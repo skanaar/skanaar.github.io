@@ -4,13 +4,17 @@ var offset = { x: canvas.width/2, y: canvas.height/2 }
 var scale = { x: 1, y: 1 }
 var dominantForce = 0
 var forces = ['r', 'g', 'b']
-var entities = _.times(40, Entity)
+var entities = _.times(80, Entity)
 
 window.addEventListener('resize', _.throttle(fillScreen, 750, {leading: false}))
 window.addEventListener('wheel', zoom)
 _.times(5, simulate)
 fillScreen()
 pulse(draw, 1000/40)
+
+function cycleClustering(index){
+	dominantForce = index
+}
 
 function fillScreen(){
 	canvas.setAttribute('width', canvas.parentElement.offsetWidth)
@@ -53,8 +57,6 @@ function onMouseUp(pos){
 	var e = pickEntity(pos)
 	if (e)
 		e.charge = poorMansHSL(Math.random(), 1, 1)
-	else
-		dominantForce = (dominantForce+1)%3
 }
 
 function repeat(action, repetitions){
@@ -96,10 +98,11 @@ function eachPair(list, action){
 }
 
 function simulate(){
+	var populationWeight = 20/entities.length
 	var surfaceRepulsion = 0.014
-	var springiness = 0.00005
+	var springiness = 0.00005 * populationWeight
 	var repulsion = 50
-	var naturalSeparation = 50
+	var naturalSeparation = 50 * populationWeight
 	eachRelation(entities, function (e, f){
 		var d = dist(e, f)
 		var springForce = springiness*(d - naturalSeparation)*sq(chargeAttraction(e, f)/3)
@@ -111,9 +114,10 @@ function simulate(){
 
 	var universalConstant = -0.95
 	_.each(entities, function (e){
-		var centerForce = normalize(e)
-		e.fx += universalConstant*centerForce.x
-		e.fy += universalConstant*centerForce.y
+		var clusterBias = 1 + 3*e.charge[forces[dominantForce]]
+		var d = Math.max(300, Math.sqrt(sq(e.x) + sq(e.y)))
+		e.fx += universalConstant * e.x * clusterBias / d
+		e.fy += universalConstant * e.y * clusterBias / d
 	})
 
 	var dampening = 0.8
@@ -138,7 +142,6 @@ function drawEntities(){
 
 function chargeAttraction(e1, e2){
 	return e1.charge[forces[dominantForce]] * e2.charge[forces[dominantForce]]
-	//return e1.charge.r * e2.charge.r + e1.charge.g * e2.charge.g + e1.charge.b * e2.charge.b
 }
 
 function drawConnections(){
