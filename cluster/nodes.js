@@ -2,9 +2,9 @@ var canvas = document.getElementById('canvas')
 var g = skanaar.Canvas(canvas, { mouseup: onMouseUp })
 var offset = { x: canvas.width/2, y: canvas.height/2 }
 var scale = { x: 1, y: 1 }
-var dominantForce = 0
-var forces = ['r', 'g', 'b']
+var clusterColor = { r: 0, g: 0, b: 0 }
 var entities = _.times(80, Entity)
+var tight = false
 
 window.addEventListener('resize', _.throttle(fillScreen, 750, {leading: false}))
 window.addEventListener('wheel', zoom)
@@ -12,8 +12,12 @@ _.times(5, simulate)
 fillScreen()
 pulse(draw, 1000/40)
 
-function cycleClustering(index){
-	dominantForce = index
+function clusterBy(r, g, b){
+	clusterColor = { r: r, g: g, b: b }
+}
+
+function toggleTightness(){
+	tight = !tight
 }
 
 function fillScreen(){
@@ -55,8 +59,9 @@ function Entity(){
 
 function onMouseUp(pos){
 	var e = pickEntity(pos)
-	if (e)
-		e.charge = poorMansHSL(Math.random(), 1, 1)
+	if (e){
+		clusterColor = e.charge
+	}
 }
 
 function repeat(action, repetitions){
@@ -98,6 +103,14 @@ function eachPair(list, action){
 }
 
 function simulate(){
+	var dampening = 0.8
+	_.each(entities, function (e){
+		e.x += e.fx
+		e.y += e.fy
+		e.fx *= dampening
+		e.fy *= dampening
+	})
+
 	var populationWeight = 20/entities.length
 	var surfaceRepulsion = 0.014
 	var springiness = 0.00005 * populationWeight
@@ -114,18 +127,10 @@ function simulate(){
 
 	var universalConstant = -0.95
 	_.each(entities, function (e){
-		var clusterBias = 1 + 3*e.charge[forces[dominantForce]]
+		var clusterBias = 1 + 3*(e.charge.r * clusterColor.r + e.charge.g * clusterColor.g + e.charge.b * clusterColor.b)
 		var d = Math.max(300, Math.sqrt(sq(e.x) + sq(e.y)))
 		e.fx += universalConstant * e.x * clusterBias / d
 		e.fy += universalConstant * e.y * clusterBias / d
-	})
-
-	var dampening = 0.8
-	_.each(entities, function (e){
-		e.x += e.fx
-		e.y += e.fy
-		e.fx *= dampening
-		e.fy *= dampening
 	})
 }
 
@@ -141,7 +146,10 @@ function drawEntities(){
 }
 
 function chargeAttraction(e1, e2){
-	return e1.charge[forces[dominantForce]] * e2.charge[forces[dominantForce]]
+	var modifier = tight ? sq : _.identity
+	return (modifier(e1.charge.r * e2.charge.r) * clusterColor.r + 
+			modifier(e1.charge.g * e2.charge.g) * clusterColor.g + 
+			modifier(e1.charge.b * e2.charge.b) * clusterColor.b)
 }
 
 function drawConnections(){
@@ -167,7 +175,7 @@ function pickEntity(pos){
 	var mx = (pos.x - offset.x)/scale.x
 	var my = (pos.y - offset.y)/scale.y
 	var e = _.min(entities, function (e){ return dist(e.x, e.y, mx, my) })
-	return (dist(e.x, e.y, mx, my) < e.r) ? e : undefined
+	return (dist(e.x, e.y, mx, my) < e.r + 10) ? e : undefined
 }
 
 var swe = [[104,496],[80,494],[75,471],[80,461],[55,418],[55,389],[61,382],[69,356],[75,340],
@@ -194,6 +202,8 @@ function draw(){
 		g.ctx.strokeStyle = g.color255(0,0,0,0.5)
 		g.ctx.fillStyle = g.color255(0,0,0,0.25)
 		//g.path(swe, e.x - 100, e.y - 100, 0.3).stroke().fill()
+		e.fx *= 0.25
+		e.fy *= 0.25
 	})
 	g.ctx.restore()
 }

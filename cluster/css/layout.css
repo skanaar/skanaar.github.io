@@ -37,6 +37,15 @@ body {
 	color: #333;
 }
 
+.inline-label {
+	font-weight: bold;
+	color: #333;
+}
+
+.pull-right {
+	text-align: right
+}
+
 /* #Media Queries
 ================================================== */
 
