@@ -1,0 +1,26 @@
+body {
+	background: #666;
+}
+
+.menubar {
+	padding: 10px;
+	background: #666
+}
+
+.menubar button {
+	margin: 2px;
+}
+
+.inline-label {
+	font-weight: bold;
+	color: #333;
+}
+
+.inline-label {
+	font-weight: bold;
+	color: #333;
+}
+
+.pull-right {
+	text-align: right
+}
