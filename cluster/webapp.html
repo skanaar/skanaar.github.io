@@ -10,6 +10,7 @@
 	<link href='//fonts.googleapis.com/css?family=Dosis:400' rel='stylesheet' type='text/css'>
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
+	<link rel="stylesheet" href="css/boilerplate.css">
 	<link rel="stylesheet" href="css/cluster.css">
 	<link rel="stylesheet" href="css/normalize.css">
 
@@ -190,12 +191,15 @@
 				</div>
 			</div>
 
-			<div class="full-row footer page-stripe">
+		</div>
+
+		<div class="full-row footer page-stripe">
+			<div class="title">
 				21st Centruy Frontiers 2014
 			</div>
-
 		</div>
 	</div>
+
 
 	<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
@@ -223,7 +227,8 @@
 		handleUrlChange({ newURL: location.hash })
 	}
 
-	fragmentRouting('dashboard', { cluster: fillScreen })
+	var nodes = initNodes('canvas', { fps: 40 })
+	fragmentRouting('dashboard', { cluster: nodes.fillScreen })
 
 	</script>
 </body>
