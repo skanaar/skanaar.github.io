@@ -47,6 +47,10 @@ h3 {
 	font-family: 'Dosis', sans-serif;
 }
 
+.pull-right {
+	float: right;
+}
+
 .page {
 	max-width: 1000px;
 	margin: auto;
@@ -62,21 +66,23 @@ h3 {
 	text-overflow: ellipsis;
 	padding: 5px 0;
 }
-.page-stripe .tools {
-	display: block;
-	float: right;
-}
-.page-stripe .tools a{
+.page-stripe a {
+	color: inherit;
+	text-decoration: none;
 	display: inline-block;
 	padding: 5px 10px;
 }
-.page-stripe .tools a:hover{
+.page-stripe a:hover{
 	background: #555;
 }
-.page-stripe .tools a.active{
+.page-stripe a.active{
 	padding-bottom: 0;
 	border: 0 solid #ddd;
 	border-width: 0 0 5px 0;
 }
 .footer {
+}
+
+.toolbar {
+	background: #444
 }

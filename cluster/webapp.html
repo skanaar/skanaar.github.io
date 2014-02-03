@@ -85,17 +85,17 @@
 <body>
 	<div class="page">
 		<div class="full-row page-stripe">
-			<div class="tools">
-				<a id="nav-link-dashboard" onclick="openDashboard()">
+			<div class="pull-right">
+				<a id="nav-link-dashboard" onclick="openDashboard()" href="javascript:void(0)">
 					<i class="fa fa-home"></i> <span class="hidden-sm">Dashboard</span>
 				</a>
-				<a id="nav-link-home" onclick="openCluster()">
+				<a id="nav-link-home" onclick="openCluster()" href="javascript:void(0)">
 					<i class="fa fa-bullseye"></i> <span class="hidden-sm">Cluster explorer</span>
 				</a>
 				<a>
 					<i class="fa fa-user"></i> <span class="hidden-sm">Profile</span>
 				</a>
-				<a><i class="fa fa-power-off"></i></a>
+				<a href="javascript:void(0)"><i class="fa fa-power-off"></i></a>
 			</div>
 			<div class="title">
 				Cluster Platform for Transformative Solutions
@@ -103,6 +103,17 @@
 		</div>
 
 		<div id="clusterExplorer">
+			<div class="full-row page-stripe toolbar">
+				<div class="pull-right">
+					<a onclick="setTightness(1)" href="javascript:void(0)">Normal</a>
+					<a onclick="setTightness(0)" href="javascript:void(0)">Tight</a>
+				</div>
+				<div>
+					<a onclick="clusterBy(1,0,0)" href="javascript:void(0)">Red</a>
+					<a onclick="clusterBy(0,1,0)" href="javascript:void(0)">Green</a>
+					<a onclick="clusterBy(0,0,1)" href="javascript:void(0)">Blue</a>
+				</div>
+			</div>
 			<canvas id="canvas" width="800" height="800"></canvas>
 		</div>
 

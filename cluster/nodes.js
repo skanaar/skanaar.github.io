@@ -4,7 +4,7 @@ var offset = { x: canvas.width/2, y: canvas.height/2 }
 var scale = { x: 0.4, y: 0.4 }
 var clusterColor = { r: 0, g: 0, b: 0 }
 var entities = _.times(40, Entity)
-var tight = false
+var tight = 1
 
 window.addEventListener('resize', _.throttle(fillScreen, 750, {leading: false}))
 window.addEventListener('wheel', zoom)
@@ -16,8 +16,8 @@ function clusterBy(r, g, b){
 	clusterColor = { r: r, g: g, b: b }
 }
 
-function toggleTightness(){
-	tight = !tight
+function setTightness(t){
+	tight = t
 }
 
 function fillScreen(){
@@ -148,7 +148,8 @@ function drawEntities(){
 }
 
 function chargeAttraction(e1, e2){
-	var modifier = tight ? sq : _.identity
+	var modifiers = [Math.sqrt, _.identity, sq]
+	var modifier = modifiers[tight]
 	return (modifier(e1.charge.r * e2.charge.r) * clusterColor.r + 
 			modifier(e1.charge.g * e2.charge.g) * clusterColor.g + 
 			modifier(e1.charge.b * e2.charge.b) * clusterColor.b)
