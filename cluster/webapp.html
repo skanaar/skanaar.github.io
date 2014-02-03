@@ -4,12 +4,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <title>Cluster Platform</title>
+	
 	<link href='//fonts.googleapis.com/css?family=Dosis:400' rel='stylesheet' type='text/css'>
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
 	<link rel="stylesheet" href="css/cluster.css">
 	<link rel="stylesheet" href="css/normalize.css">
-	<link rel="stylesheet" href="css/boilerplate.css">
+
 	<link rel="shortcut icon" href="img/favicon.png">
 	<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
@@ -86,10 +89,10 @@
 	<div class="page">
 		<div class="full-row page-stripe">
 			<div class="pull-right">
-				<a id="nav-link-dashboard" onclick="openDashboard()" href="javascript:void(0)">
+				<a class="tab_link tab_link_dashboard" href="#dashboard">
 					<i class="fa fa-home"></i> <span class="hidden-sm">Dashboard</span>
 				</a>
-				<a id="nav-link-home" onclick="openCluster()" href="javascript:void(0)">
+				<a class="tab_link tab_link_cluster" href="#cluster">
 					<i class="fa fa-bullseye"></i> <span class="hidden-sm">Cluster explorer</span>
 				</a>
 				<a>
@@ -102,7 +105,7 @@
 			</div>
 		</div>
 
-		<div id="clusterExplorer">
+		<div class="tab_page tab_page_cluster">
 			<div class="full-row page-stripe toolbar">
 				<div class="pull-right">
 					<a onclick="setTightness(1)" href="javascript:void(0)">Normal</a>
@@ -117,7 +120,7 @@
 			<canvas id="canvas" width="800" height="800"></canvas>
 		</div>
 
-		<div id="profile">
+		<div class="tab_page tab_page_dashboard">
 
 			<div class="full-row jumbotron">
 				Welcome back, Marie!
@@ -201,22 +204,26 @@
 	<script src="nodes.js"></script>
 	<script>
 
-	openDashboard()
-
-	function openCluster(){
-		$('#clusterExplorer').show()
-		$('#profile').hide()
-		$('#nav-link-home').toggleClass('active', true)
-		$('#nav-link-dashboard').toggleClass('active', false)
-		fillScreen()
+	function fragmentRouting(defaultFragment, handlers, finallyHandler){
+		function fragmentChange(fragment){
+			$('.tab_page').hide()
+			$('.tab_page_' + fragment).show()
+			$('.tab_link').toggleClass('active', false)
+			$('.tab_link_' + fragment).toggleClass('active', true)
+			if (handlers[fragment])
+				handlers[fragment](fragment)
+			if (finallyHandler)
+				finallyHandler(fragment)
+		}
+		function handleUrlChange(e){
+			var tokens = e.newURL.split('#')
+			fragmentChange((tokens.length === 2) ? tokens[1] : defaultFragment)
+		}
+		addEventListener('hashchange', handleUrlChange)
+		handleUrlChange({ newURL: location.hash })
 	}
 
-	function openDashboard(){
-		$('#clusterExplorer').hide()
-		$('#profile').show()
-		$('#nav-link-home').toggleClass('active', !true)
-		$('#nav-link-dashboard').toggleClass('active', !false)
-	}
+	fragmentRouting('dashboard', { cluster: fillScreen })
 
 	</script>
 </body>
