@@ -1,9 +1,9 @@
 var canvas = document.getElementById('canvas')
 var g = skanaar.Canvas(canvas, { mouseup: onMouseUp })
 var offset = { x: canvas.width/2, y: canvas.height/2 }
-var scale = { x: 1, y: 1 }
+var scale = { x: 0.4, y: 0.4 }
 var clusterColor = { r: 0, g: 0, b: 0 }
-var entities = _.times(80, Entity)
+var entities = _.times(40, Entity)
 var tight = false
 
 window.addEventListener('resize', _.throttle(fillScreen, 750, {leading: false}))
@@ -21,7 +21,9 @@ function toggleTightness(){
 }
 
 function fillScreen(){
-	canvas.setAttribute('width', canvas.parentElement.offsetWidth)
+	var w = canvas.parentElement.offsetWidth
+	canvas.setAttribute('width', w)
+	canvas.setAttribute('height', w*3/4)
 	offset.x = g.width()/2
 	offset.y = g.height()/2
 }
@@ -155,13 +157,15 @@ function chargeAttraction(e1, e2){
 function drawConnections(){
 	var margin = 10
 	eachPair(entities, function (e1, e2){
-		var v = normalize(diff(e1, e2))
 		var match = chargeAttraction(e1, e2)
-		g.ctx.lineWidth = 5*match
-		g.ctx.strokeStyle = 'rgba(255, 255, 255, '+match+')'
-		var p1 = [e1.x - v.x*(e1.r+margin), e1.y - v.y*(e1.r+margin)]
-		var p2 = [e2.x + v.x*(e2.r+margin), e2.y + v.y*(e2.r+margin)]
-		g.path([p1, p2]).stroke()
+		if (match > 0.35){
+			g.ctx.lineWidth = 5*match
+			g.ctx.strokeStyle = 'rgba(255, 255, 255, '+match+')'
+			var v = normalize(diff(e1, e2))
+			var p1 = [e1.x - v.x*(e1.r+margin), e1.y - v.y*(e1.r+margin)]
+			var p2 = [e2.x + v.x*(e2.r+margin), e2.y + v.y*(e2.r+margin)]
+			g.path([p1, p2]).stroke()
+		}
 	})
 }
 

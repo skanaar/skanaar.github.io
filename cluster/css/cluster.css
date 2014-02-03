@@ -1,26 +1,82 @@
-body {
+.full-row {
+    padding: 0 10px
+}
+.row {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    padding: 0
+}
+.column {
+    box-sizing: border-box;
+    display: table-cell;
+    height: 100%;
+    padding: 5px 10px
+}
+.width2 { width: 16.65% }
+.width3 { width: 25% }
+.width4 { width: 33.3% }
+.width5 { width: 41.65% }
+.width6 { width: 50% }
+.width8 { width: 66.6% }
+.width9 { width: 75% }
+.width12 { width: 100% }
+
+/* Smaller than standard 960 (devices and browsers) */
+@media only screen and (max-width: 600px) {
+	.hidden-sm { display: none }
+}
+
+/*------------------------*/
+
+body, html {
+	margin: 0;
+	padding: 0;
 	background: #666;
 }
 
-.menubar {
-	padding: 10px;
-	background: #666
+h1 {
+	font-family: 'Dosis', sans-serif;
+}
+h2 {
+	color: #1C8394;
+	margin-left: 20px;
+	font-family: 'Dosis', sans-serif;
+}
+h3 {
+	font-family: 'Dosis', sans-serif;
 }
 
-.menubar button {
-	margin: 2px;
+.page {
+	max-width: 1000px;
+	margin: auto;
 }
-
-.inline-label {
-	font-weight: bold;
-	color: #333;
+.page-stripe {
+	background: #333;
+	color: #ddd;
+	font-family: 'Dosis', sans-serif;
 }
-
-.inline-label {
-	font-weight: bold;
-	color: #333;
+.page-stripe .title {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	padding: 5px 0;
 }
-
-.pull-right {
-	text-align: right
+.page-stripe .tools {
+	display: block;
+	float: right;
+}
+.page-stripe .tools a{
+	display: inline-block;
+	padding: 5px 10px;
+}
+.page-stripe .tools a:hover{
+	background: #555;
+}
+.page-stripe .tools a.active{
+	padding-bottom: 0;
+	border: 0 solid #ddd;
+	border-width: 0 0 5px 0;
+}
+.footer {
 }
