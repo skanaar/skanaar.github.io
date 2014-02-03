@@ -109,13 +109,13 @@
 		<div class="tab_page tab_page_cluster">
 			<div class="full-row page-stripe toolbar">
 				<div class="pull-right">
-					<a onclick="setTightness(1)" href="javascript:void(0)">Normal</a>
-					<a onclick="setTightness(0)" href="javascript:void(0)">Tight</a>
+					<a onclick="nodes.setTightness(1)" href="javascript:void(0)">Normal</a>
+					<a onclick="nodes.setTightness(0)" href="javascript:void(0)">Tight</a>
 				</div>
 				<div>
-					<a onclick="clusterBy(1,0,0)" href="javascript:void(0)">Red</a>
-					<a onclick="clusterBy(0,1,0)" href="javascript:void(0)">Green</a>
-					<a onclick="clusterBy(0,0,1)" href="javascript:void(0)">Blue</a>
+					<a onclick="nodes.clusterBy(1,0,0)" href="javascript:void(0)">Red</a>
+					<a onclick="nodes.clusterBy(0,1,0)" href="javascript:void(0)">Green</a>
+					<a onclick="nodes.clusterBy(0,0,1)" href="javascript:void(0)">Blue</a>
 				</div>
 			</div>
 			<canvas id="canvas" width="800" height="800"></canvas>
