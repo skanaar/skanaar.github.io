@@ -109,13 +109,7 @@
 		<div class="tab_page tab_page_cluster">
 			<div class="full-row page-stripe toolbar">
 				<div class="pull-right">
-					<a onclick="nodes.setTightness(1)" href="javascript:void(0)">Normal</a>
-					<a onclick="nodes.setTightness(0)" href="javascript:void(0)">Tight</a>
-				</div>
-				<div>
-					<a onclick="nodes.clusterBy(1,0,0)" href="javascript:void(0)">Red</a>
-					<a onclick="nodes.clusterBy(0,1,0)" href="javascript:void(0)">Green</a>
-					<a onclick="nodes.clusterBy(0,0,1)" href="javascript:void(0)">Blue</a>
+					<a onclick="nodes.unstabilize()" href="javascript:void(0)">Shake</a>
 				</div>
 			</div>
 			<canvas id="canvas" width="800" height="800"></canvas>
@@ -200,34 +194,19 @@
 		</div>
 	</div>
 
-
 	<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
+	<script src="webapp.js"></script>
 	<script src="canvas.js"></script>
 	<script src="nodes.js"></script>
 	<script>
 
-	function fragmentRouting(defaultFragment, handlers, finallyHandler){
-		function fragmentChange(fragment){
-			$('.tab_page').hide()
-			$('.tab_page_' + fragment).show()
-			$('.tab_link').toggleClass('active', false)
-			$('.tab_link_' + fragment).toggleClass('active', true)
-			if (handlers[fragment])
-				handlers[fragment](fragment)
-			if (finallyHandler)
-				finallyHandler(fragment)
-		}
-		function handleUrlChange(e){
-			var tokens = e.newURL.split('#')
-			fragmentChange((tokens.length === 2) ? tokens[1] : defaultFragment)
-		}
-		addEventListener('hashchange', handleUrlChange)
-		handleUrlChange({ newURL: location.hash })
-	}
-
 	var nodes = initNodes('canvas', { fps: 40 })
+
+	window.addEventListener('resize', _.throttle(nodes.fillScreen, 750, {leading: true}))
+	document.getElementById('canvas').addEventListener('wheel', function (e){ nodes.zoom(e.deltaY) })
+
 	fragmentRouting('dashboard', { cluster: nodes.fillScreen })
 
 	</script>

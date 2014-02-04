@@ -12,11 +12,15 @@ skanaar.Canvas = function (canvas, callbacks){
 		}
 	}
 	
-	canvas.addEventListener ("mouseup", function (event){
+	canvas.addEventListener("mousedown", function (event){
+		if (callbacks.mousedown) callbacks.mousedown(mouseEventToPos(event))
+	})
+	
+	canvas.addEventListener("mouseup", function (event){
 		if (callbacks.mouseup) callbacks.mouseup(mouseEventToPos(event))
 	})
 
-	canvas.addEventListener ("mousemove", function (event){
+	canvas.addEventListener("mousemove", function (event){
 		mousePos = mouseEventToPos(event)
 		if (callbacks.mousemove) callbacks.mousemove(mouseEventToPos(event))
 	})
@@ -65,6 +69,17 @@ skanaar.Canvas = function (canvas, callbacks){
 		colorNorm: function (r, g, b, a){
 			return color255(255*r, 255*g, 255*b, a)
 		},
-		color255: color255
+		color255: color255,
+		colorObjHSL: function (hue, sat, lit){
+			function component(v){
+				var x = Math.cos(6.283*v)/2 + 0.5
+				return lit*(1-sat + sat*x*x)
+			}
+			return {
+				r: component(hue),
+				g: component(hue-1/3),
+				b: component(hue+1/3)
+			}
+		}
 	}
 }

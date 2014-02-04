@@ -1,54 +1,18 @@
-angular.module('app', ['ngRoute'])
- 
-.value('fbURL', 'https://angularjs-projects.firebaseio.com/')
- 
-.factory('Projects', function($firebase, fbURL) {
-  return $firebase(new Firebase(fbURL));
-})
- 
-.config(function($routeProvider) {
-  $routeProvider
-    .when('/', {
-      controller:'ListCtrl',
-      templateUrl:'list.html'
-    })
-    .when('/edit/:projectId', {
-      controller:'EditCtrl',
-      templateUrl:'detail.html'
-    })
-    .when('/new', {
-      controller:'CreateCtrl',
-      templateUrl:'detail.html'
-    })
-    .otherwise({
-      redirectTo:'/'
-    });
-})
- 
-.controller('ListCtrl', function($scope, Projects) {
-  $scope.projects = Projects;
-})
- 
-.controller('CreateCtrl', function($scope, $location, $timeout, Projects) {
-  $scope.save = function() {
-    Projects.$add($scope.project, function() {
-      $timeout(function() { $location.path('/'); });
-    });
-  };
-})
- 
-.controller('EditCtrl',
-  function($scope, $location, $routeParams, $firebase, fbURL) {
-    var projectUrl = fbURL + $routeParams.projectId;
-    $scope.project = $firebase(new Firebase(projectUrl));
- 
-    $scope.destroy = function() {
-      $scope.project.$remove();
-      $location.path('/');
-    };
- 
-    $scope.save = function() {
-      $scope.project.$save();
-      $location.path('/');
-    };
-});
+function fragmentRouting(defaultFragment, handlers, finallyHandler){
+    function fragmentChange(fragment){
+        $('.tab_page').hide()
+        $('.tab_page_' + fragment).show()
+        $('.tab_link').toggleClass('active', false)
+        $('.tab_link_' + fragment).toggleClass('active', true)
+        if (handlers && handlers[fragment])
+            handlers[fragment](fragment)
+        if (finallyHandler)
+            finallyHandler(fragment)
+    }
+    function handleUrlChange(e){
+        var tokens = e.newURL.split('#')
+        fragmentChange((tokens.length === 2) ? tokens[1] : defaultFragment)
+    }
+    addEventListener('hashchange', handleUrlChange)
+    handleUrlChange({ newURL: location.hash })
+}
