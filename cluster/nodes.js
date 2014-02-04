@@ -12,6 +12,8 @@ function initNodes(canvasId, options){
 	})
 	var offset = { x: canvas.width/2, y: canvas.height/2 }
 	var scale = { x: 0.3, y: 0.3 }
+	var clickedEntity = undefined
+	var mousePos = { x: 0, y: 0 }
 	var mouseDownPos = undefined
 	var mouseDownOffset = offset
 
@@ -67,11 +69,17 @@ function initNodes(canvasId, options){
 	}
 
 	function onMouseDown(pos){
-		mouseDownPos = pos
-		mouseDownOffset = _.clone(offset)
+		var e = pickEntity(pos)
+		if (e){
+			clickedEntity = e
+		} else {
+			mouseDownPos = pos
+			mouseDownOffset = _.clone(offset)
+		}
 	}
 
 	function onMouseMove(pos){
+		mousePos = pos
 		if (mouseDownPos){
 			offset = {
 				x: mouseDownOffset.x + pos.x - mouseDownPos.x,
@@ -81,7 +89,12 @@ function initNodes(canvasId, options){
 	}
 
 	function onMouseUp(pos){
+		var e = pickEntity(pos)
+		if (clickedEntity && e){
+			relations.push(Relation(clickedEntity.id, e.id))
+		}
 		mouseDownPos = undefined
+		clickedEntity = undefined
 	}
 
 	function repeat(action, repetitions){
