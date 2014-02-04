@@ -11,7 +11,7 @@ function initNodes(canvasId, options){
 		mousemove: onMouseMove
 	})
 	var offset = { x: canvas.width/2, y: canvas.height/2 }
-	var scale = { x: 0.4, y: 0.4 }
+	var scale = { x: 0.3, y: 0.3 }
 	var mouseDownPos = undefined
 	var mouseDownOffset = offset
 
