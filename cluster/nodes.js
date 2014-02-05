@@ -91,6 +91,13 @@ function Nodes(count){
 		}
 	}
 
+	function nudge(x,y){
+		_.each(entities, function(e){
+			e.x += x
+			e.y += y
+		})
+	}
+
 	function eachPairTwice(list, action){
 		for(var i=0, len=list.length; i<len; i++)
 			for(var j=0; j<len; j++)
@@ -130,10 +137,11 @@ function Nodes(count){
 		simulate: simulate,
 		entities: entities,
 		relations: relations,
+		nudge: nudge,
 		addRelation: function (a, b){
 			var r = Relation(a.id, b.id)
 			r.strength = 0
-			repeat(function (v){ r.strength = v; console.log(v) }, 20)
+			repeat(function (v){ r.strength = v }, 20)
 			relations.push(r)
 		}
 	}

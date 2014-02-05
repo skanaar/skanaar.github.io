@@ -166,10 +166,10 @@ function Engine(canvasId, nodes, _options){
 		},
 		zoom: function(direction){
 			repeat(function(strength){
-				var f = 1 - 0.03*strength
+				var f = 1 - 0.2*strength
 				scale.x *= direction > 0 ? f : 1/f
 				scale.y *= direction > 0 ? f : 1/f
-			})
+			}, 5)
 		},
 		fillScreen: function(){
 			var w = canvas.parentElement.offsetWidth
@@ -177,6 +177,13 @@ function Engine(canvasId, nodes, _options){
 			canvas.setAttribute('height', w*3/4)
 			offset.x = g.width()/2
 			offset.y = g.height()/2
+		},
+		centerSelected: function(){
+			if (selectedEntity){
+				nodes.nudge(-selectedEntity.x, -selectedEntity.y)
+				offset.x = selectedEntity.x + g.width()/2
+				offset.y = selectedEntity.y + g.height()/2
+			}
 		}
 	}
 }

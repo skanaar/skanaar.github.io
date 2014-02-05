@@ -101,7 +101,7 @@
 			margin: 10px
 		}
 		.overlay_sidebar h2 {
-			color: #eee;
+			color: #8f8;
 		}
 
 	</style>
@@ -129,23 +129,27 @@
 		<div class="tab_page tab_page_cluster">
 			<div class="full-row page-stripe toolbar">
 				<div class="pull-right">
-					<a onclick="engine.unstabilize()" href="javascript:void(0)">Shake</a>
+					<a onclick="engine.zoom(-1)" href="javascript:void(0)">
+						<i class="fa fa-plus"></i></a>
+					<a onclick="engine.zoom(1)" href="javascript:void(0)">
+						<i class="fa fa-minus"></i></a>
 				</div>
 				<div>
-					<a onclick="engine.zoom(-1)" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
-					<a onclick="engine.zoom(1)" href="javascript:void(0)"><i class="fa fa-minus"></i></a>
+					<a href="javascript:void(0)">Filter</a>
 				</div>
 			</div>
 			<div style="position: relative">
 				<canvas id="canvas" width="800" height="800"></canvas>
-				<div id="node_details_popup" style="position: absolute; background: rgba(255, 255, 255, 0.5); border: 1px solid white; border-radius: 2px; padding: 3px">
-					<div class="bind-name"></div>
-					<div class="bind-x"></div>
-					<div class="bind-y"></div>
-				</div>
 				<div class="overlay_sidebar" id="node_details_sidebar">
 					<div>
-						<h2 class="bind-name"></h2>
+						<div>
+							<a class="pull-right"
+							   onclick="engine.centerSelected()" 
+							   href="javascript:void(0)">
+								<i class="fa fa-crosshairs fa-2x"></i>
+							</a>
+							<h2><span class="bind-name"></span> </h2>
+						</div>
 						<div class="bind-description"></div>
 					</div>
 				</div>
