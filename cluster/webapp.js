@@ -16,3 +16,10 @@ function fragmentRouting(defaultFragment, handlers, finallyHandler){
     addEventListener('hashchange', handleUrlChange)
     handleUrlChange({ newURL: location.hash })
 }
+
+function bindData(targetId, data){
+    var target = $('#' + targetId)
+    for(var key in data)
+        if (data.hasOwnProperty(key))
+            target.find('.bind-' + key).text(data[key])
+}
