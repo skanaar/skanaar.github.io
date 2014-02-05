@@ -97,9 +97,11 @@
 			color: #eee;
 			font-family: 'Dosis', sans-serif;
 		}
-
 		.overlay_sidebar>div {
 			margin: 10px
+		}
+		.overlay_sidebar h2 {
+			color: #eee;
 		}
 
 	</style>
@@ -127,11 +129,11 @@
 		<div class="tab_page tab_page_cluster">
 			<div class="full-row page-stripe toolbar">
 				<div class="pull-right">
-					<a onclick="nodes.unstabilize()" href="javascript:void(0)">Shake</a>
+					<a onclick="engine.unstabilize()" href="javascript:void(0)">Shake</a>
 				</div>
 				<div>
-					<a onclick="nodes.zoom(-1)" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
-					<a onclick="nodes.zoom(1)" href="javascript:void(0)"><i class="fa fa-minus"></i></a>
+					<a onclick="engine.zoom(-1)" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
+					<a onclick="engine.zoom(1)" href="javascript:void(0)"><i class="fa fa-minus"></i></a>
 				</div>
 			</div>
 			<div style="position: relative">
@@ -144,8 +146,7 @@
 				<div class="overlay_sidebar" id="node_details_sidebar">
 					<div>
 						<h2 class="bind-name"></h2>
-						<div class="bind-x"></div>
-						<div class="bind-y"></div>
+						<div class="bind-description"></div>
 					</div>
 				</div>
 			</div>
@@ -236,6 +237,7 @@
 	<script src="webapp.js"></script>
 	<script src="canvas.js"></script>
 	<script src="nodes.js"></script>
+	<script src="engine.js"></script>
 	<script>
 
 	function selectEntity(e){
@@ -246,16 +248,17 @@
 		$('#node_details_sidebar').hide()
 	}
 
-	var nodes = initNodes('canvas', {
+	var nodes = Nodes(80)
+	var engine = Engine('canvas', nodes, {
 		fps: 40,
 		selectEntity: selectEntity,
 		deselectEntity: deselectEntity
 	})
 
-	window.addEventListener('resize', _.throttle(nodes.fillScreen, 750, {leading: true}))
-	document.getElementById('canvas').addEventListener('wheel', function (e){ nodes.zoom(e.deltaY) })
+	window.addEventListener('resize', _.throttle(engine.fillScreen, 750, {leading: true}))
+	document.getElementById('canvas').addEventListener('wheel', function (e){ engine.zoom(e.deltaY) })
 
-	fragmentRouting('dashboard', { cluster: nodes.fillScreen })
+	fragmentRouting('dashboard', { cluster: engine.fillScreen })
 
 	</script>
 </body>
