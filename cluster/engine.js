@@ -77,9 +77,10 @@ function Engine(canvasId, nodes, _options){
 	function drawEntities(){
 		g.ctx.lineWidth = 10
 		_.each(entities, function (e){
-			g.ctx.fillStyle = 'rgba(255, 255, 255, 0.75)'
+			var alpha = nodes.forceScaling(e)
+			g.ctx.fillStyle = 'rgba(255, 255, 255, '+0.75*alpha+')'
 			g.circle(e.x, e.y, e.r+10).fill()
-			g.ctx.fillStyle = g.colorNorm(e.charge.r, e.charge.g, e.charge.b, 0.5)
+			g.ctx.fillStyle = g.colorNorm(e.properties.r, e.properties.g, e.properties.b, 0.5*alpha)
 			g.circle(e.x, e.y, e.r).fill()
 		})
 	}
@@ -87,8 +88,9 @@ function Engine(canvasId, nodes, _options){
 	function drawRelations(){
 		var margin = 10
 		g.ctx.lineWidth = 5
-		g.ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)'
 		relations.each(function (e1, e2){
+			var alpha = nodes.forceScaling(e1, e2)
+			g.ctx.strokeStyle = 'rgba(255, 255, 255, '+alpha/2+')'
 			var v = normalize(diff(e1, e2))
 			var p1 = [e1.x - v.x*(e1.r+margin), e1.y - v.y*(e1.r+margin)]
 			var p2 = [e2.x + v.x*(e2.r+margin), e2.y + v.y*(e2.r+margin)]
@@ -161,9 +163,6 @@ function Engine(canvasId, nodes, _options){
 	}
 
 	return {
-		unstabilize: function (t){
-			natsep = _.random(150, 250)
-		},
 		zoom: function(direction){
 			repeat(function(strength){
 				var f = 1 - 0.2*strength
@@ -181,8 +180,19 @@ function Engine(canvasId, nodes, _options){
 		centerSelected: function(){
 			if (selectedEntity){
 				nodes.nudge(-selectedEntity.x, -selectedEntity.y)
-				offset.x = selectedEntity.x + g.width()/2
+				offset.x = selectedEntity.x + g.height()/2
 				offset.y = selectedEntity.y + g.height()/2
+			}
+		},
+		filter: function(component){
+			$('.filter-option').toggleClass('active', false)
+			if (component === filterProperty){
+				filterProperty = ''
+			} else {
+				$('.filter-'+component).toggleClass('active', true)
+				filterProperty = component
+				filterFactor = 0
+				repeat(function (v){ filterFactor = v })
 			}
 		}
 	}

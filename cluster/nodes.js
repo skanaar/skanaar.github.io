@@ -1,6 +1,8 @@
 var rep = 25
 var springF = 2
 var dampening = 0.95
+var filterProperty = ''
+var filterFactor = 0
 
 function sq(x){ return x*x }
 function dist(a,b){ return mag(diff(a,b)) }
@@ -32,7 +34,7 @@ function Nodes(count){
 		relations.push(Relation(_.random(20, n), _.random(20, n)))
 	})
 
-	_.times(150, simulate)
+	_.times(50, simulate)
 
 	function fillTree(factory, branches, max){
 		var accumulator = []
@@ -67,8 +69,7 @@ function Nodes(count){
 			fx: 0,
 			fy: 0,
 			r: r,
-			properties: {},
-			charge: colorObject(Math.random(), 1, 1)
+			properties: colorObject(Math.random(), 1, 1)
 		}
 	}
 
@@ -105,6 +106,15 @@ function Nodes(count){
 					action(list[i], list[j])
 	}
 
+	function forceScaling(e, f){
+		if (arguments.length === 2) return Math.min(forceScaling(e), forceScaling(f))
+		if (filterProperty){
+			var a = filterProperty ? e.properties[filterProperty] : 1
+			return filterFactor * a + (1-filterFactor)
+		}
+		return 1
+	}
+
 	function simulate(){
 		_.each(entities, function (e){
 			e.x += e.fx
@@ -118,18 +128,17 @@ function Nodes(count){
 		var repulsion = rep
 		eachPairTwice(entities, function (e, f){
 			var d = dist(e, f)
-			var repulsForce = repulsion/(0.1 + sq(d))
-			var surfacForce = surfaceRepulsion * Math.max(0, e.r + f.r - d)
-			e.fx += (e.x - f.x)*(surfacForce + repulsForce)
-			e.fy += (e.y - f.y)*(surfacForce + repulsForce)
+			var repulsForce = forceScaling(e, f) * repulsion/(0.1 + sq(d))
+			e.fx += (e.x - f.x) * repulsForce
+			e.fy += (e.y - f.y) * repulsForce
 		})
 
 		var springiness = springF
 		relations.each(function (e, f, relation){
 			var d = dist(e, f)
-			var springForce = relation.strength * springiness * (d - relation.length) / 10000
-			e.fx += (e.x - f.x)*(-springForce)
-			e.fy += (e.y - f.y)*(-springForce)
+			var springForce = (d - relation.length) / 10000
+			e.fx += (e.x - f.x) * (-springForce) * springiness * relation.strength
+			e.fy += (e.y - f.y) * (-springForce) * springiness * relation.strength
 		})
 	}
 
@@ -138,6 +147,7 @@ function Nodes(count){
 		entities: entities,
 		relations: relations,
 		nudge: nudge,
+		forceScaling: forceScaling,
 		addRelation: function (a, b){
 			var r = Relation(a.id, b.id)
 			r.strength = 0
