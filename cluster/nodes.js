@@ -20,8 +20,20 @@ function repeat(action, repetitions){
 }
 
 function Nodes(count){
-	var entities = _.times(count, Entity)
-	var relations = fillTree(Relation, 3, entities.length)
+	var entities = _.times(count, function (i){
+		if (i<count/3) return Entity(i, { properties: {r:1, g:0, b:0} })
+		if (i<count*2/3) return Entity(i, { properties: {r:0, g:1, b:0} })
+		return Entity(i, { properties: {r:0, g:0, b:1} })
+	})
+
+	var r1 = fillTree(Relation, 3, count/3, 0)
+	var r2 = fillTree(Relation, 3, count/3, count/3)
+	var r3 = fillTree(Relation, 3, count/3, count*2/3)
+	var relations = r1.concat(r2).concat(r3)
+	relations.push(Relation(0, count/3, 1600, 'abstract'))
+	relations.push(Relation(0, count*2/3, 1600, 'abstract'))
+	relations.push(Relation(count/3, count*2/3, 1600, 'abstract'))
+
 	relations.each = function (action){
 		_.each(relations, function (r){
 			action(entities[r.start], entities[r.end], r)
@@ -34,42 +46,44 @@ function Nodes(count){
 		relations.push(Relation(_.random(20, n), _.random(20, n)))
 	})
 
-	_.times(50, simulate)
+	_.times(550, simulate)
+	dampening = 0.8
 
-	function fillTree(factory, branches, max){
+	function fillTree(factory, branches, max, offset){
 		var accumulator = []
 		var pointer = 1
 		for(var index=0; pointer<max; index++){
 			var b = _.random(2, branches)
 			for(var i=0; i<b && pointer<max-i; i++)
-				accumulator.push(factory(index, pointer+i))
+				accumulator.push(factory(index + offset, pointer+i + offset))
 			pointer+=b
 		}
 		return accumulator
 	}
 
-	function Relation(i, j){
+	function Relation(i, j, len, isAbstract){
 		return {
 			start: i,
 			end: j,
 			strength: 0.5 + Math.random(),
-			length: _.random(100,250),
+			length: len || _.random(100,250),
+			isAbstract: !!isAbstract,
 			properties: {}
 		}
 	}
 
-	function Entity(i, x, y){
-		var r = _.random(20,30)
+	function Entity(i, _fields){
+		var fields = _fields || {}
 		return {
 			id: i,
 			name: randomName(),
 			description: randomName() + ' ' + _.times(15, randomName).join(' ').toLowerCase(),
-			x: x || _.random(-100, 100),
-			y: y || _.random(-100, 100),
+			x: fields.x || _.random(-100, 100),
+			y: fields.y || _.random(-100, 100),
 			fx: 0,
 			fy: 0,
-			r: r,
-			properties: colorObject(Math.random(), 1, 1)
+			r: fields.r || _.random(20,30),
+			properties: fields.properties || colorObject(Math.random(), 1, 1)
 		}
 	}
 
@@ -128,6 +142,7 @@ function Nodes(count){
 		var repulsion = rep
 		eachPairTwice(entities, function (e, f){
 			var d = dist(e, f)
+			if (d > 400) return
 			var repulsForce = forceScaling(e, f) * repulsion/(0.1 + sq(d))
 			e.fx += (e.x - f.x) * repulsForce
 			e.fy += (e.y - f.y) * repulsForce

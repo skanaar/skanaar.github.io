@@ -88,13 +88,25 @@ function Engine(canvasId, nodes, _options){
 	function drawRelations(){
 		var margin = 10
 		g.ctx.lineWidth = 5
-		relations.each(function (e1, e2){
+		relations.each(function (e1, e2, r){
 			var alpha = nodes.forceScaling(e1, e2)
-			g.ctx.strokeStyle = 'rgba(255, 255, 255, '+alpha/2+')'
+			if (r.isAbstract)
+				g.ctx.strokeStyle = 'rgba(255, 255, 128, '+alpha/4+')'
+			else
+				g.ctx.strokeStyle = 'rgba(255, 255, 255, '+alpha/2+')'
 			var v = normalize(diff(e1, e2))
 			var p1 = [e1.x - v.x*(e1.r+margin), e1.y - v.y*(e1.r+margin)]
 			var p2 = [e2.x + v.x*(e2.r+margin), e2.y + v.y*(e2.r+margin)]
 			g.path([p1, p2]).stroke()
+			if (r.isAbstract){
+				var s = 8
+				p1 = [e1.x - v.x*(e1.r+margin) + s*v.y, e1.y - v.y*(e1.r+margin) - s*v.x]
+				p2 = [e2.x + v.x*(e2.r+margin) + s*v.y, e2.y + v.y*(e2.r+margin) - s*v.x]
+				g.path([p1, p2]).stroke()
+				p1 = [e1.x - v.x*(e1.r+margin) - s*v.y, e1.y - v.y*(e1.r+margin) + s*v.x]
+				p2 = [e2.x + v.x*(e2.r+margin) - s*v.y, e2.y + v.y*(e2.r+margin) + s*v.x]
+				g.path([p1, p2]).stroke()
+			}
 		})
 	}
 

@@ -108,6 +108,7 @@
 </head>
 <body>
 	<div class="page">
+
 		<div class="full-row page-stripe">
 			<div class="pull-right">
 				<a class="tab_link tab_link_dashboard" href="#dashboard">
@@ -129,6 +130,8 @@
 		<div class="tab_page tab_page_cluster">
 			<div class="full-row page-stripe toolbar">
 				<div class="pull-right">
+					<a id="download-image-link" download="cluster-snapshot.png">
+						<i class="fa fa-camera"></i></a>
 					<a onclick="engine.zoom(-1)" href="javascript:void(0)">
 						<i class="fa fa-plus"></i></a>
 					<a onclick="engine.zoom(1)" href="javascript:void(0)">
@@ -256,6 +259,16 @@
 	<script src="engine.js"></script>
 	<script>
 
+	(function (){
+		var link = document.getElementById('download-image-link')
+		link.addEventListener('click', downloadImage, false);
+		function downloadImage(){
+			var url = document.getElementById('canvas').toDataURL('image/png')
+			var downloadUrl = url.replace(/^data:image\/[^;]/, 'data:application/octet-stream')
+		    link.href = downloadUrl;
+		}
+	}())
+
 	function selectEntity(e){
 		$('#node_details_sidebar').show()
 		bindData('node_details_sidebar', e)
@@ -264,7 +277,7 @@
 		$('#node_details_sidebar').hide()
 	}
 
-	var nodes = Nodes(80)
+	var nodes = Nodes(90)
 	var engine = Engine('canvas', nodes, {
 		fps: 40,
 		selectEntity: selectEntity,
