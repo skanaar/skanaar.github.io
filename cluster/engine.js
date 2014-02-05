@@ -194,6 +194,14 @@ function Engine(canvasId, nodes, _options){
 				filterFactor = 0
 				repeat(function (v){ filterFactor = v })
 			}
+		},
+		paint: function(component){
+			if (selectedEntity){
+				selectedEntity.properties.r *= 0.25
+				selectedEntity.properties.g *= 0.25
+				selectedEntity.properties.b *= 0.25
+				selectedEntity.properties[component] = 1
+			}
 		}
 	}
 }
