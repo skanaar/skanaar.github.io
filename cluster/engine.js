@@ -91,7 +91,7 @@ function Engine(canvasId, nodes, _options){
 		relations.each(function (e1, e2, r){
 			var alpha = nodes.forceScaling(e1, e2)
 			if (r.isAbstract)
-				g.ctx.strokeStyle = 'rgba(255, 255, 128, '+alpha/4+')'
+				g.ctx.strokeStyle = 'rgba(0, 0, 0, 0.01)'
 			else
 				g.ctx.strokeStyle = 'rgba(255, 255, 255, '+alpha/2+')'
 			var v = normalize(diff(e1, e2))

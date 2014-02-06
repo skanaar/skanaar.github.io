@@ -20,52 +20,59 @@ function repeat(action, repetitions){
 }
 
 function Nodes(count){
-	var entities = _.times(count, function (i){
-		if (i<count/3) return Entity(i, { properties: {r:1, g:0, b:0} })
-		if (i<count*2/3) return Entity(i, { properties: {r:0, g:1, b:0} })
-		return Entity(i, { properties: {r:0, g:0, b:1} })
+
+	function entityFactory(r,g,b){
+		return function(i){
+			return Entity(i, { properties: {r:r, g:g, b:b} })
+		}
+	}
+
+	var clusters = _.times(8, function (i){
+		var col = colorObject(i/8, 1, 1)
+		var es = _.times(count, entityFactory(col.r, col.g, col.b))
+		var rs = fillTree(Relation, 3, es)
+		return { entities: es, relations: rs }
 	})
 
-	var r1 = fillTree(Relation, 3, count/3, 0)
-	var r2 = fillTree(Relation, 3, count/3, count/3)
-	var r3 = fillTree(Relation, 3, count/3, count*2/3)
-	var relations = r1.concat(r2).concat(r3)
-	relations.push(Relation(0, count/3, 1600, 'abstract'))
-	relations.push(Relation(0, count*2/3, 1600, 'abstract'))
-	relations.push(Relation(count/3, count*2/3, 1600, 'abstract'))
+	var entities = _.flatten(_.pluck(clusters, 'entities'))
+	var relations = _.flatten(_.pluck(clusters, 'relations'))
+
+	var cores = _.map(clusters, function (es){ return es.entities[0] })
+
+	_.each(cores, function (e){
+		_.each(cores, function (f){
+			if (e !== f)
+				relations.push(Relation(e, f, 1600, 'abstract'))
+		})
+	})
 
 	relations.each = function (action){
 		_.each(relations, function (r){
-			action(entities[r.start], entities[r.end], r)
-			action(entities[r.end], entities[r.start], r)
+			action(r.start, r.end, r)
+			action(r.end, r.start, r)
 		})
 	}
-
-	_.times(0, function (){
-		var n = entities.length-1
-		relations.push(Relation(_.random(20, n), _.random(20, n)))
-	})
 
 	_.times(550, simulate)
 	dampening = 0.8
 
-	function fillTree(factory, branches, max, offset){
+	function fillTree(factory, branches, nodes){
 		var accumulator = []
 		var pointer = 1
-		for(var index=0; pointer<max; index++){
+		for(var index=0; pointer<nodes.length; index++){
 			var b = _.random(2, branches)
-			for(var i=0; i<b && pointer<max-i; i++)
-				accumulator.push(factory(index + offset, pointer+i + offset))
+			for(var i=0; i<b && pointer<nodes.length-i; i++)
+				accumulator.push(factory(nodes[index], nodes[pointer+i]))
 			pointer+=b
 		}
 		return accumulator
 	}
 
-	function Relation(i, j, len, isAbstract){
+	function Relation(a, b, len, isAbstract){
 		return {
-			start: i,
-			end: j,
-			strength: 0.5 + Math.random(),
+			start: a,
+			end: b,
+			strength: isAbstract ? 0.1 : (0.5 + Math.random()),
 			length: len || _.random(100,250),
 			isAbstract: !!isAbstract,
 			properties: {}
@@ -164,7 +171,7 @@ function Nodes(count){
 		nudge: nudge,
 		forceScaling: forceScaling,
 		addRelation: function (a, b){
-			var r = Relation(a.id, b.id)
+			var r = Relation(a, b)
 			r.strength = 0
 			repeat(function (v){ r.strength = v }, 20)
 			relations.push(r)
