@@ -22,12 +22,12 @@
 
 		.jumbotron {
 			background: #0d8;
-			font-size: 300%;
+			font-size: 200%;
 			font-family: 'Dosis', sans-serif;
 			background: url(img/algae.jpg) center center;
 			background-size: cover;
 			color: #eee;
-			padding: 20px 0;
+			padding: 10px 20px;
 			text-align: center;
 		}
 		.updates {
@@ -85,11 +85,19 @@
 			color: lightgreen;
 		}
 
+		.tab_page_clustersearch {
+			background: #eee
+		}
+
+		.sidebar {
+			background: #ccc; 
+			color: #333; 
+			padding: 10px;
+		}
+
 		.overlay_sidebar {
-			display: none;
 			position: absolute; 
 			top: 0; 
-			right: 0; 
 			width: 200px; 
 			height: 100%; 
 			background: rgba(0, 0, 0, 0.5); 
@@ -97,6 +105,16 @@
 			color: #eee;
 			font-family: 'Dosis', sans-serif;
 		}
+		.details_sidebar {
+			display: none;
+			right: 0; 
+		}
+		.search_sidebar {
+			display: none;
+			left: 0; 
+			background: rgba(64, 64, 64, 0.75); 
+		}
+
 		.overlay_sidebar>div {
 			margin: 10px
 		}
@@ -114,11 +132,11 @@
 				<a class="tab_link tab_link_dashboard" href="#dashboard">
 					<i class="fa fa-home"></i> <span class="hidden-sm">Dashboard</span>
 				</a>
-				<a class="tab_link tab_link_cluster" href="#cluster">
-					<i class="fa fa-bullseye"></i> <span class="hidden-sm">Cluster explorer</span>
+				<a class="tab_link tab_link_clustersearch" href="#clustersearch">
+					<i class="fa fa-search"></i> <span class="hidden-sm">Search</span>
 				</a>
-				<a>
-					<i class="fa fa-user"></i> <span class="hidden-sm">Profile</span>
+				<a class="tab_link tab_link_cluster" href="#cluster">
+					<i class="fa fa-bullseye"></i> <span class="hidden-sm">Explorer</span>
 				</a>
 				<a href="javascript:void(0)"><i class="fa fa-power-off"></i></a>
 			</div>
@@ -146,7 +164,7 @@
 			</div>
 			<div style="position: relative">
 				<canvas id="canvas" width="800" height="800"></canvas>
-				<div class="overlay_sidebar" id="node_details_sidebar">
+				<div class="overlay_sidebar details_sidebar" id="node_details_sidebar">
 					<div>
 						<div>
 							<a class="pull-right"
@@ -157,6 +175,7 @@
 							<h2><span class="bind-name"></span> </h2>
 						</div>
 						<div class="bind-description"></div>
+						<div class="page-stripe toolset"><label>Id:</label> <span class="bind-id"></span></div>
 
 						<hr>
 
@@ -168,13 +187,58 @@
 						</div>
 					</div>
 				</div>
+				<div class="overlay_sidebar search_sidebar" id="search_sidebar">
+					<div>
+						<input placeholder="search">
+						<hr>
+						<div><label><input type="checkbox"> Mobility</label></div>
+						<div><label><input type="checkbox" checked> Nutrition</label></div>
+						<div><label><input type="checkbox"> Building</label></div>
+						<h4>Minimum size: 64 <input type="range" placeholder="search"></h4>
+					</div>
+				</div>
 			</div>
+		</div>
+
+		<div class="tab_page tab_page_clustersearch">
+
+			<div class="full-row jumbotron">
+				Cluster Search
+			</div>
+
+			<div class="row" ng-app="cluster" ng-controller="SearchCtrl">
+				<div class="column width4 sidebar">
+					<div><input type="text" ng-model="search" placeholder="Search"></div>
+					<hr>
+					<div>
+						<label><input type="checkbox" ng-model="filters.mobility"> Mobility</label>
+					</div>
+					<div>
+						<label><input type="checkbox" ng-model="filters.nutrition"> Nutrition</label>
+					</div>
+					<div>
+						<label><input type="checkbox" ng-model="filters.building"> Building</label>
+					</div>
+				</div>
+				<div class="column width8">
+					<h2>Results</h2>
+					<table style="width: 100%">
+					<tr ng-repeat="s in orderedSolutions() | filter:search">
+						<td><a href="#cluster/{{s.id}}">{{s.name}}</a></td>
+						<td><small>Mobility: {{s.properties.mobility}}</small></td>
+						<td><small>Nutrition: {{s.properties.nutrition}}</small></td>
+						<td><small>Building: {{s.properties.building}}</small></td>
+					</tr>
+					</table>
+				</div>
+			</div>
+
 		</div>
 
 		<div class="tab_page tab_page_dashboard">
 
 			<div class="full-row jumbotron">
-				Welcome back, Marie!
+				Dashboard
 			</div>
 
 			<div class="row">
@@ -235,17 +299,11 @@
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="column width12" style="background: #eee">
-					<h2>Heading 2</h2>
-				</div>
-			</div>
-
 		</div>
 
 		<div class="full-row footer page-stripe">
 			<div class="title">
-				21st Centruy Frontiers 2014
+				21st Century Frontiers 2014
 			</div>
 		</div>
 	</div>
@@ -277,9 +335,45 @@
 		$('#node_details_sidebar').hide()
 	}
 
-	var nodes = Nodes(20)
+	function entityFactory(r,g,b){
+		return function(i){
+			return {
+				id:_.uniqueId(),
+				name: randomName(),
+				properties: {
+					r:r, 
+					g:g, 
+					b:b,
+	                mobility: _.random(100),
+	                nutrition: _.random(100),
+	                building: _.random(100)
+				}
+			}
+		}
+	}
+	var clusters = _.times(8, function (i){
+		var es = _.times(10, entityFactory(Math.random(), Math.random(), Math.random()))
+		var rs = fillTree(function (a,b){ return {start:a, end:b} }, 3, es)
+		return { entities: es, relations: rs }
+	})
+	var entities = _.flatten(_.pluck(clusters, 'entities'))
+	var relations = _.flatten(_.pluck(clusters, 'relations'))
+	function fillTree(factory, branches, nodes){
+		var accumulator = []
+		var pointer = 1
+		for(var index=0; pointer<nodes.length; index++){
+			var b = _.random(2, branches)
+			for(var i=0; i<b && pointer<nodes.length-i; i++)
+				accumulator.push(factory(nodes[index], nodes[pointer+i]))
+			pointer+=b
+		}
+		return accumulator
+	}
+
+
+	var nodes = Nodes(10, entities, relations)
 	var engine = Engine('canvas', nodes, {
-		fps: 40,
+		fps: 30,
 		selectEntity: selectEntity,
 		deselectEntity: deselectEntity
 	})
@@ -287,7 +381,17 @@
 	window.addEventListener('resize', _.throttle(engine.fillScreen, 750, {leading: true}))
 	document.getElementById('canvas').addEventListener('wheel', function (e){ engine.zoom(e.deltaY) })
 
-	fragmentRouting('dashboard', { cluster: engine.fillScreen })
+	var viewChangeHandlers = {
+		cluster: function (path, clusterId){
+			engine.fillScreen()
+			if (clusterId){
+				engine.select(clusterId)
+				engine.centerSelected()
+			}
+		}
+	}
+
+	fragmentRouting('dashboard', viewChangeHandlers)
 
 	</script>
 </body>

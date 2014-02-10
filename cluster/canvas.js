@@ -61,9 +61,9 @@ skanaar.Canvas = function (canvas, callbacks){
 			x = x || 0
 			y = y || 0
 			ctx.beginPath()
-			ctx.moveTo(x + s*path[0][0], y + s*path[0][1])
+			ctx.moveTo(x + s*path[0].x, y + s*path[0].y)
 			for(var i=1, len=path.length; i<len; i++)
-				ctx.lineTo(x + s*path[i][0], y + s*path[i][1])
+				ctx.lineTo(x + s*path[i].x, y + s*path[i].y)
 			return chainable
 		},
 		colorNorm: function (r, g, b, a){

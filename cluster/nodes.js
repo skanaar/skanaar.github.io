@@ -19,33 +19,20 @@ function repeat(action, repetitions){
 	})
 }
 
-function Nodes(count){
+function randomName(syllables){
+	var vowel = 'aaeeiioouuy'
+	var conso = 'bcddfghhkllmnnprrsstttv'
+	function syllable(){ return _.sample(vowel) + _.sample(conso) }
+	return _.sample(conso).toUpperCase() + _.times(syllables || _.random(2,4), syllable).join('')
+}
 
-	function entityFactory(r,g,b){
-		return function(i){
-			return Entity(i, { properties: {r:r, g:g, b:b} })
-		}
-	}
+function Nodes(count, _entities, _relations){
 
-	var clusters = _.times(8, function (i){
-		var col = colorObject(i/8, 1, 1)
-		var es = _.times(count, entityFactory(col.r, col.g, col.b))
-		var rs = fillTree(Relation, 3, es)
-		return { entities: es, relations: rs }
+	var entities = _.map(_entities, function (e){ return Entity(e.id, e)})
+	var entitiesById = _.object(_.map(entities, function (e){ return [e.id, e] }))
+	var relations = _.map(_relations, function (r){
+		return Relation(entitiesById[r.start.id], entitiesById[r.end.id])
 	})
-
-	var entities = _.flatten(_.pluck(clusters, 'entities'))
-	var relations = _.flatten(_.pluck(clusters, 'relations'))
-
-	var cores = _.map(clusters, function (es){ return es.entities[0] })
-
-	_.each(cores, function (e){
-		_.each(cores, function (f){
-			if (e !== f)
-				relations.push(Relation(e, f, 1600, 'abstract'))
-		})
-	})
-
 	relations.each = function (action){
 		_.each(relations, function (r){
 			action(r.start, r.end, r)
@@ -55,18 +42,6 @@ function Nodes(count){
 
 	_.times(550, simulate)
 	dampening = 0.8
-
-	function fillTree(factory, branches, nodes){
-		var accumulator = []
-		var pointer = 1
-		for(var index=0; pointer<nodes.length; index++){
-			var b = _.random(2, branches)
-			for(var i=0; i<b && pointer<nodes.length-i; i++)
-				accumulator.push(factory(nodes[index], nodes[pointer+i]))
-			pointer+=b
-		}
-		return accumulator
-	}
 
 	function Relation(a, b, len, isAbstract){
 		return {
@@ -83,8 +58,8 @@ function Nodes(count){
 		var fields = _fields || {}
 		return {
 			id: i,
-			name: randomName(),
-			description: randomName() + ' ' + _.times(15, randomName).join(' ').toLowerCase(),
+			name: fields.name || randomName(),
+			description: fields.description || randomName() + ' ' + _.times(15, randomName).join(' ').toLowerCase(),
 			x: fields.x || _.random(-100, 100),
 			y: fields.y || _.random(-100, 100),
 			fx: 0,
@@ -92,13 +67,6 @@ function Nodes(count){
 			r: fields.r || _.random(20,30),
 			properties: fields.properties || colorObject(Math.random(), 1, 1)
 		}
-	}
-
-	function randomName(){
-		var vowel = 'aaeeiioouuy'
-		var conso = 'bcddfghhkllmnnprrsstttv'
-		function syllable(){ return _.sample(vowel) + _.sample(conso) }
-		return _.sample(conso).toUpperCase() + _.times(_.random(2,4), syllable).join('')
 	}
 
 	function colorObject(hue, sat, lit){

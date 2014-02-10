@@ -1,4 +1,3 @@
-
 function Engine(canvasId, nodes, _options){
 	var options = {
 		fps: _options.fps || 30,
@@ -12,7 +11,7 @@ function Engine(canvasId, nodes, _options){
 		mousemove: onMouseMove
 	})
 	var offset = { x: canvas.width/2, y: canvas.height/2 }
-	var scale = { x: 0.3, y: 0.3 }
+	var scale = { x: 0.3, y: 0.15 }
 	var selectedEntity = undefined
 	var clickedEntity = undefined
 	var mouseDownPos = undefined
@@ -85,28 +84,42 @@ function Engine(canvasId, nodes, _options){
 		})
 	}
 
+	function drawEntityHuds(){
+		if (scale.x < 0.3) return
+		g.ctx.lineWidth = 10
+		g.ctx.font = '10pt Verdana';
+		g.ctx.textAlign = 'center';
+		_.each(entities, function (e){
+			var screenPos = untransform(e)
+			g.ctx.fillStyle = 'rgba(0, 0, 0, 0.5)'
+			g.ctx.fillText(e.name, screenPos.x+1, screenPos.y+1)
+			g.ctx.fillStyle = 'rgba(255, 255, 255, 0.9975)'
+			g.ctx.fillText(e.name, screenPos.x, screenPos.y)
+		})
+	}
+
 	function drawRelations(){
+		var steps = 8
 		var margin = 10
 		g.ctx.lineWidth = 5
 		relations.each(function (e1, e2, r){
 			var alpha = nodes.forceScaling(e1, e2)
-			if (r.isAbstract)
-				g.ctx.strokeStyle = 'rgba(0, 0, 0, 0.01)'
-			else
-				g.ctx.strokeStyle = 'rgba(255, 255, 255, '+alpha/2+')'
-			var v = normalize(diff(e1, e2))
-			var p1 = [e1.x - v.x*(e1.r+margin), e1.y - v.y*(e1.r+margin)]
-			var p2 = [e2.x + v.x*(e2.r+margin), e2.y + v.y*(e2.r+margin)]
-			g.path([p1, p2]).stroke()
 			if (r.isAbstract){
-				var s = 8
-				p1 = [e1.x - v.x*(e1.r+margin) + s*v.y, e1.y - v.y*(e1.r+margin) - s*v.x]
-				p2 = [e2.x + v.x*(e2.r+margin) + s*v.y, e2.y + v.y*(e2.r+margin) - s*v.x]
-				g.path([p1, p2]).stroke()
-				p1 = [e1.x - v.x*(e1.r+margin) - s*v.y, e1.y - v.y*(e1.r+margin) + s*v.x]
-				p2 = [e2.x + v.x*(e2.r+margin) - s*v.y, e2.y + v.y*(e2.r+margin) + s*v.x]
-				g.path([p1, p2]).stroke()
+				g.ctx.strokeStyle = 'rgba(0, 0, 0, 0.01)'
+				g.ctx.fillStyle = 'rgba(0, 0, 0, 0.01)'
 			}
+			else{
+				g.ctx.strokeStyle = 'rgba(255, 255, 255, '+alpha/2+')'
+				g.ctx.fillStyle = 'rgba(255, 255, 255, '+alpha/2+')'
+			}
+
+			var d = dist(e1, e2)
+			var v = mult(diff(e2, e1), 1/steps)
+			function down(i){ return {x:0, y: d*(1-sq(2*i/steps-1))/2 } }
+			var path = _.times(steps+1, function (i){ return add(add(e1, mult(v, i)), down(i)) })
+
+			//_.each(path, function (p){ g.circle(p.x, p.y, 5).fill() })
+			g.path(path).stroke()
 		})
 	}
 
@@ -148,12 +161,11 @@ function Engine(canvasId, nodes, _options){
 			var v = normalize(diff(p, clickedEntity))
 			if (d>10){
 				var path = _.times(Math.round(d/10), function (i){
-					return [
-						clickedEntity.x + i*v.x*10 + 10*v.y*Math.cos(i+tick/2),
-						clickedEntity.y + i*v.y*10 - 10*v.x*Math.cos(i+tick/2)
-					]
+					return {
+						x: clickedEntity.x + i*v.x*10 + 10*v.y*Math.cos(i+tick/2),
+						y: clickedEntity.y + i*v.y*10 - 10*v.x*Math.cos(i+tick/2)
+					}
 				})
-				//g.path([[clickedEntity.x, clickedEntity.y], [mx, my]]).stroke()
 				g.ctx.strokeStyle = g.color255(255, 255, 255,0.5)
 				g.ctx.lineWidth = 13
 				g.path(path).stroke()
@@ -167,14 +179,21 @@ function Engine(canvasId, nodes, _options){
 			var e = selectedEntity
 			g.ctx.strokeStyle = g.color255(0,0,0,0.5)
 			g.ctx.lineWidth = 10/scale.x
-			var sidebarEdge = transform({x:g.width()-200, y:0})
-			g.path([[e.x + e.r + 5/scale.x, e.y], [sidebarEdge.x, e.y]]).stroke()
+			var sidebarEdge = transform({x:g.width()-200, y: 0})
+			sidebarEdge.y = e.y
+			g.path([{ x: e.x + e.r + 5/scale.x, y: e.y}, sidebarEdge]).stroke()
 		}
 
 		g.ctx.restore()
+		drawEntityHuds()
 	}
 
 	return {
+		select: function (id){
+			var e = _.find(entities, function (x){ return x.id == id })
+			options.selectEntity(e)
+			selectedEntity = e
+		},
 		zoom: function(direction){
 			repeat(function(strength){
 				var f = 1 - 0.2*strength
@@ -194,6 +213,8 @@ function Engine(canvasId, nodes, _options){
 				nodes.nudge(-selectedEntity.x, -selectedEntity.y)
 				offset.x = selectedEntity.x + g.height()/2
 				offset.y = selectedEntity.y + g.height()/2
+				scale.x = 1
+				scale.y = 0.5
 			}
 		},
 		filter: function(component){
