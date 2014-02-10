@@ -28,13 +28,13 @@ html, body {
 #textarea {
 	position: absolute;
 	width: 100%;
-	height: 50%;
+	height: 40%;
 	box-sizing: border-box;
-	background: #1d1e1c;
+	background: #2d2e2c;
 	border: 0;
 	font-family: Consolas, monospace;
-	color: #eee;
-	padding: 20px;
+	color: #aaa;
+	padding: 30px;
 }
 #canvas {
 	position: absolute;
@@ -42,9 +42,10 @@ html, body {
 }
 a, a:hover, a:active {
 	color: #888;
+	text-decoration: none
 }
 a:hover {
-	color: #ddd;
+	color: #aaa;
 }
 .tools {
 	display: block;
@@ -52,13 +53,12 @@ a:hover {
 	top: 20px;
 	right: 20px;
 	color: #888;
-	text-shadow: 0 0 2px rgba(0, 0, 0, 0.975);
+	text-shadow: 0 1px 0px rgba(0, 0, 0, 0.5);
+	font-family: Helvetica, sans-serif;
+	font-weight: bold
 }
 .tools>span {
 	font-size: 150%;
-}
-#savebutton {
-	text-shadow: 0 0 2px rgba(0, 0, 0, 0.975);
 }
 </style>
 </head>
@@ -66,19 +66,21 @@ a:hover {
 	<div class="wrap">
 
 		<canvas id="canvas" width="800" height="800"></canvas>
-		<textarea id="textarea"></textarea>
+		<textarea id="textarea">[apa]->[banan]
+[apa]->[kokos]</textarea>
 
 		<div class="tools">
 			<span>nomnoml &nbsp;&nbsp;</span>
 			<a id="savebutton" href="javascript:void(0)" download="uml.png">
-				<i class="fa fa-camera fa-2x"></i>
+				<i class="fa fa-camera fa-lg"></i>
 			</a>
 		</div>
 	</div>
 
 	<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+	<script src="underscore.js"></script>
 	<script src="../cluster/canvas.js"></script>
+	<script src="../cluster/vector.js"></script>
 	<script>
 
 	(function (){
@@ -91,27 +93,99 @@ a:hover {
 		}
 	}())
 
+	function fillScreen(){
+		w = canvas.parentElement.offsetWidth
+		h = canvas.parentElement.offsetHeight
+		canvas.setAttribute('width', w)
+		canvas.setAttribute('height', h*0.6-1)
+		sourceChanged()
+	}
+
+	var w, h;
 	var canvas = document.getElementById('canvas')
 	var textarea = document.getElementById('textarea')
-
-	function fillScreen(){
-		var w = canvas.parentElement.offsetWidth
-		var h = canvas.parentElement.offsetHeight
-		canvas.setAttribute('width', w)
-		canvas.setAttribute('height', h/2-1)
-		render()
-	}
-
-	window.addEventListener('resize', _.throttle(fillScreen, 750, {leading: true}))
-
 	var g = skanaar.Canvas(canvas, {})
+	window.addEventListener('resize', _.throttle(fillScreen, 750, {leading: true}))
+	textarea.addEventListener('input', sourceChanged)
+	textarea.value = localStorage.getItem('nomnoml.lastSource') || '[monkey]->[banana]'
+	fillScreen()
 
-	function render(){
-		g.ctx.fillStyle = '#444'
-		g.circle(_.random(100), _.random(100), 20).fill()
+	function sourceChanged(){
+		var ast = parse(textarea.value)
+		localStorage.setItem('nomnoml.lastSource', textarea.value)
+		render(layout(ast))
 	}
 
-	fillScreen()
+	function parse(source){
+		function splitTrim(s){
+			var parts = s.split('->')
+			return parts.length < 2 ? ['', ''] : [parts[0].trim(), parts[1].trim()]
+		}
+		function hasValidSyntax(s){
+			return s[0] === '[' && s[s.length-1] === ']'
+		}
+		var lines = source.split('\n')
+		var bimap = _.map(lines, splitTrim)
+		var nodes = {}
+		var relations = []
+		_.each(bimap, function (pair){
+			if (!hasValidSyntax(pair[0]) || !hasValidSyntax(pair[1])) return
+			var left = pair[0].substring(1, pair[0].length-1)
+			var right = pair[1].substring(1, pair[1].length-1)
+			nodes[left] = { name: left, x: _.random(600), y: _.random(400) }
+			nodes[right] = { name: right, x: _.random(600), y: _.random(400) }
+			relations.push( { start: left, end: right } )
+		})
+		function eachRelation(action){
+			_.each(relations, function (r){
+				action(nodes[r.start], nodes[r.end])
+			})
+		}
+		return { nodes: nodes, relations: relations, eachRelation: eachRelation }
+	}
+
+	function layout(ast){
+		ast.eachRelation(function (p1, p2){
+			p1.charge = p1.charge || 0
+			p2.charge = p2.charge || 0
+			p1.charge--
+			p2.charge++
+		})
+		_.each(_.pairs(_.groupBy(_.values(ast.nodes), 'charge')), function(level, i, list){
+			_.each(level[1], function (e, j){
+				e.x = 100 + (w)*j/(level[1].length)
+				e.y = 100 + (h/2)*i/list.length
+			})
+		})
+		return ast
+	}
+
+	function render(ast){
+		g.ctx.clearRect(0, 0, w, h)
+		g.ctx.strokeStyle = '#111'
+		g.ctx.fillStyle = '#111'
+		g.ctx.textAlign = 'center'
+		g.ctx.lineWidth = 3
+		ast.eachRelation(function (p1, p2){
+			var v = normalize(diff(p1, p2))
+			var p2_ = add(p2, mult(v, 50))
+			g.path([p1, p2_]).stroke()
+			var t = rot(v)
+			var arrowBase = add(p2_, mult(v, 15))
+			g.path([add(p2_, mult(v, -4)), add(arrowBase, mult(t, 10)), add(arrowBase, mult(t, -10))]).fill()
+		})
+		_.each(ast.nodes, function (e){
+			g.ctx.fillStyle = '#aaa'
+			g.circle(e.x, e.y, 40).fill().stroke()
+			//g.ctx.fillRect(e.x-50, e.y-30, 100, 60)
+			//g.ctx.strokeRect(e.x-50, e.y-30, 100, 60)
+			g.ctx.fillStyle = '#333'
+			g.ctx.fillText(e.name, e.x, e.y+3)
+		})
+	}
+
+
+
 
 	</script>
 </body>
