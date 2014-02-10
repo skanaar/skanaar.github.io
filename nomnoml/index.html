@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>nomnoml</title>
+<link href='//fonts.googleapis.com/css?family=Dosis:400' rel='stylesheet' type='text/css'>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="../cluster/css/boilerplate.css">
+<link rel="stylesheet" href="../cluster/css/normalize.css">
+<link rel="shortcut icon" href="img/favicon.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+<style>
+
+html, body {
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+.wrap {
+	position: relative;
+	background: #2d2e2c;
+	min-height: 100%;
+}
+#textarea {
+	position: absolute;
+	width: 100%;
+	height: 50%;
+	box-sizing: border-box;
+	background: #1d1e1c;
+	border: 0;
+	font-family: Consolas, monospace;
+	color: #eee;
+	padding: 20px;
+}
+#canvas {
+	position: absolute;
+	bottom: 0;
+}
+a, a:hover, a:active {
+	color: #888;
+}
+a:hover {
+	color: #ddd;
+}
+.tools {
+	display: block;
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	color: #888;
+	text-shadow: 0 0 2px rgba(0, 0, 0, 0.975);
+}
+.tools>span {
+	font-size: 150%;
+}
+#savebutton {
+	text-shadow: 0 0 2px rgba(0, 0, 0, 0.975);
+}
+</style>
+</head>
+<body>
+	<div class="wrap">
+
+		<canvas id="canvas" width="800" height="800"></canvas>
+		<textarea id="textarea"></textarea>
+
+		<div class="tools">
+			<span>nomnoml &nbsp;&nbsp;</span>
+			<a id="savebutton" href="javascript:void(0)" download="uml.png">
+				<i class="fa fa-camera fa-2x"></i>
+			</a>
+		</div>
+	</div>
+
+	<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+	<script src="../cluster/canvas.js"></script>
+	<script>
+
+	(function (){
+		var link = document.getElementById('savebutton')
+		link.addEventListener('click', downloadImage, false);
+		function downloadImage(){
+			var url = canvas.toDataURL('image/png')
+			var downloadUrl = url.replace(/^data:image\/[^;]/, 'data:application/octet-stream')
+		    link.href = downloadUrl;
+		}
+	}())
+
+	var canvas = document.getElementById('canvas')
+	var textarea = document.getElementById('textarea')
+
+	function fillScreen(){
+		var w = canvas.parentElement.offsetWidth
+		var h = canvas.parentElement.offsetHeight
+		canvas.setAttribute('width', w)
+		canvas.setAttribute('height', h/2-1)
+		render()
+	}
+
+	window.addEventListener('resize', _.throttle(fillScreen, 750, {leading: true}))
+
+	var g = skanaar.Canvas(canvas, {})
+
+	function render(){
+		g.ctx.fillStyle = '#444'
+		g.circle(_.random(100), _.random(100), 20).fill()
+	}
+
+	fillScreen()
+
+	</script>
+</body>
+</html>
