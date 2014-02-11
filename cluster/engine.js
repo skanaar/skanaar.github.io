@@ -11,7 +11,7 @@ function Engine(canvasId, nodes, _options){
 		mousemove: onMouseMove
 	})
 	var offset = { x: canvas.width/2, y: canvas.height/2 }
-	var scale = { x: 0.3, y: 0.15 }
+	var scale = { x: 0.8, y: 0.8 }
 	var selectedEntity = undefined
 	var clickedEntity = undefined
 	var mouseDownPos = undefined
@@ -73,52 +73,91 @@ function Engine(canvasId, nodes, _options){
 		return { x: scale.x*pos.x + offset.x, y: scale.y*pos.y + offset.y }
 	}
 
+	var phi = 3.14*2
+
+	var entityColor = {
+		core: 'rgba(10, 120, 20, 0.75)',
+		accelerator: 'rgba(100, 20, 128, 0.75)',
+		expander: 'rgba(255, 128, 32, 0.75)',
+		existing: 'rgba(10, 120, 20, 0.75)',
+		supporting: 'rgba(100, 20, 128, 0.75)',
+		potential: 'rgba(255, 128, 32, 0.75)'
+	}
+
 	function drawEntities(){
-		g.ctx.lineWidth = 10
+		g.ctx.lineWidth = 4
 		_.each(entities, function (e){
-			var alpha = nodes.forceScaling(e)
-			g.ctx.fillStyle = 'rgba(255, 255, 255, '+0.75*alpha+')'
-			g.circle(e.x, e.y, e.r+10).fill()
-			g.ctx.fillStyle = g.colorNorm(e.properties.r, e.properties.g, e.properties.b, 0.5*alpha)
+			var grad = g.ctx.createRadialGradient(e.x, e.y, e.r, e.x, e.y, e.r*2)
+			grad.addColorStop(0, 'rgba(0,0,0,0.5)')
+			grad.addColorStop(1, 'rgba(0,0,0,0)')
+			g.ctx.fillStyle = grad
+			g.circle(e.x, e.y, e.r*2).fill()
+
+			var alpha = Math.min(1, Math.max(0, scale.x-1))
+
+			if (scale.x > 0.2){
+				var grad = g.ctx.createRadialGradient(e.x+2, e.y+2, e.r, e.x+2, e.y+2, e.r+10)
+				grad.addColorStop(0, '#fff')
+				grad.addColorStop(0.25, entityColor[e.properties.type])
+				grad.addColorStop(0.75, entityColor[e.properties.type])
+				grad.addColorStop(1, '#fff')
+				g.ctx.strokeStyle = grad
+				g.circle(e.x, e.y, e.r+5).stroke()
+			}
+
+			g.ctx.fillStyle = entityColor[e.properties.status]
 			g.circle(e.x, e.y, e.r).fill()
+
+			var p = e.properties
+			var m = p.mobility / (p.mobility + p.nutrition + p.building)
+			var n = p.nutrition/ (p.mobility + p.nutrition + p.building)
+			var b = p.building / (p.mobility + p.nutrition + p.building)
+			g.ctx.fillStyle = g.colorNorm(1, 0.5, 0.25, 0.75*alpha)
+			g.arc(e.x, e.y, e.r, 0, m*phi).fill()
+			g.ctx.fillStyle = g.colorNorm(0.25, 1, 0.5, 0.75*alpha)
+			g.arc(e.x, e.y, e.r, m*phi, (m+n)*phi).fill()
+			g.ctx.fillStyle = g.colorNorm(0.5, 0.25, 1, 0.75*alpha)
+			g.arc(e.x, e.y, e.r, (m+n)*phi, 0).fill()
 		})
 	}
 
+	function scaleFadedAlpha(){
+		return Math.max(0, Math.min(2*scale.x-1, 0.75))
+	}
+
 	function drawEntityHuds(){
-		if (scale.x < 0.3) return
-		g.ctx.lineWidth = 10
+		var alpha = scaleFadedAlpha()
+		if (alpha < 0) return
+		g.ctx.lineWidth = 1.5
+		g.ctx.strokeStyle = 'rgba(255, 255, 255, '+alpha+')'
+		g.ctx.fillStyle = 'rgba(255, 255, 255, '+alpha+')'
 		g.ctx.font = '10pt Verdana';
-		g.ctx.textAlign = 'center';
+		g.ctx.textAlign = 'left';
 		_.each(entities, function (e){
 			var screenPos = untransform(e)
-			g.ctx.fillStyle = 'rgba(0, 0, 0, 0.5)'
-			g.ctx.fillText(e.name, screenPos.x+1, screenPos.y+1)
-			g.ctx.fillStyle = 'rgba(255, 255, 255, 0.9975)'
-			g.ctx.fillText(e.name, screenPos.x, screenPos.y)
+			g.circle(screenPos.x, screenPos.y, 6).fill()
+			g.path([{x:0, y:0}, {x:22, y:-22}], screenPos).stroke()
+			g.path([{x:30, y:-25}, {x:110, y:-25}], screenPos).stroke()
+			g.circle(screenPos.x+25, screenPos.y-25, 5).stroke()
+			g.circle(screenPos.x+115, screenPos.y-25, 5).stroke()
+			g.ctx.fillText(e.name, screenPos.x+35, screenPos.y-30)
 		})
 	}
 
 	function drawRelations(){
-		var steps = 8
+		var steps = 20
 		var margin = 10
-		g.ctx.lineWidth = 5
 		relations.each(function (e1, e2, r){
-			var alpha = nodes.forceScaling(e1, e2)
-			if (r.isAbstract){
-				g.ctx.strokeStyle = 'rgba(0, 0, 0, 0.01)'
-				g.ctx.fillStyle = 'rgba(0, 0, 0, 0.01)'
-			}
-			else{
-				g.ctx.strokeStyle = 'rgba(255, 255, 255, '+alpha/2+')'
-				g.ctx.fillStyle = 'rgba(255, 255, 255, '+alpha/2+')'
-			}
-
-			var d = dist(e1, e2)
+			var d = dist(e1, e2) * 0.3
 			var v = mult(diff(e2, e1), 1/steps)
 			function down(i){ return {x:0, y: d*(1-sq(2*i/steps-1))/2 } }
 			var path = _.times(steps+1, function (i){ return add(add(e1, mult(v, i)), down(i)) })
 
-			//_.each(path, function (p){ g.circle(p.x, p.y, 5).fill() })
+			g.ctx.lineWidth = 5
+			g.ctx.strokeStyle = 'rgba(0, 0, 0, 0.1)'
+			g.path(path).stroke()
+			g.ctx.lineWidth = 3
+			g.ctx.strokeStyle = entityColor[r.type]
 			g.path(path).stroke()
 		})
 	}
@@ -144,7 +183,14 @@ function Engine(canvasId, nodes, _options){
 	function draw(tick){
 		nodes.simulate()
 
-		g.background(150, 150, 150)
+		g.background(15, 45, 45)
+		var hw = g.width()/2
+		var hh = g.height()/2
+		var grad = g.ctx.createRadialGradient(hw, hh, 0, hw, hh, 2*hh)
+		grad.addColorStop(0.25, 'rgba(0, 0, 0, 0)')
+		grad.addColorStop(1, 'rgba(0, 0, 0, 0.2)')
+		g.ctx.fillStyle = grad
+		g.ctx.fillRect(0, 0, 2*hw, 2*hh)
 
 		g.ctx.save()
 		g.ctx.translate(offset.x, offset.y)
@@ -214,7 +260,7 @@ function Engine(canvasId, nodes, _options){
 				offset.x = selectedEntity.x + g.height()/2
 				offset.y = selectedEntity.y + g.height()/2
 				scale.x = 1
-				scale.y = 0.5
+				scale.y = 1
 			}
 		},
 		filter: function(component){

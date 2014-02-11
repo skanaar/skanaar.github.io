@@ -341,9 +341,8 @@
 				id:_.uniqueId(),
 				name: randomName(),
 				properties: {
-					r:r, 
-					g:g, 
-					b:b,
+					status: _.sample(['existing', 'supporting', 'potential']),
+					type: _.sample(['core', 'accelerator', 'expander']),
 	                mobility: _.random(100),
 	                nutrition: _.random(100),
 	                building: _.random(100)
@@ -351,9 +350,11 @@
 			}
 		}
 	}
-	var clusters = _.times(8, function (i){
-		var es = _.times(10, entityFactory(Math.random(), Math.random(), Math.random()))
-		var rs = fillTree(function (a,b){ return {start:a, end:b} }, 3, es)
+	var clusters = _.times(1, function (i){
+		var es = _.times(40, entityFactory(Math.random(), Math.random(), Math.random()))
+		var rs = fillTree(function (a,b){
+			return {start:a, end:b, type: _.sample(['core', 'accelerator', 'expander'])}
+		}, 3, es)
 		return { entities: es, relations: rs }
 	})
 	var entities = _.flatten(_.pluck(clusters, 'entities'))

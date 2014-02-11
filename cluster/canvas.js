@@ -56,14 +56,19 @@ skanaar.Canvas = function (canvas, callbacks){
 			ctx.arc(x, y, r, 0, twopi)
 			return chainable
 		},
-		path: function (path, x, y, s){
-			s = s === undefined ? 1 : s
-			x = x || 0
-			y = y || 0
+		arc: function (x, y, r, start, stop){
 			ctx.beginPath()
-			ctx.moveTo(x + s*path[0].x, y + s*path[0].y)
+			ctx.moveTo(x,y)
+			ctx.arc(x, y, r, start, stop)
+			return chainable
+		},
+		path: function (path, offset, s){
+			s = s === undefined ? 1 : s
+			offset = offset || {x:0, y:0}
+			ctx.beginPath()
+			ctx.moveTo(offset.x + s*path[0].x, offset.y + s*path[0].y)
 			for(var i=1, len=path.length; i<len; i++)
-				ctx.lineTo(x + s*path[i].x, y + s*path[i].y)
+				ctx.lineTo(offset.x + s*path[i].x, offset.y + s*path[i].y)
 			return chainable
 		},
 		colorNorm: function (r, g, b, a){

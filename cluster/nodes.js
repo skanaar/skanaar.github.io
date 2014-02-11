@@ -15,7 +15,7 @@ function normalize(v){ return mult(v, 1/mag(v)) }
 function repeat(action, repetitions){
 	var r = repetitions || 10
 	_.times(r, function (i){
-		setTimeout(function (){ action(i/r) }, 50*i)
+		setTimeout(function (){ action(i/(r-1)) }, 50*i)
 	})
 }
 
@@ -31,7 +31,7 @@ function Nodes(count, _entities, _relations){
 	var entities = _.map(_entities, function (e){ return Entity(e.id, e)})
 	var entitiesById = _.object(_.map(entities, function (e){ return [e.id, e] }))
 	var relations = _.map(_relations, function (r){
-		return Relation(entitiesById[r.start.id], entitiesById[r.end.id])
+		return Relation(entitiesById[r.start.id], entitiesById[r.end.id], r.type)
 	})
 	relations.each = function (action){
 		_.each(relations, function (r){
@@ -40,17 +40,16 @@ function Nodes(count, _entities, _relations){
 		})
 	}
 
-	_.times(550, simulate)
-	dampening = 0.8
+	_.times(300, simulate)
+	dampening = 0
 
-	function Relation(a, b, len, isAbstract){
+	function Relation(a, b, type){
 		return {
 			start: a,
 			end: b,
-			strength: isAbstract ? 0.1 : (0.5 + Math.random()),
-			length: len || _.random(100,250),
-			isAbstract: !!isAbstract,
-			properties: {}
+			strength: 0.5 + Math.random(),
+			length: _.random(50,150),
+			type: type || {}
 		}
 	}
 
@@ -106,10 +105,10 @@ function Nodes(count, _entities, _relations){
 
 	function simulate(){
 		_.each(entities, function (e){
-			e.x += e.fx
-			e.y += e.fy
 			e.fx *= dampening
 			e.fy *= dampening
+			e.x += e.fx
+			e.y += e.fy
 		})
 
 		var populationWeight = 20/entities.length
@@ -139,9 +138,10 @@ function Nodes(count, _entities, _relations){
 		nudge: nudge,
 		forceScaling: forceScaling,
 		addRelation: function (a, b){
-			var r = Relation(a, b)
+			var r = Relation(a, b, 'core')
 			r.strength = 0
 			repeat(function (v){ r.strength = v }, 20)
+			repeat(function (v){ dampening = 0.95*(1-sq(v)) }, 40)
 			relations.push(r)
 		}
 	}
