@@ -85,7 +85,7 @@ function Engine(canvasId, nodes, _options){
 	}
 
 	function drawEntities(){
-		g.ctx.lineWidth = 4
+		g.ctx.lineWidth = 2
 		_.each(entities, function (e){
 			var grad = g.ctx.createRadialGradient(e.x, e.y, e.r, e.x, e.y, e.r*2)
 			grad.addColorStop(0, 'rgba(0,0,0,0.5)')
@@ -93,20 +93,18 @@ function Engine(canvasId, nodes, _options){
 			g.ctx.fillStyle = grad
 			g.circle(e.x, e.y, e.r*2).fill()
 
-			var alpha = Math.min(1, Math.max(0, scale.x-1))
-
 			if (scale.x > 0.2){
-				var grad = g.ctx.createRadialGradient(e.x+2, e.y+2, e.r, e.x+2, e.y+2, e.r+10)
-				grad.addColorStop(0, '#fff')
-				grad.addColorStop(0.25, entityColor[e.properties.type])
-				grad.addColorStop(0.75, entityColor[e.properties.type])
-				grad.addColorStop(1, '#fff')
-				g.ctx.strokeStyle = grad
+				g.ctx.strokeStyle = entityColor[e.properties.type]
 				g.circle(e.x, e.y, e.r+5).stroke()
 			}
 
-			g.ctx.fillStyle = entityColor[e.properties.status]
+			var grad = g.ctx.createRadialGradient(e.x, e.y, 0, e.x, e.y, e.r*2)
+			grad.addColorStop(0, entityColor[e.properties.status])
+			grad.addColorStop(1, 'rgba(0,0,0,0)')
+			g.ctx.fillStyle = grad
 			g.circle(e.x, e.y, e.r).fill()
+
+			var alpha = Math.min(1, Math.max(0, scale.x/2-1))
 
 			var p = e.properties
 			var m = p.mobility / (p.mobility + p.nutrition + p.building)
@@ -242,7 +240,7 @@ function Engine(canvasId, nodes, _options){
 		},
 		zoom: function(direction){
 			repeat(function(strength){
-				var f = 1 - 0.2*strength
+				var f = 1 - 0.1*strength
 				scale.x *= direction > 0 ? f : 1/f
 				scale.y *= direction > 0 ? f : 1/f
 			}, 5)
