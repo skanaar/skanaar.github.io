@@ -105,7 +105,7 @@ function Nodes(count, _entities, _relations){
 
 	function simulate(){
 		if (dampening === 0) return
-		
+
 		_.each(entities, function (e){
 			e.fx *= dampening
 			e.fy *= dampening
@@ -133,18 +133,24 @@ function Nodes(count, _entities, _relations){
 		})
 	}
 
+	var changeSubscribers = []
+
 	return {
 		simulate: simulate,
 		entities: entities,
 		relations: relations,
 		nudge: nudge,
 		forceScaling: forceScaling,
+		onChange: function(callback){
+			changeSubscribers.push(callback)
+		},
 		addRelation: function (a, b){
 			var r = Relation(a, b, 'core')
 			r.strength = 0
 			repeat(function (v){ r.strength = v }, 20)
 			repeat(function (v){ dampening = 0.95*(1-sq(v)) }, 40)
 			relations.push(r)
+			_.each(changeSubscribers, function (c){ c() })
 		}
 	}
 }

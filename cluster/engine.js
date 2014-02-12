@@ -10,18 +10,20 @@ function Engine(canvasId, nodes, _options){
 		mouseup: onMouseUp, 
 		mousemove: onMouseMove
 	})
+	var paused = false
 	var offset = { x: canvas.width/2, y: canvas.height/2 }
+	var targetOffset = { x: canvas.width/2, y: canvas.height/2 }
 	var scale = { x: 0.8, y: 0.8 }
 	var selectedEntity = undefined
 	var clickedEntity = undefined
 	var mouseDownPos = undefined
 	var mouseDownOffset = offset
 
+	var visibleSubset = nodes
 	var entities = nodes.entities
 	var relations = nodes.relations
 	var peers = calculatePeers(nodes.relations)
-
-	var paused = false
+	nodes.onChange(function (){ peers = calculatePeers(nodes.relations) })
 
 	pulse(draw, 1000/options.fps)
 
@@ -46,7 +48,10 @@ function Engine(canvasId, nodes, _options){
 			})
 		}
 		collect(source, generations)
-		return _.values(accumulator)
+		var rels = _.filter(relations, function (r){
+			return accumulator[r.start.id] && accumulator[r.end.id]
+		})
+		return { entities: _.values(accumulator), relations: rels }
 	}
 
 	function relationsFor(entities){
@@ -68,17 +73,18 @@ function Engine(canvasId, nodes, _options){
 	}
 
 	function onMouseMove(pos){
-		if (mouseDownPos)
-			offset = diff(add(mouseDownOffset, pos), mouseDownPos)
+		if (mouseDownPos){
+			offset = diff(mouseDownOffset, diff(pos, mouseDownPos))
+			targetOffset = offset
+		}
 	}
 
 	function onMouseUp(pos){
 		var e = pickEntity(pos)
 		if (clickedEntity && e){
 			if (clickedEntity === e){
+				select(e)
 				options.selectEntity(e)
-				selectedEntity = e
-				centerSelected()
 			}
 			else
 				nodes.addRelation(clickedEntity, e)
@@ -86,7 +92,7 @@ function Engine(canvasId, nodes, _options){
 		
 		if (_.isEqual(mouseDownPos, pos)){
 			options.deselectEntity()
-			selectedEntity = undefined
+			select(undefined)
 		}
 		mouseDownPos = undefined
 		clickedEntity = undefined
@@ -103,10 +109,14 @@ function Engine(canvasId, nodes, _options){
 	}
 
 	function transform(pos){
-		return { x: (pos.x - offset.x)/scale.x, y: (pos.y - offset.y)/scale.y }
+		var w = g.width()/2
+		var h = g.height()/2
+		return { x: (pos.x - w)/scale.x + offset.x, y: (pos.y - h)/scale.y + offset.y }
 	}
 	function untransform(pos){
-		return { x: scale.x*pos.x + offset.x, y: scale.y*pos.y + offset.y }
+		var w = g.width()/2
+		var h = g.height()/2
+		return { x: (pos.x - offset.x)*scale.x + w, y: (pos.y - offset.y)*scale.y + h }
 	}
 
 	var phi = 3.14*2
@@ -207,7 +217,7 @@ function Engine(canvasId, nodes, _options){
 
 	function pickEntity(pos){
 		var p = transform(pos)
-		var e = _.min(entities, function (e){ return dist(e, p) })
+		var e = _.min(visibleSubset.entities, function (e){ return dist(e, p) })
 		return (dist(e, p) < e.r + 10) ? e : undefined
 	}
 
@@ -218,12 +228,7 @@ function Engine(canvasId, nodes, _options){
 	[223,206],[207,229],[162,264],[150,303],[154,337],[181,354],[178,366],
 	[163,393],[143,403],[143,448],[129,475],[108,477],[104,496]]
 
-	function draw(tick){
-		if (paused) return
-
-		nodes.simulate()
-
-		g.background(15, 45, 45)
+	function vingette(){
 		var hw = g.width()/2
 		var hh = g.height()/2
 		var grad = g.ctx.createRadialGradient(hw, hh, 0, hw, hh, 2*hh)
@@ -231,11 +236,30 @@ function Engine(canvasId, nodes, _options){
 		grad.addColorStop(1, 'rgba(0, 0, 0, 0.2)')
 		g.ctx.fillStyle = grad
 		g.ctx.fillRect(0, 0, 2*hw, 2*hh)
+	}
+
+	function easeOffsetTowardsTarget(){
+		var v = diff(targetOffset, offset)
+		var d = mag(v)
+		if (d > 1) v = add( mult(v, 1/d), mult(v, 0.1) )
+		offset = add(offset, v)
+	}
+
+	function draw(tick){
+		if (paused) return
+
+		nodes.simulate()
+		easeOffsetTowardsTarget()
+
+		g.background(15, 45, 45)
+		vingette()
 
 		g.ctx.save()
-		g.ctx.translate(offset.x, offset.y)
+		
+		g.ctx.translate(g.width()/2, g.height()/2)
 		g.ctx.scale(scale.x, scale.y)
-
+		g.ctx.translate(-offset.x, -offset.y)
+		
 		withPickedEntity(g.mousePos(), function (e){
 			g.ctx.fillStyle = g.color255(0,0,0,0.25)
 			g.circle(e.x, e.y, e.r+20).fill()
@@ -253,15 +277,16 @@ function Engine(canvasId, nodes, _options){
 					}
 				})
 				g.ctx.strokeStyle = g.color255(255, 255, 255,0.5)
+				g.ctx.lineJoin = 'round'
 				g.ctx.lineWidth = 13
 				g.path(path).stroke()
 			}
 		}
 
-		var es = selectedEntity ? filteredEntities(selectedEntity, 2) : entities
+		var es = visibleSubset
 
-		drawRelations(relationsFor(es))
-		drawEntities(es)
+		drawRelations(es.relations)
+		drawEntities(es.entities)
 
 		if (selectedEntity){
 			var e = selectedEntity
@@ -274,14 +299,21 @@ function Engine(canvasId, nodes, _options){
 
 		g.ctx.restore()
 
-		drawEntityHuds(es)
+		drawEntityHuds(es.entities)
+	}
+
+	function select(entity){
+		selectedEntity = entity
+		centerSelected()
+		visibleSubset = selectedEntity ? 
+			filteredEntities(selectedEntity, 2) : 
+			{entities: entities, relations: relations}
 	}
 
 	function centerSelected(){
 		if (selectedEntity){
-			nodes.nudge(-selectedEntity.x, -selectedEntity.y)
-			offset.x = selectedEntity.x + g.height()/2
-			offset.y = selectedEntity.y + g.height()/2
+			targetOffset.x = selectedEntity.x
+			targetOffset.y = selectedEntity.y
 		}
 	}
 
@@ -292,24 +324,22 @@ function Engine(canvasId, nodes, _options){
 		select: function (id){
 			var e = _.find(entities, function (x){ return x.id == id })
 			options.selectEntity(e)
-			selectedEntity = e
-			centerSelected()
+			select(e)
 			scale.x = 1
 			scale.y = 1
 		},
 		zoom: function(direction){
 			repeat(function(strength){
-				var f = 1 - 0.1*strength
-				scale.x *= direction > 0 ? f : 1/f
-				scale.y *= direction > 0 ? f : 1/f
+				var s = 1 - 0.1*strength
+				var f = direction > 0 ? s : 1/s
+				scale.x *= f
+				scale.y *= f
 			}, 5)
 		},
 		fillScreen: function(){
 			var w = canvas.parentElement.offsetWidth
 			canvas.setAttribute('width', w)
 			canvas.setAttribute('height', w*3/4)
-			offset.x = g.width()/2
-			offset.y = g.height()/2
 		},
 		centerSelected: centerSelected,
 		filter: function(component){
