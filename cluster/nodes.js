@@ -104,6 +104,8 @@ function Nodes(count, _entities, _relations){
 	}
 
 	function simulate(){
+		if (dampening === 0) return
+		
 		_.each(entities, function (e){
 			e.fx *= dampening
 			e.fy *= dampening
