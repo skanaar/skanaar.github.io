@@ -358,8 +358,8 @@
 			}
 		}
 	}
-	var clusters = _.times(1, function (i){
-		var es = _.times(40, entityFactory(Math.random(), Math.random(), Math.random()))
+	var clusters = _.times(5, function (i){
+		var es = _.times(10, entityFactory(Math.random(), Math.random(), Math.random()))
 		var rs = fillTree(function (a,b){
 			return {start:a, end:b, type: _.sample(['core', 'accelerator', 'expander'])}
 		}, 3, es)

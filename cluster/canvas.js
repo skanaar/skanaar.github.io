@@ -85,6 +85,13 @@ skanaar.Canvas = function (canvas, callbacks){
 				g: component(hue-1/3),
 				b: component(hue+1/3)
 			}
+		},
+		radialGradient: function (x, y, r1, r2, colors){
+			var grad = ctx.createRadialGradient(x, y, r1, x, y, r2)
+			for(var key in colors)
+				if (colors.hasOwnProperty(key))
+					grad.addColorStop(key, colors[key])
+			return grad
 		}
 	}
 }

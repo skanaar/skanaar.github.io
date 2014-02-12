@@ -13,7 +13,7 @@ function Engine(canvasId, nodes, _options){
 	var paused = false
 	var offset = { x: canvas.width/2, y: canvas.height/2 }
 	var targetOffset = { x: canvas.width/2, y: canvas.height/2 }
-	var scale = { x: 0.8, y: 0.8 }
+	var scale = { x: 0.8, y: 0.4 }
 	var selectedEntity = undefined
 	var clickedEntity = undefined
 	var mouseDownPos = undefined
@@ -23,7 +23,10 @@ function Engine(canvasId, nodes, _options){
 	var entities = nodes.entities
 	var relations = nodes.relations
 	var peers = calculatePeers(nodes.relations)
-	nodes.onChange(function (){ peers = calculatePeers(nodes.relations) })
+	nodes.onChange(function (){
+		peers = calculatePeers(nodes.relations)
+		select(selectedEntity)
+	})
 
 	pulse(draw, 1000/options.fps)
 
@@ -74,7 +77,7 @@ function Engine(canvasId, nodes, _options){
 
 	function onMouseMove(pos){
 		if (mouseDownPos){
-			offset = diff(mouseDownOffset, diff(pos, mouseDownPos))
+			offset = diff(mouseDownOffset, mult(diff(pos, mouseDownPos), 1/scale.x))
 			targetOffset = offset
 		}
 	}
@@ -133,21 +136,23 @@ function Engine(canvasId, nodes, _options){
 	function drawEntities(entities){
 		g.ctx.lineWidth = 2
 		_.each(entities, function (e){
-			var grad = g.ctx.createRadialGradient(e.x, e.y, e.r, e.x, e.y, e.r*2)
-			grad.addColorStop(0, 'rgba(0,0,0,0.5)')
-			grad.addColorStop(1, 'rgba(0,0,0,0)')
-			g.ctx.fillStyle = grad
-			g.circle(e.x, e.y, e.r*2).fill()
+			//drop shadow
+			var shadow = 40*scale.x/scale.y - 40
+			g.ctx.fillStyle = g.radialGradient(e.x, e.y + shadow, e.r, e.r*2, {
+				0: 'rgba(0,0,0,0.25)',
+				1: 'rgba(0,0,0,0)'
+			})
+			g.circle(e.x, e.y+shadow, e.r*2).fill()
 
 			if (scale.x > 0.2){
 				g.ctx.strokeStyle = entityColor[e.properties.type]
 				g.circle(e.x, e.y, e.r+5).stroke()
 			}
 
-			var grad = g.ctx.createRadialGradient(e.x, e.y, 0, e.x, e.y, e.r*2)
-			grad.addColorStop(0, entityColor[e.properties.status])
-			grad.addColorStop(1, 'rgba(0,0,0,0)')
-			g.ctx.fillStyle = grad
+			g.ctx.fillStyle = g.radialGradient(e.x, e.y, 0, e.r*2, {
+				0: entityColor[e.properties.status],
+				1: 'rgba(0,0,0,0)'
+			})
 			g.circle(e.x, e.y, e.r).fill()
 
 			var alpha = Math.min(1, Math.max(0, scale.x/2-1))
@@ -194,7 +199,7 @@ function Engine(canvasId, nodes, _options){
 		_.each(relations, function (r){
 			var e1 = r.start
 			var e2 = r.end
-			var d = dist(e1, e2) * 0.3
+			var d = dist(e1, e2) * 0.3 * scale.x/scale.y
 			var v = mult(diff(e2, e1), 1/steps)
 			function down(i){ return {x:0, y: d*(1-sq(2*i/steps-1))/2 } }
 			function curved(i){ return add(add(e1, mult(v, i)), down(i)) }
@@ -231,9 +236,10 @@ function Engine(canvasId, nodes, _options){
 	function vingette(){
 		var hw = g.width()/2
 		var hh = g.height()/2
-		var grad = g.ctx.createRadialGradient(hw, hh, 0, hw, hh, 2*hh)
-		grad.addColorStop(0.25, 'rgba(0, 0, 0, 0)')
-		grad.addColorStop(1, 'rgba(0, 0, 0, 0.2)')
+		var grad = g.radialGradient(hw, hh, 0, 2*hh, {
+			0.25: 'rgba(0, 0, 0, 0)',
+			1: 'rgba(0, 0, 0, 0.2)'
+		})
 		g.ctx.fillStyle = grad
 		g.ctx.fillRect(0, 0, 2*hw, 2*hh)
 	}
@@ -321,12 +327,15 @@ function Engine(canvasId, nodes, _options){
 		togglePause: function (){
 			paused = !paused
 		},
+		set3D: function (factor){
+			scale.y = factor * scale.x
+		},
 		select: function (id){
 			var e = _.find(entities, function (x){ return x.id == id })
 			options.selectEntity(e)
 			select(e)
+			scale.y /= scale.x
 			scale.x = 1
-			scale.y = 1
 		},
 		zoom: function(direction){
 			repeat(function(strength){
