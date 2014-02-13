@@ -1,3 +1,5 @@
+var gFilter = { status: null, type: null }
+
 function Engine(canvasId, nodes, _options){
 	var options = {
 		fps: _options.fps || 30,
@@ -13,7 +15,7 @@ function Engine(canvasId, nodes, _options){
 	var paused = false
 	var offset = { x: canvas.width/2, y: canvas.height/2 }
 	var targetOffset = { x: canvas.width/2, y: canvas.height/2 }
-	var scale = { x: 0.8, y: 0.4 }
+	var scale = { x: 1, y: 1 }
 	var selectedEntity = undefined
 	var clickedEntity = undefined
 	var mouseDownPos = undefined
@@ -39,6 +41,20 @@ function Engine(canvasId, nodes, _options){
 			map[r.end.id].push(r.start)
 		})
 		return map
+	}
+
+	function filteredEntities_0(){
+		var filter = gFilter || { status: null, type: null }
+		var filtered = _.filter(entities, function (e){
+			var matchesStatus = (!filter.status) || e.properties.status === filter.status
+			var matchesType = (!filter.type) || e.properties.type === filter.type
+			return matchesType && matchesStatus
+		})
+		var entById = _.indexBy(filtered, 'id')
+		var rels = _.filter(relations, function (r){
+			return entById[r.start.id] && entById[r.end.id]
+		})
+		return { entities: filtered, relations: rels }
 	}
 
 	function filteredEntities(source, generations){
@@ -125,48 +141,69 @@ function Engine(canvasId, nodes, _options){
 	var phi = 3.14*2
 
 	var entityColor = {
-		core: 'rgba(10, 120, 20, 0.75)',
-		accelerator: 'rgba(100, 20, 128, 0.75)',
-		expander: 'rgba(255, 128, 32, 0.75)',
-		existing: 'rgba(10, 120, 20, 0.75)',
-		supporting: 'rgba(100, 20, 128, 0.75)',
-		potential: 'rgba(255, 128, 32, 0.75)'
+		core: 'rgba(255, 64, 0, 0.5)',
+		accelerator: 'rgba(200, 40, 255, 0.5)',
+		expander: 'rgba(200, 255, 0, 0.5)',
+		existing: 'rgba(210, 100, 20, 1)',
+		supporting: 'rgba(10, 170, 210, 1)',
+		potential: 'rgba(60, 180, 10, 1)'
+	}
+
+	var relationColor = {
+		participant: hsl(0.0, 0.5, 1, 0.5),
+		provider:    hsl(0.2, 0.5, 1, 0.5),
+		catalyst:    hsl(0.4, 0.5, 1, 0.5),
+		potential:   hsl(0.6, 0.5, 1, 0.5),
+		alternative: hsl(0.8, 0.5, 1, 0.5)
+	}
+
+	function hsl(hue, sat, lit, alpha){
+		function component(v){
+			return lit*(1-sat + sat*sq(Math.cos(6.283*v)/2 + 0.5))
+		}
+		var r = Math.round(255 * component(hue))
+		var g = Math.round(255 * component(hue-1/3))
+		var b = Math.round(255 * component(hue+1/3))
+		return 'rgba(' + [r, g, b, alpha].join() + ')'
 	}
 
 	function drawEntities(entities){
-		g.ctx.lineWidth = 2
 		_.each(entities, function (e){
 			//drop shadow
+			var radius = radiusOf(e)
 			var shadow = 40*scale.x/scale.y - 40
-			g.ctx.fillStyle = g.radialGradient(e.x, e.y + shadow, e.r, e.r*2, {
+			g.ctx.fillStyle = g.radialGradient(e.x, e.y + shadow, radius, radius*2, {
 				0: 'rgba(0,0,0,0.25)',
 				1: 'rgba(0,0,0,0)'
 			})
-			g.circle(e.x, e.y+shadow, e.r*2).fill()
+			g.circle(e.x, e.y+shadow, radius*2).fill()
 
+			// border
 			if (scale.x > 0.2){
+				g.ctx.lineWidth = 2
 				g.ctx.strokeStyle = entityColor[e.properties.type]
-				g.circle(e.x, e.y, e.r+5).stroke()
+				g.circle(e.x, e.y, radius+3).stroke()
 			}
 
-			g.ctx.fillStyle = g.radialGradient(e.x, e.y, 0, e.r*2, {
+			// core
+			g.ctx.fillStyle = g.radialGradient(e.x, e.y, 0, radius*3, {
 				0: entityColor[e.properties.status],
 				1: 'rgba(0,0,0,0)'
 			})
-			g.circle(e.x, e.y, e.r).fill()
+			g.circle(e.x, e.y, radius).fill()
 
+			// pie pieces
 			var alpha = Math.min(1, Math.max(0, scale.x/2-1))
-
 			var p = e.properties
 			var m = p.mobility / (p.mobility + p.nutrition + p.building)
 			var n = p.nutrition/ (p.mobility + p.nutrition + p.building)
 			var b = p.building / (p.mobility + p.nutrition + p.building)
 			g.ctx.fillStyle = g.colorNorm(1, 0.5, 0.25, 0.75*alpha)
-			g.arc(e.x, e.y, e.r, 0, m*phi).fill()
+			g.arc(e.x, e.y, radius, 0, m*phi).fill()
 			g.ctx.fillStyle = g.colorNorm(0.25, 1, 0.5, 0.75*alpha)
-			g.arc(e.x, e.y, e.r, m*phi, (m+n)*phi).fill()
+			g.arc(e.x, e.y, radius, m*phi, (m+n)*phi).fill()
 			g.ctx.fillStyle = g.colorNorm(0.5, 0.25, 1, 0.75*alpha)
-			g.arc(e.x, e.y, e.r, (m+n)*phi, 0).fill()
+			g.arc(e.x, e.y, radius, (m+n)*phi, 0).fill()
 		})
 	}
 
@@ -185,11 +222,11 @@ function Engine(canvasId, nodes, _options){
 		_.each(entities, function (e){
 			var screenPos = untransform(e)
 			g.circle(screenPos.x, screenPos.y, 6).fill()
-			g.path([{x:0, y:0}, {x:22, y:-22}], screenPos).stroke()
-			g.path([{x:30, y:-25}, {x:110, y:-25}], screenPos).stroke()
-			g.circle(screenPos.x+25, screenPos.y-25, 5).stroke()
-			g.circle(screenPos.x+115, screenPos.y-25, 5).stroke()
-			g.ctx.fillText(e.name, screenPos.x+35, screenPos.y-30)
+			g.path([{x:4, y:-4}, {x:32, y:-32}], screenPos).stroke()
+			g.path([{x:40, y:-35}, {x:120, y:-35}], screenPos).stroke()
+			g.circle(screenPos.x+35, screenPos.y-35, 5).stroke()
+			g.circle(screenPos.x+125, screenPos.y-35, 5).stroke()
+			g.ctx.fillText(e.name, screenPos.x+45, screenPos.y-40)
 		})
 	}
 
@@ -205,11 +242,11 @@ function Engine(canvasId, nodes, _options){
 			function curved(i){ return add(add(e1, mult(v, i)), down(i)) }
 			var path = _.times(steps+1, curved)
 
-			g.ctx.lineWidth = 5
-			g.ctx.strokeStyle = 'rgba(0, 0, 0, 0.1)'
+			g.ctx.lineWidth = 4
+			g.ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)'
 			g.path(path).stroke()
-			g.ctx.lineWidth = 3
-			g.ctx.strokeStyle = entityColor[r.type]
+			g.ctx.lineWidth = 1.5
+			g.ctx.strokeStyle = relationColor[r.type]
 			g.path(path).stroke()
 		})
 	}
@@ -223,7 +260,7 @@ function Engine(canvasId, nodes, _options){
 	function pickEntity(pos){
 		var p = transform(pos)
 		var e = _.min(visibleSubset.entities, function (e){ return dist(e, p) })
-		return (dist(e, p) < e.r + 10) ? e : undefined
+		return (dist(e, p) < radiusOf(e) + 10) ? e : undefined
 	}
 
 	var swe = [[104,496],[80,494],[75,471],[80,461],[55,418],[55,389],[61,382],
@@ -257,7 +294,7 @@ function Engine(canvasId, nodes, _options){
 		nodes.simulate()
 		easeOffsetTowardsTarget()
 
-		g.background(15, 45, 45)
+		g.ctx.clearRect(0, 0, g.width(), g.height())
 		vingette()
 
 		g.ctx.save()
@@ -268,7 +305,7 @@ function Engine(canvasId, nodes, _options){
 		
 		withPickedEntity(g.mousePos(), function (e){
 			g.ctx.fillStyle = g.color255(0,0,0,0.25)
-			g.circle(e.x, e.y, e.r+20).fill()
+			g.circle(e.x, e.y, radiusOf(e)+20).fill()
 		})
 
 		if (clickedEntity){
@@ -300,7 +337,7 @@ function Engine(canvasId, nodes, _options){
 			g.ctx.lineWidth = 10/scale.x
 			var sidebarEdge = transform({x:g.width()-200, y: 0})
 			sidebarEdge.y = e.y
-			g.path([{ x: e.x + e.r + 5/scale.x, y: e.y}, sidebarEdge]).stroke()
+			g.path([{ x: e.x + radiusOf(e) + 5/scale.x, y: e.y}, sidebarEdge]).stroke()
 		}
 
 		g.ctx.restore()
@@ -308,12 +345,10 @@ function Engine(canvasId, nodes, _options){
 		drawEntityHuds(es.entities)
 	}
 
+	function radiusOf(entity){ return 30 + (selectedEntity === entity ? 30 : 0) }
+
 	function select(entity){
 		selectedEntity = entity
-		centerSelected()
-		visibleSubset = selectedEntity ? 
-			filteredEntities(selectedEntity, 2) : 
-			{entities: entities, relations: relations}
 	}
 
 	function centerSelected(){
@@ -352,15 +387,20 @@ function Engine(canvasId, nodes, _options){
 		},
 		centerSelected: centerSelected,
 		filter: function(component){
-			$('.filter-option').toggleClass('active', false)
-			if (component === filterProperty){
-				filterProperty = ''
-			} else {
-				$('.filter-'+component).toggleClass('active', true)
-				filterProperty = component
-				filterFactor = 0
-				repeat(function (v){ filterFactor = v })
-			}
+
+			visibleSubset = selectedEntity ? 
+				filteredEntities(selectedEntity, 2) : 
+				{entities: entities, relations: relations}
+
+			//$('.filter-option').toggleClass('active', false)
+			//if (component === filterProperty){
+			//	filterProperty = ''
+			//} else {
+			//	$('.filter-'+component).toggleClass('active', true)
+			//	filterProperty = component
+			//	filterFactor = 0
+			//	repeat(function (v){ filterFactor = v })
+			//}
 		}
 	}
 }

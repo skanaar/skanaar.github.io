@@ -63,20 +63,7 @@ function Nodes(count, _entities, _relations){
 			y: fields.y || _.random(-100, 100),
 			fx: 0,
 			fy: 0,
-			r: fields.r || _.random(20,30),
-			properties: fields.properties || colorObject(Math.random(), 1, 1)
-		}
-	}
-
-	function colorObject(hue, sat, lit){
-		function component(v){
-			var x = Math.cos(6.283*v)/2 + 0.5
-			return lit*(1-sat + sat*x*x)
-		}
-		return {
-			r: component(hue),
-			g: component(hue-1/3),
-			b: component(hue+1/3)
+			properties: fields.properties || {}
 		}
 	}
 

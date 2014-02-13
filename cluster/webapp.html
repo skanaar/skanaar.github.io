@@ -95,18 +95,31 @@
 			background: #eee
 		}
 
+		canvas#canvas {
+			background: url(img/background.jpg) center center;
+			background-size: cover;
+		}
+
 		.sidebar {
-			background: #ccc; 
 			color: #333; 
 			padding: 10px;
+			background: #174140; 
+			background: rgb(0,33,32); /* Old browsers */
+			background: -moz-linear-gradient(top,  rgba(0,33,32,1) 0%, rgba(23,65,64,1) 7%); /* FF3.6+ */
+			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,33,32,1)), color-stop(7%,rgba(23,65,64,1))); /* Chrome,Safari4+ */
+			background: -webkit-linear-gradient(top,  rgba(0,33,32,1) 0%,rgba(23,65,64,1) 7%); /* Chrome10+,Safari5.1+ */
+			background: -o-linear-gradient(top,  rgba(0,33,32,1) 0%,rgba(23,65,64,1) 7%); /* Opera 11.10+ */
+			background: -ms-linear-gradient(top,  rgba(0,33,32,1) 0%,rgba(23,65,64,1) 7%); /* IE10+ */
+			background: linear-gradient(to bottom,  rgba(0,33,32,1) 0%,rgba(23,65,64,1) 7%); /* W3C */
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#002120', endColorstr='#174140',GradientType=0 ); /* IE6-9 */
+
 		}
 
 		.overlay_sidebar {
 			position: absolute; 
 			top: 0; 
 			width: 200px; 
-			height: 100%; 
-			background: rgba(0, 0, 0, 0.5); 
+			height: 100%;
 			padding: 0px;
 			color: #eee;
 			font-family: 'Dosis', sans-serif;
@@ -172,7 +185,7 @@
 			</div>
 			<div style="position: relative">
 				<canvas id="canvas" width="800" height="800"></canvas>
-				<div class="overlay_sidebar details_sidebar" id="node_details_sidebar">
+				<div class="sidebar overlay_sidebar details_sidebar" id="node_details_sidebar">
 					<div>
 						<div>
 							<a class="pull-right"
@@ -361,7 +374,8 @@
 	var clusters = _.times(5, function (i){
 		var es = _.times(10, entityFactory(Math.random(), Math.random(), Math.random()))
 		var rs = fillTree(function (a,b){
-			return {start:a, end:b, type: _.sample(['core', 'accelerator', 'expander'])}
+			var type = _.sample(['participant', 'provider', 'catalyst', 'potential', 'alternative'])
+			return {start:a, end:b, type: type}
 		}, 3, es)
 		return { entities: es, relations: rs }
 	})
