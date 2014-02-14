@@ -32,7 +32,7 @@ function bindData(targetId, data){
 angular.module('cluster', [])
 .controller('SearchCtrl', function ($scope){
 
-    $scope.solutions = entities
+    $scope.solutions = ClusterPlatform.entities
     $scope.filters = {
         mobility: false,
         nutrition: false,

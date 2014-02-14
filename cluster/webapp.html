@@ -207,8 +207,10 @@
 	<script src="underscore.js"></script>
 	<script src="angular.js"></script>
 	<script src="webapp.js"></script>
+	<script src="vector.js"></script>
 	<script src="canvas.js"></script>
 	<script src="nodes.js"></script>
+	<script src="visualizer.js"></script>
 	<script src="engine.js"></script>
 	<script>
 
@@ -230,46 +232,64 @@
 		$('#node_details_sidebar').hide()
 	}
 
-	function entityFactory(r,g,b){
-		return function(i){
-			return {
-				id:_.uniqueId(),
-				name: randomName(),
-				properties: {
-					status: _.sample(['existing', 'supporting', 'potential']),
-					type: _.sample(['core', 'accelerator', 'expander']),
-	                mobility: _.random(100),
-	                nutrition: _.random(100),
-	                building: _.random(100)
+	function randomName(syllables){
+		var vowel = 'aaeeiioouuy'
+		var conso = 'bcddfghhkllmnnprrsstttv'
+		function syllable(){ return _.sample(vowel) + _.sample(conso) }
+		return _.sample(conso).toUpperCase() + _.times(syllables || _.random(2,4), syllable).join('')
+	}
+
+	var ClusterPlatform = { entities: [] }
+
+	function createNodes(clusterCount, clusterSize){
+		function entityFactory(r,g,b){
+			return function(i){
+				return {
+					id:_.uniqueId(),
+					name: randomName(),
+					description: randomName()+' '+_.times(15, randomName).join(' ').toLowerCase(),
+					properties: {
+						status: _.sample(['existing', 'supporting', 'potential']),
+						type: _.sample(['core', 'accelerator', 'expander']),
+		                mobility: _.random(100),
+		                nutrition: _.random(100),
+		                building: _.random(100)
+					}
 				}
 			}
 		}
-	}
-	var clusters = _.times(5, function (i){
-		var es = _.times(10, entityFactory(Math.random(), Math.random(), Math.random()))
-		var rs = fillTree(function (a,b){
-			var type = _.sample(['participant', 'provider', 'catalyst', 'potential', 'alternative'])
-			return {start:a, end:b, type: type}
-		}, 3, es)
-		return { entities: es, relations: rs }
-	})
-	var entities = _.flatten(_.pluck(clusters, 'entities'))
-	var relations = _.flatten(_.pluck(clusters, 'relations'))
-	function fillTree(factory, branches, nodes){
-		var accumulator = []
-		var pointer = 1
-		for(var index=0; pointer<nodes.length; index++){
-			var b = _.random(2, branches)
-			for(var i=0; i<b && pointer<nodes.length-i; i++)
-				accumulator.push(factory(nodes[index], nodes[pointer+i]))
-			pointer+=b
+		var clusters = _.times(clusterCount, function (i){
+			var es = _.times(clusterSize, entityFactory(Math.random(), Math.random(), Math.random()))
+			var rs = fillTree(function (a,b){
+				var type = _.sample(['participant', 'provider', 'catalyst', 'potential', 'alternative'])
+				return {start:a, end:b, type: type}
+			}, 3, es)
+			return { entities: es, relations: rs }
+		})
+		var entities = _.flatten(_.pluck(clusters, 'entities'))
+		var relations = _.flatten(_.pluck(clusters, 'relations'))
+		function fillTree(factory, branches, nodes){
+			var accumulator = []
+			var pointer = 1
+			for(var index=0; pointer<nodes.length; index++){
+				var b = _.random(2, branches)
+				for(var i=0; i<b && pointer<nodes.length-i; i++)
+					accumulator.push(factory(nodes[index], nodes[pointer+i]))
+				pointer+=b
+			}
+			return accumulator
 		}
-		return accumulator
+
+		ClusterPlatform.entities = entities
+
+		var nodes = Nodes(entities, relations)
+		nodes.setDampening(0.95)
+		_.times(300, function (){ nodes.simulate() })
+		nodes.setDampening(0)
+		return nodes
 	}
 
-
-	var nodes = Nodes(10, entities, relations)
-	var engine = Engine('canvas', nodes, {
+	var engine = Engine('canvas', createNodes(0, 0), {
 		fps: 30,
 		selectEntity: selectEntity,
 		deselectEntity: deselectEntity
@@ -280,6 +300,7 @@
 
 	var viewChangeHandlers = {
 		cluster: function (path, clusterId){
+			engine.setNodes(createNodes(5, 10))
 			engine.fillScreen()
 			if (clusterId){
 				engine.select(clusterId)
