@@ -191,6 +191,8 @@ function Engine(canvasId, _nodes, _options){
 		}
 	}
 
+	var filterArgs = { status: null, type: null }
+
 	return {
 		setNodes: setNodes,
 		togglePause: function (){
@@ -218,17 +220,20 @@ function Engine(canvasId, _nodes, _options){
 		},
 		centerSelected: centerSelected,
 		filter: function(status, type){
-			visibleSubset = filteredEntities(status, type)
+			if (status){
+				filterArgs.status = (filterArgs.status === status) ? null : status
+				$('.filter-option-status').toggleClass('active', false)
+				if (filterArgs.status)
+					$('.filter-status-'+filterArgs.status).toggleClass('active', true)
+			}
+			if (type){
+				filterArgs.type = (filterArgs.type === type) ? null : type
+				$('.filter-option-type').toggleClass('active', false)
+				if (filterArgs.type)
+					$('.filter-type-'+filterArgs.type).toggleClass('active', true)
+			}
 
-			//$('.filter-option').toggleClass('active', false)
-			//if (component === filterProperty){
-			//	filterProperty = ''
-			//} else {
-			//	$('.filter-'+component).toggleClass('active', true)
-			//	filterProperty = component
-			//	filterFactor = 0
-			//	repeat(function (v){ filterFactor = v })
-			//}
+			visibleSubset = filteredEntities(filterArgs.status, filterArgs.type)
 		}
 	}
 }
