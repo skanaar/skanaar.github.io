@@ -1,147 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <title>Cluster Platform</title>
-	
-	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
-
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Cluster Platform</title>
+	<link rel="stylesheet" href="css/font-awesome.css">
 	<link rel="stylesheet" href="css/boilerplate.css">
 	<link rel="stylesheet" href="css/cluster.css">
 	<link rel="stylesheet" href="css/normalize.css">
-
 	<link rel="shortcut icon" href="img/favicon.png">
 	<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
 	<link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
-	<style>
-
-		@font-face {
-			font-family: 'Dosis';
-			font-style: normal;
-			font-weight: 400;
-			src: local('Dosis Regular'), local('Dosis-Regular'), url(dosis.woff) format('woff');
-		}
-
-		.jumbotron {
-			background: #0d8;
-			font-size: 200%;
-			font-family: 'Dosis', sans-serif;
-			background: url(img/algae.jpg) center center;
-			background-size: cover;
-			color: #eee;
-			padding: 10px 20px;
-			text-align: center;
-		}
-		.updates {
-			background: #eee;
-			font-family: 'Dosis', sans-serif;
-		}
-		.updates .blocks{
-			text-align: center;
-		}
-		.updates .block {
-			display: inline-block;
-			margin: 0 10px;
-			width: 220px;
-			text-align: left;
-		}
-		.updates .block .fa-stack {
-			color: #4C9730;
-		}
-		.updates .block b {
-			display: inline-block;
-			vertical-align: middle;
-			width: 30px;
-			font-size: 200%;
-			text-align: right
-		}
-		.updates .block .specifier {
-			display: inline-block;
-			width: 50px;
-			vertical-align: middle;
-			margin-left: 10px;
-		}
-		.profile-summary {
-			color: #eee;
-			font-family: 'Dosis', sans-serif;
-			background: #1C8394;
-			padding: 0 20px;
-		}
-		.profile-summary h2 {
-			color: white;
-			margin: 0 0 10px 0;
-		}
-		.profile-summary img {
-			border-radius: 146px;
-			float: left;
-		}
-		.profile-summary .properties {
-			font-size: 110%;
-			padding-left: 20px;
-			float: left;
-		}
-		.profile-summary .properties b{
-			font-weight: normal;
-			display: block;
-			font-size: 80%;
-			color: lightgreen;
-		}
-
-		.tab_page_clustersearch {
-			background: #eee
-		}
-
-		canvas#canvas {
-			background: url(img/background.jpg) center center;
-			background-size: cover;
-		}
-
-		.sidebar {
-			color: #333; 
-			padding: 10px;
-			background: #174140; 
-			background: rgb(0,33,32); /* Old browsers */
-			background: -moz-linear-gradient(top,  rgba(0,33,32,1) 0%, rgba(23,65,64,1) 7%); /* FF3.6+ */
-			background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,33,32,1)), color-stop(7%,rgba(23,65,64,1))); /* Chrome,Safari4+ */
-			background: -webkit-linear-gradient(top,  rgba(0,33,32,1) 0%,rgba(23,65,64,1) 7%); /* Chrome10+,Safari5.1+ */
-			background: -o-linear-gradient(top,  rgba(0,33,32,1) 0%,rgba(23,65,64,1) 7%); /* Opera 11.10+ */
-			background: -ms-linear-gradient(top,  rgba(0,33,32,1) 0%,rgba(23,65,64,1) 7%); /* IE10+ */
-			background: linear-gradient(to bottom,  rgba(0,33,32,1) 0%,rgba(23,65,64,1) 7%); /* W3C */
-			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#002120', endColorstr='#174140',GradientType=0 ); /* IE6-9 */
-
-		}
-
-		.overlay_sidebar {
-			position: absolute; 
-			top: 0; 
-			width: 200px; 
-			height: 100%;
-			padding: 0px;
-			color: #eee;
-			font-family: 'Dosis', sans-serif;
-		}
-		.details_sidebar {
-			display: none;
-			right: 0; 
-		}
-		.search_sidebar {
-			display: none;
-			left: 0; 
-			background: rgba(64, 64, 64, 0.75); 
-		}
-
-		.overlay_sidebar>div {
-			margin: 10px
-		}
-		.overlay_sidebar h2 {
-			color: #8f8;
-		}
-
-	</style>
 </head>
 <body>
 	<div class="page">
@@ -241,14 +112,17 @@
 						<label><input type="checkbox" ng-model="filters.building"> Building</label>
 					</div>
 				</div>
-				<div class="column width8">
-					<h2>Results</h2>
+				<div class="column width8 result-pane">
+					<h3>TRANSFORMATIVE CLUSTERS</h3>
 					<table style="width: 100%">
-					<tr ng-repeat="s in orderedSolutions() | filter:search">
-						<td><a href="#cluster/{{s.id}}">{{s.name}}</a></td>
-						<td><small>Mobility: {{s.properties.mobility}}</small></td>
-						<td><small>Nutrition: {{s.properties.nutrition}}</small></td>
-						<td><small>Building: {{s.properties.building}}</small></td>
+					<tr>
+						<th>Name</th><th>Mobility</th><th>Nutrition</th><th>Building</th>
+					</tr>
+					<tr ng-repeat="s in orderedSolutions() | filter:search | limitTo:10">
+						<td class="cluster-name"><a href="#cluster/{{s.id}}">{{s.name}}</a></td>
+						<td><small>{{s.properties.mobility}}</small></td>
+						<td><small>{{s.properties.nutrition}}</small></td>
+						<td><small>{{s.properties.building}}</small></td>
 					</tr>
 					</table>
 				</div>
