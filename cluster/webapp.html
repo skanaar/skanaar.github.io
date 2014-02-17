@@ -83,15 +83,15 @@
 
 		</div>
 
-		<div id="results" class="tab_page tab_page_goals" style="padding: 0 40px; background: #158892">
-			<script>
-				var daysLeft = 32
-				function getProcessingSketchId () { return 'indicator'; }
-			</script>
-			<canvas id="indicator" data-processing-sources="indicator/indicator.pde"
-					width="920" height="350" tabindex="0"
-					style="image-rendering: -webkit-optimize-contrast !important;">
-	        </canvas>
+		<div class="tab_page tab_page_goals">
+			<div class="full-row jumbotron">Platform goals</div>
+			<script> var daysLeft = 32 </script>
+			<div style="padding: 0 40px; background: #158892">
+				<canvas id="indicator" data-processing-sources="indicator/indicator.pde"
+						width="920" height="350" tabindex="0"
+						style="image-rendering: -webkit-optimize-contrast !important;">
+		        </canvas>
+			</div>
 		</div>
 
 		<div class="tab_page tab_page_cluster" ng-controller="ClusterCtrl">
