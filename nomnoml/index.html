@@ -79,6 +79,7 @@ a:hover {
 
 	<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
 	<script src="underscore.js"></script>
+	<script src="dagre.min.js"></script>
 	<script src="../cluster/canvas.js"></script>
 	<script src="../cluster/vector.js"></script>
 	<script>
@@ -136,56 +137,67 @@ a:hover {
 			nodes[right] = { name: right, x: _.random(600), y: _.random(400) }
 			relations.push( { start: left, end: right } )
 		})
-		function eachRelation(action){
-			_.each(relations, function (r){
-				action(nodes[r.start], nodes[r.end])
-			})
-		}
-		return { nodes: nodes, relations: relations, eachRelation: eachRelation }
+		return { nodes: nodes, relations: relations }
 	}
 
 	function layout(ast){
-		ast.eachRelation(function (p1, p2){
-			p1.charge = p1.charge || 0
-			p2.charge = p2.charge || 0
-			p1.charge--
-			p2.charge++
-		})
-		_.each(_.pairs(_.groupBy(_.values(ast.nodes), 'charge')), function(level, i, list){
-			_.each(level[1], function (e, j){
-				e.x = 100 + (w)*j/(level[1].length)
-				e.y = 100 + (h/2)*i/list.length
+		function buildDagreGraph(ast){
+			var g = new dagre.Digraph()
+			_.each(ast.nodes, function (e, key){
+				g.addNode(key, { label: key, width: 100, height: 50 })
 			})
-		})
-		return ast
+			_.each(ast.relations, function (r){
+				g.addEdge(null, r.start, r.end)
+			})
+			return g
+		}
+		function packageDagreGraph(dagreLayout){
+			var nodes = {}
+			var relations = []
+			dagreLayout.eachNode(function (key, data){
+				nodes[key] = { name: key, x: data.x, y: data.y }
+			})
+			dagreLayout.eachEdge(function (id, start, end, data){
+				relations.push({
+					start: nodes[start],
+					middle: _.pick(data, 'x', 'y'),
+					end: nodes[end],
+					path: _.flatten([nodes[start], data.points, nodes[end]])
+				})
+			})
+			return { nodes: nodes, relations: relations }
+		}
+		return packageDagreGraph(dagre.layout().run(buildDagreGraph(ast)))
 	}
 
-	function render(ast){
+	function render(layout){
+		var fontSize = 14
+
+		g.ctx.save()
 		g.ctx.clearRect(0, 0, w, h)
+		g.ctx.translate(50, 50)
 		g.ctx.strokeStyle = '#111'
-		g.ctx.fillStyle = '#111'
+		g.ctx.font = 'bold '+fontSize+'pt Calibri, sans-serif'
 		g.ctx.textAlign = 'center'
 		g.ctx.lineWidth = 3
-		ast.eachRelation(function (p1, p2){
-			var v = normalize(diff(p1, p2))
-			var p2_ = add(p2, mult(v, 50))
-			g.path([p1, p2_]).stroke()
-			var t = rot(v)
-			var arrowBase = add(p2_, mult(v, 15))
-			g.path([add(p2_, mult(v, -4)), add(arrowBase, mult(t, 10)), add(arrowBase, mult(t, -10))]).fill()
+		_.each(layout.relations, function (r){
+			var v = diff(r.path[r.path.length-2], r.end)
+			var nv = normalize(v)
+			var p2_ = add(r.end, mult(nv, mag(v)*0.75))
+			var t = rot(nv)
+			var arrowBase = add(p2_, mult(nv, 8))
+			g.path(r.path).stroke()
+			g.path([add(p2_, mult(nv, -2)), add(arrowBase, mult(t, 5)), add(arrowBase, mult(t, -5))]).fill()
 		})
-		_.each(ast.nodes, function (e){
-			g.ctx.fillStyle = '#aaa'
-			g.circle(e.x, e.y, 40).fill().stroke()
-			//g.ctx.fillRect(e.x-50, e.y-30, 100, 60)
-			//g.ctx.strokeRect(e.x-50, e.y-30, 100, 60)
+		_.each(layout.nodes, function (e){
+			g.ctx.fillStyle = 'rgba(200, 200, 200, 1)'
+			g.ctx.fillRect(e.x-50, e.y-25, 100, 50)
+			g.ctx.strokeRect(e.x-50, e.y-25, 100, 50)
 			g.ctx.fillStyle = '#333'
-			g.ctx.fillText(e.name, e.x, e.y+3)
+			g.ctx.fillText(e.name, e.x, e.y+fontSize/2-1)
 		})
+		g.ctx.restore()
 	}
-
-
-
 
 	</script>
 </body>
