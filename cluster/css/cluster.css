@@ -1,8 +1,8 @@
 @font-face {
 	font-family: 'Dosis';
 	font-style: normal;
-	font-weight: 400;
-	src: local('Dosis Regular'), local('Dosis-Regular'), url(../fonts/dosis.woff) format('woff');
+	font-weight: 500;
+	src: local('Dosis Regular'), local('Dosis-Regular'), url(../fonts/dosis-500.woff) format('woff');
 }
 
 @media only screen and (max-width: 600px) {
@@ -135,7 +135,8 @@ input[type=checkbox] {
 
 /*-- Style.updates -----------------*/
 
-.updates {
+.dashboard-section {
+	padding: 1px 30px;
 	background: #eee;
 	font-family: 'Dosis', sans-serif;
 }
@@ -144,12 +145,13 @@ input[type=checkbox] {
 }
 .updates .block {
 	display: inline-block;
-	margin: 0 10px;
-	width: 220px;
+	margin: 10px;
+	width: 240px;
 	text-align: left;
 }
-.updates .block .fa-stack {
-	color: #4C9730;
+.updates .block img {
+	width: 60px;
+	height: 60px;
 }
 .updates .block b {
 	display: inline-block;
@@ -160,15 +162,41 @@ input[type=checkbox] {
 }
 .updates .block .specifier {
 	display: inline-block;
-	width: 50px;
+	width: 100px;
 	vertical-align: middle;
 	margin-left: 10px;
 }
+
+.progress-gauge {
+	position: relative;
+	border-radius: 2em;
+	background: #444;
+	padding: 1ex 2ex;
+	margin: 1em;
+}
+.progress-bar {
+	border-radius: 2em 0 0 2em; 
+	padding: 1ex 2ex; 
+	position: absolute; 
+	top: 0; 
+	left: 0
+}
+.progress-message {
+	color: #eee;
+	padding: 1ex 2ex; 
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow-x: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
 .profile-summary {
 	color: #eee;
 	font-family: 'Dosis', sans-serif;
 	background: #1C8394;
-	padding: 0 20px;
+	padding: 15px 30px;
 }
 .profile-summary h2 {
 	color: white;
@@ -176,6 +204,8 @@ input[type=checkbox] {
 }
 .profile-summary img {
 	border-radius: 146px;
+	width: 150px;
+	height: 150px;
 	float: left;
 }
 .profile-summary .properties {

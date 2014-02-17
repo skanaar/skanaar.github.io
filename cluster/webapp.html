@@ -22,6 +22,9 @@
 				<a class="tab_link tab_link_dashboard" href="#dashboard">
 					<i class="fa fa-home"></i> <span class="hidden-sm">Dashboard</span>
 				</a>
+				<a class="tab_link tab_link_goals" href="#goals">
+					<i class="fa fa-trophy"></i> <span class="hidden-sm">Goals</span>
+				</a>
 				<a class="tab_link tab_link_clustersearch" href="#clustersearch">
 					<i class="fa fa-search"></i> <span class="hidden-sm">Search</span>
 				</a>
@@ -35,6 +38,62 @@
 			</div>
 		</div>
 
+		<div class="tab_page tab_page_dashboard" ng-controller="DashboardCtrl">
+
+			<div class="full-row jumbotron">Dashboard</div>
+			<div class="full-row dashboard-section updates">
+				<h2>UPDATES</h2>
+				<div class="blocks">
+					<div class="block" ng-repeat="u in updates">
+						<img ng-src="img/icons/{{u.icon}}" style="display: inline">
+						<b>{{u.value}}</b><div class="specifier">{{u.name}}</div>
+					</div>
+				</div>
+				<hr>
+				<h2>PERSONAL GOALS</h2>
+				<div class="progress-gauge" style="border-radius: 2em; background: #444; padding: 1ex 2ex; position: relative; margin: 1em; color: white" ng-repeat="g in goals">
+					&nbsp;
+					<div class="progress-bar"
+						 style="background: {{g.color}}; width: {{g.value}}">&nbsp;</div>
+					<div class="progress-message">{{g.value}} &nbsp; &nbsp; &nbsp; {{g.name}}</div>
+				</div>
+				<hr>
+			</div>
+
+			<div class="full-row dashboard-section profile-summary">
+				<h2>Marie Fredricks</h2>
+				<div class="row">
+					<div class="column width3">
+						<img src="img/profiles/marie.jpg" width=150 height=150>
+					</div>
+					<div class="column width3">
+						<div class="properties">
+							<div><b>Company/City</b> Malmö Stad, Sweden</div>
+							<div><b>Looking for</b> City planners, Contractors</div>
+							<div><b>Providing</b> Know-how, Budget</div>
+						</div>
+					</div>
+					<div class="column width3">
+						<div class="properties">
+							<div>Customize settings</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<div id="results" class="tab_page tab_page_goals" style="padding: 0 40px; background: #158892">
+			<script>
+				var daysLeft = 32
+				function getProcessingSketchId () { return 'indicator'; }
+			</script>
+			<canvas id="indicator" data-processing-sources="indicator/indicator.pde"
+					width="920" height="350" tabindex="0"
+					style="image-rendering: -webkit-optimize-contrast !important;">
+	        </canvas>
+		</div>
+
 		<div class="tab_page tab_page_cluster" ng-controller="ClusterCtrl">
 			<div class="full-row page-stripe toolbar">
 				<div class="pull-right">
@@ -46,20 +105,23 @@
 						<i class="fa fa-minus"></i></a>
 				</div>
 				<div>
+					<a ng-click="activePane = 'none'" href="javascript:void(0)">
+						<i class="fa fa-times"></i>
+					</a>
 					<a ng-class="{active: activePane === 'filter'}"
-					   ng-click="activePane = 'filter'" href="javascript:void(0)">
+					   ng-click="togglePane('filter')" href="javascript:void(0)">
 						Filter
 					</a>
 					<a ng-class="{active: activePane === 'current'}"
-					   ng-click="activePane = 'current'" href="javascript:void(0)">
+					   ng-click="togglePane('current')" href="javascript:void(0)">
 						Current
 					</a>
 					<a ng-class="{active: activePane === 'develop'}"
-					   ng-click="activePane = 'develop'" href="javascript:void(0)">
+					   ng-click="togglePane('develop')" href="javascript:void(0)">
 						Develop
 					</a>
 					<a ng-class="{active: activePane === 'legend'}"
-					   ng-click="activePane = 'legend'" href="javascript:void(0)">
+					   ng-click="togglePane('legend')" href="javascript:void(0)">
 						Legend
 					</a>
 				</div>
@@ -177,72 +239,6 @@
 
 		</div>
 
-		<div class="tab_page tab_page_dashboard">
-
-			<div class="full-row jumbotron">
-				Dashboard
-			</div>
-
-			<div class="row">
-				<div class="column width8 updates">
-					<h2>Updates</h2>
-					<div class="blocks">
-						<div class="block">
-							<span class="fa-stack fa-2x">
-						  		<i class="fa fa-circle fa-stack-2x"></i>
-						  		<i class="fa fa-thumbs-up fa-stack-1x fa-inverse"></i>
-							</span>
-							<b>14</b><div class="specifier">likes</div>
-						</div>
-						<div class="block">
-							<span class="fa-stack fa-2x">
-						  		<i class="fa fa-circle fa-stack-2x"></i>
-						  		<i class="fa fa-bolt fa-stack-1x fa-inverse"></i>
-							</span>
-							<b>6</b><div class="specifier">opportunities</div>
-						</div>
-						<div class="block">
-							<span class="fa-stack fa-2x">
-						  		<i class="fa fa-circle fa-stack-2x"></i>
-						  		<i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-							</span>
-							<b>32</b><div class="specifier">news flashes</div>
-						</div>
-						<div class="block">
-							<span class="fa-stack fa-2x">
-						  		<i class="fa fa-circle fa-stack-2x"></i>
-						  		<i class="fa fa-lightbulb-o fa-stack-1x fa-inverse"></i>
-							</span>
-							<b>7</b><div class="specifier">ideas for you</div>
-						</div>
-						<div class="block">
-							<span class="fa-stack fa-2x">
-						  		<i class="fa fa-circle fa-stack-2x"></i>
-						  		<i class="fa fa-link fa-stack-1x fa-inverse"></i>
-							</span>
-							<b>3</b><div class="specifier">possible connections</div>
-						</div>
-						<div class="block">
-							<span class="fa-stack fa-2x">
-						  		<i class="fa fa-circle fa-stack-2x"></i>
-						  		<i class="fa fa-link fa-stack-1x fa-inverse"></i>
-							</span>
-							<b>3</b><div class="specifier">possible connections</div>
-						</div>
-					</div>
-				</div>
-				<div class="column width4 profile-summary">
-					<h2>Marie Fredricks</h2>
-					<img src="img/profiles/marie.jpg" width=100 height=100>
-					<div class="properties">
-						<div><b>Profile</b> Entrepreneur</div>
-						<div><b>Segment</b> Nutrition</div>
-					</div>
-				</div>
-			</div>
-
-		</div>
-
 		<div class="full-row footer page-stripe">
 			<div class="title">
 				21st Century Frontiers 2014
@@ -253,6 +249,8 @@
 	<script src="jquery.js"></script>
 	<script src="underscore.js"></script>
 	<script src="angular.js"></script>
+	<script src="indicator/processing.js"></script>
+
 	<script src="webapp.js"></script>
 	<script src="vector.js"></script>
 	<script src="canvas.js"></script>

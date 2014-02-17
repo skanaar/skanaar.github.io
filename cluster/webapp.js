@@ -69,6 +69,10 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope){
         ClusterPlatform.engine.filter($scope.filter)
     }, true)
 
+    $scope.togglePane = function (key){
+        $scope.activePane = ($scope.activePane === key) ? "none" : key
+    }
+
     var orderedSolutions = []
     $scope.orderedSolutions = function (){
         orderedSolutions.length = 0
@@ -81,4 +85,13 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope){
             orderedSolutions.push(s[i])
         return orderedSolutions
     }
+})
+
+angular.module('cluster').controller('DashboardCtrl', function ($scope, $http){
+    $http.get('data/updates.json').then(function (response){
+        $scope.updates = response.data
+    })
+    $http.get('data/goals.json').then(function (response){
+        $scope.goals = response.data
+    })
 })
