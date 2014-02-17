@@ -53,7 +53,7 @@ function Engine(canvasId, _nodes, _options){
 
 	function filteredEntities(filterArgs){
 		var filtered = _.filter(entities, function (e){
-			return filterArgs[e.properties.status] && filterArgs[e.properties.type]
+			return filterArgs[e.status] && filterArgs[e.type]
 		})
 		var entById = _.indexBy(filtered, 'id')
 		var rels = _.filter(relations, function (r){

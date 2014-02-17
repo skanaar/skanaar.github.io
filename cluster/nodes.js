@@ -8,12 +8,11 @@ function repeat(action, repetitions, interval){
 function Nodes(_entities, _relations){
 	var dampening = 0
 	var changeSubscribers = []
-	var entities = _.map(_entities, function (e){ return Entity(e.id, e)})
+	var entities = _.map(_entities, Entity)
 	var entitiesById = _.object(_.map(entities, function (e){ return [e.id, e] }))
 	var relations = _.map(_relations, function (r){
 		return Relation(entitiesById[r.start.id], entitiesById[r.end.id], r.type)
 	})
-
 
 	function Relation(a, b, type){
 		return {
@@ -25,18 +24,13 @@ function Nodes(_entities, _relations){
 		}
 	}
 
-	function Entity(i, _fields){
-		var fields = _fields || {}
-		return {
-			id: i,
-			name: fields.name,
-			description: fields.description,
-			x: fields.x || _.random(-100, 100),
-			y: fields.y || _.random(-100, 100),
+	function Entity(_fields){
+		return _.extend(_.clone(_fields), {
+			x: _fields.x || _.random(-100, 100),
+			y: _fields.y || _.random(-100, 100),
 			fx: 0,
-			fy: 0,
-			properties: fields.properties || {}
-		}
+			fy: 0
+		})
 	}
 
 	function eachPairTwice(list, action){

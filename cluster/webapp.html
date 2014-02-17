@@ -39,7 +39,6 @@
 		</div>
 
 		<div class="tab_page tab_page_dashboard" ng-controller="DashboardCtrl">
-
 			<div class="full-row jumbotron">Dashboard</div>
 			<div class="full-row dashboard-section updates">
 				<h2>UPDATES</h2>
@@ -59,7 +58,6 @@
 				</div>
 				<hr>
 			</div>
-
 			<div class="full-row dashboard-section profile-summary">
 				<h2>Marie Fredricks</h2>
 				<div class="row">
@@ -80,7 +78,6 @@
 					</div>
 				</div>
 			</div>
-
 		</div>
 
 		<div class="tab_page tab_page_goals">
@@ -97,6 +94,8 @@
 		<div class="tab_page tab_page_cluster" ng-controller="ClusterCtrl">
 			<div class="full-row page-stripe toolbar">
 				<div class="pull-right">
+					<a id="download-data-link" download="cluster-data.json">
+						<i class="fa fa-download"></i></a>
 					<a id="download-image-link" download="cluster-snapshot.png">
 						<i class="fa fa-camera"></i></a>
 					<a onclick="engine.zoom(-1)" href="javascript:void(0)">
@@ -202,11 +201,7 @@
 		</div>
 
 		<div class="tab_page tab_page_clustersearch">
-
-			<div class="full-row jumbotron">
-				Cluster Search
-			</div>
-
+			<div class="full-row jumbotron">Cluster Search</div>
 			<div class="row" ng-controller="SearchCtrl" style="position: relative">
 				<div class="sidebar column width4">
 					<div><input type="text" ng-model="search" placeholder="Search"></div>
@@ -229,14 +224,13 @@
 					</tr>
 					<tr ng-repeat="s in orderedSolutions() | filter:search | limitTo:10">
 						<td class="cluster-name"><a href="#cluster/{{s.id}}">{{s.name}}</a></td>
-						<td><small>{{s.properties.mobility}}</small></td>
-						<td><small>{{s.properties.nutrition}}</small></td>
-						<td><small>{{s.properties.building}}</small></td>
+						<td><small>{{s.mobility}}</small></td>
+						<td><small>{{s.nutrition}}</small></td>
+						<td><small>{{s.building}}</small></td>
 					</tr>
 					</table>
 				</div>
 			</div>
-
 		</div>
 
 		<div class="full-row footer page-stripe">
@@ -244,6 +238,7 @@
 				21st Century Frontiers 2014
 			</div>
 		</div>
+
 	</div>
 
 	<script src="jquery.js"></script>
@@ -259,15 +254,22 @@
 	<script src="engine.js"></script>
 	<script>
 
-	(function (){
-		var link = document.getElementById('download-image-link')
-		link.addEventListener('click', downloadImage, false);
-		function downloadImage(){
-			var url = document.getElementById('canvas').toDataURL('image/png')
-			var downloadUrl = url.replace(/^data:image\/[^;]/, 'data:application/octet-stream')
-		    link.href = downloadUrl;
-		}
-	}())
+	attachDataUrlToLink('download-image-link', 'image/png', function (){
+		return document.getElementById('canvas').toDataURL('image/png')
+	})
+
+	attachDataUrlToLink('download-data-link', 'text/json', function (){
+		var data = _.pick(ClusterPlatform, 'entities', 'relations')
+		return 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data, undefined, 2))
+	})
+
+	function attachDataUrlToLink(id, dataType, linkGenerator){
+		var link = document.getElementById(id)
+		link.addEventListener('click', function (){
+			var downloadType = 'data:application/octet-stream'
+		    link.href = linkGenerator().replace(new RegExp('^data:'+dataType), downloadType)
+		}, false);
+	}
 
 	function selectEntity(e){
 		$('#node_details_sidebar').show()
@@ -284,7 +286,7 @@
 		return _.sample(conso).toUpperCase() + _.times(syllables || _.random(2,4), syllable).join('')
 	}
 
-	var ClusterPlatform = { entities: [] }
+	var ClusterPlatform = { entities: [], relations: [] }
 
 	function createNodes(clusterCount, clusterSize){
 		function entityFactory(r,g,b){
@@ -293,13 +295,11 @@
 					id:_.uniqueId(),
 					name: randomName(),
 					description: randomName()+' '+_.times(15, randomName).join(' ').toLowerCase(),
-					properties: {
-						status: _.sample(['existing', 'supporting', 'potential']),
-						type: _.sample(['core', 'accelerator', 'expander']),
-		                mobility: _.random(100),
-		                nutrition: _.random(100),
-		                building: _.random(100)
-					}
+					status: _.sample(['existing', 'supporting', 'potential']),
+					type: _.sample(['core', 'accelerator', 'expander']),
+	                mobility: _.random(100),
+	                nutrition: _.random(100),
+	                building: _.random(100)
 				}
 			}
 		}
@@ -326,6 +326,7 @@
 		}
 
 		ClusterPlatform.entities = entities
+		ClusterPlatform.relations = relations
 
 		var nodes = Nodes(entities, relations)
 		nodes.setDampening(0.95)

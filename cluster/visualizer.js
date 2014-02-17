@@ -41,23 +41,22 @@ function Visualizer(){
 			// border
 			if (scale.x > 0.2){
 				g.ctx.lineWidth = 2
-				g.ctx.strokeStyle = entityColor[e.properties.type]
+				g.ctx.strokeStyle = entityColor[e.type]
 				g.circle(e.x, e.y, radius+3).stroke()
 			}
 
 			// core
 			g.ctx.fillStyle = g.radialGradient(e.x, e.y, 0, radius*3, {
-				0: entityColor[e.properties.status],
+				0: entityColor[e.status],
 				1: 'rgba(0,0,0,0)'
 			})
 			g.circle(e.x, e.y, radius).fill()
 
 			// pie pieces
 			var alpha = Math.min(1, Math.max(0, scale.x/2-1))
-			var p = e.properties
-			var m = p.mobility / (p.mobility + p.nutrition + p.building)
-			var n = p.nutrition/ (p.mobility + p.nutrition + p.building)
-			var b = p.building / (p.mobility + p.nutrition + p.building)
+			var m = e.mobility / (e.mobility + e.nutrition + e.building)
+			var n = e.nutrition/ (e.mobility + e.nutrition + e.building)
+			var b = e.building / (e.mobility + e.nutrition + e.building)
 			g.ctx.fillStyle = g.colorNorm(1, 0.5, 0.25, 0.75*alpha)
 			g.arc(e.x, e.y, radius, 0, m*phi).fill()
 			g.ctx.fillStyle = g.colorNorm(0.25, 1, 0.5, 0.75*alpha)

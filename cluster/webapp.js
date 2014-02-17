@@ -43,9 +43,9 @@ angular.module('cluster').controller('SearchCtrl', function ($scope){
     $scope.orderedSolutions = function (){
         orderedSolutions.length = 0
         var s = _.sortBy($scope.solutions, function (s){
-            return -(!!$scope.filters.mobility) * s.properties.mobility
-                   -(!!$scope.filters.nutrition) * s.properties.nutrition
-                   -(!!$scope.filters.building) * s.properties.building
+            return -(!!$scope.filters.mobility) * s.mobility
+                   -(!!$scope.filters.nutrition) * s.nutrition
+                   -(!!$scope.filters.building) * s.building
         })
         for (var i=0; i<s.length; i++)
             orderedSolutions.push(s[i])
@@ -77,9 +77,9 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope){
     $scope.orderedSolutions = function (){
         orderedSolutions.length = 0
         var s = _.sortBy($scope.solutions, function (s){
-            return -(!!$scope.filters.mobility) * s.properties.mobility
-                   -(!!$scope.filters.nutrition) * s.properties.nutrition
-                   -(!!$scope.filters.building) * s.properties.building
+            return -(!!$scope.filters.mobility) * s.mobility
+                   -(!!$scope.filters.nutrition) * s.nutrition
+                   -(!!$scope.filters.building) * s.building
         })
         for (var i=0; i<s.length; i++)
             orderedSolutions.push(s[i])
