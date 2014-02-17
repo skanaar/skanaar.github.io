@@ -16,6 +16,7 @@ function Engine(canvasId, _nodes, _options){
 	var offset = { x: 0, y: 0 }
 	var targetOffset = { x: 0, y: 0 }
 	var scale = { x: 1, y: 1 }
+	var centralEntity = undefined
 	var selectedEntity = undefined
 	var clickedEntity = undefined
 	var mouseDownPos = undefined
@@ -50,11 +51,9 @@ function Engine(canvasId, _nodes, _options){
 		return map
 	}
 
-	function filteredEntities(status, type){
+	function filteredEntities(filterArgs){
 		var filtered = _.filter(entities, function (e){
-			var matchesStatus = (!status) || e.properties.status === status
-			var matchesType = (!type) || e.properties.type === type
-			return matchesType && matchesStatus
+			return filterArgs[e.properties.status] && filterArgs[e.properties.type]
 		})
 		var entById = _.indexBy(filtered, 'id')
 		var rels = _.filter(relations, function (r){
@@ -172,13 +171,14 @@ function Engine(canvasId, _nodes, _options){
 		var interactions = {
 			hoveredEntity: pickEntity(g.mousePos()),
 			clickedEntity: clickedEntity,
-			selectedEntity: selectedEntity
+			selectedEntity: selectedEntity,
+			centralEntity: centralEntity
 		}
 		var coords = { transform: transform, untransform: untransform }
 		Visualizer().draw(g, visibleSubset, interactions, scale, offset, tickCounter, coords)
 	}
 
-	function radiusOf(entity){ return 30 + (selectedEntity === entity ? 30 : 0) }
+	function radiusOf(entity){ return 30 + (centralEntity === entity ? 30 : 0) }
 
 	function select(entity){
 		selectedEntity = entity
@@ -205,6 +205,9 @@ function Engine(canvasId, _nodes, _options){
 			scale.y /= scale.x
 			scale.x = 1
 		},
+		setCentralEntity: function (e){
+			centralEntity = e
+		},
 		zoom: function(direction){
 			repeat(function(strength){
 				var s = 1 - 0.1*strength
@@ -219,21 +222,8 @@ function Engine(canvasId, _nodes, _options){
 			canvas.setAttribute('height', w*3/4)
 		},
 		centerSelected: centerSelected,
-		filter: function(status, type){
-			if (status){
-				filterArgs.status = (filterArgs.status === status) ? null : status
-				$('.filter-option-status').toggleClass('active', false)
-				if (filterArgs.status)
-					$('.filter-status-'+filterArgs.status).toggleClass('active', true)
-			}
-			if (type){
-				filterArgs.type = (filterArgs.type === type) ? null : type
-				$('.filter-option-type').toggleClass('active', false)
-				if (filterArgs.type)
-					$('.filter-type-'+filterArgs.type).toggleClass('active', true)
-			}
-
-			visibleSubset = filteredEntities(filterArgs.status, filterArgs.type)
+		filter: function(filterArgs){
+			visibleSubset = filteredEntities(filterArgs)
 		}
 	}
 }

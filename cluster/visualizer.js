@@ -128,7 +128,7 @@ function Visualizer(){
 		untransform = coords.untransform
 
 		function radiusOf(entity){
-			return interactions.selectedEntity === entity ? 60 : 30
+			return interactions.centralEntity === entity ? 60 : 30
 		}
 
 		g.ctx.clearRect(0, 0, g.width(), g.height())
@@ -140,9 +140,9 @@ function Visualizer(){
 		g.ctx.scale(scale.x, scale.y)
 		g.ctx.translate(-offset.x, -offset.y)
 		
-		if (interactions.hoveredEntity){
-			g.ctx.fillStyle = g.color255(0,0,0,0.25)
-			var e = interactions.hoveredEntity
+		if (interactions.selectedEntity){
+			g.ctx.fillStyle = '#174140'
+			var e = interactions.selectedEntity
 			g.circle(e.x, e.y, radiusOf(e)+20).fill()
 		}
 
@@ -169,7 +169,7 @@ function Visualizer(){
 
 		if (interactions.selectedEntity){
 			var e = interactions.selectedEntity
-			g.ctx.strokeStyle = g.color255(0,0,0,0.5)
+			g.ctx.strokeStyle = '#174140'
 			g.ctx.lineWidth = 10/scale.x
 			var sidebarEdge = transform({x:g.width()-200, y: 0})
 			sidebarEdge.y = e.y

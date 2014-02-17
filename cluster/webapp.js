@@ -30,14 +30,44 @@ function bindData(targetId, data){
 }
 
 angular.module('cluster', [])
-.controller('SearchCtrl', function ($scope){
 
+angular.module('cluster').controller('SearchCtrl', function ($scope){
     $scope.solutions = ClusterPlatform.entities
     $scope.filters = {
         mobility: false,
         nutrition: false,
         building: false
     }
+
+    var orderedSolutions = []
+    $scope.orderedSolutions = function (){
+        orderedSolutions.length = 0
+        var s = _.sortBy($scope.solutions, function (s){
+            return -(!!$scope.filters.mobility) * s.properties.mobility
+                   -(!!$scope.filters.nutrition) * s.properties.nutrition
+                   -(!!$scope.filters.building) * s.properties.building
+        })
+        for (var i=0; i<s.length; i++)
+            orderedSolutions.push(s[i])
+        return orderedSolutions
+    }
+})
+
+angular.module('cluster').controller('ClusterCtrl', function ($scope){
+
+    $scope.solutions = ClusterPlatform.entities
+    $scope.filter = {
+        existing: true,
+        supporting: true,
+        potential: true,
+        core: true,
+        accelerator: true,
+        expander: true
+    }
+
+    $scope.$watch('filter', function (){
+        ClusterPlatform.engine.filter($scope.filter)
+    }, true)
 
     var orderedSolutions = []
     $scope.orderedSolutions = function (){
