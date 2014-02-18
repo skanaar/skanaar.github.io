@@ -9,7 +9,7 @@
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="../cluster/css/boilerplate.css">
 <link rel="stylesheet" href="../cluster/css/normalize.css">
-<link rel="shortcut icon" href="img/favicon.png">
+<link rel="shortcut icon" href="favicon.png">
 <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 <link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
@@ -22,18 +22,19 @@ html, body {
 }
 .wrap {
 	position: relative;
-	background: #2d2e2c;
+	background: #E5E9EB;
 	min-height: 100%;
 }
 #textarea {
+	outline: none;
 	position: absolute;
 	width: 100%;
 	height: 40%;
 	box-sizing: border-box;
-	background: #2d2e2c;
+	background: #E5E9EB;
 	border: 0;
 	font-family: Consolas, monospace;
-	color: #aaa;
+	color: #444;
 	padding: 30px;
 }
 #canvas {
@@ -51,9 +52,9 @@ a:hover {
 	display: block;
 	position: absolute;
 	top: 20px;
-	right: 20px;
+	right: 40px;
 	color: #888;
-	text-shadow: 0 1px 0px rgba(0, 0, 0, 0.5);
+	text-shadow: 0 1px 0px rgba(255, 255, 255, 0.5);
 	font-family: Helvetica, sans-serif;
 	font-weight: bold
 }
@@ -71,8 +72,11 @@ a:hover {
 
 		<div class="tools">
 			<span>nomnoml &nbsp;&nbsp;</span>
+			<a href="javascript:discardCurrentGraph()">
+				<i class="fa fa-fw fa-trash-o fa-lg"></i>
+			</a>
 			<a id="savebutton" href="javascript:void(0)" download="uml.png">
-				<i class="fa fa-camera fa-lg"></i>
+				<i class="fa fa-fw fa-camera fa-lg"></i>
 			</a>
 		</div>
 	</div>
@@ -82,6 +86,15 @@ a:hover {
 	<script src="dagre.min.js"></script>
 	<script src="../cluster/canvas.js"></script>
 	<script src="../cluster/vector.js"></script>
+	<script type="text/nomnoml" id="defaultGraph">[marauder]<:-[pirate]
+[pirate]-[mischief]
+[jollyness]->[pirate]
+[jollyness]->[rum]
+[jollyness]->[singing]
+[pirate]->[rum]
+[pirate]->[singing]
+[singing]<->[rum]
+	</script>
 	<script>
 
 	(function (){
@@ -106,93 +119,133 @@ a:hover {
 	var canvas = document.getElementById('canvas')
 	var textarea = document.getElementById('textarea')
 	var g = skanaar.Canvas(canvas, {})
+	var fontSize = 14
 	window.addEventListener('resize', _.throttle(fillScreen, 750, {leading: true}))
 	textarea.addEventListener('input', sourceChanged)
-	textarea.value = localStorage.getItem('nomnoml.lastSource') || '[monkey]->[banana]'
+	textarea.value = localStorage.getItem('nomnoml.lastSource') || document.getElementById('defaultGraph').innerHTML
 	fillScreen()
 
+	function discardCurrentGraph(){
+		textarea.value = document.getElementById('defaultGraph').innerHTML
+		sourceChanged()
+	}
+
 	function sourceChanged(){
+		g.ctx.font = ' '+fontSize+'pt Calibri, sans-serif'
 		var ast = parse(textarea.value)
 		localStorage.setItem('nomnoml.lastSource', textarea.value)
-		render(layout(ast))
+		render(layout(ast, measureNode))
+	}
+
+	function measureNode(node){
+		return { width: g.ctx.measureText(node.name).width + 25, height: fontSize + 25 }
 	}
 
 	function parse(source){
-		function splitTrim(s){
-			var parts = s.split('->')
-			return parts.length < 2 ? ['', ''] : [parts[0].trim(), parts[1].trim()]
-		}
-		function hasValidSyntax(s){
-			return s[0] === '[' && s[s.length-1] === ']'
+		var pattern = /\[(.*)\](-:>|->|<:-|<-|<->|-)\[(.*)\]/
+		function parseLine(s){
+			var parts = s.match(pattern)
+			return parts && _.map(_.tail(parts), function (p){ return p.trim() })
 		}
 		var lines = source.split('\n')
-		var bimap = _.map(lines, splitTrim)
+		var bimap = _.compact(_.map(lines, parseLine))
 		var nodes = {}
 		var relations = []
 		_.each(bimap, function (pair){
-			if (!hasValidSyntax(pair[0]) || !hasValidSyntax(pair[1])) return
-			var left = pair[0].substring(1, pair[0].length-1)
-			var right = pair[1].substring(1, pair[1].length-1)
+			var left = pair[0]
+			var right = pair[2]
 			nodes[left] = { name: left, x: _.random(600), y: _.random(400) }
 			nodes[right] = { name: right, x: _.random(600), y: _.random(400) }
-			relations.push( { start: left, end: right } )
+			var isLeftToRight = pair[1][0] === '-'
+			var a = isLeftToRight ? left : right
+			var b = isLeftToRight ? right : left
+			var t = {
+				'-:>': 'generalization',
+				'->': 'dependency',
+				'<:-': 'generalization',
+				'<-': 'dependency',
+				'<->': 'twoway',
+				'-': 'nondirectional' 
+			}[pair[1]]
+			relations.push({start: a, end:b, type: t})
 		})
 		return { nodes: nodes, relations: relations }
 	}
 
-	function layout(ast){
+	function layout(ast, measureNode){
 		function buildDagreGraph(ast){
 			var g = new dagre.Digraph()
 			_.each(ast.nodes, function (e, key){
-				g.addNode(key, { label: key, width: 100, height: 50 })
+				var size = measureNode(e)
+				g.addNode(key, { label: key, width: size.width, height: size.height })
 			})
 			_.each(ast.relations, function (r){
 				g.addEdge(null, r.start, r.end)
 			})
 			return g
 		}
-		function packageDagreGraph(dagreLayout){
+		function packageDagreGraph(ast, dagreLayout){
 			var nodes = {}
 			var relations = []
 			dagreLayout.eachNode(function (key, data){
-				nodes[key] = { name: key, x: data.x, y: data.y }
+				nodes[key] = { name: key, x: data.x, y: data.y, width: data.width, height: data.height }
 			})
 			dagreLayout.eachEdge(function (id, start, end, data){
 				relations.push({
 					start: nodes[start],
 					middle: _.pick(data, 'x', 'y'),
 					end: nodes[end],
-					path: _.flatten([nodes[start], data.points, nodes[end]])
+					path: _.flatten([nodes[start], data.points, nodes[end]]),
+					type: _.findWhere(ast.relations, {start: start, end: end}).type
 				})
 			})
 			return { nodes: nodes, relations: relations }
 		}
-		return packageDagreGraph(dagre.layout().run(buildDagreGraph(ast)))
+		return packageDagreGraph(ast, dagre.layout().run(buildDagreGraph(ast)))
 	}
 
 	function render(layout){
-		var fontSize = 14
-
 		g.ctx.save()
 		g.ctx.clearRect(0, 0, w, h)
 		g.ctx.translate(50, 50)
 		g.ctx.strokeStyle = '#111'
-		g.ctx.font = 'bold '+fontSize+'pt Calibri, sans-serif'
 		g.ctx.textAlign = 'center'
-		g.ctx.lineWidth = 3
-		_.each(layout.relations, function (r){
-			var v = diff(r.path[r.path.length-2], r.end)
+		g.ctx.lineWidth = 1
+
+		function drawArrow(path, type){
+			var v = diff(path[path.length-2], _.last(path))
 			var nv = normalize(v)
-			var p2_ = add(r.end, mult(nv, mag(v)*0.75))
+			var p2_ = add(_.last(path), mult(nv, mag(v)*0.6))
 			var t = rot(nv)
 			var arrowBase = add(p2_, mult(nv, 8))
+			var arrowPoint = add(p2_, mult(nv, -2))
+			var arrow = [
+				arrowPoint,
+				add(arrowBase, mult(t, 5)),
+				add(arrowBase, mult(t, -5)),
+				arrowPoint
+			]
+			g.ctx.fillStyle = (type === 'dependency') ? '#111' : '#fff'
+			var ctx = g.path(arrow).fill().stroke()
+		}
+
+		_.each(layout.relations, function (r){
 			g.path(r.path).stroke()
-			g.path([add(p2_, mult(nv, -2)), add(arrowBase, mult(t, 5)), add(arrowBase, mult(t, -5))]).fill()
+			if (r.type === 'nondirectional') return
+			if (r.type === 'twoway'){
+				drawArrow(r.path, 'dependency')
+				drawArrow(_.clone(r.path).reverse(), 'dependency')
+			}
+			else
+				drawArrow(r.path, r.type)
 		})
+		g.ctx.lineWidth = 1
 		_.each(layout.nodes, function (e){
+			var w = e.width
+			var h = e.height
 			g.ctx.fillStyle = 'rgba(200, 200, 200, 1)'
-			g.ctx.fillRect(e.x-50, e.y-25, 100, 50)
-			g.ctx.strokeRect(e.x-50, e.y-25, 100, 50)
+			g.ctx.fillRect(e.x-w/2, e.y-h/2, w, h)
+			g.ctx.strokeRect(e.x-w/2, e.y-h/2, w, h)
 			g.ctx.fillStyle = '#333'
 			g.ctx.fillText(e.name, e.x, e.y+fontSize/2-1)
 		})
