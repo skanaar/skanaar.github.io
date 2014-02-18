@@ -1,0 +1,30 @@
+<div class="full-row jumbotron">Cluster Search</div>
+<div class="row" ng-controller="SearchCtrl" style="position: relative">
+	<div class="sidebar column width4">
+		<div><input type="text" ng-model="search" placeholder="Search"></div>
+		<hr>
+		<div>
+			<label><input type="checkbox" ng-model="filters.mobility"> Mobility</label>
+		</div>
+		<div>
+			<label><input type="checkbox" ng-model="filters.nutrition"> Nutrition</label>
+		</div>
+		<div>
+			<label><input type="checkbox" ng-model="filters.building"> Building</label>
+		</div>
+	</div>
+	<div class="column width8 result-pane">
+		<h3>TRANSFORMATIVE CLUSTERS</h3>
+		<table style="width: 100%">
+		<tr>
+			<th>Name</th><th>Mobility</th><th>Nutrition</th><th>Building</th>
+		</tr>
+		<tr ng-repeat="s in orderedSolutions() | filter:search | limitTo:10">
+			<td class="cluster-name"><a href="#cluster/{{s.id}}">{{s.name}}</a></td>
+			<td><small>{{s.mobility}}</small></td>
+			<td><small>{{s.nutrition}}</small></td>
+			<td><small>{{s.building}}</small></td>
+		</tr>
+		</table>
+	</div>
+</div>

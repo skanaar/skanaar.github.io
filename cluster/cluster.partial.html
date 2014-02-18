@@ -1,0 +1,205 @@
+<div class="full-row page-stripe toolbar">
+	<div class="pull-right">
+		<a id="download-data-link" download="cluster-data.json">
+			<i class="fa fa-download"></i></a>
+		<a id="download-image-link" download="cluster-snapshot.png">
+			<i class="fa fa-camera"></i></a>
+		<a onclick="engine.zoom(-1)" href="javascript:void(0)">
+			<i class="fa fa-plus"></i></a>
+		<a onclick="engine.zoom(1)" href="javascript:void(0)">
+			<i class="fa fa-minus"></i></a>
+	</div>
+	<div>
+		<a ng-class="{active: activePane === 'filter'}"
+		   ng-click="togglePane('filter')" href="javascript:void(0)">
+			Filter
+		</a>
+		<a ng-class="{active: activePane === 'current'}"
+		   ng-click="togglePane('current')" href="javascript:void(0)">
+			Current
+		</a>
+		<a ng-class="{active: activePane === 'develop'}"
+		   ng-click="togglePane('develop')" href="javascript:void(0)">
+			Develop
+		</a>
+		<a ng-class="{active: activePane === 'legend'}"
+		   ng-click="togglePane('legend')" href="javascript:void(0)">
+			Legend
+		</a>
+	</div>
+</div>
+<div style="position: relative">
+	<canvas id="canvas" width="800" height="800"></canvas>
+	<div class="sidebar details_sidebar" id="node_details_sidebar">
+		<div>
+			<div>
+				<a class="pull-right"
+				   onclick="engine.centerSelected()" 
+				   href="javascript:void(0)">
+					<i class="fa fa-crosshairs fa-2x"></i>
+				</a>
+				<h2><span class="bind-name"></span> </h2>
+			</div>
+			<div class="bind-description"></div>
+			<div class="page-stripe toolset"><label>Id:</label> <span class="bind-id"></span></div>
+		</div>
+	</div>
+	<div class="sidebar search_sidebar"
+		 id="search_sidebar"
+		 ng-show="activePane === 'filter'">
+		<div>
+			<h3>Filter</h3>
+			Mobility &gt; {{filter.mobility}}%
+			<div><input type="range" ng-model="filter.mobility"></div>
+			Nutrition &gt; {{filter.nutrition}}%
+			<div><input type="range" ng-model="filter.nutrition"></div>
+			Building &gt; {{filter.building}}%
+			<div><input type="range" ng-model="filter.building"></div>
+			<hr>
+			<label>Solution status</label>
+			<div><label><input type="checkbox" ng-model="filter.existing"> Existing</label></div>
+			<div><label> <input type="checkbox" ng-model="filter.supporting"> Supporting</label></div>
+			<div><label><input type="checkbox" ng-model="filter.potential"> Potential</label></div>
+			<label>Solution type</label>
+			<div><label><input type="checkbox" ng-model="filter.core"> Core</label></div>
+			<div><label><input type="checkbox" ng-model="filter.accelerator"> Accelerator</label></div>
+			<div><label><input type="checkbox" ng-model="filter.expander"> Expander</label></div>
+			<hr>
+			<label>Relations</label>
+			<div><label><input type="checkbox" ng-model="filter.rel_participant"> Participant</label></div>
+			<div><label><input type="checkbox" ng-model="filter.rel_provider"> Provider</label></div>
+			<div><label><input type="checkbox" ng-model="filter.rel_catalyst"> Catalyst</label></div>
+			<div><label><input type="checkbox" ng-model="filter.rel_potential"> Potential</label></div>
+			<div><label><input type="checkbox" ng-model="filter.rel_alternative"> Alternative</label></div>
+		</div>
+	</div>
+	<div class="sidebar legend_sidebar"
+		 ng-show="activePane === 'current'">
+		<div>
+			<h3>Current View</h3>
+		</div>
+	</div>
+	<div class="sidebar legend_sidebar"
+		 ng-show="activePane === 'develop'">
+		<div>
+			<h3>Develop</h3>
+		</div>
+	</div>
+	<div class="sidebar legend_sidebar"
+		 ng-show="activePane === 'legend'">
+		<div>
+			<h3>Legend</h3>
+			<label class="fill" style="background-color: rgba(255, 64, 0, 0.5)"> core</label>
+			<label class="fill" style="background-color: rgba(200, 40, 255, 0.5)"> accelerator</label>
+			<label class="fill" style="background-color: rgba(200, 255, 0, 0.5)"> expander</label>
+			<label class="border" style="border-color: rgba(210, 100, 20, 0.5)"> existing</label>
+			<label class="border" style="border-color: rgba(10, 170, 210, 0.5)"> supporting</label>
+			<label class="border" style="border-color: rgba(60, 180, 10, 0.5)"> potential</label>
+			<label class="relation" style="border-color: rgba(182,128,216, 0.5)">alternative</label>
+			<label class="relation" style="border-color: rgba(129,244,153, 0.5)">catalyst</label>
+			<label class="relation" style="border-color: rgba(255,135,135, 0.5)">participant</label>
+			<label class="relation" style="border-color: rgba(129,153,244, 0.5)">potential</label>
+			<label class="relation" style="border-color: rgba(182,216,128, 0.5)">provider</label>
+		</div>
+	</div>
+</div>
+<script>
+attachDataUrlToLink('download-image-link', 'image/png', function (){
+	return document.getElementById('canvas').toDataURL('image/png')
+})
+
+attachDataUrlToLink('download-data-link', 'text/json', function (){
+	var data = {
+		entities: _.map(ClusterPlatform.entities, function (e){ return _.omit(e, '$$hashKey', ['fx', 'fy'])}),
+		relations: _.map(ClusterPlatform.relations, function (r){
+			return { start: r.start.id, end: r.end.id, type: r.type }
+		})
+	}
+	return 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data, undefined, 2))
+})
+
+function attachDataUrlToLink(id, dataType, linkGenerator){
+	var link = document.getElementById(id)
+	link.addEventListener('click', function (){
+		var downloadType = 'data:application/octet-stream'
+	    link.href = linkGenerator().replace(new RegExp('^data:'+dataType), downloadType)
+	}, false);
+}
+
+
+function selectEntity(e){
+	$('#node_details_sidebar').show()
+	bindData('node_details_sidebar', e)
+}
+function deselectEntity(e){
+	$('#node_details_sidebar').hide()
+}
+
+function randomName(syllables){
+	var vowel = 'aaeeiioouuy'
+	var conso = 'bcddfghhkllmnnprrsstttv'
+	function syllable(){ return _.sample(vowel) + _.sample(conso) }
+	return _.sample(conso).toUpperCase() + _.times(syllables || _.random(2,4), syllable).join('')
+}
+
+var ClusterPlatform = { entities: [], relations: [] }
+
+function createNodes(clusterCount, clusterSize){
+	function entityFactory(i){
+		return {
+			id:_.uniqueId(),
+			name: randomName(),
+			company: randomName() + ' ' + randomName(),
+			description: randomName()+' '+_.times(15, randomName).join(' ').toLowerCase(),
+			status: _.sample(['existing', 'supporting', 'potential']),
+			type: _.sample(['core', 'accelerator', 'expander']),
+            mobility: _.random(100),
+            nutrition: _.random(100),
+            building: _.random(100)
+		}
+	}
+	var clusters = _.times(clusterCount, function (i){
+		var es = _.times(clusterSize, entityFactory)
+		var rs = fillTree(function (a,b){
+			var type = _.sample(['participant', 'provider', 'catalyst', 'potential', 'alternative'])
+			return {start:a, end:b, type: type}
+		}, 3, es)
+		return { entities: es, relations: rs }
+	})
+	var entities = _.flatten(_.pluck(clusters, 'entities'))
+	var relations = _.flatten(_.pluck(clusters, 'relations'))
+	function fillTree(factory, branches, nodes){
+		var accumulator = []
+		var pointer = 1
+		for(var index=0; pointer<nodes.length; index++){
+			var b = _.random(2, branches)
+			for(var i=0; i<b && pointer<nodes.length-i; i++)
+				accumulator.push(factory(nodes[index], nodes[pointer+i]))
+			pointer+=b
+		}
+		return accumulator
+	}
+
+	var nodes = Nodes(entities, relations)
+	nodes.setDampening(0.95)
+	_.times(300, function (){ nodes.simulate() })
+	nodes.setDampening(0)
+
+	ClusterPlatform.entities = nodes.entities
+	ClusterPlatform.relations = nodes.relations
+	return nodes
+}
+
+var engine = Engine('canvas', createNodes(1, 20), {
+	fps: 30,
+	selectEntity: selectEntity,
+	deselectEntity: deselectEntity
+})
+
+ClusterPlatform.engine = engine
+
+window.addEventListener('resize', _.throttle(engine.fillScreen, 750, {leading: true}))
+document.getElementById('canvas').addEventListener('wheel', function (e){ engine.zoom(e.deltaY) })
+engine.fillScreen()
+
+</script>

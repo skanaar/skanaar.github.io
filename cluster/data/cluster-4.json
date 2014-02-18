@@ -1,0 +1,60 @@
+{
+  "entities": [
+    {
+      "id": "1",
+      "name": "Cuked",
+      "company": "Tibifotaf Vytedos",
+      "description": "Hylut lisutab vif mytop gorekut vuvusadas munaraligug domakodilosah muroficogemebal haridacusototesac rikidisobysypolepyd sudatidetagereconefyp devodolekofinepohinarit dunugenyvulutyrosefufecol himerihynolidicanotusisacyh pudituryvoluropelupulegohahed",
+      "status": "supporting",
+      "type": "accelerator",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": 20.951325524192946,
+      "y": 16.856534775190188
+    },
+    {
+      "id": "2",
+      "name": "Maged",
+      "company": "Cutehyd Nonagakid",
+      "description": "Lahas lugunar fad cucol fihinuk conedoket tanaselubun raracanisedim runuhofylidogur neturipytilanopyc nobiselilegolynasim madofasuvupodunusorun logacumohihinotocylasug takamaginufamenakutovuman hehamuvufytesifidalamusigor lucenasisyvikumamugetytahaher",
+      "status": "existing",
+      "type": "expander",
+      "mobility": 82,
+      "nutrition": 54,
+      "building": 2,
+      "x": -87.03046804029174,
+      "y": -92.4943987547476
+    },
+    {
+      "id": "3",
+      "name": "Lysufynet",
+      "company": "Vehedirir Hulipokyl",
+      "description": "Hymoharag cacedum nal nupam lahonyc nivukekyc ratovacilit mivevoradatos hosaratihahikif damefevulymumogak fyponivodeposimehed hatasilatehatususadeh bisydukirukugymicefusov dotepafohinuturuhabamerah muhyhusybodusogykolibidosis vupofuvusarohipynotisypesilyt",
+      "status": "supporting",
+      "type": "accelerator",
+      "mobility": 45,
+      "nutrition": 80,
+      "building": 42,
+      "x": 120.04926943353283,
+      "y": 112.42510475752856
+    }
+  ],
+  "relations": [
+    {
+      "start": "1",
+      "end": "2",
+      "type": "potential"
+    },
+    {
+      "start": "1",
+      "end": "3",
+      "type": "provider"
+    },
+    {
+      "start": "2",
+      "end": "4",
+      "type": "participant"
+    }
+  ]
+}

@@ -202,9 +202,8 @@ function Engine(canvasId, _nodes, _options){
 
 	return {
 		setNodes: setNodes,
-		togglePause: function (){
-			paused = !paused
-		},
+		pause: function (){ paused = true },
+		togglePause: function (){ paused = !paused },
 		select: function (id){
 			var e = _.find(entities, function (x){ return x.id == id })
 			options.selectEntity(e)

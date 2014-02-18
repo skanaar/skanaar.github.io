@@ -1,0 +1,39 @@
+<div class="full-row jumbotron">Dashboard</div>
+<div class="full-row dashboard-section updates">
+	<h2>UPDATES</h2>
+	<div class="blocks">
+		<div class="block" ng-repeat="u in updates">
+			<img ng-src="img/icons/{{u.icon}}" style="display: inline">
+			<b>{{u.value}}</b><div class="specifier">{{u.name}}</div>
+		</div>
+	</div>
+	<hr>
+	<h2>PERSONAL GOALS</h2>
+	<div class="progress-gauge" style="border-radius: 2em; background: #444; padding: 1ex 2ex; position: relative; margin: 1em; color: white" ng-repeat="g in goals">
+		&nbsp;
+		<div class="progress-bar"
+			 style="background: {{g.color}}; width: {{g.value}}">&nbsp;</div>
+		<div class="progress-message">{{g.value}} &nbsp; &nbsp; &nbsp; {{g.name}}</div>
+	</div>
+	<hr>
+</div>
+<div class="full-row dashboard-section profile-summary">
+	<h2>Marie Fredricks</h2>
+	<div class="row">
+		<div class="column width3">
+			<img src="img/profiles/marie.jpg" width=150 height=150>
+		</div>
+		<div class="column width3">
+			<div class="properties">
+				<div><b>Company/City</b> Malmö Stad, Sweden</div>
+				<div><b>Looking for</b> City planners, Contractors</div>
+				<div><b>Providing</b> Know-how, Budget</div>
+			</div>
+		</div>
+		<div class="column width3">
+			<div class="properties">
+				<div>Customize settings</div>
+			</div>
+		</div>
+	</div>
+</div>
