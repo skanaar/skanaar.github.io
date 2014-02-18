@@ -6,7 +6,8 @@ function Visualizer(){
 		expander: 'rgba(200, 255, 0, 0.5)',
 		existing: 'rgba(210, 100, 20, 1)',
 		supporting: 'rgba(10, 170, 210, 1)',
-		potential: 'rgba(60, 180, 10, 1)'
+		potential: 'rgba(60, 180, 10, 1)',
+		none: 'rgba(0, 0, 0, 0)'
 	}
 
 	var relationColor = {

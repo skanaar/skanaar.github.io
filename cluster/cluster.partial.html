@@ -1,5 +1,7 @@
 <div class="full-row page-stripe toolbar">
 	<div class="pull-right">
+		<a onclick="engine.runFor(2000)">
+			<i class="fa fa-forward"></i></a>
 		<a id="download-data-link" download="cluster-data.json">
 			<i class="fa fa-download"></i></a>
 		<a id="download-image-link" download="cluster-snapshot.png">
@@ -104,18 +106,21 @@
 	</div>
 </div>
 <script>
+
 attachDataUrlToLink('download-image-link', 'image/png', function (){
 	return document.getElementById('canvas').toDataURL('image/png')
 })
 
 attachDataUrlToLink('download-data-link', 'text/json', function (){
-	var data = {
-		entities: _.map(ClusterPlatform.entities, function (e){ return _.omit(e, '$$hashKey', ['fx', 'fy'])}),
-		relations: _.map(ClusterPlatform.relations, function (r){
-			return { start: r.start.id, end: r.end.id, type: r.type }
-		})
-	}
-	return 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data, undefined, 2))
+	var es = ClusterPlatform.nodes.entities
+	var rs = ClusterPlatform.nodes.relations
+    var data = {
+        entities: _.map(es, function (e){ return _.omit(e, ['$$hashKey', 'fx', 'fy'])}),
+        relations:  _.map(rs, function (r){
+            return { start: r.start.id, end: r.end.id, type: r.type }
+        })
+    }
+    return 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data, undefined, 2))
 })
 
 function attachDataUrlToLink(id, dataType, linkGenerator){
@@ -190,7 +195,7 @@ function createNodes(clusterCount, clusterSize){
 	return nodes
 }
 
-var engine = Engine('canvas', createNodes(1, 20), {
+var engine = Engine('canvas', createNodes(0, 0), {
 	fps: 30,
 	selectEntity: selectEntity,
 	deselectEntity: deselectEntity

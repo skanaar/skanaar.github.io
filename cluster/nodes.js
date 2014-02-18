@@ -73,7 +73,14 @@ function Nodes(_entities, _relations){
 	}
 
 	function addRelation(a, b){
-		var r = Relation(a, b, 'participant')
+		var type = prompt('Please specify relation type\n[participant, provider, catalyst, potential, alternative]')
+		var existing = _.find(relations, function (r){
+			return _.isEqual(_.sortBy([r.start.id, r.end.id]), _.sortBy([a.id, b.id]))
+		})
+		if (existing){
+			existing.type = type
+		}
+		var r = Relation(a, b, type)
 		r.strength = 0
 		repeat(function (v){ r.strength = v }, 20)
 		repeat(function (v){ dampening = 0.95*(1-sq(v)) }, 40)
@@ -81,7 +88,13 @@ function Nodes(_entities, _relations){
 		_.each(changeSubscribers, function (c){ c() })
 	}
 
+	function runFor(millis){
+		dampening = 0.95
+		setTimeout(function (v){ dampening = 0 }, millis)
+	}
+
 	return {
+		runFor: runFor,
 		simulate: simulate,
 		entities: entities,
 		relations: relations,

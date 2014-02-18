@@ -54,7 +54,7 @@ function Engine(canvasId, _nodes, _options){
 	function filteredEntities(filterArgs){
 		var filtered = _.filter(entities, function (e){
 			return filterArgs[e.status] &&
-				filterArgs[e.type] &&
+				(filterArgs[e.type] || e.type === 'none') &&
 				filterArgs.mobility <= e.mobility && 
 				filterArgs.nutrition <= e.nutrition && 
 				filterArgs.building <= e.building
@@ -202,6 +202,7 @@ function Engine(canvasId, _nodes, _options){
 
 	return {
 		setNodes: setNodes,
+		runFor: function (millis){ nodes.runFor(millis) },
 		pause: function (){ paused = true },
 		togglePause: function (){ paused = !paused },
 		select: function (id){

@@ -61,7 +61,7 @@ angular.module('cluster').controller('SearchCtrl', function ($scope){
     }
 })
 
-angular.module('cluster').controller('ClusterCtrl', function ($scope, $http){
+angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $routeParams){
     ClusterPlatform.clusterScope = $scope
     $scope.filter = {
         mobility: 0,
@@ -85,21 +85,21 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http){
         ClusterPlatform.engine.filter($scope.filter)
     }, true)
 
-    $scope.setCluster = function (clusterId, engine){
-        $http.get('data/cluster-'+clusterId+'.json').then(function (response){
-            ClusterPlatform.engine.setNodes(new Nodes([], []))
-            _.each(response.data.relations, function (r){
-                r.start = { id: r.start.id }
-                r.end = { id: r.end.id }
-            })
-            var nodes = new Nodes(response.data.entities, response.data.relations)
-            ClusterPlatform.engine.setNodes(nodes)
+    var clusterId = $routeParams.clusterId
+    $http.get('data/cluster-'+clusterId+'.json').then(function (response){
+        ClusterPlatform.engine.setNodes(new Nodes([], []))
+        _.each(response.data.relations, function (r){
+            r.start = { id: r.start }
+            r.end = { id: r.end }
         })
-    }
+        var nodes = new Nodes(response.data.entities, response.data.relations)
+        ClusterPlatform.engine.setNodes(nodes)
+        ClusterPlatform.nodes = nodes
+    })
 
     $scope.$on('$locationChangeStart', function(scope, next, current){
         ClusterPlatform.engine.pause()
-    });
+    })
 
     $scope.togglePane = function (key){
         $scope.activePane = ($scope.activePane === key) ? "none" : key

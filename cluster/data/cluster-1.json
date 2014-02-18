@@ -1,0 +1,395 @@
+{
+  "entities": [
+    {
+      "id": 0,
+      "name": "9 Billion Food",
+      "company": "Goodstore",
+      "description": "A company",
+      "status": "supporting",
+      "type": "none",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": 154.0716210874196,
+      "y": -157.2773720725597
+    },
+    {
+      "id": 1,
+      "name": "Solar power",
+      "company": "Solelia",
+      "description": "A company",
+      "status": "supporting",
+      "type": "none",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": -179.44643220065635,
+      "y": -138.33053350083995
+    },
+    {
+      "id": 2,
+      "name": "Smart Bikes",
+      "company": "Cargobike",
+      "description": "A company",
+      "status": "existing",
+      "type": "none",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": -95.44816774570047,
+      "y": -104.84854927572448
+    },
+    {
+      "id": 3,
+      "name": "Energy drinks",
+      "company": "Oji Drinks",
+      "description": "A company",
+      "status": "supporting",
+      "type": "none",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": 13.778902126871962,
+      "y": -91.76394654492667
+    },
+    {
+      "id": 4,
+      "name": "Smart app",
+      "company": "Turningpoint FTW",
+      "description": "A company",
+      "status": "supporting",
+      "type": "accelerator",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": 269.96262036815045,
+      "y": -1.620212817745088
+    },
+    {
+      "id": 5,
+      "name": "Smart app",
+      "company": "app-maker",
+      "description": "A company",
+      "status": "accelerator",
+      "type": "none",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": -283.5113488261536,
+      "y": -94.8621969648643
+    },
+    {
+      "id": 6,
+      "name": "Recipes for 9 ",
+      "company": "billion lunch",
+      "description": "A company",
+      "status": "supporting",
+      "type": "none",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": 145.763877408327,
+      "y": -37.6772539247852
+    },
+    {
+      "id": 7,
+      "name": "Elegantly Vegan",
+      "company": "Lunch maker",
+      "description": "A company",
+      "status": "existing",
+      "type": "none",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": 37.30922963165182,
+      "y": 22.722369247862886
+    },
+    {
+      "id": 8,
+      "name": "Mobility pool",
+      "company": "Sunfleet",
+      "description": "A company",
+      "status": "existing",
+      "type": "none",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": -152.05430091510266,
+      "y": -12.158870926633552
+    },
+    {
+      "id": 9,
+      "name": "Bike friendly cities",
+      "company": "Koucky & Partners",
+      "description": "A company",
+      "status": "supporting",
+      "type": "none",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": -261.61738752772175,
+      "y": 9.513458596345485
+    },
+    {
+      "id": 10,
+      "name": "Urban Farming",
+      "company": "Plantagon",
+      "description": "A company",
+      "status": "supporting",
+      "type": "none",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": 234.45946206393467,
+      "y": -89.47621665228466
+    },
+    {
+      "id": 11,
+      "name": "Co-working space",
+      "company": "Coffice",
+      "description": "A company",
+      "status": "supporting",
+      "type": "core",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": -53.42155586841649,
+      "y": 103.50168836482926
+    },
+    {
+      "id": 12,
+      "name": "Smart Lightning",
+      "company": "Svenska LED",
+      "description": "A company",
+      "status": "supporting",
+      "type": "none",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": -6.139766265739361,
+      "y": 222.1746364050213
+    },
+    {
+      "id": 13,
+      "name": "Flexiworking",
+      "company": "Compodium",
+      "description": "A company",
+      "status": "supporting",
+      "type": "expander",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": -162.27749637177138,
+      "y": 96.60021177991628
+    },
+    {
+      "id": 14,
+      "name": "Renewable Collaboration energy",
+      "company": "Egen El",
+      "description": "A company",
+      "status": "supporting",
+      "type": "none",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": 57.03986082246788,
+      "y": 336.7286699206428
+    },
+    {
+      "id": 15,
+      "name": "Smart Tools",
+      "company": "Dreamler",
+      "description": "A company",
+      "status": "supporting",
+      "type": "core",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": -129.8695255782231,
+      "y": 279.4662760562221
+    },
+    {
+      "id": 16,
+      "name": "Flexiworking",
+      "company": "Skiptrip",
+      "description": "A company",
+      "status": "supporting",
+      "type": "expander",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": -116.15428534523306,
+      "y": 206.29893354728628
+    },
+    {
+      "id": 17,
+      "name": "Shared Living",
+      "company": "Remote ",
+      "description": "A company",
+      "status": "supporting",
+      "type": "none",
+      "mobility": 64,
+      "nutrition": 28,
+      "building": 63,
+      "x": 28.905263016386293,
+      "y": 156.04843628670517
+    }
+  ],
+  "relations": [
+    {
+      "start": 1,
+      "end": 2,
+      "type": "potential"
+    },
+    {
+      "start": 4,
+      "end": 6,
+      "type": "participant"
+    },
+    {
+      "start": 6,
+      "end": 10,
+      "type": "catalyst"
+    },
+    {
+      "start": 10,
+      "end": 0,
+      "type": "catalyst"
+    },
+    {
+      "start": 0,
+      "end": 3,
+      "type": "catalyst"
+    },
+    {
+      "start": 3,
+      "end": 2,
+      "type": "catalyst"
+    },
+    {
+      "start": 8,
+      "end": 2,
+      "type": "participant"
+    },
+    {
+      "start": 8,
+      "end": 1,
+      "type": "catalyst"
+    },
+    {
+      "start": 11,
+      "end": 8,
+      "type": "catalyst"
+    },
+    {
+      "start": 11,
+      "end": 16,
+      "type": "provider"
+    },
+    {
+      "start": 11,
+      "end": 12,
+      "type": "catalyst"
+    },
+    {
+      "start": 11,
+      "end": 17,
+      "type": "catalyst"
+    },
+    {
+      "start": 5,
+      "end": 8,
+      "type": "participant"
+    },
+    {
+      "start": 6,
+      "end": 3,
+      "type": "catalyst"
+    },
+    {
+      "start": 6,
+      "end": 0,
+      "type": "catalyst"
+    },
+    {
+      "start": 13,
+      "end": 9,
+      "type": "catalyst"
+    },
+    {
+      "start": 13,
+      "end": 11,
+      "type": "catalyst"
+    },
+    {
+      "start": 13,
+      "end": 16,
+      "type": "alternative"
+    },
+    {
+      "start": 9,
+      "end": 8,
+      "type": "catalyst"
+    },
+    {
+      "start": 13,
+      "end": 8,
+      "type": "catalyst"
+    },
+    {
+      "start": 3,
+      "end": 7,
+      "type": "catalyst"
+    },
+    {
+      "start": 6,
+      "end": 7,
+      "type": "catalyst"
+    },
+    {
+      "start": 7,
+      "end": 11,
+      "type": "participant"
+    },
+    {
+      "start": 12,
+      "end": 14,
+      "type": "catalyst"
+    },
+    {
+      "start": 15,
+      "end": 11,
+      "type": "catalyst"
+    },
+    {
+      "start": 8,
+      "end": 11,
+      "type": "participant"
+    },
+    {
+      "start": 11,
+      "end": 16,
+      "type": "provider"
+    },
+    {
+      "start": 11,
+      "end": 13,
+      "type": "provider"
+    },
+    {
+      "start": 13,
+      "end": 16,
+      "type": "alternative"
+    },
+    {
+      "start": 5,
+      "end": 8,
+      "type": "participant"
+    },
+    {
+      "start": 7,
+      "end": 11,
+      "type": "participant"
+    }
+  ]
+}
