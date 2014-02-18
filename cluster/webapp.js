@@ -57,12 +57,21 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope){
 
     $scope.solutions = ClusterPlatform.entities
     $scope.filter = {
+        mobility: 0,
+        nutrition: 0,
+        building: 0,
         existing: true,
         supporting: true,
         potential: true,
         core: true,
         accelerator: true,
-        expander: true
+        expander: true,
+        // relations
+        rel_participant: true,
+        rel_provider: true,
+        rel_catalyst: true,
+        rel_potential: true,
+        rel_alternative: true
     }
 
     $scope.$watch('filter', function (){

@@ -111,8 +111,9 @@ input[type=checkbox] {
 	border: 0 solid #ddd;
 	border-width: 0 0 7px 0;
 }
-.footer {
-}
+.footer { font-size: 80% }
+.footer a { padding: 0 }
+.footer img { margin-right: 10px }
 
 .toolbar {
 	background: #444
@@ -246,6 +247,8 @@ input[type=checkbox] {
 	height: 100%;
 	padding: 0;
 	color: #eee;
+
+	overflow: auto;
 }
 .sidebar>div {
 	margin: 10px

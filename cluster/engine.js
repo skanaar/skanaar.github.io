@@ -53,10 +53,19 @@ function Engine(canvasId, _nodes, _options){
 
 	function filteredEntities(filterArgs){
 		var filtered = _.filter(entities, function (e){
-			return filterArgs[e.status] && filterArgs[e.type]
+			return filterArgs[e.status] &&
+				filterArgs[e.type] &&
+				filterArgs.mobility <= e.mobility && 
+				filterArgs.nutrition <= e.nutrition && 
+				filterArgs.building <= e.building
 		})
 		var entById = _.indexBy(filtered, 'id')
 		var rels = _.filter(relations, function (r){
+			return (filterArgs.rel_participant && r.type == 'participant') ||
+				(filterArgs.rel_provider && r.type == 'provider') ||
+				(filterArgs.rel_catalyst && r.type == 'catalyst') ||
+				(filterArgs.rel_potential && r.type == 'potential') ||
+				(filterArgs.rel_alternative && r.type == 'alternative')
 			return entById[r.start.id] && entById[r.end.id]
 		})
 		return { entities: filtered, relations: rels }
@@ -190,8 +199,6 @@ function Engine(canvasId, _nodes, _options){
 			targetOffset.y = selectedEntity.y
 		}
 	}
-
-	var filterArgs = { status: null, type: null }
 
 	return {
 		setNodes: setNodes,

@@ -76,12 +76,14 @@ function Visualizer(){
 		g.ctx.textAlign = 'left';
 		_.each(entities, function (e){
 			var screenPos = untransform(e)
+			var len = Math.max(g.ctx.measureText(e.name).width, g.ctx.measureText(e.company+'()').width)
 			g.circle(screenPos.x, screenPos.y, 6).fill()
 			g.path([{x:4, y:-4}, {x:32, y:-32}], screenPos).stroke()
-			g.path([{x:40, y:-35}, {x:120, y:-35}], screenPos).stroke()
+			g.path([{x:40, y:-35}, {x:50+len, y:-35}], screenPos).stroke()
 			g.circle(screenPos.x+35, screenPos.y-35, 5).stroke()
-			g.circle(screenPos.x+125, screenPos.y-35, 5).stroke()
+			g.circle(screenPos.x+55+len, screenPos.y-35, 5).stroke()
 			g.ctx.fillText(e.name, screenPos.x+45, screenPos.y-40)
+			g.ctx.fillText('('+e.company+')', screenPos.x+45, screenPos.y-21)
 		})
 	}
 
