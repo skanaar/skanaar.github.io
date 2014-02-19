@@ -71,6 +71,7 @@ angular.module('cluster').controller('SearchCtrl', function ($scope, $http, $q){
 
 angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $routeParams){
     ClusterPlatform.clusterScope = $scope
+    $scope.visibleSolutions = []
     $scope.filter = {
         mobility: 0,
         nutrition: 0,
@@ -91,24 +92,30 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
     $scope.clusterName = 'loading...'
 
     $scope.$watch('filter', function (){
-        ClusterPlatform.engine.filter($scope.filter)
+        var subset = ClusterPlatform.engine.filter($scope.filter)
+        $scope.visibleSolutions = subset.entities
     }, true)
 
+    ClusterPlatform.engine.setNodes(new Nodes([], []))
     var clusterId = $routeParams.clusterId
     $http.get('data/cluster-'+clusterId+'.json').then(function (response){
         loadCluster(response.data)
     })
 
     function loadCluster(c){
+        $scope.visibleSolutions = c.entities
         $scope.clusterName = c.name
-        $scope.companyName = _.findWhere(c.entities, {id: c.centralEntity}).company
-        ClusterPlatform.engine.setNodes(new Nodes([], []))
+        var centralEntity = _.findWhere(c.entities, {id: c.centralEntity})
+        $scope.companyName = centralEntity && centralEntity.company
         _.each(c.relations, function (r){
             r.start = { id: r.start }
             r.end = { id: r.end }
         })
         var nodes = new Nodes(c.entities, c.relations)
         ClusterPlatform.engine.setNodes(nodes)
+        ClusterPlatform.engine.setCentralEntityId(c.centralEntity)
+        ClusterPlatform.engine.select(c.centralEntity)
+        ClusterPlatform.engine.centerSelected()
         ClusterPlatform.nodes = nodes
     }
 
@@ -118,6 +125,10 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
 
     $scope.togglePane = function (key){
         $scope.activePane = ($scope.activePane === key) ? "none" : key
+    }
+
+    $scope.selectEntity = function (id){
+        ClusterPlatform.engine.select(id)
     }
 })
 

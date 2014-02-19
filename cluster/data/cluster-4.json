@@ -1,9 +1,9 @@
 {
   "name": "Vytedos",
-  "centralEntity": 1, 
+  "centralEntity": 2, 
   "entities": [
     {
-      "id": "1",
+      "id": 1,
       "name": "Cuked",
       "company": "Tibifotaf Vytedos",
       "description": "Hylut lisutab vif mytop gorekut vuvusadas munaraligug domakodilosah muroficogemebal haridacusototesac rikidisobysypolepyd sudatidetagereconefyp devodolekofinepohinarit dunugenyvulutyrosefufecol himerihynolidicanotusisacyh pudituryvoluropelupulegohahed",
@@ -16,7 +16,7 @@
       "y": 16.856534775190188
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Maged",
       "company": "Cutehyd Nonagakid",
       "description": "Lahas lugunar fad cucol fihinuk conedoket tanaselubun raracanisedim runuhofylidogur neturipytilanopyc nobiselilegolynasim madofasuvupodunusorun logacumohihinotocylasug takamaginufamenakutovuman hehamuvufytesifidalamusigor lucenasisyvikumamugetytahaher",
@@ -29,7 +29,7 @@
       "y": -92.4943987547476
     },
     {
-      "id": "3",
+      "id": 3,
       "name": "Lysufynet",
       "company": "Vehedirir Hulipokyl",
       "description": "Hymoharag cacedum nal nupam lahonyc nivukekyc ratovacilit mivevoradatos hosaratihahikif damefevulymumogak fyponivodeposimehed hatasilatehatususadeh bisydukirukugymicefusov dotepafohinuturuhabamerah muhyhusybodusogykolibidosis vupofuvusarohipynotisypesilyt",
@@ -40,18 +40,324 @@
       "building": 42,
       "x": 120.04926943353283,
       "y": 112.42510475752856
+    },
+    {
+      "id": 4,
+      "name": "Lenofebat",
+      "company": "Daribug Ragusyv",
+      "description": "Tetokot pedaluc pad lifir hireher tocatilod dulitohiloh doguvadasufod caturafafadicus sogaturivavololyp pedagotacupenifetuh pilusididyrarorudutok dotadototorotinutahisyn tytukipadotalurulugetuces ratorubutucenolepidesikylah tesesibileletitibutysulynadym",
+      "status": "existing",
+      "type": "accelerator",
+      "mobility": 12,
+      "nutrition": 38,
+      "building": 88,
+      "x": 1.5090124663414988,
+      "y": -180.80945148549463
+    },
+    {
+      "id": 5,
+      "name": "Solemalec",
+      "company": "Hecadyb Nuricudon",
+      "description": "Nodilak dohebidef vem sulod tarudas dygolurel hosanosohos kigiruvicehub teceturehilecad durusihicitiduhap dyhymynunurenasemot nopiturinolenebuhitad hatyhalinulyvutunudonof vanudatugipunosurahunedat tosotulitidycihatypesulynov lyhenadamegitesasyrysuralipul",
+      "status": "potential",
+      "type": "expander",
+      "mobility": 68,
+      "nutrition": 15,
+      "building": 99,
+      "x": -172.68260378763452,
+      "y": 10.204744064116143
+    },
+    {
+      "id": 6,
+      "name": "Larovaf",
+      "company": "Bigekehen Sedadonor",
+      "description": "Venavys lynymuc lyf kihin gocanyn vutocenad ratulenisid vocireduriheg lusalyhodasynot latinytohotolydur tititelevotelolakif vetobopituhinikocypor mirytihiridaduparonepyt honifitatonolunomaretugok tetehynyludefutiharytulukut daredebeladitemyhitililidomun",
+      "status": "potential",
+      "type": "core",
+      "mobility": 53,
+      "nutrition": 64,
+      "building": 1,
+      "x": -194.01190757422816,
+      "y": -177.97582494403548
+    },
+    {
+      "id": 7,
+      "name": "Nocorusyl",
+      "company": "Rinolicet Kunasup",
+      "description": "Romisesan gofos loh liliv milylic letetumen lusudikysum bicorudeviles tohiketedesacus gatetegidutetofeh tesutiduvaderahocas timifarifedasosufunun tinunifidysunihanuhykoh soredusitadycucitikulubes huporosuhororyvitebipolyseb lemihonasehivemotaledigetasik",
+      "status": "supporting",
+      "type": "expander",
+      "mobility": 36,
+      "nutrition": 9,
+      "building": 26,
+      "x": 271.4738852665977,
+      "y": 97.88047754038786
+    },
+    {
+      "id": 8,
+      "name": "Pociseder",
+      "company": "Dytyt Nugat",
+      "description": "Tesap sirehuruh ran sipor vunyvuh pasyrelit dinipakevek henebusolydit gesidarytudikot tatoriraramedinen hynuliganosukeserym hodevolotivitalihales lonymufitudyboholevomed hohoveresovohiberepovutop difolesacorenolilelybahyrot hatadadirunyrafalabelafupisir",
+      "status": "existing",
+      "type": "expander",
+      "mobility": 66,
+      "nutrition": 54,
+      "building": 53,
+      "x": 99.4985711051139,
+      "y": 273.65313247273895
+    },
+    {
+      "id": 9,
+      "name": "Sakudyd",
+      "company": "Pyvimiv Tyreresor",
+      "description": "Lenisut tutorymor duv retag cacofob ridecusen cekebesenyt kiniborytirat dupyperocopuhom rimehudafugedirih nyranisisurikuvifuv sehitysetalagehivavik harumamopaviledupacecol dudinaragucutetehedihahuh hutusakalukonikedevisesokid sohirukifemucalunimorimehohat",
+      "status": "existing",
+      "type": "accelerator",
+      "mobility": 63,
+      "nutrition": 35,
+      "building": 71,
+      "x": 99.72786555691872,
+      "y": -234.63932672324003
+    },
+    {
+      "id": 10,
+      "name": "Pysod",
+      "company": "Cavododal Nulotel",
+      "description": "Vutesanol hurihal pyc fubid logudih taradofih hohasipihyb siserufuhepud vanasocabagolur polapudasyridelin nuhidycineruredasoc mecenitagomonakirunul kedofovenofalikanuniloh lehanulanenuhetevuhididar ketahececonegitiliborugikah setotavalerinibalokupovopahub",
+      "status": "existing",
+      "type": "accelerator",
+      "mobility": 87,
+      "nutrition": 73,
+      "building": 77,
+      "x": 31.791439298287067,
+      "y": -333.49263824328574
+    },
+    {
+      "id": 11,
+      "name": "Fahopahup",
+      "company": "Perukyb Labyh",
+      "description": "Teludah rypoh kat locet natygad vuhukeluk tilygapuvel salydaribynyp bavepofinenireg hehotigapetetonat tedatofavitafinetih nytitecifuriconuvunet tihelisuvosurecynusakak gunugetohisuhaluvarusytub hirotadydusirecidagaholatev futotusanulurohiparylodolacot",
+      "status": "supporting",
+      "type": "core",
+      "mobility": 78,
+      "nutrition": 8,
+      "building": 53,
+      "x": -240.85515338788414,
+      "y": 64.17160592981597
+    },
+    {
+      "id": 12,
+      "name": "Satiponam",
+      "company": "Daranym Kihakives",
+      "description": "Pilahoric lilet dom disor lonivys bunaberor sesosulopav nodytatuhonil nalosogocovynad lutogamosodehebes titehihosanutupacin tobumerigotahebomadas ditegahatudukotiveludoh bitobinegovidesybadikasut lemucicunogodohulylalolehag dinulenetitalogatuhotegylysuk",
+      "status": "potential",
+      "type": "expander",
+      "mobility": 54,
+      "nutrition": 69,
+      "building": 100,
+      "x": -278.6828542367057,
+      "y": 143.93282292223518
+    },
+    {
+      "id": 13,
+      "name": "Sudesefot",
+      "company": "Matafutad Lamuhus",
+      "description": "Hanytos nonukites vav hatis bohekad hurygageh komufylorit hirorulisuved buhevikohemyfyh pohanunolucesigac lererihiladagolahoh kesubavyvomelacibaper duvamagegecuheverokemil nicinosadusipipunilurisiv mypehenuniduhuranasetubevam lihumugekudobidolulalatihedyv",
+      "status": "existing",
+      "type": "accelerator",
+      "mobility": 57,
+      "nutrition": 31,
+      "building": 66,
+      "x": -310.4462068799624,
+      "y": -161.6114309806494
+    },
+    {
+      "id": 14,
+      "name": "Hosel",
+      "company": "Pysurefer Lasedosap",
+      "description": "Pikufak lypakonyn bac dusov tasycok hibipemet rugicedunag vipusolaferes megylynuroromyt fypaviberynotasyf fuvuduvuvagugakehes bibahaforafycocodusur penefulatuvyhefoharefel hydonogomifihulafuhobutip fepulohegehodudohodahelunad cyfecatutidolulynuvabetakotuh",
+      "status": "potential",
+      "type": "core",
+      "mobility": 76,
+      "nutrition": 100,
+      "building": 5,
+      "x": -213.61812903525407,
+      "y": -330.62166283443725
+    },
+    {
+      "id": 15,
+      "name": "Sotesoroc",
+      "company": "Dyfokyn Nosem",
+      "description": "Pilik tasinohov pis rohoh ropydir sudifovir suratakilot vatyfodudutih sesonyvokarisyk rirutinunimonuhet sanatibacupydafevaf tatosusidefegatyvumih tynufuhitonavuredosysuh siholetiponarecibotoviduh dokihududadidobirebecefucih korilynobudetatacokosebasalim",
+      "status": "supporting",
+      "type": "expander",
+      "mobility": 93,
+      "nutrition": 70,
+      "building": 68,
+      "x": -296.44147694225677,
+      "y": -255.80988221583644
+    },
+    {
+      "id": 16,
+      "name": "Seberalyd",
+      "company": "Mimidov Lotisik",
+      "description": "Cehelonah gysil men sefov rugebyf lidihosuc dagebotehav lorugitunesot folotatababicip tigyripobosonilid sedycemotokaherakud netofenamaducosurygot govasofygagahetetenuhen povudafobodudilikunufedoh tohukosatosutanynitotebadih ponakakenalisygihisehimosamer",
+      "status": "existing",
+      "type": "expander",
+      "mobility": 25,
+      "nutrition": 74,
+      "building": 75,
+      "x": 383.21163569021803,
+      "y": 143.05429003245925
+    },
+    {
+      "id": 17,
+      "name": "Satinabed",
+      "company": "Cateb Hytuf",
+      "description": "Tymibun pisut gon biren legisys latebavut pibohulobod tufetinelulin necypivekohecut dopohokebohoraten romehuripomitutapet kavycepimorinolebohup tututadahefitulecykotet nitalohinuhycohalacagosif kotedefamunolunydeheludikam tubeduryhuvutotumyhosohatehys",
+      "status": "existing",
+      "type": "accelerator",
+      "mobility": 29,
+      "nutrition": 96,
+      "building": 63,
+      "x": 387.8692633977698,
+      "y": 26.368506408606848
+    },
+    {
+      "id": 18,
+      "name": "Forof",
+      "company": "Lamenul Titap",
+      "description": "Fadylag rypel lev colab peviken limuvotis dohofinihib duceryseminir suritytunilusum romutotiditurelug bulymoryfekurutifet tinufitobususagonebih disetumiratikilupatagen taruhotigelosusenosebyhuf hahudunodikyhubitygetupisyv danunabyhegivinevefulicipusul",
+      "status": "supporting",
+      "type": "accelerator",
+      "mobility": 72,
+      "nutrition": 100,
+      "building": 12,
+      "x": 149.3908097920205,
+      "y": 395.7596557546186
+    },
+    {
+      "id": 19,
+      "name": "Ratunehut",
+      "company": "Sesegacyv Lanimen",
+      "description": "Tanaculig haced toc cuhic dasybet gotonybar momudakugud rupinetugonap gapysesonososuv rehirunuhumipenon lehufuhisonulerefol biroferutasabitusytik milecalifogacavikotulyl revitobulipamininekudosir hekedikedefasoterycirakateh hyfumetuvetopelevosyveducuhym",
+      "status": "potential",
+      "type": "core",
+      "mobility": 86,
+      "nutrition": 21,
+      "building": 51,
+      "x": 40.38042069160682,
+      "y": 348.8039859362407
+    },
+    {
+      "id": 20,
+      "name": "Malaregec",
+      "company": "Pimys Kokasamyl",
+      "description": "Borin tyfat rod manif hosulel hucanutos takesyfidir toricuhirycop tovebabirilosek fidigomasumanatuf raladacedocarulilyf mominitihedolonuvuvyn ravabutolatipaturematih dypisohilafibicafarulofil gisopydopadovinadutehahesuv kamunisutolusuhaholupotopivam",
+      "status": "supporting",
+      "type": "core",
+      "mobility": 1,
+      "nutrition": 70,
+      "building": 94,
+      "x": 188.91530166161797,
+      "y": -293.65624441221246
     }
   ],
   "relations": [
     {
-      "start": "1",
-      "end": "2",
+      "start": 1,
+      "end": 2,
       "type": "potential"
     },
     {
-      "start": "1",
-      "end": "3",
+      "start": 1,
+      "end": 3,
       "type": "provider"
+    },
+    {
+      "start": 2,
+      "end": 4,
+      "type": "participant"
+    },
+    {
+      "start": 2,
+      "end": 5,
+      "type": "provider"
+    },
+    {
+      "start": 2,
+      "end": 6,
+      "type": "alternative"
+    },
+    {
+      "start": 3,
+      "end": 7,
+      "type": "potential"
+    },
+    {
+      "start": 3,
+      "end": 8,
+      "type": "catalyst"
+    },
+    {
+      "start": 4,
+      "end": 9,
+      "type": "potential"
+    },
+    {
+      "start": 4,
+      "end": 10,
+      "type": "provider"
+    },
+    {
+      "start": 5,
+      "end": 11,
+      "type": "potential"
+    },
+    {
+      "start": 5,
+      "end": 12,
+      "type": "potential"
+    },
+    {
+      "start": 6,
+      "end": 13,
+      "type": "catalyst"
+    },
+    {
+      "start": 6,
+      "end": 14,
+      "type": "alternative"
+    },
+    {
+      "start": 6,
+      "end": 15,
+      "type": "provider"
+    },
+    {
+      "start": 7,
+      "end": 16,
+      "type": "provider"
+    },
+    {
+      "start": 7,
+      "end": 17,
+      "type": "provider"
+    },
+    {
+      "start": 8,
+      "end": 18,
+      "type": "alternative"
+    },
+    {
+      "start": 8,
+      "end": 19,
+      "type": "potential"
+    },
+    {
+      "start": 9,
+      "end": 20,
+      "type": "catalyst"
     }
   ]
 }

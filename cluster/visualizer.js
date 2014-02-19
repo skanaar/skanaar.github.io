@@ -29,7 +29,6 @@ function Visualizer(){
 	}
 
 	function drawEntities(entities, scale, radiusOf){
-		var phi = 3.14*2
 		_.each(entities, function (e){
 			//drop shadow
 			var radius = radiusOf(e)
@@ -52,18 +51,6 @@ function Visualizer(){
 				1: 'rgba(0,0,0,0)'
 			})
 			g.circle(e.x, e.y, radius).fill()
-
-			// pie pieces
-			var alpha = Math.min(1, Math.max(0, scale.x/2-1))
-			var m = e.mobility / (e.mobility + e.nutrition + e.building)
-			var n = e.nutrition/ (e.mobility + e.nutrition + e.building)
-			var b = e.building / (e.mobility + e.nutrition + e.building)
-			g.ctx.fillStyle = g.colorNorm(1, 0.5, 0.25, 0.75*alpha)
-			g.arc(e.x, e.y, radius, 0, m*phi).fill()
-			g.ctx.fillStyle = g.colorNorm(0.25, 1, 0.5, 0.75*alpha)
-			g.arc(e.x, e.y, radius, m*phi, (m+n)*phi).fill()
-			g.ctx.fillStyle = g.colorNorm(0.5, 0.25, 1, 0.75*alpha)
-			g.arc(e.x, e.y, radius, (m+n)*phi, 0).fill()
 		})
 	}
 
@@ -130,7 +117,7 @@ function Visualizer(){
 		untransform = coords.untransform
 
 		function radiusOf(entity){
-			return interactions.centralEntity === entity ? 60 : 30
+			return interactions.centralEntityId === entity.id ? 60 : 30
 		}
 
 		g.ctx.clearRect(0, 0, g.width(), g.height())
