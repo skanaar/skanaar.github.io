@@ -1,4 +1,6 @@
 {
+  "name": "Vytedos",
+  "centralEntity": 1, 
   "entities": [
     {
       "id": "1",
