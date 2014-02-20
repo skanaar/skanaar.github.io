@@ -2,7 +2,7 @@ angular.module('cluster', ['ngRoute']).config(function($routeProvider) {
     $routeProvider
     .when('/dashboard', {controller:'DashboardCtrl', templateUrl:'dashboard.partial.html'})
     .when('/goals', {controller:'GoalsCtrl', templateUrl:'goals.partial.html'})
-    .when('/newsolution', { templateUrl:'newsolution.partial.html'})
+    .when('/newsolution', {controller: 'RegisterSolutionCtrl', templateUrl:'newsolution.partial.html'})
     .when('/searchclusters', {controller:'SearchCtrl', templateUrl:'clustersearch.partial.html'})
     .when('/cluster/:clusterId', {controller:'ClusterCtrl', templateUrl:'cluster.partial.html'})
     .otherwise({ redirectTo: '/dashboard' })
@@ -146,4 +146,12 @@ angular.module('cluster').controller('GoalsCtrl', function ($scope, $http){
     $http.get('indicator/indicator.pde').then(function (response){
         new Processing('indicator', response.data)
     })
+})
+
+angular.module('cluster').controller('RegisterSolutionCtrl', function ($scope){
+    $scope.area = {
+        mobility: 0,
+        nutrition: 0,
+        building: 0
+    }
 })

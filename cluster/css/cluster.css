@@ -415,6 +415,7 @@ canvas#canvas {
 
 .solution-form input[type=text], .solution-form input[type=range] {
 	width: 50%;
+	margin: 2px;
 }
 
 .solution-form .align-inputs label {
@@ -423,6 +424,7 @@ canvas#canvas {
 }
 
 textarea {
+	width: 50%;
 	border-radius: 10px;
 	border: 1px solid #aaa;
 }
