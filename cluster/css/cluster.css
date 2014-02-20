@@ -438,3 +438,14 @@ textarea {
 .solution-form small {
 	color: #888;
 }
+
+.solution-form a {
+	display: block;
+	width: 100px;
+	text-align: center;
+	margin: 20px auto;
+	background: green;
+	color: #eee;
+	border-radius: 20px;
+	padding: 4px 20px;
+}

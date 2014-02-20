@@ -18,8 +18,7 @@ function Nodes(_entities, _relations){
 		return {
 			start: a,
 			end: b,
-			strength: 0.5 + Math.random(),
-			length: _.random(50,150),
+			strength: 1,
 			type: type || {}
 		}
 	}
@@ -64,9 +63,10 @@ function Nodes(_entities, _relations){
 		})
 
 		var springiness = 0.0002
+		var springLength = 150
 		_.each(relations, function (r){
 			var delta = diff(r.start, r.end)
-			var factor = springiness * r.strength * (mag(delta) - r.length)
+			var factor = springiness * r.strength * (mag(delta) - springLength)
 			addForce(r.start, mult(delta, -factor))
 			addForce(r.end, mult(delta, factor))
 		})

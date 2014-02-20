@@ -53,7 +53,10 @@ skanaar.Canvas = function (canvas, callbacks){
 		},
 		circle: function (x, y, r){
 			ctx.beginPath()
-			ctx.arc(x, y, r, 0, twopi)
+			if (arguments.length === 2)
+				ctx.arc(x.x, x.y, y, 0, twopi)
+			else	
+				ctx.arc(x, y, r, 0, twopi)
 			return chainable
 		},
 		arc: function (x, y, r, start, stop){

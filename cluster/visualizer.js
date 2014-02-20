@@ -65,13 +65,17 @@ function Visualizer(){
 		_.each(entities, function (e){
 			var screenPos = untransform(e)
 			var len = Math.max(g.ctx.measureText(e.name).width, g.ctx.measureText(e.company+'()').width)
+			var dir = {x:0.5, y:-1}
+			var dist = 25
+			var dot1 = add(screenPos, mult(dir, dist))
+			var dot2 = add(dot1, {x:len+20, y:0})
 			g.circle(screenPos.x, screenPos.y, 6).fill()
-			g.path([{x:4, y:-4}, {x:32, y:-32}], screenPos).stroke()
-			g.path([{x:40, y:-35}, {x:50+len, y:-35}], screenPos).stroke()
-			g.circle(screenPos.x+35, screenPos.y-35, 5).stroke()
-			g.circle(screenPos.x+55+len, screenPos.y-35, 5).stroke()
-			g.ctx.fillText(e.name, screenPos.x+45, screenPos.y-40)
-			g.ctx.fillText('('+e.company+')', screenPos.x+45, screenPos.y-21)
+			g.path([{x:0, y:-0}, mult(dir, dist-4)], screenPos).stroke()
+			g.path([{x:dot1.x+5, y:dot1.y}, {x:dot2.x-5, y:dot2.y}]).stroke()
+			g.circle(dot1, 5).stroke()
+			g.circle(dot2, 5).stroke()
+			g.ctx.fillText(e.name, dot1.x+10, dot1.y-5)
+			g.ctx.fillText('('+e.company+')', dot1.x+10, dot1.y+14)
 		})
 	}
 

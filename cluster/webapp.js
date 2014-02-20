@@ -8,6 +8,14 @@ angular.module('cluster', ['ngRoute']).config(function($routeProvider) {
     .otherwise({ redirectTo: '/dashboard' })
 })
 
+function attachDataUrlToLink(id, dataType, linkGenerator){
+    var link = document.getElementById(id)
+    link.addEventListener('click', function (){
+        var downloadType = 'data:application/octet-stream'
+        link.href = linkGenerator().replace(new RegExp('^data:'+dataType), downloadType)
+    }, false);
+}
+
 function bindData(targetId, data){
     var target = $('#' + targetId)
     for(var key in data)
@@ -113,6 +121,7 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
             r.end = { id: r.end }
         })
         var nodes = new Nodes(c.entities, c.relations)
+        ClusterPlatform.cluster = c
         ClusterPlatform.engine.setNodes(nodes)
         ClusterPlatform.engine.setCentralEntityId(c.centralEntity)
         ClusterPlatform.engine.select(c.centralEntity)
