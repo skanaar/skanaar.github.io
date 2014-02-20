@@ -47,6 +47,12 @@
 			<div class="page-stripe toolset"><label>Id:</label> <span class="bind-id"></span></div>
 		</div>
 	</div>
+	<div class="sidebar details_sidebar" id="relation_details_sidebar">
+		<div>
+			<h2>relation</h2>
+			<div class="bind-type"></div>
+		</div>
+	</div>
 	<div class="sidebar search_sidebar"
 		 id="search_sidebar"
 		 ng-show="activePane === 'filter'">
@@ -131,11 +137,18 @@ attachDataUrlToLink('download-data-link', 'text/json', function (){
 })
 
 
+function selectRelation(r){
+	$('#node_details_sidebar').hide()
+	$('#relation_details_sidebar').show()
+	bindData('relation_details_sidebar', r)
+}
 function selectEntity(e){
+	$('#relation_details_sidebar').hide()
 	$('#node_details_sidebar').show()
 	bindData('node_details_sidebar', e)
 }
 function deselectEntity(e){
+	$('#relation_details_sidebar').hide()
 	$('#node_details_sidebar').hide()
 }
 
@@ -196,6 +209,7 @@ function createNodes(clusterCount, clusterSize){
 
 var engine = Engine('canvas', createNodes(0, 0), {
 	fps: 30,
+	selectRelation: selectRelation,
 	selectEntity: selectEntity,
 	deselectEntity: deselectEntity
 })

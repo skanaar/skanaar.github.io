@@ -79,24 +79,34 @@ function Visualizer(){
 		})
 	}
 
-	function drawRelations(relations, scale){
+	function drawRelations(relations, scale, selectedRelation){
 		var steps = 20
 		var margin = 10
 		_.each(relations, function (r){
 			var e1 = r.start
 			var e2 = r.end
-			var d = dist(e1, e2) * 0.3 * scale.x/scale.y
+			var d = dist(e1, e2) * 0.15
 			var v = mult(diff(e2, e1), 1/steps)
-			function down(i){ return {x:0, y: d*(1-sq(2*i/steps-1))/2 } }
+			function down(i){ return {x:0, y: d*(1-sq(2*i/steps-1)) } }
 			function curved(i){ return add(add(e1, mult(v, i)), down(i)) }
 			var path = _.times(steps+1, curved)
+			var midPoint = curved(steps/2)
+
+			if (r === selectedRelation){
+				g.ctx.fillStyle = '#174140'
+				g.circle(midPoint, 15).fill()
+			}
 
 			g.ctx.lineWidth = 4
 			g.ctx.strokeStyle = 'rgba(0, 0, 0, 0.5)'
+			g.ctx.fillStyle = 'rgba(0, 0, 0, 0.5)'
 			g.path(path).stroke()
+			g.circle(midPoint, 4).fill()
 			g.ctx.lineWidth = 1.5
 			g.ctx.strokeStyle = relationColor[r.type]
+			g.ctx.fillStyle = relationColor[r.type]
 			g.path(path).stroke()
+			g.circle(midPoint, 2.5).fill()
 		})
 	}
 
@@ -157,7 +167,7 @@ function Visualizer(){
 			}
 		}
 
-		drawRelations(data.relations, scale, offset)
+		drawRelations(data.relations, scale, interactions.selectedRelation)
 		drawEntities(data.entities, scale, radiusOf)
 
 		if (interactions.selectedEntity){

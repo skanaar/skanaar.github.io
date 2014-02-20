@@ -3,6 +3,7 @@ var gFilter = { status: null, type: null }
 function Engine(canvasId, _nodes, _options){
 	var options = {
 		fps: _options.fps || 30,
+		selectRelation: _options.selectRelation || function (){},
 		selectEntity: _options.selectEntity || function (){},
 		deselectEntity: _options.deselectEntity || function (){}
 	}
@@ -19,6 +20,8 @@ function Engine(canvasId, _nodes, _options){
 	var centralEntityId = undefined
 	var selectedEntity = undefined
 	var clickedEntity = undefined
+	var clickedRelation = undefined
+	var selectedRelation = undefined
 	var mouseDownPos = undefined
 	var mouseDownOffset = offset
 
@@ -97,8 +100,11 @@ function Engine(canvasId, _nodes, _options){
 
 	function onMouseDown(pos){
 		var e = pickEntity(pos)
+		var r = pickRelation(pos)
 		if (e){
 			clickedEntity = e
+		} else if (r){
+			clickedRelation = r
 		} else {
 			mouseDownPos = pos
 			mouseDownOffset = _.clone(offset)
@@ -114,6 +120,7 @@ function Engine(canvasId, _nodes, _options){
 
 	function onMouseUp(pos){
 		var e = pickEntity(pos)
+		var r = pickRelation(pos)
 		if (clickedEntity && e){
 			if (clickedEntity === e){
 				select(e)
@@ -122,10 +129,16 @@ function Engine(canvasId, _nodes, _options){
 			else
 				nodes.addRelation(clickedEntity, e)
 		}
+
+		if (clickedRelation && r && clickedRelation === r){
+			selectedRelation = r
+			options.selectRelation(r)
+		}
 		
 		if (_.isEqual(mouseDownPos, pos)){
 			options.deselectEntity()
 			select(undefined)
+			selectedRelation = undefined
 		}
 		mouseDownPos = undefined
 		clickedEntity = undefined
@@ -164,6 +177,16 @@ function Engine(canvasId, _nodes, _options){
 		return (dist(e, p) < radiusOf(e) + 10) ? e : undefined
 	}
 
+	function pickRelation(pos){
+		var p = transform(pos)
+		var measured = _.map(visibleSubset.relations, function (r){
+			var middle = mult(add(r.start, r.end), 0.5)
+			return { obj:r, dist: dist(middle, p) }
+		})
+		var o = _.min(measured, function (q){ return q.dist })
+		return (o.dist < 40) ? o.obj : undefined
+	}
+
 	function easeOffsetTowardsTarget(){
 		var v = diff(targetOffset, offset)
 		var d = mag(v)
@@ -181,7 +204,8 @@ function Engine(canvasId, _nodes, _options){
 			hoveredEntity: pickEntity(g.mousePos()),
 			clickedEntity: clickedEntity,
 			selectedEntity: selectedEntity,
-			centralEntityId: centralEntityId
+			centralEntityId: centralEntityId,
+			selectedRelation: selectedRelation
 		}
 		var coords = { transform: transform, untransform: untransform }
 		Visualizer().draw(g, visibleSubset, interactions, scale, offset, tickCounter, coords)
