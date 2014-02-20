@@ -2,6 +2,7 @@ angular.module('cluster', ['ngRoute']).config(function($routeProvider) {
     $routeProvider
     .when('/dashboard', {controller:'DashboardCtrl', templateUrl:'dashboard.partial.html'})
     .when('/goals', {controller:'GoalsCtrl', templateUrl:'goals.partial.html'})
+    .when('/newsolution', { templateUrl:'newsolution.partial.html'})
     .when('/searchclusters', {controller:'SearchCtrl', templateUrl:'clustersearch.partial.html'})
     .when('/cluster/:clusterId', {controller:'ClusterCtrl', templateUrl:'cluster.partial.html'})
     .otherwise({ redirectTo: '/dashboard' })

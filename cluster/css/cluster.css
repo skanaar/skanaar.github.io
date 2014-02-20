@@ -2,7 +2,9 @@
 	font-family: 'Dosis';
 	font-style: normal;
 	font-weight: 500;
-	src: local('Dosis Regular'), local('Dosis-Regular'), url(../fonts/dosis-500.woff) format('woff');
+	src: local('Dosis Regular'), 
+		 local('Dosis-Regular'), 
+		 url(../fonts/dosis-500.woff) format('woff');
 }
 
 @media only screen and (max-width: 600px) {
@@ -18,15 +20,18 @@ body, html {
 
 h1 {
 	font-family: 'Dosis', sans-serif;
+	font-weight: normal
 }
 h2 {
 	color: #1C8394;
 	margin-left: 20px;
 	font-family: 'Dosis', sans-serif;
+	font-weight: normal
 }
 h3 {
 	color: #1C8394;
 	font-family: 'Dosis', sans-serif;
+	font-weight: normal
 }
 
 a {
@@ -75,6 +80,7 @@ input[type=range]::-webkit-slider-thumb:hover{
 
 input[type=checkbox] {
 	-webkit-appearance:none !important;
+	box-shadow: 0 0 1px black;
 	width: 20px;
 	height: 20px;
 	border: 4px solid white;
@@ -401,4 +407,26 @@ canvas#canvas {
 .legend_sidebar label.relation {
 	border-width: 0 0 2px 0;
 	border-style: solid;
+}
+
+.solution-form {
+	font-family: 'Dosis', sans-serif
+}
+
+.solution-form input[type=text], .solution-form input[type=range] {
+	width: 50%;
+}
+
+.solution-form .align-inputs label {
+	display: inline-block;
+	width: 120px;
+}
+
+textarea {
+	border-radius: 10px;
+	border: 1px solid #aaa;
+}
+
+.solution-form small {
+	color: #888;
 }
