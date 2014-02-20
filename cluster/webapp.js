@@ -154,4 +154,13 @@ angular.module('cluster').controller('RegisterSolutionCtrl', function ($scope){
         nutrition: 0,
         building: 0
     }
+    $scope.panes = {}
+    $scope.toggle = function (key){
+        $scope.panes[key] = !$scope.panes[key]
+    }
+    $scope.icon = function (key){
+        return $scope.panes[key] ?
+            'fa fa-chevron-circle-down fa-lg' :
+            'fa fa-chevron-circle-right fa-lg'
+    }
 })

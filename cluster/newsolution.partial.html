@@ -20,45 +20,59 @@
 <label><input type="checkbox"> Other (please specify)</label> <input type="text"><br>
 <label><input type="checkbox"> Don't know or do not apply</label> <input type="text"><br>
 
+<h2>WHAT FUNCTION DOES YOUR SOLUTION PROVIDE?</h2>
+
 <div ng-show="area.nutrition > 0">
-	<h2>NEEDS SATISFIED BY THE SOLUTION IN <b>NUTRITION</b></h2>
+	<hr>
+	<h1>NUTRITION</h1>
+	<h2>NEEDS SATISFIED BY THE SOLUTION</h2>
 
-	<h3>PHYSICAL</h3>
-	<label><input type="checkbox"> Protein</label><br>
-	<label><input type="checkbox"> Carbohydrates (incl. fibre)</label><br>
-	<label><input type="checkbox"> Fat</label><br>
-	<label><input type="checkbox"> Water</label><br>
-	<label><input type="checkbox"> Vitamins</label><br>
-	<label><input type="checkbox"> Minerals</label><br>
-	<label><input type="checkbox"> Other (please specify)</label> <input type="text"><br>
+	<h3 ng-click="toggle('nut_physical')" >PHYSICAL <i ng-class="icon('nut_physical')"></i></h3>
+	<div ng-show="panes.nut_physical">
+		<label><input type="checkbox"> Protein</label><br>
+		<label><input type="checkbox"> Carbohydrates (incl. fibre)</label><br>
+		<label><input type="checkbox"> Fat</label><br>
+		<label><input type="checkbox"> Water</label><br>
+		<label><input type="checkbox"> Vitamins</label><br>
+		<label><input type="checkbox"> Minerals</label><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input type="text"><br>
+	</div>
 
-	<H3>OPTIMIZATION</H3>
-	<label><input type="checkbox"> Balance (between different kind of nutrients)</label> <small>E.g recipies that help users ensure a good balance between nutrients
-	</small><br>
-	<label><input type="checkbox"> Total amount needed (amount nutrition and amount energy used)</label> <small>E.g. Health tracking apps that nudge users to eat sufficient (and avoid overconsumption) 
-	</small><br>
-	<label><input type="checkbox"> Other (please specify)</label> <input type="text"><br>
+	<h3 ng-click="toggle('nut_optimize')" >OPTIMIZATION <i ng-class="icon('nut_optimize')"></i></h3>
+	<div ng-show="panes.nut_optimize">
+		<label><input type="checkbox"> Balance (between different kind of nutrients)</label> <small>E.g recipies that help users ensure a good balance between nutrients
+		</small><br>
+		<label><input type="checkbox"> Total amount needed (amount nutrition and amount energy used)</label> <small>E.g. Health tracking apps that nudge users to eat sufficient (and avoid overconsumption) 
+		</small><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input type="text"><br>
+	</div>
 
-	<H3>SOCIAL</H3>
-	<label><input type="checkbox"> Meet/socialize with people</label><br>
-	<label><input type="checkbox"> Active life</label><br>
-	<label><input type="checkbox"> Culture/traditions</label><br>
-	<label><input type="checkbox"> Optimize time</label><br>
-	<label><input type="checkbox"> Other (please specify)</label><br>
+	<h3 ng-click="toggle('nut_social')" >SOCIAL <i ng-class="icon('nut_social')"></i></h3>
+	<div ng-show="panes.nut_social">
+		<label><input type="checkbox"> Meet/socialize with people</label><br>
+		<label><input type="checkbox"> Active life</label><br>
+		<label><input type="checkbox"> Culture/traditions</label><br>
+		<label><input type="checkbox"> Optimize time</label><br>
+		<label><input type="checkbox"> Other (please specify)</label><br>
+	</div>
 
-	<H3>ECONOMICAL</H3>
-	<label><input type="checkbox"> Saving money</label><br>
-	<label><input type="checkbox"> Other (please specify)</label> <input type="text"><br>
+	<h3 ng-click="toggle('nut_economical')" >ECONOMICAL <i ng-class="icon('nut_economical')"></i></h3>
+	<div ng-show="panes.nut_economical">
+		<label><input type="checkbox"> Saving money</label><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input type="text"><br>
+	</div>
 
-	<H3>ETHICAL</H3>
-	<label><input type="checkbox"> Equal access to food for 10 billion people within the boundaries of the planet</label><br>
-	<label><input type="checkbox"> Environmental/climate impact</label><br>
-	<label><input type="checkbox"> Human rights </label><br>
-	<label><input type="checkbox"> Animal rights</label><br>
-	<label><input type="checkbox"> Sustainable lifestyle</label><br>
-	<label><input type="checkbox"> Other (please specify)</label> <input type="text"><br>
+	<h3 ng-click="toggle('nut_ethical')" >ETHICAL <i ng-class="icon('nut_ethical')"></i></h3>
+	<div ng-show="panes.nut_ethical">
+		<label><input type="checkbox"> Equal access to food for 10 billion people within the boundaries of the planet</label><br>
+		<label><input type="checkbox"> Environmental/climate impact</label><br>
+		<label><input type="checkbox"> Human rights </label><br>
+		<label><input type="checkbox"> Animal rights</label><br>
+		<label><input type="checkbox"> Sustainable lifestyle</label><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input type="text"><br>
+	</div>
 
-	<H3>PART OF THE VALUE CHAIN WHERE THE SOLUTION IS RELEVANT</H3>
+	<H2>PART OF THE VALUE CHAIN WHERE THE SOLUTION IS RELEVANT</H2>
 	<label><input type="checkbox"> Providing nutrition in a totally new way</label> <small>	Changing/providing nutrition in a new way that radically reduces the use of resources compared to conventional ways of providing nutrition (e.g. providing plant-based protein instead of meat-based protein)</small><br>
 	<label><input type="checkbox"> Closed loop service</label><br>
 	<label><input type="checkbox"> Cultivation</label> <small>	E.g. resource-efficient agriculture</small><br>
@@ -75,39 +89,53 @@
 </div>
 
 <div ng-show="area.building > 0">
-	<h2>NEEDS SATISFIED BY THE SOLUTION IN <b>BUILDING/WORK-LIFE</b></h2>
+	<hr>
+	<h1>BUILDING/WORK-LIFE</h1>
+	<h2>NEEDS SATISFIED BY THE SOLUTION</h2>
 
-	<H3>PHYSICAL</H3>
-	<label><input type="checkbox"> Light</label><br>
-	<label><input type="checkbox"> Right air temperature (heat/cold)</label><br>
-	<label><input type="checkbox"> Healthy air quality</label><br>
-	<label><input type="checkbox"> Fresh food (e.g. cold storage)</label><br>
-	<label><input type="checkbox"> Cooked/edible food</label><br>
-	<label><input type="checkbox"> Fresh water</label><br>
-	<label><input type="checkbox"> Clean spaces/furniture/kitchenware/clothing/interior etc.</label><br>
-	<label><input type="checkbox"> Energy, motion etc.</label><br>
-	<label><input type="checkbox"> Shelter</label><br>
-	<label><input type="checkbox"> Storage</label><br>
-	<label><input type="checkbox"> Other (please specify)</label> <input type="text">	
-	<H3>SOCIAL</H3>	
-	<label><input type="checkbox"> Working</label><br>
-	<label><input type="checkbox"> Co-working</label><br>
-	<label><input type="checkbox"> Work meetings</label><br>
-	<label><input type="checkbox"> Private meetings</label> <small>	E.g. socializing with family and friends</small><br>
-	<label><input type="checkbox"> Network meetings</label> <small>	E.g. network meetings at big conferences</small><br>
-	<label><input type="checkbox"> Exhibitions</label><br>
-	<label><input type="checkbox"> Playing</label><br>
-	<label><input type="checkbox"> Other (please specify)</label> <input type="text">	
-	<H3>ECONOMICAL</H3>	
-	<label><input type="checkbox"> Saving money</label> <small>	E.g. having a net-producing building that generates more energy than it consumes, which then can be fed into the grid</small><br>
-	<label><input type="checkbox"> Other (please specify)</label> <small> + Fritextrad	</small><br>
-	<H3>ETHICAL</H3>
-	<label><input type="checkbox"> Equal access to housing for 10 billion people within the boundaries of the planet</label><br>
-	<label><input type="checkbox"> Environmental/climate impact</label><br>
-	<label><input type="checkbox"> Human rights</label> <small>	E.g. fair working and living conditions</small><br>
-	<label><input type="checkbox"> Sustainable lifestyle</label><br>
-	<label><input type="checkbox"> Other (please specify)</label> <input type="text">	
-	<H3>PART OF THE VALUE CHAIN WHERE THE SOLUTION IS RELEVANT (MULTIPLE OPTIONS POSSIBLE)</H3>
+	<h3 ng-click="toggle('build_physical')" >PHYSICAL <i ng-class="icon('build_physical')"></i></h3>
+	<div ng-show="panes.build_physical">
+		<label><input type="checkbox"> Light</label><br>
+		<label><input type="checkbox"> Right air temperature (heat/cold)</label><br>
+		<label><input type="checkbox"> Healthy air quality</label><br>
+		<label><input type="checkbox"> Fresh food (e.g. cold storage)</label><br>
+		<label><input type="checkbox"> Cooked/edible food</label><br>
+		<label><input type="checkbox"> Fresh water</label><br>
+		<label><input type="checkbox"> Clean spaces/furniture/kitchenware/clothing/interior etc.</label><br>
+		<label><input type="checkbox"> Energy, motion etc.</label><br>
+		<label><input type="checkbox"> Shelter</label><br>
+		<label><input type="checkbox"> Storage</label><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input type="text">	
+	</div>
+
+	<h3 ng-click="toggle('build_social')" >SOCIAL <i ng-class="icon('build_social')"></i></h3>
+	<div ng-show="panes.build_social">
+		<label><input type="checkbox"> Working</label><br>
+		<label><input type="checkbox"> Co-working</label><br>
+		<label><input type="checkbox"> Work meetings</label><br>
+		<label><input type="checkbox"> Private meetings</label> <small>	E.g. socializing with family and friends</small><br>
+		<label><input type="checkbox"> Network meetings</label> <small>	E.g. network meetings at big conferences</small><br>
+		<label><input type="checkbox"> Exhibitions</label><br>
+		<label><input type="checkbox"> Playing</label><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input type="text">	
+	</div>
+
+	<h3 ng-click="toggle('build_economical')" >ECONOMICAL <i ng-class="icon('build_economical')"></i></h3>
+	<div ng-show="panes.build_economical">
+		<label><input type="checkbox"> Saving money</label> <small>	E.g. having a net-producing building that generates more energy than it consumes, which then can be fed into the grid</small><br>
+		<label><input type="checkbox"> Other (please specify)</label> <small> + Fritextrad	</small><br>
+	</div>
+
+	<h3 ng-click="toggle('build_ethical')" >ETHICAL <i ng-class="icon('build_ethical')"></i></h3>
+	<div ng-show="panes.build_ethical">
+		<label><input type="checkbox"> Equal access to housing for 10 billion people within the boundaries of the planet</label><br>
+		<label><input type="checkbox"> Environmental/climate impact</label><br>
+		<label><input type="checkbox"> Human rights</label> <small>	E.g. fair working and living conditions</small><br>
+		<label><input type="checkbox"> Sustainable lifestyle</label><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input type="text">	
+	</div>
+
+	<H2>PART OF THE VALUE CHAIN WHERE THE SOLUTION IS RELEVANT (MULTIPLE OPTIONS POSSIBLE)</H2>
 	<label><input type="checkbox"> Providing living/buildings in a totally new way</label> <small>	Changing/providing buildings/living in a new way that radically reduces the use of resources compared to conventional buildings/solutions (e.g. plus energy houses that are net producers of energy instead of conventional buildings that are only energy consumers)</small><br>
 	<label><input type="checkbox"> Closed loop service</label><br>
 	<label><input type="checkbox"> Planning & design</label> <small>	E.g. urban planning, architecture</small><br>
@@ -126,28 +154,42 @@
 </div>
 
 <div ng-show="area.mobility > 0">
-	<h2>NEEDS SATISFIED BY THE SOLUTION IN <b>MOBILITY/TRANSPORT</b></h2>
+	<hr>
+	<h1>MOBILITY/TRANSPORT</h1>
+	<h2>NEEDS SATISFIED BY THE SOLUTION</h2>
 
-	<H3>PHYSICAL (NOT DIRECTLY APPLICABLE, BUT AS A FACILITATOR):</H3>
-	<label><input type="checkbox"> Transportation of goods</label><br>
-	<label><input type="checkbox"> Transportation of people</label><br>
-	<label><input type="checkbox"> Other (please specify)</label> <input type="text">		
-	<H3>SOCIAL</H3>		
-	<label><input type="checkbox"> Meeting of people</label><br>
-	<label><input type="checkbox"> Co-working</label><br>
-	<label><input type="checkbox"> Representativeness</label><br>
-	<label><input type="checkbox"> Security</label><br>
-	<label><input type="checkbox"> Other (please specify)</label> <input type="text">	
-	<H3>ECONOMICAL</H3>
-	<label><input type="checkbox"> Saving money</label> <small>	E.g. avoid travel costs when not having to travel/commute to meetings/work</small><br>
-	<label><input type="checkbox"> Saving time</label> <small>	E.g. not having to travel/commute to meetings/work, possibility to work during travel</small><br>
-	<label><input type="checkbox"> Other (please specify)</label> <input type="text">	
-	<H3>ETHICAL</H3>
-	<label><input type="checkbox"> Equal access to mobility for 10 billion people within the boundaries of the planet</label><br>
-	<label><input type="checkbox"> Environmental/climate impact</label><br>
-	<label><input type="checkbox"> Human rights</label> <small>	E.g. fair working and living conditions</small><br>
-	<label><input type="checkbox"> Sustainable lifestyle</label><br>
-	<label><input type="checkbox"> Other</label> <input type="text">	
+	<h3 ng-click="toggle('mob_physical')" >PHYSICAL <i ng-class="icon('mob_physical')"></i></h3>
+	<div ng-show="panes.mob_physical">
+		<label><input type="checkbox"> Transportation of goods</label><br>
+		<label><input type="checkbox"> Transportation of people</label><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input type="text">		
+	</div>
+
+	<h3 ng-click="toggle('mob_social')" >SOCIAL <i ng-class="icon('mob_social')"></i></h3>
+	<div ng-show="panes.mob_social">	
+		<label><input type="checkbox"> Meeting of people</label><br>
+		<label><input type="checkbox"> Co-working</label><br>
+		<label><input type="checkbox"> Representativeness</label><br>
+		<label><input type="checkbox"> Security</label><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input type="text">	
+	</div>
+
+	<h3 ng-click="toggle('mob_economical')" >ECONOMICAL <i ng-class="icon('mob_economical')"></i></h3>
+	<div ng-show="panes.mob_economical">
+		<label><input type="checkbox"> Saving money</label> <small>	E.g. avoid travel costs when not having to travel/commute to meetings/work</small><br>
+		<label><input type="checkbox"> Saving time</label> <small>	E.g. not having to travel/commute to meetings/work, possibility to work during travel</small><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input type="text">	
+	</div>
+
+	<h3 ng-click="toggle('mob_ethical')" >ETHICAL <i ng-class="icon('mob_ethical')"></i></h3>
+	<div ng-show="panes.mob_ethical">
+		<label><input type="checkbox"> Equal access to mobility for 10 billion people within the boundaries of the planet</label><br>
+		<label><input type="checkbox"> Environmental/climate impact</label><br>
+		<label><input type="checkbox"> Human rights</label> <small>	E.g. fair working and living conditions</small><br>
+		<label><input type="checkbox"> Sustainable lifestyle</label><br>
+		<label><input type="checkbox"> Other</label> <input type="text">
+	</div>
+
 	<H3>PART OF THE VALUE CHAIN WHERE THE SOLUTION IS RELEVANT</H3>	
 	<label><input type="checkbox"> Providing mobility in a totally new way</label> <small>	Providing a new mode of mobility that radically reduces the use of resources compared to conventional mobility modes (e.g. providing video meetings instead of flying, or app for public transport)</small><br>
 	<label><input type="checkbox"> Closed loop service</label><br>
@@ -165,6 +207,8 @@
 	<label><input type="checkbox"> Recycling/disposal</label><br>
 	<label><input type="checkbox"> Other (please specify)</label> <input type="text">
 </div>
+
+<hr>
 
 <h3>SHORT DESCRIPTION OF THE SOLUTION (MAX. 70 WORDS)</h3>
 <textarea></textarea>

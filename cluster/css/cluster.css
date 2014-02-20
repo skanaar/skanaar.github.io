@@ -423,6 +423,12 @@ canvas#canvas {
 	width: 120px;
 }
 
+.solution-form h3 i.fa {
+	display: inline-block;
+	margin-left: 10px;
+	color: green;
+}
+
 textarea {
 	width: 50%;
 	border-radius: 10px;
