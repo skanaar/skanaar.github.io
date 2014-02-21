@@ -1,10 +1,6 @@
 <div class="full-row jumbotron">{{clusterName}}: {{companyName}}</div>
 <div class="full-row page-stripe toolbar">
 	<div class="pull-right">
-		<a onclick="engine.runFor(2000)">
-			<i class="fa fa-forward"></i></a>
-		<a id="download-data-link" download="cluster-data.json">
-			<i class="fa fa-download"></i></a>
 		<a id="download-image-link" download="cluster-snapshot.png">
 			<i class="fa fa-camera"></i></a>
 		<a onclick="engine.zoom(-1)" href="javascript:void(0)">
@@ -33,7 +29,7 @@
 </div>
 <div style="position: relative">
 	<canvas id="canvas" width="800" height="800"></canvas>
-	<div class="sidebar details_sidebar" id="node_details_sidebar">
+	<div class="sidebar details_sidebar" id="node_details_sidebar" ng-show="selectedEntity">
 		<div>
 			<div>
 				<a class="pull-right"
@@ -41,16 +37,16 @@
 				   href="javascript:void(0)">
 					<i class="fa fa-crosshairs fa-2x"></i>
 				</a>
-				<h2><span class="bind-name"></span> </h2>
+				<h2>{{selectedEntity.name}} </h2>
 			</div>
-			<div class="bind-description"></div>
-			<div class="page-stripe toolset"><label>Id:</label> <span class="bind-id"></span></div>
+			<div>{{selectedEntity.description}}</div>
+			<div><label>Id:</label> {{selectedEntity.id}}</div>
 		</div>
 	</div>
-	<div class="sidebar details_sidebar" id="relation_details_sidebar">
+	<div class="sidebar details_sidebar" id="relation_details_sidebar" ng-show="selectedRelation">
 		<div>
-			<h2>relation</h2>
-			<div class="bind-type"></div>
+			<h2>{{selectedRelation.start.name}} - {{selectedRelation.end.name}}</h2>
+			<div>{{selectedRelation.type}}</div>
 		</div>
 	</div>
 	<div class="sidebar search_sidebar"
@@ -92,10 +88,46 @@
 			</div>
 		</div>
 	</div>
-	<div class="sidebar legend_sidebar"
+	<div class="sidebar develop_sidebar"
 		 ng-show="activePane === 'develop'">
 		<div>
 			<h3>Develop</h3>
+			<div class="toolset">
+				<a href="#cluster/blank"><i class="fa fa-fw fa-dot-circle-o"></i> Blank cluster</a>
+				<a ng-click="addSolution()"><i class="fa fa-fw fa-plus"></i> Add solution</a>
+				<a onclick="engine.runFor(2000)"><i class="fa fa-fw fa-forward"></i> Relax</a>
+				<a id="download-data-link" download="cluster-data.json">
+					<i class="fa fa-fw fa-download"></i> Download data</a>
+			</div>
+
+			<hr>
+			<div ng-show="selectedEntity">
+				<label>Name</label>
+				<input type="text" ng-model="selectedEntity.name">
+				<label>Description</label>
+				<input type="text" ng-model="selectedEntity.description">
+				<label>Company</label>
+				<input type="text" ng-model="selectedEntity.company">
+				<label>Status</label>
+				<select ng-options="e for e in ['existing', 'supporting', 'potential']"
+						ng-model="selectedEntity.status"></select>
+				<label>Type</label>
+				<select ng-options="e for e in ['core', 'accelerator', 'expander']"
+						ng-model="selectedEntity.type"></select><br>
+
+				Mobility  <em>&gt; {{selectedEntity.mobility}}%</em>
+				<div><input type="range" ng-model="selectedEntity.mobility"></div>
+				Nutrition <em>&gt; {{selectedEntity.nutrition}}%</em>
+				<div><input type="range" ng-model="selectedEntity.nutrition"></div>
+				Building  <em>&gt; {{selectedEntity.building}}%</em>
+				<div><input type="range" ng-model="selectedEntity.building"></div>
+			</div>
+			<div ng-show="selectedRelation">
+				<label>Type</label>
+				<select ng-options="e for e in ['participant','provider','catalyst','potential','alternative']"
+						ng-model="selectedRelation.type"></select><br>
+			</div>
+
 		</div>
 	</div>
 	<div class="sidebar legend_sidebar"
@@ -135,22 +167,6 @@ attachDataUrlToLink('download-data-link', 'text/json', function (){
     }
     return 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data, undefined, 2))
 })
-
-
-function selectRelation(r){
-	$('#node_details_sidebar').hide()
-	$('#relation_details_sidebar').show()
-	bindData('relation_details_sidebar', r)
-}
-function selectEntity(e){
-	$('#relation_details_sidebar').hide()
-	$('#node_details_sidebar').show()
-	bindData('node_details_sidebar', e)
-}
-function deselectEntity(e){
-	$('#relation_details_sidebar').hide()
-	$('#node_details_sidebar').hide()
-}
 
 function randomName(syllables){
 	var vowel = 'aaeeiioouuy'
@@ -207,12 +223,7 @@ function createNodes(clusterCount, clusterSize){
 	return nodes
 }
 
-var engine = Engine('canvas', createNodes(0, 0), {
-	fps: 30,
-	selectRelation: selectRelation,
-	selectEntity: selectEntity,
-	deselectEntity: deselectEntity
-})
+var engine = Engine('canvas', createNodes(0, 0), { fps: 30 })
 
 ClusterPlatform.engine = engine
 

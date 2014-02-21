@@ -131,12 +131,16 @@ hr {
 }
 
 .page {
-	max-width: 1000px;
+	max-width: 1024px;
 	margin: auto;
 }
 
 /*-- Style.Common -----------------*/
 
+.header {
+	overflow: hidden;
+	white-space: nowrap;
+}
 .page-stripe {
 	background: #333;
 	color: #ddd;
@@ -173,8 +177,15 @@ hr {
 	background: #444
 }
 
-.toolset {
-	background: none
+.toolset a {
+	display: block;
+	margin-right: auto;
+	cursor: pointer;
+	padding: 3px;
+}
+
+.toolset a:hover {
+	background: rgba(0, 0, 0, 0.2)
 }
 
 .jumbotron {
@@ -377,12 +388,21 @@ canvas#canvas {
 }
 
 .details_sidebar {
-	display: none;
 	right: 0; 
 }
 .search_sidebar {
 	left: 0;
 }
+.develop_sidebar {
+	left: 0;
+	width: 300px;
+}
+.develop_sidebar label {
+	display: block;
+	padding: 0 5px;
+	margin: 5px 0 0 0;
+}
+
 .legend_sidebar {
 	left: 0;
 }

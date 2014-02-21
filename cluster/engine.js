@@ -4,8 +4,7 @@ function Engine(canvasId, _nodes, _options){
 	var options = {
 		fps: _options.fps || 30,
 		selectRelation: _options.selectRelation || function (){},
-		selectEntity: _options.selectEntity || function (){},
-		deselectEntity: _options.deselectEntity || function (){}
+		selectEntity: _options.selectEntity || function (){}
 	}
 	var canvas = document.getElementById(canvasId)
 	var g = skanaar.Canvas(canvas, {
@@ -124,20 +123,27 @@ function Engine(canvasId, _nodes, _options){
 		var r = pickRelation(pos)
 		if (clickedEntity && e){
 			if (clickedEntity === e){
+				selectedRelation = undefined
+				options.selectRelation(undefined)
 				select(e)
 				options.selectEntity(e)
 			}
-			else
-				nodes.addRelation(clickedEntity, e)
+			else{
+				var type = 'participant'
+				nodes.addRelation(clickedEntity, e, type)
+			}
 		}
 
 		if (clickedRelation && r && clickedRelation === r){
 			selectedRelation = r
+			select(undefined)
+			options.selectEntity(undefined)
 			options.selectRelation(r)
 		}
 		
-		if (_.isEqual(mouseDownPos, pos)){
-			options.deselectEntity()
+		if (!e && !r && _.isEqual(mouseDownPos, pos)){
+			options.selectEntity(undefined)
+			options.selectRelation(undefined)
 			select(undefined)
 			selectedRelation = undefined
 		}
@@ -182,10 +188,11 @@ function Engine(canvasId, _nodes, _options){
 		var p = transform(pos)
 		var measured = _.map(visibleSubset.relations, function (r){
 			var middle = mult(add(r.start, r.end), 0.5)
+			middle.y += 0.15 * dist(r.start, r.end)
 			return { obj:r, dist: dist(middle, p) }
 		})
 		var o = _.min(measured, function (q){ return q.dist })
-		return (o.dist < 40) ? o.obj : undefined
+		return (o.dist < 20) ? o.obj : undefined
 	}
 
 	function easeOffsetTowardsTarget(){
@@ -255,13 +262,20 @@ function Engine(canvasId, _nodes, _options){
 		fillScreen: function(){
 			var w = canvas.parentElement.offsetWidth
 			canvas.setAttribute('width', w)
-			canvas.setAttribute('height', w*7/12)
+			var w = $(window).height() - 185
+			canvas.setAttribute('height', w)
 		},
 		centerSelected: centerSelected,
 		getVisibleSubset: function (){ return visibleSubset },
 		setFilter: function (args){
 			filterArgs = args
 			applyFilter()
+		},
+		onSelectedEntityChanged: function (callback){
+			options.selectEntity = callback
+		},
+		onSelectedRelationChanged: function (callback){
+			options.selectRelation = callback
 		}
 	}
 }

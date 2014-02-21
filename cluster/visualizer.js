@@ -92,9 +92,13 @@ function Visualizer(){
 			var path = _.times(steps+1, curved)
 			var midPoint = curved(steps/2)
 
+			
 			if (r === selectedRelation){
-				g.ctx.fillStyle = '#174140'
-				g.circle(midPoint, 15).fill()
+				g.ctx.lineWidth = 6
+				g.ctx.fillStyle = '#fff'
+				g.ctx.strokeStyle = '#fff'
+				g.circle(midPoint, 10).fill()
+				g.path(path).stroke()
 			}
 
 			g.ctx.lineWidth = 4
@@ -144,9 +148,11 @@ function Visualizer(){
 		g.ctx.translate(-offset.x, -offset.y)
 		
 		if (interactions.selectedEntity){
-			g.ctx.fillStyle = '#174140'
+			g.ctx.fillStyle = 'rgba(255, 255, 255, 1)'//'#174140'
+			g.ctx.strokeStyle = 'rgba(255, 255, 255, 1)'//'#174140'
+			g.ctx.lineWidth = 5
 			var e = interactions.selectedEntity
-			g.circle(e.x, e.y, radiusOf(e)+20).fill()
+			g.circle(e.x, e.y, radiusOf(e)+8).stroke()
 		}
 
 		if (interactions.clickedEntity){
@@ -170,18 +176,22 @@ function Visualizer(){
 		drawRelations(data.relations, scale, interactions.selectedRelation)
 		drawEntities(data.entities, scale, radiusOf)
 
-		if (interactions.selectedEntity){
-			var e = interactions.selectedEntity
+		//if (interactions.selectedEntity)
+		//	drawSelectedPointer(interactions.selectedEntity)
+		//if (interactions.selectedRelation)
+		//	drawSelectedPointer(interactions.selectedRelation)
+
+		g.ctx.restore()
+
+		drawEntityHuds(data.entities, scale)
+
+		function drawSelectedPointer(e){
 			g.ctx.strokeStyle = '#174140'
 			g.ctx.lineWidth = 10/scale.x
 			var sidebarEdge = transform({x:g.width()-200, y: 0})
 			sidebarEdge.y = e.y
 			g.path([{ x: e.x + radiusOf(e) + 5/scale.x, y: e.y}, sidebarEdge]).stroke()
 		}
-
-		g.ctx.restore()
-
-		drawEntityHuds(data.entities, scale)
 	}
 
 	return { draw: draw }

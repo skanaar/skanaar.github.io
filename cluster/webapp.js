@@ -100,6 +100,8 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
         relations: []
     }
 
+    $scope.selectedEntity = undefined
+    $scope.selectedRelation = undefined
     $scope.visibleSolutions = []
     $scope.filter = {
         mobility: 0,
@@ -151,6 +153,14 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
         ClusterPlatform.engine.select(c.centralEntity)
         ClusterPlatform.engine.centerSelected()
         ClusterPlatform.nodes = nodes
+
+        ClusterPlatform.engine.onSelectedEntityChanged(function (e){
+            $scope.$apply(function (){ $scope.selectedEntity = e })
+        })
+
+        ClusterPlatform.engine.onSelectedRelationChanged(function (r){
+            $scope.$apply(function (){ $scope.selectedRelation = r })
+        })
     }
 
     $scope.$on('$locationChangeStart', function(scope, next, current){
@@ -165,8 +175,20 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
         ClusterPlatform.engine.select(id)
     }
 
-    $scope.addNode = function (){
-        ClusterPlatform.engine.select(id)
+    $scope.addSolution = function (){
+        var fields = {
+            id:_.uniqueId(),
+            name: randomName(),
+            company: randomName() + ' ' + randomName(),
+            description: randomName(),
+            status: _.sample(['existing', 'supporting', 'potential']),
+            type: _.sample(['core', 'accelerator', 'expander']),
+            mobility: _.random(100),
+            nutrition: _.random(100),
+            building: _.random(100)
+        }
+        ClusterPlatform.nodes.addEntity(fields)
+        ClusterPlatform.nodes.runFor(1000)
     }
 })
 
