@@ -80,6 +80,26 @@ angular.module('cluster').controller('SearchCtrl', function ($scope, $http, $q){
 
 angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $routeParams){
     ClusterPlatform.clusterScope = $scope
+
+    var clusterTemplate = {
+        name: "blank cluster",
+        centralEntity: 0,
+        entities: [{
+            id: 0,
+            name: "blank solution",
+            company: "blank company",
+            description: "description...",
+            status: "existing",
+            type: "core",
+            mobility: 50,
+            nutrition: 50,
+            building: 50,
+            x: 0,
+            y: 0
+        }],
+        relations: []
+    }
+
     $scope.visibleSolutions = []
     $scope.filter = {
         mobility: 0,
@@ -100,16 +120,20 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
     }
     $scope.clusterName = 'loading...'
 
+    ClusterPlatform.engine.setFilter($scope.filter)
     $scope.$watch('filter', function (){
-        var subset = ClusterPlatform.engine.filter($scope.filter)
-        $scope.visibleSolutions = subset.entities
+        ClusterPlatform.engine.setFilter($scope.filter)
+        $scope.visibleSolutions = ClusterPlatform.engine.getVisibleSubset().entities
     }, true)
 
     ClusterPlatform.engine.setNodes(new Nodes([], []))
     var clusterId = $routeParams.clusterId
-    $http.get('data/cluster-'+clusterId+'.json').then(function (response){
-        loadCluster(response.data)
-    })
+    if (clusterId === 'blank')
+        loadCluster(JSON.parse(JSON.stringify(clusterTemplate)))
+    else
+        $http.get('data/cluster-'+clusterId+'.json').then(function (response){
+            loadCluster(response.data)
+        })
 
     function loadCluster(c){
         $scope.visibleSolutions = c.entities
@@ -138,6 +162,10 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
     }
 
     $scope.selectEntity = function (id){
+        ClusterPlatform.engine.select(id)
+    }
+
+    $scope.addNode = function (){
         ClusterPlatform.engine.select(id)
     }
 })

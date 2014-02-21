@@ -17,6 +17,7 @@ function Engine(canvasId, _nodes, _options){
 	var offset = { x: 0, y: 0 }
 	var targetOffset = { x: 0, y: 0 }
 	var scale = { x: 1, y: 1 }
+	var filterArgs = undefined
 	var centralEntityId = undefined
 	var selectedEntity = undefined
 	var clickedEntity = undefined
@@ -25,7 +26,7 @@ function Engine(canvasId, _nodes, _options){
 	var mouseDownPos = undefined
 	var mouseDownOffset = offset
 
-	var nodes, visibleSubset, entities, relations, peers
+	var nodes, visibleSubset
 
 	setNodes(_nodes)
 	pulse(tick, 1000/options.fps)
@@ -34,12 +35,10 @@ function Engine(canvasId, _nodes, _options){
 		if (nodes) nodes.dispose()
 		nodes = _nodes
 		visibleSubset = nodes
-		entities = nodes.entities
-		relations = nodes.relations
 		peers = calculatePeers(nodes.relations)
 		nodes.onChange(function (){
-			peers = calculatePeers(nodes.relations)
 			select(selectedEntity)
+			applyFilter()
 		})
 	}
 
@@ -55,7 +54,7 @@ function Engine(canvasId, _nodes, _options){
 	}
 
 	function filteredEntities(filterArgs){
-		var filtered = _.filter(entities, function (e){
+		var filtered = _.filter(nodes.entities, function (e){
 			return filterArgs[e.status] &&
 				(filterArgs[e.type] || e.type === 'none') &&
 				filterArgs.mobility <= e.mobility && 
@@ -63,7 +62,7 @@ function Engine(canvasId, _nodes, _options){
 				filterArgs.building <= e.building
 		})
 		var entById = _.indexBy(filtered, 'id')
-		var rels = _.filter(relations, function (r){
+		var rels = _.filter(nodes.relations, function (r){
 			return (filterArgs.rel_participant && r.type == 'participant') ||
 				(filterArgs.rel_provider && r.type == 'provider') ||
 				(filterArgs.rel_catalyst && r.type == 'catalyst') ||
@@ -74,25 +73,27 @@ function Engine(canvasId, _nodes, _options){
 		return { entities: filtered, relations: rels }
 	}
 
-	function filteredEntities_0(source, generations){
-		var accumulator = []
-		function collect(a, generations){
-			_.each(peers[a.id], function (sibling){
-				accumulator[a.id] = a
-				if (accumulator[sibling.id] === undefined && generations)
-					collect(sibling, generations-1)
-			})
-		}
-		collect(source, generations)
-		var rels = _.filter(relations, function (r){
-			return accumulator[r.start.id] && accumulator[r.end.id]
-		})
-		return { entities: _.values(accumulator), relations: rels }
-	}
+	//#onchange: peers = calculatePeers(nodes.relations)
+	//var peers
+	//function filteredEntities_0(source, generations){
+	//	var accumulator = []
+	//	function collect(a, generations){
+	//		_.each(peers[a.id], function (sibling){
+	//			accumulator[a.id] = a
+	//			if (accumulator[sibling.id] === undefined && generations)
+	//				collect(sibling, generations-1)
+	//		})
+	//	}
+	//	collect(source, generations)
+	//	var rels = _.filter(relations, function (r){
+	//		return accumulator[r.start.id] && accumulator[r.end.id]
+	//	})
+	//	return { entities: _.values(accumulator), relations: rels }
+	//}
 
 	function relationsFor(entities){
 		return _.flatten(_.map(entities, function (e){
-			return _.filter(relations, function (r){
+			return _.filter(nodes.relations, function (r){
 				return r.start === e || r.end === e
 			})
 		}))
@@ -224,16 +225,20 @@ function Engine(canvasId, _nodes, _options){
 		}
 	}
 
+	function applyFilter(){
+		visibleSubset = filteredEntities(filterArgs)
+	}
+
 	return {
 		setNodes: setNodes,
 		runFor: function (millis){ nodes.runFor(millis) },
 		pause: function (){ paused = true },
 		togglePause: function (){ paused = !paused },
 		select: function (id){
-			var e = _.find(entities, function (x){ return x.id == id })
+			var e = _.find(nodes.entities, function (x){ return x.id == id })
 			options.selectEntity(e)
 			select(e)
-			scale.y /= scale.x
+			scale.y = 1
 			scale.x = 1
 		},
 		setCentralEntityId: function (id){
@@ -250,12 +255,13 @@ function Engine(canvasId, _nodes, _options){
 		fillScreen: function(){
 			var w = canvas.parentElement.offsetWidth
 			canvas.setAttribute('width', w)
-			canvas.setAttribute('height', w*2/3)
+			canvas.setAttribute('height', w*7/12)
 		},
 		centerSelected: centerSelected,
-		filter: function(filterArgs){
-			visibleSubset = filteredEntities(filterArgs)
-			return visibleSubset
+		getVisibleSubset: function (){ return visibleSubset },
+		setFilter: function (args){
+			filterArgs = args
+			applyFilter()
 		}
 	}
 }
