@@ -48,9 +48,6 @@ input[type=text] {
 	width: 100%;
 }
 
-input[type=checkbox] {
-}
-
 input[type=range] {
 	width: 100%;
 }
@@ -86,8 +83,7 @@ input[type=checkbox] {
 	border: 4px solid white;
 	border-radius: 10px;
 	background-color: white;
-	margin-top: 3px;
-	margin-bottom: 6px;
+	margin: 1px 5px 6px 0;
 	vertical-align: middle;
 }
 
@@ -414,7 +410,7 @@ canvas#canvas {
 }
 
 .solution-form input[type=text], .solution-form input[type=range] {
-	width: 50%;
+	width: 40%;
 	margin: 2px;
 }
 
@@ -429,7 +425,24 @@ canvas#canvas {
 	color: green;
 }
 
-textarea {
+.solution-form .clickable {
+	cursor: pointer;
+}
+
+.solution-form .segment {
+	padding-left: 1.5em;
+}
+
+.solution-form .help {
+	margin: 0 -2em 1em -2em;
+	padding: 1ex 2em;
+	background: #f8f8f8;
+	border-style: solid;
+	border-color: #ccc;
+	border-width: 1px 0;
+}
+
+.solution-form textarea {
 	width: 50%;
 	border-radius: 10px;
 	border: 1px solid #aaa;
@@ -437,6 +450,7 @@ textarea {
 
 .solution-form small {
 	color: #888;
+	margin-left: 20px;
 }
 
 .solution-form a {
