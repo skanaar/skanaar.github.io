@@ -131,7 +131,9 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
     ClusterPlatform.engine.setNodes(new Nodes([], []))
     var clusterId = $routeParams.clusterId
     if (clusterId === 'blank')
-        loadCluster(JSON.parse(JSON.stringify(clusterTemplate)))
+        loadCluster(copyOfTemplate())
+    else if (clusterId === 'local')
+        loadCluster(getFromLocalStorage() || copyOfTemplate())
     else
         $http.get('data/cluster-'+clusterId+'.json').then(function (response){
             loadCluster(response.data)
@@ -163,6 +165,13 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
         })
     }
 
+    function copyOfTemplate(){ return JSON.parse(JSON.stringify(clusterTemplate)) }
+    function getFromLocalStorage(){
+        var version = localStorage.getItem("cluster-data-version")
+        var data = localStorage.getItem("cluster-data")
+        return (version === '001' && data) ? JSON.parse(data) : undefined
+    }
+
     $scope.$on('$locationChangeStart', function(scope, next, current){
         ClusterPlatform.engine.pause()
     })
@@ -173,6 +182,22 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
 
     $scope.selectEntity = function (id){
         ClusterPlatform.engine.select(id)
+    }
+
+    $scope.saveToBrowser = function (){
+        var es = ClusterPlatform.nodes.entities
+        var rs = ClusterPlatform.nodes.relations
+        var data = {
+            name: ClusterPlatform.cluster.name,
+            centralEntity: ClusterPlatform.cluster.centralEntity,
+            entities: _.map(es, function (e){ return _.omit(e, ['$$hashKey', 'fx', 'fy'])}),
+            relations:  _.map(rs, function (r){
+                return { start: r.start.id, end: r.end.id, type: r.type }
+            })
+        }
+        localStorage.setItem('cluster-data-version', '001')
+        localStorage.setItem('cluster-data', JSON.stringify(data))
+        alert('Cluster saved to browser storage')
     }
 
     $scope.addSolution = function (){
@@ -189,6 +214,16 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
         }
         ClusterPlatform.nodes.addEntity(fields)
         ClusterPlatform.nodes.runFor(1000)
+    }
+
+    $scope.removeEntity = function (){
+        if ($scope.selectedEntity)
+            ClusterPlatform.nodes.removeEntity($scope.selectedEntity)
+    }
+
+    $scope.removeRelation = function (){
+        if ($scope.selectedRelation)
+            ClusterPlatform.nodes.removeRelation($scope.selectedRelation)
     }
 })
 

@@ -88,8 +88,20 @@ function Nodes(_entities, _relations){
 		_.each(changeSubscribers, function (c){ c() })
 	}
 
+	function removeRelation(r){
+		relations.splice(relations.indexOf(r), 1)
+		_.each(changeSubscribers, function (c){ c() })
+	}
+
 	function addEntity(fields){
 		entities.push(Entity(fields))
+		_.each(changeSubscribers, function (c){ c() })
+	}
+
+	function removeEntity(e){
+		var marked = _.filter(relations, function (r){ return (r.start === e || r.end === e) })
+		_.each(marked, removeRelation)
+		entities.splice(entities.indexOf(e), 1)
 		_.each(changeSubscribers, function (c){ c() })
 	}
 
@@ -104,6 +116,8 @@ function Nodes(_entities, _relations){
 		relations: relations,
 		addRelation: addRelation,
 		addEntity: addEntity,
+		removeRelation: removeRelation,
+		removeEntity: removeEntity,
 		setDampening: function (d){ dampening = d },
 		onChange: function(callback){ changeSubscribers.push(callback) },
 		dispose: function (){ changeSubscribers.length = 0 }
