@@ -342,6 +342,17 @@ hr {
 .sidebar input[type=checkbox] {
 	margin-left: 10px
 }
+.sidebar select {
+	border-radius: 2px
+}
+.sidebar input[type=file] {
+	font-size: 65%;
+	padding: 3px 13px;
+	width: 85%;
+	background: #eee;
+	border-radius: 16px;
+	border: 1px solid rgba(0,0,0,0.5);
+}
 .sidebar em {
 	display: block;
 	text-align: center;
@@ -351,6 +362,9 @@ hr {
 	border-radius: 3px;
 	background-color: #0B2120;
 	font-style: normal;
+}
+.sidebar a.heading {
+	color: #888;
 }
 
 .result-pane { background-color: #eee }

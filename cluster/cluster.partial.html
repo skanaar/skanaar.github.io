@@ -94,15 +94,15 @@
 			<h3>Develop</h3>
 			<div class="toolset">
 				<a href="#cluster/blank"><i class="fa fa-fw fa-dot-circle-o"></i> Blank cluster</a>
-				<a href="#cluster/local"><i class="fa fa-fw fa-folder-open"></i> Open locally saved cluster</a>
-				<a ng-click="saveToBrowser()"><i class="fa fa-fw fa-save"></i> Save locally</a>
 				<a ng-click="addSolution()"><i class="fa fa-fw fa-plus"></i> Add solution</a>
 				<a onclick="engine.runFor(2000)"><i class="fa fa-fw fa-arrow-circle-o-right"></i> Auto layout</a>
 				<a id="download-data-link" download="cluster-data.json">
 					<i class="fa fa-fw fa-download"></i> Download data</a>
+				<h3><i class="fa fa-fw fa-folder-open"></i> Open file</h3>
+				<input type="file"
+					   onchange="angular.element(this).scope().loadClusterFile(this.files)">
 			</div>
 
-			<hr>
 			<h3>Selection</h3>
 			<div ng-show="selectedEntity">
 				<div class="toolset" ng-show="selectedEntity">
