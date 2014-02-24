@@ -190,13 +190,19 @@ hr {
 
 .jumbotron {
 	background: #0d8;
-	font-size: 200%;
-	font-family: 'Dosis', sans-serif;
 	background: url(../img/algae.jpg) center center;
 	background-size: cover;
-	color: #eee;
-	padding: 10px 20px;
+	font-family: 'Dosis', sans-serif;
 	text-align: center;
+	padding: 5px 5px 5px 5px;
+}
+.jumbotron h1 {
+	font-size: 200%;
+	color: #eee;
+	margin: 0;
+}
+.jumbotron small {
+	color: #39B7EA
 }
 
 /*-- Style.updates -----------------*/
@@ -419,7 +425,61 @@ canvas#canvas {
 
 .legend_sidebar {
 	left: 0;
+	width: 300px;
 }
+
+.legend_sidebar hr {
+	border-width: 0
+}
+
+.legend_sidebar b {
+	font-weight: normal;
+	color: rgba(255, 255, 255, 0.5);
+}
+
+.legend_sidebar div.entity {
+	display: inline-block;
+	width: 50px;
+	height: 50px;
+	margin: 5px;
+	border-radius: 35px;
+	border: 0 solid black;
+}
+
+.legend_sidebar div.bordered {
+	width: 39px;
+	height: 39px;
+	margin: 8px;
+	border-width: 3px;
+}
+
+.legend_sidebar div.relation {
+	display: inline-block;
+	width: 40px;
+	height: 20px;
+	margin: 8px 8px 28px 8px;
+	border-width: 0 0 3px 0;
+	border-style: solid;
+}
+
+.legend_sidebar div.desc {
+	display: inline-block;
+	width: 200px;
+	height: 30px;
+}
+
+.legend_sidebar div.entity.existing { background-color: rgba(210, 100, 20, 1) }
+.legend_sidebar div.entity.supporting { background-color: rgba(10, 170, 210, 1) }
+.legend_sidebar div.entity.potential { background-color: rgba(60, 180, 10, 1) }
+.legend_sidebar div.entity.core { border-color: rgba(255, 64, 0, 0.75) }
+.legend_sidebar div.entity.accelerator { border-color: rgba(200, 40, 255, 0.75) }
+.legend_sidebar div.entity.expander { border-color: rgba(200, 255, 0, 0.75) }
+.legend_sidebar div.relation.alternative { border-color: rgba(182,128,216, 0.75) }
+.legend_sidebar div.relation.catalyst { border-color: rgba(129,244,153, 0.75) }
+.legend_sidebar div.relation.participant { border-color: rgba(255,135,135, 0.75) }
+.legend_sidebar div.relation.potential { border-color: rgba(129,153,244, 0.75) }
+.legend_sidebar div.relation.provider { border-color: rgba(182,216,128, 0.75) }
+
 .legend_sidebar label {
 	display: block;
 	padding: 0 5px;

@@ -36,8 +36,29 @@ angular.module('cluster').controller('NavbarCtrl', function ($scope){
             return haystack.substr(0, needle.length) === needle;
         }
         return startsWith(window.location.hash, '#/' + name);
-    };
+    }
 })
+
+;(function (){
+    function sum(list, plucker){
+        var transform = {
+            'undefined': _.identity,
+            'string': function (obj){ return obj[plucker] },
+            'number': function (obj){ return obj[plucker] },
+            'function': plucker
+        }[typeof plucker]
+        for(var i=0, sum=0, len=list.length; i<len; i++)
+            sum += transform(list[i])
+        return sum
+    }
+    function average(list, plucker){
+        return sum(list, plucker) / list.length
+    }
+    _.mixin({
+        sum: sum,
+        average: average
+    })
+}())
 
 angular.module('cluster').controller('SearchCtrl', function ($scope, $http, $q){
     $scope.clusters = []
@@ -146,6 +167,13 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
             r.start = { id: r.start }
             r.end = { id: r.end }
         })
+
+        $scope.clusterProperties = {
+            mobility: _.average(c.entities, 'mobility'),
+            nutrition: _.average(c.entities, 'nutrition'),
+            building: _.average(c.entities, 'building')
+        }
+
         var nodes = new Nodes(c.entities, c.relations)
         ClusterPlatform.cluster = c
         ClusterPlatform.engine.setNodes(nodes)

@@ -1,4 +1,8 @@
-<div class="full-row jumbotron">{{clusterName}}: {{companyName}}</div>
+<div class="full-row jumbotron">
+<h1>{{clusterName}}: {{companyName}}</h1>
+<small>Building: {{clusterProperties.building}}% - 
+Nutrition: {{clusterProperties.nutrition}}% - 
+Mobility: {{clusterProperties.mobility}}%</small></div>
 <div class="full-row page-stripe toolbar">
 	<div class="pull-right">
 		<a id="download-image-link" download="cluster-snapshot.png">
@@ -143,17 +147,62 @@
 		 ng-show="activePane === 'legend'">
 		<div>
 			<h3>Legend</h3>
-			<label class="fill" style="background-color: rgba(255, 64, 0, 0.5)"> core</label>
-			<label class="fill" style="background-color: rgba(200, 40, 255, 0.5)"> accelerator</label>
-			<label class="fill" style="background-color: rgba(200, 255, 0, 0.5)"> expander</label>
-			<label class="border" style="border-color: rgba(210, 100, 20, 0.5)"> existing</label>
-			<label class="border" style="border-color: rgba(10, 170, 210, 0.5)"> supporting</label>
-			<label class="border" style="border-color: rgba(60, 180, 10, 0.5)"> potential</label>
-			<label class="relation" style="border-color: rgba(182,128,216, 0.5)">alternative</label>
-			<label class="relation" style="border-color: rgba(129,244,153, 0.5)">catalyst</label>
-			<label class="relation" style="border-color: rgba(255,135,135, 0.5)">participant</label>
-			<label class="relation" style="border-color: rgba(129,153,244, 0.5)">potential</label>
-			<label class="relation" style="border-color: rgba(182,216,128, 0.5)">provider</label>
+
+			<div class="entity existing"></div>
+			<div class="desc"><b>Existing Solution</b> Solutions that is part of an existing cluster</div>
+
+			<hr>
+			<div class="entity supporting"></div>
+			<div class="desc"><b>Supporting solution</b> Existing solution that is (not yet) part of the cluster </div>
+
+			<hr>
+			<div class="entity potential"></div>
+			<div class="desc"><b>Potential solution</b> Possible solution that is not on the market, that could be part of a future cluster</div>
+
+			<hr>
+			<div class="entity bordered core"></div>
+			<div class="desc"><b>Existing</b> Solution that focus on what the cluster i delivering right now</div>
+
+			<hr>
+			<div class="entity bordered accelerator"></div>
+			<div class="desc"><b>Accelerator</b> Accelererating solution such a business- or app development</div>
+
+			<hr>
+			<div class="entity bordered expander"></div>
+			<div class="desc"><b>Expander</b> Solution that broadens the current clusters capacity to deliver solutions into new areas. </div>
+
+			<hr>
+			<div class="relation participant"></div>
+			<div class="desc"><b>Existing relation</b> Relations established by  existing cluster participants</div>
+
+			<hr>
+			<div class="relation supporting"></div>
+			<div class="desc"><b>Supporting relation</b> Relation established by  supporting solution providers</div>
+
+			<hr>
+			<div class="relation catalyst"></div>
+			<div class="desc"><b>Catalyst relation</b> Relation established by  a catalyst</div>
+
+			<hr>
+			<div class="relation potential"></div>
+			<div class="desc"><b>Potential relation</b> Relation established by a thought leader</div>
+
+			<hr>
+			<div class="relation alternative"></div>
+			<div class="desc"><b>Alternative relation</b> Two solutions that are potential alternatives</div>
+
+			<!--img src="img/legend.png"-->
+			<!--label class="fill" style="background-color: rgba(255, 64, 0, 0.5)"> core</label-->
+			<!--label class="fill" style="background-color: rgba(200, 40, 255, 0.5)"> accelerator</label-->
+			<!--label class="fill" style="background-color: rgba(200, 255, 0, 0.5)"> expander</label-->
+			<!--label class="border" style="border-color: rgba(210, 100, 20, 0.5)"> existing</label-->
+			<!--label class="border" style="border-color: rgba(10, 170, 210, 0.5)"> supporting</label-->
+			<!--label class="border" style="border-color: rgba(60, 180, 10, 0.5)"> potential</label-->
+			<!--label class="relation" style="border-color: rgba(182,128,216, 0.5)">alternative</label-->
+			<!--label class="relation" style="border-color: rgba(129,244,153, 0.5)">catalyst</label-->
+			<!--label class="relation" style="border-color: rgba(255,135,135, 0.5)">participant</label-->
+			<!--label class="relation" style="border-color: rgba(129,153,244, 0.5)">potential</label-->
+			<!--label class="relation" style="border-color: rgba(182,216,128, 0.5)">provider</label-->
 		</div>
 	</div>
 </div>
@@ -187,57 +236,29 @@ function randomName(syllables){
 var ClusterPlatform = { cluster: {}, entities: [], relations: [] }
 
 function createNodes(clusterCount, clusterSize){
-	function entityFactory(i){
-		return {
-			id:_.uniqueId(),
-			name: randomName(),
-			company: randomName() + ' ' + randomName(),
-			description: randomName()+' '+_.times(15, randomName).join(' ').toLowerCase(),
-			status: _.sample(['existing', 'supporting', 'potential']),
-			type: _.sample(['core', 'accelerator', 'expander']),
-            mobility: _.random(100),
-            nutrition: _.random(100),
-            building: _.random(100)
-		}
-	}
-	var clusters = _.times(clusterCount, function (i){
-		var es = _.times(clusterSize, entityFactory)
-		var rs = fillTree(function (a,b){
-			var type = _.sample(['participant', 'provider', 'catalyst', 'potential', 'alternative'])
-			return {start:a, end:b, type: type}
-		}, 3, es)
-		return { entities: es, relations: rs }
-	})
-	var entities = _.flatten(_.pluck(clusters, 'entities'))
-	var relations = _.flatten(_.pluck(clusters, 'relations'))
-	function fillTree(factory, branches, nodes){
-		var accumulator = []
-		var pointer = 1
-		for(var index=0; pointer<nodes.length; index++){
-			var b = _.random(2, branches)
-			for(var i=0; i<b && pointer<nodes.length-i; i++)
-				accumulator.push(factory(nodes[index], nodes[pointer+i]))
-			pointer+=b
-		}
-		return accumulator
-	}
-
-	var nodes = Nodes(entities, relations)
-	nodes.setDampening(0.95)
-	_.times(300, function (){ nodes.simulate() })
-	nodes.setDampening(0)
-
+	//{
+	//	id:_.uniqueId(),
+	//	name: randomName(),
+	//	company: randomName() + ' ' + randomName(),
+	//	description: randomName()+' '+_.times(15, randomName).join(' ').toLowerCase(),
+	//	status: _.sample(['existing', 'supporting', 'potential']),
+	//	type: _.sample(['core', 'accelerator', 'expander']),
+    //    mobility: _.random(100),
+    //    nutrition: _.random(100),
+    //    building: _.random(100)
+	//}
+	var nodes = Nodes([], [])
 	ClusterPlatform.entities = nodes.entities
 	ClusterPlatform.relations = nodes.relations
 	return nodes
 }
 
-var engine = Engine('canvas', createNodes(0, 0), { fps: 30 })
+var engine0 = Engine('canvas', createNodes(0, 0), { fps: 30 })
 
-ClusterPlatform.engine = engine
+ClusterPlatform.engine = engine0
 
-window.addEventListener('resize', _.throttle(engine.fillScreen, 750, {leading: true}))
-document.getElementById('canvas').addEventListener('wheel', function (e){ engine.zoom(e.deltaY) })
-engine.fillScreen()
+window.addEventListener('resize', _.throttle(engine0.fillScreen, 750, {leading: true}))
+document.getElementById('canvas').addEventListener('wheel', function (e){ engine0.zoom(e.deltaY) })
+engine0.fillScreen()
 
 </script>
