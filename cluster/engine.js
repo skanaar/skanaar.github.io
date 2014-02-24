@@ -244,7 +244,7 @@ function Engine(canvasId, _nodes, _options){
 		fillScreen: function(){
 			var w = canvas.parentElement.offsetWidth
 			canvas.setAttribute('width', w)
-			var w = $(window).height() - 185
+			var w = $(window).height() - 200
 			canvas.setAttribute('height', w)
 		},
 		centerSelected: centerSelected,

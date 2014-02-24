@@ -1,11 +1,12 @@
 angular.module('cluster', ['ngRoute']).config(function($routeProvider) {
     $routeProvider
+    .when('/login', {controller:'GoalsCtrl', templateUrl:'login.partial.html'})
     .when('/dashboard', {controller:'DashboardCtrl', templateUrl:'dashboard.partial.html'})
     .when('/goals', {controller:'GoalsCtrl', templateUrl:'goals.partial.html'})
     .when('/newsolution', {controller: 'RegisterSolutionCtrl', templateUrl:'newsolution.partial.html'})
     .when('/searchclusters', {controller:'SearchCtrl', templateUrl:'clustersearch.partial.html'})
     .when('/cluster/:clusterId', {controller:'ClusterCtrl', templateUrl:'cluster.partial.html'})
-    .otherwise({ redirectTo: '/dashboard' })
+    .otherwise({ redirectTo: '/login' })
 })
 
 function attachDataUrlToLink(id, dataType, linkGenerator){
