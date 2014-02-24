@@ -16,20 +16,6 @@ function attachDataUrlToLink(id, dataType, linkGenerator){
     }, false);
 }
 
-function bindData(targetId, data){
-    var target = $('#' + targetId)
-    for(var key in data)
-        if (data.hasOwnProperty(key))
-            target.find('.bind-' + key).text(data[key])
-}
-
-function randomName(syllables){
-    var vowel = 'aaeeiioouuy'
-    var conso = 'bcddfghhkllmnnprrsstttv'
-    function syllable(){ return _.sample(vowel) + _.sample(conso) }
-    return _.sample(conso).toUpperCase() + _.times(syllables || _.random(2,4), syllable).join('')
-}
-
 angular.module('cluster').controller('NavbarCtrl', function ($scope){
     $scope.isApp = function (name) {
         function startsWith(haystack, needle){
@@ -40,6 +26,12 @@ angular.module('cluster').controller('NavbarCtrl', function ($scope){
 })
 
 ;(function (){
+    function randomName(syllables){
+        var vowel = 'aaeeiioouuy'
+        var conso = 'bcddfghhkllmnnprrsstttv'
+        function syllable(){ return _.sample(vowel) + _.sample(conso) }
+        return _.sample(conso).toUpperCase() + _.times(syllables || _.random(2,4), syllable).join('')
+    }
     function sum(list, plucker){
         var transform = {
             'undefined': _.identity,
@@ -56,7 +48,8 @@ angular.module('cluster').controller('NavbarCtrl', function ($scope){
     }
     _.mixin({
         sum: sum,
-        average: average
+        average: average,
+        randomName: randomName
     })
 }())
 
@@ -158,15 +151,46 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
             loadCluster(response.data)
         })
 
+    function unpackCluster(c){
+        return {
+            name: c.name || 'unnamed cluster',
+            centralEntity: c.centralEntity || 0,
+            relations: _.map(c.relations, function (r){
+                return {
+                    start: { id: r.start },
+                    end: { id: r.end },
+                    type: r.type,
+                    description: r.description || 'relation description',
+                    author: r.author || 'unknown author',
+                    date: r.date
+                }
+            }),
+            entities: _.map(c.entities, function (e){
+                return  {
+                    id: +e.id,
+                    name: e.name,
+                    company: e.company,
+                    email: e.email || 'unknown email',
+                    description: e.description,
+                    status: e.status || 'supporting',
+                    type: e.type || 'core',
+                    mobility: +e.mobility,
+                    nutrition: +e.nutrition,
+                    building: +e.building,
+                    x: e.x,
+                    y: e.y,
+                    date: e.date
+                }
+            })
+        }
+    }
+
     function loadCluster(c){
+        c = unpackCluster(c)
         $scope.visibleSolutions = c.entities
         $scope.clusterName = c.name
         var centralEntity = _.findWhere(c.entities, {id: c.centralEntity})
         $scope.companyName = centralEntity && centralEntity.company
-        _.each(c.relations, function (r){
-            r.start = { id: r.start }
-            r.end = { id: r.end }
-        })
 
         $scope.clusterProperties = {
             mobility: _.average(c.entities, 'mobility'),
@@ -216,9 +240,9 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
     $scope.addSolution = function (){
         var fields = {
             id:_.uniqueId(),
-            name: randomName(),
-            company: randomName() + ' ' + randomName(),
-            description: randomName(),
+            name: _.randomName(),
+            company: _.randomName() + ' ' + _.randomName(),
+            description: _.randomName(),
             status: _.sample(['existing', 'supporting', 'potential']),
             type: _.sample(['core', 'accelerator', 'expander']),
             mobility: _.random(100),

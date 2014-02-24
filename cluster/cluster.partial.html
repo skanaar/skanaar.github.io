@@ -1,8 +1,8 @@
 <div class="full-row jumbotron">
 <h1>{{clusterName}}: {{companyName}}</h1>
-<small>Building: {{clusterProperties.building}}% - 
-Nutrition: {{clusterProperties.nutrition}}% - 
-Mobility: {{clusterProperties.mobility}}%</small></div>
+<small>Building: {{clusterProperties.building | number:0}}% &nbsp; &nbsp; &nbsp; 
+Nutrition: {{clusterProperties.nutrition | number:0}}% &nbsp; &nbsp; &nbsp; 
+Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
 <div class="full-row page-stripe toolbar">
 	<div class="pull-right">
 		<a id="download-image-link" download="cluster-snapshot.png">
@@ -190,19 +190,6 @@ Mobility: {{clusterProperties.mobility}}%</small></div>
 			<hr>
 			<div class="relation alternative"></div>
 			<div class="desc"><b>Alternative relation</b> Two solutions that are potential alternatives</div>
-
-			<!--img src="img/legend.png"-->
-			<!--label class="fill" style="background-color: rgba(255, 64, 0, 0.5)"> core</label-->
-			<!--label class="fill" style="background-color: rgba(200, 40, 255, 0.5)"> accelerator</label-->
-			<!--label class="fill" style="background-color: rgba(200, 255, 0, 0.5)"> expander</label-->
-			<!--label class="border" style="border-color: rgba(210, 100, 20, 0.5)"> existing</label-->
-			<!--label class="border" style="border-color: rgba(10, 170, 210, 0.5)"> supporting</label-->
-			<!--label class="border" style="border-color: rgba(60, 180, 10, 0.5)"> potential</label-->
-			<!--label class="relation" style="border-color: rgba(182,128,216, 0.5)">alternative</label-->
-			<!--label class="relation" style="border-color: rgba(129,244,153, 0.5)">catalyst</label-->
-			<!--label class="relation" style="border-color: rgba(255,135,135, 0.5)">participant</label-->
-			<!--label class="relation" style="border-color: rgba(129,153,244, 0.5)">potential</label-->
-			<!--label class="relation" style="border-color: rgba(182,216,128, 0.5)">provider</label-->
 		</div>
 	</div>
 </div>
@@ -226,39 +213,13 @@ attachDataUrlToLink('download-data-link', 'text/json', function (){
     return 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data, undefined, 2))
 })
 
-function randomName(syllables){
-	var vowel = 'aaeeiioouuy'
-	var conso = 'bcddfghhkllmnnprrsstttv'
-	function syllable(){ return _.sample(vowel) + _.sample(conso) }
-	return _.sample(conso).toUpperCase() + _.times(syllables || _.random(2,4), syllable).join('')
-}
 
-var ClusterPlatform = { cluster: {}, entities: [], relations: [] }
-
-function createNodes(clusterCount, clusterSize){
-	//{
-	//	id:_.uniqueId(),
-	//	name: randomName(),
-	//	company: randomName() + ' ' + randomName(),
-	//	description: randomName()+' '+_.times(15, randomName).join(' ').toLowerCase(),
-	//	status: _.sample(['existing', 'supporting', 'potential']),
-	//	type: _.sample(['core', 'accelerator', 'expander']),
-    //    mobility: _.random(100),
-    //    nutrition: _.random(100),
-    //    building: _.random(100)
-	//}
-	var nodes = Nodes([], [])
-	ClusterPlatform.entities = nodes.entities
-	ClusterPlatform.relations = nodes.relations
-	return nodes
-}
-
-var engine0 = Engine('canvas', createNodes(0, 0), { fps: 30 })
-
-ClusterPlatform.engine = engine0
+var engine0 = Engine('canvas', Nodes([], []), { fps: 30 })
 
 window.addEventListener('resize', _.throttle(engine0.fillScreen, 750, {leading: true}))
 document.getElementById('canvas').addEventListener('wheel', function (e){ engine0.zoom(e.deltaY) })
 engine0.fillScreen()
+
+var ClusterPlatform = { cluster: {}, entities: [], relations: [], engine: engine0 }
 
 </script>

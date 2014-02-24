@@ -460,6 +460,7 @@ canvas#canvas {
 	margin: 8px 8px 28px 8px;
 	border-width: 0 0 3px 0;
 	border-style: solid;
+	text-shadow: 0 0 2px black
 }
 
 .legend_sidebar div.desc {
@@ -479,25 +480,6 @@ canvas#canvas {
 .legend_sidebar div.relation.participant { border-color: rgba(255,135,135, 0.75) }
 .legend_sidebar div.relation.potential { border-color: rgba(129,153,244, 0.75) }
 .legend_sidebar div.relation.provider { border-color: rgba(182,216,128, 0.75) }
-
-.legend_sidebar label {
-	display: block;
-	padding: 0 5px;
-	margin: 15px 0;
-}
-.legend_sidebar label.fill {
-	border-radius: 3px;
-}
-.legend_sidebar label.border {
-	border-radius: 3px;
-	border-width: 2px;
-	border-style: solid;
-	background: rgba(0,0,0,0.25);
-}
-.legend_sidebar label.relation {
-	border-width: 0 0 2px 0;
-	border-style: solid;
-}
 
 .solution-form {
 	font-family: 'Dosis', sans-serif
