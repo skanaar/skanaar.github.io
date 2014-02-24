@@ -11,16 +11,15 @@ function Nodes(_entities, _relations){
 	var entities = _.map(_entities, Entity)
 	var entitiesById = _.object(_.map(entities, function (e){ return [e.id, e] }))
 	var relations = _.map(_relations, function (r){
-		return Relation(entitiesById[r.start.id], entitiesById[r.end.id], r.type)
+		return Relation(entitiesById[r.start.id], entitiesById[r.end.id], r)
 	})
 
-	function Relation(a, b, type){
-		return {
+	function Relation(a, b, _fields){
+		return _.extend(_.clone(_fields), {
 			start: a,
 			end: b,
-			strength: 1,
-			type: type || {}
-		}
+			strength: 1
+		})
 	}
 
 	function Entity(_fields){

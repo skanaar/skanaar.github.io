@@ -127,12 +127,14 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
         core: true,
         accelerator: true,
         expander: true,
+        solutionAge: 30,
         // relations
         rel_participant: true,
         rel_provider: true,
         rel_catalyst: true,
         rel_potential: true,
-        rel_alternative: true
+        rel_alternative: true,
+        rel_age: 30
     }
     $scope.clusterName = 'loading...'
 
@@ -171,7 +173,7 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
                     name: e.name,
                     company: e.company,
                     email: e.email || 'unknown email',
-                    description: e.description,
+                    description: e.description || _.randomName(),
                     status: e.status || 'supporting',
                     type: e.type || 'core',
                     mobility: +e.mobility,

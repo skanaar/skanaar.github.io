@@ -1,4 +1,4 @@
-<div class="full-row jumbotron">
+<div class="full-row jumbotron withsubtitle">
 <h1>{{clusterName}}: {{companyName}}</h1>
 <small>Building: {{clusterProperties.building | number:0}}% &nbsp; &nbsp; &nbsp; 
 Nutrition: {{clusterProperties.nutrition | number:0}}% &nbsp; &nbsp; &nbsp; 
@@ -14,43 +14,40 @@ Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
 	</div>
 	<div>
 		<a ng-class="{active: activePane === 'filter'}"
-		   ng-click="togglePane('filter')" href="javascript:void(0)">
-			Filter
-		</a>
+		   ng-click="togglePane('filter')" href="javascript:void(0)">Filter</a>
 		<a ng-class="{active: activePane === 'current'}"
-		   ng-click="togglePane('current')" href="javascript:void(0)">
-			Current
-		</a>
+		   ng-click="togglePane('current')" href="javascript:void(0)">Current</a>
 		<a ng-class="{active: activePane === 'develop'}"
-		   ng-click="togglePane('develop')" href="javascript:void(0)">
-			Develop
-		</a>
+		   ng-click="togglePane('develop')" href="javascript:void(0)">Develop</a>
 		<a ng-class="{active: activePane === 'legend'}"
-		   ng-click="togglePane('legend')" href="javascript:void(0)">
-			Legend
-		</a>
+		   ng-click="togglePane('legend')" href="javascript:void(0)">Legend</a>
 	</div>
 </div>
 <div style="position: relative">
 	<canvas id="canvas" width="800" height="800"></canvas>
-	<div class="sidebar details_sidebar" id="node_details_sidebar" ng-show="selectedEntity">
+	<div class="sidebar details_sidebar" ng-show="selectedEntity">
 		<div>
 			<div>
 				<a class="pull-right"
 				   onclick="engine.centerSelected()" 
-				   href="javascript:void(0)">
-					<i class="fa fa-crosshairs fa-2x"></i>
-				</a>
+				   href="javascript:void(0)"><i class="fa fa-crosshairs fa-2x"></i></a>
 				<h2>{{selectedEntity.name}} </h2>
 			</div>
 			<div>{{selectedEntity.description}}</div>
-			<div><label>Id:</label> {{selectedEntity.id}}</div>
+			<hr>
+			<div><label>Email</label> {{selectedEntity.email}}</div>
+			<div><label>Company</label> {{selectedEntity.company}}</div>
+			<div><label>Id</label> {{selectedEntity.id}}</div>
 		</div>
 	</div>
-	<div class="sidebar details_sidebar" id="relation_details_sidebar" ng-show="selectedRelation">
+	<div class="sidebar details_sidebar" ng-show="selectedRelation">
 		<div>
 			<h2>{{selectedRelation.start.name}} - {{selectedRelation.end.name}}</h2>
-			<div>{{selectedRelation.type}}</div>
+			<div>{{selectedRelation.description}}</div>
+			<hr>
+			<div><label>Type</label> <em style="width: 100px">{{selectedRelation.type}}</em></div>
+			<div><label>Date</label> {{selectedRelation.date}}</div>
+			<div><label>Author</label> {{selectedRelation.author}}</div>
 		</div>
 	</div>
 	<div class="sidebar search_sidebar"
@@ -73,6 +70,10 @@ Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
 			<div><label><input type="checkbox" ng-model="filter.core"> Core</label></div>
 			<div><label><input type="checkbox" ng-model="filter.accelerator"> Accelerator</label></div>
 			<div><label><input type="checkbox" ng-model="filter.expander"> Expander</label></div>
+			<label>Max age</label>
+			<div><label><input type="text" style="width: 50%" ng-model="filter.solutionAge"></label>
+			<i class="fa fa-fw fa-minus" ng-click="filter.solutionAge = filter.solutionAge - 10"></i>
+			<i class="fa fa-fw fa-plus" ng-click="filter.solutionAge = filter.solutionAge + 10"></i></div>
 			<hr>
 			<label>Relations</label>
 			<div><label><input type="checkbox" ng-model="filter.rel_participant"> Participant</label></div>
@@ -80,6 +81,11 @@ Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
 			<div><label><input type="checkbox" ng-model="filter.rel_catalyst"> Catalyst</label></div>
 			<div><label><input type="checkbox" ng-model="filter.rel_potential"> Potential</label></div>
 			<div><label><input type="checkbox" ng-model="filter.rel_alternative"> Alternative</label></div>
+			<label>Max age</label>
+			<div><label><input type="text" style="width: 50%" ng-model="filter.rel_age"></label>
+			<i class="fa fa-fw fa-minus" ng-click="filter.rel_age = filter.rel_age - 10"></i>
+			<i class="fa fa-fw fa-plus" ng-click="filter.rel_age = filter.rel_age + 10"></i></div>
+			<hr>
 		</div>
 	</div>
 	<div class="sidebar legend_sidebar"
@@ -87,8 +93,7 @@ Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
 		<div>
 			<h3>Current View</h3>
 			<div ng-repeat="e in visibleSolutions">
-				<a ng-click="selectEntity(e.id)"
-				   href="javascript:void(0)">{{e.name}}</a>
+				<a ng-click="selectEntity(e.id)" href="javascript:void(0)">{{e.name}}</a>
 			</div>
 		</div>
 	</div>
@@ -143,52 +148,30 @@ Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
 
 		</div>
 	</div>
-	<div class="sidebar legend_sidebar"
-		 ng-show="activePane === 'legend'">
+	<div class="sidebar legend_sidebar" ng-show="activePane === 'legend'">
 		<div>
 			<h3>Legend</h3>
-
 			<div class="entity existing"></div>
 			<div class="desc"><b>Existing Solution</b> Solutions that is part of an existing cluster</div>
-
-			<hr>
-			<div class="entity supporting"></div>
+			<hr><div class="entity supporting"></div>
 			<div class="desc"><b>Supporting solution</b> Existing solution that is (not yet) part of the cluster </div>
-
-			<hr>
-			<div class="entity potential"></div>
+			<hr><div class="entity potential"></div>
 			<div class="desc"><b>Potential solution</b> Possible solution that is not on the market, that could be part of a future cluster</div>
-
-			<hr>
-			<div class="entity bordered core"></div>
+			<hr><div class="entity bordered core"></div>
 			<div class="desc"><b>Existing</b> Solution that focus on what the cluster i delivering right now</div>
-
-			<hr>
-			<div class="entity bordered accelerator"></div>
+			<hr><div class="entity bordered accelerator"></div>
 			<div class="desc"><b>Accelerator</b> Accelererating solution such a business- or app development</div>
-
-			<hr>
-			<div class="entity bordered expander"></div>
+			<hr><div class="entity bordered expander"></div>
 			<div class="desc"><b>Expander</b> Solution that broadens the current clusters capacity to deliver solutions into new areas. </div>
-
-			<hr>
-			<div class="relation participant"></div>
+			<hr><div class="relation participant"></div>
 			<div class="desc"><b>Existing relation</b> Relations established by  existing cluster participants</div>
-
-			<hr>
-			<div class="relation supporting"></div>
+			<hr><div class="relation supporting"></div>
 			<div class="desc"><b>Supporting relation</b> Relation established by  supporting solution providers</div>
-
-			<hr>
-			<div class="relation catalyst"></div>
+			<hr><div class="relation catalyst"></div>
 			<div class="desc"><b>Catalyst relation</b> Relation established by  a catalyst</div>
-
-			<hr>
-			<div class="relation potential"></div>
+			<hr><div class="relation potential"></div>
 			<div class="desc"><b>Potential relation</b> Relation established by a thought leader</div>
-
-			<hr>
-			<div class="relation alternative"></div>
+			<hr><div class="relation alternative"></div>
 			<div class="desc"><b>Alternative relation</b> Two solutions that are potential alternatives</div>
 		</div>
 	</div>

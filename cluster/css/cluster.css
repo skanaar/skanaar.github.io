@@ -187,7 +187,6 @@ hr {
 .toolset a:hover {
 	background: rgba(0, 0, 0, 0.2)
 }
-
 .jumbotron {
 	background: #0d8;
 	background: url(../img/algae.jpg) center center;
@@ -345,6 +344,11 @@ hr {
 .sidebar h2 {
 	color: #8f8;
 }
+
+.sidebar hr {
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	border-width: 1px 0 0 0
+}
 .sidebar input[type=checkbox] {
 	margin-left: 10px
 }
@@ -409,6 +413,9 @@ canvas#canvas {
 
 .details_sidebar {
 	right: 0; 
+}
+.details_sidebar label {
+	color: #888;
 }
 .search_sidebar {
 	left: 0;

@@ -72,24 +72,6 @@ function Engine(canvasId, _nodes, _options){
 		return { entities: filtered, relations: rels }
 	}
 
-	//#onchange: peers = calculatePeers(nodes.relations)
-	//var peers
-	//function filteredEntities_0(source, generations){
-	//	var accumulator = []
-	//	function collect(a, generations){
-	//		_.each(peers[a.id], function (sibling){
-	//			accumulator[a.id] = a
-	//			if (accumulator[sibling.id] === undefined && generations)
-	//				collect(sibling, generations-1)
-	//		})
-	//	}
-	//	collect(source, generations)
-	//	var rels = _.filter(relations, function (r){
-	//		return accumulator[r.start.id] && accumulator[r.end.id]
-	//	})
-	//	return { entities: _.values(accumulator), relations: rels }
-	//}
-
 	function relationsFor(entities){
 		return _.flatten(_.map(entities, function (e){
 			return _.filter(nodes.relations, function (r){
