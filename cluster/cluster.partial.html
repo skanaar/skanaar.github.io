@@ -38,6 +38,17 @@ Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
 			<div><label>Email</label> {{selectedEntity.email}}</div>
 			<div><label>Company</label> {{selectedEntity.company}}</div>
 			<div><label>Id</label> {{selectedEntity.id}}</div>
+			<hr>
+			<div class="toolset">
+				<a ng-click="showSelectClusterPane = true" href="javascript:void(0)">
+					<i class="fa fa-fw fa-plus-circle"></i> Add related solution
+				</a>
+				<a>
+					Relation type:
+					<select ng-options="e for e in relationTypes" ng-model="newRelationType">
+					</select>
+				</a>
+			</div>
 		</div>
 	</div>
 	<div class="sidebar details_sidebar" ng-show="selectedRelation">
@@ -142,7 +153,7 @@ Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
 					<a ng-click="removeRelation()"><i class="fa fa-fw fa-trash-o"></i> Remove</a>
 				</div>
 				<label>Type</label>
-				<select ng-options="e for e in ['participant','provider','catalyst','potential','alternative']"
+				<select ng-options="e for e in relationTypes"
 						ng-model="selectedRelation.type"></select><br>
 			</div>
 
@@ -175,6 +186,26 @@ Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
 			<div class="desc"><b>Alternative relation</b> Two solutions that are potential alternatives</div>
 		</div>
 	</div>
+	<div class="modal" ng-show="showSelectClusterPane">
+		<div>
+			<a class="pull-right" ng-click="showSelectClusterPane = false">
+				<img src="img/icons/close_popup.png" width="42" height="42">
+			</a>
+			<h2>Add solution to cluster</h2>
+			<table>
+			<tr>
+				<th><a ng-click="sortKey = 'name'">Name</a></th>
+				<th><a ng-click="sortKey = 'company'">Company</a></th>
+				<th><a ng-click="sortKey = 'date'">Date</a></th>
+			</tr>
+			<tr ng-repeat="s in allSolutions | orderBy:sortKey">
+				<td><a ng-click="add(s)">{{s.name}}</a></td>
+				<td><a ng-click="add(s)">{{s.company}}</a></td>
+				<td><a ng-click="add(s)">{{s.date}}</a></td>
+			</tr>
+			</table>
+		</div>
+	</div>
 </div>
 <script>
 
@@ -197,12 +228,12 @@ attachDataUrlToLink('download-data-link', 'text/json', function (){
 })
 
 
-var engine0 = Engine('canvas', Nodes([], []), { fps: 30 })
+var engine = Engine('canvas', Nodes([], []), { fps: 30 })
 
-window.addEventListener('resize', _.throttle(engine0.fillScreen, 750, {leading: true}))
-document.getElementById('canvas').addEventListener('wheel', function (e){ engine0.zoom(e.deltaY) })
-engine0.fillScreen()
+window.addEventListener('resize', _.throttle(engine.fillScreen, 750, {leading: true}))
+document.getElementById('canvas').addEventListener('wheel', function (e){ engine.zoom(e.deltaY) })
+engine.fillScreen()
 
-var ClusterPlatform = { cluster: {}, entities: [], relations: [], engine: engine0 }
+var ClusterPlatform = { cluster: {}, entities: [], relations: [], engine: engine }
 
 </script>

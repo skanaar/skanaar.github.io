@@ -79,7 +79,7 @@ function Nodes(_entities, _relations){
 			existing.type = type
 			return
 		}
-		var r = Relation(a, b, type)
+		var r = Relation(a, b, { type: type })
 		r.strength = 0
 		repeat(function (v){ r.strength = v }, 20)
 		repeat(function (v){ dampening = 0.95*(1-sq(v)) }, 40)
@@ -93,8 +93,11 @@ function Nodes(_entities, _relations){
 	}
 
 	function addEntity(fields){
-		entities.push(Entity(fields))
+		var id = _.max(_.pluck(entities, 'id')) + 1
+		var freshman = Entity(_.extend(_.clone(fields), { id:id }))
+		entities.push(freshman)
 		_.each(changeSubscribers, function (c){ c() })
+		return freshman
 	}
 
 	function removeEntity(e){

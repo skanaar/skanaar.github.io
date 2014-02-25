@@ -1,32 +1,4 @@
-angular.module('cluster', ['ngRoute']).config(function($routeProvider) {
-    $routeProvider
-    .when('/login', {controller:'GoalsCtrl', templateUrl:'login.partial.html'})
-    .when('/dashboard', {controller:'DashboardCtrl', templateUrl:'dashboard.partial.html'})
-    .when('/goals', {controller:'GoalsCtrl', templateUrl:'goals.partial.html'})
-    .when('/newsolution', {controller: 'RegisterSolutionCtrl', templateUrl:'newsolution.partial.html'})
-    .when('/searchclusters', {controller:'SearchCtrl', templateUrl:'clustersearch.partial.html'})
-    .when('/cluster/:clusterId', {controller:'ClusterCtrl', templateUrl:'cluster.partial.html'})
-    .otherwise({ redirectTo: '/login' })
-})
-
-function attachDataUrlToLink(id, dataType, linkGenerator){
-    var link = document.getElementById(id)
-    link.addEventListener('click', function (){
-        var downloadType = 'data:application/octet-stream'
-        link.href = linkGenerator().replace(new RegExp('^data:'+dataType), downloadType)
-    }, false);
-}
-
-angular.module('cluster').controller('NavbarCtrl', function ($scope){
-    $scope.isApp = function (name) {
-        function startsWith(haystack, needle){
-            return haystack.substr(0, needle.length) === needle;
-        }
-        return startsWith(window.location.hash, '#/' + name);
-    }
-})
-
-;(function (){
+(function (){
     function randomName(syllables){
         var vowel = 'aaeeiioouuy'
         var conso = 'bcddfghhkllmnnprrsstttv'
@@ -54,105 +26,43 @@ angular.module('cluster').controller('NavbarCtrl', function ($scope){
     })
 }())
 
-angular.module('cluster').controller('SearchCtrl', function ($scope, $http, $q){
-    $scope.clusters = []
-    $scope.filters = {
-        mobility: false,
-        nutrition: false,
-        building: false
-    }
+function attachDataUrlToLink(id, dataType, linkGenerator){
+    var link = document.getElementById(id)
+    link.addEventListener('click', function (){
+        var downloadType = 'data:application/octet-stream'
+        link.href = linkGenerator().replace(new RegExp('^data:'+dataType), downloadType)
+    }, false);
+}
 
-    $q.all([
+angular.module('cluster', ['ngRoute']).config(function($routeProvider) {
+    $routeProvider
+    .when('/login', {controller:'GoalsCtrl', templateUrl:'login.partial.html'})
+    .when('/dashboard', {controller:'DashboardCtrl', templateUrl:'dashboard.partial.html'})
+    .when('/goals', {controller:'GoalsCtrl', templateUrl:'goals.partial.html'})
+    .when('/newsolution', {controller: 'RegisterSolutionCtrl', templateUrl:'newsolution.partial.html'})
+    .when('/searchclusters', {controller:'SearchCtrl', templateUrl:'clustersearch.partial.html'})
+    .when('/cluster/:clusterId', {controller:'ClusterCtrl', templateUrl:'cluster.partial.html'})
+    .otherwise({ redirectTo: '/login' })
+})
+
+angular.module('cluster').controller('NavbarCtrl', function ($scope){
+    $scope.isApp = function (name) {
+        function startsWith(haystack, needle){
+            return haystack.substr(0, needle.length) === needle;
+        }
+        return startsWith(window.location.hash, '#/' + name);
+    }
+})
+
+angular.module('cluster').factory('clusterLoader', function ($http, $q){
+    var files = $q.all([
         $http.get('data/cluster-1.json'),
         $http.get('data/cluster-2.json'),
         $http.get('data/cluster-3.json'),
         $http.get('data/cluster-4.json')
-    ]).then(function (responses){
-        $scope.clusters = _.pluck(responses, 'data')
-        function sumProp(list, propName){
-            return _.reduce(_.pluck(list, propName), function (memo, x){ return memo + x }, 0)
-        }
-        _.each($scope.clusters, function (c){
-            c.mobility = Math.round(sumProp(c.entities, 'mobility') / c.entities.length)
-            c.nutrition= Math.round(sumProp(c.entities, 'nutrition') / c.entities.length)
-            c.building = Math.round(sumProp(c.entities, 'building') / c.entities.length)
-        })
+    ]).then(function (rs){
+        return _.map(rs, function (r){ return unpackCluster(r.data) })
     })
-
-    var orderedSolutions = []
-    $scope.orderedSolutions = function (){
-        orderedSolutions.length = 0
-        var s = _.sortBy($scope.clusters, function (s){
-            return -(!!$scope.filters.mobility) * s.mobility
-                   -(!!$scope.filters.nutrition) * s.nutrition
-                   -(!!$scope.filters.building) * s.building
-        })
-        for (var i=0; i<s.length; i++)
-            orderedSolutions.push(s[i])
-        return orderedSolutions
-    }
-})
-
-angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $routeParams){
-    ClusterPlatform.clusterScope = $scope
-
-    var clusterTemplate = {
-        name: "blank cluster",
-        centralEntity: 0,
-        entities: [{
-            id: 0,
-            name: "blank solution",
-            company: "blank company",
-            description: "description...",
-            status: "existing",
-            type: "core",
-            mobility: 50,
-            nutrition: 50,
-            building: 50,
-            x: 0,
-            y: 0
-        }],
-        relations: []
-    }
-
-    $scope.selectedEntity = undefined
-    $scope.selectedRelation = undefined
-    $scope.visibleSolutions = []
-    $scope.filter = {
-        mobility: 0,
-        nutrition: 0,
-        building: 0,
-        existing: true,
-        supporting: true,
-        potential: true,
-        core: true,
-        accelerator: true,
-        expander: true,
-        solutionAge: 30,
-        // relations
-        rel_participant: true,
-        rel_provider: true,
-        rel_catalyst: true,
-        rel_potential: true,
-        rel_alternative: true,
-        rel_age: 30
-    }
-    $scope.clusterName = 'loading...'
-
-    ClusterPlatform.engine.setFilter($scope.filter)
-    $scope.$watch('filter', function (){
-        ClusterPlatform.engine.setFilter($scope.filter)
-        $scope.visibleSolutions = ClusterPlatform.engine.getVisibleSubset().entities
-    }, true)
-
-    ClusterPlatform.engine.setNodes(new Nodes([], []))
-    var clusterId = $routeParams.clusterId
-    if (clusterId === 'blank')
-        loadCluster(copyOfTemplate())
-    else
-        $http.get('data/cluster-'+clusterId+'.json').then(function (response){
-            loadCluster(response.data)
-        })
 
     function unpackCluster(c){
         return {
@@ -188,8 +98,124 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
         }
     }
 
+    return {
+        getClusters: function (){
+            return files
+        },
+        getSolutions: function (){
+            return files.then(function (rs){ return _.flatten(_.pluck(rs, 'entities')) })
+        },
+        unpack: unpackCluster
+    }
+})
+
+angular.module('cluster').controller('SearchCtrl', function ($scope, $http, $q, clusterLoader){
+    $scope.clusters = []
+    $scope.filters = {
+        mobility: false,
+        nutrition: false,
+        building: false
+    }
+
+    clusterLoader.getClusters().then(function (clusters){
+        $scope.clusters = clusters
+        _.each($scope.clusters, function (c){
+            c.mobility = Math.round(_.average(c.entities, 'mobility'))
+            c.nutrition= Math.round(_.average(c.entities, 'nutrition'))
+            c.building = Math.round(_.average(c.entities, 'building'))
+        })
+    })
+
+    var orderedSolutions = []
+    $scope.orderedSolutions = function (){
+        orderedSolutions.length = 0
+        var s = _.sortBy($scope.clusters, function (s){
+            return -(!!$scope.filters.mobility) * s.mobility
+                   -(!!$scope.filters.nutrition) * s.nutrition
+                   -(!!$scope.filters.building) * s.building
+        })
+        for (var i=0; i<s.length; i++)
+            orderedSolutions.push(s[i])
+        return orderedSolutions
+    }
+})
+
+angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q, $routeParams, clusterLoader){
+    ClusterPlatform.clusterScope = $scope
+
+    var clusterTemplate = {
+        name: "blank cluster",
+        centralEntity: 0,
+        entities: [{
+            id: 0,
+            name: "blank solution",
+            company: "blank company",
+            description: "description...",
+            status: "existing",
+            type: "core",
+            mobility: 50,
+            nutrition: 50,
+            building: 50,
+            x: 0,
+            y: 0
+        }],
+        relations: []
+    }
+
+    $scope.relationTypes = ['participant','provider','catalyst','potential','alternative']
+    $scope.newRelationType = $scope.relationTypes[0]
+    $scope.showSelectClusterPane = false
+    $scope.selectedEntity = undefined
+    $scope.selectedRelation = undefined
+    $scope.allSolutions = []
+    $scope.visibleSolutions = []
+    $scope.filter = {
+        mobility: 0,
+        nutrition: 0,
+        building: 0,
+        existing: true,
+        supporting: true,
+        potential: true,
+        core: true,
+        accelerator: true,
+        expander: true,
+        solutionAge: 30,
+        // relations
+        rel_participant: true,
+        rel_provider: true,
+        rel_catalyst: true,
+        rel_potential: true,
+        rel_alternative: true,
+        rel_age: 30
+    }
+    $scope.clusterName = 'loading...'
+
+    clusterLoader.getSolutions().then(function (sols){
+        $scope.allSolutions = sols
+    })
+
+    ClusterPlatform.engine.setFilter($scope.filter)
+    $scope.$watch('filter', function (){
+        ClusterPlatform.engine.setFilter($scope.filter)
+        $scope.visibleSolutions = ClusterPlatform.engine.getVisibleSubset().entities
+    }, true)
+
+    $scope.$watch('newRelationType', function (t){
+        ClusterPlatform.engine.setNewRelationType(t)
+    })
+
+    ClusterPlatform.engine.setNodes(new Nodes([], []))
+    var clusterId = $routeParams.clusterId
+    if (clusterId === 'blank')
+        loadCluster(copyOfTemplate())
+    else {
+        $http.get('data/cluster-'+clusterId+'.json').then(function (response){
+            loadCluster(response.data)
+        })
+    }
+
     function loadCluster(c){
-        c = unpackCluster(c)
+        c = clusterLoader.unpack(c)
         $scope.visibleSolutions = c.entities
         $scope.clusterName = c.name
         var centralEntity = _.findWhere(c.entities, {id: c.centralEntity})
@@ -254,6 +280,13 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $ro
         }
         ClusterPlatform.nodes.addEntity(fields)
         ClusterPlatform.nodes.runFor(1000)
+    }
+
+    $scope.add = function (e){
+        var e = ClusterPlatform.nodes.addEntity(_.omit(e, ['id', 'x', 'y']))
+        if ($scope.selectedEntity)
+            ClusterPlatform.nodes.addRelation($scope.selectedEntity, e, $scope.newRelationType)
+        $scope.showSelectClusterPane = false
     }
 
     $scope.removeEntity = function (){

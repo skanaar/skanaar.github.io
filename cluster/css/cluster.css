@@ -176,17 +176,23 @@ hr {
 .toolbar {
 	background: #444
 }
-
+.toolbar select {
+	border: 1px solid #888;
+	border-radius: 0;
+	color: #eee;
+	background: #666;
+	padding: 0px;
+}
 .toolset a {
 	display: block;
 	margin-right: auto;
 	cursor: pointer;
 	padding: 3px;
 }
-
 .toolset a:hover {
 	background: rgba(0, 0, 0, 0.2)
 }
+
 .jumbotron {
 	background: #0d8;
 	background: url(../img/algae.jpg) center center;
@@ -496,6 +502,41 @@ canvas#canvas {
 .legend_sidebar div.relation.participant { border-color: rgba(255,135,135, 0.75) }
 .legend_sidebar div.relation.potential { border-color: rgba(129,153,244, 0.75) }
 .legend_sidebar div.relation.provider { border-color: rgba(182,216,128, 0.75) }
+
+.modal {
+	position: absolute;
+	top: 40px;
+	bottom: 40px;
+	left: 40px;
+	right: 40px;
+	background: #174140;
+	color: #eee;
+	font-family: 'Dosis', sans-serif;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	box-shadow: 0 0 8px black
+}
+.modal h2 {
+	color: #1C86A0;
+}
+.modal>div {
+	margin: 15px;
+}
+.modal table {
+	width: 100%;
+}
+.modal td {
+	padding: 2px 10px;
+}
+.modal th {
+	text-align: left;
+	padding: 2px 10px;
+	font-weight: normal;
+	color: #48797D;
+}
+.modal tr:nth-child(even) { background-color: #285858 }
+.modal tr:nth-child(odd) { background-color: #1A3637 }
+.modal tr:hover { background-color: #ccc }
 
 .solution-form {
 	font-family: 'Dosis', sans-serif

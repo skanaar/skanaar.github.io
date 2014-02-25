@@ -12,6 +12,7 @@ function Engine(canvasId, _nodes, _options){
 		mouseup: onMouseUp, 
 		mousemove: onMouseMove
 	})
+	var newRelationType = 'participant'
 	var paused = false
 	var offset = { x: 0, y: 0 }
 	var targetOffset = { x: 0, y: 0 }
@@ -111,8 +112,7 @@ function Engine(canvasId, _nodes, _options){
 				options.selectEntity(e)
 			}
 			else{
-				var type = 'participant'
-				nodes.addRelation(clickedEntity, e, type)
+				nodes.addRelation(clickedEntity, e, newRelationType)
 			}
 		}
 
@@ -220,6 +220,7 @@ function Engine(canvasId, _nodes, _options){
 
 	return {
 		setNodes: setNodes,
+		setNewRelationType: function (t){ newRelationType = t },
 		runFor: function (millis){ nodes.runFor(millis) },
 		pause: function (){ paused = true },
 		togglePause: function (){ paused = !paused },
