@@ -163,8 +163,9 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q,
     }
 
     $scope.relationTypes = ['participant','provider','catalyst','potential','alternative']
+    $scope.solutionStatuses = ['existing', 'supporting', 'potential']
+    $scope.solutionTypes = ['core', 'accelerator', 'expander']
     $scope.newRelationType = $scope.relationTypes[0]
-    $scope.showSelectClusterPane = false
     $scope.selectedEntity = undefined
     $scope.selectedRelation = undefined
     $scope.allSolutions = []
@@ -282,11 +283,37 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q,
         ClusterPlatform.nodes.runFor(1000)
     }
 
-    $scope.add = function (e){
-        var e = ClusterPlatform.nodes.addEntity(_.omit(e, ['id', 'x', 'y']))
-        if ($scope.selectedEntity)
-            ClusterPlatform.nodes.addRelation($scope.selectedEntity, e, $scope.newRelationType)
-        $scope.showSelectClusterPane = false
+    $scope.addSolutionWizard = {
+        start: function (){
+            $scope.addSolutionWizard.cancel()
+            $scope.addSolutionWizard.show = true
+        },
+        cancel: function (){
+            $scope.addSolutionWizard.show = false
+            $scope.addSolutionWizard.chosenSolution = undefined
+            $scope.addSolutionWizard.page = 1
+        },
+        show: false,
+        page: 1,
+        rel_desc: '',
+        rel_type: 'participant',
+        status: 'existing',
+        type: 'core',
+        chosenSolution: undefined,
+        chooseSolution: function (e){
+            $scope.addSolutionWizard.chosenSolution = _.clone(e)
+            $scope.addSolutionWizard.page = 2
+        },
+        done: function (){
+            var e = _.omit($scope.addSolutionWizard.chosenSolution, ['id', 'x', 'y'])
+            e.type = $scope.addSolutionWizard.type
+            e.status = $scope.addSolutionWizard.status
+            var created = ClusterPlatform.nodes.addEntity(e)
+            var rel_t = $scope.addSolutionWizard.rel_type
+            var rel_desc = $scope.addSolutionWizard.rel_desc
+            ClusterPlatform.nodes.addRelation($scope.selectedEntity, created, rel_t, rel_desc)
+            $scope.addSolutionWizard.cancel()
+        }
     }
 
     $scope.removeEntity = function (){

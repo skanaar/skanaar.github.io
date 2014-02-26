@@ -91,6 +91,11 @@ input[type=checkbox]:checked {
 	background-color: green;
 }
 
+textarea {
+	border-radius: 10px;
+	border: 1px solid #aaa;
+}
+
 hr {
     display: block;
     height: 1px;
@@ -176,11 +181,11 @@ hr {
 .toolbar {
 	background: #444
 }
-.toolbar select {
-	border: 1px solid #888;
+.toolset select {
+	border: 1px solid #1A3637;
 	border-radius: 0;
-	color: #eee;
-	background: #666;
+	color: #1A3637;
+	background: #5F7C7B;
 	padding: 0px;
 }
 .toolset a {
@@ -310,40 +315,21 @@ hr {
 	font-family: 'Dosis', sans-serif;
 	background: #174140; 
 	background: rgb(0,33,32); /* Old browsers */
-	background: -moz-linear-gradient(top,  rgba(0,33,32,1) 0%, rgba(23,65,64,1) 5%); /* FF3.6+ */
+	background: -moz-linear-gradient(top,  rgba(0,33,32,1) 0%, rgba(23,65,64,0.9) 5%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, 
 		color-stop(0%,rgba(0,33,32,1)), 
-		color-stop(5%,rgba(23,65,64,1))); /* Chrome,Safari4+ */
+		color-stop(5%,rgba(23,65,64,0.9))); /* Chrome,Safari4+ */
 	background: -webkit-linear-gradient(
-		top, rgba(0,33,32,1) 0%,rgba(23,65,64,1) 5%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top,  rgba(0,33,32,1) 0%,rgba(23,65,64,1) 5%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top,  rgba(0,33,32,1) 0%,rgba(23,65,64,1) 5%); /* IE10+ */
-	background: linear-gradient(to bottom,  rgba(0,33,32,1) 0%,rgba(23,65,64,1) 5%); /* W3C */
+		top, rgba(0,33,32,1) 0%,rgba(23,65,64,0.9) 5%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  rgba(0,33,32,1) 0%,rgba(23,65,64,0.9) 5%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  rgba(0,33,32,1) 0%,rgba(23,65,64,0.9) 5%); /* IE10+ */
+	background: linear-gradient(to bottom,  rgba(0,33,32,1) 0%,rgba(23,65,64,0.9) 5%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient(
 		startColorstr='#002120', endColorstr='#174140',GradientType=0 ); /* IE6-9 */
 	overflow: auto;
 }
-.sidebar-look>div {
-	margin: 10px
-}
 
 .sidebar {
-	color: #fff; 
-	font-family: 'Dosis', sans-serif;
-	background: #174140; 
-	background: rgb(0,33,32); /* Old browsers */
-	background: -moz-linear-gradient(top,  rgba(0,33,32,1) 0%, rgba(23,65,64,1) 5%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top,
-		left bottom, color-stop(0%,rgba(0,33,32,1)),
-		color-stop(5%,rgba(23,65,64,1))); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(
-		top, rgba(0,33,32,1) 0%,rgba(23,65,64,1) 5%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, rgba(0,33,32,1) 0%,rgba(23,65,64,1) 5%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, rgba(0,33,32,1) 0%,rgba(23,65,64,1) 5%); /* IE10+ */
-	background: linear-gradient(to bottom, rgba(0,33,32,1) 0%,rgba(23,65,64,1) 5%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient(
-		startColorstr='#002120', endColorstr='#174140',GradientType=0 ); /* IE6-9 */
-
 	position: absolute; 
 	top: 0; 
 	width: 200px; 
@@ -448,47 +434,48 @@ canvas#canvas {
 .legend_sidebar {
 	left: 0;
 	width: 300px;
+	font-size: 80%
 }
 
 .legend_sidebar hr {
-	border-width: 0
+	border-width: 0;
+	margin: 0;
 }
 
 .legend_sidebar b {
 	font-weight: normal;
 	color: rgba(255, 255, 255, 0.5);
 }
-
 .legend_sidebar div.entity {
 	display: inline-block;
+	vertical-align: top;
 	width: 50px;
 	height: 50px;
 	margin: 5px;
 	border-radius: 35px;
 	border: 0 solid black;
 }
-
 .legend_sidebar div.bordered {
 	width: 39px;
 	height: 39px;
 	margin: 8px;
 	border-width: 3px;
 }
-
 .legend_sidebar div.relation {
 	display: inline-block;
 	width: 40px;
 	height: 20px;
-	margin: 8px 8px 28px 8px;
+	margin: 8px 8px 28px 13px;
 	border-width: 0 0 3px 0;
 	border-style: solid;
 	text-shadow: 0 0 2px black
 }
-
 .legend_sidebar div.desc {
 	display: inline-block;
+	vertical-align: top;
+	padding-top: 1ex;
 	width: 200px;
-	height: 30px;
+	height: 50px;
 }
 
 .legend_sidebar div.entity.existing { background-color: rgba(210, 100, 20, 1) }
@@ -519,6 +506,10 @@ canvas#canvas {
 .modal h2 {
 	color: #1C86A0;
 }
+.modal h2>strong, .modal h3>strong {
+	font-weight: normal;
+	color: #eee;
+}
 .modal>div {
 	margin: 15px;
 }
@@ -537,6 +528,11 @@ canvas#canvas {
 .modal tr:nth-child(even) { background-color: #285858 }
 .modal tr:nth-child(odd) { background-color: #1A3637 }
 .modal tr:hover { background-color: #ccc }
+.modal ul li {
+	display: inline-block;
+	vertical-align: top;
+	width: 40%
+}
 
 .solution-form {
 	font-family: 'Dosis', sans-serif

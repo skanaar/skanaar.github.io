@@ -71,7 +71,7 @@ function Nodes(_entities, _relations){
 		})
 	}
 
-	function addRelation(a, b, type){
+	function addRelation(a, b, type, desc){
 		var existing = _.find(relations, function (r){
 			return _.isEqual(_.sortBy([r.start.id, r.end.id]), _.sortBy([a.id, b.id]))
 		})
@@ -79,10 +79,10 @@ function Nodes(_entities, _relations){
 			existing.type = type
 			return
 		}
-		var r = Relation(a, b, { type: type })
+		var r = Relation(a, b, { type: type, description: desc })
 		r.strength = 0
 		repeat(function (v){ r.strength = v }, 20)
-		repeat(function (v){ dampening = 0.95*(1-sq(v)) }, 40)
+		repeat(function (v){ dampening = 0.95*(1-sq(v)) }, 80)
 		relations.push(r)
 		_.each(changeSubscribers, function (c){ c() })
 	}

@@ -25,7 +25,7 @@ Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
 </div>
 <div style="position: relative">
 	<canvas id="canvas" width="800" height="800"></canvas>
-	<div class="sidebar details_sidebar" ng-show="selectedEntity">
+	<div class="sidebar sidebar-look details_sidebar" ng-show="selectedEntity">
 		<div>
 			<div>
 				<a class="pull-right"
@@ -40,18 +40,13 @@ Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
 			<div><label>Id</label> {{selectedEntity.id}}</div>
 			<hr>
 			<div class="toolset">
-				<a ng-click="showSelectClusterPane = true" href="javascript:void(0)">
+				<a ng-click="addSolutionWizard.show = true" href="javascript:void(0)">
 					<i class="fa fa-fw fa-plus-circle"></i> Add related solution
-				</a>
-				<a>
-					Relation type:
-					<select ng-options="e for e in relationTypes" ng-model="newRelationType">
-					</select>
 				</a>
 			</div>
 		</div>
 	</div>
-	<div class="sidebar details_sidebar" ng-show="selectedRelation">
+	<div class="sidebar sidebar-look details_sidebar" ng-show="selectedRelation">
 		<div>
 			<h2>{{selectedRelation.start.name}} - {{selectedRelation.end.name}}</h2>
 			<div>{{selectedRelation.description}}</div>
@@ -61,7 +56,7 @@ Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
 			<div><label>Author</label> {{selectedRelation.author}}</div>
 		</div>
 	</div>
-	<div class="sidebar search_sidebar"
+	<div class="sidebar sidebar-look search_sidebar"
 		 id="search_sidebar"
 		 ng-show="activePane === 'filter'">
 		<div>
@@ -99,7 +94,7 @@ Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
 			<hr>
 		</div>
 	</div>
-	<div class="sidebar legend_sidebar"
+	<div class="sidebar sidebar-look legend_sidebar"
 		 ng-show="activePane === 'current'">
 		<div>
 			<h3>Current View</h3>
@@ -108,7 +103,7 @@ Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
 			</div>
 		</div>
 	</div>
-	<div class="sidebar develop_sidebar"
+	<div class="sidebar sidebar-look develop_sidebar"
 		 ng-show="activePane === 'develop'">
 		<div>
 			<h3>Develop</h3>
@@ -159,51 +154,68 @@ Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
 
 		</div>
 	</div>
-	<div class="sidebar legend_sidebar" ng-show="activePane === 'legend'">
+	<div class="sidebar sidebar-look legend_sidebar" ng-show="activePane === 'legend'">
 		<div>
-			<h3>Legend</h3>
 			<div class="entity existing"></div>
 			<div class="desc"><b>Existing Solution</b> Solutions that is part of an existing cluster</div>
-			<hr><div class="entity supporting"></div>
+			<div class="entity supporting"></div>
 			<div class="desc"><b>Supporting solution</b> Existing solution that is (not yet) part of the cluster </div>
-			<hr><div class="entity potential"></div>
+			<div class="entity potential"></div>
 			<div class="desc"><b>Potential solution</b> Possible solution that is not on the market, that could be part of a future cluster</div>
-			<hr><div class="entity bordered core"></div>
+			<div class="entity bordered core"></div>
 			<div class="desc"><b>Existing</b> Solution that focus on what the cluster i delivering right now</div>
-			<hr><div class="entity bordered accelerator"></div>
+			<div class="entity bordered accelerator"></div>
 			<div class="desc"><b>Accelerator</b> Accelererating solution such a business- or app development</div>
-			<hr><div class="entity bordered expander"></div>
+			<div class="entity bordered expander"></div>
 			<div class="desc"><b>Expander</b> Solution that broadens the current clusters capacity to deliver solutions into new areas. </div>
-			<hr><div class="relation participant"></div>
+			<div class="relation participant"></div>
 			<div class="desc"><b>Existing relation</b> Relations established by  existing cluster participants</div>
-			<hr><div class="relation supporting"></div>
+			<div class="relation supporting"></div>
 			<div class="desc"><b>Supporting relation</b> Relation established by  supporting solution providers</div>
-			<hr><div class="relation catalyst"></div>
+			<div class="relation catalyst"></div>
 			<div class="desc"><b>Catalyst relation</b> Relation established by  a catalyst</div>
-			<hr><div class="relation potential"></div>
+			<div class="relation potential"></div>
 			<div class="desc"><b>Potential relation</b> Relation established by a thought leader</div>
-			<hr><div class="relation alternative"></div>
+			<div class="relation alternative"></div>
 			<div class="desc"><b>Alternative relation</b> Two solutions that are potential alternatives</div>
 		</div>
 	</div>
-	<div class="modal" ng-show="showSelectClusterPane">
+	<div class="modal" ng-show="addSolutionWizard.show">
 		<div>
-			<a class="pull-right" ng-click="showSelectClusterPane = false">
+			<a class="pull-right" ng-click="addSolutionWizard.cancel()">
 				<img src="img/icons/close_popup.png" width="42" height="42">
 			</a>
-			<h2>Add solution to cluster</h2>
-			<table>
+			<h2>Add solution to cluster: <strong>{{addSolutionWizard.chosenSolution.name}}</strong></h2>
+			<table ng-show="addSolutionWizard.page === 1">
 			<tr>
 				<th><a ng-click="sortKey = 'name'">Name</a></th>
 				<th><a ng-click="sortKey = 'company'">Company</a></th>
 				<th><a ng-click="sortKey = 'date'">Date</a></th>
 			</tr>
 			<tr ng-repeat="s in allSolutions | orderBy:sortKey">
-				<td><a ng-click="add(s)">{{s.name}}</a></td>
-				<td><a ng-click="add(s)">{{s.company}}</a></td>
-				<td><a ng-click="add(s)">{{s.date}}</a></td>
+				<td><a ng-click="addSolutionWizard.chooseSolution(s)">{{s.name}}</a></td>
+				<td><a ng-click="addSolutionWizard.chooseSolution(s)">{{s.company}}</a></td>
+				<td><a ng-click="addSolutionWizard.chooseSolution(s)">{{s.date}}</a></td>
 			</tr>
 			</table>
+			<ul ng-show="addSolutionWizard.page === 2">
+				<li>
+					<h3>Solution status in cluster</h3>
+					<select ng-options="e for e in solutionStatuses" ng-model="addSolutionWizard.status">
+					</select>
+					<h3>Solution type in cluster</h3>
+					<select ng-options="e for e in solutionTypes" ng-model="addSolutionWizard.type">
+					</select>
+				</li>
+				<li>
+					<h3>Your role</h3>
+					<select ng-options="e for e in relationTypes" ng-model="addSolutionWizard.rel_type">
+					</select>
+					<h3>Description of relation to <strong>{{selectedEntity.name}}</strong></h3>
+					<textarea ng-model="addSolutionWizard.rel_desc"></textarea>
+					<a class="button" ng-click="addSolutionWizard.done()">Done</a>
+				</li>
+			</ul>
 		</div>
 	</div>
 </div>
