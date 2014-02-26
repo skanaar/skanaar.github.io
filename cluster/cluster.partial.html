@@ -1,8 +1,10 @@
 <div class="full-row jumbotron withsubtitle">
-<h1>{{clusterName}}: {{companyName}}</h1>
-<small>Building: {{clusterProperties.building | number:0}}% &nbsp; &nbsp; &nbsp; 
+<h1>{{cluster.name}}: {{companyName}}</h1>
+<small>Solutions: {{cluster.entities.length}} &nbsp; &nbsp; &nbsp; 
+Building: {{clusterProperties.building | number:0}}% &nbsp; &nbsp; &nbsp; 
 Nutrition: {{clusterProperties.nutrition | number:0}}% &nbsp; &nbsp; &nbsp; 
-Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
+Mobility: {{clusterProperties.mobility | number:0}}% &nbsp; &nbsp; &nbsp; 
+Transformative Cluster Potential: {{cluster.potential || 'TBD'}}</small></div>
 <div class="full-row page-stripe toolbar">
 	<div class="pull-right">
 		<a id="download-image-link" download="cluster-snapshot.png">
@@ -43,6 +45,9 @@ Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
 				<a ng-click="addSolutionWizard.show = true" href="javascript:void(0)">
 					<i class="fa fa-fw fa-plus-circle"></i> Add related solution
 				</a>
+				<a ng-click="removeEntity()" href="javascript:void(0)">
+					<i class="fa fa-fw fa-minus-circle"></i> Remove this solution
+				</a>
 			</div>
 		</div>
 	</div>
@@ -54,6 +59,12 @@ Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
 			<div><label>Type</label> <em style="width: 100px">{{selectedRelation.type}}</em></div>
 			<div><label>Date</label> {{selectedRelation.date}}</div>
 			<div><label>Author</label> {{selectedRelation.author}}</div>
+			<hr>
+			<div class="toolset">
+				<a ng-click="removeRelation()" href="javascript:void(0)">
+					<i class="fa fa-fw fa-minus-circle"></i> Remove this relation
+				</a>
+			</div>
 		</div>
 	</div>
 	<div class="sidebar sidebar-look search_sidebar"
@@ -117,6 +128,13 @@ Mobility: {{clusterProperties.mobility | number:0}}%</small></div>
 				<input type="file"
 					   onchange="angular.element(this).scope().loadClusterFile(this.files)">
 			</div>
+
+			<h3>Cluster</h3>
+			<label>Name</label>
+			<input type="text" ng-model="cluster.name">
+			<label>Potential</label>
+			<input type="text" ng-model="cluster.potential">
+
 
 			<h3>Selection</h3>
 			<div ng-show="selectedEntity">
@@ -230,6 +248,7 @@ attachDataUrlToLink('download-data-link', 'text/json', function (){
 	var rs = ClusterPlatform.nodes.relations
     var data = {
     	name: ClusterPlatform.cluster.name,
+    	potential: ClusterPlatform.cluster.potential,
     	centralEntity: ClusterPlatform.cluster.centralEntity,
         entities: _.map(es, function (e){ return _.omit(e, ['$$hashKey', 'fx', 'fy'])}),
         relations:  _.map(rs, function (r){

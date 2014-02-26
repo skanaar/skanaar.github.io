@@ -67,6 +67,7 @@ angular.module('cluster').factory('clusterLoader', function ($http, $q){
     function unpackCluster(c){
         return {
             name: c.name || 'unnamed cluster',
+            potential: c.potential,
             centralEntity: c.centralEntity || 0,
             relations: _.map(c.relations, function (r){
                 return {
@@ -222,6 +223,7 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q,
         var centralEntity = _.findWhere(c.entities, {id: c.centralEntity})
         $scope.companyName = centralEntity && centralEntity.company
 
+        $scope.cluster = c
         $scope.clusterProperties = {
             mobility: _.average(c.entities, 'mobility'),
             nutrition: _.average(c.entities, 'nutrition'),

@@ -425,6 +425,9 @@ canvas#canvas {
 	left: 0;
 	width: 300px;
 }
+.develop_sidebar h3 {
+	margin-bottom: 2px
+}
 .develop_sidebar label {
 	display: block;
 	padding: 0 5px;
