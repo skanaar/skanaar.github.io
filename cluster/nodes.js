@@ -53,7 +53,7 @@ function Nodes(_entities, _relations){
 			e.y += e.fy
 		})
 
-		var repulsion = 25
+		var repulsion = 35
 		var forceThreshold = 400
 		eachPairTwice(entities, function (e, f){
 			var squareDist = sq(e.x-f.x) + sq(e.y-f.y)
@@ -62,7 +62,7 @@ function Nodes(_entities, _relations){
 		})
 
 		var springiness = 0.0002
-		var springLength = 150
+		var springLength = 180
 		_.each(relations, function (r){
 			var delta = diff(r.start, r.end)
 			var factor = springiness * r.strength * (mag(delta) - springLength)
@@ -80,11 +80,9 @@ function Nodes(_entities, _relations){
 			return
 		}
 		var r = Relation(a, b, { type: type, description: desc })
-		r.strength = 0
-		repeat(function (v){ r.strength = v }, 20)
-		repeat(function (v){ dampening = 0.95*(1-sq(v)) }, 80)
 		relations.push(r)
 		_.each(changeSubscribers, function (c){ c() })
+		return r
 	}
 
 	function removeRelation(r){

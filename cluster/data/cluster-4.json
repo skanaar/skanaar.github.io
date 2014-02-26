@@ -1,266 +1,286 @@
 {
   "name": "Vytedos",
-  "centralEntity": 2, 
+  "centralEntity": 2,
   "entities": [
     {
       "id": 1,
       "name": "Cuked",
       "company": "Tibifotaf Vytedos",
+      "email": "unknown email",
       "description": "Hylut lisutab vif mytop gorekut vuvusadas munaraligug domakodilosah muroficogemebal haridacusototesac rikidisobysypolepyd sudatidetagereconefyp devodolekofinepohinarit dunugenyvulutyrosefufecol himerihynolidicanotusisacyh pudituryvoluropelupulegohahed",
       "status": "supporting",
       "type": "accelerator",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": 20.951325524192946,
-      "y": 16.856534775190188
+      "x": 16.304071234818448,
+      "y": 16.61051392605558
     },
     {
       "id": 2,
       "name": "Maged",
       "company": "Cutehyd Nonagakid",
+      "email": "unknown email",
       "description": "Lahas lugunar fad cucol fihinuk conedoket tanaselubun raracanisedim runuhofylidogur neturipytilanopyc nobiselilegolynasim madofasuvupodunusorun logacumohihinotocylasug takamaginufamenakutovuman hehamuvufytesifidalamusigor lucenasisyvikumamugetytahaher",
       "status": "existing",
       "type": "expander",
       "mobility": 82,
       "nutrition": 54,
       "building": 2,
-      "x": -87.03046804029174,
-      "y": -92.4943987547476
+      "x": -127.64954234623661,
+      "y": -117.1364641160032
     },
     {
       "id": 3,
       "name": "Lysufynet",
       "company": "Vehedirir Hulipokyl",
+      "email": "unknown email",
       "description": "Hymoharag cacedum nal nupam lahonyc nivukekyc ratovacilit mivevoradatos hosaratihahikif damefevulymumogak fyponivodeposimehed hatasilatehatususadeh bisydukirukugymicefusov dotepafohinuturuhabamerah muhyhusybodusogykolibidosis vupofuvusarohipynotisypesilyt",
       "status": "supporting",
       "type": "accelerator",
       "mobility": 45,
       "nutrition": 80,
       "building": 42,
-      "x": 120.04926943353283,
-      "y": 112.42510475752856
+      "x": 153.488438940262,
+      "y": 156.36175313421384
     },
     {
       "id": 4,
       "name": "Lenofebat",
       "company": "Daribug Ragusyv",
+      "email": "unknown email",
       "description": "Tetokot pedaluc pad lifir hireher tocatilod dulitohiloh doguvadasufod caturafafadicus sogaturivavololyp pedagotacupenifetuh pilusididyrarorudutok dotadototorotinutahisyn tytukipadotalurulugetuces ratorubutucenolepidesikylah tesesibileletitibutysulynadym",
       "status": "existing",
       "type": "accelerator",
       "mobility": 12,
       "nutrition": 38,
       "building": 88,
-      "x": 1.5090124663414988,
-      "y": -180.80945148549463
+      "x": 28.388592817008913,
+      "y": -246.7119382818368
     },
     {
       "id": 5,
       "name": "Solemalec",
       "company": "Hecadyb Nuricudon",
+      "email": "unknown email",
       "description": "Nodilak dohebidef vem sulod tarudas dygolurel hosanosohos kigiruvicehub teceturehilecad durusihicitiduhap dyhymynunurenasemot nopiturinolenebuhitad hatyhalinulyvutunudonof vanudatugipunosurahunedat tosotulitidycihatypesulynov lyhenadamegitesasyrysuralipul",
       "status": "potential",
       "type": "expander",
       "mobility": 68,
       "nutrition": 15,
       "building": 99,
-      "x": -172.68260378763452,
-      "y": 10.204744064116143
+      "x": -234.2954699504705,
+      "y": 53.99368795910179
     },
     {
       "id": 6,
       "name": "Larovaf",
       "company": "Bigekehen Sedadonor",
+      "email": "unknown email",
       "description": "Venavys lynymuc lyf kihin gocanyn vutocenad ratulenisid vocireduriheg lusalyhodasynot latinytohotolydur tititelevotelolakif vetobopituhinikocypor mirytihiridaduparonepyt honifitatonolunomaretugok tetehynyludefutiharytulukut daredebeladitemyhitililidomun",
       "status": "potential",
       "type": "core",
       "mobility": 53,
       "nutrition": 64,
       "building": 1,
-      "x": -194.01190757422816,
-      "y": -177.97582494403548
+      "x": -289.91745947335653,
+      "y": -242.41430087538697
     },
     {
       "id": 7,
       "name": "Nocorusyl",
       "company": "Rinolicet Kunasup",
+      "email": "unknown email",
       "description": "Romisesan gofos loh liliv milylic letetumen lusudikysum bicorudeviles tohiketedesacus gatetegidutetofeh tesutiduvaderahocas timifarifedasosufunun tinunifidysunihanuhykoh soredusitadycucitikulubes huporosuhororyvitebipolyseb lemihonasehivemotaledigetasik",
       "status": "supporting",
       "type": "expander",
       "mobility": 36,
       "nutrition": 9,
       "building": 26,
-      "x": 271.4738852665977,
-      "y": 97.88047754038786
+      "x": 348.11118183820173,
+      "y": 130.07097021048716
     },
     {
       "id": 8,
       "name": "Pociseder",
       "company": "Dytyt Nugat",
+      "email": "unknown email",
       "description": "Tesap sirehuruh ran sipor vunyvuh pasyrelit dinipakevek henebusolydit gesidarytudikot tatoriraramedinen hynuliganosukeserym hodevolotivitalihales lonymufitudyboholevomed hohoveresovohiberepovutop difolesacorenolilelybahyrot hatadadirunyrafalabelafupisir",
       "status": "existing",
       "type": "expander",
       "mobility": 66,
       "nutrition": 54,
       "building": 53,
-      "x": 99.4985711051139,
-      "y": 273.65313247273895
+      "x": 127.34637470619423,
+      "y": 351.25231895025127
     },
     {
       "id": 9,
       "name": "Sakudyd",
       "company": "Pyvimiv Tyreresor",
+      "email": "unknown email",
       "description": "Lenisut tutorymor duv retag cacofob ridecusen cekebesenyt kiniborytirat dupyperocopuhom rimehudafugedirih nyranisisurikuvifuv sehitysetalagehivavik harumamopaviledupacecol dudinaragucutetehedihahuh hutusakalukonikedevisesokid sohirukifemucalunimorimehohat",
       "status": "existing",
       "type": "accelerator",
       "mobility": 63,
       "nutrition": 35,
       "building": 71,
-      "x": 99.72786555691872,
-      "y": -234.63932672324003
+      "x": 213.23775783516535,
+      "y": -310.1587673418342
     },
     {
       "id": 10,
       "name": "Pysod",
       "company": "Cavododal Nulotel",
+      "email": "unknown email",
       "description": "Vutesanol hurihal pyc fubid logudih taradofih hohasipihyb siserufuhepud vanasocabagolur polapudasyridelin nuhidycineruredasoc mecenitagomonakirunul kedofovenofalikanuniloh lehanulanenuhetevuhididar ketahececonegitiliborugikah setotavalerinibalokupovopahub",
       "status": "existing",
       "type": "accelerator",
       "mobility": 87,
       "nutrition": 73,
       "building": 77,
-      "x": 31.791439298287067,
-      "y": -333.49263824328574
+      "x": 33.177413614374565,
+      "y": -437.60299195800866
     },
     {
       "id": 11,
       "name": "Fahopahup",
       "company": "Perukyb Labyh",
+      "email": "unknown email",
       "description": "Teludah rypoh kat locet natygad vuhukeluk tilygapuvel salydaribynyp bavepofinenireg hehotigapetetonat tedatofavitafinetih nytitecifuriconuvunet tihelisuvosurecynusakak gunugetohisuhaluvarusytub hirotadydusirecidagaholatev futotusanulurohiparylodolacot",
       "status": "supporting",
       "type": "core",
       "mobility": 78,
       "nutrition": 8,
       "building": 53,
-      "x": -240.85515338788414,
-      "y": 64.17160592981597
+      "x": -405.2913725599512,
+      "y": 140.58187940376934
     },
     {
       "id": 12,
       "name": "Satiponam",
       "company": "Daranym Kihakives",
+      "email": "unknown email",
       "description": "Pilahoric lilet dom disor lonivys bunaberor sesosulopav nodytatuhonil nalosogocovynad lutogamosodehebes titehihosanutupacin tobumerigotahebomadas ditegahatudukotiveludoh bitobinegovidesybadikasut lemucicunogodohulylalolehag dinulenetitalogatuhotegylysuk",
       "status": "potential",
       "type": "expander",
       "mobility": 54,
       "nutrition": 69,
       "building": 100,
-      "x": -278.6828542367057,
-      "y": 143.93282292223518
+      "x": -262.03465624554076,
+      "y": 242.04782609595281
     },
     {
       "id": 13,
       "name": "Sudesefot",
       "company": "Matafutad Lamuhus",
+      "email": "unknown email",
       "description": "Hanytos nonukites vav hatis bohekad hurygageh komufylorit hirorulisuved buhevikohemyfyh pohanunolucesigac lererihiladagolahoh kesubavyvomelacibaper duvamagegecuheverokemil nicinosadusipipunilurisiv mypehenuniduhuranasetubevam lihumugekudobidolulalatihedyv",
       "status": "existing",
       "type": "accelerator",
       "mobility": 57,
       "nutrition": 31,
       "building": 66,
-      "x": -310.4462068799624,
-      "y": -161.6114309806494
+      "x": -475.0471792758384,
+      "y": -188.71620393857316
     },
     {
       "id": 14,
       "name": "Hosel",
       "company": "Pysurefer Lasedosap",
+      "email": "unknown email",
       "description": "Pikufak lypakonyn bac dusov tasycok hibipemet rugicedunag vipusolaferes megylynuroromyt fypaviberynotasyf fuvuduvuvagugakehes bibahaforafycocodusur penefulatuvyhefoharefel hydonogomifihulafuhobutip fepulohegehodudohodahelunad cyfecatutidolulynuvabetakotuh",
       "status": "potential",
       "type": "core",
       "mobility": 76,
       "nutrition": 100,
       "building": 5,
-      "x": -213.61812903525407,
-      "y": -330.62166283443725
+      "x": -278.51022682284923,
+      "y": -434.75817448399675
     },
     {
       "id": 15,
       "name": "Sotesoroc",
       "company": "Dyfokyn Nosem",
+      "email": "unknown email",
       "description": "Pilik tasinohov pis rohoh ropydir sudifovir suratakilot vatyfodudutih sesonyvokarisyk rirutinunimonuhet sanatibacupydafevaf tatosusidefegatyvumih tynufuhitonavuredosysuh siholetiponarecibotoviduh dokihududadidobirebecefucih korilynobudetatacokosebasalim",
       "status": "supporting",
       "type": "expander",
       "mobility": 93,
       "nutrition": 70,
       "building": 68,
-      "x": -296.44147694225677,
-      "y": -255.80988221583644
+      "x": -439.30528970289083,
+      "y": -362.5838262090418
     },
     {
       "id": 16,
       "name": "Seberalyd",
       "company": "Mimidov Lotisik",
+      "email": "unknown email",
       "description": "Cehelonah gysil men sefov rugebyf lidihosuc dagebotehav lorugitunesot folotatababicip tigyripobosonilid sedycemotokaherakud netofenamaducosurygot govasofygagahetetenuhen povudafobodudilikunufedoh tohukosatosutanynitotebadih ponakakenalisygihisehimosamer",
       "status": "existing",
       "type": "expander",
       "mobility": 25,
       "nutrition": 74,
       "building": 75,
-      "x": 383.21163569021803,
-      "y": 143.05429003245925
+      "x": 510.97526579597326,
+      "y": 228.4161131109458
     },
     {
       "id": 17,
       "name": "Satinabed",
       "company": "Cateb Hytuf",
+      "email": "unknown email",
       "description": "Tymibun pisut gon biren legisys latebavut pibohulobod tufetinelulin necypivekohecut dopohokebohoraten romehuripomitutapet kavycepimorinolebohup tututadahefitulecykotet nitalohinuhycohalacagosif kotedefamunolunydeheludikam tubeduryhuvutotumyhosohatehys",
       "status": "existing",
       "type": "accelerator",
       "mobility": 29,
       "nutrition": 96,
       "building": 63,
-      "x": 387.8692633977698,
-      "y": 26.368506408606848
+      "x": 476.2355408857092,
+      "y": -8.78334689959833
     },
     {
       "id": 18,
       "name": "Forof",
       "company": "Lamenul Titap",
+      "email": "unknown email",
       "description": "Fadylag rypel lev colab peviken limuvotis dohofinihib duceryseminir suritytunilusum romutotiditurelug bulymoryfekurutifet tinufitobususagonebih disetumiratikilupatagen taruhotigelosusenosebyhuf hahudunodikyhubitygetupisyv danunabyhegivinevefulicipusul",
       "status": "supporting",
       "type": "accelerator",
       "mobility": 72,
       "nutrition": 100,
       "building": 12,
-      "x": 149.3908097920205,
-      "y": 395.7596557546186
+      "x": 229.03608252566812,
+      "y": 511.9793955523179
     },
     {
       "id": 19,
       "name": "Ratunehut",
       "company": "Sesegacyv Lanimen",
+      "email": "unknown email",
       "description": "Tanaculig haced toc cuhic dasybet gotonybar momudakugud rupinetugonap gapysesonososuv rehirunuhumipenon lehufuhisonulerefol biroferutasabitusytik milecalifogacavikotulyl revitobulipamininekudosir hekedikedefasoterycirakateh hyfumetuvetopelevosyveducuhym",
       "status": "potential",
       "type": "core",
       "mobility": 86,
       "nutrition": 21,
       "building": 51,
-      "x": 40.38042069160682,
-      "y": 348.8039859362407
+      "x": -4.997922815004971,
+      "y": 487.01343315038105
     },
     {
       "id": 20,
       "name": "Malaregec",
       "company": "Pimys Kokasamyl",
+      "email": "unknown email",
       "description": "Borin tyfat rod manif hosulel hucanutos takesyfidir toricuhirycop tovebabirilosek fidigomasumanatuf raladacedocarulilyf mominitihedolonuvuvyn ravabutolatipaturematih dypisohilafibicafarulofil gisopydopadovinadutehahesuv kamunisutolusuhaholupotopivam",
       "status": "supporting",
       "type": "core",
       "mobility": 1,
       "nutrition": 70,
       "building": 94,
-      "x": 188.91530166161797,
-      "y": -293.65624441221246
+      "x": 381.74839899876383,
+      "y": -397.46187738919684
     }
   ],
   "relations": [

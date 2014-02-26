@@ -496,7 +496,7 @@ canvas#canvas {
 	bottom: 40px;
 	left: 40px;
 	right: 40px;
-	background: #174140;
+	background: rgba(23, 65, 65, 0.9);
 	color: #eee;
 	font-family: 'Dosis', sans-serif;
 	overflow-y: scroll;
@@ -516,10 +516,13 @@ canvas#canvas {
 .modal table {
 	width: 100%;
 }
-.modal td {
+.modal td>a {
+	display: block;
 	padding: 2px 10px;
+	cursor: pointer
 }
-.modal th {
+.modal th>a {
+	display: block;
 	text-align: left;
 	padding: 2px 10px;
 	font-weight: normal;

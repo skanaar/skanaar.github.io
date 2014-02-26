@@ -1,240 +1,258 @@
 {
   "name": "Urban Farming",
-  "centralEntity": 10,
+  "centralEntity": 7,
   "entities": [
     {
       "id": 0,
       "name": "9 Billion Food",
       "company": "Goodstore",
+      "email": "unknown email",
       "description": "A company",
       "status": "supporting",
       "type": "none",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": 154.0716210874196,
-      "y": -157.2773720725597
+      "x": 252.27907115007568,
+      "y": -267.8516573958302
     },
     {
       "id": 1,
       "name": "Solar power",
       "company": "Solelia",
+      "email": "unknown email",
       "description": "A company",
       "status": "supporting",
       "type": "none",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": -179.44643220065635,
-      "y": -138.33053350083995
+      "x": -276.8176393096205,
+      "y": -208.78891357822488
     },
     {
       "id": 2,
       "name": "Smart Bikes",
       "company": "Cargobike",
+      "email": "unknown email",
       "description": "A company",
       "status": "existing",
       "type": "none",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": -95.44816774570047,
-      "y": -104.84854927572448
+      "x": -101.4702159896116,
+      "y": -168.54454511705256
     },
     {
       "id": 3,
       "name": "Energy drinks",
       "company": "Oji Drinks",
+      "email": "unknown email",
       "description": "A company",
       "status": "supporting",
       "type": "none",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": 13.778902126871962,
-      "y": -91.76394654492667
+      "x": 87.48547835337699,
+      "y": -181.38202575599848
     },
     {
       "id": 4,
       "name": "Smart app",
       "company": "Turningpoint FTW",
+      "email": "unknown email",
       "description": "A company",
       "status": "supporting",
       "type": "accelerator",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": 269.96262036815045,
-      "y": -1.620212817745088
+      "x": 393.1631552869532,
+      "y": 49.41947927931295
     },
     {
       "id": 5,
       "name": "Smart app",
       "company": "app-maker",
+      "email": "unknown email",
       "description": "A company",
       "status": "accelerator",
       "type": "none",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": -283.5113488261536,
-      "y": -94.8621969648643
+      "x": -390.4742119170727,
+      "y": -110.98321978158502
     },
     {
       "id": 6,
       "name": "Recipes for 9 ",
       "company": "billion lunch",
+      "email": "unknown email",
       "description": "A company",
       "status": "supporting",
       "type": "none",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": 145.763877408327,
-      "y": -37.6772539247852
+      "x": 244.86080151417443,
+      "y": -77.31155637542305
     },
     {
       "id": 7,
       "name": "Elegantly Vegan",
       "company": "Lunch maker",
+      "email": "unknown email",
       "description": "A company",
       "status": "existing",
       "type": "none",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": 37.30922963165182,
-      "y": 22.722369247862886
+      "x": 60.091921234471876,
+      "y": 6.875632879258177
     },
     {
       "id": 8,
       "name": "Mobility pool",
       "company": "Sunfleet",
+      "email": "unknown email",
       "description": "A company",
       "status": "existing",
       "type": "none",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": -152.05430091510266,
-      "y": -12.158870926633552
+      "x": -227.1829269713758,
+      "y": -17.42658986807133
     },
     {
       "id": 9,
       "name": "Bike friendly cities",
       "company": "Koucky & Partners",
+      "email": "unknown email",
       "description": "A company",
       "status": "supporting",
       "type": "none",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": -261.61738752772175,
-      "y": 9.513458596345485
+      "x": -414.38390710565875,
+      "y": 43.21755402886929
     },
     {
       "id": 10,
       "name": "Urban Farming",
       "company": "Plantagon",
+      "email": "unknown email",
       "description": "A company",
       "status": "supporting",
       "type": "none",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": 234.45946206393467,
-      "y": -89.47621665228466
+      "x": 410.5351822994085,
+      "y": -175.69982954336422
     },
     {
       "id": 11,
       "name": "Co-working space",
       "company": "Coffice",
+      "email": "unknown email",
       "description": "A company",
       "status": "supporting",
       "type": "core",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": -53.42155586841649,
-      "y": 103.50168836482926
+      "x": -92.89213869796305,
+      "y": 131.48722444768595
     },
     {
       "id": 12,
       "name": "Smart Lightning",
       "company": "Svenska LED",
+      "email": "unknown email",
       "description": "A company",
       "status": "supporting",
       "type": "none",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": -6.139766265739361,
-      "y": 222.1746364050213
+      "x": 19.658600139061605,
+      "y": 300.4805582032341
     },
     {
       "id": 13,
       "name": "Flexiworking",
       "company": "Compodium",
+      "email": "unknown email",
       "description": "A company",
       "status": "supporting",
       "type": "expander",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": -162.27749637177138,
-      "y": 96.60021177991628
+      "x": -275.66322989159613,
+      "y": 163.4256813172164
     },
     {
       "id": 14,
       "name": "Renewable Collaboration energy",
       "company": "Egen El",
+      "email": "unknown email",
       "description": "A company",
       "status": "supporting",
       "type": "none",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": 57.03986082246788,
-      "y": 336.7286699206428
+      "x": 116.17948198627356,
+      "y": 466.8638857617639
     },
     {
       "id": 15,
       "name": "Smart Tools",
       "company": "Dreamler",
+      "email": "unknown email",
       "description": "A company",
       "status": "supporting",
       "type": "core",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": -129.8695255782231,
-      "y": 279.4662760562221
+      "x": -241.27868942209398,
+      "y": 265.69842971728275
     },
     {
       "id": 16,
       "name": "Flexiworking",
       "company": "Skiptrip",
+      "email": "unknown email",
       "description": "A company",
       "status": "supporting",
       "type": "expander",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": -116.15428534523306,
-      "y": 206.29893354728628
+      "x": -158.98015197092107,
+      "y": 306.37157939367535
     },
     {
       "id": 17,
       "name": "Shared Living",
       "company": "Remote ",
+      "email": "unknown email",
       "description": "A company",
       "status": "supporting",
       "type": "none",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": 28.905263016386293,
-      "y": 156.04843628670517
+      "x": 96.23998919260998,
+      "y": 179.1878399117197
     }
   ],
   "relations": [

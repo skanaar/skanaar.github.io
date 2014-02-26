@@ -280,7 +280,15 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q,
             building: _.random(100)
         }
         ClusterPlatform.nodes.addEntity(fields)
-        ClusterPlatform.nodes.runFor(1000)
+        ClusterPlatform.nodes.runFor(4000)
+    }
+
+    function getNewSiblingPositionFor(e){
+        var centroid = {
+            x: _.average(ClusterPlatform.nodes.entities, 'x'),
+            y: _.average(ClusterPlatform.nodes.entities, 'y')
+        }
+        return add($scope.selectedEntity, mult(normalize(diff(e, centroid)), 200))
     }
 
     $scope.addSolutionWizard = {
@@ -305,13 +313,15 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q,
             $scope.addSolutionWizard.page = 2
         },
         done: function (){
-            var e = _.omit($scope.addSolutionWizard.chosenSolution, ['id', 'x', 'y'])
+            var e = _.omit($scope.addSolutionWizard.chosenSolution, ['id', 'x', 'y', '$$hashKey'])
             e.type = $scope.addSolutionWizard.type
             e.status = $scope.addSolutionWizard.status
+            _.extend(e, getNewSiblingPositionFor($scope.selectedEntity))
             var created = ClusterPlatform.nodes.addEntity(e)
             var rel_t = $scope.addSolutionWizard.rel_type
             var rel_desc = $scope.addSolutionWizard.rel_desc
             ClusterPlatform.nodes.addRelation($scope.selectedEntity, created, rel_t, rel_desc)
+            ClusterPlatform.nodes.runFor(4000)
             $scope.addSolutionWizard.cancel()
         }
     }

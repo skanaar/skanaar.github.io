@@ -112,7 +112,10 @@ function Engine(canvasId, _nodes, _options){
 				options.selectEntity(e)
 			}
 			else{
-				nodes.addRelation(clickedEntity, e, newRelationType)
+				var rel = nodes.addRelation(clickedEntity, e, newRelationType)
+				rel.strength = 0
+				repeat(function (v){ rel.strength = v }, 20)
+				nodes.runFor(2000)
 			}
 		}
 
