@@ -36,9 +36,9 @@ function attachDataUrlToLink(id, dataType, linkGenerator){
 
 angular.module('cluster', ['ngRoute']).config(function($routeProvider) {
     $routeProvider
-    .when('/login', {controller:'GoalsCtrl', templateUrl:'login.partial.html'})
+    .when('/login', {controller:'LoginCtrl', templateUrl:'login.partial.html'})
     .when('/dashboard', {controller:'DashboardCtrl', templateUrl:'dashboard.partial.html'})
-    .when('/map/:clusterId', {controller:'MapCtrl', templateUrl:'map.partial.html'})
+    .when('/map', {controller:'MapCtrl', templateUrl:'map.partial.html'})
     .when('/goals', {controller:'GoalsCtrl', templateUrl:'goals.partial.html'})
     .when('/newsolution', {controller: 'RegisterSolutionCtrl', templateUrl:'newsolution.partial.html'})
     .when('/searchclusters', {controller:'SearchCtrl', templateUrl:'clustersearch.partial.html'})
@@ -142,8 +142,7 @@ angular.module('cluster').controller('SearchCtrl', function ($scope, $http, $q, 
     }
 })
 
-angular.module('cluster').controller('MapCtrl', function ($scope, $http, $q, $routeParams, clusterLoader){
-    var clusterId = $routeParams.clusterId
+angular.module('cluster').controller('MapCtrl', function ($scope, $http){
     $http.get('data/map.json').then(function (response){
         googleMapsMarkers = response.data
 
@@ -351,6 +350,23 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q,
         if ($scope.selectedRelation)
             ClusterPlatform.nodes.removeRelation($scope.selectedRelation)
     }
+})
+
+angular.module('cluster').controller('LoginCtrl', function ($scope, $http, $location){
+    $scope.username = ''
+    $scope.password = ''
+    $scope.users = []
+
+    $scope.login = function (){
+        if ($scope.users[$scope.username] === $scope.password)
+            $location.path('/dashboard')
+        else
+            alert('Incorrect password. Tip: try "apa" / "banan"')
+    }
+
+    $http.get('data/users.json').then(function (response){
+        $scope.users = response.data
+    })
 })
 
 angular.module('cluster').controller('DashboardCtrl', function ($scope, $http){

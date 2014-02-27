@@ -114,17 +114,6 @@ function Visualizer(){
 		})
 	}
 
-	function vingette(){
-		var hw = g.width()/2
-		var hh = g.height()/2
-		var grad = g.radialGradient(hw, hh, 0, 2*hh, {
-			0.25: 'rgba(0, 0, 0, 0)',
-			1: 'rgba(0, 0, 0, 0.2)'
-		})
-		g.ctx.fillStyle = grad
-		g.ctx.fillRect(0, 0, 2*hw, 2*hh)
-	}
-
 	var g
 	var transform
 	var untransform
@@ -139,7 +128,6 @@ function Visualizer(){
 		}
 
 		g.ctx.clearRect(0, 0, g.width(), g.height())
-		vingette()
 
 		g.ctx.save()
 		
@@ -175,11 +163,6 @@ function Visualizer(){
 
 		drawRelations(data.relations, scale, interactions.selectedRelation)
 		drawEntities(data.entities, scale, radiusOf)
-
-		//if (interactions.selectedEntity)
-		//	drawSelectedPointer(interactions.selectedEntity)
-		//if (interactions.selectedRelation)
-		//	drawSelectedPointer(interactions.selectedRelation)
 
 		g.ctx.restore()
 

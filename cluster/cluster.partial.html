@@ -1,10 +1,18 @@
 <div class="full-row jumbotron withsubtitle">
-<h1>{{cluster.name}}: {{companyName}}</h1>
-<small>Solutions: {{cluster.entities.length}} &nbsp; &nbsp; &nbsp; 
-Building: {{clusterProperties.building | number:0}}% &nbsp; &nbsp; &nbsp; 
-Nutrition: {{clusterProperties.nutrition | number:0}}% &nbsp; &nbsp; &nbsp; 
-Mobility: {{clusterProperties.mobility | number:0}}% &nbsp; &nbsp; &nbsp; 
-Transformative Cluster Potential: {{cluster.potential || 'TBD'}}</small></div>
+
+	<div class="pull-right adminbutton">
+		<a ng-class="{active: adminMode}" ng-click="adminMode = !adminMode">
+			<i class="fa fa-gears fa-lg"></i>
+		</a>
+	</div>
+
+	<h1>{{cluster.name}}: {{companyName}}</h1>
+	<small>Solutions: {{cluster.entities.length}} &nbsp; &nbsp; &nbsp; 
+	Building: {{clusterProperties.building | number:0}}% &nbsp; &nbsp; &nbsp; 
+	Nutrition: {{clusterProperties.nutrition | number:0}}% &nbsp; &nbsp; &nbsp; 
+	Mobility: {{clusterProperties.mobility | number:0}}% &nbsp; &nbsp; &nbsp; 
+	Transformative Cluster Potential: {{cluster.potential || 'TBD'}}</small>
+</div>
 <div class="full-row page-stripe toolbar">
 	<div class="pull-right">
 		<a id="download-image-link" download="cluster-snapshot.png">
@@ -19,10 +27,11 @@ Transformative Cluster Potential: {{cluster.potential || 'TBD'}}</small></div>
 		   ng-click="togglePane('filter')" href="javascript:void(0)">Filter</a>
 		<a ng-class="{active: activePane === 'current'}"
 		   ng-click="togglePane('current')" href="javascript:void(0)">Current</a>
-		<a ng-class="{active: activePane === 'develop'}"
-		   ng-click="togglePane('develop')" href="javascript:void(0)">Develop</a>
 		<a ng-class="{active: activePane === 'legend'}"
 		   ng-click="togglePane('legend')" href="javascript:void(0)">Legend</a>
+		<a ng-class="{active: activePane === 'admin'}"
+		   ng-show="adminMode"
+		   ng-click="togglePane('admin')" href="javascript:void(0)">Admin</a>
 	</div>
 </div>
 <div style="position: relative">
@@ -115,10 +124,9 @@ Transformative Cluster Potential: {{cluster.potential || 'TBD'}}</small></div>
 			</div>
 		</div>
 	</div>
-	<div class="sidebar sidebar-look develop_sidebar"
-		 ng-show="activePane === 'develop'">
+	<div class="sidebar sidebar-look admin_sidebar"
+		 ng-show="activePane === 'admin'">
 		<div>
-			<h3>Develop</h3>
 			<div class="toolset">
 				<a href="#cluster/blank"><i class="fa fa-fw fa-dot-circle-o"></i> Blank cluster</a>
 				<a ng-click="addSolution()"><i class="fa fa-fw fa-plus"></i> Add solution</a>
@@ -175,28 +183,30 @@ Transformative Cluster Potential: {{cluster.potential || 'TBD'}}</small></div>
 	</div>
 	<div class="sidebar sidebar-look legend_sidebar" ng-show="activePane === 'legend'">
 		<div>
-			<div class="entity existing"></div>
-			<div class="desc"><b>Existing Solution</b> Solutions that is part of an existing cluster</div>
-			<div class="entity supporting"></div>
-			<div class="desc"><b>Supporting solution</b> Existing solution that is (not yet) part of the cluster </div>
-			<div class="entity potential"></div>
-			<div class="desc"><b>Potential solution</b> Possible solution that is not on the market, that could be part of a future cluster</div>
-			<div class="entity bordered core"></div>
-			<div class="desc"><b>Existing</b> Solution that focus on what the cluster i delivering right now</div>
-			<div class="entity bordered accelerator"></div>
-			<div class="desc"><b>Accelerator</b> Accelererating solution such a business- or app development</div>
-			<div class="entity bordered expander"></div>
-			<div class="desc"><b>Expander</b> Solution that broadens the current clusters capacity to deliver solutions into new areas. </div>
-			<div class="relation participant"></div>
-			<div class="desc"><b>Existing relation</b> Relations established by  existing cluster participants</div>
-			<div class="relation supporting"></div>
-			<div class="desc"><b>Supporting relation</b> Relation established by  supporting solution providers</div>
-			<div class="relation catalyst"></div>
-			<div class="desc"><b>Catalyst relation</b> Relation established by  a catalyst</div>
-			<div class="relation potential"></div>
-			<div class="desc"><b>Potential relation</b> Relation established by a thought leader</div>
-			<div class="relation alternative"></div>
-			<div class="desc"><b>Alternative relation</b> Two solutions that are potential alternatives</div>
+		<table>
+			<tr><td><div class="entity existing"></div></td>
+			<td><b>Existing Solution</b><br> Solutions that is part of an existing cluster</div></td></tr>
+			<tr><td><div class="entity supporting"></div></td>
+			<td><b>Supporting solution</b><br> Existing solution that is (not yet) part of the cluster </td></tr>
+			<tr><td><div class="entity potential"></div></td>
+			<td><b>Potential solution</b><br> Possible solution that is not on the market, that could be part of a future cluster</td></tr>
+			<tr><td><div class="entity bordered core"></div></td>
+			<td><b>Existing</b><br> Solution that focus on what the cluster i delivering right now</td></tr>
+			<tr><td><div class="entity bordered accelerator"></div></td>
+			<td><b>Accelerator</b><br> Accelererating solution such a business- or app development</td></tr>
+			<tr><td><div class="entity bordered expander"></div></td>
+			<td><b>Expander</b><br> Solution that broadens the current clusters capacity to deliver solutions into new areas. </td></tr>
+			<tr><td><div class="relation participant"></div></td>
+			<td><b>Existing relation</b><br> Relations established by  existing cluster participants</td></tr>
+			<tr><td><div class="relation supporting"></div></td>
+			<td><b>Supporting relation</b><br> Relation established by  supporting solution providers</td></tr>
+			<tr><td><div class="relation catalyst"></div></td>
+			<td><b>Catalyst relation</b><br> Relation established by  a catalyst</td></tr>
+			<tr><td><div class="relation potential"></div></td>
+			<td><b>Potential relation</b><br> Relation established by a thought leader</td></tr>
+			<tr><td><div class="relation alternative"></div></td>
+			<td><b>Alternative relation</b><br> Two solutions that are potential alternatives</td></tr>
+		</table>
 		</div>
 	</div>
 	<div class="modal" ng-show="addSolutionWizard.show">

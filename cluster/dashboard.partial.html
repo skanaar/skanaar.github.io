@@ -1,4 +1,6 @@
-<div class="full-row jumbotron"><h1>Dashboard</h1></div>
+<div class="full-row jumbotron">
+	<h1>Transformative Solutions</h1>
+</div>
 <div class="full-row dashboard-section updates">
 	<h2>UPDATES</h2>
 	<div class="blocks">
@@ -9,13 +11,12 @@
 	</div>
 	<hr>
 	<h2>PERSONAL GOALS</h2>
-	<div class="progress-gauge" style="border-radius: 2em; background: #444; padding: 1ex 2ex; position: relative; margin: 1em; color: white" ng-repeat="g in goals">
+	<div class="progress-gauge" style="border-radius: 2em; background: #444; padding: 1ex 2ex; position: relative; margin: 1em; color: white;" ng-repeat="g in goals">
 		&nbsp;
 		<div class="progress-bar"
 			 style="background: {{g.color}}; width: {{g.value}}">&nbsp;</div>
 		<div class="progress-message">{{g.value}} &nbsp; &nbsp; &nbsp; {{g.name}}</div>
 	</div>
-	<hr>
 </div>
 <div class="full-row dashboard-section profile-summary">
 	<h2>Marie Fredricks</h2>

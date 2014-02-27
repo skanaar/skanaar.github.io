@@ -32,7 +32,10 @@
 				<i class="fa fa-search"></i> <span class="hidden-sm">Search</span>
 			</a>
 			<a ng-class="{active: isApp('cluster')}" href="#/cluster/1">
-				<i class="fa fa-bullseye"></i> <span class="hidden-sm">Explorer</span>
+				<i class="fa fa-lightbulb-o"></i> <span class="hidden-sm">Solutions</span>
+			</a>
+			<a ng-class="{active: isApp('map')}" href="#/map">
+				<i class="fa fa-globe"></i> <span class="hidden-sm">Map</span>
 			</a>
 			<a href="#"><i class="fa fa-power-off"></i></a>
 		</div>
@@ -41,7 +44,7 @@
 
 	<div ng-view></div>
 
-	<div class="full-row footer page-stripe">
+	<div class="full-row footer page-stripe" ng-controller="NavbarCtrl">
 		<div class="title">
 			<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.sv"><img alt="Creative Commons-licens" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a>
 			<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Cluster platform for transformative solutions</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.sv">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 Internationell License</a>.

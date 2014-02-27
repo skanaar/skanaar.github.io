@@ -6,25 +6,30 @@
 	<h2>UPDATES</h2>
 	<table style="margin: 2em auto">
 	<tr>
-		<td style="height: 40px">Username </td>
-		<td><input type="text"> </td>
+		<td style="height: 35px">Username </td>
+		<td><input type="text" ng-model="username"> </td>
 	</tr>
 	<tr>
-		<td style="height: 40px">Password </td>
-		<td><input type="password"> </td>
+		<td style="height: 35px">Password </td>
+		<td><input type="password" ng-model="password"> </td>
 	</tr>
 	<tr>
-		<td style="height: 40px"><label><input type="checkbox"> Remember me</label></td>
-		<td><a class="button" style="margin-right:0; width: 60px" href="#/dashboard">Log in</a> </td>
+		<td style="height: 35px"><label><input type="checkbox"> Remember me</label></td>
+		<td><a class="button"
+				style="margin-right:0; width: 60px"
+				ng-click="login()"
+				href="javascript:void(0)">Log in</a> </td>
 	</tr>
 	</table>
-	<div class="blocks">
-		<div class="block" ng-repeat="u in updates">
-			<img ng-src="img/icons/{{u.icon}}" style="display: inline">
-			<b>{{u.value}}</b><div class="specifier">{{u.name}}</div>
+
+	<div class="full-row">
+		<div class="introductions">
+			<hr>
+			<a><img src="img/trans_clust_blubb.png" ></a>
+			<a><img src="img/interest_blubb.png" ></a>
 		</div>
 	</div>
-	<hr>
+
 	<div class="progress-gauge" style="border-radius: 2em; background: #444; padding: 1ex 2ex; position: relative; margin: 1em; color: white" ng-repeat="g in goals">
 		&nbsp;
 		<div class="progress-bar"
