@@ -555,31 +555,25 @@ canvas#canvas {
 .solution-form {
 	font-family: 'Dosis', sans-serif
 }
-
 .solution-form input[type=text], .solution-form input[type=range] {
 	width: 40%;
 	margin: 2px;
 }
-
 .solution-form .align-inputs label {
 	display: inline-block;
 	width: 120px;
 }
-
 .solution-form h3 i.fa {
 	display: inline-block;
 	margin-left: 10px;
 	color: green;
 }
-
 .solution-form .clickable {
 	cursor: pointer;
 }
-
 .solution-form .segment {
 	padding-left: 1.5em;
 }
-
 .solution-form .help {
 	margin: 0 -2em 1em -2em;
 	padding: 1ex 2em;
@@ -588,16 +582,20 @@ canvas#canvas {
 	border-color: #ccc;
 	border-width: 1px 0;
 }
-
 .solution-form textarea {
 	width: 50%;
 	border-radius: 10px;
 	border: 1px solid #aaa;
 }
-
 .solution-form small {
 	color: #888;
 	margin-left: 20px;
+}
+.solution-form h3 small {
+	margin-left: 0px;
+}
+.solution-form a {
+	color: teal;
 }
 
 a.button {
