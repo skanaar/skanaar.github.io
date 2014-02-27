@@ -551,6 +551,9 @@ canvas#canvas {
 	vertical-align: top;
 	width: 40%
 }
+.modal li a {
+	color: #8fc;
+}
 
 .solution-form {
 	font-family: 'Dosis', sans-serif

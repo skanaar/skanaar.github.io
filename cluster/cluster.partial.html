@@ -7,14 +7,16 @@
 	</div>
 
 	<h1>{{cluster.name}}: {{companyName}}</h1>
-	<small>Solutions: {{cluster.entities.length}} &nbsp; &nbsp; &nbsp; 
-	Building: {{clusterProperties.building | number:0}}% &nbsp; &nbsp; &nbsp; 
-	Nutrition: {{clusterProperties.nutrition | number:0}}% &nbsp; &nbsp; &nbsp; 
+	<small>Building: {{clusterProperties.building | number:0}}% &nbsp; &nbsp; &nbsp; 
 	Mobility: {{clusterProperties.mobility | number:0}}% &nbsp; &nbsp; &nbsp; 
-	Transformative Cluster Potential: {{cluster.potential || 'TBD'}}</small>
+	Nutrition: {{clusterProperties.nutrition | number:0}}% &nbsp; &nbsp; &nbsp; 
+	Solutions: {{cluster.entities.length}} &nbsp; &nbsp; &nbsp; 
+	Transformative Potential: {{cluster.potential || 'TBD'}}</small>
 </div>
 <div class="full-row page-stripe toolbar">
 	<div class="pull-right">
+		<a ng-click="prepareDownloadLink()" href="javascript:void(0)">
+			<i class="fa fa-save"></i></a>
 		<a id="download-image-link" download="cluster-snapshot.png">
 			<i class="fa fa-camera"></i></a>
 		<a onclick="engine.zoom(-1)" href="javascript:void(0)">
@@ -247,6 +249,23 @@
 			</ul>
 		</div>
 	</div>
+	<div class="modal" ng-show="readyToDownload">
+		<div>
+			<a class="pull-right" ng-click="readyToDownload = false" href="javascript:void(0)">
+				<img src="img/icons/close_popup.png" width="42" height="42">
+			</a>
+			<h2>Download current cluster</h2>
+			<ol style="font-size: 150%">
+				<li>Right-click 
+					<a id="download-save-link2" download="my-cluster.json" target="_blank">
+						<i class="fa fa-download"></i> this link
+					</a>
+				</li>
+				<li>Choose "Save"</li>
+				<li>Email file to join@transformative-clusters.net</li>
+			</ol>
+		</div>
+	</div>
 </div>
 <script>
 
@@ -254,7 +273,7 @@ attachDataUrlToLink('download-image-link', 'image/png', function (){
 	return document.getElementById('canvas').toDataURL('image/png')
 })
 
-attachDataUrlToLink('download-data-link', 'text/json', function (){
+function clusterToDataUrl(){
 	var es = ClusterPlatform.nodes.entities
 	var rs = ClusterPlatform.nodes.relations
     var data = {
@@ -267,8 +286,9 @@ attachDataUrlToLink('download-data-link', 'text/json', function (){
         })
     }
     return 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data, undefined, 2))
-})
+}
 
+attachDataUrlToLink('download-data-link', 'text/json', clusterToDataUrl)
 
 var engine = Engine('canvas', Nodes([], []), { fps: 30 })
 

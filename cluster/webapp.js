@@ -56,12 +56,11 @@ angular.module('cluster').controller('NavbarCtrl', function ($scope){
 })
 
 angular.module('cluster').factory('clusterLoader', function ($http, $q){
-    var files = $q.all([
-        $http.get('data/cluster-1.json'),
-        $http.get('data/cluster-2.json'),
-        $http.get('data/cluster-3.json'),
-        $http.get('data/cluster-4.json')
-    ]).then(function (rs){
+    var files = $http.get('data/clustersearch.json').then(function (response){
+        return $q.all(_.times(response.data.clusterCount, function (i){
+            return $http.get('data/cluster-'+(1+i)+'.json')
+        }))
+    }).then(function (rs){
         return _.map(rs, function (r){ return unpackCluster(r.data) })
     })
 
@@ -111,7 +110,7 @@ angular.module('cluster').factory('clusterLoader', function ($http, $q){
     }
 })
 
-angular.module('cluster').controller('SearchCtrl', function ($scope, $http, $q, clusterLoader){
+angular.module('cluster').controller('SearchCtrl', function ($scope, $http, clusterLoader){
     $scope.clusters = []
     $scope.filters = {
         mobility: false,
@@ -154,7 +153,7 @@ angular.module('cluster').controller('MapCtrl', function ($scope, $http){
     })
 })
 
-angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q, $routeParams, clusterLoader){
+angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q, $timeout, $routeParams, clusterLoader){
     ClusterPlatform.clusterScope = $scope
 
     var clusterTemplate = {
@@ -272,6 +271,11 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q,
 
     $scope.selectEntity = function (id){
         ClusterPlatform.engine.select(id)
+    }
+
+    $scope.prepareDownloadLink = function (){
+        document.getElementById('download-save-link2').href = clusterToDataUrl()
+        $scope.readyToDownload = true
     }
 
     $scope.loadClusterFile = function (files){
