@@ -59,6 +59,7 @@ Transformative Cluster Potential: {{cluster.potential || 'TBD'}}</small></div>
 			<div><label>Type</label> <em style="width: 100px">{{selectedRelation.type}}</em></div>
 			<div><label>Date</label> {{selectedRelation.date}}</div>
 			<div><label>Author</label> {{selectedRelation.author}}</div>
+			<div><label>Verified</label> {{selectedRelation.verified ? 'pending' : 'Yes'}}</div>
 			<hr>
 			<div class="toolset">
 				<a ng-click="removeRelation()" href="javascript:void(0)">

@@ -38,6 +38,7 @@ angular.module('cluster', ['ngRoute']).config(function($routeProvider) {
     $routeProvider
     .when('/login', {controller:'GoalsCtrl', templateUrl:'login.partial.html'})
     .when('/dashboard', {controller:'DashboardCtrl', templateUrl:'dashboard.partial.html'})
+    .when('/map/:clusterId', {controller:'MapCtrl', templateUrl:'map.partial.html'})
     .when('/goals', {controller:'GoalsCtrl', templateUrl:'goals.partial.html'})
     .when('/newsolution', {controller: 'RegisterSolutionCtrl', templateUrl:'newsolution.partial.html'})
     .when('/searchclusters', {controller:'SearchCtrl', templateUrl:'clustersearch.partial.html'})
@@ -139,6 +140,19 @@ angular.module('cluster').controller('SearchCtrl', function ($scope, $http, $q, 
             orderedSolutions.push(s[i])
         return orderedSolutions
     }
+})
+
+angular.module('cluster').controller('MapCtrl', function ($scope, $http, $q, $routeParams, clusterLoader){
+    var clusterId = $routeParams.clusterId
+    $http.get('data/map.json').then(function (response){
+        googleMapsMarkers = response.data
+
+        var script = document.createElement('script')
+        script.type = 'text/javascript'
+        script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
+            'callback=initialize'
+        document.body.appendChild(script)
+    })
 })
 
 angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q, $routeParams, clusterLoader){

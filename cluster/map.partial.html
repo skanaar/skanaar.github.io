@@ -1,0 +1,23 @@
+<div id="map-canvas" style="height: 600px"></div>
+<script>
+
+var googleMapsMarkers = []
+
+function initialize() {
+	var mapOptions = {
+		zoom: 6,
+		center: new google.maps.LatLng(59, 18)
+	}
+
+	var map = new google.maps.Map(document.getElementById('map-canvas'),
+	  mapOptions)
+	var markers = _.map(googleMapsMarkers, function (m){
+		return new google.maps.Marker({
+		    position: new google.maps.LatLng(m.lat, m.lng),
+		    map: map,
+		    title: m.name
+		});
+	})
+}
+
+</script>
