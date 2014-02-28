@@ -19,6 +19,7 @@ html, body {
 	height: 100%;
 	overflow-x: hidden;
 	overflow-y: hidden;
+	background: #E5E9EB;
 }
 .wrap {
 	position: relative;
@@ -29,9 +30,9 @@ html, body {
 	outline: none;
 	position: absolute;
 	width: 100%;
-	height: 40%;
+	height: 100%;
+	background: rgba(0,0,0,0);
 	box-sizing: border-box;
-	background: #E5E9EB;
 	border: 0;
 	font-family: Consolas, monospace;
 	color: #444;
@@ -39,6 +40,7 @@ html, body {
 }
 #canvas {
 	position: absolute;
+	right: 0;
 	bottom: 0;
 }
 a, a:hover, a:active {
@@ -109,8 +111,8 @@ a:hover {
 	function fillScreen(){
 		w = canvas.parentElement.offsetWidth
 		h = canvas.parentElement.offsetHeight
-		canvas.setAttribute('width', w)
-		canvas.setAttribute('height', h*0.6-1)
+		canvas.setAttribute('width', w*0.75)
+		canvas.setAttribute('height', h-200)
 		sourceChanged()
 	}
 
@@ -140,20 +142,23 @@ a:hover {
 		var widths = _.map(lines, function (n){ return g.ctx.measureText(n).width })
 		return {
 			width: _.max(widths) + 25,
-			height: (fontSize) *  (lines.length + (lines.length===1 ? 0.5 : 1.5))
+			height: (fontSize) *  (lines.length + (lines.length===1 ? 1.5 : 2.5))
 		}
 	}
 
+	function trim(s){ return s.trim() }
+	function trims(ss){ return _.map(ss, trim) }
+
 	function parse(source){
 		function parseRelationString(s){
-			var pattern = /\[(.*)\](-:>|->|<:-|<-|<->|-)\[(.*)\]/
+			var pattern = /\[(.*)\](-:>|->|<:-|<-|<->|-|:)\[(.*)\]/
 			var parts = s.match(pattern)
-			return parts && _.map(_.tail(parts), function (p){ return p.trim() })
+			return parts && trims(_.tail(parts))
 		}
 		function parseMetaString(s){
 			var pattern = /#(.*):(.*)/
 			var parts = s.match(pattern)
-			return parts && _.map(_.tail(parts), function (p){ return p.trim() })
+			return parts && trims(_.tail(parts))
 		}
 		var lines = source.split('\n')
 		var bimap = _.compact(_.map(lines, parseRelationString))
@@ -161,7 +166,7 @@ a:hover {
 		var nodes = {}
 		var relations = []
 		function parseClass(nodes, classSerialization){
-			var tokens = classSerialization.split('|')
+			var tokens = trims(classSerialization.split('|'))
 			if (tokens.length === 3)
 				nodes[tokens[0]] = undefined
 			return nodes[tokens[0]] || {
@@ -173,8 +178,8 @@ a:hover {
 		_.each(bimap, function (pair){
 			var left = parseClass(nodes, pair[0])
 			var right = parseClass(nodes, pair[2])
-			nodes[left.name] = left
-			nodes[right.name] = right
+			if (left.name) nodes[left.name] = left
+			if (right.name) nodes[right.name] = right
 			var isLeftToRight = pair[1][0] === '-'
 			var a = isLeftToRight ? left : right
 			var b = isLeftToRight ? right : left
@@ -186,13 +191,15 @@ a:hover {
 				'<->': 'twoway',
 				'-': 'nondirectional' 
 			}[pair[1]]
-			relations.push({start: a.name, end:b.name, type: t})
+			if (t)
+				relations.push({start: a.name, end:b.name, type: t})
 		})
 		return {
 			nodes: nodes,
 			relations: relations,
 			fontSize: directives.fontSize || 14,
-			font: directives.font || 'Calibri'
+			font: directives.font || 'Calibri',
+			rankSeparation: directives.rankSeparation || 30
 		}
 	}
 
@@ -233,61 +240,78 @@ a:hover {
 			})
 			return { nodes: nodes, relations: relations }
 		}
-		return packageDagreGraph(ast, dagre.layout().run(buildDagreGraph(ast)))
+		var dagreLayout = dagre.layout()
+							   .rankSep(ast.rankSeparation)
+							   .run(buildDagreGraph(ast))
+		return packageDagreGraph(ast, dagreLayout)
 	}
 
 	function render(ast, layout){
 		g.ctx.save()
 		g.ctx.clearRect(0, 0, w, h)
-		g.ctx.translate(50, 50)
+		g.ctx.translate(20, 20)
 		g.ctx.strokeStyle = '#111'
 		g.ctx.textAlign = 'center'
 		g.ctx.lineWidth = 1
 
-		function drawArrow(path, type){
+		function rectIntersection(p1, p2, w, h){
+			var v = diff(p1, p2)
+			for(var t=1; t>=0; t-= 0.01){
+				var p = mult(v, t)
+				if(Math.abs(p.x) < w/2 && Math.abs(p.y) < h/2)
+					return add(p2, p)
+			}
+			return p1
+		}
+
+		function drawArrow(path, type, target){
 			var v = diff(path[path.length-2], _.last(path))
 			var nv = normalize(v)
-			var p2_ = add(_.last(path), mult(nv, mag(v)*0.6))
+			var p2_ = rectIntersection(path[path.length-2], _.last(path), target.width, target.height)
 			var t = rot(nv)
 			var arrowBase = add(p2_, mult(nv, 8))
-			var arrowPoint = add(p2_, mult(nv, -2))
+			var arrowPoint = add(p2_, mult(nv, 0))
 			var arrow = [
 				arrowPoint,
-				add(arrowBase, mult(t, 5)),
-				add(arrowBase, mult(t, -5)),
+				add(arrowBase, mult(t, 3)),
+				add(arrowBase, mult(t, -3)),
 				arrowPoint
 			]
 			g.ctx.fillStyle = (type === 'dependency') ? '#111' : '#fff'
 			var ctx = g.path(arrow).fill().stroke()
 		}
 
+		function rnd(x){ return Math.round(x) }
+
 		_.each(layout.relations, function (r){
 			g.path(r.path).stroke()
 			if (r.type === 'nondirectional') return
 			if (r.type === 'twoway'){
-				drawArrow(r.path, 'dependency')
-				drawArrow(_.clone(r.path).reverse(), 'dependency')
+				drawArrow(r.path, 'dependency', r.end)
+				drawArrow(_.clone(r.path).reverse(), 'dependency', r.end)
 			}
 			else
-				drawArrow(r.path, r.type)
+				drawArrow(r.path, r.type, r.end)
 		})
 		g.ctx.lineWidth = 1
 		_.each(layout.nodes, function (e){
 			var lineHeight = +ast.fontSize
 			var w = e.width
-			var h = e.height+lineHeight
+			var h = e.height
+			var rx = rnd(e.x-w/2)+0.5
+			var ry = rnd(e.y-h/2)+0.5
 			var y = e.y-h/2
-			g.ctx.fillStyle = 'rgba(200, 200, 200, 0.9)'
-			g.ctx.fillRect(e.x-w/2, y, w, h)
-			g.ctx.strokeRect(e.x-w/2, y, w, h)
+			g.ctx.fillStyle = 'rgba(220, 220, 220, 1)'
+			g.ctx.fillRect(rx, ry, w, h)
+			g.ctx.strokeRect(rx, ry, w, h)
 			g.ctx.fillStyle = '#333'
-			y += lineHeight*1.5
+			y += rnd(lineHeight*1.5)
 			g.ctx.fillText(e.name, e.x, y)
 			if (e.attrs.length || e.ops.length){
-				y += lineHeight/2
-				var line = [{x: e.x-w/2, y: y}, {x: e.x+w/2, y: y}]
+				y += rnd(lineHeight/2)+0.5
+				var line = [{x: rx, y: y}, {x: rx+w, y: y}]
 				g.path(line).stroke()
-				g.path(line, {x:0, y:(e.attrs.length+0.75)*lineHeight}).stroke()
+				g.path(line, {x:0, y:rnd((e.attrs.length+0.75)*lineHeight)}).stroke()
 				y += lineHeight/4
 			}
 			_.each(e.attrs, function (a, i){
