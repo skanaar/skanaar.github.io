@@ -63,6 +63,32 @@ a:hover {
 .tools>span {
 	font-size: 150%;
 }
+.tools>a {
+	margin-left: 10px;
+}
+#help {
+	display: none;
+	position: absolute;
+	top: 0px;
+	width: 300px;
+	background-color: rgba(224,228,230,1);
+	border: 0 solid #aaa;
+	border-width: 0 0 0 1px;
+	color: black;
+	font-family: Calibri, Helvetica, sans-serif;
+	right:0;
+	bottom: 0;
+	padding: 100px 10px 0 10px;
+}
+#help label{
+	display: block;
+	color: #888;
+	margin-top: 1em;
+}
+#help.visible {
+	display: block
+}
+
 </style>
 </head>
 <body>
@@ -72,6 +98,30 @@ a:hover {
 		<textarea id="textarea">[apa]->[banan]
 [apa]->[kokos]</textarea>
 
+		<div id="help">
+			<label>Car depends on Engine</label>
+			[Car]-&gt;[Engine]
+
+			<label>Pickup inherits from Car</label>
+			[Pickup]-:&gt;[Car]
+
+			<label>Paul and Ron have an association</label>
+			[Paul]-[Ron]
+
+			<label>They both depend on each other</label>
+			[Chicken]&lt;-&gt;[Egg]
+
+			<label>Car has some attributes</label>
+			[Car]:[Car|maxSpeed: Float;color: Color|]
+
+			<label>Car has some operations</label>
+			[Car]:[Car|color: Color|honk()]
+
+			<label>Set font</label>
+			#fontSize: 20<br>
+			#font: Times
+		</div>
+
 		<div class="tools">
 			<span>nomnoml &nbsp;&nbsp;</span>
 			<a href="javascript:discardCurrentGraph()">
@@ -79,6 +129,9 @@ a:hover {
 			</a>
 			<a id="savebutton" href="javascript:void(0)" download="uml.png">
 				<i class="fa fa-fw fa-camera fa-lg"></i>
+			</a>
+			<a href="javascript:void(0)" onclick="toggleHelp()">
+				<i class="fa fa-fw fa-book fa-lg"></i>
 			</a>
 		</div>
 	</div>
@@ -112,6 +165,10 @@ a:hover {
 		    link.href = downloadUrl;
 		}
 	}())
+
+	function toggleHelp(){
+		document.getElementById('help').classList.toggle("visible");
+	}
 
 	function fillScreen(){
 		w = canvas.parentElement.offsetWidth
