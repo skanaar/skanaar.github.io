@@ -87,14 +87,13 @@ a:hover {
 	<script src="../cluster/canvas.js"></script>
 	<script src="../cluster/vector.js"></script>
 	<script type="text/nomnoml" id="defaultGraph">[marauder]<:-[pirate]
-[pirate]-[mischief]
+[pirate|eyeCount: Int|raid();pillage()]-[mischief]
 [jollyness]->[pirate]
 [jollyness]->[rum]
 [jollyness]->[singing]
 [pirate]->[rum]
 [pirate]->[singing]
-[singing]<->[rum]
-	</script>
+[singing]<->[rum]</script>
 	<script>
 
 	(function (){
@@ -119,7 +118,6 @@ a:hover {
 	var canvas = document.getElementById('canvas')
 	var textarea = document.getElementById('textarea')
 	var g = skanaar.Canvas(canvas, {})
-	var fontSize = 14
 	window.addEventListener('resize', _.throttle(fillScreen, 750, {leading: true}))
 	textarea.addEventListener('input', sourceChanged)
 	textarea.value = localStorage.getItem('nomnoml.lastSource') || document.getElementById('defaultGraph').innerHTML
@@ -131,31 +129,52 @@ a:hover {
 	}
 
 	function sourceChanged(){
-		g.ctx.font = ' '+fontSize+'pt Calibri, sans-serif'
 		var ast = parse(textarea.value)
+		g.ctx.font = ast.fontSize+'pt '+ast.font+', Helvetica, sans-serif'
 		localStorage.setItem('nomnoml.lastSource', textarea.value)
-		render(layout(ast, measureNode))
+		render(ast, layout(ast, measureNode))
 	}
 
-	function measureNode(node){
-		return { width: g.ctx.measureText(node.name).width + 25, height: fontSize + 25 }
+	function measureNode(fontSize, node){
+		var lines = _.flatten([node.name, node.attrs, node.ops])
+		var widths = _.map(lines, function (n){ return g.ctx.measureText(n).width })
+		return {
+			width: _.max(widths) + 25,
+			height: (fontSize) *  (lines.length + (lines.length===1 ? 0.5 : 1.5))
+		}
 	}
 
 	function parse(source){
-		var pattern = /\[(.*)\](-:>|->|<:-|<-|<->|-)\[(.*)\]/
-		function parseLine(s){
+		function parseRelationString(s){
+			var pattern = /\[(.*)\](-:>|->|<:-|<-|<->|-)\[(.*)\]/
+			var parts = s.match(pattern)
+			return parts && _.map(_.tail(parts), function (p){ return p.trim() })
+		}
+		function parseMetaString(s){
+			var pattern = /#(.*):(.*)/
 			var parts = s.match(pattern)
 			return parts && _.map(_.tail(parts), function (p){ return p.trim() })
 		}
 		var lines = source.split('\n')
-		var bimap = _.compact(_.map(lines, parseLine))
+		var bimap = _.compact(_.map(lines, parseRelationString))
+		var directives = _.object(_.compact(_.map(lines, parseMetaString)))
 		var nodes = {}
 		var relations = []
+		function parseClass(nodes, classSerialization){
+			var tokens = classSerialization.split('|')
+			if (tokens.length === 3)
+				nodes[tokens[0]] = undefined
+			return nodes[tokens[0]] || {
+				name: tokens[0],
+				attrs: tokens[1] ? tokens[1].split(';') : [],
+				ops: tokens[2] ? tokens[2].split(';') : []
+			}
+		}
 		_.each(bimap, function (pair){
-			var left = pair[0]
-			var right = pair[2]
-			nodes[left] = { name: left, x: _.random(600), y: _.random(400) }
-			nodes[right] = { name: right, x: _.random(600), y: _.random(400) }
+			var left = parseClass(nodes, pair[0])
+			var right = parseClass(nodes, pair[2])
+			nodes[left.name] = left
+			nodes[right.name] = right
 			var isLeftToRight = pair[1][0] === '-'
 			var a = isLeftToRight ? left : right
 			var b = isLeftToRight ? right : left
@@ -167,16 +186,21 @@ a:hover {
 				'<->': 'twoway',
 				'-': 'nondirectional' 
 			}[pair[1]]
-			relations.push({start: a, end:b, type: t})
+			relations.push({start: a.name, end:b.name, type: t})
 		})
-		return { nodes: nodes, relations: relations }
+		return {
+			nodes: nodes,
+			relations: relations,
+			fontSize: directives.fontSize || 14,
+			font: directives.font || 'Calibri'
+		}
 	}
 
 	function layout(ast, measureNode){
 		function buildDagreGraph(ast){
 			var g = new dagre.Digraph()
 			_.each(ast.nodes, function (e, key){
-				var size = measureNode(e)
+				var size = measureNode(ast.fontSize, e)
 				g.addNode(key, { label: key, width: size.width, height: size.height })
 			})
 			_.each(ast.relations, function (r){
@@ -188,7 +212,15 @@ a:hover {
 			var nodes = {}
 			var relations = []
 			dagreLayout.eachNode(function (key, data){
-				nodes[key] = { name: key, x: data.x, y: data.y, width: data.width, height: data.height }
+				nodes[key] = {
+					name: key,
+					x: data.x,
+					y: data.y,
+					attrs: ast.nodes[key].attrs,
+					ops: ast.nodes[key].ops,
+					width: data.width,
+					height: data.height
+				}
 			})
 			dagreLayout.eachEdge(function (id, start, end, data){
 				relations.push({
@@ -204,7 +236,7 @@ a:hover {
 		return packageDagreGraph(ast, dagre.layout().run(buildDagreGraph(ast)))
 	}
 
-	function render(layout){
+	function render(ast, layout){
 		g.ctx.save()
 		g.ctx.clearRect(0, 0, w, h)
 		g.ctx.translate(50, 50)
@@ -241,13 +273,32 @@ a:hover {
 		})
 		g.ctx.lineWidth = 1
 		_.each(layout.nodes, function (e){
+			var lineHeight = +ast.fontSize
 			var w = e.width
-			var h = e.height
-			g.ctx.fillStyle = 'rgba(200, 200, 200, 1)'
-			g.ctx.fillRect(e.x-w/2, e.y-h/2, w, h)
-			g.ctx.strokeRect(e.x-w/2, e.y-h/2, w, h)
+			var h = e.height+lineHeight
+			var y = e.y-h/2
+			g.ctx.fillStyle = 'rgba(200, 200, 200, 0.9)'
+			g.ctx.fillRect(e.x-w/2, y, w, h)
+			g.ctx.strokeRect(e.x-w/2, y, w, h)
 			g.ctx.fillStyle = '#333'
-			g.ctx.fillText(e.name, e.x, e.y+fontSize/2-1)
+			y += lineHeight*1.5
+			g.ctx.fillText(e.name, e.x, y)
+			if (e.attrs.length || e.ops.length){
+				y += lineHeight/2
+				var line = [{x: e.x-w/2, y: y}, {x: e.x+w/2, y: y}]
+				g.path(line).stroke()
+				g.path(line, {x:0, y:(e.attrs.length+0.75)*lineHeight}).stroke()
+				y += lineHeight/4
+			}
+			_.each(e.attrs, function (a, i){
+				y += lineHeight
+				g.ctx.fillText(a, e.x, y)
+			})
+			y += lineHeight*0.75
+			_.each(e.ops, function (a, i){
+				y += lineHeight
+				g.ctx.fillText(a, e.x, y)
+			})
 		})
 		g.ctx.restore()
 	}
