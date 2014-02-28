@@ -88,12 +88,17 @@ a:hover {
 	<script src="dagre.min.js"></script>
 	<script src="../cluster/canvas.js"></script>
 	<script src="../cluster/vector.js"></script>
-	<script type="text/nomnoml" id="defaultGraph">[marauder]<:-[pirate]
-[pirate|eyeCount: Int|raid();pillage()]-[mischief]
+	<script type="text/nomnoml" id="defaultGraph">#fontSize: 14
+
+[pirate]:[pirate | eyeCount: Int | raid();pillage()]
+[jollyness]:[jollyness | magnitude: Real |]
+
+[marauder]<:-[pirate]
+[pirate]-[mischief]
 [jollyness]->[pirate]
 [jollyness]->[rum]
 [jollyness]->[singing]
-[pirate]->[rum]
+[pirate]->[rum|tastiness: Int|swig()]
 [pirate]->[singing]
 [singing]<->[rum]</script>
 	<script>
