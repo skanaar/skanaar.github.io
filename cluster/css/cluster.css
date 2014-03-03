@@ -88,7 +88,7 @@ input[type=checkbox] {
 }
 
 input[type=checkbox]:checked {
-	background-color: green;
+	background-color: #4C9730;
 }
 
 textarea {
@@ -203,7 +203,7 @@ hr {
 
 .jumbotron {
 	background: #0d8;
-	background: url(../img/algae.jpg) center center;
+	background: url(../img/header.jpg) center center;
 	background-size: cover;
 	font-family: 'Dosis', sans-serif;
 	text-align: center;
@@ -225,6 +225,15 @@ hr {
 	padding: 1px 30px;
 	background: #eee;
 	font-family: 'Dosis', sans-serif;
+}
+.action-buttons {
+	text-align: center;
+}
+.action-buttons a.button{
+	display: inline-block;
+	font-size: 150%;
+	width: 350px;
+	margin: 20px;
 }
 .updates .blocks{
 	text-align: center;
@@ -427,6 +436,38 @@ canvas#canvas {
 	background: url(../img/background.jpg) center center;
 	background-size: cover;
 }
+.properties-hud {
+	position: absolute; 
+	left: 70px; 
+	top: 0; 
+	right: 0; 
+	background: rgba(0,0,0,0.75);
+	font-family: 'Dosis', sans-serif;
+	text-align: center;
+	padding: 5px 5px 5px 5px;
+	color: #39B7EA;
+	font-size: 120%;
+}
+.tab-bar {
+	position: absolute;
+	width: 69px;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	background-color: #153F3E;
+	border: 1px solid black;
+	border-width: 0 1px 0 0;
+	color: #eee;
+	font-size: 80%;
+	font-family: 'Dosis';
+	text-align: center
+}
+
+.tab-bar img {
+	width: 50px;
+	height: 50px;
+	margin-top: 15px;
+}
 
 .details_sidebar {
 	right: 0; 
@@ -435,10 +476,10 @@ canvas#canvas {
 	color: #888;
 }
 .search_sidebar {
-	left: 0;
+	left: 70px;
 }
 .admin_sidebar {
-	left: 0;
+	left: 70px;
 	width: 300px;
 }
 .admin_sidebar h3 {
@@ -451,7 +492,7 @@ canvas#canvas {
 }
 
 .legend_sidebar {
-	left: 0;
+	left: 70px;
 	width: 300px;
 }
 
@@ -507,16 +548,11 @@ canvas#canvas {
 
 .modal {
 	position: absolute;
-	top: 40px;
-	bottom: 40px;
-	left: 40px;
-	right: 40px;
-	background: rgba(23, 65, 65, 0.9);
-	color: #eee;
-	font-family: 'Dosis', sans-serif;
-	overflow-y: scroll;
-	overflow-x: hidden;
-	box-shadow: 0 0 8px black
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0, 0, 0, 0.5);
 }
 .modal h2 {
 	color: #1C86A0;
@@ -526,7 +562,18 @@ canvas#canvas {
 	color: #eee;
 }
 .modal>div {
-	margin: 15px;
+	position: absolute;
+	top: 40px;
+	bottom: 40px;
+	left: 40px;
+	right: 40px;
+	background: rgba(23, 65, 65, 0.9);
+	color: #eee;
+	font-family: 'Dosis', sans-serif;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	box-shadow: 0 0 8px black;
+	padding: 15px;
 }
 .modal table {
 	width: 100%;
@@ -569,7 +616,7 @@ canvas#canvas {
 .solution-form h3 i.fa {
 	display: inline-block;
 	margin-left: 10px;
-	color: green;
+	color: #4C9730;
 }
 .solution-form .clickable {
 	cursor: pointer;
@@ -606,7 +653,7 @@ a.button {
 	width: 100px;
 	text-align: center;
 	margin: 20px auto;
-	background: green;
+	background: #4C9730;
 	color: #eee;
 	border-radius: 20px;
 	padding: 4px 20px;

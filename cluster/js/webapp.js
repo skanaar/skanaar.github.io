@@ -442,6 +442,10 @@ angular.module('cluster').controller('NetworkCtrl', function ($scope, $http, $q,
         ClusterPlatform.engine.pause()
     })
 
+    $scope.togglePane = function (key){
+        $scope.activePane = ($scope.activePane === key) ? "none" : key
+    }
+
     $scope.selectEntity = function (id){
         ClusterPlatform.engine.select(id)
     }

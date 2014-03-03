@@ -10,10 +10,27 @@
 		<a onclick="engine.zoom(1)" href="javascript:void(0)">
 			<i class="fa fa-minus"></i></a>
 	</div>
-	<div><a>&nbsp;</a></div>
+	<div>
+		<a href="#/cluster/1">CLUSTER</a>
+		<a class="active" href="#/network">NETWORK</a>
+		<a href="#/map">MAP</a>
+	</div>
 </div>
 <div style="position: relative">
 	<canvas id="canvas" width="800" height="800"></canvas>
+	<div class="tab-bar">
+		<a ng-click="togglePane('filter')" href="javascript:void(0)">
+		   <img ng-show="activePane === 'filter'" src="img/view_icon.png">
+		   <img ng-hide="activePane === 'filter'" src="img/view_icon_inactive.png">
+		   VIEW
+		</a>
+		<a ng-click="togglePane('current')" href="javascript:void(0)">
+		   <img ng-show="activePane === 'current'" src="img/current_icon.png">
+		   <img ng-hide="activePane === 'current'" src="img/current_icon_inactive.png">CURRENT</a>
+		<a ng-click="togglePane('legend')" href="javascript:void(0)">
+		   <img ng-show="activePane === 'legend'" src="img/legend_icon.png">
+		   <img ng-hide="activePane === 'legend'" src="img/legend_icon_inactive.png">LEGEND</a>
+	</div>
 	<div class="sidebar sidebar-look details_sidebar" ng-show="selectedEntity">
 		<div>
 			<div>
@@ -57,7 +74,7 @@
 	</div>
 	<div class="sidebar sidebar-look search_sidebar"
 		 id="search_sidebar"
-		 ng-show="true">
+		 ng-show="activePane === 'filter'">
 		<div>
 			<h3>Filter</h3>
 			Mobility  <em>&gt; {{filter.mobility}}%</em>

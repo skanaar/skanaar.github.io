@@ -25,20 +25,12 @@
 			<a ng-class="{active: isApp('goals')}" href="#/goals">
 				<i class="fa fa-trophy"></i> <span class="hidden-sm">Goals</span>
 			</a>
-			<a ng-class="{active: isApp('newsolution')}" href="#/newsolution">
-				<i class="fa fa-plus"></i> <span class="hidden-sm">Register</span>
-			</a>
 			<a ng-class="{active: isApp('searchclusters')}" href="#/searchclusters">
 				<i class="fa fa-search"></i> <span class="hidden-sm">Search</span>
 			</a>
-			<a ng-class="{active: isApp('cluster')}" href="#/cluster/1">
+			<a ng-class="{active: isApp('cluster')||isApp('network')||isApp('map')}" 
+			   href="#/cluster/1">
 				<i class="fa fa-lightbulb-o"></i> <span class="hidden-sm">Solutions</span>
-			</a>
-			<a ng-class="{active: isApp('network')}" href="#/network">
-				<i class="fa fa-code-fork"></i> <span class="hidden-sm">Network</span>
-			</a>
-			<a ng-class="{active: isApp('map')}" href="#/map">
-				<i class="fa fa-globe"></i> <span class="hidden-sm">Map</span>
 			</a>
 			<a href="#"><i class="fa fa-power-off"></i></a>
 		</div>

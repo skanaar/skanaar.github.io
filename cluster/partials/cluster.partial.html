@@ -1,22 +1,13 @@
-<div class="full-row jumbotron withsubtitle">
-
+<div class="full-row jumbotron">
 	<div class="pull-right adminbutton">
 		<a ng-class="{active: adminMode}" ng-click="adminMode = !adminMode">
 			<i class="fa fa-gears fa-lg"></i>
 		</a>
 	</div>
-
 	<h1>{{cluster.name}}: {{companyName}}</h1>
-	<small>Building: {{clusterProperties.building | number:0}}% &nbsp; &nbsp; &nbsp; 
-	Mobility: {{clusterProperties.mobility | number:0}}% &nbsp; &nbsp; &nbsp; 
-	Nutrition: {{clusterProperties.nutrition | number:0}}% &nbsp; &nbsp; &nbsp; 
-	Solutions: {{cluster.entities.length}} &nbsp; &nbsp; &nbsp; 
-	Transformative Potential: {{cluster.potential || 'TBD'}}</small>
 </div>
 <div class="full-row page-stripe toolbar">
 	<div class="pull-right">
-		<a ng-click="prepareDownloadLink()" href="javascript:void(0)">
-			<i class="fa fa-save"></i></a>
 		<a id="download-image-link" download="cluster-snapshot.png">
 			<i class="fa fa-camera"></i></a>
 		<a onclick="engine.zoom(-1)" href="javascript:void(0)">
@@ -25,19 +16,38 @@
 			<i class="fa fa-minus"></i></a>
 	</div>
 	<div>
-		<a ng-class="{active: activePane === 'filter'}"
-		   ng-click="togglePane('filter')" href="javascript:void(0)">Filter</a>
-		<a ng-class="{active: activePane === 'current'}"
-		   ng-click="togglePane('current')" href="javascript:void(0)">Current</a>
-		<a ng-class="{active: activePane === 'legend'}"
-		   ng-click="togglePane('legend')" href="javascript:void(0)">Legend</a>
-		<a ng-class="{active: activePane === 'admin'}"
-		   ng-show="adminMode"
-		   ng-click="togglePane('admin')" href="javascript:void(0)">Admin</a>
+		<a class="active" href="#/cluster/1">CLUSTER</a>
+		<a href="#/network">NETWORK</a>
+		<a href="#/map">MAP</a>
 	</div>
 </div>
 <div style="position: relative">
 	<canvas id="canvas" width="800" height="800"></canvas>
+	<div class="properties-hud">
+		<small>Building: {{clusterProperties.building | number:0}}% &nbsp; &nbsp; &nbsp; 
+		Mobility: {{clusterProperties.mobility | number:0}}% &nbsp; &nbsp; &nbsp; 
+		Nutrition: {{clusterProperties.nutrition | number:0}}% &nbsp; &nbsp; &nbsp; 
+		Solutions: {{cluster.entities.length}} &nbsp; &nbsp; &nbsp; 
+		Transformative Potential: {{cluster.potential || 'TBD'}}</small>
+	</div>
+	<div class="tab-bar">
+		<a ng-click="togglePane('filter')" href="javascript:void(0)">
+		   <img ng-show="activePane === 'filter'" src="img/view_icon.png">
+		   <img ng-hide="activePane === 'filter'" src="img/view_icon_inactive.png">
+		   VIEW
+		</a>
+		<a ng-click="togglePane('current')" href="javascript:void(0)">
+		   <img ng-show="activePane === 'current'" src="img/current_icon.png">
+		   <img ng-hide="activePane === 'current'" src="img/current_icon_inactive.png">CURRENT</a>
+		<a ng-click="prepareDownloadLink()" href="javascript:void(0)">
+		   <img src="img/save_to_hdd_inactive.png">DOWNLOAD</a>
+		<a ng-click="togglePane('legend')" href="javascript:void(0)">
+		   <img ng-show="activePane === 'legend'" src="img/legend_icon.png">
+		   <img ng-hide="activePane === 'legend'" src="img/legend_icon_inactive.png">LEGEND</a>
+		<a ng-click="togglePane('admin')" href="javascript:void(0)" ng-show="adminMode">
+		   <img ng-show="activePane === 'admin'" src="img/develop_icon.png">
+		   <img ng-hide="activePane === 'admin'" src="img/develop_icon_inactive.png">ADMIN</a>
+	</div>
 	<div class="sidebar sidebar-look details_sidebar" ng-show="selectedEntity">
 		<div>
 			<div>
