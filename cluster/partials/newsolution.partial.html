@@ -1,0 +1,291 @@
+<div class="full-row jumbotron"><h1>Register new solution</h1></div>
+<div class="solution-form" style="background: #eee; padding: 1em 2em">
+
+<H3>DO YOU WANT TO BE PART OF TRANSFORMATIVE CLUSTERS?<br>
+<small>REGISTER YOUR INTEREST TO PARTICIPATE AS A VIP BETA TESTER</small></H3>
+If you have a (potential) transformative solution, or are interested in implementing such solutions in your work, and want to participate as a VIP beta tester during the pilot of the cluster platform, please fill in the fields below (all fields must be filled) and submit your request. As soon as we have reviewed your application we will get back to you to let you know if your solution is what we are looking for during the pilot. For more information about who can participate as a VIP beta tester and what options exist to participate, see <a href="pdf/quickguide.pdf">Quick guide</a>. 
+
+<hr>
+
+<form id="newsolutionform">
+
+<div class="align-inputs">
+	<H3>NAME OF THE SOLUTION</H3>
+	<label>Solution name</label><input name="SolutionName" type="text">
+
+	<H3>WHAT AREA DOES YOUR SOLUTION COVER? 
+		<i ng-click="toggle('help_area')" class="fa fa-question-circle fa-lg"></i></H3>
+	<div class="help" ng-show="panes.help_area">Grade your solution from 0-100 %. Note than it is possible to have 100 % in more than one area. E.g. if you have a nutrition solution that is integrated in buildings you could have 100 % buildings and 100 % nutrition. Your solution might also have indirect effects or be used in other ways than what is currently the focus. For example it might be possible to use the residues to produce biofuel, or perhaps your solution enables urban farming and thereby reduces or in some cases even eliminates the need for transportation of the food to the customer. Depending on how integrated you think this is in your solution, you might grade your solution as 25 % on the mobility scale as that is a possibility but perhaps not currently a focus.</div>
+	<label>Building</label><input name="Building" ng-model="area.building" type="range"> {{area.building}}%<br>
+	<label>Mobility</label><input name="Mobility" ng-model="area.mobility" type="range"> {{area.mobility}}%<br>
+	<label>Nutrition</label><input name="Nutrition" ng-model="area.nutrition" type="range"> {{area.nutrition}}%<br>
+</div>
+
+<H3>WHAT KIND OF SOLUTION?</H3>
+<label><input name="kind_technical" type="checkbox"> Technical solution</label> <small>E.g. solar PV module, laptop, greenhouse</small><br>
+<label><input name="kind_business_model" type="checkbox"> Business model</label> <small>E.g. renting light from PV/LED/Battery system, selling virtual meetings etc.</small><br>
+<label><input name="kind_capacity" type="checkbox"> Capacity building</label> <small>E.g. supporting a buyer to use their existing, or other entrepreneurs’, technologies to deliver a specific solution.</small><br>
+<label><input name="kind_communication" type="checkbox"> Communication/data</label> <small>E.g. help solution providers to explain their solutions, or cities to better understand and communicate their needs.</small><br>
+<label><input type="checkbox"> Other (please specify)</label> <input name="kind_other" type="text"><br>
+<label><input type="checkbox"> Don't know or do not apply</label> <input name="kind_na" type="text"><br>
+
+<h2>WHAT FUNCTION DOES YOUR SOLUTION PROVIDE?</h2>
+
+<div ng-show="area.building > 0">
+<hr>
+<div class="segment">
+	<h1>BUILDING/WORK-LIFE</h1>
+	<h2>NEEDS SATISFIED BY THE SOLUTION</h2>
+
+	<h3 class="clickable" ng-click="toggle('build_physical')" >PHYSICAL <i ng-class="icon('build_physical')"></i></h3>
+	<div ng-show="panes.build_physical">
+		<label><input name="building_physical_Light" type="checkbox"> Light</label><br>
+		<label><input name="building_physical_Right" type="checkbox"> Right air temperature (heat/cold)</label><br>
+		<label><input name="building_physical_Healthy" type="checkbox"> Healthy air quality</label><br>
+		<label><input name="building_physical_Fresh" type="checkbox"> Fresh food (e.g. cold storage)</label><br>
+		<label><input name="building_physical_Cooked" type="checkbox"> Cooked/edible food</label><br>
+		<label><input name="building_physical_Fresh" type="checkbox"> Fresh water</label><br>
+		<label><input name="building_physical_Clean" type="checkbox"> Clean spaces/furniture/kitchenware/clothing/interior etc.</label><br>
+		<label><input name="building_physical_Energy" type="checkbox"> Energy, motion etc.</label><br>
+		<label><input name="building_physical_Shelter" type="checkbox"> Shelter</label><br>
+		<label><input name="building_physical_Storage" type="checkbox"> Storage</label><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input name="building_physical_Other" type="text">	
+	</div>
+
+	<h3 class="clickable" ng-click="toggle('build_social')" >SOCIAL <i ng-class="icon('build_social')"></i></h3>
+	<div ng-show="panes.build_social">
+		<label><input name="building_social_Working" type="checkbox"> Working</label><br>
+		<label><input name="building_social_Coworking" type="checkbox"> Co-working</label><br>
+		<label><input name="building_social_Work" type="checkbox"> Work meetings</label><br>
+		<label><input name="building_social_Private" type="checkbox"> Private meetings</label> <small>	E.g. socializing with family and friends</small><br>
+		<label><input name="building_social_Network" type="checkbox"> Network meetings</label> <small>	E.g. network meetings at big conferences</small><br>
+		<label><input name="building_social_Exhibitions" type="checkbox"> Exhibitions</label><br>
+		<label><input name="building_social_Playing" type="checkbox"> Playing</label><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input name="building_social_Other" type="text">	
+	</div>
+
+	<h3 class="clickable" ng-click="toggle('build_economical')" >ECONOMICAL <i ng-class="icon('build_economical')"></i></h3>
+	<div ng-show="panes.build_economical">
+		<label><input name="building_economical_Save" type="checkbox"> Saving money</label> <small>	E.g. having a net-producing building that generates more energy than it consumes, which then can be fed into the grid</small><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input name="building_economical_Other" type="text">
+	</div>
+
+	<h3 class="clickable" ng-click="toggle('build_ethical')" >ETHICAL <i ng-class="icon('build_ethical')"></i></h3>
+	<div ng-show="panes.build_ethical">
+		<label><input name="building_ethical_Equal" type="checkbox"> Equal access to housing for 10 billion people within the boundaries of the planet</label><br>
+		<label><input name="building_ethical_Environmental" type="checkbox"> Environmental/climate impact</label><br>
+		<label><input name="building_ethical_Human" type="checkbox"> Human rights</label> <small>	E.g. fair working and living conditions</small><br>
+		<label><input name="building_ethical_Sustainable" type="checkbox"> Sustainable lifestyle</label><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input name="building_ethical_Other" type="text">	
+	</div>
+
+	<H2>PART OF THE VALUE CHAIN WHERE THE SOLUTION IS RELEVANT (MULTIPLE OPTIONS POSSIBLE)</H2>
+	<label><input name="building_chain_Providing" type="checkbox"> Providing living/buildings in a totally new way</label> <small>	Changing/providing buildings/living in a new way that radically reduces the use of resources compared to conventional buildings/solutions (e.g. plus energy houses that are net producers of energy instead of conventional buildings that are only energy consumers)</small><br>
+	<label><input name="building_chain_Closed" type="checkbox"> Closed loop service</label><br>
+	<label><input name="building_chain_Planning" type="checkbox"> Planning &amp; design</label> <small>	E.g. urban planning, architecture</small><br>
+	<label><input name="building_chain_Materials" type="checkbox"> Materials</label> <small>	E.g. cement, wood</small><br>
+	<label><input name="building_chain_Manufacturing" type="checkbox"> Manufacturing</label> <small>	E.g. bricks, windows, insulation</small><br>
+	<label><input name="building_chain_Packaging" type="checkbox"> Packaging</label><br>
+	<label><input name="building_chain_Distribution" type="checkbox"> Distribution</label> <small>	E.g. home delivery or rooftop gardens</small><br>
+	<label><input name="building_chain_Sales" type="checkbox"> Sales/purchasing/acquisition</label><br>
+	<label><input name="building_chain_Construction" type="checkbox"> Construction</label><br>
+	<label><input name="building_chain_Maintenance" type="checkbox"> Maintenance</label><br>
+	<label><input name="building_chain_Refurbishing" type="checkbox"> Refurbishing</label><br>
+	<label><input name="building_chain_Retrofitting" type="checkbox"> Retrofitting </label> <small>	E.g. improvement of existing buildings with energy efficiency technologies to reduce emissions</small><br>
+	<label><input name="building_chain_Recycling" type="checkbox"> Recycling/disposal</label><br>
+	<label><input type="checkbox"> Other (please specify)</label> <input name="building_chain_Other" type="text">
+
+</div>
+</div>
+
+<div ng-show="area.mobility > 0">
+<hr>
+<div class="segment">
+	<h1>MOBILITY/TRANSPORT</h1>
+	<h2>NEEDS SATISFIED BY THE SOLUTION</h2>
+
+	<h3 class="clickable" ng-click="toggle('mob_physical')" >PHYSICAL <i ng-class="icon('mob_physical')"></i></h3>
+	<div ng-show="panes.mob_physical">
+		<label><input name="mobility_physical_Transportation" type="checkbox"> Transportation of goods</label><br>
+		<label><input name="mobility_physical_Transportation" type="checkbox"> Transportation of people</label><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input name="mobility_physical_Other" type="text">		
+	</div>
+
+	<h3 class="clickable" ng-click="toggle('mob_social')" >SOCIAL <i ng-class="icon('mob_social')"></i></h3>
+	<div ng-show="panes.mob_social">	
+		<label><input name="mobility_social_Meeting" type="checkbox"> Meeting of people</label><br>
+		<label><input name="mobility_social_Coworking" type="checkbox"> Co-working</label><br>
+		<label><input name="mobility_social_Representativeness" type="checkbox"> Representativeness</label><br>
+		<label><input name="mobility_social_Security" type="checkbox"> Security</label><br>
+		<label><input name="mobility_social_Other" type="checkbox"> Other (please specify)</label> <input name="mobility_social_Other" type="text">	
+	</div>
+
+	<h3 class="clickable" ng-click="toggle('mob_economical')" >ECONOMICAL <i ng-class="icon('mob_economical')"></i></h3>
+	<div ng-show="panes.mob_economical">
+		<label><input name="mobility_economy_SaveMoney" type="checkbox"> Saving money</label> <small>	E.g. avoid travel costs when not having to travel/commute to meetings/work</small><br>
+		<label><input name="mobility_economy_SaveTime" type="checkbox"> Saving time</label> <small>	E.g. not having to travel/commute to meetings/work, possibility to work during travel</small><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input name="mobility_economy_Other" type="text">	
+	</div>
+
+	<h3 class="clickable" ng-click="toggle('mob_ethical')" >ETHICAL <i ng-class="icon('mob_ethical')"></i></h3>
+	<div ng-show="panes.mob_ethical">
+		<label><input name="mobility_ethical_Equal" type="checkbox"> Equal access to mobility for 10 billion people within the boundaries of the planet</label><br>
+		<label><input name="mobility_ethical_Environmental" type="checkbox"> Environmental/climate impact</label><br>
+		<label><input name="mobility_ethical_Human" type="checkbox"> Human rights</label> <small>	E.g. fair working and living conditions</small><br>
+		<label><input name="mobility_ethical_Sustainable" type="checkbox"> Sustainable lifestyle</label><br>
+		<label><input type="checkbox"> Other</label> <input name="mobility_ethical_Other" type="text">
+	</div>
+
+	<H3>PART OF THE VALUE CHAIN WHERE THE SOLUTION IS RELEVANT</H3>	
+	<label><input name="mobility_chain_Providing" type="checkbox"> Providing mobility in a totally new way</label> <small>	Providing a new mode of mobility that radically reduces the use of resources compared to conventional mobility modes (e.g. providing video meetings instead of flying, or app for public transport)</small><br>
+	<label><input name="mobility_chain_Closed" type="checkbox"> Closed loop service</label><br>
+	<label><input name="mobility_chain_Planning" type="checkbox"> Planning &amp; design</label> <small>	Affecting the need for mobility and what modes of mobility are included in the city development (e.g. city planning, business model support)</small><br>
+	<label><input name="mobility_chain_Materials" type="checkbox"> Materials</label> <small>	E.g. asphalt, metals, plastics</small><br>
+	<label><input name="mobility_chain_Manufacturing" type="checkbox"> Manufacturing</label> <small>	E.g. cars, bikes</small><br>
+	<label><input name="mobility_chain_Evaluation" type="checkbox"> Evaluation of the meeting/mobility solution</label> <small>	E.g. system for measuring the efficiency and environmental impact of different modes of mobility</small><br>
+	<label><input name="mobility_chain_Packaging" type="checkbox"> Packaging</label><br>
+	<label><input name="mobility_chain_Distribution" type="checkbox"> Distribution</label> <small>	E.g. home delivery or rooftop gardens</small><br>
+	<label><input name="mobility_chain_Sales" type="checkbox"> Sales/purchasing/acquisition</label><br>
+	<label><input name="mobility_chain_Construction" type="checkbox"> Construction</label><br>
+	<label><input name="mobility_chain_Maintenance" type="checkbox"> Maintenance</label><br>
+	<label><input name="mobility_chain_Refurbishing" type="checkbox"> Refurbishing</label><br>
+	<label><input name="mobility_chain_Retrofitting" type="checkbox"> Retrofitting</label> <small>	E.g. retrofitting fossil fuel cars to electric</small><br>
+	<label><input name="mobility_chain_Recycling" type="checkbox"> Recycling/disposal</label><br>
+	<label><input type="checkbox"> Other (please specify)</label> <input name="mobility_chain_Other" type="text">
+</div>
+</div>
+
+<div ng-show="area.nutrition > 0">
+<hr>
+<div class="segment">
+	<h1>NUTRITION</h1>
+	<h2>NEEDS SATISFIED BY THE SOLUTION</h2>
+
+	<h3 class="clickable" ng-click="toggle('nut_physical')" >PHYSICAL <i ng-class="icon('nut_physical')"></i></h3>
+	<div ng-show="panes.nut_physical">
+		<label><input name="nutrition_needs_Protein" type="checkbox"> Protein</label><br>
+		<label><input name="nutrition_needs_Carbohydrates" type="checkbox"> Carbohydrates (incl. fibre)</label><br>
+		<label><input name="nutrition_needs_Fat" type="checkbox"> Fat</label><br>
+		<label><input name="nutrition_needs_Water" type="checkbox"> Water</label><br>
+		<label><input name="nutrition_needs_Vitamins" type="checkbox"> Vitamins</label><br>
+		<label><input name="nutrition_needs_Minerals" type="checkbox"> Minerals</label><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input name="nutrition_needs_Other" type="text"><br>
+	</div>
+
+	<h3 class="clickable" ng-click="toggle('nut_optimize')" >OPTIMIZATION <i ng-class="icon('nut_optimize')"></i></h3>
+	<div ng-show="panes.nut_optimize">
+		<label><input name="nutrition_optimize_Balance" type="checkbox"> Balance (between different kind of nutrients)</label> <small>E.g recipies that help users ensure a good balance between nutrients</small><br>
+		<label><input name="nutrition_optimize_Total" type="checkbox"> Total amount needed (amount nutrition and amount energy used)</label> <small>E.g. Health tracking apps that nudge users to eat sufficient (and avoid overconsumption)</small><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input name="nutrition_optimize_Other" type="text"><br>
+	</div>
+
+	<h3 class="clickable" ng-click="toggle('nut_social')" >SOCIAL <i ng-class="icon('nut_social')"></i></h3>
+	<div ng-show="panes.nut_social">
+		<label><input name="nutrition_social_Meet" type="checkbox"> Meet/socialize with people</label><br>
+		<label><input name="nutrition_social_Active" type="checkbox"> Active life</label><br>
+		<label><input name="nutrition_social_Culture" type="checkbox"> Culture/traditions</label><br>
+		<label><input name="nutrition_social_Optimize" type="checkbox"> Optimize time</label><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input name="nutrition_social_Other" type="text"><br>
+	</div>
+
+	<h3 class="clickable" ng-click="toggle('nut_economical')" >ECONOMICAL <i ng-class="icon('nut_economical')"></i></h3>
+	<div ng-show="panes.nut_economical">
+		<label><input name="nutrition_economy_Save" type="checkbox"> Saving money</label><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input name="nutrition_economy_Other" type="text"><br>
+	</div>
+
+	<h3 class="clickable" ng-click="toggle('nut_ethical')" >ETHICAL <i ng-class="icon('nut_ethical')"></i></h3>
+	<div ng-show="panes.nut_ethical">
+		<label><input name="nutrition_ethical_Equal" type="checkbox"> Equal access to food for 10 billion people within the boundaries of the planet</label><br>
+		<label><input name="nutrition_ethical_Environmental" type="checkbox"> Environmental/climate impact</label><br>
+		<label><input name="nutrition_ethical_Human" type="checkbox"> Human rights </label><br>
+		<label><input name="nutrition_ethical_Animal" type="checkbox"> Animal rights</label><br>
+		<label><input name="nutrition_ethical_Sustainable" type="checkbox"> Sustainable lifestyle</label><br>
+		<label><input type="checkbox"> Other (please specify)</label> <input name="nutrition_ethical_Other" type="text"><br>
+	</div>
+
+	<H2>PART OF THE VALUE CHAIN WHERE THE SOLUTION IS RELEVANT</H2>
+	<label><input name="nutrition_chain_Providing" type="checkbox"> Providing nutrition in a totally new way</label> <small>	Changing/providing nutrition in a new way that radically reduces the use of resources compared to conventional ways of providing nutrition (e.g. providing plant-based protein instead of meat-based protein)</small><br>
+	<label><input name="nutrition_chain_Closed" type="checkbox"> Closed loop service</label><br>
+	<label><input name="nutrition_chain_Cultivation" type="checkbox"> Cultivation</label> <small>	E.g. resource-efficient agriculture</small><br>
+	<label><input name="nutrition_chain_Manufacturing" type="checkbox"> Manufacturing</label> <small>	E.g. manufacturing of synthetic protein</small><br>
+	<label><input name="nutrition_chain_Packaging" type="checkbox"> Packaging</label><br>
+	<label><input name="nutrition_chain_Distribution" type="checkbox"> Distribution</label> <small>	E.g. home delivery or rooftop gardens</small><br>
+	<label><input name="nutrition_chain_Sales" type="checkbox"> Sales/purchasing/acquisition</label><br>
+	<label><input name="nutrition_chain_Storage" type="checkbox"> Storage/fresh food</label><br>
+	<label><input name="nutrition_chain_Cooking" type="checkbox"> Cooking/serving</label><br>
+	<label><input name="nutrition_chain_Recipe" type="checkbox"> Recipe development</label><br>
+	<label><input name="nutrition_chain_Recycling" type="checkbox"> Re-cycling/disposal</label><br>
+	<label><input type="checkbox"> Other (please specify)</label> <input name="nutrition_chain_Other" type="text">
+
+</div>
+</div>
+
+<hr>
+
+<h3>SHORT DESCRIPTION OF THE SOLUTION (MAX. 70 WORDS)</h3>
+<textarea name="solution_description"></textarea>
+
+<h3>DESCRIPTION OF THE SOLUTION’S (POTENTIAL) TRANSFORMATIVE CONTRIBUTION (MAX. 100 WORDS)
+	<i ng-click="toggle('help_desc')" class="fa fa-question-circle fa-lg"></i></h3>
+<div class="help" ng-show="panes.help_desc">Text describing how this change the way we use resources and how it can be part of a world where 9-10 billion people can live within the carrying capacity of the planet. If the solution does not deliver this directly, please explain how it can/will contribute (e.g. by helping other solutions to deliver better results, or help other actors to export concepts/business solutions to other countries etc.)</div>
+<textarea name="solution_description_contribution"></textarea>
+
+<h3>WHERE CAN YOUR SOLUTION BE IMPLEMENTED?
+	<i ng-click="toggle('help_location')" class="fa fa-question-circle fa-lg"></i></h3>
+<div class="help" ng-show="panes.help_location">The locations you type in will be shown with pins on a map on the platform so that potential customers and other interested stakeholders can see where your solution can be implemented. The more precise address you provide the better, but it is OK to only write the name of the cities.
+
+We are also particularly interested to know if your solution can be implemented in the cities that are included in our core development team, which is Malmö, Uppsala and Åre/Jämtland region. 
+
+Some solutions, e.g. those linked to buildings, are easy to add, while others linked to for example mobility, like carpools, can be linked to the most used spot (like a dedicated parking spot). Others, linked to lifestyle choices, will have to be for countries or cities.  What is important is that a potential customer, or potential cluster participant, shall know where the solution has been used and where it soon will/could be a reality</div>
+<label>Locations where solution currently is used</label><br>
+<textarea name="locations_current"></textarea><br>
+<label>Locations where solution soon will be implemented</label><br>
+<textarea name="locations_soon"></textarea><br>
+
+<h3>SHORT DESCRIPTION OF THE ENTREPRENEUR/TEAM BEHIND THE SOLUTION (MAX. 70 WORDS/ENTREPRENEUR)</h3>
+<textarea name="entrepreneur_description"></textarea>
+
+<div class="align-inputs">
+	<h3>CONTACT DETAILS</h3>
+	<label>Name of the company*</label><input name="CompanyName" type="text"><br>
+	<label>Address</label><input name="Address" type="text"><br>
+	<label>Contact person*</label><input name="Contact" type="text"><br>
+	<label>Email*</label><input name="Email" type="text"><br>
+	<label>Phone number</label><input name="Phone" type="text"><br>
+	<label>Skype</label><input name="Skype" type="text"><br>
+
+	<h3>Web-links</h3>
+	<label>Company website</label><input name="web_Company" type="text"><br>
+	<label>Twitter</label><input name="web_Twitter" type="text"><br>
+	<label>Facebook</label><input name="web_Facebook" type="text"><br>
+	<label>LindkedIn</label><input name="web_LindkedIn" type="text"><br>
+	<label>Other</label><input name="web_Other" type="text"><br>
+</div>
+
+Privacy settings		
+<h3>HOW DO YOU WANT TO DISPLAY YOUR CONTACT DETAILS?</h3>
+<label><input type="checkbox"> To everyone using the platform</label> <br>
+<label><input type="checkbox"> To everyone with interest in the areas relevant to my solution</label> <br>
+<label><input type="checkbox"> Only to potential customers</label> <br>
+<label><input type="checkbox"> Only to other solution providers</label> <br>
+<label><input type="checkbox"> To nobody</label> <small>Interested stakeholders can contact you through the platform, but all your contact details will be anonymous. If you mark this option, also mark what stakeholders above you want to be able to contact you through the platform, if any.</small><br>
+<h3>What data do you want to share, if any</h3>
+<small>You can always come back and change settings later. General tip: The more transparent you are the easier it is for customers/partners to find and see the benefits of your solution.</small><br>
+<label><input type="checkbox"> I’m willing to share everything</label> <br>
+<label><input type="checkbox"> Only basic information about the solution (including contact details)</label> <br>
+<label><input type="checkbox"> Both basic and optimal level information</label> <br>
+<label><input type="checkbox"> My comments on other solutions</label> <br>
+<label><input type="checkbox"> My use of the platform</label> <small>E.g. what solutions you look at, if you rate them high, etc., so that you – based on how you and users similar to you use the platform – can get tailor-made suggestions such as “Others that looked at these solutions also liked this solution” (a similar functionality that Amazon.com has).</small><br>
+
+<a class="button" id="download-solution-link" href="javascript:void(0)" download="newcluster.json" class="button">Save</a>
+
+</form>
+</div>
+<script>
+attachDataUrlToLink('download-solution-link', 'text/json', function (){
+    var jqData = $('#newsolutionform').serializeArray()
+    var data = _.object(_.map(jqData, function (e){ return [e.name, e.value] }))
+    return 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data, undefined, 2))
+})
+</script>

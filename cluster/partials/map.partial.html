@@ -1,0 +1,28 @@
+<div class="full-row jumbotron"><h1>Map</h1></div>
+<div id="map-canvas" style="height: 600px"></div>
+<script>
+
+var googleMapsMarkers = []
+
+function initialize() {
+	var mapOptions = {
+		zoom: 5,
+		center: new google.maps.LatLng(59, 18)
+	}
+
+	var map = new google.maps.Map(document.getElementById('map-canvas'),
+	  mapOptions)
+
+	_.each(googleMapsMarkers, function (m, i){
+		setTimeout(function (){
+			return new google.maps.Marker({
+			    position: new google.maps.LatLng(m.lat, m.lng),
+			    map: map,
+			    animation: google.maps.Animation.DROP,
+			    title: m.name
+			})
+		}, i*20)
+	})
+}
+
+</script>

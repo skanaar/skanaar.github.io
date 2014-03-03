@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Cluster Platform</title>
+	<link rel="stylesheet" href="css/font-awesome.css">
+	<link rel="stylesheet" href="css/boilerplate.css">
+	<link rel="stylesheet" href="css/cluster.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="shortcut icon" href="img/favicon.png">
+	<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
+</head>
+<body ng-app="cluster">
+<div class="page">
+
+	<div class="full-row page-stripe header" ng-controller="NavbarCtrl">
+		<div class="pull-right" ng-hide="isApp('login')">
+			<a ng-class="{active: isApp('dashboard')}" href="#/dashboard">
+				<i class="fa fa-home"></i> <span class="hidden-sm">Dashboard</span>
+			</a>
+			<a ng-class="{active: isApp('goals')}" href="#/goals">
+				<i class="fa fa-trophy"></i> <span class="hidden-sm">Goals</span>
+			</a>
+			<a ng-class="{active: isApp('newsolution')}" href="#/newsolution">
+				<i class="fa fa-plus"></i> <span class="hidden-sm">Register</span>
+			</a>
+			<a ng-class="{active: isApp('searchclusters')}" href="#/searchclusters">
+				<i class="fa fa-search"></i> <span class="hidden-sm">Search</span>
+			</a>
+			<a ng-class="{active: isApp('cluster')}" href="#/cluster/1">
+				<i class="fa fa-lightbulb-o"></i> <span class="hidden-sm">Solutions</span>
+			</a>
+			<a ng-class="{active: isApp('map')}" href="#/map">
+				<i class="fa fa-globe"></i> <span class="hidden-sm">Map</span>
+			</a>
+			<a href="#"><i class="fa fa-power-off"></i></a>
+		</div>
+		<div class="title">Cluster Platform for Transformative Solutions</div>
+	</div>
+
+	<div ng-view></div>
+
+	<div class="full-row footer page-stripe" ng-controller="NavbarCtrl">
+		<div class="title">
+			<a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.sv"><img alt="Creative Commons-licens" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a>
+			<span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Cluster platform for transformative solutions</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.sv">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 Internationell License</a>.
+		</div>
+	</div>
+
+</div>
+
+<script src="lib/jquery.js"></script>
+<script src="lib/underscore.js"></script>
+<script src="lib/angular.js"></script>
+<script src="lib/angular.route.js"></script>
+<script src="indicator/processing.js"></script>
+
+<script src="js/webapp.js"></script>
+<script src="js/vector.js"></script>
+<script src="js/canvas.js"></script>
+<script src="js/nodes.js"></script>
+<script src="js/visualizer.js"></script>
+<script src="js/engine.js"></script>
+
+</body>
+</html>
