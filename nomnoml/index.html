@@ -86,7 +86,8 @@ a:hover {
 	margin-top: 1em;
 }
 #help.visible {
-	display: block
+	display: block;
+	overflow: auto;
 }
 
 </style>
@@ -95,7 +96,7 @@ a:hover {
 	<div class="wrap">
 
 		<canvas id="canvas" width="800" height="800"></canvas>
-		<textarea id="textarea">[apa]->[banan]
+		<textarea id="textarea" spellcheck="false">[apa]->[banan]
 [apa]->[kokos]</textarea>
 
 		<div id="help">
@@ -118,8 +119,11 @@ a:hover {
 			[Car]:[Car|color: Color|honk()]
 
 			<label>Set font</label>
-			#fontSize: 20<br>
 			#font: Times
+
+			<label>Layout the diagram really tight</label>
+			#fontSize: 8<br>
+			#spacing: 11
 		</div>
 
 		<div class="tools">
@@ -183,7 +187,7 @@ a:hover {
 	var textarea = document.getElementById('textarea')
 	var g = skanaar.Canvas(canvas, {})
 	window.addEventListener('resize', _.throttle(fillScreen, 750, {leading: true}))
-	textarea.addEventListener('input', sourceChanged)
+	textarea.addEventListener('input', _.debounce(sourceChanged, 300))
 	textarea.value = localStorage.getItem('nomnoml.lastSource') || document.getElementById('defaultGraph').innerHTML
 	fillScreen()
 
@@ -259,9 +263,10 @@ a:hover {
 		return {
 			nodes: nodes,
 			relations: relations,
-			fontSize: directives.fontSize || 14,
+			fontSize: (+directives.fontSize) || 14,
 			font: directives.font || 'Calibri',
-			rankSeparation: directives.rankSeparation || 30
+			spacing: (+directives.spacing) || 30,
+			direction: {down: 'TB', right: 'LR'}[directives.direction] || 'TB'
 		}
 	}
 
@@ -303,7 +308,10 @@ a:hover {
 			return { nodes: nodes, relations: relations }
 		}
 		var dagreLayout = dagre.layout()
-							   .rankSep(ast.rankSeparation)
+							   .rankSep(ast.spacing)
+							   .nodeSep(ast.spacing)
+							   .edgeSep(ast.spacing)
+							   .rankDir(ast.direction)
 							   .run(buildDagreGraph(ast))
 		return packageDagreGraph(ast, dagreLayout)
 	}
