@@ -381,7 +381,7 @@ hr {
 .sidebar select {
 	border-radius: 2px
 }
-.sidebar input[type=file] {
+input[type=file] {
 	font-size: 65%;
 	padding: 3px 13px;
 	width: 85%;

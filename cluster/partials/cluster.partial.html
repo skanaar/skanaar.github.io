@@ -41,6 +41,8 @@
 		   <img ng-hide="activePane === 'current'" src="img/current_icon_inactive.png">CURRENT</a>
 		<a ng-click="prepareDownloadLink()" href="javascript:void(0)">
 		   <img src="img/save_to_hdd_inactive.png">DOWNLOAD</a>
+		<a ng-click="showLoadCluster = true" href="javascript:void(0)">
+		   <img src="img/load_icon_inactive.png">OPEN</a>
 		<a ng-click="togglePane('legend')" href="javascript:void(0)">
 		   <img ng-show="activePane === 'legend'" src="img/legend_icon.png">
 		   <img ng-hide="activePane === 'legend'" src="img/legend_icon_inactive.png">LEGEND</a>
@@ -259,6 +261,16 @@
 			</ul>
 		</div>
 	</div>
+	<div class="modal" ng-show="showLoadCluster">
+		<div>
+			<a class="pull-right" ng-click="showLoadCluster = false" href="javascript:void(0)">
+				<img src="img/icons/close_popup.png" width="42" height="42">
+			</a>
+			<h2><i class="fa fa-fw fa-folder-open"></i> Open cluster file</h2>
+			<input type="file"
+				   onchange="angular.element(this).scope().loadClusterFile(this.files)">
+		</div>
+	</div>
 	<div class="modal" ng-show="readyToDownload">
 		<div>
 			<a class="pull-right" ng-click="readyToDownload = false" href="javascript:void(0)">
@@ -272,7 +284,7 @@
 					</a>
 				</li>
 				<li>Choose "Save"</li>
-				<li>Email file to join@transformative-clusters.net</li>
+				<li>Email file to <a href="mailto:madeleine@transformative-clusters.net">madeleine@transformative-clusters.net</a></li>
 			</ol>
 		</div>
 	</div>
