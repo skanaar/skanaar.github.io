@@ -1,0 +1,277 @@
+<div class="full-row jumbotron">
+	<h1>Network</h1>
+</div>
+<div class="full-row page-stripe toolbar">
+	<div class="pull-right">
+		<a id="download-image-link" download="cluster-snapshot.png">
+			<i class="fa fa-camera"></i></a>
+		<a onclick="engine.zoom(-1)" href="javascript:void(0)">
+			<i class="fa fa-plus"></i></a>
+		<a onclick="engine.zoom(1)" href="javascript:void(0)">
+			<i class="fa fa-minus"></i></a>
+	</div>
+	<div><a>&nbsp;</a></div>
+</div>
+<div style="position: relative">
+	<canvas id="canvas" width="800" height="800"></canvas>
+	<div class="sidebar sidebar-look details_sidebar" ng-show="selectedEntity">
+		<div>
+			<div>
+				<a class="pull-right"
+				   onclick="engine.centerSelected()" 
+				   href="javascript:void(0)"><i class="fa fa-crosshairs fa-2x"></i></a>
+				<h2>{{selectedEntity.name}} </h2>
+			</div>
+			<div>{{selectedEntity.description}}</div>
+			<hr>
+			<div><label>Email</label> {{selectedEntity.email}}</div>
+			<div><label>Company</label> {{selectedEntity.company}}</div>
+			<div><label>Id</label> {{selectedEntity.id}}</div>
+			<hr>
+			<div class="toolset">
+				<a ng-click="addSolutionWizard.show = true" href="javascript:void(0)">
+					<i class="fa fa-fw fa-plus-circle"></i> Add related solution
+				</a>
+				<a ng-click="removeEntity()" href="javascript:void(0)">
+					<i class="fa fa-fw fa-minus-circle"></i> Remove this solution
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="sidebar sidebar-look details_sidebar" ng-show="selectedRelation">
+		<div>
+			<h2>{{selectedRelation.start.name}} - {{selectedRelation.end.name}}</h2>
+			<div>{{selectedRelation.description}}</div>
+			<hr>
+			<div><label>Type</label> <em style="width: 100px">{{selectedRelation.type}}</em></div>
+			<div><label>Date</label> {{selectedRelation.date}}</div>
+			<div><label>Author</label> {{selectedRelation.author}}</div>
+			<div><label>Verified</label> {{selectedRelation.verified ? 'pending' : 'Yes'}}</div>
+			<hr>
+			<div class="toolset">
+				<a ng-click="removeRelation()" href="javascript:void(0)">
+					<i class="fa fa-fw fa-minus-circle"></i> Remove this relation
+				</a>
+			</div>
+		</div>
+	</div>
+	<div class="sidebar sidebar-look search_sidebar"
+		 id="search_sidebar"
+		 ng-show="true">
+		<div>
+			<h3>Filter</h3>
+			Mobility  <em>&gt; {{filter.mobility}}%</em>
+			<div><input type="range" ng-model="filter.mobility"></div>
+			Nutrition <em>&gt; {{filter.nutrition}}%</em>
+			<div><input type="range" ng-model="filter.nutrition"></div>
+			Building  <em>&gt; {{filter.building}}%</em>
+			<div><input type="range" ng-model="filter.building"></div>
+			<hr>
+			<label>Solution status</label>
+			<div><label><input type="checkbox" ng-model="filter.existing"> Existing</label></div>
+			<div><label> <input type="checkbox" ng-model="filter.supporting"> Supporting</label></div>
+			<div><label><input type="checkbox" ng-model="filter.potential"> Potential</label></div>
+			<label>Solution type</label>
+			<div><label><input type="checkbox" ng-model="filter.core"> Core</label></div>
+			<div><label><input type="checkbox" ng-model="filter.accelerator"> Accelerator</label></div>
+			<div><label><input type="checkbox" ng-model="filter.expander"> Expander</label></div>
+			<label>Max age</label>
+			<div><label><input type="text" style="width: 50%" ng-model="filter.solutionAge"></label>
+			<i class="fa fa-fw fa-minus" ng-click="filter.solutionAge = filter.solutionAge - 10"></i>
+			<i class="fa fa-fw fa-plus" ng-click="filter.solutionAge = filter.solutionAge + 10"></i></div>
+			<hr>
+			<label>Relations</label>
+			<div><label><input type="checkbox" ng-model="filter.rel_participant"> Participant</label></div>
+			<div><label><input type="checkbox" ng-model="filter.rel_provider"> Provider</label></div>
+			<div><label><input type="checkbox" ng-model="filter.rel_catalyst"> Catalyst</label></div>
+			<div><label><input type="checkbox" ng-model="filter.rel_potential"> Potential</label></div>
+			<div><label><input type="checkbox" ng-model="filter.rel_alternative"> Alternative</label></div>
+			<label>Max age</label>
+			<div><label><input type="text" style="width: 50%" ng-model="filter.rel_age"></label>
+			<i class="fa fa-fw fa-minus" ng-click="filter.rel_age = filter.rel_age - 10"></i>
+			<i class="fa fa-fw fa-plus" ng-click="filter.rel_age = filter.rel_age + 10"></i></div>
+			<hr>
+		</div>
+	</div>
+	<div class="sidebar sidebar-look legend_sidebar"
+		 ng-show="activePane === 'current'">
+		<div>
+			<h3>Current View</h3>
+			<div ng-repeat="e in visibleSolutions">
+				<a ng-click="selectEntity(e.id)" href="javascript:void(0)">{{e.name}}</a>
+			</div>
+		</div>
+	</div>
+	<div class="sidebar sidebar-look admin_sidebar"
+		 ng-show="activePane === 'admin'">
+		<div>
+			<div class="toolset">
+				<a href="#cluster/blank"><i class="fa fa-fw fa-dot-circle-o"></i> Blank cluster</a>
+				<a ng-click="addSolution()"><i class="fa fa-fw fa-plus"></i> Add solution</a>
+				<a onclick="engine.runFor(2000)"><i class="fa fa-fw fa-arrow-circle-o-right"></i> Auto layout</a>
+				<a id="download-data-link" download="cluster-data.json">
+					<i class="fa fa-fw fa-download"></i> Download data</a>
+				<h3><i class="fa fa-fw fa-folder-open"></i> Open file</h3>
+				<input type="file"
+					   onchange="angular.element(this).scope().loadClusterFile(this.files)">
+			</div>
+
+			<h3>Cluster</h3>
+			<label>Name</label>
+			<input type="text" ng-model="cluster.name">
+			<label>Potential</label>
+			<input type="text" ng-model="cluster.potential">
+
+
+			<h3>Selection</h3>
+			<div ng-show="selectedEntity">
+				<div class="toolset" ng-show="selectedEntity">
+					<a ng-click="removeEntity()"><i class="fa fa-fw fa-trash-o"></i> Remove</a>
+				</div>
+				<label>Name</label>
+				<input type="text" ng-model="selectedEntity.name">
+				<label>Description</label>
+				<input type="text" ng-model="selectedEntity.description">
+				<label>Company</label>
+				<input type="text" ng-model="selectedEntity.company">
+				<label>Status</label>
+				<select ng-options="e for e in ['existing', 'supporting', 'potential']"
+						ng-model="selectedEntity.status"></select>
+				<label>Type</label>
+				<select ng-options="e for e in ['core', 'accelerator', 'expander']"
+						ng-model="selectedEntity.type"></select><br>
+
+				Mobility  <em>&gt; {{selectedEntity.mobility}}%</em>
+				<div><input type="range" ng-model="selectedEntity.mobility"></div>
+				Nutrition <em>&gt; {{selectedEntity.nutrition}}%</em>
+				<div><input type="range" ng-model="selectedEntity.nutrition"></div>
+				Building  <em>&gt; {{selectedEntity.building}}%</em>
+				<div><input type="range" ng-model="selectedEntity.building"></div>
+			</div>
+			<div ng-show="selectedRelation">
+				<div class="toolset" ng-show="selectedRelation">
+					<a ng-click="removeRelation()"><i class="fa fa-fw fa-trash-o"></i> Remove</a>
+				</div>
+				<label>Type</label>
+				<select ng-options="e for e in relationTypes"
+						ng-model="selectedRelation.type"></select><br>
+			</div>
+
+		</div>
+	</div>
+	<div class="sidebar sidebar-look legend_sidebar" ng-show="activePane === 'legend'">
+		<div>
+		<table>
+			<tr><td><div class="entity existing"></div></td>
+			<td><b>Existing Solution</b><br> Solutions that is part of an existing cluster</div></td></tr>
+			<tr><td><div class="entity supporting"></div></td>
+			<td><b>Supporting solution</b><br> Existing solution that is (not yet) part of the cluster </td></tr>
+			<tr><td><div class="entity potential"></div></td>
+			<td><b>Potential solution</b><br> Possible solution that is not on the market, that could be part of a future cluster</td></tr>
+			<tr><td><div class="entity bordered core"></div></td>
+			<td><b>Existing</b><br> Solution that focus on what the cluster i delivering right now</td></tr>
+			<tr><td><div class="entity bordered accelerator"></div></td>
+			<td><b>Accelerator</b><br> Accelererating solution such a business- or app development</td></tr>
+			<tr><td><div class="entity bordered expander"></div></td>
+			<td><b>Expander</b><br> Solution that broadens the current clusters capacity to deliver solutions into new areas. </td></tr>
+			<tr><td><div class="relation participant"></div></td>
+			<td><b>Existing relation</b><br> Relations established by  existing cluster participants</td></tr>
+			<tr><td><div class="relation supporting"></div></td>
+			<td><b>Supporting relation</b><br> Relation established by  supporting solution providers</td></tr>
+			<tr><td><div class="relation catalyst"></div></td>
+			<td><b>Catalyst relation</b><br> Relation established by  a catalyst</td></tr>
+			<tr><td><div class="relation potential"></div></td>
+			<td><b>Potential relation</b><br> Relation established by a thought leader</td></tr>
+			<tr><td><div class="relation alternative"></div></td>
+			<td><b>Alternative relation</b><br> Two solutions that are potential alternatives</td></tr>
+		</table>
+		</div>
+	</div>
+	<div class="modal" ng-show="addSolutionWizard.show">
+		<div>
+			<a class="pull-right" ng-click="addSolutionWizard.cancel()" href="javascript:void(0)">
+				<img src="img/icons/close_popup.png" width="42" height="42">
+			</a>
+			<h2>Add solution to cluster: <strong>{{addSolutionWizard.chosenSolution.name}}</strong></h2>
+			<table ng-show="addSolutionWizard.page === 1">
+			<tr>
+				<th><a ng-click="sortKey = 'name'">Name</a></th>
+				<th><a ng-click="sortKey = 'company'">Company</a></th>
+				<th><a ng-click="sortKey = 'date'">Date</a></th>
+			</tr>
+			<tr ng-repeat="s in allSolutions | orderBy:sortKey">
+				<td><a ng-click="addSolutionWizard.chooseSolution(s)">{{s.name}}</a></td>
+				<td><a ng-click="addSolutionWizard.chooseSolution(s)">{{s.company}}</a></td>
+				<td><a ng-click="addSolutionWizard.chooseSolution(s)">{{s.date}}</a></td>
+			</tr>
+			</table>
+			<ul ng-show="addSolutionWizard.page === 2">
+				<li>
+					<h3>Solution status in cluster</h3>
+					<select ng-options="e for e in solutionStatuses" ng-model="addSolutionWizard.status">
+					</select>
+					<h3>Solution type in cluster</h3>
+					<select ng-options="e for e in solutionTypes" ng-model="addSolutionWizard.type">
+					</select>
+				</li>
+				<li>
+					<h3>Your role</h3>
+					<select ng-options="e for e in relationTypes" ng-model="addSolutionWizard.rel_type">
+					</select>
+					<h3>Description of relation to <strong>{{selectedEntity.name}}</strong></h3>
+					<textarea ng-model="addSolutionWizard.rel_desc"></textarea>
+					<a class="button" ng-click="addSolutionWizard.done()">Done</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="modal" ng-show="readyToDownload">
+		<div>
+			<a class="pull-right" ng-click="readyToDownload = false" href="javascript:void(0)">
+				<img src="img/icons/close_popup.png" width="42" height="42">
+			</a>
+			<h2>Download current cluster</h2>
+			<ol style="font-size: 150%">
+				<li>Right-click 
+					<a id="download-save-link2" download="my-cluster.json" target="_blank">
+						<i class="fa fa-download"></i> this link
+					</a>
+				</li>
+				<li>Choose "Save"</li>
+				<li>Email file to join@transformative-clusters.net</li>
+			</ol>
+		</div>
+	</div>
+</div>
+<script>
+
+attachDataUrlToLink('download-image-link', 'image/png', function (){
+	return document.getElementById('canvas').toDataURL('image/png')
+})
+
+function clusterToDataUrl(){
+	var es = ClusterPlatform.nodes.entities
+	var rs = ClusterPlatform.nodes.relations
+    var data = {
+    	name: ClusterPlatform.cluster.name,
+    	potential: ClusterPlatform.cluster.potential,
+    	centralEntity: ClusterPlatform.cluster.centralEntity,
+        entities: _.map(es, function (e){ return _.omit(e, ['$$hashKey', 'fx', 'fy'])}),
+        relations:  _.map(rs, function (r){
+            return { start: r.start.id, end: r.end.id, type: r.type }
+        })
+    }
+    return 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(data, undefined, 2))
+}
+
+attachDataUrlToLink('download-data-link', 'text/json', clusterToDataUrl)
+
+var engine = Engine('canvas', Nodes([], []), { fps: 30 })
+
+window.addEventListener('resize', _.throttle(engine.fillScreen, 750, {leading: true}))
+document.getElementById('canvas').addEventListener('wheel', function (e){ engine.zoom(e.deltaY) })
+engine.fillScreen()
+
+var ClusterPlatform = { cluster: {}, entities: [], relations: [], engine: engine }
+
+</script>

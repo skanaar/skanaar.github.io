@@ -43,6 +43,7 @@ angular.module('cluster', ['ngRoute']).config(function($routeProvider) {
     .when('/newsolution', {controller: 'RegisterSolutionCtrl', templateUrl:'partials/newsolution.partial.html'})
     .when('/searchclusters', {controller:'SearchCtrl', templateUrl:'partials/clustersearch.partial.html'})
     .when('/cluster/:clusterId', {controller:'ClusterCtrl', templateUrl:'partials/cluster.partial.html'})
+    .when('/network', {controller:'NetworkCtrl', templateUrl:'partials/network.partial.html'})
     .otherwise({ redirectTo: '/login' })
 })
 
@@ -353,6 +354,96 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q,
     $scope.removeRelation = function (){
         if ($scope.selectedRelation)
             ClusterPlatform.nodes.removeRelation($scope.selectedRelation)
+    }
+})
+
+angular.module('cluster').controller('NetworkCtrl', function ($scope, $http, $q, $timeout, $routeParams, clusterLoader){
+    ClusterPlatform.clusterScope = $scope
+    $scope.selectedEntity = undefined
+    $scope.selectedRelation = undefined
+    $scope.allSolutions = []
+    $scope.visibleSolutions = []
+    $scope.filter = {
+        mobility: 0,
+        nutrition: 0,
+        building: 0,
+        existing: true,
+        supporting: true,
+        potential: true,
+        core: true,
+        accelerator: true,
+        expander: true,
+        solutionAge: 30,
+        // relations
+        rel_participant: true,
+        rel_provider: true,
+        rel_catalyst: true,
+        rel_potential: true,
+        rel_alternative: true,
+        rel_age: 30
+    }
+
+    clusterLoader.getSolutions().then(function (sols){
+        $scope.allSolutions = sols
+    })
+
+    ClusterPlatform.engine.setFilter($scope.filter)
+    $scope.$watch('filter', function (){
+        ClusterPlatform.engine.setFilter($scope.filter)
+        $scope.visibleSolutions = ClusterPlatform.engine.getVisibleSubset().entities
+    }, true)
+
+    ClusterPlatform.engine.setNodes(new Nodes([], []))
+
+    clusterLoader.getClusters().then(loadClusters)
+
+    function loadClusters(cs){
+        function hsh(s){
+            var i=1
+            return _.reduce(s, function (memo, c){
+                return memo + (i++)*c.charCodeAt(0)
+            }, 0)
+        }
+        cs = JSON.parse(JSON.stringify(cs))
+        
+        _.each(cs, function (c){
+            _.each(c.relations, function (r){
+                r.start.id = hsh(_.findWhere(c.entities, {id: r.start.id}).name)
+                r.end.id = hsh(_.findWhere(c.entities, {id: r.end.id}).name)
+            })
+        })
+        var es = _.flatten(_.pluck(cs, 'entities'))
+        var rs = _.flatten(_.pluck(cs, 'relations'))
+        es = _.uniq(es, function (e){ return e.name })
+        _.each(es, function (e, i){ e.id = hsh(e.name) })
+
+        var c = ({entities: es, relations: rs })
+
+        $scope.cluster = c
+
+        var nodes = new Nodes(c.entities, c.relations)
+        nodes.setDampening(0.95)
+        _.times(200, function (){ nodes.simulate()})
+        nodes.runFor(2000)
+        ClusterPlatform.cluster = c
+        ClusterPlatform.engine.setNodes(nodes)
+        ClusterPlatform.nodes = nodes
+
+        ClusterPlatform.engine.onSelectedEntityChanged(function (e){
+            $scope.$apply(function (){ $scope.selectedEntity = e })
+        })
+
+        ClusterPlatform.engine.onSelectedRelationChanged(function (r){
+            $scope.$apply(function (){ $scope.selectedRelation = r })
+        })
+    }
+
+    $scope.$on('$locationChangeStart', function(scope, next, current){
+        ClusterPlatform.engine.pause()
+    })
+
+    $scope.selectEntity = function (id){
+        ClusterPlatform.engine.select(id)
     }
 })
 
