@@ -9,9 +9,9 @@
 <div id="map-canvas" style="height: 600px"></div>
 <script>
 
-var googleMapsMarkers = []
+var googleMapsMarkers = googleMapsMarkers || []
 
-function initialize() {
+function initializeGoogleMaps() {
 	var mapOptions = {
 		zoom: 5,
 		center: new google.maps.LatLng(59, 18)

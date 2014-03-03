@@ -143,15 +143,18 @@ angular.module('cluster').controller('SearchCtrl', function ($scope, $http, clus
 })
 
 angular.module('cluster').controller('MapCtrl', function ($scope, $http){
-    $http.get('data/map.json').then(function (response){
-        googleMapsMarkers = response.data
-
-        var script = document.createElement('script')
-        script.type = 'text/javascript'
-        script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
-            'callback=initialize'
-        document.body.appendChild(script)
-    })
+    if (googleMapsMarkers.length){
+        initializeGoogleMaps()
+    } else {
+        $http.get('data/map.json').then(function (response){
+            googleMapsMarkers = response.data
+            var script = document.createElement('script')
+            script.type = 'text/javascript'
+            script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
+                'callback=initializeGoogleMaps'
+            document.body.appendChild(script)
+        })
+    }
 })
 
 angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q, $timeout, $routeParams, clusterLoader){
