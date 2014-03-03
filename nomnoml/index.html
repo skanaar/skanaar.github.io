@@ -78,7 +78,7 @@ a:hover {
 	font-family: Calibri, Helvetica, sans-serif;
 	right:0;
 	bottom: 0;
-	padding: 100px 10px 0 10px;
+	padding: 60px 10px 0 10px;
 }
 #help label{
 	display: block;
@@ -124,6 +124,9 @@ a:hover {
 			<label>Layout the diagram really tight</label>
 			#fontSize: 8<br>
 			#spacing: 11
+
+			<label>Set left-to-right layout ('down' is default)</label>
+			#direction: right
 		</div>
 
 		<div class="tools">
@@ -196,9 +199,14 @@ a:hover {
 		sourceChanged()
 	}
 
+	function setFont(ast, isBold){
+		var style = isBold === 'bold' ? 'bold ' : ''
+		g.ctx.font = style+ast.fontSize+'pt '+ast.font+', Helvetica, sans-serif'
+	}
+
 	function sourceChanged(){
 		var ast = parse(textarea.value)
-		g.ctx.font = ast.fontSize+'pt '+ast.font+', Helvetica, sans-serif'
+		setFont(ast, 'bold')
 		localStorage.setItem('nomnoml.lastSource', textarea.value)
 		render(ast, layout(ast, measureNode))
 	}
@@ -217,7 +225,7 @@ a:hover {
 
 	function parse(source){
 		function parseRelationString(s){
-			var pattern = /\[(.*)\](-:>|->|<:-|<-|<->|-|:)\[(.*)\]/
+			var pattern = /\[(.*)\]\s*(-:>|->|<:-|<-|<->|-|:)\s*\[(.*)\]/
 			var parts = s.match(pattern)
 			return parts && trims(_.tail(parts))
 		}
@@ -260,13 +268,15 @@ a:hover {
 			if (t)
 				relations.push({start: a.name, end:b.name, type: t})
 		})
+
 		return {
 			nodes: nodes,
 			relations: relations,
-			fontSize: (+directives.fontSize) || 14,
+			fontSize: (+directives.fontSize) || 12,
 			font: directives.font || 'Calibri',
 			spacing: (+directives.spacing) || 30,
-			direction: {down: 'TB', right: 'LR'}[directives.direction] || 'TB'
+			direction: {down: 'TB', right: 'LR'}[directives.direction] || 'TB',
+			fillArrows: directives.fillArrows === 'true'
 		}
 	}
 
@@ -335,19 +345,21 @@ a:hover {
 		}
 
 		function drawArrow(path, type, target){
+			var size = ast.spacing / 30
 			var v = diff(path[path.length-2], _.last(path))
 			var nv = normalize(v)
-			var p2_ = rectIntersection(path[path.length-2], _.last(path), target.width, target.height)
+			var arrowPoint = rectIntersection(path[path.length-2], _.last(path), target.width, target.height)
+			var arrowBase = add(arrowPoint, mult(nv, 10*size))
 			var t = rot(nv)
-			var arrowBase = add(p2_, mult(nv, 8))
-			var arrowPoint = add(p2_, mult(nv, 0))
+			var isDependency = type === 'dependency'
 			var arrow = [
+				add(arrowBase, mult(t, 4*size)),
+				(isDependency && !ast.fillArrows) ? add(arrowPoint, mult(nv, 5*size)) : arrowBase,
+				add(arrowBase, mult(t, -4*size)),
 				arrowPoint,
-				add(arrowBase, mult(t, 3)),
-				add(arrowBase, mult(t, -3)),
-				arrowPoint
+				add(arrowBase, mult(t, 4*size))
 			]
-			g.ctx.fillStyle = (type === 'dependency') ? '#111' : '#fff'
+			g.ctx.fillStyle = isDependency ? '#111' : '#fff'
 			var ctx = g.path(arrow).fill().stroke()
 		}
 
@@ -358,14 +370,14 @@ a:hover {
 			if (r.type === 'nondirectional') return
 			if (r.type === 'twoway'){
 				drawArrow(r.path, 'dependency', r.end)
-				drawArrow(_.clone(r.path).reverse(), 'dependency', r.end)
+				drawArrow(_.clone(r.path).reverse(), 'dependency', r.start)
 			}
 			else
 				drawArrow(r.path, r.type, r.end)
 		})
 		g.ctx.lineWidth = 1
 		_.each(layout.nodes, function (e){
-			var lineHeight = +ast.fontSize
+			var lineHeight = ast.fontSize
 			var w = e.width
 			var h = e.height
 			var rx = rnd(e.x-w/2)+0.5
@@ -376,22 +388,29 @@ a:hover {
 			g.ctx.strokeRect(rx, ry, w, h)
 			g.ctx.fillStyle = '#333'
 			y += rnd(lineHeight*1.5)
-			g.ctx.fillText(e.name, e.x, y)
-			if (e.attrs.length || e.ops.length){
+			setFont(ast, 'bold')
+			g.ctx.textAlign = 'center'
+			if (!(e.attrs.length || e.ops.length)){
+				g.ctx.fillText(e.name, e.x, y+ast.fontSize/5)
+			} else {
+				g.ctx.fillText(e.name, e.x, y)
 				y += rnd(lineHeight/2)+0.5
 				var line = [{x: rx, y: y}, {x: rx+w, y: y}]
 				g.path(line).stroke()
 				g.path(line, {x:0, y:rnd((e.attrs.length+0.75)*lineHeight)}).stroke()
 				y += lineHeight/4
 			}
+			setFont(ast, 'normal')
+			g.ctx.textAlign = 'left'
+			var tx = rnd(e.x-w/2)+13
 			_.each(e.attrs, function (a, i){
 				y += lineHeight
-				g.ctx.fillText(a, e.x, y)
+				g.ctx.fillText(a, tx, y)
 			})
 			y += lineHeight*0.75
 			_.each(e.ops, function (a, i){
 				y += lineHeight
-				g.ctx.fillText(a, e.x, y)
+				g.ctx.fillText(a, tx, y)
 			})
 		})
 		g.ctx.restore()
