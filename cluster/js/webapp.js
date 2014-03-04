@@ -282,6 +282,27 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q,
         $scope.readyToDownload = true
     }
 
+    $scope.uploadCluster = function (){
+        var config = {
+            headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
+        }
+        var payload = $.param({
+            key: '93jdv74',
+            subject: 'UPLOAD_CLUSTER',
+            message: serializeCluster()
+        })
+        function onResponse(response){
+            if (response.data === 'success')
+                alert('Cluster successfully uploaded')
+            else
+                alert('Failed to upload cluster')
+        }
+        function failure(response){
+            alert('Failed to upload cluster')
+        }
+        $http.post('upload.php', payload, config).then(onResponse, failure)
+    }
+
     $scope.loadClusterFile = function (files){
         var reader = new FileReader()
         reader.onload = function(e) {

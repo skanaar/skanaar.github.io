@@ -100,11 +100,17 @@ a:hover {
 [apa]->[kokos]</textarea>
 
 		<div id="help">
-			<label>Car depends on Engine</label>
+			<label>Car has an Engine</label>
 			[Car]-&gt;[Engine]
+
+			<label>Car depends on Fuel</label>
+			[Car]--&gt;[Fuel]
 
 			<label>Pickup inherits from Car</label>
 			[Pickup]-:&gt;[Car]
+
+			<label>Car implements interface IVehicle</label>
+			[Car]--:&gt;[IVehicle]
 
 			<label>Paul and Ron have an association</label>
 			[Paul]-[Ron]
@@ -115,8 +121,8 @@ a:hover {
 			<label>Car has some attributes</label>
 			[Car]:[Car|maxSpeed: Float;color: Color|]
 
-			<label>Car has some operations</label>
-			[Car]:[Car|color: Color|honk()]
+			<label>Engine has an operation</label>
+			[Engine]:[Engine||start()]
 
 			<label>Set font</label>
 			#font: Times
@@ -225,7 +231,7 @@ a:hover {
 
 	function parse(source){
 		function parseRelationString(s){
-			var pattern = /\[(.*)\]\s*(-:>|->|<:-|<-|<->|-|:)\s*\[(.*)\]/
+			var pattern = /\[(.*)\]\s*(-:>|<:-|--:>|<:--|->|<-|-->|<--|<->|-|--|:)\s*\[(.*)\]/
 			var parts = s.match(pattern)
 			return parts && trims(_.tail(parts))
 		}
@@ -259,11 +265,16 @@ a:hover {
 			var b = isLeftToRight ? right : left
 			var t = {
 				'-:>': 'generalization',
-				'->': 'dependency',
 				'<:-': 'generalization',
-				'<-': 'dependency',
+				'--:>': 'realization',
+				'<:--': 'realization',
+				'-->': 'dependency',
+				'<--': 'dependency',
+				'->': 'association',
+				'<-': 'association',
 				'<->': 'twoway',
-				'-': 'nondirectional' 
+				'-': 'nondirectional',
+				'--': 'note'
 			}[pair[1]]
 			if (t)
 				relations.push({start: a.name, end:b.name, type: t})
@@ -344,36 +355,57 @@ a:hover {
 			return p1
 		}
 
-		function drawArrow(path, type, target){
+		function drawArrow(path, isOpen, target){
 			var size = ast.spacing / 30
 			var v = diff(path[path.length-2], _.last(path))
 			var nv = normalize(v)
 			var arrowPoint = rectIntersection(path[path.length-2], _.last(path), target.width, target.height)
 			var arrowBase = add(arrowPoint, mult(nv, 10*size))
 			var t = rot(nv)
-			var isDependency = type === 'dependency'
 			var arrow = [
 				add(arrowBase, mult(t, 4*size)),
-				(isDependency && !ast.fillArrows) ? add(arrowPoint, mult(nv, 5*size)) : arrowBase,
+				(isOpen && !ast.fillArrows) ? add(arrowPoint, mult(nv, 5*size)) : arrowBase,
 				add(arrowBase, mult(t, -4*size)),
 				arrowPoint,
 				add(arrowBase, mult(t, 4*size))
 			]
-			g.ctx.fillStyle = isDependency ? '#111' : '#fff'
+			g.ctx.fillStyle = isOpen ? '#111' : '#fff'
 			var ctx = g.path(arrow).fill().stroke()
 		}
 
 		function rnd(x){ return Math.round(x) }
 
+		var empty = !true
+		var filled = !false
+
 		_.each(layout.relations, function (r){
-			g.path(r.path).stroke()
-			if (r.type === 'nondirectional') return
-			if (r.type === 'twoway'){
+			if (r.type == 'generalization'){
+				g.path(r.path).stroke()
+				drawArrow(r.path, empty, r.end)
+			}
+			else if (r.type == 'realization'){
+				g.dashPath(r.path, 3, 3)
+				drawArrow(r.path, empty, r.end)
+			}
+			else if (r.type == 'dependency'){
+				g.dashPath(r.path, 3, 3)
+				drawArrow(r.path, filled, r.end)
+			}
+			else if (r.type == 'association'){
+				g.path(r.path).stroke()
+				drawArrow(r.path, filled, r.end)
+			}
+			else if (r.type == 'nondirectional'){
+				g.path(r.path).stroke()
+			}
+			else if (r.type == 'note'){
+				g.dashPath(r.path, 3, 3)
+			}
+			else if (r.type === 'twoway'){
+				g.path(r.path).stroke()
 				drawArrow(r.path, 'dependency', r.end)
 				drawArrow(_.clone(r.path).reverse(), 'dependency', r.start)
 			}
-			else
-				drawArrow(r.path, r.type, r.end)
 		})
 		g.ctx.lineWidth = 1
 		_.each(layout.nodes, function (e){

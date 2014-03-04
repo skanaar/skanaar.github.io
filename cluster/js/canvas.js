@@ -74,6 +74,21 @@ skanaar.Canvas = function (canvas, callbacks){
 				ctx.lineTo(offset.x + s*path[i].x, offset.y + s*path[i].y)
 			return chainable
 		},
+		dashPath: function (path, dashLen, spaceLen){
+			spaceLen = spaceLen || dashLen
+			for(var i=1, len=path.length; i<len; i++){
+				var a = path[i-1], b = path[i]
+				var d = Math.sqrt((a.x-b.x)*(a.x-b.x) + (a.y-b.y)*(a.y-b.y))
+				var nx = (b.x-a.x)/d, ny = (b.y-a.y)/d
+				for(var j=0; d>j*(dashLen+spaceLen)+dashLen; j++){
+					var dashStart = (dashLen+spaceLen)*j
+					var dashEnd = (dashLen+spaceLen)*j+dashLen
+					ctx.moveTo(a.x + nx*dashStart, a.y + ny*dashStart)
+					ctx.lineTo(a.x + nx*dashEnd, a.y + ny*dashEnd)
+				}
+			}
+			ctx.stroke()
+		},
 		colorNorm: function (r, g, b, a){
 			return color255(255*r, 255*g, 255*b, a)
 		},
