@@ -8,4 +8,4 @@ solutions		4	12	0
 export			4	12	0
 reductions		120	200	0
 //SET DAYS LEFT TO -1 TO START AUTOMATIC COUNTDOWN 
-daysleft		-1
+daysleft		8

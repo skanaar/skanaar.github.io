@@ -52,7 +52,7 @@ void setup()
     timeimage = loadImage("indicator/images/timeslider.png");
     
     //LOAD DATA
-    String lines[] = loadStrings("indicator/data.txt");
+    String lines[] = loadStrings("data/indicator.txt");
     for (int i = 1; i < lines.length(); ++i){
       loadData(lines[i]);
     }
