@@ -476,7 +476,7 @@ angular.module('cluster').controller('LoginCtrl', function ($scope, $http, $loca
         if ($scope.users[$scope.username] === $scope.password)
             $location.path('/dashboard')
         else
-            alert('Incorrect password. Tip: try "apa" / "banan"')
+            alert('Incorrect username/password')
     }
 
     $scope.registerInterest = function (){

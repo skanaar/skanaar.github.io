@@ -1,9 +1,4 @@
 <div class="full-row jumbotron">
-	<div class="pull-right adminbutton">
-		<a ng-class="{active: adminMode}" ng-click="adminMode = !adminMode">
-			<i class="fa fa-gears fa-lg"></i>
-		</a>
-	</div>
 	<h1>{{cluster.name}}: {{companyName}}</h1>
 </div>
 <div class="full-row page-stripe toolbar">
@@ -40,17 +35,13 @@
 		   <img ng-show="activePane === 'current'" src="img/current_icon.png">
 		   <img ng-hide="activePane === 'current'" src="img/current_icon_inactive.png">CURRENT</a>
 		<a ng-click="showUploadDialog = true" href="javascript:void(0)">
-		   <img src="img/upload_icon_inactive.png">UPLOAD</a>
-		<a ng-click="prepareDownloadLink()" href="javascript:void(0)">
-		   <img src="img/save_to_hdd_inactive.png">DOWNLOAD</a>
-		<a ng-click="showLoadCluster = true" href="javascript:void(0)">
-		   <img src="img/load_icon_inactive.png">OPEN</a>
+		   <img src="img/upload_icon_inactive.png">SUBMIT</a>
+		<a ng-click="togglePane('admin')" href="javascript:void(0)">
+		   <img ng-show="activePane === 'admin'" src="img/develop_icon.png">
+		   <img ng-hide="activePane === 'admin'" src="img/develop_icon_inactive.png">DEVELOP</a>
 		<a ng-click="togglePane('legend')" href="javascript:void(0)">
 		   <img ng-show="activePane === 'legend'" src="img/legend_icon.png">
 		   <img ng-hide="activePane === 'legend'" src="img/legend_icon_inactive.png">LEGEND</a>
-		<a ng-click="togglePane('admin')" href="javascript:void(0)" ng-show="adminMode">
-		   <img ng-show="activePane === 'admin'" src="img/develop_icon.png">
-		   <img ng-hide="activePane === 'admin'" src="img/develop_icon_inactive.png">ADMIN</a>
 	</div>
 	<div class="sidebar sidebar-look onlyTopShadow details_sidebar" ng-show="selectedEntity">
 		<div>

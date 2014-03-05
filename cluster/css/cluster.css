@@ -178,9 +178,6 @@ hr {
 .footer a { padding: 0 }
 .footer img { margin-right: 10px }
 
-.jumbotron a.active { border-width:0; color: #0f0; }
-.jumbotron .adminbutton { color: rgba(0, 0, 0, 0.2) }
-
 .toolbar {
 	background: #444
 }
