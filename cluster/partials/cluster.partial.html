@@ -39,7 +39,7 @@
 		<a ng-click="togglePane('current')" href="javascript:void(0)">
 		   <img ng-show="activePane === 'current'" src="img/current_icon.png">
 		   <img ng-hide="activePane === 'current'" src="img/current_icon_inactive.png">CURRENT</a>
-		<a ng-click="uploadCluster()" href="javascript:void(0)">
+		<a ng-click="showUploadDialog = true" href="javascript:void(0)">
 		   <img src="img/upload_icon_inactive.png">UPLOAD</a>
 		<a ng-click="prepareDownloadLink()" href="javascript:void(0)">
 		   <img src="img/save_to_hdd_inactive.png">DOWNLOAD</a>
@@ -52,7 +52,7 @@
 		   <img ng-show="activePane === 'admin'" src="img/develop_icon.png">
 		   <img ng-hide="activePane === 'admin'" src="img/develop_icon_inactive.png">ADMIN</a>
 	</div>
-	<div class="sidebar sidebar-look details_sidebar" ng-show="selectedEntity">
+	<div class="sidebar sidebar-look onlyTopShadow details_sidebar" ng-show="selectedEntity">
 		<div>
 			<div>
 				<a class="pull-right"
@@ -76,7 +76,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="sidebar sidebar-look details_sidebar" ng-show="selectedRelation">
+	<div class="sidebar sidebar-look onlyTopShadow details_sidebar" ng-show="selectedRelation">
 		<div>
 			<h2>{{selectedRelation.start.name}} - {{selectedRelation.end.name}}</h2>
 			<div>{{selectedRelation.description}}</div>
@@ -261,6 +261,18 @@
 					<a class="button" ng-click="addSolutionWizard.done()">Done</a>
 				</li>
 			</ul>
+		</div>
+	</div>
+	<div class="modal" ng-show="showUploadDialog">
+		<div>
+			<a class="pull-right" ng-click="showUploadDialog = false" href="javascript:void(0)">
+				<img src="img/icons/close_popup.png" width="42" height="42">
+			</a>
+			<h2><i class="fa fa-fw fa-cloud-upload"></i> Upload current cluster</h2>
+			Send the current cluster with any changes to transformative-clusters.net for review and inclusion in out database.
+			<h3>Message (optional)</h3>
+			<textarea ng-model="uploadMessage"></textarea>
+			<a class="button" ng-click="uploadCluster()">Upload</a>
 		</div>
 	</div>
 	<div class="modal" ng-show="showLoadCluster">

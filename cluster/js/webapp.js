@@ -157,7 +157,7 @@ angular.module('cluster').controller('MapCtrl', function ($scope, $http){
     }
 })
 
-angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q, $timeout, $routeParams, clusterLoader){
+angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q, $timeout, $routeParams, clusterLoader, uploader){
     ClusterPlatform.clusterScope = $scope
 
     var clusterTemplate = {
@@ -282,25 +282,13 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q,
         $scope.readyToDownload = true
     }
 
+    $scope.showUploadDialog = false
     $scope.uploadCluster = function (){
-        var config = {
-            headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
-        }
-        var payload = $.param({
-            key: '93jdv74',
+        uploader.send({
             subject: 'UPLOAD_CLUSTER',
-            message: serializeCluster()
-        })
-        function onResponse(response){
-            if (response.data === 'success')
-                alert('Cluster successfully uploaded')
-            else
-                alert('Failed to upload cluster')
-        }
-        function failure(response){
-            alert('Failed to upload cluster')
-        }
-        $http.post('upload.php', payload, config).then(onResponse, failure)
+            message: $scope.uploadMessage,
+            data: serializeCluster()
+        }, function (){ $scope.showUploadDialog = false })
     }
 
     $scope.loadClusterFile = function (files){
@@ -507,7 +495,7 @@ angular.module('cluster').controller('GoalsCtrl', function ($scope, $http){
     })
 })
 
-angular.module('cluster').controller('RegisterSolutionCtrl', function ($scope){
+angular.module('cluster').controller('RegisterSolutionCtrl', function ($scope, uploader){
     $scope.area = {
         mobility: 0,
         nutrition: 0,
@@ -521,5 +509,43 @@ angular.module('cluster').controller('RegisterSolutionCtrl', function ($scope){
         return $scope.panes[key] ?
             'fa fa-chevron-circle-down fa-lg' :
             'fa fa-chevron-circle-right fa-lg'
+    }
+    $scope.uploadSolution = function (){
+        var jqData = $('#newsolutionform').serializeArray()
+        var data = _.object(_.map(jqData, function (e){ return [e.name, e.value] }))
+        var serialization = JSON.stringify(data, undefined, 2)
+        uploader.send({
+            subject: 'NEW_SOLUTION',
+            message: 'new solution',
+            data: serialization
+        })
+    }
+})
+
+angular.module('cluster').factory('uploader', function ($http){
+    return {
+        send: function (params, whenDone){
+            var config = {
+                headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
+            }
+            var payload = $.param({
+                key: 'ofd38sd',
+                subject: params.subject,
+                message: params.message,
+                data: params.data
+            })
+            function onResponse(response){
+                if (response.data === 'success')
+                    alert('Data successfully uploaded')
+                else
+                    alert('Failed to upload data')
+                if (whenDone) whenDone()
+            }
+            function failure(response){
+                alert('Failed to upload data')
+                if (whenDone) whenDone()
+            }
+            $http.post('upload.php', payload, config).then(onResponse, failure)
+        }
     }
 })
