@@ -463,10 +463,14 @@ angular.module('cluster').controller('NetworkCtrl', function ($scope, $http, $q,
     }
 })
 
-angular.module('cluster').controller('LoginCtrl', function ($scope, $http, $location){
+angular.module('cluster').controller('LoginCtrl', function ($scope, $http, $location, uploader){
     $scope.username = ''
     $scope.password = ''
     $scope.users = []
+
+    $http.get('data/users.json').then(function (response){
+        $scope.users = response.data
+    })
 
     $scope.login = function (){
         if ($scope.users[$scope.username] === $scope.password)
@@ -475,9 +479,21 @@ angular.module('cluster').controller('LoginCtrl', function ($scope, $http, $loca
             alert('Incorrect password. Tip: try "apa" / "banan"')
     }
 
-    $http.get('data/users.json').then(function (response){
-        $scope.users = response.data
-    })
+    $scope.registerInterest = function (){
+        uploader.send({
+            subject: 'REGISTER_INTEREST',
+            message: $scope.email + ", \n" + $scope.motivation,
+            data: ''
+        }, function (){ $scope.showRegister = false })
+    }
+
+    $scope.forgotLogin = function (){
+        uploader.send({
+            subject: 'FORGOT_LOGIN',
+            message: $scope.email,
+            data: ''
+        }, function (){ $scope.showForgotLogin = false })
+    }
 })
 
 angular.module('cluster').controller('DashboardCtrl', function ($scope, $http){

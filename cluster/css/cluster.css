@@ -561,10 +561,28 @@ canvas#canvas {
 	background: rgba(23, 65, 65, 0.9);
 	color: #eee;
 	font-family: 'Dosis', sans-serif;
-	overflow-y: scroll;
+	overflow-y: auto;
 	overflow-x: hidden;
 	box-shadow: 0 0 8px black;
 	padding: 15px;
+}
+.modal.light>div {
+	background: #eee;
+	color: #333;
+}
+.modal.light a {
+	color: #444;
+}
+.modal .content-box {
+	max-width: 300px;
+	margin: auto;
+}
+.modal .content-box textarea {
+	width: 300px;
+}
+.modal.small>div {
+	top: 120px;
+	height: 300px;
 }
 .modal table {
 	width: 100%;
@@ -645,7 +663,7 @@ a.button {
 	text-align: center;
 	margin: 20px auto;
 	background: #4C9730;
-	color: #eee;
+	color: #eee !important;
 	border-radius: 20px;
 	padding: 4px 20px;
 }

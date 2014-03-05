@@ -1,9 +1,9 @@
 <div class="full-row jumbotron">
-	<h1>Start</h1>
+	<h1>START</h1>
 	<small>Transformative Clusters</small>
 </div>
 <div class="full-row dashboard-section updates">
-	<h2>UPDATES</h2>
+	<h2>LOG IN</h2>
 	<table style="margin: 2em auto">
 	<tr>
 		<td style="height: 35px">Username </td>
@@ -14,7 +14,7 @@
 		<td><input type="password" ng-model="password"> </td>
 	</tr>
 	<tr>
-		<td style="height: 35px"><label><input type="checkbox"> Remember me</label></td>
+		<td style="height: 35px"><a href="javascript:void(0)" ng-click="showForgotLogin = true">Forgot username/password?</a></td>
 		<td><a class="button"
 				style="margin-right:0; width: 60px"
 				ng-click="login()"
@@ -25,8 +25,65 @@
 	<div class="full-row">
 		<div class="introductions">
 			<hr>
-			<a><img src="img/trans_clust_blubb.png" ></a>
-			<a><img src="img/interest_blubb.png" ></a>
+			<a href="javascript:void(0)" ng-click="showInfo = true">
+				<img src="img/trans_clust_blubb.png">
+			</a>
+			<a href="javascript:void(0)" ng-click="showRegister = true">
+				<img src="img/interest_blubb.png">
+			</a>
+		</div>
+	</div>
+
+	<div class="modal light small" ng-show="showInfo">
+		<div>
+			<a class="pull-right" ng-click="showInfo = false" href="javascript:void(0)">
+				<img src="img/icons/close_popup.png" width="42" height="42">
+			</a>
+			<ul>
+				<li>
+					<h3>About Transformative Clusters</h3>
+					<div><a href="material/TC-Leaflet-20131025-Web.pdf">Leaflet (English)</a></div>
+					<div><a href="material/TC-Leaflet-20131025-Web-Chn.pdf">Leaflet (Chinese)</a></div>
+					<div><a href="material/TC-Leaflet-20131025-Web-Swe.pdf">Leaflet (Swedish)</a></div>
+				</li>
+				<li>
+					<h3>Who can participate and how</h3>
+					<div><a href="material/guide-entrepreneurs.pdf">Quick quide for entrepreneurs</a></div>
+					<div><a href="material/guide-cities.pdf">Quick quide for cities</a></div>
+					<div><a href="material/guide-catalysts.pdf">Quick quide for catalysts</a></div>
+					<div><a href="material/guide-thoughtleaders.pdf">Quick quide for thoughtleaders</a></div>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="modal light small" ng-show="showRegister">
+		<div>
+			<a class="pull-right" ng-click="showRegister = false" href="javascript:void(0)">
+				<img src="img/icons/close_popup.png" width="42" height="42">
+			</a>
+			<h2>REGISTER YOUR INTEREST</h2>
+			<div class="content-box">
+				<label>Enter your email address and we will get back to you shortly</label>
+				<input type="text" ng-model="email">
+				<div>Briefly state why the platform is of interest for you</div>
+				<textarea ng-model="motivation"></textarea>
+			</div>
+			<a class="button" href="javascript:void(0)" ng-click="registerInterest()">Send</a>
+		</div>
+	</div>
+
+	<div class="modal light small" ng-show="showForgotLogin">
+		<div>
+			<a class="pull-right" ng-click="showForgotLogin = false" href="javascript:void(0)">
+				<img src="img/icons/close_popup.png" width="42" height="42">
+			</a>
+			<h2>FORGOT USERNAME/PASSWORD</h2>
+			<div class="content-box">
+				Enter your email address and we will get back to you shortly
+				<input type="text" ng-model="email">
+				<a class="button" href="javascript:void(0)" ng-click="forgotLogin()">Send</a>
+			</div>
 		</div>
 	</div>
 
