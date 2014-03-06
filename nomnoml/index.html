@@ -236,7 +236,7 @@ a:hover {
 			return parts && trims(_.tail(parts))
 		}
 		function parseMetaString(s){
-			var pattern = /#(.*):(.*)/
+			var pattern = /#([^:]*):(.*)/
 			var parts = s.match(pattern)
 			return parts && trims(_.tail(parts))
 		}
@@ -287,7 +287,8 @@ a:hover {
 			font: directives.font || 'Calibri',
 			spacing: (+directives.spacing) || 30,
 			direction: {down: 'TB', right: 'LR'}[directives.direction] || 'TB',
-			fillArrows: directives.fillArrows === 'true'
+			fillArrows: directives.fillArrows === 'true',
+			frame: directives.frame
 		}
 	}
 
@@ -326,7 +327,8 @@ a:hover {
 					type: _.findWhere(ast.relations, {start: start, end: end}).type
 				})
 			})
-			return { nodes: nodes, relations: relations }
+			var g = dagreLayout.graph()
+			return { nodes: nodes, relations: relations, width: g.width, height: g.height }
 		}
 		var dagreLayout = dagre.layout()
 							   .rankSep(ast.spacing)
@@ -338,12 +340,6 @@ a:hover {
 	}
 
 	function render(ast, layout){
-		g.ctx.save()
-		g.ctx.clearRect(0, 0, w, h)
-		g.ctx.translate(20, 20)
-		g.ctx.strokeStyle = '#111'
-		g.ctx.textAlign = 'center'
-		g.ctx.lineWidth = 1
 
 		function rectIntersection(p1, p2, w, h){
 			var v = diff(p1, p2)
@@ -373,10 +369,36 @@ a:hover {
 			var ctx = g.path(arrow).fill().stroke()
 		}
 
+		function drawFrame(title, layout){
+			g.ctx.fillStyle = '#000'
+			setFont(ast, 'normal')
+			g.ctx.textAlign = 'left'
+			g.ctx.strokeRect(0.5, 0.5, layout.width+2*frameMarg, layout.height+frameMarg*3+lineHeight)
+			var w = g.ctx.measureText(title).width + frameMarg + 0.5
+			var h = lineHeight+frameMarg + 0.5
+			g.path([{x:0, y:h}, {x:w-frameMarg*2/3, y:h}, {x:w, y:h-frameMarg}, {x:w, y:0}]).stroke()
+			g.ctx.fillText(ast.frame, frameMarg/2, frameMarg/2 + lineHeight)
+		}
+
 		function rnd(x){ return Math.round(x) }
 
 		var empty = !true
 		var filled = !false
+		var lineHeight = ast.fontSize
+		var frameMarg = 10
+
+		g.ctx.save()
+		g.ctx.clearRect(0, 0, w, h)
+		g.ctx.strokeStyle = '#111'
+		g.ctx.lineWidth = 1
+
+		g.ctx.translate((g.width() - layout.width)/2, 0)
+
+		if (ast.frame)
+			drawFrame(ast.frame, layout)
+
+		g.ctx.translate(frameMarg, frameMarg*2 + lineHeight)
+		g.ctx.textAlign = 'center'
 
 		_.each(layout.relations, function (r){
 			if (r.type == 'generalization'){
@@ -409,7 +431,6 @@ a:hover {
 		})
 		g.ctx.lineWidth = 1
 		_.each(layout.nodes, function (e){
-			var lineHeight = ast.fontSize
 			var w = e.width
 			var h = e.height
 			var rx = rnd(e.x-w/2)+0.5
