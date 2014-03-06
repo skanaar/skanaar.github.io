@@ -1,10 +1,9 @@
 @font-face {
-	font-family: 'Dosis';
+	font-family: 'Miso';
 	font-style: normal;
-	font-weight: 500;
-	src: local('Dosis Regular'), 
-		 local('Dosis-Regular'), 
-		 url(../fonts/dosis-500.woff) format('woff');
+	src: local('Miso'), 
+		 url(../fonts/miso-regular.ttf) format('truetype'), 
+		 url(../fonts/miso-regular.otf) format('opentype');
 }
 
 @media only screen and (max-width: 600px) {
@@ -12,6 +11,7 @@
 }
 
 body, html {
+	font-size: 120%;
 	margin: 0;
 	padding: 0;
 	background: #666;
@@ -19,18 +19,18 @@ body, html {
 }
 
 h1 {
-	font-family: 'Dosis', sans-serif;
+	font-family: 'Miso', sans-serif;
 	font-weight: normal
 }
 h2 {
 	color: #1C8394;
 	margin-left: 20px;
-	font-family: 'Dosis', sans-serif;
+	font-family: 'Miso', sans-serif;
 	font-weight: normal
 }
 h3 {
 	color: #1C8394;
-	font-family: 'Dosis', sans-serif;
+	font-family: 'Miso', sans-serif;
 	font-weight: normal
 }
 
@@ -149,7 +149,7 @@ hr {
 .page-stripe {
 	background: #333;
 	color: #ddd;
-	font-family: 'Dosis', sans-serif;
+	font-family: 'Miso', sans-serif;
 }
 .page-stripe .title {
 	overflow: hidden;
@@ -202,7 +202,7 @@ hr {
 	background: #0d8;
 	background: url(../img/header.jpg) center center;
 	background-size: cover;
-	font-family: 'Dosis', sans-serif;
+	font-family: 'Miso', sans-serif;
 	text-align: center;
 	padding: 5px 5px 5px 5px;
 }
@@ -221,7 +221,7 @@ hr {
 .dashboard-section {
 	padding: 1px 30px;
 	background: #eee;
-	font-family: 'Dosis', sans-serif;
+	font-family: 'Miso', sans-serif;
 }
 .action-buttons {
 	text-align: center;
@@ -299,7 +299,7 @@ hr {
 
 .profile-summary {
 	color: #eee;
-	font-family: 'Dosis', sans-serif;
+	font-family: 'Miso', sans-serif;
 	background: #1C8394;
 	padding: 15px 30px;
 }
@@ -334,7 +334,7 @@ hr {
 
 .sidebar-look {
 	color: #eee;
-	font-family: 'Dosis', sans-serif;
+	font-family: 'Miso', sans-serif;
 	background: #174140; 
 	box-shadow: inset 5px 5px 15px 0px rgba(0, 0, 0, 0.50);
 	overflow: auto;
@@ -396,7 +396,7 @@ input[type=file] {
 .result-pane { background-color: #eee }
 .result-pane table {
 	color: #000;
-	font-family: 'Dosis', sans-serif
+	font-family: 'Miso', sans-serif
 }
 .result-pane td {
 	width: 20%;
@@ -432,7 +432,7 @@ canvas#canvas {
 	top: 0; 
 	right: 0; 
 	background: rgba(0,0,0,0.75);
-	font-family: 'Dosis', sans-serif;
+	font-family: 'Miso', sans-serif;
 	text-align: center;
 	padding: 5px 5px 5px 5px;
 	color: #39B7EA;
@@ -447,7 +447,7 @@ canvas#canvas {
 	background-color: #153F3E;
 	color: #eee;
 	font-size: 80%;
-	font-family: 'Dosis';
+	font-family: 'Miso';
 	text-align: center
 }
 
@@ -557,7 +557,7 @@ canvas#canvas {
 	right: 40px;
 	background: rgba(23, 65, 65, 0.9);
 	color: #eee;
-	font-family: 'Dosis', sans-serif;
+	font-family: 'Miso', sans-serif;
 	overflow-y: auto;
 	overflow-x: hidden;
 	box-shadow: 0 0 8px black;
@@ -609,7 +609,7 @@ canvas#canvas {
 }
 
 .solution-form {
-	font-family: 'Dosis', sans-serif
+	font-family: 'Miso', sans-serif
 }
 .solution-form input[type=text], .solution-form input[type=range] {
 	width: 40%;
