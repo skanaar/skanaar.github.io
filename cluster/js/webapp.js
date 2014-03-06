@@ -26,6 +26,32 @@
     })
 }())
 
+function serializeCluster(){
+    var es = ClusterPlatform.nodes.entities
+    var rs = ClusterPlatform.nodes.relations
+    var data = {
+        name: ClusterPlatform.cluster.name,
+        potential: ClusterPlatform.cluster.potential,
+        centralEntity: ClusterPlatform.cluster.centralEntity,
+        entities: _.map(es, function (e){ return _.omit(e, ['$$hashKey', 'fx', 'fy'])}),
+        relations:  _.map(rs, function (r){
+            return {
+                start: r.start.id,
+                end: r.end.id,
+                description: r.description,
+                date: r.date,
+                author: r.author,
+                type: r.type
+            }
+        })
+    }
+    return JSON.stringify(data, undefined, 2)
+}
+
+function clusterToDataUrl(){
+    return 'data:text/json;charset=utf-8,' + encodeURIComponent(serializeCluster())
+}
+
 function attachDataUrlToLink(id, dataType, linkGenerator){
     var link = document.getElementById(id)
     link.addEventListener('click', function (){

@@ -39,6 +39,10 @@ a {
 	text-decoration: none;
 }
 
+input[type=text], select {
+	font-size: 83% !important;
+}
+
 input[type=text], input[type=password] {
 	box-sizing: border-box;
 	padding: 4px 0 4px 8px;

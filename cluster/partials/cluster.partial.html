@@ -75,7 +75,7 @@
 			<div><label>Type</label> <em style="width: 100px">{{selectedRelation.type}}</em></div>
 			<div><label>Date</label> {{selectedRelation.date}}</div>
 			<div><label>Author</label> {{selectedRelation.author}}</div>
-			<div><label>Verified</label> {{selectedRelation.verified ? 'pending' : 'Yes'}}</div>
+			<div><label>Verified</label> {{selectedRelation.verified ? 'Yes' : 'pending'}}</div>
 			<hr>
 			<div class="toolset">
 				<a ng-click="removeRelation()" href="javascript:void(0)">
@@ -175,6 +175,14 @@
 				<label>Type</label>
 				<select ng-options="e for e in relationTypes"
 						ng-model="selectedRelation.type"></select><br>
+				<label>Description</label>
+				<input type="text" ng-model="selectedRelation.description">
+				<label>Author</label>
+				<input type="text" ng-model="selectedRelation.author">
+				<label>Date</label>
+				<input type="text" ng-model="selectedRelation.date">
+				<label>Verified</label>
+				<input type="checkbox" ng-model="selectedRelation.verified">
 			</div>
 
 		</div>
@@ -290,25 +298,6 @@
 attachDataUrlToLink('download-image-link', 'image/png', function (){
 	return document.getElementById('canvas').toDataURL('image/png')
 })
-
-function serializeCluster(){
-	var es = ClusterPlatform.nodes.entities
-	var rs = ClusterPlatform.nodes.relations
-    var data = {
-    	name: ClusterPlatform.cluster.name,
-    	potential: ClusterPlatform.cluster.potential,
-    	centralEntity: ClusterPlatform.cluster.centralEntity,
-        entities: _.map(es, function (e){ return _.omit(e, ['$$hashKey', 'fx', 'fy'])}),
-        relations:  _.map(rs, function (r){
-            return { start: r.start.id, end: r.end.id, type: r.type }
-        })
-    }
-    return JSON.stringify(data, undefined, 2)
-}
-
-function clusterToDataUrl(){
-    return 'data:text/json;charset=utf-8,' + encodeURIComponent(serializeCluster())
-}
 
 attachDataUrlToLink('download-data-link', 'text/json', clusterToDataUrl)
 
