@@ -102,11 +102,12 @@ textarea {
 
 hr {
     display: block;
-    height: 1px;
     border: 0;
-    border-top: 2px dotted #717983;
-    margin: 1em 0;
-    padding: 0;
+    background-image: url(../img/hr.png);
+    /*background-size: 972px 2px;
+    border-top: 2px dotted #717983;*/
+    margin: 1em 2px;
+    padding: 2px;
 }
 
 /*-- Grid -----------------*/
