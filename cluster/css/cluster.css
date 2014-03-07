@@ -14,7 +14,7 @@ body, html {
 	font-size: 120%;
 	margin: 0;
 	padding: 0;
-	background: #666;
+	background: #404040;
 	overflow-x: hidden;
 }
 
@@ -104,7 +104,7 @@ hr {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 2px dotted #ccc;
+    border-top: 2px dotted #717983;
     margin: 1em 0;
     padding: 0;
 }
@@ -151,7 +151,7 @@ hr {
 	white-space: nowrap;
 }
 .page-stripe {
-	background: #333;
+	background: #252525;
 	color: #ddd;
 	font-family: 'Miso', sans-serif;
 }
@@ -171,19 +171,33 @@ hr {
 	color: grey;
 }
 .page-stripe a:hover{
-	background: #555;
+	background: rgba(255, 255, 255, 0.1);
 }
 .page-stripe a.active{
 	padding-bottom: 0;
 	border: 0 solid #ddd;
 	border-width: 0 0 7px 0;
 }
+.page-stripe.header a {
+	color: #1C8395;
+}
+.page-stripe.header a.active {
+	color: #fff;
+	border-width: 0;
+	padding: 7px 12px;
+}
+.page-stripe.header a span {
+	display: none;
+}
+.page-stripe.header a.active span {
+	display: inline;
+}
 .footer .title { font-size: 80%; padding: 6px 0; }
 .footer a { padding: 0 }
 .footer img { margin-right: 10px }
 
 .toolbar {
-	background: #444
+	background: #062c27
 }
 .toolset select {
 	border: 1px solid #1A3637;
@@ -252,15 +266,17 @@ hr {
 .updates .block b {
 	display: inline-block;
 	vertical-align: middle;
-	width: 30px;
-	font-size: 200%;
-	text-align: right
+	width: 40px;
+	font-size: 250%;
+	text-align: right;
+	color: #454545;
 }
 .updates .block .specifier {
 	display: inline-block;
 	width: 100px;
 	vertical-align: middle;
 	margin-left: 10px;
+	color: #717983;
 }
 .introductions {
 	background: url(../img/home_clusters_bg.png) center top;
@@ -435,12 +451,13 @@ canvas#canvas {
 	left: 70px; 
 	top: 0; 
 	right: 0; 
-	background: rgba(0,0,0,0.75);
+	background-color: rgba(0, 0, 0, 0.65);
 	font-family: 'Miso', sans-serif;
 	text-align: center;
 	padding: 5px 5px 5px 5px;
-	color: #39B7EA;
+	color: #1c8395;
 	font-size: 120%;
+	text-shadow: #000 0 0 15px, #000 0 0 15px, #000 0 0 15px, #000 0 0 15px;
 }
 .tab-bar {
 	position: absolute;
@@ -609,7 +626,7 @@ canvas#canvas {
 	width: 40%
 }
 .modal li a {
-	color: #8fc;
+	color: #4c972f;
 }
 
 .solution-form {

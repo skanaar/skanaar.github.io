@@ -374,8 +374,8 @@ a:hover {
 			setFont(ast, 'normal')
 			g.ctx.textAlign = 'left'
 			g.ctx.strokeRect(0.5, 0.5, layout.width+2*frameMarg, layout.height+frameMarg*3+lineHeight)
-			var w = g.ctx.measureText(title).width + frameMarg + 0.5
-			var h = lineHeight+frameMarg + 0.5
+			var w = g.ctx.measureText(title).width + frameMarg
+			var h = lineHeight+frameMarg
 			g.path([{x:0, y:h}, {x:w-frameMarg*2/3, y:h}, {x:w, y:h-frameMarg}, {x:w, y:0}]).stroke()
 			g.ctx.fillText(ast.frame, frameMarg/2, frameMarg/2 + lineHeight)
 		}
@@ -392,7 +392,7 @@ a:hover {
 		g.ctx.strokeStyle = '#111'
 		g.ctx.lineWidth = 1
 
-		g.ctx.translate((g.width() - layout.width)/2, 0)
+		g.ctx.translate(rnd((g.width() - layout.width)/2)+0.5, 0.5)
 
 		if (ast.frame)
 			drawFrame(ast.frame, layout)
@@ -433,8 +433,8 @@ a:hover {
 		_.each(layout.nodes, function (e){
 			var w = e.width
 			var h = e.height
-			var rx = rnd(e.x-w/2)+0.5
-			var ry = rnd(e.y-h/2)+0.5
+			var rx = rnd(e.x-w/2)
+			var ry = rnd(e.y-h/2)
 			var y = e.y-h/2
 			g.ctx.fillStyle = 'rgba(220, 220, 220, 1)'
 			g.ctx.fillRect(rx, ry, w, h)
@@ -447,7 +447,7 @@ a:hover {
 				g.ctx.fillText(e.name, e.x, y+ast.fontSize/5)
 			} else {
 				g.ctx.fillText(e.name, e.x, y)
-				y += rnd(lineHeight/2)+0.5
+				y += rnd(lineHeight/2)
 				var line = [{x: rx, y: y}, {x: rx+w, y: y}]
 				g.path(line).stroke()
 				g.path(line, {x:0, y:rnd((e.attrs.length+0.75)*lineHeight)}).stroke()
