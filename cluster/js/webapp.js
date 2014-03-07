@@ -3,7 +3,8 @@
         var vowel = 'aaeeiioouuy'
         var conso = 'bcddfghhkllmnnprrsstttv'
         function syllable(){ return _.sample(vowel) + _.sample(conso) }
-        return _.sample(conso).toUpperCase() + _.times(syllables || _.random(2,4), syllable).join('')
+        return _.sample(conso).toUpperCase() + 
+                _.times(syllables || _.random(2,4), syllable).join('')
     }
     function sum(list, plucker){
         var transform = {
@@ -33,7 +34,9 @@ function serializeCluster(){
         name: ClusterPlatform.cluster.name,
         potential: ClusterPlatform.cluster.potential,
         centralEntity: ClusterPlatform.cluster.centralEntity,
-        entities: _.map(es, function (e){ return _.omit(e, ['$$hashKey', 'fx', 'fy'])}),
+        entities: _.map(es, function (e){
+            return _.omit(e, ['$$hashKey', 'fx', 'fy'])
+        }),
         relations:  _.map(rs, function (r){
             return {
                 start: r.start.id,
@@ -56,20 +59,36 @@ function attachDataUrlToLink(id, dataType, linkGenerator){
     var link = document.getElementById(id)
     link.addEventListener('click', function (){
         var downloadType = 'data:application/octet-stream'
-        link.href = linkGenerator().replace(new RegExp('^data:'+dataType), downloadType)
+        var regex = new RegExp('^data:'+dataType)
+        link.href = linkGenerator().replace(regex, downloadType)
     }, false);
 }
 
 angular.module('cluster', ['ngRoute']).config(function($routeProvider) {
     $routeProvider
-    .when('/login', {controller:'LoginCtrl', templateUrl:'partials/login.partial.html'})
-    .when('/dashboard', {controller:'DashboardCtrl', templateUrl:'partials/dashboard.partial.html'})
-    .when('/map', {controller:'MapCtrl', templateUrl:'partials/map.partial.html'})
-    .when('/goals', {controller:'GoalsCtrl', templateUrl:'partials/goals.partial.html'})
-    .when('/newsolution', {controller: 'RegisterSolutionCtrl', templateUrl:'partials/newsolution.partial.html'})
-    .when('/searchclusters', {controller:'SearchCtrl', templateUrl:'partials/clustersearch.partial.html'})
-    .when('/cluster/:clusterId', {controller:'ClusterCtrl', templateUrl:'partials/cluster.partial.html'})
-    .when('/network', {templateUrl:'partials/network.partial.html'})
+    .when('/login', 
+        {controller:'LoginCtrl', 
+        templateUrl:'partials/login.partial.html'})
+    .when('/dashboard', {
+        controller:'DashboardCtrl', 
+        templateUrl:'partials/dashboard.partial.html'})
+    .when('/map', {
+        controller:'MapCtrl', 
+        templateUrl:'partials/map.partial.html'})
+    .when('/goals', {
+        controller:'GoalsCtrl', 
+        templateUrl:'partials/goals.partial.html'})
+    .when('/newsolution', {
+        controller: 'RegisterSolutionCtrl',
+        templateUrl:'partials/newsolution.partial.html'})
+    .when('/searchclusters', {
+        controller:'SearchCtrl', 
+        templateUrl:'partials/clustersearch.partial.html'})
+    .when('/cluster/:clusterId', {
+        controller:'ClusterCtrl', 
+        templateUrl:'partials/cluster.partial.html'})
+    .when('/network', {
+        templateUrl:'partials/network.partial.html'})
     .otherwise({ redirectTo: '/login' })
 })
 
@@ -84,8 +103,8 @@ angular.module('cluster').controller('NavbarCtrl', function ($scope){
 
 angular.module('cluster').factory('clusterLoader', function ($http, $q){
     var files = $http.get('data/clustersearch.json').then(function (response){
-        return $q.all(_.times(response.data.clusterCount, function (i){
-            return $http.get('data/cluster-'+(1+i)+'.json')
+        return $q.all(_.times(response.data.clusterCount+1, function (i){
+            return $http.get('data/clusters/cluster-'+i+'.json')
         }))
     }).then(function (rs){
         return _.map(rs, function (r){ return unpackCluster(r.data) })
@@ -131,13 +150,16 @@ angular.module('cluster').factory('clusterLoader', function ($http, $q){
             return files
         },
         getSolutions: function (){
-            return files.then(function (rs){ return _.flatten(_.pluck(rs, 'entities')) })
+            return files.then(function (rs){
+                return _.flatten(_.pluck(rs, 'entities'))
+            })
         },
         unpack: unpackCluster
     }
 })
 
-angular.module('cluster').controller('SearchCtrl', function ($scope, $http, clusterLoader){
+angular.module('cluster').controller('SearchCtrl', 
+    function ($scope, $http, clusterLoader){
     $scope.clusters = []
     $scope.filters = {
         mobility: false,
@@ -146,7 +168,7 @@ angular.module('cluster').controller('SearchCtrl', function ($scope, $http, clus
     }
 
     clusterLoader.getClusters().then(function (clusters){
-        $scope.clusters = clusters
+        $scope.clusters = _.tail(clusters)
         _.each($scope.clusters, function (c){
             c.mobility = Math.round(_.average(c.entities, 'mobility'))
             c.nutrition= Math.round(_.average(c.entities, 'nutrition'))
@@ -173,17 +195,22 @@ angular.module('cluster').controller('MapCtrl', function ($scope, $http){
         initializeGoogleMaps()
     } else {
         $http.get('data/map.json').then(function (response){
-            googleMapsMarkers = response.data
+            googleMapsMarkers = _.shuffle(response.data)
             var script = document.createElement('script')
             script.type = 'text/javascript'
-            script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&' +
+            var params = [
+                'v=3.exp',
+                'sensor=false',
                 'callback=initializeGoogleMaps'
+            ]
+            script.src = 'https://maps.googleapis.com/maps/api/js?'+params.join('&')
             document.body.appendChild(script)
         })
     }
 })
 
-angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q, $timeout, $routeParams, clusterLoader, uploader){
+angular.module('cluster').controller('ClusterCtrl',
+  function ($scope, $http, $q, $timeout, $routeParams, clusterLoader, uploader){
     ClusterPlatform.clusterScope = $scope
 
     var clusterTemplate = {
@@ -205,7 +232,13 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q,
         relations: []
     }
 
-    $scope.relationTypes = ['participant','provider','catalyst','potential','alternative']
+    $scope.relationTypes = [
+        'participant',
+        'provider',
+        'catalyst',
+        'potential',
+        'alternative'
+    ]
     $scope.solutionStatuses = ['existing', 'supporting', 'potential']
     $scope.solutionTypes = ['core', 'accelerator', 'expander']
     $scope.newRelationType = $scope.relationTypes[0]
@@ -235,7 +268,7 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q,
     $scope.clusterName = 'loading...'
 
     clusterLoader.getSolutions().then(function (sols){
-        $scope.allSolutions = sols
+        $scope.allSolutions = _.uniq(sols, function (s){ return s.name })
     })
 
     ClusterPlatform.engine.setFilter($scope.filter)
@@ -253,7 +286,7 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q,
     if (clusterId === 'blank')
         loadCluster(copyOfTemplate())
     else {
-        $http.get('data/cluster-'+clusterId+'.json').then(function (response){
+        $http.get('data/clusters/cluster-'+clusterId+'.json').then(function (response){
             loadCluster(response.data)
         })
     }
@@ -289,7 +322,9 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q,
         })
     }
 
-    function copyOfTemplate(){ return JSON.parse(JSON.stringify(clusterTemplate)) }
+    function copyOfTemplate(){
+        return JSON.parse(JSON.stringify(clusterTemplate))
+    }
 
     $scope.$on('$locationChangeStart', function(scope, next, current){
         ClusterPlatform.engine.pause()
@@ -371,15 +406,17 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q,
             $scope.addSolutionWizard.page = 2
         },
         done: function (){
-            var e = _.omit($scope.addSolutionWizard.chosenSolution, ['id', 'x', 'y', '$$hashKey'])
+            var skipList = ['id', 'x', 'y', '$$hashKey']
+            var e = _.omit($scope.addSolutionWizard.chosenSolution, skipList)
             e.type = $scope.addSolutionWizard.type
             e.status = $scope.addSolutionWizard.status
             _.extend(e, getNewSiblingPositionFor($scope.selectedEntity))
             var created = ClusterPlatform.nodes.addEntity(e)
             var rel_t = $scope.addSolutionWizard.rel_type
             var rel_desc = $scope.addSolutionWizard.rel_desc
-            ClusterPlatform.nodes.addRelation($scope.selectedEntity, created, rel_t, rel_desc)
-            ClusterPlatform.nodes.runFor(4000)
+            var nodes = ClusterPlatform.nodes
+            nodes.addRelation($scope.selectedEntity, created, rel_t, rel_desc)
+            nodes.runFor(4000)
             $scope.addSolutionWizard.cancel()
         }
     }
@@ -395,7 +432,8 @@ angular.module('cluster').controller('ClusterCtrl', function ($scope, $http, $q,
     }
 })
 
-angular.module('cluster').controller('LoginCtrl', function ($scope, $http, $location, uploader){
+angular.module('cluster').controller('LoginCtrl', 
+    function ($scope, $http, $location, uploader){
     $scope.username = ''
     $scope.password = ''
 
@@ -451,7 +489,8 @@ angular.module('cluster').controller('GoalsCtrl', function ($scope, $http){
     })
 })
 
-angular.module('cluster').controller('RegisterSolutionCtrl', function ($scope, uploader){
+angular.module('cluster').controller('RegisterSolutionCtrl',
+function ($scope, uploader){
     $scope.area = {
         mobility: 0,
         nutrition: 0,
@@ -481,9 +520,8 @@ angular.module('cluster').controller('RegisterSolutionCtrl', function ($scope, u
 angular.module('cluster').factory('uploader', function ($http){
     return {
         send: function (params, whenDone){
-            var config = {
-                headers: {'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8'}
-            }
+            var formMime = 'application/x-www-form-urlencoded; charset=UTF-8'
+            var config = { headers: {'Content-Type':formMime} }
             var payload = $.param({
                 key: 'ofd38sd',
                 subject: params.subject,
@@ -501,7 +539,8 @@ angular.module('cluster').factory('uploader', function ($http){
                 alert('Failed to upload data')
                 if (whenDone) whenDone()
             }
-            $http.post('upload.php', payload, config).then(onResponse, failure)
+            $http.post('upload.php', payload, config)
+                .then(onResponse, failure)
         }
     }
 })
