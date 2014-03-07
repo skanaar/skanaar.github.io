@@ -277,6 +277,19 @@ hr {
 	margin-left: 10px;
 	color: #717983;
 }
+.updates table.updateList {
+	display: block;
+	max-height: 200px;
+	margin: 0 2ex;
+	overflow-y: auto;
+}
+.updates table.updateList td {
+	padding: 1ex;
+}
+.updates table.updateList td.date {
+	min-width: 150px;
+	color: #717983;
+}
 .introductions {
 	background: url(../img/home_clusters_bg.png) center top;
 	background-size: cover;
@@ -293,14 +306,14 @@ hr {
 
 .progress-gauge {
 	position: relative;
-	border-radius: 2em;
+	border-radius: 3em;
 	background: #444;
 	padding: 1ex 2ex;
 	margin: 1em;
 }
 .progress-bar {
-	border-radius: 2em 0 0 2em; 
-	padding: 1ex 2ex; 
+	border-radius: 3em 0 0 3em; 
+	padding: 1ex 1px; 
 	position: absolute; 
 	top: 0; 
 	left: 0
@@ -321,21 +334,24 @@ hr {
 	font-family: 'Miso', sans-serif;
 	background: #1C8394;
 	padding: 15px 30px;
+	text-align: center
 }
 .profile-summary h2 {
 	color: white;
 	margin: 0 0 10px 0;
 }
 .profile-summary img {
+	display: inline-block;
+	vertical-align: top;
 	border-radius: 146px;
 	width: 150px;
 	height: 150px;
-	float: left;
 }
 .profile-summary .properties {
+	display: inline-block;
 	font-size: 110%;
 	padding-left: 20px;
-	float: left;
+	text-align: left
 }
 .profile-summary .properties b{
 	font-weight: normal;
@@ -590,7 +606,7 @@ canvas#canvas {
 }
 .modal.small>div {
 	top: 120px;
-	height: 300px;
+	height: 350px;
 }
 .modal table {
 	width: 100%;

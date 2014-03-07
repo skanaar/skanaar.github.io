@@ -492,17 +492,18 @@ angular.module('cluster').controller('NetworkCtrl', function ($scope, $http, $q,
 angular.module('cluster').controller('LoginCtrl', function ($scope, $http, $location, uploader){
     $scope.username = ''
     $scope.password = ''
-    $scope.users = []
-
-    $http.get('data/users.json').then(function (response){
-        $scope.users = response.data
-    })
 
     $scope.login = function (){
-        if ($scope.users[$scope.username] === $scope.password)
-            $location.path('/dashboard')
-        else
+        $http.get('data/users/'+$scope.username+'.json').then(function (response){
+            if ($scope.password === response.data.password){
+                localStorage['user'] = $scope.username
+                $location.path('/dashboard')
+            }
+            else
+                alert('Incorrect username/password')
+        }, function (){
             alert('Incorrect username/password')
+        })
     }
 
     $scope.registerInterest = function (){
@@ -523,12 +524,19 @@ angular.module('cluster').controller('LoginCtrl', function ($scope, $http, $loca
 })
 
 angular.module('cluster').controller('DashboardCtrl', function ($scope, $http){
-    $http.get('data/updates.json').then(function (response){
+    $http.get('data/updates/'+localStorage.user+'.json').then(function (response){
         $scope.updates = response.data
     })
-    $http.get('data/goals.json').then(function (response){
+    $http.get('data/goals/'+localStorage.user+'.json').then(function (response){
         $scope.goals = response.data
     })
+    $http.get('data/users/'+localStorage.user+'.json').then(function (response){
+        $scope.profile = response.data
+    })
+    $scope.imageUrl = 'data/user-img/' + localStorage.user + '.jpg'
+    $scope.setUpdateKind = function (u){
+        $scope.updateKind = ($scope.updateKind === u) ? null : u
+    }
 })
 
 angular.module('cluster').controller('GoalsCtrl', function ($scope, $http){

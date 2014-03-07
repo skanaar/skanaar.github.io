@@ -1,0 +1,7 @@
+{
+	"password": "admin",
+	"name": "administratör",
+	"info":{
+		"Privilege": "root"
+	}
+}
