@@ -104,9 +104,7 @@ hr {
     display: block;
     border: 0;
     background-image: url(../img/hr.png);
-    /*background-size: 972px 2px;
-    border-top: 2px dotted #717983;*/
-    margin: 1em 2px;
+    margin: 1em 3px;
     padding: 2px;
 }
 
@@ -382,10 +380,6 @@ hr {
 	color: #8f8;
 }
 
-.sidebar hr {
-	border: 1px solid rgba(255, 255, 255, 0.5);
-	border-width: 1px 0 0 0
-}
 .sidebar input[type=checkbox] {
 	margin-left: 10px
 }
@@ -504,11 +498,6 @@ canvas#canvas {
 .legend_sidebar {
 	left: 70px;
 	width: 300px;
-}
-
-.legend_sidebar hr {
-	border-width: 0;
-	margin: 0;
 }
 
 .legend_sidebar b {
