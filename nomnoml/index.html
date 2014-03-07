@@ -103,6 +103,12 @@ a:hover {
 			<label>Car has an Engine</label>
 			[Car]-&gt;[Engine]
 
+			<label>Car owns some blemished</label>
+			[Car]+-&gt;[RustPatches]
+
+			<label>Car knows its Manufacturer</label>
+			[Car]o-&gt;[Manufacturer]
+
 			<label>Car depends on Fuel</label>
 			[Car]--&gt;[Fuel]
 
@@ -231,7 +237,7 @@ a:hover {
 
 	function parse(source){
 		function parseRelationString(s){
-			var pattern = /\[(.*)\]\s*(-:>|<:-|--:>|<:--|->|<-|-->|<--|<->|-|--|:)\s*\[(.*)\]/
+			var pattern = /\[(.*)\]\s*(-:>|<:-|--:>|<:--|->|<-|\+->|<-\+|o->|<-o|-->|<--|<->|-|--|:)\s*\[(.*)\]/
 			var parts = s.match(pattern)
 			return parts && trims(_.tail(parts))
 		}
@@ -255,12 +261,12 @@ a:hover {
 				ops: tokens[2] ? tokens[2].split(';') : []
 			}
 		}
-		_.each(bimap, function (pair){
+		_.each(bimap, function (pair, i){
 			var left = parseClass(nodes, pair[0])
 			var right = parseClass(nodes, pair[2])
 			if (left.name) nodes[left.name] = left
 			if (right.name) nodes[right.name] = right
-			var isLeftToRight = pair[1][0] === '-'
+			var isLeftToRight = (pair[1][0] === '-' || pair[1][0] === '+' || pair[1][0] === 'o')
 			var a = isLeftToRight ? left : right
 			var b = isLeftToRight ? right : left
 			var t = {
@@ -272,12 +278,16 @@ a:hover {
 				'<--': 'dependency',
 				'->': 'association',
 				'<-': 'association',
+				'o->': 'aggregation',
+				'<-o': 'aggregation',
+				'+->': 'composition',
+				'<-+': 'composition',
 				'<->': 'twoway',
 				'-': 'nondirectional',
 				'--': 'note'
 			}[pair[1]]
 			if (t && a.name && b.name)
-				relations.push({start: a.name, end:b.name, type: t})
+				relations.push({id: i, start: a.name, end:b.name, type: t})
 		})
 
 		return {
@@ -300,7 +310,7 @@ a:hover {
 				g.addNode(key, { label: key, width: size.width, height: size.height })
 			})
 			_.each(ast.relations, function (r){
-				g.addEdge(null, r.start, r.end)
+				g.addEdge(r.id, r.start, r.end)
 			})
 			return g
 		}
@@ -324,7 +334,7 @@ a:hover {
 					middle: _.pick(data, 'x', 'y'),
 					end: nodes[end],
 					path: _.flatten([nodes[start], data.points, nodes[end]]),
-					type: _.findWhere(ast.relations, {start: start, end: end}).type
+					type: _.findWhere(ast.relations, {id: id}).type
 				})
 			})
 			var g = dagreLayout.graph()
@@ -351,16 +361,18 @@ a:hover {
 			return p1
 		}
 
-		function drawArrow(path, isOpen, target){
+		function drawArrow(path, isOpen, target, diamond){
 			var size = ast.spacing / 30
 			var v = diff(path[path.length-2], _.last(path))
 			var nv = normalize(v)
 			var arrowPoint = rectIntersection(path[path.length-2], _.last(path), target.width, target.height)
-			var arrowBase = add(arrowPoint, mult(nv, 10*size))
+			var arrowBase = add(arrowPoint, mult(nv, (diamond ? 7 : 10)*size))
 			var t = rot(nv)
+			var arrowButt = (diamond) ? add(arrowPoint, mult(nv, 14*size))
+					: (isOpen && !ast.fillArrows) ? add(arrowPoint, mult(nv, 5*size)) : arrowBase
 			var arrow = [
 				add(arrowBase, mult(t, 4*size)),
-				(isOpen && !ast.fillArrows) ? add(arrowPoint, mult(nv, 5*size)) : arrowBase,
+				arrowButt,
 				add(arrowBase, mult(t, -4*size)),
 				arrowPoint,
 				add(arrowBase, mult(t, 4*size))
@@ -373,7 +385,7 @@ a:hover {
 			g.ctx.fillStyle = '#000'
 			setFont(ast, 'normal')
 			g.ctx.textAlign = 'left'
-			g.ctx.strokeRect(0.5, 0.5, layout.width+2*frameMarg, layout.height+frameMarg*3+lineHeight)
+			g.ctx.strokeRect(0, 0, layout.width+2*frameMarg, layout.height+frameMarg*3+lineHeight)
 			var w = g.ctx.measureText(title).width + frameMarg
 			var h = lineHeight+frameMarg
 			g.path([{x:0, y:h}, {x:w-frameMarg*2/3, y:h}, {x:w, y:h-frameMarg}, {x:w, y:0}]).stroke()
@@ -384,6 +396,7 @@ a:hover {
 
 		var empty = !true
 		var filled = !false
+		var diamond = 'diamond'
 		var lineHeight = ast.fontSize
 		var frameMarg = 10
 
@@ -416,6 +429,16 @@ a:hover {
 			else if (r.type == 'association'){
 				g.path(r.path).stroke()
 				drawArrow(r.path, filled, r.end)
+			}
+			else if (r.type == 'aggregation'){
+				g.path(r.path).stroke()
+				drawArrow(r.path, filled, r.end)
+				drawArrow(_.clone(r.path).reverse(), empty, r.start, diamond)
+			}
+			else if (r.type == 'composition'){
+				g.path(r.path).stroke()
+				drawArrow(r.path, filled, r.end)
+				drawArrow(_.clone(r.path).reverse(), filled, r.start, diamond)
 			}
 			else if (r.type == 'nondirectional'){
 				g.path(r.path).stroke()
