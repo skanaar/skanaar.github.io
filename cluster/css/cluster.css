@@ -39,6 +39,15 @@ a {
 	text-decoration: none;
 }
 
+input:focus, textarea:focus, select:focus {
+	outline: none;
+	box-shadow: 0 0 5px 1px #08f !important
+}
+
+select {
+	border-radius: 2px
+}
+
 input[type=text], select {
 	font-size: 83% !important;
 }
