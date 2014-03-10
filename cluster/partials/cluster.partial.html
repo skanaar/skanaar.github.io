@@ -1,5 +1,5 @@
 <div class="full-row jumbotron">
-	<h1>{{cluster.name}}: {{companyName}}</h1>
+	<h1>{{cluster.name}}</h1>
 </div>
 <div class="full-row page-stripe toolbar">
 	<div class="pull-right">
@@ -36,12 +36,12 @@
 		   <img ng-hide="activePane === 'current'" src="img/current_icon_inactive.png">CURRENT</a>
 		<a ng-click="showUploadDialog = true" href="javascript:void(0)">
 		   <img src="img/upload_icon_inactive.png">SUBMIT</a>
-		<a ng-click="togglePane('admin')" href="javascript:void(0)">
-		   <img ng-show="activePane === 'admin'" src="img/develop_icon.png">
-		   <img ng-hide="activePane === 'admin'" src="img/develop_icon_inactive.png">DEVELOP</a>
 		<a ng-click="togglePane('legend')" href="javascript:void(0)">
 		   <img ng-show="activePane === 'legend'" src="img/legend_icon.png">
 		   <img ng-hide="activePane === 'legend'" src="img/legend_icon_inactive.png">LEGEND</a>
+		<a ng-click="togglePane('admin')" href="javascript:void(0)">
+		   <img ng-show="activePane === 'admin'" src="img/develop_icon.png">
+		   <img ng-hide="activePane === 'admin'" src="img/develop_icon_inactive.png">DEVELOP</a>
 	</div>
 	<div class="sidebar sidebar-look onlyTopShadow details_sidebar" ng-show="selectedEntity">
 		<div>
@@ -53,16 +53,12 @@
 			</div>
 			<div>{{selectedEntity.description}}</div>
 			<hr>
-			<div><label>Email</label> {{selectedEntity.email}}</div>
+			<div><label>Email</label> <a href="mailto:{{selectedEntity.email}}">{{selectedEntity.email}}</a></div>
 			<div><label>Company</label> {{selectedEntity.company}}</div>
-			<div><label>Id</label> {{selectedEntity.id}}</div>
 			<hr>
 			<div class="toolset">
 				<a ng-click="addSolutionWizard.show = true" href="javascript:void(0)">
 					<i class="fa fa-fw fa-plus-circle"></i> Add related solution
-				</a>
-				<a ng-click="removeEntity()" href="javascript:void(0)">
-					<i class="fa fa-fw fa-minus-circle"></i> Remove this solution
 				</a>
 			</div>
 		</div>
@@ -76,19 +72,12 @@
 			<div><label>Date</label> {{selectedRelation.date}}</div>
 			<div><label>Author</label> {{selectedRelation.author}}</div>
 			<div><label>Verified</label> {{selectedRelation.verified ? 'Yes' : 'pending'}}</div>
-			<hr>
-			<div class="toolset">
-				<a ng-click="removeRelation()" href="javascript:void(0)">
-					<i class="fa fa-fw fa-minus-circle"></i> Remove this relation
-				</a>
-			</div>
 		</div>
 	</div>
 	<div class="sidebar sidebar-look search_sidebar"
 		 id="search_sidebar"
 		 ng-show="activePane === 'filter'">
 		<div>
-			<h3>Filter</h3>
 			Mobility  <em>&gt; {{filter.mobility}}%</em>
 			<div><input type="range" ng-model="filter.mobility"></div>
 			Nutrition <em>&gt; {{filter.nutrition}}%</em>
@@ -106,6 +95,10 @@
 			<div><label><input type="checkbox" ng-model="filter.expander"> Expander</label></div>
 			<hr>
 			<label>Relations</label>
+			<div class="toolset">
+				<a href="javascript:void(0)" ng-click="toggleRelationFilters()">
+					<i class="fa fa-fw fa-eye"></i> Show/hide all</a>
+			</div>
 			<div><label><input type="checkbox" ng-model="filter.rel_participant"> Participant</label></div>
 			<div><label><input type="checkbox" ng-model="filter.rel_provider"> Provider</label></div>
 			<div><label><input type="checkbox" ng-model="filter.rel_catalyst"> Catalyst</label></div>
@@ -146,7 +139,7 @@
 			<h3>Selection</h3>
 			<div ng-show="selectedEntity">
 				<div class="toolset" ng-show="selectedEntity">
-					<a ng-click="removeEntity()"><i class="fa fa-fw fa-trash-o"></i> Remove</a>
+					<a ng-click="removeEntity()"><i class="fa fa-fw fa-trash-o"></i> Remove solution from cluster</a>
 				</div>
 				<label>Name</label>
 				<input type="text" ng-model="selectedEntity.name">
@@ -170,7 +163,7 @@
 			</div>
 			<div ng-show="selectedRelation">
 				<div class="toolset" ng-show="selectedRelation">
-					<a ng-click="removeRelation()"><i class="fa fa-fw fa-trash-o"></i> Remove</a>
+					<a ng-click="removeRelation()"><i class="fa fa-fw fa-trash-o"></i> Remove relation</a>
 				</div>
 				<label>Type</label>
 				<select ng-options="e for e in relationTypes"
@@ -261,7 +254,7 @@
 			<h2><i class="fa fa-fw fa-cloud-upload"></i> Upload current cluster</h2>
 			Send the current cluster with any changes to transformative-clusters.net for review and inclusion in out database.
 			<h3>Message (optional)</h3>
-			<textarea ng-model="uploadMessage"></textarea>
+			<textarea ng-model="uploadMessage" style="width: 100%"></textarea>
 			<a class="button" ng-click="uploadCluster()">Upload</a>
 		</div>
 	</div>

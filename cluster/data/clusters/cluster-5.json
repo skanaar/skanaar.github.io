@@ -1,0 +1,202 @@
+{
+  "name": "Smart work",
+  "centralEntity": 11,
+  "entities": [
+    {
+      "id": 0,
+      "name": "9 Billion Food",
+      "company": "Goodstore",
+      "email": "unknown email",
+      "description": "A company",
+      "status": "supporting",
+      "type": "none",
+      "mobility": 18,
+      "nutrition": 70,
+      "building": 46,
+      "x": -17.191132905022517,
+      "y": -104.43362465644847
+    },
+    {
+      "id": 4,
+      "name": "Smart app",
+      "company": "Turningpoint FTW",
+      "email": "unknown email",
+      "description": "A company",
+      "status": "supporting",
+      "type": "accelerator",
+      "mobility": 89,
+      "nutrition": 87,
+      "building": 16,
+      "x": 349.30487867936966,
+      "y": -25.344036662747317
+    },
+    {
+      "id": 10,
+      "name": "Urban Farming",
+      "company": "Plantagon",
+      "email": "unknown email",
+      "description": "A company",
+      "status": "supporting",
+      "type": "none",
+      "mobility": 82,
+      "nutrition": 40,
+      "building": 4,
+      "x": -114.99973311698176,
+      "y": 60.90293474761007
+    },
+    {
+      "id": 12,
+      "name": "Smart Lightning",
+      "company": "Svenska LED",
+      "email": "unknown email",
+      "description": "A company",
+      "status": "supporting",
+      "type": "none",
+      "mobility": 32,
+      "nutrition": 28,
+      "building": 89,
+      "x": -20.206558824411367,
+      "y": 394.97365766713494
+    },
+    {
+      "id": 14,
+      "name": "Renewable Collaboration energy",
+      "company": "Egen El",
+      "email": "unknown email",
+      "description": "A company",
+      "status": "supporting",
+      "type": "none",
+      "mobility": 99,
+      "nutrition": 3,
+      "building": 3,
+      "x": 168.25488301710422,
+      "y": 416.152145575858
+    },
+    {
+      "id": 15,
+      "name": "Smart Tools",
+      "company": "Dreamler",
+      "email": "unknown email",
+      "description": "A company",
+      "status": "supporting",
+      "type": "core",
+      "mobility": 76,
+      "nutrition": 13,
+      "building": 27,
+      "x": -140.54883059283398,
+      "y": 248.7438564932131
+    },
+    {
+      "id": 16,
+      "name": "Flexiworking",
+      "company": "Skiptrip",
+      "email": "unknown email",
+      "description": "A company",
+      "status": "supporting",
+      "type": "expander",
+      "mobility": 13,
+      "nutrition": 28,
+      "building": 98,
+      "x": 174.88535169067114,
+      "y": -99.70778098852014
+    },
+    {
+      "id": 17,
+      "name": "Shared Living",
+      "company": "Remote ",
+      "email": "unknown email",
+      "description": "A company",
+      "status": "supporting",
+      "type": "none",
+      "mobility": 0,
+      "nutrition": 74,
+      "building": 0,
+      "x": 334.2316212698922,
+      "y": 324.14587465991383
+    },
+    {
+      "id": 18,
+      "name": "Lösning nr 4",
+      "company": "Tunul Makegabop",
+      "description": "bölksdjasd",
+      "status": "existing",
+      "type": "core",
+      "mobility": "63",
+      "nutrition": "0",
+      "building": "0",
+      "x": 414.6402206038423,
+      "y": 152.40747493507143
+    },
+    {
+      "name": "Maged",
+      "company": "Cutehyd Nonagakid",
+      "email": "unknown email",
+      "description": "Lahas lugunar fad cucol fihinuk conedoket tanaselubun raracanisedim runuhofylidogur neturipytilanopyc nobiselilegolynasim madofasuvupodunusorun logacumohihinotocylasug takamaginufamenakutovuman hehamuvufytesifidalamusigor lucenasisyvikumamugetytahaher",
+      "status": "existing",
+      "type": "accelerator",
+      "mobility": 82,
+      "nutrition": 54,
+      "building": 2,
+      "x": -109.78702342905474,
+      "y": -269.70360954072174,
+      "id": 19
+    }
+  ],
+  "relations": [
+    {
+      "start": 10,
+      "end": 0,
+      "description": "relation description",
+      "author": "unknown author",
+      "type": "catalyst"
+    },
+    {
+      "start": 12,
+      "end": 14,
+      "description": "relation description",
+      "author": "unknown author",
+      "type": "catalyst"
+    },
+    {
+      "start": 18,
+      "end": 4,
+      "type": "participant"
+    },
+    {
+      "start": 18,
+      "end": 17,
+      "type": "participant"
+    },
+    {
+      "start": 15,
+      "end": 12,
+      "type": "participant"
+    },
+    {
+      "start": 16,
+      "end": 0,
+      "type": "participant"
+    },
+    {
+      "start": 15,
+      "end": 10,
+      "type": "participant"
+    },
+    {
+      "start": 16,
+      "end": 4,
+      "type": "participant"
+    },
+    {
+      "start": 17,
+      "end": 14,
+      "type": "participant"
+    },
+    {
+      "start": 0,
+      "end": 19,
+      "description": "ddf",
+      "type": "catalyst"
+    }
+  ]
+}

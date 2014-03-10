@@ -1,415 +1,188 @@
 {
-  "name": "Urban Farming",
-  "centralEntity": 7,
+  "name": "Car pool",
+  "potential": "",
+  "centralEntity": 0,
   "entities": [
     {
       "id": 0,
-      "name": "9 Billion Food",
-      "company": "Goodstore",
+      "name": "Car pool",
+      "company": "Sunfleet",
       "email": "unknown email",
-      "description": "A company",
-      "status": "supporting",
-      "type": "none",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 63,
-      "x": 252.27907115007568,
-      "y": -267.8516573958302
+      "description": "Vårt mål är att förändra hur svenskarna ser på att använda och äga bil. Vi strävar alltid efter att ha så bränslesnåla och klimatsmarta bilar som möjligt för att minska påverkan på vårt klimat.",
+      "status": "existing",
+      "type": "core",
+      "mobility": "100",
+      "nutrition": "11",
+      "building": "76",
+      "x": 55.0280378137121,
+      "y": 2.4341406305997877
     },
     {
-      "id": 1,
-      "name": "Solar power",
-      "company": "Solelia",
+      "name": "Smart app",
+      "company": "app-maker",
       "email": "unknown email",
       "description": "A company",
-      "status": "supporting",
-      "type": "none",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 63,
-      "x": -276.8176393096205,
-      "y": -208.78891357822488
+      "status": "existing",
+      "type": "core",
+      "mobility": 100,
+      "nutrition": 13,
+      "building": 76,
+      "x": -73.04620897364654,
+      "y": 153.0919396938219,
+      "id": 1
     },
     {
-      "id": 2,
       "name": "Smart Bikes",
       "company": "Cargobike",
       "email": "unknown email",
       "description": "A company",
       "status": "existing",
-      "type": "none",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 63,
-      "x": -101.4702159896116,
-      "y": -168.54454511705256
-    },
-    {
-      "id": 3,
-      "name": "Energy drinks",
-      "company": "Oji Drinks",
-      "email": "unknown email",
-      "description": "A company",
-      "status": "supporting",
-      "type": "none",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 63,
-      "x": 87.48547835337699,
-      "y": -181.38202575599848
-    },
-    {
-      "id": 4,
-      "name": "Smart app",
-      "company": "Turningpoint FTW",
-      "email": "unknown email",
-      "description": "A company",
-      "status": "supporting",
-      "type": "accelerator",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 63,
-      "x": 393.1631552869532,
-      "y": 49.41947927931295
-    },
-    {
-      "id": 5,
-      "name": "Smart app",
-      "company": "app-maker",
-      "email": "unknown email",
-      "description": "A company",
-      "status": "accelerator",
-      "type": "none",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 63,
-      "x": -390.4742119170727,
-      "y": -110.98321978158502
-    },
-    {
-      "id": 6,
-      "name": "Recipes for 9 ",
-      "company": "billion lunch",
-      "email": "unknown email",
-      "description": "A company",
-      "status": "supporting",
-      "type": "none",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 63,
-      "x": 244.86080151417443,
-      "y": -77.31155637542305
-    },
-    {
-      "id": 7,
-      "name": "Elegantly Vegan",
-      "company": "Lunch maker",
-      "email": "unknown email",
-      "description": "A company",
-      "status": "existing",
-      "type": "none",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 63,
-      "x": 60.091921234471876,
-      "y": 6.875632879258177
-    },
-    {
-      "id": 8,
-      "name": "Mobility pool",
-      "company": "Sunfleet",
-      "email": "unknown email",
-      "description": "A company",
-      "status": "existing",
-      "type": "none",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 63,
-      "x": -227.1829269713758,
-      "y": -17.42658986807133
-    },
-    {
-      "id": 9,
-      "name": "Bike friendly cities",
-      "company": "Koucky & Partners",
-      "email": "unknown email",
-      "description": "A company",
-      "status": "supporting",
-      "type": "none",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 63,
-      "x": -414.38390710565875,
-      "y": 43.21755402886929
-    },
-    {
-      "id": 10,
-      "name": "Urban Farming",
-      "company": "Plantagon",
-      "email": "unknown email",
-      "description": "A company",
-      "status": "supporting",
-      "type": "none",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 63,
-      "x": 410.5351822994085,
-      "y": -175.69982954336422
-    },
-    {
-      "id": 11,
-      "name": "Co-working space",
-      "company": "Coffice",
-      "email": "unknown email",
-      "description": "A company",
-      "status": "supporting",
       "type": "core",
       "mobility": 64,
       "nutrition": 28,
       "building": 63,
-      "x": -92.89213869796305,
-      "y": 131.48722444768595
+      "x": -145.9003670598884,
+      "y": -32.033544812849954,
+      "id": 2
     },
     {
-      "id": 12,
-      "name": "Smart Lightning",
-      "company": "Svenska LED",
+      "name": "Smart measurement",
+      "company": "Copenhagen wheel",
       "email": "unknown email",
-      "description": "A company",
+      "description": "Riders are given a boost as they pedal by measuring their effort, instead of using a throttle. This preserves the normal biking experience while enabling riders to bike faster, farther, and easier.",
       "status": "supporting",
-      "type": "none",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 63,
-      "x": 19.658600139061605,
-      "y": 300.4805582032341
+      "type": "accelerator",
+      "mobility": "100",
+      "nutrition": "11",
+      "building": "51",
+      "x": -334.72501901405593,
+      "y": -65.55314394354761,
+      "id": 3
     },
     {
-      "id": 13,
       "name": "Flexiworking",
       "company": "Compodium",
       "email": "unknown email",
       "description": "A company",
       "status": "supporting",
-      "type": "expander",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 63,
-      "x": -275.66322989159613,
-      "y": 163.4256813172164
+      "type": "accelerator",
+      "mobility": 100,
+      "nutrition": 10,
+      "building": 80,
+      "x": 152.80023226171886,
+      "y": -170.39489423490102,
+      "id": 4
     },
     {
-      "id": 14,
-      "name": "Renewable Collaboration energy",
-      "company": "Egen El",
-      "email": "unknown email",
-      "description": "A company",
-      "status": "supporting",
-      "type": "none",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 63,
-      "x": 116.17948198627356,
-      "y": 466.8638857617639
-    },
-    {
-      "id": 15,
-      "name": "Smart Tools",
-      "company": "Dreamler",
-      "email": "unknown email",
-      "description": "A company",
-      "status": "supporting",
-      "type": "core",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 63,
-      "x": -241.27868942209398,
-      "y": 265.69842971728275
-    },
-    {
-      "id": 16,
       "name": "Flexiworking",
       "company": "Skiptrip",
       "email": "unknown email",
       "description": "A company",
       "status": "supporting",
-      "type": "expander",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 63,
-      "x": -158.98015197092107,
-      "y": 306.37157939367535
+      "type": "accelerator",
+      "mobility": 100,
+      "nutrition": 10,
+      "building": 80,
+      "x": -24.95336122511572,
+      "y": -179.02476948830036,
+      "id": 5
     },
     {
-      "id": 17,
-      "name": "Shared Living",
-      "company": "Remote ",
+      "name": "Solar power",
+      "company": "Solelia",
       "email": "unknown email",
       "description": "A company",
       "status": "supporting",
-      "type": "none",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 63,
-      "x": 96.23998919260998,
-      "y": 179.1878399117197
+      "type": "core",
+      "mobility": 100,
+      "nutrition": 10,
+      "building": 76,
+      "x": 71.97909654493033,
+      "y": 199.54800667358137,
+      "id": 6
+    },
+    {
+      "name": "Sales models",
+      "company": "KnowIT",
+      "email": "unknown email",
+      "description": "",
+      "status": "supporting",
+      "type": "core",
+      "mobility": "99",
+      "nutrition": "12",
+      "building": "80",
+      "x": 247.2041145380488,
+      "y": -44.46559883008488,
+      "id": 7
+    },
+    {
+      "name": "Driver-less cars",
+      "company": "Google and more",
+      "email": "unknown email",
+      "description": "",
+      "status": "potential",
+      "type": "core",
+      "mobility": "100",
+      "nutrition": "18",
+      "building": "81",
+      "x": 215.57513736640956,
+      "y": 118.05457225959967,
+      "id": 8
     }
   ],
   "relations": [
     {
-      "start": 1,
-      "end": 2,
-      "type": "potential"
-    },
-    {
-      "start": 4,
-      "end": 6,
+      "start": 0,
+      "end": 1,
+      "description": "",
       "type": "participant"
     },
     {
-      "start": 6,
-      "end": 10,
-      "type": "catalyst"
+      "start": 0,
+      "end": 2,
+      "description": "",
+      "type": "participant"
     },
     {
-      "start": 10,
-      "end": 0,
+      "start": 2,
+      "end": 3,
+      "description": "",
       "type": "catalyst"
     },
     {
       "start": 0,
-      "end": 3,
-      "type": "catalyst"
-    },
-    {
-      "start": 3,
-      "end": 2,
-      "type": "catalyst"
-    },
-    {
-      "start": 8,
-      "end": 2,
-      "type": "participant"
-    },
-    {
-      "start": 8,
-      "end": 1,
-      "type": "catalyst"
-    },
-    {
-      "start": 11,
-      "end": 8,
-      "type": "catalyst"
-    },
-    {
-      "start": 11,
-      "end": 16,
+      "end": 4,
+      "description": "",
       "type": "provider"
     },
     {
-      "start": 11,
-      "end": 12,
-      "type": "catalyst"
-    },
-    {
-      "start": 11,
-      "end": 17,
+      "start": 0,
+      "end": 5,
+      "description": "",
       "type": "catalyst"
     },
     {
       "start": 5,
-      "end": 8,
-      "type": "participant"
-    },
-    {
-      "start": 6,
-      "end": 3,
-      "type": "catalyst"
-    },
-    {
-      "start": 6,
-      "end": 0,
-      "type": "catalyst"
-    },
-    {
-      "start": 13,
-      "end": 9,
-      "type": "catalyst"
-    },
-    {
-      "start": 13,
-      "end": 11,
-      "type": "catalyst"
-    },
-    {
-      "start": 13,
-      "end": 16,
+      "end": 4,
       "type": "alternative"
     },
     {
-      "start": 9,
-      "end": 8,
-      "type": "catalyst"
-    },
-    {
-      "start": 13,
-      "end": 8,
-      "type": "catalyst"
-    },
-    {
-      "start": 3,
-      "end": 7,
-      "type": "catalyst"
-    },
-    {
-      "start": 6,
-      "end": 7,
-      "type": "catalyst"
-    },
-    {
-      "start": 7,
-      "end": 11,
-      "type": "participant"
-    },
-    {
-      "start": 12,
-      "end": 14,
-      "type": "catalyst"
-    },
-    {
-      "start": 15,
-      "end": 11,
-      "type": "catalyst"
-    },
-    {
-      "start": 8,
-      "end": 11,
-      "type": "participant"
-    },
-    {
-      "start": 11,
-      "end": 16,
+      "start": 0,
+      "end": 6,
+      "description": "",
       "type": "provider"
     },
     {
-      "start": 11,
-      "end": 13,
-      "type": "provider"
+      "start": 0,
+      "end": 7,
+      "description": "",
+      "type": "catalyst"
     },
     {
-      "start": 13,
-      "end": 16,
-      "type": "alternative"
-    },
-    {
-      "start": 5,
+      "start": 0,
       "end": 8,
-      "type": "participant"
-    },
-    {
-      "start": 7,
-      "end": 11,
-      "type": "participant"
+      "description": "Could be disruptive and car pools should be ready for driverless cars",
+      "type": "catalyst"
     }
   ]
 }

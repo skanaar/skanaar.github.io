@@ -9,10 +9,10 @@
       "email": "unknown email",
       "description": "A company",
       "status": "supporting",
-      "type": "none",
-      "mobility": 18,
-      "nutrition": 70,
-      "building": 46,
+      "type": "core",
+      "mobility": 25,
+      "nutrition": 100,
+      "building": 24,
       "x": 252.9496162564179,
       "y": -249.70566261465697
     },
@@ -23,10 +23,10 @@
       "email": "unknown email",
       "description": "A company",
       "status": "supporting",
-      "type": "none",
-      "mobility": 4,
-      "nutrition": 15,
-      "building": 15,
+      "type": "core",
+      "mobility": 100,
+      "nutrition": 10,
+      "building": 76,
       "x": -280.52237004584873,
       "y": -219.33325049108723
     },
@@ -36,11 +36,11 @@
       "company": "Cargobike",
       "email": "unknown email",
       "description": "A company",
-      "status": "existing",
-      "type": "none",
-      "mobility": 64,
-      "nutrition": 49,
-      "building": 63,
+      "status": "supporting",
+      "type": "core",
+      "mobility": 100,
+      "nutrition": 0,
+      "building": 75,
       "x": -105.49756836946116,
       "y": -181.17201911976568
     },
@@ -51,10 +51,10 @@
       "email": "unknown email",
       "description": "A company",
       "status": "supporting",
-      "type": "none",
-      "mobility": 18,
-      "nutrition": 89,
-      "building": 63,
+      "type": "core",
+      "mobility": 81,
+      "nutrition": 100,
+      "building": 10,
       "x": 83.40567597115256,
       "y": -173.1067771707077
     },
@@ -66,9 +66,9 @@
       "description": "A company",
       "status": "supporting",
       "type": "accelerator",
-      "mobility": 89,
-      "nutrition": 87,
-      "building": 16,
+      "mobility": 50,
+      "nutrition": 100,
+      "building": 25,
       "x": 375.58427463856634,
       "y": 74.66082179787557
     },
@@ -78,53 +78,53 @@
       "company": "app-maker",
       "email": "unknown email",
       "description": "A company",
-      "status": "accelerator",
-      "type": "none",
-      "mobility": 37,
-      "nutrition": 84,
-      "building": 85,
+      "status": "existing",
+      "type": "accelerator",
+      "mobility": 100,
+      "nutrition": 13,
+      "building": 76,
       "x": -387.6358496472412,
       "y": -128.99141010303234
     },
     {
       "id": 6,
-      "name": "Recipes for 9 ",
-      "company": "billion lunch",
+      "name": "Vegan recipes",
+      "company": "Elegantly Vegan",
       "email": "unknown email",
       "description": "A company",
       "status": "supporting",
-      "type": "none",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 63,
+      "type": "core",
+      "mobility": 13,
+      "nutrition": 100,
+      "building": 25,
       "x": 234.20820951587737,
       "y": -59.907707574381995
     },
     {
       "id": 7,
-      "name": "Elegantly Vegan",
+      "name": "Fredrik",
       "company": "Lunch maker",
       "email": "unknown email",
       "description": "A company",
       "status": "existing",
-      "type": "none",
-      "mobility": 11,
-      "nutrition": 28,
-      "building": 84,
+      "type": "core",
+      "mobility": 75,
+      "nutrition": 100,
+      "building": 75,
       "x": 44.62079218820224,
       "y": 13.589671586272768
     },
     {
       "id": 8,
-      "name": "Mobility pool",
+      "name": "Car sharing",
       "company": "Sunfleet",
       "email": "unknown email",
       "description": "A company",
       "status": "existing",
-      "type": "none",
-      "mobility": 45,
-      "nutrition": 28,
-      "building": 63,
+      "type": "core",
+      "mobility": 100,
+      "nutrition": 15,
+      "building": 75,
       "x": -229.3551027343202,
       "y": -27.364751518363875
     },
@@ -135,10 +135,10 @@
       "email": "unknown email",
       "description": "A company",
       "status": "supporting",
-      "type": "none",
-      "mobility": 97,
-      "nutrition": 91,
-      "building": 42,
+      "type": "core",
+      "mobility": 100,
+      "nutrition": 18,
+      "building": 78,
       "x": -422.98042097712766,
       "y": 13.244808032143883
     },
@@ -149,10 +149,10 @@
       "email": "unknown email",
       "description": "A company",
       "status": "supporting",
-      "type": "none",
-      "mobility": 82,
-      "nutrition": 40,
-      "building": 4,
+      "type": "core",
+      "mobility": 75,
+      "nutrition": 100,
+      "building": 100,
       "x": 405.42744663968654,
       "y": -148.40797666025864
     },
@@ -161,12 +161,12 @@
       "name": "Co-working space",
       "company": "Coffice",
       "email": "unknown email",
-      "description": "A company",
-      "status": "supporting",
+      "description": "Välkommen till ett arbetsdedikerat kafé!  Vi brinner för att skapa en rolig och kreativ mötesplats för alla som på ett eller annat sätt vill arbeta ute på stan. Slå dig ner med en god kopp kaffe och prova på! I de två mötesrummen kan både privatpersoner och företag hyra in sig per timme, ett smidigt sätt att ha sitt möte på stan i en lugn och inspirerande och miljö. Längst in i lokalen sitter Combine arkitekter, intiativtagare till Coffice med intresse för gränssnittet mellan människa och omvärld och att kombinera saker på nya sätt!",
+      "status": "existing",
       "type": "core",
-      "mobility": 64,
-      "nutrition": 28,
-      "building": 4,
+      "mobility": 80,
+      "nutrition": 80,
+      "building": 100,
       "x": -109.88389893338805,
       "y": 136.67457677390342
     },
@@ -177,10 +177,10 @@
       "email": "unknown email",
       "description": "A company",
       "status": "supporting",
-      "type": "none",
-      "mobility": 32,
-      "nutrition": 28,
-      "building": 89,
+      "type": "core",
+      "mobility": 51,
+      "nutrition": 10,
+      "building": 100,
       "x": 29.455925217028106,
       "y": 285.7147862918259
     },
@@ -192,9 +192,9 @@
       "description": "A company",
       "status": "supporting",
       "type": "expander",
-      "mobility": 48,
-      "nutrition": 54,
-      "building": 49,
+      "mobility": 100,
+      "nutrition": 10,
+      "building": 80,
       "x": -298.4922211986709,
       "y": 142.06432597843062
     },
@@ -205,10 +205,10 @@
       "email": "unknown email",
       "description": "A company",
       "status": "supporting",
-      "type": "none",
-      "mobility": 99,
-      "nutrition": 3,
-      "building": 3,
+      "type": "core",
+      "mobility": 51,
+      "nutrition": 10,
+      "building": 100,
       "x": 165.19094925168008,
       "y": 423.36015078496143
     },
@@ -220,9 +220,9 @@
       "description": "A company",
       "status": "supporting",
       "type": "core",
-      "mobility": 76,
-      "nutrition": 13,
-      "building": 27,
+      "mobility": 10,
+      "nutrition": 10,
+      "building": 100,
       "x": -121.57292532250595,
       "y": 334.0135354378979
     },
@@ -234,9 +234,9 @@
       "description": "A company",
       "status": "supporting",
       "type": "expander",
-      "mobility": 13,
-      "nutrition": 28,
-      "building": 98,
+      "mobility": 100,
+      "nutrition": 10,
+      "building": 80,
       "x": -214.3245119430859,
       "y": 296.95123773740636
     },
@@ -247,10 +247,10 @@
       "email": "unknown email",
       "description": "A company",
       "status": "supporting",
-      "type": "none",
-      "mobility": 0,
-      "nutrition": 74,
-      "building": 0,
+      "type": "core",
+      "mobility": 25,
+      "nutrition": 10,
+      "building": 100,
       "x": 80.77254937352997,
       "y": 172.7551683560044
     }
@@ -259,156 +259,218 @@
     {
       "start": 1,
       "end": 2,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "potential"
     },
     {
       "start": 4,
       "end": 6,
-      "type": "participant"
+      "description": "relation description",
+      "author": "unknown author",
+      "type": "provider"
     },
     {
       "start": 6,
       "end": 10,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "catalyst"
     },
     {
       "start": 10,
       "end": 0,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "catalyst"
     },
     {
       "start": 0,
       "end": 3,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "catalyst"
     },
     {
       "start": 3,
       "end": 2,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "catalyst"
     },
     {
       "start": 8,
       "end": 2,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "participant"
     },
     {
       "start": 8,
       "end": 1,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "catalyst"
     },
     {
       "start": 11,
       "end": 8,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "catalyst"
     },
     {
       "start": 11,
       "end": 16,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "provider"
     },
     {
       "start": 11,
       "end": 12,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "catalyst"
     },
     {
       "start": 11,
       "end": 17,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "catalyst"
     },
     {
       "start": 5,
       "end": 8,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "participant"
     },
     {
       "start": 6,
       "end": 3,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "catalyst"
     },
     {
       "start": 6,
       "end": 0,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "catalyst"
     },
     {
       "start": 13,
       "end": 9,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "catalyst"
     },
     {
       "start": 13,
       "end": 11,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "catalyst"
     },
     {
       "start": 13,
       "end": 16,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "alternative"
     },
     {
       "start": 9,
       "end": 8,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "catalyst"
     },
     {
       "start": 13,
       "end": 8,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "catalyst"
     },
     {
       "start": 3,
       "end": 7,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "catalyst"
     },
     {
       "start": 6,
       "end": 7,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "catalyst"
     },
     {
       "start": 7,
       "end": 11,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "participant"
     },
     {
       "start": 12,
       "end": 14,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "catalyst"
     },
     {
       "start": 15,
       "end": 11,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "catalyst"
     },
     {
       "start": 8,
       "end": 11,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "participant"
     },
     {
       "start": 11,
       "end": 16,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "provider"
     },
     {
       "start": 11,
       "end": 13,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "provider"
     },
     {
       "start": 13,
       "end": 16,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "alternative"
     },
     {
       "start": 5,
       "end": 8,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "participant"
     },
     {
       "start": 7,
       "end": 11,
+      "description": "relation description",
+      "author": "unknown author",
       "type": "participant"
     }
   ]

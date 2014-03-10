@@ -391,11 +391,11 @@ hr {
 .sidebar {
 	position: absolute; 
 	top: 0; 
-	width: 200px; 
+	width: 250px; 
 	height: 100%;
 	padding: 0;
 	color: #eee;
-
+	left: 70px;
 	overflow: auto;
 }
 .sidebar>div {
@@ -499,17 +499,11 @@ canvas#canvas {
 }
 
 .details_sidebar {
-	right: 0; 
+	right: 0;
+	left: auto;
 }
 .details_sidebar label {
 	color: #888;
-}
-.search_sidebar {
-	left: 70px;
-}
-.admin_sidebar {
-	left: 70px;
-	width: 300px;
 }
 .admin_sidebar h3 {
 	margin-bottom: 2px
@@ -518,11 +512,6 @@ canvas#canvas {
 	display: block;
 	padding: 0 5px;
 	margin: 5px 0 0 0;
-}
-
-.legend_sidebar {
-	left: 70px;
-	width: 300px;
 }
 
 .legend_sidebar b {

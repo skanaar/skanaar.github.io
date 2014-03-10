@@ -338,6 +338,16 @@ angular.module('cluster').controller('ClusterCtrl',
         ClusterPlatform.engine.select(id)
     }
 
+    $scope.toggleRelationFilters = function (){
+        var rels = ['rel_participant',
+                    'rel_provider',
+                    'rel_catalyst',
+                    'rel_potential',
+                    'rel_alternative']
+        var all = _.every(_.pick($scope.filter, rels))
+        _.each(rels, function (r){ $scope.filter[r] = !all })
+    }
+
     $scope.prepareDownloadLink = function (){
         document.getElementById('download-save-link2').href = clusterToDataUrl()
         $scope.readyToDownload = true
