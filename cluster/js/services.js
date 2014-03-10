@@ -10,11 +10,11 @@ function serializeCluster(){
         mobility: c.mobility,
         nutrition: c.nutrition,
         building: c.building,
-        url: c.url,
         entities: _.map(es, function (e){
             var o = _.omit(e, ['$$hashKey', 'fx', 'fy'])
             o.x = Math.round(o.x)
             o.y = Math.round(o.y)
+            o.url = o.url || 'http://www.' + o.company.split(' ').join('') + '.com'
             return o
         }),
         relations:  _.map(rs, function (r){
@@ -48,7 +48,6 @@ angular.module('cluster').factory('clusterLoader', function ($http, $q){
             mobility: c.mobility || _.random(100),
             nutrition: c.nutrition || _.random(100),
             building: c.building || _.random(100),
-            url: c.url || '',
             relations: _.map(c.relations, function (r){
                 return {
                     start: { id: r.start },
@@ -64,6 +63,7 @@ angular.module('cluster').factory('clusterLoader', function ($http, $q){
                     id: +e.id,
                     name: e.name,
                     company: e.company,
+                    url: e.url,
                     email: e.email || 'unknown email',
                     description: e.description || _.randomName(),
                     status: e.status || 'supporting',

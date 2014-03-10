@@ -107,8 +107,8 @@ function Visualizer(){
 			g.path(path).stroke()
 			g.circle(midPoint, 4).fill()
 			g.ctx.lineWidth = 1.5
-			g.ctx.strokeStyle = relationColor[r.type] || '#000'
-			g.ctx.fillStyle = relationColor[r.type] || '#000'
+			g.ctx.strokeStyle = relationColor[r.type] || '#888'
+			g.ctx.fillStyle = relationColor[r.type] || '#888'
 			g.path(path).stroke()
 			g.circle(midPoint, 2.5).fill()
 		})

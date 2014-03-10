@@ -51,7 +51,7 @@
 				   href="javascript:void(0)"><i class="fa fa-crosshairs fa-2x"></i></a>
 				<h2>{{selectedEntity.name}} </h2>
 			</div>
-			<div><label>Web</label> <a href="{{selectedEntity.url}}">{{selectedEntity.company}}</a></div>
+			<div><label>Web</label> <a target="_BLANK" href="{{selectedEntity.url}}">{{selectedEntity.company}}</a></div>
 			<div><label>Email</label>  <a href="mailto:{{selectedEntity.email}}">{{selectedEntity.email}}</a></div>
 			<hr>
 			<div class="toolset">
@@ -71,7 +71,7 @@
 	<div class="sidebar sidebar-look onlyTopShadow details_sidebar" ng-show="selectedRelation">
 		<div>
 			<h2>{{selectedRelation.start.name}} - {{selectedRelation.end.name}}</h2>
-			<div><label>Type</label> <em style="width: 100px">{{selectedRelation.type}}</em></div>
+			<div><label>Type</label> <em style="width: 100px">{{selectedRelation.type || 'N/A'}}</em></div>
 			<div><label>Date</label> {{selectedRelation.date}}</div>
 			<div><label>Author</label> {{selectedRelation.author}}</div>
 			<div><label>Verified</label> {{selectedRelation.verified ? 'Yes' : 'pending'}}</div>
@@ -137,10 +137,6 @@
 			<h3>Cluster</h3>
 			<label>Name</label>
 			<input type="text" ng-model="cluster.name">
-			<label>Url</label>
-			<input type="text" ng-model="cluster.url">
-			<label>Email</label>
-			<input type="text" ng-model="cluster.email">
 			<label>Potential</label>
 			<input type="text" ng-model="cluster.potential">
 			Building  <em>{{cluster.building}}%</em>
@@ -162,6 +158,10 @@
 				<input type="text" ng-model="selectedEntity.description">
 				<label>Company</label>
 				<input type="text" ng-model="selectedEntity.company">
+				<label>Url</label>
+				<input type="text" ng-model="selectedEntity.url">
+				<label>Email</label>
+				<input type="text" ng-model="selectedEntity.email">
 				<label>Status</label>
 				<select ng-options="e for e in ['existing', 'supporting', 'potential']"
 						ng-model="selectedEntity.status"></select>
@@ -182,7 +182,9 @@
 				</div>
 				<label>Type</label>
 				<select ng-options="e for e in relationTypes"
-						ng-model="selectedRelation.type"></select><br>
+						ng-model="selectedRelation.type">
+					<option value="">N/A</option>
+				</select><br>
 				<label>Description</label>
 				<input type="text" ng-model="selectedRelation.description">
 				<label>Author</label>

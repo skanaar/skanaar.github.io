@@ -1,6 +1,9 @@
 {
   "name": "Smart work",
   "centralEntity": 11,
+  "mobility": 34,
+  "nutrition": 96,
+  "building": 88,
   "entities": [
     {
       "id": 0,
@@ -13,8 +16,9 @@
       "mobility": 25,
       "nutrition": 100,
       "building": 24,
-      "x": 252.9496162564179,
-      "y": -249.70566261465697
+      "x": 253,
+      "y": -250,
+      "url": "http://www.Goodstore.com"
     },
     {
       "id": 1,
@@ -27,8 +31,9 @@
       "mobility": 100,
       "nutrition": 10,
       "building": 76,
-      "x": -280.52237004584873,
-      "y": -219.33325049108723
+      "x": -281,
+      "y": -219,
+      "url": "http://www.Solelia.com"
     },
     {
       "id": 2,
@@ -41,8 +46,9 @@
       "mobility": 100,
       "nutrition": 0,
       "building": 75,
-      "x": -105.49756836946116,
-      "y": -181.17201911976568
+      "x": -105,
+      "y": -181,
+      "url": "http://www.Cargobike.com"
     },
     {
       "id": 3,
@@ -55,8 +61,9 @@
       "mobility": 81,
       "nutrition": 100,
       "building": 10,
-      "x": 83.40567597115256,
-      "y": -173.1067771707077
+      "x": 83,
+      "y": -173,
+      "url": "http://www.OjiDrinks.com"
     },
     {
       "id": 4,
@@ -69,8 +76,9 @@
       "mobility": 50,
       "nutrition": 100,
       "building": 25,
-      "x": 375.58427463856634,
-      "y": 74.66082179787557
+      "x": 376,
+      "y": 75,
+      "url": "http://www.TurningpointFTW.com"
     },
     {
       "id": 5,
@@ -83,8 +91,9 @@
       "mobility": 100,
       "nutrition": 13,
       "building": 76,
-      "x": -387.6358496472412,
-      "y": -128.99141010303234
+      "x": -388,
+      "y": -129,
+      "url": "http://www.app-maker.com"
     },
     {
       "id": 6,
@@ -97,8 +106,9 @@
       "mobility": 13,
       "nutrition": 100,
       "building": 25,
-      "x": 234.20820951587737,
-      "y": -59.907707574381995
+      "x": 234,
+      "y": -60,
+      "url": "http://www.ElegantlyVegan.com"
     },
     {
       "id": 7,
@@ -111,8 +121,9 @@
       "mobility": 75,
       "nutrition": 100,
       "building": 75,
-      "x": 44.62079218820224,
-      "y": 13.589671586272768
+      "x": 45,
+      "y": 14,
+      "url": "http://www.Lunchmaker.com"
     },
     {
       "id": 8,
@@ -125,8 +136,9 @@
       "mobility": 100,
       "nutrition": 15,
       "building": 75,
-      "x": -229.3551027343202,
-      "y": -27.364751518363875
+      "x": -229,
+      "y": -27,
+      "url": "http://www.Sunfleet.com"
     },
     {
       "id": 9,
@@ -139,8 +151,9 @@
       "mobility": 100,
       "nutrition": 18,
       "building": 78,
-      "x": -422.98042097712766,
-      "y": 13.244808032143883
+      "x": -423,
+      "y": 13,
+      "url": "http://www.Koucky&Partners.com"
     },
     {
       "id": 10,
@@ -153,8 +166,9 @@
       "mobility": 75,
       "nutrition": 100,
       "building": 100,
-      "x": 405.42744663968654,
-      "y": -148.40797666025864
+      "x": 405,
+      "y": -148,
+      "url": "http://www.Plantagon.com"
     },
     {
       "id": 11,
@@ -167,8 +181,9 @@
       "mobility": 80,
       "nutrition": 80,
       "building": 100,
-      "x": -109.88389893338805,
-      "y": 136.67457677390342
+      "x": -110,
+      "y": 137,
+      "url": "http://www.Coffice.com"
     },
     {
       "id": 12,
@@ -181,8 +196,9 @@
       "mobility": 51,
       "nutrition": 10,
       "building": 100,
-      "x": 29.455925217028106,
-      "y": 285.7147862918259
+      "x": 29,
+      "y": 286,
+      "url": "http://www.SvenskaLED.com"
     },
     {
       "id": 13,
@@ -195,8 +211,9 @@
       "mobility": 100,
       "nutrition": 10,
       "building": 80,
-      "x": -298.4922211986709,
-      "y": 142.06432597843062
+      "x": -298,
+      "y": 142,
+      "url": "http://www.Compodium.com"
     },
     {
       "id": 14,
@@ -209,8 +226,9 @@
       "mobility": 51,
       "nutrition": 10,
       "building": 100,
-      "x": 165.19094925168008,
-      "y": 423.36015078496143
+      "x": 165,
+      "y": 423,
+      "url": "http://www.EgenEl.com"
     },
     {
       "id": 15,
@@ -223,8 +241,9 @@
       "mobility": 10,
       "nutrition": 10,
       "building": 100,
-      "x": -121.57292532250595,
-      "y": 334.0135354378979
+      "x": -122,
+      "y": 334,
+      "url": "http://www.Dreamler.com"
     },
     {
       "id": 16,
@@ -237,8 +256,9 @@
       "mobility": 100,
       "nutrition": 10,
       "building": 80,
-      "x": -214.3245119430859,
-      "y": 296.95123773740636
+      "x": -214,
+      "y": 297,
+      "url": "http://www.Skiptrip.com"
     },
     {
       "id": 17,
@@ -251,8 +271,9 @@
       "mobility": 25,
       "nutrition": 10,
       "building": 100,
-      "x": 80.77254937352997,
-      "y": 172.7551683560044
+      "x": 81,
+      "y": 173,
+      "url": "http://www.Remote.com"
     }
   ],
   "relations": [
