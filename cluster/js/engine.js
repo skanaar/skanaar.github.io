@@ -55,8 +55,8 @@ function Engine(canvasId, _nodes, _options){
 
 	function filteredEntities(filterArgs){
 		var filtered = _.filter(nodes.entities, function (e){
-			return filterArgs[e.status] &&
-				filterArgs[e.type] &&
+			return (filterArgs[e.status] ||
+				filterArgs[e.type]) &&
 				filterArgs.mobility <= e.mobility && 
 				filterArgs.nutrition <= e.nutrition && 
 				filterArgs.building <= e.building

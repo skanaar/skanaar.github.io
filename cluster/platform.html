@@ -12,9 +12,9 @@
 	<link rel="shortcut icon" href="favicon.ico">
 </head>
 <body ng-app="cluster">
-<div class="page">
+<div class="page" ng-controller="NavbarCtrl" ng-class="{widescreen: isApp('cluster')}">
 
-	<div class="full-row page-stripe header" ng-controller="NavbarCtrl">
+	<div class="full-row page-stripe header">
 		<div class="pull-right" ng-hide="isApp('login')">
 			<a ng-class="{active: isApp('dashboard')}" href="#/dashboard">
 				<i class="fa fa-home fa-lg fa-fw"></i> <span class="hidden-sm">DASHBOARD</span>
@@ -52,6 +52,7 @@
 <script src="indicator/processing.js"></script>
 
 <script src="js/webapp.js"></script>
+<script src="js/services.js"></script>
 <script src="js/vector.js"></script>
 <script src="js/canvas.js"></script>
 <script src="js/nodes.js"></script>

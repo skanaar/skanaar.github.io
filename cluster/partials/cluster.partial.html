@@ -19,9 +19,9 @@
 <div style="position: relative">
 	<canvas id="canvas" width="800" height="800"></canvas>
 	<div class="properties-hud">
-		<small>Building: {{clusterProperties.building | number:0}}% &nbsp; &nbsp; &nbsp; 
-		Mobility: {{clusterProperties.mobility | number:0}}% &nbsp; &nbsp; &nbsp; 
-		Nutrition: {{clusterProperties.nutrition | number:0}}% &nbsp; &nbsp; &nbsp; 
+		<small>Building: {{cluster.building | number:0}}% &nbsp; &nbsp; &nbsp; 
+		Mobility: {{cluster.mobility | number:0}}% &nbsp; &nbsp; &nbsp; 
+		Nutrition: {{cluster.nutrition | number:0}}% &nbsp; &nbsp; &nbsp; 
 		Solutions: {{cluster.entities.length}} &nbsp; &nbsp; &nbsp; 
 		Transformative Potential: {{cluster.potential || 'TBD'}}</small>
 	</div>
@@ -51,27 +51,32 @@
 				   href="javascript:void(0)"><i class="fa fa-crosshairs fa-2x"></i></a>
 				<h2>{{selectedEntity.name}} </h2>
 			</div>
-			<div>{{selectedEntity.description}}</div>
-			<hr>
-			<div><label>Email</label> <a href="mailto:{{selectedEntity.email}}">{{selectedEntity.email}}</a></div>
-			<div><label>Company</label> {{selectedEntity.company}}</div>
+			<div><label>Web</label> <a href="{{selectedEntity.url}}">{{selectedEntity.company}}</a></div>
+			<div><label>Email</label>  <a href="mailto:{{selectedEntity.email}}">{{selectedEntity.email}}</a></div>
 			<hr>
 			<div class="toolset">
+				<h3>Improve cluster</h3>
 				<a ng-click="addSolutionWizard.show = true" href="javascript:void(0)">
-					<i class="fa fa-fw fa-plus-circle"></i> Add related solution
+					<i class="fa fa-fw fa-plus-circle fa-lg"></i> Add related solution
+				</a>
+				<a ng-click="showComment = true" href="javascript:void(0)">
+					<i class="fa fa-fw fa-comment fa-lg"></i> Comment solution
 				</a>
 			</div>
+			<hr>
+			<h3>Brief information</h3>
+			<div>{{selectedEntity.description}}</div>
 		</div>
 	</div>
 	<div class="sidebar sidebar-look onlyTopShadow details_sidebar" ng-show="selectedRelation">
 		<div>
 			<h2>{{selectedRelation.start.name}} - {{selectedRelation.end.name}}</h2>
-			<div>{{selectedRelation.description}}</div>
-			<hr>
 			<div><label>Type</label> <em style="width: 100px">{{selectedRelation.type}}</em></div>
 			<div><label>Date</label> {{selectedRelation.date}}</div>
 			<div><label>Author</label> {{selectedRelation.author}}</div>
 			<div><label>Verified</label> {{selectedRelation.verified ? 'Yes' : 'pending'}}</div>
+			<hr>
+			<div>{{selectedRelation.description}}</div>
 		</div>
 	</div>
 	<div class="sidebar sidebar-look search_sidebar"
@@ -132,8 +137,18 @@
 			<h3>Cluster</h3>
 			<label>Name</label>
 			<input type="text" ng-model="cluster.name">
+			<label>Url</label>
+			<input type="text" ng-model="cluster.url">
+			<label>Email</label>
+			<input type="text" ng-model="cluster.email">
 			<label>Potential</label>
 			<input type="text" ng-model="cluster.potential">
+			Building  <em>{{cluster.building}}%</em>
+			<div><input type="range" ng-model="cluster.building"></div>
+			Mobility  <em>{{cluster.mobility}}%</em>
+			<div><input type="range" ng-model="cluster.mobility"></div>
+			Nutrition <em>{{cluster.nutrition}}%</em>
+			<div><input type="range" ng-model="cluster.nutrition"></div>
 
 
 			<h3>Selection</h3>
@@ -154,12 +169,12 @@
 				<select ng-options="e for e in ['core', 'accelerator', 'expander']"
 						ng-model="selectedEntity.type"></select><br>
 
-				Mobility  <em>&gt; {{selectedEntity.mobility}}%</em>
-				<div><input type="range" ng-model="selectedEntity.mobility"></div>
-				Nutrition <em>&gt; {{selectedEntity.nutrition}}%</em>
-				<div><input type="range" ng-model="selectedEntity.nutrition"></div>
-				Building  <em>&gt; {{selectedEntity.building}}%</em>
+				Building  <em>{{selectedEntity.building}}%</em>
 				<div><input type="range" ng-model="selectedEntity.building"></div>
+				Mobility  <em>{{selectedEntity.mobility}}%</em>
+				<div><input type="range" ng-model="selectedEntity.mobility"></div>
+				Nutrition <em>{{selectedEntity.nutrition}}%</em>
+				<div><input type="range" ng-model="selectedEntity.nutrition"></div>
 			</div>
 			<div ng-show="selectedRelation">
 				<div class="toolset" ng-show="selectedRelation">
@@ -258,14 +273,14 @@
 			<a class="button" ng-click="uploadCluster()">Upload</a>
 		</div>
 	</div>
-	<div class="modal" ng-show="showLoadCluster">
+	<div class="modal" ng-show="showComment">
 		<div>
-			<a class="pull-right" ng-click="showLoadCluster = false" href="javascript:void(0)">
+			<a class="pull-right" ng-click="showComment = false" href="javascript:void(0)">
 				<img src="img/icons/close_popup.png" width="42" height="42">
 			</a>
-			<h2><i class="fa fa-fw fa-folder-open"></i> Open cluster file</h2>
-			<input type="file"
-				   onchange="angular.element(this).scope().loadClusterFile(this.files)">
+			<h2><i class="fa fa-fw fa-comment"></i> Comment solution <strong>{{selectedEntity.name}}</strong></h2>
+			<textarea ng-model="comment" style="width: 100%"></textarea>
+			<a class="button" ng-click="commentSolution()">Send</a>
 		</div>
 	</div>
 	<div class="modal" ng-show="readyToDownload">

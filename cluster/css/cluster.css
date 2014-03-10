@@ -152,6 +152,9 @@ hr {
 	margin: auto;
 }
 
+.widescreen {
+}
+
 /*-- Style.Common -----------------*/
 
 .header {
@@ -419,6 +422,10 @@ input[type=file] {
 	border-radius: 16px;
 	border: 1px solid rgba(0,0,0,0.5);
 }
+.sidebar h3 {
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
 .sidebar em {
 	display: block;
 	text-align: center;
@@ -505,13 +512,13 @@ canvas#canvas {
 .details_sidebar label {
 	color: #888;
 }
-.admin_sidebar h3 {
-	margin-bottom: 2px
-}
 .admin_sidebar label {
 	display: block;
 	padding: 0 5px;
 	margin: 5px 0 0 0;
+}
+.admin_sidebar h3 {
+	margin-top: 1em;
 }
 
 .legend_sidebar b {
@@ -681,6 +688,7 @@ canvas#canvas {
 
 a.button {
 	display: block;
+	cursor: pointer;
 	width: 100px;
 	text-align: center;
 	margin: 20px auto;

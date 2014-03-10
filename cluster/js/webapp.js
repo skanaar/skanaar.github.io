@@ -27,30 +27,6 @@
     })
 }())
 
-function serializeCluster(){
-    var es = ClusterPlatform.nodes.entities
-    var rs = ClusterPlatform.nodes.relations
-    var data = {
-        name: ClusterPlatform.cluster.name,
-        potential: ClusterPlatform.cluster.potential,
-        centralEntity: ClusterPlatform.cluster.centralEntity,
-        entities: _.map(es, function (e){
-            return _.omit(e, ['$$hashKey', 'fx', 'fy'])
-        }),
-        relations:  _.map(rs, function (r){
-            return {
-                start: r.start.id,
-                end: r.end.id,
-                description: r.description,
-                date: r.date,
-                author: r.author,
-                type: r.type
-            }
-        })
-    }
-    return JSON.stringify(data, undefined, 2)
-}
-
 function clusterToDataUrl(){
     return 'data:text/json;charset=utf-8,' + encodeURIComponent(serializeCluster())
 }
@@ -101,63 +77,6 @@ angular.module('cluster').controller('NavbarCtrl', function ($scope){
     }
 })
 
-angular.module('cluster').factory('clusterLoader', function ($http, $q){
-    var files = $http.get('data/clustersearch.json').then(function (response){
-        return $q.all(_.times(response.data.clusterCount+1, function (i){
-            return $http.get('data/clusters/cluster-'+i+'.json')
-        }))
-    }).then(function (rs){
-        return _.map(rs, function (r){ return unpackCluster(r.data) })
-    })
-
-    function unpackCluster(c){
-        return {
-            name: c.name || 'unnamed cluster',
-            potential: c.potential,
-            centralEntity: c.centralEntity || 0,
-            relations: _.map(c.relations, function (r){
-                return {
-                    start: { id: r.start },
-                    end: { id: r.end },
-                    type: r.type,
-                    description: r.description || 'relation description',
-                    author: r.author || 'unknown author',
-                    date: r.date
-                }
-            }),
-            entities: _.map(c.entities, function (e){
-                return  {
-                    id: +e.id,
-                    name: e.name,
-                    company: e.company,
-                    email: e.email || 'unknown email',
-                    description: e.description || _.randomName(),
-                    status: e.status || 'supporting',
-                    type: e.type || 'core',
-                    mobility: +e.mobility,
-                    nutrition: +e.nutrition,
-                    building: +e.building,
-                    x: e.x,
-                    y: e.y,
-                    date: e.date
-                }
-            })
-        }
-    }
-
-    return {
-        getClusters: function (){
-            return files
-        },
-        getSolutions: function (){
-            return files.then(function (rs){
-                return _.flatten(_.pluck(rs, 'entities'))
-            })
-        },
-        unpack: unpackCluster
-    }
-})
-
 angular.module('cluster').controller('SearchCtrl', 
     function ($scope, $http, clusterLoader){
     $scope.clusters = []
@@ -169,11 +88,6 @@ angular.module('cluster').controller('SearchCtrl',
 
     clusterLoader.getClusters().then(function (clusters){
         $scope.clusters = _.tail(clusters)
-        _.each($scope.clusters, function (c){
-            c.mobility = Math.round(_.average(c.entities, 'mobility'))
-            c.nutrition= Math.round(_.average(c.entities, 'nutrition'))
-            c.building = Math.round(_.average(c.entities, 'building'))
-        })
     })
 
     var orderedSolutions = []
@@ -213,25 +127,6 @@ angular.module('cluster').controller('ClusterCtrl',
   function ($scope, $http, $q, $timeout, $routeParams, clusterLoader, uploader){
     ClusterPlatform.clusterScope = $scope
 
-    var clusterTemplate = {
-        name: "blank cluster",
-        centralEntity: 0,
-        entities: [{
-            id: 0,
-            name: "blank solution",
-            company: "blank company",
-            description: "description...",
-            status: "existing",
-            type: "core",
-            mobility: 50,
-            nutrition: 50,
-            building: 50,
-            x: 0,
-            y: 0
-        }],
-        relations: []
-    }
-
     $scope.relationTypes = [
         'participant',
         'provider',
@@ -265,7 +160,6 @@ angular.module('cluster').controller('ClusterCtrl',
         rel_alternative: true,
         rel_age: 30
     }
-    $scope.clusterName = 'loading...'
 
     clusterLoader.getSolutions().then(function (sols){
         $scope.allSolutions = _.uniq(sols, function (s){ return s.name })
@@ -284,7 +178,7 @@ angular.module('cluster').controller('ClusterCtrl',
     ClusterPlatform.engine.setNodes(new Nodes([], []))
     var clusterId = $routeParams.clusterId
     if (clusterId === 'blank')
-        loadCluster(copyOfTemplate())
+        loadCluster(clusterLoader.blankCluster())
     else {
         $http.get('data/clusters/cluster-'+clusterId+'.json').then(function (response){
             loadCluster(response.data)
@@ -294,16 +188,7 @@ angular.module('cluster').controller('ClusterCtrl',
     function loadCluster(c){
         c = clusterLoader.unpack(c)
         $scope.visibleSolutions = c.entities
-        $scope.clusterName = c.name
-        var centralEntity = _.findWhere(c.entities, {id: c.centralEntity})
-        $scope.companyName = centralEntity && centralEntity.company
-
         $scope.cluster = c
-        $scope.clusterProperties = {
-            mobility: _.average(c.entities, 'mobility'),
-            nutrition: _.average(c.entities, 'nutrition'),
-            building: _.average(c.entities, 'building')
-        }
 
         var nodes = new Nodes(c.entities, c.relations)
         ClusterPlatform.cluster = c
@@ -320,10 +205,8 @@ angular.module('cluster').controller('ClusterCtrl',
         ClusterPlatform.engine.onSelectedRelationChanged(function (r){
             $scope.$apply(function (){ $scope.selectedRelation = r })
         })
-    }
 
-    function copyOfTemplate(){
-        return JSON.parse(JSON.stringify(clusterTemplate))
+        ClusterPlatform.engine.fillScreen()
     }
 
     $scope.$on('$locationChangeStart', function(scope, next, current){
@@ -431,6 +314,17 @@ angular.module('cluster').controller('ClusterCtrl',
         }
     }
 
+    $scope.commentSolution = function (){
+        uploader.send({
+            subject: 'COMMENT_SOLUTION',
+            message: [
+                'user: ' + localStorage.user,
+                'solution: ' + $scope.selectedEntity.name,
+                'comment: ' + $scope.comment ].join(" \n"),
+            data: serializeCluster()
+        }, function (){ $scope.showComment = false })
+    }
+
     $scope.removeEntity = function (){
         if ($scope.selectedEntity)
             ClusterPlatform.nodes.removeEntity($scope.selectedEntity)
@@ -524,33 +418,5 @@ function ($scope, uploader){
             message: 'new solution',
             data: serialization
         })
-    }
-})
-
-angular.module('cluster').factory('uploader', function ($http){
-    return {
-        send: function (params, whenDone){
-            var formMime = 'application/x-www-form-urlencoded; charset=UTF-8'
-            var config = { headers: {'Content-Type':formMime} }
-            var payload = $.param({
-                key: 'ofd38sd',
-                subject: params.subject,
-                message: params.message,
-                data: params.data
-            })
-            function onResponse(response){
-                if (response.data === 'success')
-                    alert('Data successfully uploaded')
-                else
-                    alert('Failed to upload data')
-                if (whenDone) whenDone()
-            }
-            function failure(response){
-                alert('Failed to upload data')
-                if (whenDone) whenDone()
-            }
-            $http.post('upload.php', payload, config)
-                .then(onResponse, failure)
-        }
     }
 })
