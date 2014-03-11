@@ -7,7 +7,6 @@ nomnoml.Classifier = function (type, name, compartments){
         compartments: compartments
     }
 }
-
 nomnoml.Compartment = function (lines, nodes, relations){
 	return {
         lines: lines,
@@ -26,11 +25,11 @@ function layoutDiagram(measurer, config, ast){
 					.run(input)
 	}
 	function measureLines(lines){
-		if (!lines.length) return { width: 0, height: config.margin }
-		var widths = _.map(lines, function (s){ return measurer.textWidth(s) })
+		if (!lines.length)
+			return { width: 0, height: config.margin }
 		return {
-			width: _.max(widths) + 2 * config.margin,
-			height: measurer.textHeight() * lines.length + 2 * config.margin
+			width: _.max(_.map(lines, measurer.textWidth)) + 2*config.margin,
+			height: measurer.textHeight() * lines.length + 2*config.margin
 		}
 	}
 	function layoutCompartment(c){
@@ -52,21 +51,19 @@ function layoutDiagram(measurer, config, ast){
 		})
 		var dLayout = runDagre(g)
 
-		// TODO: extract actual layout
+		var rels = _.indexBy(c.relations, 'id')
+		var nodes = _.indexBy(c.nodes, 'name')
+		function toPoint(o){ return {x:o.x, y:o.y} }
 		dLayout.eachNode(function(u, value) {
-			var node = _.findWhere(c.nodes, {name: u})
-			node.x = value.x
-			node.y = value.y
+			nodes[u].x = value.x
+			nodes[u].y = value.y
 		})
 		dLayout.eachEdge(function(e, u, v, value) {
-			var rel = _.findWhere(c.relations, {id: e})
-			var start = _.findWhere(c.nodes, {name: u})
-			var end = _.findWhere(c.nodes, {name: v})
-			function toPoint(o){ return {x:o.x, y:o.y} }
-			rel.path = _.map(_.flatten([start, value.points, end]), toPoint)
+			var start = nodes[u], end = nodes[v]
+			rels[e].path = _.map(_.flatten([start, value.points, end]), toPoint)
 		})
-
 		var graph = dLayout.graph()
+
 		c.width = Math.max(textSize.width, graph.width) + 2 * config.margin
 		c.height = textSize.height + graph.height + config.margin
 	}
