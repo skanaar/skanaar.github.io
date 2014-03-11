@@ -478,6 +478,8 @@ input[type=file] {
 .result-pane .table-container {
 	background-color: #1C8394;
 	border-radius: 8px;
+	border: 0 solid #ddd;
+	border-bottom-width: 7px;
 }
 .result-pane table {
 	font-family: 'Miso', sans-serif;
