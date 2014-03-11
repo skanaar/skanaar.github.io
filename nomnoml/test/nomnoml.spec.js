@@ -23,6 +23,7 @@ describe('nomnoml', function() {
     })
 
     describe('layout engine', function() {
+        /* import */ var clas = nomnoml.Classifier, comp = nomnoml.Compartment
         var textWidth = 100
         var config = { spacing: 5, margin: 2 }
         var measurer = {
@@ -31,8 +32,8 @@ describe('nomnoml', function() {
         }
 
         it('should handle [apa]', function(){
-            var root = nomnoml.Classifier('class', 'apa', [
-                nomnoml.Compartment(['apa'],[],[])
+            var root = clas('class', 'apa', [
+                comp(['apa'],[],[])
             ])
             var layouted = layouter.layout(measurer, config, root)
             expect(layouted.width).toEqual(2+100+2)
@@ -42,8 +43,8 @@ describe('nomnoml', function() {
         })
 
         it('should handle [apa; banana owner]', function(){
-            var root = nomnoml.Classifier('class', 'apa', [
-                nomnoml.Compartment(['apa','banana owner'],[],[])
+            var root = clas('class', 'apa', [
+                comp(['apa','banana owner'],[],[])
             ])
             var layouted = layouter.layout(measurer, config, root)
             expect(layouted.width).toEqual(2+100+2)
@@ -51,9 +52,9 @@ describe('nomnoml', function() {
         })
 
         it('should handle [apa; banana owner| fleaCount]', function(){
-            var root = nomnoml.Classifier('class', 'apa', [
-                nomnoml.Compartment(['apa','banana owner'],[],[]),
-                nomnoml.Compartment(['fleaCount'],[],[])
+            var root = clas('class', 'apa', [
+                comp(['apa','banana owner'],[],[]),
+                comp(['fleaCount'],[],[])
             ])
             var layouted = layouter.layout(measurer, config, root)
             expect(layouted.width).toEqual(2+100+2)
@@ -61,9 +62,9 @@ describe('nomnoml', function() {
         })
 
         it('should handle [apa|]', function(){
-            var root = nomnoml.Classifier('class', 'apa', [
-                nomnoml.Compartment(['apa'],[],[]),
-                nomnoml.Compartment([],[],[])
+            var root = clas('class', 'apa', [
+                comp(['apa'],[],[]),
+                comp([],[],[])
             ])
             var layouted = layouter.layout(measurer, config, root)
             expect(layouted.width).toEqual(2+100+2)
@@ -71,17 +72,74 @@ describe('nomnoml', function() {
         })
 
         it('should handle [apa|[flea]]', function(){
-            var root = nomnoml.Classifier('class', 'apa', [
-                nomnoml.Compartment(['apa'],[],[]),
-                nomnoml.Compartment([],[
-                    nomnoml.Classifier('class', 'flea', [
-                        nomnoml.Compartment(['flea'],[],[])
+            var root = clas('class', 'apa', [
+                comp(['apa'],[],[]),
+                comp([],[
+                    clas('class', 'flea', [
+                        comp(['flea'],[],[])
                     ])
                 ],[])
             ])
             var layouted = layouter.layout(measurer, config, root)
             expect(layouted.width).toEqual(2+2+100+2+2)
             expect(layouted.height).toEqual(2+10+2+2+2+10+2+2)
+        })
+
+        it('should handle [apa|[flea];[dandruff]] horizontally stacked inner classes', function(){
+            var root = clas('class', 'apa', [
+                comp(['apa'],[],[]),
+                comp([],[
+                    clas('class', 'flea', [comp(['flea'],[],[])]),
+                    clas('class', 'dandruff', [comp(['dandruff'],[],[])])
+                ],[])
+            ])
+            var layouted = layouter.layout(measurer, config, root)
+            expect(layouted.width).toEqual(2+2+100+2+5+2+100+2+2)
+            expect(layouted.height).toEqual(2+10+2+2+2+10+2+2)
+        })
+
+        it('should handle [apa|[flea]->[dandruff]] vertically stacked inner classes', function(){
+            var root = clas('class', 'apa', [
+                comp(['apa'],[],[]),
+                comp([],[
+                        clas('class', 'flea', [comp(['flea'],[],[])]),
+                        clas('class', 'dandruff', [comp(['dandruff'],[],[])])
+                    ],[{
+                        id: 0,
+                        type: 'association',
+                        start: 'flea',
+                        end: 'dandruff'
+                    }]
+                )
+            ])
+            var layouted = layouter.layout(measurer, config, root)
+            expect(layouted.width).toEqual(2+2+100+2+2)
+            expect(layouted.height).toEqual(2+10+2+2+2+10+2+5+2+10+2+2)
+            var flea = layouted.compartments[1].nodes[0]
+            var dandruff = layouted.compartments[1].nodes[1]
+            expect(flea.x).toEqual(52)
+            expect(flea.y).toEqual(7)
+            expect(dandruff.x).toEqual(52)
+            expect(dandruff.y).toEqual(10+2+2+5+7)
+        })
+
+        it('should handle [apa|[flea]->[dandruff]] relation placement', function(){
+            var root = clas('class', 'apa', [
+                comp(['apa'],[],[]),
+                comp([],[
+                        clas('class', 'flea', [comp(['flea'],[],[])]),
+                        clas('class', 'dandruff', [comp(['dandruff'],[],[])])
+                    ],[{
+                        id: 0,
+                        type: 'association',
+                        start: 'flea',
+                        end: 'dandruff'
+                    }]
+                )
+            ])
+            var layouted = layouter.layout(measurer, config, root)
+            var rel = layouted.compartments[1].relations[0]
+            expect(rel.path).toEqual([{x:52,y:7}, {x:52,y:16.5}, {x:52,y:26}])
         })
         
     })

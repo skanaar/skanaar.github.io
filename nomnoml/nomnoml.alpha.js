@@ -45,13 +45,27 @@ function layoutDiagram(measurer, config, ast){
 
 		var g = new dagre.Digraph()
 		_.each(c.nodes, function (e){
-			g.addNode(e.name, { label: 'blubb', width: e.width, height: e.height })
+			g.addNode(e.name, { width: e.width, height: e.height })
 		})
 		_.each(c.relations, function (r){
 			g.addEdge(r.id, r.start, r.end)
 		})
 		var dLayout = runDagre(g)
+
 		// TODO: extract actual layout
+		dLayout.eachNode(function(u, value) {
+			var node = _.findWhere(c.nodes, {name: u})
+			node.x = value.x
+			node.y = value.y
+		})
+		dLayout.eachEdge(function(e, u, v, value) {
+			var rel = _.findWhere(c.relations, {id: e})
+			var start = _.findWhere(c.nodes, {name: u})
+			var end = _.findWhere(c.nodes, {name: v})
+			function toPoint(o){ return {x:o.x, y:o.y} }
+			rel.path = _.map(_.flatten([start, value.points, end]), toPoint)
+		})
+
 		var graph = dLayout.graph()
 		c.width = Math.max(textSize.width, graph.width) + 2 * config.margin
 		c.height = textSize.height + graph.height + config.margin
