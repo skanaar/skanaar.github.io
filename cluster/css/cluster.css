@@ -247,6 +247,17 @@ hr {
 	margin-top: -10px;
 }
 
+.subtitle {
+	position: absolute;
+	margin: auto;
+	top: 8px;
+	left:40%;
+	right:40%;
+	bottom:0;
+	text-align:center;
+	color: #39B7EA;
+}
+
 /*-- Style.updates -----------------*/
 
 .dashboard-section {
