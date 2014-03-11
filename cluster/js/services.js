@@ -159,7 +159,7 @@ angular.module('cluster').factory('clusterLoader', function ($http, $q){
                     id: +e.id,
                     name: e.name,
                     company: e.company,
-                    url: e.url,
+                    url: e.url || 'http://www.' + e.company.split(' ').join('') + '.com',
                     email: e.email || 'unknown email',
                     description: e.description || _.randomName(),
                     functions: e.functions || randomFunctions(),
