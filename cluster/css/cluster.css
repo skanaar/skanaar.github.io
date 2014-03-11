@@ -241,8 +241,10 @@ hr {
 	margin: 0;
 }
 .jumbotron small {
+	display: block;
 	color: #39B7EA;
 	font-size: 120%;
+	margin-top: -10px;
 }
 
 /*-- Style.updates -----------------*/

@@ -12,9 +12,9 @@
 	<link rel="shortcut icon" href="favicon.ico">
 </head>
 <body ng-app="cluster">
-<div class="page" ng-controller="NavbarCtrl" ng-class="{widescreen: isApp('cluster')}">
+<div class="page">
 
-	<div class="full-row page-stripe header">
+	<div class="full-row page-stripe header" ng-controller="NavbarCtrl">
 		<div class="pull-right" ng-hide="isApp('login')">
 			<a ng-class="{active: isApp('dashboard')}" href="#/dashboard">
 				<i class="fa fa-home fa-lg fa-fw"></i> <span class="hidden-sm">DASHBOARD</span>
@@ -29,7 +29,7 @@
 			   href="#/cluster/1">
 				<i class="fa fa-lightbulb-o fa-lg fa-fw"></i> <span class="hidden-sm">SOLUTIONS</span>
 			</a>
-			<a href="#"><i class="fa fa-power-off fa-lg fa-fw"></i></a>
+			<a href="#" ng-click="logout()"><i class="fa fa-power-off fa-lg fa-fw"></i></a>
 		</div>
 		<div class="title">Cluster Platform for Transformative Solutions</div>
 	</div>
