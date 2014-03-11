@@ -67,13 +67,23 @@ angular.module('cluster', ['ngRoute']).config(function($routeProvider) {
         templateUrl:'partials/network.partial.html'})
     .otherwise({ redirectTo: '/login' })
 })
+.run(function ($rootScope, $location){
+    $rootScope.$on('$locationChangeStart', function(scope, next, current){
+        if (next.indexOf('#/login') === -1 && !localStorage['user'])
+            $location.path('/login')
+    })
+})
 
-angular.module('cluster').controller('NavbarCtrl', function ($scope){
+angular.module('cluster').controller('NavbarCtrl', function ($scope, $location){
     $scope.isApp = function (name) {
         function startsWith(haystack, needle){
             return haystack.substr(0, needle.length) === needle;
         }
         return startsWith(window.location.hash, '#/' + name);
+    }
+    $scope.logout = function () {
+        delete localStorage.user
+        $location.path('/login')
     }
 })
 
