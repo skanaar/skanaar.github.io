@@ -1,37 +1,4 @@
 
-
-(function (){
-	var link = document.getElementById('savebutton')
-	if (link === null) return
-	link.addEventListener('click', downloadImage, false);
-	function downloadImage(){
-		var url = canvas.toDataURL('image/png')
-		var downloadUrl = url.replace(/^data:image\/[^;]/, 'data:application/octet-stream')
-	    link.href = downloadUrl;
-	}
-}())
-
-function toggleHelp(){
-	document.getElementById('help').classList.toggle("visible");
-}
-
-function fillScreen(){
-	w = canvas.parentElement.offsetWidth
-	h = canvas.parentElement.offsetHeight
-	canvas.setAttribute('width', w*0.75)
-	canvas.setAttribute('height', h-200)
-	sourceChanged()
-}
-
-var w, h;
-var canvas = document.getElementById('canvas')
-var textarea = document.getElementById('textarea')
-var g = skanaar.Canvas(canvas, {})
-window.addEventListener('resize', _.throttle(fillScreen, 750, {leading: true}))
-textarea.addEventListener('input', _.debounce(sourceChanged, 300))
-textarea.value = localStorage.getItem('nomnoml.lastSource') || document.getElementById('defaultGraph').innerHTML
-fillScreen()
-
 function discardCurrentGraph(){
 	textarea.value = document.getElementById('defaultGraph').innerHTML
 	sourceChanged()
@@ -125,6 +92,56 @@ function parse(source){
 		direction: {down: 'TB', right: 'LR'}[directives.direction] || 'TB',
 		fillArrows: directives.fillArrows === 'true',
 		frame: directives.frame
+	}
+}
+
+var layouter = {
+	layout: function (measurer, config, ast){
+		function buildDagreGraph(){
+			var g = new dagre.Digraph()
+			var comp = ast.compartments[0]
+			_.each(comp.nodes, function (e, key){
+				var w = measurer.textWidth(e.lines)
+				g.addNode(key, { label: key, width: w, height: measurer.textHeight() })
+			})
+			_.each(ast.relations, function (r){
+				g.addEdge(r.id, r.start, r.end)
+			})
+			return g
+		}
+		function packageDagreGraph(ast, dagreLayout){
+			var nodes = {}
+			var relations = []
+			dagreLayout.eachNode(function (key, data){
+				nodes[key] = {
+					name: key,
+					x: data.x,
+					y: data.y,
+					attrs: ast.nodes[key].attrs,
+					ops: ast.nodes[key].ops,
+					width: data.width,
+					height: data.height
+				}
+			})
+			dagreLayout.eachEdge(function (id, start, end, data){
+				relations.push({
+					start: nodes[start],
+					middle: _.pick(data, 'x', 'y'),
+					end: nodes[end],
+					path: _.flatten([nodes[start], data.points, nodes[end]]),
+					type: _.findWhere(ast.relations, {id: id}).type
+				})
+			})
+			var g = dagreLayout.graph()
+			return { nodes: nodes, relations: relations, width: g.width, height: g.height }
+		}
+		var dagreLayout = dagre.layout()
+							   .rankSep(ast.spacing)
+							   .nodeSep(ast.spacing)
+							   .edgeSep(ast.spacing)
+							   .rankDir(ast.direction)
+							   .run(buildDagreGraph())
+		return packageDagreGraph(ast, dagreLayout)
 	}
 }
 

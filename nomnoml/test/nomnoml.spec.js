@@ -22,4 +22,31 @@ describe('nomnoml', function() {
         })
     })
 
+    describe('layout engine', function() {
+        var textWidth = 100
+        var config = { spacing: 2 }
+        var measurer = {
+            textWidth: function (s){ return textWidth },
+            textHeight: function (s){ return 10 }
+        }
+
+        it('should handle single relation', function(){
+            var root = {
+                type: 'class',
+                name: 'apa',
+                compartments: [{
+                    lines: 'apa',
+                    nodes: [],
+                    relations: []
+                }]
+            }
+            var layouted = layouter.layout(measurer, config, root)
+            expect(layouted.width).toEqual(100+2+2)
+            expect(layouted.height).toEqual(10+2+2)
+            expect(layouted.x).toEqual(0)
+            expect(layouted.y).toEqual(0)
+        })
+        
+    })
+
 })
