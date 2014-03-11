@@ -24,6 +24,8 @@ function serializeCluster(){
                 description: r.description,
                 date: r.date,
                 author: r.author,
+                connectionsByAuthor: r.connectionsByAuthor,
+                verified: r.verified,
                 type: r.type
             }
         })
@@ -147,6 +149,8 @@ angular.module('cluster').factory('clusterLoader', function ($http, $q){
                     type: r.type,
                     description: r.description || 'relation description',
                     author: r.author || 'unknown author',
+                    connectionsByAuthor: r.connectionsByAuthor || '1',
+                    verified: !!r.verified,
                     date: r.date
                 }
             }),

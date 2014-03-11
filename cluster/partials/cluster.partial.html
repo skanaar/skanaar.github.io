@@ -74,6 +74,7 @@
 			<div><label>Type</label> <em style="width: 100px">{{selectedRelation.type || 'N/A'}}</em></div>
 			<div><label>Date</label> {{selectedRelation.date}}</div>
 			<div><label>Author</label> {{selectedRelation.author}}</div>
+			<div><label>Connections by this author</label> {{selectedRelation.connectionsByAuthor}}</div>
 			<div><label>Verified</label> {{selectedRelation.verified ? 'Yes' : 'pending'}}</div>
 			<hr>
 			<div>{{selectedRelation.description}}</div>
@@ -206,6 +207,8 @@
 				<input type="text" ng-model="selectedRelation.description">
 				<label>Author</label>
 				<input type="text" ng-model="selectedRelation.author">
+				<label>Connections by author</label>
+				<input type="text" ng-model="selectedRelation.connectionsByAuthor">
 				<label>Date</label>
 				<input type="text" ng-model="selectedRelation.date">
 				<label>Verified</label>
