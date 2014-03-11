@@ -60,6 +60,9 @@ angular.module('cluster', ['ngRoute']).config(function($routeProvider) {
     .when('/searchclusters', {
         controller:'SearchCtrl', 
         templateUrl:'partials/clustersearch.partial.html'})
+    .when('/searchsolutions', {
+        controller:'SearchSolutionCtrl', 
+        templateUrl:'partials/searchsolution.partial.html'})
     .when('/cluster/:clusterId', {
         controller:'ClusterCtrl', 
         templateUrl:'partials/cluster.partial.html'})
@@ -114,6 +117,34 @@ angular.module('cluster').controller('SearchCtrl',
     }
 })
 
+angular.module('cluster').controller('SearchSolutionCtrl', 
+    function ($scope, $http, clusterLoader){
+    $scope.solutions = []
+
+    clusterLoader.getSolutions().then(function (sols){
+        $scope.solutions = sols
+    })
+
+    $scope.funcs = clusterLoader.getSolutionFunctionTree()
+
+    var cachedArrayInstance = []
+    $scope.filteredSolutions = function (){
+        cachedArrayInstance.length = 0
+        function accept(s){
+            for(var a in $scope.funcs){
+                for(var b in ($scope.funcs[a] || {})){
+                    for(var c in ($scope.funcs[a][b] || {})){
+                        if (s.functions[a+'_'+b+'_'+c] && $scope.funcs[a][b][c]) return true
+                    }
+                }
+            }
+            return false
+        }
+        _.each(_.filter($scope.solutions, accept), function (e){ cachedArrayInstance.push(e) })
+        return cachedArrayInstance
+    }
+})
+
 angular.module('cluster').controller('MapCtrl', function ($scope, $http){
     if (googleMapsMarkers.length){
         initializeGoogleMaps()
@@ -137,6 +168,7 @@ angular.module('cluster').controller('ClusterCtrl',
   function ($scope, $http, $q, $timeout, $routeParams, clusterLoader, uploader){
     ClusterPlatform.clusterScope = $scope
 
+    $scope.funcs = clusterLoader.getSolutionFunctionTree()
     $scope.relationTypes = [
         'participant',
         'provider',
@@ -172,7 +204,7 @@ angular.module('cluster').controller('ClusterCtrl',
     }
 
     clusterLoader.getSolutions().then(function (sols){
-        $scope.allSolutions = _.uniq(sols, function (s){ return s.name })
+        $scope.allSolutions = sols
     })
 
     ClusterPlatform.engine.setFilter($scope.filter)

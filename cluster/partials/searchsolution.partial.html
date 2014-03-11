@@ -1,0 +1,45 @@
+<div class="full-row jumbotron"><h1>Find Clusters and Solutions</h1></div>
+<div class="full-row page-stripe toolbar">
+	<div>
+		<a href="#/searchclusters">CLUSTERS</a>
+		<a class="active" href="#/searchsolutions">SOLUTIONS</a>
+	</div>
+</div>
+<div class="row">
+	<div class="column width4 sidebar-look onlyTopShadow">
+		<div><input type="text" ng-model="search" placeholder="Search"></div>
+		<hr>
+		<div class="functionFilters" ng-repeat="(aKey, aVal) in funcs" ng-if="aKey !== '__isOpen'">
+			<h3 ng-click="aVal.__isOpen = !aVal.__isOpen">
+				<i class="fa fa-chevron-circle-right" ng-class="{'fa-chevron-circle-down': aVal.__isOpen}"></i>
+				{{aKey.toUpperCase()}}
+			</h3>
+			<div ng-repeat="(bKey, bVal) in aVal" ng-if="bKey !== '__isOpen'" ng-show="aVal.__isOpen">
+				<h3 ng-click="bVal.__isOpen = !bVal.__isOpen">
+					<i class="fa fa-chevron-circle-right" ng-class="{'fa-chevron-circle-down': bVal.__isOpen}"></i>
+					{{bKey.toUpperCase()}}
+				</h3>
+				<div ng-repeat="(cKey, cVal) in bVal" ng-if="cKey !== '__isOpen'" ng-show="bVal.__isOpen">
+					<label><input type="checkbox" ng-model="funcs[aKey][bKey][cKey]"> {{cKey}}</label>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="column width8 result-pane">
+		<h3>TRANSFORMATIVE CLUSTERS</h3>
+		<div class="table-container">
+			<table style="width: 100%">
+			<tr class="header">
+				<th>Name</th><th>Company</th><th>Mobility</th><th>Nutrition</th><th>Building</th>
+			</tr>
+			<tr ng-repeat="s in filteredSolutions() | filter:search">
+				<td class="cluster-name">{{s.name}}</td>
+				<td><small>{{s.company}}</small></td>
+				<td><small>{{s.mobility}}</small></td>
+				<td><small>{{s.nutrition}}</small></td>
+				<td><small>{{s.building}}</small></td>
+			</tr>
+			</table>
+		</div>
+	</div>
+</div>

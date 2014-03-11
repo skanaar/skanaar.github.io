@@ -175,6 +175,23 @@
 				<div><input type="range" ng-model="selectedEntity.mobility"></div>
 				Nutrition <em>{{selectedEntity.nutrition}}%</em>
 				<div><input type="range" ng-model="selectedEntity.nutrition"></div>
+
+				<h3>Functions</h3>
+				<div class="functionFilters" ng-repeat="(aKey, aVal) in funcs" ng-if="aKey !== '__isOpen'">
+					<h3 ng-click="aVal.__isOpen = !aVal.__isOpen">
+						<i class="fa fa-chevron-circle-right" ng-class="{'fa-chevron-circle-down': aVal.__isOpen}"></i>
+						{{aKey.toUpperCase()}}
+					</h3>
+					<div ng-repeat="(bKey, bVal) in aVal" ng-if="bKey !== '__isOpen'" ng-show="aVal.__isOpen">
+						<h3 ng-click="bVal.__isOpen = !bVal.__isOpen">
+							<i class="fa fa-chevron-circle-right" ng-class="{'fa-chevron-circle-down': bVal.__isOpen}"></i>
+							{{bKey.toUpperCase()}}
+						</h3>
+						<div ng-repeat="(cKey, cVal) in bVal" ng-if="cKey !== '__isOpen'" ng-show="bVal.__isOpen">
+							<label><input type="checkbox" ng-model="selectedEntity.functions[aKey+'_'+bKey+'_'+cKey]"> {{cKey}}</label>
+						</div>
+					</div>
+				</div>
 			</div>
 			<div ng-show="selectedRelation">
 				<div class="toolset" ng-show="selectedRelation">
