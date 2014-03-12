@@ -35,9 +35,12 @@ function parseTreeToSyntaxTree(entity){
 				rawClassifiers.push(p)
             }
 		})
-		var classifiers = _.map(rawClassifiers, transformItem)
+		var allClassifiers = _.map(rawClassifiers, transformItem)
+		var noDuplicates = _.map(_.groupBy(allClassifiers, 'name'), function (cList){
+			return _.max(cList, function (c){ return c.compartments.length })
+		})
 
-		return nomnoml.Compartment(lines, classifiers, relations)
+		return nomnoml.Compartment(lines, noDuplicates, relations)
 	}
 
 	function transformItem(entity){

@@ -24,7 +24,7 @@ describe('nomnoml', function() {
     })
 
     describe('astBuilder', function() {
-        it('should transform single relation to virtual classifier with single compartment', function(){
+        xit('should transform single relation to virtual classifier with single compartment', function(){
             var jisonOutput = {
                 type: '->', 
                 start: { parts: ['apa'] }, 
@@ -48,6 +48,11 @@ describe('nomnoml', function() {
         it('should handle single class', function(){
             var ast = astBuilder.apply({parts:['apa']})
             expect(ast).toEqual(clas('class', 'apa', [ comp(['apa'],[],[]) ]))
+        })
+
+        it('should choose longest definition of classes defined twice', function(){
+            var ast = astBuilder.apply({"parts":[{"parts":["apa"]},{"parts":["apa","|","fleas"]}]})
+            expect(ast).toEqual(clas('class', 'apa', [ comp(['apa'],[],[]), comp(['fleas'],[],[]) ]))
         })
 
         it('should handle [apa|+field: int;#x:int|apply]', function(){
