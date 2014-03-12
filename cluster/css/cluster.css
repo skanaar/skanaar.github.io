@@ -6,8 +6,10 @@
 		 url(../fonts/miso-regular.otf) format('opentype');
 }
 
+.visible-sm { display: none !important }
 @media only screen and (max-width: 600px) {
-	.hidden-sm { display: none }
+	.hidden-sm { display: none !important }
+	.visible-sm { display: inherit !important }
 }
 
 body, html {
@@ -195,7 +197,7 @@ hr {
 .page-stripe.header a.active {
 	color: #fff;
 	border-width: 0;
-	padding: 7px 12px;
+	padding: 7px 14px;
 }
 .page-stripe.header a span {
 	display: none;
@@ -267,12 +269,14 @@ hr {
 }
 .action-buttons {
 	text-align: center;
+	margin-top: 20px;
 }
 .action-buttons a.button{
 	display: inline-block;
 	font-size: 150%;
-	width: 350px;
-	margin: 20px;
+	width: 200px;
+	padding-bottom: 0;
+	margin: 10px;
 }
 .updates .blocks{
 	text-align: center;
@@ -310,6 +314,9 @@ hr {
 }
 .updates table.updateList td {
 	padding: 1ex;
+}
+.updates table.updateList tr.nopadding td {
+	padding: 0 0 0 4ex;
 }
 .updates table.updateList td.date {
 	min-width: 150px;
@@ -735,6 +742,6 @@ a.button {
 	margin: 20px auto;
 	background: #4C9730;
 	color: #eee !important;
-	border-radius: 20px;
+	border-radius: 30px;
 	padding: 4px 20px;
 }

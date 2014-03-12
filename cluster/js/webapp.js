@@ -384,9 +384,10 @@ angular.module('cluster').controller('LoginCtrl',
     $scope.password = ''
 
     $scope.login = function (){
-        $http.get('data/users/'+$scope.username+'.json').then(function (response){
+        var usr = $scope.username.toLowerCase()
+        $http.get('data/users/'+usr+'.json').then(function (response){
             if ($scope.password === response.data.password){
-                localStorage['user'] = $scope.username
+                localStorage['user'] = usr.toLowerCase()
                 $location.path('/dashboard')
             }
             else

@@ -7,7 +7,7 @@
 			<i class="fa fa-plus"></i> NEW SOLUTION
 		</a>
 		<a class="button" href="#/goals" >
-			<i class="fa fa-trophy"></i> VIEW PLATFORM GOALS
+			<i class="fa fa-trophy"></i> PLATFORM GOALS
 		</a>
 	</div>
 	<hr>
@@ -22,7 +22,7 @@
 	</div>
 	<hr ng-show="!!updateKind">
 	<h2 ng-show="!!updateKind">{{updateKind.name.toUpperCase()}}</h2>
-	<div ng-show="!!updateKind">
+	<div ng-show="!!updateKind" class="hidden-sm">
 		<table class="updateList">
 		<tr ng-repeat="(date, message) in updateKind.items">
 			<td><img width="30" height="30" ng-src="img/icons/{{updateKind.icon}}"></td>
@@ -30,6 +30,12 @@
 			<td>{{message}}</td>
 		</tr>
 		</table>
+	</div>
+	<div ng-show="!!updateKind" class="visible-sm">
+		<div ng-repeat="(date, message) in updateKind.items">
+			<div style="color:#717983"><img width="30" height="30" ng-src="img/icons/{{updateKind.icon}}"> {{date}}</div>
+			<div style="padding-left: 35px; padding-bottom:10px">{{message}}</div>
+		</div>
 	</div>
 	<hr>
 	<h2>PERSONAL GOALS</h2>
