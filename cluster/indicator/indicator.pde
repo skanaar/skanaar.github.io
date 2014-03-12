@@ -10,6 +10,7 @@ PImage timeRimage;
 int drawApp = 1;
 
 float timePercent;
+int daysLeft;
 int days;
 int total = 365;
 
@@ -58,12 +59,12 @@ void setup()
     }
     
     //SETUP TIMER
-    if(daysLeft > 365)
+    if(daysLeft > total)
     {
     	days = 0;
     }
     else{
-    	days = 365 - daysLeft;
+    	days = total - daysLeft;
     }    
         
     timePercent = round((days/total)*100);
@@ -290,9 +291,16 @@ void loadData(String lines)
     reductionsMax = (int)input[2]; 
     reductionsStarted = (int)input[3];
   }
+  else if (input[0].equals("timeInterval") == true){
+    int millisInADay = 24*60*60*1000;
+    int start = (int)(new Date(input[1]).getTime() / millisInADay);
+    int now = (int)(new Date().getTime() / millisInADay);
+    int end = (int)(new Date(input[2]).getTime() / millisInADay);
+    total = end - start;
+    daysLeft = end - now;
+  }
   else if ((input[0].equals("daysleft") == true) && ((int)input[1]) != -1 ){
     daysLeft = (int)input[1];
-
   }
 }
 

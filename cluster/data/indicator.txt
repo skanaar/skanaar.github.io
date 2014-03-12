@@ -7,5 +7,6 @@ clusters		4	4	0
 solutions		4	12	0
 export			4	12	0
 reductions		120	200	0
-//SET DAYS LEFT TO -1 TO START AUTOMATIC COUNTDOWN 
-daysleft		8
+timeInterval	2014-01-01	2014-12-31
+//SET daysleft TO -1 FOR AUTOMATIC COUNTDOWN 
+daysleft		-1
