@@ -690,9 +690,9 @@ canvas#canvas {
 }
 .solution-form .align-inputs label {
 	display: inline-block;
-	width: 120px;
+	width: 220px;
 }
-.solution-form h3 i.fa {
+.solution-form h3 i.fa, .solution-form h2 i.fa {
 	display: inline-block;
 	margin-left: 10px;
 	color: #4C9730;

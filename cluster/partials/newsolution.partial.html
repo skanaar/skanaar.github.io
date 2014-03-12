@@ -278,6 +278,100 @@ Privacy settings
 <label><input type="checkbox"> My comments on other solutions</label> <br>
 <label><input type="checkbox"> My use of the platform</label> <small>E.g. what solutions you look at, if you rate them high, etc., so that you – based on how you and users similar to you use the platform – can get tailor-made suggestions such as “Others that looked at these solutions also liked this solution” (a similar functionality that Amazon.com has).</small><br>
 
+<hr>
+
+<h2>Level 2 information
+	<i ng-click="toggle('level_2')"
+	   class="fa fa-chevron-circle-right fa-lg"
+	   ng-class="{'fa-chevron-circle-down': panes.level_2}"></i></h2>
+<div ng-show="panes.level_2">
+	<h3>IF YOU HAVE SPECIFIC GOALS THAT OTHERS MIGHT BE INTERESTED IN, PLEASE LIST THEM HERE</h3>
+	<textarea name="lev2_specific_goals"></textarea>
+	<h3>KEY MARKETS OF INTEREST AND/OR WHERE THE SOLUTION IS POSSIBLE TO IMPLEMENT</h3>
+	<textarea name="lev2_key_markets"></textarea>
+
+	<h3>EXAMPLES OF CITIES</h3>
+	<label><input name="lev2_city_uppsala" type="checkbox"> Uppsala</label><br>
+	<label><input name="lev2_city_malmö" type="checkbox"> Malmö</label><br>
+	<label><input name="lev2_city_are" type="checkbox"> Åre/Jämtland region</label><br>
+	<label><input name="lev2_city_linkoping" type="checkbox"> Linköping</label><br>
+	<label><input name="lev2_city_othernordic" type="checkbox">Other Nordic cities</label> <input name="lev2_other_nordic_cities" type="text"><br>
+	<label><input name="lev2_city_beijing" type="checkbox"> Beijing</label><br>
+	<label><input name="lev2_city_baoding" type="checkbox"> Baoding</label><br>
+	<label><input name="lev2_city_dehli" type="checkbox"> Dehli</label><br>
+	<label><input name="lev2_city_bangalore" type="checkbox"> Bangalore</label><br>
+	<label><input name="lev2_city_seoul" type="checkbox"> Seoul</label><br>
+	<label><input name="lev2_city_brussels" type="checkbox"> Brussels</label><br>
+	<label><input name="lev2_city_london" type="checkbox"> London</label><br>
+	<label><input name="lev2_city_sanfranciso" type="checkbox"> San Francisco</label><br>
+	<label><input name="lev2_city_other" type="checkbox"> Other</label> <input name="lev2_other_cities" type="text">	<br>
+
+	<h3>COUNTRIES</h3>
+	<div class="align-inputs">
+		<label><input type="checkbox"> Nordic countries</label> <input type="text" name="lev2_country_nordic"><br>
+		<label><input type="checkbox"> European countries (outside the Nordic countries)</label> <input type="text" name="lev2_country_european"><br>
+		<label><input type="checkbox"> Asian countries</label> <input type="text" name="lev2_country_asian"><br>
+		<label><input type="checkbox"> North American countries</label> <input type="text" name="lev2_country_north"><br>
+		<label><input type="checkbox"> South American countries</label> <input type="text" name="lev2_country_south"><br>
+		<label><input type="checkbox"> African countries</label> <input type="text" name="lev2_country_african"><br>
+		<label><input type="checkbox"> Australia</label> <input type="text" name="lev2_country_australia"><br>
+		<label><input type="checkbox"> Anywhere</label>
+	</div>
+
+	<div class="align-inputs">
+		<h3>IF POSSIBLE AND APPLICABLE, PLEASE ADD CONDITIONS THAT MUST BE MET FOR THE SOLUTION TO BE IMPLEMENTED</h3>
+		<label>E.g. Infrastructure, legal frameworks, knowledge</label><input name="lev2_condition_frameworks" type="text"><br>
+		<label>What desicion(s in the city) should consider your solution?</label><input name="lev2_condition_what" type="text"><br>
+	</div>
+
+	<h3>LINKS TO OTHER SOLUTIONS</h3>
+	<small>Please use the cluster tool on the platform to indicate how your solution/offer relates to other relevant clusters and individual solutions already on the platform</small>
+	<h3>PLEASE LIST CURRENT RELATIONS YOU HAVE TO OTHER SOLUTION PROVIDERS NOT INCLUDED IN THE PLATFORM THAT MAKE YOUR SOLUTION MORE EFFICIENT/ATTRACTIVE/ETC. (IF POSSIBLE PLEASE TRY TO UPLOAD THESE SOLUTIONS TO THE PLATFORM)</h3>
+	<textarea name="lev2_relations_notincluded"></textarea><br>
+	<h3>PLEASE LIST ANY STAKEHOLDER YOU CURRENTLY DO NOT WORK WITH, BUT WOULD LIKE TO GET HELP FROM/COLLABORATE WITH. THEN THE PLATFORM CAN HELP ESTABLISH A CONNECTION WITH SUCH A STAKEHOLDER AND HELP YOU BUILD CLUSTERS WITH THEM</h3>
+	<textarea name="lev2_relations_stakeholders"></textarea><br><br>
+
+	<label><input name="lev2_sharing_profit" type="checkbox"> Interested in sharing profit/carbon reductions if helped to new or bigger markets faster</label>
+
+	<h3>REFERENCES FROM EARLIER USE (IF SUCH EXIST)</h3>
+	<textarea name="lev2_references"></textarea><br>
+	<h3>REWARDS, COMPETITIONS, PARTICIPATION IN PROJECTS ETC. WHERE THE SOLUTION HAS BEEN INCLUDED</h3>
+	<textarea name="lev2_rewards"></textarea><br>
+
+	<h3>WHAT KIND OF CHANGE DO YOU LIKE?</h3>
+	<label><input name="lev2_change_slow" type="checkbox"> Slow</label><br>
+	<label><input name="lev2_change_medium" type="checkbox"> Medium</label><br>
+	<label><input name="lev2_change_fast" type="checkbox"> Fast</label><br>
+	<label><input name="lev2_change_nolimit" type="checkbox"> No Limit</label><br>
+
+</div>
+
+<hr>
+
+<h2>Level 3 information
+	<i ng-click="toggle('level_3')"
+	   class="fa fa-chevron-circle-right fa-lg"
+	   ng-class="{'fa-chevron-circle-down': panes.level_3}"></i></h2>
+<div ng-show="panes.level_3">
+	<h3>POSSIBLE POSITIVE DYNAMIC EFFECTS (LOW-CARBON FEEDBACK)</h3>
+	<textarea name="lev3_effects"></textarea>
+	<h3>DATA OF IMPACTS</h3>
+	<textarea name="lev3_impacts"></textarea>
+	<h3>FOUR POSSIBLE UPTAKE SCENARIOS</h3>
+	<label>Low</label><br>
+	<textarea name="lev3_low"></textarea><br>
+	<label>Medium</label><br>
+	<textarea name="lev3_medium"></textarea><br>
+	<label>High</label><br>
+	<textarea name="lev3_high"></textarea><br>
+	<label>Radical</label><br>
+	<textarea name="lev3_radical"></textarea><br>
+	<h3>FUTURE GUARANTEE: HOW CAN THE SOLUTION BE UPGRADED</h3>
+	<textarea name="lev3_futureguarantee"></textarea>
+	<h3>HOW DO YOU ADDRESS POSSIBLE HIGH-CARBON LOCK-IN CHALLENGES</h3>
+	<textarea name="lev3_highcarbonlockin"></textarea>
+</div>
+
 <a class="button" href="javascript:void(0)" ng-click="uploadSolution()">Upload</a>
 
 </form>
