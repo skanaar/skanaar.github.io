@@ -1,9 +1,15 @@
 {
 	"password": "savetheplanet",
 	"name": "Dennis",
-	"info":{
-		"Company": "21st Century Frontiers",
-		"Status": "Catalyst",
-		"Specialty": "Maränger"
-	}
+	"info":[
+		["Company", "21st Century Frontiers"],
+		["Status", "Catalyst"],
+		["Specialty", "Transformations"]
+	],
+	"info2":[
+		["Speed of change",  "Fast"],
+		["Building",  "27%"],
+		["Nutrition", "40%"],
+		["Mobility",  "87%"]
+	]
 }

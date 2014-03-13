@@ -1,8 +1,14 @@
 {
 	"password": "banan",
 	"name": "Monkey Man",
-	"info":{
-		"Company": "Banana Industries",
-		"Providing": "Ook ook ook"
-	}
+	"info":[
+		["Company", "Banana Industries"],
+		["Providing", "Ook ook ook"],
+		["Change", "Medium"]
+	],
+	"info2":[
+		["Building",  "27%"],
+		["Nutrition", "40%"],
+		["Mobility",  "87%"]
+	]
 }

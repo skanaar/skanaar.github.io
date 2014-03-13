@@ -1,4 +1,8 @@
 
+function nameToUrl(name){
+    return 'http://www.' + name.split(' ').join('') + '.com'
+}
+
 function serializeCluster(){
     var es = ClusterPlatform.nodes.entities
     var rs = ClusterPlatform.nodes.relations
@@ -14,7 +18,7 @@ function serializeCluster(){
             var o = _.omit(e, ['$$hashKey', 'fx', 'fy'])
             o.x = Math.round(o.x)
             o.y = Math.round(o.y)
-            o.url = o.url || 'http://www.' + o.company.split(' ').join('') + '.com'
+            o.url = o.url || nameToUrl(o.company)
             return o
         }),
         relations:  _.map(rs, function (r){
@@ -61,14 +65,14 @@ angular.module('cluster').factory('clusterLoader', function ($http, $q){
         "building_social_Exhibitions": "on",
         "building_social_Playing": "on",
         "building_social_Other": "",
-        "building_economical_Save": "on",
-        "building_economical_Other": "",
+        //"building_economical_Save": "on",
+        //"building_economical_Other": "",
         "building_ethical_Equal": "on",
         "building_ethical_Environmental": "on",
         "building_ethical_Human": "on",
         "building_ethical_Sustainable": "on",
         "building_ethical_Other": "",
-        "building_chain_Other": "",
+        //"building_chain_Other": "",
         "mobility_physical_Transportation": "on",
         "mobility_physical_Other": "",
         "mobility_social_Meeting": "on",
@@ -76,15 +80,15 @@ angular.module('cluster').factory('clusterLoader', function ($http, $q){
         "mobility_social_Representativeness": "on",
         "mobility_social_Security": "on",
         "mobility_social_Other": "",
-        "mobility_economy_SaveMoney": "on",
-        "mobility_economy_SaveTime": "on",
-        "mobility_economy_Other": "",
-        "mobility_ethical_Equal": "on",
+        //"mobility_economy_SaveMoney": "on",
+        //"mobility_economy_SaveTime": "on",
+        //"mobility_economy_Other": "",
+        //"mobility_ethical_Equal": "on",
         "mobility_ethical_Environmental": "on",
         "mobility_ethical_Human": "on",
         "mobility_ethical_Sustainable": "on",
         "mobility_ethical_Other": "",
-        "mobility_chain_Other": "",
+        //"mobility_chain_Other": "",
         "nutrition_needs_Protein": "on",
         "nutrition_needs_Carbohydrates": "on",
         "nutrition_needs_Fat": "on",
@@ -100,15 +104,15 @@ angular.module('cluster').factory('clusterLoader', function ($http, $q){
         "nutrition_social_Culture": "on",
         "nutrition_social_Optimize": "on",
         "nutrition_social_Other": "",
-        "nutrition_economy_Save": "on",
-        "nutrition_economy_Other": "",
+        //"nutrition_economy_Save": "on",
+        //"nutrition_economy_Other": "",
+        //"nutrition_chain_Other": "",
         "nutrition_ethical_Equal": "on",
         "nutrition_ethical_Environmental": "on",
         "nutrition_ethical_Human": "on",
         "nutrition_ethical_Animal": "on",
         "nutrition_ethical_Sustainable": "on",
-        "nutrition_ethical_Other": "",
-        "nutrition_chain_Other": ""
+        "nutrition_ethical_Other": ""
     }
 
     function randomFunctions(){
@@ -159,7 +163,7 @@ angular.module('cluster').factory('clusterLoader', function ($http, $q){
                     id: +e.id,
                     name: e.name,
                     company: e.company,
-                    url: e.url || 'http://www.' + e.company.split(' ').join('') + '.com',
+                    url: e.url || nameToUrl(e.company),
                     email: e.email || 'unknown email',
                     description: e.description || _.randomName(),
                     functions: e.functions || randomFunctions(),

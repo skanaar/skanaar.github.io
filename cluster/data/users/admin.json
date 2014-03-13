@@ -1,7 +1,11 @@
 {
 	"password": "admin",
 	"name": "administratör",
-	"info":{
-		"Privilege": "root"
-	}
+	"info":[
+		["Privilege", "root"]
+	],
+	"info2":[
+	],
+	"info3":[
+	]
 }

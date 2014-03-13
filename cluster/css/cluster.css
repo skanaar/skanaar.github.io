@@ -631,6 +631,8 @@ canvas#canvas {
 }
 .modal>div {
 	position: absolute;
+	max-width: 994px;
+	margin: 0 auto;
 	top: 40px;
 	bottom: 40px;
 	left: 40px;
