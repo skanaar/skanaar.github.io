@@ -481,16 +481,17 @@ function ($scope, uploader){
     }
 })
 
-angular.module('cluster').controller('SettingsCtrl',
-function ($scope, uploader){
+angular.module('cluster').controller('SettingsCtrl', function ($scope, $http, uploader){
     $scope.qq_mobility = 0
     $scope.qq_nutrition = 0
     $scope.qq_building = 0
+
+    $http.get('data/settings/' + localStorage.user + '.json').then(function (response){
+        $scope.form = response.data
+    })
     
     $scope.uploadSettings = function (){
-        var jqData = $('#settingsform').serializeArray()
-        var data = _.object(_.map(jqData, function (e){ return [e.name, e.value] }))
-        var serialization = JSON.stringify(data, undefined, 2)
+        var serialization = JSON.stringify($scope.form, undefined, 2)
         uploader.send({
             subject: 'SAVE_SETTINGS',
             message: 'user: ' + localStorage.user,
