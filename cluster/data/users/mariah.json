@@ -1,0 +1,15 @@
+{
+	"password": "test",
+	"name": "Maria Helle",
+	"info":[
+		["Company/Organisation", "Tillväxtverket"],
+		["Status", "Catalyst"],
+		["Specialty", "Organisational development"]
+	],
+	"info2":[
+		["Preferred speed of change",  "Fast"],
+		["Building",  "50%"],
+		["Nutrition", "100%"],
+		["Mobility",  "70%"]
+	]
+}

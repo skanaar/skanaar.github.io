@@ -1,0 +1,57 @@
+[
+    {
+        "value": 4,
+        "name": "news flashes",
+        "icon": "updates_news_icon.png",
+        "items": {
+            "2014-03-17": "New report about innovation and values",
+            "2014-03-15": "Denmark to arrange conference about culture and sustainability with world leading entreprenuers",
+            "2014-03-12": "World Economic Forum is asking for input regarding policy recomendation for cultural entreprenuers",
+            "2014-03-12": "New mobile application help blind artists to collaborate."
+            
+        }
+    },
+    {
+        "value": 2,
+        "name": "responses to challenges",
+        "icon": "updates_responses_icon.png",
+        "items": {
+            "2014-03-12": "Response to your question about ways to gather creative people from differerent sectors from Anna Nededahl at culture collaboration",
+            "2014-03-10": "Reading tip in response to your question about ways to gather creative people from differerent sectors from Peter Asgard at Boros city"
+        }
+    },
+    {
+        "value": 2,
+        "name": "weak signals",
+        "icon": "updates_signals_icon.png",
+        "items": {
+            "2014-01-01": "Demonstrations in Germany due to closing of theaters",
+            "2014-01-20": "New movie by Nolan might focus on cultural entreprenuers"
+        }
+    },
+    {
+        "value": 2,
+        "name": "opportunity scan",
+        "icon": "updates_opportunities_icon.png",
+        "items": {
+            "2014-01-01": "bla bla bla",
+            "2014-01-20": "blo blo blo"
+        }
+    },
+    {
+        "value": 0,
+        "name": "inspirations",
+        "icon": "updates_ideas_icon.png",
+        "items": {
+        }
+    },
+    {
+        "value": 2,
+        "name": "changes in clusters",
+        "icon": "updates_cluster_icon.png",
+        "items": {
+            "2014-01-01": "Two new solutions in culture innovation cluster",
+            "2014-01-20": "New cluster named 'cluture collaboration' established"
+        }
+    }
+]
