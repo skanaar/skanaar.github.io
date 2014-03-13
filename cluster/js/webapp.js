@@ -40,7 +40,7 @@ function attachDataUrlToLink(id, dataType, linkGenerator){
     }, false);
 }
 
-angular.module('cluster', ['ngRoute']).config(function($routeProvider) {
+angular.module('cluster', ['ngRoute', 'ngSanitize']).config(function($routeProvider) {
     $routeProvider
     .when('/login', 
         {controller:'LoginCtrl', 
@@ -134,13 +134,16 @@ angular.module('cluster').controller('SearchSolutionCtrl',
             for(var a in $scope.funcs){
                 for(var b in ($scope.funcs[a] || {})){
                     for(var c in ($scope.funcs[a][b] || {})){
-                        if (s.functions[a+'_'+b+'_'+c] && $scope.funcs[a][b][c]) return true
+                        if (s.functions[a+'_'+b+'_'+c] && $scope.funcs[a][b][c])
+                            return true
                     }
                 }
             }
             return false
         }
-        _.each(_.filter($scope.solutions, accept), function (e){ cachedArrayInstance.push(e) })
+        _.each($scope.solutions, function (e){
+            if (accept(e)) cachedArrayInstance.push(e)
+        })
         return cachedArrayInstance
     }
 })

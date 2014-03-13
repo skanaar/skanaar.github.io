@@ -312,6 +312,9 @@ hr {
 	margin: 0 2ex;
 	overflow-y: auto;
 }
+.updates table.updateList a {
+	color: teal;
+}
 .updates table.updateList td {
 	padding: 1ex;
 }
@@ -390,6 +393,9 @@ hr {
 	display: block;
 	font-size: 80%;
 	color: lightgreen;
+}
+.profile-summary a {
+	color: lightblue;
 }
 
 /*-- Style.updates -----------------*/

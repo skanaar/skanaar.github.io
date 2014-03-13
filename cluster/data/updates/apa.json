@@ -4,7 +4,7 @@
         "name": "news flashes",
         "icon": "updates_news_icon.png",
         "items": {
-            "2014-01-01": "bla bla bla",
+            "2014-01-01": "bla <a href=\"banan.com\">Banana</a> bla",
             "2014-01-02": "bla bla bla",
             "2014-01-03": "bla bla bla",
             "2014-01-04": "bla bla bla",

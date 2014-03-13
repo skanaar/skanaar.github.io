@@ -27,14 +27,14 @@
 		<tr ng-repeat="(date, message) in updateKind.items">
 			<td><img width="30" height="30" ng-src="img/icons/{{updateKind.icon}}"></td>
 			<td class="date">{{date}}</td>
-			<td>{{message}}</td>
+			<td ng-bind-html="message"></td>
 		</tr>
 		</table>
 	</div>
 	<div ng-show="!!updateKind" class="visible-sm">
 		<div ng-repeat="(date, message) in updateKind.items">
 			<div style="color:#717983"><img width="30" height="30" ng-src="img/icons/{{updateKind.icon}}"> {{date}}</div>
-			<div style="padding-left: 35px; padding-bottom:10px">{{message}}</div>
+			<div style="padding-left: 35px; padding-bottom:10px" ng-bind-html="message"></div>
 		</div>
 	</div>
 	<hr>
@@ -50,12 +50,15 @@
 	<h2>{{profile.name}}</h2>
 	<img ng-src="{{imageUrl}}" width=150 height=150>
 	<div class="properties">
-		<div ng-repeat="line in profile.info"><b>{{line[0]}}</b> {{line[1]}}</div>
+		<div ng-repeat="line in profile.info"><b>{{line[0]}}</b>
+		<span ng-bind-html="line[1]"></span></div>
 	</div>
 	<div class="properties">
-		<div ng-repeat="line in profile.info2"><b>{{line[0]}}</b> {{line[1]}}</div>
+		<div ng-repeat="line in profile.info2"><b>{{line[0]}}</b>
+		<span ng-bind-html="line[1]"></span></div>
 	</div>
 	<div class="properties">
-		<div ng-repeat="line in profile.info3"><b>{{line[0]}}</b> {{line[1]}}</div>
+		<div ng-repeat="line in profile.info3"><b>{{line[0]}}</b>
+		<span ng-bind-html="line[1]"></span></div>
 	</div>
 </div>

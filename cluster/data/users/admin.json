@@ -2,9 +2,12 @@
 	"password": "admin",
 	"name": "administratör",
 	"info":[
-		["Privilege", "root"]
+		["Privilege", "root"],
+		["Company", "X"]
 	],
 	"info2":[
+		["Privilege sjkhjklghdfsgl", "root"],
+		["Company", "X"]
 	],
 	"info3":[
 	]

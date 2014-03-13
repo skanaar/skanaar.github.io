@@ -2,7 +2,7 @@
 	"password": "banan",
 	"name": "Monkey Man",
 	"info":[
-		["Company", "Banana Industries"],
+		["Company", "<a href=\"banan.com\">Banana</a> Industries"],
 		["Providing", "Ook ook ook"],
 		["Change", "Medium"]
 	],
