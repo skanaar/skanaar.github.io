@@ -1,0 +1,80 @@
+<div class="full-row jumbotron"><h1>Settings</h1></div>
+<div class="solution-form" style="background: #eee; padding: 1em 2em">
+
+<form id="settingsform">
+
+	<div class="align-inputs">
+		<h2>GENERAL INFORMATION</h2>
+		<label>Name</label> <input type="text" name="setting_Name "><br>
+		<label>Organisation/company </label> <input type="text" name="setting_Organisationcompany"><br>
+		<label>Email</label> <input type="text" name="setting_Email"><br>
+		<label>Upload photo </label> <input type="file" name="setting_Uploadphoto"><br>
+
+		<hr>
+		<h2>INFORMATION TO MAKE THE PLATFORM TAILOR-MADE</h2>
+		<h3>WHAT AREAS ARE YOU MOST INTERESTED IN?</h3>
+		<label>Buildings  0-100% </label> <input type="range" name="setting_Buildings" ng-model="qq_building" type="range"> {{qq_building || 0}}%<br>
+		<label>Mobility 0-100% </label> <input type="range" name="setting_Mobility" ng-model="qq_mobility" type="range"> {{qq_mobility || 0}}%<br>
+		<label>Nutrition 0-100% </label> <input type="range" name="setting_Nutrition"ng-model="qq_nutrition" type="range"> {{qq_nutrition || 0}}%<br>
+	</div>
+
+	<hr>
+	<h3>WHAT UPDATES DO YOU WANT ON YOUR PERSONAL DASHBOARD</h3>
+	<label><input type="checkbox" name="setting_updates_News">  News Updates</label><br>
+	<label><input type="checkbox" name="setting_updates_Weak">  Weak signals</label><br>
+	<label><input type="checkbox" name="setting_updates_Surprises">  Surprises/inspiration</label><br>
+	<label><input type="checkbox" name="setting_updates_Personal">  Personal messages</label><br>
+	<label><input type="checkbox" name="setting_updates_Changes">  Changes in clusters</label><br>
+	<label><input type="checkbox" name="setting_updates_Newclusters">  New clusters </label><br>
+	<label><input type="checkbox" name="setting_updates_Newopportunities">  New opportunities</label><br>
+
+	<h3>WHAT PERSONAL GOALS DO YOU WANT TO INCLUDE</h3>
+	<div class="align-inputs">
+		<label><input type="checkbox"> Connections with solutions</label> <input type="text" name="setting_goal_connections" placeholder="Number of connections with solutions"><br>
+		<label><input type="checkbox"> Contacts with markets</label> <input type="text" name="setting_goal_contacts" placeholder="Number of contacts with markets"><br>
+		<label><input type="checkbox"> Cluster involvement</label> <input type="text" name="setting_goal_involvement" placeholder="Number of clusters involved in"><br>
+		<label><input type="checkbox"> Relevant weak signals </label> <input type="text" name="setting_goal_weaksignals" placeholder="Number of relevant weak signals"><br>
+	</div>
+
+	<h3>WHAT KIND OF CHANGE DO YOU LIKE?</h3>
+	<label><input type="checkbox" name="Very">  Very fast</label><br>
+	<label><input type="checkbox" name="Fast">  Fast</label><br>
+	<label><input type="checkbox" name="Normal">  Normal</label><br>
+	<label><input type="checkbox" name="Slow">  Slow</label><br>
+
+	<h3>WHAT KIND OF SOLUTIONS IS OF INTEREST</h3>
+	<label><input type="checkbox" name="setting_kind_worldclass">  Transformative solutions in world class</label><br>
+	<label><input type="checkbox" name="setting_kind_general">  Transformative solutions in general</label><br>
+	<label><input type="checkbox" name="setting_kind_better">  Something better than today</label><br>
+
+	<h3>WHAT TIME HORIZON DO YOU WORK WITH (MORE THAN ONE OPTION POSSIBLE)</h3>
+	<label><input type="checkbox" name="setting_horizon_now"> Now</label><br>
+	<label><input type="checkbox" name="setting_horizon_weeks">  A few weeks</label><br>
+	<label><input type="checkbox" name="setting_horizon_quarter">  This quarter</label><br>
+	<label><input type="checkbox" name="setting_horizon_year">  This year</label><br>
+	<label><input type="checkbox" name="setting_horizon_5years">  Five years</label><br>
+	<label><input type="checkbox" name="setting_horizon_life">  Legacy/life time</label><br>
+
+	<hr>
+	<h2>PRIVACY SETTINGS</h2>
+
+	<h3>HOW DO YOU WANT TO DISPLAY YOUR CONTACT DETAILS?</h3>
+	<label><input type="checkbox" name="setting_privacy_everyone">  To everyone using the platform</label><br>
+	<label><input type="checkbox" name="setting_privacy_everyone_area">  To everyone with interest in the areas relevant to my solution	</label><br>
+	<label><input type="checkbox" name="setting_privacy_potentialcustomers">  Only to potential customers/providers</label><br>
+	<label><input type="checkbox" name="setting_privacy_solutionproviders">  Only to other solution providers</label><br>
+	<label><input type="checkbox" name="setting_privacy_">  To nobody</label> <small>Interested stakeholders can contact you through the platform, but all your contact details will be anonymous. If you mark this option, also mark what stakeholders above you want to be able to contact you through the platform, if any.</small>
+
+	<h3>WHAT DATA DO YOU WANT TO SHARE, IF ANY?</h3>
+	<small>You can always come back and change settings later</small><br>
+	<small><b>General tip</b> The more transparent you are the easier it is for customers/partners to find and see the benefits of your solution.</small><br><br>
+	<label><input type="checkbox">  I’m willing to share everything	</label><br>
+	<label><input type="checkbox">  Only basic information about the solution (including contact details)	</label><br>
+	<label><input type="checkbox">  Both basic and optimal level information	</label><br>
+	<label><input type="checkbox">  My comments on other solutions	</label><br>
+	<label><input type="checkbox">  My use of the platform</label> <small>E.g. what solutions you look at, if you rate them high, etc., so that you – based on how you and users similar to you use the platform – can get tailor-made suggestions such as “Others that looked at these solutions also liked this solution” (a similar functionality that Amazon.com has for books)</small>
+
+	<a class="button" href="javascript:void(0)" ng-click="uploadSettings()">Save</a>
+
+</form>
+</div>

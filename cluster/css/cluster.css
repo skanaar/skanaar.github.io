@@ -281,6 +281,13 @@ hr {
 .updates .blocks{
 	text-align: center;
 }
+.updates .block.active {
+	border-radius: 50px;
+	background: white;
+	border: 0 solid white;
+	border-left-width: 5px;
+	margin-left: 5px;
+}
 .updates .block {
 	display: inline-block;
 	margin: 10px;
@@ -306,17 +313,23 @@ hr {
 	margin-left: 10px;
 	color: #717983;
 }
-.updates table.updateList {
-	display: block;
+.updates .scroll-content {
 	max-height: 200px;
 	margin: 0 2ex;
 	overflow-y: auto;
+}
+.updates table.updateList {
+	width: 100%;
+	table-layout: fixed;
 }
 .updates table.updateList a {
 	color: teal;
 }
 .updates table.updateList td {
 	padding: 1ex;
+}
+.updates table.updateList tr {
+	width: 100%;
 }
 .updates table.updateList tr.nopadding td {
 	padding: 0 0 0 4ex;
@@ -699,7 +712,7 @@ canvas#canvas {
 .solution-form {
 	font-family: 'Miso', sans-serif
 }
-.solution-form input[type=text], .solution-form input[type=range] {
+.solution-form input[type=text], .solution-form input[type=range], .solution-form input[type=file] {
 	width: 40%;
 	margin: 2px;
 }

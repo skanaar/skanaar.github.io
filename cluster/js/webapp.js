@@ -54,6 +54,9 @@ angular.module('cluster', ['ngRoute', 'ngSanitize']).config(function($routeProvi
     .when('/goals', {
         controller:'GoalsCtrl', 
         templateUrl:'partials/goals.partial.html'})
+    .when('/settings', {
+        controller: 'SettingsCtrl',
+        templateUrl:'partials/settings.partial.html'})
     .when('/newsolution', {
         controller: 'RegisterSolutionCtrl',
         templateUrl:'partials/newsolution.partial.html'})
@@ -285,7 +288,7 @@ angular.module('cluster').controller('ClusterCtrl',
     $scope.uploadCluster = function (){
         uploader.send({
             subject: 'UPLOAD_CLUSTER',
-            message: $scope.uploadMessage,
+            message: 'user: ' + localStorage.user + "\nmessage: " + $scope.uploadMessage,
             data: serializeCluster()
         }, function (){ $scope.showUploadDialog = false })
     }
@@ -417,7 +420,7 @@ angular.module('cluster').controller('LoginCtrl',
     }
 })
 
-angular.module('cluster').controller('DashboardCtrl', function ($scope, $http){
+angular.module('cluster').controller('DashboardCtrl', function ($scope, $http, uploader){
     $http.get('data/updates/'+localStorage.user+'.json').then(function (response){
         $scope.updates = response.data
     })
@@ -430,6 +433,17 @@ angular.module('cluster').controller('DashboardCtrl', function ($scope, $http){
     $scope.imageUrl = 'data/user-img/' + localStorage.user + '.jpg'
     $scope.setUpdateKind = function (u){
         $scope.updateKind = ($scope.updateKind === u) ? null : u
+    }
+
+    $scope.sendOpinion = function (opinion, message){
+        uploader.send({
+            subject: 'NEWS_OPINION',
+            message: [
+                'user: ' + localStorage.user,
+                'opinion: ' + opinion,
+                'message: ' + message ].join(" \n"),
+            data: ''
+        })
     }
 })
 
@@ -461,7 +475,25 @@ function ($scope, uploader){
         var serialization = JSON.stringify(data, undefined, 2)
         uploader.send({
             subject: 'NEW_SOLUTION',
-            message: 'new solution',
+            message: 'user: ' + localStorage.user,
+            data: serialization
+        })
+    }
+})
+
+angular.module('cluster').controller('SettingsCtrl',
+function ($scope, uploader){
+    $scope.qq_mobility = 0
+    $scope.qq_nutrition = 0
+    $scope.qq_building = 0
+    
+    $scope.uploadSettings = function (){
+        var jqData = $('#settingsform').serializeArray()
+        var data = _.object(_.map(jqData, function (e){ return [e.name, e.value] }))
+        var serialization = JSON.stringify(data, undefined, 2)
+        uploader.send({
+            subject: 'SAVE_SETTINGS',
+            message: 'user: ' + localStorage.user,
             data: serialization
         })
     }
