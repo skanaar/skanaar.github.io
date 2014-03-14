@@ -1,4 +1,10 @@
 
+/**
+
+    Angular services and global utility functions
+
+*/
+
 function nameToUrl(name){
     return 'http://www.' + name.split(' ').join('') + '.com'
 }

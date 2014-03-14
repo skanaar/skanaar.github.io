@@ -15,3 +15,26 @@ bob   => bob					# loopback message
 else
 
 end
+
+
+
+
+
+#diagram: sequence
+[]->[client]
+[client]->[server]
+[client]<-[server]
+[client].>[server]
+          [server]=>[database] : <<create>>
+          [server]->[database] : getData
+          [server]<.[database] : data
+          [server]=X[database] : <<delete>>
+[client]<.[server]
+[server]
+[]<.[client]
+
+alt
+
+else
+
+end

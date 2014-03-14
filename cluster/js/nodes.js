@@ -1,3 +1,18 @@
+
+/**
+	Calls action a few times with delay between each invoke.
+	Passes a number between 0-1 to action.
+	
+		repeat(foo, 5);
+	
+	is equivalent to:
+
+		setTimeout(function (){ foo(0.00) }, 0);
+		setTimeout(function (){ foo(0.25) }, 50);
+		setTimeout(function (){ foo(0.50) }, 100);
+		setTimeout(function (){ foo(0.75) }, 150);
+		setTimeout(function (){ foo(1.00) }, 200);
+*/
 function repeat(action, repetitions, interval){
 	var r = repetitions || 10
 	_.times(r, function (i){
@@ -5,6 +20,12 @@ function repeat(action, repetitions, interval){
 	})
 }
 
+/**
+	Physics simulation of a graph of nodes and relations.
+	Nodes repulse each other by inverted gravitation - up until a cutoff distance after
+	which they no longer repulse each other.
+	Relations between nodes act as springs.
+*/
 function Nodes(_entities, _relations){
 	var dampening = 0
 	var changeSubscribers = []

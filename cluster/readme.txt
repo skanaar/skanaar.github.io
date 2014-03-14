@@ -6,11 +6,12 @@ Site architecture
 The site consists of:
 - Three separate landing pages (English, Swedish, Chinese)
 - A single page application (platform.html)
+- a PHP email sender for uploading data
 
 The single page application
 ----------------
 Powered by AngularJS that handles routing. It looks like multiple pages but the sub-pages are partials that are loaded and inserted when the #-hash part of the url changes.
-- js/webapp.js : contains the entire AngularJS application
+- js/webapp.js, js/services.js : contains the AngularJS application
 - partials/*.partial.html : templates for the sub-pages
 
 Editing data

@@ -1,3 +1,41 @@
+/**
+
+	Renders a cluster graph.
+
+	has a single method 'draw' with parameters:
+	- graphics
+		a canvas drawing context
+
+	- data: object with fields:
+		- entities: array of object with fields:
+			- x: int
+			- y: int
+			- type: core | accelerator | expander
+			- status: existing | supporting | potential
+			- id: int
+		- relations: array of objects with fields:
+			- start: <an entity>
+			- end: <an entity>
+			- type: participant | provider | catalyst | potential | alternative
+
+	- interactions: object with fields:
+		- hoveredEntity: entity that mouse hovers over,
+		- clickedEntity: entity to visualize as clicked,
+		- selectedEntity: entity to visualize as selected,
+		- centralEntityId: entity to visualize as central,
+		- selectedRelation: relation to visualize as selected
+
+	- scale : float
+
+	- offset : an {x, y} object
+
+	- tick : the frame count
+
+	- coords : object with functions:
+		- transform: transforms screen coordinates to cluster space coordinates
+		- untransform: transforms cluster space coordinates to screen coordinates 
+*/
+
 function Visualizer(){
 
 	var entityColor = {

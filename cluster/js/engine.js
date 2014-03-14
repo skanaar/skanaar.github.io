@@ -1,3 +1,8 @@
+/**
+	The Controller (as in MVC) for the cluster navigator.
+	Handles mouse interactions, selection and update and rendering cycles.
+*/
+
 var gFilter = { status: null, type: null }
 
 function Engine(canvasId, _nodes, _options){

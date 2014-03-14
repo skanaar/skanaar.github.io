@@ -1,3 +1,8 @@
+
+/**
+	Utility library for interacting and drawing to a HTML5 canvas element
+*/
+
 var skanaar = skanaar || {}
 skanaar.Canvas = function (canvas, callbacks){
 	var ctx = canvas.getContext('2d');

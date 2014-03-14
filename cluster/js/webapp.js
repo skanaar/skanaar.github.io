@@ -40,6 +40,11 @@ function attachDataUrlToLink(id, dataType, linkGenerator){
     }, false);
 }
 
+/**
+    Application definition.
+    - ngRoute is required for URL fragment routing
+    - ngSanitize is required for binding html code on the dashboard
+*/
 angular.module('cluster', ['ngRoute', 'ngSanitize']).config(function($routeProvider) {
     $routeProvider
     .when('/login', 
@@ -74,6 +79,9 @@ angular.module('cluster', ['ngRoute', 'ngSanitize']).config(function($routeProvi
     .otherwise({ redirectTo: '/login' })
 })
 .run(function ($rootScope, $location){
+    /**
+        enforce (very lightly) that the user is logged, otherwise redirect to login page
+    */
     $rootScope.$on('$locationChangeStart', function(scope, next, current){
         if (next.indexOf('#/login') === -1 && !localStorage['user'])
             $location.path('/login')
@@ -81,6 +89,9 @@ angular.module('cluster', ['ngRoute', 'ngSanitize']).config(function($routeProvi
 })
 
 angular.module('cluster').controller('NavbarCtrl', function ($scope, $location){
+    /**
+        isApp(.) is used for highlighting navbar links on the correct page
+    */
     $scope.isApp = function (name) {
         function startsWith(haystack, needle){
             return haystack.substr(0, needle.length) === needle;
@@ -93,6 +104,9 @@ angular.module('cluster').controller('NavbarCtrl', function ($scope, $location){
     }
 })
 
+/**
+    Search Cluster controller. Results are sorted by mobility/nutrition/building
+*/
 angular.module('cluster').controller('SearchCtrl', 
     function ($scope, $http, clusterLoader){
     $scope.clusters = []
@@ -120,6 +134,9 @@ angular.module('cluster').controller('SearchCtrl',
     }
 })
 
+/**
+    Search Solutions controller. If result-set is empty show all solutions instead
+*/
 angular.module('cluster').controller('SearchSolutionCtrl', 
     function ($scope, $http, clusterLoader){
     $scope.solutions = []
@@ -153,6 +170,15 @@ angular.module('cluster').controller('SearchSolutionCtrl',
     }
 })
 
+/**
+    Map. Requires two globally defined symbols in the map.partial.html :
+    - initializeGoogleMaps(): callback that creates the Google Map element
+    - googleMapsMarkers: array of {name, lat, lng} objects that are loaded from data/map.json
+
+    Since angular controllers are recreated on routed view changes, but the html page
+    (with the injected google-maps script) is persistens we must only initialize google maps
+    on the very first visit (checked by looking at googleMapsMarkers variable)
+*/
 angular.module('cluster').controller('MapCtrl', function ($scope, $http){
     if (googleMapsMarkers.length){
         initializeGoogleMaps()
@@ -172,6 +198,12 @@ angular.module('cluster').controller('MapCtrl', function ($scope, $http){
     }
 })
 
+/**
+    Cluster navigator
+    Loads and displays data/cluster-<X>.json when visiting url #/cluster/<X>
+    Communicates with Engine and Nodes via the global ClusterPlatform variable
+    This variable must be initialized by a inline script in cluster.partial.html
+*/
 angular.module('cluster').controller('ClusterCtrl',
   function ($scope, $http, $q, $routeParams, clusterLoader, uploader){
     ClusterPlatform.clusterScope = $scope
@@ -386,6 +418,11 @@ angular.module('cluster').controller('ClusterCtrl',
     }
 })
 
+/**
+    Login page
+    On attempted login loads the data/users/<username>.json file and checks if passwords match.
+    If they match the username is put in localStorage for other pages to track.
+*/
 angular.module('cluster').controller('LoginCtrl', 
     function ($scope, $http, $location, uploader){
     $scope.username = ''
@@ -422,6 +459,14 @@ angular.module('cluster').controller('LoginCtrl',
     }
 })
 
+/**
+    Dashboard
+    Gets current user from localStorage and displays data from
+    - data/goals
+    - data/updates
+    - data/users
+    - data/user-img
+*/
 angular.module('cluster').controller('DashboardCtrl', function ($scope, $http, uploader){
     $http.get('data/updates/'+localStorage.user+'.json').then(function (response){
         $scope.updates = response.data
@@ -449,12 +494,20 @@ angular.module('cluster').controller('DashboardCtrl', function ($scope, $http, u
     }
 })
 
+/**
+    Goals page
+    Initializes the Processing.js application found in the /indicator folder.  
+*/
 angular.module('cluster').controller('GoalsCtrl', function ($scope, $http){
     $http.get('indicator/indicator.pde').then(function (response){
         new Processing('indicator', response.data)
     })
 })
 
+/**
+    New Solution page
+    Serializes the form data and uploads it to the server
+*/
 angular.module('cluster').controller('RegisterSolutionCtrl',
 function ($scope, uploader){
     $scope.area = {
@@ -483,6 +536,10 @@ function ($scope, uploader){
     }
 })
 
+/**
+    Settings page
+    Serializes the form data and uploads it to the server
+*/
 angular.module('cluster').controller('SettingsCtrl', function ($scope, $http, uploader){
     $http.get('data/settings/' + localStorage.user + '.json').then(function (response){
         $scope.form = response.data
