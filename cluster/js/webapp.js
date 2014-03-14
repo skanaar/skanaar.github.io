@@ -482,10 +482,6 @@ function ($scope, uploader){
 })
 
 angular.module('cluster').controller('SettingsCtrl', function ($scope, $http, uploader){
-    $scope.qq_mobility = 0
-    $scope.qq_nutrition = 0
-    $scope.qq_building = 0
-
     $http.get('data/settings/' + localStorage.user + '.json').then(function (response){
         $scope.form = response.data
     })
