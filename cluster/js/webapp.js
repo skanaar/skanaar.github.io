@@ -147,6 +147,8 @@ angular.module('cluster').controller('SearchSolutionCtrl',
         _.each($scope.solutions, function (e){
             if (accept(e)) cachedArrayInstance.push(e)
         })
+        if (cachedArrayInstance.length === 0)
+            _.each($scope.solutions, function (e){ cachedArrayInstance.push(e) })
         return cachedArrayInstance
     }
 })
@@ -171,7 +173,7 @@ angular.module('cluster').controller('MapCtrl', function ($scope, $http){
 })
 
 angular.module('cluster').controller('ClusterCtrl',
-  function ($scope, $http, $q, $timeout, $routeParams, clusterLoader, uploader){
+  function ($scope, $http, $q, $routeParams, clusterLoader, uploader){
     ClusterPlatform.clusterScope = $scope
 
     $scope.funcs = clusterLoader.getSolutionFunctionTree()

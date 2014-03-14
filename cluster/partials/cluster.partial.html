@@ -19,6 +19,7 @@
 <div style="position: relative">
 	<canvas id="canvas" width="800" height="800"></canvas>
 	<div class="properties-hud">
+		<span style="visibility: hidden" data-nudge-angular-update>{{cluster.building}}</span>
 		<small>Building: {{cluster.building | number:0}}% &nbsp; &nbsp; &nbsp; 
 		Mobility: {{cluster.mobility | number:0}}% &nbsp; &nbsp; &nbsp; 
 		Nutrition: {{cluster.nutrition | number:0}}% &nbsp; &nbsp; &nbsp; 

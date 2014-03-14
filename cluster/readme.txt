@@ -9,7 +9,7 @@ The site consists of:
 
 The single page application
 ----------------
-Powered by AngularJS that handles routing. It looks like multiple pages but they sub-pages are partials that are loaded and inserted when the #-hash part of the url changes.
+Powered by AngularJS that handles routing. It looks like multiple pages but the sub-pages are partials that are loaded and inserted when the #-hash part of the url changes.
 - js/webapp.js : contains the entire AngularJS application
 - partials/*.partial.html : templates for the sub-pages
 
@@ -25,19 +25,26 @@ Its data is pulled from data/indicator.txt.
 Login page
 ----------------
 The login is just a faked login and the credentials checking is done on the client.
-The list of username/password pairs is data/users.json. Add entries to the JSON object to add users.
+The files /data/users/<username>.json contain the user passwords.
 
 Dashboard
 ----------------
-Most data here is loaded from data/goals.json, data/updates.json. Edit these files to manipulate the dashboard.
+Most data here is loaded from:
+
+- data/goals/<username>.json
+- data/updates/<username>.json
+- data/users/<username>.json
+- data/user-img/<username>.jpg.
+
+Add new files to these folders to add users.
 
 New Solution
 ----------------
-When you click save a JSON object with all entered information is created and downloaded or displayed.
+When you click save a JSON object with all entered information is created and emailed to the address contained in data/adminemail.txt.
 
 Clusters
 ----------------
-Every cluster is defined in a data/cluster-X.json where X is a number. To add more clusters the clusterCount field in data/clustersearch.json must be updated to match the number of data/cluster-X.json files.
+Every cluster is defined in a data/clusters/cluster-X.json where X is a number. To add more clusters the clusterCount field in data/clustersearch.json must be updated to match the number of data/cluster-X.json files.
 
 The Cluster display is a HTML5 canvas application not built on AngularJS. It is spread over six files:
 
@@ -50,7 +57,7 @@ The Cluster display is a HTML5 canvas application not built on AngularJS. It is 
 
 Network
 ----------------
-Uses the Cluster display but loads all clusters and glues together nodes that have the same name.
+Dummy image
 
 Map
 ----------------
