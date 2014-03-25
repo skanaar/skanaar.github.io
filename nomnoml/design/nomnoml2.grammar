@@ -1,0 +1,49 @@
+%lex
+%%
+
+[a-zA-Z0-9*.:]+[a-zA-Z0-9 *.:]*         return 'IDENT'
+[ ]*(\;|\n)+[ ]*      return 'SEP'
+"|"                   return '|'
+"[<"                  return '[<'
+"["                   return '['
+"]"                   return ']'
+([<:o+]?\-+[>:o+]?)   return 'ASSOC'
+">"                   return '>'
+<<EOF>>               return 'EOF'
+.                     return 'INVALID'
+
+/lex
+
+%start expressions
+
+%% /* ------------------------------------------------- */
+
+expressions
+    : compartment EOF      { return $1 };
+
+slot
+  : IDENT                  {$$ = $1;}
+  | class                  {$$ = $1;}
+  | relation               {$$ = $1;};
+
+compartment
+  : slot                   {$$ = [$1];}
+  | compartment SEP slot   {$$ = $1.concat($3);};
+
+parts
+  : compartment            {$$ = [$1];}
+  | parts '|' compartment  {$$ = [$1,$3];};
+
+relation
+  : class ASSOC class
+        {$$ = {r:$2, start:$1, end:$3, startLabel:'', endLabel:''};}
+  | class IDENT ASSOC class
+        {$$ = {r:$3, start:$1, end:$4, startLabel:$2, endLabel:''};}
+  | class ASSOC IDENT class
+        {$$ = {r:$2, start:$1, end:$4, startLabel:'', endLabel:$3};}
+  | class IDENT ASSOC IDENT class
+        {$$ = {r:$3, start:$1, end:$5, startLabel:$2, endLabel:$4};};
+
+class
+  : '[' parts ']'          {$$ = {t:'CLASS', parts:$2};}
+  | '[<'IDENT'>'parts']'   {$$ = {t:$2.toUpperCase(), parts:$4};};

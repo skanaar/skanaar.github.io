@@ -1,17 +1,17 @@
 %lex
 %%
 
-\n                 return 'NL'
-'|'                   return '|'
-";"                   return ';'
-"<"                   return '<'
-">"                   return '>'
-[\s]*[\[]              return '('
-[\]][\s]*              return ')'
-[\s]*[^\]]*[-][>][^\[]*[\s]*      return '-'
-[-0-9a-zA#+~*: ]+   return 'STRING'
-<<EOF>>               return 'EOF'
-.                     return 'INVALID'
+\n                            return 'NL'
+'|'                           return '|'
+";"                           return ';'
+"<"                           return '<'
+">"                           return '>'
+[\s]*[\[]                     return '('
+[\]][\s]*                     return ')'
+[\s]*[^\]]*[-][>][^\[]*[\s]*  return '-'
+[-0-9a-zA#+~*: ]+             return 'STRING'
+<<EOF>>                       return 'EOF'
+.                             return 'INVALID'
 
 /lex
 
