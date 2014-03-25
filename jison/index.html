@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+  	<title>Jison</title>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        background: #E5E9EB;
+        font-family: Helvetica, Calibri, sans-serif;
+      }
+      .wrap {
+        position: relative;
+        background: #E5E9EB;
+        min-height: 100%;
+      }
+      .left {
+        width: 50%;
+        min-height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+      }
+      .left textarea {
+        border: 0 solid gray;
+        outline: none;
+      }
+      .right {
+        width: 50%;
+        min-height: 100%;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        border: 0 solid gray;
+        border-left-width: 1px;
+      }
+      .right textarea {
+        min-height: 30%;
+        outline: none;
+        margin: 0;
+        border: 0 solid gray;
+        border-bottom-width: 1px;
+      }
+      #grammar {
+        /*outline: none;
+        position: absolute;
+        background: rgba(0,0,0,0);
+        border: 0;
+        */
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        font-family: Consolas, monospace;
+        color: #444;
+        padding: 0px;
+      }
+      #source {
+        width: 100%;
+      }
+      pre {
+        box-sizing: border-box;
+        white-space: normal;
+        padding: 5px;
+        margin: 0;
+        border: 0 solid grey;
+        border-width: 1px 0;
+        font-family: Consolas, monospace;
+        background: #fff;
+        overflow: auto;
+      }
+      .buttongroup {
+        box-sizing: border-box;
+        margin: 5px;
+      }
+      .good {
+        background: #dfd;
+      }
+      .bad {
+        background: #fdd;
+      }
+      .logo-container {
+        margin: 60px 0;
+        text-align: center
+      }
+      .logo-container img {
+        width: 146px;
+        height: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+
+      <div class="left">
+        <textarea id="grammar" spellcheck="false"></textarea>
+      </div>
+
+      <div class="right">
+        <textarea id="source" spellcheck="false"></textarea>
+
+        <div class="buttongroup">
+          <select id="examples">
+            <option value="" selected="selected" disabled>Load example</option>
+            <option value="calculator.jison">Calculator</option>
+            <option value="lambdacalc.jison">Lambda Calculus</option>
+          </select>
+          <button id="process_btn">Generate Parser</button>
+          <button id="download_btn" disabled>Download</button>
+        </div>
+        <pre id="gen_out"></pre>
+        <div id="nonterminals"></div>
+        <div id="productions"></div>
+        <div id="table"></div>
+        <div id="parsing" class="buttongroup">
+          <button id="parse_btn">Parse</button>
+        </div>
+        <pre id="out"></pre>
+
+        <div id="loading"></div>
+
+        <div class="logo-container">
+          <a href="http://zaach.github.io/jison">
+            <img src="/jison/jison_logo.png">
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <script src="http://zaach.github.io/jison/assets/js/webtoolkit.js"></script>
+    <script src="http://zaach.github.io/jison/assets/js/jquery.js"></script>
+    <script src="http://zaach.github.io/jison/assets/js/json2.js"></script>
+    <script src="http://zaach.github.io/jison/assets/js/es5.js"></script>
+    <script src="http://zaach.github.io/jison/assets/js/jison.js"></script>
+    <script src="http://zaach.github.io/jison/assets/js/try.js"></script>
+
+    <script>
+      var grammar = document.getElementById('grammar')
+      var source = document.getElementById('source')
+
+      if (localStorage['jison.grammar']){
+        grammar.value = localStorage['jison.grammar']
+      }
+      if (localStorage['jison.source']){
+        source.value = localStorage['jison.source']
+      }
+
+      function grammarChanged(){
+        localStorage['jison.grammar'] = grammar.value
+      }
+      function sourceChanged(){
+        localStorage['jison.source'] = source.value
+      }
+
+      grammar.addEventListener('input', grammarChanged)
+      source.addEventListener('input', sourceChanged)
+
+    </script>
+
+  </body>
+</html>
