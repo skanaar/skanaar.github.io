@@ -22,7 +22,7 @@ function parseTreeToSyntaxTree(entity){
 		_.each(parts, function (p){
 			if (typeof p === 'string')
 				lines.push(p)
-			if (p.start){ // is a relation
+			if (p.assoc){ // is a relation
 				// TODO: store in-relation defined classifiers
 				relations.push({
                     id: relationId++,
@@ -46,12 +46,11 @@ function parseTreeToSyntaxTree(entity){
 	function transformItem(entity){
 		if (typeof entity === 'string')
 			return entity
+		if (_.isArray(entity))
+			return transformCompartment(entity)
 		if (entity.parts){
-			var type = entity.type || 'class'
-			var name = entity.parts[0]
-			var parts = split(entity.parts, '|')
-			var compartments = _.map(parts, transformCompartment)
-			return nomnoml.Classifier(type, name, compartments)
+			var compartments = _.map(entity.parts, transformCompartment)
+			return nomnoml.Classifier(entity.type, entity.id, compartments)
 		}
 		if (entity.start){
 			return {

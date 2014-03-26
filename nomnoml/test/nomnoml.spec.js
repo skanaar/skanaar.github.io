@@ -1,62 +1,45 @@
 describe('nomnoml', function() {
     /* import */ var clas = nomnoml.Classifier, comp = nomnoml.Compartment
 
-    describe('jison parser', function() {
-        it('should handle single relation', function(){
-            var source = '[apa]->[banan]'
-            var ast = parser.parse(source)
-            expect(ast.type).toEqual('->')
-            expect(ast.start).toEqual({parts:['apa']})
-            expect(ast.end).toEqual({parts:['banan']})
-        })
+    function c(id){ return { type:'CLASS', parts:[[id]], id:id } }
+    function parse(source){ return parser.parse(source) }
 
+    describe('jison parser', function() {
         it('should handle single class', function(){
-            var source = '[apa]'
-            var ast = parser.parse(source)
-            expect(ast).toEqual({parts:['apa']})
+            var ast = parse('[apa]')
+            expect(ast).toEqual([c('apa')])
         })
 
         it('should handle single class with compartments', function(){
-            var source = '[apa|+field: int;#x:int|apply]'
-            var ast = parser.parse(source)
-            expect(ast).toEqual({parts:['apa','|','+field: int','#x:int','|','apply']})
+            var ast = parse('[apa|+field: int;#x:int|apply]')
+            expect(ast.length).toEqual(1)
+            expect(ast[0]).toEqual({
+                type: 'CLASS',
+                id: 'apa',
+                parts:[['apa'],['+field: int','#x:int'],['apply']]
+            })
+        })
+
+        it('should handle single relation', function(){
+            var ast = parse('[apa]->[banan]')
+            expect(ast.length).toEqual(1)
+            var assoc = ast[0]
+            expect(assoc.assoc).toEqual('->')
+            expect(assoc.start).toEqual(c('apa'))
+            expect(assoc.end).toEqual(c('banan'))
         })
     })
 
     describe('astBuilder', function() {
-        xit('should transform single relation to virtual classifier with single compartment', function(){
-            var jisonOutput = {
-                type: '->', 
-                start: { parts: ['apa'] }, 
-                end: { parts: ['banan'] }
-            }
-            var ast = astBuilder.apply(jisonOutput)
-            expect(ast).toEqual(clas('virtual', '[root]', [
-                comp([],[
-                        clas('class', 'apa', [comp(['apa'],[],[])]),
-                        clas('class', 'banan', [comp(['banan'],[],[])])
-                    ],[{
-                        id: 0,
-                        type: 'association',
-                        start: 'apa',
-                        end: 'banan'
-                    }]
-                )
-            ]))
-        })
-
         it('should handle single class', function(){
-            var ast = astBuilder.apply({parts:['apa']})
-            expect(ast).toEqual(clas('class', 'apa', [ comp(['apa'],[],[]) ]))
-        })
-
-        it('should choose longest definition of classes defined twice', function(){
-            var ast = astBuilder.apply({"parts":[{"parts":["apa"]},{"parts":["apa","|","fleas"]}]})
-            expect(ast).toEqual(clas('class', 'apa', [ comp(['apa'],[],[]), comp(['fleas'],[],[]) ]))
+            var ast = astBuilder.apply([c('apa')])
+            expect(ast).toEqual(comp([],[clas('CLASS', 'apa', [ comp(['apa'],[],[]) ])],[]))
         })
 
         it('should handle [apa|+field: int;#x:int|apply]', function(){
-            var ast = astBuilder.apply({parts:['apa','|','+field: int','#x:int','|','apply']})
+            var apa = c('apa')
+            apa.parts.concat([['+field: int', '#x:int'], ['apply']])
+            var ast = astBuilder.apply([apa])
             expect(ast).toEqual(clas('class', 'apa', [
                 comp(['apa'],[],[]),
                 comp(['+field: int', '#x:int'],[],[]),
@@ -64,23 +47,43 @@ describe('nomnoml', function() {
             ]))
         })
 
-        it('should handle nested classes [apa|+field: int;#x:int|[flea]]', function(){
+        it('should choose longest definition of classes defined twice', function(){
+            var first = c('apa')
+            var second = c('apa')
+            second.parts.concat([['+fleas']])
+            var ast = astBuilder.apply([first, second])
+            expect(ast).toEqual(clas('CLASS', 'apa', [ comp(['apa'],[],[]), comp(['fleas'],[],[]) ]))
+        })
+
+        it('should handle single association', function(){
+            var jisonOutput = [{
+                assoc: '->', 
+                start: c('apa'), 
+                end: c('banan'),
+                startLabel: '',
+                endLabel: ''
+            }]
+            var ast = astBuilder.apply(jisonOutput)
+            expect(ast).toEqual(comp([],[
+                clas('CLASS', 'apa', [['apa']]),
+                clas('CLASS', 'banan', [['banan']])
+            ],[
+                {
+                    assoc: '->', 
+                    start: 'apa', 
+                    end: 'banan',
+                    startLabel: '',
+                    endLabel: ''
+                }
+            ]))
+        })
+
+        xit('should handle nested classes [apa|+field: int;#x:int|[flea]]', function(){
             var ast = astBuilder.apply({parts:['apa','|','+field: int','#x:int','|',{parts:['flea']}]})
             expect(ast).toEqual(clas('class', 'apa', [
                 comp(['apa'],[],[]),
                 comp(['+field: int', '#x:int'],[],[]),
                 comp([],[clas('class', 'flea', [comp(['flea'],[],[])])],[])
-            ]))
-        })
-
-        it('should handle multiple nested classes [apa|[flea];[dandruff]]', function(){
-            var ast = astBuilder.apply({parts:['apa','|',{parts:['flea']},{parts:['dandruff']}]})
-            expect(ast).toEqual(clas('class', 'apa', [
-                comp(['apa'],[],[]),
-                comp([],[
-                    clas('class', 'flea', [comp(['flea'],[],[])]),
-                    clas('class', 'dandruff', [comp(['dandruff'],[],[])])
-                ],[])
             ]))
         })
     })
