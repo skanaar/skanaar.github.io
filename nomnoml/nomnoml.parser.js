@@ -1,10 +1,20 @@
 var nomnoml = nomnoml || {}
 
 nomnoml.parse = function (x){
-	return nomnoml.transformParseIntoSyntaxTree(nomnoml.intermediateParse(x))
+	var isDirective = function (line){ return line.trim()[0] === '#' }
+	var syntaxTypes = _.partition(x.split('\n'), isDirective)
+	var pureDiagramCode = syntaxTypes[1].join('\n').trim()
+	var directives = _.object(syntaxTypes[0].map(function (line){
+		return line.trim().substring(1).split(':')
+	}))
+	var ast = nomnoml.transformParseIntoSyntaxTree(nomnoml.intermediateParse(pureDiagramCode))
+	ast.directives = directives
+	return ast
 }
 
-nomnoml.intermediateParse = function (x){ return parser.parse(x) }
+nomnoml.intermediateParse = function (x){
+	return parser.parse(x)
+}
 
 nomnoml.transformParseIntoSyntaxTree = function (entity){
 

@@ -118,6 +118,9 @@ nomnoml.render = function (graphics, config, compartment){
 
 	g.ctx.save()
 	g.ctx.translate(0.5, 0.5)
+
+	g.ctx.font = config.fontSize+'pt '+config.font+', Helvetica, sans-serif'
 	renderCompartment(compartment)
+
 	g.ctx.restore()
 }

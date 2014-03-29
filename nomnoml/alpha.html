@@ -143,15 +143,26 @@ function setFont(ast, isBold){
 	g.ctx.font = style+ast.fontSize+'pt '+ast.font+', Helvetica, sans-serif'
 }
 
-function sourceChanged(){
+function getConfig(d){
+	return {
+		fontSize: (+d.fontSize) || 12,
+		font: d.font || 'Calibri',
+		margin: d.margin || 5,
+		spacing: (+d.spacing) || 30,
+		direction: {down: 'TB', right: 'LR'}[d.direction] || 'TB',
+		fillArrows: d.fillArrows === 'true'
+	}
+}
 
-    var config = { spacing: 55, margin: 5, fontSize: 9, fillArrows: undefined }
+function sourceChanged(){
+	var ast = nomnoml.parse(textarea.value)
+
+	var config = getConfig(ast.directives)
     var measurer = {
         textWidth: function (s){ return 100 },
-        textHeight: function (s){ return 10 }
+        textHeight: function (s){ return config.fontSize }
     }
 
-	var ast = nomnoml.parse(textarea.value)
 	setFont(ast, 'bold')
 	localStorage.setItem('nomnoml.alpha.lastSource', textarea.value)
 	g.ctx.clearRect(0, 0, w, h)
