@@ -15,7 +15,7 @@ nomnoml.Compartment = function (lines, nodes, relations){
     }
 }
 
-function layoutDiagram(measurer, config, ast){
+nomnoml.layout = function (measurer, config, ast){
 	function runDagre(input){
 		return dagre.layout()
 					.rankSep(config.spacing)
@@ -75,10 +75,6 @@ function layoutDiagram(measurer, config, ast){
 		clas.y = clas.height/2
 		_.each(clas.compartments, function(co){ co.width = clas.width })
 	}
-	layoutClassifier(ast)
+	layoutCompartment(ast)
 	return ast
-}
-
-var layouter = {
-	layout: layoutDiagram
 }

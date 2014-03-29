@@ -1,19 +1,14 @@
+var nomnoml = nomnoml || {}
 
+nomnoml.parse = function (x){
+	return nomnoml.transformParseIntoSyntaxTree(nomnoml.intermediateParse(x))
+}
 
-function parseTreeToSyntaxTree(entity){
+nomnoml.intermediateParse = function (x){ return parser.parse(x) }
+
+nomnoml.transformParseIntoSyntaxTree = function (entity){
 
 	var relationId = 0
-
-	function split(list, separator){
-		var output = [[]]
-		_.each(list, function (e){
-			if (e === separator)
-				output.push([])
-			else
-				_.last(output).push(e)
-		})
-		return output
-	}
 
 	function transformCompartment(parts){
 		var lines = []
@@ -27,7 +22,7 @@ function parseTreeToSyntaxTree(entity){
 				rawClassifiers.push(p.end)
 				relations.push({
                     id: relationId++,
-                    assoc: '->',
+                    assoc: p.assoc,
                     start: p.start.parts[0][0],
                     end: p.end.parts[0][0],
                     startLabel: p.startLabel,
@@ -59,8 +54,4 @@ function parseTreeToSyntaxTree(entity){
 	}
 
 	return transformItem(entity)
-}
-
-var astBuilder = {
-	apply: parseTreeToSyntaxTree
 }

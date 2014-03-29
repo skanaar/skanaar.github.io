@@ -1,8 +1,12 @@
 describe('nomnoml', function() {
     /* import */ var clas = nomnoml.Classifier, comp = nomnoml.Compartment
 
+    function compClas(type, name, parts){
+        return comp([],[clas(type, name, parts)],[])
+    }
+
     function c(id){ return { type:'CLASS', parts:[[id]], id:id } }
-    function parse(source){ return parser.parse(source) }
+    function parse(source){ return nomnoml.intermediateParse(source) }
 
     describe('jison parser', function() {
         it('should handle single class', function(){
@@ -32,7 +36,7 @@ describe('nomnoml', function() {
 
     describe('astBuilder', function() {
         it('should handle single class', function(){
-            var ast = astBuilder.apply([c('apa')])
+            var ast = nomnoml.transformParseIntoSyntaxTree([c('apa')])
             expect(ast).toEqual(comp([],[clas('CLASS', 'apa', [ comp(['apa'],[],[]) ])],[]))
         })
 
@@ -40,7 +44,7 @@ describe('nomnoml', function() {
             var apa = c('apa')
             apa.parts.push(['+field: int', '#x:int'])
             apa.parts.push(['apply'])
-            var ast = astBuilder.apply([apa])
+            var ast = nomnoml.transformParseIntoSyntaxTree([apa])
             expect(ast).toEqual(comp([],[clas('CLASS', 'apa', [
                 comp(['apa'],[],[]),
                 comp(['+field: int', '#x:int'],[],[]),
@@ -52,7 +56,7 @@ describe('nomnoml', function() {
             var first = c('apa')
             var second = c('apa')
             second.parts.push(['+fleas'])
-            var ast = astBuilder.apply([first, second])
+            var ast = nomnoml.transformParseIntoSyntaxTree([first, second])
             expect(ast).toEqual(comp([],[
                 clas('CLASS', 'apa', [ comp(['apa'],[],[]), comp(['+fleas'],[],[]) ])
             ],[]))
@@ -66,7 +70,7 @@ describe('nomnoml', function() {
                 startLabel: '',
                 endLabel: ''
             }]
-            var ast = astBuilder.apply(jisonOutput)
+            var ast = nomnoml.transformParseIntoSyntaxTree(jisonOutput)
 
             expect(ast.nodes.length).toEqual(2)
             expect(ast.relations.length).toEqual(1)
@@ -93,7 +97,7 @@ describe('nomnoml', function() {
         it('should handle nested classes [apa|[flea]]', function(){
             var input = c('apa')
             input.parts.push([c('flea')])
-            var ast = astBuilder.apply(input)
+            var ast = nomnoml.transformParseIntoSyntaxTree(input)
             expect(ast).toEqual(clas('CLASS', 'apa', [
                 comp(['apa'],[],[]),
                 comp([],[clas('CLASS', 'flea', [comp(['flea'],[],[])])],[])
@@ -110,47 +114,48 @@ describe('nomnoml', function() {
         }
 
         it('should handle [apa]', function(){
-            var root = clas('class', 'apa', [
+            var root = compClas('class', 'apa', [
                 comp(['apa'],[],[])
             ])
-            var layouted = layouter.layout(measurer, config, root)
+            var layouted = nomnoml.layout(measurer, config, root).nodes[0]
             expect(layouted.width).toEqual(2+100+2)
             expect(layouted.height).toEqual(2+10+2)
+            console.log(layouted)
             expect(layouted.x).toEqual(52)
             expect(layouted.y).toEqual(7)
         })
 
         it('should handle [apa; banana owner]', function(){
-            var root = clas('class', 'apa', [
+            var root = compClas('class', 'apa', [
                 comp(['apa','banana owner'],[],[])
             ])
-            var layouted = layouter.layout(measurer, config, root)
+            var layouted = nomnoml.layout(measurer, config, root).nodes[0]
             expect(layouted.width).toEqual(2+100+2)
             expect(layouted.height).toEqual(2+10+10+2)
         })
 
         it('should handle [apa; banana owner| fleaCount]', function(){
-            var root = clas('class', 'apa', [
+            var root = compClas('class', 'apa', [
                 comp(['apa','banana owner'],[],[]),
                 comp(['fleaCount'],[],[])
             ])
-            var layouted = layouter.layout(measurer, config, root)
+            var layouted = nomnoml.layout(measurer, config, root).nodes[0]
             expect(layouted.width).toEqual(2+100+2)
             expect(layouted.height).toEqual(2+10+10+2+2+10+2)
         })
 
         it('should handle [apa|]', function(){
-            var root = clas('class', 'apa', [
+            var root = compClas('class', 'apa', [
                 comp(['apa'],[],[]),
                 comp([],[],[])
             ])
-            var layouted = layouter.layout(measurer, config, root)
+            var layouted = nomnoml.layout(measurer, config, root).nodes[0]
             expect(layouted.width).toEqual(2+100+2)
             expect(layouted.height).toEqual(2+10+2+2)
         })
 
         it('should handle [apa|[flea]]', function(){
-            var root = clas('class', 'apa', [
+            var root = compClas('class', 'apa', [
                 comp(['apa'],[],[]),
                 comp([],[
                     clas('class', 'flea', [
@@ -158,26 +163,26 @@ describe('nomnoml', function() {
                     ])
                 ],[])
             ])
-            var layouted = layouter.layout(measurer, config, root)
+            var layouted = nomnoml.layout(measurer, config, root).nodes[0]
             expect(layouted.width).toEqual(2+2+100+2+2)
             expect(layouted.height).toEqual(2+10+2+2+2+10+2+2)
         })
 
         it('should handle [apa|[flea];[dandruff]] horizontally stacked inner classes', function(){
-            var root = clas('class', 'apa', [
+            var root = compClas('class', 'apa', [
                 comp(['apa'],[],[]),
                 comp([],[
                     clas('class', 'flea', [comp(['flea'],[],[])]),
                     clas('class', 'dandruff', [comp(['dandruff'],[],[])])
                 ],[])
             ])
-            var layouted = layouter.layout(measurer, config, root)
+            var layouted = nomnoml.layout(measurer, config, root).nodes[0]
             expect(layouted.width).toEqual(2+2+100+2+5+2+100+2+2)
             expect(layouted.height).toEqual(2+10+2+2+2+10+2+2)
         })
 
         it('should handle [apa|[flea]->[dandruff]] vertically stacked inner classes', function(){
-            var root = clas('class', 'apa', [
+            var root = compClas('class', 'apa', [
                 comp(['apa'],[],[]),
                 comp([],[
                         clas('class', 'flea', [comp(['flea'],[],[])]),
@@ -190,7 +195,7 @@ describe('nomnoml', function() {
                     }]
                 )
             ])
-            var layouted = layouter.layout(measurer, config, root)
+            var layouted = nomnoml.layout(measurer, config, root).nodes[0]
             expect(layouted.width).toEqual(2+2+100+2+2)
             expect(layouted.height).toEqual(2+10+2+2+2+10+2+5+2+10+2+2)
             var flea = layouted.compartments[1].nodes[0]
@@ -202,7 +207,7 @@ describe('nomnoml', function() {
         })
 
         it('should handle [apa|[flea]->[dandruff]] relation placement', function(){
-            var root = clas('class', 'apa', [
+            var root = compClas('class', 'apa', [
                 comp(['apa'],[],[]),
                 comp([],[
                         clas('class', 'flea', [comp(['flea'],[],[])]),
@@ -215,7 +220,7 @@ describe('nomnoml', function() {
                     }]
                 )
             ])
-            var layouted = layouter.layout(measurer, config, root)
+            var layouted = nomnoml.layout(measurer, config, root).nodes[0]
             var rel = layouted.compartments[1].relations[0]
             expect(rel.path).toEqual([{x:52,y:7}, {x:52,y:16.5}, {x:52,y:26}])
         })

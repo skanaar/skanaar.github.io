@@ -5,7 +5,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>nomnoml</title>
-<link href='//fonts.googleapis.com/css?family=Dosis:400' rel='stylesheet' type='text/css'>
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="../cluster/css/boilerplate.css">
 <link rel="stylesheet" href="../cluster/css/normalize.css">
@@ -94,9 +93,79 @@
 
 	<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
 	<script src="lib/underscore.js"></script>
+	<script src="lib/underscore.skanaar.js"></script>
 	<script src="lib/dagre.min.js"></script>
+	<script src="lib/parser2.jison.js"></script>
 	<script src="../cluster/js/canvas.js"></script>
 	<script src="../cluster/js/vector.js"></script>
-	<script src="nomnoml.js"></script>
+	<script src="nomnoml.parser.js"></script>
+	<script src="nomnoml.layouter.js"></script>
+	<script src="nomnoml.renderer.js"></script>
+	<script>
+(function (){
+	var link = document.getElementById('savebutton')
+	link.addEventListener('click', downloadImage, false);
+	function downloadImage(){
+		var url = canvas.toDataURL('image/png')
+		var downloadUrl = url.replace(/^data:image\/[^;]/, 'data:application/octet-stream')
+	    link.href = downloadUrl;
+	}
+}())
+
+function toggleHelp(){
+	document.getElementById('help').classList.toggle("visible");
+}
+
+function fillScreen(){
+	w = canvas.parentElement.offsetWidth
+	h = canvas.parentElement.offsetHeight
+	canvas.setAttribute('width', w*0.75)
+	canvas.setAttribute('height', h-200)
+	sourceChanged()
+}
+
+var w, h;
+var canvas = document.getElementById('canvas')
+var textarea = document.getElementById('textarea')
+var g = skanaar.Canvas(canvas, {})
+window.addEventListener('resize', _.throttle(fillScreen, 750, {leading: true}))
+textarea.addEventListener('input', _.debounce(sourceChanged, 300))
+textarea.value = localStorage.getItem('nomnoml.alpha.lastSource') || document.getElementById('defaultGraph').innerHTML
+fillScreen()
+
+function discardCurrentGraph(){
+	textarea.value = document.getElementById('defaultGraph').innerHTML
+	sourceChanged()
+}
+
+function setFont(ast, isBold){
+	var style = isBold === 'bold' ? 'bold ' : ''
+	g.ctx.font = style+ast.fontSize+'pt '+ast.font+', Helvetica, sans-serif'
+}
+
+function sourceChanged(){
+
+    var config = { spacing: 55, margin: 5, fontSize: 9, fillArrows: undefined }
+    var measurer = {
+        textWidth: function (s){ return 100 },
+        textHeight: function (s){ return 10 }
+    }
+
+	var ast = nomnoml.parse(textarea.value)
+	setFont(ast, 'bold')
+	localStorage.setItem('nomnoml.alpha.lastSource', textarea.value)
+	g.ctx.clearRect(0, 0, w, h)
+	nomnoml.render(g, config, nomnoml.layout(measurer, config, ast))
+}
+
+function measureNode(fontSize, node){
+	var lines = _.flatten([node.name, node.attrs, node.ops])
+	var widths = _.map(lines, function (n){ return g.ctx.measureText(n).width })
+	return {
+		width: _.max(widths) + 25,
+		height: (fontSize) *  (lines.length + (lines.length===1 ? 1.5 : 2.5))
+	}
+}
+	</script>
 </body>
 </html>
