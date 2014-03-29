@@ -23,12 +23,15 @@ function parseTreeToSyntaxTree(entity){
 			if (typeof p === 'string')
 				lines.push(p)
 			if (p.assoc){ // is a relation
-				// TODO: store in-relation defined classifiers
+				rawClassifiers.push(p.start)
+				rawClassifiers.push(p.end)
 				relations.push({
                     id: relationId++,
-                    type: 'association',
-                    start: p.start.parts[0],
-                    end: p.end.parts[0]
+                    assoc: '->',
+                    start: p.start.parts[0][0],
+                    end: p.end.parts[0][0],
+                    startLabel: p.startLabel,
+                    endLabel: p.endLabel
                 })
             }
 			if (p.parts){ // is a classifier
@@ -51,15 +54,6 @@ function parseTreeToSyntaxTree(entity){
 		if (entity.parts){
 			var compartments = _.map(entity.parts, transformCompartment)
 			return nomnoml.Classifier(entity.type, entity.id, compartments)
-		}
-		if (entity.start){
-			return {
-				type: 'virtual',
-				name: '[root]'
-			}
-			return parseTreeToSyntaxTree({
-				parts: [entity]
-			})
 		}
 		return undefined
 	}

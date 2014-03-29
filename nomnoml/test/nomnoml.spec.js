@@ -38,21 +38,24 @@ describe('nomnoml', function() {
 
         it('should handle [apa|+field: int;#x:int|apply]', function(){
             var apa = c('apa')
-            apa.parts.concat([['+field: int', '#x:int'], ['apply']])
+            apa.parts.push(['+field: int', '#x:int'])
+            apa.parts.push(['apply'])
             var ast = astBuilder.apply([apa])
-            expect(ast).toEqual(clas('class', 'apa', [
+            expect(ast).toEqual(comp([],[clas('CLASS', 'apa', [
                 comp(['apa'],[],[]),
                 comp(['+field: int', '#x:int'],[],[]),
                 comp(['apply'],[],[])
-            ]))
+            ])],[]))
         })
 
         it('should choose longest definition of classes defined twice', function(){
             var first = c('apa')
             var second = c('apa')
-            second.parts.concat([['+fleas']])
+            second.parts.push(['+fleas'])
             var ast = astBuilder.apply([first, second])
-            expect(ast).toEqual(clas('CLASS', 'apa', [ comp(['apa'],[],[]), comp(['fleas'],[],[]) ]))
+            expect(ast).toEqual(comp([],[
+                clas('CLASS', 'apa', [ comp(['apa'],[],[]), comp(['+fleas'],[],[]) ])
+            ],[]))
         })
 
         it('should handle single association', function(){
@@ -64,11 +67,20 @@ describe('nomnoml', function() {
                 endLabel: ''
             }]
             var ast = astBuilder.apply(jisonOutput)
+
+            expect(ast.nodes.length).toEqual(2)
+            expect(ast.relations.length).toEqual(1)
+            expect(ast.nodes).toEqual([
+                clas('CLASS', 'apa', [comp(['apa'],[],[])]),
+                clas('CLASS', 'banan', [comp(['banan'],[],[])])
+            ])
+
             expect(ast).toEqual(comp([],[
-                clas('CLASS', 'apa', [['apa']]),
-                clas('CLASS', 'banan', [['banan']])
+                clas('CLASS', 'apa', [comp(['apa'],[],[])]),
+                clas('CLASS', 'banan', [comp(['banan'],[],[])])
             ],[
                 {
+                    id: 0,
                     assoc: '->', 
                     start: 'apa', 
                     end: 'banan',
@@ -78,12 +90,13 @@ describe('nomnoml', function() {
             ]))
         })
 
-        xit('should handle nested classes [apa|+field: int;#x:int|[flea]]', function(){
-            var ast = astBuilder.apply({parts:['apa','|','+field: int','#x:int','|',{parts:['flea']}]})
-            expect(ast).toEqual(clas('class', 'apa', [
+        it('should handle nested classes [apa|[flea]]', function(){
+            var input = c('apa')
+            input.parts.push([c('flea')])
+            var ast = astBuilder.apply(input)
+            expect(ast).toEqual(clas('CLASS', 'apa', [
                 comp(['apa'],[],[]),
-                comp(['+field: int', '#x:int'],[],[]),
-                comp([],[clas('class', 'flea', [comp(['flea'],[],[])])],[])
+                comp([],[clas('CLASS', 'flea', [comp(['flea'],[],[])])],[])
             ]))
         })
     })
