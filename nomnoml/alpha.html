@@ -79,8 +79,8 @@
 
 	<script type="text/vnd.nomnoml.class" id="defaultGraph">#fontSize: 14
 
-[pirate]:[pirate | eyeCount: Int | raid();pillage()]
-[jollyness]:[jollyness | magnitude: Real |]
+[pirate | eyeCount: Int | raid();pillage()]
+[jollyness | magnitude: Real |]
 
 [marauder]<:-[pirate]
 [pirate]-[mischief]
@@ -147,7 +147,9 @@ function getConfig(d){
 	return {
 		fontSize: (+d.fontSize) || 12,
 		font: d.font || 'Calibri',
-		margin: d.margin || 5,
+		lineWidth: (+d.lineWidth) || 1,
+		margin: (+d.margin) || 5,
+		diagramMargin: (+d.diagramMargin) || 5,
 		spacing: (+d.spacing) || 30,
 		direction: {down: 'TB', right: 'LR'}[d.direction] || 'TB',
 		fillArrows: d.fillArrows === 'true'
@@ -159,23 +161,15 @@ function sourceChanged(){
 
 	var config = getConfig(ast.directives)
     var measurer = {
-        textWidth: function (s){ return 100 },
+        textWidth: function (s){ return g.ctx.measureText(s).width },
         textHeight: function (s){ return config.fontSize }
     }
 
 	setFont(ast, 'bold')
 	localStorage.setItem('nomnoml.alpha.lastSource', textarea.value)
 	g.ctx.clearRect(0, 0, w, h)
+	g.ctx.font = config.fontSize+'pt '+config.font+', Helvetica, sans-serif'
 	nomnoml.render(g, config, nomnoml.layout(measurer, config, ast))
-}
-
-function measureNode(fontSize, node){
-	var lines = _.flatten([node.name, node.attrs, node.ops])
-	var widths = _.map(lines, function (n){ return g.ctx.measureText(n).width })
-	return {
-		width: _.max(widths) + 25,
-		height: (fontSize) *  (lines.length + (lines.length===1 ? 1.5 : 2.5))
-	}
 }
 	</script>
 </body>

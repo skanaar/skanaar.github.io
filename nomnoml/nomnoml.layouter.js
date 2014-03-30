@@ -63,9 +63,11 @@ nomnoml.layout = function (measurer, config, ast){
 			rels[e].path = _.map(_.flatten([start, value.points, end]), toPoint)
 		})
 		var graph = dLayout.graph()
+		var graphHeight = graph.height ? graph.height + 2*config.diagramMargin : 0
+		var graphWidth = graph.width ? graph.width + 2*config.diagramMargin : 0
 
-		c.width = Math.max(textSize.width, graph.width) + 2 * config.margin
-		c.height = textSize.height + graph.height + config.margin
+		c.width = Math.max(textSize.width, graphWidth) + 2*config.margin
+		c.height = textSize.height + graphHeight + config.margin
 	}
 	function layoutClassifier(clas){
 		_.each(clas.compartments, layoutCompartment)

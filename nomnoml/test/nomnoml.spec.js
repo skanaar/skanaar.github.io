@@ -107,7 +107,7 @@ describe('nomnoml', function() {
 
     describe('layout engine', function() {
         var textWidth = 100
-        var config = { spacing: 5, margin: 2 }
+        var config = { spacing: 5, margin: 2, diagramMargin: 0 }
         var measurer = {
             textWidth: function (s){ return textWidth },
             textHeight: function (s){ return 10 }
