@@ -47,21 +47,21 @@
 			[Chicken]&lt;-&gt;[Egg]
 
 			<label>Car has some attributes</label>
-			[Car]:[Car|maxSpeed: Float;color: Color|]
+			[Car|maxSpeed: Float;color: Color]
 
 			<label>Engine has an operation</label>
-			[Engine]:[Engine||start()]
+			[Engine|color: Color|start()]
 
 			<label>Set font</label>
 			#font: Times
 
 			<label>Layout the diagram really tight</label>
 			#fontSize: 8<br>
-			#spacing: 11
-
-			<label>Set left-to-right layout ('down' is default)</label>
-			#direction: right
+			#spacing: 12<br>
+			#margin: 3
 		</div>
+
+		<div id="linemarker" style="background: rgba(255,0,0,0.25); position: absolute; left: 0; width: 30px; height: 16px"></div>
 
 		<div class="tools">
 			<span>nomnoml &nbsp;&nbsp;</span>
@@ -77,17 +77,18 @@
 		</div>
 	</div>
 
-	<script type="text/vnd.nomnoml.class" id="defaultGraph">#fontSize: 14
+	<script type="text/vnd.nomnoml.class" id="defaultGraph">[jollyness|magnitude: Real]
+[pirate|eyeCount: Int|raid();pillage()|
+  [beard]--[parrot]
+  [beard]-:>[foul mouth]
+]
 
-[pirate | eyeCount: Int | raid();pillage()]
-[jollyness | magnitude: Real |]
-
-[marauder]<:-[pirate]
-[pirate]-[mischief]
+[pirate]-:>[marauder]
+[pirate]-0..7[mischief]
 [jollyness]->[pirate]
 [jollyness]->[rum]
 [jollyness]->[singing]
-[pirate]->[rum|tastiness: Int|swig()]
+[pirate]->*[rum|tastiness: Int|swig()]
 [pirate]->[singing]
 [singing]<->[rum]</script>
 
@@ -150,26 +151,34 @@ function getConfig(d){
 		lineWidth: (+d.lineWidth) || 1,
 		margin: (+d.margin) || 5,
 		diagramMargin: (+d.diagramMargin) || 5,
-		spacing: (+d.spacing) || 30,
+		spacing: (+d.spacing) || 40,
 		direction: {down: 'TB', right: 'LR'}[d.direction] || 'TB',
 		fillArrows: d.fillArrows === 'true'
 	}
 }
 
 function sourceChanged(){
-	var ast = nomnoml.parse(textarea.value)
+	try {
+		var ast = nomnoml.parse(textarea.value)
+		var config = getConfig(ast.directives)
+	    var measurer = {
+	        textWidth: function (s){ return g.ctx.measureText(s).width },
+	        textHeight: function (s){ return config.fontSize }
+	    }
 
-	var config = getConfig(ast.directives)
-    var measurer = {
-        textWidth: function (s){ return g.ctx.measureText(s).width },
-        textHeight: function (s){ return config.fontSize }
-    }
-
-	setFont(ast, 'bold')
-	localStorage.setItem('nomnoml.alpha.lastSource', textarea.value)
-	g.ctx.clearRect(0, 0, w, h)
-	g.ctx.font = config.fontSize+'pt '+config.font+', Helvetica, sans-serif'
-	nomnoml.render(g, config, nomnoml.layout(measurer, config, ast))
+		setFont(ast, 'bold')
+		localStorage.setItem('nomnoml.alpha.lastSource', textarea.value)
+		g.ctx.clearRect(0, 0, w, h)
+		g.ctx.font = config.fontSize+'pt '+config.font+', Helvetica, sans-serif'
+		nomnoml.render(g, config, nomnoml.layout(measurer, config, ast))
+		$('#linemarker').css('top', -30)
+	} catch (e){
+		var matches = e.message.match('line ([0-9]*)')
+		if (matches)
+			 $('#linemarker').css('top', 14 + 19*matches[1])
+		else
+			throw e
+	}
 }
 	</script>
 </body>

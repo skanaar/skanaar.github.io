@@ -19,7 +19,7 @@ nomnoml.render = function (graphics, config, compartment){
 	function renderNode(node, level){
 		var x = Math.round(node.x-node.width/2)
 		var y = Math.round(node.y-node.height/2)
-		var shade = 250 - 20*level
+		var shade = 230 - 20*level
 		g.ctx.fillStyle = 'rgb(' + [shade,shade,shade].join() + ')'
 		g.ctx.fillRect(x, y, node.width, node.height)
 		g.ctx.strokeRect(x, y, node.width, node.height)
@@ -48,6 +48,7 @@ nomnoml.render = function (graphics, config, compartment){
 		for(var i=1; i<r.path.length-1; i++) path.push(r.path[i])
 		path.push(end)
 
+		g.ctx.fillStyle = '#444'
 		g.ctx.fillText(r.startLabel, start.x+config.margin, start.y+config.margin+config.fontSize)
 		g.ctx.fillText(r.endLabel, end.x+config.margin, end.y-config.margin)
 
