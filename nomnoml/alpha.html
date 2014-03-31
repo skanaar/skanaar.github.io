@@ -25,8 +25,8 @@
 			<label>Car has an Engine</label>
 			[Car]-&gt;[Engine]
 			
-			<label>Car owns some blemished</label>
-			[Car]+-&gt;[RustPatches]
+			<label>Car owns an arbitrary number of blemished</label>
+			[Car]+-&gt;0..*[RustPatches]
 
 			<label>Car knows its Manufacturer</label>
 			[Car]o-&gt;[Manufacturer]
@@ -47,10 +47,25 @@
 			[Chicken]&lt;-&gt;[Egg]
 
 			<label>Car has some attributes</label>
-			[Car|maxSpeed: Float;color: Color]
+			[Car|maxSpeed: Float;color: Color|]
 
 			<label>Engine has an operation</label>
-			[Engine|color: Color|start()]
+			[Engine||start()]
+
+			<label>Engine has internal parts</label>
+			[Engine|<br>
+			&nbsp;&nbsp;[Cylinder]->1[Piston]<br>
+			&nbsp;&nbsp;[Cylinder]->2[Valve]<br>
+			]<br>
+
+			<label>Engine is an abstract class</label>
+			[&lt;abstract&gt;Engine||start()]
+
+			<label>Car is in the package 'vehicles'</label>
+			[&lt;package&gt;vehicles| [Car] ]
+
+			<label>Car has an attached note</label>
+			[Car]--[&lt;note&gt;only driven;twice a month]
 
 			<label>Set font</label>
 			#font: Times
@@ -139,8 +154,9 @@ function discardCurrentGraph(){
 	sourceChanged()
 }
 
-function setFont(ast, isBold){
+function setFont(ast, isBold, isItalic){
 	var style = isBold === 'bold' ? 'bold ' : ''
+	if (isItalic) style = 'italic ' + style
 	g.ctx.font = style+ast.fontSize+'pt '+ast.font+', Helvetica, sans-serif'
 }
 
@@ -149,7 +165,7 @@ function getConfig(d){
 		fontSize: (+d.fontSize) || 12,
 		font: d.font || 'Calibri',
 		lineWidth: (+d.lineWidth) || 1,
-		margin: (+d.margin) || 5,
+		margin: (+d.margin) || 8,
 		diagramMargin: (+d.diagramMargin) || 5,
 		spacing: (+d.spacing) || 40,
 		direction: {down: 'TB', right: 'LR'}[d.direction] || 'TB',

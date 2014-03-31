@@ -1,12 +1,10 @@
 %lex
 %%
 
-[^\]\[|;\n]+               return 'IDENT'
 \s*\|\s*                   return '|'
-"[<"                       return '[<'
+[^\]\[|;\n]+               return 'IDENT'
 "["                        return '['
 \s*\]                      return ']'
-">"                        return '>'
 [ ]*(\;|\n)+[ ]*           return 'SEP'
 <<EOF>>                    return 'EOF'
 .                          return 'INVALID'
@@ -21,7 +19,7 @@ root
     : compartment EOF      { return $1 };
 
 slot
-  : IDENT                  {$$ = $1;}
+  : IDENT                  {$$ = $1.trim();}
   | class                  {$$ = $1;}
   | association            {$$ = $1;};
 
@@ -31,15 +29,24 @@ compartment
 
 parts
   : compartment            {$$ = [$1];}
-  | parts '|' compartment  {$$ = $1.concat([$3]);};
+  | parts '|' compartment  {$$ = $1.concat([$3]);}
+  | parts '|'              {$$ = $1.concat([[]]);};
 
 association
-  : class IDENT class
-        {
+  : class IDENT class      {
            var t = $2.trim().match('^([^<:o+-]*)([<:o+]*-+[:o+>]*)(.*)$');
            $$ = {assoc:t[2], start:$1, end:$3, startLabel:t[1].trim(), endLabel:t[3].trim()};
-        };
+  };
 
 class
-  : '[' parts ']'          {$$ = {type:'CLASS', id:$2[0][0], parts:$2};}
-  | '[<'IDENT'>'parts']'   {$$ = {type:$2.toUpperCase(), id:$4[0][0], parts:$4};};
+  : '[' parts ']'          {
+           var type = 'CLASS';
+           var id = $2[0][0];
+           var typeMatch = $2[0][0].match('<([a-z]*)>(.*)');
+           if (typeMatch) {
+               type = typeMatch[1].toUpperCase();
+               id = typeMatch[2].trim();
+           }
+           $2[0][0] = id;
+           $$ = {type:type, id:id, parts:$2};
+  };

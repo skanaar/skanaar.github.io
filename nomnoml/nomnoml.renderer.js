@@ -2,13 +2,16 @@ var nomnoml = nomnoml || {}
 
 nomnoml.render = function (graphics, config, compartment){
 
+	var margin = config.margin
+
 	function renderCompartment(compartment, centerText, level){
 		g.ctx.save()
-		g.ctx.translate(config.margin, config.margin)
+		g.ctx.translate(margin, margin)
 		g.ctx.fillStyle = '#333'
 		_.each(compartment.lines, function (text, i){
 			g.ctx.textAlign = centerText ? 'center' : 'left'
-			g.ctx.fillText(text, centerText ? compartment.width/2 - config.margin : 0, (1+i)*config.fontSize)
+			var x = centerText ? compartment.width/2 - margin : 0
+			g.ctx.fillText(text, x, (1+i)*config.fontSize)
 		})
 		g.ctx.translate(config.diagramMargin, config.diagramMargin)
 		_.each(compartment.relations, function (r){ renderRelation(r, compartment) })
@@ -16,22 +19,70 @@ nomnoml.render = function (graphics, config, compartment){
 		g.ctx.restore()
 	}
 
+	function textStyle(node, line){
+		if (line === 0){
+			switch (node.type){
+				case 'CLASS': return { bold: true, center: true }
+				case 'FRAME': return { bold: false, center: false, frameHeader: true }
+				case 'ABSTRACT': return { italic: true, bold: true, center: true}
+			}
+		}
+		return {}
+	}
+
 	function renderNode(node, level){
 		var x = Math.round(node.x-node.width/2)
 		var y = Math.round(node.y-node.height/2)
 		var shade = 230 - 20*level
 		g.ctx.fillStyle = 'rgb(' + [shade,shade,shade].join() + ')'
-		g.ctx.fillRect(x, y, node.width, node.height)
-		g.ctx.strokeRect(x, y, node.width, node.height)
+		if (node.type === 'NOTE'){
+			g.path([
+				{x: x, y: y},
+				{x: x+node.width-margin, y: y},
+				{x: x+node.width, y: y+margin},
+				{x: x+node.width, y: y+node.height},
+				{x: x, y: y+node.height},
+				{x: x, y: y}
+			]).fill().stroke()
+			g.path([
+				{x: x+node.width-margin, y: y},
+				{x: x+node.width-margin, y: y+margin},
+				{x: x+node.width, y: y+margin}
+			]).stroke()
+		} else if (node.type === 'PACKAGE') {
+			var headHeight = node.compartments[0].height
+			g.ctx.fillRect(x, y+headHeight, node.width, node.height-headHeight)
+			g.ctx.strokeRect(x, y+headHeight, node.width, node.height-headHeight)
+			var w = g.ctx.measureText(node.id).width + 2*margin
+			g.path([
+				{x:x, y:y+headHeight},
+				{x:x, y:y},
+				{x:x+w, y:y},
+				{x:x+w, y:y+headHeight}
+		    ]).fill().stroke()
+		} else {
+			g.ctx.fillRect(x, y, node.width, node.height)
+			g.ctx.strokeRect(x, y, node.width, node.height)
+		}
 		var yDivider = y
 		_.each(node.compartments, function (part, i){
 			g.ctx.save()
 			g.ctx.translate(x, yDivider)
-			setFont(config, i ? 'normal' : 'bold')
-			renderCompartment(part, i ? false : 'centerText', level+1)
+			var s = textStyle(node, i)
+			setFont(config, s.bold ? 'bold' : 'normal', s.italic)
+			renderCompartment(part, s.center, level+1)
 			g.ctx.restore()
 			yDivider += part.height
-			g.path([{x:x, y:yDivider}, {x:x+node.width, y:yDivider}]).stroke()
+			if (node.type === 'FRAME' && i === 0){
+				var w = g.ctx.measureText(node.id).width + part.height/2 + margin
+				g.path([
+					{x:x, y:yDivider},
+					{x:x+w-part.height/2, y:yDivider},
+					{x:x+w, y:yDivider-part.height/2},
+					{x:x+w, y:yDivider-part.height}
+			    ]).stroke()
+			} else
+				g.path([{x:x, y:yDivider}, {x:x+node.width, y:yDivider}]).stroke()
 		})
 	}
 
@@ -41,16 +92,16 @@ nomnoml.render = function (graphics, config, compartment){
 		var startNode = _.findWhere(compartment.nodes, {name:r.start})
 		var endNode = _.findWhere(compartment.nodes, {name:r.end})
 
-		var start = rectIntersection(r.path[1], _.first(r.path), startNode.width+2, startNode.height+2)
-		var end = rectIntersection(r.path[r.path.length-2], _.last(r.path), endNode.width+2, endNode.height+2)
+		var start = rectIntersection(r.path[1], _.first(r.path), startNode)
+		var end = rectIntersection(r.path[r.path.length-2], _.last(r.path), endNode)
 
 		var path = [start]
 		for(var i=1; i<r.path.length-1; i++) path.push(r.path[i])
 		path.push(end)
 
 		g.ctx.fillStyle = '#444'
-		g.ctx.fillText(r.startLabel, start.x+config.margin, start.y+config.margin+config.fontSize)
-		g.ctx.fillText(r.endLabel, end.x+config.margin, end.y-config.margin)
+		g.ctx.fillText(r.startLabel, start.x+margin, start.y+margin+config.fontSize)
+		g.ctx.fillText(r.endLabel, end.x+margin, end.y-margin)
 
 		if (r.assoc == '-'){
 			g.path(path).stroke()
@@ -104,11 +155,11 @@ nomnoml.render = function (graphics, config, compartment){
 		}
 	}
 
-	function rectIntersection(p1, p2, w, h){
+	function rectIntersection(p1, p2, rect){
 		var v = diff(p1, p2)
 		for(var t=1; t>=0; t-= 0.01){
 			var p = mult(v, t)
-			if(Math.abs(p.x) < w/2 && Math.abs(p.y) < h/2)
+			if(Math.abs(p.x) <= rect.width/2 && Math.abs(p.y) <= rect.height/2)
 				return add(p2, p)
 		}
 		return p1
@@ -118,10 +169,11 @@ nomnoml.render = function (graphics, config, compartment){
 		var size = config.spacing / 30
 		var v = diff(path[path.length-2], _.last(path))
 		var nv = normalize(v)
-		var arrowBase = add(arrowPoint, mult(nv, (diamond ? 7 : 10)*size))
+		function getArrowBase(s){ return add(arrowPoint, mult(nv, s*size)) }
+		var arrowBase = getArrowBase(diamond ? 7 : 10)
 		var t = rot(nv)
-		var arrowButt = (diamond) ? add(arrowPoint, mult(nv, 14*size))
-				: (isOpen && !config.fillArrows) ? add(arrowPoint, mult(nv, 5*size)) : arrowBase
+		var arrowButt = (diamond) ? getArrowBase(14)
+				: (isOpen && !config.fillArrows) ? getArrowBase(5) : arrowBase
 		var arrow = [
 			add(arrowBase, mult(t, 4*size)),
 			arrowButt,
@@ -134,8 +186,9 @@ nomnoml.render = function (graphics, config, compartment){
 	}
 
 	g.ctx.save()
-	g.ctx.translate(0.5, 0.5)
 	g.ctx.lineWidth = config.lineWidth
+	if (config.lineWidth % 2 > 0)
+		g.ctx.translate(0.5, 0.5)
 	g.ctx.lineJoin = 'round'
 	renderCompartment(compartment, false, 0)
 	g.ctx.restore()
