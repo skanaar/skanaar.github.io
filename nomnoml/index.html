@@ -5,15 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>nomnoml</title>
-<link href='//fonts.googleapis.com/css?family=Dosis:400' rel='stylesheet' type='text/css'>
 <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="../cluster/css/boilerplate.css">
 <link rel="stylesheet" href="../cluster/css/normalize.css">
 <link rel="stylesheet" href="nomnoml.css">
 <link rel="shortcut icon" href="favicon.png">
-<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
-<link rel="apple-touch-icon" sizes="72x72" href="img/apple-touch-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="114x114" href="img/apple-touch-icon-114x114.png">
 </head>
 <body>
 	<div class="wrap">
@@ -26,8 +22,8 @@
 			<label>Car has an Engine</label>
 			[Car]-&gt;[Engine]
 			
-			<label>Car owns some blemished</label>
-			[Car]+-&gt;[RustPatches]
+			<label>Car owns an arbitrary number of blemished</label>
+			[Car]+-&gt;0..*[RustPatches]
 
 			<label>Car knows its Manufacturer</label>
 			[Car]o-&gt;[Manufacturer]
@@ -48,21 +44,36 @@
 			[Chicken]&lt;-&gt;[Egg]
 
 			<label>Car has some attributes</label>
-			[Car]:[Car|maxSpeed: Float;color: Color|]
+			[Car|maxSpeed: Float;color: Color|]
 
 			<label>Engine has an operation</label>
-			[Engine]:[Engine||start()]
+			[Engine||start()]
+
+			<label>Engine has internal parts</label>
+			[Engine|<br>
+			&nbsp;&nbsp;[Cylinder]->1[Piston]<br>
+			&nbsp;&nbsp;[Cylinder]->2[Valve]<br>
+			]<br>
+
+			<label>Engine is an abstract class</label>
+			[&lt;abstract&gt;Engine||start()]
+
+			<label>Car is in the package 'vehicles'</label>
+			[&lt;package&gt;vehicles| [Car] ]
+
+			<label>Car has an attached note</label>
+			[Car]--[&lt;note&gt;only driven;twice a month]
 
 			<label>Set font</label>
 			#font: Times
 
 			<label>Layout the diagram really tight</label>
 			#fontSize: 8<br>
-			#spacing: 11
-
-			<label>Set left-to-right layout ('down' is default)</label>
-			#direction: right
+			#spacing: 12<br>
+			#margin: 3
 		</div>
+
+		<div id="linemarker" style="background: rgba(255,0,0,0.25); position: absolute; left: 0; width: 30px; height: 16px"></div>
 
 		<div class="tools">
 			<span>nomnoml &nbsp;&nbsp;</span>
@@ -78,25 +89,110 @@
 		</div>
 	</div>
 
-	<script type="text/vnd.nomnoml.class" id="defaultGraph">#fontSize: 14
+	<script type="text/vnd.nomnoml.class" id="defaultGraph">[jollyness|magnitude: Real]
+[pirate|eyeCount: Int|raid();pillage()|
+  [beard]--[parrot]
+  [beard]-:>[foul mouth]
+]
 
-[pirate]:[pirate | eyeCount: Int | raid();pillage()]
-[jollyness]:[jollyness | magnitude: Real |]
-
-[marauder]<:-[pirate]
-[pirate]-[mischief]
+[pirate]-:>[marauder]
+[pirate]-0..7[mischief]
 [jollyness]->[pirate]
 [jollyness]->[rum]
 [jollyness]->[singing]
-[pirate]->[rum|tastiness: Int|swig()]
+[pirate]->*[rum|tastiness: Int|swig()]
 [pirate]->[singing]
 [singing]<->[rum]</script>
 
 	<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
 	<script src="lib/underscore.js"></script>
+	<script src="lib/underscore.skanaar.js"></script>
 	<script src="lib/dagre.min.js"></script>
-	<script src="../cluster/js/canvas.js"></script>
-	<script src="../cluster/js/vector.js"></script>
-	<script src="nomnoml.js"></script>
+	<script src="lib/skanaar.canvas.js"></script>
+	<script src="lib/vector.js"></script>
+	<script src="nomnoml.jison.js"></script>
+	<script src="nomnoml.parser.js"></script>
+	<script src="nomnoml.layouter.js"></script>
+	<script src="nomnoml.renderer.js"></script>
+	<script>
+(function (){
+	var link = document.getElementById('savebutton')
+	link.addEventListener('click', downloadImage, false);
+	function downloadImage(){
+		var url = canvas.toDataURL('image/png')
+		var downloadUrl = url.replace(/^data:image\/[^;]/, 'data:application/octet-stream')
+	    link.href = downloadUrl;
+	}
+}())
+
+function toggleHelp(){
+	document.getElementById('help').classList.toggle("visible");
+}
+
+function fillScreen(){
+	w = canvas.parentElement.offsetWidth
+	h = canvas.parentElement.offsetHeight
+	canvas.setAttribute('width', w*0.75)
+	canvas.setAttribute('height', h-200)
+	sourceChanged()
+}
+
+var w, h;
+var canvas = document.getElementById('canvas')
+var textarea = document.getElementById('textarea')
+var g = skanaar.Canvas(canvas, {})
+window.addEventListener('resize', _.throttle(fillScreen, 750, {leading: true}))
+textarea.addEventListener('input', _.debounce(sourceChanged, 300))
+textarea.value = localStorage.getItem('nomnoml.alpha.lastSource') || document.getElementById('defaultGraph').innerHTML
+fillScreen()
+
+function discardCurrentGraph(){
+	textarea.value = document.getElementById('defaultGraph').innerHTML
+	sourceChanged()
+}
+
+function setFont(ast, isBold, isItalic){
+	var style = isBold === 'bold' ? 'bold ' : ''
+	if (isItalic) style = 'italic ' + style
+	g.ctx.font = style+ast.fontSize+'pt '+ast.font+', Helvetica, sans-serif'
+}
+
+function getConfig(d){
+	return {
+		fontSize: (+d.fontSize) || 12,
+		font: d.font || 'Calibri',
+		lineWidth: (+d.lineWidth) || 1,
+		margin: (+d.margin) || 8,
+		diagramMargin: (+d.diagramMargin) || 5,
+		spacing: (+d.spacing) || 40,
+		direction: {down: 'TB', right: 'LR'}[d.direction] || 'TB',
+		fillArrows: d.fillArrows === 'true'
+	}
+}
+
+function sourceChanged(){
+	try {
+		var ast = nomnoml.parse(textarea.value)
+		var config = getConfig(ast.directives)
+	    var measurer = {
+	        textWidth: function (s){ return g.ctx.measureText(s).width },
+	        textHeight: function (s){ return config.fontSize }
+	    }
+
+		setFont(ast, 'bold')
+		localStorage.setItem('nomnoml.alpha.lastSource', textarea.value)
+		g.ctx.clearRect(0, 0, w, h)
+		g.ctx.font = config.fontSize+'pt '+config.font+', Helvetica, sans-serif'
+		nomnoml.render(g, config, nomnoml.layout(measurer, config, ast))
+		$('#linemarker').css('top', -30)
+	} catch (e){
+		var matches = e.message.match('line ([0-9]*)')
+		if (matches)
+			 $('#linemarker').css('top', 14 + 19*matches[1])
+		else
+			throw e
+	}
+}
+	</script>
 </body>
 </html>

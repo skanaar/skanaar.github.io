@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>nomnoml</title>
+<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+<link rel="stylesheet" href="../cluster/css/boilerplate.css">
+<link rel="stylesheet" href="../cluster/css/normalize.css">
+<link rel="stylesheet" href="nomnoml.css">
+<link rel="shortcut icon" href="favicon.png">
+</head>
+<body>
+	<div class="wrap">
+
+		<canvas id="canvas" width="800" height="800"></canvas>
+		<textarea id="textarea" spellcheck="false">[apa]->[banan]
+[apa]->[kokos]</textarea>
+
+		<div id="help">
+			<label>Car has an Engine</label>
+			[Car]-&gt;[Engine]
+			
+			<label>Car owns some blemished</label>
+			[Car]+-&gt;[RustPatches]
+
+			<label>Car knows its Manufacturer</label>
+			[Car]o-&gt;[Manufacturer]
+
+			<label>Car depends on Fuel</label>
+			[Car]--&gt;[Fuel]
+
+			<label>Pickup inherits from Car</label>
+			[Pickup]-:&gt;[Car]
+
+			<label>Car implements interface IVehicle</label>
+			[Car]--:&gt;[IVehicle]
+
+			<label>Paul and Ron have an association</label>
+			[Paul]-[Ron]
+
+			<label>They both depend on each other</label>
+			[Chicken]&lt;-&gt;[Egg]
+
+			<label>Car has some attributes</label>
+			[Car]:[Car|maxSpeed: Float;color: Color|]
+
+			<label>Engine has an operation</label>
+			[Engine]:[Engine||start()]
+
+			<label>Set font</label>
+			#font: Times
+
+			<label>Layout the diagram really tight</label>
+			#fontSize: 8<br>
+			#spacing: 11
+
+			<label>Set left-to-right layout ('down' is default)</label>
+			#direction: right
+		</div>
+
+		<div class="tools">
+			<span>nomnoml &nbsp;&nbsp;</span>
+			<a href="javascript:discardCurrentGraph()">
+				<i class="fa fa-fw fa-trash-o fa-lg"></i>
+			</a>
+			<a id="savebutton" href="javascript:void(0)" download="uml.png">
+				<i class="fa fa-fw fa-camera fa-lg"></i>
+			</a>
+			<a href="javascript:void(0)" onclick="toggleHelp()">
+				<i class="fa fa-fw fa-book fa-lg"></i>
+			</a>
+		</div>
+	</div>
+
+	<script type="text/vnd.nomnoml.class" id="defaultGraph">#fontSize: 14
+
+[pirate]:[pirate | eyeCount: Int | raid();pillage()]
+[jollyness]:[jollyness | magnitude: Real |]
+
+[marauder]<:-[pirate]
+[pirate]-[mischief]
+[jollyness]->[pirate]
+[jollyness]->[rum]
+[jollyness]->[singing]
+[pirate]->[rum|tastiness: Int|swig()]
+[pirate]->[singing]
+[singing]<->[rum]</script>
+
+	<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+	<script src="lib/underscore.js"></script>
+	<script src="lib/dagre.min.js"></script>
+	<script src="../cluster/js/canvas.js"></script>
+	<script src="../cluster/js/vector.js"></script>
+	<script src="nomnoml.js"></script>
+</body>
+</html>
