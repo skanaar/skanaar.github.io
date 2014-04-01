@@ -11,7 +11,7 @@ nomnoml.render = function (graphics, config, compartment){
 		_.each(compartment.lines, function (text, i){
 			g.ctx.textAlign = centerText ? 'center' : 'left'
 			var x = centerText ? compartment.width/2 - margin : 0
-			g.ctx.fillText(text, x, (1+i)*config.fontSize)
+			g.ctx.fillText(text, x, (0.5+(i+.5)*config.leading)*config.fontSize)
 		})
 		g.ctx.translate(config.diagramMargin, config.diagramMargin)
 		_.each(compartment.relations, function (r){ renderRelation(r, compartment) })
@@ -33,8 +33,8 @@ nomnoml.render = function (graphics, config, compartment){
 	function renderNode(node, level){
 		var x = Math.round(node.x-node.width/2)
 		var y = Math.round(node.y-node.height/2)
-		var shade = 230 - 20*level
-		g.ctx.fillStyle = 'rgb(' + [shade,shade,shade].join() + ')'
+		var shade = config.fill[level] || _.last(config.fill)
+		g.ctx.fillStyle = shade
 		if (node.type === 'NOTE'){
 			g.path([
 				{x: x, y: y},
@@ -103,11 +103,13 @@ nomnoml.render = function (graphics, config, compartment){
 		g.ctx.fillText(r.startLabel, start.x+margin, start.y+margin+config.fontSize)
 		g.ctx.fillText(r.endLabel, end.x+margin, end.y-margin)
 
+		var dash = 3*config.lineWidth
+
 		if (r.assoc == '-'){
 			g.path(path).stroke()
 		}
 		else if (r.assoc == '--'){
-			g.dashPath(path, 3, 3)
+			g.dashPath(path, dash, dash)
 		}
 		else if (r.assoc == '->'){
 			g.path(path).stroke()
@@ -119,7 +121,7 @@ nomnoml.render = function (graphics, config, compartment){
 			drawArrow(path.reverse(), filled, start)
 		}
 		else if (r.assoc == '<-->'){
-			g.dashPath(path, 3, 3)
+			g.dashPath(path, dash, dash)
 			drawArrow(path, filled, end)
 			drawArrow(path.reverse(), filled, start)
 		}
@@ -146,11 +148,11 @@ nomnoml.render = function (graphics, config, compartment){
 			drawArrow(path, empty, end)
 		}
 		else if (r.assoc == '-->'){
-			g.dashPath(path, 3, 3)
+			g.dashPath(path, dash, dash)
 			drawArrow(path, filled, end)
 		}
 		else if (r.assoc == '--:>'){
-			g.dashPath(path, 3, 3)
+			g.dashPath(path, dash, dash)
 			drawArrow(path, empty, end)
 		}
 	}
@@ -185,11 +187,15 @@ nomnoml.render = function (graphics, config, compartment){
 		var ctx = g.path(arrow).fill().stroke()
 	}
 
+	function snapToPixels(){
+		if (config.lineWidth % 2 > 0)
+			g.ctx.translate(0.5, 0.5)
+	}
+
 	g.ctx.save()
 	g.ctx.lineWidth = config.lineWidth
-	if (config.lineWidth % 2 > 0)
-		g.ctx.translate(0.5, 0.5)
 	g.ctx.lineJoin = 'round'
+	snapToPixels()
 	renderCompartment(compartment, false, 0)
 	g.ctx.restore()
 }

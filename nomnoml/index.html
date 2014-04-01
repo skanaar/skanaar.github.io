@@ -160,13 +160,15 @@ function setFont(ast, isBold, isItalic){
 function getConfig(d){
 	return {
 		fontSize: (+d.fontSize) || 12,
+		leading: (+d.leading) || 1.25,
 		font: d.font || 'Calibri',
 		lineWidth: (+d.lineWidth) || 1,
 		margin: (+d.margin) || 8,
 		diagramMargin: (+d.diagramMargin) || 5,
 		spacing: (+d.spacing) || 40,
 		direction: {down: 'TB', right: 'LR'}[d.direction] || 'TB',
-		fillArrows: d.fillArrows === 'true'
+		fillArrows: d.fillArrows === 'true',
+		fill: (d.fill || '#ddd,#bbb,#888,#666').split(',')
 	}
 }
 
@@ -176,7 +178,7 @@ function sourceChanged(){
 		var config = getConfig(ast.directives)
 	    var measurer = {
 	        textWidth: function (s){ return g.ctx.measureText(s).width },
-	        textHeight: function (s){ return config.fontSize }
+	        textHeight: function (s){ return config.leading * config.fontSize }
 	    }
 
 		setFont(ast, 'bold')

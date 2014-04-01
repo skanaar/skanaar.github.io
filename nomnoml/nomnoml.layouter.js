@@ -28,8 +28,8 @@ nomnoml.layout = function (measurer, config, ast){
 		if (!lines.length)
 			return { width: 0, height: config.margin }
 		return {
-			width: _.max(_.map(lines, measurer.textWidth)) + 2*config.margin,
-			height: measurer.textHeight() * lines.length + 2*config.margin
+			width: Math.round(_.max(_.map(lines, measurer.textWidth)) + 2*config.margin),
+			height: Math.round(measurer.textHeight() * lines.length + 2*config.margin)
 		}
 	}
 	function layoutCompartment(c){
