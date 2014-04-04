@@ -5,7 +5,8 @@ nomnoml.parse = function (x){
 	var syntaxTypes = _.partition(x.split('\n'), isDirective)
 	var pureDiagramCode = syntaxTypes[1].join('\n').trim()
 	var directives = _.object(syntaxTypes[0].map(function (line){
-		return line.trim().substring(1).split(':')
+		var tokens =  line.substring(1).split(':')
+		return [tokens[0].trim(), tokens[1].trim()]
 	}))
 	var ast = nomnoml.transformParseIntoSyntaxTree(nomnoml.intermediateParse(pureDiagramCode))
 	ast.directives = directives

@@ -168,7 +168,8 @@ function getConfig(d){
 		spacing: (+d.spacing) || 40,
 		direction: {down: 'TB', right: 'LR'}[d.direction] || 'TB',
 		fillArrows: d.fillArrows === 'true',
-		fill: (d.fill || '#ddd,#bbb,#888,#666').split(',')
+		fill: (d.fill || '#ddd,#bbb,#888,#666').split(','),
+		edges: {curved: 'curved', hard: 'hard'}[d.edges] || 'hard'
 	}
 }
 

@@ -3,6 +3,7 @@ var nomnoml = nomnoml || {}
 nomnoml.render = function (graphics, config, compartment){
 
 	var margin = config.margin
+	var g = graphics
 
 	function renderCompartment(compartment, centerText, level){
 		g.ctx.save()
@@ -86,6 +87,31 @@ nomnoml.render = function (graphics, config, compartment){
 		})
 	}
 
+	function strokePath(p){
+		function enhanceEnd(list){
+			var len = p.length
+			var fac = Math.max(config.spacing, dist(p[0], _.last(p))/2)
+			p[len-2] = add(p[len-1], mult(normalize(diff(p[len-2], p[len-1])), fac))
+		}
+		if (config.edges === 'curved' && p.length === 4){
+			enhanceEnd(p)
+	        g.ctx.beginPath()
+	        g.ctx.moveTo(p[0].x, p[0].y)
+	        g.ctx.bezierCurveTo(p[1].x, p[1].y, p[2].x, p[2].y, p[3].x, p[3].y)
+	        g.ctx.stroke()
+		}
+		else if (config.edges === 'curved' && p.length === 3){
+			enhanceEnd(p)
+	        g.ctx.beginPath()
+	        g.ctx.moveTo(p[0].x, p[0].y)
+	        g.ctx.quadraticCurveTo(p[1].x, p[1].y, p[2].x, p[2].y)
+	        g.ctx.stroke()
+		}
+		else {
+			g.path(p).stroke()
+		}
+	}
+
 	var empty = false, filled = true, diamond = true
 
 	function renderRelation(r, compartment){
@@ -106,17 +132,17 @@ nomnoml.render = function (graphics, config, compartment){
 		var dash = 3*config.lineWidth
 
 		if (r.assoc == '-'){
-			g.path(path).stroke()
+			strokePath(path)
 		}
 		else if (r.assoc == '--'){
 			g.dashPath(path, dash, dash)
 		}
 		else if (r.assoc == '->'){
-			g.path(path).stroke()
+			strokePath(path)
 			drawArrow(path, filled, end)
 		}
 		else if (r.assoc == '<->'){
-			g.path(path).stroke()
+			strokePath(path)
 			drawArrow(path, filled, end)
 			drawArrow(path.reverse(), filled, start)
 		}
@@ -126,25 +152,25 @@ nomnoml.render = function (graphics, config, compartment){
 			drawArrow(path.reverse(), filled, start)
 		}
 		else if (r.assoc == 'o->'){
-			g.path(path).stroke()
+			strokePath(path)
 			drawArrow(path, filled, end)
 			drawArrow(path.reverse(), empty, start, diamond)
 		}
 		else if (r.assoc == '+->'){
-			g.path(path).stroke()
+			strokePath(path)
 			drawArrow(path, filled, end)
 			drawArrow(path.reverse(), filled, start, diamond)
 		}
 		else if (r.assoc == 'o-'){
-			g.path(path).stroke()
+			strokePath(path)
 			drawArrow(path.reverse(), empty, start, diamond)
 		}
 		else if (r.assoc == '+-'){
-			g.path(path).stroke()
+			strokePath(path)
 			drawArrow(path.reverse(), filled, start, diamond)
 		}
 		else if (r.assoc == '-:>'){
-			g.path(path).stroke()
+			strokePath(path)
 			drawArrow(path, empty, end)
 		}
 		else if (r.assoc == '-->'){
