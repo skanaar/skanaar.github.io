@@ -68,7 +68,7 @@ a.action-button:active, a.action-button:focus {
 ul.topmenu > li.menu-button {
     display: inline-block;
     width: auto;
-    margin-right: 4px;
+    margin: 2px;
     padding: 0;
 }
 ul.topmenu > li.menu-button.fixed-button {
@@ -222,6 +222,6 @@ a.specials-button {
         display: block;
     }
     input[type=text]{
-        width: 100px;
+        width: 120px;
     }
 }
