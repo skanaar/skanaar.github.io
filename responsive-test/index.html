@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    .container {
+        background-color: #eee;
+        width: 964px;
+        padding-right: -30px;
+        margin: 0 auto;
+    }
+    .level-B-headlines {
+        float: left;
+        vertical-align: top
+    }
+    .headline {
+        float: left;
+        box-sizing: margin-box;
+        width: 304px;
+        margin-right: 24px;
+        margin-bottom: 24px;
+        border-radius: 3px;
+    }
+    .level-B-headlines > .headline {
+        height: 300px;
+        background-color: black;
+    }
+    .level-C-headlines {
+        box-sizing: margin-box;
+        width: 304px;
+        display: inline-block;
+    }
+    .level-C-headlines > .headline {
+        height: 84px;
+        background-color: #DB17A3;
+    }
+    @media (max-width: 1024px) {
+        .container {
+            width: 714px;
+        }
+        .row { 
+            width: 656px;
+            margin: 0 auto;
+        }
+        .level-C-headlines {
+            width: 656px;
+        }
+    }
+    @media (max-width: 768px) {
+        .container {
+            width: 492px;
+        }
+        .level-B-headlines > .headline {
+            width: 222px;
+        }
+        .level-C-headlines > .headline {
+            float: none;
+            width: 468px;
+        }
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="level-B-headlines">
+                <div class="headline">
+                    <div class="black">A</div>
+                </div>
+                <div class="headline">
+                    <div class="black">A</div>
+                </div>
+            </div>
+            <div class="level-C-headlines">
+                <div class="headline">A</div>
+                <div class="headline">A</div>
+                <div class="headline">A</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
