@@ -26,7 +26,8 @@ a.action-button:active, a.action-button:focus {
     color: white;
 }
 .container {
-    background-color: #eee
+    background-color: #eee;
+    padding: 0;
 }
 .menu {
     position: relative;
@@ -40,6 +41,9 @@ a.action-button:active, a.action-button:focus {
 .menu > .search-box ul.topmenu{
     display: inline-block;
 }
+.phone-menu-button {
+    margin-left: 8px
+}
 #phone-menu-icon {
     margin-left: 12px;
 }
@@ -47,11 +51,24 @@ a.action-button:active, a.action-button:focus {
     border-radius: 4px;
     border: 2px solid #bbb;
     margin: 2px;
+    padding: 4px;
+}
+::-webkit-input-placeholder {
+    font-style: italic;
+}
+:-moz-placeholder {
+    font-style: italic;
+}
+::-moz-placeholder {
+    font-style: italic;
+}
+:-ms-input-placeholder {
+    font-style: italic;
 }
 ul.topmenu > li.menu-button {
     display: inline-block;
     width: auto;
-    margin: 2px;
+    margin-right: 4px;
     padding: 0;
 }
 ul.topmenu > li.menu-button.fixed-button {
@@ -114,7 +131,7 @@ a.specials-button {
 .sub-spotlight {
     display: inline-block;
     vertical-align: top;
-    width: 311px;
+    width: 321px;
     margin: 0 0 20px 0;
     font-weight: bold
 }
@@ -130,12 +147,15 @@ a.specials-button {
 }
 .partners {
     background-color: #666;
+    padding-bottom: 12px;
+    margin-top: 12px;
+    margin-bottom: 24px;
 }
 .partner {
     background-color: #888;
     color: white;
     text-align: center;
-    margin: 12px 0;
+    margin: 12px 0 0 0;
     padding: 24px 0;
     font-weight: bold
 }
@@ -151,9 +171,14 @@ a.specials-button {
     display: inline-block;
     margin: 10px 0;
 }
+.row-alignment-fix {
+    margin-left: 0;
+    margin-right: 0;
+}
+
 @media (max-width: 1024px) {
     .sub-spotlight {
-        width: 354px;
+        width: 369px;
         margin-bottom: 12px;
     }
     .sub-spotlight.alpha {
@@ -163,6 +188,7 @@ a.specials-button {
         display: none;
     }
 }
+
 @media (max-width: 768px) {
     .footer-button a.action-button {
         text-align: center;
@@ -186,6 +212,7 @@ a.specials-button {
         display: none;
     }
 }
+
 @media (max-width: 480px) {
     .footer-link {
         display: block;
@@ -193,5 +220,8 @@ a.specials-button {
     ul.topmenu > li.menu-button {
         width: auto;
         display: block;
+    }
+    input[type=text]{
+        width: 100px;
     }
 }
