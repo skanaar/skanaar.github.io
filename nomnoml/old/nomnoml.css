@@ -1,0 +1,76 @@
+
+html, body {
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	background: #E5E9EB;
+}
+.wrap {
+	position: relative;
+	background: #E5E9EB;
+	min-height: 100%;
+}
+#textarea {
+	outline: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0);
+	box-sizing: border-box;
+	border: 0;
+	font-family: Consolas, monospace;
+	color: #444;
+	padding: 30px;
+}
+#canvas {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+a, a:hover, a:active {
+	color: #888;
+	text-decoration: none
+}
+a:hover {
+	color: #aaa;
+}
+.tools {
+	display: block;
+	position: absolute;
+	top: 20px;
+	right: 40px;
+	color: #888;
+	text-shadow: 0 1px 0px rgba(255, 255, 255, 0.5);
+	font-family: Helvetica, sans-serif;
+	font-weight: bold
+}
+.tools>span {
+	font-size: 150%;
+}
+.tools>a {
+	margin-left: 10px;
+}
+#help {
+	display: none;
+	position: absolute;
+	top: 0px;
+	width: 300px;
+	background-color: rgba(224,228,230,1);
+	border: 0 solid #aaa;
+	border-width: 0 0 0 1px;
+	color: black;
+	font-family: monospace;
+	right:0;
+	bottom: 0;
+	padding: 60px 10px 0 10px;
+}
+#help label{
+	display: block;
+	font-family: Calibri, Helvetica, sans-serif;
+	color: #888;
+	margin-top: 1em;
+}
+#help.visible {
+	display: block;
+	overflow: auto;
+}

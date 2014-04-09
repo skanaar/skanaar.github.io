@@ -19,72 +19,76 @@
 [apa]->[kokos]</textarea>
 
 		<div id="help">
-			<label>Car has an Engine</label>
-			[Car]-&gt;[Engine]
-			
-			<label>Car owns an arbitrary number of blemished</label>
-			[Car]+-&gt;0..*[RustPatches]
+			<div class="content">
+				<label>Car has an Engine</label>
+				[Car]-&gt;[Engine]
+				
+				<label>Car owns an arbitrary number of blemished</label>
+				[Car]+-&gt;0..*[RustPatches]
 
-			<label>Car knows its Manufacturer</label>
-			[Car]o-&gt;[Manufacturer]
+				<label>Car knows its Manufacturer</label>
+				[Car]o-&gt;[Manufacturer]
 
-			<label>Car depends on Fuel</label>
-			[Car]--&gt;[Fuel]
+				<label>Car depends on Fuel</label>
+				[Car]--&gt;[Fuel]
 
-			<label>Pickup inherits from Car</label>
-			[Pickup]-:&gt;[Car]
+				<label>Pickup inherits from Car</label>
+				[Pickup]-:&gt;[Car]
 
-			<label>Car implements interface IVehicle</label>
-			[Car]--:&gt;[IVehicle]
+				<label>Car implements interface IVehicle</label>
+				[Car]--:&gt;[IVehicle]
 
-			<label>Paul and Ron have an association</label>
-			[Paul]-[Ron]
+				<label>Paul and Ron have an association</label>
+				[Paul]-[Ron]
 
-			<label>They both depend on each other</label>
-			[Chicken]&lt;-&gt;[Egg]
+				<label>They both depend on each other</label>
+				[Chicken]&lt;-&gt;[Egg]
 
-			<label>Car has some attributes</label>
-			[Car|maxSpeed: Float;color: Color|]
+				<label>Car has some attributes</label>
+				[Car|maxSpeed: Float;color: Color|]
 
-			<label>Engine has an operation</label>
-			[Engine||start()]
+				<label>Engine has an operation</label>
+				[Engine||start()]
 
-			<label>Engine has internal parts</label>
-			[Engine|<br>
-			&nbsp;&nbsp;[Cylinder]->1[Piston]<br>
-			&nbsp;&nbsp;[Cylinder]->2[Valve]<br>
-			]<br>
+				<label>Engine has internal parts</label>
+				[Engine|<br>
+				&nbsp;&nbsp;[Cylinder]->1[Piston]<br>
+				&nbsp;&nbsp;[Cylinder]->2[Valve]<br>
+				]<br>
 
-			<label>Engine is an abstract class</label>
-			[&lt;abstract&gt;Engine||start()]
+				<label>Engine is an abstract class</label>
+				[&lt;abstract&gt;Engine||start()]
 
-			<label>Car is in the package 'vehicles'</label>
-			[&lt;package&gt;vehicles| [Car] ]
+				<label>Car is in the package 'vehicles'</label>
+				[&lt;package&gt;vehicles| [Car] ]
 
-			<label>Car has an attached note</label>
-			[Car]--[&lt;note&gt;only driven;twice a month]
+				<label>Car has an attached note</label>
+				[Car]--[&lt;note&gt;only driven;twice a month]
 
-			<label>Set font</label>
-			#font: Times
+				<label>Set font</label>
+				#font: Times
 
-			<label>Layout the diagram really tight</label>
-			#fontSize: 8<br>
-			#spacing: 12<br>
-			#margin: 3
+				<label>Layout the diagram really tight</label>
+				#fontSize: 8<br>
+				#spacing: 12<br>
+				#margin: 3
+			</div>
+
+			<div class="logo-background"></div>
 		</div>
 
-		<div id="linemarker" style="background: rgba(255,0,0,0.25); position: absolute; left: 0; width: 30px; height: 16px"></div>
+		<div id="linemarker"></div>
 
 		<div class="tools">
-			<span>nomnoml &nbsp;&nbsp;</span>
+			<span class="logo">nomnoml &nbsp;&nbsp;</span>
 			<a href="javascript:discardCurrentGraph()">
-				<i class="fa fa-fw fa-trash-o fa-lg"></i>
+				<img src="img/upload.png">
 			</a>
 			<a id="savebutton" href="javascript:void(0)" download="uml.png">
-				<i class="fa fa-fw fa-camera fa-lg"></i>
+				<img src="img/camera.png">
 			</a>
-			<a href="javascript:void(0)" onclick="toggleHelp()">
-				<i class="fa fa-fw fa-book fa-lg"></i>
+			<a href="javascript:void(0)" onclick="toggleHelp()" class="narrow">
+				<img src="img/info-large.png">
 			</a>
 		</div>
 	</div>
@@ -143,7 +147,7 @@ var textarea = document.getElementById('textarea')
 var g = skanaar.Canvas(canvas, {})
 window.addEventListener('resize', _.throttle(fillScreen, 750, {leading: true}))
 textarea.addEventListener('input', _.debounce(sourceChanged, 300))
-textarea.value = localStorage.getItem('nomnoml.alpha.lastSource') || document.getElementById('defaultGraph').innerHTML
+textarea.value = localStorage.getItem('nomnoml.lastSource') || document.getElementById('defaultGraph').innerHTML
 fillScreen()
 
 function discardCurrentGraph(){
@@ -162,13 +166,14 @@ function getConfig(d){
 		fontSize: (+d.fontSize) || 12,
 		leading: (+d.leading) || 1.25,
 		font: d.font || 'Calibri',
-		lineWidth: (+d.lineWidth) || 1,
+		lineWidth: (+d.lineWidth) || 3,
 		margin: (+d.margin) || 8,
 		diagramMargin: (+d.diagramMargin) || 5,
 		spacing: (+d.spacing) || 40,
 		direction: {down: 'TB', right: 'LR'}[d.direction] || 'TB',
 		fillArrows: d.fillArrows === 'true',
-		fill: (d.fill || '#ddd,#bbb,#888,#666').split(','),
+		fill: (d.fill || '#eee8d5,#fdf6e3,#eee8d5,#fdf6e3').split(','),
+		stroke: d.stroke || '#33322E',
 		edges: {curved: 'curved', hard: 'hard'}[d.edges] || 'hard'
 	}
 }
@@ -183,7 +188,7 @@ function sourceChanged(){
 	    }
 
 		setFont(ast, 'bold')
-		localStorage.setItem('nomnoml.alpha.lastSource', textarea.value)
+		localStorage.setItem('nomnoml.lastSource', textarea.value)
 		g.ctx.clearRect(0, 0, w, h)
 		g.ctx.font = config.fontSize+'pt '+config.font+', Helvetica, sans-serif'
 		nomnoml.render(g, config, nomnoml.layout(measurer, config, ast))

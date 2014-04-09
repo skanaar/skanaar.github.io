@@ -209,7 +209,7 @@ nomnoml.render = function (graphics, config, compartment){
 			arrowPoint,
 			add(arrowBase, mult(t, 4*size))
 		]
-		g.ctx.fillStyle = isOpen ? '#111' : '#fff'
+		g.ctx.fillStyle = isOpen ? config.stroke : config.fill[0]
 		var ctx = g.path(arrow).fill().stroke()
 	}
 
@@ -221,6 +221,7 @@ nomnoml.render = function (graphics, config, compartment){
 	g.ctx.save()
 	g.ctx.lineWidth = config.lineWidth
 	g.ctx.lineJoin = 'round'
+	g.ctx.strokeStyle = config.stroke
 	snapToPixels()
 	renderCompartment(compartment, false, 0)
 	g.ctx.restore()
