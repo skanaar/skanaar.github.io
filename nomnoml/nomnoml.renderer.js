@@ -8,7 +8,7 @@ nomnoml.render = function (graphics, config, compartment){
 	function renderCompartment(compartment, centerText, level){
 		g.ctx.save()
 		g.ctx.translate(margin, margin)
-		g.ctx.fillStyle = '#333'
+		g.ctx.fillStyle = config.stroke
 		_.each(compartment.lines, function (text, i){
 			g.ctx.textAlign = centerText ? 'center' : 'left'
 			var x = centerText ? compartment.width/2 - margin : 0
@@ -125,7 +125,7 @@ nomnoml.render = function (graphics, config, compartment){
 		for(var i=1; i<r.path.length-1; i++) path.push(r.path[i])
 		path.push(end)
 
-		g.ctx.fillStyle = '#444'
+		g.ctx.fillStyle = config.stroke
 		g.ctx.fillText(r.startLabel, start.x+margin, start.y+margin+config.fontSize)
 		g.ctx.fillText(r.endLabel, end.x+margin, end.y-margin)
 
