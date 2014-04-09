@@ -767,3 +767,14 @@ a.button {
 	border-radius: 30px;
 	padding: 4px 20px;
 }
+
+button.button {
+	border-radius: 30px;
+	background: green;
+	border: 0;
+	color: white;
+	padding: 2px 12px
+}
+button.button:hover {
+	background: darkgreen;
+}

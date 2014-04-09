@@ -246,7 +246,7 @@ angular.module('cluster').factory('uploader', function ($http){
                 alert('Failed to upload data')
                 if (whenDone) whenDone()
             }
-            $http.post('upload.php', payload, config)
+            $http.post('api/upload.php', payload, config)
                 .then(onResponse, failure)
         }
     }

@@ -76,6 +76,9 @@ angular.module('cluster', ['ngRoute', 'ngSanitize']).config(function($routeProvi
         templateUrl:'partials/cluster.partial.html'})
     .when('/network', {
         templateUrl:'partials/network.partial.html'})
+    .when('/admin', {
+        controller:'AdminCtrl', 
+        templateUrl:'partials/admin.partial.html'})
     .otherwise({ redirectTo: '/login' })
 })
 .run(function ($rootScope, $location){
@@ -552,5 +555,24 @@ angular.module('cluster').controller('SettingsCtrl', function ($scope, $http, up
             message: 'user: ' + localStorage.user,
             data: serialization
         })
+    }
+})
+
+/**
+    Admin page
+*/
+angular.module('cluster').controller('AdminCtrl', function ($scope, $http){
+
+    function onSuccess(){ alert('success') }
+    function onFailure(){ alert('failure') }
+    var formMime = 'application/x-www-form-urlencoded; charset=UTF-8'
+    var config = { headers: {'Content-Type':formMime} }
+
+    $scope.newAccount = { new_account: '', username:'', email:'', password:'' }
+    $scope.newPassword = { assign_password: '', username:'', password:'' }
+
+    $scope.callApi = function(payload){
+        $http.post('api', $.param(payload), config)
+            .then(onSuccess, onFailure)
     }
 })

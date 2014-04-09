@@ -1,4 +1,8 @@
 <?php
+//require_once __DIR__ . '/core.php';
+//session_start();
+//if (Auth::isInSession()){
+
 if ($_POST["key"] == "ofd38sd"){
 	require 'class.phpmailer.php';
 	$mail = new PHPMailer();
@@ -20,3 +24,5 @@ if ($_POST["key"] == "ofd38sd"){
 } else {
 	echo "failure";
 }
+
+//}
