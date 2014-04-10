@@ -42,6 +42,16 @@ skanaar.Canvas = function (canvas, callbacks){
 		return 'rgba('+ comps.join() +')'
 	}
 
+	function tracePath(path, offset, s){
+		s = s === undefined ? 1 : s
+		offset = offset || {x:0, y:0}
+		ctx.beginPath()
+		ctx.moveTo(offset.x + s*path[0].x, offset.y + s*path[0].y)
+		for(var i=1, len=path.length; i<len; i++)
+			ctx.lineTo(offset.x + s*path[i].x, offset.y + s*path[i].y)
+		return chainable
+	}
+
 	return {
 		mousePos: function (){ return mousePos },
 		width: function (){ return canvas.width },
@@ -65,13 +75,10 @@ skanaar.Canvas = function (canvas, callbacks){
 			ctx.arc(x, y, r, start, stop)
 			return chainable
 		},
-		path: function (path, offset, s){
-			s = s === undefined ? 1 : s
-			offset = offset || {x:0, y:0}
-			ctx.beginPath()
-			ctx.moveTo(offset.x + s*path[0].x, offset.y + s*path[0].y)
-			for(var i=1, len=path.length; i<len; i++)
-				ctx.lineTo(offset.x + s*path[i].x, offset.y + s*path[i].y)
+		path: tracePath,
+		circuit: function (path, offset, s){
+			tracePath(path, offset, s)
+			ctx.closePath()
 			return chainable
 		},
 		dashPath: function (path, dashLen, spaceLen){

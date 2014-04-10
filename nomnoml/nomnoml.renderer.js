@@ -54,7 +54,8 @@ nomnoml.render = function (graphics, config, compartment){
 			var headHeight = node.compartments[0].height
 			g.ctx.fillRect(x, y+headHeight, node.width, node.height-headHeight)
 			g.ctx.strokeRect(x, y+headHeight, node.width, node.height-headHeight)
-			var w = g.ctx.measureText(node.id).width + 2*margin
+			var w = g.ctx.measureText(node.name).width + 2*margin
+			console.log(node)
 			g.path([
 				{x:x, y:y+headHeight},
 				{x:x, y:y},
@@ -75,7 +76,7 @@ nomnoml.render = function (graphics, config, compartment){
 			g.ctx.restore()
 			yDivider += part.height
 			if (node.type === 'FRAME' && i === 0){
-				var w = g.ctx.measureText(node.id).width + part.height/2 + margin
+				var w = g.ctx.measureText(node.name).width + part.height/2 + margin
 				g.path([
 					{x:x, y:yDivider},
 					{x:x+w-part.height/2, y:yDivider},
@@ -206,11 +207,10 @@ nomnoml.render = function (graphics, config, compartment){
 			add(arrowBase, mult(t, 4*size)),
 			arrowButt,
 			add(arrowBase, mult(t, -4*size)),
-			arrowPoint,
-			add(arrowBase, mult(t, 4*size))
+			arrowPoint
 		]
 		g.ctx.fillStyle = isOpen ? config.stroke : config.fill[0]
-		var ctx = g.path(arrow).fill().stroke()
+		var ctx = g.circuit(arrow).fill().stroke()
 	}
 
 	function snapToPixels(){
