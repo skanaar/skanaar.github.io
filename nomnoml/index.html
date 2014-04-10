@@ -155,10 +155,11 @@ function discardCurrentGraph(){
 	sourceChanged()
 }
 
-function setFont(ast, isBold, isItalic){
-	var style = isBold === 'bold' ? 'bold ' : ''
+function setFont(config, isBold, isItalic){
+	var style = (isBold === 'bold' ? 'bold ' : '')
 	if (isItalic) style = 'italic ' + style
-	g.ctx.font = style+ast.fontSize+'pt '+ast.font+', Helvetica, sans-serif'
+	var s = style+config.fontSize+'pt '+config.font+', Helvetica, sans-serif'
+	g.ctx.font = s
 }
 
 function getConfig(d){
@@ -174,7 +175,8 @@ function getConfig(d){
 		fillArrows: d.fillArrows === 'true',
 		fill: (d.fill || '#eee8d5,#fdf6e3,#eee8d5,#fdf6e3').split(','),
 		stroke: d.stroke || '#33322E',
-		edges: {curved: 'curved', hard: 'hard'}[d.edges] || 'hard'
+		edges: {curved: 'curved', hard: 'hard'}[d.edges] || 'hard',
+		zoom: +d.zoom || 1
 	}
 }
 

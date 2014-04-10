@@ -222,6 +222,7 @@ nomnoml.render = function (graphics, config, compartment){
 	g.ctx.lineWidth = config.lineWidth
 	g.ctx.lineJoin = 'round'
 	g.ctx.strokeStyle = config.stroke
+	g.ctx.scale(config.zoom, config.zoom)
 	snapToPixels()
 	renderCompartment(compartment, false, 0)
 	g.ctx.restore()

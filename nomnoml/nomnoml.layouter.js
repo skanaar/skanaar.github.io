@@ -24,16 +24,17 @@ nomnoml.layout = function (measurer, config, ast){
 					.rankDir(config.direction)
 					.run(input)
 	}
-	function measureLines(lines){
+	function measureLines(lines, fontWeight){
 		if (!lines.length)
 			return { width: 0, height: config.margin }
+		setFont(config, fontWeight)
 		return {
 			width: Math.round(_.max(_.map(lines, measurer.textWidth)) + 2*config.margin),
 			height: Math.round(measurer.textHeight() * lines.length + 2*config.margin)
 		}
 	}
-	function layoutCompartment(c){
-		var textSize = measureLines(c.lines)
+	function layoutCompartment(c, compartmentIndex){
+		var textSize = measureLines(c.lines, compartmentIndex ? 'normal' : 'bold')
 		c.width = textSize.width
 		c.height = textSize.height
 
