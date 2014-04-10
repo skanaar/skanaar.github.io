@@ -769,6 +769,7 @@ a.button {
 }
 
 button.button {
+	font-family: 'Miso', sans-serif;
 	border-radius: 30px;
 	background: green;
 	border: 0;

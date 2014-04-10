@@ -1,6 +1,11 @@
 <?php
+class Config {
+	const connection = 'mysql:host=localhost;port=3306;dbname=cluster';
+}
+
 class Session {
 	static function set($value){ $_SESSION['username'] = $value; }
+	static function isActive(){ return isset($_SESSION['username']); }
 	static function get(){ return $_SESSION['username']; }
 	static function end(){ unset($_SESSION['username']); }
 }
@@ -10,30 +15,10 @@ class Crypto {
 	static function hash($password, $salt){ return md5($password . $salt); }
 }
 
-class Auth {
-	static function isSuperUser($name){
-		return $name == 'apa';
-	}
-	static function isInSession(){
-		return isset($_SESSION['username']);
-	}
-	static function authenticated($user, $password){
-		try {
-			$dao = new AccountStorage();
-			$account = $dao->get($user);
-			$hash = Crypto::hash($password, $account['salt']);
-			return ($account['passwordHash'] == $hash) ? $account : false;
-		} catch (Exception $e) {
-			return false;
-		}
-	}
-}
-
 class Storage {
 	protected $pdo;
 	function __construct() {
-		$connString = 'mysql:host=localhost;port=3306;dbname=cluster';
-		$this->pdo = new PDO($connString, 'root', '');
+		$this->pdo = new PDO(Config::connection, 'root', '');
 		$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 }

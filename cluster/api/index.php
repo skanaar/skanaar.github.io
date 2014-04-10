@@ -1,63 +1,61 @@
 <?php
 require_once __DIR__ . '/core.php';
 
+function fail($msg){
+	http_response_code(400);
+	echo $msg;
+}
+
+function isSuperUser($name){
+	return $name == 'apa';
+}
+
 session_start();
+if (!isset($_REQUEST['action'])){
+	fail('no action specified');
+	exit();
+}
+$action = $_REQUEST['action'];
 
-if (isset($_REQUEST['store_settings'])){
-	$payload = $_REQUEST['payload'];
-	if (Auth::isInSession()){
+try {
+
+	if ($action == 'store_settings'){
+		$payload = $_REQUEST['payload'];
+		if (Session::isActive()){
+			$dao = new SettingsStorage();
+			$dao->write(Session::get(), $payload);
+			echo 'write complete';
+		}
+		else
+			fail('did not authenticate');
+	}
+
+	if ($action == 'read_settings'){
 		$dao = new SettingsStorage();
-		$dao->write(Session::get(), $payload);
-		echo 'write complete';
+		echo $dao->read($_REQUEST['username']);
 	}
-	else
-		echo 'did not authenticate ';
-}
 
-if (isset($_REQUEST['read_settings'])){
-	$dao = new SettingsStorage();
-	echo $dao->read($_REQUEST['username']);
-}
-
-if (isset($_REQUEST['show_user'])){
-	$p = new AccountStorage();
-	try {
-		print_r($p->get($_REQUEST['show_user']));
-	} catch (Exception $e) {
-		echo 'no user found';
-	}
-}
-
-if (isset($_REQUEST['new_account'])){
-	try {
-		if (Auth::isSuperUser(Session::get())){
+	if ($action == 'new_account'){
+		if (isSuperUser(Session::get())){
 			$dao = new AccountStorage();
 			$dao->create($_REQUEST['username'], $_REQUEST['password'], $_REQUEST['email']);
 			echo 'account created';
 		} else
-			echo 'insufficient privileges';
-	} catch (Exception $e) {
-		echo 'failure';
+			fail('insufficient privileges');
 	}
-}
 
-if (isset($_REQUEST['assign_password'])){
-	try {
-		if (Auth::isSuperUser(Session::get())){
+	if ($action == 'assign_password'){
+		if (isSuperUser(Session::get())){
 			$dao = new AccountStorage();
 			$account = $dao->get($_REQUEST['username']);
 			$hash = Crypto::hash($_REQUEST['password'], $account['salt']);
 			$dao->changePassword($_REQUEST['username'], $hash);
 			echo 'password changed';
 		} else
-			echo 'insufficient privileges';
-	} catch (Exception $e) {
-		echo 'failure';
+			fail('insufficient privileges');
 	}
-}
 
-if (isset($_REQUEST['change_password'])){
-	try {
+	if ($action == 'change_password'){
 		$dao = new AccountStorage();
 		$account = $dao->get($_REQUEST['user']);
 		$hash = Crypto::hash($_REQUEST['password'], $account['salt']);
@@ -67,26 +65,29 @@ if (isset($_REQUEST['change_password'])){
 			echo 'password changed';
 		}
 		else
-			echo 'did not authenticate ';
-	} catch (Exception $e) {
-		echo 'no user found';
+			fail('did not authenticate');
 	}
-}
 
-if (isset($_REQUEST['start_session'])){
-	if (Auth::authenticated($_REQUEST['user'], $_REQUEST['password'])) {
-		Session::set($_REQUEST['user']);
-		echo 'session started';
-	} else {
-		echo 'did not authenticate';
+	if ($action == 'start_session'){
+		$dao = new AccountStorage();
+		$account = $dao->get($_REQUEST['user']);
+		$hash = Crypto::hash($_REQUEST['password'], $account['salt']);
+		if ($account['passwordHash'] == $hash) {
+			Session::set($_REQUEST['user']);
+			echo 'success';
+		} else 
+			fail('failure');
 	}
-}
 
-if (isset($_REQUEST['end_session'])){
-	Session::end();
-	echo 'session terminated';
-}
+	if ($action == 'end_session'){
+		Session::end();
+		echo 'session terminated';
+	}
 
-if (isset($_REQUEST['get_session'])){
-	echo Session::get();
+	if ($action == 'get_session'){
+		echo Session::get();
+	}
+
+} catch (Exception $e) {
+	fail('failure');
 }

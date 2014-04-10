@@ -91,7 +91,7 @@ angular.module('cluster', ['ngRoute', 'ngSanitize']).config(function($routeProvi
     })
 })
 
-angular.module('cluster').controller('NavbarCtrl', function ($scope, $location){
+angular.module('cluster').controller('NavbarCtrl', function ($scope, $location, $http){
     /**
         isApp(.) is used for highlighting navbar links on the correct page
     */
@@ -102,6 +102,7 @@ angular.module('cluster').controller('NavbarCtrl', function ($scope, $location){
         return startsWith(window.location.hash, '#/' + name);
     }
     $scope.logout = function () {
+        $http.get('api/?action=end_session').then(function(){})
         delete localStorage.user
         $location.path('/login')
     }
@@ -423,8 +424,7 @@ angular.module('cluster').controller('ClusterCtrl',
 
 /**
     Login page
-    On attempted login loads the data/users/<username>.json file and checks if passwords match.
-    If they match the username is put in localStorage for other pages to track.
+    If session successfully started the username is put in localStorage for other pages to track.
 */
 angular.module('cluster').controller('LoginCtrl', 
     function ($scope, $http, $location, uploader){
@@ -433,13 +433,14 @@ angular.module('cluster').controller('LoginCtrl',
 
     $scope.login = function (){
         var usr = $scope.username.toLowerCase()
-        $http.get('data/users/'+usr+'.json').then(function (response){
-            if ($scope.password === response.data.password){
-                localStorage['user'] = usr.toLowerCase()
-                $location.path('/dashboard')
-            }
-            else
-                alert('Incorrect username/password')
+        var query = $.param({
+            action: 'start_session',
+            user: usr,
+            password: $scope.password
+        })
+        $http.get('api/?'+query).then(function (response){
+            localStorage['user'] = usr
+            $location.path('/dashboard')
         }, function (){
             alert('Incorrect username/password')
         })
@@ -544,17 +545,24 @@ function ($scope, uploader){
     Serializes the form data and uploads it to the server
 */
 angular.module('cluster').controller('SettingsCtrl', function ($scope, $http, uploader){
-    $http.get('data/settings/' + localStorage.user + '.json').then(function (response){
+
+    var query = $.param({action:'read_settings', username:localStorage['user']})
+    $http.get('api/?' + query).then(function (response){
         $scope.form = response.data
     })
+
+    var formMime = 'application/x-www-form-urlencoded; charset=UTF-8'
+    var config = { headers: {'Content-Type':formMime} }
     
     $scope.uploadSettings = function (){
         var serialization = JSON.stringify($scope.form, undefined, 2)
-        uploader.send({
-            subject: 'SAVE_SETTINGS',
-            message: 'user: ' + localStorage.user,
-            data: serialization
-        })
+        var payload = { action: 'store_settings', payload: serialization }
+
+        function onSuccess(response){ alert('Data successfully uploaded') }
+        function onFailure(response){ alert('Failed to upload data') }
+
+        $http.post('api/', $.param(payload), config)
+            .then(onSuccess, onFailure)
     }
 })
 
@@ -562,17 +570,16 @@ angular.module('cluster').controller('SettingsCtrl', function ($scope, $http, up
     Admin page
 */
 angular.module('cluster').controller('AdminCtrl', function ($scope, $http){
-
     function onSuccess(){ alert('success') }
     function onFailure(){ alert('failure') }
     var formMime = 'application/x-www-form-urlencoded; charset=UTF-8'
     var config = { headers: {'Content-Type':formMime} }
 
-    $scope.newAccount = { new_account: '', username:'', email:'', password:'' }
-    $scope.newPassword = { assign_password: '', username:'', password:'' }
+    $scope.newAccount = { action: 'new_account', username:'', email:'', password:'' }
+    $scope.newPassword = { action: 'assign_password', username:'', password:'' }
 
     $scope.callApi = function(payload){
-        $http.post('api', $.param(payload), config)
+        $http.post('api/', $.param(payload), config)
             .then(onSuccess, onFailure)
     }
 })
