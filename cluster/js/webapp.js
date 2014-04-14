@@ -299,6 +299,11 @@ angular.module('cluster').controller('ClusterCtrl',
         ClusterPlatform.engine.pause()
     })
 
+    $scope.toggleFullscreen = function (){
+        $('#page-container').toggleClass('widescreen')
+        ClusterPlatform.engine.fillScreen()
+    }
+
     $scope.togglePane = function (key){
         $scope.activePane = ($scope.activePane === key) ? "none" : key
     }
@@ -478,8 +483,8 @@ angular.module('cluster').controller('DashboardCtrl', function ($scope, $http, u
     $http.get('data/goals/'+localStorage.user+'.json').then(function (response){
         $scope.goals = response.data
     })
-    $http.get('data/users/'+localStorage.user+'.json').then(function (response){
-        $scope.profile = response.data
+    $http.get('api/?action=read_settings&username='+localStorage.user).then(function (response){
+        $scope.settings = response.data
     })
     $scope.imageUrl = 'data/user-img/' + localStorage.user + '.jpg'
     $scope.setUpdateKind = function (u){

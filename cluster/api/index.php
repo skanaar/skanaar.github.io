@@ -19,6 +19,26 @@ $action = $_REQUEST['action'];
 
 try {
 
+	if ($action == 'send_message'){
+		if (Session::isActive()){
+			require 'class.phpmailer.php';
+			$mail = new PHPMailer();
+			$mail->addAddress(file_get_contents('../data/adminemail.txt'));
+			$mail->Subject = $_POST['subject'];
+			$mail->Body = stripslashes($_POST['message']);
+			if (isset($_POST['data']) && $_POST['data'] != ''){
+		    	$mail->addStringAttachment(stripslashes($_POST['data']), 'data.json');
+			}
+			if (!$mail->send()) {
+				fail('failure ' . $mail->ErrorInfo);
+			} else {
+				echo 'success';
+			}
+		}
+		else
+			fail('did not authenticate');
+	}
+
 	if ($action == 'store_settings'){
 		$payload = $_REQUEST['payload'];
 		if (Session::isActive()){

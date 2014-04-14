@@ -1,8 +1,9 @@
-<div class="full-row jumbotron">
+<div class="full-row jumbotron hidden-sm">
 	<h1>{{cluster.name}}</h1>
 </div>
 <div class="full-row page-stripe toolbar">
 	<div class="pull-right">
+		<a ng-click="toggleFullscreen()"><i class="fa fa-expand"></i></a>
 		<a id="download-image-link" download="cluster-snapshot.png">
 			<i class="fa fa-camera"></i></a>
 		<a onclick="engine.zoom(-1)" href="javascript:void(0)">
@@ -20,11 +21,12 @@
 	<canvas id="canvas" width="800" height="800"></canvas>
 	<div class="properties-hud">
 		<span style="visibility: hidden" data-nudge-angular-update>{{cluster.building}}</span>
-		<small>Building: {{cluster.building | number:0}}% &nbsp; &nbsp; &nbsp; 
+		<small class="hidden-sm">Building: {{cluster.building | number:0}}% &nbsp; &nbsp; &nbsp; 
 		Mobility: {{cluster.mobility | number:0}}% &nbsp; &nbsp; &nbsp; 
 		Nutrition: {{cluster.nutrition | number:0}}% &nbsp; &nbsp; &nbsp; 
 		Solutions: {{cluster.entities.length}} &nbsp; &nbsp; &nbsp; 
 		Transformative Potential: {{cluster.potential || 'TBD'}}</small>
+		<small class="visible-sm">{{cluster.name}}</small>
 	</div>
 	<div class="tab-bar">
 		<a ng-click="togglePane('filter')" href="javascript:void(0)">

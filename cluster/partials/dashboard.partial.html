@@ -59,21 +59,15 @@
 	</div>
 </div>
 <div class="full-row dashboard-section profile-summary" style="position: relative">
-	<a href="#/settings" style="position: absolute; top:20px; right:20px">
-		<i class="fa fa-gear"></i> Change settings
+	<a href="#/settings" class="edit-settings-button">
+		<i class="fa fa-edit"></i> Edit profile
 	</a>
-	<h2>{{profile.name}}</h2>
-	<img ng-src="{{imageUrl}}" width=150 height=150>
+	<h2>{{settings.name}}</h2>
+	<img ng-src="{{settings.imageurl}}" width="150" height="150">
 	<div class="properties">
-		<div ng-repeat="line in profile.info"><b>{{line[0]}}</b>
-		<span ng-bind-html="line[1]"></span></div>
-	</div>
-	<div class="properties">
-		<div ng-repeat="line in profile.info2"><b>{{line[0]}}</b>
-		<span ng-bind-html="line[1]"></span></div>
-	</div>
-	<div class="properties">
-		<div ng-repeat="line in profile.info3"><b>{{line[0]}}</b>
-		<span ng-bind-html="line[1]"></span></div>
+		<div><b>Company/Organisation</b> <span>{{settings.organisation}}</span></div>
+		<div><b>Building</b> <span>{{settings.building}}</span></div>
+		<div><b>Nutrition</b> <span>{{settings.nutrition}}</span></div>
+		<div><b>Mobility</b> <span>{{settings.mobility}}</span></div>
 	</div>
 </div>
