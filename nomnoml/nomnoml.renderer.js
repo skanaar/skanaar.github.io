@@ -37,7 +37,7 @@ nomnoml.render = function (graphics, config, compartment){
 		var shade = config.fill[level] || _.last(config.fill)
 		g.ctx.fillStyle = shade
 		if (node.type === 'NOTE'){
-			g.path([
+			g.circuit([
 				{x: x, y: y},
 				{x: x+node.width-margin, y: y},
 				{x: x+node.width, y: y+margin},
@@ -56,7 +56,7 @@ nomnoml.render = function (graphics, config, compartment){
 			g.ctx.strokeRect(x, y+headHeight, node.width, node.height-headHeight)
 			var w = g.ctx.measureText(node.name).width + 2*margin
 			console.log(node)
-			g.path([
+			g.circuit([
 				{x:x, y:y+headHeight},
 				{x:x, y:y},
 				{x:x+w, y:y},
@@ -127,6 +127,7 @@ nomnoml.render = function (graphics, config, compartment){
 		path.push(end)
 
 		g.ctx.fillStyle = config.stroke
+		setFont(config, 'normal')
 		g.ctx.fillText(r.startLabel, start.x+margin, start.y+margin+config.fontSize)
 		g.ctx.fillText(r.endLabel, end.x+margin, end.y-margin)
 
@@ -218,6 +219,7 @@ nomnoml.render = function (graphics, config, compartment){
 			g.ctx.translate(0.5, 0.5)
 	}
 
+	setFont(config, 'bold')
 	g.ctx.save()
 	g.ctx.lineWidth = config.lineWidth
 	g.ctx.lineJoin = 'round'
