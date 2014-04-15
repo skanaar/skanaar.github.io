@@ -66,15 +66,13 @@
 
 		<div id="about" class="sidebar">
 			<div class="content">
-				<p>Nomnoml is a tool for rendering UML structure diagrams.c
-				<p>It automatically saves your edits in the browser's localStorage, so your diagram should be here the next time, but no guarantees.</p>
-				<p>Created by Daniel Kallin (reach me at my gmail)</p>
-				<p>Stands on the shoulders of these giants:
-				<ul>
-					<li><a href="http://zaach.github.io/jison/">jison</a></li>
-					<li><a href="https://github.com/cpettitt/dagre">dagre</a></li>
-					<li><a href="http://underscorejs.org">underscore</a></li>
-				</ul>
+				<p>Hello, this is nomnoml, a tool for drawing UML diagrams based on a simple syntax.
+				<p>Try and edit the code on the left and watch the diagram change. Any changes are saved to the browser's <i>localStorage</i>, so your diagram should be here the next time, (but no guarantees).</p>
+				<p>Created by Daniel Kallin (reach him at his gmail)</p>
+				<p>Nomnoml was made possible by the cool projects 
+				<a href="http://zaach.github.io/jison/">jison</a>, 
+				<a href="https://github.com/cpettitt/dagre">dagre</a> and
+				<a href="http://underscorejs.org">underscore</a>
 				</p>
 				
 				<hr>
@@ -142,16 +140,16 @@
 
 		<div class="tools">
 			<a class="logo" href="#" onclick="toggleSidebar('about')">nomnoml &nbsp;</a>
-			<a href="javascript:void(0)" onclick="toggleSidebar('about')">
+			<a href="javascript:void(0)" onclick="toggleSidebar('about')" title="About">
 				<img src="img/info-large.png">
 			</a>
-			<a href="javascript:void(0)" onclick="toggleSidebar('reference')">
+			<a href="javascript:void(0)" onclick="toggleSidebar('reference')" title="Reference">
 				<img src="img/book.png">
 			</a>
-			<a id="savebutton" href="javascript:void(0)" download="uml.png">
+			<a id="savebutton" href="javascript:void(0)" download="uml.png" title="Download image">
 				<img src="img/camera.png">
 			</a>
-			<a href="javascript:discardCurrentGraph()">
+			<a href="javascript:discardCurrentGraph()" title="Discard">
 				<img src="img/trash.png">
 			</a>
 		</div>
@@ -164,13 +162,18 @@
 ]
 
 [pirate]-:>[marauder]
-[pirate]- 0..7[mischief]
-[jollyness]->[pirate]
+[pirate]-[<database>treasure;chest]
+[jollyness]<-->[pirate]
 [jollyness]->[rum]
 [jollyness]->[singing]
-[pirate]-> *[rum|tastiness: Int|swig()]
+[pirate] drink ->[rum|tastiness: Int|swig()]
 [pirate]->[singing]
-[singing]<->[rum]</script>
+[singing]<->[rum]
+
+[<start>s]->[<process>plunder]
+[plunder]->[<choice>more loot]
+[more loot]->[s]
+[more loot] no ->[<end>e]</script>
 
 	<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
 	<script src="lib/underscore.js"></script>

@@ -95,6 +95,9 @@ a:hover {
 	font-family: monospace;
 	padding: 70px 10px 200px 20px;
 }
+.content p {
+	font-family: Calibri, Helvetica, sans-serif
+}
 .content label{
 	display: block;
 	font-family: Calibri, Helvetica, sans-serif;
