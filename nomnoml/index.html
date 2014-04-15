@@ -182,17 +182,16 @@
 	link.addEventListener('click', downloadImage, false);
 	function downloadImage(){
 		var url = canvas.toDataURL('image/png')
-		var downloadUrl = url.replace(/^data:image\/[^;]/, 'data:application/octet-stream')
-	    link.href = downloadUrl;
+		link.href = url;
 	}
 }())
 
 function toggleSidebar(id){
 	var sidebars = ['reference', 'about']
 	_.chain(sidebars).without(id).each(function (key){
-		document.getElementById(key).classList.toggle('visible', false);
+		document.getElementById(key).classList.remove('visible')
 	})
-	document.getElementById(id).classList.toggle('visible');
+	document.getElementById(id).classList.toggle('visible')
 }
 
 function fillScreen(){
