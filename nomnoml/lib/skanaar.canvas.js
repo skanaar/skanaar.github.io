@@ -69,10 +69,34 @@ skanaar.Canvas = function (canvas, callbacks){
 				ctx.arc(x, y, r, 0, twopi)
 			return chainable
 		},
+		ellipse: function (center, rx, ry, start, stop){
+			if (start === undefined) start = 0
+			if (stop === undefined) stop = twopi
+			ctx.beginPath()
+			ctx.save()
+			ctx.translate(center.x, center.y)
+			ctx.scale(1, ry/rx)
+			ctx.arc(0, 0, rx/2, start, stop)
+			ctx.restore()
+			return chainable
+		},
 		arc: function (x, y, r, start, stop){
 			ctx.beginPath()
 			ctx.moveTo(x,y)
 			ctx.arc(x, y, r, start, stop)
+			return chainable
+		},
+		roundRect: function (x, y, w, h, r){
+			g.ctx.beginPath()
+			g.ctx.moveTo(x+r, y)
+			g.ctx.arcTo(x+w, y, x+w, y+r, r)
+			g.ctx.lineTo(x+w, y+h-r)
+			g.ctx.arcTo(x+w, y+h, x+w-r, y+h, r)
+			g.ctx.lineTo(x+r, y+h)
+			g.ctx.arcTo(x, y+h, x, y+h-r, r)
+			g.ctx.lineTo(x, y+r)
+			g.ctx.arcTo(x, y, x+r, y, r)
+			g.ctx.closePath()
 			return chainable
 		},
 		path: tracePath,

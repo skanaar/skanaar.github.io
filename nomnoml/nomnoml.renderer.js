@@ -26,6 +26,14 @@ nomnoml.render = function (graphics, config, compartment){
 				case 'CLASS': return { bold: true, center: true }
 				case 'FRAME': return { bold: false, center: false, frameHeader: true }
 				case 'ABSTRACT': return { italic: true, bold: true, center: true}
+				case 'STATE': return { bold: false, center: true}
+				case 'DATABASE': return { bold: true, center: true}
+				case 'NOTE': return {}
+				case 'START': return { empty: true }
+				case 'END': return { empty: true }
+				case 'STATE': return { center: true }
+				case 'CHOICE': return { center: true }
+				case 'PROCESS': return {}
 			}
 		}
 		return {}
@@ -50,6 +58,22 @@ nomnoml.render = function (graphics, config, compartment){
 				{x: x+node.width-margin, y: y+margin},
 				{x: x+node.width, y: y+margin}
 			]).stroke()
+		} else if (node.type === 'START') {
+			g.ctx.fillStyle = config.stroke
+			g.circle(x+node.width/2, y+node.height/2, node.height/2.5).fill()
+		} else if (node.type === 'END') {
+			g.circle(x+node.width/2, y+node.height/2, node.height/3).fill().stroke()
+			g.ctx.fillStyle = config.stroke
+			g.circle(x+node.width/2, y+node.height/2, node.height/3-margin/2).fill()
+		} else if (node.type === 'STATE') {
+			g.roundRect(x, y, node.width, node.height, margin*2).fill().stroke()
+		} else if (node.type === 'CHOICE') {
+			g.circuit([
+				{x:node.x, y:y - margin},
+				{x:x+node.width + margin, y:node.y},
+				{x:node.x, y:y+node.height + margin},
+				{x:x - margin, y:node.y}
+			]).fill().stroke()
 		} else if (node.type === 'PACKAGE') {
 			var headHeight = node.compartments[0].height
 			g.ctx.fillRect(x, y+headHeight, node.width, node.height-headHeight)
@@ -62,18 +86,36 @@ nomnoml.render = function (graphics, config, compartment){
 				{x:x+w, y:y},
 				{x:x+w, y:y+headHeight}
 		    ]).fill().stroke()
+		} else if (node.type === 'PROCESS') {
+			g.circuit([
+				{x: x, y: y},
+				{x: x+node.width-margin, y: y},
+				{x: x+node.width+margin, y: y+node.height/2},
+				{x: x+node.width-margin, y: y+node.height},
+				{x: x, y: y+node.height}
+			]).fill().stroke()
+		} else if (node.type === 'DATABASE') {
+			var cx = x+node.width/2
+			var cy = y-margin/2
+			g.ctx.fillRect(x, y, node.width, node.height)
+			g.path([{x: x, y: cy}, {x: x, y: cy+node.height}]).stroke()
+			g.path([{x: x+node.width, y: cy}, {x: x+node.width, y: cy+node.height}]).stroke()
+			g.ellipse({x: cx, y: cy}, node.width, margin*1.5).fill().stroke()
+			g.ellipse({x: cx, y: cy+node.height}, node.width, margin*1.5, 0, 3.1416).fill().stroke()
 		} else {
 			g.ctx.fillRect(x, y, node.width, node.height)
 			g.ctx.strokeRect(x, y, node.width, node.height)
 		}
 		var yDivider = y
 		_.each(node.compartments, function (part, i){
+			var s = textStyle(node, i)
+			if (s.empty) return
 			g.ctx.save()
 			g.ctx.translate(x, yDivider)
-			var s = textStyle(node, i)
 			setFont(config, s.bold ? 'bold' : 'normal', s.italic)
 			renderCompartment(part, s.center, level+1)
 			g.ctx.restore()
+			if (i+1 == node.compartments.length) return
 			yDivider += part.height
 			if (node.type === 'FRAME' && i === 0){
 				var w = g.ctx.measureText(node.name).width + part.height/2 + margin
@@ -131,7 +173,7 @@ nomnoml.render = function (graphics, config, compartment){
 		g.ctx.fillText(r.startLabel, start.x+margin, start.y+margin+config.fontSize)
 		g.ctx.fillText(r.endLabel, end.x+margin, end.y-margin)
 
-		var dash = 3*config.lineWidth
+		var dash = 2*config.lineWidth
 
 		if (r.assoc == '-'){
 			strokePath(path)
