@@ -63,7 +63,7 @@
 		<i class="fa fa-edit"></i> Edit profile
 	</a>
 	<h2>{{settings.name}}</h2>
-	<img ng-src="{{settings.imageurl}}" width="150" height="150">
+	<img ng-src="api/?action=get_image&username={{username}}" width="150" height="150">
 	<div class="properties">
 		<div><b>Company/Organisation</b> <span>{{settings.organisation}}</span></div>
 		<div><b>Change speed</b> <span>{{settings.speed}}</span></div>

@@ -10,7 +10,6 @@ function isSuperUser($name){
 	return $name == 'apa';
 }
 
-session_start();
 if (!isset($_REQUEST['action'])){
 	fail('no action specified');
 	exit();
@@ -43,7 +42,7 @@ try {
 		$payload = $_REQUEST['payload'];
 		if (Session::isActive()){
 			$dao = new SettingsStorage();
-			$dao->write(Session::get(), $payload);
+			$dao->write(Session::get(), 'application/json', $payload);
 			echo 'write complete';
 		}
 		else
@@ -53,6 +52,13 @@ try {
 	if ($action == 'read_settings'){
 		$dao = new SettingsStorage();
 		echo $dao->read($_REQUEST['username']);
+	}
+
+	if ($action == 'get_image'){
+		$dao = new ImageStorage();
+		$entry = $dao->readEntry($_REQUEST['username']);
+		header('Content-Type: ' . $entry['type']);
+		echo $entry['data'];
 	}
 
 	if ($action == 'new_account'){
@@ -108,6 +114,8 @@ try {
 		echo Session::get();
 	}
 
+} catch (PDOException $e) {
+	fail($e->getMessage());
 } catch (Exception $e) {
 	fail('failure');
 }

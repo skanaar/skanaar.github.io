@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 class Config {
 	const connection = 'mysql:host=localhost;port=3306;dbname=cluster';
 }
@@ -60,26 +62,34 @@ class AccountStorage extends Storage {
 
 class BlobStorage extends Storage {
 	protected $key = 'null';
+	protected $table = 'null';
 
 	function read($username) {
-		$q = 'SELECT data FROM blobs WHERE username = :user AND blobs.key = :key';
+		return $this->readEntry($username)['data'];
+	}
+
+	function readEntry($username) {
+		$TBL = $this->table;
+		$q = "SELECT data, type FROM $TBL WHERE username = :user AND $TBL.key = :key";
 		$s = $this->pdo->prepare($q);
 		$s->bindParam(':user', $username);
 		$s->bindParam(':key', $this->key);
 		$s->execute();
 		$row = $s->fetch(PDO::FETCH_ASSOC);
 		if ($row == false)
-			throw new Exception("No [".$this->key."] were found for [$user]");
-		return $row['data'];
+			throw new Exception("No [".$this->key."] were found for [$username]");
+		return array('data' => $row['data'], 'type' => $row['type']);
 	}
 
-	function write($username, $data) {
-		$q = 'INSERT INTO blobs (username, blobs.key, data) '.
-			 'VALUES (:user, :key, :data) '.
+	function write($username, $type, $data) {
+		$TBL = $this->table;
+		$q = "INSERT INTO $TBL (username, $TBL.key, $TBL.type, data) ".
+			 'VALUES (:user, :key, :type, :data) '.
 			 'ON DUPLICATE KEY UPDATE data = :data';
 		$s = $this->pdo->prepare($q);
 		$s->bindParam(':user', $username);
 		$s->bindParam(':key', $this->key);
+		$s->bindParam(':type', $type);
 		$s->bindParam(':data', $data);
 		$s->execute();
 	}
@@ -87,4 +97,10 @@ class BlobStorage extends Storage {
 
 class SettingsStorage extends BlobStorage {
 	protected $key = 'settings';
+	protected $table = 'texts';
+}
+
+class ImageStorage extends BlobStorage {
+	protected $key = 'profile_picture';
+	protected $table = 'blobs';
 }

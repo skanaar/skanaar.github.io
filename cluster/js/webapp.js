@@ -486,7 +486,7 @@ angular.module('cluster').controller('DashboardCtrl', function ($scope, $http, u
     $http.get('api/?action=read_settings&username='+localStorage.user).then(function (response){
         $scope.settings = response.data
     })
-    $scope.imageUrl = 'data/user-img/' + localStorage.user + '.jpg'
+    $scope.username = localStorage.user
     $scope.setUpdateKind = function (u){
         $scope.updateKind = ($scope.updateKind === u) ? null : u
     }
