@@ -201,10 +201,6 @@ function toggleSidebar(id){
 }
 
 function fillScreen(){
-	w = canvas.parentElement.offsetWidth
-	h = canvas.parentElement.offsetHeight
-	canvas.setAttribute('width', w*0.75)
-	canvas.setAttribute('height', h-200)
 	sourceChanged()
 }
 
@@ -268,7 +264,7 @@ function sourceChanged(){
 		var h = layout.height * config.zoom
 		canvas.width = w
 		canvas.height = h
-		jqCanvas.css('top', 150)
+		jqCanvas.css('top', 300*(1-h/viewport.height()))
 		jqCanvas.css('left', viewport.width()/2+150 - w/2)
 		nomnoml.render(g, config, layout)
 		$('#linemarker').css('top', -30)
