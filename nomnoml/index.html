@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>nomnoml</title>
-<link rel="stylesheet" href="../cluster/css/boilerplate.css">
-<link rel="stylesheet" href="../cluster/css/normalize.css">
+<link rel="stylesheet" href="lib/boilerplate.css">
+<link rel="stylesheet" href="lib/normalize.css">
 <link rel="stylesheet" href="nomnoml.css">
 <link rel="shortcut icon" href="favicon.png">
 </head>
@@ -15,6 +15,7 @@
 
 		<canvas id="canvas" width="800" height="800"></canvas>
 		<textarea id="textarea" spellcheck="false"></textarea>
+		<textarea id="linenumbers" disabled></textarea>
 
 		<div id="reference" class="sidebar">
 			<div class="content">
@@ -71,8 +72,10 @@
 				<p>Created by Daniel Kallin (reach him at his gmail)</p>
 				<p>Nomnoml was made possible by the cool projects 
 				<a href="http://zaach.github.io/jison/">jison</a>, 
-				<a href="https://github.com/cpettitt/dagre">dagre</a> and
-				<a href="http://underscorejs.org">underscore</a>
+				<a href="https://github.com/cpettitt/dagre">dagre</a>,
+				<a href="http://underscorejs.org">underscore</a>,
+				<a href="http://typicons.com/">typicons</a> and
+				<a href="http://ethanschoonover.com/solarized">solarized</a>
 				</p>
 				
 				<hr>
@@ -186,7 +189,10 @@
 	<script src="nomnoml.layouter.js"></script>
 	<script src="nomnoml.renderer.js"></script>
 	<script>
-(function (){
+
+document.getElementById('linenumbers').value = _.times(50, _.identity).join('\n')
+
+;(function (){
 	var link = document.getElementById('savebutton')
 	link.addEventListener('click', downloadImage, false);
 	function downloadImage(){
