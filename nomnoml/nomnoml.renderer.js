@@ -25,7 +25,7 @@ nomnoml.render = function (graphics, config, compartment){
 			switch (node.type){
 				case 'CLASS': return { bold: true, center: true }
 				case 'FRAME': return { bold: false, center: false, frameHeader: true }
-				case 'ABSTRACT': return { italic: true, bold: true, center: true}
+				case 'ABSTRACT': return { italic: true, bold: false, center: true}
 				case 'STATE': return { bold: false, center: true}
 				case 'DATABASE': return { bold: true, center: true}
 				case 'NOTE': return {}
@@ -79,7 +79,6 @@ nomnoml.render = function (graphics, config, compartment){
 			g.ctx.fillRect(x, y+headHeight, node.width, node.height-headHeight)
 			g.ctx.strokeRect(x, y+headHeight, node.width, node.height-headHeight)
 			var w = g.ctx.measureText(node.name).width + 2*margin
-			console.log(node)
 			g.circuit([
 				{x:x, y:y+headHeight},
 				{x:x, y:y},
@@ -136,7 +135,20 @@ nomnoml.render = function (graphics, config, compartment){
 			var fac = Math.max(config.spacing, dist(p[0], _.last(p))/2)
 			p[len-2] = add(p[len-1], mult(normalize(diff(p[len-2], p[len-1])), fac))
 		}
-		if (config.edges === 'curved' && p.length === 4){
+		if (config.edges === 'rounded'){
+			var radius = config.spacing * config.bendSize
+	        g.ctx.beginPath()
+	        g.ctx.moveTo(p[0].x, p[0].y)
+			for (var i = 1; i < p.length-1; i++){
+				var vec = diff(p[i], p[i-1])
+				var bendStart = add(p[i-1], mult(normalize(vec), mag(vec)-radius))
+				g.ctx.lineTo(bendStart.x, bendStart.y)
+				g.ctx.arcTo(p[i].x, p[i].y, p[i+1].x, p[i+1].y, radius)
+			}
+			g.ctx.lineTo(_.last(p).x, _.last(p).y)
+	        g.ctx.stroke()
+		}
+		else if (config.edges === 'curved' && p.length === 4){
 			enhanceEnd(p)
 	        g.ctx.beginPath()
 	        g.ctx.moveTo(p[0].x, p[0].y)
@@ -213,17 +225,25 @@ nomnoml.render = function (graphics, config, compartment){
 			strokePath(path)
 			drawArrow(path.reverse(), filled, start, diamond)
 		}
-		else if (r.assoc == '-:>'){
-			strokePath(path)
-			drawArrow(path, empty, end)
-		}
 		else if (r.assoc == '-->'){
 			g.dashPath(path, dash, dash)
 			drawArrow(path, filled, end)
 		}
+		else if (r.assoc == '-:>'){
+			strokePath(path)
+			drawArrow(path, empty, end)
+		}
 		else if (r.assoc == '--:>'){
 			g.dashPath(path, dash, dash)
 			drawArrow(path, empty, end)
+		}
+		else if (r.assoc == '<:-'){
+			strokePath(path)
+			drawArrow(path.reverse(), empty, start)
+		}
+		else if (r.assoc == '<:--'){
+			g.dashPath(path, dash, dash)
+			drawArrow(path.reverse(), empty, start)
 		}
 	}
 

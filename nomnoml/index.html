@@ -21,16 +21,18 @@
 			<div class="content">
 				<h2>Association types</h2>
 				<b>association</b> -<br>
-				<b>association</b> -><br>
-				<b>association</b> <-><br>
-				<b>dependency</b> --><br>
-				<b>dependency</b> <--><br>
-				<b>generalization</b> -:><br>
-				<b>implementation</b> --:><br>
+				<b>association</b> -&gt;<br>
+				<b>association</b> &lt;-&gt;<br>
+				<b>dependency</b> --&gt;<br>
+				<b>dependency</b> &lt;--&gt;<br>
+				<b>generalization</b> -:&gt;<br>
+				<b>generalization</b> &lt;:-<br>
+				<b>implementation</b> --:&gt;<br>
+				<b>implementation</b> &lt;:--<br>
 				<b>composition</b> +-<br>
-				<b>composition</b> +-><br>
+				<b>composition</b> +-&gt;<br>
 				<b>aggregation</b> o-<br>
-				<b>aggregation</b> o-><br>
+				<b>aggregation</b> o-&gt;<br>
 				<b>note</b> --<br>
 
 				<h2>Classifier types</h2>
@@ -249,7 +251,8 @@ function getConfig(d){
 		fillArrows: d.fillArrows === 'true',
 		fill: (d.fill || '#eee8d5,#fdf6e3,#eee8d5,#fdf6e3').split(','),
 		stroke: d.stroke || '#33322E',
-		edges: {curved: 'curved', hard: 'hard'}[d.edges] || 'hard',
+		edges: {curved: 'curved', hard: 'hard', rounded: 'rounded'}[d.edges] || 'rounded',
+		bendSize: +d.bendSize || 0.3,
 		zoom: +d.zoom || 1
 	}
 }
