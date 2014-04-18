@@ -160,24 +160,23 @@
 		</div>
 	</div>
 
-	<script type="text/vnd.nomnoml.class" id="defaultGraph">[jollyness|magnitude: Real]
-[pirate|eyeCount: Int|raid();pillage()|
+	<script type="text/vnd.nomnoml.class" id="defaultGraph">[Pirate|eyeCount: Int|raid();pillage()|
   [beard]--[parrot]
   [beard]-:>[foul mouth]
 ]
 
-[pirate]-:>[marauder]
-[pirate]-[<database>treasure;chest]
-[jollyness]<-->[pirate]
+[<abstract>Marauder]<:--[Pirate]
+[Pirate]- 0..7[mischief]
+[jollyness]->[Pirate]
 [jollyness]->[rum]
 [jollyness]->[singing]
-[pirate] drink ->[rum|tastiness: Int|swig()]
-[pirate]->[singing]
+[Pirate]-> *[rum|tastiness: Int|swig()]
+[Pirate]->[singing]
 [singing]<->[rum]
 
-[<start>s]->[<process>plunder]
+[<start>st]->[<state>plunder]
 [plunder]->[<choice>more loot]
-[more loot]->[s]
+[more loot]->[st]
 [more loot] no ->[<end>e]</script>
 
 	<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
