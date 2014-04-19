@@ -20,9 +20,19 @@
     function average(list, plucker){
         return sum(list, plucker) / list.length
     }
+    function trim(str){
+        return str.trim()
+    }
+    function hasSubstring(haystack, needle){
+        if (needle === '') return true
+        if (haystack == null) return false
+        return haystack.indexOf(needle) !== -1
+    }
     _.mixin({
         sum: sum,
         average: average,
-        randomName: randomName
+        randomName: randomName,
+        trim: trim,
+        hasSubstring: hasSubstring
     })
 }())

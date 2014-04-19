@@ -130,11 +130,6 @@ nomnoml.render = function (graphics, config, compartment){
 	}
 
 	function strokePath(p){
-		function enhanceEnd(list){
-			var len = p.length
-			var fac = Math.max(config.spacing, dist(p[0], _.last(p))/2)
-			p[len-2] = add(p[len-1], mult(normalize(diff(p[len-2], p[len-1])), fac))
-		}
 		if (config.edges === 'rounded'){
 			var radius = config.spacing * config.bendSize
 	        g.ctx.beginPath()
@@ -146,20 +141,6 @@ nomnoml.render = function (graphics, config, compartment){
 				g.ctx.arcTo(p[i].x, p[i].y, p[i+1].x, p[i+1].y, radius)
 			}
 			g.ctx.lineTo(_.last(p).x, _.last(p).y)
-	        g.ctx.stroke()
-		}
-		else if (config.edges === 'curved' && p.length === 4){
-			enhanceEnd(p)
-	        g.ctx.beginPath()
-	        g.ctx.moveTo(p[0].x, p[0].y)
-	        g.ctx.bezierCurveTo(p[1].x, p[1].y, p[2].x, p[2].y, p[3].x, p[3].y)
-	        g.ctx.stroke()
-		}
-		else if (config.edges === 'curved' && p.length === 3){
-			enhanceEnd(p)
-	        g.ctx.beginPath()
-	        g.ctx.moveTo(p[0].x, p[0].y)
-	        g.ctx.quadraticCurveTo(p[1].x, p[1].y, p[2].x, p[2].y)
 	        g.ctx.stroke()
 		}
 		else {
@@ -185,66 +166,27 @@ nomnoml.render = function (graphics, config, compartment){
 		g.ctx.fillText(r.startLabel, start.x+margin, start.y+margin+config.fontSize)
 		g.ctx.fillText(r.endLabel, end.x+margin, end.y-margin)
 
-		var dash = 2*config.lineWidth
+		if (_.hasSubstring(r.assoc, '--')){
+			var dash = 2*config.lineWidth
+			g.dashPath(path, dash, dash)
+		}
+		else
+			strokePath(path)
 
-		if (r.assoc == '-'){
-			strokePath(path)
+		function drawArrowEnd(id, path, end){
+			if (id === '>' || id === '<')
+				drawArrow(path, filled, end)
+			else if (id === ':>' || id === '<:')
+				drawArrow(path, empty, end)
+			else if (id === '+')
+				drawArrow(path, filled, end, diamond)
+			else if (id === 'o')
+				drawArrow(path, empty, end, diamond)
 		}
-		else if (r.assoc == '--'){
-			g.dashPath(path, dash, dash)
-		}
-		else if (r.assoc == '->'){
-			strokePath(path)
-			drawArrow(path, filled, end)
-		}
-		else if (r.assoc == '<->'){
-			strokePath(path)
-			drawArrow(path, filled, end)
-			drawArrow(path.reverse(), filled, start)
-		}
-		else if (r.assoc == '<-->'){
-			g.dashPath(path, dash, dash)
-			drawArrow(path, filled, end)
-			drawArrow(path.reverse(), filled, start)
-		}
-		else if (r.assoc == 'o->'){
-			strokePath(path)
-			drawArrow(path, filled, end)
-			drawArrow(path.reverse(), empty, start, diamond)
-		}
-		else if (r.assoc == '+->'){
-			strokePath(path)
-			drawArrow(path, filled, end)
-			drawArrow(path.reverse(), filled, start, diamond)
-		}
-		else if (r.assoc == 'o-'){
-			strokePath(path)
-			drawArrow(path.reverse(), empty, start, diamond)
-		}
-		else if (r.assoc == '+-'){
-			strokePath(path)
-			drawArrow(path.reverse(), filled, start, diamond)
-		}
-		else if (r.assoc == '-->'){
-			g.dashPath(path, dash, dash)
-			drawArrow(path, filled, end)
-		}
-		else if (r.assoc == '-:>'){
-			strokePath(path)
-			drawArrow(path, empty, end)
-		}
-		else if (r.assoc == '--:>'){
-			g.dashPath(path, dash, dash)
-			drawArrow(path, empty, end)
-		}
-		else if (r.assoc == '<:-'){
-			strokePath(path)
-			drawArrow(path.reverse(), empty, start)
-		}
-		else if (r.assoc == '<:--'){
-			g.dashPath(path, dash, dash)
-			drawArrow(path.reverse(), empty, start)
-		}
+
+		var tokens = r.assoc.split('-')
+		drawArrowEnd(_.last(tokens), path, end)
+		drawArrowEnd(_.first(tokens), path.reverse(), start)
 	}
 
 	function rectIntersection(p1, p2, rect){

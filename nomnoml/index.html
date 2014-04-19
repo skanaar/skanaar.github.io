@@ -60,7 +60,7 @@
 				#fillArrows: false<br>
 				#fill: #eee8d5, #fdf6e3<br>
 				#stroke: #33322e<br>
-				#edges: hard | curved<br>
+				#edges: rounded | hard<br>
 				#zoom: 1<br>
 			</div>
 
@@ -250,7 +250,7 @@ function getConfig(d){
 		fillArrows: d.fillArrows === 'true',
 		fill: (d.fill || '#eee8d5,#fdf6e3,#eee8d5,#fdf6e3').split(','),
 		stroke: d.stroke || '#33322E',
-		edges: {curved: 'curved', hard: 'hard', rounded: 'rounded'}[d.edges] || 'rounded',
+		edges: {hard: 'hard', rounded: 'rounded'}[d.edges] || 'rounded',
 		bendSize: +d.bendSize || 0.3,
 		zoom: +d.zoom || 1
 	}
