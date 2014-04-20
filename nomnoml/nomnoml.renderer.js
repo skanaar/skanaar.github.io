@@ -2,19 +2,19 @@ var nomnoml = nomnoml || {}
 
 nomnoml.render = function (graphics, config, compartment){
 
-	var margin = config.margin
+	var padding = config.padding
 	var g = graphics
 
 	function renderCompartment(compartment, centerText, level){
 		g.ctx.save()
-		g.ctx.translate(margin, margin)
+		g.ctx.translate(padding, padding)
 		g.ctx.fillStyle = config.stroke
 		_.each(compartment.lines, function (text, i){
 			g.ctx.textAlign = centerText ? 'center' : 'left'
-			var x = centerText ? compartment.width/2 - margin : 0
+			var x = centerText ? compartment.width/2 - padding : 0
 			g.ctx.fillText(text, x, (0.5+(i+.5)*config.leading)*config.fontSize)
 		})
-		g.ctx.translate(config.diagramMargin, config.diagramMargin)
+		g.ctx.translate(config.gutter, config.gutter)
 		_.each(compartment.relations, function (r){ renderRelation(r, compartment) })
 		_.each(compartment.nodes, function (n){ renderNode(n, level) })
 		g.ctx.restore()
@@ -47,16 +47,16 @@ nomnoml.render = function (graphics, config, compartment){
 		if (node.type === 'NOTE'){
 			g.circuit([
 				{x: x, y: y},
-				{x: x+node.width-margin, y: y},
-				{x: x+node.width, y: y+margin},
+				{x: x+node.width-padding, y: y},
+				{x: x+node.width, y: y+padding},
 				{x: x+node.width, y: y+node.height},
 				{x: x, y: y+node.height},
 				{x: x, y: y}
 			]).fill().stroke()
 			g.path([
-				{x: x+node.width-margin, y: y},
-				{x: x+node.width-margin, y: y+margin},
-				{x: x+node.width, y: y+margin}
+				{x: x+node.width-padding, y: y},
+				{x: x+node.width-padding, y: y+padding},
+				{x: x+node.width, y: y+padding}
 			]).stroke()
 		} else if (node.type === 'START') {
 			g.ctx.fillStyle = config.stroke
@@ -64,21 +64,22 @@ nomnoml.render = function (graphics, config, compartment){
 		} else if (node.type === 'END') {
 			g.circle(x+node.width/2, y+node.height/2, node.height/3).fill().stroke()
 			g.ctx.fillStyle = config.stroke
-			g.circle(x+node.width/2, y+node.height/2, node.height/3-margin/2).fill()
+			g.circle(x+node.width/2, y+node.height/2, node.height/3-padding/2).fill()
 		} else if (node.type === 'STATE') {
-			g.roundRect(x, y, node.width, node.height, margin*2).fill().stroke()
+			var r = Math.min(padding*2*config.leading, node.height/2)
+			g.roundRect(x, y, node.width, node.height, r).fill().stroke()
 		} else if (node.type === 'CHOICE') {
 			g.circuit([
-				{x:node.x, y:y - margin},
-				{x:x+node.width + margin, y:node.y},
-				{x:node.x, y:y+node.height + margin},
-				{x:x - margin, y:node.y}
+				{x:node.x, y:y - padding},
+				{x:x+node.width + padding, y:node.y},
+				{x:node.x, y:y+node.height + padding},
+				{x:x - padding, y:node.y}
 			]).fill().stroke()
 		} else if (node.type === 'PACKAGE') {
 			var headHeight = node.compartments[0].height
 			g.ctx.fillRect(x, y+headHeight, node.width, node.height-headHeight)
 			g.ctx.strokeRect(x, y+headHeight, node.width, node.height-headHeight)
-			var w = g.ctx.measureText(node.name).width + 2*margin
+			var w = g.ctx.measureText(node.name).width + 2*padding
 			g.circuit([
 				{x:x, y:y+headHeight},
 				{x:x, y:y},
@@ -88,19 +89,19 @@ nomnoml.render = function (graphics, config, compartment){
 		} else if (node.type === 'PROCESS') {
 			g.circuit([
 				{x: x, y: y},
-				{x: x+node.width-margin, y: y},
-				{x: x+node.width+margin, y: y+node.height/2},
-				{x: x+node.width-margin, y: y+node.height},
+				{x: x+node.width-padding, y: y},
+				{x: x+node.width+padding, y: y+node.height/2},
+				{x: x+node.width-padding, y: y+node.height},
 				{x: x, y: y+node.height}
 			]).fill().stroke()
 		} else if (node.type === 'DATABASE') {
 			var cx = x+node.width/2
-			var cy = y-margin/2
+			var cy = y-padding/2
 			g.ctx.fillRect(x, y, node.width, node.height)
 			g.path([{x: x, y: cy}, {x: x, y: cy+node.height}]).stroke()
 			g.path([{x: x+node.width, y: cy}, {x: x+node.width, y: cy+node.height}]).stroke()
-			g.ellipse({x: cx, y: cy}, node.width, margin*1.5).fill().stroke()
-			g.ellipse({x: cx, y: cy+node.height}, node.width, margin*1.5, 0, 3.1416).fill().stroke()
+			g.ellipse({x: cx, y: cy}, node.width, padding*1.5).fill().stroke()
+			g.ellipse({x: cx, y: cy+node.height}, node.width, padding*1.5, 0, 3.1416).fill().stroke()
 		} else {
 			g.ctx.fillRect(x, y, node.width, node.height)
 			g.ctx.strokeRect(x, y, node.width, node.height)
@@ -117,7 +118,7 @@ nomnoml.render = function (graphics, config, compartment){
 			if (i+1 == node.compartments.length) return
 			yDivider += part.height
 			if (node.type === 'FRAME' && i === 0){
-				var w = g.ctx.measureText(node.name).width + part.height/2 + margin
+				var w = g.ctx.measureText(node.name).width + part.height/2 + padding
 				g.path([
 					{x:x, y:yDivider},
 					{x:x+w-part.height/2, y:yDivider},
@@ -163,8 +164,8 @@ nomnoml.render = function (graphics, config, compartment){
 
 		g.ctx.fillStyle = config.stroke
 		setFont(config, 'normal')
-		g.ctx.fillText(r.startLabel, start.x+margin, start.y+margin+config.fontSize)
-		g.ctx.fillText(r.endLabel, end.x+margin, end.y-margin)
+		g.ctx.fillText(r.startLabel, start.x+padding, start.y+padding+config.fontSize)
+		g.ctx.fillText(r.endLabel, end.x+padding, end.y-padding)
 
 		if (_.hasSubstring(r.assoc, '--')){
 			var dash = 2*config.lineWidth
@@ -193,14 +194,14 @@ nomnoml.render = function (graphics, config, compartment){
 		var v = diff(p1, p2)
 		for(var t=1; t>=0; t-= 0.01){
 			var p = mult(v, t)
-			if(Math.abs(p.x) <= rect.width/2 && Math.abs(p.y) <= rect.height/2)
+			if(Math.abs(p.x) <= rect.width/2+config.edgeMargin && Math.abs(p.y) <= rect.height/2+config.edgeMargin)
 				return add(p2, p)
 		}
 		return p1
 	}
 
 	function drawArrow(path, isOpen, arrowPoint, diamond){
-		var size = config.spacing / 30
+		var size = (config.spacing - 2*config.edgeMargin) * config.arrowSize / 30
 		var v = diff(path[path.length-2], _.last(path))
 		var nv = normalize(v)
 		function getArrowBase(s){ return add(arrowPoint, mult(nv, s*size)) }
@@ -227,6 +228,7 @@ nomnoml.render = function (graphics, config, compartment){
 	g.ctx.save()
 	g.ctx.lineWidth = config.lineWidth
 	g.ctx.lineJoin = 'round'
+	g.ctx.lineCap = 'round'
 	g.ctx.strokeStyle = config.stroke
 	g.ctx.scale(config.zoom, config.zoom)
 	snapToPixels()

@@ -49,18 +49,21 @@
 				[&lt;choice&gt; name]<br>
 
 				<h2>Directives</h2>
+				#arrowSize: 1<br>
+				#bendSize: 0.3<br>
+				#direction: down | right<br>
+				#gutter: 5<br>
+				#edgeMargin: 0<br>
+				#edges: hard | rounded<br>
+				#fill: #eee8d5; #fdf6e3; #eee8d5<br>
+				#fillArrows: false<br>
+				#font: Calibri<br>
 				#fontSize: 12<br>
 				#leading: 1.25<br>
-				#font: Calibri<br>
 				#lineWidth: 3<br>
-				#margin: 8<br>
-				#diagramMargin: 5<br>
+				#padding: 8<br>
 				#spacing: 40<br>
-				#direction: down<br>
-				#fillArrows: false<br>
-				#fill: #eee8d5, #fdf6e3<br>
-				#stroke: #33322e<br>
-				#edges: rounded | hard<br>
+				#stroke: #33322E<br>
 				#zoom: 1<br>
 			</div>
 
@@ -135,7 +138,7 @@
 				<label>Layout the diagram really tight</label>
 				#fontSize: 8<br>
 				#spacing: 12<br>
-				#margin: 3
+				#padding: 3
 
 			</div>
 			<div class="logo-background"></div>
@@ -239,19 +242,21 @@ function setFont(config, isBold, isItalic){
 
 function getConfig(d){
 	return {
+		arrowSize: +d.arrowSize || 1,
+		bendSize: +d.bendSize || 0.3,
+		direction: {down: 'TB', right: 'LR'}[d.direction] || 'TB',
+		gutter: +d.gutter || 5,
+		edgeMargin: (+d.edgeMargin) || 0,
+		edges: {hard: 'hard', rounded: 'rounded'}[d.edges] || 'rounded',
+		fill: (d.fill || '#eee8d5;#fdf6e3;#eee8d5;#fdf6e3').split(';'),
+		fillArrows: d.fillArrows === 'true',
+		font: d.font || 'Calibri',
 		fontSize: (+d.fontSize) || 12,
 		leading: (+d.leading) || 1.25,
-		font: d.font || 'Calibri',
 		lineWidth: (+d.lineWidth) || 3,
-		margin: (+d.margin) || 8,
-		diagramMargin: (+d.diagramMargin) || 5,
+		padding: (+d.padding) || 8,
 		spacing: (+d.spacing) || 40,
-		direction: {down: 'TB', right: 'LR'}[d.direction] || 'TB',
-		fillArrows: d.fillArrows === 'true',
-		fill: (d.fill || '#eee8d5,#fdf6e3,#eee8d5,#fdf6e3').split(','),
 		stroke: d.stroke || '#33322E',
-		edges: {hard: 'hard', rounded: 'rounded'}[d.edges] || 'rounded',
-		bendSize: +d.bendSize || 0.3,
 		zoom: +d.zoom || 1
 	}
 }

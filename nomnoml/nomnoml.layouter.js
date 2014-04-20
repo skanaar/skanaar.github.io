@@ -26,11 +26,11 @@ nomnoml.layout = function (measurer, config, ast){
 	}
 	function measureLines(lines, fontWeight){
 		if (!lines.length)
-			return { width: 0, height: config.margin }
+			return { width: 0, height: config.padding }
 		setFont(config, fontWeight)
 		return {
-			width: Math.round(_.max(_.map(lines, measurer.textWidth)) + 2*config.margin),
-			height: Math.round(measurer.textHeight() * lines.length + 2*config.margin)
+			width: Math.round(_.max(_.map(lines, measurer.textWidth)) + 2*config.padding),
+			height: Math.round(measurer.textHeight() * lines.length + 2*config.padding)
 		}
 	}
 	function layoutCompartment(c, compartmentIndex){
@@ -64,11 +64,11 @@ nomnoml.layout = function (measurer, config, ast){
 			rels[e].path = _.map(_.flatten([start, value.points, end]), toPoint)
 		})
 		var graph = dLayout.graph()
-		var graphHeight = graph.height ? graph.height + 2*config.diagramMargin : 0
-		var graphWidth = graph.width ? graph.width + 2*config.diagramMargin : 0
+		var graphHeight = graph.height ? graph.height + 2*config.gutter : 0
+		var graphWidth = graph.width ? graph.width + 2*config.gutter : 0
 
-		c.width = Math.max(textSize.width, graphWidth) + 2*config.margin
-		c.height = textSize.height + graphHeight + config.margin
+		c.width = Math.max(textSize.width, graphWidth) + 2*config.padding
+		c.height = textSize.height + graphHeight + config.padding
 	}
 	function layoutClassifier(clas){
 		_.each(clas.compartments, layoutCompartment)
