@@ -29,7 +29,7 @@ hr {
 	background: rgba(0,0,0,0);
 	box-sizing: border-box;
 	border: 0;
-	font-family: Consolas, monospace;
+	font-family: Consolas, Monaco, monospace;
 	color: #657b83;
 	padding: 30px 0 0 40px;
 }
@@ -43,7 +43,7 @@ hr {
 	color: #D4CEBD;
 	border: 0;
 	box-sizing: border-box;
-	font-family: Consolas, monospace;
+	font-family: Consolas, Monaco, monospace;
 	padding: 30px 5px 0 0;
 	overflow-x: hidden;
 	overflow-y: hidden;
@@ -67,7 +67,7 @@ a:hover {
 	position: absolute;
 	top: 20px;
 	right: 30px;
-	font-family: Helvetica, sans-serif;
+	font-family: Calibri, Helvetica, sans-serif;
 	font-weight: bold;
 }
 .tools img {
@@ -108,7 +108,7 @@ a:hover {
 .content {
 	display: block;
 	color: #586e75;
-	font-family: monospace;
+	font-family: Consolas, Monaco, monospace;
 	padding: 70px 10px 200px 20px;
 }
 .content p {
