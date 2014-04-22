@@ -168,11 +168,11 @@ nomnoml.render = function (graphics, config, compartment){
 		g.ctx.fillText(r.endLabel, end.x+padding, end.y-padding)
 
 		if (_.hasSubstring(r.assoc, '--')){
-			var dash = 2*config.lineWidth
-			g.dashPath(path, dash, dash)
+			var dash = Math.max(4, 2*config.lineWidth)
+			g.ctx.setLineDash([dash, dash])
 		}
-		else
-			strokePath(path)
+		strokePath(path)
+		g.ctx.setLineDash([])
 
 		function drawArrowEnd(id, path, end){
 			if (id === '>' || id === '<')
