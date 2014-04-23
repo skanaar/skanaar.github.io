@@ -15,11 +15,15 @@ hr {
 	min-height: 100%;
 }
 #linemarker {
-	background: rgba(255,0,0,0.25);
+	background: rgba(220,50,47,0.75);
 	position: absolute;
 	left: 0;
 	width: 33px;
-	height: 16px
+	height: 18px
+}
+textarea {
+	line-height: 18px;
+	font-size: 16px;
 }
 #textarea {
 	outline: none;
