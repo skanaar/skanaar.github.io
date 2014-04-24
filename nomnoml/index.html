@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="A tool for drawing sassy UML diagrams based on syntax. Provides instant feedback and has a highly customizable styling.">
 <title>nomnoml</title>
 <link rel="stylesheet" href="lib/boilerplate.css">
 <link rel="stylesheet" href="lib/normalize.css">
@@ -13,7 +14,7 @@
 <body>
 	<div class="wrap">
 
-		<canvas id="canvas" width="800" height="800"></canvas>
+		<canvas id="canvas"></canvas>
 		<textarea id="textarea" spellcheck="false"></textarea>
 		<textarea id="linenumbers" disabled></textarea>
 
@@ -76,11 +77,11 @@
 				<p>Try and edit the code on the left and watch the diagram change. Any changes are saved to the browser's <i>localStorage</i>, so your diagram should be here the next time, (but no guarantees).</p>
 				<p>Created by Daniel Kallin (reach him at his gmail)</p>
 				<p>Nomnoml was made possible by the cool projects 
-				<a href="http://zaach.github.io/jison/">jison</a>, 
-				<a href="https://github.com/cpettitt/dagre">dagre</a>,
-				<a href="http://underscorejs.org">underscore</a>,
-				<a href="http://typicons.com/">typicons</a> and
-				<a href="http://ethanschoonover.com/solarized">solarized</a>
+				<a target="_blank" href="http://zaach.github.io/jison/">jison</a>, 
+				<a target="_blank" href="https://github.com/cpettitt/dagre">dagre</a>,
+				<a target="_blank" href="http://underscorejs.org">underscore</a>,
+				<a target="_blank" href="http://typicons.com/">typicons</a> and
+				<a target="_blank" href="http://ethanschoonover.com/solarized">solarized</a>
 				</p>
 				
 				<hr>
@@ -147,15 +148,18 @@
 		<div id="linemarker"></div>
 
 		<div class="tools">
-			<a class="logo" href="#" onclick="toggleSidebar('about')">nomnoml &nbsp;</a>
-			<a href="javascript:void(0)" onclick="toggleSidebar('about')" title="About">
+			<a class="logo" href="#" onclick="nomnoml.toggleSidebar('about')">nomnoml &nbsp;</a>
+			<a href="javascript:void(0)" onclick="nomnoml.toggleSidebar('about')" title="About">
 				<img src="img/info-large.png">
 			</a>
-			<a href="javascript:void(0)" onclick="toggleSidebar('reference')" title="Reference">
+			<a href="javascript:void(0)" onclick="nomnoml.toggleSidebar('reference')" title="Reference">
 				<img src="img/book.png">
 			</a>
 			<a id="savebutton" href="javascript:void(0)" download="uml.png" title="Download image">
 				<img src="img/camera.png">
+			</a>
+			<a id="linkbutton" href="javascript:void(0)" target="_blank" title="Shareable link">
+				<img src="img/link.png">
 			</a>
 			<a href="javascript:discardCurrentGraph()" title="Discard">
 				<img src="img/trash.png">
@@ -182,7 +186,7 @@
 [more loot]->[st]
 [more loot] no ->[<end>e]</script>
 
-	<script src="//code.jquery.com/jquery-2.1.0.min.js"></script>
+	<script src="lib/zepto.min.js"></script>
 	<script src="lib/underscore.js"></script>
 	<script src="lib/underscore.skanaar.js"></script>
 	<script src="lib/dagre.min.js"></script>
@@ -192,107 +196,7 @@
 	<script src="nomnoml.parser.js"></script>
 	<script src="nomnoml.layouter.js"></script>
 	<script src="nomnoml.renderer.js"></script>
-	<script>
-
-document.getElementById('linenumbers').value = _.times(60, _.identity).join('\n')
-
-;(function (){
-	var link = document.getElementById('savebutton')
-	link.addEventListener('click', downloadImage, false);
-	function downloadImage(){
-		var url = canvas.toDataURL('image/png')
-		link.href = url;
-	}
-}())
-
-function toggleSidebar(id){
-	var sidebars = ['reference', 'about']
-	_.chain(sidebars).without(id).each(function (key){
-		document.getElementById(key).classList.remove('visible')
-	})
-	document.getElementById(id).classList.toggle('visible')
-}
-
-function fillScreen(){
-	sourceChanged()
-}
-
-var w, h;
-var canvas = document.getElementById('canvas')
-var textarea = document.getElementById('textarea')
-var g = skanaar.Canvas(canvas, {})
-window.addEventListener('resize', _.throttle(fillScreen, 750, {leading: true}))
-textarea.addEventListener('input', _.debounce(sourceChanged, 300))
-textarea.value = localStorage.getItem('nomnoml.lastSource') || document.getElementById('defaultGraph').innerHTML
-fillScreen()
-
-function discardCurrentGraph(){
-	if (confirm('Do you want to discard current diagram and load the default example?')){
-		textarea.value = document.getElementById('defaultGraph').innerHTML
-		sourceChanged()
-	}
-}
-
-function setFont(config, isBold, isItalic){
-	var style = (isBold === 'bold' ? 'bold ' : '')
-	if (isItalic) style = 'italic ' + style
-	var s = style+config.fontSize+'pt '+config.font+', Helvetica, sans-serif'
-	g.ctx.font = s
-}
-
-function getConfig(d){
-	return {
-		arrowSize: +d.arrowSize || 1,
-		bendSize: +d.bendSize || 0.3,
-		direction: {down: 'TB', right: 'LR'}[d.direction] || 'TB',
-		gutter: +d.gutter || 5,
-		edgeMargin: (+d.edgeMargin) || 0,
-		edges: {hard: 'hard', rounded: 'rounded'}[d.edges] || 'rounded',
-		fill: (d.fill || '#eee8d5;#fdf6e3;#eee8d5;#fdf6e3').split(';'),
-		fillArrows: d.fillArrows === 'true',
-		font: d.font || 'Calibri',
-		fontSize: (+d.fontSize) || 12,
-		leading: (+d.leading) || 1.25,
-		lineWidth: (+d.lineWidth) || 3,
-		padding: (+d.padding) || 8,
-		spacing: (+d.spacing) || 40,
-		stroke: d.stroke || '#33322E',
-		zoom: +d.zoom || 1
-	}
-}
-
-function sourceChanged(){
-	var jqCanvas = $('#canvas')
-	var viewport = $(window)
-	try {
-		var ast = nomnoml.parse(textarea.value)
-		var config = getConfig(ast.directives)
-	    var measurer = {
-	        textWidth: function (s){ return g.ctx.measureText(s).width },
-	        textHeight: function (s){ return config.leading * config.fontSize }
-	    }
-
-		localStorage.setItem('nomnoml.lastSource', textarea.value)
-		g.ctx.clearRect(0, 0, w, h)
-		g.ctx.font = config.fontSize+'pt '+config.font+', Helvetica, sans-serif'
-		var layout = nomnoml.layout(measurer, config, ast)
-		var w = layout.width * config.zoom
-		var h = layout.height * config.zoom
-		canvas.width = w
-		canvas.height = h
-		jqCanvas.css('top', 300*(1-h/viewport.height()))
-		jqCanvas.css('left', viewport.width()/2+150 - w/2)
-		nomnoml.render(g, config, layout)
-		$('#linemarker').css('top', -30)
-	} catch (e){
-		var matches = e.message.match('line ([0-9]*)')
-		if (matches)
-			 $('#linemarker').css('top', 12 + 18*matches[1])
-		else
-			throw e
-	}
-}
-	</script>
+	<script src="nomnoml.app.js"></script>
 	<script>
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

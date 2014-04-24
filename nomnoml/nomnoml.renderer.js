@@ -1,6 +1,6 @@
 var nomnoml = nomnoml || {}
 
-nomnoml.render = function (graphics, config, compartment){
+nomnoml.render = function (graphics, config, compartment, setFont){
 
 	var padding = config.padding
 	var g = graphics
@@ -224,6 +224,7 @@ nomnoml.render = function (graphics, config, compartment){
 			g.ctx.translate(0.5, 0.5)
 	}
 
+	g.clear()
 	setFont(config, 'bold')
 	g.ctx.save()
 	g.ctx.lineWidth = config.lineWidth

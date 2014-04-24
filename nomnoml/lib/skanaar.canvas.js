@@ -61,6 +61,9 @@ skanaar.Canvas = function (canvas, callbacks){
 			ctx.fillStyle = color255(r, g, b)
 			ctx.fillRect (0, 0, canvas.width, canvas.height)
 		},
+		clear: function (){
+			ctx.clearRect(0, 0, canvas.width, canvas.height)
+		},
 		circle: function (x, y, r){
 			ctx.beginPath()
 			if (arguments.length === 2)

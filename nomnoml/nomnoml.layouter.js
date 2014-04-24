@@ -27,7 +27,7 @@ nomnoml.layout = function (measurer, config, ast){
 	function measureLines(lines, fontWeight){
 		if (!lines.length)
 			return { width: 0, height: config.padding }
-		setFont(config, fontWeight)
+		measurer.setFont(config, fontWeight)
 		return {
 			width: Math.round(_.max(_.map(lines, measurer.textWidth)) + 2*config.padding),
 			height: Math.round(measurer.textHeight() * lines.length + 2*config.padding)
