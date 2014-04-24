@@ -86,6 +86,14 @@ a:hover {
 	color: #000;
 	font-size: 175%;
 }
+.tools>#tooltip {
+	color: #000;
+	opacity: 0.5;
+	position: fixed;
+	top: 7px;
+	right: 25px;
+	text-align: right
+}
 
 .sidebar {
 	display: none;

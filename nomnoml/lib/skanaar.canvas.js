@@ -90,16 +90,16 @@ skanaar.Canvas = function (canvas, callbacks){
 			return chainable
 		},
 		roundRect: function (x, y, w, h, r){
-			g.ctx.beginPath()
-			g.ctx.moveTo(x+r, y)
-			g.ctx.arcTo(x+w, y, x+w, y+r, r)
-			g.ctx.lineTo(x+w, y+h-r)
-			g.ctx.arcTo(x+w, y+h, x+w-r, y+h, r)
-			g.ctx.lineTo(x+r, y+h)
-			g.ctx.arcTo(x, y+h, x, y+h-r, r)
-			g.ctx.lineTo(x, y+r)
-			g.ctx.arcTo(x, y, x+r, y, r)
-			g.ctx.closePath()
+			ctx.beginPath()
+			ctx.moveTo(x+r, y)
+			ctx.arcTo(x+w, y, x+w, y+r, r)
+			ctx.lineTo(x+w, y+h-r)
+			ctx.arcTo(x+w, y+h, x+w-r, y+h, r)
+			ctx.lineTo(x+r, y+h)
+			ctx.arcTo(x, y+h, x, y+h-r, r)
+			ctx.lineTo(x, y+r)
+			ctx.arcTo(x, y, x+r, y, r)
+			ctx.closePath()
 			return chainable
 		},
 		path: tracePath,
@@ -107,21 +107,6 @@ skanaar.Canvas = function (canvas, callbacks){
 			tracePath(path, offset, s)
 			ctx.closePath()
 			return chainable
-		},
-		dashPath: function (path, dashLen, spaceLen){
-			spaceLen = spaceLen || dashLen
-			for(var i=1, len=path.length; i<len; i++){
-				var a = path[i-1], b = path[i]
-				var d = Math.sqrt((a.x-b.x)*(a.x-b.x) + (a.y-b.y)*(a.y-b.y))
-				var nx = (b.x-a.x)/d, ny = (b.y-a.y)/d
-				for(var j=0; d>j*(dashLen+spaceLen)+dashLen; j++){
-					var dashStart = (dashLen+spaceLen)*j
-					var dashEnd = (dashLen+spaceLen)*j+dashLen
-					ctx.moveTo(a.x + nx*dashStart, a.y + ny*dashStart)
-					ctx.lineTo(a.x + nx*dashEnd, a.y + ny*dashEnd)
-				}
-			}
-			ctx.stroke()
 		},
 		colorNorm: function (r, g, b, a){
 			return color255(255*r, 255*g, 255*b, a)
