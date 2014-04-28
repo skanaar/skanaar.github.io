@@ -5,14 +5,21 @@ nomnoml.render = function (graphics, config, compartment, setFont){
 	var padding = config.padding
 	var g = graphics
 
-	function renderCompartment(compartment, centerText, level){
+	function renderCompartment(compartment, style, level){
 		g.ctx.save()
 		g.ctx.translate(padding, padding)
 		g.ctx.fillStyle = config.stroke
 		_.each(compartment.lines, function (text, i){
-			g.ctx.textAlign = centerText ? 'center' : 'left'
-			var x = centerText ? compartment.width/2 - padding : 0
-			g.ctx.fillText(text, x, (0.5+(i+.5)*config.leading)*config.fontSize)
+			g.ctx.textAlign = style.center ? 'center' : 'left'
+			var x = style.center ? compartment.width/2 - padding : 0
+			var y = (0.5+(i+.5)*config.leading)*config.fontSize
+			g.ctx.fillText(text, x, y)
+			if (style.underline){
+				var w = g.ctx.measureText(text).width
+				y += Math.round(config.fontSize * 0.1)+0.5
+				g.ctx.lineWidth = Math.round(config.fontSize/10)
+				g.path([{x:x-w/2, y:y}, {x:x+w/2, y:y}]).stroke()
+			}
 		})
 		g.ctx.translate(config.gutter, config.gutter)
 		_.each(compartment.relations, function (r){ renderRelation(r, compartment) })
@@ -24,16 +31,19 @@ nomnoml.render = function (graphics, config, compartment, setFont){
 		if (line === 0){
 			switch (node.type){
 				case 'CLASS': return { bold: true, center: true }
-				case 'FRAME': return { bold: false, center: false, frameHeader: true }
-				case 'ABSTRACT': return { italic: true, bold: false, center: true}
-				case 'STATE': return { bold: false, center: true}
+				case 'INSTANCE': return { center: true, underline: true }
+				case 'FRAME': return { center: false, frameHeader: true }
+				case 'ABSTRACT': return { italic: true, center: true}
+				case 'STATE': return { center: true}
 				case 'DATABASE': return { bold: true, center: true}
 				case 'NOTE': return {}
 				case 'START': return { empty: true }
 				case 'END': return { empty: true }
 				case 'STATE': return { center: true }
+				case 'INPUT': return { center: true }
 				case 'CHOICE': return { center: true }
-				case 'PROCESS': return {}
+				case 'SENDER': return {}
+				case 'RECEIVER': return {}
 			}
 		}
 		return {}
@@ -68,6 +78,13 @@ nomnoml.render = function (graphics, config, compartment, setFont){
 		} else if (node.type === 'STATE') {
 			var r = Math.min(padding*2*config.leading, node.height/2)
 			g.roundRect(x, y, node.width, node.height, r).fill().stroke()
+		} else if (node.type === 'INPUT') {
+			g.circuit([
+				{x:x+padding, y:y},
+				{x:x+node.width, y:y},
+				{x:x+node.width-padding, y:y+node.height},
+				{x:x, y:y+node.height}
+			]).fill().stroke()
 		} else if (node.type === 'CHOICE') {
 			g.circuit([
 				{x:node.x, y:y - padding},
@@ -86,12 +103,20 @@ nomnoml.render = function (graphics, config, compartment, setFont){
 				{x:x+w, y:y},
 				{x:x+w, y:y+headHeight}
 		    ]).fill().stroke()
-		} else if (node.type === 'PROCESS') {
+		} else if (node.type === 'SENDER') {
 			g.circuit([
 				{x: x, y: y},
 				{x: x+node.width-padding, y: y},
 				{x: x+node.width+padding, y: y+node.height/2},
 				{x: x+node.width-padding, y: y+node.height},
+				{x: x, y: y+node.height}
+			]).fill().stroke()
+		} else if (node.type === 'RECEIVER') {
+			g.circuit([
+				{x: x, y: y},
+				{x: x+node.width+padding, y: y},
+				{x: x+node.width-padding, y: y+node.height/2},
+				{x: x+node.width+padding, y: y+node.height},
 				{x: x, y: y+node.height}
 			]).fill().stroke()
 		} else if (node.type === 'DATABASE') {
@@ -113,7 +138,7 @@ nomnoml.render = function (graphics, config, compartment, setFont){
 			g.ctx.save()
 			g.ctx.translate(x, yDivider)
 			setFont(config, s.bold ? 'bold' : 'normal', s.italic)
-			renderCompartment(part, s.center, level+1)
+			renderCompartment(part, s, level+1)
 			g.ctx.restore()
 			if (i+1 == node.compartments.length) return
 			yDivider += part.height
@@ -233,6 +258,6 @@ nomnoml.render = function (graphics, config, compartment, setFont){
 	g.ctx.strokeStyle = config.stroke
 	g.ctx.scale(config.zoom, config.zoom)
 	snapToPixels()
-	renderCompartment(compartment, false, 0)
+	renderCompartment(compartment, {}, 0)
 	g.ctx.restore()
 }
