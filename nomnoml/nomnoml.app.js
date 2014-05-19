@@ -18,6 +18,9 @@ $(function (){
 	textarea.addEventListener('input', _.debounce(sourceChanged, 300))
 	textarea.value = storage.read()
 
+	if (storage.isReadonly) $('#storage-status').show()
+	else $('#storage-status').hide()
+
 	lineNumbers.val(_.times(60, _.identity).join('\n'))
 	initImageDownloadLink(imgLink, canvasElement)
 	sourceChanged()
@@ -42,18 +45,23 @@ $(function (){
 		linkLink.href = base + str.split('\n').join('%0A').split(' ').join('%20')
 	}
 
+	function isViewMode(locationHash){
+	}
+
 	function buildStorage(locationHash){
 		if (locationHash.substring(0,6) === '#view/')
 			return {
 				read: function (){ return decodeURIComponent(locationHash.substring(6)) },
-				save: function (source){ setShareableLink(textarea.value) }
+				save: function (source){ setShareableLink(textarea.value) },
+				isReadonly: true
 			}
 		return {
 			read: function (){ return localStorage['nomnoml.lastSource'] || defaultSource },
 			save: function (source){
 				setShareableLink(textarea.value)
 				localStorage['nomnoml.lastSource'] = source
-			}
+			},
+			isReadonly: false
 		}
 	}
 

@@ -94,6 +94,17 @@ a:hover {
 	right: 25px;
 	text-align: right
 }
+.tools>#storage-status {
+	color: #000;
+	opacity: 0.5;
+	font-style: italic;
+	position: fixed;
+	top: 7px;
+	right: 0;
+	display: block;
+	width: 100%;
+	text-align: center
+}
 
 .sidebar {
 	display: none;
