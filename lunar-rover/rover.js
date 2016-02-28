@@ -5,12 +5,10 @@ function Rover(wheelA, wheelB, wheelC, wheelD, width){
     obj: Entity(0, vec.Vec(0,0,0)),
     dir: vec.Vec(1,0,0),
     update: function (dt, gravity, terrain){
-      this.turn *= 0.9;
       this.apply();
       [wheelA, wheelB, wheelC, wheelD].forEach(function (wheel){
         wheel.update(dt, gravity);
         wheel.collisions(dt, terrain);
-        wheel.apply();
       });
       wheelA.attraction(wheelB, dt, width);
       wheelD.attraction(wheelB, dt, width);
@@ -35,8 +33,8 @@ function Rover(wheelA, wheelB, wheelC, wheelD, width){
       var shape = new THREE.Shape([
         new THREE.Vector2( width/2,-width/16),
         new THREE.Vector2( width/2, 0),
-        new THREE.Vector2( width/4, width/8),
-        new THREE.Vector2(-width/4, width/8),
+        new THREE.Vector2( width/8, width/8),
+        new THREE.Vector2(-width/1.8, width/8),
         new THREE.Vector2(-width/2, 0),
         new THREE.Vector2(-width/2,-width/16)
       ]);
@@ -66,7 +64,10 @@ function Rover(wheelA, wheelB, wheelC, wheelD, width){
       this._drawObject.position.copy(p);
       this._drawObject.quaternion.copy(q);
       this._drawObject.updateMatrix();
-      //this._drawObject.matrix.compose(p, q, new THREE.Vector3());
+      wheelA.apply();
+      wheelB.apply();
+      wheelC.apply();
+      wheelD.apply();
     },
     addSpeed: function (dv){
       wheelA.addSpeed(dv);
@@ -75,7 +76,17 @@ function Rover(wheelA, wheelB, wheelC, wheelD, width){
       wheelD.addSpeed(dv);
     },
     steer: function (angle){
-      this.turn += angle;
+      var vel = vec.sum([
+        wheelA.obj.vel,
+        wheelB.obj.vel,
+        wheelC.obj.vel,
+        wheelD.obj.vel
+      ]);
+      var speed = vec.mag(vel);
+      this.turn += angle / (1+speed/20);
+    },
+    steerAhead: function (amount){
+      this.turn *= 1 - amount;
     }
   }
 }

@@ -1,5 +1,4 @@
 var clock = new THREE.Clock();
-var keys = {};
 
 var viewer = buildViewer(window.innerWidth,
                          window.innerHeight,
@@ -7,6 +6,8 @@ var viewer = buildViewer(window.innerWidth,
 var engine = buildEngine(128, viewer);
 
 var cameraPos = vec.Vec();
+var timestep = 2;
+var showDebug = false;
 
 init(viewer);
 animate();
@@ -34,47 +35,7 @@ function buildViewer(viewW, viewH, pixelRatio) {
 }
 
 function buildEngine(res) {
-  var quadtree = quad.build(res, res, 7);
-
-  // THIS
-  //
-  quad.perlinFill([0, 0, 0, 0], 12, quadtree);
-  // OR
-  //
-  // var data = generateHeight(res, res);
-  //for (var x = 0; x < res; x++) {
-  //  for (var y = 0; y < res; y++) {
-  //    quad.at(quadtree, x, y).value = data[x+y*res];
-  //  }
-  //}
-  //quad.precalculate(quadtree);
-
-  function craterOffset(height, x){
-  	x = Math.min(x, 1);
-  	return height*(Math.pow(Math.sin(x*x*3),2) + (x*x-1)*1.5);
-  }
-
-  function addCrater(terrain, x, y, r, height){
-	  for (var i = -r; i < r; i++) {
-	    for (var j = -r; j < r; j++) {
-	    	if (j+y<1 || j+y>res-1 || i+x<1 || i+x>res-1) continue;
-	    	var offset = craterOffset(height, Math.sqrt(i*i+j*j)/r);
-	      quad.at(terrain, x+i, y+j).value += offset;
-	    }
-	  }
-  }
-
-  function rand(min, max){
-  	return Math.random() * (max-min) + min;
-  }
-
-  for (var c = 0; c<25; c++){
-  	var size = 20 * Math.pow(rand(0.5,1), 2);
-  	var depth = size*rand(0.02,1/6);
-  	addCrater(quadtree, rand(-10,res+10), rand(-10,res+10), size, depth)
-  }
-
-  quad.precalculate(quadtree);
+  var quadtree = generateLandscape(res, 7);
 
   var scene = new THREE.Scene();
   var geometry = new THREE.PlaneBufferGeometry(res, res, res-1, res-1);
@@ -98,17 +59,19 @@ function buildEngine(res) {
   sun.target.position.set(0, 0, 0);
 
 	sun.castShadow = true;
-	sun.shadowCameraNear = 100;
-	sun.shadowCameraFar = 1500;
-	sun.shadowCameraFov = 50;
-	sun.shadowBias = 0.0001;
-	sun.shadowMapWidth = 2048;
-	sun.shadowMapHeight = 2048;
+	sun.shadow.camera.near = 100;
+	sun.shadow.camera.far = 1500;
+	sun.shadow.camera.fov = 50;
+	sun.shadow.bias = 0.0001;
+	sun.shadow.mapSize.width = 2048;
+	sun.shadow.mapSize.height = 2048;
 
-  var wheelA = new Wheel( 1, 10,  1, 0.6);
-  var wheelB = new Wheel(-1, 10,  1, 0.6);
-  var wheelC = new Wheel( 1, 10, -1, 0.6);
-  var wheelD = new Wheel(-1, 10, -1, 0.6);
+  var y = quad.valueAt(quadtree, 0, 0);
+
+  var wheelA = new Wheel( 1, y + 4,  1, 0.6);
+  var wheelB = new Wheel(-1, y + 4,  1, 0.6);
+  var wheelC = new Wheel( 1, y + 4, -1, 0.6);
+  var wheelD = new Wheel(-1, y + 4, -1, 0.6);
   var rover = new Rover(wheelA, wheelB, wheelC, wheelD, 2);
 
   scene.add(mesh);
@@ -121,15 +84,18 @@ function buildEngine(res) {
 
   rover.steer(0);
 
-  var markerGeo = new THREE.SphereGeometry(0.1, 4, 4);
+  var markerGeo = new THREE.SphereGeometry(0.2, 4, 4);
 	var markerMaterial = new THREE.MeshBasicMaterial({color: 0xffff00});
-	var marker = new THREE.Mesh(markerGeo, markerMaterial);
-	scene.add(marker);
+  var marker = new THREE.Mesh(markerGeo, markerMaterial);
+  scene.add(marker);
+	var normalMarker = new THREE.Mesh(markerGeo.clone(), markerMaterial);
+	scene.add(normalMarker);
 
   return {
     scene: scene,
     mesh: mesh,
     marker: marker,
+    normalMarker: normalMarker,
     wheels: [wheelA, wheelB, wheelC, wheelD],
     rover: rover,
   	quadtree: quadtree
@@ -141,12 +107,8 @@ function init(viewer) {
   container.innerHTML = '';
   container.appendChild(viewer.renderer.domElement);
   window.addEventListener('resize', onWindowResize);
-  document.addEventListener('keydown', function(event) {
-  	keys[event.keyCode] = true;
-	});
-  document.addEventListener('keyup', function(event) {
-  	keys[event.keyCode] = false;
-	});
+  input.onNumber(function(i) { timestep = Math.exp(i/4) / 2 });
+  input.on('i', function() { showDebug = !showDebug });
 }
 
 function onWindowResize() {
@@ -155,32 +117,38 @@ function onWindowResize() {
   viewer.renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-function generateHeight(width, height) {
-  var size = width * height;
-  var data = new Uint16Array(size);
-  var perlin = new ImprovedNoise();
-  var z = Math.random() * 100;
-  for (var i = 0; i < size; i ++) {
-    var x = (i % width) / 10;
-    var y = (Math.floor(i / width)) / 10;
-    data[i] += (1+perlin.noise(x, y, z)) * 500;
-  }
-  return data;
-}
-
 function animate() {
   requestAnimationFrame(animate);
-  render();
+  update();
 }
 
-function render() {
-	var gravity = vec.Vec(0, -400, 0);
+function simulate(dt, iterations) {
+  var gravity = vec.Vec(0, -500, 0);
+  var objs = engine.wheels.map(e => e.obj);
+  dt *= timestep / iterations;
+  for (var i=iterations; i; i--){
+    engine.rover.update(dt, gravity, engine.quadtree);
+    solveEuler(dt/2, objs);
+    solveEuler(dt/2, objs);
+    resetForces(objs);
+  }
+}
+
+function update() {
   var dt = clock.getDelta();
+  if (dt > 1) dt = 0.015; // pause simulation in background tabs
   viewer.controls.update(dt);
 
   var x = engine.rover.obj.pos.x;
   var z = engine.rover.obj.pos.z;
-  engine.marker.position.set(x, quad.valueAt(engine.quadtree, x, z), z);
+  var y = quad.valueAt(engine.quadtree, x, z);
+  var n = quad.normalAt(engine.quadtree, x, z);
+  engine.marker.position.set(x, y, z);
+  engine.normalMarker.position.set(x+2*n.x, y+2*n.y, z+2*n.z);
+  if (!showDebug) {
+    engine.marker.position.set(0, -100, 0);
+    engine.normalMarker.position.set(0, -100, 0);
+  }
 
   //var p = vec.clone(engine.rover.obj.pos);
   //var pos = vec.add(p, vec.Vec(0,0,-10));
@@ -188,16 +156,15 @@ function render() {
   //vec.addTo(cameraPos, pos, 0.05);
   //viewer.camera.position.set(cameraPos.x, cameraPos.y + 5, cameraPos.z);
   //viewer.camera.lookAt(p.x, p.y-5, p.z);
+  simulate(dt, 4);
 
-  solveEuler(dt, engine.wheels.map(e => e.obj));
-  //solveLeapfrog(dt, engine.wheels.map(e => e.obj));
+  engine.rover.apply();
 
-	engine.rover.update(dt, gravity, engine.quadtree);
-	engine.rover.apply();
-  if (keys[87]) engine.rover.addSpeed(20);
-  if (keys[83]) engine.rover.addSpeed(-20);
-  if (keys[65]) engine.rover.steer(-0.075); // left
-  if (keys[68]) engine.rover.steer(0.075); // right
+  if (input.up) engine.rover.addSpeed(20);
+  if (input.down) engine.rover.addSpeed(-20);
+  if (input.left) engine.rover.steer(-0.1);
+  if (input.right) engine.rover.steer(0.1);
+  engine.rover.steerAhead(0.1);
 
   viewer.renderer.render(engine.scene, viewer.camera);
 }
