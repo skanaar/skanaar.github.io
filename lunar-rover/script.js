@@ -52,7 +52,7 @@ function buildEngine(res) {
 	mesh.receiveShadow = true;
 
   var sun = new THREE.SpotLight(0xffffff, 1, 0, Math.PI / 2);
-  sun.position.set(200, 50, 200);
+  sun.position.set(200, 100, 200);
   sun.target.position.set(50, 0, 50);
 
 	sun.castShadow = true;
