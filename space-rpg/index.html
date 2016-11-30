@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+  body {
+    font-family: "helvetica neue", "arial", sans-serif;
+    font-weight: 100;
+    text-align: center;
+    padding: 5em;
+    font-size: 30px;
+    background: black;
+    color: #ddd;
+  }
+  h1, h2 {
+    font-family: inherit;
+    font-weight: 100;
+    text-align: center;
+  }
+  h2 { font-size: 60px; }
+  h2 { font-size: 30px; }
+  img {
+    width: 100%;
+    margin: 20px 0 100px 0;
+  }
+  a, a:hover, a:active, a:visited {
+    display: block;
+    color: #fa0;
+    text-decoration: none;
+    padding: 5px;
+  }
+  pre {
+    font-size: 14px;
+    text-align: left;
+    margin: 20px auto;
+    white-space: pre-wrap;
+  }
+  pre code {
+    font-family: "Consolas", "Monaco", monospace;
+  }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/solarized-dark.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/xml.min.js" >
+</head>
+<body>
+
+<h1>NEBULAR WINDS</h1>
+
+<h2>TRAVEL IN SPACE</h2>
+<img src="screen-radar.png">
+
+<h2>BUY EQUIPMENT</h2>
+<img src="screen-trader.png">
+
+<h2>EXPLORE PLANETS</h2>
+<img src="screen-surface.png">
+
+<h2>COMPLETE QUESTS</h2>
+<img src="screen-quests.png">
+
+<h2>QUEST FORMAT</h2>
+
+<pre>
+  <code class="xml">&lt;!-- Rebuild the Thanatos. Find three relics and repair the derelict.
+ Thanatos will award you with the powerful battle computer Momus. --&gt;
+&lt;quest title="Thanatos relic 1"&lt;
+    &lt;condition have-item="item.thanatos-part-1" trigger="auto" /&gt;
+    &lt;dialog&gt;You found a relic, a machine part covered with cuneiform markings.&lt;/dialog&gt;
+&lt;/quest&gt;
+&lt;quest title="Thanatos relic 2"&gt;
+    &lt;condition have-item="item.thanatos-part-2" trigger="auto" /&gt;
+    &lt;dialog&gt;You found a relic, a machine part covered with cuneiform markings.&lt;/dialog&gt;
+&lt;/quest&gt;
+&lt;quest title="Thanatos relic 3"&gt;
+    &lt;condition have-item="item.thanatos-part-3" trigger="auto" /&gt;
+    &lt;dialog&gt;You found a relic, a machine part covered with cuneiform markings.&lt;/dialog&gt;
+&lt;/quest&gt;
+&lt;quest title="Rebuild the Thanatos"&gt;
+    &lt;modify-destination dest="thanathos" type="derelict" /&gt;
+    &lt;place-item dest="balnza" item="item.thanatos-part-1" /&gt;
+    &lt;place-item dest="ougeia" item="item.thanatos-part-2" /&gt;
+    &lt;place-item dest="nozzor" item="item.thanatos-part-3" /&gt;
+    &lt;condition at-dest="thanathos" trigger="action" /&gt;
+    &lt;dialog&gt;It is the Thanatos derelict. Immensely old. Broken. The intact half is covered in cuneiform markings.&lt;/dialog&gt;
+    &lt;add-to-quest-list /&gt;
+    &lt;condition have-item="item.thanatos-part-1" trigger="auto" /&gt;
+    &lt;condition have-item="item.thanatos-part-2" trigger="auto" /&gt;
+    &lt;condition have-item="item.thanatos-part-3" trigger="auto" /&gt;
+    &lt;dialog&gt;You now possess all three missing pieces of the Thanatos.&lt;/dialog&gt;
+    &lt;condition at-dest="thanathos" trigger="action" /&gt;
+    &lt;dialog ok="Rebuild Thanatos" cancel="Leave"&gt;The relics would restore the form of Thanatos.&lt;/dialog&gt;
+    &lt;dialog&gt;As the parts touch the derelict the edges melts and merge. In an instant the dead ship springs to life, fire dancing across its hull as it burns away the dust covering it.&lt;/dialog&gt;
+    &lt;dialog&gt;The radio warbles as you are flooded with signals. A single grey sphere emerge from the the ship and drifts toward you.&lt;/dialog&gt;
+    &lt;give item="item.momus" /&gt;
+&lt;/quest&gt;</code>
+</pre>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
