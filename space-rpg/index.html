@@ -7,20 +7,29 @@
     font-weight: 100;
     text-align: center;
     padding: 5em;
-    font-size: 30px;
+    font-size: 20px;
     background: black;
     color: #ddd;
+    letter-spacing: 1.5px;
   }
   h1, h2 {
     font-family: inherit;
     font-weight: 100;
     text-align: center;
   }
-  h2 { font-size: 60px; }
-  h2 { font-size: 30px; }
+  h1 {
+    font-size: 60px;
+    letter-spacing: 15px;
+  }
+  h2 {
+    margin-top: 120px;
+    font-size: 30px;
+    letter-spacing: 10px;
+    border-bottom: 1px solid;
+  }
   img {
     width: 100%;
-    margin: 20px 0 100px 0;
+    margin: 20px 0;
   }
   a, a:hover, a:active, a:visited {
     display: block;
@@ -31,11 +40,14 @@
   pre {
     font-size: 14px;
     text-align: left;
-    margin: 20px auto;
+    margin: 20px auto 50px auto;
     white-space: pre-wrap;
   }
   pre code {
     font-family: "Consolas", "Monaco", monospace;
+  }
+  .quest-steps {
+    text-align: left
   }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/solarized-dark.min.css">
@@ -93,6 +105,53 @@
     &lt;give item="item.momus" /&gt;
 &lt;/quest&gt;</code>
 </pre>
+
+<h2>QUEST STEPS</h2>
+<div class="quest-steps">
+  Add a lootable item to the destination.
+  <pre><code>&lt;place-item dest="Backwater" item="Shiny Meteorite" /&gt;</code></pre>
+
+  Add a purchasable item to the destination's trader.
+  <pre><code>&lt;place-inventory dest="Backwater" item="Phased Ray" /&gt;</code></pre>
+
+  Display a message. If the optional <b>ok</b> and <b>cancel</b> attributes are provided they will appear as buttons. Cancel will rewinds the quest one step, so that the same trigger that triggered the quest will display the same message the next turn. Ok will progress the quest as normally.
+  <pre><code>&lt;dialog&gt;"Hey hitchhiker!"&lt;/dialog&gt;
+&lt;dialog ok="YES PLEASE" cancel="NO THANKS"&gt;"Would you like some tea?"&lt;/dialog&gt;</code></pre>
+
+  Include this quest in the quest list.
+  <pre><code>&lt;add-to-quest-list /&gt;</code></pre>
+
+  Pause the quest until all conditions are fulfilled. All attributes are optional. the <b>trigger</b> attribute take either "auto" or "action" and control if the condition must be triggered with the <b>TRIGGER</b> button on the radar screen or not.
+  <pre><code>&lt;condition
+      have-item="Shiny Meteorite"
+      at-dest="Backwater"
+      not-at-dest="Saturn"
+      have-credits="3000"
+      trigger="auto" /&gt;</code></pre>
+
+  Add items or credits to the player's inventory.
+  <pre><code>&lt;give credits="900" /&gt;
+&lt;give item="Phased Ray" /&gt;</code></pre>
+
+  Remove an item or credits from the player's inventory.
+  <pre><code>&lt;take credits="900" /&gt;
+&lt;take item="Phased Ray" /&gt;</code></pre>
+
+  Place a quest marker on the map. <b>color</b> and <b>icon</b> attributes are optional. <b>icon</b> can take these values: "arrow", "square", "enter", "exit". A quest can only have a single map marker.
+  <pre><code>&lt;mark-on-map dest="Samson's Folly" color="0x0F0" icon="arrow" /&gt;</code></pre>
+
+  Change the player's ship.
+  <pre><code>&lt;change-ship ship="clipper" /&gt;</code></pre>
+
+  Clear the map marker for this quest.
+  <pre><code>&lt;remove-map-marker /&gt;</code></pre>
+
+  Transports the player to another destination.
+  <pre><code>&lt;travel dest="Secret Station" /&gt;</code></pre>
+
+  Rewinds or fast forwards the quest a set number of steps.
+  <pre><code>&lt;goto jump="-3" /&gt;</code></pre>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
