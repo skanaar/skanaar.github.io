@@ -69,12 +69,142 @@
 <h2>COMPLETE QUESTS</h2>
 <img src="screen-quests.png">
 
-<h2>QUEST FORMAT</h2>
+<h2>QUESTS</h2>
 
+<h2>START OF AN ADVENTURE</h2>
 <pre>
-  <code class="xml">&lt;!-- Rebuild the Thanatos. Find three relics and repair the derelict.
+  <code class="xml">&lt;quest title="Start of an adventure"&gt;
+    &lt;place-item dest="Backwater" item="Shiny Meteorite" /&gt;
+    &lt;place-item dest="Shady" item="Shady Boxes" /&gt;
+    &lt;dialog&gt;The captain wakes you up.
+"Hey hitchhiker! This is your stop."
+    &lt;/dialog&gt;
+    &lt;dialog&gt;You are at the area where you saw the meteorite hit. It had a weird signature. If you EXPLORE the area you might score big time!&lt;/dialog&gt;
+    &lt;add-to-quest-list /&gt;
+    &lt;condition have-item="Shiny Meteorite" trigger="auto" /&gt;
+    &lt;dialog&gt;You find the meteorite resting on the ground. No crater. A shiny dodecahedron that is surprisingly light when you load it into the rover. The TRADE guild will pay a fortune for this.&lt;/dialog&gt;
+    &lt;condition have-credits="1000" trigger="auto" /&gt;
+    &lt;dialog&gt;"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. What do you say?"&lt;/dialog&gt;
+    &lt;dialog&gt;There it is. An opportunity to finally leave this rock. You accept eagerly.&lt;/dialog&gt;
+    &lt;dialog&gt;"Now you can LIFT OFF and leave this planet.
+But it is dangerous out there, go by Samson and get some weapons for that ship."&lt;/dialog&gt;
+    &lt;take credits="900" /&gt;
+    &lt;mark-on-map dest="Samson's Folly" /&gt;
+    &lt;change-ship ship="clipper" /&gt;
+    &lt;condition at-dest="Samson's Folly" trigger="auto" /&gt;
+    &lt;dialog&gt;"My friend at Backwater said you would be coming. We have a nice Photon Ray in stock left. You are welcome to LAND and TRADE with us here at Samson's Folly."&lt;/dialog&gt;
+    &lt;condition have-item="Photon Ray" trigger="auto" /&gt;
+    &lt;dialog&gt;You now have a Photon Ray, a basic weapon. Tap you ship hologram to open your PROFILE and INSTALL your new Photon Ray&lt;/dialog&gt;
+    &lt;remove-map-marker /&gt;
+&lt;/quest&gt;</code></pre>
+
+<h2>SHADY SPACER</h2>
+<pre><code class="xml">&lt;quest title="Shady spacer"&gt;
+    &lt;condition at-dest="Shady" trigger="auto" /&gt;
+    &lt;dialog&gt;A sad rusty ship radios you.
+"Fellow spacer! There is nice loot on this moon but my landing gear is bust. If you LAND and help me EXPLORE I'll reward you."&lt;/dialog&gt;
+    &lt;add-to-quest-list /&gt;
+    &lt;condition have-item="Shady Boxes" trigger="auto" /&gt;
+    &lt;dialog&gt;The eager spacer thank you several times for helping her finding the boxes. You receive a small reward and you hope you don't see the her again.&lt;/dialog&gt;
+    &lt;give credits="100" /&gt;
+    &lt;take item="Shady Boxes" /&gt;
+&lt;/quest&gt;</code></pre>
+
+<h2>PERIL AT BOUY 72</h2>
+<pre><code class="xml">&lt;quest title="Peril at Bouy 72"&gt;
+    &lt;condition at-dest="Bouy 72" trigger="auto" /&gt;
+    &lt;dialog&gt;You receive a transmission:
+"Help us. The way ahead is blocked by a malfunctioning drone. We don't dare to proceed. You have to clear the path for us!"&lt;/dialog&gt;
+    &lt;mark-on-map dest="Bouy 72" /&gt;
+    &lt;add-to-quest-list /&gt;
+    &lt;condition no-enemy-at="Shoal B" trigger="auto" /&gt;
+    &lt;dialog&gt;That drone wasn't even armed. This adventure looks like its going to be a walk in the park.&lt;/dialog&gt;
+&lt;/quest&gt;</code></pre>
+
+<h2>BAL GRU'S STOLEN SUBSYSTEMS</h2>
+<pre><code class="xml">&lt;quest title="Bal Gru's stolen subsystems"&gt;
+    &lt;place-item dest="Luz-2" item="item.subsystem-cache"/&gt;
+    &lt;place-item dest="Luz-2" count="3" item="enemy.bandit"/&gt;
+    &lt;condition at-dest="Luz-1" trigger="radio" /&gt;
+    &lt;dialog ok="YES" cancel="NOT NOW"&gt;
+        Hey girl, I'm Bal Gru, merchant in distress. Can you help me? Bandits robbed me of all of my subsystems. Can you get them back for me?
+    &lt;/dialog&gt;
+    &lt;add-to-quest-list /&gt;
+    &lt;condition at-dest="Luz-1" have-item="item.subsystem-cache" /&gt;
+    &lt;dialog&gt;
+        You have our stolen subsystems! This is invaluable to us. Here, take this artifact, it is the least we can give you.
+    &lt;/dialog&gt;
+    &lt;give item="item.blue-signature" /&gt;
+    &lt;condition at-dest="Larato-gate" have-item="item.blue-signature" trigger="action" /&gt;
+    &lt;dialog ok="APPROACH" cancel="IGNORE"&gt;
+        The Larato Gate looks like a torus shaped lump of stone needles. The Blue Signature in your inventory is humming.
+        Should you approach?
+    &lt;/dialog&gt;
+    &lt;dialog&gt;
+        The gate's mass of needles swells and twitches. The hole in the torus shimmers and turns into a misty black cloud.
+    &lt;/dialog&gt;
+    &lt;condition at-dest="Larato-gate" trigger="action" /&gt;
+    &lt;dialog ok="ENTER GATE" cancel="LEAVE"&gt;
+        The misty dark cloud in the toroidal gate swirls.
+    &lt;/dialog&gt;
+    &lt;travel dest="Besso" /&gt;
+&lt;/quest&gt;</code></pre>
+
+<h2>BLUE SEEDS</h2>
+<pre><code class="xml">&lt;quest title="Blue seeds"&gt;
+    &lt;place-item dest="Blue Forest" item="item.blue-seeds" /&gt;
+    &lt;condition have-item="item.blue-seeds" /&gt;
+    &lt;dialog&gt;These Blue Seeds might take root in the right soil.&lt;/dialog&gt;
+    &lt;add-to-quest-list /&gt;
+    &lt;condition at-dest="Blue Ocean" trigger="action" /&gt;
+    &lt;dialog&gt;You plant the Blue Seeds on a lonely island.&lt;/dialog&gt;
+    &lt;condition not-at-dest="Blue Ocean" /&gt;
+    &lt;condition at-dest="Blue Ocean" trigger="action" /&gt;
+    &lt;dialog&gt;You gather the Blue Flowers that sprung out of the planted seeds.&lt;/dialog&gt;
+    &lt;give item="item.blue-flowers" /&gt;
+&lt;/quest&gt;</code></pre>
+
+<h2>HELYON SHIPYARDS</h2>
+<pre><code class="xml">&lt;quest title="Helyon Shipyards"&gt;
+    &lt;add-to-quest-list /&gt;
+    &lt;mark-on-map dest="Helyon Shipyards" icon="square" color="48F" /&gt;
+    &lt;condition at-dest="Helyon Shipyards" trigger="action"/&gt;
+    &lt;dialog&gt;If you bring 1000 credits and no cops I can land you a fine Battleship hull. No receipt. Ok?&lt;/dialog&gt;
+    &lt;condition at-dest="Helyon Shipyards" have-credits="1000" trigger="action" /&gt;
+    &lt;dialog ok="Yes" cancel="No thanks"&gt;1000 credits and you have yourself a fine Battleship. If you give me you old hull.&lt;/dialog&gt;
+    &lt;take credits="1000" /&gt;
+    &lt;change-ship ship="battleship" /&gt;
+    &lt;remove-map-marker /&gt;
+&lt;/quest&gt;</code></pre>
+
+<h2>BAZAAR GATE</h2>
+<pre><code class="xml">&lt;quest title="Bazaar Gate"&gt;
+    &lt;mark-on-map dest="Bazaar Gate" icon="enter" color="0F0" /&gt;
+    &lt;condition at-dest="Bazaar Gate" trigger="action"/&gt;
+    &lt;travel dest="Bazaar" /&gt;
+    &lt;goto jump="-2" /&gt;
+&lt;/quest&gt;
+&lt;quest title="Bazaar Gate Destination"&gt;
+    &lt;mark-on-map dest="Bazaar" icon="exit" color="080" /&gt;
+&lt;/quest&gt;</code></pre>
+
+<h2>THE TALE OF ALKALUROPS</h2>
+<pre><code class="xml">&lt;quest title="The Tale of Alkalurops"&gt;
+    &lt;condition at-dest="Bazaar Station" trigger="auto" /&gt;
+    &lt;dialog&gt;An old drunken kosmonaut tells you a tale of the planet Alkalurops.&lt;/dialog&gt;
+    &lt;add-to-quest-list /&gt;
+    &lt;mark-on-map dest="Alkalurops" /&gt;
+    &lt;condition at-dest="Alkalurops" trigger="auto" /&gt;
+    &lt;dialog ok="EXPLORE" cancel="AVOID"&gt;You have found the mysterious planet of Alkarulops.&lt;/dialog&gt;
+    &lt;dialog&gt;You explore Alkalurops and find unmentionable horrors. Your mind breaks.&lt;/dialog&gt;
+    &lt;change-ship ship="battleship" /&gt;
+    &lt;remove-map-marker /&gt;
+&lt;/quest&gt;</code></pre>
+
+<h2>REBUILD THE THANATOS</h2>
+<pre><code class="xml">&lt;!-- Rebuild the Thanatos. Find three relics and repair the derelict.
  Thanatos will award you with the powerful battle computer Momus. --&gt;
-&lt;quest title="Thanatos relic 1"&lt;
+&lt;quest title="Thanatos relic 1"&gt;
     &lt;condition have-item="item.thanatos-part-1" trigger="auto" /&gt;
     &lt;dialog&gt;You found a relic, a machine part covered with cuneiform markings.&lt;/dialog&gt;
 &lt;/quest&gt;
@@ -103,8 +233,24 @@
     &lt;dialog&gt;As the parts touch the derelict the edges melts and merge. In an instant the dead ship springs to life, fire dancing across its hull as it burns away the dust covering it.&lt;/dialog&gt;
     &lt;dialog&gt;The radio warbles as you are flooded with signals. A single grey sphere emerge from the the ship and drifts toward you.&lt;/dialog&gt;
     &lt;give item="item.momus" /&gt;
+&lt;/quest&gt;</code></pre>
+
+<h2>SKA SKA WATER QUALITY</h2>
+<pre><code class="xml">&lt;quest title="Ska Ska water quality"&gt;
+    &lt;condition at-dest="Baola" trigger="action" /&gt;
+    &lt;dialog ok="YES" cancel="MAYBE LATER"&gt;"Can you help us? We run a large construction project at Ska Ska and need to take water samples at its sea"&lt;/dialog&gt;
+    &lt;add-to-quest-list /&gt;
+    &lt;mark-on-map dest="Ska Ska" /&gt;
+    &lt;place-item dest="Ska Ska" item="Water sample" /&gt;
+    &lt;condition have-item="Water sample" trigger="auto" /&gt;
+    &lt;mark-on-map dest="Baola" /&gt;
+    &lt;condition at-dest="Baola" trigger="action" /&gt;
+    &lt;dialog&gt;"Thank you! These samples are vital for the project. Please, accept this compensation"&lt;/dialog&gt;
+    &lt;give credits="100" /&gt;
+    &lt;remove-map-marker /&gt;
 &lt;/quest&gt;</code>
 </pre>
+
 
 <h2>QUEST STEPS</h2>
 <div class="quest-steps">
