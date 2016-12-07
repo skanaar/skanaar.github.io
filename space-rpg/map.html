@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>space rpg</title>
+<link rel="shortcut icon" href="favicon.png">
+<style>
+	body {
+		margin: 0;
+		background: black;
+	}
+	#canvas {
+		width: auto;
+		height: auto;
+	}
+</style>
+</head>
+<body>
+    <galactic-map src="sample.tag?"></galactic-map>
+
+    <!-- riot tags -->
+    <script type="riot/tag" src="galactic-map.tag.html"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://rawgit.com/riot/riot/master/riot%2Bcompiler.min.js"></script>
+    <script> riot.mount('galactic-map') </script>
+</body>
+</html>

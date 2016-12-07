@@ -1,0 +1,107 @@
+<galactic-map>
+
+  <svg class="galmap">
+    <line each={lines}
+      stroke-width="2" stroke="#048"
+      riot-x1={a.x} riot-x2={b.x} riot-y1={a.y} riot-y2={b.y} />
+    <ellipse
+      each={items}
+      stroke-width="2"
+      stroke="#000"
+      fill={fill} riot-cx={pos.x} riot-cy={pos.y} riot-rx={r} riot-ry={r} />
+    <!--text class="galmap_label" each={items} riot-x={pos.x+10} riot-y={pos.y+7}>{name}</text-->
+    <!--text fill="#444" font-size="8px" each={grid} riot-x={pos.x} riot-y={pos.y}>{label}</text-->
+    <path stroke="#48F" stroke-width="2" each={questLines} d={this}>{label}</text>
+  </svg>
+
+  <script>
+    var self = this
+
+    self.items = []
+    self.quests = []
+    self.lines = []
+    self.grid = []
+    self.jumpRange = 100
+    self.scale = 1.5
+    self.dx = 400
+    self.dy = 400
+
+    for(var i=-500; i<500; i+=50)
+      for(var j=-500; j<500; j+=50)
+        self.grid.push({label: i+','+j, pos: transform([i,j])})
+
+    function transform(p) { return { x: self.dx+self.scale*p[0], y: self.dy+p[1]} }
+    function dist(a, b) {
+      var dx = a[0] - b[0]
+      var dy = a[1] - b[1]
+      return Math.sqrt(dx*dx + dy*dy)
+    }
+
+    var fills = { planet: '#fff', asteroid: '#888', bouy: '#fa0', ring: '#00f', cloud: '#440' }
+    var sizes = { planet: 5, asteroid: 3, bouy: 3, ring: 7, cloud: 15 }
+
+    function loadDestinations(data) {
+      var destinations = JSON.parse(data)
+      self.items = destinations.map(e => (
+        {pos: transform(e.pos), name: e.name, fill:fills[e.visual], r: sizes[e.visual] }
+      ))
+      console.log(self.items)
+      self.lines = []
+      destinations.forEach(a => destinations.forEach(function (b){
+        if (self.jumpRange > dist(a.pos, b.pos))
+          self.lines.push({ a: transform(a.pos), b: transform(b.pos) })
+      }))
+      self.update()
+    }
+
+    function loadQuest(domNode) {
+      var destIds = _.map(domNode.getElementsByTagName('condition'), e => e.getAttribute('at-dest'))
+      return _.filter(destIds, e => !!e).map(dest => _.findWhere(self.items, { name: dest }))
+    }
+
+    function loadQuests(data) {
+      var dom = (new DOMParser()).parseFromString(data, 'text/xml')
+      var questLines = _.map(dom.getElementsByTagName('quest'), loadQuests)
+      self.questLines = questLines.map(quest => 'M' + quest.map(e => e.pos.x + ' ' + e.pos.y).join('L'))
+    }
+
+    self.on('mount', function() {
+      get('destinations.json', function (data) {
+        loadDestinations(data)
+        get('quests.xml', data => loadQuests(data, self.destinations))
+      })
+    })
+
+    function get(url, fn) {
+      var req = new XMLHttpRequest()
+      req.onreadystatechange = function() {
+        if (req.readyState == 4 && (req.status == 200 || (!req.status && req.responseText.length)))
+          fn(req.responseText)
+      }
+      req.open('GET', url, true)
+      req.send('')
+    }
+  </script>
+
+  <style>
+    :scope {
+      display: block;
+      height: 100vh;
+      overflow: hidden;
+      color: white;
+      font-family: "helvetica neue", "arial", sans-serif;
+    }
+    .galmap {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .galmap_label {
+      fill: rgba(1,1,1,0);
+    }
+    .galmap_label:hover {
+      fill: #fff;
+    }
+  </style>
+
+</galactic-map>

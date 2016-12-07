@@ -1,0 +1,179 @@
+[
+  {
+    "name": "Backwater",
+    "visual": "planet",
+    "style": "badlands-1",
+    "surface": "green-2",
+    "pos": [0,0],
+    "trader": {
+      "buy": 1.0,
+      "sell": 1.0,
+      "inventory": []
+    },
+    "treasures": [],
+    "enemy": null
+  },
+  {
+    "name": "Dust",
+    "visual": "asteroid",
+    "style": "asteroid-1",
+    "surface": "rock-1",
+    "pos": [90,20],
+    "trader": null,
+    "treasures": [],
+    "enemy": null
+  },
+  {
+    "name": "Shady",
+    "visual": "asteroid",
+    "style": "asteroid-2",
+    "surface": "rock-2",
+    "pos": [170,-30],
+    "trader": null,
+    "treasures": ["Shady Boxes"],
+    "enemy": null
+  },
+  {
+    "name": "Samson's Folly",
+    "visual": "asteroid",
+    "style": "asteroid-3",
+    "surface": "rock-2",
+    "pos": [250,0],
+    "trader": { "buy": 1, "sell": 1, "inventory": ["Photon Ray"] },
+    "treasures": [],
+    "enemy": null
+  },
+  {
+    "name": "Bazaar Gate",
+    "visual": "ring",
+    "style": "ring-1",
+    "surface": "rock-2",
+    "pos": [195,65],
+    "trader": null,
+    "treasures": [],
+    "enemy": null
+  },
+  {
+    "name": "Alkalurops",
+    "visual": "planet",
+    "style": "hell-1",
+    "surface": "hell-1",
+    "pos": [-130,-210],
+    "trader": null,
+    "treasures": [],
+    "enemy": null
+  },
+  {
+    "name": "Bazaar Station",
+    "visual": "bouy",
+    "style": "bouy",
+    "surface": "rock-1",
+    "pos": [-40,-130],
+    "trader": null,
+    "treasures": [],
+    "enemy": null
+  },
+  {
+    "name": "Bazaar",
+    "visual": "planet",
+    "style": "neutron-2",
+    "surface": "rock-2",
+    "pos": [-100,-120],
+    "trader": null,
+    "treasures": ["Gauss Gun", "Phased Ray"],
+    "enemy": null
+  },
+  {
+    "name": "Helyon Shipyards",
+    "visual": "asteroid",
+    "style": "asteroid-3",
+    "surface": "rock-3",
+    "pos": [-180,-80],
+    "trader": null,
+    "treasures": [],
+    "enemy": null
+  },
+  {
+    "name": "Ska Ska",
+    "visual": "planet",
+    "style": "water-1",
+    "surface": "water",
+    "pos": [-170,-300],
+    "trader": null,
+    "treasures": [],
+    "enemy": ["rogue"]
+  },
+  {
+    "name": "Baola",
+    "visual": "bouy",
+    "style": "bouy",
+    "surface": "rock-1",
+    "pos": [-250,-120],
+    "trader": null,
+    "treasures": [],
+    "enemy": null
+  },
+  {
+    "name": "Bouy 78",
+    "visual": "bouy",
+    "style": "bouy",
+    "surface": "rock-1",
+    "pos": [150,150],
+    "trader": null,
+    "treasures": [],
+    "enemy": null
+  },
+  {
+    "name": "Bouy 78",
+    "visual": "bouy",
+    "style": "bouy",
+    "surface": "rock-1",
+    "pos": [150,150],
+    "trader": null,
+    "treasures": [],
+    "enemy": null
+  },
+  {
+    "name": "Bouy 72",
+    "visual": "bouy",
+    "style": "bouy",
+    "surface": "rock-1",
+    "pos": [175,240],
+    "trader": null,
+    "treasures": [],
+    "enemy": null
+  },
+  {
+    "name": "Shoal B",
+    "visual": "asteroid",
+    "style": "asteroid-4",
+    "surface": "rock-4",
+    "pos": [225,290],
+    "trader": null,
+    "treasures": ["Tetragon Battery"],
+    "enemy": {
+      "type": "monitor-drone",
+      "loot":["Copper"]
+    }
+  },
+  {
+    "name": "Backwater Nebula",
+    "visual": "cloud",
+    "style": "cloud-orange",
+    "surface": "rock-1",
+    "pos": [250,150],
+    "trader": null,
+    "treasures": [],
+    "enemy": null
+  },
+  {
+    "name": "Claw Nebula",
+    "visual": "cloud",
+    "style": "cloud-purple",
+    "surface": "rock-1",
+    "pos": [75,-125],
+    "trader": null,
+    "treasures": [],
+    "enemy": null
+  }
+]
