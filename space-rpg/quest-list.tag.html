@@ -1,0 +1,42 @@
+<quest-list>
+
+  <div each={quest in quests}>
+    <h2>{quest.title}</h2>
+    <pre><code>{quest.source}</code></pre>
+  </div>
+
+  <script>
+    var self = this
+
+    self.quests = []
+
+    function loadQuests(data) {
+      var dom = (new DOMParser()).parseFromString(data, 'text/xml')
+      self.quests = _.map(dom.getElementsByTagName('quest'), function (e) {
+        return {
+          title: e.getAttribute('title').toUpperCase(),
+          source: e.innerHTML.split('  ').join('').trim()
+        }
+      })
+      self.update()
+    }
+
+    function get(url) {
+      return fetch(url).then(e => e.text())
+    }
+
+    self.on('mount', function() {
+      get('quests.xml').then(data => loadQuests(data))
+    })
+
+    self.on('updated', function () {
+      _.each(document.querySelectorAll('pre code'), function (elem){
+        hljs.highlightBlock(elem)
+      });
+    })
+  </script>
+
+  <style>
+  </style>
+
+</quest-list>

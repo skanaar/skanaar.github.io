@@ -1,6 +1,15 @@
 <galactic-map>
 
   <svg class="galmap">
+    <line each={x in grid} stroke="#222" riot-x1={x} riot-x2={x} riot-y1={gridMin} riot-y2={gridMax} />
+    <line each={y in grid} stroke="#222" riot-x1={gridMin} riot-x2={gridMax} riot-y1={y} riot-y2={y} />
+    <path each={q in quests} 
+      stroke="#FFF"
+      stroke-width="1"
+      fill="none"
+      stroke-dasharray="5,5"
+      transform="translate(0,5)"
+      d={q}></path>
     <line each={lines}
       stroke-width="2" stroke="#048"
       riot-x1={a.x} riot-x2={b.x} riot-y1={a.y} riot-y2={b.y} />
@@ -9,9 +18,9 @@
       stroke-width="2"
       stroke="#000"
       fill={fill} riot-cx={pos.x} riot-cy={pos.y} riot-rx={r} riot-ry={r} />
-    <!--text class="galmap_label" each={items} riot-x={pos.x+10} riot-y={pos.y+7}>{name}</text-->
-    <!--text fill="#444" font-size="8px" each={grid} riot-x={pos.x} riot-y={pos.y}>{label}</text-->
-    <path stroke="#48F" stroke-width="2" each={questLines} d={this}>{label}</text>
+    <text class="galmap_label" each={items} riot-x={pos.x+10} riot-y={pos.y+7}>
+      {name} {pos.x},{pos.y}
+    </text>
   </svg>
 
   <script>
@@ -20,15 +29,13 @@
     self.items = []
     self.quests = []
     self.lines = []
-    self.grid = []
     self.jumpRange = 100
     self.scale = 1.5
-    self.dx = 400
-    self.dy = 400
-
-    for(var i=-500; i<500; i+=50)
-      for(var j=-500; j<500; j+=50)
-        self.grid.push({label: i+','+j, pos: transform([i,j])})
+    self.dx = 500
+    self.dy = 500
+    self.gridMin = transform([-300,0]).x
+    self.gridMax = transform([300,0]).x
+    self.grid = _.range(self.gridMin, self.gridMax, self.scale*50)
 
     function transform(p) { return { x: self.dx+self.scale*p[0], y: self.dy+p[1]} }
     function dist(a, b) {
@@ -45,7 +52,6 @@
       self.items = destinations.map(e => (
         {pos: transform(e.pos), name: e.name, fill:fills[e.visual], r: sizes[e.visual] }
       ))
-      console.log(self.items)
       self.lines = []
       destinations.forEach(a => destinations.forEach(function (b){
         if (self.jumpRange > dist(a.pos, b.pos))
@@ -55,31 +61,32 @@
     }
 
     function loadQuest(domNode) {
-      var destIds = _.map(domNode.getElementsByTagName('condition'), e => e.getAttribute('at-dest'))
-      return _.filter(destIds, e => !!e).map(dest => _.findWhere(self.items, { name: dest }))
+      var destIds = _.map(domNode.childNodes, function (e){
+        if (e.nodeName == 'condition')
+          return e.getAttribute('at-dest') || e.getAttribute('no-enemy-at')
+        if (e.nodeName == 'place-item')
+          return e.getAttribute('dest')
+        return null
+      })
+      return _.map(destIds, dest => _.findWhere(self.items, { name: dest })).filter(e => !!e)
     }
 
     function loadQuests(data) {
       var dom = (new DOMParser()).parseFromString(data, 'text/xml')
-      var questLines = _.map(dom.getElementsByTagName('quest'), loadQuests)
-      self.questLines = questLines.map(quest => 'M' + quest.map(e => e.pos.x + ' ' + e.pos.y).join('L'))
+      var questLines = _.map(dom.getElementsByTagName('quest'), loadQuest).filter(e => e.length)
+      self.quests = questLines.map(quest => 'M' + quest.map(e => e.pos.x + ' ' + e.pos.y).join(' L'))
+      self.update()
     }
 
     self.on('mount', function() {
-      get('destinations.json', function (data) {
+      get('destinations.json').then(function (data) {
         loadDestinations(data)
-        get('quests.xml', data => loadQuests(data, self.destinations))
+        get('quests.xml').then(data => loadQuests(data, self.destinations))
       })
     })
 
-    function get(url, fn) {
-      var req = new XMLHttpRequest()
-      req.onreadystatechange = function() {
-        if (req.readyState == 4 && (req.status == 200 || (!req.status && req.responseText.length)))
-          fn(req.responseText)
-      }
-      req.open('GET', url, true)
-      req.send('')
+    function get(url) {
+      return fetch(url).then(e => e.text())
     }
   </script>
 
