@@ -18,7 +18,7 @@
     "visual": "asteroid",
     "style": "asteroid-1",
     "surface": "rock-1",
-    "pos": [90,20],
+    "pos": [170,-30],
     "trader": null,
     "treasures": [],
     "enemy": null
@@ -28,7 +28,7 @@
     "visual": "asteroid",
     "style": "asteroid-2",
     "surface": "rock-2",
-    "pos": [170,-30],
+    "pos": [250,0],
     "trader": null,
     "treasures": ["Shady Boxes"],
     "enemy": null
@@ -38,7 +38,7 @@
     "visual": "asteroid",
     "style": "asteroid-3",
     "surface": "rock-2",
-    "pos": [250,0],
+    "pos": [90,20],
     "trader": { "buy": 1, "sell": 1, "inventory": ["Photon Ray"] },
     "treasures": [],
     "enemy": null
@@ -58,7 +58,7 @@
     "visual": "planet",
     "style": "hell-1",
     "surface": "hell-1",
-    "pos": [-130,-210],
+    "pos": [-230,-310],
     "trader": null,
     "treasures": [],
     "enemy": null
@@ -68,7 +68,7 @@
     "visual": "bouy",
     "style": "bouy",
     "surface": "rock-1",
-    "pos": [-40,-130],
+    "pos": [-140,-230],
     "trader": null,
     "treasures": [],
     "enemy": null
@@ -78,7 +78,7 @@
     "visual": "planet",
     "style": "neutron-2",
     "surface": "rock-2",
-    "pos": [-100,-120],
+    "pos": [-200,-220],
     "trader": null,
     "treasures": ["Gauss Gun", "Phased Ray"],
     "enemy": null
@@ -88,7 +88,7 @@
     "visual": "asteroid",
     "style": "asteroid-3",
     "surface": "rock-3",
-    "pos": [-180,-80],
+    "pos": [-280,-180],
     "trader": null,
     "treasures": [],
     "enemy": null
@@ -98,7 +98,7 @@
     "visual": "planet",
     "style": "water-1",
     "surface": "water",
-    "pos": [-170,-300],
+    "pos": [-270,-400],
     "trader": null,
     "treasures": [],
     "enemy": ["rogue"]
@@ -108,23 +108,13 @@
     "visual": "bouy",
     "style": "bouy",
     "surface": "rock-1",
-    "pos": [-250,-120],
+    "pos": [-350,-220],
     "trader": null,
     "treasures": [],
     "enemy": null
   },
   {
-    "name": "Bouy 78",
-    "visual": "bouy",
-    "style": "bouy",
-    "surface": "rock-1",
-    "pos": [150,150],
-    "trader": null,
-    "treasures": [],
-    "enemy": null
-  },
-  {
-    "name": "Bouy 78",
+    "name": "Bouy 68",
     "visual": "bouy",
     "style": "bouy",
     "surface": "rock-1",

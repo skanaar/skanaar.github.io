@@ -9,64 +9,70 @@
 </head>
 <body>
 
-<h1>QUESTS</h1>
+  <h1>QUESTS</h1>
 
-<h2>QUEST STEPS</h2>
-<div class="quest-steps">
-  Add a lootable item to the destination.
-  <pre><code>&lt;place-item dest="Backwater" item="Shiny Meteorite" /&gt;</code></pre>
+  <h2>QUEST SETUP</h2>
+  <div class="body-text">
+    Define an item that is added to the global item library. Only the name attribute is required.
+    <pre><code>&lt;item name="Shiny Meteorite" credits="1000" /&gt;</code></pre>
+  </div>
 
-  Add a purchasable item to the destination's trader.
-  <pre><code>&lt;place-inventory dest="Backwater" item="Phased Ray" /&gt;</code></pre>
+  <h2>QUEST STEPS</h2>
+  <div class="body-text">
+    Add a lootable item to the destination.
+    <pre><code>&lt;place-item dest="Backwater" item="Shiny Meteorite" /&gt;</code></pre>
 
-  Display a message. If the optional <b>ok</b> and <b>cancel</b> attributes are provided they will appear as buttons. Cancel will rewinds the quest one step, so that the same trigger that triggered the quest will display the same message the next turn. Ok will progress the quest as normally.
-  <pre><code>&lt;dialog&gt;"Hey hitchhiker!"&lt;/dialog&gt;
-&lt;dialog ok="YES PLEASE" cancel="NO THANKS"&gt;"Would you like some tea?"&lt;/dialog&gt;</code></pre>
+    Add a purchasable item to the destination's trader.
+    <pre><code>&lt;place-inventory dest="Backwater" item="Phased Ray" /&gt;</code></pre>
 
-  Include this quest in the quest list.
-  <pre><code>&lt;add-to-quest-list /&gt;</code></pre>
+    Display a message. If the optional <b>ok</b> and <b>cancel</b> attributes are provided they will appear as buttons. Cancel will rewinds the quest one step, so that the same trigger that triggered the quest will display the same message the next turn. Ok will progress the quest as normally.
+    <pre><code>&lt;dialog&gt;"Hey hitchhiker!"&lt;/dialog&gt;
+  &lt;dialog ok="YES PLEASE" cancel="NO THANKS"&gt;"Would you like some tea?"&lt;/dialog&gt;</code></pre>
 
-  Pause the quest until all conditions are fulfilled. All attributes are optional. the <b>trigger</b> attribute take either "auto" or "action" and control if the condition must be triggered with the <b>TRIGGER</b> button on the radar screen or not.
-  <pre><code>&lt;condition
-      have-item="Shiny Meteorite"
-      at-dest="Backwater"
-      no-enemy-at="Beta"
-      not-at-dest="Saturn"
-      have-credits="3000"
-      trigger="auto" /&gt;</code></pre>
+    Include this quest in the quest list.
+    <pre><code>&lt;add-to-quest-list /&gt;</code></pre>
 
-  Add items or credits to the player's inventory.
-  <pre><code>&lt;give credits="900" /&gt;
-&lt;give item="Phased Ray" /&gt;</code></pre>
+    Pause the quest until all conditions are fulfilled. All attributes are optional. the <b>trigger</b> attribute take either "auto" or "action" and control if the condition must be triggered with the <b>TRIGGER</b> button on the radar screen or not.
+    <pre><code>&lt;condition
+        have-item="Shiny Meteorite"
+        at-dest="Backwater"
+        no-enemy-at="Beta"
+        not-at-dest="Saturn"
+        have-credits="3000"
+        trigger="auto" /&gt;</code></pre>
 
-  Remove an item or credits from the player's inventory.
-  <pre><code>&lt;take credits="900" /&gt;
-&lt;take item="Phased Ray" /&gt;</code></pre>
+    Add items or credits to the player's inventory.
+    <pre><code>&lt;give credits="900" /&gt;
+  &lt;give item="Phased Ray" /&gt;</code></pre>
 
-  Place a quest marker on the map. <b>color</b> and <b>icon</b> attributes are optional. <b>icon</b> can take these values: "arrow", "square", "enter", "exit". A quest can only have a single map marker.
-  <pre><code>&lt;mark-on-map dest="Samson's Folly" color="0x0F0" icon="arrow" /&gt;</code></pre>
+    Remove an item or credits from the player's inventory.
+    <pre><code>&lt;take credits="900" /&gt;
+  &lt;take item="Phased Ray" /&gt;</code></pre>
 
-  Change the player's ship.
-  <pre><code>&lt;change-ship ship="clipper" /&gt;</code></pre>
+    Place a quest marker on the map. <b>color</b> and <b>icon</b> attributes are optional. <b>icon</b> can take these values: "arrow", "square", "enter", "exit". A quest can only have a single map marker.
+    <pre><code>&lt;mark-on-map dest="Samson's Folly" color="0x0F0" icon="arrow" /&gt;</code></pre>
 
-  Clear the map marker for this quest.
-  <pre><code>&lt;remove-map-marker /&gt;</code></pre>
+    Change the player's ship.
+    <pre><code>&lt;change-ship ship="clipper" /&gt;</code></pre>
 
-  Transports the player to another destination.
-  <pre><code>&lt;travel dest="Secret Station" /&gt;</code></pre>
+    Clear the map marker for this quest.
+    <pre><code>&lt;remove-map-marker /&gt;</code></pre>
 
-  Rewinds or fast forwards the quest a set number of steps.
-  <pre><code>&lt;goto jump="-3" /&gt;</code></pre>
-</div>
+    Transports the player to another destination.
+    <pre><code>&lt;travel dest="Secret Station" /&gt;</code></pre>
 
-    <quest-list></quest-list>
+    Rewinds or fast forwards the quest a set number of steps.
+    <pre><code>&lt;goto jump="-3" /&gt;</code></pre>
+  </div>
 
-    <!-- riot tags -->
-    <script type="riot/tag" src="quest-list.tag.html"></script>
+  <quest-list></quest-list>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="https://rawgit.com/riot/riot/master/riot%2Bcompiler.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
-    <script> riot.mount('quest-list') </script>
+  <!-- riot tags -->
+  <script type="riot/tag" src="quest-list.tag.html"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src="https://rawgit.com/riot/riot/master/riot%2Bcompiler.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+  <script> riot.mount('quest-list') </script>
 </body>
 </html>
