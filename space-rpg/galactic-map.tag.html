@@ -1,10 +1,10 @@
 <galactic-map>
 
-  <svg class="galmap">
-    <line each={x in grid} stroke="#222" riot-x1={x} riot-x2={x} riot-y1={gridMin} riot-y2={gridMax} />
-    <line each={y in grid} stroke="#222" riot-x1={gridMin} riot-x2={gridMax} riot-y1={y} riot-y2={y} />
+  <svg class="galmap" onmousedown={mousedown} onmousemove={mousemove} onmouseup={mouseup}>
+    <line each={x in grid} stroke="#DDD" stroke-width=0.5 riot-x1={x} riot-x2={x} riot-y1={gridMin} riot-y2={gridMax} />
+    <line each={y in grid} stroke="#DDD" stroke-width=0.5 riot-x1={gridMin} riot-x2={gridMax} riot-y1={y} riot-y2={y} />
     <path each={q in quests} 
-      stroke="#FFF"
+      stroke="#48F"
       stroke-width="1"
       fill="none"
       stroke-dasharray="5,5"
@@ -16,11 +16,15 @@
     <ellipse
       each={items}
       stroke-width="2"
-      stroke="#000"
-      fill={fill} riot-cx={pos.x} riot-cy={pos.y} riot-rx={r} riot-ry={r} />
-    <text class="galmap_label" each={items} riot-x={pos.x+10} riot-y={pos.y+7}>
+      stroke={isSelected ? '#F00' : '#000'}
+      fill={fill} riot-cx={screenPos.x} riot-cy={screenPos.y} riot-rx={r} riot-ry={r}
+      onmouseup={mouseupOnItem}/>
+    <text class="galmap_label" each={items} riot-x={screenPos.x+10} riot-y={screenPos.y+7}>
       {name} {pos.x},{pos.y}
     </text>
+    <rect riot-x={select.pos.x} riot-y={select.pos.y}
+      riot-width={select.dim.x} riot-height={select.dim.y}
+      stroke="#F00" stroke-width="1" fill="rgba(0,0,0,0)"/>
   </svg>
 
   <script>
@@ -29,35 +33,124 @@
     self.items = []
     self.quests = []
     self.lines = []
-    self.jumpRange = 100
-    self.scale = 1.5
-    self.dx = 500
-    self.dy = 500
-    self.gridMin = transform([-300,0]).x
-    self.gridMax = transform([300,0]).x
+    self.jumpRange = 125
+    self.scale = 1.0
+    self.dx = window.innerWidth/2
+    self.dy = window.innerWidth/2
+    self.gridMin = transform({x:-self.dx,y:0}).x
+    self.gridMax = transform({x: self.dx,y:0}).x
     self.grid = _.range(self.gridMin, self.gridMax, self.scale*50)
+    self.input = { a: Vec(0,0), b: Vec(0,0) }
+    self.isDown = false
+    self.select = { pos: Vec(0,0), dim: Vec(0,0) }
 
-    function transform(p) { return { x: self.dx+self.scale*p[0], y: self.dy+p[1]} }
-    function dist(a, b) {
-      var dx = a[0] - b[0]
-      var dy = a[1] - b[1]
-      return Math.sqrt(dx*dx + dy*dy)
+    self.keydown = function (e) {
+      if (e.key == 'Backspace') {
+        e.preventDefault()
+        self.items = self.items.filter(function (entity){ return !entity.isSelected })
+      }
+      else {
+        e.preventDefault()
+        self.items.forEach(function (entity) {
+          if (!entity.isSelected) return
+          var step = e.shiftKey ? 2 : (e.metaKey ? 100 : 20)
+          switch (e.key) {
+            case 'ArrowLeft': entity.pos.x -= step; break;
+            case 'ArrowRight': entity.pos.x += step; break;
+            case 'ArrowUp': entity.pos.y -= step; break;
+            case 'ArrowDown': entity.pos.y += step; break;
+          }
+          entity.screenPos = transform(entity.pos)
+        })
+      }
+      calculateLines()
+      self.update()
     }
 
-    var fills = { planet: '#fff', asteroid: '#888', bouy: '#fa0', ring: '#00f', cloud: '#440' }
-    var sizes = { planet: 5, asteroid: 3, bouy: 3, ring: 7, cloud: 15 }
+    self.mousedown = function (e) {
+      e.preventDefault()
+      self.input.a = Vec(e.offsetX, e.offsetY)
+      self.isDown = true
+    }
+    self.mousemove = function (e) {
+      e.preventDefault()
+      if (!self.isDown) return;
+      self.input.b = Vec(e.offsetX, e.offsetY)
+      var d = diff(self.input.b, self.input.a)
+      self.select.dim = Vec(Math.abs(d.x), Math.abs(d.y))
+      self.select.pos = Vec(Math.min(self.input.a.x, self.input.b.x), Math.min(self.input.a.y, self.input.b.y))
+    }
+    self.mouseupOnItem = function (e) {
+      e.stopPropagation()
+      e.item.isSelected = true
+      self.isDown = false
+      self.select = { pos: Vec(0,0), dim: Vec(0,0) }
+      self.input.a = Vec(0,0)
+      self.input.b = Vec(0,0)
+    }
+    self.mouseup = function (e) {
+      e.preventDefault()
+      self.input.b = Vec(e.offsetX, e.offsetY)
+      if (0 == dist(self.input.a, self.input.b)) {
+        var pos = diff(self.input.a, Vec(self.dx, self.dy))
+        self.items.push({
+          screenPos: transform(pos),
+          isSelected: false,
+          pos: pos,
+          name: 'unnamed',
+          visual: 'asteroid',
+          fill:fills['asteroid'],
+          r: sizes['asteroid']
+        })
+        calculateLines()
+      } else {
+        self.items.forEach(function (e) {
+          var p = transform(e.pos)
+          e.isSelected = (
+            p.x > self.select.pos.x &&
+            p.y > self.select.pos.y &&
+            p.x < self.select.pos.x + self.select.dim.x &&
+            p.y < self.select.pos.y + self.select.dim.y)
+        })
+      }
+      self.isDown = false
+      self.select = { pos: Vec(0,0), dim: Vec(0,0) }
+      self.input.a = Vec(0,0)
+      self.input.b = Vec(0,0)
+    }
+
+    function transform(p) { return Vec(self.dx+self.scale*p.x, self.dy+self.scale*p.y) }
+    function toPos(p) { return Vec(p[0], p[1]) }
+
+    var fills = { planet: '#fff', asteroid: '#888', anomaly: '#fa0', ring: '#00f', cloud: '#DD0' }
+    var sizes = { planet: 5, asteroid: 3, anomaly: 3, ring: 7, cloud: 15 }
 
     function loadDestinations(data) {
       var destinations = JSON.parse(data)
-      self.items = destinations.map(e => (
-        {pos: transform(e.pos), name: e.name, fill:fills[e.visual], r: sizes[e.visual] }
-      ))
-      self.lines = []
-      destinations.forEach(a => destinations.forEach(function (b){
-        if (self.jumpRange > dist(a.pos, b.pos))
-          self.lines.push({ a: transform(a.pos), b: transform(b.pos) })
-      }))
+      destinations.forEach(function (e) { e.pos = toPos(e.pos) })
+      self.items = destinations.map(function (e) {
+        return {
+          screenPos: transform(e.pos),
+          isSelected: false,
+          pos: e.pos,
+          name: e.name,
+          visual: e.visual,
+          fill:fills[e.visual],
+          r: sizes[e.visual]
+        }
+      })
+      calculateLines()
       self.update()
+    }
+
+    function calculateLines() {
+      self.lines = []
+      self.items.forEach(function (a) {
+        self.items.forEach(function (b){
+          if (self.jumpRange > dist(a.pos, b.pos) && a.visual != 'cloud' && b.visual != 'cloud')
+            self.lines.push({ a: transform(a.pos), b: transform(b.pos) })
+        })
+      })
     }
 
     function loadQuest(domNode) {
@@ -68,32 +161,42 @@
           return e.getAttribute('dest')
         return null
       })
-      return _.map(destIds, dest => _.findWhere(self.items, { name: dest })).filter(e => !!e)
+      function findByName(dest) { return _.findWhere(self.items, { name: dest }) }
+      return _.compact(_.map(destIds, findByName))
     }
 
     function loadQuests(data) {
       var dom = (new DOMParser()).parseFromString(data, 'text/xml')
-      var questLines = _.map(dom.getElementsByTagName('quest'), loadQuest).filter(e => e.length)
-      self.quests = questLines.map(quest => 'M' + quest.map(e => e.pos.x + ' ' + e.pos.y).join(' L'))
+      var questLines = _.filter(_.map(dom.getElementsByTagName('quest'), loadQuest), 'length')
+      self.quests = questLines.map(function (quest) {
+        return 'M' + quest.map(function (e) { return (e.screenPos.x + ' ' + e.screenPos.y) }).join(' L')
+      })
       self.update()
     }
 
     self.on('mount', function() {
-      get('destinations.json').then(function (data) {
+      window.document.addEventListener('keydown', self.keydown.bind(self))
+      _.fetch('destinations.json', function (data) {
         loadDestinations(data)
-        get('quests.xml').then(data => loadQuests(data, self.destinations))
+        _.fetch('quests.xml', function (data) { loadQuests(data) })
       })
     })
 
-    function get(url) {
-      return fetch(url).then(e => e.text())
-    }
+    function Vec(x,y){ return {x:x, y:y} }
+    function dist(a,b){ return mag(diff(a,b)) }
+    function add(a,b){ return { x: a.x + b.x, y: a.y + b.y } }
+    function diff(a,b){ return { x: a.x - b.x, y: a.y - b.y } }
+    function mult(v,factor){ return { x: factor*v.x, y: factor*v.y } }
+    function mag(v){ return Math.sqrt(v.x*v.x + v.y*v.y) }
+    function normalize(v){ mult(v, 1/mag(v)) }
+    function rot(a){ return { x: a.y, y: -a.x } }
+
   </script>
 
   <style>
     :scope {
       display: block;
-      height: 100vh;
+      height: 1000px;
       overflow: hidden;
       color: white;
       font-family: "helvetica neue", "arial", sans-serif;
@@ -104,10 +207,12 @@
       height: 100%;
     }
     .galmap_label {
-      fill: rgba(1,1,1,0);
+      font-size: 8px;
+      font-family: Verdana;
+      fill: rgba(0,0,0,0.2);
     }
     .galmap_label:hover {
-      fill: #fff;
+      fill: #000;
     }
   </style>
 
