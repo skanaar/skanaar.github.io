@@ -1,6 +1,6 @@
 <quest-list>
 
-  <div each={quest in quests}>
+  <div each={quest in quests} >
     <h2>{quest.title}</h2>
     <pre><code>{quest.source}</code></pre>
   </div>
@@ -21,12 +21,8 @@
       self.update()
     }
 
-    function get(url) {
-      return fetch(url).then(e => e.text())
-    }
-
     self.on('mount', function() {
-      get('quests.xml').then(data => loadQuests(data))
+      _.fetch('quests.xml', function (data) { loadQuests(data) })
     })
 
     self.on('updated', function () {

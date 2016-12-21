@@ -173,4 +173,99 @@ But it is dangerous out there, go by Samson and get some weapons for that ship."
         <give credits="100" />
         <remove-map-marker />
     </quest>
+
+    <quest title="Find Ha-Eel">
+        <item name="Lengzin Blaster" />
+        <item name="Memory Shard" />
+        <item name="Pure Memory Shard"/>
+        <item name="Ha-Eels Pendant"/>
+        <item name="Mark of The Bearers"/>
+        <item name="Kappa Infused Tri-Cell Blaster"/>
+        <item name="Sunstone"/>
+        <item name="enemy.vicedurqs"/>
+
+        <condition at-dest="Salfir" trigger="VISIT PUB" />
+        <dialog>After your third shot of Ooze, the man who has been eye-balling you for quite a while approaches.</dialog>
+        <dialog ok="FIND Ha-Eel" cancel="NO THANKS">"Hey! Rumour has is the greatest Bounty Hunter in The Sadal Rim is here. Could you please go tell her I'm looking for her?"</dialog>
+        <dialog>What?! Did you just agree to hunt a hunter? Madness...</dialog>
+        <dialog>"Great! I think you can find her near the spaceport in Hossta Square.
+            In these parts of the Universe she goes by the name of Ha-Eel."
+
+            "I'm Klaatur by the way."</dialog>
+        <add-to-quest-list />
+        <mark-on-map dest="Hossta Square" icon="square" color="48F" />
+
+        <place-enemy dest="Hossta Square" enemy="enemy.vicedurqs" />
+        <condition at-dest="Hossta Square" trigger="SCAN" />
+        <dialog>You spot the Bounty Hunter easily. You can tell she's been through some tough times.</dialog>
+        <dialog>"Yes, I am Ha-Eel. Who sent you, Klaatur? I've never heard of no Klaatur!"</dialog>
+        <dialog ok="KILL 'EM ALL" cancel="NO THANKS">"Now go away, unless you can help me get rid of these Vicedurqs?"</dialog>
+        <remove-map-marker />
+        <dialog>"Perfect! Here, use this blaster!"</dialog>
+        <give item="Lengzin Blaster" />
+        <dialog>"You know, with that blaster you can send them back to their black hole really easy."</dialog>
+        <dialog>"Try aiming for the lower joint. Right there, see?"</dialog>
+
+        <condition no-enemy-at="Hossta Square" trigger="auto" />
+        <dialog>Yes, you know your way with weapons. The Vicedurqs threat to Hossta has diminished.</dialog>
+        <dialog>Ha-Eel is smiling, this was just another day at work for her:</dialog>
+        <dialog>"Wohoo! Wow, you're really handy with that steel!"</dialog>
+        <dialog>"Thank you for your help. Now who was that guy who sent you again?"</dialog>
+        <dialog>"Klaatur, you say. Hmm.. Maybe you should seek out Sagedion. He might be able to help you."</dialog>
+        <mark-on-map dest="Viloet Alta" color="0xF0" icon="arrow" />
+
+        <condition at-dest="Viloet Alta" trigger="auto" />
+        <dialog>You haven't set foot on Viloet Alta since before the days of Naqua, but it seems nothing has changed.</dialog>
+        <dialog>Still mostly inhabited by smugglers and no-good people. In the House of Senate, you can find Sagedian</dialog>
+        <condition at-dest="Viloet Alta" trigger="auto" />
+        <dialog ok="YES" cancel="NO">"Ha-Eel cannot remember Klaatur? Oh dear, oh dear. She must've lost her memory."
+            "I knew it would happen sooner or later. Will you help me restore it?"</dialog>
+        <remove-map-marker />
+        <dialog>"Excellent. There should be an old Memory Shard around here. Please bring it to me"</dialog>
+        <dialog>You take a casual stroll downtown, trying to not cause any trouble.</dialog>
+        <dialog>In the outskirts of town, near an old worn-down jios-reactor, you find what you're looking for.</dialog>
+        <give item="Memory Shard" />
+
+        <dialog>Sagedion: Great! Take this shard to Amcynis for purification</dialog>
+        <condition at-dest="Viloet Alta" have-item="Memory Shard" trigger="action"/>
+        <dialog>"There it is! Thank you! This Memory Shard needs to be purified. Bring it to Amcynis in Salfir"</dialog>
+        <mark-on-map dest="Salfir" icon="square" color="48F" />
+
+        <dialog>Amcynis: The shard is pure. Please return it to Ha-Eel</dialog>
+        <condition at-dest="Salfir" have-item="Memory Shard" trigger="auto" />
+        <dialog>You return to Salfir again. Klaatur nods as you pass on your way to the back entrance of the bar.
+            Sagedion told you to find the dealer Amcynis in the basement.</dialog>
+        <condition at-dest="Salfir" have-item="Memory Shard" have-credits="100" trigger="action" />
+        <dialog>"No thanks, I don't do charity work. If you need this purified, you need to pay up."
+            Amcynis was a Budergian, and you know there is no use in bargaining with that kind.
+            "So what if Sagedian sent you, he has loads of so called friends"</dialog>
+        <dialog ok="PAY" cancel="GO HOME">"If you want this fixed, It'll be 75 credits"</dialog>
+        <remove-map-marker />
+        <take item="Memory Shard" />
+        <take credits="100" />
+        <dialog>"Very well. Nice doing business with you, he he he."</dialog>
+        <dialog>"Here is your purified Shard"</dialog>
+        <give item="Pure Memory Shard" />
+
+        <dialog>This had sure been an unusual day; killing aliens with the notorious Ha-Eel,</dialog>
+        <dialog>revisiting Viloet Alta and whatnot.</dialog>
+        <dialog>Somehow you get the feeling this is not over yet.</dialog>
+
+        <condition at-dest="Hossta Square" have-item="Pure Memory Shard" trigger="auto" />
+        <dialog>This time, Ha-Eel is happy to see you.</dialog>
+        <dialog>"Hi! Hey, did you find Sagedion? What did he s... Wait!"</dialog>
+        <dialog>"What is that?!"</dialog>
+        <dialog>Ha-Eel looks at the Memory Shard you just pulled up from your backpack.
+            You hand it to her.</dialog>
+        <take item="Pure Memory Shard" />
+        <dialog>She immediately inserts the Shard into her KRM.</dialog>
+        <dialog>"It's a miracle! I remember again! Oh, Klaatur, my dear old comrade..."</dialog>
+        <dialog>"Where is Klaatur? I must meet him!"</dialog>
+        <dialog>"No, not now. I can't. My services are needed near Dretra IV. Here - take this pendant"</dialog>
+        <give item="Ha-Eels Pendant" />
+        <dialog>"Bring this to Klaatur and tell him I have not forgotten"</dialog>
+        <dialog>"Oh, and this is for you..."
+            Ha-Eel smiles and winks at you as she turns around and walks off</dialog>
+        <give credits="550" />
+    </quest>
 </quests>

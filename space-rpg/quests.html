@@ -5,7 +5,6 @@
   <link rel="shortcut icon" href="favicon.png">
   <link rel="stylesheet" href="style.css" >
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/solarized-dark.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/xml.min.js" >
 </head>
 <body>
 
@@ -71,8 +70,14 @@
   <script type="riot/tag" src="quest-list.tag.html"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src="util.js"></script>
   <script src="https://rawgit.com/riot/riot/master/riot%2Bcompiler.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+  <script> 
+      _.each(document.querySelectorAll('pre code'), function (elem){
+        hljs.highlightBlock(elem)
+      });
+    </script>
   <script> riot.mount('quest-list') </script>
 </body>
 </html>
