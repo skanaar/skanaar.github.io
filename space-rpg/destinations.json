@@ -1,169 +1,581 @@
 [
   {
     "name": "Backwater",
-    "visual": "planet",
     "style": "badlands-1",
     "surface": "green-2",
-    "pos": [0,0],
+    "pos": {
+      "x": 0,
+      "y": 0
+    },
     "trader": {
-      "buy": 1.0,
-      "sell": 1.0,
+      "buy": 1,
+      "sell": 1,
       "inventory": []
     },
     "treasures": [],
     "enemy": null
   },
   {
-    "name": "Dust",
-    "visual": "asteroid",
-    "style": "asteroid-1",
-    "surface": "rock-1",
-    "pos": [170,-30],
+    "name": "Anomaly 42",
+    "style": "anomaly-derelict",
+    "surface": "anomaly-thanatos",
+    "pos": {
+      "x": 170,
+      "y": -30
+    },
     "trader": null,
     "treasures": [],
     "enemy": null
   },
   {
     "name": "Shady",
-    "visual": "asteroid",
     "style": "asteroid-2",
     "surface": "rock-2",
-    "pos": [250,0],
+    "pos": {
+      "x": 250,
+      "y": 0
+    },
     "trader": null,
-    "treasures": ["Shady Boxes"],
+    "treasures": [
+      "Shady Boxes"
+    ],
     "enemy": null
   },
   {
     "name": "Samson's Folly",
-    "visual": "asteroid",
     "style": "asteroid-3",
     "surface": "rock-2",
-    "pos": [90,20],
-    "trader": { "buy": 1, "sell": 1, "inventory": ["Photon Ray"] },
+    "pos": {
+      "x": 90,
+      "y": 20
+    },
+    "trader": {
+      "buy": 1,
+      "sell": 1,
+      "inventory": [
+        "Photon Ray"
+      ]
+    },
     "treasures": [],
     "enemy": null
   },
   {
     "name": "Bazaar Gate",
-    "visual": "ring",
     "style": "ring-1",
     "surface": "rock-2",
-    "pos": [195,65],
+    "pos": {
+      "x": 195,
+      "y": 65
+    },
     "trader": null,
     "treasures": [],
     "enemy": null
   },
   {
     "name": "Alkalurops",
-    "visual": "planet",
     "style": "hell-1",
     "surface": "hell-1",
-    "pos": [-230,-310],
+    "pos": {
+      "x": -230,
+      "y": -310
+    },
     "trader": null,
     "treasures": [],
     "enemy": null
   },
   {
     "name": "Bazaar Station",
-    "visual": "anomaly",
-    "style": "anomaly",
+    "style": "ring-1",
     "surface": "rock-1",
-    "pos": [-140,-230],
+    "pos": {
+      "x": -140,
+      "y": -230
+    },
     "trader": null,
     "treasures": [],
     "enemy": null
   },
   {
     "name": "Bazaar",
-    "visual": "planet",
     "style": "neutron-2",
     "surface": "rock-2",
-    "pos": [-200,-220],
+    "pos": {
+      "x": -200,
+      "y": -220
+    },
     "trader": null,
-    "treasures": ["Gauss Gun", "Phased Ray"],
+    "treasures": [
+      "Gauss Gun",
+      "Phased Ray"
+    ],
     "enemy": null
   },
   {
     "name": "Helyon Shipyards",
-    "visual": "asteroid",
     "style": "asteroid-3",
     "surface": "rock-3",
-    "pos": [-280,-180],
+    "pos": {
+      "x": -280,
+      "y": -180
+    },
     "trader": null,
     "treasures": [],
     "enemy": null
   },
   {
     "name": "Ska Ska",
-    "visual": "planet",
     "style": "water-1",
     "surface": "water",
-    "pos": [-270,-400],
+    "pos": {
+      "x": -270,
+      "y": -400
+    },
     "trader": null,
     "treasures": [],
-    "enemy": ["rogue"]
+    "enemy": [
+      "rogue"
+    ]
   },
   {
     "name": "Baola",
-    "visual": "anomaly",
-    "style": "anomaly",
+    "style": "ring-1",
     "surface": "rock-1",
-    "pos": [-350,-220],
+    "pos": {
+      "x": -350,
+      "y": -220
+    },
     "trader": null,
     "treasures": [],
     "enemy": null
   },
   {
-    "name": "Bouy 68",
-    "visual": "anomaly",
-    "style": "anomaly",
-    "surface": "rock-1",
-    "pos": [150,150],
+    "name": "Buoy 68",
+    "style": "anomaly-buoy",
+    "surface": "anomaly-buoy",
+    "pos": {
+      "x": 150,
+      "y": 150
+    },
     "trader": null,
     "treasures": [],
     "enemy": null
   },
   {
-    "name": "Bouy 72",
-    "visual": "anomaly",
-    "style": "anomaly",
-    "surface": "rock-1",
-    "pos": [175,240],
+    "name": "Buoy 72",
+    "style": "anomaly-buoy",
+    "surface": "anomaly-buoy",
+    "pos": {
+      "x": 95,
+      "y": 240
+    },
     "trader": null,
     "treasures": [],
     "enemy": null
   },
   {
     "name": "Shoal B",
-    "visual": "asteroid",
     "style": "asteroid-4",
     "surface": "rock-4",
-    "pos": [225,290],
+    "pos": {
+      "x": 25,
+      "y": 330
+    },
     "trader": null,
-    "treasures": ["Tetragon Battery"],
+    "treasures": [
+      "Tetragon Battery"
+    ],
     "enemy": {
       "type": "monitor-drone",
-      "loot":["Copper"]
+      "loot": [
+        "Copper"
+      ]
     }
   },
   {
     "name": "Backwater Nebula",
-    "visual": "cloud",
     "style": "cloud-orange",
     "surface": "rock-1",
-    "pos": [250,150],
+    "pos": {
+      "x": 250,
+      "y": 150
+    },
     "trader": null,
     "treasures": [],
     "enemy": null
   },
   {
     "name": "Claw Nebula",
-    "visual": "cloud",
     "style": "cloud-purple",
     "surface": "rock-1",
-    "pos": [75,-125],
+    "pos": {
+      "x": 75,
+      "y": -125
+    },
     "trader": null,
     "treasures": [],
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": 54,
+      "y": 523
+    },
+    "name": "A-66283",
+    "style": "asteroid-1",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": 89,
+      "y": 422
+    },
+    "name": "A-91162",
+    "style": "asteroid-1",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -36,
+      "y": 381
+    },
+    "name": "A-136201",
+    "style": "asteroid-1",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -78,
+      "y": 355
+    },
+    "name": "A-178175",
+    "style": "asteroid-1",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -288,
+      "y": 365
+    },
+    "name": "A-308185",
+    "style": "asteroid-1",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -268,
+      "y": 260
+    },
+    "name": "A-308120",
+    "style": "asteroid-1",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -340,
+      "y": 421
+    },
+    "name": "A-360221",
+    "style": "asteroid-1",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -381,
+      "y": 487
+    },
+    "name": "A-421267",
+    "style": "asteroid-1",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -508,
+      "y": 574
+    },
+    "name": "A-448314",
+    "style": "asteroid-1",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -187,
+      "y": 522
+    },
+    "name": "Tau Pavonis",
+    "style": "star-m-ff0",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -304,
+      "y": 526
+    },
+    "name": "Pavonis Smoke",
+    "style": "badlands-1",
+    "surface": "desert-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -98,
+      "y": 490
+    },
+    "name": "Pavonis Mirror",
+    "style": "green-1",
+    "surface": "green-4",
+    "trader": {"buy":1, "sell":1},
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -161,
+      "y": 239
+    },
+    "name": "A-22179",
+    "style": "asteroid-1",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -379,
+      "y": 290
+    },
+    "name": "A-359150",
+    "style": "asteroid-1",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -57,
+      "y": 282
+    },
+    "name": "A-177122",
+    "style": "asteroid-1",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -431,
+      "y": 376
+    },
+    "name": "A-411196",
+    "style": "asteroid-1",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -415,
+      "y": 603
+    },
+    "name": "A-415603",
+    "style": "asteroid-2",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -289,
+      "y": 677
+    },
+    "name": "A-289677",
+    "style": "asteroid-2",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -173,
+      "y": 711
+    },
+    "name": "A-173711",
+    "style": "asteroid-2",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -45,
+      "y": 583
+    },
+    "name": "A-45583",
+    "style": "asteroid-2",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": 73,
+      "y": 679
+    },
+    "name": "A73679",
+    "style": "asteroid-2",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": 41,
+      "y": 589
+    },
+    "name": "A41589",
+    "style": "asteroid-2",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -57,
+      "y": 743
+    },
+    "name": "A-57743",
+    "style": "asteroid-2",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -287,
+      "y": 753
+    },
+    "name": "A-287753",
+    "style": "asteroid-2",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -169,
+      "y": 545
+    },
+    "name": "Pavonis Observatory",
+    "style": "anomaly-buoy",
+    "surface": "anomaly-observatory",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -21,
+      "y": 473
+    },
+    "name": "A-21473",
+    "style": "asteroid-2",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -61,
+      "y": 659
+    },
+    "name": "A-61659",
+    "style": "asteroid-2",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -477,
+      "y": 701
+    },
+    "name": "A-477701",
+    "style": "asteroid-2",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -533,
+      "y": 431
+    },
+    "name": "A-533431",
+    "style": "asteroid-2",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -221,
+      "y": 829
+    },
+    "name": "A-221829",
+    "style": "asteroid-2",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -83,
+      "y": 791
+    },
+    "name": "A-83791",
+    "style": "asteroid-2",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -371,
+      "y": 685
+    },
+    "name": "A-371685",
+    "style": "asteroid-2",
+    "surface": "rock-1",
+    "trader": null,
+    "enemy": null
+  },
+  {
+    "pos": {
+      "x": -217,
+      "y": 477
+    },
+    "name": "Pavois Ember",
+    "style": "hell-2",
+    "surface": "hell-2",
+    "trader": null,
     "enemy": null
   }
 ]

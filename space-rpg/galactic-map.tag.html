@@ -20,13 +20,16 @@
       fill={fill} riot-cx={screenPos.x} riot-cy={screenPos.y} riot-rx={r} riot-ry={r}
       onmouseup={mouseupOnItem}/>
     <text class="galmap_label" each={items} riot-x={screenPos.x+10} riot-y={screenPos.y+7}>
-      {name} {pos.x},{pos.y}
+      {entity.name} {entity.pos.x},{entity.pos.y}
     </text>
     <rect riot-x={select.pos.x} riot-y={select.pos.y}
       riot-width={select.dim.x} riot-height={select.dim.y}
       stroke="#F00" stroke-width="1" fill="rgba(0,0,0,0)"/>
   </svg>
-
+  <div class="galmap_tools">
+    <a ref="load" onclick={openFile} href='#'>load</a>
+    <a ref="save" onmouseenter={primeDownloadLink} download="destinations.json" href='#'>save</a>
+  </div>
   <script>
     var self = this
 
@@ -34,11 +37,11 @@
     self.quests = []
     self.lines = []
     self.jumpRange = 125
-    self.scale = 1.0
+    self.scale = 0.5
     self.dx = window.innerWidth/2
     self.dy = window.innerWidth/2
-    self.gridMin = transform({x:-self.dx,y:0}).x
-    self.gridMax = transform({x: self.dx,y:0}).x
+    self.gridMin = transform({x:-self.dx/self.scale,y:0}).x
+    self.gridMax = transform({x: self.dx/self.scale,y:0}).x
     self.grid = _.range(self.gridMin, self.gridMax, self.scale*50)
     self.input = { a: Vec(0,0), b: Vec(0,0) }
     self.isDown = false
@@ -47,20 +50,20 @@
     self.keydown = function (e) {
       if (e.key == 'Backspace') {
         e.preventDefault()
-        self.items = self.items.filter(function (entity){ return !entity.isSelected })
+        self.items = self.items.filter(function (item){ return !item.isSelected })
       }
       else {
         e.preventDefault()
-        self.items.forEach(function (entity) {
-          if (!entity.isSelected) return
+        self.items.forEach(function (item) {
+          if (!item.isSelected) return
           var step = e.shiftKey ? 2 : (e.metaKey ? 100 : 20)
           switch (e.key) {
-            case 'ArrowLeft': entity.pos.x -= step; break;
-            case 'ArrowRight': entity.pos.x += step; break;
-            case 'ArrowUp': entity.pos.y -= step; break;
-            case 'ArrowDown': entity.pos.y += step; break;
+            case 'ArrowLeft': item.entity.pos.x -= step; break;
+            case 'ArrowRight': item.entity.pos.x += step; break;
+            case 'ArrowUp': item.entity.pos.y -= step; break;
+            case 'ArrowDown': item.entity.pos.y += step; break;
           }
-          entity.screenPos = transform(entity.pos)
+          item.screenPos = transform(item.entity.pos)
         })
       }
       calculateLines()
@@ -92,20 +95,25 @@
       e.preventDefault()
       self.input.b = Vec(e.offsetX, e.offsetY)
       if (0 == dist(self.input.a, self.input.b)) {
-        var pos = diff(self.input.a, Vec(self.dx, self.dy))
+        var pos = mult(diff(self.input.a, Vec(self.dx, self.dy)), 1/self.scale)
         self.items.push({
           screenPos: transform(pos),
           isSelected: false,
-          pos: pos,
-          name: 'unnamed',
-          visual: 'asteroid',
           fill:fills['asteroid'],
-          r: sizes['asteroid']
+          r: sizes['asteroid'],
+          entity: {
+            pos: pos,
+            name: 'unnamed',
+            style: 'asteroid',
+            surface: 'rock-1',
+            trader: null,
+            enemy: null
+          }
         })
         calculateLines()
       } else {
         self.items.forEach(function (e) {
-          var p = transform(e.pos)
+          var p = transform(e.entity.pos)
           e.isSelected = (
             p.x > self.select.pos.x &&
             p.y > self.select.pos.y &&
@@ -119,24 +127,26 @@
       self.input.b = Vec(0,0)
     }
 
+    self.primeDownloadLink = function () {
+      var payload = self.items.map(function (e){ return e.entity })
+      var serialization = encodeURIComponent(JSON.stringify(payload, null, 2))
+      self.refs.save.setAttribute('href', 'data:text;charset=utf-8,' + serialization)
+    }
+
     function transform(p) { return Vec(self.dx+self.scale*p.x, self.dy+self.scale*p.y) }
-    function toPos(p) { return Vec(p[0], p[1]) }
 
     var fills = { planet: '#fff', asteroid: '#888', anomaly: '#fa0', ring: '#00f', cloud: '#DD0' }
     var sizes = { planet: 5, asteroid: 3, anomaly: 3, ring: 7, cloud: 15 }
 
     function loadDestinations(data) {
       var destinations = JSON.parse(data)
-      destinations.forEach(function (e) { e.pos = toPos(e.pos) })
       self.items = destinations.map(function (e) {
         return {
           screenPos: transform(e.pos),
           isSelected: false,
-          pos: e.pos,
-          name: e.name,
-          visual: e.visual,
-          fill:fills[e.visual],
-          r: sizes[e.visual]
+          fill:fills[e.style.split('-')[0]],
+          r: sizes[e.style.split('-')[0]],
+          entity: e
         }
       })
       calculateLines()
@@ -147,8 +157,8 @@
       self.lines = []
       self.items.forEach(function (a) {
         self.items.forEach(function (b){
-          if (self.jumpRange > dist(a.pos, b.pos) && a.visual != 'cloud' && b.visual != 'cloud')
-            self.lines.push({ a: transform(a.pos), b: transform(b.pos) })
+          if (self.jumpRange > dist(a.entity.pos, b.entity.pos) && !a.entity.style.startsWith('cloud') && !b.entity.style.startsWith('cloud'))
+            self.lines.push({ a: transform(a.entity.pos), b: transform(b.entity.pos) })
         })
       })
     }
@@ -213,6 +223,22 @@
     }
     .galmap_label:hover {
       fill: #000;
+    }
+    .galmap_tools {
+      position: fixed;
+      right: 10px;
+      top: 10px;
+    }
+    .galmap_tools a {
+      display: inline-block;
+      margin: 0 0 0 5px;
+      background: #eee;
+      border: 1px solid #888;
+      padding: 4px 8px;
+      border-radius: 3px;
+      color: #000;
+      font-weight: bold;
+      text-decoration: none;
     }
   </style>
 
