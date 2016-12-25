@@ -36,62 +36,15 @@
     <div>
       <select ref="styleSelect" onchange={setCelestialStyle}>
         <option value="unknown">- style -</option>
-        <option>planet-green-1</option>
-        <option>planet-green-2</option>
-        <option>planet-green-3</option>
-        <option>planet-water-1</option>
-        <option>planet-water-2</option>
-        <option>planet-water-3</option>
-        <option>planet-badlands-1</option>
-        <option>planet-rock-1</option>
-        <option>planet-hell-1</option>
-        <option>planet-hell-2</option>
-        <option>planet-hell-3</option>
-        <option>planet-hell-4</option>
-        <option>planet-hell-5</option>
-        <option>planet-star-m-ff0</option>
-        <option>planet-neutron-1</option>
-        <option>planet-neutron-2</option>
-        <option>planet-neutron-3</option>
-        <option>asteroid-1</option>
-        <option>asteroid-2</option>
-        <option>asteroid-3</option>
-        <option>asteroid-4</option>
-        <option>asteroid-5</option>
-        <option>asteroid-6</option>
-        <option>asteroid-7</option>
-        <option>cloud-orange</option>
-        <option>cloud-green</option>
-        <option>cloud-purple</option>
-        <option>cloud-star-yellow</option>
-        <option>ring-1</option>
-        <option>ring-2</option>
-        <option>ring-3</option>
-        <option>ring-4</option>
-        <option>anomaly-buoy</option>
-        <option>anomaly-derelict</option>
+        <option each={e,i in celestialStyles}>{e}</option>
       </select>
-    </div>
+      <button onclick={randomizeStyle}>Randomize</button>
+    </div>  
     <div>
-      <select>
-        <option>- random style -</option>
-        <option>planet</option>
-        <option>asteroid</option>
-        <option>cloud</option>
-        <option>ring</option>
-        <option>ring</option>
-        <option>anomaly</option>
-      </select>
-    </div>
-    <div>
-      <input type=text ref="nameField" > <button onclick={setName}>OK</button>
-    </div>
-    <div>
+      <input type=text ref="nameField" placeholder="name"> <button onclick={setName}>OK</button>
       <button onclick={autoNameNodes}>Autoname</button>
     </div>
-    <div>
-      <button onclick={removeSelected}>Delete</button>
-    </div>
+    <div><button onclick={removeSelected}>Delete</button></div>
   </div>
   <script>
     var self = this
@@ -109,9 +62,18 @@
     self.input = { a: Vec(0,0), b: Vec(0,0) }
     self.isDown = false
     self.select = { pos: Vec(0,0), dim: Vec(0,0) }
+    self.celestialStyles = [
+      'planet-green-1','planet-green-2','planet-green-3','planet-water-1','planet-water-2',
+      'planet-water-3','planet-badlands-1','planet-rock-1','planet-hell-1','planet-hell-2',
+      'planet-hell-3','planet-hell-4','planet-hell-5','planet-star-m-ff0','planet-neutron-1',
+      'planet-neutron-2','planet-neutron-3','asteroid-1','asteroid-2','asteroid-3','asteroid-4',
+      'asteroid-5','asteroid-6','asteroid-7','cloud-orange','cloud-green','cloud-purple',
+      'cloud-star-yellow','ring-1','ring-2','ring-3','ring-4','anomaly-buoy','anomaly-derelict'
+    ]
 
     self.removeSelected = function () {
       self.items = self.items.filter(function (item){ return !item.isSelected })
+      updateUI()
     }
 
     self.keydown = function (e) {
@@ -218,6 +180,15 @@
     self.setName = function (e) {
       var selection = _.filter(self.items, 'isSelected')
       if (selection.length == 1) selection[0].entity.name = self.refs.nameField.value
+    }
+
+    self.randomizeStyle = function () {
+      _.filter(self.items, 'isSelected').forEach(function (item) {
+        var type = item.entity.style.split('-')[0]
+        var stylesOfSameType = self.celestialStyles.filter(function(e){return e.startsWith(type)})
+        item.entity.style = _.sample(stylesOfSameType)
+      })
+      updateUI()
     }
 
     var fills = { planet: '#fff', asteroid: '#888', anomaly: '#fa0', ring: '#00f', cloud: '#DD0' }
@@ -347,7 +318,6 @@
       padding: 1px 8px;
       border-radius: 4px;
       color: #000;
-      /* font-weight: bold; */
       text-decoration: none;
       font-size: 11px;
       box-shadow: 0 1px 0px rgba(0,0,0,0.05);

@@ -1,7 +1,7 @@
 [
   {
     "name": "Backwater",
-    "style": "badlands-1",
+    "style": "planet-badlands-1",
     "surface": "green-2",
     "pos": {
       "x": 0,
@@ -73,7 +73,7 @@
   },
   {
     "name": "Alkalurops",
-    "style": "hell-1",
+    "style": "planet-hell-1",
     "surface": "hell-1",
     "pos": {
       "x": -230,
@@ -97,7 +97,7 @@
   },
   {
     "name": "Bazaar",
-    "style": "neutron-2",
+    "style": "planet-neutron-2",
     "surface": "rock-2",
     "pos": {
       "x": -200,
@@ -124,7 +124,7 @@
   },
   {
     "name": "Ska Ska",
-    "style": "water-1",
+    "style": "planet-water-1",
     "surface": "water",
     "pos": {
       "x": -270,
@@ -331,7 +331,7 @@
       "y": 526
     },
     "name": "Pavonis Smoke",
-    "style": "badlands-1",
+    "style": "planet-badlands-1",
     "surface": "desert-1",
     "trader": null,
     "enemy": null
@@ -342,7 +342,7 @@
       "y": 490
     },
     "name": "Pavonis Mirror",
-    "style": "green-1",
+    "style": "planet-green-1",
     "surface": "green-4",
     "trader": {"buy":1, "sell":1},
     "enemy": null
@@ -573,7 +573,7 @@
       "y": 477
     },
     "name": "Pavois Ember",
-    "style": "hell-2",
+    "style": "planet-hell-2",
     "surface": "hell-2",
     "trader": null,
     "enemy": null
