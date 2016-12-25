@@ -1,8 +1,8 @@
 <galactic-map>
 
-  <svg class="galmap" onmousedown={mousedown} onmousemove={mousemove} onmouseup={mouseup}>
-    <line each={x in grid} stroke="#DDD" stroke-width=0.5 riot-x1={x} riot-x2={x} riot-y1={gridMin} riot-y2={gridMax} />
-    <line each={y in grid} stroke="#DDD" stroke-width=0.5 riot-x1={gridMin} riot-x2={gridMax} riot-y1={y} riot-y2={y} />
+  <svg class="galmap" onmousedown={mousedown} onmousemove={mousemove} onmouseup={mouseup} width={2*dx} height={2*dy}>
+    <line each={x in gridX} stroke="#DDD" stroke-width=0.5 riot-x1={x} riot-x2={x} riot-y1={gridMin.y} riot-y2={gridMax.y} />
+    <line each={y in gridY} stroke="#DDD" stroke-width=0.5 riot-x1={gridMin.x} riot-x2={gridMax.x} riot-y1={y} riot-y2={y} />
     <path each={q in quests} 
       stroke="#48F"
       stroke-width="1"
@@ -54,11 +54,12 @@
     self.lines = []
     self.jumpRange = 125
     self.scale = 0.5
-    self.dx = window.innerWidth/2
-    self.dy = window.innerWidth/2
-    self.gridMin = transform({x:-self.dx/self.scale,y:0}).x
-    self.gridMax = transform({x: self.dx/self.scale,y:0}).x
-    self.grid = _.range(self.gridMin, self.gridMax, self.scale*50)
+    self.dx = window.innerWidth
+    self.dy = window.innerWidth
+    self.gridMin = transform({x:-self.dx/self.scale,y:-self.dy/self.scale})
+    self.gridMax = transform({x: self.dx/self.scale,y: self.dy/self.scale})
+    self.gridX = _.range(self.gridMin.x, self.gridMax.x, self.scale*50)
+    self.gridY = _.range(self.gridMin.y, self.gridMax.y, self.scale*50)
     self.input = { a: Vec(0,0), b: Vec(0,0) }
     self.isDown = false
     self.select = { pos: Vec(0,0), dim: Vec(0,0) }
@@ -74,14 +75,14 @@
     self.removeSelected = function () {
       self.items = self.items.filter(function (item){ return !item.isSelected })
       updateUI()
+      calculateLines()
     }
 
     self.keydown = function (e) {
       if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) return
       e.preventDefault()
-      self.items.forEach(function (item) {
-        if (!item.isSelected) return
-        var step = e.shiftKey ? 2 : (e.metaKey ? 100 : 20)
+      var step = e.shiftKey ? 2 : (e.metaKey ? 100 : 20)
+      _.filter(self.items, 'isSelected').forEach(function (item) {
         switch (e.key) {
           case 'ArrowLeft': item.entity.pos.x -= step; break;
           case 'ArrowRight': item.entity.pos.x += step; break;
@@ -109,7 +110,13 @@
     }
     self.mouseupOnItem = function (e) {
       e.stopPropagation()
-      e.item.isSelected = true
+      if (e.shiftKey) {
+        e.item.isSelected = !e.item.isSelected
+      }
+      else {
+        self.items.forEach(function (e){ e.isSelected = false })
+        e.item.isSelected = true
+      }
       updateUI()
       self.isDown = false
       self.select = { pos: Vec(0,0), dim: Vec(0,0) }
@@ -175,6 +182,7 @@
         if (item.isSelected) item.entity.style = e.target.value
       })
       self.update()
+      calculateLines()
     }
 
     self.setName = function (e) {
@@ -189,6 +197,7 @@
         item.entity.style = _.sample(stylesOfSameType)
       })
       updateUI()
+      calculateLines()
     }
 
     var fills = { planet: '#fff', asteroid: '#888', anomaly: '#fa0', ring: '#00f', cloud: '#DD0' }
@@ -285,16 +294,7 @@
 
   <style>
     :scope {
-      display: block;
-      height: 1000px;
-      overflow: hidden;
-      color: white;
       font-family: "helvetica neue", "arial", sans-serif;
-    }
-    .galmap {
-      position: relative;
-      width: 100%;
-      height: 100%;
     }
     .galmap_label {
       font-size: 8px;
