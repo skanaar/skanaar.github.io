@@ -22,7 +22,7 @@
       riot-rx={radiusFor(entity.style)} riot-ry={radiusFor(entity.style)}
       onmouseup={mouseupOnItem}/>
     <text class="galmap_label" each={items} riot-x={screenPos.x+10} riot-y={screenPos.y+7}>
-      {entity.name} {entity.pos.x},{entity.pos.y}
+      {entity.name}
     </text>
     <rect riot-x={select.pos.x} riot-y={select.pos.y}
       riot-width={select.dim.x} riot-height={select.dim.y}
@@ -30,12 +30,12 @@
   </svg>
   <div class="galmap_tools">
     <div>
-      <a ref="load" onclick={openFile} href='#'>load</a>
-      <a ref="save" onmouseenter={primeDownloadLink} download="destinations.json" href='#'>save</a>
+      <a ref="load" onclick={openFile} href='#'>Load</a>
+      <a ref="save" onmouseenter={primeDownloadLink} download="destinations.json" href='#'>Save</a>
     </div>
     <div>
-      <select onchange={setCelestialStyle}>
-        <option>- style -</option>
+      <select ref="styleSelect" onchange={setCelestialStyle}>
+        <option value="unknown">- style -</option>
         <option>planet-green-1</option>
         <option>planet-green-2</option>
         <option>planet-green-3</option>
@@ -84,13 +84,13 @@
       </select>
     </div>
     <div>
-      <select>
-        <option>- enemy -</option>
-        <option>monitor-drone</option>
-        <option>rogue</option>
-        <option>devourer</option>
-        <option>soma</option>
-      </select>
+      <input type=text ref="nameField" > <button onclick={setName}>OK</button>
+    </div>
+    <div>
+      <button onclick={autoNameNodes}>Autoname</button>
+    </div>
+    <div>
+      <button onclick={removeSelected}>Delete</button>
     </div>
   </div>
   <script>
@@ -110,25 +110,24 @@
     self.isDown = false
     self.select = { pos: Vec(0,0), dim: Vec(0,0) }
 
+    self.removeSelected = function () {
+      self.items = self.items.filter(function (item){ return !item.isSelected })
+    }
+
     self.keydown = function (e) {
-      if (e.key == 'Backspace') {
-        e.preventDefault()
-        self.items = self.items.filter(function (item){ return !item.isSelected })
-      }
-      else {
-        e.preventDefault()
-        self.items.forEach(function (item) {
-          if (!item.isSelected) return
-          var step = e.shiftKey ? 2 : (e.metaKey ? 100 : 20)
-          switch (e.key) {
-            case 'ArrowLeft': item.entity.pos.x -= step; break;
-            case 'ArrowRight': item.entity.pos.x += step; break;
-            case 'ArrowUp': item.entity.pos.y -= step; break;
-            case 'ArrowDown': item.entity.pos.y += step; break;
-          }
-          item.screenPos = transform(item.entity.pos)
-        })
-      }
+      if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) return
+      e.preventDefault()
+      self.items.forEach(function (item) {
+        if (!item.isSelected) return
+        var step = e.shiftKey ? 2 : (e.metaKey ? 100 : 20)
+        switch (e.key) {
+          case 'ArrowLeft': item.entity.pos.x -= step; break;
+          case 'ArrowRight': item.entity.pos.x += step; break;
+          case 'ArrowUp': item.entity.pos.y -= step; break;
+          case 'ArrowDown': item.entity.pos.y += step; break;
+        }
+        item.screenPos = transform(item.entity.pos)
+      })
       calculateLines()
       self.update()
     }
@@ -149,6 +148,7 @@
     self.mouseupOnItem = function (e) {
       e.stopPropagation()
       e.item.isSelected = true
+      updateUI()
       self.isDown = false
       self.select = { pos: Vec(0,0), dim: Vec(0,0) }
       self.input.a = Vec(0,0)
@@ -180,6 +180,7 @@
             p.y > self.select.pos.y &&
             p.x < self.select.pos.x + self.select.dim.x &&
             p.y < self.select.pos.y + self.select.dim.y)
+            updateUI()
         })
       }
       self.isDown = false
@@ -194,12 +195,29 @@
       self.refs.save.setAttribute('href', 'data:text;charset=utf-8,' + serialization)
     }
 
+    self.autoNameNodes = function () {
+      var abs = Math.abs
+      self.items
+        .filter(function (e){ return e.isSelected })
+        .forEach(function (item){
+          var e = item.entity
+          if (e.style.startsWith('asteroid'))
+            e.name = 'A'+abs(e.pos.x%100)+abs(e.pos.y%100)
+          if (e.style == 'anomaly-buoy') 
+            e.name = 'Buoy '+(1+abs(e.pos.x)%10)+(1+abs(e.pos.y)%100)
+        })
+    }
+
     self.setCelestialStyle = function (e) {
       self.items.forEach(function (item) {
-        debugger
         if (item.isSelected) item.entity.style = e.target.value
       })
       self.update()
+    }
+
+    self.setName = function (e) {
+      var selection = _.filter(self.items, 'isSelected')
+      if (selection.length == 1) selection[0].entity.name = self.refs.nameField.value
     }
 
     var fills = { planet: '#fff', asteroid: '#888', anomaly: '#fa0', ring: '#00f', cloud: '#DD0' }
@@ -210,6 +228,21 @@
     var sizes = { planet: 5, asteroid: 3, anomaly: 3, ring: 7, cloud: 15 }
     self.radiusFor = function (style) {
       return sizes[style.split('-')[0]]
+    }
+
+    function uniqueSelectedProp(key) {
+      var x = null
+      self.items.forEach(function (e) {
+        if (e.isSelected && e.entity[key])
+          x = x == null ? e.entity[key] : (e.entity[key] == x ? e.entity[key] : 'unknown')
+      })
+      return x
+    }
+
+    function updateUI() {
+      self.refs.styleSelect.value = uniqueSelectedProp('style') || 'unknown'
+      var selection = _.filter(self.items, 'isSelected')
+      self.refs.nameField.value = selection.length == 1 ? selection[0].entity.name : ''
     }
 
     function transform(p) { return Vec(self.dx+self.scale*p.x, self.dy+self.scale*p.y) }
@@ -309,13 +342,16 @@
     .galmap_tools a {
       display: inline-block;
       margin: 0 0 0 5px;
-      background: #eee;
-      border: 1px solid #888;
-      padding: 4px 8px;
-      border-radius: 3px;
+      background: #fff;
+      border: 1px solid #ccc;
+      padding: 1px 8px;
+      border-radius: 4px;
       color: #000;
-      font-weight: bold;
+      /* font-weight: bold; */
       text-decoration: none;
+      font-size: 11px;
+      box-shadow: 0 1px 0px rgba(0,0,0,0.05);
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     }
   </style>
 
