@@ -14,6 +14,11 @@
     <text class="galmap_label" each={items} riot-x={screenPos.x+10} riot-y={screenPos.y+7}>
       {entity.name}
     </text>
+    <path
+      each={enemyDestinations()}
+      d="M-2,2 L0,-2 L2,2 Z"
+      riot-transform={'translate(' + (screenPos.x+10) + ',' + (screenPos.y+10) + ')'}
+      fill="rgba(255,0,0,0.5)" stroke="#F00"/>
     <ellipse
       each={items}
       stroke-width="2"
@@ -36,7 +41,11 @@
     </div>
     <hr />
     <div>
-      <button onclick={toggleTool}>Add destinations: {createOnClick ? 'ON' : 'OFF'}</button>
+      <div class="btn-group">
+        <a onclick={() => tool='select'} class="toggle-btn {(tool == 'select') && 'active'}">Select
+        </a><a onclick={() => tool='draw'} class="toggle-btn {(tool == 'draw') && 'active'}">Draw
+        </a><a onclick={() => tool='spray'} class="toggle-btn {(tool == 'spray') && 'active'}">Spray</a>
+      </div>
     </div>
     <div>
       <select ref="styleSelect" onchange={setCelestialStyle}>
@@ -46,8 +55,17 @@
       <button onclick={randomizeStyle}>Randomize</button>
     </div>
     <div>
-      <input type=text ref="nameField" placeholder="name"> <button onclick={setName}>OK</button>
+      <input type=text ref="nameField" placeholder="name">
+      <button onclick={setName}>OK</button>
       <button onclick={autoNameNodes}>Autoname</button>
+    </div>
+    <div>
+      <label><input type=checkbox ref="enemyToggle"> Enemy</label>
+      <select>
+        <option>monitor-drone</option>
+        <option>battleship</option>
+      </select>
+      <input type=text placeholder=Loot>
     </div>
     <div>
       <button onclick={enlarge}>Enlarge</button>
@@ -67,6 +85,7 @@
     self.lines = []
     self.jumpRange = 125
     self.scale = 0.5
+    self.tool = 'select' // draw | spray
     self.dx = window.innerWidth
     self.dy = window.innerWidth
     self.gridMin = transform({x:-self.dx/self.scale,y:-self.dy/self.scale})
@@ -75,46 +94,51 @@
     self.gridY = _.range(self.gridMin.y, self.gridMax.y, self.scale*50)
     self.input = { a: Vec(0,0), b: Vec(0,0) }
     self.isDown = false
-    self.createOnClick = false
     self.select = { pos: Vec(0,0), dim: Vec(0,0) }
     self.celestialStyles = [
       'star-m-ff0',
+      'jovian-1', 'jovian-2', 'jovian-3',
       'planet-green-1','planet-green-2','planet-green-3','planet-water-1','planet-water-2',
       'planet-water-3','planet-badlands-1','planet-rock-1','planet-hell-1','planet-hell-2',
-      'planet-hell-3','planet-hell-4','planet-hell-5','planet-star-m-ff0','planet-neutron-1',
+      'planet-hell-3','planet-hell-4','planet-hell-5','planet-neutron-1',
       'planet-neutron-2','planet-neutron-3','asteroid-1','asteroid-2','asteroid-3','asteroid-4',
       'asteroid-5','asteroid-6','asteroid-7','cloud-orange','cloud-green','cloud-purple',
       'cloud-star-yellow','ring-1','ring-2','ring-3','ring-4','anomaly-buoy','anomaly-derelict'
     ]
 
+    self.setTool = function (id) { self.tool = id }
+
     self.removeSelected = function () {
-      self.items = self.items.filter(function (item){ return !item.isSelected })
+      self.items = self.items.filter(e => !e.isSelected)
       updateUI()
       calculateLines()
     }
 
-    self.toggleTool = function () {
-      self.createOnClick = !self.createOnClick
+    self.keydown = function (e) {
+      if (document.activeElement && document.activeElement.nodeName === 'INPUT') return;
+      var step = e.shiftKey ? 2 : (e.metaKey ? 100 : 20)
+      switch (e.key) {
+        case 'Backspace':
+        case 'Delete':     self.removeSelected(); break;
+        case 'ArrowLeft':  translateSelection(Vec(-step, 0)); break;
+        case 'ArrowRight': translateSelection(Vec(step, 0)); break;
+        case 'ArrowUp':    translateSelection(Vec(0, -step)); break;
+        case 'ArrowDown':  translateSelection(Vec(0, step)); break;
+        default: return;
+      }
+      e.preventDefault()
     }
 
-    self.keydown = function (e) {
-      if (!['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown'].includes(e.key)) return
-      e.preventDefault()
-      var step = e.shiftKey ? 2 : (e.metaKey ? 100 : 20)
+    function translateSelection(delta) {
       _.filter(self.items, 'isSelected').forEach(function (item) {
-        switch (e.key) {
-          case 'ArrowLeft': item.entity.pos.x -= step; break;
-          case 'ArrowRight': item.entity.pos.x += step; break;
-          case 'ArrowUp': item.entity.pos.y -= step; break;
-          case 'ArrowDown': item.entity.pos.y += step; break;
-        }
+        item.entity.pos = add(item.entity.pos, delta)
         item.screenPos = transform(item.entity.pos)
       })
       calculateLines()
       self.update()
     }
 
-    self.mousedown = function (e) {
+    self.mousedown = function (e) { // 132
       e.preventDefault()
       self.input.a = Vec(e.offsetX, e.offsetY)
       self.isDown = true
@@ -142,11 +166,8 @@
       self.input.a = Vec(0,0)
       self.input.b = Vec(0,0)
     }
-    self.mouseup = function (e) {
-      e.preventDefault()
-      self.input.b = Vec(e.offsetX, e.offsetY)
-      if (0 == dist(self.input.a, self.input.b) && self.createOnClick) {
-        var pos = mult(diff(self.input.a, Vec(self.dx, self.dy)), 1/self.scale)
+
+    function addAsteroid(pos) {
         self.items.push({
           screenPos: transform(pos),
           isSelected: false,
@@ -159,6 +180,22 @@
             enemy: null
           }
         })
+    }
+
+    self.mouseup = function (e) {
+      e.preventDefault()
+      document.activeElement.blur()
+      self.input.b = Vec(e.offsetX, e.offsetY)
+      if (0 == dist(self.input.a, self.input.b) && self.tool != 'select') {
+        var pos = mult(diff(self.input.a, Vec(self.dx, self.dy)), 1/self.scale)
+        if (self.tool == 'draw')
+          addAsteroid(pos)
+        else if (self.tool == 'spray'){
+          for (var i = 0, a = 0; i < 10; i++, a=6.28*Math.random()){
+            var delta = mult(Vec(Math.cos(6.28*i/10), Math.sin(6.28*i/10)), 80)
+            addAsteroid(add(pos, add(delta, Vec(60*Math.random(), 60*Math.random()))))
+          }
+        }
         calculateLines()
       } else {
         self.items.forEach(function (e) {
@@ -178,13 +215,13 @@
     }
 
     self.primeDownloadLink = function () {
-      var payload = self.items.map(function (e){ return e.entity })
+      var payload = self.items.map(e => e.entity)
       var serialization = encodeURIComponent(JSON.stringify(payload, null, 2))
       self.refs.downloadLink.setAttribute('href', 'data:text;charset=utf-8,' + serialization)
     }
 
     self.saveToStorage = function () {
-      var payload = self.items.map(function (e){ return e.entity })
+      var payload = self.items.map(e => e.entity)
       localStorage['world'] = JSON.stringify(payload, null, 2)
     }
 
@@ -195,7 +232,7 @@
     self.autoNameNodes = function () {
       var abs = Math.abs
       self.items
-        .filter(function (e){ return e.isSelected })
+        .filter(e => e.isSelected)
         .forEach(function (item){
           var e = item.entity
           if (e.style.startsWith('asteroid'))
@@ -230,9 +267,7 @@
 
     self.fileChanged = function () {
       var reader = new FileReader()
-      reader.onload = function(e) {
-        loadDestinations(reader.result)
-      }
+      reader.onload = () => loadDestinations(reader.result)
       reader.readAsText(self.refs.fileInput.files[0])
     }
 
@@ -258,13 +293,17 @@
     self.shrink = function () { self.enlargeShrink(0.99) }
     self.enlargeShrink = function (coefficient) {
       var subset = _.filter(self.items, 'isSelected')
-      var positions = _.pluck(_.pluck(subset, 'entity'), 'pos')
+      var positions = subset.map(e => e.entity.pos)
       var centroid = mult(positions.reduce(add, Vec(0,0)), 1/subset.length)
       subset.forEach(function (a) {
         a.entity.pos = rund(add(centroid, mult(diff(a.entity.pos, centroid), coefficient)))
         a.screenPos = transform(a.entity.pos)
       })
       calculateLines()
+    }
+
+    self.enemyDestinations = function () {
+      return self.items.filter(e => !!e.entity.enemy)
     }
 
     var fills = {
@@ -315,10 +354,14 @@
       self.lines = []
       self.items.forEach(function (a) {
         self.items.forEach(function (b){
-          if (self.jumpRange > dist(a.entity.pos, b.entity.pos) && !a.entity.style.startsWith('cloud') && !b.entity.style.startsWith('cloud'))
+          if (self.jumpRange > dist(a.entity.pos, b.entity.pos) && isTravellable(a.entity) && isTravellable(b.entity))
             self.lines.push({ a: transform(a.entity.pos), b: transform(b.entity.pos) })
         })
       })
+    }
+
+    function isTravellable(entity) {
+      return !entity.style.startsWith('cloud') && !entity.style.startsWith('star')
     }
 
     self.on('mount', function() {
@@ -365,7 +408,7 @@
       top: 10px;
       text-align: right;
     }
-    .galmap_tools a {
+    .galmap_tools a, .galmap_tools button, .galmap_tools input[type=file] {
       display: inline-block;
       margin: 0 0 0 5px;
       background: #fff;
@@ -374,8 +417,26 @@
       border-radius: 4px;
       color: #000;
       text-decoration: none;
-      font-size: 11px;
       box-shadow: 0 1px 0px rgba(0,0,0,0.05);
+      font-size: 11px;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    .galmap_tools button:active {
+      background: linear-gradient(to top, #07f, #5af);
+      border-color: #25f;
+    }
+    .btn-group .toggle-btn {
+      border-radius: 0;
+      margin: 0 0 0 -1px;
+    }
+    .btn-group .toggle-btn:first-child { border-radius: 4px 0 0 4px }
+    .btn-group .toggle-btn:last-child { border-radius: 0 4px 4px 0 }
+    .btn-group .toggle-btn.active {
+      background: linear-gradient(to top, #07f, #5af);
+      border-color: #25f;
+    }
+    label {
+      font-size: 11px;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     }
   </style>
