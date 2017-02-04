@@ -50,7 +50,7 @@
     <div>
       <select ref="styleSelect" onchange={setCelestialStyle}>
         <option value="unknown">- style -</option>
-        <option each={e,i in celestialStyles}>{e}</option>
+        <option each={e,i in styleNames}>{e}</option>
       </select>
       <button onclick={randomizeStyle}>Randomize</button>
     </div>
@@ -95,16 +95,8 @@
     self.input = { a: Vec(0,0), b: Vec(0,0) }
     self.isDown = false
     self.select = { pos: Vec(0,0), dim: Vec(0,0) }
-    self.celestialStyles = [
-      'star-m-ff0',
-      'jovian-1', 'jovian-2', 'jovian-3',
-      'planet-green-1','planet-green-2','planet-green-3','planet-water-1','planet-water-2',
-      'planet-water-3','planet-badlands-1','planet-rock-1','planet-hell-1','planet-hell-2',
-      'planet-hell-3','planet-hell-4','planet-hell-5','planet-neutron-1',
-      'planet-neutron-2','planet-neutron-3','asteroid-1','asteroid-2','asteroid-3','asteroid-4',
-      'asteroid-5','asteroid-6','asteroid-7','cloud-orange','cloud-green','cloud-purple',
-      'cloud-star-yellow','ring-1','ring-2','ring-3','ring-4','anomaly-buoy','anomaly-derelict'
-    ]
+    self.styleNames = []
+    self.celestialStyles = {}
 
     self.setTool = function (id) { self.tool = id }
 
@@ -214,15 +206,19 @@
       self.input.b = Vec(0,0)
     }
 
+    function serializedWorld() {
+      var entities = self.items.map(e => e.entity)
+      var payload = { destinations: entities, celestialStyles: self.celestialStyles }
+      return JSON.stringify(payload, null, 2)      
+    }
+
     self.primeDownloadLink = function () {
-      var payload = self.items.map(e => e.entity)
-      var serialization = encodeURIComponent(JSON.stringify(payload, null, 2))
+      var serialization = encodeURIComponent(serializedWorld())
       self.refs.downloadLink.setAttribute('href', 'data:text;charset=utf-8,' + serialization)
     }
 
     self.saveToStorage = function () {
-      var payload = self.items.map(e => e.entity)
-      localStorage['world'] = JSON.stringify(payload, null, 2)
+      localStorage['world'] = serializedWorld()
     }
 
     self.loadFromStorage = function () {
@@ -258,7 +254,7 @@
     self.randomizeStyle = function () {
       _.filter(self.items, 'isSelected').forEach(function (item) {
         var type = item.entity.style.split('-')[0]
-        var stylesOfSameType = self.celestialStyles.filter(function(e){return e.startsWith(type)})
+        var stylesOfSameType = self.styleNames.filter(function(e){return e.startsWith(type)})
         item.entity.style = _.sample(stylesOfSameType)
       })
       updateUI()
@@ -267,7 +263,7 @@
 
     self.fileChanged = function () {
       var reader = new FileReader()
-      reader.onload = () => loadDestinations(reader.result)
+      reader.onload = () => loadWorld(reader.result)
       reader.readAsText(self.refs.fileInput.files[0])
     }
 
@@ -335,9 +331,16 @@
 
     function transform(p) { return Vec(self.dx+self.scale*p.x, self.dy+self.scale*p.y) }
 
-    function loadDestinations(data) {
-      var destinations = JSON.parse(data)
-      self.items = destinations.map(function (e) {
+    function loadWorld(data) {
+        var world = JSON.parse(data)
+        loadDestinations(world.destinations)
+        self.celestialStyles = world.celestialStyles
+        self.styleNames = Object.keys(world.celestialStyles)
+        self.update()
+    }
+
+    function loadDestinations(list) {
+      self.items = list.map(function (e) {
         return {
           screenPos: transform(e.pos),
           isSelected: false,
@@ -347,7 +350,6 @@
         }
       })
       calculateLines()
-      self.update()
     }
 
     function calculateLines() {
@@ -367,7 +369,7 @@
     self.on('mount', function() {
       window.document.addEventListener('keydown', self.keydown.bind(self))
       _.fetch('destinations.json', function (data) {
-        loadDestinations(data)
+        loadWorld(data)
       })
       window.scrollTo(self.dx/3, self.dy/3)
     })
