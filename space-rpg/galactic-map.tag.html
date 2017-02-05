@@ -9,9 +9,9 @@
     <line each={x in gridX} stroke="#DDD" stroke-width=0.5 riot-x1={x} riot-x2={x} riot-y1={gridMin.y} riot-y2={gridMax.y} />
     <line each={y in gridY} stroke="#DDD" stroke-width=0.5 riot-x1={gridMin.x} riot-x2={gridMax.x} riot-y1={y} riot-y2={y} />
     <line each={lines}
-      stroke-width="2" stroke="#000"
+      stroke-width="2" stroke="#888"
       riot-x1={a.x} riot-x2={b.x} riot-y1={a.y} riot-y2={b.y} />
-    <text class="galmap_label" each={items} riot-x={screenPos.x+10} riot-y={screenPos.y+7}>
+    <text class="galmap_label" each={items} riot-x={screenPos.x+radiusFor(entity.style)*scale+4} riot-y={screenPos.y+7}>
       {entity.name}
     </text>
     <path
@@ -25,7 +25,7 @@
       stroke={isSelected ? '#F00' : '#000'}
       fill={isSelected ? '#F88' : fillFor(entity.style)}
       riot-cx={screenPos.x} riot-cy={screenPos.y}
-      riot-rx={radiusFor(entity.style)} riot-ry={radiusFor(entity.style)}
+      riot-rx={1+radiusFor(entity.style)*scale} riot-ry={1+radiusFor(entity.style)*scale}
       onmouseup={mouseupOnItem}/>
     <rect riot-x={select.pos.x} riot-y={select.pos.y}
       riot-width={select.dim.x} riot-height={select.dim.y}
@@ -48,9 +48,17 @@
       </div>
     </div>
     <div>
+      <label>Start at:</label>
+      <input ref="initialDestinationInput" type=text value={world.initialDestination}>
+      <select ref="initialShipSelect" onchange={setInitialShip}>
+        <option each={e in world.ships}>{e}</option>
+      </select>
+    </div>
+    <hr />
+    <div>
       <select ref="styleSelect" onchange={setCelestialStyle}>
         <option value="unknown">- style -</option>
-        <option each={e,i in styleNames}>{e}</option>
+        <option each={e in world.celestialStyles}>{e.id}</option>
       </select>
       <button onclick={randomizeStyle}>Randomize</button>
     </div>
@@ -62,8 +70,7 @@
     <div>
       <label><input type=checkbox ref="enemyToggle"> Enemy</label>
       <select>
-        <option>monitor-drone</option>
-        <option>battleship</option>
+        <option each={e in world.enemies}>{e}</option>
       </select>
       <input type=text placeholder=Loot>
     </div>
@@ -84,7 +91,7 @@
     self.items = []
     self.lines = []
     self.jumpRange = 125
-    self.scale = 0.5
+    self.scale = (+ location.search.substring(1).split('=')[1]) || 0.5
     self.tool = 'select' // draw | spray
     self.dx = window.innerWidth
     self.dy = window.innerWidth
@@ -95,8 +102,14 @@
     self.input = { a: Vec(0,0), b: Vec(0,0) }
     self.isDown = false
     self.select = { pos: Vec(0,0), dim: Vec(0,0) }
-    self.styleNames = []
-    self.celestialStyles = {}
+    self.world = {
+      ships: [],
+      enemies: [],
+      initialDestination: '',
+      initialShip: 'clipper',
+      celestialStyles: [],
+      destinations: []
+    }
 
     self.setTool = function (id) { self.tool = id }
 
@@ -207,9 +220,8 @@
     }
 
     function serializedWorld() {
-      var entities = self.items.map(e => e.entity)
-      var payload = { destinations: entities, celestialStyles: self.celestialStyles }
-      return JSON.stringify(payload, null, 2)      
+      self.world.destinations = self.items.map(e => e.entity)
+      return JSON.stringify(self.world, null, 2)      
     }
 
     self.primeDownloadLink = function () {
@@ -222,7 +234,7 @@
     }
 
     self.loadFromStorage = function () {
-      loadDestinations(localStorage['world'])
+      loadWorld(localStorage['world'])
     }
 
     self.autoNameNodes = function () {
@@ -246,6 +258,11 @@
       calculateLines()
     }
 
+    self.setInitialShip = function (e) {
+      self.world.initialShip = e.target.value
+      self.update()
+    }
+
     self.setName = function (e) {
       var selection = _.filter(self.items, 'isSelected')
       if (selection.length == 1) selection[0].entity.name = self.refs.nameField.value
@@ -254,7 +271,7 @@
     self.randomizeStyle = function () {
       _.filter(self.items, 'isSelected').forEach(function (item) {
         var type = item.entity.style.split('-')[0]
-        var stylesOfSameType = self.styleNames.filter(function(e){return e.startsWith(type)})
+        var stylesOfSameType = self.world.celestialStyles.filter(function(e){return e.startsWith(type)})
         item.entity.style = _.sample(stylesOfSameType)
       })
       updateUI()
@@ -303,15 +320,14 @@
     }
 
     var fills = {
-      star: '#ff4', planet: '#8f8', asteroid: '#aaa', anomaly: '#fa0', ring: '#00f', cloud: '#DD0'
+      cloud: '#D8D', star: '#ff4', jovian: '#fa8', planet: '#8f8', asteroid: '#aaa', anomaly: '#fa0', ring: '#8af'
     }
     self.fillFor = function (style) {
       return fills[style.split('-')[0]]
     }
-    
-    var sizes = { star: 10, planet: 7, asteroid: 5, anomaly: 5, ring: 7, cloud: 15 }
+
     self.radiusFor = function (style) {
-      return sizes[style.split('-')[0]]
+      return self.world.celestialStyles.find(function (e){ return e.id == style }).r
     }
 
     function uniqueSelectedProp(key) {
@@ -325,6 +341,7 @@
 
     function updateUI() {
       self.refs.styleSelect.value = uniqueSelectedProp('style') || 'unknown'
+      self.refs.initialShipSelect.value = self.world.initialShip
       var selection = _.filter(self.items, 'isSelected')
       self.refs.nameField.value = selection.length == 1 ? selection[0].entity.name : ''
     }
@@ -332,20 +349,19 @@
     function transform(p) { return Vec(self.dx+self.scale*p.x, self.dy+self.scale*p.y) }
 
     function loadWorld(data) {
-        var world = JSON.parse(data)
-        loadDestinations(world.destinations)
-        self.celestialStyles = world.celestialStyles
-        self.styleNames = Object.keys(world.celestialStyles)
+        self.world = JSON.parse(data)
+        loadDestinations(self.world)
+        updateUI()
         self.update()
     }
 
-    function loadDestinations(list) {
-      self.items = list.map(function (e) {
+    function loadDestinations(world) {
+      self.items = world.destinations.map(function (e) {
         return {
           screenPos: transform(e.pos),
           isSelected: false,
-          fill:fills[e.style.split('-')[0]],
-          r: sizes[e.style.split('-')[0]],
+          fill: fills[e.style.split('-')[0]],
+          r: world.celestialStyles.find(function (sty){ return sty.id == e.style }).r,
           entity: e
         }
       })
@@ -368,7 +384,7 @@
 
     self.on('mount', function() {
       window.document.addEventListener('keydown', self.keydown.bind(self))
-      _.fetch('destinations.json', function (data) {
+      _.fetch('world.json', function (data) {
         loadWorld(data)
       })
       window.scrollTo(self.dx/3, self.dy/3)
@@ -399,7 +415,7 @@
     .galmap_label {
       font-size: 8px;
       font-family: Verdana;
-      fill: rgba(0,0,0,0.2);
+      fill: rgba(0,0,0,0.4);
     }
     .galmap_label:hover {
       fill: #000;
@@ -409,6 +425,9 @@
       right: 10px;
       top: 10px;
       text-align: right;
+    }
+    .galmap_tools > div {
+      margin: 3px 0;
     }
     .galmap_tools a, .galmap_tools button, .galmap_tools input[type=file] {
       display: inline-block;
