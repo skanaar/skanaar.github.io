@@ -48,7 +48,7 @@
       </div>
     </div>
     <div>
-      <label>Start at:</label>
+      <label>Start at</label>
       <input ref="initialDestinationInput" type=text value={world.initialDestination}>
       <select ref="initialShipSelect" onchange={setInitialShip}>
         <option each={e in world.ships}>{e}</option>
@@ -56,11 +56,19 @@
     </div>
     <hr />
     <div>
+      <label>Style</label>
       <select ref="styleSelect" onchange={setCelestialStyle}>
         <option value="unknown">- style -</option>
         <option each={e in world.celestialStyles}>{e.id}</option>
       </select>
       <button onclick={randomizeStyle}>Randomize</button>
+    </div>
+    <div>
+      <label>Surface</label>
+      <select ref="surfaceSelect" onchange={setSurface}>
+        <option value="unknown">- surface -</option>
+        <option each={e in world.surfaces}>{e.id}</option>
+      </select>
     </div>
     <div>
       <input type=text ref="nameField" placeholder="name">
@@ -221,7 +229,7 @@
 
     function serializedWorld() {
       self.world.destinations = self.items.map(e => e.entity)
-      return JSON.stringify(self.world, null, 2)      
+      return _.stringify(self.world, {maxLength: 200})
     }
 
     self.primeDownloadLink = function () {
@@ -256,6 +264,13 @@
       })
       self.update()
       calculateLines()
+    }
+
+    self.setSurface = function (e) {
+      self.items.forEach(function (item) {
+        if (item.isSelected) item.entity.surface = e.target.value
+      })
+      self.update()
     }
 
     self.setInitialShip = function (e) {
@@ -341,6 +356,7 @@
 
     function updateUI() {
       self.refs.styleSelect.value = uniqueSelectedProp('style') || 'unknown'
+      self.refs.surfaceSelect.value = uniqueSelectedProp('surface') || 'unknown'
       self.refs.initialShipSelect.value = self.world.initialShip
       var selection = _.filter(self.items, 'isSelected')
       self.refs.nameField.value = selection.length == 1 ? selection[0].entity.name : ''
