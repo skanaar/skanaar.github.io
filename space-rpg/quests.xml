@@ -1,16 +1,16 @@
 <quests>
     
+    <item name="Shiny Meteorite" credits="1000" />
     <quest title="Start of an adventure">
         <place-item dest="Backwater" item="Shiny Meteorite" />
-        <place-item dest="Shady" item="Shady Boxes" />
         <dialog>The captain wakes you up.
 "Hey hitchhiker! This is your stop."
         </dialog>
         <dialog>You are at the area where you saw the meteorite hit. It had a weird signature. If you EXPLORE the area you might score big time!</dialog>
         <add-to-quest-list />
-        <condition have-item="Shiny Meteorite" trigger="auto" />
+        <condition have-item="Shiny Meteorite" />
         <dialog>You find the meteorite resting on the ground. No crater. A shiny dodecahedron that is surprisingly light when you load it into the rover. The TRADE guild will pay a fortune for this.</dialog>
-        <condition have-credits="1000" trigger="auto" />
+        <condition have-credits="1000" />
         <dialog>"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. What do you say?"</dialog>
         <dialog>There it is. An opportunity to finally leave this rock. You accept eagerly.</dialog>
         <dialog>"Now you can LIFT OFF and leave this planet.
@@ -18,48 +18,56 @@ But it is dangerous out there, go by Samson and get some weapons for that ship."
         <take credits="900" />
         <mark-on-map dest="Samson's Folly" />
         <change-ship ship="clipper" />
-        <condition at-dest="Samson's Folly" trigger="auto" />
+        <condition at-dest="Samson's Folly" />
         <dialog>"My friend at Backwater said you would be coming. We have a nice Photon Ray in stock left. You are welcome to LAND and TRADE with us here at Samson's Folly."</dialog>
-        <condition have-item="Photon Ray" trigger="auto" />
+        <condition have-item="Photon Ray" />
         <dialog>You now have a Photon Ray, a basic weapon. Tap you ship hologram to open your PROFILE and INSTALL your new Photon Ray</dialog>
         <remove-map-marker />
     </quest>
 
+    <item name="Shady Boxes" />
     <quest title="Shady spacer">
-        <condition at-dest="Shady" trigger="auto" />
+        <place-item dest="Shady" item="Shady Boxes" />
+        <condition at-dest="Shady" />
         <dialog>A sad rusty ship radios you.
 "Fellow spacer! There is nice loot on this moon but my landing gear is bust. If you LAND and help me EXPLORE I'll reward you."</dialog>
         <add-to-quest-list />
-        <condition have-item="Shady Boxes" trigger="auto" />
+        <condition have-item="Shady Boxes" />
         <dialog>The eager spacer thank you several times for helping her finding the boxes. You receive a small reward and you hope you don't see the her again.</dialog>
         <give credits="100" />
         <take item="Shady Boxes" />
     </quest>
 
-    <quest title="Peril at Bouy 72">
-        <condition at-dest="Bouy 72" trigger="auto" />
+    <quest title="Peril at Buoy 72">
+        <place-enemy dest="Bouy 72" enemy="monitor-drone" />
+        <condition at-dest="Buoy 68" />
         <dialog>You receive a transmission:
 "Help us. The way ahead is blocked by a malfunctioning drone. We don't dare to proceed. You have to clear the path for us!"</dialog>
-        <mark-on-map dest="Bouy 72" />
+        <mark-on-map dest="Buoy 72" />
         <add-to-quest-list />
-        <condition no-enemy-at="Shoal B" trigger="auto" />
+        <condition no-enemy-at="Bouy 72" />
         <dialog>That drone wasn't even armed. This adventure looks like its going to be a walk in the park.</dialog>
+        <mark-on-map dest="Buoy 68" />
+        <dialog>""Thank you for clearing the way for us! Here, take this for you troubles."</dialog>
+        <give credits="15" />
     </quest>
     
+    <item name="Subsystem cache"/>
+    <item name="Blue signature"/>
     <quest title="Bal Gru's stolen subsystems">
-        <place-item dest="Luz-2" item="item.subsystem-cache"/>
-        <place-item dest="Luz-2" count="3" item="enemy.bandit"/>
-        <condition at-dest="Luz-1" trigger="radio" />
+        <place-item dest="Luz-2" item="Subsystem cache"/>
+        <place-enemy dest="Luz-2" enemy="bandit"/>
+        <condition at-dest="Luz-1" trigger="HAIL" />
         <dialog ok="YES" cancel="NOT NOW">
             Hey girl, I'm Bal Gru, merchant in distress. Can you help me? Bandits robbed me of all of my subsystems. Can you get them back for me?
         </dialog>
         <add-to-quest-list />
-        <condition at-dest="Luz-1" have-item="item.subsystem-cache" />
+        <condition at-dest="Luz-1" have-item="Subsystem cache" />
         <dialog>
             You have our stolen subsystems! This is invaluable to us. Here, take this artifact, it is the least we can give you.
         </dialog>
         <give item="item.blue-signature" />
-        <condition at-dest="Larato-gate" have-item="item.blue-signature" trigger="action" />
+        <condition at-dest="Larato-gate" have-item="Blue signature" trigger="ANALYZE" />
         <dialog ok="APPROACH" cancel="IGNORE">
             The Larato Gate looks like a torus shaped lump of stone needles. The Blue Signature in your inventory is humming.
             Should you approach?
@@ -67,34 +75,34 @@ But it is dangerous out there, go by Samson and get some weapons for that ship."
         <dialog>
             The gate's mass of needles swells and twitches. The hole in the torus shimmers and turns into a misty black cloud.
         </dialog>
-        <condition at-dest="Larato-gate" trigger="action" />
+        <condition at-dest="Larato-gate" trigger="ACTIVATE" />
         <dialog ok="ENTER GATE" cancel="LEAVE">
             The misty dark cloud in the toroidal gate swirls.
         </dialog>
         <travel dest="Besso" />
     </quest>
     
-    
+    <item name="Blue seeds"/>
+    <item name="Blue flowers"/>
     <quest title="Blue seeds">
-        <place-item dest="Blue Forest" item="item.blue-seeds" />
-        <condition have-item="item.blue-seeds" />
+        <place-item dest="Blue Forest" item="Blue seeds" />
+        <condition have-item="Blue seeds" />
         <dialog>These Blue Seeds might take root in the right soil.</dialog>
         <add-to-quest-list />
-        <condition at-dest="Blue Ocean" trigger="action" />
+        <condition at-dest="Blue Ocean" trigger="PLANT" />
         <dialog>You plant the Blue Seeds on a lonely island.</dialog>
         <condition not-at-dest="Blue Ocean" />
-        <condition at-dest="Blue Ocean" trigger="action" />
+        <condition at-dest="Blue Ocean" trigger="GATHER" />
         <dialog>You gather the Blue Flowers that sprung out of the planted seeds.</dialog>
-        <give item="item.blue-flowers" />
+        <give item="Blue flowers" />
     </quest>
     
     
     <quest title="Helyon Shipyards">
-        <add-to-quest-list />
-        <mark-on-map dest="Helyon Shipyards" icon="square" color="48F" />
-        <condition at-dest="Helyon Shipyards" trigger="action"/>
+        <condition at-dest="Helyon Shipyards" trigger="HAIL"/>
         <dialog>If you bring 1000 credits and no cops I can land you a fine Battleship hull. No receipt. Ok?</dialog>
-        <condition at-dest="Helyon Shipyards" have-credits="1000" trigger="action" />
+        <add-to-quest-list />
+        <condition at-dest="Helyon Shipyards" have-credits="1000" trigger="HAIL" />
         <dialog ok="Yes" cancel="No thanks">1000 credits and you have yourself a fine Battleship. If you give me you old hull.</dialog>
         <take credits="1000" />
         <change-ship ship="battleship" />
@@ -102,170 +110,140 @@ But it is dangerous out there, go by Samson and get some weapons for that ship."
     </quest>
     
     
-    <quest title="Bazaar Gate">
-        <mark-on-map dest="Bazaar Gate" icon="enter" color="0F0" />
-        <condition at-dest="Bazaar Gate" trigger="action"/>
-        <travel dest="Bazaar" />
-        <goto jump="-2" />
-    </quest>
-    <quest title="Bazaar Gate Destination">
-        <mark-on-map dest="Bazaar" icon="exit" color="080" />
-    </quest>
-    
-    
-    <quest title="The Tale of Alkalurops">
-        <condition at-dest="Bazaar Station" trigger="auto" />
-        <dialog>An old drunken kosmonaut tells you a tale of the planet Alkalurops.</dialog>
-        <add-to-quest-list />
-        <mark-on-map dest="Alkalurops" />
-        <condition at-dest="Alkalurops" trigger="auto" />
-        <dialog ok="EXPLORE" cancel="AVOID">You have found the mysterious planet of Alkarulops.</dialog>
-        <dialog>You explore Alkalurops and find unmentionable horrors. Your mind breaks.</dialog>
-        <change-ship ship="battleship" />
-        <remove-map-marker />
-    </quest>
-    
-    
     <!-- Rebuild the Thanatos. Find three relics and repair the derelict.
      Thanatos will award you with the powerful battle computer Momus. -->
+    <item name="Thanatos mesh" />
+    <item name="Thanatos core" />
+    <item name="Thanatos nacelle" />
     <quest title="Thanatos relic 1">
-        <condition have-item="item.thanatos-part-1" trigger="auto" />
+        <condition have-item="Thanatos mesh" />
         <dialog>You found a relic, a machine part covered with cuneiform markings.</dialog>
     </quest>
     <quest title="Thanatos relic 2">
-        <condition have-item="item.thanatos-part-2" trigger="auto" />
+        <condition have-item="Thanatos core" />
         <dialog>You found a relic, a machine part covered with cuneiform markings.</dialog>
     </quest>
     <quest title="Thanatos relic 3">
-        <condition have-item="item.thanatos-part-3" trigger="auto" />
+        <condition have-item="Thanatos nacelle" />
         <dialog>You found a relic, a machine part covered with cuneiform markings.</dialog>
     </quest>
     <quest title="Rebuild the Thanatos">
-        <modify-destination dest="thanathos" type="derelict" />
-        <place-item dest="balnza" item="item.thanatos-part-1" />
-        <place-item dest="ougeia" item="item.thanatos-part-2" />
-        <place-item dest="nozzor" item="item.thanatos-part-3" />
-        <condition at-dest="thanathos" trigger="action" />
+        <place-item dest="Balnza" item="Thanatos mesh" />
+        <place-item dest="Ougeia" item="Thanatos core" />
+        <place-item dest="Nozzor" item="Thanatos nacelle" />
+        <condition at-dest="thanathos" trigger="ANALYZE" />
         <dialog>It is the Thanatos derelict. Immensely old. Broken. The intact half is covered in cuneiform markings.</dialog>
         <add-to-quest-list />
-        <condition have-item="item.thanatos-part-1" trigger="auto" />
-        <condition have-item="item.thanatos-part-2" trigger="auto" />
-        <condition have-item="item.thanatos-part-3" trigger="auto" />
+        <condition have-item="Thanatos mesh" />
+        <condition have-item="Thanatos core" />
+        <condition have-item="Thanatos nacelle" />
         <dialog>You now possess all three missing pieces of the Thanatos.</dialog>
-        <condition at-dest="thanathos" trigger="action" />
+        <condition at-dest="Thanathos" trigger="REBUILD" />
         <dialog ok="Rebuild Thanatos" cancel="Leave">The relics would restore the form of Thanatos.</dialog>
         <dialog>As the parts touch the derelict the edges melts and merge. In an instant the dead ship springs to life, fire dancing across its hull as it burns away the dust covering it.</dialog>
         <dialog>The radio warbles as you are flooded with signals. A single grey sphere emerge from the the ship and drifts toward you.</dialog>
-        <give item="item.momus" />
+        <give item="Momus" />
     </quest>
     
-    
+    <item name="Water sample"/>
     <quest title="Ska Ska water quality">
-        <condition at-dest="Baola" trigger="action" />
+        <condition at-dest="Baola" trigger="HAIL" />
         <dialog ok="YES" cancel="MAYBE LATER">"Can you help us? We run a large construction project at Ska Ska and need to take water samples at its sea"</dialog>
         <add-to-quest-list />
         <mark-on-map dest="Ska Ska" />
         <place-item dest="Ska Ska" item="Water sample" />
-        <condition have-item="Water sample" trigger="auto" />
+        <condition have-item="Water sample" />
         <mark-on-map dest="Baola" />
-        <condition at-dest="Baola" trigger="action" />
+        <condition at-dest="Baola" trigger="HAIL" />
         <dialog>"Thank you! These samples are vital for the project. Please, accept this compensation"</dialog>
         <give credits="100" />
         <remove-map-marker />
     </quest>
-
-    <quest title="Find Ha-Eel">
-        <item name="Lengzin Blaster" />
-        <item name="Memory Shard" />
-        <item name="Pure Memory Shard"/>
-        <item name="Ha-Eels Pendant"/>
-        <item name="Mark of The Bearers"/>
-        <item name="Kappa Infused Tri-Cell Blaster"/>
-        <item name="Sunstone"/>
-        <item name="enemy.vicedurqs"/>
-
-        <condition at-dest="Salfir" trigger="VISIT PUB" />
-        <dialog>After your third shot of Ooze, the man who has been eye-balling you for quite a while approaches.</dialog>
-        <dialog ok="FIND Ha-Eel" cancel="NO THANKS">"Hey! Rumour has is the greatest Bounty Hunter in The Sadal Rim is here. Could you please go tell her I'm looking for her?"</dialog>
-        <dialog>What?! Did you just agree to hunt a hunter? Madness...</dialog>
-        <dialog>"Great! I think you can find her near the spaceport in Hossta Square.
-            In these parts of the Universe she goes by the name of Ha-Eel."
-
-            "I'm Klaatur by the way."</dialog>
+    
+    <item name="Star Sensor" />
+    <item name="Tungsten" credits="50" />
+    <quest title="Tau Pavonis Observer">
+        <place-item dest="Pavonis Observatory" item="Tungsten" />
+        <condition at-dest="Pavonis Smoke"/>
+        <dialog>You are hailed as you enter orbit: "Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work."</dialog>
         <add-to-quest-list />
-        <mark-on-map dest="Hossta Square" icon="square" color="48F" />
-
-        <place-enemy dest="Hossta Square" enemy="enemy.vicedurqs" />
-        <condition at-dest="Hossta Square" trigger="SCAN" />
-        <dialog>You spot the Bounty Hunter easily. You can tell she's been through some tough times.</dialog>
-        <dialog>"Yes, I am Ha-Eel. Who sent you, Klaatur? I've never heard of no Klaatur!"</dialog>
-        <dialog ok="KILL 'EM ALL" cancel="NO THANKS">"Now go away, unless you can help me get rid of these Vicedurqs?"</dialog>
+        <condition trigger="HAIL"/>
+        <dialog ok="ACCEPT" cancel="NOT NOW">"We study Tau Pavonis and need assistance in placing sensors at the Observatory. Compensation is 500 credits. Are you interested?"</dialog>
+        <dialog>"First you need protection. Travel to Pavonis Mirror and aquire a Star Shield."</dialog>
+        <give item="Star Sensor" />
+        <mark-on-map dest="Pavonis Mirror" />
+        <condition at-dest="Pavonis Mirror" />
+        <dialog>"Traveller. This is Mirror spaceport. We have prepared the Star Shield you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed."</dialog>
+        <give item="Star Shield" />
+        <condition at-dest="Pavonis Mirror" have-item="Star Sensor" installed="Star Shield" trigger="READY" />
+        <dialog ok="PROCEED" cancel="WAIT">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>
+        <travel dest="Pavonis Observatory" />
+        <condition trigger="PUT SENSOR" />
+        <dialog>You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>
+        <condition trigger="LEAVE" />
+        <travel dest="Pavonis Mirror" />
+        <dialog>"You made it! Must be a sturdy ship you got there."</dialog>
+        <dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organisation.</dialog>
+        <dialog>"Let us remove that Star Shield, you can collect your payment at Pavonis Smoke."</dialog>
+        <take item="Star Shield" />
+        <mark-on-map dest="Pavonis Smoke" />
+        <condition dest="Pavonis Smoke" trigger="HAIL" />
+        <dialog>"You survived! Excellent, we are anxious to get the data from your installed sensor. Please accept our payment!"</dialog>
+        <give credits="1000" />
         <remove-map-marker />
-        <dialog>"Perfect! Here, use this blaster!"</dialog>
-        <give item="Lengzin Blaster" />
-        <dialog>"You know, with that blaster you can send them back to their black hole really easy."</dialog>
-        <dialog>"Try aiming for the lower joint. Right there, see?"</dialog>
-
-        <condition no-enemy-at="Hossta Square" trigger="auto" />
-        <dialog>Yes, you know your way with weapons. The Vicedurqs threat to Hossta has diminished.</dialog>
-        <dialog>Ha-Eel is smiling, this was just another day at work for her:</dialog>
-        <dialog>"Wohoo! Wow, you're really handy with that steel!"</dialog>
-        <dialog>"Thank you for your help. Now who was that guy who sent you again?"</dialog>
-        <dialog>"Klaatur, you say. Hmm.. Maybe you should seek out Sagedion. He might be able to help you."</dialog>
-        <mark-on-map dest="Viloet Alta" color="0xF0" icon="arrow" />
-
-        <condition at-dest="Viloet Alta" trigger="auto" />
-        <dialog>You haven't set foot on Viloet Alta since before the days of Naqua, but it seems nothing has changed.</dialog>
-        <dialog>Still mostly inhabited by smugglers and no-good people. In the House of Senate, you can find Sagedian</dialog>
-        <condition at-dest="Viloet Alta" trigger="auto" />
-        <dialog ok="YES" cancel="NO">"Ha-Eel cannot remember Klaatur? Oh dear, oh dear. She must've lost her memory."
-            "I knew it would happen sooner or later. Will you help me restore it?"</dialog>
-        <remove-map-marker />
-        <dialog>"Excellent. There should be an old Memory Shard around here. Please bring it to me"</dialog>
-        <dialog>You take a casual stroll downtown, trying to not cause any trouble.</dialog>
-        <dialog>In the outskirts of town, near an old worn-down jios-reactor, you find what you're looking for.</dialog>
-        <give item="Memory Shard" />
-
-        <dialog>Sagedion: Great! Take this shard to Amcynis for purification</dialog>
-        <condition at-dest="Viloet Alta" have-item="Memory Shard" trigger="action"/>
-        <dialog>"There it is! Thank you! This Memory Shard needs to be purified. Bring it to Amcynis in Salfir"</dialog>
-        <mark-on-map dest="Salfir" icon="square" color="48F" />
-
-        <dialog>Amcynis: The shard is pure. Please return it to Ha-Eel</dialog>
-        <condition at-dest="Salfir" have-item="Memory Shard" trigger="auto" />
-        <dialog>You return to Salfir again. Klaatur nods as you pass on your way to the back entrance of the bar.
-            Sagedion told you to find the dealer Amcynis in the basement.</dialog>
-        <condition at-dest="Salfir" have-item="Memory Shard" have-credits="100" trigger="action" />
-        <dialog>"No thanks, I don't do charity work. If you need this purified, you need to pay up."
-            Amcynis was a Budergian, and you know there is no use in bargaining with that kind.
-            "So what if Sagedian sent you, he has loads of so called friends"</dialog>
-        <dialog ok="PAY" cancel="GO HOME">"If you want this fixed, It'll be 75 credits"</dialog>
-        <remove-map-marker />
-        <take item="Memory Shard" />
-        <take credits="100" />
-        <dialog>"Very well. Nice doing business with you, he he he."</dialog>
-        <dialog>"Here is your purified Shard"</dialog>
-        <give item="Pure Memory Shard" />
-
-        <dialog>This had sure been an unusual day; killing aliens with the notorious Ha-Eel,</dialog>
-        <dialog>revisiting Viloet Alta and whatnot.</dialog>
-        <dialog>Somehow you get the feeling this is not over yet.</dialog>
-
-        <condition at-dest="Hossta Square" have-item="Pure Memory Shard" trigger="auto" />
-        <dialog>This time, Ha-Eel is happy to see you.</dialog>
-        <dialog>"Hi! Hey, did you find Sagedion? What did he s... Wait!"</dialog>
-        <dialog>"What is that?!"</dialog>
-        <dialog>Ha-Eel looks at the Memory Shard you just pulled up from your backpack.
-            You hand it to her.</dialog>
-        <take item="Pure Memory Shard" />
-        <dialog>She immediately inserts the Shard into her KRM.</dialog>
-        <dialog>"It's a miracle! I remember again! Oh, Klaatur, my dear old comrade..."</dialog>
-        <dialog>"Where is Klaatur? I must meet him!"</dialog>
-        <dialog>"No, not now. I can't. My services are needed near Dretra IV. Here - take this pendant"</dialog>
-        <give item="Ha-Eels Pendant" />
-        <dialog>"Bring this to Klaatur and tell him I have not forgotten"</dialog>
-        <dialog>"Oh, and this is for you..."
-            Ha-Eel smiles and winks at you as she turns around and walks off</dialog>
-        <give credits="550" />
+        <condition not-at-dest="Pavonis Smoke" />
+        <condition at-dest="Pavonis Smoke" />
+        <dialog>"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor is most disturbing. Tau Pavonis is behaving unphysically."</dialog>
+        <dialog>"You must help us collect more data! Please take us to the Observatory so we can make further readings."</dialog>
+        <dialog>You request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>
+        <dialog>"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental Soliton Pulse gun. Ok?"</dialog>
+        <dialog>You see your change to make demands. "That sounds useful, give it to me in advance, and a regular reward afterwards!"</dialog>
+        <give item="Soliton Pulse" />
+        <condition at-dest="Pavonis Mirror" />
+        <dialog>They load the Star Shield onto you ship once again. They tell you to install it but they all look a bit worried this time. What is it they have found inside that star?</dialog>
+        <give item="Star Shield" />
+        <condition at-dest="Pavonis Mirror" have-item="Star Sensor" installed="Star Shield" trigger="READY" />
+        <travel dest="Pavonis Observatory" />
+        <dialog>The scientists take readings with arcane instruments they brought. But you don't need any telescopes, looking throught the dimmed windows you can see a region of the stars surface pulsing. Or rather heaving, like it is breathing.</dialog>
+        <dialog>Suddenly the star's surface open like a flower and a pillar of fire like a trail pushes out through space. It looks slow like a ballet, but at these scales it is tremendously fast.</dialog>
+        <dialog>The monstrosity trace a glowing path towards Pavonis Charm. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>
+        <place-enemy enemy="Wrcacnter" dest="Pavonis Charm" />
     </quest>
+
+    <!-- A1-6 are placeholder names for asteroids in the south Pavonis asteroid belt -->
+    <item name="Pavonian Mineral" />
+    <item name="Pavonian Ore" />
+    <quest title="Pavonis Mining Co">
+        <place-enemy enemy="Rogue" dest="A1" />
+        <place-enemy enemy="Rogue" dest="A2" />
+        <place-enemy enemy="Monitor drone" dest="A3" />
+        <place-enemy enemy="Rogue" dest="A4" />
+        <place-enemy enemy="Monitor drone" dest="A5" />
+        <place-enemy enemy="Monitor drone" dest="A6" />
+        <condition at-dest="Pavonis A2934" trigger="HAIL" />
+        <dialog>"This is Pavonis Mining Co Headquarters. Are you looking for assignments?"</dialog>
+        <dialog>"There are rogues disturbing our operations at the south asteroid rim. We will pay 100 credits for clearing them out."</dialog>
+        <add-to-quest-list />
+        <condition no-enemy-at="A1;A2;A3;A4;A5;A6" at-dest="Pavonis A2934" />
+        <dialog>"Excellent work! Transferring reward now."</dialog>
+        <dialog ok="ACCEPT" cancel="NOT NOW">"Many of our contractors are damaged by the rogues. Would you like to run some mining operations? We rent out the needed equipment."</dialog>
+        <give item="Mining Drill" />
+        <take credits="50" />
+        <mark-on-map dest="A4" />
+        <dialog>"Readings at A4 show rich ore. Start there."</dialog>
+        <condition at-dest="A4" have-item="Mining Drill" trigger="DRILL" />
+        <give item="Pavonian Ore" />
+        <mark-on-map dest="A4" />
+        <dialog>"Readings at A2 show rich ore. Continue there."</dialog>
+        <condition at-dest="A2" have-item="Mining Drill" trigger="DRILL" />
+        <give item="Pavonian Mineral" />
+        <mark-on-map dest="Pavonis A2934" />
+        <condition have-item="Pavonian Mineral;Pavonian Ore" at-dest="Pavonis A2934" />
+        <dialog>"Good work, a bit slow, but good. Let us buy that mineral from you."</dialog>
+        <take item="Pavonian Mineral" />
+        <take item="Pavonian Ore" />
+        <take item="Mining Drill" />
+        <give credits="100" />
+    </quest>
+
 </quests>
