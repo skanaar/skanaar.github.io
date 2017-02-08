@@ -11,22 +11,32 @@
     <line each={lines}
       stroke-width="2" stroke="#888"
       riot-x1={a.x} riot-x2={b.x} riot-y1={a.y} riot-y2={b.y} />
-    <text class="galmap_label" each={nodes} riot-x={screenPos.x+radiusFor(entity.style)*scale+4} riot-y={screenPos.y+7}>
+    <text class="galmap_label" each={nodes} riot-x={screenPos.x+radiusFor(entity.style)+4} riot-y={screenPos.y+7}>
       {entity.name}
     </text>
-    <path
-      each={enemyDestinations()}
-      d="M-2,2 L0,-2 L2,2 Z"
-      riot-transform={'translate(' + (screenPos.x+10) + ',' + (screenPos.y+10) + ')'}
-      fill="rgba(255,0,0,0.5)" stroke="#F00"/>
     <ellipse
       each={nodes}
       stroke-width="2"
       stroke={isSelected ? '#F00' : '#000'}
       fill={isSelected ? '#F88' : fillFor(entity.style)}
       riot-cx={screenPos.x} riot-cy={screenPos.y}
-      riot-rx={1+radiusFor(entity.style)*scale} riot-ry={1+radiusFor(entity.style)*scale}
+      riot-rx={1+radiusFor(entity.style)} riot-ry={1+radiusFor(entity.style)}
       onmouseup={mouseupOnItem}/>
+    <path
+      each={enemyDestinations()}
+      d="M-2,2 L0,-2 L2,2 Z"
+      riot-transform={'translate(' + (screenPos.x+radiusFor(entity.style)+3) + ',' + (screenPos.y-radiusFor(entity.style)-3) + ')'}
+      fill="rgba(255,0,0,0.5)" stroke="#F00"/>
+    <ellipse
+      each={treasureDestinations()}
+      riot-cx={screenPos.x+3} riot-cy={screenPos.y+3}
+      rx=2 ry=2
+      stroke="#000" fill="#FF0" />
+    <path
+      each={traderDestinations()}
+      d="M-6,-4 L-6,4 L0,0 Z"
+      riot-transform={'translate(' + (screenPos.x-radiusFor(entity.style)) + ',' + screenPos.y + ')'}
+      fill="#0A0" stroke="#FFF"/>
     <rect riot-x={select.pos.x} riot-y={select.pos.y}
       riot-width={select.dim.x} riot-height={select.dim.y}
       stroke="#F00" stroke-width="1" fill="rgba(0,0,0,0)"/>
@@ -38,72 +48,66 @@
       </a><a onclick={() => tool='draw'} class="toggle-btn {(tool == 'draw') && 'active'}">Draw
       </a><a onclick={() => tool='spray'} class="toggle-btn {(tool == 'spray') && 'active'}">Spray</a>
     </div>
-    <div>
-      <div class="btn-group" show={selectionSize > 1}>
-        <a class="toggle-btn" onclick={enlarge}>Enlarge</a><a class="toggle-btn" onclick={shrink}>Shrink</a>
-      </div>
-      <div class="btn-group" show={selectionSize > 1}>
-        <a class="toggle-btn" onclick={repulse}>Repulse</a><a class="toggle-btn" onclick={attract}>Attract</a>
-      </div>
-      <button onclick={removeSelected} show={selectionSize > 0}>Delete</button>
+    <div class="btn-group" style="opacity: {selectionSize > 1 ? 1 : 0.5}">
+      <a class="toggle-btn" onclick={enlarge}>Enlarge</a><a class="toggle-btn" onclick={shrink}>Shrink</a>
     </div>
+    <div class="btn-group" style="opacity: {selectionSize > 1 ? 1 : 0.5}">
+      <a class="toggle-btn" onclick={repulse}>Repulse</a><a class="toggle-btn" onclick={attract}>Attract</a>
+    </div>
+    <button onclick={removeSelected}  style="opacity: {selectionSize > 0 ? 1 : 0.5}">Delete</button>
   </div>
-  <div class="galmap_tools galmap-filemenu">
-    <div>
-      <button onclick={saveToStorage}>Save</button>
-      <button onclick={loadFromStorage}>Load</button>
-      <a ref="downloadLink" onmouseenter={primeDownloadLink} download="destinations.json" href='#'>Download</a>
-      <hr />
-      <input type=file ref=fileInput onchange={fileChanged} style="width: 150px">
-    </div>
-    <hr />
-    <div>
-      <label>Start at</label>
-      <input ref="initialDestinationInput" type=text value={world.initialDestination}>
-    </div>
-    <div>
-      <label>Starting ship</label>
-      <select ref="initialShipSelect" onchange={setInitialShip}>
-        <option each={e in world.ships}>{e}</option>
-      </select>
-    </div>
-  </div>
+
   <div class="galmap_tools galmap-editmenu">
-    <div>
-      <label>Style</label>
-      <select ref="styleSelect" onchange={setCelestialStyle}>
-        <option value="unknown">- style -</option>
-        <option each={e in world.celestialStyles}>{e.id}</option>
-      </select>
-      <button onclick={randomizeStyle}>Randomize</button>
-    </div>
-    <div>
-      <label>Surface</label>
-      <select ref="surfaceSelect" onchange={setSurface}>
-        <option value="unknown">- surface -</option>
-        <option each={e in world.surfaces}>{e.id}</option>
-      </select>
-    </div>
-    <div>
-      <input type=text ref="nameField" placeholder="name">
-      <button onclick={setName}>OK</button>
-      <button onclick={autoNameNodes}>Autoname</button>
-    </div>
-    <div>
-      <label>Treasures</label>
-      <select onchange={pickTreasureItem}>
-        <option each={e in world.items} value={e.name}>{e.name} ({e.credits} c)</option>
-      </select><br/>
-      <input type=text ref="treasuresField" placeholder=Treasures>
-      <button onClick={clearTreasures}>&times;</button>
-    </div>
+    <button onclick={saveToStorage}>Save</button>
+    <button onclick={loadFromStorage}>Load</button>
+    <a ref="downloadLink" onmouseenter={primeDownloadLink} download="destinations.json" href='#'>Download</a>
+    <br/>
+    <input type=file ref=fileInput onchange={fileChanged} style="width: 150px">
+
+    <label>Start World &amp; Ship</label>
+    <input ref="initialDestinationInput" type=text value={world.initialDestination}>
+    <select ref="initialShipSelect" onchange={setInitialShip}>
+      <option each={e in world.ships}>{e}</option>
+    </select>
+
+    <label>Name</label>
+    <input type=text ref="nameField" placeholder="name">
+    <button onclick={setName}>OK</button>
+    <button onclick={autoNameNodes}>Autoname</button>
+
+    <label>Celestial &amp; Surface</label>
+    <select ref="styleSelect" onchange={setCelestialStyle}>
+      <option value="unknown">- style -</option>
+      <option each={e in world.celestialStyles}>{e.id}</option>
+    </select>
+    <button onclick={randomizeStyle}>Randomize</button>
+    <select ref="surfaceSelect" onchange={setSurface}>
+      <option value="unknown">- surface -</option>
+      <option each={e in world.surfaces}>{e.id}</option>
+    </select>
+
+    <label>Treasures</label>
+    <select onchange={pickTreasureItem}>
+      <option each={e in world.items} value={e.name}>{e.name} ({e.credits} c)</option>
+    </select>
+    <span>{selectedTreasures}</span>
+    <button onClick={clearTreasures}>&times;</button>
+
     <div show={selectionSize == 1}>
-      <hr />
-      <label><input type=checkbox ref="enemyToggle"> Enemy</label>
+      <label><input type=checkbox ref=traderToggle onchange={traderChange}> Trader - Buy &amp; Sell</label>
+      <select onchange={pickTraderItem}>
+        <option each={e in world.items} value={e.name}>{e.name} ({e.credits} c)</option>
+      </select>
+      <input type=text value={selectedTrader.buy} onchange={traderBuyChange}>
+      <input type=text value={selectedTrader.sell} onchange={traderSellChange}>
+      <span>{(selectedTrader.inventory || []).join(', ')}</span>
+      <button onClick={clearInventory}>&times;</button>
+
+      <label><input type=checkbox ref=enemyToggle> Enemy</label>
       <select>
         <option each={e in world.enemies}>{e}</option>
       </select>
-      <br />
+
       <label>Loot</label>
       <input type=text placeholder=Loot>
     </div>
@@ -135,6 +139,8 @@
       destinations: []
     }
     self.selectionSize = 0
+    self.selectedTreasures = ''
+    self.selectedTrader = { inventory: [] }
 
     self.setTool = function (id) { self.tool = id }
 
@@ -290,24 +296,48 @@
       self.update()
     }
 
-    self.pickTreasureItem = function (e) {
-      _.filter(self.nodes, 'isSelected').forEach(function (node) {
-        if (!node.entity.treasures)
-          node.entity.treasures = []
-        var index = node.entity.treasures.indexOf(e.target.value)
-        if (index != -1)
-          node.entity.treasures.splice(index, 1)
-        else
-          node.entity.treasures.push(e.target.value)
-      })
+    function toggleItemInSet(set, item) {
+      var index = set.indexOf(item)
+      if (index != -1) set.splice(index, 1)
+      else set.push(item)
+    }
+
+    function forSelection(action) {
+      _.filter(self.nodes, 'isSelected').forEach(action)
       updateUI()
     }
 
-    self.clearTreasures = function (e) {
-      _.filter(self.nodes, 'isSelected').forEach(function (node) {
-        node.entity.treasures = []
+    self.pickTreasureItem = function (e) {
+      forSelection(function (node) {
+        if (!node.entity.treasures) node.entity.treasures = []
+        toggleItemInSet(node.entity.treasures, e.target.value)
       })
-      updateUI()
+    }
+
+    self.clearTreasures = function (e) {
+      forSelection(node => node.entity.treasures = [])
+    }
+
+    self.traderChange = function (e) {
+      forSelection(function (node) {
+        node.entity.trader = e.target.checked ? { buy: 0.75, sell: 1.5, inventory: [] } : null
+      })
+    }
+
+    self.pickTraderItem = function (e) {
+      forSelection(node => toggleItemInSet(node.entity.trader.inventory, e.target.value))
+    }
+
+    self.traderBuyChange = function (e) {
+      forSelection(node => node.entity.trader.buy = e.target.value)
+    }
+
+    self.traderSellChange = function (e) {
+      forSelection(node => node.entity.trader.sell = e.target.value)
+    }
+
+    self.clearInventory = function (e) {
+      forSelection(node => node.entity.trader.inventory = [])
     }
 
     self.setInitialShip = function (e) {
@@ -367,9 +397,9 @@
       calculateLines()
     }
 
-    self.enemyDestinations = function () {
-      return self.nodes.filter(e => !!e.entity.enemy)
-    }
+    self.enemyDestinations = () => self.nodes.filter(e => e.entity.enemy)
+    self.traderDestinations = () => self.nodes.filter(e => e.entity.trader)
+    self.treasureDestinations = () => self.nodes.filter(e => (e.entity.treasures || []).length)
 
     var fills = {
       cloud: '#D8D', star: '#ff4', jovian: '#fa8', planet: '#8f8', asteroid: '#aaa', anomaly: '#fa0', ring: '#8af'
@@ -379,7 +409,7 @@
     }
 
     self.radiusFor = function (style) {
-      return self.world.celestialStyles.find(function (e){ return e.id == style }).r
+      return self.world.celestialStyles.find(function (e){ return e.id == style }).r * self.scale
     }
 
     function uniqueSelectedProp(key) {
@@ -397,9 +427,11 @@
       self.refs.initialShipSelect.value = self.world.initialShip
       var selection = _.filter(self.nodes, 'isSelected')
       self.refs.nameField.value = selection.length == 1 ? selection[0].entity.name : ''
-      self.selectionSize = self.nodes.filter(e => e.isSelected).length
-      var selectedTreasures = self.nodes.filter(e => e.isSelected && e.entity.treasures).map(e => e.entity.treasures)
-      self.refs.treasuresField.value = _.flatten(selectedTreasures).join()
+      self.refs.traderToggle.checked = !!(selection.length == 1 && selection[0].entity.trader)
+      self.selectionSize = selection.length
+      var selectedTreasures = selection.map(e => e.entity.treasures || [])
+      self.selectedTreasures = _.flatten(selectedTreasures).join(', ')
+      self.selectedTrader = (selection[0] && selection[0].entity.trader) || { buy: 0, sell: 0, inventory: [] }
     }
 
     function transform(p) { return Vec(self.dx+self.scale*p.x, self.dy+self.scale*p.y) }
@@ -468,10 +500,18 @@
       height: 1px;
       background: #aaa;
     }
+    .galmap_tools {
+      font-size: 11px;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
     .galmap_tools.galmap-editmenu {
       position: fixed;
-      right: 10px;
-      top: 10px;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      padding: 5px;
+      background: #fafafa;
+      border-left: 1px solid #aaa;
       text-align: right;
     }
     .galmap_tools.galmap-filemenu {
@@ -486,6 +526,27 @@
       right: 10px;
       top: 10px;
       text-align: center;
+    }
+    .galmap_tools span {
+      display: block;
+      max-width: 150px;
+      text-align: left;
+    }
+    .galmap_tools label {
+      display: block;
+      text-align: left;
+      font-weight: bold;
+      margin-top: 20px;
+      padding: 2px;
+      margin-bottom: 5px;
+      border-bottom: 1px solid #ddd;
+    }
+    .galmap_tools.galmap-editmenu input[type=text],
+    .galmap_tools.galmap-editmenu input[type=file],
+    .galmap_tools.galmap-editmenu select {
+      display: block;
+      margin: 2px 0;
+      width: 150px;
     }
     .galmap_label {
       font-size: 8px;
@@ -541,10 +602,6 @@
     .btn-group .toggle-btn.active {
       background: linear-gradient(to top, #07f, #5af);
       border-color: #25f;
-    }
-    label {
-      font-size: 11px;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     }
   </style>
 
