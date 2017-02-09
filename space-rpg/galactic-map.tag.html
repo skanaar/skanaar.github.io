@@ -255,45 +255,35 @@
       return _.stringify(self.world, {maxLength: 200})
     }
 
+    self.saveToStorage = () => localStorage['world'] = serializedWorld()
+    self.loadFromStorage = () => loadWorld(localStorage['world'])
+    self.fileChanged = function () {
+      var reader = new FileReader()
+      reader.onload = () => loadWorld(reader.result)
+      reader.readAsText(self.refs.fileInput.files[0])
+    }
     self.primeDownloadLink = function () {
       var serialization = encodeURIComponent(serializedWorld())
       self.refs.downloadLink.setAttribute('href', 'data:text;charset=utf-8,' + serialization)
     }
 
-    self.saveToStorage = function () {
-      localStorage['world'] = serializedWorld()
-    }
-
-    self.loadFromStorage = function () {
-      loadWorld(localStorage['world'])
-    }
-
     self.autoNameNodes = function () {
-      var abs = Math.abs
-      self.nodes
-        .filter(e => e.isSelected)
-        .forEach(function (node){
-          var e = node.entity
-          if (e.style.startsWith('asteroid'))
-            e.name = 'A'+abs(e.pos.x%100)+abs(e.pos.y%100)
-          if (e.style == 'anomaly-buoy') 
-            e.name = 'Buoy '+(1+abs(e.pos.x)%10)+(1+abs(e.pos.y)%100)
-        })
+      forSelection(function (node){
+        var e = node.entity
+        if (e.style.startsWith('asteroid'))
+          e.name = 'A'+Math.abs(e.pos.x%100)+Math.abs(e.pos.y%100)
+        if (e.style == 'anomaly-buoy') 
+          e.name = 'Buoy '+(1+Math.abs(e.pos.x)%10)+(1+Math.abs(e.pos.y)%100)
+      })
     }
 
     self.setCelestialStyle = function (e) {
-      self.nodes.forEach(function (node) {
-        if (node.isSelected) node.entity.style = e.target.value
-      })
-      self.update()
+      forSelection(node => node.entity.style = e.target.value)
       calculateLines()
     }
 
     self.setSurface = function (e) {
-      self.nodes.forEach(function (node) {
-        if (node.isSelected) node.entity.surface = e.target.value
-      })
-      self.update()
+      forSelection(node => node.entity.surface = e.target.value)
     }
 
     function toggleItemInSet(set, item) {
@@ -358,12 +348,6 @@
       })
       updateUI()
       calculateLines()
-    }
-
-    self.fileChanged = function () {
-      var reader = new FileReader()
-      reader.onload = () => loadWorld(reader.result)
-      reader.readAsText(self.refs.fileInput.files[0])
     }
 
     self.repulse = function () { self.repulseAttract(1) }
@@ -478,131 +462,6 @@
       window.scrollTo(self.dx/3, self.dy/3)
     })
 
-    function Vec(x,y){ return {x:x, y:y} }
-    function dist(a,b){ return mag(diff(a,b)) }
-    function eq(a,b){ return Math.abs(a.x-b.x) < 1 && Math.abs(a.y-b.y) < 1 }
-    function rund(a){ return Vec(Math.round(a.x), Math.round(a.y)) }
-    function add(a,b){ return { x: a.x + b.x, y: a.y + b.y } }
-    function diff(a,b){ return { x: a.x - b.x, y: a.y - b.y } }
-    function mult(v,factor){ return { x: factor*v.x, y: factor*v.y } }
-    function mag(v){ return Math.sqrt(v.x*v.x + v.y*v.y) }
-    function normalize(v){ return mult(v, 1/mag(v)) }
-    function rot(a){ return { x: a.y, y: -a.x } }
-
   </script>
-
-  <style>
-    :scope {
-      font-family: "helvetica neue", "arial", sans-serif;
-    }
-    hr {
-      border: none;
-      height: 1px;
-      background: #aaa;
-    }
-    .galmap_tools {
-      font-size: 11px;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    .galmap_tools.galmap-editmenu {
-      position: fixed;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      padding: 5px;
-      background: #fafafa;
-      border-left: 1px solid #aaa;
-      text-align: right;
-    }
-    .galmap_tools.galmap-filemenu {
-      position: fixed;
-      left: 10px;
-      top: 10px;
-      text-align: left;
-    }
-    .galmap_tools.galmap-toolbox {
-      position: fixed;
-      left: 10px;
-      right: 10px;
-      top: 10px;
-      text-align: center;
-    }
-    .galmap_tools span {
-      display: block;
-      max-width: 150px;
-      text-align: left;
-    }
-    .galmap_tools label {
-      display: block;
-      text-align: left;
-      font-weight: bold;
-      margin-top: 20px;
-      padding: 2px;
-      margin-bottom: 5px;
-      border-bottom: 1px solid #ddd;
-    }
-    .galmap_tools.galmap-editmenu input[type=text],
-    .galmap_tools.galmap-editmenu input[type=file],
-    .galmap_tools.galmap-editmenu select {
-      display: block;
-      margin: 2px 0;
-      width: 150px;
-    }
-    .galmap_label {
-      font-size: 8px;
-      font-family: Verdana;
-      fill: rgba(0,0,0,0.4);
-    }
-    .galmap_label:hover {
-      fill: #000;
-    }
-    .galmap_tools > div {
-      margin: 3px 0;
-    }
-    .galmap_tools a,
-    .galmap_tools button,
-    .galmap_tools input[type=file],
-    .galmap_tools input[type=text] {
-      display: inline-block;
-      margin: 0 0 0 5px;
-      background: #fff;
-      border: 1px solid #ccc;
-      padding: 1px 8px;
-      border-radius: 4px;
-      color: #000;
-      text-decoration: none;
-      box-shadow: 0 1px 0px rgba(0,0,0,0.05);
-      font-size: 11px;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    }
-    .galmap_tools input[type=text] {
-      border: 1px solid #aaa;
-      border-radius: 2px;
-    }
-    .galmap_tools button:active {
-      background: linear-gradient(to top, #07f, #5af);
-      border-color: #25f;
-    }
-    .galmap_tools .btn-group {
-      display: inline-block;
-      margin: 0 5px;
-    }
-    .btn-group .toggle-btn {
-      border-radius: 0;
-      margin: 0 0 0 -1px;
-      cursor: pointer;
-      user-select: none;
-    }
-    .btn-group .toggle-btn:hover {
-      background: linear-gradient(to top, #8bf, #adf);
-      border-color: #8af;
-    }
-    .btn-group .toggle-btn:first-child { border-radius: 4px 0 0 4px }
-    .btn-group .toggle-btn:last-child { border-radius: 0 4px 4px 0 }
-    .btn-group .toggle-btn.active {
-      background: linear-gradient(to top, #07f, #5af);
-      border-color: #25f;
-    }
-  </style>
 
 </galactic-map>

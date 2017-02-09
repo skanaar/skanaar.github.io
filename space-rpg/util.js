@@ -1,3 +1,14 @@
+function Vec(x,y){ return {x:x, y:y} }
+function dist(a,b){ return mag(diff(a,b)) }
+function eq(a,b){ return Math.abs(a.x-b.x) < 1 && Math.abs(a.y-b.y) < 1 }
+function rund(a){ return Vec(Math.round(a.x), Math.round(a.y)) }
+function add(a,b){ return { x: a.x + b.x, y: a.y + b.y } }
+function diff(a,b){ return { x: a.x - b.x, y: a.y - b.y } }
+function mult(v,factor){ return { x: factor*v.x, y: factor*v.y } }
+function mag(v){ return Math.sqrt(v.x*v.x + v.y*v.y) }
+function normalize(v){ return mult(v, 1/mag(v)) }
+function rot(a){ return { x: a.y, y: -a.x } }
+
 _.mixin({
   fetch: function (url, fn) {
     var req = new XMLHttpRequest()
