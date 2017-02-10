@@ -11,21 +11,21 @@
     <line each={lines}
       stroke-width="2" stroke="#888"
       riot-x1={a.x} riot-x2={b.x} riot-y1={a.y} riot-y2={b.y} />
-    <text class="galmap_label" each={nodes} riot-x={screenPos.x+radiusFor(entity.style)+4} riot-y={screenPos.y+7}>
+    <text class="galmap_label" each={nodes} riot-x={screenPos.x+radiusFor(entity)+4} riot-y={screenPos.y+7}>
       {entity.name}
     </text>
     <ellipse
       each={nodes}
       stroke-width="2"
       stroke={isSelected ? '#F00' : '#000'}
-      fill={isSelected ? '#F88' : fillFor(entity.style)}
+      fill={isSelected ? '#F88' : fillFor(entity)}
       riot-cx={screenPos.x} riot-cy={screenPos.y}
-      riot-rx={1+radiusFor(entity.style)} riot-ry={1+radiusFor(entity.style)}
+      riot-rx={1+radiusFor(entity)} riot-ry={1+radiusFor(entity)}
       onmouseup={mouseupOnItem}/>
     <path
       each={enemyDestinations()}
       d="M-2,2 L0,-2 L2,2 Z"
-      riot-transform={'translate(' + (screenPos.x+radiusFor(entity.style)+3) + ',' + (screenPos.y-radiusFor(entity.style)-3) + ')'}
+      riot-transform={'translate(' + (screenPos.x+radiusFor(entity)+3) + ',' + (screenPos.y-radiusFor(entity)-3) + ')'}
       fill="rgba(255,0,0,0.5)" stroke="#F00"/>
     <ellipse
       each={treasureDestinations()}
@@ -35,7 +35,7 @@
     <path
       each={traderDestinations()}
       d="M-6,-4 L-6,4 L0,0 Z"
-      riot-transform={'translate(' + (screenPos.x-radiusFor(entity.style)) + ',' + screenPos.y + ')'}
+      riot-transform={'translate(' + (screenPos.x-radiusFor(entity)) + ',' + screenPos.y + ')'}
       fill="#0A0" stroke="#FFF"/>
     <rect riot-x={select.pos.x} riot-y={select.pos.y}
       riot-width={select.dim.x} riot-height={select.dim.y}
@@ -257,19 +257,11 @@
 
     self.saveToStorage = () => localStorage['world'] = serializedWorld()
     self.loadFromStorage = () => loadWorld(localStorage['world'])
-    self.fileChanged = function () {
-      var reader = new FileReader()
-      reader.onload = () => loadWorld(reader.result)
-      reader.readAsText(self.refs.fileInput.files[0])
-    }
-    self.primeDownloadLink = function () {
-      var serialization = encodeURIComponent(serializedWorld())
-      self.refs.downloadLink.setAttribute('href', 'data:text;charset=utf-8,' + serialization)
-    }
+    self.fileChanged = () => _.readFile(self.refs.fileInput.files[0], data => loadWorld(data))
+    self.primeDownloadLink = () => self.refs.downloadLink.setAttribute('href', _.toDataUrl(serializedWorld()))
 
     self.autoNameNodes = function () {
-      forSelection(function (node){
-        var e = node.entity
+      forSelected(function (e){
         if (e.style.startsWith('asteroid'))
           e.name = 'A'+Math.abs(e.pos.x%100)+Math.abs(e.pos.y%100)
         if (e.style == 'anomaly-buoy') 
@@ -278,57 +270,23 @@
     }
 
     self.setCelestialStyle = function (e) {
-      forSelection(node => node.entity.style = e.target.value)
+      forSelected(ent => ent.style = e.target.value)
       calculateLines()
     }
 
     self.setSurface = function (e) {
-      forSelection(node => node.entity.surface = e.target.value)
+      forSelected(ent => ent.surface = e.target.value)
     }
 
-    function toggleItemInSet(set, item) {
-      var index = set.indexOf(item)
-      if (index != -1) set.splice(index, 1)
-      else set.push(item)
-    }
+    self.pickTreasureItem = e => forSelected(ent => toggleItemInSet(ent.treasures, e.target.value))
+    self.clearTreasures = e => forSelected(ent => ent.treasures = [])
 
-    function forSelection(action) {
-      _.filter(self.nodes, 'isSelected').forEach(action)
-      updateUI()
-    }
-
-    self.pickTreasureItem = function (e) {
-      forSelection(function (node) {
-        if (!node.entity.treasures) node.entity.treasures = []
-        toggleItemInSet(node.entity.treasures, e.target.value)
-      })
-    }
-
-    self.clearTreasures = function (e) {
-      forSelection(node => node.entity.treasures = [])
-    }
-
-    self.traderChange = function (e) {
-      forSelection(function (node) {
-        node.entity.trader = e.target.checked ? { buy: 0.75, sell: 1.5, inventory: [] } : null
-      })
-    }
-
-    self.pickTraderItem = function (e) {
-      forSelection(node => toggleItemInSet(node.entity.trader.inventory, e.target.value))
-    }
-
-    self.traderBuyChange = function (e) {
-      forSelection(node => node.entity.trader.buy = e.target.value)
-    }
-
-    self.traderSellChange = function (e) {
-      forSelection(node => node.entity.trader.sell = e.target.value)
-    }
-
-    self.clearInventory = function (e) {
-      forSelection(node => node.entity.trader.inventory = [])
-    }
+    function defaultTrader(){ return { buy: 0.75, sell: 1.5, inventory: [] } }
+    self.traderChange = e => forSelected(ent => ent.trader = e.target.checked ? defaultTrader() : null)
+    self.pickTraderItem = e => forSelected(ent => toggleItemInSet(ent.trader.inventory, e.target.value))
+    self.traderBuyChange = e => forSelected(ent => ent.trader.buy = e.target.value)
+    self.traderSellChange = e => forSelected(ent => ent.trader.sell = e.target.value)
+    self.clearInventory = e => forSelected(ent => ent.trader.inventory = [])
 
     self.setInitialShip = function (e) {
       self.world.initialShip = e.target.value
@@ -385,15 +343,19 @@
     self.traderDestinations = () => self.nodes.filter(e => e.entity.trader)
     self.treasureDestinations = () => self.nodes.filter(e => (e.entity.treasures || []).length)
 
-    var fills = {
-      cloud: '#D8D', star: '#ff4', jovian: '#fa8', planet: '#8f8', asteroid: '#aaa', anomaly: '#fa0', ring: '#8af'
-    }
-    self.fillFor = function (style) {
-      return fills[style.split('-')[0]]
+    var fills = { cloud:'D8D',star:'ff4',jovian:'fa8',planet:'8f8',asteroid:'aaa',anomaly:'fa0',ring:'8af'}
+    self.fillFor = entity => '#' + fills[entity.style.split('-')[0]]
+    self.radiusFor = ent => self.world.celestialStyles.find(s => s.id == ent.style).r * self.scale
+
+    function toggleItemInSet(set, item) {
+      var index = set.indexOf(item)
+      if (index != -1) set.splice(index, 1)
+      else set.push(item)
     }
 
-    self.radiusFor = function (style) {
-      return self.world.celestialStyles.find(function (e){ return e.id == style }).r * self.scale
+    function forSelected(action) {
+      _.filter(self.nodes, 'isSelected').forEach(o => action(o.entity))
+      updateUI()
     }
 
     function uniqueSelectedProp(key) {
@@ -429,6 +391,7 @@
 
     function loadDestinations(world) {
       self.nodes = world.destinations.map(function (e) {
+        e.treasures = e.treasures || []
         return {
           screenPos: transform(e.pos),
           isSelected: false,
@@ -441,6 +404,9 @@
     }
 
     function calculateLines() {
+      function isTravellable(e) {
+        return !e.style.startsWith('cloud') && !e.style.startsWith('star')
+      }
       self.lines = []
       self.nodes.forEach(function (a) {
         self.nodes.forEach(function (b){
@@ -450,15 +416,9 @@
       })
     }
 
-    function isTravellable(entity) {
-      return !entity.style.startsWith('cloud') && !entity.style.startsWith('star')
-    }
-
     self.on('mount', function() {
       window.document.addEventListener('keydown', self.keydown.bind(self))
-      _.fetch('world.json', function (data) {
-        loadWorld(data)
-      })
+      _.fetch('world.json', data => loadWorld(data))
       window.scrollTo(self.dx/3, self.dy/3)
     })
 

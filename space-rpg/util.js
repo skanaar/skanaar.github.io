@@ -10,6 +10,16 @@ function normalize(v){ return mult(v, 1/mag(v)) }
 function rot(a){ return { x: a.y, y: -a.x } }
 
 _.mixin({
+  toDataUrl: function (payload) {
+    return 'data:text;charset=utf-8,' + encodeURIComponent(payload)
+  },
+
+  readFile: function (file, callback) {
+    var reader = new FileReader()
+    reader.onload = () => callback(reader.result)
+    reader.readAsText(file)
+  },
+
   fetch: function (url, fn) {
     var req = new XMLHttpRequest()
     req.onreadystatechange = function() {
