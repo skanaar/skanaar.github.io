@@ -1,0 +1,31 @@
+<items-viewer>
+
+  <main-menu></main-menu>
+
+  <table>
+    <tbody>
+      <tr each={item in world.items}>
+        <td>{item.name}</td>
+        <td>{item.credits}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    var self = this
+
+    self.world = { items: [] }
+
+    function loadWorld(data) {
+        self.world = JSON.parse(data)
+        self.update()
+    }
+
+    self.on('mount', function() {
+      window.events.on('world-updated', () => loadWorld(localStorage['world']))
+      loadWorld(localStorage['world'])
+    })
+
+  </script>
+
+</items-viewer>

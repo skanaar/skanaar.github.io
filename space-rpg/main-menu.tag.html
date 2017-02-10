@@ -1,0 +1,60 @@
+<main-menu>
+  <div class="main-menu">
+    <a class="tab">World Editor</a>
+    <a class="button" ref="downloadLink" onmouseenter={primeDownloadLink} download="destinations.json" href='#'>Download</a>
+    <button onclick={loadDefault}>Load default</button>
+    <input type=file ref=fileInput onchange={fileChanged} style="width: 150px; margin-right: 20px">
+    <a each={e in tabs} href="{e}.html" class={ tab: true, active: page == e + '.html' }>{e}</a>
+  </div>
+  <script>
+    var self = this
+    self.page = 'index'
+    self.tabs = ['map', 'items', 'quests', 'surfaces', 'celestials', 'ships', 'enemies']
+
+    window.events = {}
+    riot.observable(window.events)
+
+    self.on('mount', function() {
+      self.page = _.last(window.location.pathname.split('/'))
+      self.update()
+    })
+
+    self.loadDefault = function () {
+      _.fetch('world.json', data => localStorage['world'] = data)
+      window.events.trigger('world-updated')
+    }
+
+    self.fileChanged = function () {
+      _.readFile(self.refs.fileInput.files[0], data => localStorage['world'] = data)
+    }
+
+    self.primeDownloadLink = function () {
+      self.refs.downloadLink.setAttribute('href', _.toDataUrl(localStorage['world']))
+    }
+
+  </script>
+  <style>
+    .main-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #f8f8f8;
+      border-bottom: 1px solid #aaa;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 12px;
+    }
+    a.tab, a.tab:active, a.tab:hover, a.tab:visited {
+      display: inline-block;
+      text-decoration: none;
+      color: #000;
+      padding: 5px 10px;
+    }
+    a.tab.active {
+      background: #ddd;
+      border-left: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+      font-weight: bold;
+    }
+  </style>
+</main-menu>

@@ -1,0 +1,35 @@
+<celestials-viewer>
+
+  <main-menu></main-menu>
+
+  <div each={e in world.celestialStyles}>
+    <div class="celestial" style="width: {e.r*2}px; height: {e.r*2}px; background: #{e.color[0]}"></div>
+    {e.id}
+  </div>
+
+  <style>
+    .celestial {
+      display: inline-block;
+      margin-right: 20px;
+      border-radius: 200px;
+    }
+  </style>
+
+  <script>
+    var self = this
+
+    self.world = { items: [] }
+
+    function loadWorld(data) {
+        self.world = JSON.parse(data)
+        self.update()
+    }
+
+    self.on('mount', function() {
+      window.events.on('world-updated', () => loadWorld(localStorage['world']))
+      loadWorld(localStorage['world'])
+    })
+
+  </script>
+
+</celestials-viewer>

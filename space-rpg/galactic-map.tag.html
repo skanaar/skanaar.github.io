@@ -1,5 +1,7 @@
 <galactic-map>
 
+  <main-menu></main-menu>
+
   <svg class="galmap"
       riot-width={2*dx}
       riot-height={2*dy}
@@ -60,13 +62,10 @@
   <div class="galmap_tools galmap-editmenu">
     <button onclick={saveToStorage}>Save</button>
     <button onclick={loadFromStorage}>Load</button>
-    <a ref="downloadLink" onmouseenter={primeDownloadLink} download="destinations.json" href='#'>Download</a>
-    <br/>
-    <input type=file ref=fileInput onchange={fileChanged} style="width: 150px">
 
     <label>Start World &amp; Ship</label>
-    <input ref="initialDestinationInput" type=text value={world.initialDestination}>
-    <select ref="initialShipSelect" onchange={setInitialShip}>
+    <input type=text value={world.initialDestination} onchange={initialDestinationChange}>
+    <select ref="initialShipSelect" onchange={initialShipChange}>
       <option each={e in world.ships}>{e}</option>
     </select>
 
@@ -213,7 +212,8 @@
             style: 'asteroid-1',
             surface: 'rock-1',
             trader: null,
-            enemy: null
+            enemy: null,
+            treasures: []
           }
         })
     }
@@ -257,8 +257,6 @@
 
     self.saveToStorage = () => localStorage['world'] = serializedWorld()
     self.loadFromStorage = () => loadWorld(localStorage['world'])
-    self.fileChanged = () => _.readFile(self.refs.fileInput.files[0], data => loadWorld(data))
-    self.primeDownloadLink = () => self.refs.downloadLink.setAttribute('href', _.toDataUrl(serializedWorld()))
 
     self.autoNameNodes = function () {
       forSelected(function (e){
@@ -288,10 +286,8 @@
     self.traderSellChange = e => forSelected(ent => ent.trader.sell = e.target.value)
     self.clearInventory = e => forSelected(ent => ent.trader.inventory = [])
 
-    self.setInitialShip = function (e) {
-      self.world.initialShip = e.target.value
-      self.update()
-    }
+    self.initialDestinationChange = e => self.world.initialDestination = e.target.value
+    self.initialShipChange = e => self.world.initialShip = e.target.value
 
     self.setName = function (e) {
       var selection = _.filter(self.nodes, 'isSelected')
@@ -395,8 +391,6 @@
         return {
           screenPos: transform(e.pos),
           isSelected: false,
-          fill: fills[e.style.split('-')[0]],
-          r: world.celestialStyles.find(function (sty){ return sty.id == e.style }).r,
           entity: e
         }
       })
@@ -417,8 +411,9 @@
     }
 
     self.on('mount', function() {
+      window.events.on('world-updated', () => loadWorld(localStorage['world']))
       window.document.addEventListener('keydown', self.keydown.bind(self))
-      _.fetch('world.json', data => loadWorld(data))
+      loadWorld(localStorage['world'])
       window.scrollTo(self.dx/3, self.dy/3)
     })
 
