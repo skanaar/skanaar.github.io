@@ -94,6 +94,32 @@ a.button {
   background: linear-gradient(to top, #07f, #5af);
   border-color: #25f;
 }
+.sidebar .input-grid em {
+  display: inline-block;
+  text-style: normal;
+  width: 74px;
+}
+.sidebar .input-grid input {
+  display: inline-block;
+  width: 74px;
+}
+
+.table {
+  margin: 20px;
+  width: 75%;
+  border-spacing: 0;
+}
+.table th {
+  text-align: left;
+  padding: 4px;
+}
+.table td {
+  padding: 4px;
+}
+.table tr:hover {
+  background: #f8f8f8
+}
+
 .btn-group {
   display: inline-block;
   margin: 0 5px;

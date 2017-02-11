@@ -234,14 +234,15 @@
         }
         calculateLines()
       } else {
-        self.nodes.forEach(function (e) {
-          var p = transform(e.entity.pos)
-          e.isSelected = (
+        self.nodes.forEach(function (node) {
+          var p = transform(node.entity.pos)
+          var isLassood = (
             p.x > self.select.pos.x &&
             p.y > self.select.pos.y &&
             p.x < self.select.pos.x + self.select.dim.x &&
             p.y < self.select.pos.y + self.select.dim.y)
-            updateUI()
+          node.isSelected = e.shiftKey ? (node.isSelected || isLassood) : isLassood
+          updateUI()
         })
       }
       self.isDown = false
