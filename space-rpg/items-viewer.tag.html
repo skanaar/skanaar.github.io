@@ -2,19 +2,103 @@
 
   <main-menu></main-menu>
 
-  <table>
+  <table class="items-table">
+    <thead>
+      <tr>
+        <th>name</th>
+        <th>credits</th>
+        <th>maxhull</th>
+        <th>maxshield</th>
+        <th>maxenergy</th>
+        <th>player-hull</th>
+        <th>player-shield</th>
+        <th>player-energy</th>
+        <th>target-hull</th>
+        <th>target-shield</th>
+        <th>target-energy</th>
+      </tr>
+    </thead>
     <tbody>
-      <tr each={item in world.items}>
+      <tr each={item in world.items} onclick={editItem}>
         <td>{item.name}</td>
         <td>{item.credits}</td>
+        <td>{item.attr.maxhull}</td>
+        <td>{item.attr.maxshield}</td>
+        <td>{item.attr.maxenergy}</td>
+        <td>{item.playerBuff.hull}</td>
+        <td>{item.playerBuff.shield}</td>
+        <td>{item.playerBuff.energy}</td>
+        <td>{item.targetBuff.hull}</td>
+        <td>{item.targetBuff.shield}</td>
+        <td>{item.targetBuff.energy}</td>
+      </tr>
+      <tr>
+        <td><button onclick={addItem}>Add</button></td>
       </tr>
     </tbody>
   </table>
+
+  <div class="sidebar" show={!!selected}>
+    <input type=text ref="nameField" value={selected && selected.name}>
+    <div class="input-grid">
+      <em>credits</em>   <input type=number ref="creditsField" value={selected && selected.credits}>
+    </div>
+    
+    <label>Attributes</label>
+    <div class="input-grid">
+      <em>maxhull</em>   <input type=number ref="maxhullField" value={selected && selected.attr.maxhull}><br/>
+      <em>maxshield</em> <input type=number ref="maxshieldField" value={selected && selected.attr.maxshield}><br/>
+      <em>maxenergy</em> <input type=number ref="maxenergyField" value={selected && selected.attr.maxenergy}><br/>
+    </div>
+    
+    <label>User effect on use</label>
+    <div class="input-grid">
+      <em>hull</em>   <input type=number ref="playerHullField" value={selected && selected.playerBuff.hull}><br/>
+      <em>shield</em>   <input type=number ref="playerShieldField" value={selected && selected.playerBuff.shield}><br/>
+      <em>energy</em>   <input type=number ref="playerEnergyField" value={selected && selected.playerBuff.energy}>
+    </div>
+    
+    <label>Target effect on use</label>
+    <div class="input-grid">
+      <em>hull</em>   <input type=number ref="targetHullField" value={selected && selected.targetBuff.hull}><br/>
+      <em>shield</em>   <input type=number ref="targetShieldField" value={selected && selected.targetBuff.shield}><br/>
+      <em>energy</em>   <input type=number ref="targetEnergyField" value={selected && selected.targetBuff.energy}>
+    </div>
+
+    <br/>
+    <button onclick={endEditing}>Done</button>
+  </div>
 
   <script>
     var self = this
 
     self.world = { items: [] }
+    self.selected = null
+
+    self.addItem = function () {
+      self.world.items.push({
+        type:'common', size: 's', isInstallable: false, isPassive: false, attr: { maxhull:0, maxshield:0, maxenergy:0, armor:0, cloak:0, jump:0, slots:0}, playerBuff:{hull:0, shield:0, energy: 0}, targetBuff:{ hull: 0, shield:  0, energy: 0}, credits: 5, name: 'unnamed'})
+    }
+    
+    self.editItem = function (e) {
+      self.selected = e.item.item
+    }
+    
+    self.endEditing = function (e) {
+      self.selected.name = self.refs.nameField.value
+      self.selected.credits = self.refs.creditsField.value
+      self.selected.attr.maxhull = self.refs.maxhullField.value
+      self.selected.attr.maxshield = self.refs.maxshieldField.value
+      self.selected.attr.maxenergy = self.refs.maxenergyField.value
+      self.selected.playerBuff.hull = self.refs.playerHullField.value
+      self.selected.playerBuff.shield = self.refs.playerShieldField.value
+      self.selected.playerBuff.energy = self.refs.playerEnergyField.value
+      self.selected.targetBuff.hull = self.refs.targetHullField.value
+      self.selected.targetBuff.shield = self.refs.targetShieldField.value
+      self.selected.targetBuff.energy = self.refs.targetEnergyField.value
+      self.selected = null
+      self.update()
+    }
 
     function loadWorld(data) {
         self.world = JSON.parse(data)
@@ -27,5 +111,32 @@
     })
 
   </script>
+
+  <style>
+    .items-table {
+      margin: 20px;
+      width: 75%;
+      border-spacing: 0;
+    }
+    .items-table th {
+      text-align: left;
+      padding: 4px;
+    }
+    .items-table td {
+      padding: 4px;
+    }
+    .items-table tr:hover {
+      background: #f8f8f8
+    }
+    .sidebar .input-grid em {
+      display: inline-block;
+      text-style: normal;
+      width: 74px;
+    }
+    .sidebar .input-grid input {
+      display: inline-block;
+      width: 74px;
+    }
+  </style>
 
 </items-viewer>

@@ -10,54 +10,14 @@ body, html {
 body {
   padding-top: 25px;
 }
-.galmap_tools {
-  font-size: 11px;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-}
-.galmap_tools.galmap-editmenu {
-  position: fixed;
-  right: 0;
-  top: 25px;
-  bottom: 0;
-  padding: 5px;
-  background: #fafafa;
-  border-left: 1px solid #aaa;
-  text-align: right;
-}
-.galmap_tools.galmap-filemenu {
-  position: fixed;
-  left: 10px;
-  top: 10px;
-  text-align: left;
-}
-.galmap_tools.galmap-toolbox {
+
+.galmap-toolbox {
   position: fixed;
   left: 0px;
   right: 0px;
   top: 25px;
   padding: 10px;
   text-align: center;
-}
-.galmap_tools span {
-  display: block;
-  max-width: 150px;
-  text-align: left;
-}
-.galmap_tools label {
-  display: block;
-  text-align: left;
-  font-weight: bold;
-  margin-top: 20px;
-  padding: 2px;
-  margin-bottom: 5px;
-  border-bottom: 1px solid #ddd;
-}
-.galmap_tools.galmap-editmenu input[type=text],
-.galmap_tools.galmap-editmenu input[type=file],
-.galmap_tools.galmap-editmenu select {
-  display: block;
-  margin: 2px 0;
-  width: 150px;
 }
 .galmap_label {
   font-size: 8px;
@@ -67,13 +27,50 @@ body {
 .galmap_label:hover {
   fill: #000;
 }
-.galmap_tools > div {
+
+.sidebar {
+  font-size: 11px;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+.sidebar {
+  position: fixed;
+  right: 0;
+  top: 25px;
+  bottom: 0;
+  padding: 5px;
+  background: #fafafa;
+  border-left: 1px solid #aaa;
+  text-align: right;
+}
+.sidebar span {
+  display: block;
+  max-width: 150px;
+  text-align: left;
+}
+.sidebar label {
+  display: block;
+  text-align: left;
+  font-weight: bold;
+  margin-top: 20px;
+  padding: 2px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #ddd;
+}
+.sidebar input[type=text],
+.sidebar input[type=file],
+.sidebar select {
+  display: block;
+  margin: 2px 0;
+  width: 150px;
+}
+.sidebar > div {
   margin: 3px 0;
 }
-.galmap_tools a,
-.galmap_tools button,
-.galmap_tools input[type=file],
-.galmap_tools input[type=text],
+.sidebar button,
+.sidebar input[type=file],
+.sidebar input[type=text],
+.sidebar input[type=number],
+a.toggle-btn,
 a.button {
   display: inline-block;
   margin: 0 0 0 5px;
@@ -87,15 +84,17 @@ a.button {
   font-size: 11px;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
-.galmap_tools input[type=text] {
+.sidebar input[type=text],
+.sidebar input[type=number] {
+  display: block;
   border: 1px solid #aaa;
   border-radius: 2px;
 }
-.galmap_tools button:active {
+.sidebar button:active {
   background: linear-gradient(to top, #07f, #5af);
   border-color: #25f;
 }
-.galmap_tools .btn-group {
+.btn-group {
   display: inline-block;
   margin: 0 5px;
 }

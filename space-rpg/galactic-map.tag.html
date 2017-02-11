@@ -44,7 +44,7 @@
       stroke="#F00" stroke-width="1" fill="rgba(0,0,0,0)"/>
   </svg>
 
-  <div class="galmap_tools galmap-toolbox">
+  <div class="galmap-toolbox">
     <div class="btn-group">
       <a onclick={() => tool='select'} class="toggle-btn {(tool == 'select') && 'active'}">Select
       </a><a onclick={() => tool='draw'} class="toggle-btn {(tool == 'draw') && 'active'}">Draw
@@ -59,7 +59,7 @@
     <button onclick={removeSelected}  style="opacity: {selectionSize > 0 ? 1 : 0.5}">Delete</button>
   </div>
 
-  <div class="galmap_tools galmap-editmenu">
+  <div class="sidebar">
     <button onclick={saveToStorage}>Save</button>
     <button onclick={loadFromStorage}>Load</button>
 
