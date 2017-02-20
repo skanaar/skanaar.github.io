@@ -99,7 +99,8 @@ a.button {
   text-style: normal;
   width: 74px;
 }
-.sidebar .input-grid input {
+.sidebar .input-grid input,
+.sidebar .input-grid select {
   display: inline-block;
   width: 74px;
 }

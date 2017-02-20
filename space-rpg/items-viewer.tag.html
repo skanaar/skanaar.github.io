@@ -7,6 +7,8 @@
       <tr>
         <th>name</th>
         <th>credits</th>
+        <th>installable</th>
+        <th>passive</th>
         <th>maxhull</th>
         <th>maxshield</th>
         <th>maxenergy</th>
@@ -22,6 +24,8 @@
       <tr each={item in world.items} onclick={editItem}>
         <td>{item.name}</td>
         <td>{item.credits}</td>
+        <td>{item.isInstallable ? '×' : ''}</td>
+        <td>{item.isPassive ? '×' : ''}</td>
         <td>{item.attr.maxhull}</td>
         <td>{item.attr.maxshield}</td>
         <td>{item.attr.maxenergy}</td>
@@ -33,7 +37,7 @@
         <td>{item.targetBuff.energy}</td>
       </tr>
       <tr>
-        <td><button onclick={addItem}>Add</button></td>
+        <td><button onclick={addItem}>Add new item</button></td>
       </tr>
     </tbody>
   </table>
@@ -41,7 +45,9 @@
   <div class="sidebar" show={!!selected}>
     <input type=text ref="nameField" value={selected && selected.name}>
     <div class="input-grid">
-      <em>credits</em>   <input type=number ref="creditsField" value={selected && selected.credits}>
+      <em>credits</em>     <input type=number ref="creditsField" value={selected && selected.credits}><br/>
+      <em>installable</em> <input type=checkbox ref="isInstallableToggle" value={selected && selected.isInstallable}><br/>
+      <em>passive</em>     <input type=checkbox ref="isPassiveToggle" checked={selected && selected.isPassive}>
     </div>
     
     <label>Attributes</label>
@@ -54,19 +60,20 @@
     <label>User effect on use</label>
     <div class="input-grid">
       <em>hull</em>   <input type=number ref="playerHullField" value={selected && selected.playerBuff.hull}><br/>
-      <em>shield</em>   <input type=number ref="playerShieldField" value={selected && selected.playerBuff.shield}><br/>
-      <em>energy</em>   <input type=number ref="playerEnergyField" value={selected && selected.playerBuff.energy}>
+      <em>shield</em> <input type=number ref="playerShieldField" value={selected && selected.playerBuff.shield}><br/>
+      <em>energy</em> <input type=number ref="playerEnergyField" value={selected && selected.playerBuff.energy}>
     </div>
     
     <label>Target effect on use</label>
     <div class="input-grid">
       <em>hull</em>   <input type=number ref="targetHullField" value={selected && selected.targetBuff.hull}><br/>
-      <em>shield</em>   <input type=number ref="targetShieldField" value={selected && selected.targetBuff.shield}><br/>
-      <em>energy</em>   <input type=number ref="targetEnergyField" value={selected && selected.targetBuff.energy}>
+      <em>shield</em> <input type=number ref="targetShieldField" value={selected && selected.targetBuff.shield}><br/>
+      <em>energy</em> <input type=number ref="targetEnergyField" value={selected && selected.targetBuff.energy}>
     </div>
 
     <br/>
     <button onclick={endEditing}>Done</button>
+    <button onclick={cancelEditing}>Cancel</button>
   </div>
 
   <script>
@@ -87,6 +94,8 @@
     self.endEditing = function (e) {
       self.selected.name = self.refs.nameField.value
       self.selected.credits = self.refs.creditsField.value
+      self.selected.isInstallable = self.refs.isInstallableToggle.checked
+      self.selected.isPassive = self.refs.isPassiveToggle.checked
       self.selected.attr.maxhull = self.refs.maxhullField.value
       self.selected.attr.maxshield = self.refs.maxshieldField.value
       self.selected.attr.maxenergy = self.refs.maxenergyField.value
@@ -96,6 +105,11 @@
       self.selected.targetBuff.hull = self.refs.targetHullField.value
       self.selected.targetBuff.shield = self.refs.targetShieldField.value
       self.selected.targetBuff.energy = self.refs.targetEnergyField.value
+      self.selected = null
+      self.update()
+    }
+
+    self.cancelEditing = function () {
       self.selected = null
       self.update()
     }

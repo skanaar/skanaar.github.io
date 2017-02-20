@@ -1,9 +1,11 @@
 <main-menu>
   <div class="main-menu">
-    <a class="tab">World Editor</a>
+    <a class="tab logo">World Editor</a>
     <a each={e in tabs} href="{e}.html" onclick={requestSave}
        class={ tab: true, active: page == e + '.html' }>{e}</a>
     <div class="file-tools">
+      <button onclick={requestSave}>Save</button>
+      <button onclick={loadFromStorage}>Load</button>
       <a class="button" ref="downloadLink" onmouseenter={primeDownloadLink} download="destinations.json" href='#'>Download</a>
       <button onclick={loadDefault}>Load default</button>
       <input type=file ref=fileInput onchange={fileChanged} style="width: 150px; margin-right: 20px">
@@ -21,6 +23,10 @@
       self.page = _.last(window.location.pathname.split('/'))
       self.update()
     })
+
+    self.loadFromStorage = function () {
+      window.events.trigger('world-updated')
+    }
 
     self.requestSave = function () {
       window.events.trigger('save-world')
@@ -66,6 +72,9 @@
       border-left: 1px solid #ccc;
       border-right: 1px solid #ccc;
       font-weight: bold;
+    }
+    .logo {
+      font-style: italic;
     }
   </style>
 </main-menu>

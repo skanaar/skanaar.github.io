@@ -6,7 +6,7 @@
     <tr each={row in rows()}>
       <td each={e in row} onclick={editCelestial}>
         <div>{e.id}</div>
-        <div class="celestial" style="width: {e.r*2}px; height: {e.r*2}px; background: #{e.color[0]}"></div>
+        <div class="celestial" style="width: {e.r*2}px; height: {e.r*2}px; background: linear-gradient(0deg, #{e.color[0]}, #{e.color[1]})"></div>
       </td>
     </tr>
     <tr>

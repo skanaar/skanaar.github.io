@@ -60,14 +60,13 @@
   </div>
 
   <div class="sidebar">
-    <button onclick={saveToStorage}>Save</button>
-    <button onclick={loadFromStorage}>Load</button>
-
-    <label>Start World &amp; Ship</label>
-    <input type=text value={world.initialDestination} onchange={initialDestinationChange}>
-    <select ref="initialShipSelect" onchange={initialShipChange}>
-      <option each={e in world.ships}>{e}</option>
-    </select>
+    <div class="input-grid">
+      <em>start at</em> <input type=text value={world.initialDestination} onchange={initialDestinationChange}><br/>
+      <em>start with</em>
+      <select ref="initialShipSelect" onchange={initialShipChange}>
+        <option each={e in world.ships}>{e}</option>
+      </select>
+    </div>
 
     <label>Name</label>
     <input type=text ref="nameField" placeholder="name">
@@ -93,12 +92,14 @@
     <button onClick={clearTreasures}>&times;</button>
 
     <div show={selectionSize == 1}>
-      <label><input type=checkbox ref=traderToggle onchange={traderChange}> Trader - Buy &amp; Sell</label>
+      <label><input type=checkbox ref=traderToggle onchange={traderChange}> Trader</label>
+      <div class="input-grid">
+        <em>buy at</em> <input type=number value={selectedTrader.buy} onchange={traderBuyChange}><br/>
+        <em>sell at</em> <input type=number value={selectedTrader.sell} onchange={traderSellChange}>
+      </div>
       <select onchange={pickTraderItem}>
         <option each={e in world.items} value={e.name}>{e.name} ({e.credits} c)</option>
       </select>
-      <input type=text value={selectedTrader.buy} onchange={traderBuyChange}>
-      <input type=text value={selectedTrader.sell} onchange={traderSellChange}>
       <span>{(selectedTrader.inventory || []).join(', ')}</span>
       <button onClick={clearInventory}>&times;</button>
 
@@ -256,9 +257,6 @@
       return _.stringify(self.world, {maxLength: 200})
     }
 
-    self.saveToStorage = () => localStorage['world'] = serializedWorld()
-    self.loadFromStorage = () => loadWorld(localStorage['world'])
-
     self.autoNameNodes = function () {
       forSelected(function (e){
         if (e.style.startsWith('asteroid'))
@@ -413,7 +411,7 @@
 
     self.on('mount', function() {
       window.events.on('world-updated', () => loadWorld(localStorage['world']))
-      window.events.on('save-world', self.saveToStorage)
+      window.events.on('save-world', () => localStorage['world'] = serializedWorld())
       window.document.addEventListener('keydown', self.keydown.bind(self))
       loadWorld(localStorage['world'])
       window.scrollTo(self.dx/3, self.dy/3)
