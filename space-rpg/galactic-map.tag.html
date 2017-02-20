@@ -413,6 +413,7 @@
 
     self.on('mount', function() {
       window.events.on('world-updated', () => loadWorld(localStorage['world']))
+      window.events.on('save-world', self.saveToStorage)
       window.document.addEventListener('keydown', self.keydown.bind(self))
       loadWorld(localStorage['world'])
       window.scrollTo(self.dx/3, self.dy/3)

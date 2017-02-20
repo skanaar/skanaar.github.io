@@ -107,6 +107,7 @@
 
     self.on('mount', function() {
       window.events.on('world-updated', () => loadWorld(localStorage['world']))
+      window.events.on('save-world', () => localStorage['world'] = JSON.stringify(self.world))
       loadWorld(localStorage['world'])
     })
 

@@ -1,10 +1,13 @@
 <main-menu>
   <div class="main-menu">
     <a class="tab">World Editor</a>
-    <a class="button" ref="downloadLink" onmouseenter={primeDownloadLink} download="destinations.json" href='#'>Download</a>
-    <button onclick={loadDefault}>Load default</button>
-    <input type=file ref=fileInput onchange={fileChanged} style="width: 150px; margin-right: 20px">
-    <a each={e in tabs} href="{e}.html" class={ tab: true, active: page == e + '.html' }>{e}</a>
+    <a each={e in tabs} href="{e}.html" onclick={requestSave}
+       class={ tab: true, active: page == e + '.html' }>{e}</a>
+    <div class="file-tools">
+      <a class="button" ref="downloadLink" onmouseenter={primeDownloadLink} download="destinations.json" href='#'>Download</a>
+      <button onclick={loadDefault}>Load default</button>
+      <input type=file ref=fileInput onchange={fileChanged} style="width: 150px; margin-right: 20px">
+    </div>
   </div>
   <script>
     var self = this
@@ -18,6 +21,10 @@
       self.page = _.last(window.location.pathname.split('/'))
       self.update()
     })
+
+    self.requestSave = function () {
+      window.events.trigger('save-world')
+    }
 
     self.loadDefault = function () {
       _.fetch('world.json', data => localStorage['world'] = data)
@@ -43,6 +50,10 @@
       border-bottom: 1px solid #aaa;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
       font-size: 12px;
+    }
+    .file-tools {
+      float: right;
+      margin-top: 5px;
     }
     a.tab, a.tab:active, a.tab:hover, a.tab:visited {
       display: inline-block;
