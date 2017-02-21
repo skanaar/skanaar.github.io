@@ -60,11 +60,7 @@ body {
 .sidebar input[type=file],
 .sidebar select {
   display: block;
-  margin: 2px 0;
   width: 150px;
-}
-.sidebar > div {
-  margin: 3px 0;
 }
 .sidebar button,
 .sidebar input[type=file],
@@ -73,16 +69,21 @@ body {
 a.toggle-btn,
 a.button {
   display: inline-block;
-  margin: 0 0 0 5px;
+  margin: 1px 0;
+  padding: 1px 2px;
+  color: #000;
   background: #fff;
   border: 1px solid #ccc;
-  padding: 1px 8px;
   border-radius: 4px;
-  color: #000;
   text-decoration: none;
-  box-shadow: 0 1px 0px rgba(0,0,0,0.05);
   font-size: 11px;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  box-shadow: 0 1px 0px rgba(0,0,0,0.05);
+}
+.sidebar button,
+a.button {
+  margin: 1px 4px;
+  padding: 1px 8px;
 }
 .sidebar input[type=text],
 .sidebar input[type=number] {
@@ -103,6 +104,7 @@ a.button {
 .sidebar .input-grid select {
   display: inline-block;
   width: 74px;
+  margin: 2px 1px;
 }
 
 .table {
@@ -128,6 +130,7 @@ a.button {
 .btn-group .toggle-btn {
   border-radius: 0;
   margin: 0 0 0 -1px;
+  padding: 1px 8px;
   cursor: pointer;
   user-select: none;
 }

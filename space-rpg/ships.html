@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>space rpg</title>
+  <link rel="shortcut icon" href="favicon.png">
+  <link rel="stylesheet" href="galactic-map.css">
+</head>
+<body>
+    <ships-viewer></ships-viewer>
+
+    <!-- riot tags -->
+    <script type="riot/tag" src="main-menu.tag.html"></script>
+    <script type="riot/tag" src="ships-viewer.tag.html"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="util.js"></script>
+    <script src="https://rawgit.com/riot/riot/master/riot%2Bcompiler.min.js"></script>
+    <script>
+      riot.mount('ships-viewer')
+    </script>
+</body>
+</html>

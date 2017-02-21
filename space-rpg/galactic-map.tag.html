@@ -64,7 +64,7 @@
       <em>start at</em> <input type=text value={world.initialDestination} onchange={initialDestinationChange}><br/>
       <em>start with</em>
       <select ref="initialShipSelect" onchange={initialShipChange}>
-        <option each={e in world.ships}>{e}</option>
+        <option each={e in world.ships}>{e.name}</option>
       </select>
     </div>
 
@@ -105,7 +105,7 @@
 
       <label><input type=checkbox ref=enemyToggle> Enemy</label>
       <select>
-        <option each={e in world.enemies}>{e}</option>
+        <option each={e in world.enemies}>{e.name}</option>
       </select>
 
       <label>Loot</label>

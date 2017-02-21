@@ -1,8 +1,74 @@
 {
   "initialDestination": "Backwater",
   "initialShip": "rover",
-  "enemies": ["monitor-drone", "rogue", "devourer", "soma"],
-  "ships": ["rover", "rogue", "clipper", "battleship", "soma", "longship"],
+  "ships": [
+        {
+            "name": "rover",
+            "visual": "rover",
+            "attr": { "maxhull": 1, "maxshield": 1, "maxenergy": 1, "jump": 0, "slots": 1 },
+            "generator": { "hull": 1, "shield": 1, "energy": 1 }
+        },
+        {
+            "name": "rogue",
+            "visual": "rogue",
+            "attr": { "maxhull": 20, "maxshield": 20, "maxenergy": 20, "jump": 100, "slots": 4 },
+            "generator": { "hull": 1, "shield": 1, "energy": 1 }
+        },
+        {
+            "name": "clipper",
+            "visual": "clipper",
+            "attr": { "maxhull": 20, "maxshield": 20, "maxenergy": 20, "jump": 125, "slots": 4 },
+            "generator": { "hull": 1, "shield": 1, "energy": 1 }
+        },
+        {
+            "name": "battleship",
+            "visual": "battleship",
+            "attr": { "maxhull": 40, "maxshield": 40, "maxenergy": 30, "jump": 150, "slots": 6 },
+            "generator": { "hull": 2, "shield": 2, "energy": 2 }
+        },
+        {
+            "name": "soma",
+            "visual": "soma",
+            "attr": { "maxhull": 50, "maxshield": 35, "maxenergy": 30, "jump": 175, "slots": 8 },
+            "generator": { "hull": 3, "shield": 3, "energy": 3 }
+        },
+        {
+            "name": "longship",
+            "visual": "longship",
+            "attr": { "maxhull": 70, "maxshield": 50, "maxenergy": 50, "jump": 200, "slots": 10 },
+            "generator": { "hull": 4, "shield": 4, "energy": 4 }
+        }
+    ],
+  "enemies": [
+    {
+        "name": "monitor-drone",
+        "visual": "monitor-drone",
+        "attr": { "maxhull":1, "maxshield":0, "maxenergy":0, "jump":0, "slots":0 },
+        "generator": { "hull": 0, "shield": 0, "energy": 0 },
+        "inventory": ["Recharge Loop"]
+    },
+    {
+        "name": "rogue",
+        "visual": "rogue",
+        "attr": { "maxhull":20, "maxshield":20, "maxenergy":20, "jump":0, "slots":4 },
+        "generator": { "hull": 1, "shield": 1, "energy": 1 },
+        "inventory": ["Alpha Beam"]
+    },
+    {
+        "name": "devourer",
+        "visual": "devourer",
+        "attr": { "maxhull":40, "maxshield":40, "maxenergy":30, "jump":0, "slots":6 },
+        "generator": { "hull": 2, "shield": 2, "energy": 2 },
+        "inventory": ["Beta Beam"]
+    },
+    {
+        "name": "soma",
+        "visual": "soma",
+        "attr": { "maxhull":50, "maxshield":35, "maxenergy":30, "jump":0, "slots":8 },
+        "generator": { "hull": 3, "shield": 3, "energy": 3 },
+        "inventory": ["Photon Ray"]
+    }
+  ],
   "items": [
     {"type":"gun", "size":"s", "isInstallable":true, "isPassive":false, "attr": { "maxhull":0, "maxshield":0, "maxenergy":0, "armor":0, "cloak":0, "jump":0, "slots":0}, "playerBuff":{"hull":0, "shield":0, "energy": -2}, "targetBuff":{ "hull":  -5, "shield":  0, "energy": 0}, "credits": 5, "name":"Kinetic Gun"},
     {"type":"gun", "size":"m", "isInstallable":true, "isPassive":false, "attr": { "maxhull":0, "maxshield":0, "maxenergy":0, "armor":0, "cloak":-1, "jump":0, "slots":0}, "playerBuff":{"hull":0, "shield":0, "energy": -4}, "targetBuff":{ "hull":  -10, "shield": 0, "energy": 0}, "credits": 20, "name":"Gauss Gun"},
@@ -370,5 +436,8 @@
     {"pos": {"x": 1012, "y": -94}, "name": "Al Se Nebula", "style": "cloud-purple", "surface": "rock-1", "trader": null, "enemy": null},
     {"pos": {"x": 236, "y": -1368}, "name": "Blue Forest", "style": "planet-green-3", "surface": "rock-1", "trader": null, "enemy": null},
     {"pos": {"x": 320, "y": -938}, "name": "Blue Ocean", "style": "planet-water-2", "surface": "rock-1", "trader": null, "enemy": null}
-  ]
+  ],
+  "quests": {
+    "Start of an adventure": ""
+  }
 }

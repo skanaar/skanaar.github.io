@@ -46,7 +46,7 @@
     <input type=text ref="nameField" value={selected && selected.name}>
     <div class="input-grid">
       <em>credits</em>     <input type=number ref="creditsField" value={selected && selected.credits}><br/>
-      <em>installable</em> <input type=checkbox ref="isInstallableToggle" value={selected && selected.isInstallable}><br/>
+      <em>installable</em> <input type=checkbox ref="isInstallableToggle" checked={selected && selected.isInstallable}><br/>
       <em>passive</em>     <input type=checkbox ref="isPassiveToggle" checked={selected && selected.isPassive}>
     </div>
     

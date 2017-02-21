@@ -14,7 +14,7 @@
   <script>
     var self = this
     self.page = 'index'
-    self.tabs = ['map', 'items', 'celestials']
+    self.tabs = ['map', 'items', 'ships', 'celestials']
 
     window.events = {}
     riot.observable(window.events)
@@ -24,24 +24,17 @@
       self.update()
     })
 
-    self.loadFromStorage = function () {
+    function loadWorld(data) {
+      localStorage['world'] = data
       window.events.trigger('world-updated')
     }
 
-    self.requestSave = function () {
-      window.events.trigger('save-world')
-    }
-
-    self.loadDefault = function () {
-      _.fetch('world.json', data => localStorage['world'] = data)
-      window.events.trigger('world-updated')
-    }
-
-    self.fileChanged = function () {
-      _.readFile(self.refs.fileInput.files[0], data => localStorage['world'] = data)
-    }
-
+    self.loadFromStorage = () => window.events.trigger('world-updated')
+    self.requestSave = () => window.events.trigger('save-world')
+    self.loadDefault = () => _.fetch('world.json', loadWorld)
+    self.fileChanged = () => _.readFile(self.refs.fileInput.files[0], loadWorld)
     self.primeDownloadLink = function () {
+      window.events.trigger('save-world')
       self.refs.downloadLink.setAttribute('href', _.toDataUrl(localStorage['world']))
     }
 
