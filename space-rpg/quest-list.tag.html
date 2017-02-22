@@ -4,6 +4,12 @@
 
   <div class="quest-list">
     <div each={quest in quests} onclick={edit} class={ active: quest.title==active }>{quest.title}</div>
+    <div><button onclick={add}>+ New Quest</button></div>
+  </div>
+
+  <div class="quest-tools">
+    <input type=text value={active} ref="nameField">
+    <button onclick={save}>Save</button>
   </div>
 
   <script>
@@ -23,9 +29,20 @@
       self.update()
     }
 
+    self.add = function () {
+      self.quests.push({ title: 'unnamed', source: '<condition />' })
+    }
+
     self.edit = function (e) {
       self.active = e.item.quest.title
-      window.codeMirrorInstance.setValue(e.item.quest.source);
+      window.codeMirrorInstance.setValue(e.item.quest.source)
+    }
+
+    self.save = function () {
+      var quest = _.findWhere(self.quests, { title: self.active })
+      quest.title = self.refs.nameField.value
+      quest.source = window.codeMirrorInstance.getValue()
+      self.active = null
     }
 
     self.on('mount', function() {
@@ -47,6 +64,12 @@
     }
     .quest-list div.active {
       background: #eee;
+    }
+    .quest-tools {
+      position: fixed;
+      top: 31px;
+      left: 255px;
+      z-index: 2;
     }
   </style>
 
