@@ -436,8 +436,5 @@
     {"pos": {"x": 1012, "y": -94}, "name": "Al Se Nebula", "style": "cloud-purple", "surface": "rock-1", "trader": null, "enemy": null},
     {"pos": {"x": 236, "y": -1368}, "name": "Blue Forest", "style": "planet-green-3", "surface": "rock-1", "trader": null, "enemy": null},
     {"pos": {"x": 320, "y": -938}, "name": "Blue Ocean", "style": "planet-water-2", "surface": "rock-1", "trader": null, "enemy": null}
-  ],
-  "quests": {
-    "Start of an adventure": ""
-  }
+  ]
 }
