@@ -2,39 +2,52 @@
 
   <main-menu></main-menu>
 
-  <div each={quest in quests} >
-    <h2>{quest.title}</h2>
-    <pre><code>{quest.source}</code></pre>
+  <div class="quest-list">
+    <div each={quest in quests} onclick={edit} class={ active: quest.title==active }>{quest.title}</div>
   </div>
 
   <script>
     var self = this
 
     self.quests = []
+    self.active = null
 
     function loadQuests(data) {
       var dom = (new DOMParser()).parseFromString(data, 'text/xml')
       self.quests = _.map(dom.getElementsByTagName('quest'), function (e) {
         return {
-          title: e.getAttribute('title').toUpperCase(),
+          title: e.getAttribute('title'),
           source: e.innerHTML.split('  ').join('').trim()
         }
       })
       self.update()
     }
 
+    self.edit = function (e) {
+      self.active = e.item.quest.title
+      window.codeMirrorInstance.setValue(e.item.quest.source);
+    }
+
     self.on('mount', function() {
       _.fetch('quests.xml', function (data) { loadQuests(data) })
-    })
-
-    self.on('updated', function () {
-      _.each(document.querySelectorAll('pre code'), function (elem){
-        hljs.highlightBlock(elem)
-      });
     })
   </script>
 
   <style>
+    .quest-list {
+      position: fixed;
+      top: 26px;
+      left: 0;
+      bottom: 0;
+      overflow: auto;
+      width: 250px;
+    }
+    .quest-list div {
+      padding: 10px;
+    }
+    .quest-list div.active {
+      background: #eee;
+    }
   </style>
 
 </quest-list>

@@ -4,20 +4,43 @@
   <title>space rpg</title>
   <link rel="shortcut icon" href="favicon.png">
   <link rel="stylesheet" href="editor.css" >
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/styles/solarized-dark.min.css">
+  <link rel="stylesheet" href="lib/codemirror.css">
+  <link rel="stylesheet" href="lib/night.css">
+  <style>
+    .CodeMirror {
+      position: fixed;
+      left: 250px;
+      top: 26px;
+      right: 0;
+      height: 100%;
+      font-size: 16px;
+      font-family: Menlo, Consolas, monospace;
+    }
+  </style>
 </head>
 <body>
 
   <quest-list></quest-list>
 
+  <textarea id="quest-editor"></textarea>
+
   <!-- riot tags -->
   <script type="riot/tag" src="main-menu.tag.html"></script>
   <script type="riot/tag" src="quest-list.tag.html"></script>
 
+  <script src="lib/codemirror.js"></script>
+  <script src="lib/xml.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   <script src="util.js"></script>
   <script src="https://rawgit.com/riot/riot/master/riot%2Bcompiler.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
-  <script> riot.mount('quest-list') </script>
+  <script>
+    var textarea = document.getElementById('quest-editor')
+    window.codeMirrorInstance = CodeMirror.fromTextArea(textarea, {
+      mode: 'xml',
+      theme: 'night',
+      lineWrapping: true
+    })
+    riot.mount('quest-list')
+  </script>
 </body>
 </html>
