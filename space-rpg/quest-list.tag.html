@@ -8,7 +8,7 @@
   </div>
 
   <div class="quest-tools">
-    <input type=text value={active} ref="nameField">
+    <input type="text" value={active} ref="nameField">
     <button onclick={save}>Save</button>
   </div>
 
@@ -30,7 +30,7 @@
     }
 
     self.add = function () {
-      self.quests.push({ title: 'unnamed', source: '<condition />' })
+      self.quests.push({ title: 'unnamed', source: '' })
     }
 
     self.edit = function (e) {
