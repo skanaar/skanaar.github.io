@@ -20,7 +20,7 @@
   </style>
 </head>
 <body>
-
+  <main-menu></main-menu>
   <quest-list></quest-list>
 
   <textarea id="quest-editor"></textarea>
@@ -31,9 +31,10 @@
 
   <script src="lib/codemirror.js"></script>
   <script src="lib/xml.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src="lib/riot.js"></script>
+  <script src="lib/underscore.js"></script>
   <script src="util.js"></script>
-  <script src="https://rawgit.com/riot/riot/master/riot%2Bcompiler.min.js"></script>
+  <script src="events.js"></script>
   <script>
     var textarea = document.getElementById('quest-editor')
     window.codeMirrorInstance = CodeMirror.fromTextArea(textarea, {
@@ -41,6 +42,7 @@
       theme: 'night',
       lineWrapping: true
     })
+    riot.mount('main-menu')
     riot.mount('quest-list')
   </script>
 </body>

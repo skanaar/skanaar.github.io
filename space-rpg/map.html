@@ -6,16 +6,19 @@
   <link rel="stylesheet" href="editor.css">
 </head>
 <body>
+    <main-menu></main-menu>
     <galactic-map></galactic-map>
 
     <!-- riot tags -->
     <script type="riot/tag" src="main-menu.tag.html"></script>
     <script type="riot/tag" src="galactic-map.tag.html"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="lib/riot.js"></script>
+    <script src="lib/underscore.js"></script>
     <script src="util.js"></script>
-    <script src="https://rawgit.com/riot/riot/master/riot%2Bcompiler.min.js"></script>
+    <script src="events.js"></script>
     <script>
+      riot.mount('main-menu')
       riot.mount('galactic-map')
     </script>
 </body>

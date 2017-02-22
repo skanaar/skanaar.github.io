@@ -1,0 +1,27 @@
+<editor-app>
+
+  <main-menu />
+  <galactic-map if={page == '#map'} />
+  <items-viewer if={page == '#items'} />
+  <ships-viewer if={page == '#ships'} />
+  <celestials-viewer if={page == '#celestials'} />
+  <quests-viewer if={page == '#quests'} />
+
+  <script>
+    var self = this
+
+    function updatePage() {
+      self.page = (window.location.hash || '#map')
+      self.update()
+    }
+
+    updatePage()
+
+    self.on('mount', function() {
+      window.addEventListener('hashchange', updatePage)
+      self.update()
+    })
+
+  </script>
+
+</editor-app>

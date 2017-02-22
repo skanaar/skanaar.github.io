@@ -1,7 +1,5 @@
 <ships-viewer>
 
-  <main-menu></main-menu>
-
   <table class="table">
     <tr><th>Player Ship</th></tr>
     <tr each={ship in world.ships} onclick={edit}><td>{ship.name}</td></tr>
@@ -87,15 +85,15 @@
       self.update()
     }
 
-    function loadWorld(data) {
-        self.world = JSON.parse(data)
+    function loadWorld() {
+        self.world = getWorld()
         self.update()
     }
 
     self.on('mount', function() {
-      window.events.on('world-updated', () => loadWorld(localStorage['world']))
-      window.events.on('save-world', () => localStorage['world'] = JSON.stringify(self.world))
-      loadWorld(localStorage['world'])
+      window.events.on('world-updated', loadWorld)
+      window.events.on('save-world', () => saveWorld(self.world))
+      loadWorld()
     })
 
   </script>

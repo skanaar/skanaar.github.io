@@ -1,7 +1,5 @@
 <quest-list>
 
-  <main-menu></main-menu>
-
   <div class="quest-list">
     <div each={quest in quests} onclick={edit} class={ active: quest.title==active }>{quest.title}</div>
     <div><button onclick={add}>+ New Quest</button></div>
@@ -10,6 +8,7 @@
   <div class="quest-tools">
     <input type="text" value={active} ref="nameField">
     <button onclick={save}>Save</button>
+    <button onclick={remove}>Delete</button>
   </div>
 
   <script>
@@ -18,8 +17,8 @@
     self.quests = []
     self.active = null
 
-    function loadQuests(data) {
-      var dom = (new DOMParser()).parseFromString(data, 'text/xml')
+    function loadQuests(world) {
+      var dom = (new DOMParser()).parseFromString(world.quests, 'text/xml')
       self.quests = _.map(dom.getElementsByTagName('quest'), function (e) {
         return {
           title: e.getAttribute('title'),
@@ -45,8 +44,22 @@
       self.active = null
     }
 
+    self.remove = function () {
+      self.quests = _.filter(self.quests, q => q.title != self.active)
+    }
+
+    function questsXml() {
+      return self.quests.map(q => '<quest title="'+ q.title +'"">'+q.source+'</quest>').join('')
+    }
+
     self.on('mount', function() {
-      _.fetch('quests.xml', function (data) { loadQuests(data) })
+      window.events.on('world-updated', () => loadQuests(getWorld()))
+      window.events.on('save-world', function () {
+        var world = JSON.parse(getWorld())
+        world.quests = questsXml()
+        saveWorld(world)
+      })
+      loadQuests(getWorld())
     })
   </script>
 

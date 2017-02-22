@@ -1,7 +1,5 @@
 <galactic-map>
 
-  <main-menu></main-menu>
-
   <svg class="galmap"
       riot-width={2*dx}
       riot-height={2*dy}
@@ -252,9 +250,9 @@
       self.input.b = Vec(0,0)
     }
 
-    function serializedWorld() {
+    function preparedWorld() {
       self.world.destinations = self.nodes.map(e => e.entity)
-      return _.stringify(self.world, {maxLength: 200})
+      return self.world
     }
 
     self.autoNameNodes = function () {
@@ -377,8 +375,8 @@
 
     function transform(p) { return Vec(self.dx+self.scale*p.x, self.dy+self.scale*p.y) }
 
-    function loadWorld(data) {
-        self.world = JSON.parse(data)
+    function loadWorld() {
+        self.world = getWorld()
         loadDestinations(self.world)
         updateUI()
         self.update()
@@ -410,10 +408,10 @@
     }
 
     self.on('mount', function() {
-      window.events.on('world-updated', () => loadWorld(localStorage['world']))
-      window.events.on('save-world', () => localStorage['world'] = serializedWorld())
+      window.events.on('world-updated', loadWorld)
+      window.events.on('save-world', () => saveWorld(preparedWorld()))
       window.document.addEventListener('keydown', self.keydown.bind(self))
-      loadWorld(localStorage['world'])
+      loadWorld()
       window.scrollTo(self.dx/3, self.dy/3)
     })
 

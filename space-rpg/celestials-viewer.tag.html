@@ -1,7 +1,5 @@
 <celestials-viewer>
 
-  <main-menu></main-menu>
-
   <table>
     <tr each={row in rows()}>
       <td each={e in row} onclick={editCelestial}>
@@ -82,15 +80,15 @@
       return _.range(chunk).map(i => self.world.celestialStyles.slice(i*chunk, i*chunk+chunk))
     }
 
-    function loadWorld(data) {
-        self.world = JSON.parse(data)
+    function loadWorld(w) {
+        self.world = getWorld()
         self.update()
     }
 
     self.on('mount', function() {
-      window.events.on('world-updated', () => loadWorld(localStorage['world']))
-      window.events.on('save-world', () => localStorage['world'] = JSON.stringify(self.world))
-      loadWorld(localStorage['world'])
+      window.events.on('world-updated', loadWorld)
+      window.events.on('save-world', () => saveWorld(self.world))
+      loadWorld()
     })
 
   </script>

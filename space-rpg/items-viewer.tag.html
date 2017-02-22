@@ -1,7 +1,5 @@
 <items-viewer>
 
-  <main-menu></main-menu>
-
   <table class="table">
     <thead>
       <tr>
@@ -114,15 +112,15 @@
       self.update()
     }
 
-    function loadWorld(data) {
-        self.world = JSON.parse(data)
+    function loadWorld() {
+        self.world = getWorld()
         self.update()
     }
 
     self.on('mount', function() {
-      window.events.on('world-updated', () => loadWorld(localStorage['world']))
-      window.events.on('save-world', () => localStorage['world'] = JSON.stringify(self.world))
-      loadWorld(localStorage['world'])
+      window.events.on('world-updated', loadWorld)
+      window.events.on('save-world', () => saveWorld(self.world))
+      loadWorld()
     })
 
   </script>

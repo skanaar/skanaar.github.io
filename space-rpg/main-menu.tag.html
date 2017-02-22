@@ -25,7 +25,7 @@
     })
 
     function loadWorld(data) {
-      localStorage['world'] = data
+      saveWorld(JSON.parse(data))
       window.events.trigger('world-updated')
     }
 
@@ -35,7 +35,7 @@
     self.fileChanged = () => _.readFile(self.refs.fileInput.files[0], loadWorld)
     self.primeDownloadLink = function () {
       window.events.trigger('save-world')
-      self.refs.downloadLink.setAttribute('href', _.toDataUrl(localStorage['world']))
+      self.refs.downloadLink.setAttribute('href', _.toDataUrl(JSON.stringify(getWorld())))
     }
 
   </script>
