@@ -107,26 +107,6 @@ a.button {
   margin: 2px 1px;
 }
 
-.table {
-  margin: 5px 192px 0 0;
-  border-spacing: 0;
-}
-.table tr:nth-child(even) {
-  background: #f8f8f8;
-}
-.table tr:hover {
-  background: #eee;
-}
-.table th {
-  text-align: left;
-  padding: 4px;
-}
-.table td {
-  padding: 4px;
-  border-top: 1px solid #ddd;
-  border-left: 1px solid #eee;
-}
-
 .btn-group {
   display: inline-block;
   margin: 0 5px;

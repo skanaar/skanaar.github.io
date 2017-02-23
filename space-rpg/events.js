@@ -3,8 +3,19 @@ if (!window.events) {
   riot.observable(window.events)
 }
 
+window.nullWorld = function () {
+  return {
+    destinations: [],
+    quests: '',
+    items: [],
+    ships: [],
+    enemies: [],
+    celestialStyles: [],
+    surfaces: []
+  }
+}
+
 window.getWorld = function () {
-  var nullWorld = { destinations: [], quests: '', items: [], ships: [], enemies: [] }
   try {
     var world = JSON.parse(localStorage['world'])
     if (!_.isArray(world.destinations)) throw new Error()
@@ -15,7 +26,7 @@ window.getWorld = function () {
     return world
   } catch(e) {
     alert('locally stored world was corrupt, press [Load default] to restore data from the server')
-    return nullWorld
+    return nullWorld()
   }
 }
 

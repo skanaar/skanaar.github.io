@@ -35,10 +35,32 @@
         <td>{item.targetBuff.energy}</td>
       </tr>
       <tr>
-        <td colspan=13><button onclick={add}>+ Add Item</button></td>
+        <td colspan=13><button onclick={add}>+ New Item</button></td>
       </tr>
     </tbody>
   </table>
+
+  <style>
+    .table {
+      margin: 5px 192px 80px 0;
+      border-spacing: 0;
+    }
+    .table tr:nth-child(even) {
+      background: #f8f8f8;
+    }
+    .table tr:hover {
+      background: #eee;
+    }
+    .table th {
+      text-align: left;
+      padding: 4px;
+    }
+    .table td {
+      padding: 4px;
+      border-top: 1px solid #ddd;
+      border-left: 1px solid #eee;
+    }
+  </style>
 
   <div class="sidebar" show={!!selected}>
     <input type=text ref="nameField" value={selected && selected.name}>

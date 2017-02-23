@@ -5,6 +5,7 @@
     <div class="file-tools">
       <i>{needsSave ? 'Unsaved' : 'Saved'}</i>
       <button onclick={loadDefault}>Load default</button>
+      <button onclick={loadEmpty}>Clear all</button>
       <a class="button" ref="downloadLink" onmouseenter={primeDownloadLink} download="destinations.json" href='#'>Download</a>
       <input type=file ref=fileInput onchange={fileChanged} style="width: 150px; margin-right: 20px">
     </div>
@@ -31,6 +32,7 @@
 
     self.requestSave = () => window.events.trigger('save-world')
     self.loadDefault = () => _.fetch('world.json', loadWorld)
+    self.loadEmpty = () => loadWorld(JSON.stringify(nullWorld()))
     self.fileChanged = () => _.readFile(self.refs.fileInput.files[0], loadWorld)
     self.primeDownloadLink = function () {
       window.events.trigger('save-world')
@@ -40,7 +42,7 @@
     self.validateWorld = function () {
       var world = getWorld()
       var referencedItems = _.flatten([
-        world.quests.match(/item="[^"]*/gm).map(e => e.substring(6).split(';')),
+        (world.quests.match(/item="[^"]*/gm) || []).map(e => e.substring(6).split(';')),
         world.enemies.map(e => e.inventory),
         world.destinations.map(e => e.treasures),
         world.destinations.map(e => e.trader && e.trader.inventory || [])
@@ -48,7 +50,8 @@
       var definedItems = world.items.map(e => e.name)
       self.undefinedItems = _.uniq(_.difference(referencedItems, definedItems))
 
-      var referencesNodes = _.flatten(world.quests.match(/dest="[^"]*/gm).map(e => e.substring(6).split(';')))
+      var destRefs = world.quests.match(/dest="[^"]*/gm) || []
+      var referencesNodes = _.flatten(destRefs.map(e => e.substring(6).split(';')))
       var definedNodes = world.destinations.map(e => e.name)
       self.undefinedNodes = _.uniq(_.difference(referencesNodes, definedNodes))
 
