@@ -784,6 +784,193 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 3,
       "name": "Platinum"
+    },
+    {
+      "type": "common",
+      "size": "s",
+      "isInstallable": false,
+      "isPassive": true,
+      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "credits": "5",
+      "name": "Blue seeds"
+    },
+    {
+      "type": "common",
+      "size": "s",
+      "isInstallable": false,
+      "isPassive": true,
+      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "credits": "5",
+      "name": "Blue flowers"
+    },
+    {
+      "type": "common",
+      "size": "s",
+      "isInstallable": false,
+      "isPassive": true,
+      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "credits": "5",
+      "name": "Thanatos mesh"
+    },
+    {
+      "type": "common",
+      "size": "s",
+      "isInstallable": false,
+      "isPassive": true,
+      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "credits": "5",
+      "name": "Thanatos core"
+    },
+    {
+      "type": "common",
+      "size": "s",
+      "isInstallable": false,
+      "isPassive": true,
+      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "credits": "5",
+      "name": "Thanatos nacelle"
+    },
+    {
+      "type": "common",
+      "size": "s",
+      "isInstallable": false,
+      "isPassive": true,
+      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "credits": "5",
+      "name": "Water sample"
+    },
+    {
+      "type": "common",
+      "size": "s",
+      "isInstallable": false,
+      "isPassive": true,
+      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "credits": "4",
+      "name": "Tungsten"
+    },
+    {
+      "type": "common",
+      "size": "s",
+      "isInstallable": false,
+      "isPassive": true,
+      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "credits": "0",
+      "name": "Mining Drill"
+    },
+    {
+      "type": "common",
+      "size": "s",
+      "isInstallable": false,
+      "isPassive": true,
+      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "credits": "0",
+      "name": "Star Sensor"
+    },
+    {
+      "type": "common",
+      "size": "s",
+      "isInstallable": false,
+      "isPassive": true,
+      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "credits": "8",
+      "name": "Pavonian Ore"
+    },
+    {
+      "type": "common",
+      "size": "s",
+      "isInstallable": false,
+      "isPassive": false,
+      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "credits": "16",
+      "name": "Pavonian Mineral"
+    },
+    {
+      "type": "common",
+      "size": "s",
+      "isInstallable": false,
+      "isPassive": false,
+      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "credits": "0",
+      "name": "Shady Boxes"
+    },
+    {
+      "type": "common",
+      "size": "s",
+      "isInstallable": false,
+      "isPassive": true,
+      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "credits": "1000",
+      "name": "Shiny Meteorite"
+    },
+    {
+      "type": "common",
+      "size": "s",
+      "isInstallable": false,
+      "isPassive": true,
+      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "credits": "0",
+      "name": "Star Shield"
+    },
+    {
+      "type": "common",
+      "size": "s",
+      "isInstallable": false,
+      "isPassive": true,
+      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "credits": "0",
+      "name": "Larato sigil"
+    },
+    {
+      "type": "common",
+      "size": "s",
+      "isInstallable": false,
+      "isPassive": false,
+      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "credits": "0",
+      "name": "Subsystem cache"
+    },
+    {
+      "type": "common",
+      "size": "s",
+      "isInstallable": true,
+      "isPassive": true,
+      "attr": {"maxhull": "0", "maxshield": "5", "maxenergy": "15", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": "0", "shield": "1", "energy": "1"},
+      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
+      "credits": "230",
+      "name": "Momus"
     }
   ],
   "celestialStyles": [
@@ -1046,6 +1233,16 @@
       "falloff": 0.5,
       "curve": [0.45, 0.4, 0.45, 0.4, 0.7, 0.7, 0.7, 0.7],
       "spectrum": ["68F", "36F", "36F", "FFF", "FFF", "FFF"]
+    },
+    {
+      "id": "unnamed",
+      "desc": "",
+      "zoom": 1,
+      "height": 3,
+      "octaves": 3,
+      "falloff": 0.5,
+      "curve": [0, 1],
+      "spectrum": ["06F", "F00"]
     }
   ],
   "destinations": [
@@ -1226,7 +1423,8 @@
       "style": "asteroid-4",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": -537, "y": -833},
@@ -1243,7 +1441,8 @@
       "style": "asteroid-1",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": -287, "y": -758},
@@ -1251,7 +1450,8 @@
       "style": "star-m-ff0",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": -412, "y": -854},
@@ -1259,7 +1459,8 @@
       "style": "planet-badlands-1",
       "surface": "desert-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": -170, "y": -804},
@@ -1321,7 +1522,8 @@
       "style": "asteroid-6",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": -273, "y": -533},
@@ -1347,7 +1549,8 @@
       "style": "asteroid-2",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 35, "y": -683},
@@ -1373,7 +1576,8 @@
       "style": "asteroid-5",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": -261, "y": -715},
@@ -1381,7 +1585,8 @@
       "style": "anomaly-buoy",
       "surface": "anomaly-observatory",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": -85, "y": -827},
@@ -1430,8 +1635,8 @@
     },
     {
       "pos": {"x": -175, "y": -465},
-      "name": "A7535",
-      "style": "asteroid-7",
+      "name": "Pavonis A2934",
+      "style": "planet-s-rock-1",
       "surface": "rock-1",
       "trader": null,
       "enemy": null,
@@ -1461,7 +1666,8 @@
       "style": "asteroid-1",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 216, "y": -480},
@@ -1478,7 +1684,8 @@
       "style": "asteroid-1",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 394, "y": -386},
@@ -1486,7 +1693,8 @@
       "style": "asteroid-1",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 546, "y": -380},
@@ -1503,7 +1711,8 @@
       "style": "asteroid-1",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 472, "y": -460},
@@ -1511,7 +1720,8 @@
       "style": "asteroid-5",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 661, "y": -530},
@@ -1519,7 +1729,8 @@
       "style": "asteroid-1",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 670, "y": -389},
@@ -1527,7 +1738,8 @@
       "style": "planet-water-1",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 886, "y": -459},
@@ -1535,15 +1747,17 @@
       "style": "asteroid-3",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 926, "y": -562},
-      "name": "A2638",
-      "style": "asteroid-3",
+      "name": "Larato Gate",
+      "style": "ring-3",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 1048, "y": -263},
@@ -1551,7 +1765,8 @@
       "style": "planet-hell-4",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 720, "y": -188},
@@ -1559,7 +1774,8 @@
       "style": "planet-green-3",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 496, "y": -189},
@@ -1567,7 +1783,8 @@
       "style": "asteroid-2",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 650, "y": 198},
@@ -1575,7 +1792,8 @@
       "style": "asteroid-2",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 872, "y": 43},
@@ -1583,7 +1801,8 @@
       "style": "asteroid-7",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 706, "y": -75},
@@ -1591,7 +1810,8 @@
       "style": "asteroid-4",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 536, "y": 39},
@@ -1599,7 +1819,8 @@
       "style": "asteroid-4",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 812, "y": 140},
@@ -1607,7 +1828,8 @@
       "style": "planet-neutron-3",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 1106, "y": -127},
@@ -1615,7 +1837,8 @@
       "style": "asteroid-5",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 1141, "y": -340},
@@ -1623,7 +1846,8 @@
       "style": "asteroid-4",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 1065, "y": -486},
@@ -1631,7 +1855,8 @@
       "style": "planet-hell-1",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 1026, "y": -374},
@@ -1639,7 +1864,8 @@
       "style": "asteroid-7",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 862, "y": -346},
@@ -1647,7 +1873,8 @@
       "style": "asteroid-5",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 776, "y": -496},
@@ -1655,7 +1882,8 @@
       "style": "planet-neutron-3",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 747, "y": -302},
@@ -1663,7 +1891,8 @@
       "style": "planet-water-1",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 821, "y": -58},
@@ -1671,7 +1900,8 @@
       "style": "planet-hell-1",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 933, "y": -274},
@@ -1679,7 +1909,8 @@
       "style": "planet-rock-1",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 881, "y": -152},
@@ -1687,7 +1918,8 @@
       "style": "planet-green-3",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 823, "y": -257},
@@ -1695,7 +1927,8 @@
       "style": "asteroid-5",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 994, "y": -176},
@@ -1703,7 +1936,8 @@
       "style": "asteroid-6",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 504, "y": -74},
@@ -1711,7 +1945,8 @@
       "style": "planet-neutron-1",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 609, "y": -165},
@@ -1719,7 +1954,8 @@
       "style": "planet-water-2",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 605, "y": -26},
@@ -1727,7 +1963,8 @@
       "style": "planet-green-3",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 777, "y": 29},
@@ -1735,7 +1972,8 @@
       "style": "asteroid-1",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 658, "y": 81},
@@ -1743,7 +1981,8 @@
       "style": "planet-water-1",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 948, "y": 146},
@@ -1751,7 +1990,8 @@
       "style": "asteroid-3",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 950, "y": -58},
@@ -1759,7 +1999,8 @@
       "style": "asteroid-5",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 1074, "y": -32},
@@ -1767,7 +2008,8 @@
       "style": "asteroid-6",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 986, "y": 37},
@@ -1775,7 +2017,8 @@
       "style": "star-m-ff0",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 150, "y": -914},
@@ -1783,7 +2026,8 @@
       "style": "anomaly-buoy",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 256, "y": -856},
@@ -1791,7 +2035,8 @@
       "style": "anomaly-buoy",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 456, "y": -300},
@@ -1799,7 +2044,8 @@
       "style": "cloud-green",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 778, "y": -414},
@@ -1807,7 +2053,8 @@
       "style": "cloud-green",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 1012, "y": -94},
@@ -1815,7 +2062,8 @@
       "style": "cloud-purple",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 236, "y": -1368},
@@ -1823,7 +2071,8 @@
       "style": "planet-green-3",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
     },
     {
       "pos": {"x": 320, "y": -938},
@@ -1831,8 +2080,126 @@
       "style": "planet-water-2",
       "surface": "rock-1",
       "trader": null,
-      "enemy": null
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 62, "y": -836},
+      "name": "unnamed",
+      "style": "asteroid-1",
+      "surface": "rock-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -708, "y": -520},
+      "name": "Pavonis Charm",
+      "style": "jovian-3",
+      "surface": "rock-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1283, "y": -1051},
+      "name": "A8351",
+      "style": "asteroid-1",
+      "surface": "rock-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1317, "y": -946},
+      "name": "A1746",
+      "style": "asteroid-1",
+      "surface": "rock-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1220, "y": -950},
+      "name": "A2050",
+      "style": "asteroid-1",
+      "surface": "rock-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1111, "y": -917},
+      "name": "A1117",
+      "style": "asteroid-1",
+      "surface": "rock-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1114, "y": -985},
+      "name": "A1485",
+      "style": "asteroid-1",
+      "surface": "rock-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1053, "y": -1070},
+      "name": "A5370",
+      "style": "asteroid-1",
+      "surface": "rock-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1168, "y": -1073},
+      "name": "Besso",
+      "style": "jovian-1",
+      "surface": "rock-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1119, "y": -1182},
+      "name": "A1982",
+      "style": "asteroid-1",
+      "surface": "rock-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1211, "y": -1172},
+      "name": "A1172",
+      "style": "asteroid-1",
+      "surface": "rock-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1305, "y": -1164},
+      "name": "A564",
+      "style": "asteroid-1",
+      "surface": "rock-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1142, "y": 8},
+      "name": "Thanatos",
+      "style": "anomaly-derelict",
+      "surface": "anomaly-thanatos",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
     }
   ],
-  "quests": "<quests><quest title=\"REFERENCE\"><!-- Pause the quest until all conditions are fulfilled. All attributes are optional. the trigger attribute take either \"auto\" or \"action\" and control if the condition must be triggered with the TRIGGER button on the radar screen or not. -->\n<condition have-item=\"Shiny Meteorite\" at-dest=\"Backwater\" no-enemy-at=\"Beta\" not-at-dest=\"Backwater\" have-credits=\"3000\" trigger=\"auto\"/>\n\n<!-- Add a lootable item to the destination. -->\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n\n<!-- Add a purchasable item to the destination's trader. -->\n<place-inventory dest=\"Backwater\" item=\"Phased Ray\"/>\n\n<!-- Display a message. If the optional ok and cancel attributes are provided they will appear as buttons. Cancel will rewinds the quest one step, so that the same trigger that triggered the quest will display the same message the next turn. Ok will progress the quest as normally. -->\n<dialog>\"Hey hitchhiker!\"</dialog>\n<dialog ok=\"YES PLEASE\" cancel=\"NO THANKS\">\"Would you like some tea?\"</dialog>\n\n<!-- Include this quest in the quest list. -->\n<add-to-quest-list/>\n<!-- Add items or credits to the player's inventory. -->\n<give credits=\"900\"/>\n<give item=\"Phased Ray\"/>\n\n<!-- Remove an item or credits from the player's inventory. -->\n<take credits=\"900\"/>\n<take item=\"Phased Ray\"/>\n\n<!-- Place a quest marker on the map. color and icon attributes are optional. icon can take these values: \"arrow\", \"square\", \"enter\", \"exit\". A quest can only have a single map marker. -->\n<mark-on-map dest=\"Samson's Folly\" color=\"0x0F0\" icon=\"arrow\"/>\n\n<!-- Change the player's ship. -->\n<change-ship ship=\"clipper\"/>\n\n<!-- Clear the map marker for this quest. -->\n<remove-map-marker/>\n\n<!-- Transports the player to another destination. -->\n<travel dest=\"Secret Station\"/>\n\n<!-- Rewinds or fast forwards the quest a set number of steps. -->\n<goto jump=\"-3\"/></quest><quest title=\"Start of an adventure\"><place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n\"Hey hitchhiker! This is your stop.\"\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a weird signature. If you EXPLORE the area you might score big time!</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog>You find the meteorite resting on the ground. No crater. A shiny dodecahedron that is surprisingly light when you load it into the rover. The TRADE guild will pay a fortune for this.</dialog>\n<condition have-credits=\"1000\"/>\n<dialog>\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. What do you say?\"</dialog>\n<dialog>There it is. An opportunity to finally leave this rock. You accept eagerly.</dialog>\n<dialog>\"Now you can LIFT OFF and leave this planet.\nBut it is dangerous out there, go by Samson and get some weapons for that ship.\"</dialog>\n<take credits=\"900\"/>\n<mark-on-map dest=\"Samson's Folly\"/>\n<change-ship ship=\"clipper\"/>\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>\"My friend at Backwater said you would be coming. We have a nice Photon Ray in stock left. You are welcome to LAND and TRADE with us here at Samson's Folly.\"</dialog>\n<condition have-item=\"Photon Ray\"/>\n<dialog>You now have a Photon Ray, a basic weapon. Tap you ship hologram to open your PROFILE and INSTALL your new Photon Ray</dialog>\n<remove-map-marker/></quest><quest title=\"Shady spacer\"><place-item dest=\"Shady\" item=\"Shady Boxes\"/>\n<condition at-dest=\"Shady\"/>\n<dialog>A sad rusty ship radios you.\n\"Fellow spacer! There is nice loot on this moon but my landing gear is bust. If you LAND and help me EXPLORE I'll reward you.\"</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shady Boxes\"/>\n<dialog>The eager spacer thank you several times for helping her finding the boxes. You receive a small reward and you hope you don't see the her again.</dialog>\n<give credits=\"100\"/>\n<take item=\"Shady Boxes\"/></quest><quest title=\"Peril at Buoy 72\"><place-enemy dest=\"Bouy 72\" enemy=\"monitor-drone\"/>\n<condition at-dest=\"Buoy 68\"/>\n<dialog>You receive a transmission:\n\"Help us. The way ahead is blocked by a malfunctioning drone. We don't dare to proceed. You have to clear the path for us!\"</dialog>\n<mark-on-map dest=\"Buoy 72\"/>\n<add-to-quest-list/>\n<condition no-enemy-at=\"Bouy 72\"/>\n<dialog>That drone wasn't even armed. This adventure looks like its going to be a walk in the park.</dialog>\n<mark-on-map dest=\"Buoy 68\"/>\n<dialog>\"Thank you for clearing the way for us! Here, take this for you troubles.\"</dialog>\n<give credits=\"15\"/></quest><quest title=\"Bal Gru's stolen subsystems\"><place-item dest=\"Luz-2\" item=\"Subsystem cache\"/>\n<place-enemy dest=\"Luz-2\" enemy=\"bandit\"/>\n<condition at-dest=\"Luz-1\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">\nHey girl, I'm Bal Gru, merchant in distress. Can you help me? Bandits robbed me of all of my subsystems. Can you get them back for me?\n</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Luz-1\" have-item=\"Subsystem cache\"/>\n<dialog>\nYou have our stolen subsystems! This is invaluable to us. Here, take this artifact, it is the least we can give you.\n</dialog>\n<give item=\"item.blue-signature\"/>\n<condition at-dest=\"Larato-gate\" have-item=\"Blue signature\" trigger=\"ANALYZE\"/>\n<dialog ok=\"APPROACH\" cancel=\"IGNORE\">\nThe Larato Gate looks like a torus shaped lump of stone needles. The Blue Signature in your inventory is humming.\nShould you approach?\n</dialog>\n<dialog>\nThe gate's mass of needles swells and twitches. The hole in the torus shimmers and turns into a misty black cloud.\n</dialog>\n<condition at-dest=\"Larato-gate\" trigger=\"ACTIVATE\"/>\n<dialog ok=\"ENTER GATE\" cancel=\"LEAVE\">\nThe misty dark cloud in the toroidal gate swirls.\n</dialog>\n<travel dest=\"Besso\"/></quest><quest title=\"Blue seeds\"><place-item dest=\"Blue Forest\" item=\"Blue seeds\"/>\n<condition have-item=\"Blue seeds\"/>\n<dialog>These Blue Seeds might take root in the right soil.</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Blue Ocean\" trigger=\"PLANT\"/>\n<dialog>You plant the Blue Seeds on a lonely island.</dialog>\n<condition not-at-dest=\"Blue Ocean\"/>\n<condition at-dest=\"Blue Ocean\" trigger=\"GATHER\"/>\n<dialog>You gather the Blue Flowers that sprung out of the planted seeds.</dialog>\n<give item=\"Blue flowers\"/></quest><quest title=\"Helyon Shipyards\"><condition at-dest=\"Helyon Shipyards\" trigger=\"HAIL\"/>\n<dialog>If you bring 1000 credits and no cops I can land you a fine Battleship hull. No receipt. Ok?</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Helyon Shipyards\" have-credits=\"1000\" trigger=\"HAIL\"/>\n<dialog ok=\"Yes\" cancel=\"No thanks\">1000 credits and you have yourself a fine Battleship. If you give me you old hull.</dialog>\n<take credits=\"1000\"/>\n<change-ship ship=\"battleship\"/>\n<remove-map-marker/></quest><quest title=\"Thanatos relic 1\"><condition have-item=\"Thanatos mesh\"/>\n<dialog>You found a relic, a machine part covered with cuneiform markings.</dialog></quest><quest title=\"Thanatos relic 2\"><condition have-item=\"Thanatos core\"/>\n<dialog>You found a relic, a machine part covered with cuneiform markings.</dialog></quest><quest title=\"Thanatos relic 3\"><condition have-item=\"Thanatos nacelle\"/>\n<dialog>You found a relic, a machine part covered with cuneiform markings.</dialog></quest><quest title=\"Rebuild the Thanatos\"><place-item dest=\"Balnza\" item=\"Thanatos mesh\"/>\n<place-item dest=\"Ougeia\" item=\"Thanatos core\"/>\n<place-item dest=\"Nozzor\" item=\"Thanatos nacelle\"/>\n<condition at-dest=\"thanathos\" trigger=\"ANALYZE\"/>\n<dialog>It is the Thanatos derelict. Immensely old. Broken. The intact half is covered in cuneiform markings.</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Thanatos mesh\"/>\n<condition have-item=\"Thanatos core\"/>\n<condition have-item=\"Thanatos nacelle\"/>\n<dialog>You now possess all three missing pieces of the Thanatos.</dialog>\n<condition at-dest=\"Thanathos\" trigger=\"REBUILD\"/>\n<dialog ok=\"Rebuild Thanatos\" cancel=\"Leave\">The relics would restore the form of Thanatos.</dialog>\n<dialog>As the parts touch the derelict the edges melts and merge. In an instant the dead ship springs to life, fire dancing across its hull as it burns away the dust covering it.</dialog>\n<dialog>The radio warbles as you are flooded with signals. A single grey sphere emerge from the the ship and drifts toward you.</dialog>\n<give item=\"Momus\"/></quest><quest title=\"Ska Ska water quality\"><condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"MAYBE LATER\">\"Can you help us? We run a large construction project at Ska Ska and need to take water samples at its sea\"</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ska Ska\"/>\n<place-item dest=\"Ska Ska\" item=\"Water sample\"/>\n<condition have-item=\"Water sample\"/>\n<mark-on-map dest=\"Baola\"/>\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>\"Thank you! These samples are vital for the project. Please, accept this compensation\"</dialog>\n<give credits=\"100\"/>\n<remove-map-marker/></quest><quest title=\"Tau Pavonis Observer\"><place-item dest=\"Pavonis Observatory\" item=\"Tungsten\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>You are hailed as you enter orbit: \"Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work.\"</dialog>\n<add-to-quest-list/>\n<condition trigger=\"HAIL\"/>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">\"We study Tau Pavonis and need assistance in placing sensors at the Observatory. Compensation is 500 credits. Are you interested?\"</dialog>\n<dialog>\"First you need protection. Travel to Pavonis Mirror and aquire a Star Shield.\"</dialog>\n<give item=\"Star Sensor\"/>\n<mark-on-map dest=\"Pavonis Mirror\"/>\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>\"Traveller. This is Mirror spaceport. We have prepared the Star Shield you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed.\"</dialog>\n<give item=\"Star Shield\"/>\n<condition at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed=\"Star Shield\" trigger=\"READY\"/>\n<dialog ok=\"PROCEED\" cancel=\"WAIT\">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>\n<travel dest=\"Pavonis Observatory\"/>\n<condition trigger=\"PUT SENSOR\"/>\n<dialog>You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>\n<condition trigger=\"LEAVE\"/>\n<travel dest=\"Pavonis Mirror\"/>\n<dialog>\"You made it! Must be a sturdy ship you got there.\"</dialog>\n<dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organisation.</dialog>\n<dialog>\"Let us remove that Star Shield, you can collect your payment at Pavonis Smoke.\"</dialog>\n<take item=\"Star Shield\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n<condition dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog>\"You survived! Excellent, we are anxious to get the data from your installed sensor. Please accept our payment!\"</dialog>\n<give credits=\"1000\"/>\n<remove-map-marker/>\n<condition not-at-dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>\"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor is most disturbing. Tau Pavonis is behaving unphysically.\"</dialog>\n<dialog>\"You must help us collect more data! Please take us to the Observatory so we can make further readings.\"</dialog>\n<dialog>You request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>\n<dialog>\"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental Soliton Pulse gun. Ok?\"</dialog>\n<dialog>You see your change to make demands. \"That sounds useful, give it to me in advance, and a regular reward afterwards!\"</dialog>\n<give item=\"Soliton Pulse\"/>\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>They load the Star Shield onto you ship once again. They tell you to install it but they all look a bit worried this time. What is it they have found inside that star?</dialog>\n<give item=\"Star Shield\"/>\n<condition at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed=\"Star Shield\" trigger=\"READY\"/>\n<travel dest=\"Pavonis Observatory\"/>\n<dialog>The scientists take readings with arcane instruments they brought. But you don't need any telescopes, looking throught the dimmed windows you can see a region of the stars surface pulsing. Or rather heaving, like it is breathing.</dialog>\n<dialog>Suddenly the star's surface open like a flower and a pillar of fire like a trail pushes out through space. It looks slow like a ballet, but at these scales it is tremendously fast.</dialog>\n<dialog>The monstrosity trace a glowing path towards Pavonis Charm. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>\n<place-enemy enemy=\"Wrcacnter\" dest=\"Pavonis Charm\"/></quest><quest title=\"Pavonis Mining Co\"><place-enemy enemy=\"Rogue\" dest=\"A1\"/>\n<place-enemy enemy=\"Rogue\" dest=\"A2\"/>\n<place-enemy enemy=\"Monitor drone\" dest=\"A3\"/>\n<place-enemy enemy=\"Rogue\" dest=\"A4\"/>\n<place-enemy enemy=\"Monitor drone\" dest=\"A5\"/>\n<place-enemy enemy=\"Monitor drone\" dest=\"A6\"/>\n<condition at-dest=\"Pavonis A2934\" trigger=\"HAIL\"/>\n<dialog>\"This is Pavonis Mining Co Headquarters. Are you looking for assignments?\"</dialog>\n<dialog>\"There are rogues disturbing our operations at the south asteroid rim. We will pay 100 credits for clearing them out.\"</dialog>\n<add-to-quest-list/>\n<condition no-enemy-at=\"A1;A2;A3;A4;A5;A6\" at-dest=\"Pavonis A2934\"/>\n<dialog>\"Excellent work! Transferring reward now.\"</dialog>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">\"Many of our contractors are damaged by the rogues. Would you like to run some mining operations? We rent out the needed equipment.\"</dialog>\n<give item=\"Mining Drill\"/>\n<take credits=\"50\"/>\n<mark-on-map dest=\"A4\"/>\n<dialog>\"Readings at A4 show rich ore. Start there.\"</dialog>\n<condition at-dest=\"A4\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Ore\"/>\n<mark-on-map dest=\"A4\"/>\n<dialog>\"Readings at A2 show rich ore. Continue there.\"</dialog>\n<condition at-dest=\"A2\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Mineral\"/>\n<mark-on-map dest=\"Pavonis A2934\"/>\n<condition have-item=\"Pavonian Mineral;Pavonian Ore\" at-dest=\"Pavonis A2934\"/>\n<dialog>\"Good work, a bit slow, but good. Let us buy that mineral from you.\"</dialog>\n<take item=\"Pavonian Mineral\"/>\n<take item=\"Pavonian Ore\"/>\n<take item=\"Mining Drill\"/>\n<give credits=\"100\"/></quest></quests>"
+  "quests": "<quests><quest title=\"REFERENCE\"><!-- Pause the quest until all conditions are fulfilled. All attributes are optional. the trigger attribute take either \"auto\" or \"action\" and control if the condition must be triggered with the TRIGGER button on the radar screen or not. -->\n<condition have-item=\"Shiny Meteorite\" at-dest=\"Backwater\" no-enemy-at-dest=\"Baola\" not-at-dest=\"Backwater\" have-credits=\"3000\" trigger=\"auto\"/>\n\n<!-- Add a lootable item to the destination. -->\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n\n<!-- Add a purchasable item to the destination's trader. -->\n<place-inventory dest=\"Backwater\" item=\"Phased Ray\"/>\n\n<!-- Display a message. If the optional ok and cancel attributes are provided they will appear as buttons. Cancel will rewinds the quest one step, so that the same trigger that triggered the quest will display the same message the next turn. Ok will progress the quest as normally. -->\n<dialog>\"Hey hitchhiker!\"</dialog>\n<dialog ok=\"YES PLEASE\" cancel=\"NO THANKS\">\"Would you like some tea?\"</dialog>\n\n<!-- Include this quest in the quest list. -->\n<add-to-quest-list/>\n<!-- Add items or credits to the player's inventory. -->\n<give credits=\"900\"/>\n<give item=\"Phased Ray\"/>\n\n<!-- Remove an item or credits from the player's inventory. -->\n<take credits=\"900\"/>\n<take item=\"Phased Ray\"/>\n\n<!-- Place a quest marker on the map. color and icon attributes are optional. icon can take these values: \"arrow\", \"square\", \"enter\", \"exit\". A quest can only have a single map marker. -->\n<mark-on-map dest=\"Samson's Folly\" color=\"0x0F0\" icon=\"arrow\"/>\n\n<!-- Change the player's ship. -->\n<change-ship ship=\"clipper\"/>\n\n<!-- Clear the map marker for this quest. -->\n<remove-map-marker/>\n\n<!-- Transports the player to another destination. -->\n<travel dest=\"Backwater\"/>\n\n<!-- Rewinds or fast forwards the quest a set number of steps. -->\n<goto jump=\"-3\"/></quest><quest title=\"Start of an adventure\"><place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n\"Hey hitchhiker! This is your stop.\"\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a weird signature. If you EXPLORE the area you might score big time!</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog>You find the meteorite resting on the ground. No crater. A shiny dodecahedron that is surprisingly light when you load it into the rover. The TRADE guild will pay a fortune for this.</dialog>\n<condition have-credits=\"1000\"/>\n<dialog>\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. What do you say?\"</dialog>\n<dialog>There it is. An opportunity to finally leave this rock. You accept eagerly.</dialog>\n<dialog>\"Now you can LIFT OFF and leave this planet.\nBut it is dangerous out there, go by Samson and get some weapons for that ship.\"</dialog>\n<take credits=\"900\"/>\n<mark-on-map dest=\"Samson's Folly\"/>\n<change-ship ship=\"clipper\"/>\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>\"My friend at Backwater said you would be coming. We have a nice Photon Ray in stock left. You are welcome to LAND and TRADE with us here at Samson's Folly.\"</dialog>\n<condition have-item=\"Photon Ray\"/>\n<dialog>You now have a Photon Ray, a basic weapon. Tap you ship hologram to open your PROFILE and INSTALL your new Photon Ray</dialog>\n<remove-map-marker/></quest><quest title=\"Shady spacer\"><place-item dest=\"Shady\" item=\"Shady Boxes\"/>\n<condition at-dest=\"Shady\"/>\n<dialog>A sad rusty ship radios you.\n\"Fellow spacer! There is nice loot on this moon but my landing gear is bust. If you LAND and help me EXPLORE I'll reward you.\"</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shady Boxes\"/>\n<dialog>The eager spacer thank you several times for helping her finding the boxes. You receive a small reward and you hope you don't see the her again.</dialog>\n<give credits=\"100\"/>\n<take item=\"Shady Boxes\"/></quest><quest title=\"Peril at Buoy 72\"><place-enemy dest=\"Buoy 72\" enemy=\"monitor-drone\"/>\n<condition at-dest=\"Buoy 68\"/>\n<dialog>You receive a transmission:\n\"Help us. The way ahead is blocked by a malfunctioning drone. We don't dare to proceed. You have to clear the path for us!\"</dialog>\n<mark-on-map dest=\"Buoy 72\"/>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"Buoy 72\"/>\n<dialog>That drone wasn't even armed. This adventure looks like its going to be a walk in the park.</dialog>\n<mark-on-map dest=\"Buoy 68\"/>\n<dialog>\"Thank you for clearing the way for us! Here, take this for you troubles.\"</dialog>\n<give credits=\"15\"/></quest><quest title=\"Bal Gru's stolen subsystems\"><place-item dest=\"A3639\" item=\"Subsystem cache\"/>\n<place-enemy dest=\"A3639\" enemy=\"bandit\"/>\n<condition at-dest=\"Pizbui\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">\nHey girl, I'm Bal Gru, merchant in distress. Can you help me? Bandits robbed me of all of my subsystems. Can you get them back for me?\n</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Pizbui\" have-item=\"Subsystem cache\"/>\n<dialog>\nYou have our stolen subsystems! This is invaluable to us. Here, take this artifact, it is the least we can give you.\n</dialog>\n<give item=\"Larato sigil\"/>\n<condition at-dest=\"Larato Gate\" have-item=\"Larato sigil\" trigger=\"ANALYZE\"/>\n<dialog ok=\"APPROACH\" cancel=\"IGNORE\">\nThe Larato Gate looks like a torus shaped lump of stone needles. The Blue Signature in your inventory is humming.\nShould you approach?\n</dialog>\n<dialog>\nThe gate's mass of needles swells and twitches. The hole in the torus shimmers and turns into a misty black cloud.\n</dialog>\n<condition at-dest=\"Larato Gate\" trigger=\"ACTIVATE\"/>\n<dialog ok=\"ENTER GATE\" cancel=\"LEAVE\">\nThe misty dark cloud in the toroidal gate swirls.\n</dialog>\n<travel dest=\"Besso\"/></quest><quest title=\"Blue seeds\"><place-item dest=\"Blue Forest\" item=\"Blue seeds\"/>\n<condition have-item=\"Blue seeds\"/>\n<dialog>These Blue Seeds might take root in the right soil.</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Blue Ocean\" trigger=\"PLANT\"/>\n<dialog>You plant the Blue Seeds on a lonely island.</dialog>\n<condition not-at-dest=\"Blue Ocean\"/>\n<condition at-dest=\"Blue Ocean\" trigger=\"GATHER\"/>\n<dialog>You gather the Blue Flowers that sprung out of the planted seeds.</dialog>\n<give item=\"Blue flowers\"/></quest><quest title=\"Helyon Shipyards\"><condition at-dest=\"Helyon Shipyards\" trigger=\"HAIL\"/>\n<dialog>If you bring 1000 credits and no cops I can land you a fine Battleship hull. No receipt. Ok?</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Helyon Shipyards\" have-credits=\"1000\" trigger=\"HAIL\"/>\n<dialog ok=\"Yes\" cancel=\"No thanks\">1000 credits and you have yourself a fine Battleship. If you give me you old hull.</dialog>\n<take credits=\"1000\"/>\n<change-ship ship=\"battleship\"/>\n<remove-map-marker/></quest><quest title=\"Thanatos relic 1\"><condition have-item=\"Thanatos mesh\"/>\n<dialog>You found a relic, a machine part covered with cuneiform markings.</dialog></quest><quest title=\"Thanatos relic 2\"><condition have-item=\"Thanatos core\"/>\n<dialog>You found a relic, a machine part covered with cuneiform markings.</dialog></quest><quest title=\"Thanatos relic 3\"><condition have-item=\"Thanatos nacelle\"/>\n<dialog>You found a relic, a machine part covered with cuneiform markings.</dialog></quest><quest title=\"Rebuild the Thanatos\"><place-item dest=\"Obria\" item=\"Thanatos mesh\"/>\n<place-item dest=\"Grig\" item=\"Thanatos core\"/>\n<place-item dest=\"Namm\" item=\"Thanatos nacelle\"/>\n<condition at-dest=\"Thanatos\" trigger=\"ANALYZE\"/>\n<dialog>It is the Thanatos derelict. Immensely old. Broken. The intact half is covered in cuneiform markings.</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Thanatos mesh\"/>\n<condition have-item=\"Thanatos core\"/>\n<condition have-item=\"Thanatos nacelle\"/>\n<dialog>You now possess all three missing pieces of the Thanatos.</dialog>\n<condition at-dest=\"Thanatos\" trigger=\"REBUILD\"/>\n<dialog ok=\"Rebuild Thanatos\" cancel=\"Leave\">The relics would restore the form of Thanatos.</dialog>\n<dialog>As the parts touch the derelict the edges melts and merge. In an instant the dead ship springs to life, fire dancing across its hull as it burns away the dust covering it.</dialog>\n<dialog>The radio warbles as you are flooded with signals. A single grey sphere emerge from the the ship and drifts toward you.</dialog>\n<give item=\"Momus\"/></quest><quest title=\"Ska Ska water quality\"><condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"MAYBE LATER\">\"Can you help us? We run a large construction project at Ska Ska and need to take water samples at its sea\"</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ska Ska\"/>\n<place-item dest=\"Ska Ska\" item=\"Water sample\"/>\n<condition have-item=\"Water sample\"/>\n<mark-on-map dest=\"Baola\"/>\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>\"Thank you! These samples are vital for the project. Please, accept this compensation\"</dialog>\n<give credits=\"100\"/>\n<remove-map-marker/></quest><quest title=\"Tau Pavonis Observer\"><place-item dest=\"Pavonis Observatory\" item=\"Tungsten\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>You are hailed as you enter orbit: \"Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work.\"</dialog>\n<add-to-quest-list/>\n<condition trigger=\"HAIL\"/>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">\"We study Tau Pavonis and need assistance in placing sensors at the Observatory. Compensation is 500 credits. Are you interested?\"</dialog>\n<dialog>\"First you need protection. Travel to Pavonis Mirror and aquire a Star Shield.\"</dialog>\n<give item=\"Star Sensor\"/>\n<mark-on-map dest=\"Pavonis Mirror\"/>\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>\"Traveller. This is Mirror spaceport. We have prepared the Star Shield you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed.\"</dialog>\n<give item=\"Star Shield\"/>\n<condition at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed=\"Star Shield\" trigger=\"READY\"/>\n<dialog ok=\"PROCEED\" cancel=\"WAIT\">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>\n<travel dest=\"Pavonis Observatory\"/>\n<condition trigger=\"PUT SENSOR\"/>\n<dialog>You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>\n<condition trigger=\"LEAVE\"/>\n<travel dest=\"Pavonis Mirror\"/>\n<dialog>\"You made it! Must be a sturdy ship you got there.\"</dialog>\n<dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organisation.</dialog>\n<dialog>\"Let us remove that Star Shield, you can collect your payment at Pavonis Smoke.\"</dialog>\n<take item=\"Star Shield\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n<condition dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog>\"You survived! Excellent, we are anxious to get the data from your installed sensor. Please accept our payment!\"</dialog>\n<give credits=\"1000\"/>\n<remove-map-marker/>\n<condition not-at-dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>\"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor is most disturbing. Tau Pavonis is behaving unphysically.\"</dialog>\n<dialog>\"You must help us collect more data! Please take us to the Observatory so we can make further readings.\"</dialog>\n<dialog>You request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>\n<dialog>\"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental Soliton Pulse gun. Ok?\"</dialog>\n<dialog>You see your change to make demands. \"That sounds useful, give it to me in advance, and a regular reward afterwards!\"</dialog>\n<give item=\"Soliton Pulse\"/>\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>They load the Star Shield onto you ship once again. They tell you to install it but they all look a bit worried this time. What is it they have found inside that star?</dialog>\n<give item=\"Star Shield\"/>\n<condition at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed=\"Star Shield\" trigger=\"READY\"/>\n<travel dest=\"Pavonis Observatory\"/>\n<dialog>The scientists take readings with arcane instruments they brought. But you don't need any telescopes, looking throught the dimmed windows you can see a region of the stars surface pulsing. Or rather heaving, like it is breathing.</dialog>\n<dialog>Suddenly the star's surface open like a flower and a pillar of fire like a trail pushes out through space. It looks slow like a ballet, but at these scales it is tremendously fast.</dialog>\n<dialog>The monstrosity trace a glowing path towards Pavonis Charm. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>\n<place-enemy enemy=\"Wrcacnter\" dest=\"Pavonis Charm\"/></quest><quest title=\"Pavonis Mining Co\"><place-enemy enemy=\"Rogue\" dest=\"A117\"/>\n<place-enemy enemy=\"Rogue\" dest=\"A8761\"/>\n<place-enemy enemy=\"Monitor drone\" dest=\"A9753\"/>\n<place-enemy enemy=\"Rogue\" dest=\"A2170\"/>\n<place-enemy enemy=\"Monitor drone\" dest=\"A3566\"/>\n<place-enemy enemy=\"Monitor drone\" dest=\"A4976\"/>\n<condition at-dest=\"Pavonis A2934\" trigger=\"HAIL\"/>\n<dialog>\"This is Pavonis Mining Co Headquarters. Are you looking for assignments?\"</dialog>\n<dialog>\"There are rogues disturbing our operations at the south asteroid rim. We will pay 100 credits for clearing them out.\"</dialog>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"A117;A8761;A9753;A2170;A3566;A4976\" at-dest=\"Pavonis A2934\"/>\n<dialog>\"Excellent work! Transferring reward now.\"</dialog>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">\"Many of our contractors are damaged by the rogues. Would you like to run some mining operations? We rent out the needed equipment.\"</dialog>\n<give item=\"Mining Drill\"/>\n<take credits=\"50\"/>\n<mark-on-map dest=\"A2170\"/>\n<dialog>\"Readings at A4 show rich ore. Start there.\"</dialog>\n<condition at-dest=\"A2170\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Ore\"/>\n<mark-on-map dest=\"A2170\"/>\n<dialog>\"Readings at A8761 show rich ore. Continue there.\"</dialog>\n<condition at-dest=\"A8761\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Mineral\"/>\n<mark-on-map dest=\"Pavonis A2934\"/>\n<condition have-item=\"Pavonian Mineral;Pavonian Ore\" at-dest=\"Pavonis A2934\"/>\n<dialog>\"Good work, a bit slow, but good. Let us buy that mineral from you.\"</dialog>\n<take item=\"Pavonian Mineral\"/>\n<take item=\"Pavonian Ore\"/>\n<take item=\"Mining Drill\"/>\n<give credits=\"100\"/></quest></quests>"
 }

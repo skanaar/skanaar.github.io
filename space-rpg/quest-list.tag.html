@@ -43,7 +43,6 @@
       var quest = _.findWhere(self.quests, { title: self.active })
       quest.title = self.refs.nameField.value
       quest.source = window.codeMirrorInstance.getValue()
-      self.active = null
     }
 
     self.remove = function () {
