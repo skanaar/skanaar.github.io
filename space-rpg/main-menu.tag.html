@@ -1,32 +1,41 @@
 <main-menu>
   <div class="main-menu">
-    <a class="tab logo">World Editor</a>
     <a each={e in tabs} href="{e}.html" onclick={requestSave}
        class={ tab: true, active: page == e + '.html' }>{e}</a>
     <div class="file-tools">
-      <button onclick={requestSave}>Save</button>
-      <button onclick={loadFromStorage}>Load</button>
-      <a class="button" ref="downloadLink" onmouseenter={primeDownloadLink} download="destinations.json" href='#'>Download</a>
+      <i>{needsSave ? 'Unsaved' : 'Saved'}</i>
       <button onclick={loadDefault}>Load default</button>
+      <a class="button" ref="downloadLink" onmouseenter={primeDownloadLink} download="destinations.json" href='#'>Download</a>
       <input type=file ref=fileInput onchange={fileChanged} style="width: 150px; margin-right: 20px">
     </div>
   </div>
   <script>
     var self = this
     self.page = 'index'
-    self.tabs = ['map', 'items', 'ships', 'celestials', 'quests']
+    self.tabs = ['map', 'items', 'ships', 'celestials', 'surfaces', 'quests']
 
     self.on('mount', function() {
       self.page = _.last(window.location.pathname.split('/'))
       self.update()
     })
 
+    self.needsSave = false
+    function onUserInteraction() {
+      self.needsSave = true
+      self.update();
+    }
+    window.addEventListener('click', onUserInteraction, true)
+    window.setInterval(function () {
+      if (self.needsSave) window.events.trigger('save-world')
+      self.needsSave = false
+      self.update()
+    }, 2000)
+
     function loadWorld(data) {
       saveWorld(JSON.parse(data))
       window.events.trigger('world-updated')
     }
 
-    self.loadFromStorage = () => window.events.trigger('world-updated')
     self.requestSave = () => window.events.trigger('save-world')
     self.loadDefault = () => _.fetch('world.json', loadWorld)
     self.fileChanged = () => _.readFile(self.refs.fileInput.files[0], loadWorld)
@@ -46,6 +55,10 @@
       border-bottom: 1px solid #aaa;
       font-family: -apple-system, BlinkMacSystemFont, sans-serif;
       font-size: 12px;
+    }
+    i {
+      color: #888;
+      padding: 0 10px;
     }
     .file-tools {
       float: right;

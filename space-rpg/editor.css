@@ -98,19 +98,24 @@ a.button {
 .sidebar .input-grid em {
   display: inline-block;
   text-style: normal;
-  width: 74px;
+  width: 59px;
 }
 .sidebar .input-grid input,
 .sidebar .input-grid select {
   display: inline-block;
-  width: 74px;
+  width: 90px;
   margin: 2px 1px;
 }
 
 .table {
-  margin: 20px;
-  width: 75%;
+  margin: 5px 192px 0 0;
   border-spacing: 0;
+}
+.table tr:nth-child(even) {
+  background: #f8f8f8;
+}
+.table tr:hover {
+  background: #eee;
 }
 .table th {
   text-align: left;
@@ -118,9 +123,8 @@ a.button {
 }
 .table td {
   padding: 4px;
-}
-.table tr:hover {
-  background: #eee;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #eee;
 }
 
 .btn-group {

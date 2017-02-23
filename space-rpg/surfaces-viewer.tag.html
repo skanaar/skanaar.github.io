@@ -1,0 +1,82 @@
+<surfaces-viewer>
+
+  <div class="list">
+    <div each={e in world.surfaces} onclick={edit} class={ list_item: true, active: e==selected }>
+      {e.id}
+    </div>
+    <div><button onclick={add}>+ New Surface</button></div>
+  </div>
+
+  <div class="sidebar" show={!!selected}>
+
+    <div class="input-grid">
+      <em>id</em> <input type=text ref="idField" value={selected && selected.id}><br/>
+      <em>desc</em> <input type=text ref="descField" value={selected && selected.desc}><br/>
+      <em>zoom</em> <input type=number ref="zoomField" value={selected && selected.zoom}><br/>
+      <em>height</em> <input type=number ref="heightField" value={selected && selected.height}><br/>
+      <em>octaves</em> <input type=number ref="octavesField" value={selected && selected.octaves}><br/>
+      <em>falloff</em> <input type=number ref="falloffField" value={selected && selected.falloff}><br/>
+      <em>curve</em> <input type=text ref="curveField" value={selected && selected.curve.join()}><br/>
+      <em>spectrum</em> <input type=text ref="spectrumField" value={selected && selected.spectrum.join()}><br/>
+    </div>
+
+    <br/>
+    <button onclick={endEditing}>Done</button>
+    <button onclick={cancelEditing}>Cancel</button>
+  </div>
+
+  <script>
+    var self = this
+
+    self.world = { surfaces: [] }
+    self.selected = null
+
+    self.add = function () {
+      self.world.surfaces.push({
+        id: "unnamed",
+        desc: "",
+        zoom: 1,
+        height: 3,
+        octaves: 3,
+        falloff: 0.5,
+        curve: [0, 1],
+        spectrum: ["06F", "F00"]
+      })
+    }
+    
+    self.edit = function (e) {
+      self.selected = e.item.e
+    }
+    
+    self.endEditing = function (e) {
+      self.selected.id = self.refs.idField.value
+      self.selected.desc = self.refs.descField.value
+      self.selected.zoom = self.refs.zoomField.value
+      self.selected.height = self.refs.heightField.value
+      self.selected.octaves = self.refs.octavesField.value
+      self.selected.falloff = self.refs.falloffField.value
+      self.selected.curve = self.refs.curveField.value.split(',').map(x => +x)
+      self.selected.spectrum = self.refs.spectrumField.value.split(',')
+      self.selected = null
+      self.update()
+    }
+
+    self.cancelEditing = function () {
+      self.selected = null
+      self.update()
+    }
+
+    function loadWorld() {
+        self.world = getWorld()
+        self.update()
+    }
+
+    self.on('mount', function() {
+      window.events.on('world-updated', loadWorld)
+      window.events.on('save-world', () => saveWorld(self.world))
+      loadWorld()
+    })
+
+  </script>
+
+</surfaces-viewer>

@@ -39,6 +39,7 @@
     </div>
 
     <br/>
+    <button onclick={remove}>Delete</button>
     <button onclick={endEditing}>Done</button>
     <button onclick={cancelEditing}>Cancel</button>
   </div>
@@ -48,6 +49,11 @@
 
     self.world = { ships: [], enemies: [] }
     self.selected = null
+
+    self.remove = function () {
+      self.world.ships = self.world.ships.filter(e => e != self.selected)
+      self.world.enemies = self.world.enemies.filter(e => e != self.selected)
+    }
 
     self.addShip = function () {
       self.world.ships.push({

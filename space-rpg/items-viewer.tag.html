@@ -35,7 +35,7 @@
         <td>{item.targetBuff.energy}</td>
       </tr>
       <tr>
-        <td><button onclick={addItem}>Add new item</button></td>
+        <td colspan=13><button onclick={add}>+ Add Item</button></td>
       </tr>
     </tbody>
   </table>
@@ -70,6 +70,7 @@
     </div>
 
     <br/>
+    <button onclick={remove}>Delete</button>
     <button onclick={endEditing}>Done</button>
     <button onclick={cancelEditing}>Cancel</button>
   </div>
@@ -80,9 +81,13 @@
     self.world = { items: [] }
     self.selected = null
 
-    self.addItem = function () {
+    self.add = function () {
       self.world.items.push({
         type:'common', size: 's', isInstallable: false, isPassive: false, attr: { maxhull:0, maxshield:0, maxenergy:0, armor:0, cloak:0, jump:0, slots:0}, playerBuff:{hull:0, shield:0, energy: 0}, targetBuff:{ hull: 0, shield:  0, energy: 0}, credits: 5, name: 'unnamed'})
+    }
+
+    self.remove = function () {
+      self.world.items = self.world.items.filter(e => e != self.selected)
     }
     
     self.editItem = function (e) {
