@@ -16,9 +16,6 @@
     self.page = 'index'
     self.tabs = ['map', 'items', 'ships', 'celestials', 'quests']
 
-    window.events = {}
-    riot.observable(window.events)
-
     self.on('mount', function() {
       self.page = _.last(window.location.pathname.split('/'))
       self.update()
@@ -35,7 +32,7 @@
     self.fileChanged = () => _.readFile(self.refs.fileInput.files[0], loadWorld)
     self.primeDownloadLink = function () {
       window.events.trigger('save-world')
-      self.refs.downloadLink.setAttribute('href', _.toDataUrl(JSON.stringify(getWorld())))
+      self.refs.downloadLink.setAttribute('href', _.toDataUrl(_.stringify(getWorld(), { maxLength: 120 })))
     }
 
   </script>

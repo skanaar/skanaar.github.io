@@ -1,7 +1,9 @@
 <quest-list>
 
-  <div class="quest-list">
-    <div each={quest in quests} onclick={edit} class={ active: quest.title==active }>{quest.title}</div>
+  <div class="list">
+    <div each={quest in quests} onclick={edit} class={ list_item: true, active: quest.title==active }>
+      {quest.title}
+    </div>
     <div><button onclick={add}>+ New Quest</button></div>
   </div>
 
@@ -49,13 +51,14 @@
     }
 
     function questsXml() {
-      return self.quests.map(q => '<quest title="'+ q.title +'"">'+q.source+'</quest>').join('')
+      var quests = self.quests.map(q => '<quest title="'+ q.title +'">'+q.source+'</quest>')
+      return '<quests>' + quests.join('') + '</quests>'
     }
 
     self.on('mount', function() {
       window.events.on('world-updated', () => loadQuests(getWorld()))
       window.events.on('save-world', function () {
-        var world = JSON.parse(getWorld())
+        var world = getWorld()
         world.quests = questsXml()
         saveWorld(world)
       })
@@ -64,23 +67,6 @@
   </script>
 
   <style>
-    .quest-list {
-      position: fixed;
-      top: 26px;
-      left: 0;
-      bottom: 0;
-      overflow: auto;
-      width: 250px;
-    }
-    .quest-list div {
-      padding: 10px;
-    }
-    .quest-list div:hover {
-      background: #f8f8f8;
-    }
-    .quest-list div.active {
-      background: #eee;
-    }
     .quest-tools {
       position: fixed;
       top: 31px;

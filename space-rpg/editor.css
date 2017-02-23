@@ -144,3 +144,25 @@ a.button {
   background: linear-gradient(to top, #07f, #5af);
   border-color: #25f;
 }
+
+.list {
+  position: fixed;
+  top: 26px;
+  left: 0;
+  bottom: 0;
+  overflow: auto;
+  width: 250px;
+  border-right: 1px solid #eee;
+}
+.list-2 {
+  left: 251px;
+}
+.list div {
+  padding: 10px;
+}
+.list .list_item:hover {
+  background: #eee;
+}
+.list .list_item.active {
+  background: #ddd;
+}

@@ -12,10 +12,9 @@
       left: 250px;
       top: 26px;
       right: 0;
-      height: 100%;
       font-size: 16px;
       font-family: Menlo, Consolas, monospace;
-      padding: 30px 10px 10px 10px;
+      padding: 30px 10px 30px 10px;
     }
   </style>
 </head>
@@ -42,6 +41,11 @@
       theme: 'night',
       lineWrapping: true
     })
+    function setEditorSize() {
+      codeMirrorInstance.setSize(window.innerWidth-250, window.innerHeight-26-26)
+    }
+    setEditorSize()
+    window.addEventListener('resize', _.throttle(setEditorSize, 100))
     riot.mount('main-menu')
     riot.mount('quest-list')
   </script>

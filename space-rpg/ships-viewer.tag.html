@@ -1,16 +1,20 @@
 <ships-viewer>
 
-  <table class="table">
-    <tr><th>Player Ship</th></tr>
-    <tr each={ship in world.ships} onclick={edit}><td>{ship.name}</td></tr>
-    <tr><td><button onclick={addShip}>Add new ship</button></td></tr>
-  </table>
+  <div class="list">
+    <div><b>Player Ships</b></div>
+    <div each={ship in world.ships} onclick={edit} class={ list_item: true, active: ship==selected }>
+      {ship.name}
+    </div>
+    <div><button onclick={addShip}>+ New Ship</button></div>
+  </div>
 
-  <table class="table">
-    <tr><th>Enemy Ship</th></tr>
-    <tr each={ship in world.enemies} onclick={edit}><td>{ship.name}</td></tr>
-    <tr><td><button onclick={addEnemy}>Add new enemy</button></td></tr>
-  </table>
+  <div class="list list-2">
+    <div><b>Enemy Ships</b></div>
+    <div each={ship in world.enemies} onclick={edit} class={ list_item: true, active: ship==selected }>
+      {ship.name}
+    </div>
+    <div><button onclick={addEnemy}>+ New Enemy</button></div>
+  </div>
 
   <div class="sidebar" show={!!selected}>
     <input type=text ref="nameField" value={selected && selected.name}>
