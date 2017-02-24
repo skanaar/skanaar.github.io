@@ -1293,7 +1293,7 @@
       "pos": {"x": 19, "y": -1084},
       "trader": null,
       "treasures": [],
-      "enemy": null
+      "enemy": {"type": "monitor-drone", "loot": ["Recharge Loop"]}
     },
     {
       "name": "A6114",
@@ -1302,7 +1302,7 @@
       "pos": {"x": -39, "y": -986},
       "trader": null,
       "treasures": ["Tetragon Battery"],
-      "enemy": {"type": "monitor-drone", "loot": ["Copper"]}
+      "enemy": null
     },
     {
       "name": "Backwater Nebula",

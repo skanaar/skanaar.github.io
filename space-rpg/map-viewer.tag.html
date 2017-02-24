@@ -89,7 +89,7 @@
         <option each={e in world.items} value={e.name}>{e.name} ({e.credits} c)</option>
       </select>
     </div>
-    <span>{selectedTreasures}</span>
+    <span>{selectedTreasures()}</span>
     <button onClick={clearTreasures}>&times;</button>
 
     <div show={selectionSize == 1}>
@@ -105,13 +105,20 @@
       <span>{(selectedTrader.inventory || []).join(', ')}</span>
       <button onClick={clearInventory}>&times;</button>
 
-      <label><input type=checkbox ref=enemyToggle> Enemy</label>
-      <select>
+      <label><input type="checkbox" onchange={enemyToggle} ref="enemyCheckbox"> Enemy</label>
+      <select ref="enemySelect" onchange={enemyChanged}>
         <option each={e in world.enemies}>{e.name}</option>
       </select>
 
       <label>Loot</label>
-      <input type=text placeholder=Loot>
+      <div class="input-grid">
+        <em>add item</em>
+        <select onchange={pickLootItem}>
+          <option each={e in world.items} value={e.name}>{e.name} ({e.credits} c)</option>
+        </select>
+      </div>
+      <span>{selectedLoot()}</span>
+      <button onClick={clearLoot}>&times;</button>
     </div>
   </div>
 
@@ -142,7 +149,6 @@
     }
     self.models = window.constants.models
     self.selectionSize = 0
-    self.selectedTreasures = ''
     self.selectedTrader = { inventory: [] }
 
     self.setTool = function (id) { self.tool = id }
@@ -289,6 +295,10 @@
       forSelected(ent => { if (surfaceIsModel(ent)) ent.surface = e.target.value })
     }
 
+    self.selectedTreasures = function () {
+      var selection = self.nodes.filter(e => e.isSelected)
+      return _.flatten(selection.map(e => e.entity.treasures || [])).join(', ')
+    }
     self.pickTreasureItem = e => forSelected(ent => toggleItemInSet(ent.treasures, e.target.value))
     self.clearTreasures = e => forSelected(ent => ent.treasures = [])
 
@@ -298,6 +308,18 @@
     self.traderBuyChange = e => forSelected(ent => ent.trader.buy = e.target.value)
     self.traderSellChange = e => forSelected(ent => ent.trader.sell = e.target.value)
     self.clearInventory = e => forSelected(ent => ent.trader.inventory = [])
+
+    function singleSelect() { return (_.find(self.nodes, e => e.isSelected) || {}).entity || {} }
+    self.isEnemyChecked = () => singleSelect().enemy
+    self.enemyToggle = e => singleSelect().enemy = e.target.checked ? { type: "rogue", loot: [] } : null
+    self.enemyChanged = e => { if (singleSelect().enemy) singleSelect().enemy.type = e.target.value }
+    self.selectedLoot = function () {
+      return (singleSelect().enemy && singleSelect().enemy.loot || []).join(', ')
+    }
+    self.pickLootItem = e => {
+      if (singleSelect().enemy) toggleItemInSet(singleSelect().enemy.loot, e.target.value)
+    }
+    self.clearLoot = e => (singleSelect().enemy || {}).loot = []
 
     self.setName = function (e) {
       var selection = _.filter(self.nodes, 'isSelected')
@@ -385,12 +407,12 @@
       self.refs.surfaceSelect.value = uniqueSelectedProp('surface') || 'unknown'
       self.refs.modelSelect.value = uniqueSelectedProp('surface') || 'unknown'
       var selection = _.filter(self.nodes, 'isSelected')
+      self.selectionSize = selection.length
       self.refs.nameField.value = selection.length == 1 ? selection[0].entity.name : ''
       self.refs.traderToggle.checked = !!(selection.length == 1 && selection[0].entity.trader)
-      self.selectionSize = selection.length
-      var selectedTreasures = selection.map(e => e.entity.treasures || [])
-      self.selectedTreasures = _.flatten(selectedTreasures).join(', ')
       self.selectedTrader = (selection[0] && selection[0].entity.trader) || { buy: 0, sell: 0, inventory: [] }
+      self.refs.enemySelect.value = selection[0] && selection[0].entity.enemy && selection[0].entity.enemy.type
+      self.refs.enemyCheckbox.checked = selection[0] && selection[0].entity.enemy
     }
 
     function transform(p) { return Vec(self.dx+self.scale*p.x, self.dy+self.scale*p.y) }
