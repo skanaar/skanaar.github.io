@@ -34,7 +34,7 @@
     },
     {
       "name": "longship",
-      "visual": "longship",
+      "visual": "interplan",
       "attr": {"maxhull": 70, "maxshield": 50, "maxenergy": 50, "jump": 200, "slots": 10},
       "generator": {"hull": 4, "shield": 4, "energy": 4}
     }
@@ -790,10 +790,10 @@
       "size": "s",
       "isInstallable": false,
       "isPassive": true,
-      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "credits": "5",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 5,
       "name": "Blue seeds"
     },
     {
@@ -801,10 +801,10 @@
       "size": "s",
       "isInstallable": false,
       "isPassive": true,
-      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "credits": "5",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 5,
       "name": "Blue flowers"
     },
     {
@@ -812,10 +812,10 @@
       "size": "s",
       "isInstallable": false,
       "isPassive": true,
-      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "credits": "5",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 5,
       "name": "Thanatos mesh"
     },
     {
@@ -823,10 +823,10 @@
       "size": "s",
       "isInstallable": false,
       "isPassive": true,
-      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "credits": "5",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 5,
       "name": "Thanatos core"
     },
     {
@@ -834,10 +834,10 @@
       "size": "s",
       "isInstallable": false,
       "isPassive": true,
-      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "credits": "5",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 5,
       "name": "Thanatos nacelle"
     },
     {
@@ -845,10 +845,10 @@
       "size": "s",
       "isInstallable": false,
       "isPassive": true,
-      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "credits": "5",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 5,
       "name": "Water sample"
     },
     {
@@ -856,10 +856,10 @@
       "size": "s",
       "isInstallable": false,
       "isPassive": true,
-      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "credits": "4",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 4,
       "name": "Tungsten"
     },
     {
@@ -867,10 +867,10 @@
       "size": "s",
       "isInstallable": false,
       "isPassive": true,
-      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "credits": "0",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
       "name": "Mining Drill"
     },
     {
@@ -878,10 +878,10 @@
       "size": "s",
       "isInstallable": false,
       "isPassive": true,
-      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "credits": "0",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
       "name": "Star Sensor"
     },
     {
@@ -889,10 +889,10 @@
       "size": "s",
       "isInstallable": false,
       "isPassive": true,
-      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "credits": "8",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 8,
       "name": "Pavonian Ore"
     },
     {
@@ -900,10 +900,10 @@
       "size": "s",
       "isInstallable": false,
       "isPassive": false,
-      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "credits": "16",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 16,
       "name": "Pavonian Mineral"
     },
     {
@@ -911,10 +911,10 @@
       "size": "s",
       "isInstallable": false,
       "isPassive": false,
-      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "credits": "0",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
       "name": "Shady Boxes"
     },
     {
@@ -922,10 +922,10 @@
       "size": "s",
       "isInstallable": false,
       "isPassive": true,
-      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "credits": "1000",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 1000,
       "name": "Shiny Meteorite"
     },
     {
@@ -933,10 +933,10 @@
       "size": "s",
       "isInstallable": false,
       "isPassive": true,
-      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "credits": "0",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
       "name": "Star Shield"
     },
     {
@@ -944,10 +944,10 @@
       "size": "s",
       "isInstallable": false,
       "isPassive": true,
-      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "credits": "0",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
       "name": "Larato sigil"
     },
     {
@@ -955,10 +955,10 @@
       "size": "s",
       "isInstallable": false,
       "isPassive": false,
-      "attr": {"maxhull": "0", "maxshield": "0", "maxenergy": "0", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "credits": "0",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
       "name": "Subsystem cache"
     },
     {
@@ -966,10 +966,10 @@
       "size": "s",
       "isInstallable": true,
       "isPassive": true,
-      "attr": {"maxhull": "0", "maxshield": "5", "maxenergy": "15", "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": "0", "shield": "1", "energy": "1"},
-      "targetBuff": {"hull": "0", "shield": "0", "energy": "0"},
-      "credits": "230",
+      "attr": {"maxhull": 0, "maxshield": 5, "maxenergy": 15, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 1, "energy": 1},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 230,
       "name": "Momus"
     }
   ],

@@ -19,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr each={item in world.items} onclick={editItem}>
+      <tr each={item in world.items} onclick={editItem} class={active: selected == item}>
         <td>{item.name}</td>
         <td>{item.credits}</td>
         <td>{item.isInstallable ? '×' : ''}</td>
@@ -50,6 +50,9 @@
     }
     .table tr:hover {
       background: #eee;
+    }
+    .table tr.active {
+      background: #ddd;
     }
     .table th {
       text-align: left;
@@ -118,18 +121,18 @@
     
     self.endEditing = function (e) {
       self.selected.name = self.refs.nameField.value
-      self.selected.credits = self.refs.creditsField.value
+      self.selected.credits = +self.refs.creditsField.value
       self.selected.isInstallable = self.refs.isInstallableToggle.checked
       self.selected.isPassive = self.refs.isPassiveToggle.checked
-      self.selected.attr.maxhull = self.refs.maxhullField.value
-      self.selected.attr.maxshield = self.refs.maxshieldField.value
-      self.selected.attr.maxenergy = self.refs.maxenergyField.value
-      self.selected.playerBuff.hull = self.refs.playerHullField.value
-      self.selected.playerBuff.shield = self.refs.playerShieldField.value
-      self.selected.playerBuff.energy = self.refs.playerEnergyField.value
-      self.selected.targetBuff.hull = self.refs.targetHullField.value
-      self.selected.targetBuff.shield = self.refs.targetShieldField.value
-      self.selected.targetBuff.energy = self.refs.targetEnergyField.value
+      self.selected.attr.maxhull = +self.refs.maxhullField.value
+      self.selected.attr.maxshield = +self.refs.maxshieldField.value
+      self.selected.attr.maxenergy = +self.refs.maxenergyField.value
+      self.selected.playerBuff.hull = +self.refs.playerHullField.value
+      self.selected.playerBuff.shield = +self.refs.playerShieldField.value
+      self.selected.playerBuff.energy = +self.refs.playerEnergyField.value
+      self.selected.targetBuff.hull = +self.refs.targetHullField.value
+      self.selected.targetBuff.shield = +self.refs.targetShieldField.value
+      self.selected.targetBuff.energy = +self.refs.targetEnergyField.value
       self.selected = null
       self.update()
     }
