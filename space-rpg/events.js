@@ -15,6 +15,43 @@ window.nullWorld = function () {
   }
 }
 
+window.constants = {
+  models: [
+    'anomaly-thanatos',
+    'anomaly-observatory',
+    'anomaly-buoy',
+    'monitor-drone',
+    'soma',
+    'devourer',
+    'saucer',
+    'battleship',
+    'clipper',
+    'bentus',
+    'rogue',
+    'vanguard',
+    'thanatos',
+    'interplan',
+    'interplan-derelict',
+    'sol-array',
+    'rover'
+  ],
+  celestialTypes: [
+    'cloud',
+    'star',
+    'jovian',
+    'planet',
+    'asteroid',
+    'ring',
+    'anomaly'
+  ],
+  hasSurface: function (entity) {
+    return ['planet', 'asteroid'].includes(entity.style.split('-')[0])
+  },
+  hasModel: function (entity) {
+    return 'anomaly' == entity.style.split('-')[0]
+  }
+}
+
 window.getWorld = function () {
   try {
     var world = JSON.parse(localStorage['world'])

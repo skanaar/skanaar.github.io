@@ -55,37 +55,40 @@
       <a class="toggle-btn" onclick={repulse}>Repulse</a><a class="toggle-btn" onclick={attract}>Attract</a>
     </div>
     <button onclick={removeSelected}  style="opacity: {selectionSize > 0 ? 1 : 0.5}">Delete</button>
+    <button onclick={makeStartingDest}  style="opacity: {selectionSize == 1 ? 1 : 0.5}">Make starting point</button>
   </div>
 
   <div class="sidebar">
-    <div class="input-grid">
-      <em>start at</em> <input type=text value={world.initialDestination} onchange={initialDestinationChange}><br/>
-      <em>start with</em>
-      <select ref="initialShipSelect" onchange={initialShipChange}>
-        <option each={e in world.ships}>{e.name}</option>
-      </select>
-    </div>
-
     <label>Name</label>
     <input type=text ref="nameField" placeholder="name">
     <button onclick={setName}>OK</button>
     <button onclick={autoNameNodes}>Autoname</button>
 
-    <label>Celestial &amp; Surface</label>
+    <label>Celestial</label>
     <select ref="styleSelect" onchange={setCelestialStyle}>
       <option value="unknown">- style -</option>
       <option each={e in world.celestialStyles}>{e.id}</option>
     </select>
     <button onclick={randomizeStyle}>Randomize</button>
-    <select ref="surfaceSelect" onchange={setSurface}>
+
+    <label show={selectionHasSurface()}>Surface</label>
+    <select ref="surfaceSelect" onchange={setSurface} show={selectionHasSurface()}>
       <option value="unknown">- surface -</option>
       <option each={e in world.surfaces}>{e.id}</option>
     </select>
+    <label show={selectionHasModel()}>Model</label>
+    <select ref="modelSelect" onchange={setModel} show={selectionHasModel()}>
+      <option value="unknown">- model -</option>
+      <option each={e in models}>{e}</option>
+    </select>
 
     <label>Treasures</label>
-    <select onchange={pickTreasureItem}>
-      <option each={e in world.items} value={e.name}>{e.name} ({e.credits} c)</option>
-    </select>
+    <div class="input-grid">
+      <em>add item</em>
+      <select onchange={pickTreasureItem}>
+        <option each={e in world.items} value={e.name}>{e.name} ({e.credits} c)</option>
+      </select>
+    </div>
     <span>{selectedTreasures}</span>
     <button onClick={clearTreasures}>&times;</button>
 
@@ -93,11 +96,12 @@
       <label><input type=checkbox ref=traderToggle onchange={traderChange}> Trader</label>
       <div class="input-grid">
         <em>buy at</em> <input type=number value={selectedTrader.buy} onchange={traderBuyChange}><br/>
-        <em>sell at</em> <input type=number value={selectedTrader.sell} onchange={traderSellChange}>
+        <em>sell at</em> <input type=number value={selectedTrader.sell} onchange={traderSellChange}><br/>
+        <em>add item</em> 
+        <select onchange={pickTraderItem}>
+          <option each={e in world.items} value={e.name}>{e.name} ({e.credits} c)</option>
+        </select>
       </div>
-      <select onchange={pickTraderItem}>
-        <option each={e in world.items} value={e.name}>{e.name} ({e.credits} c)</option>
-      </select>
       <span>{(selectedTrader.inventory || []).join(', ')}</span>
       <button onClick={clearInventory}>&times;</button>
 
@@ -136,6 +140,7 @@
       celestialStyles: [],
       destinations: []
     }
+    self.models = window.constants.models
     self.selectionSize = 0
     self.selectedTreasures = ''
     self.selectedTrader = { inventory: [] }
@@ -146,6 +151,11 @@
       self.nodes = self.nodes.filter(e => !e.isSelected)
       updateUI()
       calculateLines()
+    }
+
+    self.makeStartingDest = function () {
+      var selection = self.nodes.filter(e => e.isSelected)
+      if (selection.length == 1) self.world.initialDestination = selection[0].entity.name
     }
 
     self.keydown = function (e) {
@@ -269,8 +279,14 @@
       calculateLines()
     }
 
+    function surfaceIsModel(ent) { return ent.style.startsWith('anomaly') }
+
     self.setSurface = function (e) {
-      forSelected(ent => ent.surface = e.target.value)
+      forSelected(ent => { if (!surfaceIsModel(ent)) ent.surface = e.target.value })
+    }
+
+    self.setModel = function (e) {
+      forSelected(ent => { if (surfaceIsModel(ent)) ent.surface = e.target.value })
     }
 
     self.pickTreasureItem = e => forSelected(ent => toggleItemInSet(ent.treasures, e.target.value))
@@ -282,9 +298,6 @@
     self.traderBuyChange = e => forSelected(ent => ent.trader.buy = e.target.value)
     self.traderSellChange = e => forSelected(ent => ent.trader.sell = e.target.value)
     self.clearInventory = e => forSelected(ent => ent.trader.inventory = [])
-
-    self.initialDestinationChange = e => self.world.initialDestination = e.target.value
-    self.initialShipChange = e => self.world.initialShip = e.target.value
 
     self.setName = function (e) {
       var selection = _.filter(self.nodes, 'isSelected')
@@ -336,6 +349,13 @@
     self.traderDestinations = () => self.nodes.filter(e => e.entity.trader)
     self.treasureDestinations = () => self.nodes.filter(e => (e.entity.treasures || []).length)
 
+    self.selectionHasSurface = function() {
+      return _.filter(self.nodes, 'isSelected').every(e => constants.hasSurface(e.entity))
+    }
+    self.selectionHasModel = function() {
+      return _.filter(self.nodes, 'isSelected').every(e => constants.hasModel(e.entity))
+    }
+
     var fills = { cloud:'D8D',star:'ff4',jovian:'fa8',planet:'8f8',asteroid:'aaa',anomaly:'fa0',ring:'8af'}
     self.fillFor = entity => '#' + fills[entity.style.split('-')[0]]
     self.radiusFor = ent => self.world.celestialStyles.find(s => s.id == ent.style).r * self.scale
@@ -363,7 +383,7 @@
     function updateUI() {
       self.refs.styleSelect.value = uniqueSelectedProp('style') || 'unknown'
       self.refs.surfaceSelect.value = uniqueSelectedProp('surface') || 'unknown'
-      self.refs.initialShipSelect.value = self.world.initialShip
+      self.refs.modelSelect.value = uniqueSelectedProp('surface') || 'unknown'
       var selection = _.filter(self.nodes, 'isSelected')
       self.refs.nameField.value = selection.length == 1 ? selection[0].entity.name : ''
       self.refs.traderToggle.checked = !!(selection.length == 1 && selection[0].entity.trader)

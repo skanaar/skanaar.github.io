@@ -14,6 +14,7 @@
     <div each={e in undefinedNodes}>Error: Destination <b>{e}</b> not defined</div>
     <div each={e in undefinedItems}>Error: Item <b>{e}</b> not defined</div>
     <div each={e in undefinedEnemies}>Error: Enemy <b>{e}</b> not defined</div>
+    <div each={e in undefinedShips}>Error: Ship <b>{e}</b> not defined</div>
     <button onclick={validateWorld}>Update</button>
   </div>
 
@@ -24,6 +25,7 @@
     self.undefinedItems = []
     self.undefinedNodes = []
     self.undefinedEnemies = []
+    self.undefinedShips = []
 
     self.on('mount', function() {
       self.page = _.last(window.location.pathname.split('/'))
@@ -55,11 +57,15 @@
       var definedNodes = world.destinations.map(e => e.name)
       self.undefinedNodes = _.uniq(_.difference(referencesNodes, definedNodes))
 
-      var referencesEnemies = world.destinations.map(e => e.enemy).filter(e => e)
+      var referencesEnemies = world.destinations.filter(e => e.enemy).map(e => e.enemy.type)
       var definedEnemies = world.enemies.map(e => e.name)
       self.undefinedEnemies = _.uniq(_.difference(referencesEnemies, definedEnemies))
 
       self.hasValidationError = self.undefinedItems.length || self.undefinedNodes.length || self.undefinedEnemies.length
+
+      var referencesShips = (world.quests.match(/ship="[^"]*/gm) || []).map(e => e.substring(6))
+      var definedShips = world.ships.map(e => e.name)
+      self.undefinedShips = _.difference(referencesShips, definedShips)
 
       self.update()
     }

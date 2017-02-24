@@ -41,6 +41,7 @@ body {
   background: #fafafa;
   border-left: 1px solid #aaa;
   text-align: right;
+  overflow: auto;
 }
 .sidebar span {
   display: block;
@@ -51,9 +52,9 @@ body {
   display: block;
   text-align: left;
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 10px;
   padding: 2px;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
   border-bottom: 1px solid #ddd;
 }
 .sidebar input[type=text],

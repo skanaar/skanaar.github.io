@@ -17,9 +17,13 @@
   </div>
 
   <div class="sidebar" show={!!selected}>
+    <button onclick={makeStartingShip}>Make starting ship</button>
     <input type=text ref="nameField" value={selected && selected.name}>
     <div class="input-grid">
-      <em>visual</em> <input type=text ref="visualField" value={selected && selected.visual}>
+      <em>visual</em>
+      <select ref="visualInput">
+        <option each={e in models}>{e}</option>
+      </select>
     </div>
     
     <label>Attributes</label>
@@ -49,6 +53,11 @@
 
     self.world = { ships: [], enemies: [] }
     self.selected = null
+    self.models = window.constants.models
+
+    self.makeStartingShip = function () {
+      if (self.selected) self.world.initialShip = self.selected.name
+    }
 
     self.remove = function () {
       self.world.ships = self.world.ships.filter(e => e != self.selected)
@@ -73,19 +82,20 @@
     
     self.edit = function (e) {
       self.selected = e.item.ship
+      self.refs.visualInput.value = self.selected.visual
     }
     
     self.endEditing = function (e) {
       self.selected.name = self.refs.nameField.value
-      self.selected.visual = self.refs.visualField.value
-      self.selected.attr.maxhull = self.refs.maxhullField.value
-      self.selected.attr.maxshield = self.refs.maxshieldField.value
-      self.selected.attr.maxenergy = self.refs.maxenergyField.value
-      self.selected.attr.jump = self.refs.jumpField.value
-      self.selected.attr.slots = self.refs.slotsField.value
-      self.selected.generator.hull = self.refs.hullField.value
-      self.selected.generator.shield = self.refs.shieldField.value
-      self.selected.generator.energy = self.refs.energyField.value
+      self.selected.visual = self.refs.visualInput.value
+      self.selected.attr.maxhull = +self.refs.maxhullField.value
+      self.selected.attr.maxshield = +self.refs.maxshieldField.value
+      self.selected.attr.maxenergy = +self.refs.maxenergyField.value
+      self.selected.attr.jump = +self.refs.jumpField.value
+      self.selected.attr.slots = +self.refs.slotsField.value
+      self.selected.generator.hull = +self.refs.hullField.value
+      self.selected.generator.shield = +self.refs.shieldField.value
+      self.selected.generator.energy = +self.refs.energyField.value
       self.selected = null
       self.update()
     }

@@ -21,6 +21,7 @@
     </div>
 
     <br/>
+    <button onclick={remove}>Delete</button>
     <button onclick={endEditing}>Done</button>
     <button onclick={cancelEditing}>Cancel</button>
   </div>
@@ -42,6 +43,10 @@
         curve: [0, 1],
         spectrum: ["06F", "F00"]
       })
+    }
+
+    self.remove = function () {
+      self.world.surfaces = self.world.surfaces.filter(e => e != self.selected)
     }
     
     self.edit = function (e) {
