@@ -7,6 +7,14 @@
     <div><button onclick={add}>+ New Surface</button></div>
   </div>
 
+
+  <svg width=1000 height=500 style="margin-left: 250px">
+    <path
+      each={e in mesh}
+      d="M{e.a.x},{e.a.y} L{e.b.x},{e.b.y} L{e.c.x},{e.c.y} L{e.d.x},{e.d.y} Z"
+      fill="#{e.fill}"/>
+  </svg>
+
   <div class="sidebar" show={!!selected}>
 
     <div class="input-grid">
@@ -51,6 +59,13 @@
     
     self.edit = function (e) {
       self.selected = e.item.e
+      drawTerrain({
+        center: Vec(400, 250),
+        offset: Vec(0, 0),
+        radius: 348,
+        res: 16,
+        angle: 0.3
+      }, self.selected)
     }
     
     self.endEditing = function (e) {
@@ -81,6 +96,104 @@
       window.events.on('save-world', () => saveWorld(self.world))
       loadWorld()
     })
+
+    function toHex(x){ return constrain(0, 16, Math.round(x)).toString(16) }
+
+    function drawGrid(center, radius, res, angle, g){
+      for(var i=-res; i<res; i++){
+        var x = i*radius/res
+        var y = Math.sqrt(radius*radius-x*x)
+        g.path([
+          add(center, perspective(rotate(Vec(x, -y), angle))),
+          add(center, perspective(rotate(Vec(x, y), angle)))
+        ]).stroke('#333')
+      }
+    }
+
+    function colorLerp(c1, c2, factor){
+      return [
+        toHex(lerp([parseInt(c1[0], 16), parseInt(c2[0], 16)], factor)),
+        toHex(lerp([parseInt(c1[1], 16), parseInt(c2[1], 16)], factor)),
+        toHex(lerp([parseInt(c1[2], 16), parseInt(c2[2], 16)], factor))
+      ].join('')
+    }
+
+    function sq(x){ return x*x }
+
+    function constrain(min, max, x) { return Math.min(max, Math.max(min, x)) }
+
+    function lerp(values, x) {
+      var a = constrain(0, 0.999, x)
+      var k = (a*(values.length-1)) % 1
+      var i = Math.floor(a*(values.length-1))
+      var c1 = values[i]
+      var c2 = values[i+1]
+      return c1*(1-k) + c2*k
+    }
+
+    function spectrumSample(spectrum, x){
+      return _.map([
+        lerp(_.map(spectrum, x => parseInt(x[0],16)), x),
+        lerp(_.map(spectrum, x => parseInt(x[1],16)), x),
+        lerp(_.map(spectrum, x => parseInt(x[2],16)), x)
+      ], toHex).join('')
+    }
+
+    function perlin(i, j, octaves, falloff) {
+      var sum = 0
+      var factor = 0.8
+      var mult = 1
+      for(var a=0; a<octaves; a++){
+        sum += factor * noise.perlin2(mult*i + 17*a, mult*j + 3*a)
+        factor *= falloff
+        mult *= 2
+      }
+      return sum + 0.5
+    }
+
+    function drawTerrain(display, style){
+      var s = display.radius/display.res
+      var off = display.offset
+      var nScale = style.zoom/display.res
+
+      function terrainPoint(i, j, h){
+        i -= display.res
+        j -= display.res
+        p = rotate(Vec(i*s, j*s), display.angle)
+        return Vec(p.x, p.y/2 - h * style.height*40/style.zoom)
+      }
+
+      var terrain = []
+      for(var i=0; i<2*display.res+1; i++){
+        terrain.push([])
+        for(var j=0; j<2*display.res+1; j++){
+          terrain[i][j] = perlin(i*nScale+off.x, j*nScale+off.y, style.octaves, style.falloff)
+          terrain[i][j] = lerp(style.curve, terrain[i][j])
+        }
+      }
+
+      var shadow = '000'
+      var low = '0f0'
+      var high = 'fff'
+
+      self.mesh = []
+
+      for(var i=0; i<2*display.res; i++){
+        for(var j=0; j<2*display.res; j++){
+          var sunAngle = 0.5 + (terrain[i][j]-terrain[i+1][j])*display.res/15
+          var color = colorLerp(shadow, spectrumSample(style.spectrum, terrain[i][j]), sunAngle)
+          var alpha = constrain(0, 1, 0.6*(display.res - mag(Vec(i-display.res+1, j-display.res+1))))
+          self.mesh.push({
+            a: add(display.center, terrainPoint(i+0, j+0, terrain[i+0][j+0]-0.3)),
+            b: add(display.center, terrainPoint(i+1, j+0, terrain[i+1][j+0]-0.3)),
+            c: add(display.center, terrainPoint(i+1, j+1, terrain[i+1][j+1]-0.3)),
+            d: add(display.center, terrainPoint(i+0, j+1, terrain[i+0][j+1]-0.3)),
+            fill: color
+          })
+        }
+      }
+    }
+
 
   </script>
 
