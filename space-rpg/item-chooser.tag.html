@@ -1,0 +1,97 @@
+<item-chooser>
+
+  <div class="modal-parent" if={isOpen}>
+    <div class="modal">
+      <div class="modal-list">
+        <div class="modal-item" each={item in world.items} onclick={add}>{item.name}</div>
+      </div>
+      <div class="modal-list">
+        <div class="modal-item" each={id in opts.list} onclick={remove}>{id} &times;</div>
+      </div>
+      <div class="modal-footer"><button onclick={done}>Done</button></div>
+    </div>
+  </div>
+
+  <style>
+    .modal-parent {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: rgba(0,0,0,0.1);
+    }
+    .modal {
+      width: 75%;
+      background: #fff;
+      border: 1px solid #888;
+      border-radius: 2px;
+      margin: 100px auto;
+    }
+    .modal-list {
+      display: inline-block;
+      width: 45%;
+      height: 300px;
+      padding: 10px;
+      vertical-align: top;
+      overflow: auto;
+      cursor: pointer;
+    }
+    .modal-list:first-child {
+      border-right: 1px solid #888;
+    }
+    .modal-footer {
+      padding: 10px;
+      text-align: right;
+    }
+    .modal-item {
+      display: inline-block;
+      width: 120px;
+      margin: 2px;
+      padding: 2px 6px;
+      border: 1px solid #eee;
+      background: #f8f8f8;
+      border-radius: 2px;
+    }
+    .item:hover {
+      border: 1px solid #ddd;
+      background: #eee;
+    }
+  </style>
+
+  <script>
+    var self = this
+
+    self.world = { items: [] }
+
+    self.add = function (e) {
+      self.opts.list.push(e.item.item.name)
+    }
+
+    self.remove = function (e) {
+      self.opts.list.splice(self.opts.list.indexOf(e.item.id), 1)
+    }
+    
+    self.done = function () {
+      self.isOpen = false
+    }
+
+    function show() {
+      self.isOpen = true
+      self.update()
+    }
+
+    function loadWorld() {
+        self.world = getWorld()
+        self.update()
+    }
+
+    self.on('mount', function() {
+      window.events.on('world-updated', loadWorld)
+      window.events.on('show-item-chooser', show)
+      loadWorld()
+    })
+
+  </script>
+
+</item-chooser>
