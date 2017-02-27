@@ -13,11 +13,34 @@
     <button onclick={remove}>Delete</button>
   </div>
 
+  <div class="sidebar">
+    <div each={e in templates}>
+      <button onclick={useTemplate}>{e.name}</button>
+    </div>
+  </div>
+
   <script>
     var self = this
 
     self.quests = []
     self.active = null
+    self.templates = [
+      { name: 'Condition', template: '<condition have-item="" at-dest="" no-enemy-at-dest="" not-at-dest="" have-credits="" trigger="auto"/>' },
+      { name: 'Place item', template: '<place-item dest="" item=""/>' },
+      { name: 'Place trader inventory', template: '<place-inventory dest="" item=""/>' },
+      { name: 'Dialog', template: '<dialog>"Hey hitchhiker!"</dialog>' },
+      { name: 'Dialog with choice', template: '<dialog ok="YES PLEASE" cancel="NO THANKS">"Would you like some tea?"</dialog>' },
+      { name: 'Add to quest list', template: '<add-to-quest-list/>' },
+      { name: 'Give credits', template: '<give credits=""/>' },
+      { name: 'Give item', template: '<give item=""/>' },
+      { name: 'Take credits', template: '<take credits=""/>' },
+      { name: 'Take item', template: '<take item=""/>' },
+      { name: 'Mark on map', template: '<mark-on-map dest="" color="0x0F0" icon="arrow"/>' },
+      { name: 'Remove map marker', template: '<remove-map-marker/>' },
+      { name: 'Change ship', template: '<change-ship ship=""/>' },
+      { name: 'Travel', template: '<travel dest=""/>' },
+      { name: 'Script goto', template: '<goto jump="1"/>' }
+    ]
 
     function loadQuests(world) {
       var dom = (new DOMParser()).parseFromString(world.quests, 'text/xml')
@@ -28,6 +51,12 @@
         }
       })
       self.update()
+    }
+
+    self.useTemplate = function (e) {
+      var src = window.codeMirrorInstance.getValue()
+      src = src + '\n' + e.item.e.template
+      window.codeMirrorInstance.setValue(src)
     }
 
     self.add = function () {

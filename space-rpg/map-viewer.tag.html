@@ -58,7 +58,7 @@
     <button onclick={makeStartingDest}  style="opacity: {selectionSize == 1 ? 1 : 0.5}">Make starting point</button>
   </div>
 
-  <div class="sidebar">
+  <div class="sidebar" show={selectionSize}>
     <label>Name</label>
     <input type=text ref="nameField" placeholder="name">
     <button onclick={setName}>OK</button>
@@ -311,8 +311,8 @@
     self.randomizeStyle = function () {
       _.filter(self.nodes, 'isSelected').forEach(function (node) {
         var type = node.entity.style.split('-')[0]
-        var stylesOfSameType = self.world.celestialStyles.filter(function(e){return e.startsWith(type)})
-        node.entity.style = _.sample(stylesOfSameType)
+        var stylesOfSameType = self.world.celestialStyles.filter(e => e.id.startsWith(type))
+        node.entity.style = _.sample(stylesOfSameType).id
       })
       updateUI()
       calculateLines()

@@ -1,0 +1,88 @@
+<models-viewer>
+
+  <div class="list">
+    <div each={e in world.models} onclick={edit} class={ list_item: true, active: e==selected }>
+      {e.name}
+    </div>
+    <div><button onclick={add}>+ New Model</button></div>
+  </div>
+
+  <svg width=1000 height=500 style="margin-left: 250px">
+    <path
+      each={e in selectedMesh()}
+      d="M{e[0][0]},{e[0][1]} L{e[1][0]},{e[1][1]} L{e[2][0]},{e[2][1]} L{e[3][0]},{e[3][1]} Z"
+      fill="rgba(255,128,0,0.2)"/>
+  </svg>
+
+  <div class="sidebar" show={!!selected}>
+
+    <div class="input-grid">
+      <em>name</em> <input type=text ref="nameField" value={selected && selected.name}><br/>
+    </div>
+
+    <textarea value={JSON.stringify(selected && selected.mesh)} ref="meshField"></textarea>
+
+    <br/>
+    <button onclick={remove}>Delete</button>
+    <button onclick={endEditing}>Done</button>
+    <button onclick={cancelEditing}>Cancel</button>
+  </div>
+
+  <style>
+    .sidebar textarea {
+      width: 170px;
+      height: 240px;
+    }
+  </style>
+
+  <script>
+    var self = this
+
+    self.world = { models: [] }
+    self.selected = null
+
+    self.selectedMesh = function () {
+      return self.selected ? self.selected.mesh : []
+    }
+
+    self.add = function () {
+      self.world.models.push({
+        name: "unnamed",
+        mesh: []
+      })
+    }
+
+    self.remove = function () {
+      self.world.surfaces = self.world.surfaces.filter(e => e != self.selected)
+    }
+    
+    self.edit = function (e) {
+      self.selected = e.item.e
+    }
+    
+    self.endEditing = function (e) {
+      self.selected.name = self.refs.nameField.value
+      self.selected.mesh = JSON.parse(self.refs.meshField.value)
+      self.selected = null
+      self.update()
+    }
+
+    self.cancelEditing = function () {
+      self.selected = null
+      self.update()
+    }
+
+    function loadWorld() {
+        self.world = getWorld()
+        self.update()
+    }
+
+    self.on('mount', function() {
+      window.events.on('world-updated', loadWorld)
+      window.events.on('save-world', () => saveWorld(self.world))
+      loadWorld()
+    })
+
+  </script>
+
+</models-viewer>
