@@ -6,8 +6,6 @@
       onmousedown={mousedown}
       onmousemove={mousemove}
       onmouseup={mouseup}>
-    <line each={x in gridX} stroke="#DDD" stroke-width=0.5 riot-x1={x} riot-x2={x} riot-y1={gridMin.y} riot-y2={gridMax.y} />
-    <line each={y in gridY} stroke="#DDD" stroke-width=0.5 riot-x1={gridMin.x} riot-x2={gridMax.x} riot-y1={y} riot-y2={y} />
     <line each={lines}
       stroke-width="2" stroke="#888"
       riot-x1={a.x} riot-x2={b.x} riot-y1={a.y} riot-y2={b.y} />
@@ -60,8 +58,7 @@
 
   <div class="sidebar" show={selectionSize}>
     <label>Name</label>
-    <input type=text ref="nameField" placeholder="name">
-    <button onclick={setName}>OK</button>
+    <input show={selectionSize == 1} type=text ref="nameField" placeholder="name" onchange={setName}>
     <button onclick={autoNameNodes}>Autoname</button>
 
     <label>Celestial</label>
@@ -102,7 +99,7 @@
     </div>
   </div>
 
-  <item-chooser list={selectedItems} />
+  <item-chooser />
 
   <script>
     var self = this
@@ -114,38 +111,14 @@
     self.tool = 'select' // draw | spray
     self.dx = window.innerWidth
     self.dy = window.innerWidth
-    self.gridMin = transform({x:-self.dx/self.scale,y:-self.dy/self.scale})
-    self.gridMax = transform({x: self.dx/self.scale,y: self.dy/self.scale})
-    self.gridX = _.range(self.gridMin.x, self.gridMax.x, self.scale*50)
-    self.gridY = _.range(self.gridMin.y, self.gridMax.y, self.scale*50)
     self.input = { a: Vec(0,0), b: Vec(0,0) }
     self.isDown = false
     self.select = { pos: Vec(0,0), dim: Vec(0,0) }
-    self.world = {
-      ships: [],
-      enemies: [],
-      initialDestination: '',
-      initialShip: 'clipper',
-      celestialStyles: [],
-      destinations: []
-    }
+    self.world = window.nullWorld()
     self.models = window.constants.models
     self.selectionSize = 0
     self.selectedTrader = { inventory: [] }
     self.selectedItems = []
-
-    self.setTool = function (id) { self.tool = id }
-
-    self.removeSelected = function () {
-      self.nodes = self.nodes.filter(e => !e.isSelected)
-      updateUI()
-      calculateLines()
-    }
-
-    self.makeStartingDest = function () {
-      var selection = self.nodes.filter(e => e.isSelected)
-      if (selection.length == 1) self.world.initialDestination = selection[0].entity.name
-    }
 
     self.keydown = function (e) {
       if (document.activeElement && document.activeElement.nodeName === 'INPUT') return;
@@ -249,24 +222,28 @@
       self.input.b = Vec(0,0)
     }
 
-    function preparedWorld() {
-      self.world.destinations = self.nodes.map(e => e.entity)
-      return self.world
+    self.removeSelected = function () {
+      self.nodes = self.nodes.filter(e => !e.isSelected)
+      updateUI()
+      calculateLines()
     }
 
+    self.makeStartingDest = function () {
+      self.world.initialDestination = singleSelected().name
+    }
+
+    function singleSelected() { return (_.find(self.nodes, e => e.isSelected) || {}).entity || {} }
+
     self.chooseTreasures = function () {
-      self.selectedItems = self.nodes.find(e => e.isSelected).entity.treasures
-      window.events.trigger('show-item-chooser')
+      window.events.trigger('show-item-chooser', singleSelected().treasures)
     }
 
     self.chooseTraderInventory = function () {
-      self.selectedItems = self.nodes.find(e => e.isSelected).entity.trader.inventory
-      window.events.trigger('show-item-chooser')
+      window.events.trigger('show-item-chooser', singleSelected().trader.inventory)
     }
 
     self.chooseLoot = function () {
-      self.selectedItems = self.nodes.find(e => e.isSelected).entity.enemy.loot
-      window.events.trigger('show-item-chooser')
+      window.events.trigger('show-item-chooser', singleSelected().enemy.loot)
     }
 
     self.autoNameNodes = function () {
@@ -283,14 +260,12 @@
       calculateLines()
     }
 
-    function surfaceIsModel(ent) { return ent.style.startsWith('anomaly') }
-
     self.setSurface = function (e) {
-      forSelected(ent => { if (!surfaceIsModel(ent)) ent.surface = e.target.value })
+      forSelected(ent => { if (!constants.hasModel(ent)) ent.surface = e.target.value })
     }
 
     self.setModel = function (e) {
-      forSelected(ent => { if (surfaceIsModel(ent)) ent.surface = e.target.value })
+      forSelected(ent => { if (constants.hasModel(ent)) ent.surface = e.target.value })
     }
 
     function defaultTrader(){ return { buy: 0.75, sell: 1.5, inventory: [] } }
@@ -298,14 +273,12 @@
     self.traderBuyChange = e => forSelected(ent => ent.trader.buy = e.target.value)
     self.traderSellChange = e => forSelected(ent => ent.trader.sell = e.target.value)
 
-    function singleSelect() { return (_.find(self.nodes, e => e.isSelected) || {}).entity || {} }
-    self.isEnemyChecked = () => singleSelect().enemy
-    self.enemyToggle = e => singleSelect().enemy = e.target.checked ? { type: "rogue", loot: [] } : null
-    self.enemyChanged = e => { if (singleSelect().enemy) singleSelect().enemy.type = e.target.value }
+    self.isEnemyChecked = () => singleSelected().enemy
+    self.enemyToggle = e => singleSelected().enemy = e.target.checked ? { type: "rogue", loot: [] } : null
+    self.enemyChanged = e => { if (singleSelected().enemy) singleSelected().enemy.type = e.target.value }
 
-    self.setName = function (e) {
-      var selection = _.filter(self.nodes, 'isSelected')
-      if (selection.length == 1) selection[0].entity.name = self.refs.nameField.value
+    self.setName = function () {
+      singleSelected().name = self.refs.nameField.value
     }
 
     self.randomizeStyle = function () {
@@ -318,8 +291,8 @@
       calculateLines()
     }
 
-    self.repulse = function () { self.repulseAttract(1) }
-    self.attract = function () { self.repulseAttract(-1) }
+    self.repulse = function () { self.repulseAttract(2) }
+    self.attract = function () { self.repulseAttract(-2) }
     self.repulseAttract = function (coefficient) {
       var subset = _.filter(self.nodes, 'isSelected')
       subset.forEach(function (a) {
@@ -336,8 +309,8 @@
       })
       calculateLines()
     }
-    self.enlarge = function () { self.enlargeShrink(1.01) }
-    self.shrink = function () { self.enlargeShrink(0.99) }
+    self.enlarge = function () { self.enlargeShrink(1.02) }
+    self.shrink = function () { self.enlargeShrink(0.98) }
     self.enlargeShrink = function (coefficient) {
       var subset = _.filter(self.nodes, 'isSelected')
       var positions = subset.map(e => e.entity.pos)
@@ -360,15 +333,12 @@
       return _.filter(self.nodes, 'isSelected').every(e => constants.hasModel(e.entity))
     }
 
-    var fills = { cloud:'D8D',star:'ff4',jovian:'fa8',planet:'8f8',asteroid:'aaa',anomaly:'fa0',ring:'8af'}
-    self.fillFor = entity => '#' + fills[entity.style.split('-')[0]]
-    self.radiusFor = ent => self.world.celestialStyles.find(s => s.id == ent.style).r * self.scale
-
-    function toggleItemInSet(set, item) {
-      var index = set.indexOf(item)
-      if (index != -1) set.splice(index, 1)
-      else set.push(item)
+    var fills = {
+      cloud: 'rgba(221, 136, 221, 0.5)', star: '#ff4', jovian: '#fa8',
+      planet: '#8f8', asteroid: '#aaa', anomaly: '#fa0', ring: '#8af'
     }
+    self.fillFor = entity => fills[entity.style.split('-')[0]]
+    self.radiusFor = ent => self.world.celestialStyles.find(s => s.id == ent.style).r * self.scale
 
     function forSelected(action) {
       _.filter(self.nodes, 'isSelected').forEach(o => action(o.entity))
@@ -407,28 +377,27 @@
     }
 
     function loadDestinations(world) {
-      self.nodes = world.destinations.map(function (e) {
-        e.treasures = e.treasures || []
-        return {
-          screenPos: transform(e.pos),
-          isSelected: false,
-          entity: e
-        }
-      })
+      self.nodes = world.destinations.map(e => ({
+        screenPos: transform(e.pos),
+        isSelected: false,
+        entity: e
+      }))
       calculateLines()
     }
 
     function calculateLines() {
-      function isTravellable(e) {
-        return !e.style.startsWith('cloud') && !e.style.startsWith('star')
-      }
       self.lines = []
       self.nodes.forEach(function (a) {
         self.nodes.forEach(function (b){
-          if (self.jumpRange > dist(a.entity.pos, b.entity.pos) && isTravellable(a.entity) && isTravellable(b.entity))
+          if (self.jumpRange > dist(a.entity.pos, b.entity.pos) && constants.isTravellable(a.entity) && constants.isTravellable(b.entity))
             self.lines.push({ a: transform(a.entity.pos), b: transform(b.entity.pos) })
         })
       })
+    }
+
+    function preparedWorld() {
+      self.world.destinations = self.nodes.map(e => e.entity)
+      return self.world
     }
 
     self.on('mount', function() {

@@ -49,6 +49,9 @@ window.constants = {
   },
   hasModel: function (entity) {
     return 'anomaly' == entity.style.split('-')[0]
+  },
+  isTravellable: function (entity) {
+    return ['jovian', 'planet', 'asteroid', 'ring', 'anomaly'].includes(entity.style.split('-')[0])
   }
 }
 

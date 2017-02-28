@@ -1,1 +1,4 @@
 stockholmsstad-arkitektur/
+*.sublime-workspace
+
+*.sublime-project

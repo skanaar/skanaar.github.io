@@ -10,6 +10,7 @@
     <tr>
       <td>
         <button onclick={addCelestial}>+ New Celestial</button>
+        <button onclick={sort}>Sort</button>
       </td>
     </tr>
   </table>
@@ -53,6 +54,10 @@
 
     self.world = { celestialStyles: [] }
     self.selected = null
+
+    self.sort = function () {
+      self.world.celestialStyles.sort((a,b) => (a.id < b.id ? -1 : 1))
+    }
 
     self.addCelestial = function () {
       var style = { id:'unnamed', r: 20, amb: 0.2, oct: 3, zoom: 10, color: ['888', 'D84']}

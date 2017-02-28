@@ -6,7 +6,7 @@
         <div class="modal-item" each={item in world.items} onclick={add}>{item.name}</div>
       </div>
       <div class="modal-list">
-        <div class="modal-item" each={id in opts.list} onclick={remove}>{id} &times;</div>
+        <div class="modal-item" each={id in list} onclick={remove}>{id} &times;</div>
       </div>
       <div class="modal-footer"><button onclick={done}>Done</button></div>
     </div>
@@ -63,20 +63,22 @@
     var self = this
 
     self.world = { items: [] }
+    self.list = []
 
     self.add = function (e) {
-      self.opts.list.push(e.item.item.name)
+      self.list.push(e.item.item.name)
     }
 
     self.remove = function (e) {
-      self.opts.list.splice(self.opts.list.indexOf(e.item.id), 1)
+      self.list.splice(self.list.indexOf(e.item.id), 1)
     }
     
     self.done = function () {
       self.isOpen = false
     }
 
-    function show() {
+    function show(list) {
+      self.list = list
       self.isOpen = true
       self.update()
     }

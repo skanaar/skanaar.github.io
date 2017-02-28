@@ -4,6 +4,7 @@
     <thead>
       <tr>
         <th>name</th>
+        <th>type</th>
         <th>credits</th>
         <th>installable</th>
         <th>passive</th>
@@ -21,6 +22,7 @@
     <tbody>
       <tr each={item in world.items} onclick={editItem} class={active: selected == item}>
         <td>{item.name}</td>
+        <td>{item.type}</td>
         <td>{item.credits}</td>
         <td>{item.isInstallable ? '×' : ''}</td>
         <td>{item.isPassive ? '×' : ''}</td>
@@ -35,7 +37,10 @@
         <td>{item.targetBuff.energy}</td>
       </tr>
       <tr>
-        <td colspan=13><button onclick={add}>+ New Item</button></td>
+        <td colspan=13>
+          <button onclick={add}>+ New Item</button>
+          <button onclick={sort}>Sort</button>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -68,6 +73,14 @@
   <div class="sidebar" show={!!selected}>
     <input type=text ref="nameField" value={selected && selected.name}>
     <div class="input-grid">
+      <em>type</em>
+      <select ref="typeInput" value={selected && selected.type}>
+        <option>weapon</option>
+        <option>tool</option>
+        <option>module</option>
+        <option>common</option>
+        <option>quest</option>
+      </select><br/>
       <em>credits</em>     <input type=number ref="creditsField" value={selected && selected.credits}><br/>
       <em>installable</em> <input type=checkbox ref="isInstallableToggle" checked={selected && selected.isInstallable}><br/>
       <em>passive</em>     <input type=checkbox ref="isPassiveToggle" checked={selected && selected.isPassive}>
@@ -106,6 +119,14 @@
     self.world = { items: [] }
     self.selected = null
 
+    self.sort = function () {
+      var order = ['weapon', 'tool', 'module', 'common', 'quest']
+      self.world.items.sort(function (a,b) {
+        var typeDelta = order.indexOf(a.type) - order.indexOf(b.type)
+        return (typeDelta == 0) ? a.credits - b.credits : typeDelta
+      })
+    }
+
     self.add = function () {
       self.world.items.push({
         type:'common', size: 's', isInstallable: false, isPassive: false, attr: { maxhull:0, maxshield:0, maxenergy:0, armor:0, cloak:0, jump:0, slots:0}, playerBuff:{hull:0, shield:0, energy: 0}, targetBuff:{ hull: 0, shield:  0, energy: 0}, credits: 5, name: 'unnamed'})
@@ -121,6 +142,7 @@
     
     self.endEditing = function (e) {
       self.selected.name = self.refs.nameField.value
+      self.selected.type = self.refs.typeInput.value
       self.selected.credits = +self.refs.creditsField.value
       self.selected.isInstallable = self.refs.isInstallableToggle.checked
       self.selected.isPassive = self.refs.isPassiveToggle.checked
