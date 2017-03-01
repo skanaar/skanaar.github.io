@@ -11,6 +11,8 @@
     <input type="text" value={active} ref="nameField">
     <button onclick={save}>Save</button>
     <button onclick={remove}>Delete</button>
+    <button onclick={up}>Up</button>
+    <button onclick={down}>Down</button>
   </div>
 
   <div class="sidebar">
@@ -76,6 +78,14 @@
 
     self.remove = function () {
       self.quests = _.filter(self.quests, q => q.title != self.active)
+    }
+
+    self.up = function () {
+      _.bubbleUp(self.quests, self.quests.findIndex(e => e.title == self.active))
+    }
+
+    self.down = function () {
+      _.bubbleDown(self.quests, self.quests.findIndex(e => e.title == self.active))
     }
 
     function questsXml() {

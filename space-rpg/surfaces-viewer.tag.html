@@ -7,8 +7,7 @@
     <div><button onclick={add}>+ New Surface</button></div>
   </div>
 
-
-  <svg width=1000 height=500 style="margin-left: 250px">
+  <svg width=800 height=500 class="surface-mesh">
     <path
       each={e in mesh}
       d="M{e.a.x},{e.a.y} L{e.b.x},{e.b.y} L{e.c.x},{e.c.y} L{e.d.x},{e.d.y} Z"
@@ -30,9 +29,16 @@
 
     <br/>
     <button onclick={remove}>Delete</button>
-    <button onclick={endEditing}>Done</button>
+    <button onclick={save}>Save</button>
     <button onclick={cancelEditing}>Cancel</button>
   </div>
+
+  <style>
+    .surface-mesh {
+      display: block;
+      margin: 50px auto;
+    }
+  </style>
 
   <script>
     var self = this
@@ -59,16 +65,10 @@
     
     self.edit = function (e) {
       self.selected = e.item.e
-      drawTerrain({
-        center: Vec(400, 250),
-        offset: Vec(0, 0),
-        radius: 348,
-        res: 16,
-        angle: 0.3
-      }, self.selected)
+      drawTerrain(self.selected)
     }
     
-    self.endEditing = function (e) {
+    self.save = function (e) {
       self.selected.id = self.refs.idField.value
       self.selected.desc = self.refs.descField.value
       self.selected.zoom = self.refs.zoomField.value
@@ -77,8 +77,7 @@
       self.selected.falloff = self.refs.falloffField.value
       self.selected.curve = self.refs.curveField.value.split(',').map(x => +x)
       self.selected.spectrum = self.refs.spectrumField.value.split(',')
-      self.selected = null
-      self.update()
+      drawTerrain(self.selected)
     }
 
     self.cancelEditing = function () {
@@ -98,17 +97,6 @@
     })
 
     function toHex(x){ return constrain(0, 16, Math.round(x)).toString(16) }
-
-    function drawGrid(center, radius, res, angle, g){
-      for(var i=-res; i<res; i++){
-        var x = i*radius/res
-        var y = Math.sqrt(radius*radius-x*x)
-        g.path([
-          add(center, perspective(rotate(Vec(x, -y), angle))),
-          add(center, perspective(rotate(Vec(x, y), angle)))
-        ]).stroke('#333')
-      }
-    }
 
     function colorLerp(c1, c2, factor){
       return [
@@ -139,61 +127,87 @@
       ], toHex).join('')
     }
 
-    function perlin(i, j, octaves, falloff) {
-      var sum = 0
-      var factor = 0.8
-      var mult = 1
-      for(var a=0; a<octaves; a++){
-        sum += factor * noise.perlin2(mult*i + 17*a, mult*j + 3*a)
-        factor *= falloff
-        mult *= 2
-      }
-      return sum + 0.5
-    }
+    function drawTerrain(style){
+      var center = Vec(400, 250)
+      var radius = 348
+      var angle = 0.3
+      var res = 16
+      var shadow = '000'
 
-    function drawTerrain(display, style){
-      var s = display.radius/display.res
-      var off = display.offset
-      var nScale = style.zoom/display.res
+      var noise = Noise({ persistence: style.falloff, octaves: style.octaves, zoom: 0.2 })
 
       function terrainPoint(i, j, h){
-        i -= display.res
-        j -= display.res
-        p = rotate(Vec(i*s, j*s), display.angle)
+        var p = rotate(mult(Vec(i-res, j-res), radius/res), angle)
         return Vec(p.x, p.y/2 - h * style.height*40/style.zoom)
       }
 
       var terrain = []
-      for(var i=0; i<2*display.res+1; i++){
+      for(var i=0; i<2*res+1; i++){
         terrain.push([])
-        for(var j=0; j<2*display.res+1; j++){
-          terrain[i][j] = perlin(i*nScale+off.x, j*nScale+off.y, style.octaves, style.falloff)
+        for(var j=0; j<2*res+1; j++){
+          terrain[i][j] = noise(Vec(i*style.zoom/res, j*style.zoom/res))
           terrain[i][j] = lerp(style.curve, terrain[i][j])
         }
       }
 
-      var shadow = '000'
-      var low = '0f0'
-      var high = 'fff'
-
       self.mesh = []
 
-      for(var i=0; i<2*display.res; i++){
-        for(var j=0; j<2*display.res; j++){
-          var sunAngle = 0.5 + (terrain[i][j]-terrain[i+1][j])*display.res/15
+      for(var i=0; i<2*res; i++){
+        for(var j=0; j<2*res; j++){
+          if (sq(i-res) + sq(j-res) > sq(res)) continue
+          var sunAngle = 0.75 + (terrain[i][j]-terrain[i+1][j])*res/15
           var color = colorLerp(shadow, spectrumSample(style.spectrum, terrain[i][j]), sunAngle)
-          var alpha = constrain(0, 1, 0.6*(display.res - mag(Vec(i-display.res+1, j-display.res+1))))
+          var alpha = constrain(0, 1, 0.6*(res - mag(Vec(i-res+1, j-res+1))))
           self.mesh.push({
-            a: add(display.center, terrainPoint(i+0, j+0, terrain[i+0][j+0]-0.3)),
-            b: add(display.center, terrainPoint(i+1, j+0, terrain[i+1][j+0]-0.3)),
-            c: add(display.center, terrainPoint(i+1, j+1, terrain[i+1][j+1]-0.3)),
-            d: add(display.center, terrainPoint(i+0, j+1, terrain[i+0][j+1]-0.3)),
+            a: add(center, terrainPoint(i+0, j+0, terrain[i+0][j+0]-0.3)),
+            b: add(center, terrainPoint(i+1, j+0, terrain[i+1][j+0]-0.3)),
+            c: add(center, terrainPoint(i+1, j+1, terrain[i+1][j+1]-0.3)),
+            d: add(center, terrainPoint(i+0, j+1, terrain[i+0][j+1]-0.3)),
             fill: color
           })
         }
       }
     }
 
+    function Noise(conf) {
+      var res = 256
+      var persistence = conf.persistence || 0.5
+      var octaves = conf.octaves || 1
+      var scale = conf.zoom * 2 || 2
+      var matrix = _.range(res).map(e => Math.random() - 0.5)
+
+      function smoothstep(x) { return x*x*(3 - 2*x) }
+
+      function lerp(factor, a, b) { return a + (b-a)*factor }
+      
+      function getSingleOctave(p) {
+        var x0 = Math.floor(p.x)
+        var y0 = Math.floor(p.y)
+        var x1 = x0+1
+        var y1 = y0+1
+        var ux = smoothstep(p.x - x0)
+        var uy = smoothstep(p.y - y0)
+        var yy0 = lerp(uy, val(x0, y0), val(x0, y1))
+        var yy1 = lerp(uy, val(x1, y0), val(x1, y1))
+        return lerp(ux, yy0, yy1)
+      }
+      
+      function val(x, y) {
+        return matrix[Math.abs(1024 + x + 7*y) % matrix.length]
+      }
+
+      return function (p) {
+        var sum = 0.0
+        var pos = mult(p, 1/scale)
+        var amp = 1.0
+        for (var i=0; i<octaves; i++) {
+          sum = sum + amp * getSingleOctave(pos)
+          pos = mult(pos, 2)
+          amp = amp * persistence
+        }
+        return sum + 0.5
+      }
+    }
 
   </script>
 
