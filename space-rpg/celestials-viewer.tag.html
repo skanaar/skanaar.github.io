@@ -1,15 +1,22 @@
 <celestials-viewer>
 
+  <div class="list">
+    <div each={e in world.celestialStyles} onclick={edit} class={ list_item: true, active: e==selected }>
+      {e.id}
+    </div>
+    <div><button onclick={add}>+ New Celestial</button></div>
+  </div>
+
   <table>
     <tr each={row in rows()}>
-      <td each={e in row} onclick={editCelestial}>
+      <td each={e in row} onclick={edit}>
         <div>{e.id}</div>
-        <div class="celestial" style="width: {e.r*2}px; height: {e.r*2}px; background: linear-gradient(0deg, #{e.color[0]}, #{e.color[1]})"></div>
+        <celestial-preview celestial={e} />
       </td>
     </tr>
     <tr>
       <td>
-        <button onclick={addCelestial}>+ New Celestial</button>
+        <button onclick={add}>+ New Celestial</button>
         <button onclick={sort}>Sort</button>
       </td>
     </tr>
@@ -18,7 +25,17 @@
   <div class="sidebar" show={!!selected}>
     <input type=text ref="idField" value={selected && selected.id}>
     
-    <label>Attributes</label>
+    <label>Celestial Attributes</label>
+    <div class="input-grid">
+      <em>r</em> <input type=number ref="rField" value={selected && selected.r}><br/>
+      <em>amb</em> <input type=number ref="ambField" value={selected && selected.amb}><br/>
+      <em>oct</em> <input type=number step=1 ref="octField" value={selected && selected.oct}><br/>
+      <em>zoom</em> <input type=number ref="zoomField" value={selected && selected.zoom}><br/>
+      <em>color 1</em> <input type=text ref="color0Field" value={selected && selected.color[0]}><br/>
+      <em>color 2</em> <input type=text ref="color1Field" value={selected && selected.color[1]}><br/>
+    </div>
+    
+    <label>Surface Attributes</label>
     <div class="input-grid">
       <em>r</em> <input type=number ref="rField" value={selected && selected.r}><br/>
       <em>amb</em> <input type=number ref="ambField" value={selected && selected.amb}><br/>
@@ -33,11 +50,6 @@
   </div>
 
   <style>
-    .celestial {
-      display: inline-block;
-      margin: 10px 0 0 0;
-      border-radius: 200px;
-    }
     td {
       vertical-align: top;
       text-align: center;
@@ -59,12 +71,12 @@
       self.world.celestialStyles.sort((a,b) => (a.id < b.id ? -1 : 1))
     }
 
-    self.addCelestial = function () {
+    self.add = function () {
       var style = { id:'unnamed', r: 20, amb: 0.2, oct: 3, zoom: 10, color: ['888', 'D84']}
       self.world.celestialStyles.push(style)
     }
     
-    self.editCelestial = function (e) {
+    self.edit = function (e) {
       self.selected = e.item.e
     }
     

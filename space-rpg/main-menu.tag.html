@@ -7,7 +7,8 @@
       <button onclick={loadDefault}>Load default</button>
       <button onclick={loadEmpty}>Clear all</button>
       <a class="button" ref="downloadLink" onmouseenter={primeDownloadLink} download="destinations.json" href='#'>Download</a>
-      <input type=file ref=fileInput onchange={fileChanged} style="width: 150px; margin-right: 20px">
+      <label class=button for=file-input>Upload</label>
+      <input id=file-input type=file ref=fileInput onchange={fileChanged} style="width: 150px; margin-right: 20px">
     </div>
   </div>
   <div class="validation-report" if={hasValidationError}>
@@ -108,7 +109,7 @@
     }
     .file-tools {
       float: right;
-      margin-top: 5px;
+      margin-top: 3px;
     }
     a.tab, a.tab:active, a.tab:hover, a.tab:visited {
       display: inline-block;
