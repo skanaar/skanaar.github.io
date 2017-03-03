@@ -892,194 +892,6 @@
       "name": "Horkos"
     }
   ],
-  "celestialStyles": [
-    {"r": 4, "amb": 0.2, "oct": 16, "zoom": 1.2, "color": ["fff", "fff"], "id": "anomaly-buoy"},
-    {"r": 4, "amb": 0.2, "oct": 16, "zoom": 1.2, "color": ["f80", "f80"], "id": "anomaly-derelict"},
-    {"r": 5, "amb": 0.1, "oct": 1, "zoom": 0.2, "color": ["888", "888"], "id": "asteroid-1"},
-    {"r": 5, "amb": 0.1, "oct": 2, "zoom": 0.3, "color": ["aaa", "aaa"], "id": "asteroid-2"},
-    {"r": 5, "amb": 0.1, "oct": 2, "zoom": 0.4, "color": ["8a6", "8a6"], "id": "asteroid-3"},
-    {"r": 6, "amb": 0.1, "oct": 3, "zoom": 0.3, "color": ["aaa", "aaa"], "id": "asteroid-4"},
-    {"r": 6, "amb": 0.1, "oct": 3, "zoom": 0.4, "color": ["8a6", "8a6"], "id": "asteroid-5"},
-    {"r": 7, "amb": 0.1, "oct": 4, "zoom": 0.5, "color": ["a84", "a84"], "id": "asteroid-6"},
-    {"r": 8, "amb": 0.1, "oct": 2, "zoom": 0.6, "color": ["abb", "abb"], "id": "asteroid-7"},
-    {"r": 25, "amb": 0.6, "oct": 3, "zoom": 0.2, "color": ["ff8", "f04"], "id": "cloud-fiery"},
-    {"r": 25, "amb": 0.15, "oct": 3, "zoom": 0.15, "color": ["0f8", "f80"], "id": "cloud-green"},
-    {"r": 25, "amb": 0.15, "oct": 3, "zoom": 0.175, "color": ["f80", "f80"], "id": "cloud-orange", "attr": {}},
-    {"r": 45, "amb": 0.15, "oct": 3, "zoom": 0.2, "color": ["80f", "f80"], "id": "cloud-purple"},
-    {"id": "cloud-smoke", "r": 20, "amb": 0.2, "oct": 3, "zoom": 0.2, "color": ["444", "842"]},
-    {"r": 25, "amb": 0, "oct": 3, "zoom": 20, "color": ["5fe", "c6f"], "id": "jovian-1"},
-    {"r": 30, "amb": 0, "oct": 3, "zoom": 20, "color": ["fa5", "e74"], "id": "jovian-2"},
-    {"r": 25, "amb": 0, "oct": 3, "zoom": 20, "color": ["576", "0c6"], "id": "jovian-3"},
-    {"r": 20, "amb": 0.1, "oct": 4, "zoom": 10, "color": ["8f8", "ff8"], "id": "planet-badlands-1"},
-    {"r": 20, "amb": 0.1, "oct": 3, "zoom": 20, "color": ["00f", "0f0"], "id": "planet-green-1"},
-    {"r": 15, "amb": 0.1, "oct": 3, "zoom": 20, "color": ["00f", "0f0"], "id": "planet-green-2"},
-    {"r": 10, "amb": 0.1, "oct": 3, "zoom": 20, "color": ["00f", "0f0"], "id": "planet-green-3"},
-    {"r": 15, "amb": 0.1, "oct": 4, "zoom": 10, "color": ["8f8", "ff8"], "id": "planet-hell-1"},
-    {"r": 10, "amb": 0.1, "oct": 4, "zoom": 10, "color": ["8f8", "ff8"], "id": "planet-hell-2"},
-    {"r": 20, "amb": 0.1, "oct": 4, "zoom": 10, "color": ["888", "8f8"], "id": "planet-hell-3"},
-    {"r": 20, "amb": 0.1, "oct": 2, "zoom": 15, "color": ["f30", "555"], "id": "planet-hell-4"},
-    {"r": 10, "amb": 0.1, "oct": 2, "zoom": 15, "color": ["f30", "555"], "id": "planet-hell-5"},
-    {"r": 10, "amb": 0.5, "oct": 2, "zoom": 15, "color": ["000", "024"], "id": "planet-neutron-1"},
-    {"r": 15, "amb": 0.3, "oct": 3, "zoom": 15, "color": ["000", "024"], "id": "planet-neutron-2"},
-    {"r": 15, "amb": 0.8, "oct": 4, "zoom": 15, "color": ["000", "024"], "id": "planet-neutron-3"},
-    {"r": 20, "amb": 0.1, "oct": 4, "zoom": 10, "color": ["aaa", "444"], "id": "planet-rock-1"},
-    {"r": 10, "amb": 0.1, "oct": 4, "zoom": 10, "color": ["aaa", "444"], "id": "planet-s-rock-1"},
-    {"r": 20, "amb": 0.1, "oct": 3, "zoom": 20, "color": ["00f", "777"], "id": "planet-water-1"},
-    {"r": 15, "amb": 0.1, "oct": 3, "zoom": 20, "color": ["00f", "777"], "id": "planet-water-2"},
-    {"r": 10, "amb": 0.1, "oct": 3, "zoom": 20, "color": ["00f", "777"], "id": "planet-water-3"},
-    {"r": 9, "amb": 0.2, "oct": 2, "zoom": 0.3, "color": ["888", "888"], "id": "ring-1"},
-    {"r": 7, "amb": 0.2, "oct": 2, "zoom": 0.5, "color": ["CCA", "bbb"], "id": "ring-2"},
-    {"r": 8, "amb": 0.2, "oct": 2, "zoom": 0.3, "color": ["DAA", "bbb"], "id": "ring-3"},
-    {"r": 9, "amb": 0.2, "oct": 2, "zoom": 0.2, "color": ["ACA", "bbb"], "id": "ring-4"},
-    {"r": 30, "amb": 1, "oct": 2, "zoom": 15, "color": ["fc3", "ff5"], "id": "star-m-ff0"}
-  ],
-  "surfaces": [
-    {
-      "id": "volcano",
-      "desc": "Volcanoes constantly feed the endless forest with nutrients",
-      "zoom": 1,
-      "height": 3,
-      "octaves": 3,
-      "falloff": 0.5,
-      "curve": [0, 0.2, 0.4, 0.6, 0.8, 1, 0.9],
-      "spectrum": ["06F", "06F", "8F0", "0F0", "0F0", "0D0", "000", "F00"]
-    },
-    {
-      "id": "hell-1",
-      "desc": "The thin crust has cracked, revealing canyons of lava",
-      "zoom": 1,
-      "height": 2,
-      "octaves": 2,
-      "falloff": 0.2,
-      "curve": [0.4, 0.5, 0.45, 0.3, 0, 0.9, 0.95, 1],
-      "spectrum": ["F80", "F00", "666", "666", "666", "666", "666"]
-    },
-    {
-      "id": "hell-2",
-      "desc": "A hellish world with lakes of molten lava dotting the surface",
-      "zoom": 1,
-      "height": 2,
-      "octaves": 4,
-      "falloff": 0.3,
-      "curve": [0.4, 0.5, 0.45, 0.5, 0.3, 0, 0],
-      "spectrum": ["F80", "F00", "000", "666", "666", "666", "666", "666"]
-    },
-    {
-      "id": "xeno",
-      "desc": "A blue xenofungus only grows at a certain altitude",
-      "zoom": 0.75,
-      "height": 3,
-      "octaves": 3,
-      "falloff": 0.5,
-      "curve": [0, 1],
-      "spectrum": ["666", "666", "666", "666", "0DF", "888", "888", "555", "555"]
-    },
-    {"id": "brass", "desc": "A lunar desert, with every grain of sand made of brass", "zoom": 0.7, "height": 2, "octaves": 4, "falloff": 0.5, "curve": [0, 1], "spectrum": ["BA4", "DB4"]},
-    {"id": "rock-1", "desc": "A barren lunar landscape, littered with rocks", "zoom": 0.7, "height": 2, "octaves": 4, "falloff": 0.5, "curve": [0, 1], "spectrum": ["666", "888"]},
-    {"id": "rock-2", "desc": "Featureless regolith all the way to the horizon", "zoom": 0.7, "height": 2, "octaves": 4, "falloff": 0.3, "curve": [0, 1], "spectrum": ["666", "888"]},
-    {
-      "id": "rock-3",
-      "desc": "Inexplicably covered with deep wrinkles that cuts into the bedrock",
-      "zoom": 2,
-      "height": 2,
-      "octaves": 1,
-      "falloff": 0.5,
-      "curve": [0, 0.25, 0.5, 1, 1, 0.5, 0.25, 0],
-      "spectrum": ["040", "0F4", "888"]
-    },
-    {
-      "id": "rock-4",
-      "desc": "Purple crystals as tall as mountains protrude through the regolith ",
-      "zoom": 3,
-      "height": 2,
-      "octaves": 4,
-      "falloff": 0.25,
-      "curve": [0.4, 0.45, 0.6, 1],
-      "spectrum": ["666", "666", "666", "666", "666", "F0F"]
-    },
-    {
-      "id": "rock-5",
-      "desc": "Airless and radiation blasted, mysterious lichens grow in the valleys",
-      "zoom": 2,
-      "height": 2,
-      "octaves": 4,
-      "falloff": 0.3,
-      "curve": [0, 1],
-      "spectrum": ["0F0", "0FF", "666", "666", "666", "666", "666"]
-    },
-    {"id": "green-1", "desc": "Vast plains and tall mountains, nothing else", "zoom": 0.7, "height": 2, "octaves": 4, "falloff": 0.5, "curve": [0, 0.3, 0.3, 0.4, 0.8, 1], "spectrum": ["BA4", "888"]},
-    {"id": "green-2", "desc": "Sand and grass", "zoom": 1.5, "height": 2, "octaves": 2, "falloff": 0.2, "curve": [1, 0, 0.5], "spectrum": ["4F0", "FF8", "FF8", "884", "884"]},
-    {
-      "id": "green-3",
-      "desc": "Boulbous hills snake around the entire planet, with an infinite meadow sprouting yellow flowers",
-      "zoom": 1,
-      "height": 2,
-      "octaves": 2,
-      "falloff": 0.2,
-      "curve": [1, 0, 1],
-      "spectrum": ["040", "0F4", "FF0"]
-    },
-    {
-      "id": "green-4",
-      "desc": "Rolling hills, snow covered mountains and lush forests",
-      "zoom": 1,
-      "height": 2,
-      "octaves": 6,
-      "falloff": 0.65,
-      "curve": [0, 1],
-      "spectrum": ["04F", "0F0", "8D0", "FFF"]
-    },
-    {
-      "id": "green-5",
-      "desc": "Pink soft peaks tower over a vast double layered forest",
-      "zoom": 1,
-      "height": 2,
-      "octaves": 4,
-      "falloff": 0.5,
-      "curve": [0.1, 0.2, 0.3, 0.33, 0.37, 0.4, 0.6, 0.8, 0.9, 1],
-      "spectrum": ["040", "0F0", "8D0", "F88"]
-    },
-    {
-      "id": "desert-1",
-      "desc": "Scorching hot desert streaked with mysteriously temperate and humid forests",
-      "zoom": 2.5,
-      "height": 2,
-      "octaves": 2,
-      "falloff": 0.2,
-      "curve": [1, 0.75, 0.5, 0.1, 0],
-      "spectrum": ["4F0", "FF8", "FF8", "884", "884"]
-    },
-    {
-      "id": "desert-2",
-      "desc": "A completely uniform desert, any traces of life long since ground into dust",
-      "zoom": 1.5,
-      "height": 2,
-      "octaves": 2,
-      "falloff": 0.2,
-      "curve": [1, 0, 0.5],
-      "spectrum": ["FF8", "FF8", "884"]
-    },
-    {
-      "id": "beach",
-      "desc": "Covered with an infinite beach, and blasted into lifelessness by unrelenting radiation",
-      "zoom": 1.5,
-      "height": 2,
-      "octaves": 2,
-      "falloff": 0.2,
-      "curve": [0.5, 0.5, 0, 0, 0.5],
-      "spectrum": ["06F", "FF8", "FF8", "884", "884"]
-    },
-    {
-      "id": "water",
-      "desc": "A single frozen sea of water and salt",
-      "zoom": 1.5,
-      "height": 1,
-      "octaves": 5,
-      "falloff": 0.5,
-      "curve": [0.45, 0.4, 0.45, 0.4, 0.7, 0.7, 0.7, 0.7],
-      "spectrum": ["68F", "36F", "36F", "FFF", "FFF", "FFF"]
-    }
-  ],
   "destinations": [
     {"name": "Backwater", "style": "planet-badlands-1", "surface": "green-2", "pos": {"x": -100, "y": -1300}, "trader": {"buy": 1, "sell": 1, "inventory": []}, "treasures": [], "enemy": null},
     {"name": "Anomaly 42", "style": "anomaly-derelict", "surface": "anomaly-thanatos", "pos": {"x": 70, "y": -1330}, "trader": null, "treasures": [], "enemy": null},
@@ -1427,5 +1239,224 @@
     {"id": "unnamed", "desc": "", "zoom": 1, "height": 3, "octaves": 3, "falloff": 0.5, "curve": [0, 1], "spectrum": ["06F", "F00"]}
   ],
   "initialDestination": "Backwater",
-  "models": []
+  "models": [],
+  "celestials": [
+    {
+      "type": "anomaly",
+      "id": "anomaly-buoy",
+      "celestial": {"r": 4, "amb": 0.2, "oct": 16, "zoom": 1.2, "color": ["f80", "f80"]},
+      "surface": null,
+      "desc": "USO-MG85Q compliant deep space buoy",
+      "model": "anomaly-buoy"
+    },
+    {"type": "anomaly", "id": "anomaly-derelict", "celestial": {"r": 4, "amb": 0.2, "oct": 16, "zoom": 1.2, "color": ["f80", "f80"]}, "surface": null, "desc": "", "model": "anomaly-thanatos"},
+    {
+      "id": "anomaly-thanatos",
+      "type": "anomaly",
+      "desc": "",
+      "celestial": {"r": 4, "amb": 0.2, "oct": 3, "zoom": 10, "color": ["f80", "f80"]},
+      "surface": {"zoom": 1.5, "height": 2, "octaves": 2, "falloff": 0.2, "curve": [0, 1], "spectrum": ["000", "FFF"]},
+      "model": "anomaly-thanatos"
+    },
+    {
+      "type": "asteroid",
+      "id": "asteroid-1",
+      "desc": "Featureless regolith all the way to the horizon",
+      "celestial": {"r": 5, "amb": 0.1, "oct": 1, "zoom": 0.2, "color": ["888", "888"]},
+      "surface": {"zoom": 0.7, "height": 2, "octaves": 4, "falloff": 0.3, "curve": [0, 1], "spectrum": ["666", "888"]}
+    },
+    {
+      "type": "asteroid",
+      "id": "asteroid-wrinkle",
+      "desc": "Inexplicably covered with deep wrinkles that cuts into the bedrock",
+      "celestial": {"r": 5, "amb": 0.1, "oct": 2, "zoom": 0.3, "color": ["aaa", "aaa"]},
+      "surface": {"zoom": 2, "height": 2, "octaves": 1, "falloff": 0.5, "curve": [0, 0.25, 0.5, 1, 1, 0.5, 0.25, 0], "spectrum": ["040", "0F4", "888"]},
+      "model": null
+    },
+    {
+      "type": "asteroid",
+      "id": "asteroid-lichen",
+      "desc": "Airless and radiation blasted, mysterious lichens grow in the valleys",
+      "celestial": {"r": 5, "amb": 0.1, "oct": 2, "zoom": 0.4, "color": ["8a6", "484"]},
+      "surface": {"zoom": 2, "height": 2, "octaves": 4, "falloff": 0.3, "curve": [0, 1], "spectrum": ["0F0", "0FF", "666", "666", "666", "666", "666"]},
+      "model": null
+    },
+    {
+      "type": "asteroid",
+      "id": "asteroid-4",
+      "desc": "A porous asteroid, mor like a cloud of dust",
+      "celestial": {"r": 6, "amb": 0.1, "oct": 3, "zoom": 0.3, "color": ["aaa", "aaa"]},
+      "surface": {"zoom": 2, "height": 2, "octaves": 4, "falloff": 0.3, "curve": [0, 1], "spectrum": ["888", "666", "666", "666"]},
+      "model": null
+    },
+    {
+      "type": "asteroid",
+      "id": "asteroid-5",
+      "desc": "Silicate rich asteroid",
+      "celestial": {"r": 6, "amb": 0.1, "oct": 3, "zoom": 0.4, "color": ["8a6", "8a6"]},
+      "surface": {"zoom": 1.5, "height": 3, "octaves": 3, "falloff": 0.3, "curve": [0, 0.4, 0.6, 1], "spectrum": ["880", "666", "884"]},
+      "model": null
+    },
+    {
+      "type": "asteroid",
+      "id": "asteroid-6",
+      "desc": "Carbonous rock of soft filthy rock",
+      "celestial": {"r": 7, "amb": 0.1, "oct": 4, "zoom": 0.5, "color": ["a84", "a84"]},
+      "surface": {"zoom": 2, "height": 2, "octaves": 4, "falloff": 0.3, "curve": [0, 1], "spectrum": ["666", "A84"]},
+      "model": null
+    },
+    {
+      "type": "asteroid",
+      "id": "asteroid-xeno",
+      "desc": "A blue xenofungus only grows at a certain altitude",
+      "celestial": {"r": 8, "amb": 0.1, "oct": 2, "zoom": 0.6, "color": ["abb", "0DF"]},
+      "surface": {"zoom": 0.75, "height": 3, "octaves": 3, "falloff": 0.5, "curve": [0, 1], "spectrum": ["666", "666", "666", "666", "0DF", "888", "888", "555", "555"]}
+    },
+    {"type": "cloud", "id": "cloud-fiery", "celestial": {"r": 25, "amb": 0.6, "oct": 3, "zoom": 0.2, "color": ["ff8", "f04"]}, "surface": null},
+    {"type": "cloud", "id": "cloud-green", "celestial": {"r": 25, "amb": 0.15, "oct": 3, "zoom": 0.15, "color": ["0f8", "f80"]}, "surface": null},
+    {"type": "cloud", "id": "cloud-orange", "attr": {}, "celestial": {"r": 25, "amb": 0.15, "oct": 3, "zoom": 0.175, "color": ["f80", "f80"]}, "surface": null},
+    {"type": "cloud", "id": "cloud-purple", "celestial": {"r": 45, "amb": 0.15, "oct": 3, "zoom": 0.2, "color": ["80f", "f80"]}, "surface": null},
+    {"type": "cloud", "id": "cloud-smoke", "celestial": {"r": 20, "amb": 0.2, "oct": 3, "zoom": 0.2, "color": ["444", "842"]}, "surface": null},
+    {"type": "jovian", "id": "jovian-1", "celestial": {"r": 25, "amb": 0, "oct": 3, "zoom": 20, "color": ["5fe", "c6f"]}, "surface": null},
+    {"type": "jovian", "id": "jovian-2", "celestial": {"r": 30, "amb": 0, "oct": 3, "zoom": 20, "color": ["fa5", "e74"]}, "surface": null},
+    {"type": "jovian", "id": "jovian-3", "celestial": {"r": 25, "amb": 0, "oct": 3, "zoom": 20, "color": ["576", "0c6"]}, "surface": null},
+    {
+      "type": "planet",
+      "id": "planet-badlands-1",
+      "desc": "A completely uniform desert, any traces of life long since ground into dust",
+      "celestial": {"r": 20, "amb": 0.1, "oct": 4, "zoom": 10, "color": ["8f8", "ff8"]},
+      "surface": {"zoom": 1.5, "height": 2, "octaves": 2, "falloff": 0.2, "curve": [1, 0, 0.5], "spectrum": ["FF8", "FF8", "884"]}
+    },
+    {
+      "type": "planet",
+      "id": "planet-beach",
+      "desc": "Covered with an infinite beach, and blasted into lifelessness by unrelenting radiation",
+      "celestial": {"r": 10, "amb": 0.1, "oct": 3, "zoom": 20, "color": ["00f", "777"]},
+      "surface": {"zoom": 1.5, "height": 2, "octaves": 2, "falloff": 0.2, "curve": [0.5, 0.5, 0, 0, 0.5], "spectrum": ["06F", "FF8", "FF8", "884", "884"]}
+    },
+    {
+      "type": "planet",
+      "id": "planet-green-1",
+      "desc": "Vast plains and tall mountains, nothing else",
+      "celestial": {"r": 20, "amb": 0.1, "oct": 3, "zoom": 20, "color": ["00f", "0f0"]},
+      "surface": {"zoom": 0.7, "height": 2, "octaves": 4, "falloff": 0.5, "curve": [0, 0.3, 0.3, 0.4, 0.8, 1], "spectrum": ["BA4", "888"]}
+    },
+    {
+      "type": "planet",
+      "id": "planet-green-2",
+      "desc": "Boulbous hills snake around the entire planet, with an infinite meadow sprouting yellow flowers",
+      "celestial": {"r": 15, "amb": 0.1, "oct": 3, "zoom": 20, "color": ["00f", "0f0"]},
+      "surface": {"zoom": 1, "height": 2, "octaves": 2, "falloff": 0.2, "curve": [1, 0, 1], "spectrum": ["040", "0F4", "FF0"]}
+    },
+    {
+      "type": "planet",
+      "id": "planet-green-3",
+      "desc": "Sand and grass",
+      "celestial": {"r": 10, "amb": 0.1, "oct": 3, "zoom": 20, "color": ["00f", "0f0"]},
+      "surface": {"zoom": 1.5, "height": 2, "octaves": 2, "falloff": 0.2, "curve": [1, 0, 0.5], "spectrum": ["4F0", "FF8", "FF8", "884", "884"]}
+    },
+    {
+      "type": "planet",
+      "id": "planet-green-4",
+      "desc": "Rolling hills, snow covered mountains and lush forests",
+      "celestial": {"r": 10, "amb": 0.1, "oct": 3, "zoom": 20, "color": ["00f", "0f0"]},
+      "surface": {"zoom": 1, "height": 2, "octaves": 6, "falloff": 0.65, "curve": [0, 1], "spectrum": ["04F", "0F0", "8D0", "FFF"]}
+    },
+    {
+      "type": "planet",
+      "id": "planet-green-5",
+      "desc": "Pink soft peaks tower over a vast double layered forest",
+      "celestial": {"r": 10, "amb": 0.1, "oct": 3, "zoom": 20, "color": ["00f", "0f0"]},
+      "surface": {"zoom": 1, "height": 2, "octaves": 4, "falloff": 0.5, "curve": [0.1, 0.2, 0.3, 0.33, 0.37, 0.4, 0.6, 0.8, 0.9, 1], "spectrum": ["040", "0F0", "8D0", "F88"]}
+    },
+    {
+      "type": "planet",
+      "id": "planet-hell-1",
+      "desc": "Volcanoes constantly feed the endless forest with nutrients",
+      "celestial": {"r": 15, "amb": 0.1, "oct": 4, "zoom": 10, "color": ["8f8", "ff8"]},
+      "surface": {"zoom": 1, "height": 3, "octaves": 3, "falloff": 0.5, "curve": [0, 0.2, 0.4, 0.6, 0.8, 1, 0.9], "spectrum": ["06F", "06F", "8F0", "0F0", "0F0", "0D0", "000", "F00"]}
+    },
+    {
+      "type": "planet",
+      "id": "planet-hell-2",
+      "desc": "The thin crust has cracked, revealing canyons of lava",
+      "celestial": {"r": 10, "amb": 0.1, "oct": 4, "zoom": 10, "color": ["8f8", "ff8"]},
+      "surface": {"zoom": 1, "height": 2, "octaves": 2, "falloff": 0.2, "curve": [0.4, 0.5, 0.45, 0.3, 0, 0.9, 0.95, 1], "spectrum": ["F80", "F00", "666", "666", "666", "666", "666"]}
+    },
+    {
+      "type": "planet",
+      "id": "planet-hell-3",
+      "desc": "A hellish world with lakes of molten lava dotting the surface",
+      "celestial": {"r": 20, "amb": 0.1, "oct": 4, "zoom": 10, "color": ["888", "8f8"]},
+      "surface": {"zoom": 1, "height": 2, "octaves": 4, "falloff": 0.3, "curve": [0.4, 0.5, 0.45, 0.5, 0.3, 0, 0], "spectrum": ["F80", "F00", "000", "666", "666", "666", "666", "666"]}
+    },
+    {
+      "type": "planet",
+      "id": "planet-hell-4",
+      "desc": "A hellish world with lakes of molten lava dotting the surface",
+      "celestial": {"r": 20, "amb": 0.1, "oct": 2, "zoom": 15, "color": ["f30", "555"]},
+      "surface": {"zoom": 1, "height": 2, "octaves": 4, "falloff": 0.3, "curve": [0.4, 0.5, 0.45, 0.5, 0.3, 0, 0], "spectrum": ["F80", "F00", "000", "666", "666", "666", "666", "666"]}
+    },
+    {
+      "type": "planet",
+      "id": "planet-hell-5",
+      "desc": "Scorching hot desert streaked with mysteriously temperate and humid forests",
+      "celestial": {"r": 10, "amb": 0.1, "oct": 2, "zoom": 15, "color": ["f30", "555"]},
+      "surface": {"zoom": 2.5, "height": 2, "octaves": 2, "falloff": 0.2, "curve": [1, 0.75, 0.5, 0.1, 0], "spectrum": ["4F0", "FF8", "FF8", "884", "884"]}
+    },
+    {
+      "type": "planet",
+      "id": "planet-neutron-1",
+      "desc": "A hellish world with lakes of molten lava dotting the surface",
+      "celestial": {"r": 10, "amb": 0.5, "oct": 2, "zoom": 15, "color": ["000", "024"]},
+      "surface": {"zoom": 1, "height": 2, "octaves": 4, "falloff": 0.3, "curve": [0.4, 0.5, 0.45, 0.5, 0.3, 0, 0], "spectrum": ["F80", "F00", "000", "666", "666", "666", "666", "666"]}
+    },
+    {
+      "type": "planet",
+      "id": "planet-neutron-2",
+      "desc": "A hellish world with lakes of molten lava dotting the surface",
+      "celestial": {"r": 15, "amb": 0.3, "oct": 3, "zoom": 15, "color": ["000", "024"]},
+      "surface": {"zoom": 1, "height": 2, "octaves": 4, "falloff": 0.3, "curve": [0.4, 0.5, 0.45, 0.5, 0.3, 0, 0], "spectrum": ["F80", "F00", "000", "666", "666", "666", "666", "666"]}
+    },
+    {
+      "type": "planet",
+      "id": "planet-neutron-3",
+      "desc": "A hellish world with lakes of molten lava dotting the surface",
+      "celestial": {"r": 15, "amb": 0.8, "oct": 4, "zoom": 15, "color": ["000", "024"]},
+      "surface": {"zoom": 1, "height": 2, "octaves": 4, "falloff": 0.3, "curve": [0.4, 0.5, 0.45, 0.5, 0.3, 0, 0], "spectrum": ["F80", "F00", "000", "666", "666", "666", "666", "666"]}
+    },
+    {
+      "type": "planet",
+      "id": "planet-rock-1",
+      "desc": "Purple crystals as tall as mountains protrude through the regolith ",
+      "celestial": {"r": 20, "amb": 0.1, "oct": 4, "zoom": 10, "color": ["aaa", "444"]},
+      "surface": {"zoom": 3, "height": 2, "octaves": 4, "falloff": 0.25, "curve": [0.4, 0.45, 0.6, 1], "spectrum": ["666", "666", "666", "666", "666", "F0F"]}
+    },
+    {
+      "type": "planet",
+      "id": "planet-s-rock-1",
+      "desc": "A lunar desert, with every grain of sand made of brass",
+      "celestial": {"r": 10, "amb": 0.1, "oct": 4, "zoom": 10, "color": ["aaa", "444"]},
+      "surface": {"zoom": 0.7, "height": 2, "octaves": 4, "falloff": 0.5, "curve": [0, 1], "spectrum": ["BA4", "DB4"]}
+    },
+    {
+      "type": "planet",
+      "id": "planet-water-1",
+      "desc": "A single frozen sea of water and salt",
+      "celestial": {"r": 20, "amb": 0.1, "oct": 3, "zoom": 20, "color": ["00f", "777"]},
+      "surface": {"zoom": 1.5, "height": 1, "octaves": 5, "falloff": 0.5, "curve": [0.45, 0.4, 0.45, 0.4, 0.7, 0.7, 0.7, 0.7], "spectrum": ["68F", "36F", "36F", "FFF", "FFF", "FFF"]}
+    },
+    {
+      "type": "planet",
+      "id": "planet-water-frozen",
+      "desc": "A single frozen sea of water and salt",
+      "celestial": {"r": 15, "amb": 0.1, "oct": 3, "zoom": 20, "color": ["00f", "777"]},
+      "surface": {"zoom": 1.5, "height": 1, "octaves": 5, "falloff": 0.5, "curve": [0.45, 0.4, 0.45, 0.4, 0.7, 0.7, 0.7, 0.7], "spectrum": ["68F", "36F", "36F", "FFF", "FFF", "FFF"]}
+    },
+    {"type": "ring", "id": "ring-1", "celestial": {"r": 9, "amb": 0.2, "oct": 2, "zoom": 0.3, "color": ["888", "888"]}, "surface": null},
+    {"type": "ring", "id": "ring-2", "celestial": {"r": 7, "amb": 0.2, "oct": 2, "zoom": 0.5, "color": ["CCA", "bbb"]}, "surface": null},
+    {"type": "ring", "id": "ring-3", "celestial": {"r": 8, "amb": 0.2, "oct": 2, "zoom": 0.3, "color": ["DAA", "bbb"]}, "surface": null},
+    {"type": "ring", "id": "ring-4", "celestial": {"r": 9, "amb": 0.2, "oct": 2, "zoom": 0.2, "color": ["ACA", "bbb"]}, "surface": null},
+    {"type": "star", "id": "star-m-ff0", "celestial": {"r": 30, "amb": 1, "oct": 2, "zoom": 15, "color": ["fc3", "ff5"]}, "surface": null}
+  ]
 }

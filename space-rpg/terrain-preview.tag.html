@@ -1,6 +1,6 @@
 <terrain-preview>
 
-  <svg width=800 height=500 class="surface-mesh">
+  <svg width=800 height=500 class="surface-mesh" if={opts.surface}>
     <path
       each={e in mesh}
       d="M{e.a.x},{e.a.y} L{e.b.x},{e.b.y} L{e.c.x},{e.c.y} L{e.d.x},{e.d.y} Z"

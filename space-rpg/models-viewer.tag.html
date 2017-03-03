@@ -28,6 +28,32 @@
     <button onclick={cancelEditing}>Cancel</button>
   </div>
 
+  {
+    "name": "xyz",
+    "geometry": "lathe",
+    "res": 8,
+    "transform": [["scale", 2, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 100, 0, 0]],
+    "path": [[1,2,1], [1,20,20]]
+  }
+
+  {
+    "geometry": "composition",
+    "transform": [["scale", 2, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 200, 0]],
+    "model": "xyz"
+  }
+
+  {
+    "geometry": "mesh",
+    "vertices": [[]],
+    "faces": []
+  }
+
+  {
+    "geometry": "sphere",
+    "subdivisions": 3,
+    "transform": [["scale", 10, 10, 10]]
+  }
+
   <style>
     .sidebar textarea {
       width: 170px;

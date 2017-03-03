@@ -62,22 +62,11 @@
     <button onclick={autoNameNodes}>Autoname</button>
 
     <label>Celestial</label>
-    <select ref="styleSelect" onchange={setCelestialStyle}>
+    <select ref="celestialSelect" onchange={setCelestial}>
       <option value="unknown">- style -</option>
-      <option each={e in world.celestialStyles}>{e.id}</option>
+      <option each={e in world.celestials}>{e.id}</option>
     </select>
     <button onclick={randomizeStyle}>Randomize</button>
-
-    <label show={selectionHasSurface()}>Surface</label>
-    <select ref="surfaceSelect" onchange={setSurface} show={selectionHasSurface()}>
-      <option value="unknown">- surface -</option>
-      <option each={e in world.surfaces}>{e.id}</option>
-    </select>
-    <label show={selectionHasModel()}>Model</label>
-    <select ref="modelSelect" onchange={setModel} show={selectionHasModel()}>
-      <option value="unknown">- model -</option>
-      <option each={e in models}>{e}</option>
-    </select>
 
     <label>Treasures</label>
     <button onclick={chooseTreasures}>Choose treasures</button>
@@ -255,17 +244,9 @@
       })
     }
 
-    self.setCelestialStyle = function (e) {
+    self.setCelestial = function (e) {
       forSelected(ent => ent.style = e.target.value)
       calculateLines()
-    }
-
-    self.setSurface = function (e) {
-      forSelected(ent => { if (!constants.hasModel(ent)) ent.surface = e.target.value })
-    }
-
-    self.setModel = function (e) {
-      forSelected(ent => { if (constants.hasModel(ent)) ent.surface = e.target.value })
     }
 
     function defaultTrader(){ return { buy: 0.75, sell: 1.5, inventory: [] } }
@@ -284,7 +265,7 @@
     self.randomizeStyle = function () {
       _.filter(self.nodes, 'isSelected').forEach(function (node) {
         var type = node.entity.style.split('-')[0]
-        var stylesOfSameType = self.world.celestialStyles.filter(e => e.id.startsWith(type))
+        var stylesOfSameType = self.world.celestials.filter(e => e.id.startsWith(type))
         node.entity.style = _.sample(stylesOfSameType).id
       })
       updateUI()
@@ -326,19 +307,15 @@
     self.traderDestinations = () => self.nodes.filter(e => e.entity.trader)
     self.treasureDestinations = () => self.nodes.filter(e => (e.entity.treasures || []).length)
 
-    self.selectionHasSurface = function() {
-      return _.filter(self.nodes, 'isSelected').every(e => constants.hasSurface(e.entity))
-    }
-    self.selectionHasModel = function() {
-      return _.filter(self.nodes, 'isSelected').every(e => constants.hasModel(e.entity))
-    }
-
     var fills = {
       cloud: 'rgba(221, 136, 221, 0.5)', star: '#ff4', jovian: '#fa8',
       planet: '#8f8', asteroid: '#aaa', anomaly: '#fa0', ring: '#8af'
     }
     self.fillFor = entity => fills[entity.style.split('-')[0]]
-    self.radiusFor = ent => self.world.celestialStyles.find(s => s.id == ent.style).r * self.scale
+    self.radiusFor = function (ent) {
+      var cel = self.world.celestials.find(s => s.id == ent.style)
+      return cel && (cel.celestial.r * self.scale) || 0
+    }
 
     function forSelected(action) {
       _.filter(self.nodes, 'isSelected').forEach(o => action(o.entity))
@@ -355,9 +332,7 @@
     }
 
     function updateUI() {
-      self.refs.styleSelect.value = uniqueSelectedProp('style') || 'unknown'
-      self.refs.surfaceSelect.value = uniqueSelectedProp('surface') || 'unknown'
-      self.refs.modelSelect.value = uniqueSelectedProp('surface') || 'unknown'
+      self.refs.celestialSelect.value = uniqueSelectedProp('style') || 'unknown'
       var selection = _.filter(self.nodes, 'isSelected')
       self.selectionSize = selection.length
       self.refs.nameField.value = selection.length == 1 ? selection[0].entity.name : ''
