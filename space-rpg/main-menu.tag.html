@@ -12,10 +12,11 @@
     </div>
   </div>
   <div class="validation-report" if={hasValidationError}>
-    <div each={e in undefinedNodes}>Error: Destination <b>{e}</b> not defined</div>
-    <div each={e in undefinedItems}>Error: Item <b>{e}</b> not defined</div>
-    <div each={e in undefinedEnemies}>Error: Enemy <b>{e}</b> not defined</div>
-    <div each={e in undefinedShips}>Error: Ship <b>{e}</b> not defined</div>
+    <div each={e in undefNodes}>Error: Destination <b>{e}</b> not defined</div>
+    <div each={e in undefItems}>Error: Item <b>{e}</b> not defined</div>
+    <div each={e in undefEnemies}>Error: Enemy <b>{e}</b> not defined</div>
+    <div each={e in undefShips}>Error: Ship <b>{e}</b> not defined</div>
+    <div each={e in undefModels}>Error: Model <b>{e}</b> not defined</div>
     <button onclick={validateWorld}>Update</button>
   </div>
 
@@ -44,29 +45,41 @@
 
     self.validateWorld = function () {
       var world = getWorld()
-      var referencedItems = _.flatten([
+      var referredItems = _.flatten([
         (world.quests.match(/item="[^"]*/gm) || []).map(e => e.substring(6).split(';')),
         world.enemies.map(e => e.inventory),
         world.destinations.map(e => e.treasures),
         world.destinations.map(e => e.trader && e.trader.inventory || [])
       ])
       var definedItems = world.items.map(e => e.name)
-      self.undefinedItems = _.uniq(_.difference(referencedItems, definedItems))
+      self.undefItems = _.uniq(_.difference(referredItems, definedItems))
 
       var destRefs = world.quests.match(/dest="[^"]*/gm) || []
-      var referencesNodes = _.flatten(destRefs.map(e => e.substring(6).split(';')))
+      var referredNodes = _.flatten(destRefs.map(e => e.substring(6).split(';')))
       var definedNodes = world.destinations.map(e => e.name)
-      self.undefinedNodes = _.uniq(_.difference(referencesNodes, definedNodes))
+      self.undefNodes = _.uniq(_.difference(referredNodes, definedNodes))
 
-      var referencesEnemies = world.destinations.filter(e => e.enemy).map(e => e.enemy.type)
+      var destEnemies = world.destinations.filter(e => e.enemy).map(e => e.enemy.type)
+      var questEnemies = (world.quests.match(/enemy="[^"]*/gm) || []).map(e => e.substring(7))
+      var referredEnemies = destEnemies.concat(questEnemies)
       var definedEnemies = world.enemies.map(e => e.name)
-      self.undefinedEnemies = _.uniq(_.difference(referencesEnemies, definedEnemies))
+      self.undefEnemies = _.uniq(_.difference(referredEnemies, definedEnemies))
 
-      self.hasValidationError = self.undefinedItems.length || self.undefinedNodes.length || self.undefinedEnemies.length
-
-      var referencesShips = (world.quests.match(/ship="[^"]*/gm) || []).map(e => e.substring(6))
+      var referredShips = (world.quests.match(/ship="[^"]*/gm) || []).map(e => e.substring(6))
       var definedShips = world.ships.map(e => e.name)
-      self.undefinedShips = _.difference(referencesShips, definedShips)
+      self.undefShips = _.difference(referredShips, definedShips)
+
+      var referredModels = world.celestials.filter(e => e.id.startsWith('anomaly-')).map(e=>e.model)
+      var definedModels = window.constants.models
+      self.undefModels = _.difference(referredModels, definedModels)
+
+      self.hasValidationError = [
+        self.undefItems,
+        self.undefNodes,
+        self.undefEnemies,
+        self.undefShips,
+        self.undefModels
+      ].some(e => e.length)
 
       self.update()
     }
@@ -145,6 +158,12 @@
       position: fixed;
       bottom: 5px;
       right: 25.5%;
+    }
+    .validation-report b {
+      border: 1px solid #ddd;
+      padding: 1px 3px;
+      background: #fff;
+      border-radius: 3px;
     }
   </style>
 </main-menu>
