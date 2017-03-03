@@ -17,6 +17,7 @@
     <div each={e in undefEnemies}>Error: Enemy <b>{e}</b> not defined</div>
     <div each={e in undefShips}>Error: Ship <b>{e}</b> not defined</div>
     <div each={e in undefModels}>Error: Model <b>{e}</b> not defined</div>
+    <div each={e in undefCelestials}>Error: Celestial <b>{e}</b> not defined</div>
     <button onclick={validateWorld}>Update</button>
   </div>
 
@@ -67,18 +68,23 @@
 
       var referredShips = (world.quests.match(/ship="[^"]*/gm) || []).map(e => e.substring(6))
       var definedShips = world.ships.map(e => e.name)
-      self.undefShips = _.difference(referredShips, definedShips)
+      self.undefShips = _.uniq(_.difference(referredShips, definedShips))
+
+      var referredCelestials = world.destinations.map(e => e.style)
+      var definedCelestials = world.celestials.map(e => e.id)
+      self.undefCelestials = _.uniq(_.difference(referredCelestials, definedCelestials))
 
       var referredModels = world.celestials.filter(e => e.id.startsWith('anomaly-')).map(e=>e.model)
       var definedModels = window.constants.models
-      self.undefModels = _.difference(referredModels, definedModels)
+      self.undefModels = _.uniq(_.difference(referredModels, definedModels))
 
       self.hasValidationError = [
         self.undefItems,
         self.undefNodes,
         self.undefEnemies,
         self.undefShips,
-        self.undefModels
+        self.undefModels,
+        self.undefCelestials
       ].some(e => e.length)
 
       self.update()

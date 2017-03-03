@@ -9,6 +9,11 @@ body, html {
 }
 body {
   padding-top: 25px;
+  overflow: hidden;
+}
+
+body.enable-scroll {
+  overflow: auto;
 }
 
 .galmap-toolbox {
