@@ -1524,7 +1524,7 @@
       "id": "asteroid-5",
       "desc": "Silicate rich asteroid",
       "celestial": {"r": 6, "amb": 0.1, "oct": 3, "zoom": 0.4, "color": ["8a6", "8a6"]},
-      "surface": {"zoom": "1.5", "height": "3", "octaves": "3", "falloff": "0.3", "curve": [0, 0.4, 0.6, 1], "spectrum": ["880", "666", "884"]},
+      "surface": {"zoom": 1.5, "height": 3, "octaves": 3, "falloff": 0.3, "curve": [0, 0.4, 0.6, 1], "spectrum": ["880", "666", "884"]},
       "model": null
     },
     {
@@ -1532,7 +1532,7 @@
       "id": "asteroid-6",
       "desc": "Carbonous rock of soft filthy rock",
       "celestial": {"r": 7, "amb": 0.1, "oct": 4, "zoom": 0.5, "color": ["a84", "a84"]},
-      "surface": {"zoom": "2", "height": "2", "octaves": "4", "falloff": "0.3", "curve": [0, 1], "spectrum": ["666", "A84"]},
+      "surface": {"zoom": 2, "height": 2, "octaves": 4, "falloff": 0.3, "curve": [0, 1], "spectrum": ["666", "A84"]},
       "model": null
     },
     {
