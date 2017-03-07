@@ -9,9 +9,9 @@
 
   <svg width=1000 height=500 style="margin-left: 250px">
     <path
-      each={e in selectedMesh()}
-      d="M{e[0][0]},{e[0][1]} L{e[1][0]},{e[1][1]} L{e[2][0]},{e[2][1]} L{e[3][0]},{e[3][1]} Z"
-      fill="rgba(255,128,0,0.2)"/>
+      each={e in mesh}
+      riot-d="M{e[0][0]},{e[0][1]} L{e[1][0]},{e[1][1]} L{e[2][0]},{e[2][1]} L{e[3][0]},{e[3][1]} Z"
+      fill="rgba(255,128,0,0.2)" stroke="#000"/>
   </svg>
 
   <div class="sidebar" show={!!selected}>
@@ -28,32 +28,6 @@
     <button onclick={cancelEditing}>Cancel</button>
   </div>
 
-  {
-    "name": "xyz",
-    "geometry": "lathe",
-    "res": 8,
-    "transform": [["scale", 2, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 100, 0, 0]],
-    "path": [[1,2,1], [1,20,20]]
-  }
-
-  {
-    "geometry": "composition",
-    "transform": [["scale", 2, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 200, 0]],
-    "model": "xyz"
-  }
-
-  {
-    "geometry": "mesh",
-    "vertices": [[]],
-    "faces": []
-  }
-
-  {
-    "geometry": "sphere",
-    "subdivisions": 3,
-    "transform": [["scale", 10, 10, 10]]
-  }
-
   <style>
     .sidebar textarea {
       width: 170px;
@@ -64,39 +38,80 @@
   <script>
     var self = this
 
+    var lathe = { "name": "xyz", "geometry": "lathe", "res": 8,
+      "transform": [["scale", 2, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 100, 0, 0]],
+      "path": [[1,0,-100], [200,0,0], [100,0,100]]
+    }
+    var src = [
+      { "name": "xyz", "geometry": "lathe", "res": 8,
+        "transform": [["scale", 2, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 100, 0, 0]],
+        "path": [[1,2,1], [1,20,20]]
+      },
+      {
+        "geometry": "composition",
+        "transform": [["scale", 2, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 200, 0]],
+        "model": "xyz"
+      },
+      {
+        "geometry": "mesh",
+        "vertices": [[]],
+        "faces": []
+      },
+      {
+        "geometry": "sphere",
+        "subdivisions": 3,
+        "transform": [["scale", 10, 10, 10]]
+      }
+    ]
+
     self.world = { models: [] }
     self.selected = null
+    self.mesh = []
 
-    self.selectedMesh = function () {
-      return self.selected ? self.selected.mesh : []
-    }
-
-    self.add = function () {
-      self.world.models.push({
-        name: "unnamed",
-        mesh: []
-      })
+    var transformations = {
+      'scale': scale,
+      'rotate': rotationZ
     }
 
-    self.remove = function () {
-      self.world.surfaces = self.world.surfaces.filter(e => e != self.selected)
-    }
-    
-    self.edit = function (e) {
-      self.selected = e.item.e
-    }
-    
-    self.endEditing = function (e) {
-      self.selected.name = self.refs.nameField.value
-      self.selected.mesh = JSON.parse(self.refs.meshField.value)
-      self.selected = null
-      self.update()
+    var rotationX = (a) => [1,0,0,  0,Math.cos(a),-Math.sin(a),  0,Math.sin(a),Math.cos(a)]
+    var rotationY = (a) => [Math.cos(a),0,Math.sin(a), 0,1,0, -Math.sin(a),0,Math.cos(a)]
+    var rotationZ = (a) => [Math.cos(a),-Math.sin(a),0,  Math.sin(a),Math.cos(a),0,  0,0,1]
+    var scale = (x,y,z) => [x,0,0,  0,y,0,  0,0,z]
+    var identity = () => [1,0,0, 0,1,0, 0,0,1]
+    var translate = (vec, delta) => [vec[0]+delta[0], vec[1]+delta[1], vec[2]+delta[2]]
+
+    function mapply (matrix, vec) {
+        return [vec[0]*matrix[0+3*0] + vec[1]*matrix[1+3*0] + vec[2]*matrix[2+3*0],
+                vec[0]*matrix[0+3*1] + vec[1]*matrix[1+3*1] + vec[2]*matrix[2+3*1],
+                vec[0]*matrix[0+3*2] + vec[1]*matrix[1+3*2] + vec[2]*matrix[2+3*2]]
     }
 
-    self.cancelEditing = function () {
-      self.selected = null
-      self.update()
+    function mmult (a, b) {
+        var m = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+        for (var i=0; i<3; i++) {
+            for (var j=0; j<3; j++) {
+                for (var k=0; k<3; k++) {
+                    m[i+3*j] += a[i+3*k]*b[k+3*j]
+                }
+            }
+        }
+        return m
     }
+
+    var perspective = mmult(rotationZ(0.3), rotationX(1.21))
+
+    _.range(0, lathe.res).map(function (slice) {
+      var offset = [300,300,0]
+      var sliceAngle = i => Math.PI*2 * i/lathe.res
+      for (var i=1; i<lathe.path.length; i++) {
+        self.mesh.push([
+          translate( mapply(perspective, mapply(rotationZ(sliceAngle(slice+0)), lathe.path[i])), offset),
+          translate( mapply(perspective, mapply(rotationZ(sliceAngle(slice+1)), lathe.path[i])), offset),
+          translate( mapply(perspective, mapply(rotationZ(sliceAngle(slice+1)), lathe.path[i-1])), offset),
+          translate( mapply(perspective, mapply(rotationZ(sliceAngle(slice+0)), lathe.path[i-1])), offset)
+        ])
+      }
+    })
 
     function loadWorld() {
         self.world = getWorld()
