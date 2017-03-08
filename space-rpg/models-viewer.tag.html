@@ -1,8 +1,8 @@
 <models-viewer>
 
   <div class="list">
-    <div each={e in world.models} onclick={edit} class={ list_item: true, active: e==selected }>
-      {e.name}
+    <div each={model in world.models} onclick={edit} class={ list_item: true, active: model==selected }>
+      {model.name}
     </div>
     <div><button onclick={add}>+ New Model</button></div>
   </div>
@@ -14,13 +14,26 @@
       fill="rgba(255,128,0,0.2)" stroke="#000"/>
   </svg>
 
-  <div class="sidebar" show={!!selected}>
+  <div class="toolbox">
+    <div class="btn-group">
+      <a onclick={setCamera.bind(null, 'top')} class="toggle-btn {(camera == 'top') && 'active'}">Top
+      </a><a onclick={setCamera.bind(null, 'front')} class="toggle-btn {(camera == 'front') && 'active'}">Front
+      </a><a onclick={setCamera.bind(null, 'side')} class="toggle-btn {(camera == 'side') && 'active'}">Side
+      </a><a onclick={setCamera.bind(null, 'perspective')} class="toggle-btn {(camera == 'perspective') && 'active'}">Perspective</a>
+    </div>
+  </div>
 
+  <div class="sidebar" show={!!selected}>
+    <input type=text ref="nameField" value={selected && selected.name}>
     <div class="input-grid">
-      <em>name</em> <input type=text ref="nameField" value={selected && selected.name}><br/>
+      <em>name</em> <input type=number ref="resField" value={selected && selected.res}><br/>
     </div>
 
-    <textarea value={JSON.stringify(selected && selected.mesh)} ref="meshField"></textarea>
+    <label>Transform Stack</label>
+    <textarea value={asJson(selected && selected.transform)} ref="transformField"></textarea>
+
+    <label>Path</label>
+    <textarea value={asJson(selected && selected.path)} ref="pathField"></textarea>
 
     <br/>
     <button onclick={remove}>Delete</button>
@@ -31,51 +44,116 @@
   <style>
     .sidebar textarea {
       width: 170px;
-      height: 240px;
+      height: 140px;
     }
   </style>
 
   <script>
     var self = this
-
-    var lathe = { "name": "xyz", "geometry": "lathe", "res": 8,
-      "transform": [["scale", 2, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 100, 0, 0]],
-      "path": [[1,0,-100], [200,0,0], [100,0,100]]
-    }
-    var src = [
+    self.camera = 'perspective' // top | front | side | perspective
+    self.world = { models: [
       { "name": "xyz", "geometry": "lathe", "res": 8,
-        "transform": [["scale", 2, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 100, 0, 0]],
-        "path": [[1,2,1], [1,20,20]]
-      },
-      {
-        "geometry": "composition",
-        "transform": [["scale", 2, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 200, 0]],
-        "model": "xyz"
-      },
-      {
-        "geometry": "mesh",
-        "vertices": [[]],
-        "faces": []
-      },
-      {
-        "geometry": "sphere",
-        "subdivisions": 3,
-        "transform": [["scale", 10, 10, 10]]
+        "transform": [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
+        "path": [[1,0,-100], [200,0,0], [100,0,100]]
       }
-    ]
-
-    self.world = { models: [] }
-    self.selected = null
+    ] }
     self.mesh = []
 
-    var transformations = {
-      'scale': scale,
-      'rotate': rotationZ
+    self.setCamera = function (mode) {
+      self.camera = mode
+      updateMesh()
     }
 
-    var rotationX = (a) => [1,0,0,  0,Math.cos(a),-Math.sin(a),  0,Math.sin(a),Math.cos(a)]
-    var rotationY = (a) => [Math.cos(a),0,Math.sin(a), 0,1,0, -Math.sin(a),0,Math.cos(a)]
-    var rotationZ = (a) => [Math.cos(a),-Math.sin(a),0,  Math.sin(a),Math.cos(a),0,  0,0,1]
+    self.asJson = function (data) {
+      return _.stringify(data, { maxLength: 25 })
+    }
+
+    self.add = function () {
+      self.world.models.push({
+        name: "xyz",
+        geometry: "lathe",
+        res: 8,
+        transform: [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
+        path: [[1,0,-100], [200,0,0], [100,0,100]]
+      })
+    }
+    
+    self.edit = function (e) {
+      self.selected = e.item.model
+      updateMesh()
+    }
+    
+    self.endEditing = function (e) {
+      self.selected.name = self.refs.nameField.value
+      self.selected.res = +self.refs.resField.value
+      self.selected.transform = JSON.parse(self.refs.transformField.value)
+      self.selected.path = JSON.parse(self.refs.pathField.value)
+      updateMesh()
+      self.update()
+    }
+
+    self.cancelEditing = function () {
+      self.selected = null
+      self.update()
+    }
+
+    function updateMesh(){
+      self.mesh = applyPerspective(applyTransformations(lathe(self.selected), self.selected))
+    }
+
+    function lathe(model) {
+      var mesh = []
+      _.range(0, model.res).map(function (slice) {
+        var vertex = (i,j) => mapply(rotateZ(Math.PI*2 * i/model.res), model.path[j])
+        for (var i=1; i<model.path.length; i++) {
+          mesh.push([vertex(slice,i), vertex(slice+1,i), vertex(slice+1,i-1), vertex(slice,i-1)])
+        }
+      })
+      return mesh
+    }
+
+    function transformQuad(quad, matrix) {
+      return quad.map(p => mapply(matrix, p))
+    }
+
+    function transformMesh(mesh, m) {
+      if (m[0] == 'scale')
+        return mesh.map(quad => transformQuad(quad, scale(m[1], m[2], m[3])))
+      if (m[0] == 'rotate')
+        return mesh.map(quad => transformQuad(quad, rotateXYZ(m[1], m[2], m[3])))
+      if (m[0] == 'translate')
+        return mesh.map(quad => quad.map(p => [p[0]+m[1], p[1]+m[2], p[2]+m[3]]))
+    }
+
+    function applyTransformations(mesh, model) {
+      return model.transform.reduce((mesh, trans) => transformMesh(mesh, trans), mesh)
+    }
+
+    function applyPerspective(mesh) {
+      var perspective = {
+        top: identity(),
+        front: rotateX(Math.PI/2),
+        side: rotateY(Math.PI/2),
+        perspective: mmult(rotateZ(0.75), rotateX(1.1))
+      }[self.camera] || mmult(rotateZ(0.3), rotateX(1.21))
+      return mesh.map(q => transformQuad(q, perspective).map(p => translate(p, [300,300,0])))
+    }
+
+    function loadWorld() {
+        self.world = getWorld()
+        self.update()
+    }
+
+    self.on('mount', function() {
+      window.events.on('world-updated', loadWorld)
+      window.events.on('save-world', () => saveWorld(self.world))
+      loadWorld()
+    })
+
+    var rotateX = (a) => [1,0,0,  0,Math.cos(a),-Math.sin(a),  0,Math.sin(a),Math.cos(a)]
+    var rotateY = (a) => [Math.cos(a),0,Math.sin(a), 0,1,0, -Math.sin(a),0,Math.cos(a)]
+    var rotateZ = (a) => [Math.cos(a),-Math.sin(a),0,  Math.sin(a),Math.cos(a),0,  0,0,1]
+    var rotateXYZ = (x,y,z) => mmult(mmult(rotateX(x), rotateY(y)), rotateZ(z))
     var scale = (x,y,z) => [x,0,0,  0,y,0,  0,0,z]
     var identity = () => [1,0,0, 0,1,0, 0,0,1]
     var translate = (vec, delta) => [vec[0]+delta[0], vec[1]+delta[1], vec[2]+delta[2]]
@@ -97,32 +175,6 @@
         }
         return m
     }
-
-    var perspective = mmult(rotationZ(0.3), rotationX(1.21))
-
-    _.range(0, lathe.res).map(function (slice) {
-      var offset = [300,300,0]
-      var sliceAngle = i => Math.PI*2 * i/lathe.res
-      for (var i=1; i<lathe.path.length; i++) {
-        self.mesh.push([
-          translate( mapply(perspective, mapply(rotationZ(sliceAngle(slice+0)), lathe.path[i])), offset),
-          translate( mapply(perspective, mapply(rotationZ(sliceAngle(slice+1)), lathe.path[i])), offset),
-          translate( mapply(perspective, mapply(rotationZ(sliceAngle(slice+1)), lathe.path[i-1])), offset),
-          translate( mapply(perspective, mapply(rotationZ(sliceAngle(slice+0)), lathe.path[i-1])), offset)
-        ])
-      }
-    })
-
-    function loadWorld() {
-        self.world = getWorld()
-        self.update()
-    }
-
-    self.on('mount', function() {
-      window.events.on('world-updated', loadWorld)
-      window.events.on('save-world', () => saveWorld(self.world))
-      loadWorld()
-    })
 
   </script>
 

@@ -75,6 +75,7 @@
     
     self.done = function () {
       self.isOpen = false
+      window.events.trigger('item-chooser-closed')
     }
 
     function show(list) {

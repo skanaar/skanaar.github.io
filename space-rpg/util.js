@@ -16,6 +16,10 @@ function rotate(v, a){
 }
 
 _.mixin({
+  sum: function (list, iteratee) {
+    return list.map(_.iteratee(iteratee)).reduce((a,b) => a+b, 0)
+  },
+
   bubbleUp: function (list, index) {
     if (index == 0) return
     var slice = list.splice(index, 1)

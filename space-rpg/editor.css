@@ -16,10 +16,10 @@ body.enable-scroll {
   overflow: auto;
 }
 
-.galmap-toolbox {
+.toolbox {
   position: fixed;
-  left: 0px;
-  right: 0px;
+  left: 200px;
+  right: 200px;
   top: 25px;
   padding: 10px;
   text-align: center;
@@ -88,7 +88,6 @@ button {
   color: #000;
   background: #fff;
   border: 1px solid #ccc;
-  border-radius: 4px;
   text-decoration: none;
   font-size: 11px;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -99,29 +98,29 @@ button,
   margin: 1px 4px;
   padding: 1px 8px;
   cursor: pointer;
+  border-radius: 4px;
 }
 button:hover,
 .button:hover {
   background: #f8f8ff;
   border: 1px solid #bbb;
 }
-.sidebar input[type=text],
-.sidebar input[type=number] {
+.sidebar > input[type=text],
+.sidebar > input[type=number] {
   display: block;
   border: 1px solid #aaa;
-  border-radius: 2px;
 }
 .sidebar button:active {
   background: linear-gradient(to top, #07f, #5af);
   border-color: #25f;
 }
-.sidebar .input-grid em {
+.input-grid em {
   display: inline-block;
   text-style: normal;
   width: 59px;
 }
-.sidebar .input-grid input,
-.sidebar .input-grid select {
+.input-grid input,
+.input-grid select {
   display: inline-block;
   width: 90px;
   margin: 2px 1px;
