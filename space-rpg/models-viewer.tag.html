@@ -7,11 +7,11 @@
     <div><button onclick={add}>+ New Model</button></div>
   </div>
 
-  <svg width=1000 height=500 style="margin-left: 250px">
+  <svg width=800 height=800 class="canvas-3d">
     <path
       each={e in mesh}
       riot-d="M{e[0][0]},{e[0][1]} L{e[1][0]},{e[1][1]} L{e[2][0]},{e[2][1]} L{e[3][0]},{e[3][1]} Z"
-      fill="rgba(255,128,0,0.2)" stroke="#000"/>
+      fill={shading(e)} stroke="#000"/>
   </svg>
 
   <div class="toolbox">
@@ -45,6 +45,10 @@
     .sidebar textarea {
       width: 170px;
       height: 140px;
+    }
+    .canvas-3d {
+      display: block;
+      margin: 25px auto;
     }
   </style>
 
@@ -97,6 +101,13 @@
       self.update()
     }
 
+    self.shading = function (quad) {
+      var normal = vnormalize(vcross(vdiff(quad[2], quad[0]), vdiff(quad[1], quad[3])))
+      var shade = Math.ceil(128*vdot(normal, [1,-1,-1]))
+      if (shade < 0) shade = 0
+      return 'rgba('+[shade,shade,shade].join()+',0.75)'
+    }
+
     function updateMesh(){
       self.mesh = applyPerspective(applyTransformations(lathe(self.selected), self.selected))
       self.mesh = self.mesh.filter(function (quad) {
@@ -134,13 +145,14 @@
     }
 
     function applyPerspective(mesh) {
+      var zoom = scale(2,2,2)
       var perspective = {
-        top: identity(),
-        front: rotateX(Math.PI/2),
-        side: rotateY(Math.PI/2),
-        perspective: mmult(rotateZ(0.75), rotateX(-1.1))
+        top: mmult(zoom, identity()),
+        front: mmult(zoom, rotateX(Math.PI/2)),
+        side: mmult(zoom, rotateY(Math.PI/2)),
+        perspective: mmult(zoom, mmult(rotateZ(Math.PI+0.75), rotateX(Math.PI-1.1)))
       }[self.camera] || mmult(rotateZ(0.3), rotateX(1.21))
-      return mesh.map(q => transformQuad(q, perspective).map(p => vtranslate(p, [300,300,0])))
+      return mesh.map(q => transformQuad(q, perspective).map(p => vtranslate(p, [400,300,0])))
     }
 
     function loadWorld() {
@@ -163,6 +175,10 @@
     var vtranslate = (vec, delta) => [vec[0]+delta[0], vec[1]+delta[1], vec[2]+delta[2]]
     var vdiff = (a, b) => [a[0]-b[0], a[1]-b[1], a[2]-b[2]]
     var vdot = (a, b) => a[0]*b[0] + a[1]*b[1] + a[2]*b[2]
+    var vnormalize = v => {
+      var mag = Math.sqrt(vdot(v, v))
+      return [v[0]/mag, v[1]/mag, v[2]/mag]
+    }
     var vcross = (a, b) => [a[1]*b[2] - a[2]*b[1], a[2]*b[0] - a[0]*b[2], a[0]*b[1] - a[1]*b[0]]
 
     function mapply (matrix, vec) {
