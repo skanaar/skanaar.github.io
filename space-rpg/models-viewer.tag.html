@@ -4,7 +4,8 @@
     <div each={model in world.models} onclick={edit} class={ list_item: true, active: model==selected }>
       {model.name}
     </div>
-    <div><button onclick={add}>+ New Model</button></div>
+    <div><button onclick={addLathe}>+ New Lathed Model</button></div>
+    <div><button onclick={addComposition}>+ New Composition Model</button></div>
   </div>
 
   <svg width=800 height=800 class="canvas-3d">
@@ -21,19 +22,13 @@
       </a><a onclick={setCamera.bind(null, 'side')} class="toggle-btn {(camera == 'side') && 'active'}">Side
       </a><a onclick={setCamera.bind(null, 'perspective')} class="toggle-btn {(camera == 'perspective') && 'active'}">Perspective</a>
     </div>
+    <button onclick={up}>Up</button>
+    <button onclick={down}>Down</button>
   </div>
 
   <div class="sidebar" show={!!selected}>
-    <input type=text ref="nameField" value={selected && selected.name}>
-    <div class="input-grid">
-      <em>name</em> <input type=number ref="resField" value={selected && selected.res}><br/>
-    </div>
-
-    <label>Transform Stack</label>
-    <textarea value={asJson(selected && selected.transform)} ref="transformField"></textarea>
-
-    <label>Path</label>
-    <textarea value={asJson(selected && selected.path)} ref="pathField"></textarea>
+    <label>Source</label>
+    <textarea value={asJson(selected)} ref="sourceField"></textarea>
 
     <br/>
     <button onclick={remove}>Delete</button>
@@ -43,8 +38,8 @@
 
   <style>
     .sidebar textarea {
-      width: 170px;
-      height: 140px;
+      width: 230px;
+      height: 80%;
     }
     .canvas-3d {
       display: block;
@@ -55,12 +50,7 @@
   <script>
     var self = this
     self.camera = 'perspective' // top | front | side | perspective
-    self.world = { models: [
-      { "name": "xyz", "geometry": "lathe", "res": 8,
-        "transform": [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
-        "path": [[1,0,-100], [200,0,0], [100,0,100]]
-      }
-    ] }
+    self.world = { models: [] }
     self.mesh = []
 
     self.setCamera = function (mode) {
@@ -69,17 +59,47 @@
     }
 
     self.asJson = function (data) {
-      return _.stringify(data, { maxLength: 40 })
+      return _.stringify(data, { maxLength: 40, indent: 1 })
     }
 
-    self.add = function () {
+    self.addLathe = function () {
       self.world.models.push({
         name: "xyz",
         geometry: "lathe",
         res: 8,
         transform: [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
-        path: [[1,0,-100], [200,0,0], [100,0,100]]
+        path: [[0,0,-50], [50,0,0], [0,0,50]]
       })
+    }
+
+    self.addComposition = function () {
+      self.world.models.push({
+        name: "xyz",
+        geometry: "composition",
+        transform: [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
+        parts: [
+          {
+            geometry: "lathe",
+            res: 4,
+            transform: [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 50, 0, 0]],
+            path: [[0,0,-50], [50,0,0], [0,0,50]]
+          },
+          {
+            geometry: "lathe",
+            res: 6,
+            transform: [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", -50, 0, 0]],
+            path: [[0,0,-50], [50,0,0], [0,0,50]]
+          }
+        ]
+      })
+    }
+
+    self.up = function () {
+      _.bubbleUp(self.world.models, self.world.models.findIndex(e => e == self.selected))
+    }
+
+    self.down = function () {
+      _.bubbleDown(self.world.models, self.world.models.findIndex(e => e == self.selected))
     }
     
     self.edit = function (e) {
@@ -88,10 +108,7 @@
     }
     
     self.endEditing = function (e) {
-      self.selected.name = self.refs.nameField.value
-      self.selected.res = +self.refs.resField.value
-      self.selected.transform = JSON.parse(self.refs.transformField.value)
-      self.selected.path = JSON.parse(self.refs.pathField.value)
+      _.extend(self.selected, JSON.parse(self.refs.sourceField.value))
       updateMesh()
       self.update()
     }
@@ -101,6 +118,12 @@
       self.update()
     }
 
+    self.remove = function () {
+      if (!confirm('Remove model ' + self.selected.name)) return
+      self.world.models = self.world.models.filter(e => e != self.selected)
+      self.selected = null
+    }
+
     self.shading = function (quad) {
       var normal = vnormalize(vcross(vdiff(quad[2], quad[0]), vdiff(quad[1], quad[3])))
       var shade = Math.ceil(128*vdot(normal, [1,-1,-1]))
@@ -108,8 +131,17 @@
       return 'rgba('+[shade,shade,shade].join()+',0.75)'
     }
 
+    function buildMesh(model){
+      if (model.geometry == 'lathe')
+        return applyTransformations(lathe(model), model)
+      if (model.geometry == 'composition')
+        return applyTransformations(_.flatten(model.parts.map(buildMesh), true), model)
+      if (model.geometry == 'sphere')
+        return applyTransformations(sphere(model), model)
+    }
+
     function updateMesh(){
-      self.mesh = applyPerspective(applyTransformations(lathe(self.selected), self.selected))
+      self.mesh = applyPerspective(buildMesh(self.selected))
       self.mesh = self.mesh.filter(function (quad) {
         let normal = vcross(vdiff(quad[2], quad[0]), vdiff(quad[1], quad[3]))
         return normal[2] < 0
