@@ -1475,7 +1475,29 @@
     {"id": "unnamed", "desc": "", "zoom": 1, "height": 3, "octaves": 3, "falloff": 0.5, "curve": [0, 1], "spectrum": ["06F", "F00"]}
   ],
   "initialDestination": "Backwater",
-  "models": [],
+  "models": [
+    {
+      "name": "Journeyman",
+      "geometry": "lathe",
+      "res": 6,
+      "transform": [["scale", 0.5, 0.2, 1], ["rotate", 1.57, 0, 0], ["translate", 0, 0, 0]],
+      "path": [[0, 0, -70], [75, 0, -20], [50, 0, -10], [125, 0, 40], [40, 0, 70], [0, 0, 60]]
+    },
+    {
+      "name": "Soot",
+      "geometry": "lathe",
+      "res": 8,
+      "transform": [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
+      "path": [[0, 0, -40], [150, 0, -10], [140, 0, 0], [160, 0, -8], [200, 0, 0], [0, 0, 40]]
+    },
+    {
+      "name": "Battleship",
+      "geometry": "lathe",
+      "res": 8,
+      "transform": [["rotate", 0, 0, 0.393], ["scale", 10, 10, 10], ["scale", 5, 15, 10], ["rotate", 1.57, 0, 0]],
+      "path": [[0, 0, -1.3], [0.2, 0, -1.2], [0.5, 0, -1], [0.5, 0, -0.3], [0.4, 0, -0.1], [0.4, 0, 0.1], [0.5, 0, 0.3], [0.5, 0, 1], [0.2, 0, 1.2], [0, 0, 1.1]]
+    }
+  ],
   "celestials": [
     {
       "type": "anomaly",
