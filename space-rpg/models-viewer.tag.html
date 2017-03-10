@@ -5,7 +5,7 @@
       {model.name}
     </div>
     <div><button onclick={addLathe}>+ New Lathed Model</button></div>
-    <div><button onclick={addComposition}>+ New Composition Model</button></div>
+    <div><button onclick={addComposition}>+ New Composite Model</button></div>
   </div>
 
   <svg width=800 height=800 class="canvas-3d">
@@ -59,7 +59,7 @@
     }
 
     self.asJson = function (data) {
-      return _.stringify(data, { maxLength: 40, indent: 1 })
+      return _.stringify(data, { maxLength: 50, indent: 1 })
     }
 
     self.addLathe = function () {
@@ -75,7 +75,7 @@
     self.addComposition = function () {
       self.world.models.push({
         name: "xyz",
-        geometry: "composition",
+        geometry: "composite",
         transform: [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
         parts: [
           {
@@ -134,7 +134,7 @@
     function buildMesh(model){
       if (model.geometry == 'lathe')
         return applyTransformations(lathe(model), model)
-      if (model.geometry == 'composition')
+      if (model.geometry == 'composite')
         return applyTransformations(_.flatten(model.parts.map(buildMesh), true), model)
       if (model.geometry == 'sphere')
         return applyTransformations(sphere(model), model)
