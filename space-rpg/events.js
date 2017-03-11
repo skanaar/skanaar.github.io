@@ -16,25 +16,6 @@ window.nullWorld = function () {
 }
 
 window.constants = {
-  models: [
-    'anomaly-thanatos',
-    'anomaly-observatory',
-    'anomaly-buoy',
-    'monitor-drone',
-    'soma',
-    'devourer',
-    'saucer',
-    'battleship',
-    'clipper',
-    'bentus',
-    'rogue',
-    'vanguard',
-    'thanatos',
-    'interplan',
-    'interplan-derelict',
-    'sol-array',
-    'rover'
-  ],
   celestialTypes: [
     'cloud',
     'star',

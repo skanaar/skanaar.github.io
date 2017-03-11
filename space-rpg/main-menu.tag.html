@@ -74,8 +74,11 @@
       var definedCelestials = world.celestials.map(e => e.id)
       self.undefCelestials = _.uniq(_.difference(referredCelestials, definedCelestials))
 
-      var referredModels = world.celestials.filter(e => e.id.startsWith('anomaly-')).map(e=>e.model)
-      var definedModels = window.constants.models
+      var referredModels = _.flatten([
+        world.celestials.filter(e => e.id.startsWith('anomaly-')).map(e => e.model),
+        world.ships.map(e => e.visual)
+      ])
+      var definedModels = world.models.map(e => e.name)
       self.undefModels = _.uniq(_.difference(referredModels, definedModels))
 
       self.hasValidationError = [
@@ -103,6 +106,7 @@
       self.update()
     }, 2000)
 
+    self.validateWorld()
     window.setInterval(self.validateWorld, 5000)
 
     function loadWorld(data) {

@@ -22,7 +22,7 @@
     <div class="input-grid">
       <em>visual</em>
       <select ref="visualInput">
-        <option each={e in models}>{e}</option>
+        <option each={e in world.models}>{e.name}</option>
       </select>
     </div>
     
@@ -55,7 +55,6 @@
 
     self.world = { ships: [], enemies: [] }
     self.selected = null
-    self.models = window.constants.models
 
     self.makeStartingShip = function () {
       if (self.selected) self.world.initialShip = self.selected.name

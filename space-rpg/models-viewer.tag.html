@@ -183,7 +183,7 @@
         top: mmult(zoom, rotateX(Math.PI)),
         front: mmult(zoom, rotateX(Math.PI/2)),
         side: mmult(zoom, rotateY(Math.PI/2)),
-        perspective: mmult(zoom, mmult(rotateZ(Math.PI+0.75), rotateX(Math.PI-1.1)))
+        perspective: mmult(zoom, mmult(rotateZ(0.75), rotateX(-1.1)))
       }[self.camera] || mmult(rotateZ(0.3), rotateX(1.21))
       return mesh.map(q => transformQuad(q, perspective).map(p => vtranslate(p, [400,400,0])))
     }

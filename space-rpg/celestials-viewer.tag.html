@@ -34,7 +34,7 @@
 
     <label if={hasModel()}>Model</label>
     <select show={hasModel()} value={selected && selected.model} ref="modelChooser">
-      <option each={e in models}>{e}</option>
+      <option each={e in world.models}>{e.name}</option>
     </select>
     
     <label if={hasSurface()}>Surface Attributes</label>
@@ -71,7 +71,6 @@
     self.currSurface = null
     self.currCelestial = null
     self.types = window.constants.celestialTypes
-    self.models = window.constants.models
 
     self.hasSurface = function () {
       return self.selected && ['planet', 'asteroid'].includes(self.selected.type)
