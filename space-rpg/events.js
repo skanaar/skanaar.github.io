@@ -22,17 +22,17 @@ window.constants = {
     'jovian',
     'planet',
     'asteroid',
-    'ring',
+    'structure',
     'anomaly'
   ],
   hasSurface: function (entity) {
     return ['planet', 'asteroid'].includes(entity.style.split('-')[0])
   },
   hasModel: function (entity) {
-    return 'anomaly' == entity.style.split('-')[0]
+    return ['structure', 'anomaly'].includes(entity.style.split('-')[0])
   },
   isTravellable: function (entity) {
-    return ['jovian', 'planet', 'asteroid', 'ring', 'anomaly'].includes(entity.style.split('-')[0])
+    return ['jovian', 'planet', 'asteroid', 'structure', 'anomaly'].includes(entity.style.split('-')[0])
   }
 }
 
