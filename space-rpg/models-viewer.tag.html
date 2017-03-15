@@ -10,6 +10,10 @@
 
   <svg width=800 height=800 class="canvas-3d">
     <path
+      each={e in box}
+      riot-d="M{e[0][0]},{e[0][1]} L{e[1][0]},{e[1][1]} L{e[2][0]},{e[2][1]} L{e[3][0]},{e[3][1]} Z"
+      fill=none stroke="#000"/>
+    <path
       each={e in mesh}
       riot-d="M{e[0][0]},{e[0][1]} L{e[1][0]},{e[1][1]} L{e[2][0]},{e[2][1]} L{e[3][0]},{e[3][1]} Z"
       fill={shading(e)} stroke="#000"/>
@@ -52,6 +56,7 @@
     self.camera = 'perspective' // top | front | side | perspective
     self.world = { models: [] }
     self.mesh = []
+    self.box = []
 
     self.setCamera = function (mode) {
       self.camera = mode
@@ -126,9 +131,9 @@
 
     self.shading = function (quad) {
       var normal = vnormalize(vcross(vdiff(quad[2], quad[0]), vdiff(quad[1], quad[3])))
-      var shade = Math.ceil(128*vdot(normal, [1,-1,-1]))
+      var shade = Math.ceil(200*vdot(normal, vnormalize([1,-1,-1])))
       if (shade < 0) shade = 0
-      return 'rgba('+[shade,shade,shade].join()+',0.75)'
+      return 'rgba('+[shade,shade,shade].join()+',0.85)'
     }
 
     function buildMesh(model){
@@ -147,12 +152,14 @@
         return normal[2] < 0
       })
       self.mesh = _.sortBy(self.mesh, quad => -(quad[0][2]+quad[2][2]))
+      self.box = applyPerspective([[[-200,-200,100], [-200,200,100], [200,200,100], [200,-200,100]]])
     }
 
     function lathe(model) {
       var mesh = []
+      var maxAngle = model.angle || Math.PI*2
       _.range(0, model.res).map(function (slice) {
-        var vertex = (i,j) => mapply(rotateZ(Math.PI*2 * i/model.res), model.path[j])
+        var vertex = (i,j) => mapply(rotateZ(maxAngle * i/model.res), model.path[j])
         for (var i=1; i<model.path.length; i++) {
           mesh.push([vertex(slice,i), vertex(slice+1,i), vertex(slice+1,i-1), vertex(slice,i-1)])
         }
@@ -178,14 +185,14 @@
     }
 
     function applyPerspective(mesh) {
-      var zoom = scale(2,2,2)
+      var zoom = scale(1.8,1.8,1.8)
       var perspective = {
-        top: mmult(zoom, rotateX(Math.PI)),
-        front: mmult(zoom, rotateX(Math.PI/2)),
-        side: mmult(zoom, rotateY(Math.PI/2)),
-        perspective: mmult(zoom, mmult(rotateZ(0.75), rotateX(-1.1)))
+        top: zoom,
+        front: mmult(zoom, rotateX(-Math.PI/2)),
+        side: mmult(zoom, mmult(rotateY(Math.PI/2), rotateZ(Math.PI/2))),
+        perspective: mmult(zoom, mmult(rotateZ(-0.75), rotateX(-1.1)))
       }[self.camera] || mmult(rotateZ(0.3), rotateX(1.21))
-      return mesh.map(q => transformQuad(q, perspective).map(p => vtranslate(p, [400,400,0])))
+      return mesh.map(q => transformQuad(q, perspective).map(p => vtranslate(p, [400,350,0])))
     }
 
     function loadWorld() {
@@ -208,10 +215,8 @@
     var vtranslate = (vec, delta) => [vec[0]+delta[0], vec[1]+delta[1], vec[2]+delta[2]]
     var vdiff = (a, b) => [a[0]-b[0], a[1]-b[1], a[2]-b[2]]
     var vdot = (a, b) => a[0]*b[0] + a[1]*b[1] + a[2]*b[2]
-    var vnormalize = v => {
-      var mag = Math.sqrt(vdot(v, v))
-      return [v[0]/mag, v[1]/mag, v[2]/mag]
-    }
+    var vmult = (k, v) => [k*v[0], k*v[1], k*v[2]]
+    var vnormalize = v => vmult(1/Math.sqrt(vdot(v, v)), v)
     var vcross = (a, b) => [a[1]*b[2] - a[2]*b[1], a[2]*b[0] - a[0]*b[2], a[0]*b[1] - a[1]*b[0]]
 
     function mapply (matrix, vec) {

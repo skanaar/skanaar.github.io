@@ -2,9 +2,9 @@
   "initialShip": "rover",
   "ships": [
     {"name": "rover", "visual": "Rover", "attr": {"maxhull": 1, "maxshield": 1, "maxenergy": 1, "jump": 0, "slots": 1}, "generator": {"hull": 1, "shield": 1, "energy": 1}},
-    {"name": "rogue", "visual": "Journeyman", "attr": {"maxhull": 20, "maxshield": 20, "maxenergy": 20, "jump": 100, "slots": 4}, "generator": {"hull": 1, "shield": 1, "energy": 1}},
-    {"name": "clipper", "visual": "Clipper", "attr": {"maxhull": 20, "maxshield": 20, "maxenergy": 20, "jump": 125, "slots": 4}, "generator": {"hull": 1, "shield": 1, "energy": 1}},
-    {"name": "battleship", "visual": "Battleship", "attr": {"maxhull": 40, "maxshield": 40, "maxenergy": 30, "jump": 150, "slots": 6}, "generator": {"hull": 2, "shield": 2, "energy": 2}},
+    {"name": "rogue", "visual": "Kerr Journeyman", "attr": {"maxhull": 20, "maxshield": 20, "maxenergy": 20, "jump": 100, "slots": 4}, "generator": {"hull": 1, "shield": 1, "energy": 1}},
+    {"name": "clipper", "visual": "Kerr Clipper", "attr": {"maxhull": 20, "maxshield": 20, "maxenergy": 20, "jump": 125, "slots": 4}, "generator": {"hull": 1, "shield": 1, "energy": 1}},
+    {"name": "battleship", "visual": "Kerr Frigate", "attr": {"maxhull": 40, "maxshield": 40, "maxenergy": 30, "jump": 150, "slots": 6}, "generator": {"hull": 2, "shield": 2, "energy": 2}},
     {"name": "soma", "visual": "Soma Soot", "attr": {"maxhull": 50, "maxshield": 35, "maxenergy": 30, "jump": 175, "slots": 8}, "generator": {"hull": 3, "shield": 3, "energy": 3}},
     {"name": "longship", "visual": "CES Interplan", "attr": {"maxhull": 70, "maxshield": 50, "maxenergy": 50, "jump": 200, "slots": 10}, "generator": {"hull": 4, "shield": 4, "energy": 4}}
   ],
@@ -18,7 +18,7 @@
     },
     {
       "name": "Rogue",
-      "visual": "Journeyman",
+      "visual": "Kerr Journeyman",
       "attr": {"maxhull": 20, "maxshield": 20, "maxenergy": 20, "jump": 0, "slots": 4},
       "generator": {"hull": 1, "shield": 1, "energy": 1},
       "inventory": ["Alpha Beam"]
@@ -1289,6 +1289,13 @@
   "initialDestination": "Backwater",
   "models": [
     {
+      "name": "Buoy",
+      "geometry": "lathe",
+      "res": 4,
+      "transform": [["scale", 0.5, 0.5, 0.5], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
+      "path": [[0, 0, -100], [100, 0, -5], [90, 0, 0], [100, 0, 5], [0, 0, 100]]
+    },
+    {
       "name": "Rover",
       "geometry": "composite",
       "transform": [["scale", 3, 3, 3], ["rotate", 1.57, 0, 1.57], ["translate", 0, 0, 0]],
@@ -1306,46 +1313,49 @@
         {"geometry": "lathe", "res": 6, "transform": [["translate", -20, 0, -20]], "path": [[0, 0, -3], [10, 0, -5], [11, 0, 0], [10, 0, 5], [0, 0, 3]]}
       ]
     },
-    {"name": "Soma Soot", "geometry": "lathe", "res": 12, "transform": [], "path": [[0, 0, -38], [40, 0, -29], [45, 0, -31], [150, 0, -10], [155, 0, -6], [160, 0, -8], [200, 0, 0], [0, 0, 40]]},
+    {
+      "name": "Soma Soot",
+      "geometry": "lathe",
+      "res": 12,
+      "transform": [["scale", 0.75, 0.75, 0.75]],
+      "path": [[0, 0, -38], [40, 0, -29], [45, 0, -31], [140, 0, -12], [150, 0, -6], [160, 0, -8], [200, 0, 0], [0, 0, 40]],
+      "parts": [
+        {"name": "Soma Soot", "geometry": "lathe", "res": 12, "transform": [["scale", 0.75, 0.75, 0.75]], "path": [[160, 0, -8], [200, 0, 0], [0, 0, 40]]},
+        {"name": "Soma Soot", "geometry": "lathe", "res": 12, "transform": [["scale", 0.75, 0.75, 0.75]], "path": [[0, 0, -38], [40, 0, -29], [45, 0, -31], [140, 0, -12], [155, 0, -2]]}
+      ]
+    },
     {
       "name": "Soma Saay",
       "geometry": "lathe",
       "res": 12,
-      "transform": [],
+      "transform": [["scale", 0.75, 0.75, 0.75]],
       "path": [[50, 0, 0], [50, 0, -15], [55, 0, -20], [110, 0, -20], [115, 0, -40], [120, 0, -40], [190, 0, -10], [200, 0, 0], [200, 0, 5], [50, 0, 0]]
     },
     {
-      "name": "Journeyman",
+      "name": "Kerr Clipper",
+      "geometry": "lathe",
+      "res": 3,
+      "transform": [["scale", 3, 0.75, 0.75], ["rotate", 1.57, 0, 1.57]],
+      "path": [[0, 0, -100], [50, 0, -33], [40, 0, -25], [40, 0, 25], [50, 0, 33], [0, 0, 100]]
+    },
+    {
+      "name": "Kerr Journeyman",
       "geometry": "lathe",
       "res": 6,
       "transform": [["scale", 1, 0.3, 2], ["rotate", 1.57, 0, 0]],
       "path": [[0, 0, -70], [75, 0, -20], [50, 0, -10], [125, 0, 40], [40, 0, 70], [0, 0, 60]]
     },
     {
-      "name": "Clipper",
-      "geometry": "lathe",
-      "res": 3,
-      "transform": [["scale", 4, 1, 1], ["rotate", 1.57, 0, 1.57]],
-      "path": [[0, 0, -100], [50, 0, -33], [40, 0, -25], [40, 0, 25], [50, 0, 33], [0, 0, 100]]
-    },
-    {
-      "name": "Battleship",
+      "name": "Kerr Frigate",
       "geometry": "lathe",
       "res": 8,
       "transform": [["rotate", 0, 0, 0.393], ["scale", 0.5, 1.5, 1], ["rotate", 1.57, 0, 0]],
       "path": [[0, 0, -130], [20, 0, -120], [50, 0, -100], [50, 0, -30], [40, 0, -10], [40, 0, 10], [50, 0, 30], [50, 0, 100], [20, 0, 120], [0, 0, 110]]
     },
     {
-      "name": "Buoy",
-      "geometry": "lathe",
-      "res": 4,
-      "transform": [["scale", 0.5, 0.5, 0.5], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
-      "path": [[0, 0, -100], [100, 0, -5], [90, 0, 0], [100, 0, 5], [0, 0, 100]]
-    },
-    {
       "name": "CES Interplan",
       "geometry": "composite",
-      "transform": [["scale", 8, 8, 8], ["rotate", 1.57, 0, 0], ["translate", 0, 0, 0]],
+      "transform": [["scale", 8, 8, 8], ["rotate", 1.57, 0, 0], ["translate", 0, -50, 0]],
       "parts": [
         {
           "geometry": "lathe",
@@ -1360,7 +1370,7 @@
     {
       "name": "CES Bioculus",
       "geometry": "composite",
-      "transform": [["scale", 8, 8, 8], ["rotate", 1.57, 0, 0], ["translate", 0, 0, 0]],
+      "transform": [["scale", 8, 8, 8], ["rotate", 1.57, 0, 0], ["translate", 0, -50, 0]],
       "parts": [
         {
           "geometry": "lathe",
@@ -1372,17 +1382,67 @@
         {
           "geometry": "lathe",
           "res": 4,
-          "transform": [["scale", 1, 1, 1], ["rotate", 0, 0, 0], ["translate", -8, 0, 5]],
+          "transform": [["scale", 1, 1, 1], ["rotate", 0, 0, 0.23], ["translate", -6.4, 3.8, 5]],
           "path": [[0, 0, -16], [0.3, 0, -15], [0.3, 0, -1.7], [1, 0, -1.2], [1, 0, 1.3], [0, 0, 2]]
         },
-        {"geometry": "lathe", "res": 4, "transform": [["scale", 4, 1, 1], ["rotate", 0, 1.57, 0], ["translate", -3, 0, 5]], "path": [[0.3, 0, -4], [0.3, 0, 0]]},
-        {"geometry": "lathe", "res": 4, "transform": [["scale", 4, 1, 1], ["rotate", 0, -1.57, 0], ["translate", 3, 0, 5]], "path": [[0.3, 0, -8], [0.3, 0, 0]]}
+        {"geometry": "lathe", "res": 4, "transform": [["scale", 4, 1, 1], ["rotate", 0, 1.57, -0.54], ["translate", -2.3, 1.4, 5]], "path": [[0.3, 0, -4], [0.3, 0, 0]]},
+        {"geometry": "lathe", "res": 4, "transform": [["scale", 4, 1, 1], ["rotate", 0, -1.57, 0], ["translate", 3, 0, 5]], "path": [[0.3, 0, -8], [0.3, 0, 0]]},
+        {"geometry": "lathe", "res": 9, "transform": [["scale", 0.3, 0.3, 0.3], ["rotate", 0, 0, -0.52], ["translate", -5, -3, 4]], "path": [[6, 0, 0], [8, 0, -2], [10, 0, 0], [8, 0, 14], [6, 0, 0]]}
       ]
     },
     {
-      "name": "Vanguard",
+      "name": "CES Marathon",
       "geometry": "composite",
-      "transform": [["scale", 100, 100, 100], ["rotate", 3.14, 0, 0]],
+      "transform": [["scale", 8, 8, 8], ["rotate", 1.57, 0, 0], ["translate", 0, -50, 0]],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
+          "path": [[0, 0, -13], [3, 0, -10], [3, 0, -1.5], [1.5, 0, 0], [1.5, 0, 21.5], [2, 0, 22], [2, 0, 28], [0, 0, 30]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 7,
+          "transform": [["scale", 0.3, 0.3, 0.3], ["rotate", 0, 0, -0.22], ["translate", 0, 6, 3], ["rotate", 0, 0, 0]],
+          "path": [[6, 0, 0], [8, 0, -2], [10, 0, 0], [8, 0, 20], [6, 0, 0]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 7,
+          "transform": [["scale", 0.3, 0.3, 0.3], ["rotate", 0, 0, -0.22], ["translate", 0, 6, 3], ["rotate", 0, 0, 1.05]],
+          "path": [[6, 0, 0], [8, 0, -2], [10, 0, 0], [8, 0, 20], [6, 0, 0]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 7,
+          "transform": [["scale", 0.3, 0.3, 0.3], ["rotate", 0, 0, -0.22], ["translate", 0, 6, 3], ["rotate", 0, 0, 2.1]],
+          "path": [[6, 0, 0], [8, 0, -2], [10, 0, 0], [8, 0, 20], [6, 0, 0]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 7,
+          "transform": [["scale", 0.3, 0.3, 0.3], ["rotate", 0, 0, -0.22], ["translate", 0, 6, 3], ["rotate", 0, 0, 3.14]],
+          "path": [[6, 0, 0], [8, 0, -2], [10, 0, 0], [8, 0, 20], [6, 0, 0]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 7,
+          "transform": [["scale", 0.3, 0.3, 0.3], ["rotate", 0, 0, -0.22], ["translate", 0, 6, 3], ["rotate", 0, 0, -2.1]],
+          "path": [[6, 0, 0], [8, 0, -2], [10, 0, 0], [8, 0, 20], [6, 0, 0]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 7,
+          "transform": [["scale", 0.3, 0.3, 0.3], ["rotate", 0, 0, -0.22], ["translate", 0, 6, 3], ["rotate", 0, 0, -1.05]],
+          "path": [[6, 0, 0], [8, 0, -2], [10, 0, 0], [8, 0, 20], [6, 0, 0]]
+        }
+      ]
+    },
+    {
+      "name": "NS Vanguard",
+      "geometry": "composite",
+      "transform": [["scale", 80, 80, 80], ["rotate", 3.14, 0, 0]],
       "parts": [
         {
           "name": "saucer",
@@ -1443,10 +1503,159 @@
         }
       ]
     },
+    {
+      "name": "NS Salem",
+      "geometry": "composite",
+      "transform": [["scale", 2, 2, 2], ["rotate", 1.57, 0, 0], ["translate", 0, 0, 0]],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 9,
+          "transform": [["scale", 1, 1, 1.5], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
+          "path": [[0, 0, -50], [10, 0, -40], [18, 0, -20], [20, 0, 0], [18, 0, 20], [10, 0, 40], [0, 0, 50]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 9,
+          "transform": [["scale", 1, 1, 1.2], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 6]],
+          "path": [[21, 0, -40], [30, 0, -10], [28, 0, -7], [24, 0, -8], [21, 0, -40]]
+        }
+      ]
+    },
+    {
+      "name": "NS Sloop",
+      "geometry": "composite",
+      "transform": [["scale", 1, 1, 1], ["rotate", 3.14, 0, 1.57], ["translate", 0, 0, 0]],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["scale", 60, 60, 60], ["rotate", 0, 0, 0.53], ["rotate", 0, 1.57, 0], ["translate", -30, 0, 22]],
+          "path": [[0, 0, -1.2], [0.2, 0, -1.1], [0.3, 0, -0.9], [0.3, 0, 0.9], [0.2, 0, 1.1], [0, 0, 1.2]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["scale", 60, 60, 60], ["rotate", 0, 0, 0.53], ["rotate", 0, 1.57, 0], ["translate", -30, 0, -22]],
+          "path": [[0, 0, -1.2], [0.2, 0, -1.1], [0.3, 0, -0.9], [0.3, 0, 0.9], [0.2, 0, 1.1], [0, 0, 1.2]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["scale", 80, 80, 60], ["rotate", 0, 0, 0.53], ["rotate", 0, 1.57, 0], ["translate", -40, 35, 0]],
+          "path": [[0, 0, -1], [0.2, 0, -0.9], [0.3, 0, -0.7], [0.3, 0, 0.7], [0.2, 0, 0.9], [0, 0, 1]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["scale", 80, 80, 60], ["rotate", 0, 0, 0.53], ["rotate", 0, 1.57, 0], ["translate", -40, -35, 0]],
+          "path": [[0, 0, -1], [0.2, 0, -0.9], [0.3, 0, -0.7], [0.3, 0, 0.7], [0.2, 0, 0.9], [0, 0, 1]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 9,
+          "transform": [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 80, 0, 0]],
+          "path": [[0, 0, -25], [30, 0, -25], [45, 0, -10], [70, 0, -5], [70, 0, 5], [45, 0, 10], [30, 0, 25], [0, 0, 25]]
+        }
+      ]
+    },
     {"name": "Thanatos", "geometry": "lathe", "res": 8, "transform": [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]], "path": [[0, 0, -50], [50, 0, 0], [0, 0, 50]]},
-    {"name": "Observatory", "geometry": "lathe", "res": 8, "transform": [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]], "path": [[0, 0, -50], [50, 0, 0], [0, 0, 50]]},
     {"name": "Monitor Drone", "geometry": "lathe", "res": 8, "transform": [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]], "path": [[0, 0, -50], [50, 0, 0], [0, 0, 50]]},
-    {"name": "Sol Array", "geometry": "lathe", "res": 8, "transform": [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]], "path": [[0, 0, -50], [50, 0, 0], [0, 0, 50]]}
+    {
+      "name": "Landsraad Station",
+      "geometry": "composite",
+      "transform": [["scale", 3, 3, 3], ["rotate", -1.57, 0, 0], ["translate", 0, -160, 0]],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 1,
+          "angle": 0.5,
+          "transform": [["rotate", 0, 0, -0.25], ["rotate", 0, 0.22, 0.52]],
+          "path": [[2, 0, 0], [9, 0, 7], [9, 0, 75], [2, 0, 81], [9, 0, 75], [9, 0, 7], [2, 0, 0]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 1,
+          "angle": 0.5,
+          "transform": [["rotate", 0, 0, -0.25], ["rotate", 0, 0.22, 1.56]],
+          "path": [[2, 0, 0], [9, 0, 7], [9, 0, 75], [2, 0, 81], [9, 0, 75], [9, 0, 7], [2, 0, 0]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 1,
+          "angle": 0.5,
+          "transform": [["rotate", 0, 0, -0.25], ["rotate", 0, 0.22, 2.6]],
+          "path": [[2, 0, 0], [9, 0, 7], [9, 0, 75], [2, 0, 81], [9, 0, 75], [9, 0, 7], [2, 0, 0]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 1,
+          "angle": 0.5,
+          "transform": [["rotate", 0, 0, -0.25], ["rotate", 0, 0.22, 3.64]],
+          "path": [[2, 0, 0], [9, 0, 7], [9, 0, 75], [2, 0, 81], [9, 0, 75], [9, 0, 7], [2, 0, 0]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 1,
+          "angle": 0.5,
+          "transform": [["rotate", 0, 0, -0.25], ["rotate", 0, 0.22, -1.56]],
+          "path": [[2, 0, 0], [9, 0, 7], [9, 0, 75], [2, 0, 81], [9, 0, 75], [9, 0, 7], [2, 0, 0]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 1,
+          "angle": 0.5,
+          "transform": [["rotate", 0, 0, -0.25], ["rotate", 0, 0.22, -0.52]],
+          "path": [[2, 0, 0], [9, 0, 7], [9, 0, 75], [2, 0, 81], [9, 0, 75], [9, 0, 7], [2, 0, 0]]
+        },
+        {
+          "name": "body",
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["scale", 1, 1, 1], ["rotate", 0, 0, 0], ["translate", 0, 0, 0]],
+          "path": [[0, 0, 0], [10, 0, 6], [13, 0, 20], [10, 0, 24], [10, 0, 40], [5, 0, 46], [5, 0, 60], [2, 0, 65], [0, 0, 100]]
+        }
+      ]
+    },
+    {
+      "name": "Sol Array",
+      "geometry": "composite",
+      "transform": [["scale", 30, 30, 30], ["rotate", 2.6, 0, 3], ["translate", 0, 0, 50]],
+      "parts": [
+        {"geometry": "lathe", "res": 6, "transform": [["rotate", 0, 0, 0.52], ["translate", 4, 0, -0.5], ["rotate", 0, -0.4, 0.63]], "path": [[2, 0, 0], [2, 0, 0.2], [1.2, 0, 0], [2, 0, 0.2]]},
+        {"geometry": "lathe", "res": 6, "transform": [["rotate", 0, 0, 0.52], ["translate", 4, 0, -0.5], ["rotate", 0, -0.4, 1.88]], "path": [[2, 0, 0], [2, 0, 0.2], [1.2, 0, 0], [2, 0, 0.2]]},
+        {"geometry": "lathe", "res": 6, "transform": [["rotate", 0, 0, 0.52], ["translate", 4, 0, -0.5], ["rotate", 0, -0.4, 3.14]], "path": [[2, 0, 0], [2, 0, 0.2], [1.2, 0, 0], [2, 0, 0.2]]},
+        {"geometry": "lathe", "res": 6, "transform": [["rotate", 0, 0, 0.52], ["translate", 4, 0, -0.5], ["rotate", 0, -0.4, -1.88]], "path": [[2, 0, 0], [2, 0, 0.2], [1.2, 0, 0], [2, 0, 0.2]]},
+        {"geometry": "lathe", "res": 6, "transform": [["rotate", 0, 0, 0.52], ["translate", 4, 0, -0.5], ["rotate", 0, -0.4, -0.63]], "path": [[2, 0, 0], [2, 0, 0.2], [1.2, 0, 0], [2, 0, 0.2]]},
+        {
+          "geometry": "lathe",
+          "res": 5,
+          "transform": [["scale", 2.8, 2.8, 2.8], ["translate", 0, 0, -0.3]],
+          "path": [[0, 0, 0], [0.6, 0, 0], [0.7, 0, 0.3], [0.3, 0, 0.3], [0.05, 0, 0.1], [0.05, 0, 1.5], [0.1, 0, 1.55], [0.1, 0, 2.2], [0, 0, 2.3]]
+        }
+      ]
+    },
+    {
+      "name": "Observatory",
+      "geometry": "composite",
+      "transform": [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
+      "parts": [
+        {
+          "name": "Sensor",
+          "geometry": "lathe",
+          "res": 8,
+          "transform": [["scale", 1, 1, 1], ["rotate", 3.84, 0.35, 0], ["translate", 0, 0, 0]],
+          "path": [[50, 0, 0], [40, 0, 30], [30, 0, 0], [40, 0, -30], [50, 0, 0]]
+        },
+        {
+          "name": "platform",
+          "geometry": "lathe",
+          "res": 8,
+          "transform": [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
+          "path": [[120, 0, 0], [80, 0, 10], [80, 0, -10], [120, 0, 0]]
+        }
+      ]
+    }
   ],
   "celestials": [
     {
