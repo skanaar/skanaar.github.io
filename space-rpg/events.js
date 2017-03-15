@@ -10,8 +10,8 @@ window.nullWorld = function () {
     items: [],
     ships: [],
     enemies: [],
-    celestialStyles: [],
-    surfaces: []
+    celestials: [],
+    models: []
   }
 }
 
