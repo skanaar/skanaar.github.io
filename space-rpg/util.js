@@ -16,6 +16,8 @@ function rotate(v, a){
 }
 
 _.mixin({
+  sq: x => x*x,
+  
   sum: function (list, iteratee) {
     return list.map(_.iteratee(iteratee)).reduce((a,b) => a+b, 0)
   },

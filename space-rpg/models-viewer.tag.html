@@ -35,7 +35,8 @@
     <textarea value={asJson(selected)} ref="sourceField"></textarea>
 
     <br/>
-    <button onclick={remove}>Delete</button>
+    <button onclick={compile}>Compile Mesh</button>
+    <button onclick={remove}>Delete</button><br/>
     <button onclick={endEditing}>Done</button>
     <button onclick={cancelEditing}>Cancel</button>
   </div>
@@ -123,6 +124,17 @@
       self.update()
     }
 
+    self.compile = function () {
+      var compilate = {
+        name: 'Compiled ' + self.selected.name,
+        geometry: 'mesh',
+        transform: [['scale', 1, 1, 1], ['rotate', 0, 0, 0], ['translate', 0, 0, 0]],
+        quads: buildMesh(self.selected).map(q => q.map(p => p.map(x => Math.round(x))))
+      }
+      self.world.models.push(compilate)
+      self.selected = compilate
+    }
+
     self.remove = function () {
       if (!confirm('Remove model ' + self.selected.name)) return
       self.world.models = self.world.models.filter(e => e != self.selected)
@@ -143,6 +155,8 @@
         return applyTransformations(_.flatten(model.parts.map(buildMesh), true), model)
       if (model.geometry == 'sphere')
         return applyTransformations(sphere(model), model)
+      if (model.geometry == 'mesh')
+        return applyTransformations(model.quads, model)
     }
 
     function updateMesh(){
@@ -171,6 +185,13 @@
       return quad.map(p => mapply(matrix, p))
     }
 
+    function parabola(p, vec) {
+      var dir = vnormalize(vec)
+      var lift = vdot(dir, p)
+      var p2 = vadd(vmult(-lift, dir), p)
+      return vadd(p, vmult(_.sq(vmag(p2)), vec))
+    }
+
     function transformMesh(mesh, m) {
       if (m[0] == 'scale')
         return mesh.map(quad => transformQuad(quad, scale(m[1], m[2], m[3])))
@@ -178,6 +199,10 @@
         return mesh.map(quad => transformQuad(quad, rotateXYZ(m[1], m[2], m[3])))
       if (m[0] == 'translate')
         return mesh.map(quad => quad.map(p => [p[0]+m[1], p[1]+m[2], p[2]+m[3]]))
+      if (m[0] == 'parabola'){
+        var vec = [m[1], m[2], m[3]]
+        return mesh.map(quad => quad.map(p => parabola(p, vec)))
+      }
     }
 
     function applyTransformations(mesh, model) {
@@ -213,10 +238,12 @@
     var scale = (x,y,z) => [x,0,0,  0,y,0,  0,0,z]
     var identity = () => [1,0,0, 0,1,0, 0,0,1]
     var vtranslate = (vec, delta) => [vec[0]+delta[0], vec[1]+delta[1], vec[2]+delta[2]]
+    var vadd = (a, b) => [a[0]+b[0], a[1]+b[1], a[2]+b[2]]
     var vdiff = (a, b) => [a[0]-b[0], a[1]-b[1], a[2]-b[2]]
     var vdot = (a, b) => a[0]*b[0] + a[1]*b[1] + a[2]*b[2]
     var vmult = (k, v) => [k*v[0], k*v[1], k*v[2]]
-    var vnormalize = v => vmult(1/Math.sqrt(vdot(v, v)), v)
+    var vmag = v => Math.sqrt(vdot(v, v))
+    var vnormalize = v => vmult(1/vmag(v), v)
     var vcross = (a, b) => [a[1]*b[2] - a[2]*b[1], a[2]*b[0] - a[0]*b[2], a[0]*b[1] - a[1]*b[0]]
 
     function mapply (matrix, vec) {

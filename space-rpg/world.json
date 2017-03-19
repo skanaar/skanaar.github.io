@@ -92,26 +92,6 @@
       "isPassive": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -4},
-      "targetBuff": {"hull": -10, "shield": 0, "energy": 0},
-      "credits": 20,
-      "name": "Gauss Gun"
-    },
-    {
-      "type": "weapon",
-      "isInstallable": true,
-      "isPassive": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
-      "targetBuff": {"hull": -5, "shield": -5, "energy": 0},
-      "credits": 20,
-      "name": "Alpha Beam"
-    },
-    {
-      "type": "weapon",
-      "isInstallable": true,
-      "isPassive": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -4},
       "targetBuff": {"hull": 0, "shield": 0, "energy": -40},
       "credits": 20,
       "name": "Wave Pulse"
@@ -132,6 +112,26 @@
       "isPassive": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -4},
+      "targetBuff": {"hull": -10, "shield": 0, "energy": 0},
+      "credits": 20,
+      "name": "Gauss Gun"
+    },
+    {
+      "type": "weapon",
+      "isInstallable": true,
+      "isPassive": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": -5, "shield": -5, "energy": 0},
+      "credits": 20,
+      "name": "Alpha Beam"
+    },
+    {
+      "type": "weapon",
+      "isInstallable": true,
+      "isPassive": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -4},
       "targetBuff": {"hull": -4, "shield": -10, "energy": 0},
       "credits": 39,
       "name": "Phased Ray"
@@ -142,9 +142,9 @@
       "isPassive": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
-      "targetBuff": {"hull": -10, "shield": -10, "energy": 0},
+      "targetBuff": {"hull": -10, "shield": 0, "energy": -40},
       "credits": 80,
-      "name": "Beta Beam"
+      "name": "Higgs Focuser"
     },
     {
       "type": "weapon",
@@ -152,9 +152,9 @@
       "isPassive": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
-      "targetBuff": {"hull": -10, "shield": 0, "energy": -40},
+      "targetBuff": {"hull": -10, "shield": -10, "energy": 0},
       "credits": 80,
-      "name": "Higgs Focuser"
+      "name": "Beta Beam"
     },
     {
       "type": "weapon",
@@ -211,16 +211,6 @@
       "isInstallable": true,
       "isPassive": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
-      "targetBuff": {"hull": -50, "shield": 0, "energy": 0},
-      "credits": 500,
-      "name": "Mass Gun"
-    },
-    {
-      "type": "weapon",
-      "isInstallable": true,
-      "isPassive": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -10},
       "targetBuff": {"hull": -25, "shield": -25, "energy": 0},
       "credits": 500,
@@ -252,6 +242,16 @@
       "isPassive": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
+      "targetBuff": {"hull": -50, "shield": 0, "energy": 0},
+      "credits": 500,
+      "name": "Mass Gun"
+    },
+    {
+      "type": "weapon",
+      "isInstallable": true,
+      "isPassive": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
       "targetBuff": {"hull": -10, "shield": -50, "energy": 0},
       "credits": 720,
       "name": "Spectrum Ray"
@@ -262,9 +262,9 @@
       "isPassive": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
-      "targetBuff": {"hull": 0, "shield": -50, "energy": -200},
+      "targetBuff": {"hull": -50, "shield": 0, "energy": -200},
       "credits": 2000,
-      "name": "C Field Coil"
+      "name": "Möbius Focuser"
     },
     {
       "type": "weapon",
@@ -272,9 +272,9 @@
       "isPassive": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
-      "targetBuff": {"hull": -50, "shield": 0, "energy": -200},
+      "targetBuff": {"hull": 0, "shield": -50, "energy": -200},
       "credits": 2000,
-      "name": "Möbius Focuser"
+      "name": "C Field Coil"
     },
     {
       "type": "weapon",
@@ -311,20 +311,20 @@
       "isInstallable": true,
       "isPassive": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 10, "shield": 0, "energy": -10},
+      "playerBuff": {"hull": 0, "shield": 10, "energy": 10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 20,
-      "name": "Epoxy Injector"
+      "name": "Recharge Clamp"
     },
     {
       "type": "tool",
       "isInstallable": true,
       "isPassive": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 10, "energy": 10},
+      "playerBuff": {"hull": 10, "shield": 0, "energy": -10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 20,
-      "name": "Recharge Clamp"
+      "name": "Epoxy Injector"
     },
     {
       "type": "tool",
@@ -371,16 +371,6 @@
       "isInstallable": true,
       "isPassive": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 20, "energy": -10},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 80,
-      "name": "Recharge Pump"
-    },
-    {
-      "type": "tool",
-      "isInstallable": true,
-      "isPassive": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 20, "shield": 0, "energy": -10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 80,
@@ -397,14 +387,14 @@
       "name": "Recharge Pump"
     },
     {
-      "type": "module",
+      "type": "tool",
       "isInstallable": true,
-      "isPassive": true,
+      "isPassive": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 1, "shield": 0, "energy": -1},
+      "playerBuff": {"hull": 0, "shield": 20, "energy": -10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Self Healing Hull"
+      "credits": 80,
+      "name": "Recharge Pump"
     },
     {
       "type": "module",
@@ -455,6 +445,16 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 0,
       "name": "Shield Pump"
+    },
+    {
+      "type": "module",
+      "isInstallable": true,
+      "isPassive": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 1, "shield": 0, "energy": -1},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
+      "name": "Self Healing Hull"
     },
     {
       "type": "module",
@@ -590,16 +590,6 @@
       "type": "module",
       "isInstallable": true,
       "isPassive": true,
-      "attr": {"maxhull": 0, "maxshield": 40, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 320,
-      "name": "Shield Array"
-    },
-    {
-      "type": "module",
-      "isInstallable": true,
-      "isPassive": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 40, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
@@ -607,14 +597,14 @@
       "name": "Decagon Battery"
     },
     {
-      "type": "common",
-      "isInstallable": false,
+      "type": "module",
+      "isInstallable": true,
       "isPassive": true,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "attr": {"maxhull": 0, "maxshield": 40, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Mining Drill"
+      "credits": 320,
+      "name": "Shield Array"
     },
     {
       "type": "common",
@@ -625,6 +615,16 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 0,
       "name": "Star Sensor"
+    },
+    {
+      "type": "common",
+      "isInstallable": false,
+      "isPassive": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
+      "name": "Mining Drill"
     },
     {
       "type": "common",
@@ -773,6 +773,28 @@
     },
     {
       "type": "common",
+      "size": "s",
+      "isInstallable": false,
+      "isPassive": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 50,
+      "name": "Nebular Dust"
+    },
+    {
+      "type": "common",
+      "size": "s",
+      "isInstallable": false,
+      "isPassive": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 75,
+      "name": "Stellar Dust"
+    },
+    {
+      "type": "common",
       "isInstallable": false,
       "isPassive": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
@@ -785,31 +807,11 @@
       "type": "quest",
       "isInstallable": false,
       "isPassive": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 0,
-      "name": "Subsystem cache"
-    },
-    {
-      "type": "quest",
-      "isInstallable": false,
-      "isPassive": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Shady Boxes"
-    },
-    {
-      "type": "quest",
-      "isInstallable": false,
-      "isPassive": true,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Star Shield"
+      "name": "Eris Grain"
     },
     {
       "type": "quest",
@@ -825,11 +827,11 @@
       "type": "quest",
       "isInstallable": false,
       "isPassive": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 0,
-      "name": "Eris Dust"
+      "name": "Subsystem cache"
     },
     {
       "type": "quest",
@@ -854,12 +856,32 @@
     {
       "type": "quest",
       "isInstallable": false,
+      "isPassive": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
+      "name": "Star Shield"
+    },
+    {
+      "type": "quest",
+      "isInstallable": false,
+      "isPassive": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
+      "name": "Shady Boxes"
+    },
+    {
+      "type": "quest",
+      "isInstallable": false,
       "isPassive": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 0,
-      "name": "Eris Grain"
+      "name": "Eris Dust"
     },
     {
       "type": "quest",
@@ -890,28 +912,6 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 310,
       "name": "Horkos"
-    },
-    {
-      "type": "common",
-      "size": "s",
-      "isInstallable": false,
-      "isPassive": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 50,
-      "name": "Nebular Dust"
-    },
-    {
-      "type": "common",
-      "size": "s",
-      "isInstallable": false,
-      "isPassive": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 75,
-      "name": "Stellar Dust"
     }
   ],
   "destinations": [
@@ -1559,8 +1559,43 @@
         }
       ]
     },
-    {"name": "Thanatos", "geometry": "lathe", "res": 8, "transform": [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]], "path": [[0, 0, -50], [50, 0, 0], [0, 0, 50]]},
-    {"name": "Monitor Drone", "geometry": "lathe", "res": 8, "transform": [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]], "path": [[0, 0, -50], [50, 0, 0], [0, 0, 50]]},
+    {
+      "name": "Thanatos",
+      "geometry": "composite",
+      "res": 8,
+      "transform": [["scale", 20, 20, 20], ["rotate", 1.7, -0.2, 0]],
+      "path": [[20, 0, 1], [20, 0, -1], [38, 0, -3], [40, 0, 0], [38, 0, 2], [20, 0, 1]],
+      "angle": 6,
+      "parts": [
+        {"geometry": "lathe", "res": 6, "transform": [["rotate", 0, 0, 0.524], ["scale", 2, 0.5, 1], ["rotate", 0, 3.14, 0]], "path": [[0, 0, 0], [1.99, 0, 2], [1.2, 0, 7], [0, 0, 6.8]]},
+        {"geometry": "lathe", "res": 6, "transform": [["rotate", 0, 0, 0.524], ["scale", 2, 0.5, 1], ["rotate", 0, 1.05, 0]], "path": [[0, 0, 0], [1.99, 0, 2], [1.2, 0, 7], [0, 0, 6.8]]},
+        {"geometry": "lathe", "res": 6, "transform": [["rotate", 0, 0, 0.524], ["scale", 2, 0.5, 1], ["rotate", 0, -1.05, 0]], "path": [[0, 0, 0], [1.99, 0, 2], [1.2, 0, 7], [0, 0, 6.8]]}
+      ]
+    },
+    {
+      "name": "Monitor Drone",
+      "geometry": "composite",
+      "res": 8,
+      "transform": [["scale", 2, 2, 2]],
+      "path": [[20, 0, 1], [20, 0, -1], [38, 0, -3], [40, 0, 0], [38, 0, 2], [20, 0, 1]],
+      "angle": 6,
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 8,
+          "transform": [["scale", 1, 1, 1], ["rotate", 1.57, -0.14, 0], ["translate", 0, 0, 0]],
+          "path": [[20, 0, 2], [20, 0, -2], [38, 0, -5], [40, 0, 0], [38, 0, 5], [20, 0, 2]],
+          "angle": 6
+        },
+        {
+          "geometry": "lathe",
+          "res": 8,
+          "transform": [["scale", 1, 1, 1], ["rotate", 0, 3.14, -0.14], ["translate", 2, 0, 0]],
+          "path": [[20, 0, 2], [20, 0, -2], [38, 0, -5], [40, 0, 0], [38, 0, 5], [20, 0, 2]],
+          "angle": 6
+        }
+      ]
+    },
     {
       "name": "Landsraad Station",
       "geometry": "composite",
