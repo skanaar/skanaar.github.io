@@ -6,8 +6,6 @@
         <th>name</th>
         <th>type</th>
         <th>credits</th>
-        <th>installable</th>
-        <th>passive</th>
         <th>maxhull</th>
         <th>maxshield</th>
         <th>maxenergy</th>
@@ -24,8 +22,6 @@
         <td>{item.name}</td>
         <td>{item.type}</td>
         <td>{item.credits}</td>
-        <td>{item.isInstallable ? '×' : ''}</td>
-        <td>{item.isPassive ? '×' : ''}</td>
         <td>{item.attr.maxhull}</td>
         <td>{item.attr.maxshield}</td>
         <td>{item.attr.maxenergy}</td>
@@ -81,9 +77,7 @@
         <option>common</option>
         <option>quest</option>
       </select><br/>
-      <em>credits</em>     <input type=number ref="creditsField" value={selected && selected.credits}><br/>
-      <em>installable</em> <input type=checkbox ref="isInstallableToggle" checked={selected && selected.isInstallable}><br/>
-      <em>passive</em>     <input type=checkbox ref="isPassiveToggle" checked={selected && selected.isPassive}>
+      <em>credits</em>     <input type=number ref="creditsField" value={selected && selected.credits}>
     </div>
     
     <label>Attributes</label>
@@ -129,7 +123,13 @@
 
     self.add = function () {
       self.world.items.push({
-        type:'common', size: 's', isInstallable: false, isPassive: false, attr: { maxhull:0, maxshield:0, maxenergy:0, armor:0, cloak:0, jump:0, slots:0}, playerBuff:{hull:0, shield:0, energy: 0}, targetBuff:{ hull: 0, shield:  0, energy: 0}, credits: 5, name: 'unnamed'})
+        type:'common',
+        credits: 5,
+        name: 'unnamed',
+        attr: { maxhull:0, maxshield:0, maxenergy:0, armor:0, cloak:0, jump:0, slots:0},
+        playerBuff:{hull:0, shield:0, energy: 0},
+        targetBuff:{ hull: 0, shield:  0, energy: 0}
+      })
     }
 
     self.remove = function () {
@@ -144,8 +144,6 @@
       self.selected.name = self.refs.nameField.value
       self.selected.type = self.refs.typeInput.value
       self.selected.credits = +self.refs.creditsField.value
-      self.selected.isInstallable = self.refs.isInstallableToggle.checked
-      self.selected.isPassive = self.refs.isPassiveToggle.checked
       self.selected.attr.maxhull = +self.refs.maxhullField.value
       self.selected.attr.maxshield = +self.refs.maxshieldField.value
       self.selected.attr.maxenergy = +self.refs.maxenergyField.value
