@@ -1,14 +1,20 @@
+var cameraPos = vec.Vec(100,100,100);
+var timestep = 2;
+var showDebug = false;
+var showOverview = false;
+var isPaused = false;
+var unit = {
+  '#scout': 0.25,
+  '#ranger': 0.60,
+  '#juggernaut': 1.5
+}[location.hash] || 0.4
+
 var clock = new THREE.Clock();
 
 var viewer = buildViewer(window.innerWidth,
                          window.innerHeight,
                          window.devicePixelRatio)
 var engine = buildEngine(256, viewer);
-
-var cameraPos = vec.Vec();
-var timestep = 2;
-var showDebug = false;
-var isPaused = false;
 
 init(viewer);
 animate();
@@ -52,8 +58,8 @@ function buildEngine(res) {
 	mesh.receiveShadow = true;
 
   var sun = new THREE.SpotLight(0xffffff, 1, 0, Math.PI / 2);
-  sun.position.set(200, 100, 200);
-  sun.target.position.set(50, 0, 50);
+  sun.position.set(250, 70, 0);
+  sun.target.position.set(0, 0, 0);
 
 	sun.castShadow = true;
 	sun.shadow.camera.near = 100;
@@ -65,11 +71,11 @@ function buildEngine(res) {
 
   var y = quad.valueAt(quadtree, 0, 0);
 
-  var wheelA = new Wheel( 1, y + 4,  1, 0.6);
-  var wheelB = new Wheel(-1, y + 4,  1, 0.6);
-  var wheelC = new Wheel( 1, y + 4, -1, 0.6);
-  var wheelD = new Wheel(-1, y + 4, -1, 0.6);
-  var rover = new Rover(wheelA, wheelB, wheelC, wheelD, 2);
+  var wheelA = new Wheel( unit, y + 4,  unit, unit*0.6);
+  var wheelB = new Wheel(-unit, y + 4,  unit, unit*0.6);
+  var wheelC = new Wheel( unit, y + 4, -unit, unit*0.6);
+  var wheelD = new Wheel(-unit, y + 4, -unit, unit*0.6);
+  var rover = new Rover(wheelA, wheelB, wheelC, wheelD, 2*unit);
 
   scene.add(mesh);
   scene.add(sun);
@@ -106,6 +112,7 @@ function init(viewer) {
   window.addEventListener('resize', onWindowResize);
   input.onNumber(function(i) { timestep = Math.exp(i/4) / 2 });
   input.on('i', function() { showDebug = !showDebug });
+  input.on(' ', function() { showOverview = !showOverview });
   input.on('p', function() { isPaused = !isPaused });
 }
 
@@ -114,14 +121,15 @@ function onWindowResize() {
   viewer.camera.updateProjectionMatrix();
   viewer.renderer.setSize(window.innerWidth, window.innerHeight);
 }
-
+var even = true;
 function animate() {
   requestAnimationFrame(animate);
-  update();
+  even = !even;
+  if (even) update();
 }
 
 function simulate(dt, iterations) {
-  var gravity = vec.Vec(0, -500, 0);
+  var gravity = vec.Vec(0, -300, 0);
   var objs = engine.wheels.map(e => e.obj);
   dt *= timestep / iterations;
   for (var i=iterations; i; i--){
@@ -148,7 +156,8 @@ function updateDebugInfo() {
 function updateChaseCam() {
   var p = vec.clone(engine.rover.obj.pos);
   var dir = engine.rover.dir;
-  var pos = vec.add(p, vec.Vec(dir.x*-10, 10, dir.z*-10));
+  var camDist = showOverview ? 40 : 8*unit;
+  var pos = vec.add(p, vec.Vec(dir.x*-camDist, camDist, dir.z*-camDist));
   vec.multTo(cameraPos, 0.98);
   vec.addTo(cameraPos, pos, 0.02);
   viewer.camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
@@ -167,10 +176,10 @@ function update() {
 
     engine.rover.apply();
 
-    if (input.up) engine.rover.addSpeed(20);
-    if (input.down) engine.rover.addSpeed(-20);
-    if (input.left) engine.rover.steer(-0.1);
-    if (input.right) engine.rover.steer(0.1);
+    if (input.up) engine.rover.addSpeed(10);
+    if (input.down) engine.rover.addSpeed(-10);
+    if (input.left) engine.rover.steer(-0.025);
+    if (input.right) engine.rover.steer(0.025);
     engine.rover.steerAhead(0.1);
   }
 
