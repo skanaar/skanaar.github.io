@@ -149,14 +149,12 @@
     }
 
     function buildMesh(model){
-      if (model.geometry == 'lathe')
-        return applyTransformations(lathe(model), model)
-      if (model.geometry == 'composite')
-        return applyTransformations(_.flatten(model.parts.map(buildMesh), true), model)
-      if (model.geometry == 'sphere')
-        return applyTransformations(sphere(model), model)
-      if (model.geometry == 'mesh')
-        return applyTransformations(model.quads, model)
+      switch(model.geometry) {
+      case 'lathe': return applyTransforms(lathe(model), model)
+      case 'composite': return applyTransforms(_.flatten(model.parts.map(buildMesh), true), model)
+      case 'sphere': return applyTransforms(sphere(model), model)
+      case 'mesh': return applyTransforms(model.quads, model)
+      }
     }
 
     function updateMesh(){
@@ -166,7 +164,7 @@
         return normal[2] < 0
       })
       self.mesh = _.sortBy(self.mesh, quad => -(quad[0][2]+quad[2][2]))
-      self.box = applyPerspective([[[-200,-200,100], [-200,200,100], [200,200,100], [200,-200,100]]])
+      self.box = applyPerspective([[[-200,-200,0], [-200,200,0], [200,200,0], [200,-200,0]]])
     }
 
     function lathe(model) {
@@ -205,7 +203,7 @@
       }
     }
 
-    function applyTransformations(mesh, model) {
+    function applyTransforms(mesh, model) {
       return model.transform.reduce((mesh, trans) => transformMesh(mesh, trans), mesh)
     }
 
@@ -217,7 +215,7 @@
         side: mmult(zoom, mmult(rotateY(Math.PI/2), rotateZ(Math.PI/2))),
         perspective: mmult(zoom, mmult(rotateZ(-0.75), rotateX(-1.1)))
       }[self.camera] || mmult(rotateZ(0.3), rotateX(1.21))
-      return mesh.map(q => transformQuad(q, perspective).map(p => vtranslate(p, [400,350,0])))
+      return mesh.map(q => transformQuad(q, perspective).map(p => vtranslate(p, [400,400,0])))
     }
 
     function loadWorld() {
