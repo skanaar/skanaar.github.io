@@ -6,7 +6,7 @@
       <i>{needsSave ? 'Unsaved' : 'Saved'}</i>
       <button onclick={loadDefault}>Load default</button>
       <button onclick={loadEmpty}>Clear all</button>
-      <a class="button" ref="downloadLink" onmouseenter={primeDownloadLink} download="destinations.json" href='#'>Download</a>
+      <a class="button" ref="downloadLink" onmouseenter={primeDownloadLink} download="world.json" href='#'>Download</a>
       <label class=button for=file-input>Upload</label>
       <input id=file-input type=file ref=fileInput onchange={fileChanged} style="width: 150px; margin-right: 20px">
     </div>
