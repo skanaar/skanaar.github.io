@@ -6,6 +6,7 @@ if (!window.events) {
 window.nullWorld = function () {
   return {
     destinations: [],
+    audioRegions: [],
     quests: '',
     items: [],
     ships: [],
@@ -25,6 +26,10 @@ window.constants = {
     'structure',
     'anomaly'
   ],
+  audios: [
+    'light-years',
+    'dark-sky'
+  ],
   hasSurface: function (entity) {
     return ['planet', 'asteroid'].includes(entity.style.split('-')[0])
   },
@@ -40,6 +45,7 @@ window.getWorld = function () {
   try {
     var world = JSON.parse(localStorage['world'])
     if (!_.isArray(world.destinations)) throw new Error()
+    if (!_.isArray(world.audioRegions)) throw new Error()
     if (!_.isString(world.quests)) throw new Error()
     if (!_.isArray(world.items)) throw new Error()
     if (!_.isArray(world.ships)) throw new Error()

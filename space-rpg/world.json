@@ -735,6 +735,11 @@
       "name": "Horkos"
     }
   ],
+  "audioRegions": [
+    {"audio": "light-years", "pos": {"x": -360, "y": -728}, "radius": 400},
+    {"audio": "dark-sky", "pos": {"x": -492, "y": -1572}, "radius": 250},
+    {"audio": "light-years", "pos": {"x": -170, "y": -24}, "radius": 300}
+  ],
   "destinations": [
     {"name": "Backwater", "style": "planet-badlands-1", "pos": {"x": -100, "y": -1300}, "trader": {"buy": 1, "sell": 1, "inventory": []}, "treasures": [], "enemy": null},
     {"name": "Anomaly 42", "style": "anomaly-derelict", "pos": {"x": 70, "y": -1330}, "trader": null, "treasures": [], "enemy": null},
