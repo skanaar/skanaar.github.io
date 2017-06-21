@@ -364,7 +364,7 @@
     }
 
     function forSelected(action) {
-      self.nodes.filter(e => e.isSelected && e.type === 'entity').forEach(o => action(o.entity))
+      self.nodes.filter(e => e.isSelected && e.type === 'celestial').forEach(o => action(o.entity))
       updateUI()
     }
 
