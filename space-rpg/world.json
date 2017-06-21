@@ -2,11 +2,11 @@
   "initialShip": "rogue",
   "ships": [
     {"name": "rover", "visual": "Rover", "attr": {"maxhull": 1, "maxshield": 1, "maxenergy": 1, "jump": 0, "slots": 1}, "generator": {"hull": 1, "shield": 1, "energy": 1}},
-    {"name": "rogue", "visual": "Kerr Journeyman", "attr": {"maxhull": 20, "maxshield": 20, "maxenergy": 20, "jump": 100, "slots": 4}, "generator": {"hull": 1, "shield": 1, "energy": 1}},
+    {"name": "rogue", "visual": "Kerr Journeyman", "attr": {"maxhull": 20, "maxshield": 20, "maxenergy": 20, "jump": 125, "slots": 4}, "generator": {"hull": 1, "shield": 1, "energy": 1}},
     {"name": "clipper", "visual": "Kerr Clipper", "attr": {"maxhull": 20, "maxshield": 20, "maxenergy": 20, "jump": 125, "slots": 4}, "generator": {"hull": 1, "shield": 1, "energy": 1}},
-    {"name": "battleship", "visual": "Kerr Frigate", "attr": {"maxhull": 40, "maxshield": 40, "maxenergy": 30, "jump": 150, "slots": 6}, "generator": {"hull": 2, "shield": 2, "energy": 2}},
-    {"name": "soma", "visual": "Soma Soot", "attr": {"maxhull": 50, "maxshield": 35, "maxenergy": 30, "jump": 175, "slots": 8}, "generator": {"hull": 3, "shield": 3, "energy": 3}},
-    {"name": "longship", "visual": "CES Interplan", "attr": {"maxhull": 70, "maxshield": 50, "maxenergy": 50, "jump": 200, "slots": 10}, "generator": {"hull": 4, "shield": 4, "energy": 4}}
+    {"name": "battleship", "visual": "Kerr Frigate", "attr": {"maxhull": 40, "maxshield": 40, "maxenergy": 30, "jump": 125, "slots": 6}, "generator": {"hull": 2, "shield": 2, "energy": 2}},
+    {"name": "soma", "visual": "Soma Soot", "attr": {"maxhull": 50, "maxshield": 35, "maxenergy": 30, "jump": 125, "slots": 8}, "generator": {"hull": 3, "shield": 3, "energy": 3}},
+    {"name": "longship", "visual": "CES Interplan", "attr": {"maxhull": 70, "maxshield": 50, "maxenergy": 50, "jump": 125, "slots": 10}, "generator": {"hull": 4, "shield": 4, "energy": 4}}
   ],
   "enemies": [
     {
