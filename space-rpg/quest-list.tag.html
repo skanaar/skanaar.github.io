@@ -16,8 +16,9 @@
   </div>
 
   <div class="sidebar">
+    <label>Templates</label>
     <div each={e in templates}>
-      <button onclick={useTemplate}>{e.name}</button>
+      <button class="quest-template" onclick={useTemplate}>{e.name}</button>
     </div>
   </div>
 
@@ -27,7 +28,7 @@
     self.quests = []
     self.active = null
     self.templates = [
-      { name: 'Condition', template: '<condition have-item="" at-dest="" no-enemy-at-dest="" not-at-dest="" have-credits="" trigger="auto"/>' },
+      { name: 'Condition', template: '<condition have-item="" at-dest="" no-enemy-at-dest="" not-at-dest="" have-credits="" trigger="TRIGGER"/>' },
       { name: 'Place item', template: '<place-item dest="" item=""/>' },
       { name: 'Place trader inventory', template: '<place-inventory dest="" item=""/>' },
       { name: 'Dialog', template: '<dialog>"Hey hitchhiker!"</dialog>' },
@@ -110,6 +111,11 @@
       top: 31px;
       left: 255px;
       z-index: 2;
+    }
+    .quest-template {
+      margin-bottom: 5px;
+      padding: 3px 8px;
+      width: 95%;
     }
   </style>
 

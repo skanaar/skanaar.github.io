@@ -11,7 +11,7 @@
       stroke-width="2"
       stroke-dasharray="5,5"
       stroke=gray
-      fill="#eee"
+      fill="#fafafa"
       riot-cx={e.screenPos.x} riot-cy={e.screenPos.y}
       riot-rx={scale * e.entity.radius} riot-ry={scale * e.entity.radius}
       onmouseup={mouseupOnItem}/>
@@ -24,7 +24,8 @@
     <ellipse
       each={nodes}
       stroke-width="2"
-      stroke={isSelected ? '#F00' : '#000'}
+      stroke-dasharray={type == 'audio' ? '4,4' : false}
+      stroke={(isSelected ? '#F00' : '#000')}
       fill={isSelected ? '#F88' : fillFor(entity)}
       riot-cx={screenPos.x} riot-cy={screenPos.y}
       riot-rx={1+radiusFor(entity)} riot-ry={1+radiusFor(entity)}
@@ -355,10 +356,11 @@
 
     var fills = {
       cloud: 'rgba(221, 136, 221, 0.5)', star: '#ff4', jovian: '#fa8',
-      planet: '#8f8', asteroid: '#aaa', anomaly: '#fa0', ring: '#8af', audio: '#38f'
+      planet: '#8f8', asteroid: '#aaa', anomaly: '#fa0', ring: '#8af', audio: '#aaa'
     }
     self.fillFor = entity => fills[entity.style.split('-')[0]]
     self.radiusFor = function (ent) {
+      if (ent.style == 'audio-1') return 4
       var cel = self.world.celestials.find(s => s.id == ent.style)
       return cel && (cel.celestial.r * self.scale) || 0
     }
@@ -412,7 +414,7 @@
       var audioRegions = world.audioRegions.map(e => ({
         type: 'audio',
         screenPos: transform(e.pos),
-        isSelected: true,
+        isSelected: false,
         entity: {
           pos: e.pos, name: e.audio, radius: e.radius, style: 'audio-1',
           trader: null, enemy: null, treasures: []
