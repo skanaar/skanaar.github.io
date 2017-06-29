@@ -82,22 +82,6 @@
       "type": "weapon",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -4},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -40},
-      "credits": 20,
-      "name": "Wave Pulse"
-    },
-    {
-      "type": "weapon",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
-      "targetBuff": {"hull": 0, "shield": -5, "energy": -20},
-      "credits": 20,
-      "name": "U Field Coil"
-    },
-    {
-      "type": "weapon",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -4},
       "targetBuff": {"hull": -10, "shield": 0, "energy": 0},
       "credits": 20,
       "name": "Gauss Gun"
@@ -109,6 +93,22 @@
       "targetBuff": {"hull": -5, "shield": -5, "energy": 0},
       "credits": 20,
       "name": "Alpha Beam"
+    },
+    {
+      "type": "weapon",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -4},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -40},
+      "credits": 20,
+      "name": "Wave Pulse"
+    },
+    {
+      "type": "weapon",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": 0, "shield": -5, "energy": -20},
+      "credits": 20,
+      "name": "U Field Coil"
     },
     {
       "type": "weapon",
@@ -130,17 +130,17 @@
       "type": "weapon",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
-      "targetBuff": {"hull": -10, "shield": -10, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": -10, "energy": -40},
       "credits": 80,
-      "name": "Beta Beam"
+      "name": "G Field Coil"
     },
     {
       "type": "weapon",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
-      "targetBuff": {"hull": 0, "shield": -10, "energy": -40},
+      "targetBuff": {"hull": -10, "shield": -10, "energy": 0},
       "credits": 80,
-      "name": "G Field Coil"
+      "name": "Beta Beam"
     },
     {
       "type": "weapon",
@@ -165,14 +165,6 @@
       "targetBuff": {"hull": -8, "shield": -25, "energy": 0},
       "credits": 218,
       "name": "Meson Ray"
-    },
-    {
-      "type": "weapon",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -200},
-      "credits": 500,
-      "name": "Cascade Pulse"
     },
     {
       "type": "weapon",
@@ -210,6 +202,14 @@
       "type": "weapon",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -200},
+      "credits": 500,
+      "name": "Cascade Pulse"
+    },
+    {
+      "type": "weapon",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
       "targetBuff": {"hull": -10, "shield": -50, "energy": 0},
       "credits": 720,
       "name": "Spectrum Ray"
@@ -226,25 +226,17 @@
       "type": "weapon",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
-      "targetBuff": {"hull": 0, "shield": -50, "energy": -200},
-      "credits": 2000,
-      "name": "C Field Coil"
-    },
-    {
-      "type": "weapon",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
       "targetBuff": {"hull": -50, "shield": -50, "energy": 0},
       "credits": 2000,
       "name": "Delta Beam"
     },
     {
-      "type": "tool",
+      "type": "weapon",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 5, "energy": -10},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 5,
-      "name": "Recharge Loop"
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
+      "targetBuff": {"hull": 0, "shield": -50, "energy": -200},
+      "credits": 2000,
+      "name": "C Field Coil"
     },
     {
       "type": "tool",
@@ -257,10 +249,10 @@
     {
       "type": "tool",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 10, "energy": 10},
+      "playerBuff": {"hull": 0, "shield": 5, "energy": -10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 20,
-      "name": "Recharge Clamp"
+      "credits": 5,
+      "name": "Recharge Loop"
     },
     {
       "type": "tool",
@@ -281,10 +273,10 @@
     {
       "type": "tool",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 15, "energy": -10},
+      "playerBuff": {"hull": 0, "shield": 10, "energy": 10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 45,
-      "name": "Recharge Coil"
+      "credits": 20,
+      "name": "Recharge Clamp"
     },
     {
       "type": "tool",
@@ -293,6 +285,14 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 45,
       "name": "Welding Robot"
+    },
+    {
+      "type": "tool",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 15, "energy": -10},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 45,
+      "name": "Recharge Coil"
     },
     {
       "type": "tool",
@@ -327,20 +327,20 @@
       "name": "Recharge Pump"
     },
     {
-      "type": "module",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 6},
+      "type": "tool",
+      "attr": {"maxhull": 1, "maxshield": 1, "maxenergy": 1, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": -1, "energy": 10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Fold Reactor"
+      "credits": 290,
+      "name": "Epiales"
     },
     {
-      "type": "module",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 8},
+      "type": "tool",
+      "attr": {"maxhull": 3, "maxshield": 2, "maxenergy": 1, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 10, "shield": 0, "energy": -1},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Null Reactor"
+      "credits": 310,
+      "name": "Horkos"
     },
     {
       "type": "module",
@@ -349,14 +349,6 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 0,
       "name": "Torii Reactor"
-    },
-    {
-      "type": "module",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 2},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Linear Reactor"
     },
     {
       "type": "module",
@@ -373,6 +365,46 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 0,
       "name": "Self Healing Hull"
+    },
+    {
+      "type": "module",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 8},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
+      "name": "Null Reactor"
+    },
+    {
+      "type": "module",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 6},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
+      "name": "Fold Reactor"
+    },
+    {
+      "type": "module",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
+      "name": "Star Shield"
+    },
+    {
+      "type": "module",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 2},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
+      "name": "Linear Reactor"
+    },
+    {
+      "type": "module",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
+      "name": "Star Sensor"
     },
     {
       "type": "module",
@@ -409,18 +441,18 @@
     {
       "type": "module",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 4, "energy": -4},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 3,
-      "name": "Shield Reactor"
-    },
-    {
-      "type": "module",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 4, "shield": 0, "energy": -4},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 3,
       "name": "Nanite Swarm"
+    },
+    {
+      "type": "module",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 4, "energy": -4},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 3,
+      "name": "Shield Reactor"
     },
     {
       "type": "module",
@@ -432,14 +464,6 @@
     },
     {
       "type": "module",
-      "attr": {"maxhull": 0, "maxshield": 10, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 20,
-      "name": "Shield Pack"
-    },
-    {
-      "type": "module",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 10, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
@@ -448,11 +472,11 @@
     },
     {
       "type": "module",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 20, "jump": 0, "slots": 0},
+      "attr": {"maxhull": 0, "maxshield": 10, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 80,
-      "name": "Hexagon Battery"
+      "credits": 20,
+      "name": "Shield Pack"
     },
     {
       "type": "module",
@@ -464,11 +488,11 @@
     },
     {
       "type": "module",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 30, "jump": 0, "slots": 0},
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 20, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 180,
-      "name": "Octagon Battery"
+      "credits": 80,
+      "name": "Hexagon Battery"
     },
     {
       "type": "module",
@@ -480,11 +504,19 @@
     },
     {
       "type": "module",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 40, "jump": 0, "slots": 0},
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 30, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 320,
-      "name": "Decagon Battery"
+      "credits": 180,
+      "name": "Octagon Battery"
+    },
+    {
+      "type": "module",
+      "attr": {"maxhull": 0, "maxshield": 5, "maxenergy": 15, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 1, "energy": 1},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 230,
+      "name": "Momus"
     },
     {
       "type": "module",
@@ -495,12 +527,12 @@
       "name": "Shield Array"
     },
     {
-      "type": "common",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "type": "module",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 40, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Star Sensor"
+      "credits": 320,
+      "name": "Decagon Battery"
     },
     {
       "type": "common",
@@ -556,6 +588,22 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 5,
+      "name": "Blue flowers"
+    },
+    {
+      "type": "common",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 5,
+      "name": "Water sample"
+    },
+    {
+      "type": "common",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 5,
       "name": "Blue seeds"
     },
     {
@@ -573,22 +621,6 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 5,
       "name": "Thanatos nacelle"
-    },
-    {
-      "type": "common",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 5,
-      "name": "Blue flowers"
-    },
-    {
-      "type": "common",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 5,
-      "name": "Water sample"
     },
     {
       "type": "common",
@@ -668,6 +700,22 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 0,
+      "name": "Shady Boxes"
+    },
+    {
+      "type": "quest",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
+      "name": "Eris Dust"
+    },
+    {
+      "type": "quest",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
       "name": "Subsystem cache"
     },
     {
@@ -685,54 +733,6 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 0,
       "name": "Eris Splinter"
-    },
-    {
-      "type": "quest",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Star Shield"
-    },
-    {
-      "type": "quest",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Shady Boxes"
-    },
-    {
-      "type": "quest",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Eris Dust"
-    },
-    {
-      "type": "module",
-      "attr": {"maxhull": 0, "maxshield": 5, "maxenergy": 15, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 1, "energy": 1},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 230,
-      "name": "Momus"
-    },
-    {
-      "type": "tool",
-      "attr": {"maxhull": 1, "maxshield": 1, "maxenergy": 1, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": -1, "energy": 10},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 290,
-      "name": "Epiales"
-    },
-    {
-      "type": "tool",
-      "attr": {"maxhull": 3, "maxshield": 2, "maxenergy": 1, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 10, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 310,
-      "name": "Horkos"
     }
   ],
   "audioRegions": [
@@ -866,7 +866,7 @@
     {"pos": {"x": 1119, "y": -1182}, "name": "A1982", "style": "asteroid-1", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": 1211, "y": -1172}, "name": "A1172", "style": "asteroid-1", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": 1305, "y": -1164}, "name": "A564", "style": "asteroid-1", "trader": null, "enemy": null, "treasures": []},
-    {"pos": {"x": 1142, "y": 8}, "name": "Thanatos", "style": "anomaly-derelict", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 1142, "y": 8}, "name": "Thanatos", "style": "anomaly-thanatos", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": -905, "y": -1023}, "name": "A5463", "style": "asteroid-3", "trader": null, "enemy": null, "treasures": []},
     {
       "pos": {"x": -898, "y": -915},
@@ -969,7 +969,7 @@
     },
     {"pos": {"x": 1016, "y": -974}, "name": "Larato Node", "style": "anomaly-gate", "trader": null, "enemy": null, "treasures": []}
   ],
-  "quests": "<quests><quest title=\"REFERENCE\"><!-- Pause the quest until all conditions are fulfilled. All attributes are optional. -->\n<!-- have-item accepts: semicolon separated list of items that the player must possess -->\n<!-- at-dest accepts: single destination name -->\n<!-- no-enemy-at-dest: semicolon separated list of destination names that must be cleared of enemies -->\n<!-- not-at-dest: single destination name -->\n<!-- have-credits: number of credits that player must possess -->\n<!-- trigger: if omitted condition is triggered automatically. If present the condition is triggered with a button in the Radar View with the text set to the provided string -->\n<condition have-item=\"Shiny Meteorite;Blue seeds\" at-dest=\"Backwater\" no-enemy-at-dest=\"Baola\" not-at-dest=\"Backwater\" have-credits=\"3000\" trigger=\"EXPLORE\"/>\n\n<!-- Add a lootable item to the destination. -->\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n\n<!-- Add a purchasable item to the destination's trader. -->\n<place-inventory dest=\"Backwater\" item=\"Phased Ray\"/>\n\n<!-- Display a message. If the optional ok and cancel attributes are provided they will appear as buttons. Cancel will rewinds the quest one step, so that the same trigger that triggered the quest will display the same message the next turn. Ok will progress the quest as normally. -->\n<dialog>\"Hey hitchhiker!\"</dialog>\n<dialog ok=\"YES PLEASE\" cancel=\"NO THANKS\">\"Would you like some tea?\"</dialog>\n\n<!-- Include this quest in the quest list. -->\n<add-to-quest-list/>\n<!-- Add item or credits to the player's inventory. -->\n<give credits=\"900\"/>\n<give item=\"Phased Ray\"/>\n\n<!-- Remove an item or credits from the player's inventory. -->\n<take credits=\"900\"/>\n<take item=\"Phased Ray\"/>\n\n<!-- Place a quest marker on the map. color and icon attributes are optional. icon can take these values: \"arrow\", \"square\", \"enter\", \"exit\". A quest can only have a single map marker. -->\n<mark-on-map dest=\"Samson's Folly\" color=\"0x0F0\" icon=\"arrow\"/>\n\n<!-- Change the player's ship. -->\n<change-ship ship=\"clipper\"/>\n\n<!-- Clear the map marker for this quest. -->\n<remove-map-marker/>\n\n<!-- Transports the player to another destination. -->\n<travel dest=\"Backwater\"/>\n\n<!-- Rewinds or fast forwards the quest a set number of steps. -->\n<goto jump=\"-3\"/></quest><quest title=\"Start of an adventure\"><condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n\"Hey hitchhiker! This is your stop.\"\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a weird signature. If you EXPLORE the area you might score big time!</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog>You find the meteorite resting on the ground. No crater. A shiny dodecahedron that is surprisingly light when you load it into the rover. The TRADE guild will pay a fortune for this.</dialog>\n<condition have-credits=\"1000\"/>\n<dialog>\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. What do you say?\"</dialog>\n<dialog>There it is. An opportunity to finally leave this rock. You accept eagerly.</dialog>\n<dialog>\"Now you can LIFT OFF and leave this planet.\nBut it is dangerous out there, go by Samson and get some weapons for that ship.\"</dialog>\n<take credits=\"900\"/>\n<mark-on-map dest=\"Samson's Folly\"/>\n<change-ship ship=\"clipper\"/>\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>\"My friend at Backwater said you would be coming. We have a nice Photon Ray in stock left. You are welcome to LAND and TRADE with us here at Samson's Folly.\"</dialog>\n<condition have-item=\"Photon Ray\"/>\n<dialog>You now have a Photon Ray, a basic weapon. Tap you ship hologram to open your PROFILE and INSTALL your new Photon Ray</dialog>\n<remove-map-marker/></quest><quest title=\"Shady spacer\"><place-item dest=\"Shady\" item=\"Shady Boxes\"/>\n<condition at-dest=\"Shady\"/>\n<dialog>A sad rusty ship radios you.\n\"Fellow spacer! There is nice loot on this moon but my landing gear is bust. If you LAND and help me EXPLORE I'll reward you.\"</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shady Boxes\"/>\n<dialog>The eager spacer thank you several times for helping her finding the boxes. You receive a small reward and you hope you don't see the her again.</dialog>\n<give credits=\"100\"/>\n<take item=\"Shady Boxes\"/></quest><quest title=\"Peril at Buoy 72\"><place-enemy dest=\"Buoy 72\" enemy=\"Monitor Drone\"/>\n<condition at-dest=\"Buoy 68\"/>\n<dialog>You receive a transmission:\n\"Help us. The way ahead is blocked by a malfunctioning drone. We don't dare to proceed. You have to clear the path for us!\"</dialog>\n<mark-on-map dest=\"Buoy 72\"/>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"Buoy 72\"/>\n<dialog>That drone wasn't even armed. This adventure looks like its going to be a walk in the park.</dialog>\n<dialog>\"Thank you for clearing the way for us! Here, take this for you troubles.\"</dialog>\n<give credits=\"15\"/>\n<remove-map-marker/></quest><quest title=\"Bal Gru's stolen subsystems\"><place-item dest=\"A3639\" item=\"Subsystem cache\"/>\n<place-enemy dest=\"A3639\" enemy=\"Bandit\"/>\n<condition at-dest=\"Pizbui\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">\nHey girl, I'm Bal Gru, merchant in distress. Can you help me? Bandits robbed me of all of my subsystems. Can you get them back for me?\n</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Pizbui\" have-item=\"Subsystem cache\"/>\n<dialog>\nYou have our stolen subsystems! This is invaluable to us. Here, take this artifact, it is the least we can give you.\n</dialog>\n<give item=\"Larato sigil\"/></quest><quest title=\"Larato Gate\"><condition at-dest=\"Larato Node\" trigger=\"ACTIVATE\"/>\n<dialog ok=\"ENTER GATE\" cancel=\"LEAVE\">\nThe misty dark cloud in the aperture swirls.\n</dialog>\n<travel dest=\"Larato Gate\"/>\n<goto jump=\"-3\"/></quest><quest title=\"Larato Node\"><condition at-dest=\"Larato Gate\" have-item=\"Larato sigil\" trigger=\"ANALYZE\"/>\n<dialog ok=\"APPROACH\" cancel=\"IGNORE\">\nThe Larato Gate is a lumpy ring of dirty stone needles. The Larato Sigil in your inventory is humming.\nShould you approach?\n</dialog>\n<dialog>\nThe gate's mass of needles swells and twitches. The aperture shimmers and turns into a misty black cloud.\n</dialog>\n<condition at-dest=\"Larato Gate\" trigger=\"ACTIVATE\"/>\n<dialog ok=\"ENTER GATE\" cancel=\"LEAVE\">\nThe misty dark cloud in the aperture swirls.\n</dialog>\n<travel dest=\"Larato Node\"/>\n<goto jump=\"-3\"/></quest><quest title=\"Blue seeds\"><place-item dest=\"Blue Forest\" item=\"Blue seeds\"/>\n<condition have-item=\"Blue seeds\"/>\n<dialog>These Blue Seeds might take root in the right soil.</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Blue Ocean\" trigger=\"PLANT\"/>\n<dialog>You plant the Blue Seeds on a lonely island.</dialog>\n<condition not-at-dest=\"Blue Ocean\"/>\n<condition at-dest=\"Blue Ocean\" trigger=\"GATHER\"/>\n<dialog>You gather the Blue Flowers that sprung out of the planted seeds.</dialog>\n<give item=\"Blue flowers\"/></quest><quest title=\"Helyon Shipyards\"><condition at-dest=\"Helyon Shipyards\" trigger=\"HAIL\"/>\n<dialog>If you bring 1000 credits and no cops I can land you a fine Battleship hull. No receipt. Ok?</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Helyon Shipyards\" have-credits=\"1000\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"NO THANKS\">1000 credits and you have yourself a fine Battleship. If you give me you old hull.</dialog>\n<take credits=\"1000\"/>\n<change-ship ship=\"battleship\"/>\n<remove-map-marker/></quest><quest title=\"Thanatos relic 1\"><condition have-item=\"Thanatos mesh\"/>\n<dialog>You found a relic, a machine part covered with cuneiform markings.</dialog></quest><quest title=\"Thanatos relic 2\"><condition have-item=\"Thanatos core\"/>\n<dialog>You found a relic, a machine part covered with cuneiform markings.</dialog></quest><quest title=\"Thanatos relic 3\"><condition have-item=\"Thanatos nacelle\"/>\n<dialog>You found a relic, a machine part covered with cuneiform markings.</dialog></quest><quest title=\"Rebuild the Thanatos\"><condition at-dest=\"Thanatos\" trigger=\"ANALYZE\"/>\n<dialog>It is the Thanatos derelict. Immensely old. Broken. The intact half is covered in cuneiform markings.</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Thanatos mesh;Thanatos core;Thanatos nacelle\"/>\n<dialog>You now possess all three missing pieces of the Thanatos.</dialog>\n<condition at-dest=\"Thanatos\" trigger=\"REBUILD\"/>\n<dialog ok=\"REBUILD THANATOS\" cancel=\"LEAVE\">The relics would restore the form of Thanatos.</dialog>\n<dialog>As the parts touch the derelict the edges melt and merge. In an instant the dead ship springs to life, fire dancing across its hull as it burns away the dust covering it.</dialog>\n<dialog>The radio warbles as it is flooded with signals. A single grey sphere emerges from the ship and drifts toward you.</dialog>\n<dialog>Touching the cube cause tiny ripples of light on its surface. It whispers the name \"Momus\" into your mind.</dialog>\n<give item=\"Momus\"/></quest><quest title=\"Ska Ska water quality\"><condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"MAYBE LATER\">\"Can you help us? We run a large construction project at Ska Ska and need to take water samples at its sea\"</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ska Ska\"/>\n<place-item dest=\"Ska Ska\" item=\"Water sample\"/>\n<condition have-item=\"Water sample\"/>\n<mark-on-map dest=\"Baola\"/>\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>\"Thank you! These samples are vital for the project. Please, accept this compensation\"</dialog>\n<give credits=\"100\"/>\n<remove-map-marker/></quest><quest title=\"Tau Pavonis Observer\"><place-item dest=\"Pavonis Observatory\" item=\"Tungsten\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>You are hailed as you enter orbit: \"Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work.\"</dialog>\n<add-to-quest-list/>\n<condition trigger=\"HAIL\"/>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">\"We study Tau Pavonis and need assistance in placing sensors at the Observatory. Compensation is 500 credits. Are you interested?\"</dialog>\n<dialog>\"First you need protection. Travel to Pavonis Mirror and aquire a Star Shield.\"</dialog>\n<give item=\"Star Sensor\"/>\n<mark-on-map dest=\"Pavonis Mirror\"/>\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>\"Traveller. This is Mirror spaceport. We have prepared the Star Shield you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed.\"</dialog>\n<give item=\"Star Shield\"/>\n<condition at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed=\"Star Shield\" trigger=\"READY\"/>\n<dialog ok=\"PROCEED\" cancel=\"WAIT\">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>\n<travel dest=\"Pavonis Observatory\"/>\n<condition trigger=\"PUT SENSOR\"/>\n<dialog>You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>\n<condition trigger=\"LEAVE\"/>\n<travel dest=\"Pavonis Mirror\"/>\n<dialog>\"You made it! Must be a sturdy ship you got there.\"</dialog>\n<dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organisation.</dialog>\n<dialog>\"Let us remove that Star Shield, you can collect your payment at Pavonis Smoke.\"</dialog>\n<take item=\"Star Shield\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n<condition dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog>\"You survived! Excellent, we are anxious to get the data from your installed sensor. Please accept our payment!\"</dialog>\n<give credits=\"1000\"/>\n<remove-map-marker/>\n<condition not-at-dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>\"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor is most disturbing. Tau Pavonis is behaving unphysically.\"</dialog>\n<dialog>\"You must help us collect more data! Please take us to the Observatory so we can make further readings.\"</dialog>\n<dialog>You request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>\n<dialog>\"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental Soliton Pulse gun. Ok?\"</dialog>\n<dialog>You see your change to make demands. \"That sounds useful, give it to me in advance, and a regular reward afterwards!\"</dialog>\n<give item=\"Soliton Pulse\"/>\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>They load the Star Shield onto you ship once again. They tell you to install it but they all look a bit worried this time. What is it they have found inside that star?</dialog>\n<give item=\"Star Shield\"/>\n<condition at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed=\"Star Shield\" trigger=\"READY\"/>\n<travel dest=\"Pavonis Observatory\"/>\n<dialog>The scientists take readings with arcane instruments they brought. But you don't need any telescopes, looking throught the dimmed windows you can see a region of the stars surface pulsing. Or rather heaving, like it is breathing.</dialog>\n<dialog>Suddenly the star's surface open like a flower and a pillar of fire like a trail pushes out through space. It looks slow like a ballet, but at these scales it is tremendously fast.</dialog>\n<dialog>The monstrosity trace a glowing path towards Pavonis Charm. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>\n<place-enemy enemy=\"Wrcacnter\" dest=\"Pavonis Charm\"/></quest><quest title=\"Pavonis Mining Co\"><place-enemy enemy=\"Rogue\" dest=\"A117\"/>\n<place-enemy enemy=\"Rogue\" dest=\"A8761\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A9753\"/>\n<place-enemy enemy=\"Rogue\" dest=\"A2170\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A3566\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A4976\"/>\n<condition at-dest=\"Pavonis A2934\" trigger=\"HAIL\"/>\n<dialog>\"This is Pavonis Mining Co Headquarters. Are you looking for assignments?\"</dialog>\n<dialog>\"There are rogues disturbing our operations at the south asteroid rim. We will pay 100 credits for clearing them out.\"</dialog>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"A117;A8761;A9753;A2170;A3566;A4976\" at-dest=\"Pavonis A2934\"/>\n<dialog>\"Excellent work! Transferring reward now.\"</dialog>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">\"Many of our contractors are damaged by the rogues. Would you like to run some mining operations? We rent out the needed equipment.\"</dialog>\n<give item=\"Mining Drill\"/>\n\n<mark-on-map dest=\"A2170\"/>\n<dialog>\"Readings at A2170 show rich ore. Start there.\"</dialog>\n<condition at-dest=\"A2170\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Ore\"/>\n\n<mark-on-map dest=\"A8761\"/>\n<dialog>\"Readings at A8761 show rich ore. Continue there.\"</dialog>\n<condition at-dest=\"A8761\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Mineral\"/>\n\n<mark-on-map dest=\"Pavonis A2934\"/>\n<condition have-item=\"Pavonian Mineral;Pavonian Ore\" at-dest=\"Pavonis A2934\"/>\n<dialog>\"Good work, a bit slow, but good. Let us buy that mineral from you.\"</dialog>\n<take item=\"Pavonian Mineral\"/>\n<take item=\"Pavonian Ore\"/>\n<take item=\"Mining Drill\"/>\n<give credits=\"100\"/></quest><quest title=\"Worship the Apate\"><condition at-dest=\"Path to Apate\"/>\n<add-to-quest-list/>\n<dialog>An ancient derelict, The Temple of Apate, appear on the sensors ahead. It might contain riches. Or salvation.</dialog>\n<condition no-enemy-at-dest=\"Threshold of the Temple;Stepstone of the Temple;Marker of the Temple\"/>\n<dialog>As the third sentinel of the Temple system succumbs it send a subspace signal. Most probably the Temple heard its death cry. Could be good, could be bad.</dialog>\n<condition at-dest=\"Temple of Apate\"/>\n<dialog>The temple is open now. The clearing of the sentinels must have unlocked it.</dialog>\n<condition at-dest=\"Temple of Apate\" trigger=\"ENTER\"/>\n<dialog>As your vessel slowly enters the open gates of the Temple your sensors flicker and give up, one after another. The readings from the Temple is much too strange for the sensors to cope with.</dialog>\n<dialog>Your ship finally completely dark, drifting into a central chamber. Out of a central pillar, a dark sphere emerges. A gift.</dialog>\n<dialog>You retrieve the artifact from the pillar. As you touch the artifact it whispers the name \"Horkos\" into your mind.</dialog>\n<give item=\"Horkos\"/></quest><quest title=\"Navigate the Eris\"><condition at-dest=\"Gateway of Eris\"/>\n<add-to-quest-list/>\n<dialog>A dusty nebula spread out in front of you. The dirty fields of Eris.</dialog>\n<condition at-dest=\"Locus of Eris\" have-item=\"Eris Shard;Eris Dust;Eris Splinter;Eris Grain\"/>\n<dialog ok=\"GIVE GIFTS\" cancel=\"LEAVE\">Something stirs in the Locus of Eris. It reacts to something you carry.</dialog>\n<take item=\"Eris Shard\"/>\n<take item=\"Eris Dust\"/>\n<take item=\"Eris Splinter\"/>\n<take item=\"Eris Grain\"/>\n<dialog>You place the artifacts of Eris on the dusty steps of the Locus. They sink into the drifting dunes. It their place a shiny cube emerge, spreading a dazzling light as it appear.</dialog>\n<dialog>The cube unfolds slowly to reveal a dirty, lumpy rock. It drifts into your ship, leaving dark dirty marks on every surface it touches. It whispers its name - \"Epiales\" - into your mind.</dialog>\n<give item=\"Epiales\"/></quest><quest title=\"Havest the Weaver\"><condition at-dest=\"Clear Skies\" trigger=\"HAIL\"/>\n<dialog>You hail the small base at the planet Clear Skies.\n\"Hello, we are a team of astral historian who will pay good money for Nebular Dust samples from the Weaver Nebula to the west.\"</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Weaver Alpha\" color=\"0x0F0\" icon=\"arrow\"/>\n<condition have-item=\"Nebular Dust\" at-dest=\"Clear Skies\" trigger=\"HAIL\"/>\n<dialog>\"Excellent. These dust samples from Weaver will be essential for out studies. Here, accept our reward.\"</dialog></quest></quests>",
+  "quests": "<quests><quest title=\"REFERENCE\"><!-- Pause the quest until all conditions are fulfilled. All attributes are optional. -->\n<!-- have-item accepts: semicolon separated list of items that the player must possess -->\n<!-- at-dest accepts: single destination name -->\n<!-- no-enemy-at-dest: semicolon separated list of destination names that must be cleared of enemies -->\n<!-- not-at-dest: single destination name -->\n<!-- have-credits: number of credits that player must possess -->\n<!-- trigger: if omitted condition is triggered automatically. If present the condition is triggered with a button in the Radar View with the text set to the provided string -->\n<condition have-item=\"Shiny Meteorite;Blue seeds\" at-dest=\"Backwater\" no-enemy-at-dest=\"Baola\" not-at-dest=\"Backwater\" have-credits=\"3000\" trigger=\"EXPLORE\"/>\n\n<!-- Add a lootable item to the destination. -->\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n\n<!-- Add a purchasable item to the destination's trader. -->\n<place-inventory dest=\"Backwater\" item=\"Phased Ray\"/>\n\n<!-- Display a message. If the optional ok and cancel attributes are provided they will appear as buttons. Cancel will rewinds the quest one step, so that the same trigger that triggered the quest will display the same message the next turn. Ok will progress the quest as normally. -->\n<dialog>\"Hey hitchhiker!\"</dialog>\n<dialog ok=\"YES PLEASE\" cancel=\"NO THANKS\">\"Would you like some tea?\"</dialog>\n\n<!-- Include this quest in the quest list. -->\n<add-to-quest-list/>\n<!-- Add item or credits to the player's inventory. -->\n<give credits=\"900\"/>\n<give item=\"Phased Ray\"/>\n\n<!-- Remove an item or credits from the player's inventory. -->\n<take credits=\"900\"/>\n<take item=\"Phased Ray\"/>\n\n<!-- Place a quest marker on the map. color and icon attributes are optional. icon can take these values: \"arrow\", \"square\", \"enter\", \"exit\". A quest can only have a single map marker. -->\n<mark-on-map dest=\"Samson's Folly\" color=\"0x0F0\" icon=\"arrow\"/>\n\n<!-- Change the player's ship. -->\n<change-ship ship=\"clipper\"/>\n\n<!-- Clear the map marker for this quest. -->\n<remove-map-marker/>\n\n<!-- Transports the player to another destination. -->\n<travel dest=\"Backwater\"/>\n\n<!-- Rewinds or fast forwards the quest a set number of steps. -->\n<goto jump=\"-3\"/></quest><quest title=\"Start of an adventure\"><condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n\"Hey hitchhiker! This is your stop.\"\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a weird signature. If you EXPLORE the area you might score big time!</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog>You find the meteorite resting on the ground. No crater. A shiny dodecahedron that is surprisingly light when you load it into the rover. The TRADE guild will pay a fortune for this.</dialog>\n<condition have-credits=\"1000\"/>\n<dialog>\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. What do you say?\"</dialog>\n<dialog>There it is. An opportunity to finally leave this rock. You accept eagerly.</dialog>\n<dialog>\"Now you can LIFT OFF and leave this planet.\nBut it is dangerous out there, go by Samson and get some weapons for that ship.\"</dialog>\n<take credits=\"900\"/>\n<mark-on-map dest=\"Samson's Folly\"/>\n<change-ship ship=\"clipper\"/>\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>\"My friend at Backwater said you would be coming. We have a nice Photon Ray in stock left. You are welcome to LAND and TRADE with us here at Samson's Folly.\"</dialog>\n<condition have-item=\"Photon Ray\"/>\n<dialog>You now have a Photon Ray, a basic weapon. Tap you ship hologram to open your PROFILE and INSTALL your new Photon Ray</dialog>\n<remove-map-marker/></quest><quest title=\"Shady spacer\"><place-item dest=\"Shady\" item=\"Shady Boxes\"/>\n<condition at-dest=\"Shady\"/>\n<dialog>A sad rusty ship radios you.\n\"Fellow spacer! There is nice loot on this moon but my landing gear is bust. If you LAND and help me EXPLORE I'll reward you.\"</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shady Boxes\"/>\n<dialog>The eager spacer thank you several times for helping her finding the boxes. You receive a small reward and you hope you don't see the her again.</dialog>\n<give credits=\"100\"/>\n<take item=\"Shady Boxes\"/></quest><quest title=\"Peril at Buoy 72\"><place-enemy dest=\"Buoy 72\" enemy=\"Monitor Drone\"/>\n<condition at-dest=\"Buoy 68\"/>\n<dialog>You receive a transmission:\n\"Help us. The way ahead is blocked by a malfunctioning drone. We don't dare to proceed. You have to clear the path for us!\"</dialog>\n<mark-on-map dest=\"Buoy 72\"/>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"Buoy 72\"/>\n<dialog>That drone wasn't even armed. This adventure looks like its going to be a walk in the park.</dialog>\n<dialog>\"Thank you for clearing the way for us! Here, take this for you troubles.\"</dialog>\n<give credits=\"15\"/>\n<remove-map-marker/></quest><quest title=\"Bal Gru's stolen subsystems\"><place-item dest=\"A3639\" item=\"Subsystem cache\"/>\n<place-enemy dest=\"A3639\" enemy=\"Bandit\"/>\n<condition at-dest=\"Pizbui\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">\nHey girl, I'm Bal Gru, merchant in distress. Can you help me? Bandits robbed me of all of my subsystems. Can you get them back for me?\n</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Pizbui\" have-item=\"Subsystem cache\"/>\n<dialog>\nYou have our stolen subsystems! This is invaluable to us. Here, take this artifact, it is the least we can give you.\n</dialog>\n<give item=\"Larato sigil\"/></quest><quest title=\"Larato Gate\"><condition at-dest=\"Larato Node\" trigger=\"ACTIVATE\"/>\n<dialog ok=\"ENTER GATE\" cancel=\"LEAVE\">\nThe misty dark cloud in the aperture swirls.\n</dialog>\n<travel dest=\"Larato Gate\"/>\n<goto jump=\"-3\"/></quest><quest title=\"Larato Node\"><condition at-dest=\"Larato Gate\" have-item=\"Larato sigil\" trigger=\"ANALYZE\"/>\n<dialog ok=\"APPROACH\" cancel=\"IGNORE\">\nThe Larato Gate is a lumpy ring of dirty stone needles. The Larato Sigil in your inventory is humming.\nShould you approach?\n</dialog>\n<dialog>\nThe gate's mass of needles swells and twitches. The aperture shimmers and turns into a misty black cloud.\n</dialog>\n<condition at-dest=\"Larato Gate\" trigger=\"ACTIVATE\"/>\n<dialog ok=\"ENTER GATE\" cancel=\"LEAVE\">\nThe misty dark cloud in the aperture swirls.\n</dialog>\n<travel dest=\"Larato Node\"/>\n<goto jump=\"-3\"/></quest><quest title=\"Blue seeds\"><place-item dest=\"Blue Forest\" item=\"Blue seeds\"/>\n<condition have-item=\"Blue seeds\"/>\n<dialog>These Blue Seeds might take root in the right soil.</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Blue Ocean\" trigger=\"PLANT\"/>\n<dialog>You plant the Blue Seeds on a lonely island.</dialog>\n<condition not-at-dest=\"Blue Ocean\"/>\n<condition at-dest=\"Blue Ocean\" trigger=\"GATHER\"/>\n<dialog>You gather the Blue Flowers that sprung out of the planted seeds.</dialog>\n<give item=\"Blue flowers\"/></quest><quest title=\"Helyon Shipyards\"><condition at-dest=\"Helyon Shipyards\" trigger=\"HAIL\"/>\n<dialog>If you bring 1000 credits and no cops I can land you a fine Battleship hull. No receipt. Ok?</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Helyon Shipyards\" have-credits=\"1000\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"NO THANKS\">1000 credits and you have yourself a fine Battleship. If you give me you old hull.</dialog>\n<take credits=\"1000\"/>\n<change-ship ship=\"battleship\"/>\n<remove-map-marker/></quest><quest title=\"Thanatos relic 1\"><condition have-item=\"Thanatos mesh\"/>\n<dialog>You found a relic, a machine part covered with cuneiform markings.</dialog></quest><quest title=\"Thanatos relic 2\"><condition have-item=\"Thanatos core\"/>\n<dialog>You found a relic, a machine part covered with cuneiform markings.</dialog></quest><quest title=\"Thanatos relic 3\"><condition have-item=\"Thanatos nacelle\"/>\n<dialog>You found a relic, a machine part covered with cuneiform markings.</dialog></quest><quest title=\"Rebuild the Thanatos\"><condition at-dest=\"Thanatos\" trigger=\"QUEST\"/>\n<dialog>It is the Thanatos derelict. Immensely old. Broken. The intact half is covered in cuneiform markings.</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Thanatos mesh;Thanatos core;Thanatos nacelle\"/>\n<dialog>You now possess all three missing pieces of the Thanatos.</dialog>\n<condition at-dest=\"Thanatos\" trigger=\"REBUILD\"/>\n<dialog ok=\"REBUILD THANATOS\" cancel=\"LEAVE\">The relics would restore the form of Thanatos.</dialog>\n<dialog>As the parts touch the derelict the edges melt and merge. In an instant the dead ship springs to life, fire dancing across its hull as it burns away the dust covering it.</dialog>\n<dialog>The radio warbles as it is flooded with signals. A single grey sphere emerges from the ship and drifts toward you.</dialog>\n<dialog>Touching the cube cause tiny ripples of light on its surface. It whispers the name \"Momus\" into your mind.</dialog>\n<give item=\"Momus\"/></quest><quest title=\"Worship the Apate\"><condition at-dest=\"Path to Apate\"/>\n<add-to-quest-list/>\n<dialog>An ancient derelict, The Temple of Apate, appear on the sensors ahead. It might contain riches. Or salvation.</dialog>\n<condition no-enemy-at-dest=\"Threshold of the Temple;Stepstone of the Temple;Marker of the Temple\"/>\n<dialog>As the final sentinel is destroyed it send a subspace signal. Most probably the Temple heard its death cry. Could be good, could be bad.</dialog>\n<condition at-dest=\"Temple of Apate\"/>\n<dialog>The temple is open now. The clearing of the sentinels must have unlocked it.</dialog>\n<condition at-dest=\"Temple of Apate\" trigger=\"ENTER\"/>\n<dialog>Your vessel enter the open gate of the Temple. As you slowly sink deeper your sensors flicker and give up, one after another. The readings from the Temple is much too strange for the sensors to cope with.</dialog>\n<dialog>Your ship finally completely dark, drifting into a central chamber. Out of a central pillar, a dark sphere emerges. A gift.</dialog>\n<dialog>You retrieve the artifact from the pillar. As you touch the artifact it whispers the name \"Horkos\" into your mind.</dialog>\n<give item=\"Horkos\"/></quest><quest title=\"Navigate the Eris\"><condition at-dest=\"Gateway of Eris\"/>\n<add-to-quest-list/>\n<dialog>A dusty nebula spread out in front of you. The dirty fields of Eris.</dialog>\n<condition at-dest=\"Locus of Eris\" have-item=\"Eris Shard;Eris Dust;Eris Splinter;Eris Grain\"/>\n<dialog ok=\"GIVE GIFTS\" cancel=\"LEAVE\">Something stirs in the Locus of Eris. It reacts to something you carry.</dialog>\n<take item=\"Eris Shard\"/>\n<take item=\"Eris Dust\"/>\n<take item=\"Eris Splinter\"/>\n<take item=\"Eris Grain\"/>\n<dialog>You place the artifacts of Eris on the dusty sands of the Locus. They sink into the drifting dunes. It their place a shiny cube emerge, spreading a dazzling light as it appear.</dialog>\n<dialog>The cube unfolds slowly to reveal a dirty, lumpy rock. It drifts into your ship, leaving dark dirty marks on every surface it touches. It whispers its name - \"Epiales\" - into your mind.</dialog>\n<give item=\"Epiales\"/></quest><quest title=\"Ska Ska water quality\"><condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"MAYBE LATER\">\"Can you help us? We run a large construction project at Ska Ska and need to take water samples at its sea\"</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ska Ska\"/>\n<place-item dest=\"Ska Ska\" item=\"Water sample\"/>\n<condition have-item=\"Water sample\"/>\n<mark-on-map dest=\"Baola\"/>\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>\"Thank you! These samples are vital for the project. Please, accept this compensation\"</dialog>\n<give credits=\"100\"/>\n<remove-map-marker/></quest><quest title=\"Tau Pavonis Observer\"><place-item dest=\"Pavonis Observatory\" item=\"Tungsten\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>You are hailed as you enter orbit: \"Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work.\"</dialog>\n<add-to-quest-list/>\n<condition trigger=\"HAIL\"/>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">\"We study Tau Pavonis and need assistance in placing sensors at the Observatory. Compensation is 500 credits. Are you interested?\"</dialog>\n<dialog>\"First you need protection. Travel to Pavonis Mirror and aquire a Star Shield.\"</dialog>\n<give item=\"Star Sensor\"/>\n<mark-on-map dest=\"Pavonis Mirror\"/>\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>\"Traveller. This is Mirror spaceport. We have prepared the Star Shield you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed.\"</dialog>\n<give item=\"Star Shield\"/>\n<condition at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed=\"Star Shield\" trigger=\"READY\"/>\n<dialog ok=\"PROCEED\" cancel=\"WAIT\">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>\n<travel dest=\"Pavonis Observatory\"/>\n<condition trigger=\"PUT SENSOR\"/>\n<dialog>You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>\n<condition trigger=\"LEAVE\"/>\n<travel dest=\"Pavonis Mirror\"/>\n<dialog>\"You made it! Must be a sturdy ship you got there.\"</dialog>\n<dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organisation.</dialog>\n<dialog>\"Let us remove that Star Shield, you can collect your payment at Pavonis Smoke.\"</dialog>\n<take item=\"Star Shield\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog>\"You survived! Excellent, we are anxious to get the data from your installed sensor. Please accept our payment!\"</dialog>\n<give credits=\"1000\"/>\n<remove-map-marker/>\n<condition not-at-dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>\"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor is most disturbing. Tau Pavonis is behaving unphysically.\"</dialog>\n<dialog>\"You must help us collect more data! Please take us to the Observatory so we can make further readings.\"</dialog>\n<dialog>This time you request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>\n<dialog>\"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental Soliton Pulse gun. Ok?\"</dialog>\n<dialog>You see an opportunity to make demands.\n\"That sounds useful, give it to me in advance, and a regular reward afterwards!\"</dialog>\n<give item=\"Soliton Pulse\"/>\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>They load the Star Shield onto you ship once again. They tell you to install it but they all look a bit worried this time. What is it they have found inside that star?</dialog>\n<give item=\"Star Shield\"/>\n<condition at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed=\"Star Shield\" trigger=\"READY\"/>\n<travel dest=\"Pavonis Observatory\"/>\n<dialog>The scientists take readings with arcane instruments they brought. But you don't need any telescopes, looking throught the dimmed windows you can see a region of the stars surface pulsing. Or rather heaving, like it is breathing.</dialog>\n<dialog>Suddenly the star's surface open like a flower and a pillar of fire like a trail pushes out through space. It looks slow like a ballet, but at these scales it is tremendously fast.</dialog>\n<dialog>The monstrosity trace a glowing path towards Pavonis Charm. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>\n<place-enemy enemy=\"Wrcacnter\" dest=\"Pavonis Charm\"/>\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\" /></quest><quest title=\"Pavonis Mining Co\"><place-enemy enemy=\"Rogue\" dest=\"A117\"/>\n<place-enemy enemy=\"Rogue\" dest=\"A8761\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A9753\"/>\n<place-enemy enemy=\"Rogue\" dest=\"A2170\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A3566\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A4976\"/>\n<condition at-dest=\"Pavonis A2934\" trigger=\"HAIL\"/>\n<dialog>\"This is Pavonis Mining Co Headquarters. Are you looking for assignments?\"</dialog>\n<dialog>\"There are rogues disturbing our operations at the south asteroid rim. We will pay 100 credits for clearing them out.\"</dialog>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"A117;A8761;A9753;A2170;A3566;A4976\" at-dest=\"Pavonis A2934\"/>\n<dialog>\"Excellent work! Transferring reward now.\"</dialog>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">\"Many of our contractors are damaged by the rogues. Would you like to run some mining operations? We rent out the needed equipment.\"</dialog>\n<give item=\"Mining Drill\"/>\n\n<mark-on-map dest=\"A2170\"/>\n<dialog>\"Readings at A2170 show rich ore. Start there.\"</dialog>\n<condition at-dest=\"A2170\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Ore\"/>\n\n<mark-on-map dest=\"A8761\"/>\n<dialog>\"Readings at A8761 show rich ore. Continue there.\"</dialog>\n<condition at-dest=\"A8761\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Mineral\"/>\n\n<mark-on-map dest=\"Pavonis A2934\"/>\n<condition have-item=\"Pavonian Mineral;Pavonian Ore\" at-dest=\"Pavonis A2934\"/>\n<dialog>\"Good work, a bit slow, but good. Let us buy that mineral from you.\"</dialog>\n<take item=\"Pavonian Mineral\"/>\n<take item=\"Pavonian Ore\"/>\n<take item=\"Mining Drill\"/>\n<give credits=\"100\"/></quest><quest title=\"Havest the Weaver\"><condition at-dest=\"Clear Skies\" trigger=\"HAIL\"/>\n<dialog>You hail the small base at the planet Clear Skies.\n\"Hello, we are a team of astral historian who will pay good money for Nebular Dust samples from the Weaver Nebula to the west.\"</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Weaver Alpha\" color=\"0x0F0\" icon=\"arrow\"/>\n<condition have-item=\"Nebular Dust\" at-dest=\"Clear Skies\" trigger=\"HAIL\"/>\n<dialog>\"Excellent. These dust samples from Weaver will be essential for out studies. Here, accept our reward.\"</dialog></quest></quests>",
   "surface": [
     {"id": "anomaly-observatory", "desc": "", "zoom": 1, "height": 1, "octaves": 1, "falloff": 0.1, "curve": [], "spectrum": []},
     {"id": "anomaly-buoy", "desc": "", "zoom": 1, "height": 1, "octaves": 1, "falloff": 0.1, "curve": [], "spectrum": []},
