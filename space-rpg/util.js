@@ -54,6 +54,11 @@ _.mixin({
     req.send('')
   },
 
+  jsonParse: function (source) {
+    try { return JSON.parse(source) }
+    catch (e) { return undefined }
+  },
+
   stringify: function (obj, options) {
     // Note: This regex matches even invalid JSON strings, but since we’re
     // working on the output of `JSON.stringify` we know that only valid strings
