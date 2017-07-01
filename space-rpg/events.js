@@ -10,7 +10,7 @@ window.nullWorld = function () {
     initialDestination: '',
     destinations: [],
     audioRegions: [],
-    quests: '',
+    quests: [],
     items: [],
     ships: [],
     enemies: [],
@@ -49,7 +49,7 @@ window.getWorld = function () {
     var world = JSON.parse(localStorage['world'])
     if (!_.isArray(world.destinations)) throw new Error()
     if (!_.isArray(world.audioRegions)) throw new Error()
-    if (!_.isString(world.quests)) throw new Error()
+    if (!_.isArray(world.quests)) throw new Error()
     if (!_.isArray(world.items)) throw new Error()
     if (!_.isArray(world.ships)) throw new Error()
     if (!_.isArray(world.enemies)) throw new Error()

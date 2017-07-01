@@ -37,10 +37,15 @@
     self.toggleFileMenu = () => self.isFileMenuOpen = ! self.isFileMenuOpen
     self.requestSave = () => window.events.trigger('save-world')
 
+    function inQuests(world, pattern) {
+      var matches = _.flatten(world.quests.map(q => q.xml.match(pattern) || []))
+      return _.flatten(matches.map(e => e.split('="')[1].split(';')))
+    }
+
     self.validateWorld = function () {
       var world = getWorld()
       var referredItems = _.flatten([
-        (world.quests.match(/item="[^"]*/gm) || []).map(e => e.substring(6).split(';')),
+        inQuests(world, /item="[^"]*/gm).map(e => e.split(';')),
         world.enemies.map(e => e.inventory),
         world.destinations.map(e => e.treasures),
         world.destinations.map(e => e.trader && e.trader.inventory || [])
@@ -48,18 +53,17 @@
       var definedItems = world.items.map(e => e.name)
       self.undefItems = _.uniq(_.difference(referredItems, definedItems))
 
-      var destRefs = world.quests.match(/dest="[^"]*/gm) || []
-      var referredNodes = _.flatten(destRefs.map(e => e.substring(6).split(';')))
+      var referredNodes = inQuests(world, /dest="[^"]*/gm)
       var definedNodes = world.destinations.map(e => e.name)
       self.undefNodes = _.uniq(_.difference(referredNodes, definedNodes))
 
       var destEnemies = world.destinations.filter(e => e.enemy).map(e => e.enemy.type)
-      var questEnemies = (world.quests.match(/enemy="[^"]*/gm) || []).map(e => e.substring(7))
+      var questEnemies = inQuests(world, /enemy="[^"]*/gm)
       var referredEnemies = destEnemies.concat(questEnemies)
       var definedEnemies = world.enemies.map(e => e.name)
       self.undefEnemies = _.uniq(_.difference(referredEnemies, definedEnemies))
 
-      var referredShips = (world.quests.match(/ship="[^"]*/gm) || []).map(e => e.substring(6))
+      var referredShips = inQuests(world, /ship="[^"]*/gm)
       var definedShips = world.ships.map(e => e.name)
       self.undefShips = _.uniq(_.difference(referredShips, definedShips))
 
