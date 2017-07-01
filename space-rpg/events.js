@@ -5,6 +5,9 @@ if (!window.events) {
 
 window.nullWorld = function () {
   return {
+    initialShip: '',
+    initialState: 'surface',
+    initialDestination: '',
     destinations: [],
     audioRegions: [],
     quests: '',

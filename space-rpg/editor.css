@@ -53,7 +53,7 @@ body.enable-scroll {
   max-width: 150px;
   text-align: left;
 }
-.sidebar label {
+.sidebar label:not(.not-label) {
   display: block;
   text-align: left;
   font-weight: bold;

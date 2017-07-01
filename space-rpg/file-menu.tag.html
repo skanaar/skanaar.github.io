@@ -1,41 +1,77 @@
 <file-menu>
-  <div class="file-menu">
-    <div if={s3.isNull}>
-      No cloud storage is configured. Define a configuration to enable cloud saving:
-      <pre>
-localStorage.cloudStorage = \{
-  awsConfig: \{
-    region: AWS_REGION,
-    accessKeyId: YOUR_KEY,
-    secretAccessKey: YOUR_SECRET
-  \},
-  awsS3Bucket: YOUR_BUCKET
-\}
-      </pre>
+  <div class="sidebar file-menu">
+    <label>World name</label>
+    <input type=text ref="nameField" value={world.name}>
+    <label>Starting conditions</label>
+
+    <div class="input-grid">
+      <em>state</em>
+      <select ref="stateInput" value={world.initialState}>
+        <option>surface</option>
+        <option>space</option>
+      </select><br/>
+      <em>dest.</em>
+      <select ref="destInput" value={world.initialDestination}>
+        <option each={e in destinations}>{e}</option>
+      </select><br/>
+      <em>ship</em>
+      <select ref="shipInput" value={world.initialShip}>
+        <option each={e in world.ships}>{e.name}</option>
+      </select><br/>
     </div>
-    <button onclick={download}>Download world from cloud storage</button>
-    <button onclick={upload}>Upload world from cloud storage</button>
+
+    <label>Cloud storage</label>
+
+    <div if={s3.isNull}>
+      <i>Cloud storage not configured</i><br/>
+      <button onclick={showCloudStorageHelp}>help</button>
+    </div>
+    <div if={!s3.isNull}>
+      <button onclick={loadFromCloud}>Cloud load</button>
+      <button onclick={saveToCloud}>Cloud save</button>
+    </div>
+
+    <label>File storage</label>
+    <a class="button" ref="downloadLink" onmouseenter={primeDownloadLink} download="world.json" href='#'>Download</a>
+    <label class="button not-label" for=file-input>Upload</label>
+    <input id=file-input type=file ref=fileInput onchange={fileChanged} style="width: 150px; margin-right: 20px">
+
+    <label>World</label>
+    <button onclick={loadDefault}>Load default</button>
+    <button onclick={loadEmpty}>Clear all</button>
   </div>
 
   <script>
 
+    var cloudHelp = `Create a config object in localStorage to enable cloud saving
+
+localStorage.cloudStorage = {
+  s3Bucket: BUCKET,
+  region: REGION,
+  accessKeyId: KEY,
+  secretAccessKey: SECRET
+}`
+
     var self = this
 
     self.cloudKey = 'worlds/world.json'
-    
-    self.download = function () {
-      self.s3.getObject({ Key: self.cloudKey }, handleError(function (data) {
-        loadWorld(data.Body.toString())
-      }))
+    self.world = getWorld()
+    self.destinations = self.world.destinations.map(e => e.name).sort()
+
+    self.loadDefault = () => _.fetch('world.json', loadWorld)
+    self.loadEmpty = () => loadWorld(JSON.stringify(nullWorld()))
+    self.fileChanged = () => _.readFile(self.refs.fileInput.files[0], loadWorld)
+    self.primeDownloadLink = function () {
+      window.events.trigger('save-world')
+      self.refs.downloadLink.setAttribute('href', _.toDataUrl(_.stringify(getWorld(), { maxLength: 200 })))
     }
-    
-    self.upload = function () {
+    self.showCloudStorageHelp = () => alert(cloudHelp)
+    self.loadFromCloud = () => self.s3.getObject({ Key: self.cloudKey }, handleError(loadWorld))
+    self.saveToCloud = function () {
       var world = getWorld()
       if (world.destinations.length) {
         var conf = { Key: self.cloudKey, Body: _.stringify(world), ACL: 'public-read' }
-        self.s3.upload(conf, handleError(function (data) {
-          alert('Successfully uploaded data');
-        }))
+        self.s3.upload(conf, handleError(() => alert('Successfully uploaded data')))
       }
     }
 
@@ -60,7 +96,7 @@ localStorage.cloudStorage = \{
         if (err)
           alert('Error: ' + err.message);
         else
-          callback(data);
+          callback(data.Body && data.Body.toString());
       }
     }
 
@@ -71,7 +107,11 @@ localStorage.cloudStorage = \{
   </script>
   <style>
   .file-menu {
-    margin: 20px 10px;
+    z-index: 10;
+    left: 0px;
+    right: initial;
+    border-left: 0;
+    border-right: 1px solid #aaa;
   }
   </style>
 </file-menu>

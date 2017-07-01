@@ -1,14 +1,10 @@
 <main-menu>
   <div class="main-menu">
+    <a onclick={toggleFileMenu} class={ 'tab toggle-tab': true, active: isFileMenuOpen }>file</a>
     <a each={e in tabs} href="{e}.html" onclick={requestSave}
        class={ tab: true, active: page == e + '.html' }>{e}</a>
     <div class="file-tools">
       <i>{needsSave ? 'Unsaved' : 'Saved'}</i>
-      <button onclick={loadDefault}>Load default</button>
-      <button onclick={loadEmpty}>Clear all</button>
-      <a class="button" ref="downloadLink" onmouseenter={primeDownloadLink} download="world.json" href='#'>Download</a>
-      <label class=button for=file-input>Upload</label>
-      <input id=file-input type=file ref=fileInput onchange={fileChanged} style="width: 150px; margin-right: 20px">
     </div>
   </div>
   <div class="validation-report" if={hasValidationError}>
@@ -21,10 +17,13 @@
     <button onclick={validateWorld}>Update</button>
   </div>
 
+  <file-menu if={isFileMenuOpen} />
+
   <script>
     var self = this
     self.page = 'index'
-    self.tabs = ['file', 'map', 'celestials', 'models', 'ships', 'items', 'quests']
+    self.tabs = ['map', 'celestials', 'models', 'ships', 'items', 'quests']
+    self.isFileMenuOpen = false
     self.undefinedItems = []
     self.undefinedNodes = []
     self.undefinedEnemies = []
@@ -35,14 +34,8 @@
       self.update()
     })
 
+    self.toggleFileMenu = () => self.isFileMenuOpen = ! self.isFileMenuOpen
     self.requestSave = () => window.events.trigger('save-world')
-    self.loadDefault = () => _.fetch('world.json', loadWorld)
-    self.loadEmpty = () => loadWorld(JSON.stringify(nullWorld()))
-    self.fileChanged = () => _.readFile(self.refs.fileInput.files[0], loadWorld)
-    self.primeDownloadLink = function () {
-      window.events.trigger('save-world')
-      self.refs.downloadLink.setAttribute('href', _.toDataUrl(_.stringify(getWorld(), { maxLength: 200 })))
-    }
 
     self.validateWorld = function () {
       var world = getWorld()
@@ -133,6 +126,11 @@
     .file-tools {
       float: right;
       margin-top: 3px;
+    }
+    a.toggle-tab {
+      width: 20px;
+      border-left: 1px solid #f8f8f8;
+      border-right: 1px solid #f8f8f8;
     }
     a.tab, a.tab:active, a.tab:hover, a.tab:visited {
       display: inline-block;
