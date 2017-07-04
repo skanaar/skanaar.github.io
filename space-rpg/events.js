@@ -31,7 +31,7 @@ window.constants = {
   ],
   audios: [
     'light-years',
-    'dark-sky'
+    'trouble-on-mercury'
   ],
   hasSurface: function (entity) {
     return ['planet', 'asteroid'].includes(entity.style.split('-')[0])
