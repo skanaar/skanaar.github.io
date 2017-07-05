@@ -1,5 +1,5 @@
 {
-  "initialShip": "Kerr Clipper",
+  "initialShip": "Rover",
   "ships": [
     {"name": "Rover", "visual": "Rover", "attr": {"maxhull": 1, "maxshield": 1, "maxenergy": 1, "jump": 0, "slots": 1}, "generator": {"hull": 1, "shield": 1, "energy": 1}},
     {"name": "Kerr Journeyman", "visual": "Kerr Journeyman", "attr": {"maxhull": 20, "maxshield": 20, "maxenergy": 20, "jump": 125, "slots": 4}, "generator": {"hull": 1, "shield": 1, "energy": 1}},
@@ -13,7 +13,7 @@
     {
       "name": "Monitor Drone",
       "visual": "Monitor Drone",
-      "attr": {"maxhull": 1, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "attr": {"maxhull": 10, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "generator": {"hull": 0, "shield": 0, "energy": 0},
       "inventory": ["Recharge Loop"]
     },
@@ -56,6 +56,13 @@
       "attr": {"maxhull": 5, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
       "generator": {"hull": 0, "shield": 0, "energy": 0},
       "name": "Target Drone",
+      "visual": "Monitor Drone",
+      "inventory": []
+    },
+    {
+      "attr": {"maxhull": 10, "maxshield": 2, "maxenergy": 10, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "generator": {"hull": 0, "shield": 0, "energy": 0},
+      "name": "Striker Drone",
       "visual": "Monitor Drone",
       "inventory": []
     }
@@ -690,7 +697,7 @@
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 1000,
+      "credits": 2000,
       "name": "Shiny Meteorite"
     },
     {
@@ -764,19 +771,26 @@
     {"audio": "trouble-on-mercury", "pos": {"x": -170, "y": -24}, "radius": 300}
   ],
   "destinations": [
-    {"name": "Backwater", "style": "planet-badlands-1", "pos": {"x": -102, "y": -1366}, "trader": {"buy": 1, "sell": 1, "inventory": []}, "treasures": [], "enemy": null},
-    {"name": "A7030", "style": "asteroid-2", "pos": {"x": 128, "y": -1378}, "trader": null, "treasures": [], "enemy": null},
-    {"name": "Shady", "style": "asteroid-2", "pos": {"x": 182, "y": -1298}, "trader": null, "treasures": ["Shady Boxes", "Barium Ore"], "enemy": null},
-    {"name": "Samson's Folly", "style": "asteroid-3", "pos": {"x": 8, "y": -1408}, "trader": {"buy": 1, "sell": 1, "inventory": ["Photon Ray"]}, "treasures": ["Alien Fossil"], "enemy": null},
-    {"name": "Dust", "style": "asteroid-6", "pos": {"x": 59, "y": -1295}, "trader": null, "treasures": [], "enemy": null},
+    {"name": "Backwater", "style": "planet-badlands-1", "pos": {"x": 258, "y": -1886}, "trader": {"buy": "0.5", "sell": 1.5, "inventory": []}, "treasures": [], "enemy": null},
+    {"name": "Outback 12", "style": "asteroid-2", "pos": {"x": 488, "y": -1898}, "trader": null, "treasures": [], "enemy": null},
+    {"name": "Shady", "style": "asteroid-2", "pos": {"x": 542, "y": -1818}, "trader": null, "treasures": ["Shady Boxes", "Barium Ore"], "enemy": null},
+    {
+      "name": "Samson's Folly",
+      "style": "asteroid-3",
+      "pos": {"x": 368, "y": -1928},
+      "trader": {"buy": "0.75", "sell": 1, "inventory": ["Kinetic Gun", "Photon Ray"]},
+      "treasures": ["Alien Fossil"],
+      "enemy": null
+    },
+    {"name": "Outback 82", "style": "asteroid-6", "pos": {"x": 419, "y": -1815}, "trader": null, "treasures": [], "enemy": null},
     {"name": "Helyon Shipyards", "style": "anomaly-helyon_shipyards", "pos": {"x": 406, "y": -560}, "trader": null, "treasures": [], "enemy": null},
     {"name": "Ska Ska", "style": "planet-water-1", "pos": {"x": 1176, "y": -240}, "trader": null, "treasures": [], "enemy": null},
     {"name": "Baola", "style": "planet-water-frozen", "pos": {"x": 1010, "y": -440}, "trader": null, "treasures": [], "enemy": null},
-    {"name": "Buoy 68", "style": "anomaly-buoy", "pos": {"x": 44, "y": -1190}, "trader": null, "treasures": [], "enemy": null},
+    {"name": "Buoy 68", "style": "anomaly-buoy", "pos": {"x": 404, "y": -1710}, "trader": null, "treasures": [], "enemy": null},
     {
       "name": "Buoy 72",
       "style": "anomaly-buoy",
-      "pos": {"x": 19, "y": -1084},
+      "pos": {"x": 379, "y": -1604},
       "trader": null,
       "treasures": ["Beta Beam", "D Field Coil"],
       "enemy": {"type": "Monitor Drone", "loot": ["Recharge Loop"]}
@@ -789,8 +803,8 @@
       "treasures": ["Tetragon Battery", "Railgun", "Beta Beam", "G Field Coil", "Epoxy Injector", "Shield Pack", "Decagon Battery", "Copper", "Thanatos nacelle", "Thanatos mesh", "Alien Artifact"],
       "enemy": null
     },
-    {"name": "Backwater Nebula", "style": "cloud-orange", "pos": {"x": 170, "y": -1210}, "trader": null, "treasures": [], "enemy": null},
-    {"name": "Claw Nebula", "style": "cloud-purple", "pos": {"x": -85, "y": -1479}, "trader": null, "treasures": [], "enemy": null},
+    {"name": "Backwater Nebula", "style": "cloud-orange", "pos": {"x": 530, "y": -1730}, "trader": null, "treasures": [], "enemy": null},
+    {"name": "Claw Nebula", "style": "cloud-purple", "pos": {"x": 275, "y": -1999}, "trader": null, "treasures": [], "enemy": null},
     {"pos": {"x": -7, "y": -777}, "name": "A9323", "style": "asteroid-1", "trader": null, "enemy": null, "treasures": ["Platinum"]},
     {"pos": {"x": 35, "y": -890}, "name": "A3314", "style": "asteroid-1", "trader": null, "enemy": null, "treasures": ["Platinum"]},
     {"pos": {"x": -103, "y": -927}, "name": "A373", "style": "asteroid-4", "trader": null, "enemy": null, "treasures": ["Ripple Pulse"]},
@@ -802,7 +816,7 @@
     {"pos": {"x": -629, "y": -758}, "name": "A2942", "style": "asteroid-1", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": -287, "y": -758}, "name": "Tau Pavonis", "style": "star-m-ff0", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": -412, "y": -854}, "name": "Pavonis Smoke", "style": "planet-badlands-1", "trader": null, "enemy": null, "treasures": []},
-    {"pos": {"x": -170, "y": -804}, "name": "Pavonis Mirror", "style": "planet-green-1", "trader": {"buy": 1, "sell": 1}, "enemy": null, "treasures": ["Alpha Beam"]},
+    {"pos": {"x": -170, "y": -804}, "name": "Pavonis Mirror", "style": "planet-green-1", "trader": {"buy": 0.75, "sell": 1.5, "inventory": []}, "enemy": null, "treasures": ["Alpha Beam"]},
     {"pos": {"x": -301, "y": -1065}, "name": "A135", "style": "asteroid-2", "trader": null, "enemy": null, "treasures": ["Copper", "Barium Ore"]},
     {"pos": {"x": -535, "y": -1044}, "name": "A3556", "style": "asteroid-7", "trader": null, "enemy": null, "treasures": ["Alien Fossil", "Copper", "Platinum"]},
     {"pos": {"x": -149, "y": -1011}, "name": "A4989", "style": "asteroid-5", "trader": null, "enemy": null, "treasures": ["Barium Ore", "Tetragon Battery"]},
@@ -876,7 +890,7 @@
     {"pos": {"x": 456, "y": -300}, "name": "Ko Nebula", "style": "cloud-green", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": 778, "y": -414}, "name": "Obria Nebula", "style": "cloud-green", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": 1012, "y": -94}, "name": "Al Se Nebula", "style": "cloud-purple", "trader": null, "enemy": null, "treasures": []},
-    {"pos": {"x": 276, "y": -1368}, "name": "Blue Forest", "style": "planet-green-3", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 636, "y": -1888}, "name": "Blue Forest", "style": "planet-green-3", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": 356, "y": -820}, "name": "Blue Ocean", "style": "planet-water-1", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": -788, "y": -520}, "name": "Pavonis Charm", "style": "jovian-3", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": 1483, "y": -751}, "name": "A8351", "style": "asteroid-1", "trader": null, "enemy": null, "treasures": []},
@@ -1009,18 +1023,39 @@
     {"pos": {"x": -916, "y": -598}, "name": "Charm Transfer Buoy C", "style": "anomaly-buoy", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": -896, "y": -508}, "name": "Charm Transfer Buoy A", "style": "anomaly-buoy", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": -672, "y": -540}, "name": "Charm Transfer Buoy B", "style": "anomaly-buoy", "trader": null, "enemy": null, "treasures": []},
-    {"pos": {"x": 360, "y": -1030}, "name": "Anomaly 2050", "style": "anomaly-junk", "trader": null, "enemy": null, "treasures": []},
-    {"pos": {"x": 582, "y": -1084}, "name": "Som Thia", "style": "planet-neutron-3", "trader": null, "enemy": null, "treasures": []},
-    {"pos": {"x": 464, "y": -1076}, "name": "A2496", "style": "asteroid-1", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 460, "y": -1010}, "name": "Anomaly 2050", "style": "anomaly-junk", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 682, "y": -1064}, "name": "Som Thia", "style": "planet-neutron-3", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 564, "y": -1056}, "name": "A2496", "style": "asteroid-1", "trader": null, "enemy": null, "treasures": []},
     {
-      "pos": {"x": 496, "y": -1162},
+      "pos": {"x": 596, "y": -1142},
       "name": "Som Urro",
       "style": "planet-hell-2",
       "trader": null,
       "enemy": {"type": "Soma Predator", "loot": ["Meson Ray", "Welding Robot", "Hexagon Battery"]},
       "treasures": ["Alien Artifact", "Platinum"]
     },
-    {"pos": {"x": 28, "y": -1458}, "name": "Samson's Buoy", "style": "anomaly-buoy", "trader": null, "enemy": {"type": "Target Drone", "loot": []}, "treasures": []}
+    {"pos": {"x": 388, "y": -1978}, "name": "Samson's Buoy", "style": "anomaly-buoy", "trader": null, "enemy": {"type": "Target Drone", "loot": []}, "treasures": []},
+    {"pos": {"x": 112, "y": -1250}, "name": "Outback A34", "style": "asteroid-3", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 174, "y": -1160}, "name": "Outback A37", "style": "asteroid-7", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 90, "y": -1102}, "name": "Buoy Outback 21", "style": "anomaly-buoy", "trader": null, "enemy": {"type": "Striker Drone", "loot": []}, "treasures": []},
+    {"pos": {"x": 16, "y": -1202}, "name": "Buoy Outback 36", "style": "anomaly-buoy", "trader": null, "enemy": {"type": "Striker Drone", "loot": []}, "treasures": []},
+    {"pos": {"x": 345, "y": -1469}, "name": "Outback A8178", "style": "asteroid-2", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 291, "y": -1350}, "name": "Outback A2158", "style": "asteroid-6", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 207, "y": -1289}, "name": "Outback A474", "style": "asteroid-6", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 161, "y": -1361}, "name": "Outback A667", "style": "asteroid-3", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 52, "y": -1341}, "name": "Outback A1551", "style": "asteroid-3", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 63, "y": -1484}, "name": "Outback A3069", "style": "asteroid-4", "trader": null, "enemy": null, "treasures": ["Tungsten", "Platinum"]},
+    {"pos": {"x": 163, "y": -1482}, "name": "Outback A089", "style": "asteroid-4", "trader": null, "enemy": null, "treasures": ["Barium Ore"]},
+    {"pos": {"x": 132, "y": -1572}, "name": "Outback A7769", "style": "asteroid-1", "trader": null, "enemy": null, "treasures": ["Copper", "Barium Ore"]},
+    {"pos": {"x": 270, "y": -1566}, "name": "Outback A563", "style": "asteroid-4", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 255, "y": -1467}, "name": "Outback A9674", "style": "asteroid-5", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 14, "y": -1054}, "name": "Outback Transfer Buoy", "style": "anomaly-buoy", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 174, "y": -1670}, "name": "Outback A7470", "style": "asteroid-3", "trader": null, "enemy": null, "treasures": ["Barium Ore", "Barium Ore"]},
+    {"pos": {"x": 476, "y": -1408}, "name": "Outback A168", "style": "asteroid-6", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": -18, "y": -1594}, "name": "Outback A1874", "style": "asteroid-7", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 416, "y": -1326}, "name": "Outback A1626", "style": "asteroid-7", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": -84, "y": -1316}, "name": "Outback A8416", "style": "asteroid-7", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 310, "y": -1206}, "name": "Outback A106", "style": "asteroid-6", "trader": null, "enemy": null, "treasures": []}
   ],
   "quests": [
     {
@@ -1029,7 +1064,7 @@
     },
     {
       "name": "Start of an adventure",
-      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n\"Hey hitchhiker! This is your stop.\"\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a weird signature. If you EXPLORE the area you might score big time!</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog>You find the meteorite resting on the ground. No crater. A shiny dodecahedron that is surprisingly light when you load it into the rover. The TRADE guild will pay a fortune for this.</dialog>\n<condition have-credits=\"1000\"/>\n<dialog>\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. What do you say?\"</dialog>\n<dialog>There it is. An opportunity to finally leave this rock. You accept eagerly.</dialog>\n<dialog>\"Now you can LIFT OFF and leave this planet.\nBut it is dangerous out there, go by Samson and get some weapons for that ship.\"</dialog>\n<take credits=\"900\"/>\n<mark-on-map dest=\"Samson's Folly\"/>\n<change-ship ship=\"Kerr Clipper\"/>\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>\"My friend at Backwater said you would be coming. We have a nice Photon Ray in stock left. You are welcome to LAND and TRADE with us here at Samson's Folly.\"</dialog>\n<condition have-item=\"Photon Ray\"/>\n<dialog>You now have a Photon Ray, a basic weapon. Tap you ship hologram to open your PROFILE and INSTALL your new Photon Ray</dialog>\n<dialog>\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n"
+      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n\"Hey hitchhiker! This is your stop.\"\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a weird signature. If you EXPLORE the area you might score big time!</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog>You find the meteorite resting on the ground. No crater. A shiny dodecahedron that is surprisingly light when you load it into the rover. The TRADE guild will pay a fortune for this.</dialog>\n<condition have-credits=\"1000\"/>\n<dialog>\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. What do you say?\"</dialog>\n<dialog>There it is. An opportunity to finally leave this rock. You accept eagerly.</dialog>\n<dialog>\"Now you can LIFT OFF and leave this planet.\nBut it is dangerous out there, go by Samson and get some weapons for that ship.\"</dialog>\n<take credits=\"900\"/>\n<mark-on-map dest=\"Samson's Folly\"/>\n<change-ship ship=\"Kerr Clipper\"/>\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>\"My friend at Backwater said you would be coming. We have a nice Kinetic Gun in stock left. You are welcome to LAND and TRADE with us here at Samson's Folly.\"</dialog>\n<condition have-item=\"Kinetic Gun\"/>\n<dialog>You now have a Kinetic Gun, a basic weapon. Tap you ship hologram to open your PROFILE and INSTALL your new Photon Ray</dialog>\n<dialog>\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n"
     },
     {
       "name": "Shady spacer",
@@ -1038,6 +1073,14 @@
     {
       "name": "Peril at Buoy 72",
       "xml": "<place-enemy dest=\"Buoy 72\" enemy=\"Monitor Drone\"/>\n<condition at-dest=\"Buoy 68\"/>\n<dialog>You receive a transmission:\n\"Help us. The way ahead is blocked by a malfunctioning drone. We don't dare to proceed. You have to clear the path for us!\"</dialog>\n<mark-on-map dest=\"Buoy 72\"/>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"Buoy 72\"/>\n<dialog>That drone wasn't even armed. This adventure looks like its going to be a walk in the park.</dialog>\n<dialog>\"Thank you for clearing the way for us! Here, take this for you troubles.\"</dialog>\n<give credits=\"15\"/>\n<remove-map-marker/>"
+    },
+    {
+      "name": "Outback Mining",
+      "xml": "\n<condition at-dest=\"Outback A563\" />\n<dialog>A scruffy ship is slowly passing by this asteroid. You radio it and ask if anything is wrong.</dialog>\n<dialog>\"Hey man! I am good. More than good actually. The area north-west of here is full of minerals, my ship is fully loaded. You should go there.\"</dialog>"
+    },
+    {
+      "name": "Leave the Outback",
+      "xml": "\n<condition at-dest=\"Outback A34\" />\n<dialog>A Colonial Navy patrol craft is stationed at the asteroid.\n\"Stop your engines Traveller. Malfunctioning Striker Drones are guarding the buoys ahead. We guard here until reinforcements arrive.\"</dialog>\n<dialog>If they are Striker Drones they have shields, and can withstand physical damage. Perhaps Samson has a disruptor weapon that can take down the drones' shields.</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Samson's Folly\" color=\"0x0F0\" icon=\"arrow\"/>\n<place-inventory dest=\"Samson's Folly\" item=\"Photon Ray\"/>\n<condition at-dest=\"Samson's Folly\" trigger=\"HAIL\"/>\n<dialog>You speak to Samson about the drones. She looks worried. But says she has something that might help.</dialog>\n<condition have-item=\"Photon Ray\" />\n<mark-on-map dest=\"Buoy Outback 36\" color=\"0x0F0\" icon=\"arrow\"/>\n<condition no-enemy-at-dest=\"Buoy Outback 36\" />\n<dialog>The Navy patrol slips past you once the area was cleared. They don't hail you, ashamed at being helped by a civilian.</dialog>"
     },
     {
       "name": "Bal Gru's stolen subsystems",
@@ -1241,7 +1284,7 @@
     },
     {"id": "unnamed", "desc": "", "zoom": 1, "height": 3, "octaves": 3, "falloff": 0.5, "curve": [0, 1], "spectrum": ["06F", "F00"]}
   ],
-  "initialDestination": "A6114",
+  "initialDestination": "Backwater",
   "models": [
     {
       "name": "Buoy",
@@ -1835,6 +1878,27 @@
           "transform": [["scale", 0.03, 0.03, 0.03], ["scale", 3, 0.75, 0.75], ["rotate", 1.57, 0, -1.17], ["translate", -60, -30, 5]],
           "path": [[0, 0, -100], [50, 0, -33], [40, 0, -25], [40, 0, 25], [50, 0, 33], [0, 0, 100]]
         }
+      ]
+    },
+    {
+      "name": "Tiendong Station",
+      "geometry": "composite",
+      "res": 8,
+      "transform": [["scale", 1.4, 1.4, 1.4], ["rotate", 0, 0, -0.2], ["rotate", 0, 1.1, 0], ["translate", 0, 0, -70]],
+      "path": [[0, 0, -50], [50, 0, 0], [0, 0, 50]],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 9,
+          "transform": [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
+          "path": [[0, 0, -70], [20, 0, -70], [25, 0, -65], [25, 0, -25], [25, 0, 25], [25, 0, 65], [20, 0, 70], [0, 0, 70]]
+        },
+        {"geometry": "lathe", "res": 4, "transform": [["rotate", 0, 0, 0.8], ["translate", -25, 0, 30]], "path": [[0, 0, -20], [3, 0, -20], [3, 0, 20], [0, 0, 20]]},
+        {"geometry": "lathe", "res": 4, "transform": [["rotate", 0, 0, 0.8], ["translate", -25, 0, -30], ["rotate", 0, 0, 0.7]], "path": [[0, 0, -20], [3, 0, -20], [3, 0, 20], [0, 0, 20]]},
+        {"geometry": "lathe", "res": 4, "transform": [["rotate", 0, 0, 0.8], ["translate", -25, 0, -30], ["rotate", 0, 0, -1.4]], "path": [[0, 0, -20], [3, 0, -20], [3, 0, 20], [0, 0, 20]]},
+        {"geometry": "lathe", "res": 4, "transform": [["rotate", 0, 0, 0.8], ["translate", -25, 0, -30], ["rotate", 0, 0, 2.8]], "path": [[0, 0, -20], [3, 0, -20], [3, 0, 20], [0, 0, 20]]},
+        {"geometry": "lathe", "res": 4, "transform": [["rotate", 0, 0, 0.8], ["translate", -25, 0, 30], ["rotate", 0, 0, 2.1]], "path": [[0, 0, -20], [3, 0, -20], [3, 0, 20], [0, 0, 20]]},
+        {"geometry": "lathe", "res": 4, "transform": [["rotate", 0, 0, 0.8], ["translate", -25, 0, 30], ["rotate", 0, 0, -2.1]], "path": [[0, 0, -20], [3, 0, -20], [3, 0, 20], [0, 0, 20]]}
       ]
     }
   ],

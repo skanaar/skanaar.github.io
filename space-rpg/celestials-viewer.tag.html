@@ -1,12 +1,23 @@
 <celestials-viewer>
 
   <div class="list">
-    <div each={e in world.celestials} onclick={edit} class={ list_item: true, active: e==selected }>
+    <div each={e in filteredCelestials()} onclick={edit} class={ list_item: true, active: e==selected }>
       {e.id}
     </div>
-    <div>
-      <button onclick={add}>+ New Celestial</button>
-      <button onclick={sort}>Sort</button>
+  </div>
+
+  <div class="toolbox">
+    <button onclick={add}>+ New Celestial</button>
+    <button onclick={remove}>Delete</button>
+    <button onclick={sort}>Sort</button>
+    <div class="btn-group">
+      <a onclick={() => filter=null} class="toggle-btn {(filter == null) && 'active'}">All
+      </a><a onclick={() => filter='anomaly'} class="toggle-btn {(filter == 'anomaly') && 'active'}">Anomalies
+      </a><a onclick={() => filter='asteroid'} class="toggle-btn {(filter == 'asteroid') && 'active'}">Asteroids
+      </a><a onclick={() => filter='planet'} class="toggle-btn {(filter == 'planet') && 'active'}">Planets
+      </a><a onclick={() => filter='jovian'} class="toggle-btn {(filter == 'jovian') && 'active'}">Jovians
+      </a><a onclick={() => filter='star'} class="toggle-btn {(filter == 'star') && 'active'}">Stars
+      </a><a onclick={() => filter='cloud'} class="toggle-btn {(filter == 'cloud') && 'active'}">Clouds</a>
     </div>
   </div>
 
@@ -71,6 +82,7 @@
     self.currSurface = null
     self.currCelestial = null
     self.types = window.constants.celestialTypes
+    self.filter = null
 
     self.hasSurface = function () {
       return self.selected && ['planet', 'asteroid'].includes(self.selected.type)
@@ -78,6 +90,10 @@
 
     self.hasModel = function () {
       return self.selected && ['anomaly'].includes(self.selected.type)
+    }
+
+    self.filteredCelestials = function () {
+      return self.filter ? self.world.celestials.filter(e => e.type == self.filter) : self.world.celestials
     }
 
     self.sort = function () {
@@ -92,7 +108,13 @@
         celestial: {r: 20, amb: 0.2, oct: 3, zoom: 10, color: ['888', 'D84']},
         surface: { zoom: 1.5, height: 2, octaves: 2, falloff: 0.2, curve: [0,1], spectrum: ['000', 'FFF'] }
       }
-      self.world.celestials.push(obj)
+      self.world.celestials.unshift(obj)
+      self.edit({ item: { e: self.world.celestials[0] } })
+    }
+
+    self.remove = function () {
+      if (confirm('Delete celestial with name ' + self.selected.name))
+        self.world.celestials = self.world.celestials.filter(e => e != self.selected)
     }
     
     self.edit = function (e) {

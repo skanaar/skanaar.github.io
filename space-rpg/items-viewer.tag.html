@@ -1,49 +1,62 @@
 <items-viewer>
 
-  <table class="table">
-    <thead>
-      <tr>
-        <th>name</th>
-        <th>type</th>
-        <th>credits</th>
-        <th>maxhull</th>
-        <th>maxshield</th>
-        <th>maxenergy</th>
-        <th>player-hull</th>
-        <th>player-shield</th>
-        <th>player-energy</th>
-        <th>target-hull</th>
-        <th>target-shield</th>
-        <th>target-energy</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr each={item in world.items} onclick={editItem} class={active: selected == item}>
-        <td>{item.name}</td>
-        <td>{item.type}</td>
-        <td>{item.credits}</td>
-        <td>{item.attr.maxhull}</td>
-        <td>{item.attr.maxshield}</td>
-        <td>{item.attr.maxenergy}</td>
-        <td>{item.playerBuff.hull}</td>
-        <td>{item.playerBuff.shield}</td>
-        <td>{item.playerBuff.energy}</td>
-        <td>{item.targetBuff.hull}</td>
-        <td>{item.targetBuff.shield}</td>
-        <td>{item.targetBuff.energy}</td>
-      </tr>
-      <tr>
-        <td colspan=13>
-          <button onclick={add}>+ New Item</button>
-          <button onclick={sort}>Sort</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="toolbox">
+    <button onclick={add}>+ New Item</button>
+    <button onclick={sort}>Sort</button>
+    <div class="btn-group">
+      <a onclick={() => filter=null} class="toggle-btn {(filter == null) && 'active'}">All
+      </a><a onclick={() => filter='weapon'} class="toggle-btn {(filter == 'weapon') && 'active'}">Weapons
+      </a><a onclick={() => filter='module'} class="toggle-btn {(filter == 'module') && 'active'}">Modules
+      </a><a onclick={() => filter='tool'} class="toggle-btn {(filter == 'tool') && 'active'}">Tools
+      </a><a onclick={() => filter='quest'} class="toggle-btn {(filter == 'quest') && 'active'}">Quest
+      </a><a onclick={() => filter='common'} class="toggle-btn {(filter == 'common') && 'active'}">Common</a>
+    </div>
+  </div>
+
+  <div class="table-parent">
+    <table class="table items-table">
+      <thead>
+        <tr>
+          <th>name</th>
+          <th>type</th>
+          <th>credits</th>
+          <th>maxhull</th>
+          <th>maxshield</th>
+          <th>maxenergy</th>
+          <th>player-hull</th>
+          <th>player-shield</th>
+          <th>player-energy</th>
+          <th>target-hull</th>
+          <th>target-shield</th>
+          <th>target-energy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr each={item in filteredItems()} onclick={editItem} class={active: selected == item}>
+          <td>{item.name}</td>
+          <td>{item.type}</td>
+          <td>{item.credits}</td>
+          <td>{item.attr.maxhull}</td>
+          <td>{item.attr.maxshield}</td>
+          <td>{item.attr.maxenergy}</td>
+          <td>{item.playerBuff.hull}</td>
+          <td>{item.playerBuff.shield}</td>
+          <td>{item.playerBuff.energy}</td>
+          <td>{item.targetBuff.hull}</td>
+          <td>{item.targetBuff.shield}</td>
+          <td>{item.targetBuff.energy}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
   <style>
+    .table-parent {
+      margin-right: 190px;
+    }
     .table {
-      margin: 5px 192px 80px 0;
+      margin: 40px 0 40px 0;
+      width: 100%;
       border-spacing: 0;
     }
     .table tr:nth-child(even) {
@@ -112,6 +125,7 @@
 
     self.world = { items: [] }
     self.selected = null
+    self.filter = null
 
     self.sort = function () {
       var order = ['weapon', 'tool', 'module', 'common', 'quest']
@@ -122,7 +136,7 @@
     }
 
     self.add = function () {
-      self.world.items.push({
+      self.world.items.unshift({
         type:'common',
         credits: 5,
         name: 'unnamed',
@@ -134,6 +148,10 @@
 
     self.remove = function () {
       self.world.items = self.world.items.filter(e => e != self.selected)
+    }
+
+    self.filteredItems = function () {
+      return self.filter ? self.world.items.filter(e => e.type == self.filter) : self.world.items
     }
     
     self.editItem = function (e) {

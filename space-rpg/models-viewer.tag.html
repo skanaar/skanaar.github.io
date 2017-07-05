@@ -4,8 +4,6 @@
     <div each={model in world.models} onclick={edit} class={ list_item: true, active: model==selected }>
       {model.name}
     </div>
-    <div><button onclick={addLathe}>+ New Lathed Model</button></div>
-    <div><button onclick={addComposition}>+ New Composite Model</button></div>
   </div>
 
   <svg width=800 height=800 class="canvas-3d">
@@ -20,6 +18,7 @@
   </svg>
 
   <div class="toolbox">
+    <button onclick={addComposition}>+ New Model</button>
     <div class="btn-group">
       <a onclick={setCamera.bind(null, 'top')} class="toggle-btn {(camera == 'top') && 'active'}">Top
       </a><a onclick={setCamera.bind(null, 'front')} class="toggle-btn {(camera == 'front') && 'active'}">Front
@@ -68,19 +67,9 @@
       return _.stringify(data, { maxLength: 50, indent: 1 })
     }
 
-    self.addLathe = function () {
-      self.world.models.push({
-        name: "xyz",
-        geometry: "lathe",
-        res: 8,
-        transform: [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
-        path: [[0,0,-50], [50,0,0], [0,0,50]]
-      })
-    }
-
     self.addComposition = function () {
-      self.world.models.push({
-        name: "xyz",
+      self.world.models.unshift({
+        name: "unnamed",
         geometry: "composite",
         transform: [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
         parts: [
@@ -89,15 +78,11 @@
             res: 4,
             transform: [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 50, 0, 0]],
             path: [[0,0,-50], [50,0,0], [0,0,50]]
-          },
-          {
-            geometry: "lathe",
-            res: 6,
-            transform: [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", -50, 0, 0]],
-            path: [[0,0,-50], [50,0,0], [0,0,50]]
           }
         ]
       })
+      self.selected = self.world.models[0]
+      updateMesh()
     }
 
     self.up = function () {

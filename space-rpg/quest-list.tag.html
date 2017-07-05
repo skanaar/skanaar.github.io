@@ -4,10 +4,10 @@
     <div each={quest in world.quests} onclick={edit} class={ list_item: true, active: quest.name==active }>
       {quest.name}
     </div>
-    <div><button onclick={add}>+ New Quest</button></div>
   </div>
 
-  <div class="quest-tools">
+  <div class="toolbox quest-tools">
+    <button onclick={add}>+ New Quest</button>
     <input type="text" value={active} ref="nameField">
     <button onclick={save}>Save</button>
     <button onclick={remove}>Delete</button>
