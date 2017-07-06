@@ -18,8 +18,8 @@ body.enable-scroll {
 
 .toolbox {
   position: fixed;
-  left: 200px;
-  right: 200px;
+  left: 250px;
+  right: 250px;
   top: 25px;
   padding: 10px;
   text-align: center;
@@ -156,12 +156,15 @@ button:hover,
   overflow: auto;
   width: 250px;
   border-right: 1px solid #eee;
-  background-color: rgba(255,255,255,0.5)
+  background-color: rgba(255,255,255)
+}
+.list .tools .toggle-btn {
+  padding: 1px 3px;
 }
 .list-2 {
   left: 251px;
 }
-.list div {
+.list > div {
   padding: 10px;
 }
 .list .list_item:hover {

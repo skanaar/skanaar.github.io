@@ -9,9 +9,9 @@
   <style>
     .CodeMirror {
       position: fixed;
-      left: 250px;
+      left: 251px;
       top: 26px;
-      right: 0;
+      right: 151px;
       font-size: 16px;
       font-family: Menlo, Consolas, monospace;
       padding: 45px 10px 30px 10px;
@@ -40,11 +40,10 @@
     var textarea = document.getElementById('quest-editor')
     window.codeMirrorInstance = CodeMirror.fromTextArea(textarea, {
       mode: 'xml',
-      theme: 'night',
       lineWrapping: true
     })
     function setEditorSize() {
-      codeMirrorInstance.setSize(window.innerWidth-250-170, window.innerHeight-26-26-19)
+      codeMirrorInstance.setSize(window.innerWidth-251-171, window.innerHeight-26-26-19)
     }
     setEditorSize()
     window.addEventListener('resize', _.throttle(setEditorSize, 100))

@@ -295,8 +295,8 @@
 
     function defaultTrader(){ return { buy: 0.75, sell: 1.5, inventory: [] } }
     self.traderChange = e => forSelected(ent => ent.trader = e.target.checked ? defaultTrader() : null)
-    self.traderBuyChange = e => forSelected(ent => ent.trader.buy = e.target.value)
-    self.traderSellChange = e => forSelected(ent => ent.trader.sell = e.target.value)
+    self.traderBuyChange = e => forSelected(ent => ent.trader.buy = +e.target.value)
+    self.traderSellChange = e => forSelected(ent => ent.trader.sell = +e.target.value)
 
     self.isEnemyChecked = () => singleSelected().enemy
     self.enemyToggle = e => singleSelected().enemy = e.target.checked ? { type: "rogue", loot: [] } : null

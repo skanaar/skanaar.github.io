@@ -1,12 +1,13 @@
 <models-viewer>
 
   <div class="list">
-    <div each={model in world.models} onclick={edit} class={ list_item: true, active: model==selected }>
+    <div><input ref="filterField" onchange={onFilter} placeholder="filter on tag..."></div>
+    <div each={model in filteredModels()} onclick={edit} class={ list_item: true, active: model==selected }>
       {model.name}
     </div>
   </div>
 
-  <svg width=800 height=800 class="canvas-3d">
+  <svg width=1000 height=800 class="canvas-3d">
     <path
       each={e in box}
       riot-d="M{e[0][0]},{e[0][1]} L{e[1][0]},{e[1][1]} L{e[2][0]},{e[2][1]} L{e[3][0]},{e[3][1]} Z"
@@ -57,6 +58,17 @@
     self.world = { models: [] }
     self.mesh = []
     self.box = []
+    self.filter = ''
+
+    self.onFilter = function () {
+      self.filter = self.refs.filterField.value
+      self.update()
+    }
+
+    self.filteredModels = function () {
+      if (!self.filter) return self.world.models
+      return self.world.models.filter(e => e.name.toLowerCase().includes(self.filter) || (e.tags || '').includes(self.filter))
+    }
 
     self.setCamera = function (mode) {
       self.camera = mode
@@ -211,7 +223,7 @@
         side: mmult(zoom, mmult(rotateY(Math.PI/2), rotateZ(Math.PI/2))),
         perspective: mmult(zoom, mmult(rotateZ(-0.75), rotateX(-1.1)))
       }[self.camera] || mmult(rotateZ(0.3), rotateX(1.21))
-      return mesh.map(q => transformQuad(q, perspective).map(p => vtranslate(p, [400,400,0])))
+      return mesh.map(q => transformQuad(q, perspective).map(p => vtranslate(p, [500,400,0])))
     }
 
     function loadWorld() {
