@@ -44,6 +44,14 @@ window.constants = {
   }
 }
 
+window.allTags = function (items) {
+  return _.uniq(_.flatten(items.map(e => (e.tags || '').split(' ')))).sort()
+}
+
+window.tagFilter = function (items, query) {
+  return (query ? items.filter(e => (e.tags || '').includes(query)) : items)
+}
+
 window.getWorld = function () {
   try {
     var world = JSON.parse(localStorage['world'])

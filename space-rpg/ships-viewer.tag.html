@@ -17,7 +17,6 @@
   </div>
 
   <div class="sidebar" show={!!selected}>
-    <button onclick={makeStartingShip}>Make starting ship</button>
     <input type=text ref="nameField" value={selected && selected.name}>
     <div class="input-grid">
       <em>visual</em>
@@ -42,7 +41,8 @@
       <em>energy</em> <input type=number step=1 ref="energyField" value={selected && selected.generator.energy}>
     </div>
 
-    <br/>
+    <label></label>
+    <button onclick={makeStartingShip}>Make starting ship</button><br/>
     <button onclick={remove}>Delete</button>
     <button onclick={endEditing}>Done</button>
     <button onclick={cancelEditing}>Cancel</button>

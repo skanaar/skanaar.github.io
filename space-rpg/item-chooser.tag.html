@@ -2,8 +2,20 @@
 
   <div class="modal-parent" if={isOpen}>
     <div class="modal">
+      <div class="modal-tools">
+        <div class="btn-group">
+          <a onclick={() => filter=null} class="toggle-btn {(filter == null) && 'active'}">All
+          </a><a onclick={() => filter='weapon'} class="toggle-btn {(filter == 'weapon') && 'active'}">Weapons
+          </a><a onclick={() => filter='module'} class="toggle-btn {(filter == 'module') && 'active'}">Modules
+          </a><a onclick={() => filter='tool'} class="toggle-btn {(filter == 'tool') && 'active'}">Tools
+          </a><a onclick={() => filter='quest'} class="toggle-btn {(filter == 'quest') && 'active'}">Quest
+          </a><a onclick={() => filter='common'} class="toggle-btn {(filter == 'common') && 'active'}">Common</a>
+        </div>
+      </div>
       <div class="modal-list">
-        <div class="modal-item" each={item in world.items} onclick={add}>{item.name}</div>
+        <div class="modal-item" each={item in filteredItems()} onclick={add}>
+          {item.name} <div class="price">{item.credits}c</div>
+        </div>
       </div>
       <div class="modal-list">
         <div class="modal-item" each={id in list} onclick={remove}>{id} &times;</div>
@@ -28,6 +40,9 @@
       border-radius: 2px;
       margin: 100px auto;
     }
+    .modal-tools {
+      padding: 5px;
+    }
     .modal-list {
       display: inline-block;
       width: 45%;
@@ -46,12 +61,15 @@
     }
     .modal-item {
       display: inline-block;
-      width: 120px;
+      width: 180px;
       margin: 2px;
       padding: 2px 6px;
       border: 1px solid #eee;
       background: #f8f8f8;
       border-radius: 2px;
+    }
+    .modal-item .price {
+      float: right;
     }
     .item:hover {
       border: 1px solid #ddd;
@@ -64,6 +82,11 @@
 
     self.world = { items: [] }
     self.list = []
+    self.filter = ''
+
+    self.filteredItems = function () {
+      return self.filter ? self.world.items.filter(e => e.type == self.filter) : self.world.items
+    }
 
     self.add = function (e) {
       self.list.push(e.item.item.name)

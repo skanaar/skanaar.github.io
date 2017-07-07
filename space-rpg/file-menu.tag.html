@@ -1,25 +1,5 @@
 <file-menu>
   <div class="sidebar file-menu">
-    <label>World name</label>
-    <input type=text ref="nameField" value={world.name}>
-    <label>Starting conditions</label>
-
-    <div class="input-grid">
-      <em>state</em>
-      <select ref="stateInput" value={world.initialState}>
-        <option>surface</option>
-        <option>space</option>
-      </select><br/>
-      <em>dest.</em>
-      <select ref="destInput" value={world.initialDestination}>
-        <option each={e in destinations}>{e}</option>
-      </select><br/>
-      <em>ship</em>
-      <select ref="shipInput" value={world.initialShip}>
-        <option each={e in world.ships}>{e.name}</option>
-      </select><br/>
-    </div>
-
     <label>Cloud storage</label>
 
     <div if={s3.isNull}>
@@ -32,8 +12,8 @@
     </div>
 
     <label>File storage</label>
-    <a class="button" ref="downloadLink" onmouseenter={primeDownloadLink} download="world.json" href='#'>Download</a>
-    <label class="button not-label" for=file-input>Upload</label>
+    <a class="button" ref="downloadLink" onmouseenter={primeDownloadLink} download="world.json" href='#'>Download file</a>
+    <label class="button not-label" for=file-input>Upload file</label>
     <input id=file-input type=file ref=fileInput onchange={fileChanged} style="width: 150px; margin-right: 20px">
 
     <label>World</label>
@@ -55,12 +35,10 @@ localStorage.cloudStorage = {
     var self = this
 
     self.cloudKey = 'worlds/world.json'
-    self.world = getWorld()
-    self.destinations = self.world.destinations.map(e => e.name).sort()
 
-    self.loadDefault = () => _.fetch('world.json', loadWorld)
-    self.loadEmpty = () => loadWorld(JSON.stringify(nullWorld()))
-    self.fileChanged = () => _.readFile(self.refs.fileInput.files[0], loadWorld)
+    self.loadDefault = () => _.fetch('world.json', loadWorldFrom)
+    self.loadEmpty = () => loadWorldFrom(JSON.stringify(nullWorld()))
+    self.fileChanged = () => _.readFile(self.refs.fileInput.files[0], loadWorldFrom)
     self.primeDownloadLink = function () {
       window.events.trigger('save-world')
       self.refs.downloadLink.setAttribute('href', _.toDataUrl(_.stringify(getWorld(), { maxLength: 200 })))
@@ -68,7 +46,7 @@ localStorage.cloudStorage = {
     self.showCloudStorageHelp = () => alert(cloudHelp)
     self.loadFromCloud = function (){
       if (confirm('Overwrite current world with cloud data?'))
-        self.s3.getObject({ Key: self.cloudKey }, handleError(loadWorld))
+        self.s3.getObject({ Key: self.cloudKey }, handleError(loadWorldFrom))
     }
     self.saveToCloud = function () {
       var world = getWorld()
@@ -103,7 +81,7 @@ localStorage.cloudStorage = {
       }
     }
 
-    function loadWorld(data) {
+    function loadWorldFrom(data) {
       saveWorld(JSON.parse(data))
       window.events.trigger('world-updated')
     }

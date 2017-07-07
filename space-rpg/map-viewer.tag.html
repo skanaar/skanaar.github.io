@@ -63,8 +63,6 @@
     <div class="btn-group" style="opacity: {selectionSize > 1 ? 1 : 0.5}">
       <a class="toggle-btn" onclick={repulse}>Repulse</a><a class="toggle-btn" onclick={attract}>Attract</a>
     </div>
-    <button onclick={removeSelected}  style="opacity: {selectionSize > 0 ? 1 : 0.5}">Delete</button>
-    <button onclick={makeStartingDest}  style="opacity: {selectionSize == 1 ? 1 : 0.5}">Make starting point</button>
   </div>
 
   <div class="sidebar" show={selectionSize == 1 && audioSelected}>
@@ -107,6 +105,9 @@
       </select>
       <button onclick={chooseLoot}>Choose loot</button>
     </div>
+    <label></label>
+    <button onclick={removeSelected} style="opacity: {selectionSize > 0 ? 1 : 0.5}">Delete</button>
+    <button onclick={makeStartingDest} style="opacity: {selectionSize == 1 ? 1 : 0.5}">Make starting point</button>
   </div>
 
   <item-chooser />

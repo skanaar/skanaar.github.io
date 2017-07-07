@@ -1,12 +1,5 @@
 <models-viewer>
 
-  <div class="list">
-    <div><input ref="filterField" onchange={onFilter} placeholder="filter on tag..."></div>
-    <div each={model in filteredModels()} onclick={edit} class={ list_item: true, active: model==selected }>
-      {model.name}
-    </div>
-  </div>
-
   <svg width=1000 height=800 class="canvas-3d">
     <path
       each={e in box}
@@ -18,6 +11,17 @@
       fill={shading(e)} stroke="#000"/>
   </svg>
 
+  <div class="list">
+    <div>
+      <select ref="filterSelect" onchange={onFilter}>
+        <option each={e in allTags()}>{e}</option>
+      </select>
+    </div>
+    <div each={model in filteredModels()} onclick={edit} class={ list_item: true, active: model==selected }>
+      {model.name}
+    </div>
+  </div>
+
   <div class="toolbox">
     <button onclick={addComposition}>+ New Model</button>
     <div class="btn-group">
@@ -26,15 +30,16 @@
       </a><a onclick={setCamera.bind(null, 'side')} class="toggle-btn {(camera == 'side') && 'active'}">Side
       </a><a onclick={setCamera.bind(null, 'perspective')} class="toggle-btn {(camera == 'perspective') && 'active'}">Perspective</a>
     </div>
-    <button onclick={up}>Up</button>
-    <button onclick={down}>Down</button>
+    <div class="btn-group">
+      <a class="toggle-btn" onclick={up}>Up in list</a><a class="toggle-btn" onclick={down}>Down in list</a>
+    </div>
   </div>
 
   <div class="sidebar" show={!!selected}>
     <label>Source</label>
     <textarea value={asJson(selected)} ref="sourceField"></textarea>
 
-    <br/>
+    <label></label>
     <button onclick={compile}>Compile Mesh</button>
     <button onclick={remove}>Delete</button><br/>
     <button onclick={endEditing}>Done</button>
@@ -59,16 +64,9 @@
     self.mesh = []
     self.box = []
     self.filter = ''
-
-    self.onFilter = function () {
-      self.filter = self.refs.filterField.value
-      self.update()
-    }
-
-    self.filteredModels = function () {
-      if (!self.filter) return self.world.models
-      return self.world.models.filter(e => e.name.toLowerCase().includes(self.filter) || (e.tags || '').includes(self.filter))
-    }
+    self.onFilter = () => self.filter = self.refs.filterSelect.value
+    self.allTags = () => allTags(self.world.models)
+    self.filteredModels = () => tagFilter(self.world.models, self.filter)
 
     self.setCamera = function (mode) {
       self.camera = mode

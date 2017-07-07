@@ -156,7 +156,7 @@ button:hover,
   overflow: auto;
   width: 250px;
   border-right: 1px solid #eee;
-  background-color: rgba(255,255,255)
+  background-color: #fff;
 }
 .list .tools .toggle-btn {
   padding: 1px 3px;

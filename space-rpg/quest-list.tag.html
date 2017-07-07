@@ -1,22 +1,36 @@
 <quest-list>
 
   <div class="list">
-    <div each={quest in world.quests} onclick={edit} class={ list_item: true, active: quest.name==active }>
+    <div>
+      <select ref="filterSelect" onchange={onFilter}>
+        <option each={e in allTags()}>{e}</option>
+      </select>
+    </div>
+    <div each={quest in filteredQuests()} onclick={edit} class={ list_item: true, active: quest.name==active }>
       {quest.name}
     </div>
   </div>
 
   <div class="toolbox quest-tools">
     <button onclick={add}>+ New Quest</button>
-    <input type="text" value={active} ref="nameField">
-    <button onclick={save}>Save</button>
-    <button onclick={remove}>Delete</button>
-    <button onclick={up}>Up</button>
-    <button onclick={down}>Down</button>
+    <div class="btn-group">
+      <a class="toggle-btn" onclick={up}>Up in list</a><a class="toggle-btn" onclick={down}>Down in list</a>
+    </div>
+    <select onchange={setInitialState} value={world.initialState} ref="stateSelect">
+      <option value="surface">Start on surface</option>
+      <option value="space">Start in space</option>
+    </select>
   </div>
 
   <div class="sidebar">
-    <label>Templates</label>
+    <label>Name</label>
+    <input type="text" value={selected && selected.name} onchange={setFields} ref="nameField">
+    <label>Tags</label>
+    <input type="text" value={selected && selected.tags} onchange={setFields} ref="tagsField" placeholder="Tags...">
+    <label></label>
+    <button onclick={save}>Save</button>
+    <button onclick={remove}>Delete</button>
+    <label>Append template</label>
     <div each={e in templates}>
       <button class="quest-template" onclick={useTemplate}>{e.name}</button>
     </div>
@@ -26,7 +40,7 @@
     var self = this
 
     self.world = window.nullWorld()
-    self.active = null
+    self.selected = null
     self.templates = [
       { name: 'Condition', template: '<condition have-item="" at-dest="" no-enemy-at-dest="" not-at-dest="" have-credits="" trigger="TRIGGER"/>' },
       { name: 'Place item', template: '<place-item dest="" item=""/>' },
@@ -44,6 +58,13 @@
       { name: 'Travel', template: '<travel dest=""/>' },
       { name: 'Script goto', template: '<goto jump="1"/>' }
     ]
+    self.filter = ''
+    self.onFilter = () => self.filter = self.refs.filterSelect.value
+    self.allTags = () => allTags(self.world.quests)
+    self.filteredQuests = () => tagFilter(self.world.quests, self.filter)
+    self.setInitialState = function () {
+      self.world.initialState = self.refs.stateSelect.value
+    }
 
     function loadQuests(world) {
       self.world = world
@@ -57,33 +78,39 @@
     }
 
     self.add = function () {
-      self.world.quests.push({ name: 'unnamed', xml: '' })
+      self.filter = ''
+      self.world.quests.unshift({ name: 'unnamed', xml: '' })
     }
 
     self.edit = function (e) {
       self.save()
-      self.active = e.item.quest.name
+      self.selected = e.item.quest
       window.codeMirrorInstance.setValue(e.item.quest.xml)
     }
 
+    self.setFields = function () {
+      if (self.selected) {
+        self.selected.name = self.refs.nameField.value
+        self.selected.tags = self.refs.tagsField.value
+      }
+    }
+
     self.save = function () {
-      var quest = _.findWhere(self.world.quests, { name: self.active })
-      if (quest) {
-        quest.name = self.refs.nameField.value
-        quest.xml = window.codeMirrorInstance.getValue()
+      if (self.selected) {
+        self.selected.xml = window.codeMirrorInstance.getValue()
       }
     }
 
     self.remove = function () {
-      self.world.quests = _.filter(self.world.quests, q => q.name != self.active)
+      self.world.quests = _.filter(self.world.quests, q => q != self.selected)
     }
 
     self.up = function () {
-      _.bubbleUp(self.world.quests, self.world.quests.findIndex(e => e.name == self.active))
+      _.bubbleUp(self.world.quests, self.world.quests.findIndex(e => e == self.selected))
     }
 
     self.down = function () {
-      _.bubbleDown(self.world.quests, self.world.quests.findIndex(e => e.name == self.active))
+      _.bubbleDown(self.world.quests, self.world.quests.findIndex(e => e == self.selected))
     }
 
     self.on('mount', function() {
@@ -95,14 +122,10 @@
 
   <style>
     .quest-tools {
-      position: fixed;
-      top: 31px;
-      left: 255px;
       z-index: 2;
     }
     .quest-template {
-      margin-bottom: 5px;
-      padding: 3px 8px;
+      margin-bottom: 2px;
       width: 95%;
     }
   </style>

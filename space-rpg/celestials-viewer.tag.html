@@ -18,8 +18,7 @@
 
   <div class="toolbox">
     <button onclick={add}>+ New Celestial</button>
-    <button onclick={remove}>Delete</button>
-    <button onclick={sort}>Sort</button>
+    <button onclick={sort}>Sort list</button>
   </div>
 
   <div>
@@ -59,8 +58,9 @@
       <em>spectrum</em> <input type=text ref="spectrumField" value={currSurface && currSurface.spectrum.join()}><br/>
     </div>
 
-    <br/>
+    <label></label>
     <button onclick={save}>Save</button>
+    <button onclick={remove}>Delete</button>
   </div>
 
   <style>
