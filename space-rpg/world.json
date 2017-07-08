@@ -801,14 +801,7 @@
     {"name": "Backwater", "style": "planet-badlands-1", "pos": {"x": 258, "y": -1886}, "trader": {"buy": 0.5, "sell": 1.5, "inventory": []}, "treasures": [], "enemy": null},
     {"name": "Outback 12", "style": "asteroid-2", "pos": {"x": 488, "y": -1898}, "trader": null, "treasures": [], "enemy": null},
     {"name": "Shady", "style": "asteroid-2", "pos": {"x": 542, "y": -1818}, "trader": null, "treasures": ["Shady Boxes", "Barium Ore"], "enemy": null},
-    {
-      "name": "Samson's Folly",
-      "style": "asteroid-3",
-      "pos": {"x": 368, "y": -1928},
-      "trader": {"buy": 0.75, "sell": 1, "inventory": ["Kinetic Gun", "Photon Ray"]},
-      "treasures": ["Alien Fossil"],
-      "enemy": null
-    },
+    {"name": "Samson's Folly", "style": "asteroid-3", "pos": {"x": 368, "y": -1928}, "trader": {"buy": 0.75, "sell": 1, "inventory": ["Kinetic Gun"]}, "treasures": ["Alien Fossil"], "enemy": null},
     {"name": "Outback 82", "style": "asteroid-6", "pos": {"x": 419, "y": -1815}, "trader": null, "treasures": [], "enemy": null},
     {"name": "Helyon Shipyards", "style": "anomaly-helyon_shipyards", "pos": {"x": 406, "y": -560}, "trader": {"buy": 0.75, "sell": 1.5, "inventory": []}, "treasures": [], "enemy": null},
     {"name": "Ska Ska", "style": "planet-water-1", "pos": {"x": 1176, "y": -240}, "trader": null, "treasures": [], "enemy": null},
@@ -1099,7 +1092,7 @@
     },
     {
       "name": "Start of an adventure",
-      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n\"Hey hitchhiker! This is your stop.\"\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a weird signature. If you EXPLORE the area you might score big time!</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog>You find the meteorite resting on the ground. No crater. A shiny dodecahedron that is surprisingly light when you load it into the rover. The TRADE guild will pay a fortune for this.</dialog>\n<condition have-credits=\"1000\"/>\n<dialog>\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. What do you say?\"</dialog>\n<dialog>There it is. An opportunity to finally leave this rock. You accept eagerly.</dialog>\n<dialog>\"Now you can LIFT OFF and leave this planet.\nBut it is dangerous out there, go by Samson and get some weapons for that ship.\"</dialog>\n<take credits=\"900\"/>\n<mark-on-map dest=\"Samson's Folly\"/>\n<change-ship ship=\"Kerr Clipper\"/>\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>\"My friend at Backwater said you would be coming. We have a nice Kinetic Gun in stock left. You are welcome to LAND and TRADE with us here at Samson's Folly.\"</dialog>\n<condition have-item=\"Kinetic Gun\"/>\n<dialog>You now have a Kinetic Gun, a basic weapon. Tap you ship hologram to open your PROFILE and INSTALL your new Photon Ray</dialog>\n<dialog>\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n",
+      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n\"Hey hitchhiker! This is your stop.\"\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a weird signature. If you EXPLORE the area you might score big time!</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog>You find the meteorite resting on the ground. A shiny lump that is surprisingly light when you load it into the rover. The TRADE guild will pay a fortune for this.</dialog>\n<condition have-credits=\"1000\"/>\n<dialog>\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. What do you say?\"</dialog>\n<dialog>There it is. An opportunity to finally leave this rock. You accept eagerly.</dialog>\n<dialog>\"Now you can LIFT OFF and leave this planet.\nBut it is dangerous out there, go by Samson and get some weapons for that ship.\"</dialog>\n<take credits=\"900\"/>\n<mark-on-map dest=\"Samson's Folly\"/>\n<change-ship ship=\"Kerr Clipper\"/>\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>\"My friend at Backwater said you would be coming. We have a nice Kinetic Gun in stock left. You are welcome to LAND and TRADE with us here at Samson's Folly.\"</dialog>\n<condition have-item=\"Kinetic Gun\"/>\n<dialog>You now have a Kinetic Gun, a basic weapon. Tap you ship hologram to open your PROFILE and INSTALL your new weapon</dialog>\n<dialog>\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n",
       "tags": "outback"
     },
     {
@@ -1795,7 +1788,8 @@
           "transform": [["scale", 1, 1, 1], ["rotate", 0, 0, 0], ["translate", 0, 0, 0]],
           "path": [[0, 0, 0], [10, 0, 6], [13, 0, 20], [10, 0, 24], [10, 0, 40], [5, 0, 46], [5, 0, 60], [2, 0, 65], [0, 0, 100]]
         }
-      ]
+      ],
+      "tags": "station"
     },
     {
       "name": "Sol Array",
@@ -2112,11 +2106,11 @@
       "surface": {"zoom": 0.75, "height": 3, "octaves": 3, "falloff": 0.5, "curve": [0, 1], "spectrum": ["666", "666", "666", "666", "0DF", "888", "888", "555", "555"]},
       "model": null
     },
-    {"type": "cloud", "id": "cloud-fiery", "celestial": {"r": 25, "amb": 0.6, "oct": 3, "zoom": 0.4, "color": ["ff8", "f04"]}, "surface": null, "desc": "", "model": null},
-    {"type": "cloud", "id": "cloud-green", "celestial": {"r": 40, "amb": 0.15, "oct": 3, "zoom": 0.3, "color": ["0f8", "f80"]}, "surface": null, "desc": "", "model": null},
-    {"type": "cloud", "id": "cloud-orange", "attr": {}, "celestial": {"r": 40, "amb": 0.15, "oct": 3, "zoom": 0.35, "color": ["f80", "f80"]}, "surface": null, "desc": "", "model": null},
-    {"type": "cloud", "id": "cloud-purple", "celestial": {"r": 60, "amb": 0.15, "oct": 3, "zoom": 0.4, "color": ["80f", "f80"]}, "surface": null, "desc": "", "model": null},
-    {"type": "cloud", "id": "cloud-smoke", "celestial": {"r": 30, "amb": 0.2, "oct": 3, "zoom": 0.4, "color": ["444", "842"]}, "surface": null, "desc": "", "model": null},
+    {"type": "cloud", "id": "cloud-fiery", "celestial": {"r": 25, "amb": 0.6, "oct": 4, "zoom": 1.6, "color": ["ff8", "f04"]}, "surface": null, "desc": "", "model": null},
+    {"type": "cloud", "id": "cloud-green", "celestial": {"r": 40, "amb": 0.15, "oct": 6, "zoom": 1.2, "color": ["0f8", "f80"]}, "surface": null, "desc": "", "model": null},
+    {"type": "cloud", "id": "cloud-orange", "attr": {}, "celestial": {"r": 40, "amb": 0.15, "oct": 5, "zoom": 1.4, "color": ["f80", "f80"]}, "surface": null, "desc": "", "model": null},
+    {"type": "cloud", "id": "cloud-purple", "celestial": {"r": 60, "amb": 0.15, "oct": 5, "zoom": 1.6, "color": ["80f", "f80"]}, "surface": null, "desc": "", "model": null},
+    {"type": "cloud", "id": "cloud-smoke", "celestial": {"r": 30, "amb": 0.2, "oct": 5, "zoom": 1.6, "color": ["444", "842"]}, "surface": null, "desc": "", "model": null},
     {"type": "jovian", "id": "jovian-1", "celestial": {"r": 25, "amb": 0, "oct": 3, "zoom": 20, "color": ["5fe", "c6f"]}, "surface": null},
     {"type": "jovian", "id": "jovian-2", "celestial": {"r": 30, "amb": 0, "oct": 3, "zoom": 20, "color": ["fa5", "e74"]}, "surface": null},
     {"type": "jovian", "id": "jovian-3", "celestial": {"r": 25, "amb": 0, "oct": 3, "zoom": 20, "color": ["576", "0c6"]}, "surface": null},

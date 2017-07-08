@@ -15,7 +15,8 @@
     <div each={e in undefModels}>Error: Model <b>{e}</b> not defined</div>
     <div each={e in undefCelestials}>Error: Celestial <b>{e}</b> not defined</div>
     <div each={e in undefIcons}>Error: Unknown icon <b>{e}</b></div>
-    <div each={e in undefColors}>Error: Invalid color <b>{e}</b></div>
+    <div each={e in undefColors}>Error: Invalid color in quest <b>{e}</b></div>
+    <div each={e in undefCelestialColors}>Error: Invalid color in celestial <b>{e}</b></div>
     <button onclick={validateWorld}>Update</button>
   </div>
 
@@ -46,6 +47,8 @@
       return _.flatten(matches.map(e => e.split('="')[1].split(';')))
     }
 
+    function isInvalidColor(c) { return (c.length!=3) || !!c.match(/[^a-fA-F0-9]/) }
+
     self.validateWorld = function () {
       var world = getWorld()
       var referredItems = _.flatten([
@@ -72,7 +75,7 @@
       self.undefIcons = _.uniq(_.difference(referredIcons, definedIcons))
 
       var referredColors = inQuests(world, /color="[^"]*/gm)
-      self.undefColors = _.uniq(referredColors.filter(c => (c.length!=3) || !!c.match(/[^A-F0-9]/)))
+      self.undefColors = _.uniq(referredColors.filter(isInvalidColor))
 
       var referredShips = inQuests(world, /ship="[^"]*/gm)
       var definedShips = world.ships.map(e => e.name)
@@ -89,6 +92,10 @@
       var definedModels = world.models.map(e => e.name)
       self.undefModels = _.uniq(_.difference(referredModels, definedModels))
 
+      var celestialColors = world.celestials.map(e => e.celestial.color)
+      var surfaceColors = world.celestials.map(e => e.surface ? e.surface.spectrum : [])
+      self.undefCelestialColors = _.flatten([celestialColors, surfaceColors]).filter(isInvalidColor)
+
       self.hasValidationError = [
         self.undefItems,
         self.undefNodes,
@@ -97,7 +104,8 @@
         self.undefModels,
         self.undefCelestials,
         self.undefIcons,
-        self.undefColors
+        self.undefColors,
+        self.undefCelestialColors
       ].some(e => e.length)
 
       self.update()
