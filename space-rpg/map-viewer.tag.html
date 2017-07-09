@@ -52,6 +52,9 @@
 
   <div class="toolbox">
     <div class="btn-group">
+      <a class="toggle-btn" onclick={zoomIn}">+</a><a class="toggle-btn" onclick={zoomOut}">-</a>
+    </div>
+    <div class="btn-group">
       <a onclick={() => tool='select'} class="toggle-btn {(tool == 'select') && 'active'}">Select
       </a><a onclick={() => tool='draw'} class="toggle-btn {(tool == 'draw') && 'active'}">Add Celestial
       </a><a onclick={() => tool='spray'} class="toggle-btn {(tool == 'spray') && 'active'}">Add Cluster
@@ -156,6 +159,20 @@
       })
       calculateLines()
       self.update()
+    }
+
+    self.zoomIn = function () {
+      self.scale *= 1.2
+      self.dx *= 1.2
+      self.dy *= 1.2
+      loadDestinations(self.world)
+    }
+
+    self.zoomOut = function () {
+      self.scale /= 1.2
+      self.dx /= 1.2
+      self.dy /= 1.2
+      loadDestinations(self.world)
     }
 
     self.mousedown = function (e) { // 132
