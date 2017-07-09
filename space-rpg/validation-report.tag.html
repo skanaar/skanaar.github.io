@@ -94,11 +94,11 @@
 
     self.on('mount', function () {
       self.validateWorld()
-      window.events.on('request-validate', self.validateWorld)
+      app.events.on('request-validate', self.validateWorld)
     })
 
     self.on('unmount', function () {
-      window.events.off('request-validate', self.validateWorld)
+      app.events.off('request-validate', self.validateWorld)
     })
 
   </script>

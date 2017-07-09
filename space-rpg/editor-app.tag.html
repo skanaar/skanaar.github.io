@@ -8,9 +8,6 @@
     </div>
   </div>
 
-  <div class="file-menu-backdrop" if={isFileMenuOpen} onclick={toggleFileMenu}></div>
-  <file-menu if={isFileMenuOpen} />
-
   <galactic-map app={app} if={page == '#map'} />
   <celestials-viewer app={app} if={page == '#celestials'} />
   <models-viewer app={app} if={page == '#models'} />
@@ -18,50 +15,96 @@
   <items-viewer app={app} if={page == '#items'} />
   <quest-list app={app} if={page == '#quests'} />
 
-  <item-chooser app={app} if={page == '#items'} />
-
+  <item-chooser app={app} />
   <validation-report app={app} />
+  <div class="file-menu-backdrop" if={isFileMenuOpen} onclick={toggleFileMenu}></div>
+  <file-menu app={app} if={isFileMenuOpen} />
 
   <script>
     var self = this
+
     self.page = '#map'
     self.tabs = ['map', 'celestials', 'models', 'ships', 'items', 'quests']
     self.isFileMenuOpen = false
-
+    self.app = {
+      isSaved: false,
+      world: JSON.parse(localStorage['world']),
+      events: riot.observable(),
+      setWorld: setWorld,
+      getWorld: () => self.app.world,
+      allTags: allTags,
+      tagFilter: tagFilter,
+      nullWorld: nullWorld,
+      celestialTypes: ['cloud', 'star', 'jovian', 'planet', 'asteroid', 'anomaly'],
+      audios: ['light-years', 'trouble-on-mercury']
+    }
     self.toggleFileMenu = () => self.isFileMenuOpen = ! self.isFileMenuOpen
     self.pageChange = function() {
-      window.events.trigger('save-world')
-      window.events.trigger('request-validate')
+      self.app.events.trigger('save-world')
+      self.app.events.trigger('request-validate')
     }
 
-    function updatePage() {
-      self.page = (window.location.hash || '#map')
+    function nullWorld() {
+      return {
+        initialShip: '',
+        initialState: 'surface',
+        initialDestination: '',
+        destinations: [],
+        audioRegions: [],
+        quests: [],
+        items: [],
+        ships: [],
+        enemies: [],
+        celestials: [],
+        models: []
+      }
+    }
+
+    function allTags(items) {
+      return _.uniq(_.flatten(items.map(e => (e.tags || '').split(' ')))).sort()
+    }
+
+    function tagFilter(items, query) {
+      return (query ? items.filter(e => (e.tags || '').includes(query)) : items)
+    }
+
+    function saveWorld() {
+      self.app.events.trigger('save-world')
+      localStorage['world'] = _.stringify(self.app.world)
+      self.app.isSaved = true
+      self.update()
+    }
+
+    function setWorld(world) {
+      _.extend(self.app.world, world)
+      localStorage['world'] = _.stringify(world)
+      self.app.isSaved = true
+      self.app.events.trigger('world-updated')
       self.update()
     }
 
     self.on('mount', function() {
-      window.addEventListener('hashchange', updatePage)
-      updatePage()
-    })
-
-    self.app = window.app
-
-    function onUserInteraction() {
-      self.app.isSaved = false
-      self.update()
-    }
-
-    window.addEventListener('click', onUserInteraction)
-
-    window.setInterval(function () {
-      if (!self.app.isSaved) {
-        window.events.trigger('save-world')
-        window.events.trigger('request-validate')
-      } else {
-        self.isSaved = true
+      function updatePage() {
+        self.page = (window.location.hash || '#map')
         self.update()
       }
-    }, 2000)
+      window.addEventListener('hashchange', updatePage)
+      updatePage()
+
+      window.addEventListener('click', function onUserInteraction() {
+        self.app.isSaved = false
+      })
+
+      window.setInterval(function () {
+        if (!self.app.isSaved) {
+          saveWorld()
+          self.app.events.trigger('request-validate')
+        } else {
+          self.isSaved = true
+          self.update()
+        }
+      }, 2000)
+    })
 
   </script>
   <style>

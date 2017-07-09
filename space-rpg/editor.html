@@ -26,6 +26,7 @@
     <script type="riot/tag" src="map-viewer.tag.html"></script>
     <script type="riot/tag" src="models-viewer.tag.html"></script>
     <script type="riot/tag" src="items-viewer.tag.html"></script>
+    <script type="riot/tag" src="item-chooser.tag.html"></script>
     <script type="riot/tag" src="ships-viewer.tag.html"></script>
     <script type="riot/tag" src="terrain-preview.tag.html"></script>
     <script type="riot/tag" src="celestial-preview.tag.html"></script>
@@ -39,9 +40,35 @@
     <script src="lib/underscore.js"></script>
     <script src="lib/aws.js"></script>
     <script src="util.js"></script>
-    <script src="events.js"></script>
     <script>
-      riot.mount('editor-app')
+
+      function startEditor(data){
+        localStorage['world'] = data
+        riot.mount('editor-app')
+      }
+      function loadFromServer() {
+        _.fetch('world.json', startEditor)
+      }
+      var worldJson = localStorage['world']
+      if (!worldJson) {
+        loadFromServer()
+      }
+      else {
+        try {
+          var world = JSON.parse(worldJson)
+          if (!_.isArray(world.destinations)) throw new Error()
+          if (!_.isArray(world.audioRegions)) throw new Error()
+          if (!_.isArray(world.quests)) throw new Error()
+          if (!_.isArray(world.items)) throw new Error()
+          if (!_.isArray(world.ships)) throw new Error()
+          if (!_.isArray(world.enemies)) throw new Error()
+          startEditor(worldJson)            
+        } catch(e) {
+          alert('locally stored world was corrupt, loading world from server')
+          loadFromServer()
+        }
+      }
+
     </script>
 </body>
 </html>

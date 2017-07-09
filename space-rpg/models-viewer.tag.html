@@ -225,22 +225,13 @@
       return mesh.map(q => transformQuad(q, perspective).map(p => vtranslate(p, [500,400,0])))
     }
 
-    function loadWorld() {
-        self.world = app.getWorld()
-        self.update()
-    }
-
-    function saveWorldCallback() { app.saveWorld(self.world) }
-
-    self.on('mount', function() {
-      window.events.on('world-updated', loadWorld)
-      window.events.on('save-world', saveWorldCallback)
-      loadWorld()
+    self.on('before-mount', function() {
+      self.world = app.getWorld()
+      app.events.on('world-updated', self.update)
     })
 
     self.on('unmount', function() {
-      window.events.off('world-updated', loadWorld)
-      window.events.off('save-world', saveWorldCallback)
+      app.events.off('world-updated', self.update)
     })
 
     var rotateX = (a) => [1,0,0,  0,Math.cos(a),-Math.sin(a),  0,Math.sin(a),Math.cos(a)]

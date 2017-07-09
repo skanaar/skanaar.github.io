@@ -181,22 +181,13 @@
       self.update()
     }
 
-    function loadWorld() {
-        self.world = app.getWorld()
-        self.update()
-    }
-
-    function saveWorldCallback() { app.saveWorld(self.world) }
-
-    self.on('mount', function() {
-      window.events.on('world-updated', loadWorld)
-      window.events.on('save-world', saveWorldCallback)
-      loadWorld()
+    self.on('before-mount', function() {
+      self.world = app.getWorld()
+      app.events.on('world-updated', self.update)
     })
 
     self.on('unmount', function() {
-      window.events.off('world-updated', loadWorld)
-      window.events.off('save-world', saveWorldCallback)
+      app.events.off('world-updated', self.update)
     })
 
   </script>

@@ -40,8 +40,8 @@
 
   <script>
     var self = this
-
-    self.world = window.nullWorld()
+    var app = this.opts.app || window.app
+    self.world = app.nullWorld()
     self.selected = null
     self.templates = [
       { name: 'Condition', template: '<condition have-item="" at-dest="" no-enemy-at-dest="" not-at-dest="" have-credits="" trigger="TRIGGER"/>' },
@@ -111,15 +111,6 @@
       _.bubbleDown(self.world.quests, self.world.quests.findIndex(e => e == self.selected))
     }
 
-    function loadQuests() {
-      self.world = app.getWorld()
-      self.update()
-    }
-
-    function saveQuests() {
-      app.saveWorld(self.world)
-    }
-
     function createEditor() {
       var textarea = document.getElementById('quest-editor')
       self.cmEditor = CodeMirror.fromTextArea(textarea, { mode: 'xml', lineWrapping: true })
@@ -137,15 +128,14 @@
     }
 
     self.on('mount', function() {
+      self.world = app.getWorld()
       createEditor()
-      window.events.on('world-updated', loadQuests)
-      window.events.on('save-world', saveQuests)
-      loadQuests(getWorld())
+      app.events.on('world-updated', self.update)
+      self.update()
     })
 
     self.on('before-unmount', function() {
-      window.events.off('world-updated', loadQuests)
-      window.events.off('save-world', saveQuests)
+      app.events.off('world-updated', self.update)
     })
   </script>
 

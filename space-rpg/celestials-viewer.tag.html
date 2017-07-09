@@ -83,7 +83,7 @@
     self.selected = null
     self.currSurface = null
     self.currCelestial = null
-    self.types = window.constants.celestialTypes
+    self.types = app.celestialTypes
     self.filter = null
 
     self.hasSurface = function () {
@@ -162,17 +162,13 @@
         self.update()
     }
 
-    function saveWorldCallback() { app.saveWorld(self.world) }
-
     self.on('mount', function() {
-      window.events.on('world-updated', loadWorld)
-      window.events.on('save-world', saveWorldCallback)
+      app.events.on('world-updated', loadWorld)
       loadWorld()
     })
 
     self.on('unmount', function() {
-      window.events.off('world-updated', loadWorld)
-      window.events.off('save-world', saveWorldCallback)
+      app.events.off('world-updated', loadWorld)
     })
 
   </script>

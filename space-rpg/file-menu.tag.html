@@ -41,7 +41,7 @@ localStorage.cloudStorage = {
     self.loadEmpty = () => loadWorldFrom(JSON.stringify(app.nullWorld()))
     self.fileChanged = () => _.readFile(self.refs.fileInput.files[0], loadWorldFrom)
     self.primeDownloadLink = function () {
-      window.events.trigger('save-world')
+      app.events.trigger('save-world')
       self.refs.downloadLink.setAttribute('href', _.toDataUrl(_.stringify(app.getWorld(), { maxLength: 200 })))
     }
     self.showCloudStorageHelp = () => alert(cloudHelp)
@@ -83,8 +83,7 @@ localStorage.cloudStorage = {
     }
 
     function loadWorldFrom(data) {
-      app.saveWorld(JSON.parse(data))
-      window.events.trigger('world-updated')
+      app.setWorld(JSON.parse(data))
     }
   </script>
   <style>

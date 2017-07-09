@@ -110,8 +110,6 @@
     <button onclick={makeStartingDest} style="opacity: {selectionSize == 1 ? 1 : 0.5}">Make starting point</button>
   </div>
 
-  <item-chooser />
-
   <script>
     var self = this
     var app = this.opts.app || window.app
@@ -128,7 +126,7 @@
     self.isDown = false
     self.select = { pos: Vec(0,0), dim: Vec(0,0) }
     self.world = app.nullWorld()
-    self.audios = window.constants.audios
+    self.audios = app.audios
     self.selectionSize = 0
     self.audioSelected = false
     self.selectedTrader = { inventory: [] }
@@ -270,15 +268,15 @@
     function singleSelected() { return (_.find(self.nodes, e => e.isSelected) || {}).entity || {} }
 
     self.chooseTreasures = function () {
-      window.events.trigger('show-item-chooser', singleSelected().treasures)
+      app.events.trigger('show-item-chooser', singleSelected().treasures)
     }
 
     self.chooseTraderInventory = function () {
-      window.events.trigger('show-item-chooser', singleSelected().trader.inventory)
+      app.events.trigger('show-item-chooser', singleSelected().trader.inventory)
     }
 
     self.chooseLoot = function () {
-      window.events.trigger('show-item-chooser', singleSelected().enemy.loot)
+      app.events.trigger('show-item-chooser', singleSelected().enemy.loot)
     }
 
     self.autoNameNodes = function () {
@@ -423,13 +421,17 @@
       self.lines = []
       self.nodes.forEach(function (a) {
         self.nodes.forEach(function (b){
-          if (self.jumpRange > dist(a.entity.pos, b.entity.pos) && constants.isTravellable(a.entity) && constants.isTravellable(b.entity))
+          if (self.jumpRange > dist(a.entity.pos, b.entity.pos) && isTravellable(a.entity) && isTravellable(b.entity))
             self.lines.push({ a: transform(a.entity.pos), b: transform(b.entity.pos) })
         })
       })
     }
 
-    function preparedWorld() {
+    function isTravellable(entity) {
+      return ['jovian', 'planet', 'asteroid', 'anomaly'].includes(entity.style.split('-')[0])
+    }
+
+    function prepareWorldForSave() {
       self.world.destinations = self.nodes.filter(e => e.type === 'celestial').map(e => e.entity)
       self.world.audioRegions = self.nodes.filter(e => e.type === 'audio').map(e => ({
         audio: e.entity.name,
@@ -440,25 +442,24 @@
     }
 
     function loadWorld() {
-        self.world = app.getWorld()
-        loadDestinations(self.world)
-        updateUI()
-        self.update()
+      loadDestinations(self.world)
+      updateUI()
+      self.update()
     }
 
-    function saveWorldCallback() { app.saveWorld(preparedWorld()) }
-
     self.on('mount', function() {
-      window.events.on('world-updated', loadWorld)
-      window.events.on('save-world', saveWorldCallback)
+      self.world = app.getWorld()
+      app.events.on('save-world', prepareWorldForSave)
+      app.events.on('world-updated', loadWorld)
       window.document.addEventListener('keydown', self.keydown)
       loadWorld()
       window.scrollTo(self.dx/3, self.dy/3)
     })
 
     self.on('unmount', function () {
-      window.events.off('world-updated', loadWorld)
-      window.events.off('save-world', saveWorldCallback)
+      app.events.off('world-updated', loadWorld)
+      app.events.off('save-world', prepareWorldForSave)
+      app.events.off('world-updated', loadWorld)
       window.document.removeEventListener('keydown', self.keydown)
     })
 

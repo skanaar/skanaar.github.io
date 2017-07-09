@@ -79,6 +79,7 @@
 
   <script>
     var self = this
+    var app = self.opts.app || window.app
 
     self.world = { items: [] }
     self.list = []
@@ -98,7 +99,7 @@
     
     self.done = function () {
       self.isOpen = false
-      window.events.trigger('item-chooser-closed')
+      app.events.trigger('item-chooser-closed')
     }
 
     function show(list) {
@@ -107,15 +108,10 @@
       self.update()
     }
 
-    function loadWorld() {
-        self.world = app.getWorld()
-        self.update()
-    }
-
-    self.on('mount', function() {
-      window.events.on('world-updated', loadWorld)
-      window.events.on('show-item-chooser', show)
-      loadWorld()
+    self.on('before-mount', function() {
+      self.world = app.getWorld()
+      app.events.on('world-updated', self.update)
+      app.events.on('show-item-chooser', show)
     })
 
   </script>
