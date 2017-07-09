@@ -59,14 +59,15 @@
 
   <script>
     var self = this
+    var app = self.opts.app || window.app
     self.camera = 'perspective' // top | front | side | perspective
     self.world = { models: [] }
     self.mesh = []
     self.box = []
     self.filter = ''
     self.onFilter = () => self.filter = self.refs.filterSelect.value
-    self.allTags = () => allTags(self.world.models)
-    self.filteredModels = () => tagFilter(self.world.models, self.filter)
+    self.allTags = () => app.allTags(self.world.models)
+    self.filteredModels = () => app.tagFilter(self.world.models, self.filter)
 
     self.setCamera = function (mode) {
       self.camera = mode
@@ -225,14 +226,21 @@
     }
 
     function loadWorld() {
-        self.world = getWorld()
+        self.world = app.getWorld()
         self.update()
     }
 
+    function saveWorldCallback() { app.saveWorld(self.world) }
+
     self.on('mount', function() {
       window.events.on('world-updated', loadWorld)
-      window.events.on('save-world', () => saveWorld(self.world))
+      window.events.on('save-world', saveWorldCallback)
       loadWorld()
+    })
+
+    self.on('unmount', function() {
+      window.events.off('world-updated', loadWorld)
+      window.events.off('save-world', saveWorldCallback)
     })
 
     var rotateX = (a) => [1,0,0,  0,Math.cos(a),-Math.sin(a),  0,Math.sin(a),Math.cos(a)]

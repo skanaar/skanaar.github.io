@@ -52,6 +52,7 @@
 
   <script>
     var self = this
+    var app = self.opts.app || window.app
 
     self.world = { ships: [], enemies: [] }
     self.selected = null
@@ -107,14 +108,21 @@
     }
 
     function loadWorld() {
-        self.world = getWorld()
+        self.world = app.getWorld()
         self.update()
     }
 
+    function saveWorldCallback() { app.saveWorld(self.world) }
+
     self.on('mount', function() {
       window.events.on('world-updated', loadWorld)
-      window.events.on('save-world', () => saveWorld(self.world))
+      window.events.on('save-world', saveWorldCallback)
       loadWorld()
+    })
+
+    self.on('unmount', function() {
+      window.events.off('world-updated', loadWorld)
+      window.events.off('save-world', saveWorldCallback)
     })
 
   </script>

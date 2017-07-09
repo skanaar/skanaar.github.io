@@ -1,27 +1,115 @@
 <editor-app>
 
-  <main-menu />
-  <map-viewer if={page == '#map'} />
-  <items-viewer if={page == '#items'} />
-  <ships-viewer if={page == '#ships'} />
-  <celestials-viewer if={page == '#celestials'} />
-  <quests-viewer if={page == '#quests'} />
+  <div class="main-menu">
+    <a onclick={toggleFileMenu} class={ 'tab toggle-tab': true, active: isFileMenuOpen }>file</a>
+    <a each={e in tabs} href="#{e}" onclick={pageChange} class={tab:true, active: page=='#'+e}>{e}</a>
+    <div class="file-tools">
+      <i>{!app.isSaved ? 'Unsaved' : 'Saved'}</i>
+    </div>
+  </div>
+
+  <div class="file-menu-backdrop" if={isFileMenuOpen} onclick={toggleFileMenu}></div>
+  <file-menu if={isFileMenuOpen} />
+
+  <galactic-map app={app} if={page == '#map'} />
+  <celestials-viewer app={app} if={page == '#celestials'} />
+  <models-viewer app={app} if={page == '#models'} />
+  <ships-viewer app={app} if={page == '#ships'} />
+  <items-viewer app={app} if={page == '#items'} />
+  <quest-list app={app} if={page == '#quests'} />
+
+  <item-chooser app={app} if={page == '#items'} />
+
+  <validation-report app={app} />
 
   <script>
     var self = this
+    self.page = '#map'
+    self.tabs = ['map', 'celestials', 'models', 'ships', 'items', 'quests']
+    self.isFileMenuOpen = false
+
+    self.toggleFileMenu = () => self.isFileMenuOpen = ! self.isFileMenuOpen
+    self.pageChange = function() {
+      window.events.trigger('save-world')
+      window.events.trigger('request-validate')
+    }
 
     function updatePage() {
       self.page = (window.location.hash || '#map')
       self.update()
     }
 
-    updatePage()
-
     self.on('mount', function() {
       window.addEventListener('hashchange', updatePage)
-      self.update()
+      updatePage()
     })
 
+    self.app = window.app
+
+    function onUserInteraction() {
+      self.app.isSaved = false
+      self.update()
+    }
+
+    window.addEventListener('click', onUserInteraction)
+
+    window.setInterval(function () {
+      if (!self.app.isSaved) {
+        window.events.trigger('save-world')
+        window.events.trigger('request-validate')
+      } else {
+        self.isSaved = true
+        self.update()
+      }
+    }, 2000)
+
   </script>
+  <style>
+    .main-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: #f8f8f8;
+      border-bottom: 1px solid #aaa;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 12px;
+    }
+    i {
+      color: #888;
+      padding: 0 10px;
+    }
+    .file-tools {
+      float: right;
+      margin-top: 3px;
+    }
+    a.toggle-tab {
+      width: 20px;
+      border-left: 1px solid #f8f8f8;
+      border-right: 1px solid #f8f8f8;
+    }
+    a.tab, a.tab:active, a.tab:hover, a.tab:visited {
+      display: inline-block;
+      text-decoration: none;
+      color: #000;
+      padding: 5px 10px;
+    }
+    a.tab.active {
+      background: #ddd;
+      border-left: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+      font-weight: bold;
+      box-shadow: 0 3px 6px #ccc inset;
+    }
+    .file-menu-backdrop {
+      z-index: 9;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0);
+    }
+  </style>
 
 </editor-app>

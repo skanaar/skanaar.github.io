@@ -70,4 +70,14 @@ window.getWorld = function () {
 
 window.saveWorld = function (world) {
   localStorage['world'] = _.stringify(world)
+  window.app.isSaved = true
+}
+
+window.app = {
+  isSaved: false,
+  saveWorld: saveWorld,
+  getWorld: getWorld,
+  allTags: allTags,
+  tagFilter: tagFilter,
+  nullWorld: nullWorld
 }

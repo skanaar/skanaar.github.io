@@ -1,12 +1,4 @@
-<main-menu>
-  <div class="main-menu">
-    <a onclick={toggleFileMenu} class={ 'tab toggle-tab': true, active: isFileMenuOpen }>file</a>
-    <a each={e in tabs} href="{e}.html" onclick={requestSave}
-       class={ tab: true, active: page == e + '.html' }>{e}</a>
-    <div class="file-tools">
-      <i>{needsSave ? 'Unsaved' : 'Saved'}</i>
-    </div>
-  </div>
+<validation-report>
   <div class="validation-report" if={hasValidationError}>
     <div each={e in undefNodes}>Error: Destination <b>{e}</b> not defined</div>
     <div each={e in undefItems}>Error: Item <b>{e}</b> not defined</div>
@@ -20,27 +12,16 @@
     <button onclick={validateWorld}>Update</button>
   </div>
 
-  <file-menu if={isFileMenuOpen} />
-
   <script>
     var self = this
-    self.page = 'index'
-    self.tabs = ['map', 'celestials', 'models', 'ships', 'items', 'quests']
-    self.isFileMenuOpen = false
+    var app = self.opts.app || window.app
+
     self.undefinedItems = []
     self.undefinedNodes = []
     self.undefinedEnemies = []
     self.undefinedShips = []
     self.undefinedIcons = []
     self.undefinedColors = []
-
-    self.on('mount', function() {
-      self.page = _.last(window.location.pathname.split('/'))
-      self.update()
-    })
-
-    self.toggleFileMenu = () => self.isFileMenuOpen = ! self.isFileMenuOpen
-    self.requestSave = () => window.events.trigger('save-world')
 
     function inQuests(world, pattern) {
       var matches = _.flatten(world.quests.map(q => q.xml.match(pattern) || []))
@@ -50,7 +31,7 @@
     function isInvalidColor(c) { return (c.length!=3) || !!c.match(/[^a-fA-F0-9]/) }
 
     self.validateWorld = function () {
-      var world = getWorld()
+      var world = app.getWorld()
       var referredItems = _.flatten([
         inQuests(world, /item="[^"]*/gm).map(e => e.split(';')),
         world.enemies.map(e => e.inventory),
@@ -111,68 +92,17 @@
       self.update()
     }
 
-    self.needsSave = false
-    function onUserInteraction() {
-      self.needsSave = true
-      self.update();
-    }
-    window.addEventListener('click', onUserInteraction, true)
+    self.on('mount', function () {
+      self.validateWorld()
+      window.events.on('request-validate', self.validateWorld)
+    })
 
-    window.setInterval(function () {
-      if (self.needsSave) window.events.trigger('save-world')
-      self.needsSave = false
-      self.update()
-    }, 2000)
-
-    self.validateWorld()
-    window.setInterval(self.validateWorld, 5000)
-
-    function loadWorld(data) {
-      saveWorld(JSON.parse(data))
-      window.events.trigger('world-updated')
-    }
+    self.on('unmount', function () {
+      window.events.off('request-validate', self.validateWorld)
+    })
 
   </script>
   <style>
-    .main-menu {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: #f8f8f8;
-      border-bottom: 1px solid #aaa;
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      font-size: 12px;
-    }
-    i {
-      color: #888;
-      padding: 0 10px;
-    }
-    .file-tools {
-      float: right;
-      margin-top: 3px;
-    }
-    a.toggle-tab {
-      width: 20px;
-      border-left: 1px solid #f8f8f8;
-      border-right: 1px solid #f8f8f8;
-    }
-    a.tab, a.tab:active, a.tab:hover, a.tab:visited {
-      display: inline-block;
-      text-decoration: none;
-      color: #000;
-      padding: 5px 10px;
-    }
-    a.tab.active {
-      background: #ddd;
-      border-left: 1px solid #ccc;
-      border-right: 1px solid #ccc;
-      font-weight: bold;
-      box-shadow: 0 3px 6px #ccc inset;
-    }
-    .logo {
-      font-style: italic;
-    }
     .validation-report {
       position: fixed;
       bottom: 0;
@@ -180,7 +110,7 @@
       right: 25%;
       border: 1px solid #bbb;
       border-bottom: none;
-      background: #eee;
+      background: #fdd;
       border-radius: 2px 2px 0 0;
       max-height: 80px;
       padding: 4px 10px;
@@ -199,4 +129,4 @@
       border-radius: 3px;
     }
   </style>
-</main-menu>
+</validation-report>

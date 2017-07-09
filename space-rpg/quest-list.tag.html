@@ -11,6 +11,8 @@
     </div>
   </div>
 
+  <textarea id="quest-editor"></textarea>
+
   <div class="toolbox quest-tools">
     <button onclick={add}>+ New Quest</button>
     <div class="btn-group">
@@ -61,21 +63,16 @@
     ]
     self.filter = ''
     self.onFilter = () => self.filter = self.refs.filterSelect.value
-    self.allTags = () => allTags(self.world.quests)
-    self.filteredQuests = () => tagFilter(self.world.quests, self.filter)
+    self.allTags = () => app.allTags(self.world.quests)
+    self.filteredQuests = () => app.tagFilter(self.world.quests, self.filter)
     self.setInitialState = function () {
       self.world.initialState = self.refs.stateSelect.value
     }
 
-    function loadQuests(world) {
-      self.world = world
-      self.update()
-    }
-
     self.useTemplate = function (e) {
-      var src = window.codeMirrorInstance.getValue()
+      var src = self.cmEditor.getValue()
       src = src + '\n' + e.item.e.template
-      window.codeMirrorInstance.setValue(src)
+      self.cmEditor.setValue(src)
     }
 
     self.add = function () {
@@ -86,7 +83,7 @@
     self.edit = function (e) {
       self.save()
       self.selected = e.item.quest
-      window.codeMirrorInstance.setValue(e.item.quest.xml)
+      self.cmEditor.setValue(e.item.quest.xml)
     }
 
     self.setFields = function () {
@@ -98,7 +95,7 @@
 
     self.save = function () {
       if (self.selected) {
-        self.selected.xml = window.codeMirrorInstance.getValue()
+        self.selected.xml = self.cmEditor.getValue()
       }
     }
 
@@ -114,10 +111,41 @@
       _.bubbleDown(self.world.quests, self.world.quests.findIndex(e => e == self.selected))
     }
 
+    function loadQuests() {
+      self.world = app.getWorld()
+      self.update()
+    }
+
+    function saveQuests() {
+      app.saveWorld(self.world)
+    }
+
+    function createEditor() {
+      var textarea = document.getElementById('quest-editor')
+      self.cmEditor = CodeMirror.fromTextArea(textarea, { mode: 'xml', lineWrapping: true })
+      function setEditorSize() {
+        self.cmEditor.setSize(window.innerWidth-251-200, window.innerHeight-26-26-19)
+      }
+      setEditorSize()
+      self.resizeCallback = _.throttle(setEditorSize, 100)
+      window.addEventListener('resize', self.resizeCallback)
+    }
+
+    function destroyEditor() {
+      self.cmEditor.toTextArea()
+      window.removeEventListener('resize', self.resizeCallback)
+    }
+
     self.on('mount', function() {
-      window.events.on('world-updated', () => loadQuests(getWorld()))
-      window.events.on('save-world', () => saveWorld(self.world))
+      createEditor()
+      window.events.on('world-updated', loadQuests)
+      window.events.on('save-world', saveQuests)
       loadQuests(getWorld())
+    })
+
+    self.on('before-unmount', function() {
+      window.events.off('world-updated', loadQuests)
+      window.events.off('save-world', saveQuests)
     })
   </script>
 
