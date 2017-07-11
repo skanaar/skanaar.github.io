@@ -12,10 +12,10 @@
   </svg>
 
   <div class="list">
-    <div>
-      <select ref="filterSelect" onchange={onFilter}>
-        <option each={e in allTags()}>{e}</option>
-      </select>
+    <div class="tools">
+      <div class="btn-group">
+        <a each={e in allTags()} onclick={setFilter(e)} class="toggle-btn {(filter == e) && 'active'}">{e}</a>
+      </div>
     </div>
     <div each={model in filteredModels()} onclick={edit} class={ list_item: true, active: model==selected }>
       {model.name}
@@ -65,9 +65,12 @@
     self.mesh = []
     self.box = []
     self.filter = ''
-    self.onFilter = () => self.filter = self.refs.filterSelect.value
-    self.allTags = () => app.allTags(self.world.models)
+    self.allTags = () => app.allTags(self.world.models).filter(e => e)
     self.filteredModels = () => app.tagFilter(self.world.models, self.filter)
+
+    self.setFilter = function (type) {
+      return () => self.filter = (self.filter == type ? null : type)
+    }
 
     self.setCamera = function (mode) {
       self.camera = mode
@@ -108,8 +111,13 @@
       self.selected = e.item.model
       updateMesh()
     }
+
+    function clearObject(e) {
+      Object.keys(e).forEach(key => delete e[key])
+    }
     
     self.endEditing = function (e) {
+      clearObject(self.selected)
       _.extend(self.selected, JSON.parse(self.refs.sourceField.value))
       updateMesh()
       self.update()

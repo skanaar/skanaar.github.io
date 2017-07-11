@@ -7,7 +7,7 @@
       onmousemove={mousemove}
       onmouseup={mouseup}>
     <ellipse
-      each={e in audioRegions()}
+      each={e in regions()}
       stroke-width="2"
       stroke-dasharray="5,5"
       stroke=gray
@@ -24,7 +24,7 @@
     <ellipse
       each={nodes}
       stroke-width="2"
-      stroke-dasharray={type == 'audio' ? '4,4' : false}
+      stroke-dasharray={type == 'region' ? '4,4' : false}
       stroke={(isSelected ? '#F00' : '#000')}
       fill={isSelected ? '#F88' : fillFor(entity)}
       riot-cx={screenPos.x} riot-cy={screenPos.y}
@@ -58,7 +58,7 @@
       <a onclick={() => tool='select'} class="toggle-btn {(tool == 'select') && 'active'}">Select
       </a><a onclick={() => tool='draw'} class="toggle-btn {(tool == 'draw') && 'active'}">Add Celestial
       </a><a onclick={() => tool='spray'} class="toggle-btn {(tool == 'spray') && 'active'}">Add Cluster
-      </a><a onclick={() => tool='audio'} class="toggle-btn {(tool == 'audio') && 'active'}">Add Audio</a>
+      </a><a onclick={() => tool='region'} class="toggle-btn {(tool == 'region') && 'active'}">Add Region</a>
     </div>
     <div class="btn-group" style="opacity: {selectionSize > 1 ? 1 : 0.5}">
       <a class="toggle-btn" onclick={enlarge}>Enlarge</a><a class="toggle-btn" onclick={shrink}>Shrink</a>
@@ -68,17 +68,19 @@
     </div>
   </div>
 
-  <div class="sidebar" show={selectionSize == 1 && audioSelected}>
+  <div class="sidebar" show={selectionSize == 1 && regionSelected}>
+    <label>Name</label>
+    <input type=text ref="regionNameField" onchange={setRegionName}>
+    <div class="input-grid">
+      <em>Radius</em> <input type=number ref="regionRadiusField" onchange={setRegionRadius}>
+    </div>
     <label>Audio</label>
-    <select ref="audioSelect" onchange={setAudio}>
+    <select ref="audioSelect" onchange={setRegionAudio}>
       <option each={e in audios}>{e}</option>
     </select>
-    <div class="input-grid">
-      <em>Radius</em> <input type=number ref="audioRadiusField" onchange={setAudioRadius}>
-    </div>
   </div>
 
-  <div class="sidebar" show={selectionSize && !audioSelected}>
+  <div class="sidebar" show={selectionSize && !regionSelected}>
     <label>Name</label>
     <input show={selectionSize == 1} type=text ref="nameField" placeholder="name" onchange={setName}>
     <button onclick={autoNameNodes}>Autoname</button>
@@ -118,7 +120,7 @@
     var app = this.opts.app || window.app
 
     self.nodes = []
-    self.audioRegions = []
+    self.regions = []
     self.lines = []
     self.jumpRange = 125
     self.scale = (+ location.search.substring(1).split('=')[1]) || 0.5
@@ -131,11 +133,11 @@
     self.world = app.nullWorld()
     self.audios = app.audios
     self.selectionSize = 0
-    self.audioSelected = false
+    self.regionSelected = false
     self.selectedTrader = { inventory: [] }
     self.selectedItems = []
 
-    self.audioRegions = () => self.nodes.filter(e => e.type == 'audio')
+    self.regions = () => self.nodes.filter(e => e.type == 'region')
 
     self.keydown = function (e) {
       if (document.activeElement && document.activeElement.nodeName === 'INPUT') return;
@@ -220,16 +222,17 @@
         })
     }
 
-    function addAudio(pos) {
+    function addRegion(pos) {
         self.nodes.push({
-          type: 'audio',
+          type: 'region',
           screenPos: transform(pos),
           isSelected: false,
           entity: {
             pos: pos,
             radius: 100,
-            name: 'light-years',
-            style: 'audio-1',
+            name: 'unnamed region',
+            audio: 'light-years',
+            style: 'region-1',
             trader: null,
             enemy: null,
             treasures: []
@@ -250,8 +253,8 @@
             var delta = mult(Vec(Math.cos(6.28*i/10), Math.sin(6.28*i/10)), 80)
             addAsteroid(rund(add(pos, add(delta, Vec(60*Math.random(), 60*Math.random())))))
           }
-        } else if (self.tool == 'audio'){
-          addAudio(pos)
+        } else if (self.tool == 'region'){
+          addRegion(pos)
         }
         calculateLines()
       } else {
@@ -310,7 +313,7 @@
       calculateLines()
     }
 
-    function defaultTrader(){ return { buy: 0.75, sell: 1.5, inventory: [] } }
+    function defaultTrader(){ return { buy: 1.5, sell: 0.75, inventory: [] } }
     self.traderChange = e => forSelected(ent => ent.trader = e.target.checked ? defaultTrader() : null)
     self.traderBuyChange = e => forSelected(ent => ent.trader.buy = +e.target.value)
     self.traderSellChange = e => forSelected(ent => ent.trader.sell = +e.target.value)
@@ -323,8 +326,9 @@
       singleSelected().name = self.refs.nameField.value
     }
 
-    self.setAudio = e => singleSelected().name = e.target.value
-    self.setAudioRadius = () => singleSelected().radius = self.refs.audioRadiusField.value
+    self.setRegionName = () => singleSelected().name = self.refs.regionNameField.value
+    self.setRegionRadius = () => singleSelected().radius = self.refs.regionRadiusField.value
+    self.setRegionAudio = e => singleSelected().audio = e.target.value
 
     self.randomizeStyle = function () {
       _.filter(self.nodes, 'isSelected').forEach(function (node) {
@@ -373,11 +377,11 @@
 
     var fills = {
       cloud: 'rgba(221, 136, 221, 0.5)', star: '#ff4', jovian: '#fa8',
-      planet: '#8f8', asteroid: '#aaa', anomaly: '#fa0', ring: '#8af', audio: '#aaa'
+      planet: '#8f8', asteroid: '#aaa', anomaly: '#fa0', ring: '#8af', region: '#aaa'
     }
     self.fillFor = entity => fills[entity.style.split('-')[0]]
     self.radiusFor = function (ent) {
-      if (ent.style == 'audio-1') return 4
+      if (ent.style == 'region-1') return 4
       var cel = self.world.celestials.find(s => s.id == ent.style)
       return cel && (cel.celestial.r * self.scale) || 0
     }
@@ -400,10 +404,11 @@
       self.refs.celestialSelect.value = uniqueSelectedProp('style') || 'unknown'
       var selection = _.filter(self.nodes, 'isSelected')
       self.selectionSize = selection.length
-      self.audioSelected = selection.every(e => e.type === 'audio')
-      if (self.audioSelected && self.selectionSize == 1) {
-        self.refs.audioSelect.value = selection[0].entity.name
-        self.refs.audioRadiusField.value = selection[0].entity.radius
+      self.regionSelected = selection.every(e => e.type === 'region')
+      if (self.regionSelected && self.selectionSize == 1) {
+        self.refs.regionNameField.value = selection[0].entity.name
+        self.refs.audioSelect.value = selection[0].entity.audio
+        self.refs.regionRadiusField.value = selection[0].entity.radius
       }
       self.refs.nameField.value = selection.length == 1 ? selection[0].entity.name : ''
       self.refs.traderToggle.checked = !!(selection.length == 1 && selection[0].entity.trader)
@@ -421,16 +426,16 @@
         isSelected: false,
         entity: e
       }))
-      var audioRegions = world.audioRegions.map(e => ({
-        type: 'audio',
+      var regions = world.regions.map(e => ({
+        type: 'region',
         screenPos: transform(e.pos),
         isSelected: false,
         entity: {
-          pos: e.pos, name: e.audio, radius: e.radius, style: 'audio-1',
+          pos: e.pos, name: e.name, audio: e.audio, radius: e.radius, style: 'region-1',
           trader: null, enemy: null, treasures: []
         }
       }))
-      self.nodes.push(...audioRegions)
+      self.nodes.push(...regions)
       calculateLines()
     }
 
@@ -450,8 +455,9 @@
 
     function prepareWorldForSave() {
       self.world.destinations = self.nodes.filter(e => e.type === 'celestial').map(e => e.entity)
-      self.world.audioRegions = self.nodes.filter(e => e.type === 'audio').map(e => ({
-        audio: e.entity.name,
+      self.world.regions = self.nodes.filter(e => e.type === 'region').map(e => ({
+        name: e.entity.name,
+        audio: e.entity.audio,
         pos: e.entity.pos,
         radius: +e.entity.radius
       }))

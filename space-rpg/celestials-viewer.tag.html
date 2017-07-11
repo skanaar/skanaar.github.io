@@ -3,12 +3,12 @@
   <div class="list">
     <div class="tools">
       <div class="btn-group">
-        <a onclick={() => filter='anomaly'} class="toggle-btn {(filter == 'anomaly') && 'active'}">anom
-        </a><a onclick={() => filter='asteroid'} class="toggle-btn {(filter == 'asteroid') && 'active'}">astro
-        </a><a onclick={() => filter='planet'} class="toggle-btn {(filter == 'planet') && 'active'}">planet
-        </a><a onclick={() => filter='jovian'} class="toggle-btn {(filter == 'jovian') && 'active'}">jovian
-        </a><a onclick={() => filter='star'} class="toggle-btn {(filter == 'star') && 'active'}">star
-        </a><a onclick={() => filter='cloud'} class="toggle-btn {(filter == 'cloud') && 'active'}">cloud</a>
+        <a onclick={setFilter('anomaly')} class="toggle-btn {(filter == 'anomaly') && 'active'}">anom
+        </a><a onclick={setFilter('asteroid')} class="toggle-btn {(filter == 'asteroid') && 'active'}">astro
+        </a><a onclick={setFilter('planet')} class="toggle-btn {(filter == 'planet') && 'active'}">planet
+        </a><a onclick={setFilter('jovian')} class="toggle-btn {(filter == 'jovian') && 'active'}">jovian
+        </a><a onclick={setFilter('star')} class="toggle-btn {(filter == 'star') && 'active'}">star
+        </a><a onclick={setFilter('cloud')} class="toggle-btn {(filter == 'cloud') && 'active'}">cloud</a>
       </div>
     </div>
     <div each={e in filteredCelestials()} onclick={edit} class={ list_item: true, active: e==selected }>
@@ -85,6 +85,10 @@
     self.currCelestial = null
     self.types = app.celestialTypes
     self.filter = null
+
+    self.setFilter = function (type) {
+      return () => self.filter = (self.filter == type ? null : type)
+    }
 
     self.hasSurface = function () {
       return self.selected && ['planet', 'asteroid'].includes(self.selected.type)

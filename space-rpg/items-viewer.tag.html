@@ -4,17 +4,16 @@
     <button onclick={add}>+ New Item</button>
     <button onclick={sort}>Sort</button>
     <div class="btn-group">
-      <a onclick={() => filter=null} class="toggle-btn {(filter == null) && 'active'}">All
-      </a><a onclick={() => filter='weapon'} class="toggle-btn {(filter == 'weapon') && 'active'}">Weapons
-      </a><a onclick={() => filter='module'} class="toggle-btn {(filter == 'module') && 'active'}">Modules
-      </a><a onclick={() => filter='tool'} class="toggle-btn {(filter == 'tool') && 'active'}">Tools
-      </a><a onclick={() => filter='quest'} class="toggle-btn {(filter == 'quest') && 'active'}">Quest
-      </a><a onclick={() => filter='common'} class="toggle-btn {(filter == 'common') && 'active'}">Common</a>
+      <a onclick={setFilter('weapon')} class="toggle-btn {(filter == 'weapon') && 'active'}">Weapons
+      </a><a onclick={setFilter('module')} class="toggle-btn {(filter == 'module') && 'active'}">Modules
+      </a><a onclick={setFilter('tool')} class="toggle-btn {(filter == 'tool') && 'active'}">Tools
+      </a><a onclick={setFilter('quest')} class="toggle-btn {(filter == 'quest') && 'active'}">Quest
+      </a><a onclick={setFilter('common')} class="toggle-btn {(filter == 'common') && 'active'}">Common</a>
     </div>
   </div>
 
   <div class="table-parent">
-    <table class="table items-table">
+    <table class="table attr-table">
       <thead>
         <tr>
           <th>name</th>
@@ -35,49 +34,20 @@
         <tr each={item in filteredItems()} onclick={editItem} class={active: selected == item}>
           <td>{item.name}</td>
           <td>{item.type}</td>
-          <td>{item.credits}</td>
-          <td>{item.attr.maxhull}</td>
-          <td>{item.attr.maxshield}</td>
-          <td>{item.attr.maxenergy}</td>
-          <td>{item.playerBuff.hull}</td>
-          <td>{item.playerBuff.shield}</td>
-          <td>{item.playerBuff.energy}</td>
-          <td>{item.targetBuff.hull}</td>
-          <td>{item.targetBuff.shield}</td>
-          <td>{item.targetBuff.energy}</td>
+          <td class={table_zero: !item.credits}>{item.credits}</td>
+          <td class={table_zero: !item.attr.maxhull}>{item.attr.maxhull}</td>
+          <td class={table_zero: !item.attr.maxshield}>{item.attr.maxshield}</td>
+          <td class={table_zero: !item.attr.maxenergy}>{item.attr.maxenergy}</td>
+          <td class={table_zero: !item.playerBuff.hull}>{item.playerBuff.hull}</td>
+          <td class={table_zero: !item.playerBuff.shield}>{item.playerBuff.shield}</td>
+          <td class={table_zero: !item.playerBuff.energy}>{item.playerBuff.energy}</td>
+          <td class={table_zero: !item.targetBuff.hull}>{item.targetBuff.hull}</td>
+          <td class={table_zero: !item.targetBuff.shield}>{item.targetBuff.shield}</td>
+          <td class={table_zero: !item.targetBuff.energy}>{item.targetBuff.energy}</td>
         </tr>
       </tbody>
     </table>
   </div>
-
-  <style>
-    .table-parent {
-      margin-right: 190px;
-    }
-    .table {
-      margin: 40px 0 40px 0;
-      width: 100%;
-      border-spacing: 0;
-    }
-    .table tr:nth-child(even) {
-      background: #f8f8f8;
-    }
-    .table tr:hover {
-      background: #eee;
-    }
-    .table tr.active {
-      background: #ddd;
-    }
-    .table th {
-      text-align: left;
-      padding: 4px;
-    }
-    .table td {
-      padding: 4px;
-      border-top: 1px solid #ddd;
-      border-left: 1px solid #eee;
-    }
-  </style>
 
   <div class="sidebar" show={!!selected}>
     <input type=text ref="nameField" value={selected && selected.name}>
@@ -127,6 +97,10 @@
     self.world = { items: [] }
     self.selected = null
     self.filter = null
+    
+    self.setFilter = function (type) {
+      return () => self.filter = (self.filter == type ? null : type)
+    }
 
     self.sort = function () {
       var order = ['weapon', 'tool', 'module', 'common', 'quest']

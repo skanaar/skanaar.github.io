@@ -798,12 +798,12 @@
     {"audio": "trouble-on-mercury", "pos": {"x": -170, "y": -24}, "radius": 300}
   ],
   "destinations": [
-    {"name": "Backwater", "style": "planet-badlands-1", "pos": {"x": 258, "y": -1886}, "trader": {"buy": 0.5, "sell": 1.5, "inventory": []}, "treasures": [], "enemy": null},
+    {"name": "Backwater", "style": "planet-badlands-1", "pos": {"x": 258, "y": -1886}, "trader": {"buy": 1.5, "sell": 0.5, "inventory": []}, "treasures": [], "enemy": null},
     {"name": "Outback 12", "style": "asteroid-2", "pos": {"x": 488, "y": -1898}, "trader": null, "treasures": [], "enemy": null},
     {"name": "Shady", "style": "asteroid-2", "pos": {"x": 542, "y": -1818}, "trader": null, "treasures": ["Shady Boxes", "Barium Ore"], "enemy": null},
-    {"name": "Samson's Folly", "style": "asteroid-3", "pos": {"x": 368, "y": -1928}, "trader": {"buy": 0.75, "sell": 1, "inventory": ["Kinetic Gun"]}, "treasures": ["Alien Fossil"], "enemy": null},
+    {"name": "Samson's Folly", "style": "asteroid-3", "pos": {"x": 368, "y": -1928}, "trader": {"buy": 1.5, "sell": 0.75, "inventory": ["Kinetic Gun"]}, "treasures": ["Alien Fossil"], "enemy": null},
     {"name": "Outback 82", "style": "asteroid-6", "pos": {"x": 419, "y": -1815}, "trader": null, "treasures": [], "enemy": null},
-    {"name": "Helyon Shipyards", "style": "anomaly-helyon_shipyards", "pos": {"x": 406, "y": -560}, "trader": {"buy": 0.75, "sell": 1.5, "inventory": []}, "treasures": [], "enemy": null},
+    {"name": "Helyon Shipyards", "style": "anomaly-helyon_shipyards", "pos": {"x": 406, "y": -560}, "trader": {"buy": 1.5, "sell": 0.75, "inventory": []}, "treasures": [], "enemy": null},
     {"name": "Ska Ska", "style": "planet-water-1", "pos": {"x": 1176, "y": -240}, "trader": null, "treasures": [], "enemy": null},
     {"name": "Baola", "style": "anomaly-station-ring", "pos": {"x": 1150, "y": -420}, "trader": null, "treasures": [], "enemy": null},
     {"name": "Buoy 68", "style": "anomaly-buoy", "pos": {"x": 404, "y": -1710}, "trader": null, "treasures": [], "enemy": null},
@@ -840,7 +840,7 @@
       "pos": {"x": -170, "y": -804},
       "name": "Pavonis Mirror",
       "style": "planet-green-1",
-      "trader": {"buy": 0.75, "sell": 1.5, "inventory": ["Shield Reactor"]},
+      "trader": {"buy": 1.5, "sell": 0.75, "inventory": ["Beta Beam", "Shield Pack", "Null Reactor", "Epoxy Injector", "Copper"]},
       "enemy": null,
       "treasures": ["Alpha Beam"]
     },
@@ -890,7 +890,7 @@
       "pos": {"x": 1065, "y": -486},
       "name": "Maw",
       "style": "planet-hell-1",
-      "trader": {"buy": 0.75, "sell": 1.5, "inventory": ["Fold Reactor", "Shield Engine", "G Field Coil", "Phased Ray", "Photon Ray", "Spectrum Ray", "Gauss Gun", "Kinetic Gun", "Tetragon Battery"]},
+      "trader": {"buy": 1.5, "sell": 0.75, "inventory": ["Fold Reactor", "Shield Engine", "G Field Coil", "Phased Ray", "Photon Ray", "Spectrum Ray", "Gauss Gun", "Kinetic Gun", "Tetragon Battery"]},
       "enemy": null,
       "treasures": []
     },
@@ -946,7 +946,7 @@
     {"pos": {"x": -1625, "y": -1247}, "name": "A9247", "style": "asteroid-2", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": -1579, "y": -1359}, "name": "A5050", "style": "asteroid-4", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": -1477, "y": -1385}, "name": "Marker of the Temple", "style": "planet-hell-5", "trader": null, "enemy": {"type": "Sentinel Pod", "loot": ["Alien Fossil"]}, "treasures": []},
-    {"pos": {"x": -1375, "y": -1417}, "name": "A648", "style": "asteroid-4", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": -1375, "y": -1417}, "name": "A648", "style": "asteroid-4", "trader": null, "enemy": null, "treasures": ["Klein Focuser", "Alpha Beam"]},
     {
       "pos": {"x": -1382, "y": -1338},
       "name": "Threshold of the Temple",
@@ -1009,25 +1009,7 @@
       "name": "Weaver Alpha",
       "style": "planet-beach",
       "surface": "rock-1",
-      "trader": {
-        "buy": 0.75,
-        "sell": 1.5,
-        "inventory": [
-          "Delta Beam",
-          "Nano Repairers",
-          "Tetragon Battery",
-          "Octagon Battery",
-          "Decagon Battery",
-          "Shield Array",
-          "Shield Battery",
-          "Ripple Pulse",
-          "Gauss Gun",
-          "Alpha Beam",
-          "U Field Coil",
-          "Railgun",
-          "Meson Ray"
-        ]
-      },
+      "trader": {"buy": 1.5, "sell": 0.75, "inventory": ["Klein Focuser", "Railgun", "Shield Pack", "Star Shield", "Recharge Pump", "Recharge Clamp", "Barium Ore"]},
       "enemy": null,
       "treasures": ["Copper", "Platinum", "Alien Fossil", "Glue Tube"]
     },
@@ -1082,7 +1064,27 @@
     {"pos": {"x": -18, "y": -1594}, "name": "Outback A1874", "style": "asteroid-7", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": 416, "y": -1326}, "name": "Outback A1626", "style": "asteroid-7", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": -84, "y": -1316}, "name": "Outback A8416", "style": "asteroid-7", "trader": null, "enemy": null, "treasures": []},
-    {"pos": {"x": 310, "y": -1206}, "name": "Outback A106", "style": "asteroid-6", "trader": null, "enemy": null, "treasures": []}
+    {"pos": {"x": 310, "y": -1206}, "name": "Outback A106", "style": "asteroid-6", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 1105, "y": -1353}, "name": "Beryl Canis I", "style": "jovian-mono", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 1082, "y": -1216}, "name": "A8216", "style": "asteroid-1", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 961, "y": -1170}, "name": "A6110", "style": "asteroid-1", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 797, "y": -1125}, "name": "A9725", "style": "asteroid-2", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 941, "y": -1317}, "name": "Beryl Canis", "style": "star-soma", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 763, "y": -1356}, "name": "A6356", "style": "asteroid-6", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 783, "y": -1451}, "name": "A2331", "style": "asteroid-6", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 870, "y": -1540}, "name": "A7040", "style": "asteroid-5", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 1013, "y": -1401}, "name": "A9321", "style": "asteroid-2", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 1087, "y": -1482}, "name": "A8782", "style": "asteroid-4", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 1179, "y": -1271}, "name": "A7971", "style": "asteroid-7", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 1041, "y": -1258}, "name": "A2178", "style": "asteroid-6", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 1053, "y": -1116}, "name": "A3336", "style": "asteroid-2", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 919, "y": -1105}, "name": "A195", "style": "asteroid-1", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 831, "y": -1188}, "name": "A5128", "style": "asteroid-2", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 756, "y": -1253}, "name": "A5653", "style": "asteroid-5", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 896, "y": -1428}, "name": "Beryl Canis II", "style": "jovian-1", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 636, "y": -1255}, "name": "Soma Transfer Buoy", "style": "anomaly-buoy-alien", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 990, "y": -1540}, "name": "A9040", "style": "asteroid-3", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 1155, "y": -1387}, "name": "Soma", "style": "planet-soma", "trader": null, "enemy": null, "treasures": []}
   ],
   "quests": [
     {
@@ -1331,6 +1333,20 @@
   ],
   "initialDestination": "Backwater",
   "models": [
+    {
+      "name": "Alien Buoy",
+      "geometry": "composite",
+      "transform": [["scale", 1, 1, 1], ["rotate", -0.2, 0.4, 0], ["translate", 0, 0, -80]],
+      "parts": [
+        {"geometry": "lathe", "res": 4, "transform": [["scale", 1, 1, 2], ["rotate", 3.14, 0, 0]], "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]},
+        {"geometry": "lathe", "res": 4, "transform": [["scale", 1, 1, 2], ["rotate", 1.57, 0, 0]], "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]},
+        {"geometry": "lathe", "res": 4, "transform": [["scale", 1, 1, 2], ["rotate", -1.57, 0, 0]], "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]},
+        {"geometry": "lathe", "res": 4, "transform": [["scale", 1, 1, 2], ["rotate", 0, 0, 0]], "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]},
+        {"geometry": "lathe", "res": 4, "transform": [["scale", 1, 1, 2], ["rotate", 0, 1.57, 0]], "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]},
+        {"geometry": "lathe", "res": 4, "transform": [["scale", 1, 1, 2], ["rotate", 0, -1.57, 0]], "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]}
+      ],
+      "tags": "anomaly"
+    },
     {
       "name": "Security Drone",
       "geometry": "composite",
@@ -2018,22 +2034,6 @@
     }
   ],
   "celestials": [
-    {
-      "id": "planet-blue-ocean",
-      "type": "planet",
-      "desc": "",
-      "celestial": {"r": 18, "amb": 0.2, "oct": 3, "zoom": 10, "color": ["20F", "2FA"]},
-      "surface": {"zoom": 1.2, "height": 2, "octaves": 2, "falloff": 0.2, "curve": [0, 0, 0.2, 1], "spectrum": ["20F", "2FA", "4AF", "4AF"]},
-      "model": null
-    },
-    {
-      "id": "planet-blue-forest",
-      "type": "planet",
-      "desc": "",
-      "celestial": {"r": 15, "amb": 0.2, "oct": 3, "zoom": 10, "color": ["20F", "4AF"]},
-      "surface": {"zoom": 1.5, "height": 2, "octaves": 3, "falloff": 0.2, "curve": [0, 0.8, 1], "spectrum": ["20F", "28F", "4AF"]},
-      "model": null
-    },
     {"id": "anomaly-apate", "type": "anomaly", "desc": "", "celestial": {"r": 4, "amb": 0.2, "oct": 3, "zoom": 10, "color": ["F80", "F80"]}, "surface": null, "model": "Temple of Apate"},
     {
       "type": "anomaly",
@@ -2043,6 +2043,7 @@
       "desc": "USO-MG85Q compliant deep space buoy",
       "model": "Buoy"
     },
+    {"id": "anomaly-buoy-alien", "type": "anomaly", "desc": "", "celestial": {"r": 4, "amb": 0.2, "oct": 3, "zoom": 10, "color": ["F80", "F80"]}, "surface": null, "model": "Alien Buoy"},
     {"type": "anomaly", "id": "anomaly-derelict", "celestial": {"r": 4, "amb": 0.2, "oct": 16, "zoom": 1.2, "color": ["f80", "f80"]}, "surface": null, "desc": "", "model": "CES Interplan"},
     {"id": "anomaly-gate", "type": "anomaly", "desc": "", "celestial": {"r": 4, "amb": 0.2, "oct": 3, "zoom": 10, "color": ["F80", "D84"]}, "surface": null, "model": "Larato Gate"},
     {"id": "anomaly-helyon_shipyards", "type": "anomaly", "desc": "", "celestial": {"r": 4, "amb": 0.2, "oct": 3, "zoom": 10, "color": ["FFF", "D84"]}, "surface": null, "model": "Helyon Shipyards"},
@@ -2062,8 +2063,8 @@
       "type": "asteroid",
       "id": "asteroid-2",
       "desc": "Inexplicably covered with deep wrinkles that cuts into the bedrock",
-      "celestial": {"r": 5, "amb": 0.1, "oct": 2, "zoom": 0.3, "color": ["aaa", "aaa"]},
-      "surface": {"zoom": 2, "height": 2, "octaves": 1, "falloff": 0.5, "curve": [0, 0.25, 0.5, 1, 1, 0.5, 0.25, 0], "spectrum": ["040", "0F4", "888"]},
+      "celestial": {"r": 5, "amb": 0.1, "oct": 2, "zoom": 0.3, "color": ["AFA", "666"]},
+      "surface": {"zoom": 1.2, "height": 1, "octaves": 1, "falloff": 0.5, "curve": [0, 0.25, 0.5, 1, 1, 0.5, 0.25, 0], "spectrum": ["040", "0F4", "888", "666", "888", "666"]},
       "model": null
     },
     {
@@ -2103,7 +2104,7 @@
       "id": "asteroid-7",
       "desc": "A blue xenofungus only grows at a certain altitude",
       "celestial": {"r": 8, "amb": 0.1, "oct": 2, "zoom": 0.6, "color": ["abb", "0DF"]},
-      "surface": {"zoom": 0.75, "height": 3, "octaves": 3, "falloff": 0.5, "curve": [0, 1], "spectrum": ["666", "666", "666", "666", "0DF", "888", "888", "555", "555"]},
+      "surface": {"zoom": 0.75, "height": 1, "octaves": 3, "falloff": 0.5, "curve": [0, 1], "spectrum": ["666", "666", "666", "666", "0DF", "888", "888", "555", "555"]},
       "model": null
     },
     {"type": "cloud", "id": "cloud-fiery", "celestial": {"r": 25, "amb": 0.6, "oct": 4, "zoom": 1.6, "color": ["ff8", "f04"]}, "surface": null, "desc": "", "model": null},
@@ -2114,6 +2115,7 @@
     {"type": "jovian", "id": "jovian-1", "celestial": {"r": 25, "amb": 0, "oct": 3, "zoom": 20, "color": ["5fe", "c6f"]}, "surface": null},
     {"type": "jovian", "id": "jovian-2", "celestial": {"r": 30, "amb": 0, "oct": 3, "zoom": 20, "color": ["fa5", "e74"]}, "surface": null},
     {"type": "jovian", "id": "jovian-3", "celestial": {"r": 25, "amb": 0, "oct": 3, "zoom": 20, "color": ["576", "0c6"]}, "surface": null},
+    {"id": "jovian-mono", "type": "jovian", "desc": "", "celestial": {"r": 27, "amb": 0, "oct": 3, "zoom": 10, "color": ["eee", "444"]}, "surface": null, "model": null},
     {
       "type": "planet",
       "id": "planet-badlands-1",
@@ -2127,6 +2129,22 @@
       "desc": "Covered with an infinite beach, and blasted into lifelessness by unrelenting radiation",
       "celestial": {"r": 10, "amb": 0.1, "oct": 3, "zoom": 20, "color": ["00f", "777"]},
       "surface": {"zoom": 1.5, "height": 2, "octaves": 2, "falloff": 0.2, "curve": [0.5, 0.5, 0, 0, 0.5], "spectrum": ["06F", "FF8", "FF8", "884", "884"]}
+    },
+    {
+      "id": "planet-blue-forest",
+      "type": "planet",
+      "desc": "",
+      "celestial": {"r": 15, "amb": 0.2, "oct": 3, "zoom": 10, "color": ["20F", "4AF"]},
+      "surface": {"zoom": 1.5, "height": 2, "octaves": 3, "falloff": 0.2, "curve": [0, 0.8, 1], "spectrum": ["20F", "28F", "4AF"]},
+      "model": null
+    },
+    {
+      "id": "planet-blue-ocean",
+      "type": "planet",
+      "desc": "",
+      "celestial": {"r": 18, "amb": 0.2, "oct": 3, "zoom": 10, "color": ["20F", "2FA"]},
+      "surface": {"zoom": 1.2, "height": 2, "octaves": 2, "falloff": 0.2, "curve": [0, 0, 0.2, 1], "spectrum": ["20F", "2FA", "4AF", "4AF"]},
+      "model": null
     },
     {
       "type": "planet",
@@ -2234,6 +2252,14 @@
       "surface": {"zoom": 0.7, "height": 2, "octaves": 4, "falloff": 0.5, "curve": [0, 1], "spectrum": ["BA4", "DB4"]}
     },
     {
+      "id": "planet-soma",
+      "type": "planet",
+      "desc": "",
+      "celestial": {"r": 8, "amb": 0.2, "oct": 3, "zoom": 10, "color": ["20F", "2FA"]},
+      "surface": {"zoom": 1, "height": 1, "octaves": 4, "falloff": 0.3, "curve": [0, 0.2, 1], "spectrum": ["20F", "2FA", "4AF", "4AF"]},
+      "model": null
+    },
+    {
       "type": "planet",
       "id": "planet-water-1",
       "desc": "A single frozen sea of water and salt",
@@ -2247,7 +2273,13 @@
       "celestial": {"r": 15, "amb": 0.1, "oct": 3, "zoom": 20, "color": ["00f", "777"]},
       "surface": {"zoom": 1.5, "height": 1, "octaves": 5, "falloff": 0.5, "curve": [0.45, 0.4, 0.45, 0.4, 0.7, 0.7, 0.7, 0.7], "spectrum": ["68F", "36F", "36F", "FFF", "FFF", "FFF"]}
     },
-    {"type": "star", "id": "star-m-ff0", "celestial": {"r": 30, "amb": 1, "oct": 2, "zoom": 15, "color": ["fc3", "ff5"]}, "surface": null}
+    {"type": "star", "id": "star-m-ff0", "celestial": {"r": 30, "amb": 1, "oct": 2, "zoom": 15, "color": ["fc3", "ff5"]}, "surface": null},
+    {"id": "star-soma", "type": "star", "desc": "", "celestial": {"r": 40, "amb": 1, "oct": 2, "zoom": 15, "color": ["DDF", "9AF"]}, "surface": null, "model": null}
   ],
-  "initialState": "surface"
+  "initialState": "surface",
+  "regions": [
+    {"name": "Soma", "audio": "light-years", "pos": {"x": 894, "y": -1240}, "radius": 350},
+    {"name": "Outback", "audio": "light-years", "pos": {"x": 230, "y": -1588}, "radius": 514},
+    {"name": "Pavonis", "audio": "light-years", "pos": {"x": -420, "y": -680}, "radius": 510}
+  ]
 }

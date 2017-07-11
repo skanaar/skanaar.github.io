@@ -1,10 +1,11 @@
 <quest-list>
 
   <div class="list">
-    <div>
-      <select ref="filterSelect" onchange={onFilter}>
-        <option each={e in allTags()}>{e}</option>
-      </select>
+    <div class="tools">
+      <div class="btn-group">
+        <a each={e in allTags()} onclick={setFilter(e)} class="toggle-btn {(filter == e) && 'active'}">{e}
+        </a>
+      </div>
     </div>
     <div each={quest in filteredQuests()} onclick={edit} class={ list_item: true, active: quest.name==active }>
       {quest.name}
@@ -62,11 +63,14 @@
       { name: 'Script goto', template: '<goto jump="1"/>' }
     ]
     self.filter = ''
-    self.onFilter = () => self.filter = self.refs.filterSelect.value
-    self.allTags = () => app.allTags(self.world.quests)
+    self.allTags = () => app.allTags(self.world.quests).filter(e => e)
     self.filteredQuests = () => app.tagFilter(self.world.quests, self.filter)
     self.setInitialState = function () {
       self.world.initialState = self.refs.stateSelect.value
+    }
+
+    self.setFilter = function (type) {
+      return () => self.filter = (self.filter == type ? null : type)
     }
 
     self.useTemplate = function (e) {
@@ -113,7 +117,11 @@
 
     function createEditor() {
       var textarea = document.getElementById('quest-editor')
-      self.cmEditor = CodeMirror.fromTextArea(textarea, { mode: 'xml', lineWrapping: true })
+      self.cmEditor = CodeMirror.fromTextArea(textarea, { 
+        mode: 'xml',
+        theme: 'mdn-like',
+        lineWrapping: true
+      })
       function setEditorSize() {
         self.cmEditor.setSize(window.innerWidth-251-200, window.innerHeight-26-26-19)
       }

@@ -1,19 +1,39 @@
 <ships-viewer>
 
-  <div class="list">
-    <div><b>Player Ships</b></div>
-    <div each={ship in world.ships} onclick={edit} class={ list_item: true, active: ship==selected }>
-      {ship.name}
-    </div>
-    <div><button onclick={addShip}>+ New Ship</button></div>
+  <div class="table-parent" each={list in lists()}>
+    <table class="table attr-table">
+      <thead>
+        <tr>
+          <th>{list[0]}</th>
+          <th>visual</th>
+          <th>slots</th>
+          <th>maxhull</th>
+          <th>maxshield</th>
+          <th>maxenergy</th>
+          <th>generate hull</th>
+          <th>generate shield</th>
+          <th>generate energy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr each={ship in list[1]} onclick={edit} class={active: selected == ship}>
+          <td>{ship.name}</td>
+          <td>{ship.visual}</td>
+          <td>{ship.attr.slots}</td>
+          <td class={table_zero: !ship.attr.maxhull}>{ship.attr.maxhull}</td>
+          <td class={table_zero: !ship.attr.maxshield}>{ship.attr.maxshield}</td>
+          <td class={table_zero: !ship.attr.maxenergy}>{ship.attr.maxenergy}</td>
+          <td class={table_zero: !ship.generator.hull}>{ship.generator.hull}</td>
+          <td class={table_zero: !ship.generator.shield}>{ship.generator.shield}</td>
+          <td class={table_zero: !ship.generator.energy}>{ship.generator.energy}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <div class="list list-2">
-    <div><b>Enemy Ships</b></div>
-    <div each={ship in world.enemies} onclick={edit} class={ list_item: true, active: ship==selected }>
-      {ship.name}
-    </div>
-    <div><button onclick={addEnemy}>+ New Enemy</button></div>
+  <div class="toolbox">
+    <button onclick={addShip}>+ New Ship</button>
+    <button onclick={addEnemy}>+ New Enemy</button>
   </div>
 
   <div class="sidebar" show={!!selected}>
@@ -55,6 +75,7 @@
     var app = self.opts.app || window.app
 
     self.world = { ships: [], enemies: [] }
+    self.lists = () => [['Player ships', self.world.ships], ['Enemy ships', self.world.enemies]]
     self.selected = null
 
     self.makeStartingShip = function () {
@@ -69,7 +90,10 @@
     self.addShip = function () {
       self.world.ships.push({
         attr: { maxhull:0, maxshield:0, maxenergy:0, armor:0, cloak:0, jump:0, slots:0},
-        generator:{hull:0, shield:0, energy: 0}, name: 'unnamed', visual: 'monitor-drone'})
+        generator:{hull:0, shield:0, energy: 0},
+        name: 'unnamed',
+        visual: 'monitor-drone'
+      })
     }
 
     self.addEnemy = function () {

@@ -148,6 +148,8 @@ button:hover,
   border-color: #25f;
 }
 
+/* list */
+
 .list {
   position: fixed;
   top: 26px;
@@ -172,4 +174,41 @@ button:hover,
 }
 .list .list_item.active {
   background: rgba(200,200,200,0.5);
+}
+
+/* table */
+
+.table-parent {
+  margin-right: 190px;
+}
+.table {
+  margin: 40px 0 40px 0;
+  width: 100%;
+  border-spacing: 0;
+}
+.table tr:nth-child(even) {
+  background: #f8f8f8;
+}
+.table tr:hover {
+  background: #eee;
+}
+.table tr.active {
+  background: #ddd;
+}
+.table th {
+  text-align: left;
+  padding: 4px;
+}
+.table td {
+  padding: 4px;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #eee;
+}
+
+.table.attr-table td:nth-child(3n+4) { color: #a44; font-weight: bold }
+.table.attr-table td:nth-child(3n+5) { color: #44a; font-weight: bold }
+.table.attr-table td:nth-child(3n+6) { color: #4a4; font-weight: bold }
+.table.attr-table td.table_zero {
+  color: #aaa;
+  font-weight: normal;
 }

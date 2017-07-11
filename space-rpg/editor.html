@@ -5,6 +5,7 @@
   <link rel="shortcut icon" href="favicon.png">
   <link rel="stylesheet" href="editor.css">
   <link rel="stylesheet" href="lib/codemirror.css">
+  <link rel="stylesheet" href="lib/mdn-like.css">
   <style>
     .CodeMirror {
       position: fixed;
@@ -56,8 +57,9 @@
       else {
         try {
           var world = JSON.parse(worldJson)
+          world.regions = world.regions || world.audioRegions
           if (!_.isArray(world.destinations)) throw new Error()
-          if (!_.isArray(world.audioRegions)) throw new Error()
+          if (!_.isArray(world.regions)) throw new Error()
           if (!_.isArray(world.quests)) throw new Error()
           if (!_.isArray(world.items)) throw new Error()
           if (!_.isArray(world.ships)) throw new Error()
