@@ -1,14 +1,6 @@
 <validation-report>
-  <div class="validation-report" if={hasValidationError}>
-    <div each={e in undefNodes}>Error: Destination <b>{e}</b> not defined</div>
-    <div each={e in undefItems}>Error: Item <b>{e}</b> not defined</div>
-    <div each={e in undefEnemies}>Error: Enemy <b>{e}</b> not defined</div>
-    <div each={e in undefShips}>Error: Ship <b>{e}</b> not defined</div>
-    <div each={e in undefModels}>Error: Model <b>{e}</b> not defined</div>
-    <div each={e in undefCelestials}>Error: Celestial <b>{e}</b> not defined</div>
-    <div each={e in undefIcons}>Error: Unknown icon <b>{e}</b></div>
-    <div each={e in undefColors}>Error: Invalid color in quest <b>{e}</b></div>
-    <div each={e in undefCelestialColors}>Error: Invalid color in celestial <b>{e}</b></div>
+  <div class="validation-report" if={warnings.length}>
+    <div each={e in warnings}>Error: {e.type} <b>{e.name}</b> {e.msg} <b>{e.arg}</b></div>
     <button onclick={validateWorld}>Update</button>
   </div>
 
@@ -16,79 +8,11 @@
     var self = this
     var app = self.opts.app || window.app
 
-    self.undefinedItems = []
-    self.undefinedNodes = []
-    self.undefinedEnemies = []
-    self.undefinedShips = []
-    self.undefinedIcons = []
-    self.undefinedColors = []
-
-    function inQuests(world, pattern) {
-      var matches = _.flatten(world.quests.map(q => q.xml.match(pattern) || []))
-      return _.flatten(matches.map(e => e.split('="')[1].split(';')))
-    }
-
-    function isInvalidColor(c) { return (c.length!=3) || !!c.match(/[^a-fA-F0-9]/) }
+    self.warnings = []
 
     self.validateWorld = function () {
       var world = app.getWorld()
-      var referredItems = _.flatten([
-        inQuests(world, /item="[^"]*/gm).map(e => e.split(';')),
-        world.enemies.map(e => e.inventory),
-        world.destinations.map(e => e.treasures),
-        world.destinations.map(e => e.trader && e.trader.inventory || [])
-      ])
-      var definedItems = world.items.map(e => e.name)
-      self.undefItems = _.uniq(_.difference(referredItems, definedItems))
-
-      var referredNodes = inQuests(world, /dest="[^"]*/gm)
-      var definedNodes = world.destinations.map(e => e.name)
-      self.undefNodes = _.uniq(_.difference(referredNodes, definedNodes))
-
-      var destEnemies = world.destinations.filter(e => e.enemy).map(e => e.enemy.type)
-      var questEnemies = inQuests(world, /enemy="[^"]*/gm)
-      var referredEnemies = destEnemies.concat(questEnemies)
-      var definedEnemies = world.enemies.map(e => e.name)
-      self.undefEnemies = _.uniq(_.difference(referredEnemies, definedEnemies))
-
-      var referredIcons = inQuests(world, /icon="[^"]*/gm)
-      var definedIcons = ['enter', 'exit', 'arrow', 'chevrons', 'square']
-      self.undefIcons = _.uniq(_.difference(referredIcons, definedIcons))
-
-      var referredColors = inQuests(world, /color="[^"]*/gm)
-      self.undefColors = _.uniq(referredColors.filter(isInvalidColor))
-
-      var referredShips = inQuests(world, /ship="[^"]*/gm)
-      var definedShips = world.ships.map(e => e.name)
-      self.undefShips = _.uniq(_.difference(referredShips, definedShips))
-
-      var referredCelestials = world.destinations.map(e => e.style)
-      var definedCelestials = world.celestials.map(e => e.id)
-      self.undefCelestials = _.uniq(_.difference(referredCelestials, definedCelestials))
-
-      var referredModels = _.flatten([
-        world.celestials.filter(e => e.id.startsWith('anomaly-')).map(e => e.model),
-        world.ships.map(e => e.visual)
-      ])
-      var definedModels = world.models.map(e => e.name)
-      self.undefModels = _.uniq(_.difference(referredModels, definedModels))
-
-      var celestialColors = world.celestials.map(e => e.celestial.color)
-      var surfaceColors = world.celestials.map(e => e.surface ? e.surface.spectrum : [])
-      self.undefCelestialColors = _.flatten([celestialColors, surfaceColors]).filter(isInvalidColor)
-
-      self.hasValidationError = [
-        self.undefItems,
-        self.undefNodes,
-        self.undefEnemies,
-        self.undefShips,
-        self.undefModels,
-        self.undefCelestials,
-        self.undefIcons,
-        self.undefColors,
-        self.undefCelestialColors
-      ].some(e => e.length)
-
+      self.warnings = validator.world(world)
       self.update()
     }
 

@@ -26,6 +26,9 @@
   </div>
 
   <div class="sidebar">
+    <div if={warnings.length}>
+      <div each={e in warnings}>{e.msg} <b>{e.arg}</b></div>
+    </div>
     <label>Name</label>
     <input type="text" value={selected && selected.name} onchange={setFields} ref="nameField">
     <label>Tags</label>
@@ -43,6 +46,7 @@
     var self = this
     var app = this.opts.app || window.app
     self.world = app.nullWorld()
+    self.warnings = []
     self.selected = null
     self.templates = [
       { name: 'Condition', template: '<condition have-item="" at-dest="" no-enemy-at-dest="" not-at-dest="" have-credits="" trigger="TRIGGER"/>' },
@@ -100,6 +104,7 @@
     self.save = function () {
       if (self.selected) {
         self.selected.xml = self.cmEditor.getValue()
+        self.warnings = validator.quest(self.world, self.selected)
       }
     }
 
