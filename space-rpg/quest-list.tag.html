@@ -26,9 +26,6 @@
   </div>
 
   <div class="sidebar">
-    <div if={warnings.length}>
-      <div each={e in warnings}>{e.msg} <b>{e.arg}</b></div>
-    </div>
     <label>Name</label>
     <input type="text" value={selected && selected.name} onchange={setFields} ref="nameField">
     <label>Tags</label>
@@ -52,7 +49,7 @@
       { name: 'Condition', template: '<condition have-item="" at-dest="" no-enemy-at-dest="" not-at-dest="" have-credits="" trigger="TRIGGER"/>' },
       { name: 'Place item', template: '<place-item dest="" item=""/>' },
       { name: 'Place trader inventory', template: '<place-inventory dest="" item=""/>' },
-      { name: 'Place enemy', template: '<place-enemy dest="" enemy=""/>' },
+      { name: 'Place enemy', template: '<place-enemy dest="" enemy="" loot="Armor;Gold"/>' },
       { name: 'Dialog', template: '<dialog>"Hey hitchhiker!"</dialog>' },
       { name: 'Dialog with choice', template: '<dialog ok="YES PLEASE" cancel="NO THANKS">"Would you like some tea?"</dialog>' },
       { name: 'Add to quest list', template: '<add-to-quest-list/>' },

@@ -26,6 +26,7 @@ window.validator = (function (){
       _.uniq(_.difference(inXml(quest.xml, pattern), defined)).forEach(e => error(msg, e))
     }
     undefErrors(/item="[^"]+/gm, world.items.map(e => e.name), 'undefined item')
+    undefErrors(/loot="[^"]+/gm, world.items.map(e => e.name), 'undefined loot item')
     undefErrors(/dest="[^"]+/gm, world.destinations.map(e => e.name), 'undefined destination')
     undefErrors(/enemy="[^"]+/gm, world.enemies.map(e => e.name), 'undefined enemy')
     undefErrors(/ship="[^"]+/gm, world.ships.map(e => e.name), 'undefined ship')
