@@ -4,6 +4,7 @@
     <div class="tools">
       <div class="btn-group">
         <a each={e in allTags()} onclick={setFilter(e)} class="toggle-btn {(filter == e) && 'active'}">{e}
+        </a><a onclick={setFilter('')} class="toggle-btn {(filter === '') && 'active'}">other
         </a>
       </div>
     </div>
@@ -63,7 +64,7 @@
       { name: 'Travel', template: '<travel dest=""/>' },
       { name: 'Script goto', template: '<goto jump="1"/>' }
     ]
-    self.filter = ''
+    self.filter = null
     self.allTags = () => app.allTags(self.world.quests).filter(e => e)
     self.filteredQuests = () => app.tagFilter(self.world.quests, self.filter)
     self.setInitialState = function () {

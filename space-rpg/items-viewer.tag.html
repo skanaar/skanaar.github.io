@@ -8,7 +8,9 @@
       </a><a onclick={setFilter('module')} class="toggle-btn {(filter == 'module') && 'active'}">Modules
       </a><a onclick={setFilter('tool')} class="toggle-btn {(filter == 'tool') && 'active'}">Tools
       </a><a onclick={setFilter('quest')} class="toggle-btn {(filter == 'quest') && 'active'}">Quest
-      </a><a onclick={setFilter('common')} class="toggle-btn {(filter == 'common') && 'active'}">Common</a>
+      </a><a onclick={setFilter('rare')} class="toggle-btn {(filter == 'rare') && 'active'}">Rare
+      </a><a onclick={setFilter('common')} class="toggle-btn {(filter == 'common') && 'active'}">Common
+      </a>
     </div>
   </div>
 
@@ -57,8 +59,9 @@
         <option>weapon</option>
         <option>tool</option>
         <option>module</option>
-        <option>common</option>
         <option>quest</option>
+        <option>rare</option>
+        <option>common</option>
       </select><br/>
       <em>credits</em>     <input type=number ref="creditsField" value={selected && selected.credits}>
     </div>
@@ -112,7 +115,7 @@
 
     self.add = function () {
       self.world.items.unshift({
-        type:'common',
+        type: self.filter || 'common',
         credits: 5,
         name: 'unnamed',
         attr: { maxhull:0, maxshield:0, maxenergy:0, armor:0, cloak:0, jump:0, slots:0},

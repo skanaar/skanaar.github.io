@@ -1,11 +1,11 @@
 <ships-viewer>
 
-  <div class="table-parent" each={list in lists()}>
+  <div class="table-parent">
     <table class="table attr-table">
       <thead>
         <tr>
-          <th>{list[0]}</th>
-          <th>visual</th>
+          <th>Player ships</th>
+          <th>value</th>
           <th>slots</th>
           <th>maxhull</th>
           <th>maxshield</th>
@@ -16,9 +16,35 @@
         </tr>
       </thead>
       <tbody>
-        <tr each={ship in list[1]} onclick={edit} class={active: selected == ship}>
+        <tr each={ship in world.ships} onclick={edit} class={active: selected == ship}>
           <td>{ship.name}</td>
-          <td>{ship.visual}</td>
+          <td>{ship.value} c</td>
+          <td>{ship.attr.slots}</td>
+          <td class={table_zero: !ship.attr.maxhull}>{ship.attr.maxhull}</td>
+          <td class={table_zero: !ship.attr.maxshield}>{ship.attr.maxshield}</td>
+          <td class={table_zero: !ship.attr.maxenergy}>{ship.attr.maxenergy}</td>
+          <td class={table_zero: !ship.generator.hull}>{ship.generator.hull}</td>
+          <td class={table_zero: !ship.generator.shield}>{ship.generator.shield}</td>
+          <td class={table_zero: !ship.generator.energy}>{ship.generator.energy}</td>
+        </tr>
+      </tbody>
+      <thead>
+        <tr>
+          <th>Enemy ships</th>
+          <th>equipment</th>
+          <th>slots</th>
+          <th>maxhull</th>
+          <th>maxshield</th>
+          <th>maxenergy</th>
+          <th>generate hull</th>
+          <th>generate shield</th>
+          <th>generate energy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr each={ship in world.enemies} onclick={edit} class={active: selected == ship}>
+          <td>{ship.name}</td>
+          <td>{ship.inventory.join()}</td>
           <td>{ship.attr.slots}</td>
           <td class={table_zero: !ship.attr.maxhull}>{ship.attr.maxhull}</td>
           <td class={table_zero: !ship.attr.maxshield}>{ship.attr.maxshield}</td>
@@ -34,6 +60,10 @@
   <div class="toolbox">
     <button onclick={addShip}>+ New Ship</button>
     <button onclick={addEnemy}>+ New Enemy</button>
+    <div class="btn-group">
+      <a class="toggle-btn" onclick={up}>Up in list
+      </a><a class="toggle-btn" onclick={down}>Down in list</a>
+    </div>
   </div>
 
   <div class="sidebar" show={!!selected}>
@@ -61,6 +91,12 @@
       <em>energy</em> <input type=number step=1 ref="energyField" value={selected && selected.generator.energy}>
     </div>
 
+    <label if={isEnemySelected()}>Equipment</label>
+    <button if={isEnemySelected()} onclick={chooseEquipment}>Choose equipment</button>
+
+    <label if={!isEnemySelected()}>Value</label>
+    <input type="number" if={!isEnemySelected()} ref="valueField" value={selected && selected.value}>
+
     <label></label>
     <button onclick={makeStartingShip}>Make starting ship</button><br/>
     <button onclick={remove}>Delete</button>
@@ -75,12 +111,13 @@
     var app = self.opts.app || window.app
 
     self.world = { ships: [], enemies: [] }
-    self.lists = () => [['Player ships', self.world.ships], ['Enemy ships', self.world.enemies]]
     self.selected = null
 
     self.makeStartingShip = function () {
       if (self.selected) self.world.initialShip = self.selected.name
     }
+
+    self.isEnemySelected = () => self.world.enemies.some(e => e == self.selected)
 
     self.remove = function () {
       self.world.ships = self.world.ships.filter(e => e != self.selected)
@@ -113,6 +150,7 @@
     
     self.endEditing = function (e) {
       self.selected.name = self.refs.nameField.value
+      self.selected.value = (self.refs.valueField && (+self.refs.valueField.value)) || 0
       self.selected.visual = self.refs.visualInput.value
       self.selected.attr.maxhull = +self.refs.maxhullField.value
       self.selected.attr.maxshield = +self.refs.maxshieldField.value
@@ -129,6 +167,24 @@
     self.cancelEditing = function () {
       self.selected = null
       self.update()
+    }
+
+    self.chooseEquipment = function () {
+      app.events.trigger('show-item-chooser', self.selected.inventory)
+    }
+
+    self.up = function () {
+      if (self.isEnemySelected())
+        _.bubbleUp(self.world.enemies, self.world.enemies.findIndex(e => e == self.selected))
+      else
+        _.bubbleUp(self.world.ships, self.world.ships.findIndex(e => e == self.selected))
+    }
+
+    self.down = function () {
+      if (self.isEnemySelected())
+        _.bubbleDown(self.world.enemies, self.world.enemies.findIndex(e => e == self.selected))
+      else
+        _.bubbleDown(self.world.ships, self.world.ships.findIndex(e => e == self.selected))
     }
 
     self.on('before-mount', function() {

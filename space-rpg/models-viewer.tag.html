@@ -27,6 +27,7 @@
     <div class="btn-group">
       <a onclick={setCamera.bind(null, 'top')} class="toggle-btn {(camera == 'top') && 'active'}">Top
       </a><a onclick={setCamera.bind(null, 'front')} class="toggle-btn {(camera == 'front') && 'active'}">Front
+      </a><a onclick={setCamera.bind(null, 'back')} class="toggle-btn {(camera == 'back') && 'active'}">Back
       </a><a onclick={setCamera.bind(null, 'side')} class="toggle-btn {(camera == 'side') && 'active'}">Side
       </a><a onclick={setCamera.bind(null, 'perspective')} class="toggle-btn {(camera == 'perspective') && 'active'}">Perspective</a>
     </div>
@@ -64,7 +65,7 @@
     self.world = { models: [] }
     self.mesh = []
     self.box = []
-    self.filter = ''
+    self.filter = null
     self.allTags = () => app.allTags(self.world.models).filter(e => e)
     self.filteredModels = () => app.tagFilter(self.world.models, self.filter)
 
@@ -227,6 +228,7 @@
       var perspective = {
         top: zoom,
         front: mmult(zoom, rotateX(-Math.PI/2)),
+        back: mmult(zoom, mmult(rotateX(Math.PI/2), rotateZ(Math.PI))),
         side: mmult(zoom, mmult(rotateY(Math.PI/2), rotateZ(Math.PI/2))),
         perspective: mmult(zoom, mmult(rotateZ(-0.75), rotateX(-1.1)))
       }[self.camera] || mmult(rotateZ(0.3), rotateX(1.21))
