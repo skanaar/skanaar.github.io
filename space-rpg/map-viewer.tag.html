@@ -8,10 +8,10 @@
       onmouseup={mouseup}>
     <ellipse
       each={e in regions()}
-      stroke-width="2"
-      stroke-dasharray="5,5"
+      stroke-width="1"
+      stroke-dasharray="3,3"
       stroke=gray
-      fill="#fafafa"
+      fill="#fcfcfc"
       riot-cx={e.screenPos.x} riot-cy={e.screenPos.y}
       riot-rx={scale * e.entity.radius} riot-ry={scale * e.entity.radius}
       onmouseup={mouseupOnItem}/>
@@ -23,8 +23,8 @@
     </text>
     <ellipse
       each={nodes}
-      stroke-width="2"
-      stroke-dasharray={type == 'region' ? '4,4' : false}
+      stroke-width={type == 'region' ? 1 : 2}
+      stroke-dasharray={type == 'region' ? '3,3' : false}
       stroke={(isSelected ? '#F00' : '#000')}
       fill={isSelected ? '#F88' : fillFor(entity)}
       riot-cx={screenPos.x} riot-cy={screenPos.y}
@@ -195,6 +195,7 @@
     }
     self.mouseupOnItem = function (e) {
       e.stopPropagation()
+      if (!self.isDown) { return }
       if (e.shiftKey) {
         e.item.isSelected = !e.item.isSelected
       }
@@ -245,6 +246,7 @@
 
     self.mouseup = function (e) {
       e.preventDefault()
+      if (!self.isDown) { return }
       document.activeElement.blur()
       self.input.b = Vec(e.offsetX, e.offsetY)
       if (0 == dist(self.input.a, self.input.b) && self.tool != 'select') {
@@ -387,7 +389,7 @@
     }
     self.fillFor = entity => fills[entity.style.split('-')[0]]
     self.radiusFor = function (ent) {
-      if (ent.style == 'region-1') return 4
+      if (ent.style == 'region-1') return 6
       var cel = self.world.celestials.find(s => s.id == ent.style)
       return cel && (cel.celestial.r * self.scale) || 0
     }

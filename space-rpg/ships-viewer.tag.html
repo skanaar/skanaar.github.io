@@ -72,7 +72,8 @@
       <em>visual</em>
       <select ref="visualInput">
         <option each={e in world.models}>{e.name}</option>
-      </select>
+      </select><br />
+      <em>flying</em> <input type=checkbox ref=isFlyingInput checked={selected && selected.isFlying}>
     </div>
     
     <label>Attributes</label>
@@ -80,7 +81,6 @@
       <em>maxhull</em>   <input type=number step=1 ref="maxhullField" value={selected && selected.attr.maxhull}><br/>
       <em>maxshield</em> <input type=number step=1 ref="maxshieldField" value={selected && selected.attr.maxshield}><br/>
       <em>maxenergy</em> <input type=number step=1 ref="maxenergyField" value={selected && selected.attr.maxenergy}><br/>
-      <em>jump</em>      <input type=number step=1 ref="jumpField" value={selected && selected.attr.jump}><br/>
       <em>slots</em>     <input type=number step=1 ref="slotsField" value={selected && selected.attr.slots}><br/>
     </div>
     
@@ -129,7 +129,8 @@
         attr: { maxhull:0, maxshield:0, maxenergy:0, armor:0, cloak:0, jump:0, slots:0},
         generator:{hull:0, shield:0, energy: 0},
         name: 'unnamed',
-        visual: 'monitor-drone'
+        visual: 'monitor-drone',
+        isFlying: true
       })
     }
 
@@ -139,7 +140,8 @@
         generator:{hull:0, shield:0, energy: 0},
         name: 'unnamed',
         visual: 'monitor-drone',
-        inventory: []
+        inventory: [],
+        isFlying: true
       })
     }
     
@@ -152,10 +154,10 @@
       self.selected.name = self.refs.nameField.value
       self.selected.value = (self.refs.valueField && (+self.refs.valueField.value)) || 0
       self.selected.visual = self.refs.visualInput.value
+      self.selected.isFlying = !!self.refs.isFlyingInput.checked
       self.selected.attr.maxhull = +self.refs.maxhullField.value
       self.selected.attr.maxshield = +self.refs.maxshieldField.value
       self.selected.attr.maxenergy = +self.refs.maxenergyField.value
-      self.selected.attr.jump = +self.refs.jumpField.value
       self.selected.attr.slots = +self.refs.slotsField.value
       self.selected.generator.hull = +self.refs.hullField.value
       self.selected.generator.shield = +self.refs.shieldField.value
