@@ -169,7 +169,7 @@
         return normal[2] < 0
       })
       self.mesh = _.sortBy(self.mesh, quad => -(quad[0][2]+quad[2][2]))
-      self.box = applyPerspective([[[-200,-200,0], [-200,200,0], [200,200,0], [200,-200,0]]])
+      self.box = applyPerspective([[[-170,-170,0], [-170,170,0], [170,170,0], [170,-170,0]]])
     }
 
     function lathe(model) {

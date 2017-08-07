@@ -4,9 +4,9 @@
     {
       "name": "Rover",
       "visual": "Rover",
-      "attr": {"maxhull": 2, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 1},
-      "generator": {"hull": 1, "shield": 1, "energy": 1},
-      "value": 100,
+      "attr": {"maxhull": 1, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 1},
+      "generator": {"hull": 0, "shield": 0, "energy": 0},
+      "value": 5,
       "isFlying": false
     },
     {
@@ -19,7 +19,7 @@
     },
     {
       "attr": {"maxhull": 15, "maxshield": 0, "maxenergy": 5, "armor": 0, "cloak": 0, "jump": 0, "slots": 3},
-      "generator": {"hull": 0, "shield": 0, "energy": 0},
+      "generator": {"hull": 1, "shield": 0, "energy": 1},
       "name": "Kerr Runner",
       "visual": "Kerr Runner",
       "value": 200,
@@ -28,7 +28,7 @@
     {
       "name": "Kerr Journeyman",
       "visual": "Kerr Journeyman",
-      "attr": {"maxhull": 20, "maxshield": 20, "maxenergy": 20, "jump": 125, "slots": 4},
+      "attr": {"maxhull": 20, "maxshield": 5, "maxenergy": 10, "jump": 125, "slots": 4},
       "generator": {"hull": 1, "shield": 1, "energy": 2},
       "value": 1000,
       "isFlying": true
@@ -156,6 +156,14 @@
   "items": [
     {
       "type": "rare",
+      "credits": 0,
+      "name": "Last message",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "type": "rare",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
@@ -176,14 +184,6 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 5,
-      "name": "Thanatos mesh"
-    },
-    {
-      "type": "rare",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 5,
       "name": "Thanatos nacelle"
     },
     {
@@ -192,7 +192,7 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 5,
-      "name": "Water sample"
+      "name": "Thanatos core"
     },
     {
       "type": "rare",
@@ -200,7 +200,15 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 5,
-      "name": "Thanatos core"
+      "name": "Thanatos mesh"
+    },
+    {
+      "type": "rare",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 5,
+      "name": "Water sample"
     },
     {
       "type": "rare",
@@ -261,6 +269,14 @@
     {
       "type": "weapon",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
+      "targetBuff": {"hull": -5, "shield": -2, "energy": 0},
+      "credits": 20,
+      "name": "Tau Beam"
+    },
+    {
+      "type": "weapon",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": -1, "shield": -2, "energy": 0},
       "credits": 20,
@@ -270,17 +286,17 @@
       "type": "weapon",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": -5, "shield": -2, "energy": 0},
-      "credits": 20,
-      "name": "Tau Beam"
-    },
-    {
-      "type": "weapon",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
       "targetBuff": {"hull": -2, "shield": -5, "energy": 0},
       "credits": 39,
       "name": "Phased Ray"
+    },
+    {
+      "type": "weapon",
+      "credits": 50,
+      "name": "Autocannon Mk2",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": -4, "shield": 0, "energy": 0}
     },
     {
       "type": "weapon",
@@ -302,9 +318,9 @@
       "type": "weapon",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
-      "targetBuff": {"hull": -50, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -200},
       "credits": 500,
-      "name": "Mass Gun"
+      "name": "EMP Bomb"
     },
     {
       "type": "weapon",
@@ -318,9 +334,9 @@
       "type": "weapon",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -200},
+      "targetBuff": {"hull": -50, "shield": 0, "energy": 0},
       "credits": 500,
-      "name": "EMP Bomb"
+      "name": "Mass Gun"
     },
     {
       "type": "weapon",
@@ -341,18 +357,18 @@
     {
       "type": "tool",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 5, "energy": -10},
+      "playerBuff": {"hull": 2, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 5,
-      "name": "Recharge Loop"
+      "name": "Repair Kit"
     },
     {
       "type": "tool",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 5, "shield": 0, "energy": -10},
+      "playerBuff": {"hull": 0, "shield": 5, "energy": -10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 5,
-      "name": "Glue Tube"
+      "name": "Recharge Loop"
     },
     {
       "type": "tool",
@@ -373,18 +389,18 @@
     {
       "type": "tool",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 15, "shield": 0, "energy": -10},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 45,
-      "name": "Welding Robot"
-    },
-    {
-      "type": "tool",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 15, "energy": 10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 45,
       "name": "Recharge Coil"
+    },
+    {
+      "type": "tool",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 15, "shield": 0, "energy": -10},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 45,
+      "name": "Welding Robot"
     },
     {
       "type": "tool",
@@ -492,7 +508,15 @@
     },
     {
       "type": "module",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 10, "jump": 0, "slots": 0},
+      "credits": 20,
+      "name": "Steel armor",
+      "attr": {"maxhull": 2, "maxshield": 0, "maxenergy": 0, "armor": 0, "cloak": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "type": "module",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 5, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 20,
@@ -525,14 +549,6 @@
     {
       "type": "module",
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 8},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 50,
-      "name": "Null Reactor"
-    },
-    {
-      "type": "module",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 6},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 50,
@@ -540,11 +556,11 @@
     },
     {
       "type": "module",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 20, "jump": 0, "slots": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 8},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 80,
-      "name": "Hexagon Battery"
+      "credits": 50,
+      "name": "Null Reactor"
     },
     {
       "type": "module",
@@ -556,11 +572,11 @@
     },
     {
       "type": "module",
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 30, "jump": 0, "slots": 0},
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 20, "jump": 0, "slots": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 180,
-      "name": "Octagon Battery"
+      "credits": 80,
+      "name": "Hexagon Battery"
     },
     {
       "type": "module",
@@ -569,6 +585,14 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 180,
       "name": "Shield Coil"
+    },
+    {
+      "type": "module",
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 30, "jump": 0, "slots": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 180,
+      "name": "Octagon Battery"
     },
     {
       "type": "module",
@@ -774,7 +798,7 @@
       "name": "Outback 12",
       "style": "asteroid-2",
       "pos": {"x": 588, "y": -2218},
-      "trader": {"buy": 0.2, "sell": 0.1, "inventory": ["Tau Beam", "Phased Ray", "Photon Ray", "Autocannon", "Kinetic Gun", "Railgun", "EMP Bomb", "Shield Core", "Fold Reactor", "Null Reactor"]},
+      "trader": null,
       "treasures": [],
       "enemy": null,
       "shipyard": ["Kerr Runner", "Kerr Journeyman", "Sloop", "Salem", "CES Interplan", "Kerr Frigate"]
@@ -784,7 +808,7 @@
       "name": "Samson's Folly",
       "style": "asteroid-3",
       "pos": {"x": 468, "y": -2248},
-      "trader": {"buy": 1.5, "sell": 0.75, "inventory": ["Rusty Kinetic Gun"]},
+      "trader": {"buy": 1.5, "sell": 0.75, "inventory": ["Rusty Kinetic Gun", "Steel armor"]},
       "treasures": ["Alien Fossil"],
       "enemy": null
     },
@@ -836,7 +860,7 @@
     {"pos": {"x": -321, "y": -430}, "name": "A2170", "style": "asteroid-6", "trader": null, "enemy": null, "treasures": ["Barium Ore"]},
     {"pos": {"x": -175, "y": -465}, "name": "Pavonis A2934", "style": "planet-s-rock-1", "trader": null, "enemy": null, "treasures": ["Platinum"]},
     {"pos": {"x": -487, "y": -539}, "name": "A8761", "style": "asteroid-6", "trader": null, "enemy": null, "treasures": ["Alien Fossil"]},
-    {"pos": {"x": -392, "y": -660}, "name": "Pavonis Ember", "style": "planet-hell-3", "trader": null, "enemy": null, "treasures": ["Tungsten", "Alien Fossil", "Alien Artifact"]},
+    {"pos": {"x": -392, "y": -660}, "name": "Pavonis Ember", "style": "planet-hell-3", "trader": null, "enemy": null, "treasures": ["Tungsten", "Alien Fossil", "Alien Artifact"], "shipyard": null},
     {"pos": {"x": 100, "y": -522}, "name": "A078", "style": "asteroid-1", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": 212, "y": -472}, "name": "A1620", "style": "asteroid-1", "trader": null, "enemy": null, "treasures": ["Alien Fossil", "Barium Ore"]},
     {"pos": {"x": 324, "y": -428}, "name": "A2472", "style": "asteroid-1", "trader": null, "enemy": null, "treasures": []},
@@ -969,7 +993,7 @@
       "surface": "rock-1",
       "trader": {"buy": 1.5, "sell": 0.75, "inventory": []},
       "enemy": null,
-      "treasures": ["Copper", "Platinum", "Alien Fossil", "Glue Tube"]
+      "treasures": ["Copper", "Platinum", "Alien Fossil", "Repair Kit"]
     },
     {"pos": {"x": 1216, "y": -674}, "name": "Larato Node", "style": "anomaly-gate", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": -1238, "y": -818}, "name": "Paxos Station", "style": "anomaly-paxos", "trader": null, "enemy": null, "treasures": []},
@@ -1003,7 +1027,7 @@
     },
     {"pos": {"x": 488, "y": -2298}, "name": "Samson's Buoy", "style": "anomaly-buoy", "trader": null, "enemy": {"type": "Target Drone", "loot": []}, "treasures": []},
     {"pos": {"x": 132, "y": -1790}, "name": "Outback A34", "style": "asteroid-3", "trader": null, "enemy": null, "treasures": []},
-    {"pos": {"x": 194, "y": -1700}, "name": "Outback A37", "style": "asteroid-7", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 194, "y": -1700}, "name": "Outback A37", "style": "asteroid-7", "trader": null, "enemy": null, "treasures": ["Tungsten"]},
     {"pos": {"x": 110, "y": -1642}, "name": "Buoy Outback 21", "style": "anomaly-buoy", "trader": null, "enemy": {"type": "Striker Drone", "loot": []}, "treasures": []},
     {"pos": {"x": 36, "y": -1742}, "name": "Buoy Outback 36", "style": "anomaly-buoy", "trader": null, "enemy": {"type": "Striker Drone", "loot": []}, "treasures": []},
     {
@@ -1016,7 +1040,14 @@
       "shipyard": ["Kerr Runner"]
     },
     {"pos": {"x": 247, "y": -1829}, "name": "Outback A474", "style": "asteroid-6", "trader": null, "enemy": {"type": "Monitor Drone", "loot": ["Alien Fossil"]}, "treasures": []},
-    {"pos": {"x": 181, "y": -1901}, "name": "Snake", "style": "planet-hell-4", "trader": null, "enemy": null, "treasures": ["Barium Ore", "Barium Ore", "Tungsten", "Sky Crystals", "Sky Crystals"]},
+    {
+      "pos": {"x": 181, "y": -1901},
+      "name": "Broken Hill",
+      "style": "planet-hell-4",
+      "trader": null,
+      "enemy": null,
+      "treasures": ["Barium Ore", "Barium Ore", "Tungsten", "Sky Crystals", "Sky Crystals"]
+    },
     {"pos": {"x": 72, "y": -1881}, "name": "Outback A1551", "style": "asteroid-3", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": 143, "y": -2024}, "name": "Outback A3069", "style": "asteroid-4", "trader": null, "enemy": null, "treasures": ["Tungsten", "Platinum"]},
     {"pos": {"x": 243, "y": -2022}, "name": "Outback A089", "style": "asteroid-4", "trader": null, "enemy": {"type": "Monitor Drone", "loot": ["Alien Artifact"]}, "treasures": ["Barium Ore"]},
@@ -1049,7 +1080,7 @@
     {"pos": {"x": 990, "y": -1540}, "name": "A9040", "style": "asteroid-3", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": 1155, "y": -1387}, "name": "Soma", "style": "planet-soma", "trader": null, "enemy": null, "treasures": []},
     {"pos": {"x": 168, "y": -1275}, "name": "A8855", "style": "asteroid-1", "trader": null, "enemy": null, "treasures": []},
-    {"pos": {"x": 100, "y": -1234}, "name": "Spruce", "style": "planet-rock-1", "trader": null, "enemy": null, "treasures": []},
+    {"pos": {"x": 100, "y": -1234}, "name": "Spruce", "style": "planet-rock-1", "trader": {"buy": 1.5, "sell": 0.75, "inventory": ["Autocannon Mk2", "Autocannon"]}, "enemy": null, "treasures": []},
     {"pos": {"x": 55, "y": -1164}, "name": "A7544", "style": "asteroid-4", "trader": null, "enemy": {"type": "Bandit Striker", "loot": []}, "treasures": []},
     {"pos": {"x": -29, "y": -1177}, "name": "A9157", "style": "asteroid-1", "trader": null, "enemy": {"type": "Bandit Striker", "loot": []}, "treasures": []},
     {"pos": {"x": -126, "y": -1212}, "name": "Pine", "style": "planet-hell-4", "trader": null, "enemy": {"type": "Bandit", "loot": ["Kinetic Gun"]}, "treasures": []},
@@ -1067,32 +1098,32 @@
     },
     {
       "name": "Start of an adventure",
-      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n\"Hey hitchhiker! This is your stop.\"\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a weird signature. If you EXPLORE the area you might score big time!</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog>You find the meteorite resting on the ground. A shiny lump that is surprisingly light when you load it into the rover.</dialog>\n<dialog>If you TRADE the meteroite for cash, you will earn a small fortune.</dialog>\n<condition have-credits=\"200\"/>\n<dialog>\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. Enter the SHIPYARD if you are interested.\"</dialog>\n<condition have-ship=\"Kerr Clipper\" />\n<dialog>\"Now you can LIFT OFF and leave this planet.\"\n\n\"And good luck kid! It is dangerous out there.\"</dialog>\n<dialog>Your new ship is really a piece of junk. But it is yours.\nThe trader gave you the advice to visit Samsom's Folly and buy some weapons. Protection is good.</dialog>\n<mark-on-map dest=\"Samson's Folly\"/>\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>\"My friend at Backwater said you would be coming. We have a nice Kinetic Gun in stock. You are welcome to LAND and TRADE with us here at Samson's Folly.\"</dialog>\n<condition have-item=\"Rusty Kinetic Gun\"/>\n<dialog>You now have a Rusty Kinetic Gun, a basic weapon. Tap you ship hologram to open your PROFILE and INSTALL your new weapon</dialog>\n<dialog>\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n",
+      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n_\"Hey hitchhiker! This is your stop.\"_\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a weird signature. If you *EXPLORE* the area you might score big time!</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog>You find the meteorite resting on the ground. A shiny lump that is surprisingly light when you load it into the rover.</dialog>\n<dialog>If you *TRADE* the meteroite for cash, you will earn a small fortune.</dialog>\n<condition have-credits=\"200\"/>\n<dialog>_\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. Enter the *SHIPYARD* if you are interested.\"_</dialog>\n<condition have-ship=\"Kerr Clipper\" />\n<dialog>_\"Now you can *LIFT OFF* and leave this planet.\"\n\n\"And good luck kid! It is dangerous out there.\"_</dialog>\n<dialog>Your new ship is really a piece of junk. But it is yours.\nThe trader gave you the advice to visit Samsom's Folly and buy some weapons. Protection is good.</dialog>\n<mark-on-map dest=\"Samson's Folly\"/>\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>_\"My friend at Backwater said you would be coming. We have a nice Kinetic Gun in stock. You are welcome to *LAND* and *TRADE* with us here at Samson's Folly.\"_</dialog>\n<condition have-item=\"Rusty Kinetic Gun\"/>\n<dialog>You now have a Rusty Kinetic Gun, a basic weapon. Tap you ship hologram to open your *PROFILE* and *INSTALL* your new weapon</dialog>\n<dialog>_\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"_</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n",
       "tags": "outback"
     },
     {
       "name": "Shady spacer",
-      "xml": "<place-item dest=\"Shady\" item=\"Shady Boxes\"/>\n<condition at-dest=\"Shady\"/>\n<dialog>A sad rusty ship radios you.\n\"Fellow spacer! There is nice loot on this moon but my landing gear is bust. If you LAND and help me EXPLORE I'll reward you.\"</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shady Boxes\"/>\n<dialog>The eager spacer thank you several times for helping her finding the boxes. You receive a small reward and you hope you don't see the her again.</dialog>\n<give credits=\"100\"/>\n<take item=\"Shady Boxes\"/>",
+      "xml": "<place-item dest=\"Shady\" item=\"Shady Boxes\"/>\n<condition at-dest=\"Shady\"/>\n<dialog>A sad rusty ship radios you.\n_\"Fellow spacer! There is nice loot on this moon but my landing gear is bust. If you *LAND* and help me *EXPLORE* I'll reward you.\"_</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shady Boxes\"/>\n<dialog>The eager spacer thank you several times for helping her finding the boxes. You receive a small reward and you hope you don't see the her again.</dialog>\n<give credits=\"100\"/>\n<take item=\"Shady Boxes\"/>",
       "tags": "outback"
     },
     {
       "name": "Peril at Buoy 72",
-      "xml": "<condition at-dest=\"Buoy 68\"/>\n<dialog>You receive a transmission from a private yacht:\n\"Help us. The way ahead is blocked by a malfunctioning drone. We don't dare to proceed. Your ship is armed, can you clear the path for us!\"</dialog>\n<mark-on-map dest=\"Buoy 72\"/>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"Buoy 72\"/>\n<dialog>\"Thank you for clearing the way for us! Here, take this for you troubles.\"</dialog>\n<give credits=\"15\"/>",
+      "xml": "<condition at-dest=\"Buoy 68\"/>\n<dialog>You receive a transmission from a private yacht:\n_\"Help us. The way ahead is blocked by a malfunctioning drone. We don't dare to proceed. Your ship is armed, can you clear the path for us!\"_</dialog>\n<mark-on-map dest=\"Buoy 72\"/>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"Buoy 72\"/>\n<dialog>_\"Thank you for clearing the way for us! Here, take this to patch up any damage.\"_\n\nThey send over a basic Repair Kit. Might come in handy.</dialog>\n<give item=\"Repair Kit\"/>",
       "tags": "outback"
     },
     {
       "name": "Outback Mining",
-      "xml": "\n<condition at-dest=\"Outback A563\" />\n<dialog>A scruffy ship is slowly passing by this asteroid. You radio it and ask if anything is wrong.</dialog>\n<dialog>\"Hey man! I'm ok, my ship is just a bit overloaded. The area west of here is full of minerals that I have been mining. You should go there - there is enough for everyone.\"</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Outback A089\" color=\"08F\" icon=\"arrow\"/>\n<condition at-dest=\"Outback A089\" />",
+      "xml": "\n<condition at-dest=\"Outback A563\" />\n<dialog>A scruffy ship is slowly passing by this asteroid. You radio it and ask if anything is wrong.</dialog>\n<dialog>_\"Hey man! I'm ok, my ship is just a bit overloaded. The area west of here is full of minerals that I have been mining. You should go there - there is enough for everyone.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Outback A089\" color=\"08F\" icon=\"arrow\"/>\n<condition have-item=\"Last message\" />\n<dialog>Exploring the asteroid you find a crashed ship. Inside it you find the inhabitants, dead, and a message. Words from dying spacefarers.</dialog>\n<dialog>_We have been attacked by reprogrammed Drones. They are not malfunctioning, someone is doing this to them._</dialog>\n",
       "tags": "outback"
     },
     {
       "name": "Leave the Outback",
-      "xml": "\n<condition at-dest=\"Outback A34\" />\n<dialog>A Colonial Navy patrol craft is stationed at the asteroid.\n\"Stop your engines Traveller. There are malfunctioning Striker Drones ahead. We guard here until reinforcements arrive.\"</dialog>\n<dialog>If they are Striker Drones they have shields that can withstand physical damage. Perhaps Samson has a disruptor weapon that can take down the drones' shields.</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Samson's Folly\" color=\"0F0\" icon=\"arrow\"/>\n<place-inventory dest=\"Samson's Folly\" item=\"Photon Ray\"/>\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>You speak to Samson about the drones. She looks worried. But says she has something to sell you that might help.</dialog>\n<condition have-item=\"Photon Ray\" />\n<mark-on-map dest=\"Buoy Outback 36\" color=\"0F0\" icon=\"arrow\"/>\n<condition no-enemy-at-dest=\"Buoy Outback 36\" />\n<dialog>The Navy patrol slips past you once the area was cleared. They don't hail you, ashamed at being helped by a civilian.</dialog>",
+      "xml": "\n<condition at-dest=\"Outback A34\" />\n<dialog>A Colonial Navy patrol craft is stationed at the asteroid.\n_\"Stop your engines Traveller. There are malfunctioning Striker Drones ahead. We guard here until reinforcements arrive.\"_</dialog>\n<dialog>If they are Striker Drones they have shields that can withstand physical damage. Perhaps Samson has a disruptor weapon that can take down the drones' shields.</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Samson's Folly\" color=\"0F0\" icon=\"arrow\"/>\n<place-inventory dest=\"Samson's Folly\" item=\"Photon Ray\"/>\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>You speak to Samson about the drones. She looks worried. But says she has something to sell you that might help.</dialog>\n<condition have-item=\"Photon Ray\" />\n<mark-on-map dest=\"Buoy Outback 36\" color=\"0F0\" icon=\"arrow\"/>\n<condition no-enemy-at-dest=\"Buoy Outback 36\" />\n<dialog>The Navy patrol slips past you once the area was cleared. They don't hail you, ashamed at being helped by a civilian.</dialog>",
       "tags": "outback"
     },
     {
       "name": "Bandits in The Bush",
-      "xml": "\n<condition at-dest=\"Black Stump\" trigger=\"HAIL\"/>\n<dialog>\"Hey traveller! Welcome to Black Stump station. We have some problems with Bandits out here in The Bush right now. We can help you stock up on good equipment so they don't hassle you.\"</dialog>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">\"If you are short on cash the outpost on Spruce always pay good money for Supplies. Would you like to make a supply run?\"</dialog>\n<add-to-quest-list/>\n<give item=\"Supplies\"/>\n<mark-on-map dest=\"Spruce\" color=\"FF0\" icon=\"rhomb\"/>\n<condition have-item=\"Supplies\" at-dest=\"Spruce\" />\n<dialog ok=\"SELL\" cancel=\"LEAVE\">The small outpost on the surface of the planet hail you. Asking if you have supplies they can buy.</dialog>\n<take item=\"Supplies\"/>\n<give credits=\"200\"/>\n<mark-on-map dest=\"Black Stump\" color=\"FF0\" icon=\"rhomb\"/>\n<condition at-dest=\"Black Stump\"/>\n<dialog>\"Good work with the supply run. A bit dangerous out there now with all the Bandits.\"</dialog>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">\"One of those bandits took out a transport headed here. It crashed on Pine, we are interested in any Supplies that might have survived. Can you help us?\"</dialog>\n<mark-on-map dest=\"Pine\" color=\"FF0\" icon=\"rhomb\"/>\n<place-item dest=\"Pine\" item=\"Supplies\"/>\n<condition have-item=\"Supplies\"/>\n<mark-on-map dest=\"Black Stump\" color=\"FF0\" icon=\"rhomb\"/>\n<condition at-dest=\"Black Stump\" have-item=\"Supplies\" trigger=\"GIVE SUPPLIES\"/>\n<take item=\"Supplies\"/>\n<give credits=\"200\"/>\n<dialog>\"Excellent! These supplies are sorely needed out here in The Bush.\"</dialog>\n<dialog>\"If you want to take on the Bandits to the south you are going to need a better ship. Our SHIPYARD can help you.\"</dialog>\n\n",
+      "xml": "\n<condition at-dest=\"Black Stump\" trigger=\"HAIL\"/>\n<dialog>_\"Hey traveller! Welcome to Black Stump station. We have some problems with Bandits out here in The Bush right now. We can help you stock up on good equipment so they don't hassle you.\"_</dialog>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">_\"If you are short on cash the outpost on Spruce always pay good money for Supplies. Would you like to make a supply run?\"_</dialog>\n<add-to-quest-list/>\n<give item=\"Supplies\"/>\n<mark-on-map dest=\"Spruce\" color=\"FF0\" icon=\"rhomb\"/>\n<condition have-item=\"Supplies\" at-dest=\"Spruce\" />\n<dialog ok=\"SELL\" cancel=\"LEAVE\">The small outpost on the surface of the planet hail you. Asking if you have supplies they can buy.</dialog>\n<take item=\"Supplies\"/>\n<give credits=\"200\"/>\n<mark-on-map dest=\"Black Stump\" color=\"FF0\" icon=\"rhomb\"/>\n<condition at-dest=\"Black Stump\"/>\n<dialog>_\"Good work with the supply run. A bit dangerous out there now with all the Bandits.\"_</dialog>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">_\"One of those bandits took out a transport headed here. It crashed on Pine, we are interested in any Supplies that might have survived. Can you help us?\"_</dialog>\n<mark-on-map dest=\"Pine\" color=\"FF0\" icon=\"rhomb\"/>\n<place-item dest=\"Pine\" item=\"Supplies\"/>\n<condition have-item=\"Supplies\"/>\n<mark-on-map dest=\"Black Stump\" color=\"FF0\" icon=\"rhomb\"/>\n<condition at-dest=\"Black Stump\" have-item=\"Supplies\" trigger=\"GIVE SUPPLIES\"/>\n<take item=\"Supplies\"/>\n<give credits=\"200\"/>\n<dialog>_\"Excellent! These supplies are sorely needed out here in The Bush.\"_</dialog>\n<dialog>_\"If you want to take on the Bandits to the south you are going to need a better ship. Our SHIPYARD can help you.\"_</dialog>\n\n",
       "tags": "outback"
     },
     {
@@ -1373,7 +1404,7 @@
       "name": "Buoy",
       "geometry": "composite",
       "res": 8,
-      "transform": [["scale", 1.2, 1.2, 1.2], ["rotate", 0, 0, 0], ["translate", 0, 0, -80]],
+      "transform": [["scale", 1.3, 1.3, 1.3], ["rotate", 0, -0.4, 0], ["translate", 0, 0, -82]],
       "path": [[40, 0, 0], [38, 0, 7], [30, 0, 10], [22, 0, 7], [20, 0, 0], [22, 0, -7], [30, 0, -10], [38, 0, -7], [40, 0, 0]],
       "parts": [
         {
@@ -1483,7 +1514,7 @@
     {
       "name": "CES Interplan",
       "geometry": "composite",
-      "transform": [["scale", 8, 8, 8], ["rotate", 1.57, 0, 0], ["translate", 0, -50, -100]],
+      "transform": [["scale", 7, 7, 7], ["rotate", 1.57, 0, 0], ["translate", 0, -50, -90]],
       "parts": [
         {
           "geometry": "lathe",
@@ -1499,7 +1530,7 @@
     {
       "name": "CES Bioculus",
       "geometry": "composite",
-      "transform": [["scale", 8, 8, 8], ["rotate", 1.57, 0, 0], ["translate", 0, -50, -70]],
+      "transform": [["scale", 7, 7, 7], ["rotate", 1.57, 0, 0], ["translate", 0, -50, -40]],
       "parts": [
         {
           "geometry": "lathe",
@@ -1507,23 +1538,25 @@
           "transform": [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
           "path": [[0, 0, -13], [3, 0, -10], [3, 0, -1.5], [1.5, 0, 0], [1.5, 0, 21.5], [2, 0, 22], [2, 0, 28], [0, 0, 30]]
         },
-        {"geometry": "lathe", "res": 7, "transform": [["scale", 1, 1, 1], ["rotate", 0, 0, 0], ["translate", 12, 0, 0]], "path": [[0, 0, 0], [6, 0, 0], [7, 0, -0.5], [6, 0, 0], [1, 0, 0], [1, 0, 6]]},
         {
           "geometry": "lathe",
-          "res": 4,
-          "transform": [["scale", 1, 1, 1], ["rotate", 0, 0, 0.23], ["translate", -6.4, 3.8, 5]],
-          "path": [[0, 0, -16], [0.3, 0, -15], [0.3, 0, -1.7], [1, 0, -1.2], [1, 0, 1.3], [0, 0, 2]]
+          "res": 3,
+          "transform": [["rotate", 0, 0, -1.05], ["translate", -1, 0, 0], ["parabola", 0.24, 0, 0], ["scale", 1, 0.3, 1], ["translate", -12, 0, 5.8]],
+          "path": [[0, 0, -6.8], [4, 0, -4.4], [4, 0, 4.4], [0, 0, 7]]
         },
-        {"geometry": "lathe", "res": 4, "transform": [["scale", 4, 1, 1], ["rotate", 0, 1.57, -0.54], ["translate", -2.3, 1.4, 5]], "path": [[0.3, 0, -4], [0.3, 0, 0]]},
-        {"geometry": "lathe", "res": 4, "transform": [["scale", 4, 1, 1], ["rotate", 0, -1.57, 0], ["translate", 3, 0, 5]], "path": [[0.3, 0, -8], [0.3, 0, 0]]},
-        {"geometry": "lathe", "res": 9, "transform": [["scale", 0.3, 0.3, 0.3], ["rotate", 0, 0, -0.52], ["translate", -5, -3, 4]], "path": [[6, 0, 0], [8, 0, -2], [10, 0, 0], [8, 0, 14], [6, 0, 0]]}
+        {
+          "geometry": "lathe",
+          "res": 3,
+          "transform": [["rotate", 0, 0, -1.05], ["translate", -1, 0, 0], ["parabola", 0.24, 0, 0], ["scale", 1, 0.3, 1], ["translate", -12, 0, 5.8], ["rotate", 0, 0, 3.14, 0]],
+          "path": [[0, 0, -6.8], [4, 0, -4.4], [4, 0, 4.4], [0, 0, 7]]
+        }
       ],
       "tags": "ship"
     },
     {
       "name": "CES Marathon",
       "geometry": "composite",
-      "transform": [["scale", 8, 8, 8], ["rotate", 1.57, 0, 0], ["translate", 0, -50, -80]],
+      "transform": [["scale", 7, 7, 7], ["rotate", 1.57, 0, 0], ["translate", 0, -50, -80]],
       "parts": [
         {
           "geometry": "lathe",
