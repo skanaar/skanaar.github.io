@@ -1342,6 +1342,7 @@
   ],
   "initialDestination": "Backwater",
   "models": [
+    {"name": "Sphere", "geometry": "cube", "transform": [["subdivide", 0, 0, 0], ["subdivide", 0, 0, 0], ["sphere", 50, 50, 50], ["rotate", 1, 1, 1], ["translate", 0, 0, -50]]},
     {
       "name": "Alien Buoy",
       "geometry": "composite",
@@ -1393,10 +1394,18 @@
       "transform": [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
       "parts": [
         {
-          "geometry": "lathe",
-          "res": 16,
-          "transform": [["rotate", 3.14, 1, 0], ["translate", 10, 20, 0], ["radial-wave", 3, 0.4, 0], ["scale", 2, 2, 1], ["rotate", 0.8, 0, 2.1], ["translate", 30, 20, 40]],
-          "path": [[0, 0, -40], [20, 0, -40], [45, 0, -20], [40, 0, 0], [45, 0, 20], [30, 0, 40], [0, 0, 30]]
+          "name": "Cube",
+          "geometry": "cube",
+          "transform": [
+            ["subdivide", 0, 0, 0],
+            ["subdivide", 0, 0, 0],
+            ["sphere", 100, 100, 20],
+            ["radial-wave", 4, 0.6, 0],
+            ["parabola", 0, 0.005, 0],
+            ["parabola", 0, 0, 0.006],
+            ["translate", 0, 0, 25],
+            ["rotate", 0, -0.4, 0.09]
+          ]
         }
       ]
     },
@@ -2360,5 +2369,6 @@
     {"name": "Outback", "audio": "light-years", "pos": {"x": 350, "y": -2008}, "radius": 460},
     {"name": "Pavonis", "audio": "light-years", "pos": {"x": -420, "y": -680}, "radius": 510},
     {"name": "The Bush", "audio": "light-years", "pos": {"x": 24, "y": -1302}, "radius": 270}
-  ]
+  ],
+  "name": "Skanaar's World"
 }

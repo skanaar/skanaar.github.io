@@ -5,6 +5,7 @@
     <a each={e in tabs} href="#{e}" onclick={pageChange} class={tab:true, active: page=='#'+e}>{e}</a>
     <div class="file-tools">
       <i>{!app.isSaved ? 'Unsaved' : 'Saved'}</i>
+      <b>{app.world.name}</b>
     </div>
   </div>
 
@@ -47,6 +48,8 @@
 
     function nullWorld() {
       return {
+        name: 'nullworld',
+        about: '',
         initialShip: '',
         initialState: 'surface',
         initialDestination: '',
@@ -125,7 +128,7 @@
     }
     .file-tools {
       float: right;
-      margin-top: 3px;
+      margin: 6px 6px 0 0;
     }
     a.toggle-tab {
       width: 20px;

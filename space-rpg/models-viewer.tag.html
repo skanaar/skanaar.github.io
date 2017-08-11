@@ -157,7 +157,7 @@
       switch(model.geometry) {
       case 'lathe': return applyTransforms(lathe(model), model)
       case 'composite': return applyTransforms(_.flatten(model.parts.map(buildMesh), true), model)
-      case 'sphere': return applyTransforms(sphere(model), model)
+      case 'cube': return applyTransforms(cube(), model)
       case 'mesh': return applyTransforms(model.quads, model)
       }
     }
@@ -170,6 +170,17 @@
       })
       self.mesh = _.sortBy(self.mesh, quad => -(quad[0][2]+quad[2][2]))
       self.box = applyPerspective([[[-170,-170,0], [-170,170,0], [170,170,0], [170,-170,0]]])
+    }
+
+    function cube() {
+      return [
+        Quad(Vec(-1,-1,1),Vec(-1,1,1),Vec(1,1,1),Vec(1,-1,1)),
+        Quad(Vec(-1,-1,-1),Vec(1,-1,-1),Vec(1,1,-1),Vec(-1,1,-1)),
+        Quad(Vec(-1,-1,-1),Vec(-1,1,-1),Vec(-1,1,1),Vec(-1,-1,1)),
+        Quad(Vec(1,1,-1),Vec(1,-1,-1),Vec(1,-1,1),Vec(1,1,1)),
+        Quad(Vec(1,-1,-1),Vec(-1,-1,-1),Vec(-1,-1,1),Vec(1,-1,1)),
+        Quad(Vec(1,1,1),Vec(-1,1,1),Vec(-1,1,-1),Vec(1,1,-1))
+      ]
     }
 
     function lathe(model) {
@@ -202,6 +213,17 @@
       return [p[0]*radius, p[1]*radius, p[2]]
     }
 
+    function subdivideQuad(quad) {
+      let mid = (i,j) => vmult(0.5, vadd(quad[i], quad[j]))
+      let center = vmult(0.5, vadd(mid(0,1), mid(2,3)))
+      return [
+        [quad[0], mid(0,1), center, mid(0,3)],
+        [mid(0,1), quad[1], mid(1,2), center],
+        [center, mid(1,2), quad[2], mid(2,3)],
+        [mid(3,0), center, mid(2,3), quad[3]]
+      ]
+    }
+
     function transformMesh(mesh, m) {
       if (m[0] == 'scale')
         return mesh.map(quad => transformQuad(quad, scale(m[1], m[2], m[3])))
@@ -209,9 +231,15 @@
         return mesh.map(quad => transformQuad(quad, rotateXYZ(m[1], m[2], m[3])))
       if (m[0] == 'translate')
         return mesh.map(quad => quad.map(p => [p[0]+m[1], p[1]+m[2], p[2]+m[3]]))
+      if (m[0] == 'subdivide')
+        return _.flatten(mesh.map(subdivideQuad), true)
       if (m[0] == 'parabola'){
         var vec = [m[1], m[2], m[3]]
         return mesh.map(quad => quad.map(p => parabola(p, vec)))
+      }
+      if (m[0] == 'sphere'){
+        var s = scale(m[1], m[2], m[3])
+        return mesh.map(quad => quad.map(p => mapply(s, vnormalize(p))))
       }
       if (m[0] == 'radial-wave'){
         var vec = [m[1], m[2], m[3]]

@@ -20,10 +20,6 @@
     <div class="btn-group">
       <a class="toggle-btn" onclick={up}>Up in list</a><a class="toggle-btn" onclick={down}>Down in list</a>
     </div>
-    <select onchange={setInitialState} value={world.initialState} ref="stateSelect">
-      <option value="surface">Start on surface</option>
-      <option value="space">Start in space</option>
-    </select>
   </div>
 
   <div class="sidebar">
@@ -67,9 +63,6 @@
     self.filter = null
     self.allTags = () => app.allTags(self.world.quests).filter(e => e)
     self.filteredQuests = () => app.tagFilter(self.world.quests, self.filter)
-    self.setInitialState = function () {
-      self.world.initialState = self.refs.stateSelect.value
-    }
 
     self.setFilter = function (type) {
       return () => self.filter = (self.filter == type ? null : type)

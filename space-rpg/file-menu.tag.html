@@ -1,5 +1,19 @@
 <file-menu>
   <div class="sidebar file-menu">
+
+    <label>World name</label>
+    <input type=text ref="nameField" onchange={setWorldName} value={world.name}><br/>
+
+    <label>Starting conditions</label>
+    <div class="input-grid">
+      <em>Start at</em> <input readonly value={world.initialDestination}><br/>
+      <em></em>       
+      <select onchange={setInitialState} value={world.initialState} ref="stateSelect">
+        <option value="surface">on surface</option>
+        <option value="space">in space</option>
+      </select><br/>
+      <em>with ship</em>        <input readonly value={world.initialShip}>
+    </div>
     <label>Cloud storage</label>
 
     <div if={s3.isNull}>
@@ -35,7 +49,11 @@ localStorage.cloudStorage = {
     var self = this
     var app = self.opts.app || window.app
 
+    self.world = app.world
     self.cloudKey = 'worlds/world.json'
+
+    self.setWorldName = () => app.world.name = self.refs.nameField.value
+    self.setInitialState = () => self.world.initialState = self.refs.stateSelect.value
 
     self.loadDefault = () => _.fetch('world.json', loadWorldFrom)
     self.loadEmpty = () => loadWorldFrom(JSON.stringify(app.nullWorld()))
@@ -44,7 +62,10 @@ localStorage.cloudStorage = {
       app.events.trigger('save-world')
       self.refs.downloadLink.setAttribute('href', _.toDataUrl(_.stringify(app.getWorld(), { maxLength: 200 })))
     }
-    self.showCloudStorageHelp = () => alert(cloudHelp)
+    self.showCloudStorageHelp = () => {
+      alert(cloudHelp)
+      console.log(cloudHelp)
+    }
     self.loadFromCloud = function (){
       if (confirm('Overwrite current world with cloud data?'))
         self.s3.getObject({ Key: self.cloudKey }, handleError(loadWorldFrom))
