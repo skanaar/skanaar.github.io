@@ -25,6 +25,7 @@ window.validator = (function (){
     function undefErrors(pattern, defined, msg) {
       _.uniq(_.difference(inXml(quest.xml, pattern), defined)).forEach(e => error(msg, e))
     }
+    undefErrors(/state="[^"]+/gm, ['space', 'surface'], 'state should be either "space" or "surface"')
     undefErrors(/item="[^"]+/gm, world.items.map(e => e.name), 'undefined item')
     undefErrors(/loot="[^"]+/gm, world.items.map(e => e.name), 'undefined loot item')
     undefErrors(/dest="[^"]+/gm, world.destinations.map(e => e.name), 'undefined destination')
