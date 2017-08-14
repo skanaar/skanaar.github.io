@@ -23,7 +23,7 @@
         "maxshield": 0,
         "maxenergy": 0,
         "jump": 125,
-        "slots": 2
+        "slots": 3
       },
       "generator": {"hull": 1, "shield": 0, "energy": 0},
       "value": 200,
@@ -37,7 +37,7 @@
         "armor": 0,
         "cloak": 0,
         "jump": 0,
-        "slots": 3
+        "slots": 4
       },
       "generator": {"hull": 1, "shield": 0, "energy": 1},
       "name": "Kerr Runner",
@@ -53,7 +53,7 @@
         "maxshield": 5,
         "maxenergy": 10,
         "jump": 125,
-        "slots": 4
+        "slots": 5
       },
       "generator": {"hull": 1, "shield": 1, "energy": 2},
       "value": 1000,
@@ -67,7 +67,7 @@
         "armor": 0,
         "cloak": 0,
         "jump": 125,
-        "slots": 5
+        "slots": 6
       },
       "generator": {"hull": 2, "shield": 2, "energy": 2},
       "name": "Sloop",
@@ -472,6 +472,22 @@
       "name": "Shiny Meteorite"
     },
     {
+      "type": "rare",
+      "credits": 800,
+      "name": "Whale Cheese",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
       "type": "weapon",
       "credits": 1,
       "name": "Rusty Kinetic Gun",
@@ -610,20 +626,6 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -10},
-      "targetBuff": {"hull": -25, "shield": -25, "energy": 0},
-      "credits": 500,
-      "name": "Gamma Beam"
-    },
-    {
-      "type": "weapon",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
       "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
       "targetBuff": {"hull": -50, "shield": 0, "energy": 0},
       "credits": 500,
@@ -645,19 +647,17 @@
     },
     {
       "type": "weapon",
-      "credits": 10000,
-      "name": "Nanite Attack",
       "attr": {
         "maxhull": 0,
         "maxshield": 0,
         "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": -2, "shield": -2, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -10},
+      "targetBuff": {"hull": -25, "shield": -25, "energy": 0},
+      "credits": 500,
+      "name": "Gamma Beam"
     },
     {
       "type": "weapon",
@@ -676,18 +676,20 @@
       "targetBuff": {"hull": -4, "shield": -5, "energy": -6}
     },
     {
-      "type": "tool",
+      "type": "weapon",
+      "credits": 10000,
+      "name": "Nanite Attack",
       "attr": {
         "maxhull": 0,
         "maxshield": 0,
         "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 0, "shield": 5, "energy": -10},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 5,
-      "name": "Recharge Loop"
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": -2, "shield": -2, "energy": 0}
     },
     {
       "type": "tool",
@@ -712,10 +714,10 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 0, "shield": 10, "energy": -10},
+      "playerBuff": {"hull": 0, "shield": 5, "energy": -10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 20,
-      "name": "Recharge Clamp"
+      "credits": 5,
+      "name": "Recharge Loop"
     },
     {
       "type": "tool",
@@ -740,10 +742,10 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 0, "shield": 15, "energy": 10},
+      "playerBuff": {"hull": 0, "shield": 10, "energy": -10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 45,
-      "name": "Recharge Coil"
+      "credits": 20,
+      "name": "Recharge Clamp"
     },
     {
       "type": "tool",
@@ -768,10 +770,10 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 20, "shield": 0, "energy": -10},
+      "playerBuff": {"hull": 0, "shield": 15, "energy": 10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 80,
-      "name": "Nano Repairers"
+      "credits": 45,
+      "name": "Recharge Coil"
     },
     {
       "type": "tool",
@@ -786,6 +788,20 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 80,
       "name": "Recharge Pump"
+    },
+    {
+      "type": "tool",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 20, "shield": 0, "energy": -10},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 80,
+      "name": "Nano Repairers"
     },
     {
       "type": "tool",
@@ -965,6 +981,20 @@
       "type": "module",
       "attr": {
         "maxhull": 0,
+        "maxshield": 5,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 1, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 20,
+      "name": "Electron Shield"
+    },
+    {
+      "type": "module",
+      "attr": {
+        "maxhull": 0,
         "maxshield": 0,
         "maxenergy": 5,
         "jump": 0,
@@ -974,20 +1004,6 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 20,
       "name": "Tetragon Battery"
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 10,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 20,
-      "name": "Shield Pack"
     },
     {
       "type": "module",
@@ -1049,15 +1065,15 @@
       "type": "module",
       "attr": {
         "maxhull": 0,
-        "maxshield": 20,
+        "maxshield": 10,
         "maxenergy": 0,
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "playerBuff": {"hull": 0, "shield": 3, "energy": -1},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 80,
-      "name": "Shield Battery"
+      "name": "Proton Shield"
     },
     {
       "type": "module",
@@ -1082,10 +1098,10 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "playerBuff": {"hull": 0, "shield": 7, "energy": -3},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 180,
-      "name": "Shield Coil"
+      "name": "Monopole Shield"
     },
     {
       "type": "module",
@@ -1680,7 +1696,14 @@
       "trader": {
         "buy": 1.5,
         "sell": 0.75,
-        "inventory": ["Copper", "Barium Ore", "Tungsten"]
+        "inventory": [
+          "Copper",
+          "Barium Ore",
+          "Tungsten",
+          "Proton Shield",
+          "Electron Shield",
+          "Linear Reactor"
+        ]
       },
       "enemy": null,
       "treasures": []
@@ -1912,8 +1935,8 @@
     },
     {
       "pos": {"x": 661, "y": -530},
-      "name": "A6170",
-      "style": "asteroid-4",
+      "name": "Grazing Cosmic Whales",
+      "style": "anomaly-whales",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3260,9 +3283,9 @@
       "treasures": []
     },
     {
-      "pos": {"x": 1053, "y": -1116},
-      "name": "A3336",
-      "style": "asteroid-2",
+      "pos": {"x": 973, "y": -1076},
+      "name": "Som Phtia",
+      "style": "planet-soma",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3418,7 +3441,15 @@
     {
       "pos": {"x": 884, "y": -1362},
       "name": "Beryl Canis Lookout",
-      "style": "asteroid-1",
+      "style": "anomaly-soma-observatory",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 682, "y": -1466},
+      "name": "Cosmic Whales",
+      "style": "anomaly-whales",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3487,7 +3518,12 @@
     },
     {
       "name": "First Contact",
-      "xml": "\n<condition at-dest=\"Alien Reception\" />\n<dialog>The star ahead of you is Beryl Canis. The home of the Soma. A star that no one has visited, they Soma block all jump paths to their home.</dialog>\n<dialog>Around the alien buoy a Soma ship is parked. It does not attack you, perhaps you can approach and try to hail it.</dialog>\n<condition state=\"surface\" at-dest=\"Alien Reception\" trigger=\"HAIL\"/>\n<dialog>_\"Visitor. Starfarer! Many Soma are suspicious. And some are welcoming. Visitors should be careful.\"_</dialog>\n<dialog>_\"You have dealt with the Blue Seeds and Flowers. Be very careful with those. Bring us *Blue Seeds* from the asteroids to the south and we will vouch for you.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"A9725\" color=\"8F0\" icon=\"rhomb\"/>\n<place-item dest=\"A9725\" item=\"Blue seeds\" />\n<condition have-item=\"Blue seeds\" at-dest=\"A9725\"/>\n<mark-on-map dest=\"Alien Reception\" color=\"8F0\" icon=\"rhomb\"/>\n<condition state=\"surface\" have-item=\"Blue seeds\" at-dest=\"Alien Reception\" trigger=\"GIVE SEEDS\"/>\n<dialog>_\"The Soma is grateful. The blue flowers grow and multiply. A cycle. But is a flower is nurtured by us, it will branch that cycle and spawn a Soma.\"_</dialog>\n<dialog>_\"Go to our home world. We will spread the word our friendship. Some will distrust you, but many more will welcome you.\"_</dialog>\n<mark-on-map dest=\"Soma\" color=\"8F0\" icon=\"rhomb\"/>\n<condition state=\"space\" at-dest=\"Soma\" trigger=\"HAIL\"/>\n<dialog>You send a message toward the planet. The supposed home world of the Soma.\nUp until now you almost doubted the stories of their race, and now you are the first human to visit this system.</dialog>\n<dialog>_\"Starfarer. We hear you are a friend.\nWe propose an exchange, a trade as you call it. Go to *Beryl Canis Lookout A* and gather the *Essence*.\"_</dialog>\n<dialog>Up until now the communicatio with these aliens have been surprisingly smooth. But now you feel confused.</dialog>\n<mark-on-map dest=\"Beryl Canis Lookout\" color=\"8F0\" icon=\"rhomb\"/>\n<place-item dest=\"Beryl Canis Lookout\" item=\"Soma Essence\"/>\n<mark-on-map dest=\"Soma\" color=\"8F0\" icon=\"rhomb\"/>\n<dialog>The \"Essence\" is apparently some sort of data storage. Maybe. You are not sure. Now back to *Soma* to *Land* and hand it over.</dialog>\n<condition state=\"surface\" have-item=\"Soma Essence\" at-dest=\"Soma\" trigger=\"QUEST\"/>\n<dialog>Hesitantly a small drone approach you. It accepts the Essence and hurries away. The Soma are shy. You hear nothing on the radio. Confused you go back to the ship.</dialog>\n<dialog>In the cargo hold a new item sits. How they managed to deliver it is a mystery. One that you don't intend to investigate.</dialog>\n<give item=\"Self Healing Hull\"/>\n",
+      "xml": "\n<condition at-dest=\"Alien Reception\" />\n<dialog>The star ahead of you is Beryl Canis. The home of the Soma. A star that no one has visited, they Soma block all jump paths to their home.</dialog>\n<dialog>Around the alien buoy a Soma ship is parked. It does not attack you, perhaps you can approach and try to hail it.</dialog>\n<condition state=\"surface\" at-dest=\"Alien Reception\" trigger=\"HAIL\"/>\n<dialog>_\"Visitor. Starfarer! Many Soma are suspicious. And some are welcoming. Visitors should be careful.\"_</dialog>\n<dialog>_\"You have dealt with the Blue Seeds and Flowers. Be very careful with those. Bring us *Blue Seeds* from the asteroids to the south and we will vouch for you.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"A9725\" color=\"8F0\" icon=\"rhomb\"/>\n<place-item dest=\"A9725\" item=\"Blue seeds\" />\n<condition have-item=\"Blue seeds\" at-dest=\"A9725\"/>\n<mark-on-map dest=\"Alien Reception\" color=\"8F0\" icon=\"rhomb\"/>\n<condition state=\"surface\" have-item=\"Blue seeds\" at-dest=\"Alien Reception\" trigger=\"GIVE SEEDS\"/>\n<dialog>_\"The Soma is grateful. The blue flowers grow and multiply. A cycle. But if a flower is nurtured by us, it will branch that cycle and spawn a Soma.\"_</dialog>\n<dialog>_\"Go to our home world. We will spread the word our friendship. Some will distrust you, but many more will welcome you.\"_</dialog>\n<mark-on-map dest=\"Soma\" color=\"8F0\" icon=\"rhomb\"/>\n<condition state=\"space\" at-dest=\"Soma\" trigger=\"HAIL\"/>\n<dialog>You send a message toward the planet. The supposed home world of the Soma.\nUp until now you almost doubted the stories of their race, and now you are the first human to visit this system.</dialog>\n<dialog>_\"Starfarer. We hear you are a friend.\nWe propose an exchange, a trade as you call it. Go to *Beryl Canis Lookout A* and gather the *Essence*.\"_</dialog>\n<dialog>Up until now the communicatio with these aliens have been surprisingly smooth. But now you feel confused.</dialog>\n<mark-on-map dest=\"Beryl Canis Lookout\" color=\"8F0\" icon=\"rhomb\"/>\n<place-item dest=\"Beryl Canis Lookout\" item=\"Soma Essence\"/>\n<mark-on-map dest=\"Soma\" color=\"8F0\" icon=\"rhomb\"/>\n<dialog>The \"Essence\" is apparently some sort of data storage. Maybe. You are not sure. Now back to *Soma* to *Land* and hand it over.</dialog>\n<condition state=\"surface\" have-item=\"Soma Essence\" at-dest=\"Soma\" trigger=\"QUEST\"/>\n<dialog>Hesitantly a small drone approach you. It accepts the Essence and hurries away. The Soma are shy. You hear nothing on the radio. Confused you go back to the ship.</dialog>\n<dialog>In the cargo hold a new item sits. How they managed to deliver it is a mystery. One that you don't intend to investigate.</dialog>\n<give item=\"Self Healing Hull\"/>\n",
+      "tags": "soma"
+    },
+    {
+      "name": "Milking Whales",
+      "xml": "<condition at-dest=\"Som Phtia\" trigger=\"HAIL\"/>\n<dialog>_\"We Soma have worshipped the Cosmic Whales for generations. But we cannot approach them. A visitor however can. Be a friend of Soma and find the elusive *Cosmic Whales*. Find them and bring us their milk.\"_</dialog>\n<add-to-quest-list/>\n<condition state=\"surface\" at-dest=\"Cosmic Whales\" trigger=\"MILK\"/>\n<dialog>The graceful creatures excrete a white liquid that form a glittering trail in space. Probably nothing to do with milk but you collect it anyway.</dialog>\n<mark-on-map dest=\"Som Phtia\" color=\"FFF\" icon=\"drop\"/>\n<condition at-dest=\"Som Phtia\" trigger=\"GIVE MILK\"/>\n<dialog>_\"This milk is surely a prize. The visitor is truly a friend of Soma.\"_</dialog>\n<dialog>_\"Whales thrive around the blue Soma sun. But they are not from here. Far to the south are whales that give an even thicker milk. We will mark the grazing grounds for you. Go there!\"_</dialog>\n<mark-on-map dest=\"Grazing Cosmic Whales\" color=\"FFF\" icon=\"drop\"/>\n<condition state=\"surface\" at-dest=\"Grazing Cosmic Whales\" trigger=\"MILK\"/>\n<dialog>Majestic creatures. You carefully collect their milk as they swin in the stellar breeze.</dialog>\n<mark-on-map dest=\"Som Phtia\" color=\"FFF\" icon=\"drop\"/>\n<condition state=\"space\" at-dest=\"Som Phtia\" trigger=\"GIVE MILK\"/>\n<dialog>_\"Soma are forever grateful. Wait here while we skim the milk.\"_</dialog>\n<condition state=\"space\" at-dest=\"Som Phtia\" trigger=\"DAIRY\"/>\n<dialog>The Soma don't answer you directly. Silently they send a drone that deliver a thick white liquid to your ship.</dialog>\n<dialog>_\"Friend! Let the cream bake in the hotness of the Soma Sun. Go to the *Lookout* as generations of Soma has done.\"_</dialog>\n<condition state=\"surface\" at-dest=\"Beryl Canis Lookout\" trigger=\"BAKE MILK\"/>\n<dialog>The Soma are peculiar. This substance and this process have hardly anything in common with milk. But that is how they consistently translate it.</dialog>\n<dialog>Scalding heat from Beryl Canis roast your hull, but also bake the mysterious white \"cream\" into something new.</dialog>\n<give item=\"Whale Cheese\"/>",
       "tags": "soma"
     },
     {
@@ -3778,6 +3814,75 @@
   ],
   "initialDestination": "Backwater",
   "models": [
+    {
+      "name": "Cosmic Whales",
+      "geometry": "composite",
+      "transform": [
+        ["scale", 1, 1, 1],
+        ["rotate", 3.14, 0, 0],
+        ["translate", 40, 40, -50]
+      ],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 8,
+          "transform": [
+            ["scale", 0.8, 0.8, 0.9],
+            ["rotate", -1.57, 0, -0.1],
+            ["translate", 0, 0, 0],
+            ["parabola", 0, 0, -0.002],
+            ["translate", 50, 0, 20]
+          ],
+          "path": [
+            [0, 0, 0],
+            [30, 0, -30],
+            [45, 0, -20],
+            [50, 0, 0],
+            [50, 0, 30],
+            [38, 0, 70],
+            [0, 0, 150]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 8,
+          "transform": [
+            ["scale", 0.7, 0.7, 1],
+            ["rotate", -1.57, 0, -0.2],
+            ["parabola", 0, 0, 0.002],
+            ["translate", -100, 70, -10]
+          ],
+          "path": [
+            [0, 0, 0],
+            [30, 0, -30],
+            [45, 0, -20],
+            [50, 0, 0],
+            [50, 0, 30],
+            [38, 0, 70],
+            [0, 0, 150]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 8,
+          "transform": [
+            ["scale", 1, 1, 1],
+            ["rotate", -1.57, 0, 0],
+            ["parabola", 0, 0, 0.002],
+            ["translate", -40, -60, 0]
+          ],
+          "path": [
+            [0, 0, 0],
+            [30, 0, -30],
+            [45, 0, -20],
+            [50, 0, 0],
+            [50, 0, 30],
+            [38, 0, 70],
+            [0, 0, 150]
+          ]
+        }
+      ]
+    },
     {
       "name": "Sphere",
       "geometry": "cube",
@@ -5928,6 +6033,20 @@
       },
       "surface": null,
       "model": "Thanatos"
+    },
+    {
+      "id": "anomaly-whales",
+      "type": "anomaly",
+      "desc": "",
+      "celestial": {
+        "r": 4,
+        "amb": 0.2,
+        "oct": 3,
+        "zoom": 10,
+        "color": ["F84", "F84"]
+      },
+      "surface": null,
+      "model": "Cosmic Whales"
     },
     {
       "type": "asteroid",

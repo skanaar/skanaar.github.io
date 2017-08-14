@@ -31,7 +31,7 @@ window.validator = (function (){
     undefErrors(/dest="[^"]+/gm, world.destinations.map(e => e.name), 'undefined destination')
     undefErrors(/enemy="[^"]+/gm, world.enemies.map(e => e.name), 'undefined enemy')
     undefErrors(/ship="[^"]+/gm, world.ships.map(e => e.name), 'undefined ship')
-    undefErrors(/icon="[^"]+/gm, ['enter', 'exit', 'arrow', 'rhomb', 'chevrons', 'square'], 'undefined icon')
+    undefErrors(/icon="[^"]+/gm, ['enter', 'exit', 'arrow', 'rhomb', 'chevrons', 'square', 'drop'], 'undefined icon')
     inXml(quest.xml, /color="[^"]+/gm).filter(isInvalidColor).forEach(e => error('invalid color', e))
     inXml(quest.xml, /credits="[^"]+/gm).filter(e => isNaN(+e)).forEach(e => error('credits must be a number', e))
     inXml(quest.xml, /jump="[^"]+/gm).filter(e => isNaN(+e)).forEach(e => error('jump must be a number', e))
