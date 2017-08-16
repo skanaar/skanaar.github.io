@@ -367,21 +367,7 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 5,
-      "name": "Thanatos core"
-    },
-    {
-      "type": "rare",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 5,
-      "name": "Water sample"
+      "name": "Thanatos mesh"
     },
     {
       "type": "rare",
@@ -409,7 +395,21 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 5,
-      "name": "Thanatos mesh"
+      "name": "Water sample"
+    },
+    {
+      "type": "rare",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 5,
+      "name": "Thanatos core"
     },
     {
       "type": "rare",
@@ -626,10 +626,10 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
-      "targetBuff": {"hull": -50, "shield": 0, "energy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -10},
+      "targetBuff": {"hull": -25, "shield": -25, "energy": 0},
       "credits": 500,
-      "name": "Mass Gun"
+      "name": "Gamma Beam"
     },
     {
       "type": "weapon",
@@ -654,26 +654,10 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -10},
-      "targetBuff": {"hull": -25, "shield": -25, "energy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
+      "targetBuff": {"hull": -50, "shield": 0, "energy": 0},
       "credits": 500,
-      "name": "Gamma Beam"
-    },
-    {
-      "type": "weapon",
-      "credits": 10000,
-      "name": "Worm Beam",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -50},
-      "targetBuff": {"hull": -4, "shield": -5, "energy": -6}
+      "name": "Mass Gun"
     },
     {
       "type": "weapon",
@@ -692,18 +676,20 @@
       "targetBuff": {"hull": -2, "shield": -2, "energy": 0}
     },
     {
-      "type": "tool",
+      "type": "weapon",
+      "credits": 10000,
+      "name": "Worm Beam",
       "attr": {
         "maxhull": 0,
         "maxshield": 0,
         "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 2, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 5,
-      "name": "Repair Kit"
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -50},
+      "targetBuff": {"hull": -4, "shield": -5, "energy": -6}
     },
     {
       "type": "tool",
@@ -718,6 +704,20 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 5,
       "name": "Recharge Loop"
+    },
+    {
+      "type": "tool",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 2, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 5,
+      "name": "Repair Kit"
     },
     {
       "type": "tool",
@@ -784,10 +784,10 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 0, "shield": 20, "energy": -10},
+      "playerBuff": {"hull": 20, "shield": 0, "energy": -10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 80,
-      "name": "Recharge Pump"
+      "name": "Nano Repairers"
     },
     {
       "type": "tool",
@@ -798,10 +798,10 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 20, "shield": 0, "energy": -10},
+      "playerBuff": {"hull": 0, "shield": 20, "energy": -10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 80,
-      "name": "Nano Repairers"
+      "name": "Recharge Pump"
     },
     {
       "type": "tool",
@@ -928,10 +928,10 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 0, "shield": 4, "energy": -4},
+      "playerBuff": {"hull": 4, "shield": 0, "energy": -4},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 3,
-      "name": "Shield Core Mk2"
+      "name": "Nanite Swarm"
     },
     {
       "type": "module",
@@ -942,10 +942,10 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 4, "shield": 0, "energy": -4},
+      "playerBuff": {"hull": 0, "shield": 4, "energy": -4},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 3,
-      "name": "Nanite Swarm"
+      "name": "Shield Core Mk2"
     },
     {
       "type": "module",
@@ -1028,6 +1028,20 @@
         "jump": 0,
         "slots": 0
       },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 4},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 50,
+      "name": "Torii Reactor"
+    },
+    {
+      "type": "module",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 6},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 50,
@@ -1046,20 +1060,6 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 50,
       "name": "Null Reactor"
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 4},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 50,
-      "name": "Torii Reactor"
     },
     {
       "type": "module",
@@ -1277,6 +1277,54 @@
       "type": "common",
       "credits": 80,
       "name": "Sky Crystals",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "type": "quest",
+      "credits": 0,
+      "name": "Flight log",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "type": "quest",
+      "credits": 0,
+      "name": "Crew of SS Thunder",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "type": "quest",
+      "credits": 0,
+      "name": "Soma Jump Coords",
       "attr": {
         "maxhull": 0,
         "maxshield": 0,
@@ -1725,7 +1773,7 @@
       "treasures": ["Alien Fossil", "Copper", "Platinum"]
     },
     {
-      "pos": {"x": -149, "y": -1011},
+      "pos": {"x": -129, "y": -1051},
       "name": "A4989",
       "style": "asteroid-9",
       "trader": null,
@@ -2454,7 +2502,7 @@
       "style": "asteroid-5",
       "trader": null,
       "enemy": null,
-      "treasures": []
+      "treasures": ["Thanatos nacelle"]
     },
     {
       "pos": {"x": -388, "y": -1551},
@@ -3119,7 +3167,7 @@
       "name": "Outback A089",
       "style": "asteroid-2",
       "trader": null,
-      "enemy": {"type": "Monitor Drone", "loot": ["Alien Artifact"]},
+      "enemy": null,
       "treasures": ["Barium Ore"]
     },
     {
@@ -3127,7 +3175,7 @@
       "name": "Outback A7769",
       "style": "asteroid-6",
       "trader": null,
-      "enemy": null,
+      "enemy": {"type": "Monitor Drone", "loot": ["Tungsten", "Platinum"]},
       "treasures": ["Copper", "Barium Ore"]
     },
     {
@@ -3428,7 +3476,7 @@
       "style": "asteroid-6",
       "trader": null,
       "enemy": null,
-      "treasures": []
+      "treasures": ["Thanatos core", "Water sample"]
     },
     {
       "pos": {"x": 634, "y": -2292},
@@ -3453,6 +3501,30 @@
       "trader": null,
       "enemy": null,
       "treasures": []
+    },
+    {
+      "pos": {"x": 62, "y": -2016},
+      "name": "Ship in distress",
+      "style": "anomaly-broken-sloop",
+      "trader": null,
+      "enemy": null,
+      "treasures": ["Electron Shield", "Sky Crystals"]
+    },
+    {
+      "pos": {"x": -148, "y": -984},
+      "name": "Pavonis Police",
+      "style": "anomaly-tiendong",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -232, "y": -840},
+      "name": "Mirror Moon",
+      "style": "planet-hell-5",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
     }
   ],
   "quests": [
@@ -3469,7 +3541,9 @@
     {
       "name": "Start of an adventure",
       "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n_\"Hey hitchhiker! This is your stop.\"_\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a weird signature. If you *EXPLORE* the area you might score big time!</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog>You find the meteorite resting on the ground. A shiny lump that is surprisingly light when you load it into the rover.</dialog>\n<dialog>If you *TRADE* the meteroite for cash, you will earn a small fortune.</dialog>\n<condition have-credits=\"200\"/>\n<dialog>_\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. Enter the *SHIPYARD* if you are interested.\"_</dialog>\n<condition have-ship=\"Kerr Clipper\" />\n<dialog>_\"Now you can *LIFT OFF* and leave this planet.\"\n\n\"And good luck kid! It is dangerous out there.\"_</dialog>\n<dialog>Your new ship is really a piece of junk. But it is yours.\nThe trader gave you the advice to visit Samsom's Folly and buy some weapons. Protection is good.</dialog>\n<mark-on-map dest=\"Samson's Folly\"/>\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>_\"My friend at Backwater said you would be coming. We have a nice Kinetic Gun in stock. You are welcome to *LAND* and *TRADE* with us here at Samson's Folly.\"_</dialog>\n<condition have-item=\"Rusty Kinetic Gun\"/>\n<dialog>You now have a Rusty Kinetic Gun, a basic weapon. Tap you ship hologram to open your *PROFILE* and *INSTALL* your new weapon</dialog>\n<dialog>_\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"_</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n",
-      "tags": "outback"
+      "tags": "outback",
+      "color": "07f",
+      "icon": "arrow"
     },
     {
       "name": "Shady spacer",
@@ -3478,53 +3552,97 @@
     },
     {
       "name": "Peril at Buoy 72",
-      "xml": "<condition at-dest=\"Buoy 68\"/>\n<dialog>You receive a transmission from a private yacht:\n_\"Help us. The way ahead is blocked by a malfunctioning drone. We don't dare to proceed. Your ship is armed, can you clear the path for us!\"_</dialog>\n<mark-on-map dest=\"Buoy 72\"/>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"Buoy 72\"/>\n<dialog>_\"Thank you for clearing the way for us! Here, take this to patch up any damage.\"_\n\nThey send over a basic Repair Kit. Might come in handy.</dialog>\n<give item=\"Repair Kit\"/>",
-      "tags": "outback"
+      "xml": "<condition at-dest=\"Buoy 68\"/>\n<dialog>You receive a transmission from a private yacht:\n_\"Help us. The way ahead is blocked by a malfunctioning drone. We don't dare to proceed. Your ship is armed, can you clear the path for us!\"_</dialog>\n<mark-on-map dest=\"Buoy 72\"/>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"Buoy 72\"/>\n<dialog>_\"Thank you for clearing the way for us! Here, take this to patch up any damage.\"_\n\nThey send over a basic Repair Kit. Might come in handy.</dialog>\n<give item=\"Repair Kit\"/>\n<dialog>When questioned why they were here in the Outback they say they wanted to see the flowers of the *Blue Forest*.</dialog>\n<mark-on-map dest=\"Blue Forest\" />\n<condition at-dest=\"Blue Forest\" />",
+      "tags": "outback",
+      "color": "88f",
+      "icon": "arrow"
     },
     {
       "name": "Outback Mining",
-      "xml": "\n<condition at-dest=\"Outback A563\" />\n<dialog>A scruffy ship is slowly passing by this asteroid. You radio it and ask if anything is wrong.</dialog>\n<dialog>_\"Hey man! I'm ok, my ship is just a bit overloaded. The area west of here is full of minerals that I have been mining. You should go there - there is enough for everyone.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Outback A089\" color=\"08F\" icon=\"arrow\"/>\n<condition have-item=\"Last message\" />\n<dialog>Exploring the asteroid you find a crashed ship. Inside it you find the inhabitants, dead, and a message. Words from dying spacefarers.</dialog>\n<dialog>_We have been attacked by reprogrammed Drones. They are not malfunctioning, someone is doing this to them._</dialog>\n",
+      "xml": "\n<condition at-dest=\"Outback A563\" />\n<dialog>A scruffy ship is slowly passing by this asteroid. You radio it and ask if anything is wrong.</dialog>\n<dialog>_\"Hey man! I'm ok, my ship is just a bit overloaded. The area west of here is full of minerals that I have been mining. You should go there - there is enough for everyone.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Outback A089\" />\n<condition have-item=\"Last message\" />\n<dialog>Exploring the asteroid you find a crashed ship. Inside it you find the inhabitants, dead, and a message. Words from dying spacefarers.</dialog>\n<dialog>_We have been attacked by reprogrammed Drones. They are not malfunctioning, someone is doing this to them._</dialog>\n",
+      "tags": "outback",
+      "color": "80f",
+      "icon": "rhomb"
+    },
+    {
+      "name": "SS Thunder in Distress",
+      "xml": "\n<condition state=\"space\" at-dest=\"Outback A089\" no-enemy-at-dest=\"Outback A089\" />\n<dialog>_\"Mayday, Mayday, Mayday. This is SS Thunder. We are badly damaged and leaking air. 2 jumps west of Outback A089. Two souls on board.\"_</dialog>\n<dialog>A distress call. A ship, the SS Thunder, need help.</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ship in distress\" />\n<condition state=\"surface\" at-dest=\"Ship in distress\" trigger=\"SAVE CREW\"/>\n<give item=\"Crew of SS Thunder\"/>\n<dialog>_\"Thank you! We lost our pilot and would surely have died if not for you.\n\nWe need to get to *Pavonis Mirror*. Can you take us there?\"_</dialog>\n<mark-on-map dest=\"Pavonis Mirror\" />\n<condition state=\"space\" at-dest=\"A6114\"/>\n<dialog>The crew of the SS Thunder that you saved address you.\n_\"Hey, Captain. No need to inform the police, a lot of hassle you know. Just go south to Pavonis Mirror and we will be off your back.\"_</dialog>",
+      "tags": "outback",
+      "color": "f00",
+      "icon": "arrow"
+    },
+    {
+      "name": "Help the crew of SS Thunder",
+      "xml": "<condition state=\"surface\" at-dest=\"Pavonis Mirror\" trigger=\"RELEASE CREW\"/>\n<dialog>_\"Thank you! A true savior. Take this for your troubles, it might come in handy.\"_</dialog>\n<give credits=\"1000\"/>",
       "tags": "outback"
+    },
+    {
+      "name": "Investigate the SS Thunder",
+      "xml": "<condition state=\"space\" at-dest=\"Pavonis Police\"/>\n<dialog ok=\"YES I HAVE\" cancel=\"NOT A THING\">As you approach the police station they hail you.\n_\"Citizen, we are looking for any information as to the whereabouts of the SS Thunder. Have you seen anything.\"_</dialog>\n\n<condition state=\"surface\" have-item=\"Crew of SS Thunder\" at-dest=\"Pavonis Police\" trigger=\"TURN IN CREW\"/>\n<dialog>The officers look astonished as you present them with the crew of the SS Thunder.\n  _\"Wow, this was more than we hoped for!\"_</dialog>\n<dialog>_\"But to tell the truth we don't actually know what they have done. They won't say a thing to us but we have seen a string of suspicious activity coinciding with the SS Thunders path across the sector.\"_</dialog>\n<dialog ok=\"OK\" cancel=\"NOT RIGHT NOW\">_\"If we come storming in asking questions we won't get any answers. But a private investigator however... Are you up for some undercover work?.\"_</dialog>\n<dialog>_\"Investigate what happened to their ship. Any physical evidence that you can find, and the nearest station must have seen something. Ask around.\"_</dialog>\n<give credits=\"100\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ship in distress\" />\n<place-item dest=\"Ship in distress\" item=\"Flight log\"/>\n\n<condition have-item=\"Flight log\" />\n<mark-on-map dest=\"Black Stump\" />\n\n<condition state=\"surface\" at-dest=\"Black Stump\" trigger=\"ASK QUESTIONS\"/>\n<dialog>You snoop around the station. The deckmen say that they were really interested in the station drones.</dialog>\n<dialog>The Flight log say that they visited every destination that had problems with a malfunctioning drone. They probably cause this whole mess.</dialog>\n\n<condition state=\"surface\" at-dest=\"Pavonis Police\" trigger=\"GIVE INFO\"/>\n<dialog>_\"Drone manipulation? That figures. We started digging into their backstories. They are agents trying to destabilize Pavonis. With the evidence you got we have a solid case.\"_</dialog>\n<dialog>_\"Here is a state mandated reward for your work. Thank you and safe travels.\"_</dialog>\n<give credits=\"1000\"/>",
+      "tags": "outback",
+      "color": "0f0",
+      "icon": "arrow"
     },
     {
       "name": "Leave the Outback",
-      "xml": "\n<condition at-dest=\"Outback A34\" />\n<dialog>A Colonial Navy patrol craft is stationed at the asteroid.\n_\"Stop your engines Traveller. There are malfunctioning Striker Drones ahead. We guard here until reinforcements arrive.\"_</dialog>\n<dialog>If they are Striker Drones they have shields that can withstand physical damage. Perhaps Samson has a disruptor weapon that can take down the drones' shields.</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Samson's Folly\" color=\"0F0\" icon=\"arrow\"/>\n<place-inventory dest=\"Samson's Folly\" item=\"Photon Ray\"/>\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>You speak to Samson about the drones. She looks worried. But says she has something to sell you that might help.</dialog>\n<condition have-item=\"Photon Ray\" />\n<mark-on-map dest=\"Buoy Outback 36\" color=\"0F0\" icon=\"arrow\"/>\n<condition no-enemy-at-dest=\"Buoy Outback 36\" />\n<dialog>The Navy patrol slips past you once the area was cleared. They don't hail you, ashamed at being helped by a civilian.</dialog>",
-      "tags": "outback"
+      "xml": "\n<condition at-dest=\"Outback A34\" />\n<dialog>A Colonial Navy patrol craft is stationed at the asteroid.\n_\"Stop your engines Traveller. There are malfunctioning Striker Drones ahead. We guard here until reinforcements arrive.\"_</dialog>\n<dialog>If they are Striker Drones they have shields that can withstand physical damage. Perhaps Samson has a disruptor weapon that can take down the drones' shields.</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Samson's Folly\" />\n<place-inventory dest=\"Samson's Folly\" item=\"Photon Ray\"/>\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>You speak to Samson about the drones. She looks worried. But says she has something to sell you that might help.</dialog>\n<condition have-item=\"Photon Ray\" />\n<mark-on-map dest=\"Buoy Outback 36\" />\n<condition no-enemy-at-dest=\"Buoy Outback 36\" />\n<dialog>The Navy patrol slips past you once the area was cleared. They don't hail you, ashamed at being helped by a civilian.</dialog>",
+      "tags": "outback",
+      "color": "0f0",
+      "icon": "arrow"
     },
     {
       "name": "Bandits in The Bush",
-      "xml": "\n<condition at-dest=\"Black Stump\" trigger=\"HAIL\"/>\n<dialog>_\"Hey traveller! Welcome to Black Stump station. We have some problems with Bandits out here in The Bush right now. We can help you stock up on good equipment so they don't hassle you.\"_</dialog>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">_\"If you are short on cash the outpost on Spruce always pay good money for Supplies. Would you like to make a supply run?\"_</dialog>\n<add-to-quest-list/>\n<give item=\"Supplies\"/>\n<mark-on-map dest=\"Spruce\" color=\"FF0\" icon=\"rhomb\"/>\n<condition have-item=\"Supplies\" at-dest=\"Spruce\" />\n<dialog ok=\"SELL\" cancel=\"LEAVE\">The small outpost on the surface of the planet hail you. Asking if you have supplies they can buy.</dialog>\n<take item=\"Supplies\"/>\n<give credits=\"200\"/>\n<mark-on-map dest=\"Black Stump\" color=\"FF0\" icon=\"rhomb\"/>\n<condition at-dest=\"Black Stump\"/>\n<dialog>_\"Good work with the supply run. A bit dangerous out there now with all the Bandits.\"_</dialog>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">_\"One of those bandits took out a transport headed here. It crashed on Pine, we are interested in any Supplies that might have survived. Can you help us?\"_</dialog>\n<mark-on-map dest=\"Pine\" color=\"FF0\" icon=\"rhomb\"/>\n<place-item dest=\"Pine\" item=\"Supplies\"/>\n<condition have-item=\"Supplies\"/>\n<mark-on-map dest=\"Black Stump\" color=\"FF0\" icon=\"rhomb\"/>\n<condition at-dest=\"Black Stump\" have-item=\"Supplies\" trigger=\"GIVE SUPPLIES\"/>\n<take item=\"Supplies\"/>\n<give credits=\"200\"/>\n<dialog>_\"Excellent! These supplies are sorely needed out here in The Bush.\"_</dialog>\n<dialog>_\"If you want to take on the Bandits to the south you are going to need a better ship. Our SHIPYARD can help you.\"_</dialog>\n\n",
-      "tags": "outback"
+      "xml": "\n<condition at-dest=\"Black Stump\" trigger=\"HAIL\"/>\n<dialog>Black Stump station, you have heard of the place. Rough.\nYou listen in on their radio chatter.</dialog>\n<dialog>_\"... best booty in town. Say, did you hear about the SS Thunder that passed through here. They got into some trouble. They told us they were tourists but if you ask me there was something fishy with their setup...\"_</dialog>\n<condition at-dest=\"Black Stump\" trigger=\"HAIL\"/>\n<dialog>_\"Hey traveller! Welcome to Black Stump station. We have some problems with Bandits out here in The Bush right now. We can help you stock up on good equipment so they don't hassle you.\"_</dialog>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">_\"If you are short on cash the outpost on Spruce always pay good money for Supplies. Would you like to make a supply run?\"_</dialog>\n<add-to-quest-list/>\n<give item=\"Supplies\"/>\n<mark-on-map dest=\"Spruce\" />\n<condition have-item=\"Supplies\" at-dest=\"Spruce\" />\n<dialog ok=\"SELL\" cancel=\"LEAVE\">The small outpost on the surface of the planet hail you. Asking if you have supplies they can buy.</dialog>\n<take item=\"Supplies\"/>\n<give credits=\"200\"/>\n<mark-on-map dest=\"Black Stump\" />\n<condition at-dest=\"Black Stump\"/>\n<dialog>_\"Good work with the supply run. A bit dangerous out there now with all the Bandits.\"_</dialog>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">_\"One of those bandits took out a transport headed here. It crashed on Pine, we are interested in any Supplies that might have survived. Can you help us?\"_</dialog>\n<mark-on-map dest=\"Pine\" />\n<place-item dest=\"Pine\" item=\"Supplies\"/>\n<condition have-item=\"Supplies\"/>\n<mark-on-map dest=\"Black Stump\" />\n<condition at-dest=\"Black Stump\" have-item=\"Supplies\" trigger=\"GIVE SUPPLIES\"/>\n<take item=\"Supplies\"/>\n<give credits=\"200\"/>\n<dialog>_\"Excellent! These supplies are sorely needed out here in The Bush.\"_</dialog>\n<dialog>_\"If you want to take on the Bandits to the south you are going to need a better ship. Our SHIPYARD can help you.\"_</dialog>\n",
+      "tags": "outback",
+      "color": "ff0",
+      "icon": "rhomb"
     },
     {
       "name": "Bal Gru's stolen subsystems",
-      "xml": "<place-enemy dest=\"A3639\" enemy=\"Bandit\" loot=\"Subsystem cache\"/>\n<condition at-dest=\"Pizbui\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">\n\"Hey traveller! I'm Bal Gru, merchant in distress. Can you help me? Bandits robbed me of all of my subsystems. Can you get them back for me?\"\n</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"A3639\" icon=\"chevrons\" color=\"F48\" />\n<condition at-dest=\"Pizbui\" have-item=\"Subsystem cache\"/>\n<dialog>\n\"You have our stolen subsystems! This is invaluable to us. Here, take this artifact, it is the least we can give you.\"\n</dialog>\n<give item=\"Larato sigil\"/>\n<take item=\"Subsystem cache\"/>",
-      "tags": "wastes"
+      "xml": "<place-enemy dest=\"A3639\" enemy=\"Bandit\" loot=\"Subsystem cache\"/>\n<condition at-dest=\"Pizbui\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">\n\"Hey traveller! I'm Bal Gru, merchant in distress. Can you help me? Bandits robbed me of all of my subsystems. Can you get them back for me?\"\n</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"A3639\" />\n<condition at-dest=\"Pizbui\" have-item=\"Subsystem cache\"/>\n<dialog>\n\"You have our stolen subsystems! This is invaluable to us. Here, take this artifact, it is the least we can give you.\"\n</dialog>\n<give item=\"Larato sigil\"/>\n<take item=\"Subsystem cache\"/>",
+      "tags": "wastes",
+      "color": "f48",
+      "icon": "chevrons"
     },
     {
       "name": "Larato Gate",
-      "xml": "<condition at-dest=\"Larato Node\" trigger=\"ACTIVATE\" />\n<dialog ok=\"ENTER GATE\" cancel=\"LEAVE\">\nThe misty dark cloud in the aperture swirls.\n</dialog>\n<travel dest=\"Larato Gate\"/>\n<goto jump=\"-3\"/>",
-      "tags": "pavonis"
+      "xml": "<condition at-dest=\"Larato Node\" have-item=\"Larato sigil\" />\n<mark-on-map dest=\"Larato Node\" />\n<condition at-dest=\"Larato Node\" have-item=\"Larato sigil\" trigger=\"ACTIVATE\" />\n<dialog ok=\"ENTER GATE\" cancel=\"LEAVE\">\nThe misty dark cloud in the aperture swirls.\n</dialog>\n<travel dest=\"Larato Gate\"/>\n<goto jump=\"-3\"/>",
+      "tags": "pavonis",
+      "color": "0ff",
+      "icon": "enter"
     },
     {
       "name": "Larato Node",
-      "xml": "<condition at-dest=\"Larato Gate\" have-item=\"Larato sigil\" trigger=\"ANALYZE\"/>\n<dialog ok=\"APPROACH\" cancel=\"IGNORE\">\nThe Larato Gate is a ring of dirty stone needles. The Larato Sigil in your inventory is humming.\nShould you approach?\n</dialog>\n<dialog>\nThe gate's mass of needles swells and twitches. The aperture shimmers and turns into a misty black cloud.\n</dialog>\n<condition at-dest=\"Larato Gate\" trigger=\"ACTIVATE\"/>\n<dialog ok=\"ENTER GATE\" cancel=\"LEAVE\">\nThe misty dark cloud in the aperture swirls.\n</dialog>\n<travel dest=\"Larato Node\"/>\n<goto jump=\"-3\"/>",
-      "tags": ""
+      "xml": "<condition at-dest=\"Larato Gate\" have-item=\"Larato sigil\" />\n<mark-on-map dest=\"Larato Gate\" />\n<condition at-dest=\"Larato Gate\" have-item=\"Larato sigil\" trigger=\"ANALYZE\"/>\n<dialog ok=\"APPROACH\" cancel=\"IGNORE\">\nThe Larato Gate is a ring of dirty stone needles. The Larato Sigil in your inventory is humming.\nShould you approach?\n</dialog>\n<dialog>\nThe gate's mass of needles swells and twitches. The aperture shimmers and turns into a misty black cloud.\n</dialog>\n<condition at-dest=\"Larato Gate\" trigger=\"ACTIVATE\"/>\n<dialog ok=\"ENTER GATE\" cancel=\"LEAVE\">\nThe misty dark cloud in the aperture swirls.\n</dialog>\n<travel dest=\"Larato Node\"/>\n<goto jump=\"-3\"/>",
+      "tags": "",
+      "color": "0ff",
+      "icon": "exit"
     },
     {
       "name": "Blue seeds",
-      "xml": "<place-item dest=\"Blue Forest\" item=\"Blue seeds\"/>\n<condition have-item=\"Blue seeds\"/>\n<dialog>These Blue Seeds might take root in the right soil.</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Blue Ocean\" state=\"surface\" trigger=\"PLANT\"/>\n<dialog>You plant the Blue Seeds on a lonely island.</dialog>\n<condition not-at-dest=\"Blue Ocean\"/>\n<condition at-dest=\"Blue Ocean\" trigger=\"GATHER\"/>\n<dialog>You gather the Blue Flowers that sprung out of the planted seeds.</dialog>\n<give item=\"Blue flowers\"/>\n<condition at-dest=\"Buoy 187\" />\n<dialog>The flowers fill the cabin with a fragrant smell. Soothing.\nBut suddenly you grow dizzy, intoxicated. Your vision blurs as your work the ships controls in a stupor. Darkness!</dialog>\n<travel dest=\"Anomaly 2050\"/>\n<condition at-dest=\"Anomaly 2050\" />\n<dialog>You wake up. Horror! While drugged you must have overridden the safeties and made an unguided jump. Extremely dangerous. The ship got an emergency lock on some nearby debris and exited the jump.</dialog>\n<condition at-dest=\"Som Thia\" trigger=\"QUEST\" />\n<dialog>In orbit around the planet you find ancient relics. They seem to contain jump coordinates. With them you might dare to make another far jump back from this dead end.</dialog>\n<condition at-dest=\"Anomaly 2050\" trigger=\"LONG JUMP\" />\n<travel dest=\"Buoy 187\"/>\n<condition at-dest=\"Buoy 187\" trigger=\"LONG JUMP\" />\n<travel dest=\"Anomaly 2050\"/>\n<goto jump=\"-4\"/>",
-      "tags": "outback soma"
+      "xml": "<place-item dest=\"Blue Forest\" item=\"Blue seeds\"/>\n<condition have-item=\"Blue seeds\"/>\n<dialog>These Blue Seeds might take root in the right soil.</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Blue Ocean\" state=\"surface\" trigger=\"PLANT\"/>\n<dialog>You plant the Blue Seeds on a lonely island.</dialog>\n<condition not-at-dest=\"Blue Ocean\"/>\n<condition at-dest=\"Blue Ocean\" trigger=\"GATHER\"/>\n<dialog>You gather the Blue Flowers that sprung out of the planted seeds.</dialog>\n<give item=\"Blue flowers\"/>\n<condition at-dest=\"Buoy 187\" />\n<dialog>The flowers fill the cabin with a fragrant smell. Soothing.\nBut suddenly you grow dizzy, intoxicated. Your vision blurs as your work the ships controls in a stupor. Darkness!</dialog>\n<travel dest=\"Anomaly 2050\"/>\n<condition at-dest=\"Anomaly 2050\" />\n<dialog>You wake up. Horror! While drugged you must have overridden the safeties and made an unguided jump. Extremely dangerous. The ship got an emergency lock on some nearby debris and exited the jump.</dialog>\n<condition at-dest=\"Som Thia\" trigger=\"QUEST\" />\n<dialog>In orbit around the planet you find ancient relics. They seem to contain jump coordinates. With them you might dare to make another far jump back from this dead end.</dialog>\n<dialog>With the *Soma Jump Coords* you should now be able to make Long Jumps between *Buoy 187* and *Anomaly 2050*.</dialog>\n<give item=\"Soma Jump Coords\" />\n<mark-on-map dest=\"Anomaly 2050\" />\n<condition at-dest=\"Anomaly 2050\" have-item=\"Soma Jump Coords\" />\n<travel dest=\"Buoy 187\"/>\n<condition at-dest=\"Buoy 187\" trigger=\"LONG JUMP\" />\n<travel dest=\"Anomaly 2050\"/>\n<goto jump=\"-4\"/>",
+      "tags": "outback soma",
+      "color": "39f",
+      "icon": "arrow"
+    },
+    {
+      "name": "Soma Long Jump",
+      "xml": "<condition at-dest=\"Anomaly 2050\" have-item=\"Soma Jump Coords\" trigger=\"LONG JUMP\" />\n<travel dest=\"Buoy 187\"/>\n<condition at-dest=\"Buoy 187\" trigger=\"LONG JUMP\" />\n<travel dest=\"Anomaly 2050\"/>\n<goto jump=\"-4\"/>",
+      "tags": "soma"
     },
     {
       "name": "First Contact",
-      "xml": "\n<condition at-dest=\"Alien Reception\" />\n<dialog>The star ahead of you is Beryl Canis. The home of the Soma. A star that no one has visited, they Soma block all jump paths to their home.</dialog>\n<dialog>Around the alien buoy a Soma ship is parked. It does not attack you, perhaps you can approach and try to hail it.</dialog>\n<condition state=\"surface\" at-dest=\"Alien Reception\" trigger=\"HAIL\"/>\n<dialog>_\"Visitor. Starfarer! Many Soma are suspicious. And some are welcoming. Visitors should be careful.\"_</dialog>\n<dialog>_\"You have dealt with the Blue Seeds and Flowers. Be very careful with those. Bring us *Blue Seeds* from the asteroids to the south and we will vouch for you.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"A9725\" color=\"8F0\" icon=\"rhomb\"/>\n<place-item dest=\"A9725\" item=\"Blue seeds\" />\n<condition have-item=\"Blue seeds\" at-dest=\"A9725\"/>\n<mark-on-map dest=\"Alien Reception\" color=\"8F0\" icon=\"rhomb\"/>\n<condition state=\"surface\" have-item=\"Blue seeds\" at-dest=\"Alien Reception\" trigger=\"GIVE SEEDS\"/>\n<dialog>_\"The Soma is grateful. The blue flowers grow and multiply. A cycle. But if a flower is nurtured by us, it will branch that cycle and spawn a Soma.\"_</dialog>\n<dialog>_\"Go to our home world. We will spread the word our friendship. Some will distrust you, but many more will welcome you.\"_</dialog>\n<mark-on-map dest=\"Soma\" color=\"8F0\" icon=\"rhomb\"/>\n<condition state=\"space\" at-dest=\"Soma\" trigger=\"HAIL\"/>\n<dialog>You send a message toward the planet. The supposed home world of the Soma.\nUp until now you almost doubted the stories of their race, and now you are the first human to visit this system.</dialog>\n<dialog>_\"Starfarer. We hear you are a friend.\nWe propose an exchange, a trade as you call it. Go to *Beryl Canis Lookout A* and gather the *Essence*.\"_</dialog>\n<dialog>Up until now the communicatio with these aliens have been surprisingly smooth. But now you feel confused.</dialog>\n<mark-on-map dest=\"Beryl Canis Lookout\" color=\"8F0\" icon=\"rhomb\"/>\n<place-item dest=\"Beryl Canis Lookout\" item=\"Soma Essence\"/>\n<mark-on-map dest=\"Soma\" color=\"8F0\" icon=\"rhomb\"/>\n<dialog>The \"Essence\" is apparently some sort of data storage. Maybe. You are not sure. Now back to *Soma* to *Land* and hand it over.</dialog>\n<condition state=\"surface\" have-item=\"Soma Essence\" at-dest=\"Soma\" trigger=\"QUEST\"/>\n<dialog>Hesitantly a small drone approach you. It accepts the Essence and hurries away. The Soma are shy. You hear nothing on the radio. Confused you go back to the ship.</dialog>\n<dialog>In the cargo hold a new item sits. How they managed to deliver it is a mystery. One that you don't intend to investigate.</dialog>\n<give item=\"Self Healing Hull\"/>\n",
-      "tags": "soma"
+      "xml": "\n<condition at-dest=\"Alien Reception\" />\n<dialog>The star ahead of you is Beryl Canis. The home of the Soma. A star that no one has visited, they Soma block all jump paths to their home.</dialog>\n<dialog>Around the alien buoy a Soma ship is parked. It does not attack you, perhaps you can approach and try to hail it.</dialog>\n<condition state=\"surface\" at-dest=\"Alien Reception\" trigger=\"HAIL\"/>\n<dialog>_\"Visitor. Starfarer! Many Soma are suspicious. And some are welcoming. Visitors should be careful.\"_</dialog>\n<dialog>_\"You have dealt with the Blue Seeds and Flowers. Be very careful with those. Bring us *Blue Seeds* from the asteroids to the south and we will vouch for you.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"A9725\" />\n<place-item dest=\"A9725\" item=\"Blue seeds\" />\n<condition have-item=\"Blue seeds\" at-dest=\"A9725\"/>\n<mark-on-map dest=\"Alien Reception\" />\n<condition state=\"surface\" have-item=\"Blue seeds\" at-dest=\"Alien Reception\" trigger=\"GIVE SEEDS\"/>\n<dialog>_\"The Soma is grateful. The blue flowers grow and multiply. A cycle. But if a flower is nurtured by us, it will branch that cycle and spawn a Soma.\"_</dialog>\n<dialog>_\"Go to our home world. We will spread the word our friendship. Some will distrust you, but many more will welcome you.\"_</dialog>\n<mark-on-map dest=\"Soma\" />\n<condition state=\"space\" at-dest=\"Soma\" trigger=\"HAIL\"/>\n<dialog>You send a message toward the planet. The supposed home world of the Soma.\nUp until now you almost doubted the stories of their race, and now you are the first human to visit this system.</dialog>\n<dialog>_\"Starfarer. We hear you are a friend.\nWe propose an exchange, a trade as you call it. Go to *Beryl Canis Lookout A* and gather the *Essence*.\"_</dialog>\n<dialog>Up until now the communicatio with these aliens have been surprisingly smooth. But now you feel confused.</dialog>\n<mark-on-map dest=\"Beryl Canis Lookout\" />\n<place-item dest=\"Beryl Canis Lookout\" item=\"Soma Essence\"/>\n<mark-on-map dest=\"Soma\" />\n<condition state=\"surface\" have-item=\"Soma Essence\" at-dest=\"Soma\" trigger=\"QUEST\"/>\n<dialog>The \"Essence\" is apparently some sort of data storage. Maybe. You are not sure. Now back to *Soma* to *Land* and hand it over.</dialog>\n<dialog>Hesitantly a small drone approach you. It accepts the Essence and hurries away. The Soma are shy. You hear nothing on the radio. Confused you go back to the ship.</dialog>\n<dialog>In the cargo hold a new item sits. How they managed to deliver it is a mystery. One that you don't intend to investigate.</dialog>\n<give item=\"Self Healing Hull\"/>\n",
+      "tags": "soma",
+      "color": "8f0",
+      "icon": "rhomb"
     },
     {
       "name": "Milking Whales",
-      "xml": "<condition at-dest=\"Som Phtia\" trigger=\"HAIL\"/>\n<dialog>_\"We Soma have worshipped the Cosmic Whales for generations. But we cannot approach them. A visitor however can. Be a friend of Soma and find the elusive *Cosmic Whales*. Find them and bring us their milk.\"_</dialog>\n<add-to-quest-list/>\n<condition state=\"surface\" at-dest=\"Cosmic Whales\" trigger=\"MILK\"/>\n<dialog>The graceful creatures excrete a white liquid that form a glittering trail in space. Probably nothing to do with milk but you collect it anyway.</dialog>\n<mark-on-map dest=\"Som Phtia\" color=\"FFF\" icon=\"drop\"/>\n<condition at-dest=\"Som Phtia\" trigger=\"GIVE MILK\"/>\n<dialog>_\"This milk is surely a prize. The visitor is truly a friend of Soma.\"_</dialog>\n<dialog>_\"Whales thrive around the blue Soma sun. But they are not from here. Far to the south are whales that give an even thicker milk. We will mark the grazing grounds for you. Go there!\"_</dialog>\n<mark-on-map dest=\"Grazing Cosmic Whales\" color=\"FFF\" icon=\"drop\"/>\n<condition state=\"surface\" at-dest=\"Grazing Cosmic Whales\" trigger=\"MILK\"/>\n<dialog>Majestic creatures. You carefully collect their milk as they swin in the stellar breeze.</dialog>\n<mark-on-map dest=\"Som Phtia\" color=\"FFF\" icon=\"drop\"/>\n<condition state=\"space\" at-dest=\"Som Phtia\" trigger=\"GIVE MILK\"/>\n<dialog>_\"Soma are forever grateful. Wait here while we skim the milk.\"_</dialog>\n<condition state=\"space\" at-dest=\"Som Phtia\" trigger=\"DAIRY\"/>\n<dialog>The Soma don't answer you directly. Silently they send a drone that deliver a thick white liquid to your ship.</dialog>\n<dialog>_\"Friend! Let the cream bake in the hotness of the Soma Sun. Go to the *Lookout* as generations of Soma has done.\"_</dialog>\n<condition state=\"surface\" at-dest=\"Beryl Canis Lookout\" trigger=\"BAKE MILK\"/>\n<dialog>The Soma are peculiar. This substance and this process have hardly anything in common with milk. But that is how they consistently translate it.</dialog>\n<dialog>Scalding heat from Beryl Canis roast your hull, but also bake the mysterious white \"cream\" into something new.</dialog>\n<give item=\"Whale Cheese\"/>",
-      "tags": "soma"
+      "xml": "<condition at-dest=\"Som Phtia\" trigger=\"HAIL\"/>\n<dialog>_\"We Soma have worshipped the Cosmic Whales for generations. But we cannot approach them. A visitor however can. Be a friend of Soma and find the elusive *Cosmic Whales*. Find them and bring us their milk.\"_</dialog>\n<add-to-quest-list/>\n<condition state=\"surface\" at-dest=\"Cosmic Whales\" trigger=\"MILK\"/>\n<dialog>The graceful creatures excrete a white liquid that form a glittering trail in space. Probably nothing to do with milk but you collect it anyway.</dialog>\n<mark-on-map dest=\"Som Phtia\" />\n<condition at-dest=\"Som Phtia\" trigger=\"GIVE MILK\"/>\n<dialog>_\"This milk is surely a prize. The visitor is truly a friend of Soma.\"_</dialog>\n<dialog>_\"Whales thrive around the blue Soma sun. But they are not from here. Far to the south are whales that give an even thicker milk. We will mark the grazing grounds for you. Go there!\"_</dialog>\n<mark-on-map dest=\"Grazing Cosmic Whales\" />\n<condition state=\"surface\" at-dest=\"Grazing Cosmic Whales\" trigger=\"MILK\"/>\n<dialog>Majestic creatures. You carefully collect their milk as they swin in the stellar breeze.</dialog>\n<mark-on-map dest=\"Som Phtia\" />\n<condition state=\"space\" at-dest=\"Som Phtia\" trigger=\"GIVE MILK\"/>\n<dialog>_\"Soma are forever grateful. Wait here while we skim the milk.\"_</dialog>\n<condition state=\"space\" at-dest=\"Som Phtia\" trigger=\"DAIRY\"/>\n<dialog>The Soma don't answer you directly. Silently they send a drone that deliver a thick white liquid to your ship.</dialog>\n<dialog>_\"Friend! Let the cream bake in the hotness of the Soma Sun. Go to the *Lookout* as generations of Soma has done.\"_</dialog>\n<condition state=\"surface\" at-dest=\"Beryl Canis Lookout\" trigger=\"BAKE MILK\"/>\n<dialog>The Soma are peculiar. This substance and this process have hardly anything in common with milk. But that is how they consistently translate it.</dialog>\n<dialog>Scalding heat from Beryl Canis roast your hull, but also bake the mysterious white \"cream\" into something new.</dialog>\n<give item=\"Whale Cheese\"/>",
+      "tags": "soma",
+      "color": "fff",
+      "icon": "drop"
     },
     {
       "name": "Helyon Shipyards",
@@ -3561,8 +3679,10 @@
     },
     {
       "name": "Ska Ska water quality",
-      "xml": "<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"MAYBE LATER\">\"Can you help us? We run a large construction project at Ska Ska and need to take water samples at its sea\"</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ska Ska\"/>\n<place-item dest=\"Ska Ska\" item=\"Water sample\"/>\n<condition have-item=\"Water sample\"/>\n<mark-on-map dest=\"Baola\" color=\"F00\" icon=\"chevrons\"/>\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>\"Thank you! These samples are vital for the project. Please, accept this compensation\"</dialog>\n<give credits=\"100\"/>\n<dialog>We are happy with your work, check back here later if you are looking for assignments.</dialog>\n<condition at-dest=\"Grig\"/>\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>\"Traveller!\nThe water samples you took revealed a serious contamination at Ska Ska.\"</dialog>\n<dialog>\"We need you go get a shipment of DecontamiNanites at Helyon Shipyards. Then go to Ska Ska and decontaminate the site.\"</dialog>\n<mark-on-map dest=\"Helyon Shipyards\" color=\"F00\" icon=\"chevrons\"/>\n<place-inventory dest=\"Helyon Shipyards\" item=\"DecontamiNanites\"/>\n<condition have-item=\"DecontamiNanites\" />\n<mark-on-map dest=\"Ska Ska\" color=\"F00\" icon=\"chevrons\"/>\n<dialog>You got the decontamination substance. Nano machinery, dangerous stuff.</dialog>\n<condition have-item=\"DecontamiNanites\" at-dest=\"Ska Ska\" trigger=\"DECONTAMINATE\"/>\n<dialog>You launch the self guiding pods with the nanite substance toward the construction site. Ok, only thing left is to collect the pay at Baola.</dialog>\n<mark-on-map dest=\"Baola\" color=\"F00\" icon=\"chevrons\"/>\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>Traveller, we have a problem. Out security drones around Ska Ska have mistakenly identified the nanite decontaminant as an aggressor. They are jamming our channels.</dialog>\n<dialog>You must disable the confused drones so we can send control signals to the nanites.</dialog>\n<place-enemy dest=\"Ska Ska\" enemy=\"Security Drone\"/>\n<mark-on-map dest=\"Ska Ska\" color=\"F00\" icon=\"chevrons\"/>\n<condition no-enemy-at-dest=\"Ska Ska\" />\n<dialog>As the Security Drone is disabled the jamming field is lowered. Now Baola can send control signals to the nanite swarm.</dialog>\n<mark-on-map dest=\"Baola\" color=\"F00\" icon=\"chevrons\"/>\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>\"Excellent fighting! All brawn and ... well - we are impressed.\nHere is your reward. We have sent the security override codes. Ska Ska should be clean as a whistle in a jiffy.\"</dialog>\n<give credits=\"200\" />\n<dialog>You tense up. Something about 'security override codes' sound a bit dubious...</dialog>\n<dialog>\"Oh no! The nanites have gone rampant, they are absorbing matter and forming some kind of mobile structure. What is happening?! You must save us!\"</dialog>\n<mark-on-map dest=\"Ska Ska\" color=\"F00\" icon=\"chevrons\"/>\n<place-enemy dest=\"Ska Ska\" enemy=\"Nanite Megacluster\" />\n<condition no-enemy-at-dest=\"Ska Ska\" />\n<dialog>\"Thank you! You stopped that monstrosity from wreaking havoc. We can offer you this: an improved reactor from one of our ConstructoBots.\nOut site at Ska Ska is a mess after this but work continues.\"</dialog>\n<give item=\"Fold Reactor\"/>\n<give credits=\"200\" />\n",
-      "tags": "wastes"
+      "xml": "<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"MAYBE LATER\">\"Can you help us? We run a large construction project at Ska Ska and need to take water samples at its sea\"</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ska Ska\"/>\n<place-item dest=\"Ska Ska\" item=\"Water sample\"/>\n<condition have-item=\"Water sample\"/>\n<mark-on-map dest=\"Baola\" />\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>\"Thank you! These samples are vital for the project. Please, accept this compensation\"</dialog>\n<give credits=\"100\"/>\n<dialog>We are happy with your work, check back here later if you are looking for assignments.</dialog>\n<condition at-dest=\"Grig\"/>\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>\"Traveller!\nThe water samples you took revealed a serious contamination at Ska Ska.\"</dialog>\n<dialog>\"We need you go get a shipment of DecontamiNanites at Helyon Shipyards. Then go to Ska Ska and decontaminate the site.\"</dialog>\n<mark-on-map dest=\"Helyon Shipyards\" />\n<place-inventory dest=\"Helyon Shipyards\" item=\"DecontamiNanites\"/>\n<condition have-item=\"DecontamiNanites\" />\n<mark-on-map dest=\"Ska Ska\" />\n<dialog>You got the decontamination substance. Nano machinery, dangerous stuff.</dialog>\n<condition have-item=\"DecontamiNanites\" at-dest=\"Ska Ska\" trigger=\"DECONTAMINATE\"/>\n<dialog>You launch the self guiding pods with the nanite substance toward the construction site. Ok, only thing left is to collect the pay at Baola.</dialog>\n<mark-on-map dest=\"Baola\" color=\"F00\" icon=\"chevrons\"/>\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>Traveller, we have a problem. Out security drones around Ska Ska have mistakenly identified the nanite decontaminant as an aggressor. They are jamming our channels.</dialog>\n<dialog>You must disable the confused drones so we can send control signals to the nanites.</dialog>\n<place-enemy dest=\"Ska Ska\" enemy=\"Security Drone\"/>\n<mark-on-map dest=\"Ska Ska\" />\n<condition no-enemy-at-dest=\"Ska Ska\" />\n<dialog>As the Security Drone is disabled the jamming field is lowered. Now Baola can send control signals to the nanite swarm.</dialog>\n<mark-on-map dest=\"Baola\" />\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>\"Excellent fighting! All brawn and ... well - we are impressed.\nHere is your reward. We have sent the security override codes. Ska Ska should be clean as a whistle in a jiffy.\"</dialog>\n<give credits=\"200\" />\n<dialog>You tense up. Something about 'security override codes' sound a bit dubious...</dialog>\n<dialog>\"Oh no! The nanites have gone rampant, they are absorbing matter and forming some kind of mobile structure. What is happening?! You must save us!\"</dialog>\n<mark-on-map dest=\"Ska Ska\" />\n<place-enemy dest=\"Ska Ska\" enemy=\"Nanite Megacluster\" />\n<condition no-enemy-at-dest=\"Ska Ska\" />\n<dialog>\"Thank you! You stopped that monstrosity from wreaking havoc. We can offer you this: an improved reactor from one of our ConstructoBots.\nOut site at Ska Ska is a mess after this but work continues.\"</dialog>\n<give item=\"Fold Reactor\"/>\n<give credits=\"200\" />\n",
+      "tags": "wastes",
+      "color": "f00",
+      "icon": "chevrons"
     },
     {
       "name": "Tau Pavonis Observer",
@@ -3576,8 +3696,10 @@
     },
     {
       "name": "Havest the Weaver",
-      "xml": "<condition at-dest=\"Clear Skies\" trigger=\"HAIL\"/>\n<dialog>\nYou hail the small base at the planet Clear Skies.\n\n\"Welcome to Clear Skies. We are a team of astral historian who will pay good money for Nebular Dust samples from the Weaver Nebula to the west.\"\n</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Weaver Alpha\" color=\"0F0\" icon=\"arrow\"/>\n<condition have-item=\"Nebular Dust\"/>\n<dialog>The sample of Nebular Dust is fragile, more smoke than dust. Wonder what the historians at Clear Skies can decipher from this?</dialog>\n<mark-on-map dest=\"Clear Skies\" color=\"0F0\" icon=\"arrow\"/>\n<condition have-item=\"Nebular Dust\" at-dest=\"Clear Skies\" trigger=\"HAIL\"/>\n<dialog>\"Excellent. These dust samples from Weaver are essential for our studies. Here, accept this compensation.\"</dialog>\n<give credits=\"100\" />\n<dialog>We can also sell you some of our refined products. Hail us if you are interested.</dialog>\n<condition at-dest=\"Clear Skies\" have-credits=\"100\" trigger=\"HAIL\"/>\n<dialog ok=\"BUY\" cancel=\"NOT NOW\">\"We produce large quantities of Sky Alloy in our research. We sell it for 100 credits per ingot.\n\nWould you like to invest?\"</dialog>\n<take credits=\"100\" />\n<give item=\"Sky Alloy\" />",
-      "tags": ""
+      "xml": "<condition at-dest=\"Clear Skies\" trigger=\"HAIL\"/>\n<dialog>\nYou hail the small base at the planet Clear Skies.\n\n\"Welcome to Clear Skies. We are a team of astral historian who will pay good money for Nebular Dust samples from the Weaver Nebula to the west.\"\n</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Weaver Alpha\" />\n<condition have-item=\"Nebular Dust\"/>\n<dialog>The sample of Nebular Dust is fragile, more smoke than dust. Wonder what the historians at Clear Skies can decipher from this?</dialog>\n<mark-on-map dest=\"Clear Skies\" />\n<condition have-item=\"Nebular Dust\" at-dest=\"Clear Skies\" trigger=\"HAIL\"/>\n<dialog>\"Excellent. These dust samples from Weaver are essential for our studies. Here, accept this compensation.\"</dialog>\n<give credits=\"100\" />\n<dialog>We can also sell you some of our refined products. Hail us if you are interested.</dialog>\n<condition at-dest=\"Clear Skies\" have-credits=\"100\" trigger=\"HAIL\"/>\n<dialog ok=\"BUY\" cancel=\"NOT NOW\">\"We produce large quantities of Sky Alloy in our research. We sell it for 100 credits per ingot.\n\nWould you like to invest?\"</dialog>\n<take credits=\"100\" />\n<give item=\"Sky Alloy\" />",
+      "tags": "",
+      "color": "c89",
+      "icon": "arrow"
     }
   ],
   "surface": [
@@ -3882,6 +4004,110 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Broken Sloop",
+      "geometry": "composite",
+      "transform": [
+        ["scale", 0.7, 0.7, 0.7],
+        ["rotate", -2.64, -0.25, 1.57],
+        ["translate", 0, 0, -60]
+      ],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["scale", 60, 60, 60],
+            ["rotate", 0, 0, 0.53],
+            ["rotate", 0, 1.57, 0],
+            ["translate", -30, 0, 22]
+          ],
+          "path": [
+            [0, 0, -1.2],
+            [0.2, 0, -1.1],
+            [0.3, 0, -0.9],
+            [0.3, 0, 0.9],
+            [0.2, 0, 1.1],
+            [0, 0, 1.2]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["scale", 60, 60, 60],
+            ["rotate", 0, 0, 0.53],
+            ["rotate", 0, 1.57, 0],
+            ["translate", -30, 0, -22]
+          ],
+          "path": [
+            [0, 0, -1.2],
+            [0.2, 0, -1.1],
+            [0.3, 0, -0.9],
+            [0.3, 0, 0.9],
+            [0.2, 0, 1.1],
+            [0, 0, 1.2]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["scale", 80, 80, 60],
+            ["rotate", 0, 0, 0.53],
+            ["rotate", 0, 1.57, 0],
+            ["translate", -40, 35, 0]
+          ],
+          "path": [
+            [0, 0, -1],
+            [0.2, 0, -0.9],
+            [0.3, 0, -0.7],
+            [0.3, 0, 0.7],
+            [0.2, 0, 0.9],
+            [0, 0, 1]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["scale", 80, 80, 60],
+            ["rotate", 0, 0, 0.53],
+            ["rotate", 0, 1.57, 0.5],
+            ["translate", -60, -75, 0]
+          ],
+          "path": [
+            [0, 0, -1],
+            [0.2, 0, -0.9],
+            [0.3, 0, -0.7],
+            [0.3, 0, 0.7],
+            [0.2, 0, 0.9],
+            [0, 0, 1]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 9,
+          "transform": [
+            ["scale", 1, 1, 1],
+            ["rotate", 3.14, 0, 0],
+            ["translate", 80, 0, 0],
+            ["radial-wave", 4, 0.8, 0]
+          ],
+          "path": [
+            [0, 0, -25],
+            [30, 0, -25],
+            [45, 0, -10],
+            [70, 0, -5],
+            [70, 0, 5],
+            [45, 0, 10],
+            [30, 0, 25],
+            [0, 0, 25]
+          ]
+        }
+      ],
+      "tags": "ship"
     },
     {
       "name": "Sphere",
@@ -5846,12 +6072,62 @@
             ["rotate", 0, 0, -2.1]
           ],
           "path": [[0, 0, -20], [3, 0, -20], [3, 0, 20], [0, 0, 20]]
+        },
+        {
+          "name": "Kerr Runner",
+          "geometry": "lathe",
+          "res": 5,
+          "transform": [
+            ["scale", 3, 0.75, 0.75],
+            ["rotate", 1.57, 0, 1.57],
+            ["parabola", 0, -0.01, 0],
+            ["scale", 0.1, 0.1, 0.1],
+            ["rotate", 0, -1, 0],
+            ["translate", -60, -20, -60]
+          ],
+          "path": [
+            [0, 0, -130],
+            [50, 0, -33],
+            [40, 0, -25],
+            [40, 0, 25],
+            [50, 0, 33],
+            [0, 0, 130]
+          ],
+          "tags": "ship"
         }
       ],
       "tags": "anomaly station"
     }
   ],
   "celestials": [
+    {
+      "id": "anomaly-tiendong",
+      "type": "anomaly",
+      "desc": "",
+      "celestial": {
+        "r": 4,
+        "amb": 0.2,
+        "oct": 3,
+        "zoom": 10,
+        "color": ["F80", "F80"]
+      },
+      "surface": null,
+      "model": "Tiendong Station"
+    },
+    {
+      "id": "anomaly-broken-sloop",
+      "type": "anomaly",
+      "desc": "",
+      "celestial": {
+        "r": 4,
+        "amb": 0.2,
+        "oct": 3,
+        "zoom": 10,
+        "color": ["F80", "F80"]
+      },
+      "surface": null,
+      "model": "Broken Sloop"
+    },
     {
       "id": "anomaly-apate",
       "type": "anomaly",

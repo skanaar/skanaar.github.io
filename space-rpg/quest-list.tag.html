@@ -8,7 +8,7 @@
         </a>
       </div>
     </div>
-    <div each={quest in filteredQuests()} onclick={edit} class={ list_item: true, active: quest.name==active }>
+    <div each={quest in filteredQuests()} onclick={edit} class={ list_item: true, active: quest==selected }>
       {quest.name}
     </div>
   </div>
@@ -25,6 +25,20 @@
   <div class="sidebar">
     <label>Name</label>
     <input type="text" value={selected && selected.name} onchange={setFields} ref="nameField">
+    <div class="input-grid">
+      <em>color</em> 
+      <input type=color onchange={setFields} ref="colorField" value={selected && toLongColor(selected.color)}><br/>
+      <em>icon</em>
+      <select ref="iconSelect" onchange={setFields} value={selected && selected.icon}>
+        <option>enter</option>
+        <option>exit</option>
+        <option>arrow</option>
+        <option>rhomb</option>
+        <option>chevrons</option>
+        <option>square</option>
+        <option>drop</option>
+      </select>
+    </div>
     <label>Tags</label>
     <input type="text" value={selected && selected.tags} onchange={setFields} ref="tagsField" placeholder="Tags...">
     <label></label>
@@ -43,22 +57,22 @@
     self.warnings = []
     self.selected = null
     self.templates = [
+      { name: 'Add to quest list', template: '<add-to-quest-list/>' },
+      { name: 'Mark on map', template: '<mark-on-map dest="" />' },
+      { name: 'Remove map marker', template: '<remove-map-marker/>' },
       { name: 'Condition', template: '<condition state="space" have-item="" at-dest="" no-enemy-at-dest="" not-at-dest="" have-credits="" trigger="TRIGGER"/>' },
+      { name: 'Dialog', template: '<dialog>"Hey hitchhiker!"</dialog>' },
+      { name: 'Dialog with choice', template: '<dialog ok="YES PLEASE" cancel="NO THANKS">"Would you like some tea?"</dialog>' },
+      { name: 'Script goto', template: '<goto jump="1"/>' },
+      { name: 'Travel', template: '<travel dest=""/>' },
       { name: 'Place item', template: '<place-item dest="" item=""/>' },
       { name: 'Place trader inventory', template: '<place-inventory dest="" item=""/>' },
       { name: 'Place enemy', template: '<place-enemy dest="" enemy="" loot="Armor;Gold"/>' },
-      { name: 'Dialog', template: '<dialog>"Hey hitchhiker!"</dialog>' },
-      { name: 'Dialog with choice', template: '<dialog ok="YES PLEASE" cancel="NO THANKS">"Would you like some tea?"</dialog>' },
-      { name: 'Add to quest list', template: '<add-to-quest-list/>' },
       { name: 'Give credits', template: '<give credits=""/>' },
       { name: 'Give item', template: '<give item=""/>' },
       { name: 'Take credits', template: '<take credits=""/>' },
       { name: 'Take item', template: '<take item=""/>' },
-      { name: 'Mark on map', template: '<mark-on-map dest="" color="0x0F0" icon="arrow"/>' },
-      { name: 'Remove map marker', template: '<remove-map-marker/>' },
-      { name: 'Change ship', template: '<change-ship ship=""/>' },
-      { name: 'Travel', template: '<travel dest=""/>' },
-      { name: 'Script goto', template: '<goto jump="1"/>' }
+      { name: 'Change ship', template: '<change-ship ship=""/>' }
     ]
     self.filter = null
     self.allTags = () => app.allTags(self.world.quests).filter(e => e)
@@ -76,7 +90,7 @@
 
     self.add = function () {
       self.filter = ''
-      self.world.quests.unshift({ name: 'unnamed', xml: '' })
+      self.world.quests.unshift({ name: 'unnamed', xml: '', color: '0F0', icon: 'arrow' })
     }
 
     self.edit = function (e) {
@@ -88,9 +102,14 @@
     self.setFields = function () {
       if (self.selected) {
         self.selected.name = self.refs.nameField.value
+        self.selected.color = self.toShortColor(self.refs.colorField.value)
+        self.selected.icon = self.refs.iconSelect.value
         self.selected.tags = self.refs.tagsField.value
       }
     }
+
+    self.toShortColor = s => s[1] + s[3] + s[5]
+    self.toLongColor = s => s ? '#' + s[0] + s[0] + s[1] + s[1] + s[2] + s[2] : '#888888'
 
     self.save = function () {
       if (self.selected) {

@@ -125,6 +125,10 @@ button:hover,
   width: 90px;
   margin: 2px 1px;
 }
+.input-grid input[type=color] {
+  border: none;
+  background: none;
+}
 
 .btn-group {
   display: inline-block;
@@ -179,10 +183,9 @@ button:hover,
 /* table */
 
 .table-parent {
-  margin-right: 190px;
+  margin: 40px 190px 40px 0;
 }
 .table {
-  margin: 40px 0 40px 0;
   width: 100%;
   border-spacing: 0;
 }
@@ -203,6 +206,9 @@ button:hover,
   padding: 4px;
   border-top: 1px solid #ddd;
   border-left: 1px solid #eee;
+}
+.table td:last-child {
+  border-right: 1px solid #eee;
 }
 
 .table.attr-table td:nth-child(3n+4) { color: #a44; font-weight: bold }

@@ -73,14 +73,16 @@
       <em>maxenergy</em> <input type=number ref="maxenergyField" value={selected && selected.attr.maxenergy}><br/>
     </div>
     
-    <label>User effect on use</label>
+    <label if={isActivatable(selected)}>Player effect on use</label>
+    <label if={selected.type == 'module'}>Passive player effect</label>
     <div class="input-grid">
       <em>hull</em>   <input type=number ref="playerHullField" value={selected && selected.playerBuff.hull}><br/>
       <em>shield</em> <input type=number ref="playerShieldField" value={selected && selected.playerBuff.shield}><br/>
       <em>energy</em> <input type=number ref="playerEnergyField" value={selected && selected.playerBuff.energy}>
     </div>
     
-    <label>Target effect on use</label>
+    <label if={isActivatable(selected)}>Target effect on use</label>
+    <label if={selected.type == 'module'}>Passive target effect</label>
     <div class="input-grid">
       <em>hull</em>   <input type=number ref="targetHullField" value={selected && selected.targetBuff.hull}><br/>
       <em>shield</em> <input type=number ref="targetShieldField" value={selected && selected.targetBuff.shield}><br/>
@@ -104,6 +106,8 @@
     self.setFilter = function (type) {
       return () => self.filter = (self.filter == type ? null : type)
     }
+
+    self.isActivatable = item => item.type == 'weapon' || item.type == 'tool'
 
     self.sort = function () {
       var order = ['weapon', 'tool', 'module', 'common', 'quest']
