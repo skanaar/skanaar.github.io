@@ -107,7 +107,7 @@
       return () => self.filter = (self.filter == type ? null : type)
     }
 
-    self.isActivatable = item => item.type == 'weapon' || item.type == 'tool'
+    self.isActivatable = item => item && (item.type == 'weapon' || item.type == 'tool')
 
     self.sort = function () {
       var order = ['weapon', 'tool', 'module', 'common', 'quest']
