@@ -7,6 +7,11 @@ body {
   background: black;
   color: #ddd;
   letter-spacing: 1.5px;
+
+  background-image: url(screens/inverted-background.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-y: -180px;
 }
 h1, h2 {
   font-family: inherit;
@@ -26,6 +31,7 @@ h2 {
 img {
   width: 100%;
   margin: 20px 0;
+  border: 1px solid #333;
 }
 a, a:hover, a:active, a:visited {
   display: inline-block;
