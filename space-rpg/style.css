@@ -2,7 +2,7 @@ body {
   font-family: "helvetica neue", "Segoe UI", sans-serif;
   font-weight: 100;
   text-align: center;
-  padding: 5em;
+  padding: 7vw;
   font-size: 20px;
   background: black;
   color: #ddd;
@@ -27,6 +27,9 @@ h2 {
   font-size: 30px;
   letter-spacing: 10px;
   border-bottom: 1px solid;
+}
+h1, p {
+  text-shadow: 0 0 16px black, 0 0 14px black;
 }
 img {
   width: 100%;

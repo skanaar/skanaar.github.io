@@ -113,11 +113,21 @@
       updateMesh()
     }
 
+    self.isSourceValid = function (e) {
+      try { JSON.parse(self.refs.sourceField.value) }
+      catch(e) { return false }
+      return true
+    }
+
     function clearObject(e) {
       Object.keys(e).forEach(key => delete e[key])
     }
     
     self.endEditing = function (e) {
+      if (!self.isSourceValid()) {
+        alert('Model source has parsing errors. Please fix.')
+        return
+      }
       clearObject(self.selected)
       _.extend(self.selected, JSON.parse(self.refs.sourceField.value))
       updateMesh()
