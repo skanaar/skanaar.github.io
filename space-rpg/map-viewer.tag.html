@@ -181,7 +181,7 @@
     }
 
     self.selectAsteroids = function () {
-      self.nodes.forEach(e => e.isSelected = e.type == 'celestial' && e.style.startsWith('asteroid-'))
+      self.nodes.forEach(e => e.isSelected = e.entity.style && e.entity.style.startsWith('asteroid-'))
       updateUI()
     }
 
