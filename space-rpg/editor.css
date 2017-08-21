@@ -24,14 +24,6 @@ body.enable-scroll {
   padding: 10px;
   text-align: center;
 }
-.galmap_label {
-  font-size: 8px;
-  font-family: Verdana;
-  fill: rgba(0,0,0,0.4);
-}
-.galmap_label:hover {
-  fill: #000;
-}
 
 .sidebar {
   font-size: 11px;

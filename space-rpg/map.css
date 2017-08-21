@@ -1,0 +1,34 @@
+.map-dark {
+  background: black;
+}
+
+.map-region {
+  stroke-width: 1;
+  stroke-dasharray: 3,3;
+  stroke: gray;
+  fill: rgba(128,128,128,0.05);
+}
+
+.map-pathway {
+  stroke-width: 2;
+  stroke: #888
+}
+
+.map-label {
+  font-size: 8px;
+  font-family: Verdana;
+  fill: rgba(128,128,128,0.6);
+}
+
+.map-label:hover {
+  fill: #888;
+}
+
+.map-node {
+  stroke: #000
+}
+
+.map-node.map-selected {
+  stroke: #F00;
+  fill: #F88
+}
