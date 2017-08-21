@@ -19,7 +19,7 @@
       "name": "Kerr Clipper",
       "visual": "Kerr Clipper",
       "attr": {
-        "maxhull": 10,
+        "maxhull": 8,
         "maxshield": 0,
         "maxenergy": 0,
         "jump": 125,
@@ -31,7 +31,7 @@
     },
     {
       "attr": {
-        "maxhull": 15,
+        "maxhull": 10,
         "maxshield": 0,
         "maxenergy": 5,
         "armor": 0,
@@ -49,9 +49,9 @@
       "name": "Kerr Journeyman",
       "visual": "Kerr Journeyman",
       "attr": {
-        "maxhull": 20,
-        "maxshield": 5,
-        "maxenergy": 10,
+        "maxhull": 15,
+        "maxshield": 4,
+        "maxenergy": 7,
         "jump": 125,
         "slots": 5
       },
@@ -61,15 +61,15 @@
     },
     {
       "attr": {
-        "maxhull": 30,
-        "maxshield": 40,
-        "maxenergy": 40,
+        "maxhull": 20,
+        "maxshield": 7,
+        "maxenergy": 10,
         "armor": 0,
         "cloak": 0,
         "jump": 125,
         "slots": 6
       },
-      "generator": {"hull": 2, "shield": 2, "energy": 2},
+      "generator": {"hull": 2, "shield": 1, "energy": 2},
       "name": "Sloop",
       "visual": "NS Sloop",
       "value": 2000,
@@ -77,15 +77,15 @@
     },
     {
       "attr": {
-        "maxhull": 30,
-        "maxshield": 50,
-        "maxenergy": 20,
+        "maxhull": 25,
+        "maxshield": 10,
+        "maxenergy": 15,
         "armor": 0,
         "cloak": 0,
         "jump": 125,
         "slots": 4
       },
-      "generator": {"hull": 5, "shield": 2, "energy": 2},
+      "generator": {"hull": 5, "shield": 0, "energy": 2},
       "name": "Salem",
       "visual": "NS Salem",
       "value": 3000,
@@ -95,13 +95,13 @@
       "name": "CES Interplan",
       "visual": "CES Interplan",
       "attr": {
-        "maxhull": 70,
-        "maxshield": 50,
-        "maxenergy": 50,
+        "maxhull": 40,
+        "maxshield": 10,
+        "maxenergy": 20,
         "jump": 125,
         "slots": 10
       },
-      "generator": {"hull": 4, "shield": 4, "energy": 4},
+      "generator": {"hull": 4, "shield": 2, "energy": 4},
       "value": 4000,
       "isFlying": true
     },
@@ -115,7 +115,7 @@
         "jump": 125,
         "slots": 6
       },
-      "generator": {"hull": 2, "shield": 2, "energy": 2},
+      "generator": {"hull": 2, "shield": 1, "energy": 2},
       "value": 5000,
       "isFlying": true
     }
@@ -489,7 +489,7 @@
     },
     {
       "type": "weapon",
-      "credits": 1,
+      "credits": 10,
       "name": "Rusty Kinetic Gun",
       "attr": {
         "maxhull": 0,
@@ -514,7 +514,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": -2, "shield": 0, "energy": 0},
-      "credits": 5,
+      "credits": 20,
       "name": "Kinetic Gun"
     },
     {
@@ -528,7 +528,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": -3, "shield": 0, "energy": 0},
-      "credits": 7,
+      "credits": 40,
       "name": "Autocannon"
     },
     {
@@ -542,7 +542,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": -1, "shield": -2, "energy": 0},
-      "credits": 20,
+      "credits": 50,
       "name": "Photon Ray"
     },
     {
@@ -556,7 +556,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
       "targetBuff": {"hull": -5, "shield": -2, "energy": 0},
-      "credits": 20,
+      "credits": 120,
       "name": "Tau Beam"
     },
     {
@@ -570,12 +570,12 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
       "targetBuff": {"hull": -2, "shield": -5, "energy": 0},
-      "credits": 39,
+      "credits": 150,
       "name": "Phased Ray"
     },
     {
       "type": "weapon",
-      "credits": 50,
+      "credits": 90,
       "name": "Autocannon Mk2",
       "attr": {
         "maxhull": 0,
@@ -600,7 +600,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": -10},
       "targetBuff": {"hull": -25, "shield": 0, "energy": 0},
-      "credits": 125,
+      "credits": 500,
       "name": "Railgun"
     },
     {
@@ -614,7 +614,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": -10},
       "targetBuff": {"hull": -8, "shield": -25, "energy": 0},
-      "credits": 218,
+      "credits": 750,
       "name": "Meson Ray"
     },
     {
@@ -641,9 +641,9 @@
         "slots": 0
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -200},
+      "targetBuff": {"hull": -50, "shield": 0, "energy": 0},
       "credits": 500,
-      "name": "EMP Bomb"
+      "name": "Mass Gun"
     },
     {
       "type": "weapon",
@@ -655,9 +655,9 @@
         "slots": 0
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
-      "targetBuff": {"hull": -50, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -200},
       "credits": 500,
-      "name": "Mass Gun"
+      "name": "EMP Bomb"
     },
     {
       "type": "weapon",
@@ -692,6 +692,38 @@
       "targetBuff": {"hull": -4, "shield": -5, "energy": -6}
     },
     {
+      "type": "weapon",
+      "credits": 10000,
+      "name": "Drone Attack Mk2",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": -2, "shield": -2, "energy": 0}
+    },
+    {
+      "type": "tool",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 10, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 5,
+      "name": "Repair Kit",
+      "rechageRequired": true,
+      "rechargeRequired": true
+    },
+    {
       "type": "tool",
       "attr": {
         "maxhull": 0,
@@ -704,34 +736,6 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 5,
       "name": "Recharge Loop"
-    },
-    {
-      "type": "tool",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 2, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 5,
-      "name": "Repair Kit"
-    },
-    {
-      "type": "tool",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 10, "shield": 0, "energy": -10},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 20,
-      "name": "Epoxy Injector"
     },
     {
       "type": "tool",
@@ -756,10 +760,10 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 15, "shield": 0, "energy": -10},
+      "playerBuff": {"hull": 10, "shield": 0, "energy": -10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 45,
-      "name": "Welding Robot"
+      "credits": 20,
+      "name": "Epoxy Injector"
     },
     {
       "type": "tool",
@@ -784,10 +788,10 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 20, "shield": 0, "energy": -10},
+      "playerBuff": {"hull": 15, "shield": 0, "energy": -10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 80,
-      "name": "Nano Repairers"
+      "credits": 45,
+      "name": "Welding Robot"
     },
     {
       "type": "tool",
@@ -802,6 +806,20 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 80,
       "name": "Recharge Pump"
+    },
+    {
+      "type": "tool",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 20, "shield": 0, "energy": -10},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 80,
+      "name": "Nano Repairers"
     },
     {
       "type": "tool",
@@ -981,20 +999,6 @@
       "type": "module",
       "attr": {
         "maxhull": 0,
-        "maxshield": 5,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 1, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 20,
-      "name": "Electron Shield"
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
         "maxshield": 0,
         "maxenergy": 5,
         "jump": 0,
@@ -1004,6 +1008,20 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 20,
       "name": "Tetragon Battery"
+    },
+    {
+      "type": "module",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 5,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 1, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 20,
+      "name": "Electron Shield"
     },
     {
       "type": "module",
@@ -1065,6 +1083,20 @@
       "type": "module",
       "attr": {
         "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 20,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 80,
+      "name": "Hexagon Battery"
+    },
+    {
+      "type": "module",
+      "attr": {
+        "maxhull": 0,
         "maxshield": 10,
         "maxenergy": 0,
         "jump": 0,
@@ -1080,14 +1112,14 @@
       "attr": {
         "maxhull": 0,
         "maxshield": 0,
-        "maxenergy": 20,
+        "maxenergy": 30,
         "jump": 0,
         "slots": 0
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 80,
-      "name": "Hexagon Battery"
+      "credits": 180,
+      "name": "Octagon Battery"
     },
     {
       "type": "module",
@@ -1102,20 +1134,6 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 180,
       "name": "Monopole Shield"
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 30,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 180,
-      "name": "Octagon Battery"
     },
     {
       "type": "module",
@@ -1170,7 +1188,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 2,
+      "credits": 5,
       "name": "Copper"
     },
     {
@@ -1184,7 +1202,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 4,
+      "credits": 6,
       "name": "Barium Ore"
     },
     {
@@ -1198,7 +1216,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 5,
+      "credits": 7,
       "name": "Tungsten"
     },
     {
@@ -1212,7 +1230,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 7,
+      "credits": 8,
       "name": "Platinum"
     },
     {
@@ -1226,7 +1244,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 10,
+      "credits": 20,
       "name": "Alien Fossil"
     },
     {
@@ -1254,7 +1272,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 20,
+      "credits": 50,
       "name": "Alien Artifact"
     },
     {
@@ -4540,6 +4558,30 @@
       "tags": "ship"
     },
     {
+      "name": "Kerr Interloper",
+      "geometry": "lathe",
+      "res": 5,
+      "transform": [
+        ["scale", 3, 0.75, 0.75],
+        ["rotate", 1.57, 0, 1.57],
+        ["parabola", 0, -0.007, 0],
+        ["translate", 0, 0, -50]
+      ],
+      "path": [
+        [0, 0, -170],
+        [50, 0, -73],
+        [45, 0, -65],
+        [45, 0, -55],
+        [55, 0, -45],
+        [55, 0, 45],
+        [45, 0, 55],
+        [45, 0, 65],
+        [50, 0, 73],
+        [0, 0, 170]
+      ],
+      "tags": "ship"
+    },
+    {
       "name": "Kerr Journeyman",
       "geometry": "lathe",
       "res": 6,
@@ -4588,7 +4630,7 @@
       "transform": [
         ["scale", 7, 7, 7],
         ["rotate", 1.57, 0, 0],
-        ["translate", 0, -50, -90]
+        ["translate", 0, -50, -70]
       ],
       "parts": [
         {
@@ -4616,9 +4658,9 @@
           "transform": [
             ["scale", 1, 1, 1],
             ["rotate", 0, 0, 0],
-            ["translate", 0, 0, 0]
+            ["translate", 0, 0, -1]
           ],
-          "path": [[10, 0, 1], [10, 0, -1], [12, 0, -1], [12, 0, 1], [10, 0, 1]]
+          "path": [[10, 0, 3], [10, 0, -3], [12, 0, -2], [12, 0, 2], [10, 0, 3]]
         },
         {
           "geometry": "lathe",
@@ -4626,9 +4668,9 @@
           "transform": [
             ["scale", 1, 1, 1],
             ["rotate", 0, 0, 0],
-            ["translate", 0, 0, 8]
+            ["translate", 0, 0, 7]
           ],
-          "path": [[10, 0, 1], [10, 0, -1], [12, 0, -1], [12, 0, 1], [10, 0, 1]]
+          "path": [[10, 0, 3], [10, 0, -3], [12, 0, -2], [12, 0, 2], [10, 0, 3]]
         }
       ],
       "tags": "ship"
@@ -4685,6 +4727,17 @@
             ["rotate", 0, 0, 3.14, 0]
           ],
           "path": [[0, 0, -6.8], [4, 0, -4.4], [4, 0, 4.4], [0, 0, 7]]
+        },
+        {
+          "name": "aux",
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["scale", 1, 0.3, 1],
+            ["translate", 0, -3, -4.5],
+            ["rotate", 0, 0, 3.14, 0]
+          ],
+          "path": [[0, 0, -6.8], [4, 0, -4.4], [4, 0, 4.4], [0, 0, 5.5]]
         }
       ],
       "tags": "ship"
@@ -4790,9 +4843,9 @@
       "name": "NS Vanguard",
       "geometry": "composite",
       "transform": [
-        ["scale", 80, 80, 80],
+        ["scale", 70, 70, 70],
         ["rotate", 3.14, 0, 0],
-        ["translate", 0, 0, -100]
+        ["translate", 0, 0, -85]
       ],
       "parts": [
         {
