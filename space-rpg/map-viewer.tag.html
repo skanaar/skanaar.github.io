@@ -181,7 +181,7 @@
     }
 
     self.selectAsteroids = function () {
-      self.nodes.forEach(e => e.isSelected = e.style.startsWith('asteroid-'))
+      self.nodes.forEach(e => e.isSelected = e.entity.type == 'celestial' && e.style.startsWith('asteroid-'))
     }
 
     self.mousedown = function (e) { // 132
@@ -469,7 +469,7 @@
 
     function onHighlightRequested(e) {
       if (e.type == 'destination')
-        self.nodes.forEach(e => e.isSelected = (e.name == e.name))
+        self.nodes.forEach(node => node.isSelected = (node.entity.name == e.name))
     }
 
     function prepareWorldForSave() {
