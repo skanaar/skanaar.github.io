@@ -59,6 +59,7 @@
       </a><a onclick={() => tool='spray'} class="toggle-btn {(tool == 'spray') && 'active'}">Add Cluster
       </a><a onclick={() => tool='region'} class="toggle-btn {(tool == 'region') && 'active'}">Add Region</a>
     </div>
+    <button onclick={selectAsteroids}>Select asteroids</button>
     <div class="btn-group" style="opacity: {selectionSize > 1 ? 1 : 0.5}">
       <a class="toggle-btn" onclick={enlarge}>Enlarge</a><a class="toggle-btn" onclick={shrink}>Shrink</a>
     </div>
@@ -177,6 +178,10 @@
       self.dx /= 1.2
       self.dy /= 1.2
       loadDestinations(self.world)
+    }
+
+    self.selectAsteroids = function () {
+      self.nodes.forEach(e => e.isSelected = e.style.startsWith('asteroid-'))
     }
 
     self.mousedown = function (e) { // 132
@@ -462,6 +467,11 @@
       return ['jovian', 'planet', 'asteroid', 'anomaly'].includes(entity.style.split('-')[0])
     }
 
+    function onHighlightRequested(e) {
+      if (e.type == 'destination')
+        self.nodes.forEach(e => e.isSelected = (e.name == e.name))
+    }
+
     function prepareWorldForSave() {
       self.world.destinations = self.nodes.filter(e => e.type === 'celestial').map(e => e.entity)
       self.world.regions = self.nodes.filter(e => e.type === 'region').map(e => ({
@@ -483,6 +493,7 @@
       self.world = app.getWorld()
       app.events.on('save-world', prepareWorldForSave)
       app.events.on('world-updated', loadWorld)
+      app.events.on('highlight-entity', onHighlightRequested)
       window.document.addEventListener('keydown', self.keydown)
       loadWorld()
       window.scrollTo(self.dx/3, self.dy/3)

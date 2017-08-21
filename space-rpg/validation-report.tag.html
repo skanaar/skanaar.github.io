@@ -1,6 +1,6 @@
 <validation-report>
   <div class="validation-report" if={warnings.length}>
-    <div each={e in warnings}>Error: {e.type} <b>{e.name}</b> {e.msg} <b>{e.arg}</b></div>
+    <div each={e in warnings}>Error: {e.type} <b onclick={select}>{e.name}</b> {e.msg} <b>{e.arg}</b></div>
     <button onclick={validateWorld}>Update</button>
   </div>
 
@@ -14,6 +14,10 @@
       var world = app.getWorld()
       self.warnings = validator.world(world)
       self.update()
+    }
+
+    self.select = function (e) {
+      app.events.trigger('highlight-entity', e.item.e)
     }
 
     self.on('mount', function () {
