@@ -39,14 +39,14 @@
       d="M-6,-4 L-6,4 L0,0 Z"
       riot-transform={'translate(' + (screenPos.x-radiusFor(entity)) + ',' + screenPos.y + ')'}
       fill="#0A0" stroke="#FFF"/>
-    <rect riot-x={select.pos.x} riot-y={select.pos.y}
-      riot-width={select.dim.x} riot-height={select.dim.y}
-      stroke="#F00" stroke-width="1" fill="rgba(0,0,0,0)"/>
+    <rect class="map-rubberrect"
+      riot-x={select.pos.x} riot-y={select.pos.y} riot-width={select.dim.x} riot-height={select.dim.y}/>
   </svg>
 
   <div class="toolbox">
     <div class="btn-group">
-      <a class="toggle-btn" onclick={zoomIn}">+</a><a class="toggle-btn" onclick={zoomOut}">-</a>
+      <a class="toggle-btn" onclick={() => zoom(1.2)}">+</a>
+      <a class="toggle-btn" onclick={() => zoom(1/1.2)}">-</a>
     </div>
     <div class="btn-group">
       <a onclick={() => tool='select'} class="toggle-btn {(tool == 'select') && 'active'}">Select
@@ -56,10 +56,12 @@
     </div>
     <button onclick={selectAsteroids}>Select asteroids</button>
     <div class="btn-group" style="opacity: {selectionSize > 1 ? 1 : 0.5}">
-      <a class="toggle-btn" onclick={enlarge}>Enlarge</a><a class="toggle-btn" onclick={shrink}>Shrink</a>
+      <a class="toggle-btn" onclick={() => enlargeShrink(1.02)}>Enlarge</a>
+      <a class="toggle-btn" onclick={() => enlargeShrink(0.98)}>Shrink</a>
     </div>
     <div class="btn-group" style="opacity: {selectionSize > 1 ? 1 : 0.5}">
-      <a class="toggle-btn" onclick={repulse}>Repulse</a><a class="toggle-btn" onclick={attract}>Attract</a>
+      <a class="toggle-btn" onclick={() => repulseAttract(2)}>Repulse</a>
+      <a class="toggle-btn" onclick={() => repulseAttract(-2)}>Attract</a>
     </div>
     <button onclick={() => isDark = !isDark}>dark</button>
   </div>
@@ -137,8 +139,6 @@
     self.selectedTrader = { inventory: [] }
     self.selectedItems = []
 
-    self.regions = () => self.nodes.filter(e => e.type == 'region')
-
     self.keydown = function (e) {
       if (document.activeElement && document.activeElement.nodeName === 'INPUT') return;
       var step = e.shiftKey ? 2 : (e.metaKey ? 100 : 20)
@@ -163,17 +163,10 @@
       self.update()
     }
 
-    self.zoomIn = function () {
-      self.scale *= 1.2
-      self.dx *= 1.2
-      self.dy *= 1.2
-      loadDestinations(self.world)
-    }
-
-    self.zoomOut = function () {
-      self.scale /= 1.2
-      self.dx /= 1.2
-      self.dy /= 1.2
+    self.zoom = function (factor) {
+      self.scale *= factor
+      self.dx *= factor
+      self.dy *= factor
       loadDestinations(self.world)
     }
 
@@ -217,14 +210,7 @@
           type: 'celestial',
           screenPos: transform(pos),
           isSelected: false,
-          entity: {
-            pos: pos,
-            name: 'unnamed',
-            style: 'asteroid-1',
-            trader: null,
-            enemy: null,
-            treasures: []
-          }
+          entity: { pos: pos, name: 'unnamed', style: 'asteroid-1', trader: null, enemy: null, treasures: [] }
         })
     }
 
@@ -234,14 +220,8 @@
           screenPos: transform(pos),
           isSelected: false,
           entity: {
-            pos: pos,
-            radius: 100,
-            name: 'unnamed region',
-            audio: 'light-years',
-            style: 'region-1',
-            trader: null,
-            enemy: null,
-            treasures: []
+            pos: pos, radius: 100, name: 'unnamed region', audio: 'light-years', style: 'region-1',
+            trader: null, enemy: null, treasures: []
           }
         })
     }
@@ -294,17 +274,9 @@
 
     function singleSelected() { return (_.find(self.nodes, e => e.isSelected) || {}).entity || {} }
 
-    self.chooseTreasures = function () {
-      app.events.trigger('show-item-chooser', singleSelected().treasures)
-    }
-
-    self.chooseTraderInventory = function () {
-      app.events.trigger('show-item-chooser', singleSelected().trader.inventory)
-    }
-
-    self.chooseLoot = function () {
-      app.events.trigger('show-item-chooser', singleSelected().enemy.loot)
-    }
+    self.chooseTreasures = () => app.events.trigger('show-item-chooser', singleSelected().treasures)
+    self.chooseTraderInventory = () => app.events.trigger('show-item-chooser', singleSelected().trader.inventory)
+    self.chooseLoot = () =>app.events.trigger('show-item-chooser', singleSelected().enemy.loot)
 
     self.autoNameNodes = function () {
       forSelected(function (e){
@@ -350,26 +322,19 @@
       calculateLines()
     }
 
-    self.repulse = function () { self.repulseAttract(2) }
-    self.attract = function () { self.repulseAttract(-2) }
     self.repulseAttract = function (coefficient) {
       var subset = _.filter(self.nodes, 'isSelected')
-      subset.forEach(function (a) {
-        subset.forEach(function (b){
-          if (eq(a.entity.pos, b.entity.pos)) return
-          var delta = diff(a.entity.pos, b.entity.pos)
-          var d = normalize(delta)
-          var force = coefficient * 5000 / Math.max(1000, delta.x*delta.x + delta.y*delta.y)
-          a.entity.pos = rund(add(a.entity.pos, mult(d, force)))
-          b.entity.pos = rund(add(b.entity.pos, mult(d, -force)))
-          a.screenPos = transform(a.entity.pos)
-          b.screenPos = transform(b.entity.pos)
-        })
+      _.pairs(subset, function (a, b) {
+        var delta = diff(a.entity.pos, b.entity.pos)
+        var d = normalize(delta)
+        var force = coefficient * 5000 / Math.max(1000, delta.x*delta.x + delta.y*delta.y)
+        a.entity.pos = rund(add(a.entity.pos, mult(d, force)))
+        b.entity.pos = rund(add(b.entity.pos, mult(d, -force)))
+        a.screenPos = transform(a.entity.pos)
+        b.screenPos = transform(b.entity.pos)
       })
       calculateLines()
     }
-    self.enlarge = function () { self.enlargeShrink(1.02) }
-    self.shrink = function () { self.enlargeShrink(0.98) }
     self.enlargeShrink = function (coefficient) {
       var subset = _.filter(self.nodes, 'isSelected')
       var positions = subset.map(e => e.entity.pos)
@@ -381,6 +346,7 @@
       calculateLines()
     }
 
+    self.regions = () => self.nodes.filter(e => e.type == 'region')
     self.enemyDestinations = () => self.nodes.filter(e => e.entity.enemy)
     self.traderDestinations = () => self.nodes.filter(e => e.entity.trader)
     self.treasureDestinations = () => self.nodes.filter(e => (e.entity.treasures || []).length)
@@ -453,11 +419,9 @@
 
     function calculateLines() {
       self.lines = []
-      self.nodes.forEach(function (a) {
-        self.nodes.forEach(function (b){
-          if (self.jumpRange > dist(a.entity.pos, b.entity.pos) && isTravellable(a.entity) && isTravellable(b.entity))
-            self.lines.push({ a: transform(a.entity.pos), b: transform(b.entity.pos) })
-        })
+      _.pairs(self.nodes, function (a, b) {
+        if (self.jumpRange > dist(a.entity.pos, b.entity.pos) && isTravellable(a.entity) && isTravellable(b.entity))
+          self.lines.push({ a: transform(a.entity.pos), b: transform(b.entity.pos) })
       })
     }
 

@@ -59,6 +59,12 @@ _.mixin({
     catch (e) { return undefined }
   },
 
+  pairs: function (list, action) {
+    for (var i=0; i<list.length; i++)
+      for (var j=i+1; j<list.length; j++)
+        action(list[i], list[j])
+  },
+
   stringify: function (obj, options) {
     // Note: This regex matches even invalid JSON strings, but since we’re
     // working on the output of `JSON.stringify` we know that only valid strings

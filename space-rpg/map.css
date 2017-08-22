@@ -2,6 +2,12 @@
   background: black;
 }
 
+.map-rubberrect {
+   stroke: #F00;
+   stroke-width: 1;
+   fill: rgba(0,0,0,0);
+}
+
 .map-region {
   stroke-width: 1;
   stroke-dasharray: 3,3;
