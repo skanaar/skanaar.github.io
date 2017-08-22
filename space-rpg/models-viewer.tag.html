@@ -219,7 +219,7 @@
     function lerp(k, a, b) { return (1-k)*a + k*b }
 
     function radialWave(p, args) {
-      let radius = lerp(args[1], 0.5 + 0.5 * Math.sin(args[0] * Math.atan2(p[1], p[0])), 1)
+      let radius = lerp(args[1], 0.5 + 0.5 * Math.cos(args[0] * Math.atan2(p[1], p[0])), 1)
       return [p[0]*radius, p[1]*radius, p[2]]
     }
 

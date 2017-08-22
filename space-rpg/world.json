@@ -3400,7 +3400,7 @@
       "style": "asteroid-6",
       "trader": null,
       "enemy": null,
-      "treasures": ["Thanatos core", "Water sample"]
+      "treasures": []
     },
     {
       "pos": {"x": 634, "y": -2292},
@@ -5783,11 +5783,9 @@
           "geometry": "lathe",
           "res": 15,
           "transform": [
-            ["scale", 1.25, 1.25, 1],
-            ["rotate", 0, 0, 0.11],
-            ["translate", 0, 0, 0],
+            ["scale", -1.25, 1.25, -1],
             ["radial-wave", 5, 0.6, 0],
-            ["rotate", 0, 0, -0.31]
+            ["rotate", 0, 0, 0]
           ],
           "path": [[130, 0, 0], [80, 0, 15], [80, 0, -15], [130, 0, 0]]
         },

@@ -45,8 +45,7 @@
 
   <div class="toolbox">
     <div class="btn-group">
-      <a class="toggle-btn" onclick={() => zoom(1.2)}">+</a>
-      <a class="toggle-btn" onclick={() => zoom(1/1.2)}">-</a>
+      <a class="toggle-btn" onclick={() => zoom(1.2)}>+</a><a class="toggle-btn" onclick={() => zoom(1/1.2)}>-</a>
     </div>
     <div class="btn-group">
       <a onclick={() => tool='select'} class="toggle-btn {(tool == 'select') && 'active'}">Select
@@ -56,12 +55,10 @@
     </div>
     <button onclick={selectAsteroids}>Select asteroids</button>
     <div class="btn-group" style="opacity: {selectionSize > 1 ? 1 : 0.5}">
-      <a class="toggle-btn" onclick={() => enlargeShrink(1.02)}>Enlarge</a>
-      <a class="toggle-btn" onclick={() => enlargeShrink(0.98)}>Shrink</a>
+      <a class="toggle-btn" onclick={() => enlargeShrink(1.02)}>Enlarge</a><a class="toggle-btn" onclick={() => enlargeShrink(0.98)}>Shrink</a>
     </div>
     <div class="btn-group" style="opacity: {selectionSize > 1 ? 1 : 0.5}">
-      <a class="toggle-btn" onclick={() => repulseAttract(2)}>Repulse</a>
-      <a class="toggle-btn" onclick={() => repulseAttract(-2)}>Attract</a>
+      <a class="toggle-btn" onclick={() => repulseAttract(2)}>Repulse</a><a class="toggle-btn" onclick={() => repulseAttract(-2)}>Attract</a>
     </div>
     <button onclick={() => isDark = !isDark}>dark</button>
   </div>
