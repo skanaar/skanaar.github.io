@@ -129,7 +129,8 @@
       self.currSurface = self.selected.surface
     }
     
-    self.save = function (e) {
+    self.save = function () {
+      if (!self.selected) return
       var identifier = self.refs.idField.value.split('-')
       self.selected.type = self.refs.typeChooser.value
       identifier[0] = self.selected.type
@@ -161,18 +162,20 @@
       }
     }
 
-    function loadWorld(w) {
+    function loadWorld() {
         self.world = app.getWorld()
         self.update()
     }
 
     self.on('mount', function() {
       app.events.on('world-updated', loadWorld)
+      app.events.on('save-entity', self.save)
       loadWorld()
     })
 
     self.on('unmount', function() {
       app.events.off('world-updated', loadWorld)
+      app.events.off('save-entity', self.save)
     })
 
   </script>

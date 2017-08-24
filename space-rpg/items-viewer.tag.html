@@ -19,6 +19,7 @@
       <thead>
         <tr>
           <th>name</th>
+          <th>lvl</th>
           <th>type</th>
           <th>credits</th>
           <th>maxhull</th>
@@ -35,6 +36,7 @@
       <tbody>
         <tr each={item in filteredItems()} onclick={editItem} class={active: selected == item}>
           <td>{item.name}</td>
+          <td>{item.level}</td>
           <td>{item.type}<span if={item.rechargeRequired}>, recharges</span></td>
           <td class={table_zero: !item.credits}>{item.credits}</td>
           <td class={table_zero: !item.attr.maxhull}>{item.attr.maxhull}</td>
@@ -63,6 +65,7 @@
         <option>rare</option>
         <option>common</option>
       </select><br/>
+      <em>level</em>     <input type=number ref="levelField" value={selected && (selected.level || 0)}><br />
       <em>credits</em>     <input type=number ref="creditsField" value={selected && selected.credits}><br />
       <em>must&nbsp;charge</em>     <input type=checkbox ref="rechargeToggle" checked={selected && selected.rechargeRequired}>
     </div>
@@ -121,6 +124,7 @@
     self.add = function () {
       self.world.items.unshift({
         type: self.filter || 'common',
+        level: 0,
         credits: 5,
         name: 'unnamed',
         rechargeRequired: false,
@@ -142,8 +146,10 @@
       self.selected = e.item.item
     }
     
-    self.endEditing = function (e) {
+    self.endEditing = function () {
+      if (!self.selected) return
       self.selected.name = self.refs.nameField.value
+      self.selected.level = self.refs.levelField.value
       self.selected.type = self.refs.typeInput.value
       self.selected.rechargeRequired = self.refs.rechargeToggle.checked
       self.selected.credits = +self.refs.creditsField.value
@@ -168,10 +174,12 @@
     self.on('before-mount', function() {
       self.world = app.getWorld()
       app.events.on('world-updated', self.update)
+      app.events.on('save-entity', self.endEditing)
     })
 
     self.on('unmount', function() {
       app.events.off('world-updated', self.update)
+      app.events.off('save-entity', self.endEditing)
     })
 
   </script>

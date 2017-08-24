@@ -19,6 +19,7 @@
             <tr>
               <th colspan=2>Item</th>
               <th>Item</th>
+              <th>lvl</th>
               <th colspan=3>Attr</th>
               <th colspan=3>Player</th>
               <th colspan=3>Enemy</th>
@@ -27,7 +28,7 @@
           <tbody>
             <tr each={item in filteredItems()} onclick={add}>
               <td>{item.name}</td>
-              <td></td>
+              <td>{item.level}</td>
               <td class={table_zero: !item.credits}>{item.credits}</td>
               <td class={table_zero: !item.attr.maxhull}>{item.attr.maxhull}</td>
               <td class={table_zero: !item.attr.maxshield}>{item.attr.maxshield}</td>

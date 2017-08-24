@@ -73,6 +73,7 @@
     <select ref="audioSelect" onchange={setRegionAudio}>
       <option each={e in audios}>{e}</option>
     </select>
+    <region-summary app={opts.app} region={singleSelected()} if={regionSelected} />
   </div>
 
   <div class="sidebar" show={selectionSize && !regionSelected}>
@@ -270,7 +271,7 @@
     }
 
     function singleSelected() { return (_.find(self.nodes, e => e.isSelected) || {}).entity || {} }
-
+    self.singleSelected = singleSelected
     self.chooseTreasures = () => app.events.trigger('show-item-chooser', singleSelected().treasures)
     self.chooseTraderInventory = () => app.events.trigger('show-item-chooser', singleSelected().trader.inventory)
     self.chooseLoot = () =>app.events.trigger('show-item-chooser', singleSelected().enemy.loot)
@@ -298,7 +299,7 @@
     self.shipyardShipsChange = e => forSelected(ent => ent.shipyard = e.target.value.split(','))
 
     self.isEnemyChecked = () => singleSelected().enemy
-    self.enemyToggle = e => singleSelected().enemy = e.target.checked ? { type: "rogue", loot: [] } : null
+    self.enemyToggle = e => singleSelected().enemy = e.target.checked ? { type: 'rogue', loot: [] } : null
     self.enemyChanged = e => { if (singleSelected().enemy) singleSelected().enemy.type = e.target.value }
 
     self.setName = function () {

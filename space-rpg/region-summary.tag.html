@@ -1,0 +1,46 @@
+<region-summary>
+
+  <label>Summary</label>
+  <div class="input-grid">
+    <em>treasures</em> <input type=text readonly value={treasureSum()}><br />
+    <em>level</em> <input type=text readonly value={level()}>
+  </div>
+
+  <script>
+    var self = this
+    var app = this.opts.app || window.app
+
+    function guard(func) {
+      var region = null
+      var cache = 0
+      return function () {
+        if (!this.opts.region || !this.opts.region.pos) {
+          region = null
+          return 0
+        }
+        if (region == this.opts.region) return cache
+        region = this.opts.region
+        cache = func(region)
+        return cache
+      }
+    }
+
+    self.treasureSum = guard(function (region) {
+      var members = app.world.destinations.filter(e => dist(e.pos, region.pos) < region.radius)
+      var itemIds = _.flatten(members.map(e => [e.treasures, (e.enemy ? e.enemy.loot : 0)]))
+      var items = itemIds.map(id => app.world.items.find(item => item.name==id) || { credits: 0 })
+      return _.sum(items, 'credits') + ' credits'
+    })
+
+    self.level = guard(function (region) {
+      var members = app.world.destinations.filter(e => dist(e.pos, region.pos) < region.radius)
+      var itemIds = _.flatten(members.map(e => [e.treasures, (e.enemy ? e.enemy.loot : [])]))
+      var items = itemIds.map(id => app.world.items.find(item => item.name==id) || { level: 0 })
+      var enemyIds = _.compact(members.map(e => e.enemy && e.enemy.type))
+      var enemies = _.compact(enemyIds.map(id => app.world.enemies.find(enemy => enemy.name == id)))
+      var values = _.map(items, 'level').concat(_.map(enemies, 'level'))
+      return _.min(values) + ' - ' + _.max(values)
+    })
+  </script>
+
+</region-summary>

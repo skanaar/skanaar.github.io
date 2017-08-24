@@ -30,17 +30,7 @@
       <input type=color onchange={setFields} ref="colorField" value={selected && toLongColor(selected.color)}><br/>
       <em>icon</em>
       <select ref="iconSelect" onchange={setFields} value={selected && selected.icon}>
-        <option>enter</option>
-        <option>exit</option>
-        <option>arrow</option>
-        <option>rhomb</option>
-        <option>chevrons</option>
-        <option>square</option>
-        <option>bar</option>
-        <option>pillar</option>
-        <option>bookmark</option>
-        <option>star</option>
-        <option>drop</option>
+        <option each={icon in icons}>{icon}</option>
       </select>
     </div>
     <label>Tags</label>
@@ -60,11 +50,12 @@
     self.world = app.nullWorld()
     self.warnings = []
     self.selected = null
+    self.icons = 'square bar pillar bookmark star rhomb drop triangle chevron trader heart shield bolt'.split(' ')
     self.templates = [
       { name: 'Add to quest list', template: '<add-to-quest-list/>' },
       { name: 'Mark on map', template: '<mark-on-map dest="" />' },
       { name: 'Remove map marker', template: '<remove-map-marker/>' },
-      { name: 'Condition', template: '<condition state="space" have-item="" at-dest="" no-enemy-at-dest="" not-at-dest="" have-credits="" trigger="TRIGGER"/>' },
+      { name: 'Condition', template: '<condition state="space" have-item="" installed-item="" have-ship="" at-dest="" no-enemy-at-dest="" not-at-dest="" have-credits="" trigger="TRIGGER"/>' },
       { name: 'Dialog', template: '<dialog>"Hey hitchhiker!"</dialog>' },
       { name: 'Dialog with choice', template: '<dialog ok="YES PLEASE" cancel="NO THANKS">"Would you like some tea?"</dialog>' },
       { name: 'Script goto', template: '<goto jump="1"/>' },

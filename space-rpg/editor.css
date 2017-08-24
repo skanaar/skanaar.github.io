@@ -102,6 +102,13 @@ button:hover,
   display: block;
   border: 1px solid #aaa;
 }
+.sidebar input[type=text][readonly],
+.sidebar input[type=number][readonly] {
+  background: none;
+  border: none;
+  font-style: italic;
+  text-align: center;
+}
 .sidebar button:active {
   background: linear-gradient(to top, #07f, #5af);
   border-color: #25f;
@@ -112,6 +119,8 @@ button:hover,
   width: 59px;
 }
 .input-grid input,
+.input-grid input[type=text],
+.input-grid input[type=number],
 .input-grid select {
   display: inline-block;
   width: 90px;
@@ -203,9 +212,9 @@ button:hover,
   border-right: 1px solid #eee;
 }
 
-.table.attr-table td:nth-child(3n+4) { color: #a44; font-weight: bold }
-.table.attr-table td:nth-child(3n+5) { color: #44a; font-weight: bold }
-.table.attr-table td:nth-child(3n+6) { color: #4a4; font-weight: bold }
+.table.attr-table td:nth-child(3n+5) { color: #a44; font-weight: bold }
+.table.attr-table td:nth-child(3n+6) { color: #44a; font-weight: bold }
+.table.attr-table td:nth-child(3n+7) { color: #4a4; font-weight: bold }
 .table.attr-table td.table_zero {
   color: #aaa;
   font-weight: normal;

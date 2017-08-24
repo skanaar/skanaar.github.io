@@ -13,7 +13,8 @@
       },
       "generator": {"hull": 0, "shield": 0, "energy": 0},
       "value": 5,
-      "isFlying": false
+      "isFlying": false,
+      "level": 0
     },
     {
       "name": "Kerr Clipper",
@@ -27,7 +28,8 @@
       },
       "generator": {"hull": 1, "shield": 0, "energy": 0},
       "value": 200,
-      "isFlying": true
+      "isFlying": true,
+      "level": 1
     },
     {
       "attr": {
@@ -43,7 +45,8 @@
       "name": "Kerr Runner",
       "visual": "Kerr Runner",
       "value": 200,
-      "isFlying": true
+      "isFlying": true,
+      "level": 2
     },
     {
       "attr": {
@@ -59,7 +62,8 @@
       "name": "Kerr Interloper",
       "visual": "Kerr Interloper",
       "isFlying": true,
-      "value": 700
+      "value": 700,
+      "level": 3
     },
     {
       "name": "Kerr Journeyman",
@@ -73,7 +77,8 @@
       },
       "generator": {"hull": 1, "shield": 1, "energy": 2},
       "value": 1000,
-      "isFlying": true
+      "isFlying": true,
+      "level": 3
     },
     {
       "attr": {
@@ -89,7 +94,8 @@
       "name": "Sloop",
       "visual": "NS Sloop",
       "value": 2000,
-      "isFlying": true
+      "isFlying": true,
+      "level": 4
     },
     {
       "attr": {
@@ -105,7 +111,8 @@
       "name": "Salem",
       "visual": "NS Salem",
       "value": 3000,
-      "isFlying": true
+      "isFlying": true,
+      "level": 4
     },
     {
       "attr": {
@@ -121,7 +128,8 @@
       "name": "Vanguard",
       "visual": "NS Vanguard",
       "isFlying": true,
-      "value": 3500
+      "value": 3500,
+      "level": 4
     },
     {
       "name": "CES Interplan",
@@ -135,7 +143,8 @@
       },
       "generator": {"hull": 4, "shield": 2, "energy": 4},
       "value": 4000,
-      "isFlying": true
+      "isFlying": true,
+      "level": 4
     },
     {
       "name": "Kerr Frigate",
@@ -149,7 +158,8 @@
       },
       "generator": {"hull": 2, "shield": 1, "energy": 2},
       "value": 5000,
-      "isFlying": true
+      "isFlying": true,
+      "level": 5
     }
   ],
   "enemies": [
@@ -167,7 +177,9 @@
       "name": "Target Drone",
       "visual": "Monitor Drone",
       "inventory": [],
-      "value": 0
+      "value": 0,
+      "level": 0,
+      "isFlying": false
     },
     {
       "name": "Monitor Drone",
@@ -181,7 +193,9 @@
       },
       "generator": {"hull": 0, "shield": 0, "energy": 0},
       "inventory": ["Kinetic Gun"],
-      "value": 0
+      "value": 0,
+      "level": 1,
+      "isFlying": false
     },
     {
       "attr": {
@@ -198,22 +212,8 @@
       "visual": "Monitor Drone",
       "inventory": ["Kinetic Gun", "Autocannon"],
       "value": 0,
-      "isFlying": false
-    },
-    {
-      "attr": {
-        "maxhull": 35,
-        "maxshield": 7,
-        "maxenergy": 30,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "generator": {"hull": 1, "shield": 2, "energy": 5},
-      "name": "Security Drone",
-      "visual": "Security Drone",
-      "inventory": ["Railgun", "Photon Ray"]
+      "isFlying": false,
+      "level": 2
     },
     {
       "attr": {
@@ -230,7 +230,8 @@
       "visual": "NS Salem",
       "inventory": ["Kinetic Gun", "Photon Ray"],
       "value": 0,
-      "isFlying": false
+      "isFlying": false,
+      "level": 2
     },
     {
       "attr": {
@@ -247,7 +248,26 @@
       "visual": "NS Salem",
       "inventory": ["Photon Ray", "Autocannon Mk2"],
       "isFlying": true,
-      "value": 0
+      "value": 0,
+      "level": 3
+    },
+    {
+      "attr": {
+        "maxhull": 35,
+        "maxshield": 7,
+        "maxenergy": 30,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 1, "shield": 2, "energy": 5},
+      "name": "Security Drone",
+      "visual": "Security Drone",
+      "inventory": ["Railgun", "Photon Ray"],
+      "level": 4,
+      "value": 0,
+      "isFlying": false
     },
     {
       "name": "Rogue",
@@ -260,7 +280,46 @@
         "slots": 4
       },
       "generator": {"hull": 1, "shield": 1, "energy": 1},
-      "inventory": ["Autocannon", "Photon Ray"]
+      "inventory": ["Autocannon", "Photon Ray"],
+      "level": 4,
+      "value": 0,
+      "isFlying": false
+    },
+    {
+      "attr": {
+        "maxhull": 10,
+        "maxshield": 4,
+        "maxenergy": 100,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 2, "shield": 1, "energy": 1},
+      "name": "Sentinel Pod",
+      "visual": "Monitor Drone",
+      "inventory": ["Welding Robot", "Tau Beam", "Phased Ray"],
+      "level": 4,
+      "value": 0,
+      "isFlying": false
+    },
+    {
+      "attr": {
+        "maxhull": 700,
+        "maxshield": 0,
+        "maxenergy": 1000,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 0, "shield": 0, "energy": 25},
+      "name": "Nanite Megacluster",
+      "visual": "Nanite Megacluster",
+      "inventory": ["Nanite Attack"],
+      "level": 5,
+      "value": 0,
+      "isFlying": false
     },
     {
       "attr": {
@@ -277,7 +336,8 @@
       "visual": "Soma Saay",
       "inventory": ["Autocannon Mk2", "Phased Ray"],
       "isFlying": true,
-      "value": 0
+      "value": 0,
+      "level": 5
     },
     {
       "attr": {
@@ -292,22 +352,10 @@
       "generator": {"hull": 2, "shield": 2, "energy": 10},
       "name": "Soma Predator",
       "visual": "Soma Saay",
-      "inventory": ["Phased Ray", "Autocannon"]
-    },
-    {
-      "attr": {
-        "maxhull": 10,
-        "maxshield": 4,
-        "maxenergy": 100,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "generator": {"hull": 2, "shield": 1, "energy": 1},
-      "name": "Sentinel Pod",
-      "visual": "Monitor Drone",
-      "inventory": ["Welding Robot", "Tau Beam", "Phased Ray"]
+      "inventory": ["Phased Ray", "Autocannon"],
+      "level": 6,
+      "value": 0,
+      "isFlying": false
     },
     {
       "attr": {
@@ -322,22 +370,10 @@
       "generator": {"hull": 10, "shield": 10, "energy": 10},
       "name": "Worm",
       "visual": "Worm",
-      "inventory": ["Worm Beam"]
-    },
-    {
-      "attr": {
-        "maxhull": 700,
-        "maxshield": 0,
-        "maxenergy": 1000,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "generator": {"hull": 0, "shield": 0, "energy": 25},
-      "name": "Nanite Megacluster",
-      "visual": "Nanite Megacluster",
-      "inventory": ["Nanite Attack"]
+      "inventory": ["Worm Beam"],
+      "level": 7,
+      "value": 0,
+      "isFlying": false
     }
   ],
   "items": [
@@ -459,7 +495,9 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 8,
-      "name": "Pavonian Ore"
+      "name": "Pavonian Ore",
+      "level": "0",
+      "rechargeRequired": false
     },
     {
       "type": "rare",
@@ -475,7 +513,9 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 50,
-      "name": "Nebular Dust"
+      "name": "Nebular Dust",
+      "level": "0",
+      "rechargeRequired": false
     },
     {
       "type": "rare",
@@ -491,7 +531,9 @@
         "slots": 0
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "level": "0",
+      "rechargeRequired": false
     },
     {
       "type": "rare",
@@ -505,7 +547,9 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 600,
-      "name": "Shiny Meteorite"
+      "name": "Shiny Meteorite",
+      "level": "0",
+      "rechargeRequired": false
     },
     {
       "type": "rare",
@@ -521,7 +565,9 @@
         "slots": 0
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "level": "0",
+      "rechargeRequired": false
     },
     {
       "type": "weapon",
@@ -537,7 +583,9 @@
         "slots": 0
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": -1, "shield": 0, "energy": 0}
+      "targetBuff": {"hull": -1, "shield": 0, "energy": 0},
+      "level": "1",
+      "rechargeRequired": false
     },
     {
       "type": "weapon",
@@ -551,7 +599,9 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": -2, "shield": 0, "energy": 0},
       "credits": 20,
-      "name": "Kinetic Gun"
+      "name": "Kinetic Gun",
+      "level": "1",
+      "rechargeRequired": false
     },
     {
       "type": "weapon",
@@ -565,7 +615,9 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": -3, "shield": 0, "energy": 0},
       "credits": 40,
-      "name": "Autocannon"
+      "name": "Autocannon",
+      "level": "2",
+      "rechargeRequired": false
     },
     {
       "type": "weapon",
@@ -579,7 +631,9 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": -1, "shield": -2, "energy": 0},
       "credits": 50,
-      "name": "Photon Ray"
+      "name": "Photon Ray",
+      "level": "2",
+      "rechargeRequired": false
     },
     {
       "type": "weapon",
@@ -595,7 +649,9 @@
         "slots": 0
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": -4, "shield": 0, "energy": 0}
+      "targetBuff": {"hull": -4, "shield": 0, "energy": 0},
+      "level": "2",
+      "rechargeRequired": false
     },
     {
       "type": "weapon",
@@ -609,7 +665,9 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
       "targetBuff": {"hull": -5, "shield": -2, "energy": 0},
       "credits": 120,
-      "name": "Tau Beam"
+      "name": "Tau Beam",
+      "level": "3",
+      "rechargeRequired": false
     },
     {
       "type": "weapon",
@@ -1657,7 +1715,7 @@
     {
       "name": "Helyon Shipyards",
       "style": "anomaly-helyon_shipyards",
-      "pos": {"x": 406, "y": -560},
+      "pos": {"x": 426, "y": -520},
       "trader": {
         "buy": 1.5,
         "sell": 0.75,
@@ -3589,7 +3647,7 @@
     },
     {
       "name": "Start of an adventure",
-      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n_\"Hey hitchhiker! This is your stop.\"_\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a _weird_ signature.\n\nIf you *EXPLORE* the area you might score big time!</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog>You find the meteorite resting on the ground. A shiny lump that is surprisingly light when you load it into the rover.</dialog>\n<dialog>If you *TRADE* the meteroite for cash, you will earn a small fortune.</dialog>\n<condition have-credits=\"200\"/>\n<dialog>_\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. Enter the *SHIPYARD* if you are interested.\"_</dialog>\n<condition have-ship=\"Kerr Clipper\" />\n<dialog>_\"Now you can *LIFT OFF* and leave this planet.\"\n\n\"And good luck kid! It is dangerous out there.\"_</dialog>\n<mark-on-map dest=\"Samson's Folly\"/>\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>_\"My friend at Backwater said you would be coming.\n\nWe have a cheap *Rusty inetic Gun* in stock. You are welcome to *LAND* and *TRADE* with us here at Samson's Folly.\"_</dialog>\n<condition have-item=\"Rusty Kinetic Gun\"/>\n<dialog>You now have a Rusty Kinetic Gun, a basic weapon. Tap you ship hologram to open your *PROFILE* and *INSTALL* your new weapon</dialog>\n<condition installed=\"Rusty Kinetic Gun\"/>\n<dialog>_\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"_</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n",
+      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n_\"Hey hitchhiker! This is your stop.\"_\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a _weird_ signature.\n\nIf you *EXPLORE* the area you might score big time!</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog>You find the meteorite resting on the ground. A shiny lump that is surprisingly light when you load it into the rover.</dialog>\n<dialog>If you *TRADE* the meteroite for cash, you will earn a small fortune.</dialog>\n<condition have-credits=\"200\"/>\n<dialog>_\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. Enter the *SHIPYARD* if you are interested.\"_</dialog>\n<condition have-ship=\"Kerr Clipper\" />\n<dialog>_\"Now you can *LIFT OFF* and leave this planet.\"\n\n\"And good luck kid! It is dangerous out there.\"_</dialog>\n<mark-on-map dest=\"Samson's Folly\"/>\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>_\"My friend at Backwater said you would be coming.\n\nWe have a cheap *Rusty Kinetic Gun* in stock. You are welcome to *LAND* and *TRADE* with us here at Samson's Folly.\"_</dialog>\n<condition have-item=\"Rusty Kinetic Gun\"/>\n<dialog>You now have a Rusty Kinetic Gun, a basic weapon. Tap you ship hologram to open your *PROFILE* and *INSTALL* your new weapon</dialog>\n<condition installed-item=\"Rusty Kinetic Gun\"/>\n<dialog>_\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"_</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n",
       "tags": "outback",
       "color": "07f",
       "icon": "arrow"
@@ -7259,6 +7317,30 @@
       "audio": "trouble-on-mercury",
       "pos": {"x": -1192, "y": -840},
       "radius": 300
+    },
+    {
+      "name": "Fields of Eris",
+      "audio": "trouble-on-mercury",
+      "pos": {"x": -1218, "y": -1404},
+      "radius": 250
+    },
+    {
+      "name": "Garden of Apate",
+      "audio": "trouble-on-mercury",
+      "pos": {"x": -1696, "y": -1050},
+      "radius": 250
+    },
+    {
+      "name": "Weaver Nebula",
+      "audio": "trouble-on-mercury",
+      "pos": {"x": -182, "y": 78},
+      "radius": 270
+    },
+    {
+      "name": "Al Se Expanse",
+      "audio": "light-years",
+      "pos": {"x": 812, "y": -224},
+      "radius": 500
     }
   ],
   "name": "Skanaar's World"

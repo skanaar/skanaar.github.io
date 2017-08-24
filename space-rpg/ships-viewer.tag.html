@@ -5,6 +5,7 @@
       <thead>
         <tr>
           <th>Player ships</th>
+          <th>level</th>
           <th>value</th>
           <th>slots</th>
           <th>maxhull</th>
@@ -18,6 +19,7 @@
       <tbody>
         <tr each={ship in world.ships} onclick={edit} class={active: selected == ship}>
           <td>{ship.name}</td>
+          <td>{ship.level}</td>
           <td>{ship.value} c</td>
           <td>{ship.attr.slots}</td>
           <td class={table_zero: !ship.attr.maxhull}>{ship.attr.maxhull}</td>
@@ -31,6 +33,7 @@
       <thead>
         <tr>
           <th>Enemy ships</th>
+          <th>level</th>
           <th>equipment</th>
           <th>slots</th>
           <th>maxhull</th>
@@ -44,6 +47,7 @@
       <tbody>
         <tr each={ship in world.enemies} onclick={edit} class={active: selected == ship}>
           <td>{ship.name}</td>
+          <td>{ship.level}</td>
           <td>{ship.inventory.join()}</td>
           <td>{ship.attr.slots}</td>
           <td class={table_zero: !ship.attr.maxhull}>{ship.attr.maxhull}</td>
@@ -73,7 +77,8 @@
       <select ref="visualInput">
         <option each={e in world.models}>{e.name}</option>
       </select><br />
-      <em>flying</em> <input type=checkbox ref=isFlyingInput checked={selected && selected.isFlying}>
+      <em>flying</em> <input type=checkbox ref=isFlyingInput checked={selected && selected.isFlying}><br />
+      <em>level</em> <input type=number ref=levelField value={selected && selected.level || 0}>
     </div>
     
     <label>Attributes</label>
@@ -129,6 +134,7 @@
         attr: { maxhull:0, maxshield:0, maxenergy:0, armor:0, cloak:0, jump:0, slots:0},
         generator:{hull:0, shield:0, energy: 0},
         name: 'unnamed',
+        level: 1,
         visual: 'monitor-drone',
         isFlying: true
       })
@@ -139,6 +145,7 @@
         attr: { maxhull:0, maxshield:0, maxenergy:0, armor:0, cloak:0, jump:0, slots:0},
         generator:{hull:0, shield:0, energy: 0},
         name: 'unnamed',
+        level: 1,
         visual: 'monitor-drone',
         inventory: [],
         isFlying: true
@@ -150,8 +157,10 @@
       self.refs.visualInput.value = self.selected.visual
     }
     
-    self.endEditing = function (e) {
+    self.endEditing = function () {
+      if (!self.selected) return
       self.selected.name = self.refs.nameField.value
+      self.selected.level = +self.refs.levelField.value
       self.selected.value = (self.refs.valueField && (+self.refs.valueField.value)) || 0
       self.selected.visual = self.refs.visualInput.value
       self.selected.isFlying = !!self.refs.isFlyingInput.checked
@@ -192,10 +201,12 @@
     self.on('before-mount', function() {
       self.world = app.getWorld()
       app.events.on('world-updated', self.update)
+      app.events.on('save-entity', self.endEditing)
     })
 
     self.on('unmount', function() {
       app.events.off('world-updated', self.update)
+      app.events.off('save-entity', self.endEditing)
     })
 
   </script>

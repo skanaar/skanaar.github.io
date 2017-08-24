@@ -69,7 +69,9 @@
     }
 
     function tagFilter(items, query) {
-      return (query === '' ? items.filter(e => !e.tags) : (query ? items.filter(e => (e.tags || '').includes(query)) : items))
+      return (query === '' ?
+        items.filter(e => !e.tags) :
+        (query ? items.filter(e => (e.tags || '').includes(query)) : items))
     }
 
     function saveWorld() {
@@ -97,6 +99,13 @@
 
       window.addEventListener('click', function onUserInteraction() {
         self.app.isSaved = false
+      })
+
+      window.addEventListener('keydown', function (e) {
+        if (e.key == 's' && e.metaKey) {
+          self.app.events.trigger('save-entity')
+          e.preventDefault()
+        }
       })
 
       window.setInterval(function () {
