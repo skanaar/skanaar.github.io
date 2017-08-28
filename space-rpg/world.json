@@ -374,9 +374,81 @@
       "level": 7,
       "value": 0,
       "isFlying": false
+    },
+    {
+      "attr": {
+        "maxhull": 48,
+        "maxshield": 2,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 0, "shield": 1, "energy": 0},
+      "name": "Rocket Drone",
+      "level": 0,
+      "visual": "Rocket Drone",
+      "inventory": ["Autocannon Mk3", "Meson Ray"],
+      "isFlying": true,
+      "value": 0
     }
   ],
   "items": [
+    {
+      "type": "quest",
+      "level": "0",
+      "credits": 5,
+      "name": "Brandons Whiskey",
+      "rechargeRequired": false,
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "type": "quest",
+      "level": "0",
+      "credits": 5,
+      "name": "Joes Coaster",
+      "rechargeRequired": false,
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "type": "weapon",
+      "level": "0",
+      "credits": 5,
+      "name": "Autocannon Mk3",
+      "rechargeRequired": false,
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
+      "targetBuff": {"hull": -10, "shield": -3, "energy": 0}
+    },
     {
       "type": "rare",
       "credits": 0,
@@ -1422,6 +1494,24 @@
       "type": "common",
       "credits": 80,
       "name": "Sky Crystals",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "type": "quest",
+      "level": "",
+      "credits": 0,
+      "name": "Maxwell Parking Ticket",
+      "rechargeRequired": false,
       "attr": {
         "maxhull": 0,
         "maxshield": 0,
@@ -3298,6 +3388,14 @@
       "treasures": []
     },
     {
+      "pos": {"x": -70, "y": -1857},
+      "name": "Joes",
+      "style": "anomaly-hermit",
+      "trader": {"buy": 1.5, "sell": 0.75, "inventory": []},
+      "enemy": null,
+      "treasures": []
+    },
+    {
       "pos": {"x": 1105, "y": -1353},
       "name": "Beryl Canis I",
       "style": "jovian-mono",
@@ -3724,9 +3822,175 @@
       "trader": null,
       "enemy": null,
       "treasures": ["Rusty Kinetic Gun"]
+    },
+    {
+      "pos": {"x": -37, "y": -1923},
+      "name": "Maxwell Station",
+      "style": "anomaly-Maxwell_Station",
+      "trader": {"buy": 1.75, "sell": 0.75, "inventory": []},
+      "enemy": null,
+      "treasures": ["Autocannon Mk2"],
+      "shipyard": []
+    },
+    {
+      "pos": {"x": -166, "y": -1928},
+      "name": "Arctica",
+      "style": "planet-hell-2",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -212, "y": -1842},
+      "name": "A54",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": ["Rusty Kinetic Gun"]
+    },
+    {
+      "pos": {"x": -331, "y": -1811},
+      "name": "Buoy 14",
+      "style": "anomaly-buoy",
+      "trader": null,
+      "enemy": null,
+      "treasures": ["Welding Robot"]
+    },
+    {
+      "pos": {"x": -266, "y": -1746},
+      "name": "A112",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -399, "y": -1879},
+      "name": "A178",
+      "style": "asteroid-3",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -378, "y": -1946},
+      "name": "Feather",
+      "style": "planet-s-rock-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": ["Platinum"]
+    },
+    {
+      "pos": {"x": -269, "y": -1987},
+      "name": "Smacky's",
+      "style": "anomaly- Smackys asteroid",
+      "trader": null,
+      "enemy": null,
+      "treasures": ["Copper", "Barium Ore"]
+    },
+    {
+      "pos": {"x": -558, "y": -1860},
+      "name": "Dark Nebula",
+      "style": "cloud-smoke",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -466, "y": -1939},
+      "name": "Brandons Buoy",
+      "style": "anomaly-buoy",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -564, "y": -1900},
+      "name": "Brandons",
+      "style": "anomaly-Tiendong",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -249, "y": -2069},
+      "name": "A118",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -461, "y": -2048},
+      "name": "A109",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -578, "y": -2089},
+      "name": "unnamed",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -360, "y": -2120},
+      "name": "Maxwell Gate, vortec.inc",
+      "style": "anomaly-gate",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -264, "y": -2198},
+      "name": "unnamed",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -230, "y": -2308},
+      "name": "unnamed",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -190, "y": -2096},
+      "name": "unnamed",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
     }
   ],
   "quests": [
+    {
+      "name": "Brandons",
+      "xml": "<condition at-dest=\"Brandons Buoy\" installed-item=\"Autocannon Mk3\"/>\n\n<remove-map-marker/>\n<add-to-quest-list/>\n<place-enemy dest=\"Brandons Buoy\" enemy=\"Security Drone\" loot=\"Shield Battery\"/>\n<dialog>You are in an authorized area! Leave immediately!</dialog>\n<place-enemy dest=\"Brandons\" enemy=\"Rocket Drone\" loot=\"\"/>\n\n\n<condition at-dest=\"Brandons\" no-enemy-at-dest=\"Brandons\"/>\n<dialog>No more drones in sight.</dialog>\n\n<remove-map-marker/>\n<give credits=\"400\"/>",
+      "color": "0f0",
+      "icon": "bar",
+      "tags": "qdn"
+    },
+    {
+      "name": "Joes",
+      "xml": "<condition at-dest=\"Joes\"/>\n<hint layout=\"trader\">JOES is Sponsored by Smacky's!</hint>\n\n<dialog ok=\"SMACKYS!\" cancel=\"no thanks\">\"The glare off the neon sign spelling 'JOES BAR' leaves a good impression on your eyes as you hover the landing pads at Joes.\"</dialog>\n<dialog ok=\"Who?\" cancel=\"What?\">\"How are yez!?\" Calls a man as he wobbles to your ship.</dialog>\n<dialog>The man gives the ship a hug and turnes toward you, still holding onto the ship as not to fall on his nose, clearly drunk.</dialog>\n<dialog ok=\"I got it in this condition\">\"I've been lookin' round for yeh for six months! yeh're a Wreck. Ye arn't lookin' after her. \"</dialog>\n<dialog ok=\"Really?\">\"This was my vessel see. Don't worry. It's just a wee lovely to see her after so many years.\"</dialog>\n<dialog>\"Aye. Say you don't want to get a Autocannon Mk3 for a deal, I got one but i need liqur badly.</dialog>\n<dialog>\"Aint got nothin good in these Parts. Have ta go to Brandons to get anything good.\"</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Brandons\" />\n\n\n<condition at-dest=\"Joes\" trigger=\"Enter\" have-credits=\"10\" />\n<dialog ok=\"Something to drink please\" cancel=\"Nothing im heading out\">This bar has damp lightning and is quiet, most guests are playing pool further in. You go up to the bartender.\nWhat can I get you this fine eveninin' sir?</dialog>\n<dialog>The bartender pours a beer and you ask for Brandons liqour.</dialog>\n<dialog>\"We are all out of that feller, Brandons is the darndest best liqour out there, but they have stopped deliverin.\"</dialog>\n<dialog>\"I can't tell ye why, but i think the is somethin fishy going on. The distillery is only a couple of jumps from here.\"</dialog>\n\n<give item=\"Joes Coaster\"/>\n<take credits=\"10\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Brandons\" />\n\n\n<condition have-item=\"Joes Coaster\" at-dest=\"Brandons\" />\n  \n<dialog>You navigate around space junk that is orbiting the distillery, there is no activity to be seen</dialog>\n  \n<dialog>A broken door lets you inside a part of the distillery where there are some broken bottles. Someone leem to have left in a hurry.</dialog>\n\n<dialog ok=\"This is what he wanted\" cancel=\"Put it down\">You find a unbroken bottle of Brandons Single Malt!</dialog>\n<give item=\"Brandons Whiskey\"/>\n<dialog>You go to your ship and take off.</dialog>\n<place-enemy dest=\"Brandons Buoy\" enemy=\"Striker Drone\" loot=\"\"/>\n<hint layout=\"trader\">You are in an authorized area! Leave immediatly!</hint>\n<travel dest=\"Brandons Buoy\"/>\n\n\n\n<condition have-item=\"Brandons Whiskey\" at-dest=\"Joes\" trigger=\"Mr. Brandon.\"/>\n<dialog ok=\"Do you have The Mk3?\" cancel=\"Not Yet.\">\"Can't believe ye'r back, wha? Ye found any liquor yet?</dialog>\n\n<dialog>\"Aw, C'mon, ofcourse. I have it in a garage downere'\" He takes the bottle out of your hand and sips it.</dialog>\n<take item=\"Brandons Whiskey\"/>\n<dialog>\"Here we're, good as new. Now for yeh this might be a high quality automatic machinegun...\" </dialog>\n<dialog ok=\"Not what we agreed\" cancel=\"You are changing the deal\">\"For me, it's an investment. I'm going to have ye ta help me with another thing.\"</dialog>\n<dialog>\"Houl' on. Ye see I'm mr. Brandon\" He says and pulls down his hood. One if his eyes,replaced with a cyborg techpiece. </dialog>\n<dialog>\"Those fuckers have shut down me distillery. ey mean this is bollicks, ey can't even collect me stock that're still down there.\"</dialog>\n<dialog>\"Look, I'm really thankful allright. But I need ye to install this gun and use it on the dron's outside my disillery.\"</dialog>\n<dialog>\"Then ill get me stock back, And ye keep the gun. \"</dialog>\n<mark-on-map dest=\"Brandons Buoy\" />\n<hint layout=\"trader\">Return to the Brandons distillery.</hint>\n\n\n\n\n\n\n",
+      "color": "0f0",
+      "icon": "square",
+      "tags": "qdn"
+    },
+    {
+      "name": "Maxwell Station",
+      "xml": "<condition at-dest=\"Maxwell Station\"/>\n<dialog>As you approach a transmission is recieved from Maxwell Station.</dialog>\n<dialog ok=\"Thank you.\">\"Welcome to Maxwell station, You have been approved landing pad Beta Twelve.\"</dialog>\n\n<dialog>After a secure landing you enter the metallic humm of the hangar. You are approached my a service robot.</dialog>\n<give item=\"Maxwell Parking Ticket\"/>\n<dialog>\"Greetings traveller and welcome to Maxwell Station. If you need a tour or assistance during your visit. Please let us know.\"</dialog>\n\n<condition at-dest=\"Maxwell Station\" trigger=\"Tour\" have-item=\"Maxwell Parking Ticket\"/>\n<dialog>\"Here at Maxwell Station we strive to make your adventures throughout the Nebula as convenient as possible.\"</dialog>\n<dialog>\"At the Maxwell Trader you will find some of the best prices on goods from the whole galaxy with adequite garantees.\"</dialog>\n<dialog>\"The well known Captain Maxwell was the first to explore this whole nebula. And opened the doors to this open hangar over one hundred years ago. Here all beings are welcome to share tales and trade goods.\"</dialog>\n<dialog>\"Maxwell is currently head of developing the vortec technology which will greatly improve travel speeds within the nebula.\"</dialog>\n<dialog>\"Please enjoy your stay. If you need any further assistance. Please let us know.\"</dialog>\n<take item=\"Maxwell Parking Ticket\"/>\n\n<hint layout=\"trader\">The NEW! Mk3 Is on sale!</hint>\n\n",
+      "color": "0f0",
+      "icon": "square",
+      "tags": "qdn"
+    },
     {
       "name": "REFERENCE",
       "xml": "<!-- Pause the quest until all conditions are fulfilled. All attributes are optional. -->\n<!-- have-item accepts: semicolon separated list of items that the player must possess -->\n<!-- at-dest accepts: single destination name -->\n<!-- no-enemy-at-dest: semicolon separated list of destination names that must be cleared of enemies -->\n<!-- not-at-dest: single destination name -->\n<!-- have-credits: number of credits that player must possess -->\n<!-- trigger: if omitted condition is triggered automatically. If present the condition is triggered with a button in the Radar View with the text set to the provided string -->\n<condition have-item=\"Shiny Meteorite;Blue seeds\" at-dest=\"Backwater\" no-enemy-at-dest=\"Baola\" not-at-dest=\"Backwater\" have-credits=\"3000\" trigger=\"EXPLORE\"/>\n\n<!-- Add a lootable item to the destination. -->\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n\n<!-- Add a purchasable item to the destination's trader. -->\n<place-inventory dest=\"Backwater\" item=\"Phased Ray\"/>\n\n<!-- Set enemy at destination -->\n<place-enemy dest=\"Backwater\" enemy=\"Monitor Drone\"/>\n\n<!-- Display a message. If the optional ok and cancel attributes are provided they will appear as buttons. Cancel will rewinds the quest one step, so that the same trigger that triggered the quest will display the same message the next turn. Ok will progress the quest as normally. -->\n<dialog>\"Hey hitchhiker!\"</dialog>\n<dialog ok=\"YES PLEASE\" cancel=\"NO THANKS\">\"Would you like some tea?\"</dialog>\n\n<!-- Include this quest in the quest list. -->\n<add-to-quest-list/>\n<!-- Add item or credits to the player's inventory. -->\n<give credits=\"900\"/>\n<give item=\"Phased Ray\"/>\n\n<!-- Remove an item or credits from the player's inventory. -->\n<take credits=\"900\"/>\n<take item=\"Phased Ray\"/>\n\n<!-- Place a quest marker on the map. color and icon attributes are optional. icon can take these values: \"arrow\", \"square\", \"enter\", \"exit\". A quest can only have a single map marker. -->\n<mark-on-map dest=\"Samson's Folly\" color=\"0F0\" icon=\"arrow\"/>\n\n<!-- Change the player's ship. -->\n<change-ship ship=\"Kerr Clipper\"/>\n\n<!-- Clear the map marker for this quest. -->\n<remove-map-marker/>\n\n<!-- Transports the player to another destination. -->\n<travel dest=\"Backwater\"/>\n\n<!-- Rewinds or fast forwards the quest a set number of steps. -->\n<goto jump=\"-3\"/>",
@@ -4132,6 +4396,219 @@
   ],
   "initialDestination": "Backwater",
   "models": [
+    {
+      "name": "Rocket Drone",
+      "geometry": "composite",
+      "transform": [
+        ["scale", 2, 2, 2],
+        ["rotate", 0, 1.47, 0.5],
+        ["translate", 0, 0, -80]
+      ],
+      "parts": [
+        {
+          "name": "R1",
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["scale", 1, 1, 1],
+            ["rotate", -1.57, 0, 0],
+            ["translate", 0, 0, -40]
+          ],
+          "path": [[0, 0, -20], [9, 0, -5], [10, 0, 0], [6, 0, 30], [0, 0, 25]]
+        },
+        {
+          "name": "R3mafackas",
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["scale", 1.5, 1.5, 1.5],
+            ["rotate", -1.57, 0.63, 0],
+            ["translate", -23, -10, 0]
+          ],
+          "path": [[0, 0, -20], [9, 0, -5], [10, 0, 0], [6, 0, 30], [0, 0, 25]]
+        },
+        {
+          "name": "R1",
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["scale", 1, 1, 1],
+            ["rotate", -1.57, 0, 0],
+            ["translate", 0, -10, 38]
+          ],
+          "path": [[0, 0, -20], [9, 0, -5], [10, 0, 0], [6, 0, 50], [0, 0, 45]]
+        },
+        {
+          "name": "body",
+          "geometry": "lathe",
+          "res": 8,
+          "transform": [
+            ["scale", 0.75, 0.75, 0.75],
+            ["rotate", 0, 1.57, 0],
+            ["translate", -5, 0, 0]
+          ],
+          "path": [
+            [40, 0, 0],
+            [38, 0, 7],
+            [30, 0, 10],
+            [15, 0, 7],
+            [10, 0, 0],
+            [22, 0, -7],
+            [30, 0, -10],
+            [38, 0, -7],
+            [40, 0, 0]
+          ]
+        }
+      ],
+      "res": 8,
+      "path": [
+        [40, 0, 0],
+        [38, 0, 7],
+        [30, 0, 10],
+        [22, 0, 7],
+        [20, 0, 0],
+        [22, 0, -7],
+        [30, 0, -10],
+        [38, 0, -7],
+        [40, 0, 0]
+      ],
+      "tags": "anomaly"
+    },
+    {
+      "name": "Smacky's2",
+      "geometry": "composite",
+      "transform": [
+        ["scale", 0.8, 0.8, 0.8],
+        ["rotate", 0, 0, 0],
+        ["translate", 0, -100, -50]
+      ],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 20,
+          "transform": [
+            ["rotate", 1, 0, 0],
+            ["translate", 0, 0, 0],
+            ["radial-wave", 5, 1.3, 0],
+            ["scale", 1, 1, 1],
+            ["rotate", 0, 0, 0],
+            ["translate", 0, 0, 0]
+          ],
+          "path": [
+            [0, 0, -100],
+            [30, 0, -96],
+            [50, 0, -90],
+            [60, 0, -80],
+            [65, 0, -60],
+            [70, 0, -40],
+            [70, 0, -20],
+            [60, 0, -10],
+            [0, 0, 0]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 20,
+          "transform": [
+            ["rotate", 1, 0, 0],
+            ["translate", 0, 0, 0],
+            ["radial-wave", 5, 1.3, 0],
+            ["scale", 1, 1, 1],
+            ["rotate", 0, 0, 0],
+            ["translate", 0, 0, 0]
+          ],
+          "path": [
+            [0, 0, -100],
+            [30, 0, -96],
+            [50, 0, -90],
+            [60, 0, -80],
+            [65, 0, -60],
+            [70, 0, -40],
+            [70, 0, -20],
+            [60, 0, -10],
+            [0, 0, 0]
+          ]
+        },
+        {
+          "name": "body",
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["scale", 3, 3, 3],
+            ["rotate", 0, 0, 0],
+            ["translate", -15, 145, -30]
+          ],
+          "path": [
+            [30, 0, 0],
+            [28, 0, 7],
+            [40, 0, 7],
+            [40, 0, 10],
+            [0, 0, 30],
+            [0, 0, 0],
+            [10, 0, 0],
+            [20, 0, -10],
+            [28, 0, -7],
+            [30, 0, 0]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Smacky's",
+      "geometry": "composite",
+      "transform": [
+        ["scale", 0.8, 0.8, 0.8],
+        ["rotate", 0, 0, 0],
+        ["translate", 0, -100, -50]
+      ],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 20,
+          "transform": [
+            ["rotate", 1, 0, 0],
+            ["translate", 0, 0, 0],
+            ["radial-wave", 5, 1.3, 0],
+            ["scale", 1, 1, 1],
+            ["rotate", 1, 0, 0],
+            ["translate", 0, 0, 0]
+          ],
+          "path": [
+            [0, 0, -100],
+            [30, 0, -96],
+            [50, 0, -90],
+            [60, 0, -80],
+            [65, 0, -60],
+            [70, 0, -40],
+            [70, 0, -20],
+            [60, 0, -10],
+            [0, 0, 0]
+          ]
+        },
+        {
+          "name": "R1",
+          "geometry": "lathe",
+          "res": 4,
+          "transform": [
+            ["scale", 3, 3, 1],
+            ["rotate", -1.8, 1, 0.3],
+            ["translate", -15, 55, -150]
+          ],
+          "path": [[0, 0, 0], [28, 0, 2], [30, 0, 1], [28, 0, 1], [0, 0, 0]]
+        },
+        {
+          "name": "strut",
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["scale", 1, 0.5, 8],
+            ["rotate", 0, 0.2, 0.3],
+            ["translate", 0, 50, -75]
+          ],
+          "path": [[10, 0, -10], [10, 0, 10], [10, 0, 10]]
+        }
+      ]
+    },
     {
       "name": "Rusty Ship",
       "geometry": "composite",
@@ -6409,6 +6886,48 @@
     }
   ],
   "celestials": [
+    {
+      "id": "anomaly- Smackys asteroid",
+      "type": "anomaly",
+      "desc": "Smacky's!\nThe number # one best selling in the galaxy!",
+      "celestial": {
+        "r": 5,
+        "amb": 0.2,
+        "oct": 3,
+        "zoom": 10,
+        "color": ["888", "D84"]
+      },
+      "surface": null,
+      "model": "Smacky's"
+    },
+    {
+      "id": "anomaly-Tiendong",
+      "type": "anomaly",
+      "desc": "",
+      "celestial": {
+        "r": 20,
+        "amb": 0.2,
+        "oct": 3,
+        "zoom": 10,
+        "color": ["888", "D84"]
+      },
+      "surface": null,
+      "model": "Tiendong Station"
+    },
+    {
+      "id": "anomaly-Maxwell_Station",
+      "type": "anomaly",
+      "desc": "",
+      "celestial": {
+        "r": 15,
+        "amb": 0.2,
+        "oct": 3,
+        "zoom": 10,
+        "color": ["888", "D84"]
+      },
+      "surface": null,
+      "model": "Ring Station"
+    },
     {
       "id": "anomaly-debris",
       "type": "anomaly",
