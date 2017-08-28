@@ -36,9 +36,9 @@
     <label>Celestial Attributes</label>
     <div class="input-grid">
       <em>r</em> <input type=number ref="rField" value={currCelestial && currCelestial.r}><br/>
-      <em>amb</em> <input type=number ref="ambField" value={currCelestial && currCelestial.amb}><br/>
+      <em>amb</em> <input type=number step=0.05 ref="ambField" value={currCelestial && currCelestial.amb}><br/>
       <em>oct</em> <input type=number step=1 ref="octField" value={currCelestial && currCelestial.oct}><br/>
-      <em>zoom</em> <input type=number ref="zoomField" value={currCelestial && currCelestial.zoom}><br/>
+      <em>zoom</em> <input type=number step=0.1 ref="zoomField" value={currCelestial && currCelestial.zoom}><br/>
       <em>color 1</em> <input type=text ref="color0Field" value={currCelestial && currCelestial.color[0]}><br/>
       <em>color 2</em> <input type=text ref="color1Field" value={currCelestial && currCelestial.color[1]}><br/>
     </div>
@@ -50,10 +50,10 @@
     
     <label if={hasSurface()}>Surface Attributes</label>
     <div class="input-grid" if={hasSurface()}>
-      <em>zoom</em> <input type=number ref="surfZoomField" value={currSurface && currSurface.zoom}><br/>
-      <em>height</em> <input type=number ref="heightField" value={currSurface && currSurface.height}><br/>
-      <em>octaves</em> <input type=number ref="octavesField" value={currSurface && currSurface.octaves}><br/>
-      <em>falloff</em> <input type=number ref="falloffField" value={currSurface && currSurface.falloff}><br/>
+      <em>zoom</em> <input type=number step=0.1 ref="surfZoomField" value={currSurface && currSurface.zoom}><br/>
+      <em>height</em> <input type=number step=0.1 ref="heightField" value={currSurface && currSurface.height}><br/>
+      <em>octaves</em> <input type=number step=1 ref="octavesField" value={currSurface && currSurface.octaves}><br/>
+      <em>falloff</em> <input type=number step=0.05 ref="falloffField" value={currSurface && currSurface.falloff}><br/>
       <em>curve</em> <input type=text ref="curveField" value={currSurface && currSurface.curve.join()}><br/>
       <em>spectrum</em> <input type=text ref="spectrumField" value={currSurface && currSurface.spectrum.join()}><br/>
     </div>

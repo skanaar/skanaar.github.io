@@ -397,6 +397,63 @@
   "items": [
     {
       "type": "quest",
+      "level": "1",
+      "credits": 5,
+      "name": "Combat Handbook",
+      "cooldown": false,
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "critical": 0
+    },
+    {
+      "type": "weapon",
+      "level": "2",
+      "credits": 75,
+      "name": "Incision Beam",
+      "cooldown": false,
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": -2, "shield": 0, "energy": 0},
+      "critical": 0.1
+    },
+    {
+      "type": "weapon",
+      "level": "1",
+      "credits": 15,
+      "name": "Cutting Beam",
+      "cooldown": false,
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": -1, "shield": 0, "energy": 0},
+      "critical": 0.1
+    },
+    {
+      "type": "quest",
       "level": "0",
       "credits": 5,
       "name": "Brandons Whiskey",
@@ -447,7 +504,9 @@
         "slots": 0
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": -10, "shield": -3, "energy": 0}
+      "targetBuff": {"hull": -10, "shield": -3, "energy": 0},
+      "cooldown": false,
+      "critical": 0
     },
     {
       "type": "rare",
@@ -657,7 +716,9 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": -1, "shield": 0, "energy": 0},
       "level": "1",
-      "rechargeRequired": false
+      "rechargeRequired": false,
+      "cooldown": false,
+      "critical": 0
     },
     {
       "type": "weapon",
@@ -673,7 +734,9 @@
       "credits": 20,
       "name": "Kinetic Gun",
       "level": "1",
-      "rechargeRequired": false
+      "rechargeRequired": false,
+      "cooldown": false,
+      "critical": 0
     },
     {
       "type": "weapon",
@@ -689,7 +752,9 @@
       "credits": 40,
       "name": "Autocannon",
       "level": "1",
-      "rechargeRequired": false
+      "rechargeRequired": false,
+      "cooldown": false,
+      "critical": 0
     },
     {
       "type": "weapon",
@@ -705,7 +770,9 @@
       "credits": 50,
       "name": "Photon Ray",
       "level": "2",
-      "rechargeRequired": false
+      "rechargeRequired": false,
+      "cooldown": false,
+      "critical": 0
     },
     {
       "type": "weapon",
@@ -723,7 +790,9 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": -4, "shield": 0, "energy": 0},
       "level": "2",
-      "rechargeRequired": false
+      "rechargeRequired": false,
+      "cooldown": false,
+      "critical": 0
     },
     {
       "type": "weapon",
@@ -739,7 +808,9 @@
       "credits": 120,
       "name": "Tau Beam",
       "level": "2",
-      "rechargeRequired": false
+      "rechargeRequired": false,
+      "cooldown": false,
+      "critical": 0
     },
     {
       "type": "weapon",
@@ -755,7 +826,9 @@
       "credits": 150,
       "name": "Phased Ray",
       "level": "2",
-      "rechargeRequired": false
+      "rechargeRequired": false,
+      "cooldown": false,
+      "critical": 0
     },
     {
       "type": "weapon",
@@ -773,7 +846,9 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
       "targetBuff": {"hull": -20, "shield": 0, "energy": 0},
-      "level": "3"
+      "level": "3",
+      "cooldown": true,
+      "critical": 0
     },
     {
       "type": "weapon",
@@ -787,7 +862,10 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": -10},
       "targetBuff": {"hull": -25, "shield": -25, "energy": 0},
       "credits": 500,
-      "name": "Gamma Beam"
+      "name": "Gamma Beam",
+      "level": "0",
+      "cooldown": false,
+      "critical": 0
     },
     {
       "type": "weapon",
@@ -801,7 +879,10 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
       "targetBuff": {"hull": -50, "shield": 0, "energy": 0},
       "credits": 500,
-      "name": "Mass Gun"
+      "name": "Mass Gun",
+      "level": "0",
+      "cooldown": false,
+      "critical": 0
     },
     {
       "type": "weapon",
@@ -815,7 +896,10 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
       "targetBuff": {"hull": 0, "shield": 0, "energy": -200},
       "credits": 500,
-      "name": "EMP Bomb"
+      "name": "EMP Bomb",
+      "level": "0",
+      "cooldown": false,
+      "critical": 0
     },
     {
       "type": "weapon",
@@ -830,7 +914,10 @@
       "targetBuff": {"hull": -25, "shield": 0, "energy": 0},
       "credits": 500,
       "name": "Railgun",
-      "rechargeRequired": false
+      "rechargeRequired": false,
+      "level": "0",
+      "cooldown": false,
+      "critical": 0
     },
     {
       "type": "weapon",
@@ -844,7 +931,10 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": -10},
       "targetBuff": {"hull": -8, "shield": -25, "energy": 0},
       "credits": 750,
-      "name": "Meson Ray"
+      "name": "Meson Ray",
+      "level": "0",
+      "cooldown": false,
+      "critical": 0
     },
     {
       "type": "weapon",
@@ -860,7 +950,10 @@
         "slots": 0
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": -50},
-      "targetBuff": {"hull": -4, "shield": -5, "energy": -6}
+      "targetBuff": {"hull": -4, "shield": -5, "energy": -6},
+      "level": "0",
+      "cooldown": false,
+      "critical": 0
     },
     {
       "type": "weapon",
@@ -876,7 +969,10 @@
         "slots": 0
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": -2, "shield": -2, "energy": 0}
+      "targetBuff": {"hull": -2, "shield": -2, "energy": 0},
+      "level": "0",
+      "cooldown": false,
+      "critical": 0
     },
     {
       "type": "weapon",
@@ -892,7 +988,10 @@
         "slots": 0
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": -2, "shield": -2, "energy": 0}
+      "targetBuff": {"hull": -2, "shield": -2, "energy": 0},
+      "level": "0",
+      "cooldown": false,
+      "critical": 0
     },
     {
       "type": "tool",
@@ -909,7 +1008,9 @@
       "name": "Repair Kit",
       "rechageRequired": true,
       "rechargeRequired": true,
-      "level": "1"
+      "level": "1",
+      "cooldown": true,
+      "critical": 0
     },
     {
       "type": "tool",
@@ -941,7 +1042,9 @@
       "credits": 20,
       "name": "Shield Battery",
       "rechargeRequired": true,
-      "level": "2"
+      "level": "2",
+      "cooldown": true,
+      "critical": 0
     },
     {
       "type": "tool",
@@ -1013,7 +1116,9 @@
       "credits": 20,
       "name": "Energy Cell",
       "level": "2",
-      "rechargeRequired": true
+      "rechargeRequired": true,
+      "cooldown": true,
+      "critical": 0
     },
     {
       "type": "tool",
@@ -3276,7 +3381,8 @@
           "Tau Beam",
           "Null Reactor",
           "Rusty Kinetic Gun",
-          "Energy Cell"
+          "Energy Cell",
+          "Cutting Beam"
         ]
       },
       "enemy": null,
@@ -3340,7 +3446,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 14, "y": -1054},
+      "pos": {"x": 34, "y": -1054},
       "name": "The Bush Transfer Buoy",
       "style": "anomaly-buoy",
       "trader": null,
@@ -3580,7 +3686,7 @@
       "name": "A7544",
       "style": "asteroid-8",
       "trader": null,
-      "enemy": {"type": "Bandit Striker", "loot": []},
+      "enemy": {"type": "Bandit Striker", "loot": ["Cutting Beam"]},
       "treasures": []
     },
     {
@@ -4003,7 +4109,7 @@
     },
     {
       "name": "Start of an adventure",
-      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n_\"Hey hitchhiker! This is your stop.\"_\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a _weird_ signature.\n\nIf you explore the area you might score big time!</dialog>\n<add-to-quest-list/>\n<hint layout=\"quest\">Review your objectives here</hint>\n\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog>You find the meteorite resting on the ground. A shiny lump that is surprisingly light when you load it into the rover.</dialog>\n<dialog>If you *TRADE* the meteroite for cash, you will earn a small fortune.</dialog>\n<hint layout=\"trade\">Sell your treasures here</hint>\n\n<condition have-credits=\"200\"/>\n<dialog>_\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. Enter the *SHIPYARD* if you are interested.\"_</dialog>\n<hint layout=\"shipyard\">Buy a starship here</hint>\n\n<condition have-ship=\"Kerr Clipper\" />\n<dialog>_\"Now you can *LIFT OFF* and leave this planet.\"\n\n\"And good luck kid! It is dangerous out there.\"_</dialog>\n<hint layout=\"liftoff\">Leave this world</hint>\n<mark-on-map dest=\"Samson's Folly\"/>\n\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>_\"My friend at Backwater said you would be coming.\n\nWe have a cheap *Rusty Kinetic Gun* in stock. You are welcome to *LAND* and *TRADE* with us here at Samson's Folly.\"_</dialog>\n<hint layout=\"quest\">Review you objectives here</hint>\n\n<condition have-item=\"Rusty Kinetic Gun\"/>\n<dialog>You now have a Rusty Kinetic Gun, a basic weapon. Tap you ship hologram to open your *PROFILE* and *INSTALL* your new weapon</dialog>\n<hint layout=\"profile\">Install your equipment here</hint>\n\n<condition installed-item=\"Rusty Kinetic Gun\"/>\n<hint layout=\"profile\"></hint>\n<dialog>_\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"_</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n",
+      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n_\"Hey hitchhiker! This is your stop.\"_\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a _weird_ signature.\n\nIf you explore the area you might score big time!</dialog>\n<add-to-quest-list/>\n<hint layout=\"quest\">Review your objectives here</hint>\n\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog>You find the meteorite resting on the ground. A shiny lump that is surprisingly light when you load it into the rover.</dialog>\n<dialog>If you *TRADE* the meteroite for cash, you will earn a small fortune.</dialog>\n<hint layout=\"trade\">Sell your treasures here</hint>\n\n<condition have-credits=\"200\"/>\n<dialog>_\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. Enter the *SHIPYARD* if you are interested.\"_</dialog>\n<hint layout=\"shipyard\">Buy a starship here</hint>\n\n<condition have-ship=\"Kerr Clipper\" />\n<dialog>_\"Now you can *LIFT OFF* and leave this planet.\"\n\n\"And good luck kid! It is dangerous out there.\"_</dialog>\n<hint layout=\"liftoff\">Leave this world</hint>\n<mark-on-map dest=\"Samson's Folly\"/>\n\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>_\"My friend at Backwater said you would be coming.\n\nWe have a cheap *Rusty Kinetic Gun* in stock. You are welcome to *LAND* and *TRADE* with us here at Samson's Folly.\"_</dialog>\n<hint layout=\"quest\">Review you objectives here</hint>\n\n<condition have-item=\"Rusty Kinetic Gun\"/>\n<dialog>You now have a Rusty Kinetic Gun, a basic weapon. Tap you ship hologram to open your *PROFILE* and *INSTALL* your new weapon</dialog>\n<hint layout=\"profile\">Install your equipment here</hint>\n\n<condition installed-item=\"Rusty Kinetic Gun\"/>\n<hint layout=\"profile\"></hint>\n<dialog>_\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"_</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n\n<dialog>Samson radios you.\n\n_\"Looking good kid! Here, take this *Combat Handbook*. Study it and try to be safe.\n\nGood luck!\"_</dialog>\n<give item=\"Combat Handbook\"/>\n",
       "tags": "outback",
       "color": "07f",
       "icon": "arrow"
@@ -4019,6 +4125,13 @@
       "tags": "outback",
       "color": "88f",
       "icon": "arrow"
+    },
+    {
+      "name": "Combat Handbook",
+      "xml": "\n<condition have-item=\"Combat Handbook\" />\n<add-to-quest-list/>\n<take item=\"Combat Handbook\"/>\n<dialog>_SPACE COMBAT, 3rd EDITION_\n*I.* Armored opponents\n*II.* Shielded opponents\n*III.* Energy consuming opponents\n*IV.* Critical hits\n*V.* Cooldown\n</dialog>\n<dialog>*ARMORED OPPONENTS*\nAn opponent with a strong _hull_ can be dispatched if your ship regenerate its _hull_ or _shield_ fast enough. Take care to install modules and tools that allow you to perform field repairs.</dialog>\n<dialog>*SHIELDED OPPONENTS*\nA shielded opponent is impervious to weak _hull_ damage.\nYou must do more _hull_ damage than what can be absorbed by the shields. Use weapons with _shield_ damage to reduce the shields before attacking with a hull damaging weapon.</dialog>\n<dialog>*ENERGY CONSUMING OPPONENTS*\nAn opponent that consume energy can be crippled by attacking with an _energy_ weapon. A ship with an empty energy buffer is a sitting duck that can be attacked with _shield_ or _hull_ damage.</dialog>\n<dialog>*CRITICAL HITS*\nA _critical hit_ will disable one of the target's subsystems.\nA wise combatant always have redundant shield generators and weapons to mitigate the effect of the enemy's critical hits.</dialog>\n<dialog>*COOLDOWN*\nSome weapons and tools require cooldown. This means they can only be used once per battle, but they are often powerful.</dialog>",
+      "color": "0f0",
+      "icon": "",
+      "tags": "book"
     },
     {
       "name": "Outback Mining",
@@ -4048,7 +4161,7 @@
     },
     {
       "name": "Leave the Outback",
-      "xml": "\n<condition at-dest=\"Outback A34\" />\n<dialog model=\"NS Vanguard\">A Colonial Navy patrol craft is stationed at the asteroid.\n_\"Stop your engines Traveller. There are malfunctioning Striker Drones ahead. We guard here until reinforcements arrive.\"_</dialog>\n<dialog>If they are Striker Drones they have shields that can withstand physical damage.\n\nPerhaps *Samson* has a weapon that can take down the drones' shields.</dialog>\n<hint layout=\"quest\">Quest arrow now points to Samson's Folly</hint>\n<add-to-quest-list/>\n<mark-on-map dest=\"Samson's Folly\" />\n<place-inventory dest=\"Samson's Folly\" item=\"Photon Ray\"/>\n\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>You speak to Samson about the drones. She looks worried. But says she has something to sell you that might help.</dialog>\n\n<condition have-item=\"Photon Ray\" />\n<hint layout=\"profile\">Install your new weapon</hint>\n\n<condition installed-item=\"Photon Ray\" />\n<hint layout=\"profile\"></hint>\n<mark-on-map dest=\"Buoy Outback 36\" />\n<condition no-enemy-at-dest=\"Buoy Outback 36\" />\n<dialog model=\"NS Vanguard\">The Navy patrol slips past you once the area was cleared. They don't hail you, ashamed at being helped by a civilian.</dialog>",
+      "xml": "\n<condition at-dest=\"Outback A34\" />\n<dialog model=\"NS Vanguard\">A Colonial Navy patrol craft is stationed at the asteroid.\n_\"Stop your engines Traveller. There are malfunctioning Striker Drones ahead. We guard here until reinforcements arrive.\"_</dialog>\n<dialog>If they are Striker Drones they have shields that can withstand physical damage.\n\nPerhaps *Samson* has a weapon that can take down the drones' shields.</dialog>\n<hint layout=\"quest\">Quest arrow now points to Samson's Folly</hint>\n<add-to-quest-list/>\n<mark-on-map dest=\"Samson's Folly\" />\n<place-inventory dest=\"Samson's Folly\" item=\"Photon Ray\"/>\n<place-inventory dest=\"Samson's Folly\" item=\"Photon Ray\"/>\n\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>You speak to Samson about the drones. She looks worried. But says she has something to sell you that might help.</dialog>\n\n<condition have-item=\"Photon Ray\" />\n<hint layout=\"profile\">Install your new weapon</hint>\n\n<condition installed-item=\"Photon Ray\" />\n<hint layout=\"profile\"></hint>\n<mark-on-map dest=\"Buoy Outback 36\" />\n<condition no-enemy-at-dest=\"Buoy Outback 36\" />\n<dialog model=\"NS Vanguard\">The Navy patrol slips past you once the area was cleared. They don't hail you, ashamed at being helped by a civilian.</dialog>",
       "tags": "outback",
       "color": "0f0",
       "icon": "arrow"
@@ -4396,6 +4509,40 @@
   ],
   "initialDestination": "Backwater",
   "models": [
+    {
+      "name": "Sentinel",
+      "geometry": "composite",
+      "tags": "enemy",
+      "transform": [
+        ["scale", 0.7, 0.7, 0.7],
+        ["rotate", 3.14, 0, 0.515],
+        ["translate", 0, 0, -50]
+      ],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 9,
+          "transform": [
+            ["scale", 1, 1, 1],
+            ["radial-wave", 3, 0.1, 0],
+            ["parabola", 0, 0, 0.005],
+            ["rotate", 3.14, 0, 0],
+            ["translate", 0, 0, 60]
+          ],
+          "path": [[0, 0, -50], [150, 0, 0], [0, 0, 50]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["scale", 1, 1, 1],
+            ["rotate", 3.14, 3.14, 0],
+            ["translate", 0, 0, -50]
+          ],
+          "path": [[0, 0, -20], [50, 0, 0], [0, 0, 50]]
+        }
+      ]
+    },
     {
       "name": "Rocket Drone",
       "geometry": "composite",
