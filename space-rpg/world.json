@@ -305,9 +305,9 @@
     },
     {
       "attr": {
-        "maxhull": 700,
+        "maxhull": 70,
         "maxshield": 0,
-        "maxenergy": 1000,
+        "maxenergy": 50,
         "armor": 0,
         "cloak": 0,
         "jump": 0,
@@ -359,9 +359,9 @@
     },
     {
       "attr": {
-        "maxhull": 2000,
-        "maxshield": 1000,
-        "maxenergy": 1000,
+        "maxhull": 100,
+        "maxshield": 20,
+        "maxenergy": 20,
         "armor": 0,
         "cloak": 0,
         "jump": 0,
@@ -387,7 +387,7 @@
       },
       "generator": {"hull": 0, "shield": 1, "energy": 0},
       "name": "Rocket Drone",
-      "level": 0,
+      "level": 4,
       "visual": "Rocket Drone",
       "inventory": ["Autocannon Mk3", "Meson Ray"],
       "isFlying": true,
@@ -395,6 +395,82 @@
     }
   ],
   "items": [
+    {
+      "type": "tool",
+      "level": 5,
+      "credits": 700,
+      "name": "Repair Nanites",
+      "cooldown": true,
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 70, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "critical": 0
+    },
+    {
+      "type": "tool",
+      "level": 3,
+      "credits": 300,
+      "name": "Repair System",
+      "cooldown": true,
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 30, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "critical": 0
+    },
+    {
+      "type": "common",
+      "level": "4",
+      "credits": 500,
+      "name": "Metabomb",
+      "cooldown": false,
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": -20, "shield": -10, "energy": -10},
+      "critical": 0.25
+    },
+    {
+      "type": "common",
+      "level": "3",
+      "credits": 250,
+      "name": "Piercing Beam",
+      "cooldown": false,
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": -4, "shield": -2, "energy": 0},
+      "critical": 0.3
+    },
     {
       "type": "quest",
       "level": "1",
@@ -416,7 +492,7 @@
     },
     {
       "type": "weapon",
-      "level": "2",
+      "level": 5,
       "credits": 75,
       "name": "Incision Beam",
       "cooldown": false,
@@ -435,7 +511,7 @@
     },
     {
       "type": "weapon",
-      "level": "1",
+      "level": 3,
       "credits": 15,
       "name": "Cutting Beam",
       "cooldown": false,
@@ -490,7 +566,7 @@
     },
     {
       "type": "weapon",
-      "level": "0",
+      "level": 1,
       "credits": 5,
       "name": "Autocannon Mk3",
       "rechargeRequired": false,
@@ -715,7 +791,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": -1, "shield": 0, "energy": 0},
-      "level": "1",
+      "level": 1,
       "rechargeRequired": false,
       "cooldown": false,
       "critical": 0
@@ -733,7 +809,7 @@
       "targetBuff": {"hull": -2, "shield": 0, "energy": 0},
       "credits": 20,
       "name": "Kinetic Gun",
-      "level": "1",
+      "level": 1,
       "rechargeRequired": false,
       "cooldown": false,
       "critical": 0
@@ -751,7 +827,7 @@
       "targetBuff": {"hull": -3, "shield": 0, "energy": 0},
       "credits": 40,
       "name": "Autocannon",
-      "level": "1",
+      "level": 1,
       "rechargeRequired": false,
       "cooldown": false,
       "critical": 0
@@ -769,7 +845,7 @@
       "targetBuff": {"hull": -1, "shield": -2, "energy": 0},
       "credits": 50,
       "name": "Photon Ray",
-      "level": "2",
+      "level": 2,
       "rechargeRequired": false,
       "cooldown": false,
       "critical": 0
@@ -789,7 +865,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": -4, "shield": 0, "energy": 0},
-      "level": "2",
+      "level": 2,
       "rechargeRequired": false,
       "cooldown": false,
       "critical": 0
@@ -807,7 +883,7 @@
       "targetBuff": {"hull": -5, "shield": -2, "energy": 0},
       "credits": 120,
       "name": "Tau Beam",
-      "level": "2",
+      "level": 2,
       "rechargeRequired": false,
       "cooldown": false,
       "critical": 0
@@ -825,7 +901,7 @@
       "targetBuff": {"hull": -2, "shield": -5, "energy": 0},
       "credits": 150,
       "name": "Phased Ray",
-      "level": "2",
+      "level": 2,
       "rechargeRequired": false,
       "cooldown": false,
       "critical": 0
@@ -846,7 +922,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
       "targetBuff": {"hull": -20, "shield": 0, "energy": 0},
-      "level": "3",
+      "level": 3,
       "cooldown": true,
       "critical": 0
     },
@@ -859,45 +935,11 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -10},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
       "targetBuff": {"hull": -25, "shield": -25, "energy": 0},
       "credits": 500,
       "name": "Gamma Beam",
-      "level": "0",
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "weapon",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
-      "targetBuff": {"hull": -50, "shield": 0, "energy": 0},
-      "credits": 500,
-      "name": "Mass Gun",
-      "level": "0",
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "weapon",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -20},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -200},
-      "credits": 500,
-      "name": "EMP Bomb",
-      "level": "0",
+      "level": 4,
       "cooldown": false,
       "critical": 0
     },
@@ -911,11 +953,45 @@
         "slots": 0
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": -10},
+      "targetBuff": {"hull": -50, "shield": 0, "energy": 0},
+      "credits": 500,
+      "name": "Mass Gun",
+      "level": 5,
+      "cooldown": false,
+      "critical": 0
+    },
+    {
+      "type": "weapon",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -200},
+      "credits": 500,
+      "name": "EMP Bomb",
+      "level": 5,
+      "cooldown": false,
+      "critical": 0
+    },
+    {
+      "type": "weapon",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
       "targetBuff": {"hull": -25, "shield": 0, "energy": 0},
       "credits": 500,
       "name": "Railgun",
       "rechargeRequired": false,
-      "level": "0",
+      "level": 4,
       "cooldown": false,
       "critical": 0
     },
@@ -928,11 +1004,11 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -10},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
       "targetBuff": {"hull": -8, "shield": -25, "energy": 0},
       "credits": 750,
       "name": "Meson Ray",
-      "level": "0",
+      "level": 4,
       "cooldown": false,
       "critical": 0
     },
@@ -949,9 +1025,9 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -50},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -10},
       "targetBuff": {"hull": -4, "shield": -5, "energy": -6},
-      "level": "0",
+      "level": 10,
       "cooldown": false,
       "critical": 0
     },
@@ -970,7 +1046,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": -2, "shield": -2, "energy": 0},
-      "level": "0",
+      "level": 10,
       "cooldown": false,
       "critical": 0
     },
@@ -989,7 +1065,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": -2, "shield": -2, "energy": 0},
-      "level": "0",
+      "level": 10,
       "cooldown": false,
       "critical": 0
     },

@@ -152,7 +152,7 @@
     self.endEditing = function () {
       if (!self.selected) return
       self.selected.name = self.refs.nameField.value
-      self.selected.level = self.refs.levelField.value
+      self.selected.level = +self.refs.levelField.value
       self.selected.type = self.refs.typeInput.value
       self.selected.cooldown = self.refs.cooldownToggle.checked
       self.selected.credits = +self.refs.creditsField.value

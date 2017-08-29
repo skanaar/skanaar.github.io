@@ -219,3 +219,11 @@ button:hover,
   color: #aaa;
   font-weight: normal;
 }
+
+.table.attr-4-table td:nth-child(3n+5) { color: #a44; font-weight: bold }
+.table.attr-4-table td:nth-child(3n+6) { color: #44a; font-weight: bold }
+.table.attr-4-table td:nth-child(3n+7) { color: #4a4; font-weight: bold }
+.table.attr-4-table td.table_zero {
+  color: #aaa;
+  font-weight: normal;
+}
