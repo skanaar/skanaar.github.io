@@ -117,10 +117,9 @@
     self.isActivatable = item => item && (item.type == 'weapon' || item.type == 'tool')
 
     self.sort = function () {
-      var order = ['weapon', 'tool', 'module', 'common', 'quest']
       self.world.items.sort(function (a,b) {
-        var typeDelta = order.indexOf(a.type) - order.indexOf(b.type)
-        return (typeDelta == 0) ? a.credits - b.credits : typeDelta
+        var lvlDelta = (a.level || 0) - (b.level || 0)
+        return (lvlDelta == 0) ? a.credits - b.credits : lvlDelta
       })
     }
 
