@@ -109,6 +109,7 @@
     self.world = { items: [] }
     self.selected = null
     self.filter = null
+    self.focusedIndex = -1
     
     self.setFilter = function (type) {
       return () => self.filter = (self.filter == type ? null : type)
@@ -146,6 +147,7 @@
     
     self.editItem = function (e) {
       self.selected = e.item.item
+      self.focusedIndex = _.findIndex(self.filteredItems(), item => item == e.item.item) || 0
     }
     
     self.endEditing = function () {
@@ -174,15 +176,33 @@
       self.update()
     }
 
+    self.keydown = function (e) {
+      if (document.activeElement && document.activeElement.nodeName === 'INPUT') return;
+      if (e.key == 'ArrowUp') {
+        e.preventDefault()
+        self.focusedIndex--
+        self.selected = self.filteredItems()[self.focusedIndex] || null
+        self.update()
+      }
+      if (e.key == 'ArrowDown') {
+        e.preventDefault()
+        self.focusedIndex++
+        self.selected = self.filteredItems()[self.focusedIndex] || null
+        self.update()
+      }
+    }
+
     self.on('before-mount', function() {
       self.world = app.getWorld()
       app.events.on('world-updated', self.update)
       app.events.on('save-entity', self.endEditing)
+      window.addEventListener('keydown', self.keydown)
     })
 
     self.on('unmount', function() {
       app.events.off('world-updated', self.update)
       app.events.off('save-entity', self.endEditing)
+      window.removeEventListener('keydown', self.keydown)
     })
 
   </script>

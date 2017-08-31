@@ -3,6 +3,7 @@
   <div class="modal-parent" if={isOpen}>
     <div class="modal">
       <div class="modal-tools">
+        <button class="modal-close" onclick={done}>Done</button>
         <div class="btn-group">
           <a onclick={() => filter=null} class="toggle-btn {(filter == null) && 'active'}">All
           </a><a onclick={() => filter='weapon'} class="toggle-btn {(filter == 'weapon') && 'active'}">Weapons
@@ -17,9 +18,10 @@
         <table class="table attr-table">
           <thead>
             <tr>
-              <th colspan=2>Item</th>
-              <th>Type</th>
-              <th>Crit</th>
+              <th>Item</th>
+              <th></th>
+              <th></th>
+              <th></th>
               <th>Price</th>
               <th colspan=3>Attr</th>
               <th colspan=3>Player</th>
@@ -28,8 +30,10 @@
           </thead>
           <tbody>
             <tr each={item in filteredItems()} onclick={add}>
-              <td colspan=3>{item.level} {item.name}</td>
-              <td>{item.critical}</td>
+              <td>{item.name}</td>
+              <td colspan=2>L{item.level}</td>
+              <td>{item.critical}%</td>
+              <td></td>
               <td class={table_zero: !item.credits}>{item.credits}</td>
               <td class={table_zero: !item.attr.maxhull}>{item.attr.maxhull}</td>
               <td class={table_zero: !item.attr.maxshield}>{item.attr.maxshield}</td>
@@ -45,9 +49,8 @@
         </table>
       </div>
       <div class="modal-list">
-        <div class="modal-item" each={id in list} onclick={remove}>{id} &times;</div>
+        <div class="modal-item" each={id in list} onclick={remove}>{id}</div>
       </div>
-      <div class="modal-footer"><button onclick={done}>Done</button></div>
     </div>
   </div>
 
@@ -61,7 +64,7 @@
       background: rgba(0,0,0,0.1);
     }
     .modal {
-      width: 75%;
+      width: 85%;
       background: #fff;
       border: 1px solid #888;
       border-radius: 2px;
@@ -69,6 +72,7 @@
     }
     .modal-tools {
       padding: 5px;
+      border-bottom: 1px solid #ddd;
     }
     .modal-list {
       display: inline-block;
@@ -82,9 +86,8 @@
     .modal-list:first-child {
       border-right: 1px solid #888;
     }
-    .modal-footer {
-      padding: 10px;
-      text-align: right;
+    .modal-close {
+      float: right;
     }
     .modal-item {
       display: inline-block;

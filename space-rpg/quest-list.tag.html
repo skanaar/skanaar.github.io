@@ -22,7 +22,7 @@
     </div>
   </div>
 
-  <div class="sidebar">
+  <div class="sidebar" if={selected}>
     <label>Name</label>
     <input type="text" value={selected && selected.name} onchange={setFields} ref="nameField">
     <div class="input-grid">
@@ -35,6 +35,8 @@
     </div>
     <label>Tags</label>
     <input type="text" value={selected && selected.tags} onchange={setFields} ref="tagsField" placeholder="Tags...">
+    <label></label>
+    <button onclick={itemChooser}>Open item chooser</button>
     <label></label>
     <button onclick={save}>Save</button>
     <button onclick={remove}>Delete</button>
@@ -82,6 +84,10 @@
       var src = self.cmEditor.getValue()
       src = src + '\n' + e.item.e.template
       self.cmEditor.setValue(src)
+    }
+
+    self.itemChooser = function () {
+      app.events.trigger('show-item-chooser', [])
     }
 
     self.add = function () {
@@ -155,6 +161,7 @@
 
     self.on('before-unmount', function() {
       app.events.off('world-updated', self.update)
+      destroyEditor()
     })
   </script>
 

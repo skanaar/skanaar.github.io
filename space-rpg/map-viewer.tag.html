@@ -18,7 +18,7 @@
     <ellipse
       each={nodes}
       class={ 'map-node': true, 'map-selected': isSelected }
-      stroke-width={type == 'region' ? 1 : 2}
+      stroke-width={isSelected ? 2 : (type == 'region' ? 2 : 0.5)}
       stroke-dasharray={type == 'region' ? '3,3' : false}
       fill={fillFor(entity)}
       riot-cx={screenPos.x} riot-cy={screenPos.y}
@@ -136,6 +136,7 @@
     self.regionSelected = false
     self.selectedTrader = { inventory: [] }
     self.selectedItems = []
+    self.radiusCache = {}
 
     self.keydown = function (e) {
       if (document.activeElement && document.activeElement.nodeName === 'INPUT') return;
@@ -352,14 +353,12 @@
     self.treasureDestinations = () => self.nodes.filter(e => (e.entity.treasures || []).length)
 
     var fills = {
-      cloud: 'rgba(221, 136, 221, 0.5)', star: '#ff4', jovian: '#fa8',
-      planet: '#8f8', asteroid: '#aaa', anomaly: '#fa0', ring: '#8af', region: '#aaa'
+      cloud: 'rgba(221, 136, 221, 0.5)', star: '#dd0', jovian: '#fa8',
+      planet: '#4d4', asteroid: '#888', anomaly: '#fa0', ring: '#8af', region: '#aaa'
     }
     self.fillFor = entity => fills[entity.style.split('-')[0]]
     self.radiusFor = function (ent) {
-      if (ent.style == 'region-1') return 6
-      var cel = self.world.celestials.find(s => s.id == ent.style)
-      return cel && (cel.celestial.r * self.scale) || 0
+      return 1 + self.scale * (self.radiusCache[ent.style] || 5)
     }
 
     function forSelected(action) {
@@ -436,6 +435,11 @@
       }
     }
 
+    function buildRadiusCache() {
+      self.radiusCache = _.object(self.world.celestials.map(e => [e.id, e.celestial.r]))
+      self.radiusCache['region-1'] = 6
+    }
+
     function prepareWorldForSave() {
       self.world.destinations = self.nodes.filter(e => e.type === 'celestial').map(e => e.entity)
       self.world.regions = self.nodes.filter(e => e.type === 'region').map(e => ({
@@ -460,6 +464,7 @@
       app.events.on('highlight-entity', onHighlightRequested)
       window.document.addEventListener('keydown', self.keydown)
       loadWorld()
+      buildRadiusCache()
       window.scrollTo(self.dx/3, self.dy/3)
     })
 

@@ -1,11 +1,15 @@
   {
   "globals": {
     "confirm": false,
-    "_": false,
+    "alert": false,
     "localStorage": false,
+
+    "_": false,
     "riot": false,
-    "skanaar": true,
     "CodeMirror": false,
+    
+    "skanaar": true,
+    "validator": false,
     "dist": true,
     "Vec": true,
     "dist": true,

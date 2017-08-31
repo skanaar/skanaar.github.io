@@ -21,7 +21,7 @@
 }
 
 .map-label {
-  font-size: 8px;
+  font-size: 9px;
   font-family: Verdana;
   fill: rgba(128,128,128,0.6);
 }
@@ -31,7 +31,7 @@
 }
 
 .map-node {
-  stroke: #000
+  stroke: rgba(128,128,128,0.5)
 }
 
 .map-node.map-selected {

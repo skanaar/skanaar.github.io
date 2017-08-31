@@ -49,7 +49,7 @@
 
   <style>
     .sidebar textarea {
-      width: 230px;
+      width: 320px;
       height: 80%;
     }
     .canvas-3d {
@@ -79,19 +79,19 @@
     }
 
     self.asJson = function (data) {
-      return _.stringify(data, { maxLength: 50, indent: 1 })
+      return _.stringify(data, { maxLength: 64, indent: 1 })
     }
 
     self.addComposition = function () {
       self.world.models.unshift({
-        name: "unnamed",
-        geometry: "composite",
-        transform: [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 0, 0, 0]],
+        name: 'unnamed',
+        geometry: 'composite',
+        transform: [['scale', 1, 1, 1], ['rotate', 3.14, 0, 0], ['translate', 0, 0, 0]],
         parts: [
           {
-            geometry: "lathe",
+            geometry: 'lathe',
             res: 4,
-            transform: [["scale", 1, 1, 1], ["rotate", 3.14, 0, 0], ["translate", 50, 0, 0]],
+            transform: [['scale', 1, 1, 1], ['rotate', 3.14, 0, 0], ['translate', 50, 0, 0]],
             path: [[0,0,-50], [50,0,0], [0,0,50]]
           }
         ]
@@ -113,7 +113,7 @@
       updateMesh()
     }
 
-    self.isSourceValid = function (e) {
+    self.isSourceValid = function () {
       try { JSON.parse(self.refs.sourceField.value) }
       catch(e) { return false }
       return true
@@ -123,7 +123,7 @@
       Object.keys(e).forEach(key => delete e[key])
     }
     
-    self.endEditing = function (e) {
+    self.endEditing = function () {
       if (!self.isSourceValid()) {
         alert('Model source has parsing errors. Please fix.')
         return
@@ -252,8 +252,8 @@
         return mesh.map(quad => quad.map(p => mapply(s, vnormalize(p))))
       }
       if (m[0] == 'radial-wave'){
-        var vec = [m[1], m[2], m[3]]
-        return mesh.map(quad => quad.map(p => radialWave(p, vec)))
+        var args = [m[1], m[2], m[3]]
+        return mesh.map(quad => quad.map(p => radialWave(p, args)))
       }
     }
 
