@@ -27,6 +27,7 @@ window.validator = (function (){
     }
     undefErrors(/state="[^"]+/gm, ['space', 'surface'], 'state should be either "space" or "surface"')
     undefErrors(/item="[^"]+/gm, world.items.map(e => e.name), 'undefined item')
+    undefErrors(/model="[^"]+/gm, world.models.map(e => e.name), 'undefined model')
     undefErrors(/loot="[^"]+/gm, world.items.map(e => e.name), 'undefined loot item')
     undefErrors(/dest="[^"]+/gm, world.destinations.map(e => e.name), 'undefined destination')
     undefErrors(/enemy="[^"]+/gm, world.enemies.map(e => e.name), 'undefined enemy')
@@ -77,6 +78,10 @@ window.validator = (function (){
       undefItem(world, dest.trader.inventory, error, 'undefined trader item')
       if (dest.trader.buy < dest.trader.sell)
         error('trader must be profitable', dest.trader.buy + ' < ' + dest.trader.sell)
+    }
+    if (dest.shipyard) {
+      var definedShips = world.ships.map(e => e.name)
+      _.uniq(_.difference(dest.shipyard, definedShips)).forEach(e => error('undefined ship', e))
     }
   }
 

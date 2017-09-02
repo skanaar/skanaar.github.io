@@ -156,11 +156,13 @@
       self.world = app.getWorld()
       createEditor()
       app.events.on('world-updated', self.update)
+      app.events.on('save-entity', self.save)
       self.update()
     })
 
     self.on('before-unmount', function() {
       app.events.off('world-updated', self.update)
+      app.events.off('save-entity', self.save)
       destroyEditor()
     })
   </script>

@@ -1,0 +1,119 @@
+<ship-chooser>
+
+  <div class="modal-parent" if={isOpen}>
+    <div class="modal">
+      <div class="modal-tools">
+        <button onclick={done}>Done</button>
+      </div>
+      <div class="modal-list">
+        <table class="table attr-table">
+          <thead>
+            <tr>
+              <th>Ship</th>
+              <th>Level</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr each={ship in world.ships} onclick={add}>
+              <td>{ship.name}</td>
+              <td>L{ship.level}</td>
+              <td>{ship.value} c</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-list">
+        <div class="modal-item" each={id in list} onclick={remove}>{id}</div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .modal-parent {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      background: rgba(0,0,0,0.1);
+    }
+    .modal {
+      width: 85%;
+      background: #fff;
+      border: 1px solid #888;
+      border-radius: 2px;
+      margin: 100px auto;
+    }
+    .modal-tools {
+      padding: 5px;
+      border-bottom: 1px solid #ddd;
+    }
+    .modal-list {
+      display: inline-block;
+      width: 45%;
+      height: 300px;
+      padding: 10px;
+      vertical-align: top;
+      overflow: auto;
+      cursor: pointer;
+    }
+    .modal-list:first-child {
+      border-right: 1px solid #888;
+    }
+    .modal-close {
+      float: right;
+    }
+    .modal-item {
+      display: inline-block;
+      width: 180px;
+      margin: 2px;
+      padding: 2px 6px;
+      border: 1px solid #eee;
+      background: #f8f8f8;
+      border-radius: 2px;
+    }
+    .modal-item .price {
+      float: right;
+    }
+    .item:hover {
+      border: 1px solid #ddd;
+      background: #eee;
+    }
+  </style>
+
+  <script>
+    var self = this
+    var app = self.opts.app || window.app
+
+    self.world = { ships: [] }
+    self.list = []
+
+    self.add = function (e) {
+      self.list.push(e.item.ship.name)
+    }
+
+    self.remove = function (e) {
+      self.list.splice(self.list.indexOf(e.item.id), 1)
+    }
+    
+    self.done = function () {
+      self.isOpen = false
+      app.events.trigger('ship-chooser-closed')
+    }
+
+    function show(list) {
+      self.list = list
+      self.isOpen = true
+      self.update()
+    }
+
+    self.on('before-mount', function() {
+      self.world = app.getWorld()
+      app.events.on('world-updated', self.update)
+      app.events.on('show-ship-chooser', show)
+    })
+
+  </script>
+
+</ship-chooser>

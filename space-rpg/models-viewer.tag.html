@@ -86,13 +86,17 @@
       self.world.models.unshift({
         name: 'unnamed',
         geometry: 'composite',
-        transform: [['scale', 1, 1, 1], ['rotate', 3.14, 0, 0], ['translate', 0, 0, 0]],
+        transform: [['scale', 1, 1, 1], ['rotate', 0, 0, 0], ['translate', 0, 0, -50]],
         parts: [
           {
             geometry: 'lathe',
-            res: 4,
-            transform: [['scale', 1, 1, 1], ['rotate', 3.14, 0, 0], ['translate', 50, 0, 0]],
-            path: [[0,0,-50], [50,0,0], [0,0,50]]
+            res: 12,
+            transform: [['scale', 1, 1, 1], ['rotate', 90, 0, 0], ['translate', 40, 40, 0]],
+            path: [[0,0,-20], [50,0,0], [0,0,20]]
+          },
+          {
+            geometry: 'cube',
+            transform: [['subdivide', 0,0,0], ['subdivide', 0,0,0], ['sphere', 50, 50, 50], ['translate', -50, -50, 0]]
           }
         ]
       })
@@ -276,16 +280,19 @@
     self.on('before-mount', function() {
       self.world = app.getWorld()
       app.events.on('world-updated', self.update)
+      app.events.on('save-entity', self.endEditing)
     })
 
     self.on('unmount', function() {
       app.events.off('world-updated', self.update)
+      app.events.off('save-entity', self.endEditing)
     })
 
+    var d2r = Math.PI*2/360
     var rotateX = (a) => [1,0,0,  0,Math.cos(a),-Math.sin(a),  0,Math.sin(a),Math.cos(a)]
     var rotateY = (a) => [Math.cos(a),0,Math.sin(a), 0,1,0, -Math.sin(a),0,Math.cos(a)]
     var rotateZ = (a) => [Math.cos(a),-Math.sin(a),0,  Math.sin(a),Math.cos(a),0,  0,0,1]
-    var rotateXYZ = (x,y,z) => mmult(mmult(rotateX(x), rotateY(y)), rotateZ(z))
+    var rotateXYZ = (x,y,z) => mmult(mmult(rotateX(d2r*x), rotateY(d2r*y)), rotateZ(d2r*z))
     var scale = (x,y,z) => [x,0,0,  0,y,0,  0,0,z]
     var identity = () => [1,0,0, 0,1,0, 0,0,1]
     var vtranslate = (vec, delta) => [vec[0]+delta[0], vec[1]+delta[1], vec[2]+delta[2]]

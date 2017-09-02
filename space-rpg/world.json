@@ -14,7 +14,8 @@
       "generator": {"hull": 0, "shield": 0, "energy": 0},
       "value": 5,
       "isFlying": false,
-      "level": 0
+      "level": 0,
+      "slots": 5
     },
     {
       "name": "Kerr Clipper",
@@ -29,7 +30,8 @@
       "generator": {"hull": 1, "shield": 0, "energy": 1},
       "value": 200,
       "isFlying": true,
-      "level": 1
+      "level": 1,
+      "slots": 5
     },
     {
       "attr": {
@@ -46,7 +48,8 @@
       "visual": "Kerr Runner",
       "value": 200,
       "isFlying": true,
-      "level": 2
+      "level": 2,
+      "slots": 5
     },
     {
       "attr": {
@@ -59,15 +62,16 @@
         "slots": 6
       },
       "generator": {"hull": 1, "shield": 0, "energy": 2},
-      "name": "Kerr Interloper",
-      "visual": "Kerr Interloper",
+      "name": "Kerr Harbinger",
+      "visual": "Kerr Harbinger",
       "isFlying": true,
       "value": 700,
-      "level": 3
+      "level": 3,
+      "slots": 7
     },
     {
-      "name": "Kerr Journeyman",
-      "visual": "Kerr Journeyman",
+      "name": "Journeyman",
+      "visual": "Journeyman",
       "attr": {
         "maxhull": 15,
         "maxshield": 4,
@@ -78,7 +82,8 @@
       "generator": {"hull": 1, "shield": 0, "energy": 2},
       "value": 1000,
       "isFlying": true,
-      "level": 3
+      "level": 3,
+      "slots": 6
     },
     {
       "attr": {
@@ -95,7 +100,8 @@
       "visual": "NS Sloop",
       "value": 2000,
       "isFlying": true,
-      "level": 4
+      "level": 4,
+      "slots": 7
     },
     {
       "attr": {
@@ -112,7 +118,8 @@
       "visual": "NS Salem",
       "value": 3000,
       "isFlying": true,
-      "level": 4
+      "level": 4,
+      "slots": 7
     },
     {
       "attr": {
@@ -129,7 +136,8 @@
       "level": 4,
       "visual": "CES Marathon",
       "isFlying": true,
-      "value": 4500
+      "value": 4500,
+      "slots": 10
     },
     {
       "attr": {
@@ -146,7 +154,26 @@
       "visual": "NS Vanguard",
       "isFlying": true,
       "value": 3500,
-      "level": 5
+      "level": 5,
+      "slots": 8
+    },
+    {
+      "attr": {
+        "maxhull": 35,
+        "maxshield": 20,
+        "maxenergy": 10,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 2, "shield": 2, "energy": 2},
+      "name": "Kerr Interdictor",
+      "level": 5,
+      "visual": "Kerr Interdictor",
+      "isFlying": true,
+      "slots": 8,
+      "value": 3750
     },
     {
       "name": "CES Interplan",
@@ -161,7 +188,8 @@
       "generator": {"hull": 4, "shield": 2, "energy": 4},
       "value": 4000,
       "isFlying": true,
-      "level": 6
+      "level": 6,
+      "slots": 10
     },
     {
       "name": "Kerr Frigate",
@@ -176,7 +204,8 @@
       "generator": {"hull": 2, "shield": 1, "energy": 2},
       "value": 5000,
       "isFlying": true,
-      "level": 6
+      "level": 6,
+      "slots": 10
     },
     {
       "attr": {
@@ -193,7 +222,8 @@
       "level": 6,
       "visual": "CES Bioculus",
       "isFlying": true,
-      "value": 4000
+      "value": 4000,
+      "slots": 10
     },
     {
       "attr": {
@@ -210,7 +240,8 @@
       "level": 7,
       "visual": "Soma Sonn",
       "isFlying": true,
-      "value": 7000
+      "value": 7000,
+      "slots": 10
     }
   ],
   "enemies": [
@@ -230,7 +261,8 @@
       "inventory": [],
       "value": 0,
       "level": 0,
-      "isFlying": false
+      "isFlying": false,
+      "slots": 0
     },
     {
       "attr": {
@@ -248,7 +280,8 @@
       "visual": "Monitor Drone",
       "inventory": ["Epoxy Injector", "Linear Reactor"],
       "isFlying": true,
-      "value": 0
+      "value": 0,
+      "slots": 0
     },
     {
       "name": "Monitor Drone",
@@ -264,7 +297,8 @@
       "inventory": ["Monitor Beam L1"],
       "value": 0,
       "level": 1,
-      "isFlying": false
+      "isFlying": false,
+      "slots": 0
     },
     {
       "attr": {
@@ -287,7 +321,8 @@
       ],
       "value": 0,
       "isFlying": false,
-      "level": 2
+      "level": 2,
+      "slots": 0
     },
     {
       "attr": {
@@ -311,7 +346,8 @@
       ],
       "value": 0,
       "isFlying": false,
-      "level": 2
+      "level": 2,
+      "slots": 0
     },
     {
       "attr": {
@@ -325,11 +361,12 @@
       },
       "generator": {"hull": 1, "shield": 1, "energy": 1},
       "name": "Bandit Striker",
-      "visual": "NS Salem",
+      "visual": "Kerr Harbinger",
       "inventory": ["Photon Ray", "Autocannon Mk2"],
       "isFlying": true,
       "value": 0,
-      "level": 3
+      "level": 3,
+      "slots": 0
     },
     {
       "attr": {
@@ -347,11 +384,12 @@
       "inventory": ["Railgun", "Photon Ray"],
       "level": 4,
       "value": 0,
-      "isFlying": false
+      "isFlying": false,
+      "slots": 0
     },
     {
       "name": "Rogue",
-      "visual": "Kerr Journeyman",
+      "visual": "Kerr Interdictor",
       "attr": {
         "maxhull": 20,
         "maxshield": 20,
@@ -363,7 +401,8 @@
       "inventory": ["Autocannon", "Photon Ray"],
       "level": 3,
       "value": 0,
-      "isFlying": false
+      "isFlying": false,
+      "slots": 0
     },
     {
       "attr": {
@@ -389,7 +428,8 @@
       ],
       "level": 4,
       "value": 0,
-      "isFlying": false
+      "isFlying": false,
+      "slots": 0
     },
     {
       "attr": {
@@ -407,7 +447,8 @@
       "visual": "Rocket Drone",
       "inventory": ["Autocannon Mk3", "Meson Ray"],
       "isFlying": true,
-      "value": 0
+      "value": 0,
+      "slots": 0
     },
     {
       "attr": {
@@ -425,7 +466,8 @@
       "inventory": ["Nanite Attack"],
       "level": 5,
       "value": 0,
-      "isFlying": false
+      "isFlying": false,
+      "slots": 0
     },
     {
       "attr": {
@@ -443,7 +485,8 @@
       "inventory": ["Autocannon Mk2", "Phased Ray"],
       "isFlying": true,
       "value": 0,
-      "level": 5
+      "level": 5,
+      "slots": 0
     },
     {
       "attr": {
@@ -461,11 +504,31 @@
       "inventory": ["Phased Ray", "Autocannon"],
       "level": 6,
       "value": 0,
-      "isFlying": false
+      "isFlying": false,
+      "slots": 0
     },
     {
       "attr": {
         "maxhull": 100,
+        "maxshield": 40,
+        "maxenergy": 500,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 20, "shield": 20, "energy": 20},
+      "name": "Worm",
+      "visual": "Worm",
+      "inventory": ["Worm Beam"],
+      "level": 15,
+      "value": 0,
+      "isFlying": false,
+      "slots": 0
+    },
+    {
+      "attr": {
+        "maxhull": 40,
         "maxshield": 20,
         "maxenergy": 20,
         "armor": 0,
@@ -473,16 +536,64 @@
         "jump": 0,
         "slots": 0
       },
-      "generator": {"hull": 10, "shield": 10, "energy": 10},
-      "name": "Worm",
+      "generator": {"hull": 2, "shield": 3, "energy": 1},
+      "name": "Worm Seedling",
+      "level": 5,
+      "visual": "Worm Seedling",
+      "inventory": [
+        "Worm Beam",
+        "Javelin Driver",
+        "Piercing Beam",
+        "Sacrifice Device",
+        "Repair Goo"
+      ],
+      "isFlying": true,
+      "slots": 0,
+      "value": 0
+    },
+    {
+      "attr": {
+        "maxhull": 100,
+        "maxshield": 20,
+        "maxenergy": 80,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 4, "shield": 2, "energy": 10},
+      "name": "Weakened Worm",
+      "level": 6,
       "visual": "Worm",
-      "inventory": ["Worm Beam"],
-      "level": 7,
-      "value": 0,
-      "isFlying": false
+      "inventory": [
+        "Worm Beam",
+        "Soma Emitter",
+        "Meson Ray",
+        "Mass Driver",
+        "Null Reactor",
+        "Nanite Swarm",
+        "Monopole Shield",
+        "Shield Turbopump",
+        "Sacrifice Device"
+      ],
+      "isFlying": true,
+      "slots": 0,
+      "value": 0
     }
   ],
   "items": [
+    {
+      "type": "quest",
+      "level": 0,
+      "slots": 0,
+      "credits": 0,
+      "name": "Worm Umbra",
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "critical": 0
+    },
     {
       "type": "quest",
       "attr": {
@@ -825,7 +936,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 5,
+      "credits": 0,
       "name": "Water sample",
       "rechargeRequired": false,
       "level": 0,
@@ -860,7 +971,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 5,
+      "credits": 0,
       "name": "Thanatos mesh",
       "rechargeRequired": false,
       "level": 0,
@@ -870,7 +981,7 @@
     {
       "type": "quest",
       "level": 0,
-      "credits": 5,
+      "credits": 0,
       "name": "Brandons Whiskey",
       "rechargeRequired": false,
       "attr": {
@@ -898,7 +1009,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 5,
+      "credits": 0,
       "name": "Blue flowers",
       "level": 0,
       "cooldown": false,
@@ -907,7 +1018,7 @@
     {
       "type": "quest",
       "level": 0,
-      "credits": 5,
+      "credits": 0,
       "name": "Joes Coaster",
       "rechargeRequired": false,
       "attr": {
@@ -935,7 +1046,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 5,
+      "credits": 0,
       "name": "Blue seeds",
       "level": 0,
       "cooldown": false,
@@ -952,7 +1063,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 5,
+      "credits": 0,
       "name": "Thanatos core",
       "rechargeRequired": false,
       "level": 0,
@@ -970,7 +1081,7 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 5,
+      "credits": 0,
       "name": "Thanatos nacelle",
       "rechargeRequired": false,
       "level": 0,
@@ -1268,8 +1379,8 @@
     },
     {
       "type": "quest",
-      "level": "1",
-      "credits": 5,
+      "level": 1,
+      "credits": 0,
       "name": "Combat Handbook",
       "cooldown": false,
       "attr": {
@@ -1928,25 +2039,6 @@
       "critical": 0.25
     },
     {
-      "type": "common",
-      "level": "3",
-      "credits": 250,
-      "name": "Piercing Beam",
-      "cooldown": false,
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": -4, "shield": -2, "energy": 0},
-      "critical": 0.3
-    },
-    {
       "type": "tool",
       "level": 3,
       "credits": 300,
@@ -2449,7 +2541,7 @@
       "trader": {"buy": 1.5, "sell": 0.5, "inventory": []},
       "treasures": [],
       "enemy": null,
-      "shipyard": ["Kerr Clipper"]
+      "shipyard": ["Kerr Clipper", "Kerr Interdictor"]
     },
     {
       "name": "Outback 12",
@@ -2518,7 +2610,15 @@
       },
       "treasures": [],
       "enemy": null,
-      "shipyard": ["Sloop", "Kerr Journeyman", "CES Interplan"]
+      "shipyard": [
+        "Sloop",
+        "Journeyman",
+        "Kerr Harbinger",
+        "Kerr Interdictor",
+        "CES Marathon",
+        "CES Interplan",
+        "CES Bioculus"
+      ]
     },
     {
       "name": "Ska Ska",
@@ -2681,7 +2781,8 @@
         ]
       },
       "enemy": null,
-      "treasures": []
+      "treasures": [],
+      "shipyard": ["Sloop", "Salem", "Vanguard"]
     },
     {
       "pos": {"x": -301, "y": -1065},
@@ -3734,7 +3835,8 @@
       "style": "anomaly-paxos",
       "trader": null,
       "enemy": null,
-      "treasures": []
+      "treasures": [],
+      "shipyard": ["CES Marathon", "Kerr Frigate"]
     },
     {
       "pos": {"x": -1018, "y": -852},
@@ -3825,7 +3927,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -840, "y": -632},
+      "pos": {"x": -860, "y": -572},
       "name": "Charm Beta",
       "style": "asteroid-7",
       "trader": null,
@@ -3833,7 +3935,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -836, "y": -414},
+      "pos": {"x": -836, "y": -454},
       "name": "Charm Gamma",
       "style": "asteroid-2",
       "trader": null,
@@ -3849,7 +3951,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -916, "y": -598},
+      "pos": {"x": -736, "y": -578},
       "name": "Charm Transfer Buoy C",
       "style": "anomaly-buoy",
       "trader": null,
@@ -3857,7 +3959,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -896, "y": -508},
+      "pos": {"x": -776, "y": -348},
       "name": "Charm Transfer Buoy A",
       "style": "anomaly-buoy",
       "trader": null,
@@ -3967,7 +4069,7 @@
       },
       "enemy": null,
       "treasures": [],
-      "shipyard": ["Kerr Runner", "Sloop"]
+      "shipyard": ["Kerr Runner", "Kerr Harbinger", "Kerr Interdictor", "Sloop"]
     },
     {
       "pos": {"x": 247, "y": -1829},
@@ -4676,7 +4778,7 @@
     },
     {
       "name": "Start of an adventure",
-      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n_\"Hey hitchhiker! This is your stop.\"_\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a _weird_ signature.\n\nIf you explore the area you might score big time!</dialog>\n<add-to-quest-list/>\n<hint layout=\"quest\">Review your objectives here</hint>\n\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog>You find the meteorite resting on the ground. A shiny lump that is surprisingly light when you load it into the rover.</dialog>\n<dialog>If you *TRADE* the meteroite for cash, you will earn a small fortune.</dialog>\n<hint layout=\"trade\">Sell your treasures here</hint>\n\n<condition have-credits=\"200\"/>\n<dialog>_\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. Enter the *SHIPYARD* if you are interested.\"_</dialog>\n<hint layout=\"shipyard\">Buy a starship here</hint>\n\n<condition have-ship=\"Kerr Clipper\" />\n<dialog>_\"Now you can *LIFT OFF* and leave this planet.\"\n\n\"And good luck kid! It is dangerous out there.\"_</dialog>\n<hint layout=\"liftoff\">Leave this world</hint>\n<mark-on-map dest=\"Samson's Folly\"/>\n\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>_\"My friend at Backwater said you would be coming.\n\nWe have a cheap *Rusty Kinetic Gun* in stock. You are welcome to *LAND* and *TRADE* with us here at Samson's Folly.\"_</dialog>\n<hint layout=\"quest\">Review you objectives here</hint>\n\n<condition have-item=\"Rusty Kinetic Gun\"/>\n<dialog>You now have a Rusty Kinetic Gun, a basic weapon. Tap you ship hologram to open your *PROFILE* and *INSTALL* your new weapon</dialog>\n<hint layout=\"profile\">Install your equipment here</hint>\n\n<condition installed-item=\"Rusty Kinetic Gun\"/>\n<hint layout=\"profile\"></hint>\n<dialog>_\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"_</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n<place-inventory dest=\"Samson's Folly\" item=\"Cutting Beam;EMP Pulse\"/>\n<mark-on-map dest=\"Samson's Folly\" />\n<dialog>_\"Good. Now you should try to defeat a drone that can self repair. Get back to *Samson's Folly* where I have a *Cutting Beam* and an *EMP Pulse* for you.\"_</dialog>\n\n<condition at-dest=\"Samson's Folly\" have-item=\"Cutting Beam;EMP Pulse\" />\n<dialog>_\"Here, take this *Combat Handbook*. Included in the price. It will be available in your *QUEST* computer in the future.\"_</dialog>\n<dialog>_\"The Rugged Drone is waiting for you at *Samson's Training Ground*, go there.\"_</dialog>\n<give item=\"Combat Handbook\"/>\n<mark-on-map dest=\"Samson's Training Ground\" />\n\n<condition no-enemy-at-dest=\"Samson's Training Ground\" />\n<dialog>Samson radios you.\n\n_\"Looking good kid! Now you have the basic skills needed out here in the nebula.\n\nGood luck!\"_</dialog>\n",
+      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n_\"Hey hitchhiker! This is your stop.\"_\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a _weird_ signature.\n\nIf you explore the area you might score big time!</dialog>\n<add-to-quest-list/>\n<hint layout=\"quest\">Review your objectives here</hint>\n\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog model=\"Rover\">You find the meteorite resting on the ground. A shiny lump that is surprisingly light when you load it into the rover.</dialog>\n<dialog>If you *TRADE* the meteroite for cash, you will earn a small fortune.</dialog>\n<hint layout=\"trade\">Sell your treasures here</hint>\n\n<condition have-credits=\"200\"/>\n<dialog>_\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. Enter the *SHIPYARD* if you are interested.\"_</dialog>\n<hint layout=\"shipyard\">Buy a starship here</hint>\n\n<condition have-ship=\"Kerr Clipper\" />\n<dialog>_\"Now you can *LIFT OFF* and leave this planet.\"\n\n\"And good luck kid! It is dangerous out there.\"_</dialog>\n<hint layout=\"liftoff\">Leave this world</hint>\n<mark-on-map dest=\"Samson's Folly\"/>\n\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>_\"My friend at Backwater said you would be coming.\n\nWe have a cheap *Rusty Kinetic Gun* in stock. You are welcome to *LAND* and *TRADE* with us here at Samson's Folly.\"_</dialog>\n<hint layout=\"quest\">Review you objectives here</hint>\n\n<condition have-item=\"Rusty Kinetic Gun\"/>\n<dialog>You now have a Rusty Kinetic Gun, a basic weapon. Tap you ship hologram to open your *PROFILE* and *INSTALL* your new weapon</dialog>\n<hint layout=\"profile\">Install your equipment here</hint>\n\n<condition installed-item=\"Rusty Kinetic Gun\"/>\n<hint layout=\"profile\"></hint>\n<dialog>_\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"_</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n<place-inventory dest=\"Samson's Folly\" item=\"Cutting Beam;EMP Pulse\"/>\n<mark-on-map dest=\"Samson's Folly\" />\n<dialog>_\"Good. Now you should try to defeat a drone that can self repair. Get back to *Samson's Folly* where I have a *Cutting Beam* and an *EMP Pulse* for you.\"_</dialog>\n\n<condition at-dest=\"Samson's Folly\" have-item=\"Cutting Beam;EMP Pulse\" />\n<dialog>_\"Here, take this *Combat Handbook*. Included in the price. It will be available in your *QUEST* computer in the future.\"_</dialog>\n<dialog>_\"The Rugged Drone is waiting for you at *Samson's Training Ground*, go there.\"_</dialog>\n<give item=\"Combat Handbook\"/>\n<mark-on-map dest=\"Samson's Training Ground\" />\n\n<condition no-enemy-at-dest=\"Samson's Training Ground\" />\n<dialog>Samson radios you.\n\n_\"Looking good kid! Now you have the basic skills needed out here in the nebula.\n\nGood luck!\"_</dialog>\n",
       "tags": "outback",
       "color": "6bf",
       "icon": ""
@@ -4690,7 +4792,7 @@
     },
     {
       "name": "Peril at Buoy 72",
-      "xml": "<condition at-dest=\"Buoy 68\"/>\n<dialog model=\"Kerr Interloper\">A private yacht hails you.\n\n_\"Help us. The way ahead is blocked by a malfunctioning drone. We don't dare to proceed.\n\nYour ship is armed, can you clear the path for us!\"_</dialog>\n<mark-on-map dest=\"Buoy 72\"/>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"Buoy 72\"/>\n<dialog model=\"Kerr Interloper\">_\"Thank you for clearing the way for us! Here, take this *Repair Kit*, you need it more than we do.\"_</dialog>\n<dialog>The *Repair Kit* is a _tool with cooldown_. When used in battle it will repair your hull. It can only be used once per battle.</dialog>\n<give item=\"Repair Kit\"/>\n<dialog model=\"Kerr Interloper\">When questioned why they were here in the Outback they say they wanted to see the flowers of the *Blue Forest*.</dialog>\n<mark-on-map dest=\"Blue Forest\" />\n<condition at-dest=\"Blue Forest\" />",
+      "xml": "<condition at-dest=\"Buoy 68\"/>\n<dialog model=\"Kerr Harbinger\">A private yacht hails you.\n\n_\"Help us. The way ahead is blocked by a malfunctioning drone. We don't dare to proceed.\n\nYour ship is armed, can you clear the path for us!\"_</dialog>\n<mark-on-map dest=\"Buoy 72\"/>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"Buoy 72\"/>\n<dialog model=\"Kerr Harbinger\">_\"Thank you for clearing the way for us! Here, take this *Repair Kit*, you need it more than we do.\"_</dialog>\n<dialog>The *Repair Kit* is a _tool with cooldown_. When used in battle it will repair your hull. It can only be used once per battle.</dialog>\n<give item=\"Repair Kit\"/>\n<dialog model=\"Kerr Harbinger\">When questioned why they were here in the Outback they say they wanted to see the flowers of the *Blue Forest*.</dialog>\n<mark-on-map dest=\"Blue Forest\" />\n<condition at-dest=\"Blue Forest\" />",
       "tags": "outback",
       "color": "88f",
       "icon": "arrow"
@@ -4779,7 +4881,7 @@
     },
     {
       "name": "Blue seeds",
-      "xml": "<place-item dest=\"Blue Forest\" item=\"Blue seeds\"/>\n<condition have-item=\"Blue seeds\"/>\n<dialog>These Blue Seeds might take root in the right soil.</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Blue Ocean\" state=\"surface\" trigger=\"PLANT SEEDS\"/>\n<dialog>You plant the Blue Seeds on a lonely island.</dialog>\n<condition at-dest=\"Blue Ocean\" state=\"surface\" trigger=\"GATHER FLOWERS\"/>\n<dialog>You gather the Blue Flowers that sprung out of the planted seeds.</dialog>\n<give item=\"Blue flowers\"/>\n<condition at-dest=\"Buoy 187\" />\n<dialog>The flowers fill the cabin with a fragrant smell. Soothing.\nBut suddenly you grow dizzy, intoxicated. Your vision blurs as your work the ships controls in a stupor. _Darkness!_</dialog>\n<travel dest=\"Anomaly 2050\"/>\n<condition at-dest=\"Anomaly 2050\" />\n<dialog>You wake up. _Horror!_ While drugged you must have overridden the safeties and made an unguided jump. Extremely dangerous. The ship got an emergency lock on some nearby debris and exited the jump.</dialog>\n<condition at-dest=\"Som Thia\" trigger=\"QUEST\" />\n<dialog>In orbit around the planet you find ancient relics. They seem to contain jump coordinates. With them you might dare to make another far jump back from this dead end.</dialog>\n<dialog>With the *Soma Jump Coords* you should now be able to make Long Jumps between *Buoy 187* and *Anomaly 2050*.</dialog>\n<give item=\"Soma Jump Coords\" />\n<mark-on-map dest=\"Anomaly 2050\" />\n<condition at-dest=\"Anomaly 2050\" have-item=\"Soma Jump Coords\" />",
+      "xml": "<place-item dest=\"Blue Forest\" item=\"Blue seeds\"/>\n<condition have-item=\"Blue seeds\"/>\n<dialog model=\"Seeds\">These Blue Seeds might take root in the right soil.</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Blue Ocean\" state=\"surface\" trigger=\"PLANT SEEDS\"/>\n<dialog model=\"Seeds\">You plant the Blue Seeds on a lonely island.</dialog>\n<condition at-dest=\"Blue Ocean\" state=\"surface\" trigger=\"GATHER FLOWERS\"/>\n<dialog model=\"Flowers\">You gather the Blue Flowers that sprung out of the planted seeds.</dialog>\n<give item=\"Blue flowers\"/>\n<condition at-dest=\"Buoy 187\" />\n<dialog model=\"Flowers\">The flowers fill the cabin with a fragrant smell. Soothing.\nBut suddenly you grow dizzy, intoxicated. Your vision blurs as your work the ships controls in a stupor. _Darkness!_</dialog>\n<travel dest=\"Anomaly 2050\"/>\n<condition at-dest=\"Anomaly 2050\" />\n<dialog model=\"Junk\">You wake up. _Horror!_ While drugged you must have overridden the safeties and made an unguided jump. Extremely dangerous. The ship got an emergency lock on some nearby debris and exited the jump.</dialog>\n<condition at-dest=\"Som Thia\" trigger=\"QUEST\" />\n<dialog model=\"Alien Buoy\">In orbit around the planet you find ancient relics. They seem to contain jump coordinates. With them you might dare to make another far jump back from this dead end.</dialog>\n<dialog>With the *Soma Jump Coords* you should now be able to make Long Jumps between *Buoy 187* and *Anomaly 2050*.</dialog>\n<give item=\"Soma Jump Coords\" />\n<mark-on-map dest=\"Anomaly 2050\" />\n<condition at-dest=\"Anomaly 2050\" have-item=\"Soma Jump Coords\" />",
       "tags": "outback soma",
       "color": "39f",
       "icon": "arrow"
@@ -4800,7 +4902,7 @@
     },
     {
       "name": "Milking Whales",
-      "xml": "<condition at-dest=\"Som Phtia\" trigger=\"HAIL\"/>\n<dialog>_\"We Soma have worshipped the Cosmic Whales for generations. But we cannot approach them. A visitor however can. Be a friend of Soma and find the elusive *Cosmic Whales*. Find them and bring us their milk.\"_</dialog>\n<add-to-quest-list/>\n<condition state=\"surface\" at-dest=\"Cosmic Whales\" trigger=\"MILK\"/>\n<dialog>The graceful creatures excrete a white liquid that form a glittering trail in space. Probably nothing to do with milk but you collect it anyway.</dialog>\n<mark-on-map dest=\"Som Phtia\" />\n<condition at-dest=\"Som Phtia\" trigger=\"GIVE MILK\"/>\n<dialog>_\"This milk is surely a prize. The visitor is truly a friend of Soma.\"_</dialog>\n<dialog>_\"Whales thrive around the blue Soma sun. But they are not from here. Far to the south are whales that give an even thicker milk. We will mark the grazing grounds for you. Go there!\"_</dialog>\n<mark-on-map dest=\"Grazing Cosmic Whales\" />\n<condition state=\"surface\" at-dest=\"Grazing Cosmic Whales\" trigger=\"MILK\"/>\n<dialog>Majestic creatures. You carefully collect their milk as they swin in the stellar breeze.</dialog>\n<mark-on-map dest=\"Som Phtia\" />\n<condition state=\"space\" at-dest=\"Som Phtia\" trigger=\"GIVE MILK\"/>\n<dialog>_\"Soma are forever grateful. Wait here while we skim the milk.\"_</dialog>\n<condition state=\"space\" at-dest=\"Som Phtia\" trigger=\"DAIRY\"/>\n<dialog>The Soma don't answer you directly. Silently they send a drone that deliver a thick white liquid to your ship.</dialog>\n<dialog>_\"Friend! Let the cream bake in the hotness of the Soma Sun. Go to the *Lookout* as generations of Soma has done.\"_</dialog>\n<condition state=\"surface\" at-dest=\"Beryl Canis Lookout\" trigger=\"BAKE MILK\"/>\n<dialog>The Soma are peculiar. This substance and this process have hardly anything in common with milk. But that is how they consistently translate it.</dialog>\n<dialog>Scalding heat from Beryl Canis roast your hull, but also bake the mysterious white \"cream\" into something new.</dialog>\n<give item=\"Whale Cheese\"/>",
+      "xml": "<condition at-dest=\"Som Phtia\" trigger=\"HAIL\"/>\n<dialog>_\"We Soma have worshipped the Cosmic Whales for generations. But we cannot approach them. A visitor however can. Be a friend of Soma and find the elusive *Cosmic Whales*. Find them and bring us their milk.\"_</dialog>\n<add-to-quest-list/>\n<condition state=\"surface\" at-dest=\"Cosmic Whales\" trigger=\"MILK\"/>\n<dialog model=\"Cosmic Whales\">The graceful creatures excrete a white liquid that form a glittering trail in space. Probably nothing to do with milk but you collect it anyway.</dialog>\n<mark-on-map dest=\"Som Phtia\" />\n<condition at-dest=\"Som Phtia\" trigger=\"GIVE MILK\"/>\n<dialog>_\"This milk is surely a prize. The visitor is truly a friend of Soma.\"_</dialog>\n<dialog>_\"Whales thrive around the blue Soma sun. But they are not from here. Far to the south are whales that give an even thicker milk. We will mark the grazing grounds for you. Go there!\"_</dialog>\n<mark-on-map dest=\"Grazing Cosmic Whales\" />\n<condition state=\"surface\" at-dest=\"Grazing Cosmic Whales\" trigger=\"MILK\"/>\n<dialog model=\"Cosmic Whales\">Majestic creatures. You carefully collect their milk as they swin in the stellar breeze.</dialog>\n<mark-on-map dest=\"Som Phtia\" />\n<condition state=\"space\" at-dest=\"Som Phtia\" trigger=\"GIVE MILK\"/>\n<dialog>_\"Soma are forever grateful. Wait here while we skim the milk.\"_</dialog>\n<condition state=\"space\" at-dest=\"Som Phtia\" trigger=\"DAIRY\"/>\n<dialog>The Soma don't answer you directly. Silently they send a drone that deliver a thick white liquid to your ship.</dialog>\n<dialog>_\"Friend! Let the cream bake in the hotness of the Soma Sun. Go to the *Lookout* as generations of Soma has done.\"_</dialog>\n<condition state=\"surface\" at-dest=\"Beryl Canis Lookout\" trigger=\"BAKE MILK\"/>\n<dialog>The Soma are peculiar. This substance and this process have hardly anything in common with milk. But that is how they consistently translate it.</dialog>\n<dialog model=\"Observatory\">Scalding heat from Beryl Canis roast your hull, but also bake the mysterious white \"cream\" into something new.</dialog>\n<give item=\"Whale Cheese\"/>",
       "tags": "soma",
       "color": "fff",
       "icon": "drop"
@@ -4842,7 +4944,7 @@
     },
     {
       "name": "Tau Pavonis Observer",
-      "xml": "<place-item dest=\"Pavonis Observatory\" item=\"Tungsten\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>You are hailed as you enter orbit: _\"Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"We study Tau Pavonis and need assistance in placing sensors at the *Observatory*. Compensation is 500 credits. Are you interested?\"_</dialog>\n<dialog>_\"First you need protection. Travel to *Pavonis Mirror* and aquire a *Star Shield*.\"_</dialog>\n<give item=\"Star Sensor\"/>\n<mark-on-map dest=\"Pavonis Mirror\"/>\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>_\"Traveller. This is Mirror spaceport. We have prepared the *Star Shield* you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed.\"_</dialog>\n<give item=\"Star Shield\"/>\n<condition at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed=\"Star Shield\" trigger=\"READY\"/>\n<dialog ok=\"PROCEED\" cancel=\"WAIT\">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>\n<travel dest=\"Pavonis Observatory\"/>\n<condition at-dest=\"Pavonis Observatory\" trigger=\"PUT SENSOR\"/>\n<dialog>You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\"/>\n<travel dest=\"Pavonis Mirror\"/>\n<dialog>_\"You made it! Must be a sturdy ship you got there.\"_</dialog>\n<dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organisation.</dialog>\n<dialog>_\"Let us remove that Star Shield, you can collect your payment at *Pavonis Smoke*.\"_</dialog>\n<take item=\"Star Shield\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog>_\"You survived! Excellent, we are anxious to get the data from the sensor. Please accept our payment!\"_</dialog>\n<give credits=\"1000\"/>\n<remove-map-marker/>\n<condition not-at-dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>_\"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor is most disturbing. Tau Pavonis is behaving unphysically.\"_</dialog>\n<dialog>_\"You must help us collect more data! Please take us to the *Observatory* so we can make further readings.\"_</dialog>\n<dialog>This time you request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>\n<dialog>_\"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental *Shield Reactor*. Ok?\"_</dialog>\n<dialog>You see an opportunity to make demands.\n_\"That sounds useful, give it to me in advance, and a regular reward afterwards!\"_</dialog>\n<give item=\"Shield Core Mk2\"/>\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>They load the *Star Shield* onto you ship once again. They tell you to *install* it but they all look a bit worried this time. What is it they have found inside that star?</dialog>\n<give item=\"Star Shield\"/>\n<condition at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed=\"Star Shield\" trigger=\"READY\"/>\n<travel dest=\"Pavonis Observatory\"/>\n<dialog>The scientists take readings with arcane instruments they brought. But you don't need any telescopes, looking throught the dimmed windows you can see a region of the stars surface pulsing. Or rather heaving, like it is breathing.</dialog>\n<dialog>Suddenly the star's surface open like a flower and something break free from open wound. It trashes like a wounded animal. It looks slow like a ballet, but at these scales it is tremendously fast.</dialog>\n<dialog>The monstrosity accelerates and trace a glowing path towards *Pavonis Charm*. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>\n<place-enemy enemy=\"Worm\" dest=\"Pavonis Charm\"/>\n<mark-on-map dest=\"Pavonis Charm\"/>\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\" />\n<travel dest=\"Pavonis Mirror\" />\n<condition at-dest=\"A117\"/>\n<dialog>Your sensors can make out the entity orbiting Pavonis Charm. Approaching would be devastating.</dialog>\n<dialog>You are hailed by a distant ship. \n\n_\"Traveller. We are the Worshipers. Things have been set in motion and there might still be time to dispel this danger. Seek us out at *Paxos Station*.\"_</dialog>\n<mark-on-map dest=\"Paxos Station\"/>\n<condition at-dest=\"Paxos Station\" trigger=\"HAIL\"/>\n<dialog>_\"This is Paxos Station, the Cathedral of Worship. The scholars at Pavonis Smoke have woken the Worm. You were their tool and now we can help you undo their foolish work.\"_</dialog>\n<dialog>_\"The Worm's chains can be restored with the three tools that once bound it originally. The Epiales, the Momus and the Horkos.\"_</dialog>",
+      "xml": "<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>You are hailed as you enter orbit: _\"Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"We study Tau Pavonis and need assistance in placing sensors at the *Observatory*. Compensation is 500 credits. Are you interested?\"_</dialog>\n<dialog>_\"First you need protection. Travel to *Pavonis Mirror* and aquire a *Star Shield*.\"_</dialog>\n<give item=\"Star Sensor\"/>\n<mark-on-map dest=\"Pavonis Mirror\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>_\"Traveller. This is Mirror spaceport. We have prepared the *Star Shield* you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed.\"_</dialog>\n<give item=\"Star Shield\"/>\n\n<condition at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed=\"Star Shield\" trigger=\"READY\"/>\n<dialog ok=\"PROCEED\" cancel=\"WAIT\">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>\n<travel dest=\"Pavonis Observatory\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"PUT SENSOR\"/>\n<dialog model=\"Sol Array\">You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\"/>\n<travel dest=\"Pavonis Mirror\"/>\n<dialog>_\"You made it! Must be a sturdy ship you got there.\"_</dialog>\n<dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organisation.</dialog>\n<dialog>_\"Let us remove that Star Shield, you can collect your payment at *Pavonis Smoke*.\"_</dialog>\n<take item=\"Star Shield\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog>_\"You survived! Excellent, we are anxious to get the data from the sensor. Please accept our payment!\"_</dialog>\n<give credits=\"1000\"/>\n<remove-map-marker/>\n\n<condition not-at-dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>_\"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor is most disturbing. Tau Pavonis is behaving unphysically.\"_</dialog>\n<dialog>_\"You must help us collect more data! Please take us to the *Observatory* so we can make further readings.\"_</dialog>\n<dialog>This time you request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>\n<dialog>_\"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental *Shield Reactor*. Ok?\"_</dialog>\n<dialog>You see an opportunity to make demands.\n_\"That sounds useful, give it to me in advance, and a regular reward afterwards!\"_</dialog>\n<give item=\"Shield Core Mk2\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>They load the *Star Shield* onto you ship once again. They tell you to *install* it but they all look a bit worried this time. What is it they have found inside that star?</dialog>\n<give item=\"Star Shield\"/>\n\n<condition at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed=\"Star Shield\" trigger=\"READY\"/>\n<travel dest=\"Pavonis Observatory\"/>\n<dialog>The scientists take readings with arcane instruments they brought. But you don't need any telescopes, looking throught the dimmed windows you can see a region of the stars surface pulsing. Or rather heaving, like it is breathing.</dialog>\n<dialog model=\"Worm\">Suddenly the star's surface open like a flower and something break free from open wound. It trashes like a wounded animal. It looks slow like a ballet, but at these scales it is tremendously fast.</dialog>\n<dialog>The monstrosity accelerates and trace a glowing path towards *Pavonis Charm*. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>\n<place-enemy enemy=\"Worm\" dest=\"Pavonis Charm\"/>\n<mark-on-map dest=\"Pavonis Charm\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\" />\n<travel dest=\"Pavonis Mirror\" />\n\n<condition at-dest=\"A117\"/>\n<dialog model=\"Worm\">Your sensors can make out the entity orbiting Pavonis Charm. Approaching would be devastating.</dialog>\n<dialog>You are hailed by a distant ship. \n\n_\"Traveller. We are the Worshipers. Things have been set in motion and there might still be time to dispel this danger. Seek us out at *Paxos Station*.\"_</dialog>\n<mark-on-map dest=\"Paxos Station\"/>\n\n<condition at-dest=\"Paxos Station\" trigger=\"HAIL\"/>\n<dialog model=\"Paxos Station\">_\"This is Paxos Station, the Cathedral of Worship. The scholars at Pavonis Smoke have woken the Worm. You were their tool and now we can help you undo their foolish work.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The Worm's chains can be restored with the three tools that once bound it originally.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The children of the Worm once bound their progenitor with the artifacts Epiales, Momus and Horkos. Seek them out in the Fields, the Garden and the Ruins.\"_</dialog>\n\n<condition have-item=\"Momus;Horkos;Epiales\" at-dest=\"A2172;Paxos Station\"/>\n<dialog>_\"Traveller. You have gathered the relics.\"_</dialog>\n<dialog>_\"While your hands were busy the Worm multiplied. Sired its seedlings.\nMay the relics help you. Clear out the Seedlings around *Pavonis Charm*!\"_</dialog>\n<mark-on-map dest=\"Pavonis Charm\" />\n<place-enemy dest=\"Charm Beta\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Gamma\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Delta\" enemy=\"Worm Seedling\" loot=\"\"/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" no-enemy-at-dest=\"Charm Beta;Charm Gamma;Charm Delta\" />\n<place-enemy dest=\"Pavonis Charm\" enemy=\"Weakened Worm\" loot=\"Worm Umbra\" />\n<dialog model=\"Worm Seedling\">The final Seedling succumbs to your assault. Somehow you know that the Worm is affected. Touched by your actions here that bestial presence is now weakened. This can now end.</dialog>\n\n<condition no-enemy-at-dest=\"Pavonis Charm\" />\n<dialog model=\"Worm\">The worm is mortally wounded. Its appendages flail and whips up foam on the surface of Pavis Charm as it is pulled below the surface and into the depths of the gas giant.</dialog>\n<mark-on-map dest=\"Paxos Station\" />\n\n<condition at-dest=\"Paxos Station\" />\n<dialog>_\"Traveller. You bested the Worm. The battle was glorious.\nYet many here feel fear. *The Worm is not dead.* It might slumbes for eons inside Pavonis Charm, but it will wake once again.\"_</dialog>\n\n\n\n\n",
       "tags": "pavonis"
     },
     {
@@ -5093,12 +5195,132 @@
   "initialDestination": "Backwater",
   "models": [
     {
+      "name": "Seeds",
+      "tags": "prop",
+      "geometry": "composite",
+      "transform": [
+        ["scale", 1.7, 1.7, 1.7],
+        ["rotate", 0, 0, 0],
+        ["translate", 0, 0, 0]
+      ],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["parabola", 0.01, 0, 0],
+            ["rotate", 90, 0, 0],
+            ["scale", 1.5, 1.5, 1.5],
+            ["rotate", 0, 0, 90],
+            ["translate", 0, 40, -30]
+          ],
+          "path": [
+            [0, 0, -45],
+            [4, 0, -30],
+            [6, 0, -20],
+            [14, 0, -7],
+            [16, 0, 7],
+            [6, 0, 20],
+            [4, 0, 30],
+            [0, 0, 45]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["parabola", 0.01, 0, 0],
+            ["rotate", 90, 0, 0],
+            ["scale", 1.5, 1.5, 1.5],
+            ["rotate", 0, 0, -60],
+            ["translate", 0, -20, -30]
+          ],
+          "path": [
+            [0, 0, -45],
+            [4, 0, -30],
+            [6, 0, -20],
+            [14, 0, -7],
+            [16, 0, 7],
+            [6, 0, 20],
+            [4, 0, 30],
+            [0, 0, 45]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Flowers",
+      "tags": "prop",
+      "geometry": "composite",
+      "transform": [
+        ["scale", 1.7, 1.7, 1.7],
+        ["rotate", 0, 0, 0],
+        ["translate", 0, 0, 0]
+      ],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 12,
+          "transform": [
+            ["subdivide", 0, 0, 0],
+            ["radial-wave", 6, 0.5, 0],
+            ["rotate", 0, 0, 27],
+            ["parabola", 0, 0, -0.01],
+            ["scale", 1.5, 1.5, 1.5],
+            ["rotate", 0, 60, 0],
+            ["translate", -20, 0, -60]
+          ],
+          "path": [[10, 0, 0], [50, 0, 0], [10, 0, 0]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 12,
+          "transform": [
+            ["subdivide", 0, 0, 0],
+            ["radial-wave", 6, 0.5, 0],
+            ["rotate", 0, 0, -13],
+            ["parabola", 0, 0, -0.01],
+            ["scale", 1.5, 1.5, 1.5],
+            ["rotate", 0, 60, -90],
+            ["translate", 35, 40, -90]
+          ],
+          "path": [[10, 0, 0], [50, 0, 0], [10, 0, 0]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 4,
+          "transform": [
+            ["parabola", 0, -0.005, 0],
+            ["rotate", 180, 0, -150],
+            ["translate", 5, -5, 0]
+          ],
+          "path": [[3, 0, 0], [3, 0, 30], [3, 0, 60], [0, 0, 90]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 4,
+          "transform": [["parabola", -0.006, 0, 0], ["rotate", 180, 0, 0]],
+          "path": [[3, 0, 0], [3, 0, 30], [3, 0, 60]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 4,
+          "transform": [
+            ["parabola", -0.006, 0, 0],
+            ["rotate", 180, 0, -120],
+            ["translate", 10, 0, 0]
+          ],
+          "path": [[3, 0, 0], [3, 0, 30], [3, 0, 60], [3, 0, 90]]
+        }
+      ]
+    },
+    {
       "name": "Sentinel",
       "geometry": "composite",
       "tags": "enemy",
       "transform": [
-        ["scale", 0.7, 0.7, 0.7],
-        ["rotate", 3.14, 0, 0.515],
+        ["scale", 1, 1, 1],
+        ["rotate", 180, 0, 30],
         ["translate", 0, 0, -50]
       ],
       "parts": [
@@ -5109,7 +5331,7 @@
             ["scale", 1, 1, 1],
             ["radial-wave", 3, 0.1, 0],
             ["parabola", 0, 0, 0.005],
-            ["rotate", 3.14, 0, 0],
+            ["rotate", 180, 0, 0],
             ["translate", 0, 0, 60]
           ],
           "path": [[0, 0, -50], [150, 0, 0], [0, 0, 50]]
@@ -5119,7 +5341,7 @@
           "res": 6,
           "transform": [
             ["scale", 1, 1, 1],
-            ["rotate", 3.14, 3.14, 0],
+            ["rotate", 180, 180, 0],
             ["translate", 0, 0, -50]
           ],
           "path": [[0, 0, -20], [50, 0, 0], [0, 0, 50]]
@@ -5129,23 +5351,12 @@
     {
       "name": "Smacky's2",
       "geometry": "composite",
-      "transform": [
-        ["scale", 0.8, 0.8, 0.8],
-        ["rotate", 0, 0, 0],
-        ["translate", 0, -100, -50]
-      ],
+      "transform": [["scale", 1, 1, 1], ["translate", 20, -120, -50]],
       "parts": [
         {
           "geometry": "lathe",
           "res": 20,
-          "transform": [
-            ["rotate", 1, 0, 0],
-            ["translate", 0, 0, 0],
-            ["radial-wave", 5, 1.3, 0],
-            ["scale", 1, 1, 1],
-            ["rotate", 0, 0, 0],
-            ["translate", 0, 0, 0]
-          ],
+          "transform": [["rotate", 60, 0, 0], ["radial-wave", 5, 1.3, 0]],
           "path": [
             [0, 0, -100],
             [30, 0, -96],
@@ -5161,14 +5372,7 @@
         {
           "geometry": "lathe",
           "res": 20,
-          "transform": [
-            ["rotate", 1, 0, 0],
-            ["translate", 0, 0, 0],
-            ["radial-wave", 5, 1.3, 0],
-            ["scale", 1, 1, 1],
-            ["rotate", 0, 0, 0],
-            ["translate", 0, 0, 0]
-          ],
+          "transform": [["rotate", 60, 0, 0], ["radial-wave", 5, 1.3, 0]],
           "path": [
             [0, 0, -100],
             [30, 0, -96],
@@ -5185,11 +5389,7 @@
           "name": "body",
           "geometry": "lathe",
           "res": 6,
-          "transform": [
-            ["scale", 3, 3, 3],
-            ["rotate", 0, 0, 0],
-            ["translate", -15, 145, -30]
-          ],
+          "transform": [["scale", 3, 3, 3], ["translate", -15, 145, -30]],
           "path": [
             [30, 0, 0],
             [28, 0, 7],
@@ -5218,10 +5418,9 @@
           "geometry": "lathe",
           "res": 8,
           "transform": [
-            ["rotate", 1, 0, 0],
-            ["translate", 0, 0, 0],
+            ["rotate", 60, 0, 0],
             ["radial-wave", 5, 1.3, 0],
-            ["rotate", 1, 0, 0],
+            ["rotate", 60, 0, 0],
             ["scale", 1, 1, 0.6],
             ["translate", 0, 0, -10]
           ],
@@ -5240,7 +5439,7 @@
           "geometry": "cube",
           "transform": [
             ["scale", 60, 40, 3],
-            ["rotate", -1.8, 0.2, 0.3],
+            ["rotate", -103, 12, 17],
             ["translate", -15, 55, -120]
           ]
         },
@@ -5249,7 +5448,7 @@
           "geometry": "cube",
           "transform": [
             ["scale", 5, 5, 40],
-            ["rotate", 0, 0.2, 0.3],
+            ["rotate", 0, 12, 17],
             ["translate", 0, 50, -75]
           ]
         }
@@ -5259,9 +5458,9 @@
       "name": "Rusty Ship",
       "geometry": "composite",
       "transform": [
-        ["scale", 3, 3, 3],
-        ["rotate", 1.57, 0, 1.57],
-        ["translate", 0, 20, -28]
+        ["scale", 4, 4, 4],
+        ["rotate", 90, 0, 90],
+        ["translate", 0, 20, -45]
       ],
       "parts": [
         {
@@ -5270,7 +5469,7 @@
           "res": 6,
           "transform": [
             ["scale", 3.6, 1.5, 3],
-            ["rotate", 3.14, 1.57, 0],
+            ["rotate", 180, 90, 0],
             ["translate", 0, 0, 0]
           ],
           "path": [[0, 0, -11], [3, 0, -10], [5, 0, -1], [5, 0, 9], [0, 0, 10]]
@@ -5278,13 +5477,13 @@
         {
           "geometry": "lathe",
           "res": 6,
-          "transform": [["translate", -12, 0, -35], ["rotate", 0, 1.57, 0]],
+          "transform": [["translate", -12, 0, -35], ["rotate", 0, 90, 0]],
           "path": [[5, 0, -3], [10, 0, -5], [11, 0, 0], [10, 0, 5], [5, 0, 3]]
         },
         {
           "geometry": "lathe",
           "res": 6,
-          "transform": [["translate", 12, 0, -35], ["rotate", 0, 1.57, 0]],
+          "transform": [["translate", 12, 0, -35], ["rotate", 0, 90, 0]],
           "path": [[5, 0, -3], [10, 0, -5], [11, 0, 0], [10, 0, 5], [5, 0, 3]]
         }
       ],
@@ -5293,19 +5492,14 @@
     {
       "name": "Cosmic Whales",
       "geometry": "composite",
-      "transform": [
-        ["scale", 1, 1, 1],
-        ["rotate", 3.14, 0, 0],
-        ["translate", 40, 40, -50]
-      ],
+      "transform": [["rotate", 180, 0, 0], ["translate", 40, 40, -50]],
       "parts": [
         {
           "geometry": "lathe",
           "res": 8,
           "transform": [
             ["scale", 0.8, 0.8, 0.9],
-            ["rotate", -1.57, 0, -0.1],
-            ["translate", 0, 0, 0],
+            ["rotate", -90, 0, -6],
             ["parabola", 0, 0, -0.002],
             ["translate", 50, 0, 20]
           ],
@@ -5324,7 +5518,7 @@
           "res": 8,
           "transform": [
             ["scale", 0.7, 0.7, 1],
-            ["rotate", -1.57, 0, -0.2],
+            ["rotate", -90, 0, -12],
             ["parabola", 0, 0, 0.002],
             ["translate", -100, 70, -10]
           ],
@@ -5342,8 +5536,7 @@
           "geometry": "lathe",
           "res": 8,
           "transform": [
-            ["scale", 1, 1, 1],
-            ["rotate", -1.57, 0, 0],
+            ["rotate", -90, 0, 0],
             ["parabola", 0, 0, 0.002],
             ["translate", -40, -60, 0]
           ],
@@ -5364,7 +5557,7 @@
       "geometry": "composite",
       "transform": [
         ["scale", 0.9, 0.9, 0.9],
-        ["rotate", -2.64, -0.25, 1.57],
+        ["rotate", -151, -14, 90],
         ["translate", 0, 0, -60]
       ],
       "parts": [
@@ -5373,8 +5566,8 @@
           "res": 6,
           "transform": [
             ["scale", 60, 60, 60],
-            ["rotate", 0, 0, 0.53],
-            ["rotate", 0, 1.57, 0],
+            ["rotate", 0, 0, 30],
+            ["rotate", 0, 90, 0],
             ["translate", -30, 0, 22]
           ],
           "path": [
@@ -5391,8 +5584,8 @@
           "res": 6,
           "transform": [
             ["scale", 60, 60, 60],
-            ["rotate", 0, 0, 0.53],
-            ["rotate", 0, 1.57, 0],
+            ["rotate", 0, 0, 30],
+            ["rotate", 0, 90, 0],
             ["translate", -30, 0, -22]
           ],
           "path": [
@@ -5409,8 +5602,8 @@
           "res": 6,
           "transform": [
             ["scale", 80, 80, 60],
-            ["rotate", 0, 0, 0.53],
-            ["rotate", 0, 1.57, 0],
+            ["rotate", 0, 0, 30],
+            ["rotate", 0, 90, 0],
             ["translate", -40, 35, 0]
           ],
           "path": [
@@ -5427,8 +5620,8 @@
           "res": 6,
           "transform": [
             ["scale", 80, 80, 60],
-            ["rotate", 0, 0, 0.53],
-            ["rotate", 0, 1.57, 0.5],
+            ["rotate", 0, 0, 30],
+            ["rotate", 0, 90, 30],
             ["translate", -60, -75, 0]
           ],
           "path": [
@@ -5445,8 +5638,8 @@
           "res": 3,
           "transform": [
             ["scale", 20, 20, 30],
-            ["rotate", 0, 0, 0.53],
-            ["rotate", 0, 1.57, 0.25],
+            ["rotate", 0, 0, 30],
+            ["rotate", 0, 90, 15],
             ["translate", -70, -38, 0]
           ],
           "path": [[0, 0, -1], [0.3, 0, -1], [0.3, 0, 1], [0, 0, 1]]
@@ -5456,7 +5649,7 @@
           "res": 9,
           "transform": [
             ["scale", 1, 1, 1],
-            ["rotate", 3.14, 0, 0],
+            ["rotate", 180, 0, 0],
             ["translate", 80, 0, 0],
             ["radial-wave", 4, 0.8, 0]
           ],
@@ -5477,11 +5670,12 @@
     {
       "name": "Sphere",
       "geometry": "cube",
+      "tags": "prop",
       "transform": [
         ["subdivide", 0, 0, 0],
         ["subdivide", 0, 0, 0],
         ["sphere", 100, 100, 100],
-        ["rotate", 1, 1, 1],
+        ["rotate", 30, -20, -70],
         ["translate", 0, 0, -90]
       ]
     },
@@ -5490,26 +5684,26 @@
       "geometry": "composite",
       "transform": [
         ["scale", 1, 1, 1],
-        ["rotate", -0.2, 0.4, 0],
+        ["rotate", -12, 23, 0],
         ["translate", 0, 0, -80]
       ],
       "parts": [
         {
           "geometry": "lathe",
           "res": 4,
-          "transform": [["scale", 1, 1, 2], ["rotate", 3.14, 0, 0]],
+          "transform": [["scale", 1, 1, 2], ["rotate", 180, 0, 0]],
           "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]
         },
         {
           "geometry": "lathe",
           "res": 4,
-          "transform": [["scale", 1, 1, 2], ["rotate", 1.57, 0, 0]],
+          "transform": [["scale", 1, 1, 2], ["rotate", 90, 0, 0]],
           "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]
         },
         {
           "geometry": "lathe",
           "res": 4,
-          "transform": [["scale", 1, 1, 2], ["rotate", -1.57, 0, 0]],
+          "transform": [["scale", 1, 1, 2], ["rotate", -90, 0, 0]],
           "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]
         },
         {
@@ -5521,13 +5715,13 @@
         {
           "geometry": "lathe",
           "res": 4,
-          "transform": [["scale", 1, 1, 2], ["rotate", 0, 1.57, 0]],
+          "transform": [["scale", 1, 1, 2], ["rotate", 0, 90, 0]],
           "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]
         },
         {
           "geometry": "lathe",
           "res": 4,
-          "transform": [["scale", 1, 1, 2], ["rotate", 0, -1.57, 0]],
+          "transform": [["scale", 1, 1, 2], ["rotate", 0, -90, 0]],
           "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]
         }
       ],
@@ -5537,46 +5731,58 @@
       "name": "Alien Meetup",
       "geometry": "composite",
       "transform": [
-        ["scale", 0.5, 0.5, 0.5],
-        ["rotate", -0.2, 0.4, 0],
+        ["scale", 0.65, 0.65, 0.65],
+        ["rotate", -12, 23, 0],
         ["translate", -40, -40, -50]
       ],
       "parts": [
         {
-          "geometry": "lathe",
-          "res": 4,
-          "transform": [["scale", 1, 1, 2], ["rotate", 3.14, 0, 0]],
-          "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]
-        },
-        {
-          "geometry": "lathe",
-          "res": 4,
-          "transform": [["scale", 1, 1, 2], ["rotate", 1.57, 0, 0]],
-          "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]
-        },
-        {
-          "geometry": "lathe",
-          "res": 4,
-          "transform": [["scale", 1, 1, 2], ["rotate", -1.57, 0, 0]],
-          "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]
-        },
-        {
-          "geometry": "lathe",
-          "res": 4,
-          "transform": [["scale", 1, 1, 2], ["rotate", 0, 0, 0]],
-          "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]
-        },
-        {
-          "geometry": "lathe",
-          "res": 4,
-          "transform": [["scale", 1, 1, 2], ["rotate", 0, 1.57, 0]],
-          "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]
-        },
-        {
-          "geometry": "lathe",
-          "res": 4,
-          "transform": [["scale", 1, 1, 2], ["rotate", 0, -1.57, 0]],
-          "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]
+          "name": "Alien Buoy",
+          "geometry": "composite",
+          "transform": [
+            ["scale", 1, 1, 1],
+            ["rotate", -12, 23, 0],
+            ["translate", 0, 0, -80]
+          ],
+          "parts": [
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "transform": [["scale", 1, 1, 2], ["rotate", 180, 0, 0]],
+              "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]
+            },
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "transform": [["scale", 1, 1, 2], ["rotate", 90, 0, 0]],
+              "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]
+            },
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "transform": [["scale", 1, 1, 2], ["rotate", -90, 0, 0]],
+              "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]
+            },
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "transform": [["scale", 1, 1, 2], ["rotate", 0, 0, 0]],
+              "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]
+            },
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "transform": [["scale", 1, 1, 2], ["rotate", 0, 90, 0]],
+              "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]
+            },
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "transform": [["scale", 1, 1, 2], ["rotate", 0, -90, 0]],
+              "path": [[0, 0, 5], [20, 0, 15], [0, 0, 45]]
+            }
+          ],
+          "tags": "anomaly"
         },
         {
           "name": "Soma Saay",
@@ -5584,8 +5790,8 @@
           "res": 12,
           "transform": [
             ["scale", 0.75, 0.75, 0.75],
-            ["translate", 150, 150, -30],
-            ["rotate", 0.4, -0.5, 0]
+            ["translate", 130, 120, -30],
+            ["rotate", 23, -29, 0]
           ],
           "path": [
             [50, 0, 0],
@@ -5608,7 +5814,7 @@
       "geometry": "composite",
       "transform": [
         ["scale", 2, 2, 2],
-        ["rotate", 0, 1.27, 0],
+        ["rotate", 0, 72, 0],
         ["translate", 0, 0, -80]
       ],
       "parts": [
@@ -5618,7 +5824,7 @@
           "res": 6,
           "transform": [
             ["scale", 1, 1, 1],
-            ["rotate", -1.57, 0, 0],
+            ["rotate", -90, 0, 0],
             ["translate", 0, 0, -40]
           ],
           "path": [[0, 0, -20], [9, 0, -5], [10, 0, 0], [6, 0, 30], [0, 0, 25]]
@@ -5629,7 +5835,7 @@
           "res": 6,
           "transform": [
             ["scale", 1, 1, 1],
-            ["rotate", -1.57, 0, 0],
+            ["rotate", -90, 0, 0],
             ["translate", 0, 0, 40]
           ],
           "path": [[0, 0, -20], [9, 0, -5], [10, 0, 0], [6, 0, 50], [0, 0, 45]]
@@ -5640,7 +5846,7 @@
           "res": 8,
           "transform": [
             ["scale", 0.75, 0.75, 0.75],
-            ["rotate", 0, 1.57, 0],
+            ["rotate", 0, 90, 0],
             ["translate", 1, 0, 0]
           ],
           "path": [
@@ -5675,7 +5881,7 @@
       "geometry": "composite",
       "transform": [
         ["scale", 2, 2, 2],
-        ["rotate", 0, 1.47, 0.5],
+        ["rotate", 0, 72, 30],
         ["translate", 0, 0, -80]
       ],
       "parts": [
@@ -5685,7 +5891,7 @@
           "res": 6,
           "transform": [
             ["scale", 1, 1, 1],
-            ["rotate", -1.57, 0, 0],
+            ["rotate", -90, 0, 0],
             ["translate", 0, 0, -40]
           ],
           "path": [[0, 0, -20], [9, 0, -5], [10, 0, 0], [6, 0, 30], [0, 0, 25]]
@@ -5696,7 +5902,7 @@
           "res": 6,
           "transform": [
             ["scale", 1.5, 1.5, 1.5],
-            ["rotate", -1.57, 0.63, 0],
+            ["rotate", -90, 36, 0],
             ["translate", -23, -10, 0]
           ],
           "path": [[0, 0, -20], [9, 0, -5], [10, 0, 0], [6, 0, 30], [0, 0, 25]]
@@ -5707,7 +5913,7 @@
           "res": 6,
           "transform": [
             ["scale", 1, 1, 1],
-            ["rotate", -1.57, 0, 0],
+            ["rotate", -90, 0, 0],
             ["translate", 0, -10, 38]
           ],
           "path": [[0, 0, -20], [9, 0, -5], [10, 0, 0], [6, 0, 50], [0, 0, 45]]
@@ -5718,7 +5924,7 @@
           "res": 8,
           "transform": [
             ["scale", 0.75, 0.75, 0.75],
-            ["rotate", 0, 1.57, 0],
+            ["rotate", 0, 90, 0],
             ["translate", -5, 0, 0]
           ],
           "path": [
@@ -5753,7 +5959,7 @@
       "geometry": "composite",
       "transform": [
         ["scale", 1, 1, 1],
-        ["rotate", 3.14, 0, 0],
+        ["rotate", 180, 0, 0],
         ["translate", 0, 0, 0]
       ],
       "parts": [
@@ -5763,12 +5969,12 @@
           "transform": [
             ["subdivide", 0, 0, 0],
             ["subdivide", 0, 0, 0],
-            ["sphere", 100, 100, 20],
+            ["sphere", 120, 120, 24],
             ["radial-wave", 4, 0.6, 0],
             ["parabola", 0, 0.005, 0],
             ["parabola", 0, 0, 0.006],
-            ["translate", 0, 0, 25],
-            ["rotate", 0, -0.4, 0.09]
+            ["translate", 50, 0, 5],
+            ["rotate", 0, -23, 5]
           ]
         }
       ]
@@ -5779,7 +5985,7 @@
       "res": 8,
       "transform": [
         ["scale", 1.3, 1.3, 1.3],
-        ["rotate", 0, -0.4, 0],
+        ["rotate", 0, -23, 0],
         ["translate", 0, 0, -82]
       ],
       "path": [
@@ -5800,7 +6006,7 @@
           "res": 6,
           "transform": [
             ["scale", 1, 1, 0.5],
-            ["rotate", -1.34, 0, 0],
+            ["rotate", -77, 0, 0],
             ["translate", 0, 0, -40]
           ],
           "path": [
@@ -5819,7 +6025,7 @@
           "res": 6,
           "transform": [
             ["scale", 1, 1, 0.5],
-            ["rotate", -1.8, 0, 0],
+            ["rotate", -103, 0, 0],
             ["translate", 0, 0, 40]
           ],
           "path": [
@@ -5838,7 +6044,7 @@
           "res": 8,
           "transform": [
             ["scale", 0.75, 0.75, 0.75],
-            ["rotate", 3.14, 0, 0],
+            ["rotate", 180, 0, 0],
             ["translate", 0, 0, 0]
           ],
           "path": [
@@ -5859,7 +6065,7 @@
           "res": 4,
           "transform": [
             ["scale", 3, 1, 19],
-            ["rotate", 2.6, 0, 0],
+            ["rotate", -210, 0, 0],
             ["translate", 0, -11, 24]
           ],
           "path": [[1, 0, -1], [1, 0, 1]]
@@ -5870,7 +6076,7 @@
           "res": 4,
           "transform": [
             ["scale", 3, 1, 19],
-            ["rotate", 3.68, 0, 0],
+            ["rotate", 210, 0, 0],
             ["translate", 0, -11, -24]
           ],
           "path": [[1, 0, -1], [1, 0, 1]]
@@ -5883,7 +6089,7 @@
       "geometry": "composite",
       "transform": [
         ["scale", 3, 3, 3],
-        ["rotate", 1.57, 0, 1.57],
+        ["rotate", 90, 0, 90],
         ["translate", 0, 0, -28]
       ],
       "parts": [
@@ -5893,7 +6099,7 @@
           "res": 6,
           "transform": [
             ["scale", 3.6, 1.5, 3],
-            ["rotate", 3.14, 1.57, 0],
+            ["rotate", 180, 90, 0],
             ["translate", 0, -15, 0]
           ],
           "path": [[0, 0, -11], [3, 0, -10], [5, 0, -1], [5, 0, 9], [0, 0, 10]]
@@ -5929,38 +6135,16 @@
       "name": "Soma Soot",
       "geometry": "lathe",
       "res": 12,
-      "transform": [["scale", 0.75, 0.75, 0.75], ["translate", 0, 0, -50]],
+      "transform": [["scale", 0.75, 0.75, 0.75], ["translate", 0, 0, -40]],
       "path": [
-        [0, 0, -38],
-        [40, 0, -29],
+        [90, 0, 22],
+        [41, 0, -28],
         [45, 0, -31],
         [140, 0, -12],
         [150, 0, -6],
         [160, 0, -8],
         [200, 0, 0],
-        [0, 0, 40]
-      ],
-      "parts": [
-        {
-          "name": "Soma Soot",
-          "geometry": "lathe",
-          "res": 12,
-          "transform": [["scale", 0.75, 0.75, 0.75]],
-          "path": [[160, 0, -8], [200, 0, 0], [0, 0, 40]]
-        },
-        {
-          "name": "Soma Soot",
-          "geometry": "lathe",
-          "res": 12,
-          "transform": [["scale", 0.75, 0.75, 0.75]],
-          "path": [
-            [0, 0, -38],
-            [40, 0, -29],
-            [45, 0, -31],
-            [140, 0, -12],
-            [155, 0, -2]
-          ]
-        }
+        [90, 0, 22]
       ],
       "tags": "enemy"
     },
@@ -5992,7 +6176,7 @@
           "geometry": "lathe",
           "angle": 4.19,
           "res": 8,
-          "transform": [["rotate", 0, 0, -0.53]],
+          "transform": [["rotate", 0, 0, -30]],
           "path": [
             [189, 0, 0],
             [115, 0, -35],
@@ -6020,7 +6204,7 @@
       "tags": "enemy",
       "transform": [
         ["scale", 1, 1, 1],
-        ["rotate", 3.14, 0, 0],
+        ["rotate", 180, 0, 0],
         ["translate", 0, 0, 0]
       ],
       "parts": [
@@ -6030,7 +6214,7 @@
           "transform": [
             ["scale", 1, 1, 1],
             ["radial-wave", 3, 0.4, 0],
-            ["rotate", 3.14, 0, 0.515],
+            ["rotate", 180, 0, 30],
             ["parabola", 0, 0.005, 0],
             ["translate", 0, 0, 40]
           ],
@@ -6044,7 +6228,7 @@
       "tags": "enemy",
       "transform": [
         ["scale", 0.7, 0.7, 0.7],
-        ["rotate", -1.57, 0, 0],
+        ["rotate", -90, 0, 0],
         ["translate", 0, 50, -80]
       ],
       "parts": [
@@ -6053,10 +6237,10 @@
           "res": 12,
           "transform": [
             ["scale", 1, 1, 1],
-            ["rotate", 0, 0, 0.262],
+            ["rotate", 0, 0, 15],
             ["radial-wave", 3, 0.5, 0],
             ["parabola", 0, 0, 0.005],
-            ["rotate", 3.14, 0, -0.515],
+            ["rotate", 180, 0, -30],
             ["translate", 0, 0, 0]
           ],
           "path": [[0, 0, -180], [150, 0, 0], [0, 0, 250]]
@@ -6067,7 +6251,7 @@
           "transform": [
             ["scale", 1, 1, 1],
             ["translate", 0, 80, -160],
-            ["rotate", 0, 0, 1.05]
+            ["rotate", 0, 0, 60]
           ],
           "path": [[0, 0, -150], [50, 0, 0], [0, 0, 65]]
         },
@@ -6077,7 +6261,7 @@
           "transform": [
             ["scale", 1, 1, 1],
             ["translate", 0, 80, -160],
-            ["rotate", 0, 0, -1.05]
+            ["rotate", 0, 0, -60]
           ],
           "path": [[0, 0, -150], [50, 0, 0], [0, 0, 65]]
         },
@@ -6087,7 +6271,7 @@
           "transform": [
             ["scale", 1, 1, 1],
             ["translate", 0, 80, -160],
-            ["rotate", 0, 0, 3.14]
+            ["rotate", 0, 0, 180]
           ],
           "path": [[0, 0, -150], [50, 0, 0], [0, 0, 65]]
         }
@@ -6096,13 +6280,13 @@
     {
       "name": "Kerr Clipper",
       "geometry": "composite",
-      "transform": [["translate", 0, 0, -50]],
+      "transform": [["translate", 0, -30, -50]],
       "parts": [
         {
           "name": "body",
           "geometry": "lathe",
           "res": 3,
-          "transform": [["scale", 3, 0.75, 0.75], ["rotate", 1.57, 0, 1.57]],
+          "transform": [["scale", 3, 0.75, 0.75], ["rotate", 90, 0, 90]],
           "path": [
             [0, 0, -100],
             [50, 0, -33],
@@ -6121,7 +6305,7 @@
       "res": 5,
       "transform": [
         ["scale", 3, 0.75, 0.75],
-        ["rotate", 1.57, 0, 1.57],
+        ["rotate", 90, 0, 90],
         ["parabola", 0, -0.01, 0],
         ["translate", 0, 0, -50]
       ],
@@ -6136,12 +6320,12 @@
       "tags": "ship"
     },
     {
-      "name": "Kerr Interloper",
+      "name": "Kerr Harbinger",
       "geometry": "lathe",
       "res": 5,
       "transform": [
         ["scale", 3, 0.75, 0.75],
-        ["rotate", 1.57, 0, 1.57],
+        ["rotate", 90, 0, 90],
         ["parabola", 0, -0.007, 0],
         ["translate", 0, 0, -50]
       ],
@@ -6160,12 +6344,37 @@
       "tags": "ship"
     },
     {
-      "name": "Kerr Journeyman",
+      "name": "Kerr Interdictor",
+      "geometry": "lathe",
+      "res": 5,
+      "transform": [
+        ["scale", 3, 0.75, 0.75],
+        ["rotate", 90, 0, 90],
+        ["parabola", 0, -0.007, 0],
+        ["translate", 0, 20, -50]
+      ],
+      "path": [
+        [0, 0, -160],
+        [20, 0, -170],
+        [50, 0, -73],
+        [50, 0, -73],
+        [46, 0, -50],
+        [30, 0, -30],
+        [30, 0, 30],
+        [46, 0, 50],
+        [50, 0, 73],
+        [20, 0, 170],
+        [0, 0, 160]
+      ],
+      "tags": "ship"
+    },
+    {
+      "name": "Journeyman",
       "geometry": "lathe",
       "res": 6,
       "transform": [
         ["scale", 1, 0.3, 2],
-        ["rotate", 1.57, 0, 0],
+        ["rotate", 90, 0, 0],
         ["translate", 0, 0, -50]
       ],
       "path": [
@@ -6183,10 +6392,10 @@
       "geometry": "lathe",
       "res": 8,
       "transform": [
-        ["rotate", 0, 0, 0.393],
+        ["rotate", 0, 0, 22.5],
         ["scale", 1.3, 1.3, 1.3],
         ["scale", 1.5, 0.5, 1],
-        ["rotate", 1.57, 0, 0],
+        ["rotate", 90, 0, 0],
         ["translate", 0, 0, -40]
       ],
       "path": [
@@ -6208,7 +6417,7 @@
       "geometry": "composite",
       "transform": [
         ["scale", 7, 7, 7],
-        ["rotate", 1.57, 0, 0],
+        ["rotate", 90, 0, 0],
         ["translate", 0, -50, -70]
       ],
       "parts": [
@@ -6217,7 +6426,7 @@
           "res": 6,
           "transform": [
             ["scale", 1, 1, 1],
-            ["rotate", 3.14, 0, 0],
+            ["rotate", 180, 0, 0],
             ["translate", 0, 0, 0]
           ],
           "path": [
@@ -6259,7 +6468,7 @@
       "geometry": "composite",
       "transform": [
         ["scale", 7, 7, 7],
-        ["rotate", 1.57, 0, 0],
+        ["rotate", 90, 0, 0],
         ["translate", 0, -50, -40]
       ],
       "parts": [
@@ -6268,7 +6477,7 @@
           "res": 6,
           "transform": [
             ["scale", 1, 1, 1],
-            ["rotate", 3.14, 0, 0],
+            ["rotate", 180, 0, 0],
             ["translate", 0, 0, 0]
           ],
           "path": [
@@ -6286,7 +6495,7 @@
           "geometry": "lathe",
           "res": 3,
           "transform": [
-            ["rotate", 0, 0, -1.05],
+            ["rotate", 0, 0, -60],
             ["translate", -1, 0, 0],
             ["parabola", 0.24, 0, 0],
             ["scale", 1, 0.3, 1],
@@ -6298,12 +6507,12 @@
           "geometry": "lathe",
           "res": 3,
           "transform": [
-            ["rotate", 0, 0, -1.05],
+            ["rotate", 0, 0, -60],
             ["translate", -1, 0, 0],
             ["parabola", 0.24, 0, 0],
             ["scale", 1, 0.3, 1],
             ["translate", -12, 0, 5.8],
-            ["rotate", 0, 0, 3.14, 0]
+            ["rotate", 0, 0, 180, 0]
           ],
           "path": [[0, 0, -6.8], [4, 0, -4.4], [4, 0, 4.4], [0, 0, 7]]
         },
@@ -6314,7 +6523,7 @@
           "transform": [
             ["scale", 1, 0.3, 1],
             ["translate", 0, -3, -4.5],
-            ["rotate", 0, 0, 3.14, 0]
+            ["rotate", 0, 0, 180, 0]
           ],
           "path": [[0, 0, -6.8], [4, 0, -4.4], [4, 0, 4.4], [0, 0, 5.5]]
         }
@@ -6325,9 +6534,9 @@
       "name": "CES Marathon",
       "geometry": "composite",
       "transform": [
-        ["scale", 7, 7, 7],
-        ["rotate", 1.57, 0, 0],
-        ["translate", 0, -50, -80]
+        ["scale", 8, 8, 8],
+        ["rotate", 90, 0, 0],
+        ["translate", 0, -60, -60]
       ],
       "parts": [
         {
@@ -6335,7 +6544,7 @@
           "res": 6,
           "transform": [
             ["scale", 1, 1, 1],
-            ["rotate", 3.14, 0, 0],
+            ["rotate", 180, 0, 0],
             ["translate", 0, 0, 0]
           ],
           "path": [
@@ -6354,7 +6563,7 @@
           "res": 7,
           "transform": [
             ["scale", 0.3, 0.3, 0.3],
-            ["rotate", 0, 0, -0.22],
+            ["rotate", 0, 0, -12.6],
             ["translate", 0, 6, 3],
             ["rotate", 0, 0, 0]
           ],
@@ -6365,9 +6574,9 @@
           "res": 7,
           "transform": [
             ["scale", 0.3, 0.3, 0.3],
-            ["rotate", 0, 0, -0.22],
+            ["rotate", 0, 0, -12.6],
             ["translate", 0, 6, 3],
-            ["rotate", 0, 0, 1.05]
+            ["rotate", 0, 0, 120]
           ],
           "path": [[6, 0, 0], [8, 0, -2], [10, 0, 0], [8, 0, 20], [6, 0, 0]]
         },
@@ -6376,9 +6585,9 @@
           "res": 7,
           "transform": [
             ["scale", 0.3, 0.3, 0.3],
-            ["rotate", 0, 0, -0.22],
+            ["rotate", 0, 0, -12.6],
             ["translate", 0, 6, 3],
-            ["rotate", 0, 0, 2.1]
+            ["rotate", 0, 0, 60]
           ],
           "path": [[6, 0, 0], [8, 0, -2], [10, 0, 0], [8, 0, 20], [6, 0, 0]]
         },
@@ -6387,9 +6596,9 @@
           "res": 7,
           "transform": [
             ["scale", 0.3, 0.3, 0.3],
-            ["rotate", 0, 0, -0.22],
+            ["rotate", 0, 0, -12.6],
             ["translate", 0, 6, 3],
-            ["rotate", 0, 0, 3.14]
+            ["rotate", 0, 0, 180]
           ],
           "path": [[6, 0, 0], [8, 0, -2], [10, 0, 0], [8, 0, 20], [6, 0, 0]]
         },
@@ -6398,9 +6607,9 @@
           "res": 7,
           "transform": [
             ["scale", 0.3, 0.3, 0.3],
-            ["rotate", 0, 0, -0.22],
+            ["rotate", 0, 0, -12.6],
             ["translate", 0, 6, 3],
-            ["rotate", 0, 0, -2.1]
+            ["rotate", 0, 0, -120]
           ],
           "path": [[6, 0, 0], [8, 0, -2], [10, 0, 0], [8, 0, 20], [6, 0, 0]]
         },
@@ -6409,9 +6618,9 @@
           "res": 7,
           "transform": [
             ["scale", 0.3, 0.3, 0.3],
-            ["rotate", 0, 0, -0.22],
+            ["rotate", 0, 0, -12.6],
             ["translate", 0, 6, 3],
-            ["rotate", 0, 0, -1.05]
+            ["rotate", 0, 0, -60]
           ],
           "path": [[6, 0, 0], [8, 0, -2], [10, 0, 0], [8, 0, 20], [6, 0, 0]]
         }
@@ -6422,8 +6631,8 @@
       "name": "NS Vanguard",
       "geometry": "composite",
       "transform": [
-        ["scale", 70, 70, 70],
-        ["rotate", 3.14, 0, 0],
+        ["scale", 65, 65, 65],
+        ["rotate", 180, 0, 0],
         ["translate", 0, 0, -55]
       ],
       "parts": [
@@ -6431,11 +6640,7 @@
           "name": "saucer",
           "geometry": "lathe",
           "res": 12,
-          "transform": [
-            ["scale", 2, 2, 2],
-            ["scale", 1, 0.7, 0.26],
-            ["rotate", 0, 0, 0]
-          ],
+          "transform": [["scale", 2, 2, 2], ["scale", 1, 0.7, 0.26]],
           "path": [
             [0, 0, -1],
             [0.5, 0, -0.8],
@@ -6450,19 +6655,14 @@
         {
           "name": "nacelle trio 1",
           "geometry": "composite",
-          "transform": [
-            ["scale", 1, 1, 1],
-            ["rotate", 3.14, 0, 0],
-            ["translate", 0, 1, 0.6]
-          ],
+          "transform": [["rotate", 180, 0, 0], ["translate", 0, 1, 0.6]],
           "parts": [
             {
               "geometry": "lathe",
               "res": 6,
               "transform": [
-                ["scale", 1, 1, 1],
-                ["rotate", 1.178, 0, 0],
-                ["rotate", 0, 0.63, 0],
+                ["rotate", 67.5, 0, 0],
+                ["rotate", 0, 36, 0],
                 ["translate", -0.8, 0, 0]
               ],
               "path": [
@@ -6478,8 +6678,7 @@
               "geometry": "lathe",
               "res": 6,
               "transform": [
-                ["scale", 1, 1, 1],
-                ["rotate", 1.178, 0, 0],
+                ["rotate", 67.5, 0, 0],
                 ["rotate", 0, 0, 0],
                 ["translate", 0, 0, -0.1]
               ],
@@ -6496,9 +6695,8 @@
               "geometry": "lathe",
               "res": 6,
               "transform": [
-                ["scale", 1, 1, 1],
-                ["rotate", 1.178, 0, 0],
-                ["rotate", 0, -0.63, 0],
+                ["rotate", 67.5, 0, 0],
+                ["rotate", 0, -36, 0],
                 ["translate", 0.8, 0, 0]
               ],
               "path": [
@@ -6515,19 +6713,15 @@
         {
           "name": "nacelle trio 2",
           "geometry": "composite",
-          "transform": [
-            ["scale", 1, 1, 1],
-            ["rotate", 3.14, 3.14, 0],
-            ["translate", 0, 1, -0.6]
-          ],
+          "transform": [["rotate", 180, 180, 0], ["translate", 0, 1, -0.6]],
           "parts": [
             {
               "geometry": "lathe",
               "res": 6,
               "transform": [
                 ["scale", 1, 1, 1],
-                ["rotate", 1.178, 0, 0],
-                ["rotate", 0, 0.63, 0],
+                ["rotate", 67.5, 0, 0],
+                ["rotate", 0, 36, 0],
                 ["translate", -0.8, 0, 0]
               ],
               "path": [
@@ -6544,7 +6738,7 @@
               "res": 6,
               "transform": [
                 ["scale", 1, 1, 1],
-                ["rotate", 1.178, 0, 0],
+                ["rotate", 67.5, 0, 0],
                 ["rotate", 0, 0, 0],
                 ["translate", 0, 0, -0.1]
               ],
@@ -6562,8 +6756,8 @@
               "res": 6,
               "transform": [
                 ["scale", 1, 1, 1],
-                ["rotate", 1.178, 0, 0],
-                ["rotate", 0, -0.63, 0],
+                ["rotate", 67.5, 0, 0],
+                ["rotate", 0, -36, 0],
                 ["translate", 0.8, 0, 0]
               ],
               "path": [
@@ -6585,7 +6779,7 @@
       "geometry": "composite",
       "transform": [
         ["scale", 2, 2, 2],
-        ["rotate", 1.57, 0, 0],
+        ["rotate", 90, 0, 0],
         ["translate", 0, 0, -70]
       ],
       "parts": [
@@ -6594,7 +6788,7 @@
           "res": 9,
           "transform": [
             ["scale", 1, 1, 1.5],
-            ["rotate", 3.14, 0, 0],
+            ["rotate", 180, 0, 0],
             ["translate", 0, 0, 0]
           ],
           "path": [
@@ -6612,7 +6806,7 @@
           "res": 9,
           "transform": [
             ["scale", 1, 1, 1.2],
-            ["rotate", 3.14, 0, 0],
+            ["rotate", 180, 0, 0],
             ["translate", 0, 0, 6]
           ],
           "path": [
@@ -6631,7 +6825,7 @@
       "geometry": "composite",
       "transform": [
         ["scale", 1, 1, 1],
-        ["rotate", 3.14, 0, 1.57],
+        ["rotate", 180, 0, 90],
         ["translate", 0, 0, -50]
       ],
       "parts": [
@@ -6640,8 +6834,8 @@
           "res": 6,
           "transform": [
             ["scale", 60, 60, 60],
-            ["rotate", 0, 0, 0.53],
-            ["rotate", 0, 1.57, 0],
+            ["rotate", 0, 0, 30],
+            ["rotate", 0, 90, 0],
             ["translate", -30, 0, 22]
           ],
           "path": [
@@ -6658,8 +6852,8 @@
           "res": 6,
           "transform": [
             ["scale", 60, 60, 60],
-            ["rotate", 0, 0, 0.53],
-            ["rotate", 0, 1.57, 0],
+            ["rotate", 0, 0, 30],
+            ["rotate", 0, 90, 0],
             ["translate", -30, 0, -22]
           ],
           "path": [
@@ -6676,8 +6870,8 @@
           "res": 6,
           "transform": [
             ["scale", 80, 80, 60],
-            ["rotate", 0, 0, 0.53],
-            ["rotate", 0, 1.57, 0],
+            ["rotate", 0, 0, 30],
+            ["rotate", 0, 90, 0],
             ["translate", -40, 35, 0]
           ],
           "path": [
@@ -6694,8 +6888,8 @@
           "res": 6,
           "transform": [
             ["scale", 80, 80, 60],
-            ["rotate", 0, 0, 0.53],
-            ["rotate", 0, 1.57, 0],
+            ["rotate", 0, 0, 30],
+            ["rotate", 0, 90, 0],
             ["translate", -40, -35, 0]
           ],
           "path": [
@@ -6712,7 +6906,7 @@
           "res": 9,
           "transform": [
             ["scale", 1, 1, 1],
-            ["rotate", 3.14, 0, 0],
+            ["rotate", 180, 0, 0],
             ["translate", 80, 0, 0]
           ],
           "path": [
@@ -6749,7 +6943,7 @@
           "res": 8,
           "transform": [
             ["scale", 1, 1, 1],
-            ["rotate", 1.57, -0.14, 0],
+            ["rotate", 90, -8, 0],
             ["translate", 0, 0, 0]
           ],
           "path": [
@@ -6767,7 +6961,7 @@
           "res": 8,
           "transform": [
             ["scale", 1, 1, 1],
-            ["rotate", 0, 3.14, -0.14],
+            ["rotate", 0, 180, -8],
             ["translate", 2, 0, 0]
           ],
           "path": [
@@ -6788,28 +6982,28 @@
       "geometry": "composite",
       "transform": [
         ["scale", 1.3, 1.3, 1.3],
-        ["rotate", 3.14, 0, 0],
+        ["rotate", 180, 0, 0],
         ["translate", -20, 40, -30]
       ],
       "parts": [
         {
           "geometry": "lathe",
           "res": 4,
-          "transform": [["rotate", 3.14, 0, 0], ["translate", 50, 0, 0]],
+          "transform": [["rotate", 180, 0, 0], ["translate", 50, 0, 0]],
           "angle": 2,
           "path": [[30, 0, 0], [50, 0, 4], [30, 0, 0]]
         },
         {
           "geometry": "lathe",
           "res": 5,
-          "transform": [["rotate", 3.14, -0.5, 2], ["translate", -50, 30, 0]],
+          "transform": [["rotate", 180, -30, 120], ["translate", -50, 30, 0]],
           "angle": 2.5,
           "path": [[30, 0, 0], [50, 0, -8], [30, 0, 0]]
         },
         {
           "geometry": "lathe",
           "res": 3,
-          "transform": [["rotate", 0, -0.5, 2], ["translate", 70, 50, 30]],
+          "transform": [["rotate", 0, -30, 120], ["translate", 70, 50, 30]],
           "angle": 1.5,
           "path": [[30, 0, 4], [50, 0, -4], [30, 0, 4]]
         }
@@ -6821,21 +7015,21 @@
       "geometry": "composite",
       "transform": [
         ["scale", 1.3, 1.3, 1.3],
-        ["rotate", 3.14, 0, 0],
+        ["rotate", 180, 0, 0],
         ["translate", -20, 40, -30]
       ],
       "parts": [
         {
           "geometry": "lathe",
           "res": 8,
-          "transform": [["rotate", 3.14, 0, 0], ["translate", 50, 0, 0]],
+          "transform": [["rotate", 180, 0, 0], ["translate", 50, 0, 0]],
           "path": [[30, 0, 0], [50, 0, 4], [50, 0, 14], [30, 0, 0]]
         },
         {
           "geometry": "cube",
           "transform": [
             ["scale", 15, 15, 15],
-            ["rotate", 3.14, -0.5, 2],
+            ["rotate", 180, -30, 120],
             ["translate", -30, 50, 20]
           ],
           "angle": 2.5,
@@ -6844,7 +7038,7 @@
         {
           "geometry": "lathe",
           "res": 3,
-          "transform": [["rotate", 0, -0.5, 2], ["translate", 70, 50, 30]],
+          "transform": [["rotate", 0, -30, 120], ["translate", 70, 50, 30]],
           "path": [[0, 0, 4], [30, 0, -4], [0, 0, 4]]
         }
       ],
@@ -6856,7 +7050,7 @@
       "res": 8,
       "transform": [
         ["scale", 20, 20, 20],
-        ["rotate", 1.7, -0.2, 0],
+        ["rotate", 97, -12, 0],
         ["translate", 0, 0, -50]
       ],
       "path": [
@@ -6873,9 +7067,9 @@
           "geometry": "lathe",
           "res": 6,
           "transform": [
-            ["rotate", 0, 0, 0.524],
+            ["rotate", 0, 0, 30],
             ["scale", 2, 0.5, 1],
-            ["rotate", 0, 3.14, 0]
+            ["rotate", 0, 180, 0]
           ],
           "path": [[0, 0, 0], [1.99, 0, 2], [1.2, 0, 7], [0, 0, 6.8]]
         },
@@ -6883,9 +7077,9 @@
           "geometry": "lathe",
           "res": 6,
           "transform": [
-            ["rotate", 0, 0, 0.524],
+            ["rotate", 0, 0, 30],
             ["scale", 2, 0.5, 1],
-            ["rotate", 0, 1.05, 0]
+            ["rotate", 0, 60, 0]
           ],
           "path": [[0, 0, 0], [1.99, 0, 2], [1.2, 0, 7], [0, 0, 6.8]]
         },
@@ -6893,9 +7087,9 @@
           "geometry": "lathe",
           "res": 6,
           "transform": [
-            ["rotate", 0, 0, 0.524],
+            ["rotate", 0, 0, 30],
             ["scale", 2, 0.5, 1],
-            ["rotate", 0, -1.05, 0]
+            ["rotate", 0, -60, 0]
           ],
           "path": [[0, 0, 0], [1.99, 0, 2], [1.2, 0, 7], [0, 0, 6.8]]
         }
@@ -6919,7 +7113,7 @@
             ["rotate", 0, 0, 0.262],
             ["radial-wave", 3, 0.5, 0],
             ["parabola", 0, 0, 0.005],
-            ["rotate", 3.14, 0, -0.515],
+            ["rotate", 180, 0, -0.515],
             ["scale", 1.5, 1.5, 0.3],
             ["translate", 0, 0, -125]
           ],
@@ -6931,7 +7125,7 @@
           "transform": [
             ["scale", 1, 1, 1],
             ["translate", 0, 140, -160],
-            ["rotate", 0, 0, 1.05]
+            ["rotate", 0, 0, 60]
           ],
           "path": [[0, 0, -150], [50, 0, 0], [0, 0, 20]]
         },
@@ -6941,7 +7135,7 @@
           "transform": [
             ["scale", 1, 1, 1],
             ["translate", 0, 140, -160],
-            ["rotate", 0, 0, -1.05]
+            ["rotate", 0, 0, -60]
           ],
           "path": [[0, 0, -150], [50, 0, 0], [0, 0, 20]]
         },
@@ -6951,7 +7145,7 @@
           "transform": [
             ["scale", 1, 1, 1],
             ["translate", 0, 140, -160],
-            ["rotate", 0, 0, 3.14]
+            ["rotate", 0, 0, 180]
           ],
           "path": [[0, 0, -150], [50, 0, 0], [0, 0, 20]]
         }
@@ -6962,15 +7156,15 @@
       "geometry": "composite",
       "transform": [
         ["scale", 3, 3, 3],
-        ["rotate", -1.57, 0, 0],
-        ["translate", 0, -120, -80]
+        ["rotate", -90, 0, 0],
+        ["translate", 0, -120, -70]
       ],
       "parts": [
         {
           "geometry": "lathe",
           "res": 1,
           "angle": 0.5,
-          "transform": [["rotate", 0, 0, -0.25], ["rotate", 0, 0.22, 0.52]],
+          "transform": [["rotate", 0, 0, -14], ["rotate", 0, 12, 30]],
           "path": [
             [2, 0, 0],
             [9, 0, 7],
@@ -6985,7 +7179,7 @@
           "geometry": "lathe",
           "res": 1,
           "angle": 0.5,
-          "transform": [["rotate", 0, 0, -0.25], ["rotate", 0, 0.22, 1.56]],
+          "transform": [["rotate", 0, 0, -14], ["rotate", 0, 12, 90]],
           "path": [
             [2, 0, 0],
             [9, 0, 7],
@@ -7000,7 +7194,7 @@
           "geometry": "lathe",
           "res": 1,
           "angle": 0.5,
-          "transform": [["rotate", 0, 0, -0.25], ["rotate", 0, 0.22, 2.6]],
+          "transform": [["rotate", 0, 0, -14], ["rotate", 0, 12, 149]],
           "path": [
             [2, 0, 0],
             [9, 0, 7],
@@ -7015,7 +7209,7 @@
           "geometry": "lathe",
           "res": 1,
           "angle": 0.5,
-          "transform": [["rotate", 0, 0, -0.25], ["rotate", 0, 0.22, 3.64]],
+          "transform": [["rotate", 0, 0, -14], ["rotate", 0, 12, 208]],
           "path": [
             [2, 0, 0],
             [9, 0, 7],
@@ -7030,7 +7224,7 @@
           "geometry": "lathe",
           "res": 1,
           "angle": 0.5,
-          "transform": [["rotate", 0, 0, -0.25], ["rotate", 0, 0.22, -1.56]],
+          "transform": [["rotate", 0, 0, -14], ["rotate", 0, 12, -90]],
           "path": [
             [2, 0, 0],
             [9, 0, 7],
@@ -7045,7 +7239,7 @@
           "geometry": "lathe",
           "res": 1,
           "angle": 0.5,
-          "transform": [["rotate", 0, 0, -0.25], ["rotate", 0, 0.22, -0.52]],
+          "transform": [["rotate", 0, 0, -14], ["rotate", 0, 12, -30]],
           "path": [
             [2, 0, 0],
             [9, 0, 7],
@@ -7060,11 +7254,7 @@
           "name": "body",
           "geometry": "lathe",
           "res": 6,
-          "transform": [
-            ["scale", 1, 1, 1],
-            ["rotate", 0, 0, 0],
-            ["translate", 0, 0, 0]
-          ],
+          "transform": [],
           "path": [
             [0, 0, 0],
             [10, 0, 6],
@@ -7085,7 +7275,7 @@
       "geometry": "composite",
       "transform": [
         ["scale", 20, 20, 20],
-        ["rotate", 2.6, 0, 3],
+        ["rotate", 150, 0, 172],
         ["translate", 0, -20, -30]
       ],
       "parts": [
@@ -7093,9 +7283,9 @@
           "geometry": "lathe",
           "res": 6,
           "transform": [
-            ["rotate", 0, 0, 0.52],
+            ["rotate", 0, 0, 30],
             ["translate", 4, 0, -0.5],
-            ["rotate", 0, -0.4, 0.63]
+            ["rotate", 0, -23, 36]
           ],
           "path": [[2, 0, 0], [2, 0, 0.2], [1.2, 0, 0], [2, 0, 0.2]]
         },
@@ -7103,9 +7293,9 @@
           "geometry": "lathe",
           "res": 6,
           "transform": [
-            ["rotate", 0, 0, 0.52],
+            ["rotate", 0, 0, 30],
             ["translate", 4, 0, -0.5],
-            ["rotate", 0, -0.4, 1.88]
+            ["rotate", 0, -23, 108]
           ],
           "path": [[2, 0, 0], [2, 0, 0.2], [1.2, 0, 0], [2, 0, 0.2]]
         },
@@ -7113,9 +7303,9 @@
           "geometry": "lathe",
           "res": 6,
           "transform": [
-            ["rotate", 0, 0, 0.52],
+            ["rotate", 0, 0, 30],
             ["translate", 4, 0, -0.5],
-            ["rotate", 0, -0.4, 3.14]
+            ["rotate", 0, -23, 180]
           ],
           "path": [[2, 0, 0], [2, 0, 0.2], [1.2, 0, 0], [2, 0, 0.2]]
         },
@@ -7123,9 +7313,9 @@
           "geometry": "lathe",
           "res": 6,
           "transform": [
-            ["rotate", 0, 0, 0.52],
+            ["rotate", 0, 0, 30],
             ["translate", 4, 0, -0.5],
-            ["rotate", 0, -0.4, -1.88]
+            ["rotate", 0, -23, -108]
           ],
           "path": [[2, 0, 0], [2, 0, 0.2], [1.2, 0, 0], [2, 0, 0.2]]
         },
@@ -7133,9 +7323,9 @@
           "geometry": "lathe",
           "res": 6,
           "transform": [
-            ["rotate", 0, 0, 0.52],
+            ["rotate", 0, 0, 30],
             ["translate", 4, 0, -0.5],
-            ["rotate", 0, -0.4, -0.63]
+            ["rotate", 0, -23, -36]
           ],
           "path": [[2, 0, 0], [2, 0, 0.2], [1.2, 0, 0], [2, 0, 0.2]]
         },
@@ -7163,7 +7353,7 @@
       "geometry": "composite",
       "transform": [
         ["scale", 1, 1, 1],
-        ["rotate", 3.14, 0, 0],
+        ["rotate", 180, 0, 0],
         ["translate", 0, 0, -70]
       ],
       "parts": [
@@ -7173,7 +7363,7 @@
           "res": 8,
           "transform": [
             ["scale", 1, 1, 1],
-            ["rotate", 3.84, 0.35, 0],
+            ["rotate", 220, 20, 0],
             ["translate", 0, 0, 0]
           ],
           "path": [
@@ -7190,7 +7380,7 @@
           "res": 8,
           "transform": [
             ["scale", 1, 1, 1],
-            ["rotate", 3.14, 0, 0],
+            ["rotate", 180, 0, 0],
             ["translate", 0, 0, 0]
           ],
           "path": [[120, 0, 0], [80, 0, 10], [80, 0, -10], [120, 0, 0]]
@@ -7203,17 +7393,16 @@
       "geometry": "composite",
       "transform": [
         ["scale", 1, 1, 1],
-        ["rotate", 3.14, 0, 0],
+        ["rotate", 180, 0, 0],
         ["translate", 0, 0, -70]
       ],
       "parts": [
         {
-          "name": "Sensor",
           "geometry": "lathe",
           "res": 7,
           "transform": [
             ["scale", 1, 1, 1],
-            ["rotate", 3.3, 0, 0],
+            ["rotate", 190, 0, 0],
             ["translate", 0, 0, 0]
           ],
           "path": [
@@ -7241,19 +7430,14 @@
     {
       "name": "Larato Gate",
       "geometry": "composite",
-      "transform": [
-        ["scale", 1, 1, 1],
-        ["rotate", 0, 0, 0],
-        ["translate", 0, 0, -80]
-      ],
+      "transform": [["translate", 0, 0, -80]],
       "parts": [
         {
-          "name": "Sensor",
           "geometry": "lathe",
           "res": 8,
           "transform": [
             ["scale", 2, 2, 1],
-            ["rotate", 3.83, -0.38, 0],
+            ["rotate", 220, -22, 0],
             ["translate", 0, 0, 0]
           ],
           "path": [
@@ -7274,7 +7458,7 @@
       "geometry": "composite",
       "transform": [
         ["scale", 2, 2, 2],
-        ["rotate", 0, 0, 1.4],
+        ["rotate", 0, 0, 80],
         ["translate", 0, 0, -130]
       ],
       "parts": [
@@ -7284,7 +7468,7 @@
           "res": 8,
           "transform": [
             ["scale", 1, 1, 0.25],
-            ["rotate", 0, 0, 0.14],
+            ["rotate", 0, 0, 8],
             ["translate", 0, 0, 0]
           ],
           "path": [
@@ -7304,7 +7488,7 @@
           "res": 8,
           "transform": [
             ["scale", 1, 1, 0.25],
-            ["rotate", 0, 0, 0.12],
+            ["rotate", 0, 0, 7],
             ["translate", 0, 0, 40]
           ],
           "path": [
@@ -7324,7 +7508,7 @@
           "res": 3,
           "transform": [
             ["scale", 1.5, 0.5, 4],
-            ["rotate", 0, 0, 3.14],
+            ["rotate", 0, 0, 180],
             ["rotate", 0, -0.2, 0],
             ["translate", 37, 0, 20]
           ],
@@ -7343,7 +7527,7 @@
           "transform": [
             ["scale", 0.05, 0.05, 0.05],
             ["scale", 1, 0.3, 2],
-            ["rotate", 1.57, -0.3, 0],
+            ["rotate", 90, -17, 0],
             ["translate", -60, 50, -10]
           ],
           "path": [
@@ -7362,7 +7546,7 @@
           "transform": [
             ["scale", 0.03, 0.03, 0.03],
             ["scale", 3, 0.75, 0.75],
-            ["rotate", 1.57, 0, -1.17],
+            ["rotate", 90, 0, -67],
             ["translate", 60, -30, 45]
           ],
           "path": [
@@ -7382,8 +7566,8 @@
       "geometry": "composite",
       "res": 20,
       "transform": [
-        ["scale", 1.6, 1.6, 1.6],
-        ["rotate", -1.57, 0, 0],
+        ["scale", 2, 2, 2],
+        ["rotate", -90, 0, 0],
         ["translate", 0, 60, -80]
       ],
       "path": [
@@ -7405,7 +7589,13 @@
             ["radial-wave", 5, 0.5, 0],
             ["parabola", 0, 0, -0.03]
           ],
-          "path": [[20, 0, 0], [40, 0, 0], [60, 0, 0], [40, 0, 0], [20, 0, 0]]
+          "path": [
+            [20, 0, 0],
+            [40, 0, -10],
+            [60, 0, 0],
+            [40, 0, 10],
+            [20, 0, 0]
+          ]
         },
         {
           "name": "Worm",
@@ -7416,9 +7606,49 @@
             ["radial-wave", 5, 0.5, 0],
             ["parabola", 0, 0, -0.03],
             ["translate", 0, 0, 30],
-            ["rotate", 0, 0, 0.64]
+            ["rotate", 0, 0, 36]
           ],
-          "path": [[20, 0, 0], [40, 0, 0], [60, 0, 0], [40, 0, 0], [20, 0, 0]]
+          "path": [[20, 0, 0], [40, 0, -5], [60, 0, 0], [40, 0, 5], [20, 0, 0]]
+        }
+      ],
+      "tags": "enemy"
+    },
+    {
+      "name": "Worm Seedling",
+      "geometry": "composite",
+      "res": 20,
+      "transform": [
+        ["scale", 1.6, 1.6, 1.6],
+        ["rotate", -90, 0, 0],
+        ["translate", 0, 30, -70]
+      ],
+      "path": [
+        [0, 0, 0],
+        [20, 0, 0],
+        [40, 0, 0],
+        [60, 0, 0],
+        [40, 0, 0],
+        [20, 0, 0],
+        [0, 0, 0]
+      ],
+      "parts": [
+        {
+          "name": "Worm",
+          "geometry": "lathe",
+          "res": 16,
+          "transform": [
+            ["parabola", 0, 0, 0.01],
+            ["radial-wave", 4, 0.5, 0],
+            ["parabola", 0, 0, -0.03],
+            ["rotate", 0, 0, 45]
+          ],
+          "path": [
+            [20, 0, 0],
+            [40, 0, -20],
+            [60, 0, 0],
+            [40, 0, 20],
+            [20, 0, 0]
+          ]
         }
       ],
       "tags": "enemy"
@@ -7428,8 +7658,8 @@
       "geometry": "composite",
       "transform": [
         ["scale", 1, 1, 1],
-        ["rotate", 0.16, 0, 0],
-        ["rotate", 3.14, 0, 0],
+        ["rotate", 10, 0, 0],
+        ["rotate", 180, 0, 0],
         ["translate", 0, 0, -70]
       ],
       "parts": [
@@ -7450,11 +7680,7 @@
           "name": "outer",
           "geometry": "lathe",
           "res": 15,
-          "transform": [
-            ["scale", -1.25, 1.25, -1],
-            ["radial-wave", 5, 0.6, 0],
-            ["rotate", 0, 0, 0]
-          ],
+          "transform": [["scale", -1.25, 1.25, -1], ["radial-wave", 5, 0.6, 0]],
           "path": [[130, 0, 0], [80, 0, 15], [80, 0, -15], [130, 0, 0]]
         },
         {
@@ -7464,7 +7690,7 @@
           "transform": [
             ["scale", 0.1, 0.1, 0.1],
             ["scale", 1, 0.3, 2],
-            ["rotate", 1.57, -0.3, 1],
+            ["rotate", 90, -17, 120],
             ["translate", -140, 70, -50]
           ],
           "path": [
@@ -7484,7 +7710,7 @@
       "geometry": "composite",
       "transform": [
         ["scale", 1, 1, 1],
-        ["rotate", 0, -0.2, 0],
+        ["rotate", 0, -12, 0],
         ["translate", 0, 0, -60]
       ],
       "parts": [
@@ -7497,7 +7723,7 @@
               "name": "Ring",
               "geometry": "lathe",
               "res": 9,
-              "transform": [["scale", 1, 1, 0.25], ["rotate", 0, 0, 0]],
+              "transform": [["scale", 1, 1, 0.25]],
               "path": [
                 [20, 0, -30],
                 [22, 0, -20],
@@ -7512,7 +7738,7 @@
               "name": "Hub",
               "geometry": "lathe",
               "res": 9,
-              "transform": [["scale", 1, 1, 1], ["rotate", 0, 0, 0]],
+              "transform": [],
               "path": [
                 [1, 0, -20],
                 [1, 0, -15],
@@ -7529,7 +7755,7 @@
               "res": 6,
               "transform": [
                 ["scale", 0.25, 0.25, 0.2],
-                ["rotate", -1.8, 0, 0],
+                ["rotate", -103, 0, 0],
                 ["translate", 0, 0, -22]
               ],
               "path": [
@@ -7551,10 +7777,10 @@
           "res": 5,
           "transform": [
             ["scale", 3, 0.75, 0.75],
-            ["rotate", 1.57, 0, 1.57],
+            ["rotate", 90, 0, 90],
             ["parabola", 0, -0.01, 0],
             ["scale", 0.3, 0.3, 0.3],
-            ["rotate", -1.57, 0, 1.57],
+            ["rotate", -90, 0, 90],
             ["translate", -94, 0, 0]
           ],
           "path": [
@@ -7574,7 +7800,7 @@
       "geometry": "composite",
       "transform": [
         ["scale", 3, 3, 3],
-        ["rotate", 0, 0.2, 0],
+        ["rotate", 0, 12, 0],
         ["translate", 0, 0, -50]
       ],
       "parts": [
@@ -7582,7 +7808,7 @@
           "name": "Ring",
           "geometry": "lathe",
           "res": 9,
-          "transform": [["scale", 1, 1, 0.25], ["rotate", 0, 0, 0.17]],
+          "transform": [["scale", 1, 1, 0.25], ["rotate", 0, 0, 10]],
           "path": [
             [40, 0, -20],
             [42, 0, -10],
@@ -7604,21 +7830,21 @@
           "name": "spoke",
           "geometry": "lathe",
           "res": 6,
-          "transform": [["rotate", 1.57, 0, 0]],
+          "transform": [["rotate", 90, 0, 0]],
           "path": [[2, 0, 5], [2, 0, 32]]
         },
         {
           "name": "spoke",
           "geometry": "lathe",
           "res": 6,
-          "transform": [["rotate", 1.57, 0, 2.09]],
+          "transform": [["rotate", 90, 0, 120]],
           "path": [[2, 0, 5], [2, 0, 32]]
         },
         {
           "name": "spoke",
           "geometry": "lathe",
           "res": 6,
-          "transform": [["rotate", 1.57, 0, -2.09]],
+          "transform": [["rotate", 90, 0, -120]],
           "path": [[2, 0, 5], [2, 0, 32]]
         },
         {
@@ -7628,7 +7854,7 @@
           "transform": [
             ["scale", 0.05, 0.05, 0.05],
             ["scale", 1, 0.3, 2],
-            ["rotate", 1.57, 0.3, 0],
+            ["rotate", 90, 17, 0],
             ["translate", 40, 40, -10]
           ],
           "path": [
@@ -7647,7 +7873,7 @@
           "transform": [
             ["scale", 0.03, 0.03, 0.03],
             ["scale", 3, 0.75, 0.75],
-            ["rotate", 1.57, 0, -1.17],
+            ["rotate", 90, 0, -1.17],
             ["translate", -50, -15, -8]
           ],
           "path": [
@@ -7669,7 +7895,7 @@
       "transform": [
         ["scale", 1.4, 1.4, 1.4],
         ["rotate", 0, 0, -0.2],
-        ["rotate", 0, 1.1, 0],
+        ["rotate", 0, 63, 0],
         ["translate", 0, 0, -70]
       ],
       "path": [[0, 0, -50], [50, 0, 0], [0, 0, 50]],
@@ -7679,7 +7905,7 @@
           "res": 9,
           "transform": [
             ["scale", 1, 1, 1],
-            ["rotate", 3.14, 0, 0],
+            ["rotate", 180, 0, 0],
             ["translate", 0, 0, 0]
           ],
           "path": [
@@ -7696,16 +7922,16 @@
         {
           "geometry": "lathe",
           "res": 4,
-          "transform": [["rotate", 0, 0, 0.8], ["translate", -25, 0, 30]],
+          "transform": [["rotate", 0, 0, 46], ["translate", -25, 0, 30]],
           "path": [[0, 0, -20], [3, 0, -20], [3, 0, 20], [0, 0, 20]]
         },
         {
           "geometry": "lathe",
           "res": 4,
           "transform": [
-            ["rotate", 0, 0, 0.8],
+            ["rotate", 0, 0, 46],
             ["translate", -25, 0, -30],
-            ["rotate", 0, 0, 0.7]
+            ["rotate", 0, 0, 40]
           ],
           "path": [[0, 0, -20], [3, 0, -20], [3, 0, 20], [0, 0, 20]]
         },
@@ -7713,9 +7939,9 @@
           "geometry": "lathe",
           "res": 4,
           "transform": [
-            ["rotate", 0, 0, 0.8],
+            ["rotate", 0, 0, 46],
             ["translate", -25, 0, -30],
-            ["rotate", 0, 0, -1.4]
+            ["rotate", 0, 0, -80]
           ],
           "path": [[0, 0, -20], [3, 0, -20], [3, 0, 20], [0, 0, 20]]
         },
@@ -7723,9 +7949,9 @@
           "geometry": "lathe",
           "res": 4,
           "transform": [
-            ["rotate", 0, 0, 0.8],
+            ["rotate", 0, 0, 46],
             ["translate", -25, 0, -30],
-            ["rotate", 0, 0, 2.8]
+            ["rotate", 0, 0, 160]
           ],
           "path": [[0, 0, -20], [3, 0, -20], [3, 0, 20], [0, 0, 20]]
         },
@@ -7733,9 +7959,9 @@
           "geometry": "lathe",
           "res": 4,
           "transform": [
-            ["rotate", 0, 0, 0.8],
+            ["rotate", 0, 0, 46],
             ["translate", -25, 0, 30],
-            ["rotate", 0, 0, 2.1]
+            ["rotate", 0, 0, 60]
           ],
           "path": [[0, 0, -20], [3, 0, -20], [3, 0, 20], [0, 0, 20]]
         },
@@ -7743,9 +7969,9 @@
           "geometry": "lathe",
           "res": 4,
           "transform": [
-            ["rotate", 0, 0, 0.8],
+            ["rotate", 0, 0, 46],
             ["translate", -25, 0, 30],
-            ["rotate", 0, 0, -2.1]
+            ["rotate", 0, 0, -60]
           ],
           "path": [[0, 0, -20], [3, 0, -20], [3, 0, 20], [0, 0, 20]]
         },
@@ -7755,10 +7981,10 @@
           "res": 5,
           "transform": [
             ["scale", 3, 0.75, 0.75],
-            ["rotate", 1.57, 0, 1.57],
+            ["rotate", 90, 0, 90],
             ["parabola", 0, -0.01, 0],
             ["scale", 0.1, 0.1, 0.1],
-            ["rotate", 0, -1, 0],
+            ["rotate", 0, -55, 0],
             ["translate", -60, -20, -60]
           ],
           "path": [
@@ -8263,7 +8489,7 @@
         "r": 60,
         "amb": 0.2,
         "oct": 2,
-        "zoom": 10,
+        "zoom": 0.9,
         "color": ["888", "D84"]
       },
       "surface": null,
@@ -8393,7 +8619,7 @@
     {
       "type": "planet",
       "id": "planet-badlands-1",
-      "desc": "A completely uniform desert, any traces of life long since ground into dust",
+      "desc": "",
       "celestial": {
         "r": 20,
         "amb": 0.1,
@@ -8402,13 +8628,14 @@
         "color": ["8f8", "ff8"]
       },
       "surface": {
-        "zoom": 1.5,
+        "zoom": 1.1,
         "height": 2,
-        "octaves": 2,
-        "falloff": 0.2,
-        "curve": [1, 0, 0.5],
-        "spectrum": ["FF8", "FF8", "884"]
-      }
+        "octaves": 4,
+        "falloff": 0.45,
+        "curve": [0, 0.2, 1],
+        "spectrum": ["6A0", "FF8", "884"]
+      },
+      "model": null
     },
     {
       "type": "planet",
@@ -8938,7 +9165,7 @@
       "radius": 500
     },
     {
-      "name": "Debris Field",
+      "name": "Ruins of Thanatos",
       "audio": "music-slask",
       "pos": {"x": -1640, "y": -590},
       "radius": 230

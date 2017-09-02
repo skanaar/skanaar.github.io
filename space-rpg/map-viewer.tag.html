@@ -101,7 +101,7 @@
       </div>
 
       <label><input type=checkbox ref=shipyardToggle onchange={shipyardChange}> Shipyard</label>
-      <input type=text ref=shipyardShipsField onchange={shipyardShipsChange}>
+      <button onclick={chooseShipyardInventory}>Choose ships</button>
 
       <label><input type="checkbox" onchange={enemyToggle} ref="enemyCheckbox"> Enemy</label>
       <select ref="enemySelect" onchange={enemyChanged}>
@@ -277,6 +277,8 @@
     self.chooseTraderInventory = () => app.events.trigger('show-item-chooser', singleSelected().trader.inventory)
     self.chooseLoot = () =>app.events.trigger('show-item-chooser', singleSelected().enemy.loot)
 
+    self.chooseShipyardInventory = () => app.events.trigger('show-ship-chooser', singleSelected().shipyard)
+
     self.autoNameNodes = function () {
       var coords = (e) => Math.abs(e.pos.x%100)+Math.abs(e.pos.y%100)
       var shortCode = (e) => (1+Math.abs(e.pos.x)%10)+(1+Math.abs(e.pos.y)%100)
@@ -299,7 +301,6 @@
     self.traderSellChange = e => forSelected(ent => ent.trader.sell = +e.target.value)
 
     self.shipyardChange = e => forSelected(ent => ent.shipyard = e.target.checked ? [] : null)
-    self.shipyardShipsChange = e => forSelected(ent => ent.shipyard = e.target.value.split(','))
 
     self.isEnemyChecked = () => singleSelected().enemy
     self.enemyToggle = e => singleSelected().enemy = e.target.checked ? { type: 'rogue', loot: [] } : null
@@ -389,7 +390,6 @@
       self.refs.traderToggle.checked = !!(selection.length == 1 && selection[0].entity.trader)
       self.selectedTrader = (selection[0] && selection[0].entity.trader) || { buy: 0, sell: 0, inventory: [] }
       self.refs.shipyardToggle.checked = !!(selection.length == 1 && selection[0].entity.shipyard)
-      self.refs.shipyardShipsField.value = (selection[0] && selection[0].entity.shipyard || []).join(',')
       self.refs.enemySelect.value = selection[0] && selection[0].entity.enemy && selection[0].entity.enemy.type
       self.refs.enemyCheckbox.checked = selection[0] && selection[0].entity.enemy
     }

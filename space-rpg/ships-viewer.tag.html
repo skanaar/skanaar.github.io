@@ -21,7 +21,7 @@
           <td>{ship.name}</td>
           <td>{ship.level}</td>
           <td>{ship.value} c</td>
-          <td>{ship.attr.slots}</td>
+          <td>{ship.slots}</td>
           <td class={table_zero: !ship.attr.maxhull}>{ship.attr.maxhull}</td>
           <td class={table_zero: !ship.attr.maxshield}>{ship.attr.maxshield}</td>
           <td class={table_zero: !ship.attr.maxenergy}>{ship.attr.maxenergy}</td>
@@ -49,7 +49,7 @@
           <td>{ship.name}</td>
           <td>{ship.level}</td>
           <td>{ship.inventory.join()}</td>
-          <td>{ship.attr.slots}</td>
+          <td>{ship.slots}</td>
           <td class={table_zero: !ship.attr.maxhull}>{ship.attr.maxhull}</td>
           <td class={table_zero: !ship.attr.maxshield}>{ship.attr.maxshield}</td>
           <td class={table_zero: !ship.attr.maxenergy}>{ship.attr.maxenergy}</td>
@@ -86,7 +86,7 @@
       <em>maxhull</em>   <input type=number step=1 ref="maxhullField" value={selected && selected.attr.maxhull}><br/>
       <em>maxshield</em> <input type=number step=1 ref="maxshieldField" value={selected && selected.attr.maxshield}><br/>
       <em>maxenergy</em> <input type=number step=1 ref="maxenergyField" value={selected && selected.attr.maxenergy}><br/>
-      <em>slots</em>     <input type=number step=1 ref="slotsField" value={selected && selected.attr.slots}><br/>
+      <em>slots</em>     <input type=number step=1 ref="slotsField" value={selected && selected.slots}><br/>
     </div>
     
     <label>Generators</label>
@@ -161,13 +161,13 @@
       if (!self.selected) return
       self.selected.name = self.refs.nameField.value
       self.selected.level = +self.refs.levelField.value
+      self.selected.slots = +self.refs.slotsField.value
       self.selected.value = (self.refs.valueField && (+self.refs.valueField.value)) || 0
       self.selected.visual = self.refs.visualInput.value
       self.selected.isFlying = !!self.refs.isFlyingInput.checked
       self.selected.attr.maxhull = +self.refs.maxhullField.value
       self.selected.attr.maxshield = +self.refs.maxshieldField.value
       self.selected.attr.maxenergy = +self.refs.maxenergyField.value
-      self.selected.attr.slots = +self.refs.slotsField.value
       self.selected.generator.hull = +self.refs.hullField.value
       self.selected.generator.shield = +self.refs.shieldField.value
       self.selected.generator.energy = +self.refs.energyField.value
