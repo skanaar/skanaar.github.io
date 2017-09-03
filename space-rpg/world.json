@@ -3434,7 +3434,7 @@
     },
     {
       "pos": {"x": -1715, "y": -905},
-      "name": "A9654",
+      "name": "A9655",
       "style": "asteroid-1",
       "trader": null,
       "enemy": null,
@@ -3736,7 +3736,7 @@
       "name": "Weaver 9540",
       "style": "asteroid-3",
       "trader": null,
-      "enemy": {"type": "Bandit Bosslet", "loot": ["Contraband", "Contraband"]},
+      "enemy": {"type": "Bandit Henchman", "loot": ["Contraband"]},
       "treasures": []
     },
     {
@@ -3902,7 +3902,7 @@
       "shipyard": ["CES Marathon", "Kerr Frigate"]
     },
     {
-      "pos": {"x": -1018, "y": -852},
+      "pos": {"x": -1058, "y": -786},
       "name": "A3932",
       "style": "asteroid-7",
       "trader": null,
@@ -3910,7 +3910,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1012, "y": -763},
+      "pos": {"x": -952, "y": -703},
       "name": "Debris 3558",
       "style": "anomaly-junk",
       "trader": null,
@@ -3974,7 +3974,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -903, "y": -832},
+      "pos": {"x": -937, "y": -768},
       "name": "A2931",
       "style": "asteroid-6",
       "trader": null,
@@ -3982,7 +3982,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -796, "y": -818},
+      "pos": {"x": -824, "y": -718},
       "name": "Buoy 719",
       "style": "anomaly-buoy",
       "trader": null,
@@ -4014,7 +4014,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -736, "y": -578},
+      "pos": {"x": -756, "y": -618},
       "name": "Charm Transfer Buoy C",
       "style": "anomaly-buoy",
       "trader": null,
@@ -4607,7 +4607,7 @@
     {
       "pos": {"x": -1482, "y": -624},
       "name": "Debris 115",
-      "style": "anomaly-junk",
+      "style": "anomaly-ruin",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4638,7 +4638,7 @@
     },
     {
       "pos": {"x": -1718, "y": -498},
-      "name": "Debris 90",
+      "name": "Debris 99",
       "style": "anomaly-junk",
       "trader": null,
       "enemy": null,
@@ -4647,7 +4647,7 @@
     {
       "pos": {"x": -1679, "y": -545},
       "name": "Debris 129",
-      "style": "anomaly-junk",
+      "style": "anomaly-ruin",
       "trader": null,
       "enemy": null,
       "treasures": ["Energy Cell"]
@@ -4836,6 +4836,234 @@
       "trader": null,
       "enemy": {"type": "Rugged Drone", "loot": []},
       "treasures": []
+    },
+    {
+      "pos": {"x": 208, "y": -592},
+      "name": "Debris Cloud",
+      "style": "cloud-purple",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 244, "y": -596},
+      "name": "Debris 102",
+      "style": "anomaly-debris",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 188, "y": -616},
+      "name": "Debris 64",
+      "style": "anomaly-junk",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -14, "y": -300},
+      "name": "Debris 6",
+      "style": "anomaly-debris",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 256, "y": -276},
+      "name": "Debris 132",
+      "style": "anomaly-junk",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 20, "y": -404},
+      "name": "Debris 52",
+      "style": "anomaly-ruin",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -608, "y": 285},
+      "name": "Debris 89",
+      "style": "anomaly-junk",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -544, "y": 419},
+      "name": "Debris 25",
+      "style": "anomaly-junk",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -656, "y": 372},
+      "name": "Debris 91",
+      "style": "anomaly-debris",
+      "trader": null,
+      "enemy": {"type": "Bandit Henchman", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": -736, "y": 448},
+      "name": "Debris 53",
+      "style": "anomaly-junk",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -917, "y": 416},
+      "name": "Debris 84",
+      "style": "anomaly-junk",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -805, "y": 290},
+      "name": "Debris 124",
+      "style": "anomaly-ruin",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -900, "y": 149},
+      "name": "Debris 174",
+      "style": "anomaly-junk",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -711, "y": 173},
+      "name": "Debris 97",
+      "style": "anomaly-debris",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -599, "y": 123},
+      "name": "Debris 104",
+      "style": "anomaly-junk",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -666, "y": 218},
+      "name": "Debris 78",
+      "style": "anomaly-debris",
+      "trader": null,
+      "enemy": {"type": "Bandit Striker", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": -490, "y": 225},
+      "name": "A114",
+      "style": "asteroid-5",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -578, "y": 341},
+      "name": "A69",
+      "style": "asteroid-4",
+      "trader": null,
+      "enemy": {"type": "Bandit Striker", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": -637, "y": 513},
+      "name": "A137",
+      "style": "asteroid-4",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -754, "y": 376},
+      "name": "A71",
+      "style": "asteroid-2",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -851, "y": 339},
+      "name": "A29",
+      "style": "asteroid-8",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -787, "y": 186},
+      "name": "A119",
+      "style": "asteroid-9",
+      "trader": null,
+      "enemy": {"type": "Bandit Henchman", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": -850, "y": 243},
+      "name": "A36",
+      "style": "asteroid-8",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -770, "y": 106},
+      "name": "A136",
+      "style": "asteroid-6",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -660, "y": 31},
+      "name": "A170",
+      "style": "asteroid-5",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -592, "y": 204},
+      "name": "A88",
+      "style": "asteroid-9",
+      "trader": null,
+      "enemy": {"type": "Bandit Henchman", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": -719, "y": 281},
+      "name": "The Lair",
+      "style": "planet-green-6",
+      "trader": null,
+      "enemy": {
+        "type": "Bandit Bosslet",
+        "loot": [
+          "Contraband",
+          "Contraband",
+          "Sky Crystals",
+          "Sky Crystals",
+          "Repair Nanites",
+          "Octagon Battery",
+          "Monopole Shield",
+          "Contraband"
+        ]
+      },
+      "treasures": []
     }
   ],
   "quests": [
@@ -4933,7 +5161,7 @@
     },
     {
       "name": "Bal Gru's stolen subsystems",
-      "xml": "<condition at-dest=\"Pizbui\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">\n_\"Hey traveller! I'm Bal Gru, merchant in distress. Can you help me? Bandits robbed me of all of my subsystems. Can you get them back for me?\"_\n</dialog>\n<place-enemy dest=\"A3639\" enemy=\"Bandit\" loot=\"Subsystem cache\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"A3639\" />\n<condition at-dest=\"Pizbui\" have-item=\"Subsystem cache\"/>\n<dialog>\n_\"You have our stolen subsystems! This is invaluable to us. Here, take this artifact, it is the least we can give you.\"_\n</dialog>\n<give item=\"Larato sigil\"/>\n<take item=\"Subsystem cache\"/>",
+      "xml": "<condition at-dest=\"Pizbui\" />\n<dialog model=\"Kerr Clipper\">A ship orbiting the planet is sending a distress signal.</dialog>\n<condition at-dest=\"Pizbui\" trigger=\"HAIL SHIP\"/>\n<dialog ok=\"YES\" cancel=\"NOT NOW\" model=\"Kerr Clipper\">\n_\"Hey traveller! I'm Bal Gru, merchant in distress. Can you help me? Bandits robbed me of all of my subsystems. Can you get them back for me?\"_\n</dialog>\n<place-enemy dest=\"A3639\" enemy=\"Bandit\" loot=\"Subsystem cache\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"A3639\" />\n<condition have-item=\"Subsystem cache\"/>\n<mark-on-map dest=\"Pizbui\" />\n<condition at-dest=\"Pizbui\" have-item=\"Subsystem cache\"/>\n<dialog>\n_\"You have our stolen subsystems! This is invaluable to us. Here, take this artifact, it is the least we can give you.\"_\n</dialog>\n<give item=\"Larato sigil\"/>\n<take item=\"Subsystem cache\"/>",
       "tags": "wastes",
       "color": "f48",
       "icon": "chevrons"
@@ -7104,6 +7332,38 @@
       "tags": "anomaly"
     },
     {
+      "name": "Ruin",
+      "geometry": "composite",
+      "tags": "anomaly",
+      "transform": [
+        ["scale", 10, 10, 10],
+        ["rotate", 0, 183, 0],
+        ["translate", 0, 0, -60]
+      ],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 16,
+          "transform": [["rotate", 0, -10, 0], ["translate", 0.5, 0, -1]],
+          "path": [[10, 0, 3], [10, 0, -3], [12, 0, -2], [12, 0, 2], [10, 0, 3]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 7,
+          "angle": 3,
+          "transform": [["translate", 0, 0, 7]],
+          "path": [[10, 0, 3], [10, 0, -3], [12, 0, -2], [12, 0, 2], [10, 0, 3]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 5,
+          "angle": 2,
+          "transform": [["rotate", 175, 0, 0], ["translate", -4, -2, 7]],
+          "path": [[10, 0, 3], [10, 0, -3], [12, 0, -2], [12, 0, 2], [10, 0, 3]]
+        }
+      ]
+    },
+    {
       "name": "Thanatos",
       "geometry": "composite",
       "res": 8,
@@ -8061,6 +8321,20 @@
     }
   ],
   "celestials": [
+    {
+      "id": "anomaly-ruin",
+      "type": "anomaly",
+      "desc": "",
+      "celestial": {
+        "r": 4,
+        "amb": 0.2,
+        "oct": 3,
+        "zoom": 10,
+        "color": ["F80", "F80"]
+      },
+      "surface": null,
+      "model": "Ruin"
+    },
     {
       "id": "anomaly- Smackys asteroid",
       "type": "anomaly",
@@ -9190,7 +9464,7 @@
     {
       "name": "The Bush",
       "audio": "music-slask",
-      "pos": {"x": 24, "y": -1302},
+      "pos": {"x": 84, "y": -1302},
       "radius": 270
     },
     {
@@ -9228,6 +9502,18 @@
       "audio": "music-slask",
       "pos": {"x": -1640, "y": -590},
       "radius": 230
+    },
+    {
+      "name": "Maxwell's Frontier",
+      "audio": "music-slask",
+      "pos": {"x": -452, "y": -1530},
+      "radius": 300
+    },
+    {
+      "name": "Bandits Lair",
+      "audio": "music-1997",
+      "pos": {"x": -694, "y": 304},
+      "radius": 290
     }
   ],
   "name": "Skanaar's World"

@@ -85,6 +85,14 @@ window.validator = (function (){
     }
   }
 
+  function uniqueness(type, entities) {
+    var errors = []
+    _.each(_.groupBy(entities, 'name'), (list, name) => {
+      if (list.length > 1) errors.push({ type: type, name: name, msg: 'not unique', arg: ''})
+    })
+    return errors
+  }
+
   function errorCollector(type, func) {
     return function (world, entity) {
       var errors = []
@@ -102,6 +110,8 @@ window.validator = (function (){
     enemy: errorCollector('enemy', validateEnemy),
     world: function (world) {
       return _.flatten([
+        uniqueness('destination', world.destinations),
+        uniqueness('item', world.items),
         world.quests.map(e => self.quest(world, e)),
         world.celestials.map(e => self.celestial(world, e)),
         world.destinations.map(e => self.destination(world, e)),

@@ -55,6 +55,13 @@
     </table>
   </div>
 
+  <div class="sidebar" show={!selected}>
+    <label>Total value per level</label>
+    <div class="input-grid">
+      <div each={sum,i in valuePerLevel()}><em>Level {i}</em> <input readonly value={sum}></div>
+    </div>
+  </div>
+
   <div class="sidebar" show={!!selected}>
     <input type=text ref="nameField" value={selected && selected.name}>
     <div class="input-grid">
@@ -192,6 +199,13 @@
         self.selected = self.filteredItems()[self.focusedIndex] || null
         self.update()
       }
+    }
+
+    var installable = item => item.type != 'rare' && item.type != 'common' && item.type != 'quest'
+
+    self.valuePerLevel = function () {
+      var levels = _.range(0, 1 + _.max(self.world.items.map(e => e.level)))
+      return levels.map(i => _.sum(self.world.items.filter(e => installable(e) && e.level == i).map(e => e.credits)))
     }
 
     self.on('before-mount', function() {
