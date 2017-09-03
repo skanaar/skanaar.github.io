@@ -313,12 +313,7 @@
       "generator": {"hull": 0, "shield": 0, "energy": 2},
       "name": "Striker Drone",
       "visual": "Monitor Drone",
-      "inventory": [
-        "Kinetic Gun",
-        "Autocannon",
-        "Monitor Beam L2",
-        "Repair Kit"
-      ],
+      "inventory": ["Kinetic Gun", "Monitor Beam L2", "Repair Kit", "Autogun"],
       "value": 0,
       "isFlying": false,
       "level": 2,
@@ -362,11 +357,38 @@
       "generator": {"hull": 1, "shield": 1, "energy": 1},
       "name": "Bandit Striker",
       "visual": "Kerr Harbinger",
-      "inventory": ["Photon Ray", "Autocannon Mk2"],
+      "inventory": ["Photon Ray", "Autogun Mk2"],
       "isFlying": true,
       "value": 0,
       "level": 3,
       "slots": 0
+    },
+    {
+      "attr": {
+        "maxhull": 20,
+        "maxshield": 5,
+        "maxenergy": 20,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 0, "shield": 0, "energy": 3},
+      "name": "Bandit Henchman",
+      "level": 5,
+      "visual": "Rusty Ship",
+      "inventory": [
+        "Repair Nanites",
+        "Shield Battery",
+        "Repair Goo",
+        "Monopole Shield",
+        "Meson Ray",
+        "Railgun",
+        "Fold Reactor"
+      ],
+      "isFlying": true,
+      "slots": 0,
+      "value": 0
     },
     {
       "attr": {
@@ -398,7 +420,7 @@
         "slots": 4
       },
       "generator": {"hull": 2, "shield": 1, "energy": 1},
-      "inventory": ["Autocannon", "Photon Ray"],
+      "inventory": ["Photon Ray", "Autogun Mk2"],
       "level": 3,
       "value": 0,
       "isFlying": false,
@@ -445,7 +467,7 @@
       "name": "Rocket Drone",
       "level": 4,
       "visual": "Rocket Drone",
-      "inventory": ["Autocannon Mk3", "Meson Ray"],
+      "inventory": ["Meson Ray", "Autogun Mk3"],
       "isFlying": true,
       "value": 0,
       "slots": 0
@@ -460,7 +482,7 @@
         "jump": 0,
         "slots": 0
       },
-      "generator": {"hull": 0, "shield": 0, "energy": 25},
+      "generator": {"hull": 2, "shield": 0, "energy": 25},
       "name": "Nanite Megacluster",
       "visual": "Nanite Megacluster",
       "inventory": ["Nanite Attack"],
@@ -468,6 +490,25 @@
       "value": 0,
       "isFlying": false,
       "slots": 0
+    },
+    {
+      "attr": {
+        "maxhull": 20,
+        "maxshield": 20,
+        "maxenergy": 20,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 2, "shield": 2, "energy": 2},
+      "name": "Bandit Bosslet",
+      "level": 6,
+      "visual": "Kerr Frigate",
+      "inventory": ["Soma Emitter", "EMP Bomb"],
+      "isFlying": true,
+      "slots": 0,
+      "value": 0
     },
     {
       "attr": {
@@ -482,7 +523,7 @@
       "generator": {"hull": 1, "shield": 2, "energy": 2},
       "name": "Soma Reaver",
       "visual": "Soma Saay",
-      "inventory": ["Autocannon Mk2", "Phased Ray"],
+      "inventory": ["Phased Ray", "Autogun Mk2"],
       "isFlying": true,
       "value": 0,
       "level": 5,
@@ -501,27 +542,8 @@
       "generator": {"hull": 2, "shield": 2, "energy": 10},
       "name": "Soma Predator",
       "visual": "Soma Saay",
-      "inventory": ["Phased Ray", "Autocannon"],
+      "inventory": ["Phased Ray", "Autogun"],
       "level": 6,
-      "value": 0,
-      "isFlying": false,
-      "slots": 0
-    },
-    {
-      "attr": {
-        "maxhull": 100,
-        "maxshield": 40,
-        "maxenergy": 500,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "generator": {"hull": 20, "shield": 20, "energy": 20},
-      "name": "Worm",
-      "visual": "Worm",
-      "inventory": ["Worm Beam"],
-      "level": 15,
       "value": 0,
       "isFlying": false,
       "slots": 0
@@ -550,6 +572,25 @@
       "isFlying": true,
       "slots": 0,
       "value": 0
+    },
+    {
+      "attr": {
+        "maxhull": 100,
+        "maxshield": 40,
+        "maxenergy": 500,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 20, "shield": 20, "energy": 20},
+      "name": "Worm",
+      "visual": "Worm",
+      "inventory": ["Worm Beam"],
+      "level": 15,
+      "value": 0,
+      "isFlying": false,
+      "slots": 0
     },
     {
       "attr": {
@@ -584,31 +625,18 @@
   "items": [
     {
       "type": "quest",
-      "level": 0,
-      "slots": 0,
-      "credits": 0,
-      "name": "Worm Umbra",
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "critical": 0
-    },
-    {
-      "type": "quest",
       "attr": {
         "maxhull": 0,
         "maxshield": 0,
         "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
         "jump": 0,
         "slots": 0
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 0,
-      "name": "Eris Shard",
+      "name": "Thanatos mesh",
+      "rechargeRequired": false,
       "level": 0,
       "cooldown": false,
       "critical": 0
@@ -625,62 +653,8 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 0,
-      "name": "Shady Boxes",
-      "level": 0,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "quest",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Eris Dust",
-      "level": 0,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "quest",
-      "credits": 0,
-      "name": "Flight log",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "level": 0,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "quest",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Subsystem cache",
+      "name": "Thanatos nacelle",
+      "rechargeRequired": false,
       "level": 0,
       "cooldown": false,
       "critical": 0
@@ -907,20 +881,18 @@
       "critical": 0
     },
     {
-      "type": "rare",
-      "credits": 1,
-      "name": "DecontamiNanites",
+      "type": "quest",
       "attr": {
         "maxhull": 0,
         "maxshield": 0,
         "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
         "jump": 0,
         "slots": 0
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
+      "name": "Shady Boxes",
       "level": 0,
       "cooldown": false,
       "critical": 0
@@ -944,23 +916,6 @@
       "critical": 0
     },
     {
-      "type": "common",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 5,
-      "name": "Copper",
-      "level": 0,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
       "type": "quest",
       "attr": {
         "maxhull": 0,
@@ -972,8 +927,27 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 0,
-      "name": "Thanatos mesh",
+      "name": "Thanatos core",
       "rechargeRequired": false,
+      "level": 0,
+      "cooldown": false,
+      "critical": 0
+    },
+    {
+      "type": "quest",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
+      "name": "Eris Dust",
       "level": 0,
       "cooldown": false,
       "critical": 0
@@ -1058,14 +1032,46 @@
         "maxhull": 0,
         "maxshield": 0,
         "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
         "jump": 0,
         "slots": 0
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 0,
-      "name": "Thanatos core",
-      "rechargeRequired": false,
+      "name": "Eris Shard",
+      "level": 0,
+      "cooldown": false,
+      "critical": 0
+    },
+    {
+      "type": "quest",
+      "level": 0,
+      "slots": 0,
+      "credits": 0,
+      "name": "Worm Umbra",
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "critical": 0
+    },
+    {
+      "type": "quest",
+      "credits": 0,
+      "name": "Flight log",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "level": 0,
       "cooldown": false,
       "critical": 0
@@ -1082,8 +1088,43 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 0,
-      "name": "Thanatos nacelle",
-      "rechargeRequired": false,
+      "name": "Subsystem cache",
+      "level": 0,
+      "cooldown": false,
+      "critical": 0
+    },
+    {
+      "type": "rare",
+      "credits": 1,
+      "name": "DecontamiNanites",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "level": 0,
+      "cooldown": false,
+      "critical": 0
+    },
+    {
+      "type": "common",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 5,
+      "name": "Copper",
       "level": 0,
       "cooldown": false,
       "critical": 0
@@ -1123,6 +1164,23 @@
       "critical": 0
     },
     {
+      "type": "common",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 8,
+      "name": "Platinum",
+      "level": 0,
+      "cooldown": false,
+      "critical": 0
+    },
+    {
       "type": "rare",
       "attr": {
         "maxhull": 0,
@@ -1137,23 +1195,6 @@
       "name": "Pavonian Ore",
       "level": 0,
       "rechargeRequired": false,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "common",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 8,
-      "name": "Platinum",
-      "level": 0,
       "cooldown": false,
       "critical": 0
     },
@@ -1192,6 +1233,23 @@
       "critical": 0
     },
     {
+      "type": "common",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 50,
+      "name": "Alien Artifact",
+      "level": 0,
+      "cooldown": false,
+      "critical": 0
+    },
+    {
       "type": "rare",
       "attr": {
         "maxhull": 0,
@@ -1208,23 +1266,6 @@
       "name": "Nebular Dust",
       "level": 0,
       "rechargeRequired": false,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "common",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 50,
-      "name": "Alien Artifact",
-      "level": 0,
       "cooldown": false,
       "critical": 0
     },
@@ -1284,6 +1325,17 @@
       "level": 0,
       "rechargeRequired": false,
       "cooldown": false,
+      "critical": 0
+    },
+    {
+      "type": "common",
+      "level": 0,
+      "credits": 400,
+      "name": "Contraband",
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "critical": 0
     },
     {
@@ -1361,23 +1413,6 @@
       "critical": 0
     },
     {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 1, "energy": -1},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Shield Pump",
-      "level": 1,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
       "type": "quest",
       "level": 1,
       "credits": 0,
@@ -1394,6 +1429,23 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "critical": 0
+    },
+    {
+      "type": "module",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 1, "energy": -1},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
+      "name": "Shield Pump",
+      "level": 1,
+      "cooldown": false,
       "critical": 0
     },
     {
@@ -1436,6 +1488,24 @@
       "critical": 0
     },
     {
+      "type": "weapon",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
+      "targetBuff": {"hull": -2, "shield": 0, "energy": 0},
+      "credits": 20,
+      "name": "Kinetic Gun",
+      "level": 1,
+      "rechargeRequired": false,
+      "cooldown": false,
+      "critical": 0
+    },
+    {
       "type": "tool",
       "attr": {
         "maxhull": 0,
@@ -1470,24 +1540,6 @@
       "level": 1,
       "rechargeRequired": true,
       "cooldown": true,
-      "critical": 0
-    },
-    {
-      "type": "weapon",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": -2, "shield": 0, "energy": 0},
-      "credits": 20,
-      "name": "Kinetic Gun",
-      "level": 1,
-      "rechargeRequired": false,
-      "cooldown": false,
       "critical": 0
     },
     {
@@ -1576,7 +1628,7 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
       "targetBuff": {"hull": -3, "shield": 0, "energy": 0},
       "credits": 40,
-      "name": "Autocannon",
+      "name": "Autogun",
       "level": 1,
       "rechargeRequired": false,
       "cooldown": false,
@@ -1663,24 +1715,6 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 0, "shield": 10, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 50,
-      "name": "Shield Cell",
-      "rechargeRequired": true,
-      "level": 2,
-      "cooldown": true,
-      "critical": 0
-    },
-    {
-      "type": "tool",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
       "playerBuff": {"hull": 0, "shield": 5, "energy": -10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 50,
@@ -1709,9 +1743,27 @@
       "critical": 0
     },
     {
+      "type": "tool",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 10, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 50,
+      "name": "Shield Cell",
+      "rechargeRequired": true,
+      "level": 2,
+      "cooldown": true,
+      "critical": 0
+    },
+    {
       "type": "weapon",
       "credits": 90,
-      "name": "Autocannon Mk2",
+      "name": "Autogun Mk2",
       "attr": {
         "maxhull": 0,
         "maxshield": 0,
@@ -1749,24 +1801,6 @@
     },
     {
       "type": "weapon",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": -2, "shield": -5, "energy": 0},
-      "credits": 150,
-      "name": "Phased Ray",
-      "level": 2,
-      "rechargeRequired": false,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "weapon",
       "level": 2,
       "credits": 150,
       "name": "Rod Driver",
@@ -1783,6 +1817,24 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": -8, "shield": 0, "energy": 0},
       "critical": 0.25
+    },
+    {
+      "type": "weapon",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
+      "targetBuff": {"hull": -2, "shield": -5, "energy": 0},
+      "credits": 160,
+      "name": "Phased Ray",
+      "level": 2,
+      "rechargeRequired": false,
+      "cooldown": false,
+      "critical": 0
     },
     {
       "type": "module",
@@ -1982,8 +2034,8 @@
     {
       "type": "weapon",
       "level": 3,
-      "credits": 120,
-      "name": "Autocannon Mk3",
+      "credits": 170,
+      "name": "Autogun Mk3",
       "rechargeRequired": false,
       "attr": {
         "maxhull": 0,
@@ -2035,7 +2087,7 @@
         "slots": 0
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": -20, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": -13, "shield": 0, "energy": 0},
       "critical": 0.25
     },
     {
@@ -2134,14 +2186,13 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": -25, "shield": 0, "energy": 0},
       "credits": 500,
-      "name": "Railgun",
-      "rechargeRequired": false,
+      "name": "Mass Driver",
       "level": 4,
-      "cooldown": false,
-      "critical": 0
+      "cooldown": true,
+      "critical": 0.25
     },
     {
       "type": "weapon",
@@ -2152,32 +2203,14 @@
         "jump": 0,
         "slots": 0
       },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -10},
-      "targetBuff": {"hull": -50, "shield": 0, "energy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
+      "targetBuff": {"hull": -25, "shield": 0, "energy": 0},
       "credits": 500,
-      "name": "Mass Driver",
+      "name": "Railgun",
+      "rechargeRequired": false,
       "level": 4,
-      "cooldown": true,
-      "critical": 0.25
-    },
-    {
-      "type": "common",
-      "level": "4",
-      "credits": 500,
-      "name": "Metabomb",
       "cooldown": false,
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": -20, "shield": -10, "energy": -10},
-      "critical": 0.25
+      "critical": 0
     },
     {
       "type": "weapon",
@@ -2212,6 +2245,25 @@
       "credits": 750,
       "name": "Meson Ray",
       "level": 4,
+      "cooldown": false,
+      "critical": 0
+    },
+    {
+      "type": "weapon",
+      "credits": -1,
+      "name": "Nanite Attack",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": -15, "shield": -3, "energy": -10},
+      "level": 5,
       "cooldown": false,
       "critical": 0
     },
@@ -2253,6 +2305,23 @@
       "type": "module",
       "attr": {
         "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 30,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 180,
+      "name": "Octagon Battery",
+      "level": 5,
+      "cooldown": false,
+      "critical": 0
+    },
+    {
+      "type": "module",
+      "attr": {
+        "maxhull": 0,
         "maxshield": 10,
         "maxenergy": 0,
         "jump": 0,
@@ -2263,23 +2332,6 @@
       "credits": 180,
       "name": "Monopole Shield",
       "rechargeRequired": false,
-      "level": 5,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 30,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 180,
-      "name": "Octagon Battery",
       "level": 5,
       "cooldown": false,
       "critical": 0
@@ -2357,6 +2409,17 @@
       "critical": 0
     },
     {
+      "type": "weapon",
+      "level": 5,
+      "credits": 500,
+      "name": "Luminal Driver",
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": -42, "shield": 0, "energy": 0},
+      "critical": 0.25
+    },
+    {
       "type": "tool",
       "level": 5,
       "credits": 700,
@@ -2427,6 +2490,25 @@
       "critical": 0
     },
     {
+      "type": "weapon",
+      "level": 6,
+      "credits": 500,
+      "name": "Metabomb",
+      "cooldown": true,
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": -20, "shield": -10, "energy": -10},
+      "critical": 0.25
+    },
+    {
       "type": "module",
       "attr": {
         "maxhull": 0,
@@ -2477,25 +2559,6 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": -10},
       "targetBuff": {"hull": -15, "shield": -10, "energy": -20},
-      "level": 10,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "weapon",
-      "credits": -1,
-      "name": "Nanite Attack",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": -2, "shield": -2, "energy": 0},
       "level": 10,
       "cooldown": false,
       "critical": 0
@@ -2589,7 +2652,6 @@
         "sell": 0.75,
         "inventory": [
           "Tau Ray",
-          "Autocannon Mk3",
           "Quench Device",
           "Javelin Driver",
           "Mass Driver",
@@ -2605,7 +2667,8 @@
           "Epoxy Injector",
           "Repair System",
           "Welding Robot",
-          "Shield Turbopump"
+          "Shield Turbopump",
+          "Autogun Mk3"
         ]
       },
       "treasures": [],
@@ -3404,7 +3467,7 @@
     {
       "pos": {"x": -1677, "y": -1125},
       "name": "Marker of the Temple",
-      "style": "planet-hell-5",
+      "style": "planet-hell-1",
       "trader": null,
       "enemy": {"type": "Sentinel Pod", "loot": ["Alien Fossil"]},
       "treasures": []
@@ -3673,7 +3736,7 @@
       "name": "Weaver 9540",
       "style": "asteroid-3",
       "trader": null,
-      "enemy": null,
+      "enemy": {"type": "Bandit Bosslet", "loot": ["Contraband", "Contraband"]},
       "treasures": []
     },
     {
@@ -3689,7 +3752,7 @@
       "name": "Weaver 2634",
       "style": "asteroid-3",
       "trader": null,
-      "enemy": null,
+      "enemy": {"type": "Bandit Henchman", "loot": []},
       "treasures": []
     },
     {
@@ -3745,7 +3808,7 @@
       "name": "Weaver 817",
       "style": "asteroid-5",
       "trader": null,
-      "enemy": null,
+      "enemy": {"type": "Bandit Henchman", "loot": []},
       "treasures": []
     },
     {
@@ -3753,7 +3816,7 @@
       "name": "Weaver 5560",
       "style": "asteroid-1",
       "trader": null,
-      "enemy": null,
+      "enemy": {"type": "Bandit Henchman", "loot": ["Sky Crystals"]},
       "treasures": ["Nebular Dust"]
     },
     {
@@ -3761,7 +3824,7 @@
       "name": "Weaver 7111",
       "style": "asteroid-5",
       "trader": null,
-      "enemy": null,
+      "enemy": {"type": "Bandit Striker", "loot": []},
       "treasures": []
     },
     {
@@ -3769,7 +3832,7 @@
       "name": "Weaver 1116",
       "style": "asteroid-4",
       "trader": null,
-      "enemy": null,
+      "enemy": {"type": "Bandit", "loot": []},
       "treasures": []
     },
     {
@@ -4055,7 +4118,6 @@
         "sell": 0.75,
         "inventory": [
           "Shield Core",
-          "Autocannon",
           "Null Reactor",
           "Energy Cell",
           "Cutting Beam",
@@ -4063,8 +4125,8 @@
           "Phased Ray",
           "Rod Driver",
           "Piercing Beam",
-          "Autocannon Mk2",
-          "Photon Ray"
+          "Photon Ray",
+          "Autogun"
         ]
       },
       "enemy": null,
@@ -4358,7 +4420,18 @@
       "trader": {
         "buy": 1.5,
         "sell": 0.75,
-        "inventory": ["Autocannon Mk2", "Autocannon"]
+        "inventory": [
+          "Autogun",
+          "Autogun Mk2",
+          "Shield Cell",
+          "Shield Charger",
+          "Repair Goo",
+          "Energy Cell",
+          "Repair Kit",
+          "Epoxy Injector",
+          "Tetragon Battery",
+          "Linear Reactor"
+        ]
       },
       "enemy": null,
       "treasures": []
@@ -4400,7 +4473,7 @@
       "name": "A7280",
       "style": "asteroid-6",
       "trader": null,
-      "enemy": {"type": "Bandit", "loot": ["Autocannon"]},
+      "enemy": {"type": "Bandit", "loot": ["Autogun"]},
       "treasures": []
     },
     {
@@ -4457,7 +4530,7 @@
       "style": "anomaly-broken-sloop",
       "trader": null,
       "enemy": null,
-      "treasures": ["Electron Shield", "Sky Crystals"]
+      "treasures": []
     },
     {
       "pos": {"x": -148, "y": -984},
@@ -4470,7 +4543,7 @@
     {
       "pos": {"x": -212, "y": -840},
       "name": "Mirror Moon",
-      "style": "planet-hell-5",
+      "style": "planet-hell-1",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4615,7 +4688,7 @@
       "pos": {"x": -197, "y": -1423},
       "name": "Maxwell Station",
       "style": "anomaly-Maxwell_Station",
-      "trader": {"buy": 1.75, "sell": 0.75, "inventory": ["Autocannon Mk2"]},
+      "trader": {"buy": 1.75, "sell": 0.75, "inventory": ["Autogun Mk2"]},
       "enemy": null,
       "treasures": [],
       "shipyard": ["Sloop"]
@@ -4773,7 +4846,7 @@
     },
     {
       "name": "Fast Forward",
-      "xml": "\n<condition at-dest=\"Fast Forward\" />\n<dialog ok=\"FAST FORWARD!\" cancel=\"NOT NOW\">*Thank you Beta tester for your work*\nWould you like to skip the tutorial zone?</dialog>\n<give credits=\"1000\"/>\n<give item=\"Tau Ray;Autocannon Mk3;Quench Device;Javelin Driver;Piercing Beam;Shield Core;Auro X82;Shield Core Mk2;Fold Reactor;Proton Shield;Epoxy Injector;Shield Turbopump;Repair System;Blue seeds\"/>\n<change-ship ship=\"Kerr Runner\"/>\n<travel dest=\"The Bush Transfer Buoy\"/>",
+      "xml": "\n<condition at-dest=\"Fast Forward\" />\n<dialog ok=\"FAST FORWARD!\" cancel=\"NOT NOW\">*Thank you Beta tester for your work*\nWould you like to skip the tutorial zone?</dialog>\n<give credits=\"1000\"/>\n<give item=\"Tau Ray;Autogun Mk3;Quench Device;Javelin Driver;Piercing Beam;Shield Core;Auro X82;Shield Core Mk2;Fold Reactor;Proton Shield;Epoxy Injector;Shield Turbopump;Repair System;Blue seeds\"/>\n<change-ship ship=\"Kerr Runner\"/>\n<travel dest=\"The Bush Transfer Buoy\"/>",
       "tags": "dev"
     },
     {
@@ -4806,7 +4879,7 @@
     },
     {
       "name": "Outback Mining",
-      "xml": "\n<condition at-dest=\"Outback A563\" />\n<dialog model=\"Rusty Ship\">A scruffy ship is slowly passing by this asteroid. You radio it and ask if anything is wrong.</dialog>\n<dialog model=\"Rusty Ship\">_\"Hey man! I'm ok, my ship is just a bit overloaded. The area *west* of here is full of minerals that I have been mining.\n\nYou should go there - there is enough for everyone.\"_</dialog>\n<dialog>_\"There might be some aggressive drones out there.\nHere, take this a *Slug Driver*. A gift to you. It has to recharge between uses but packs a good punch.\"_</dialog>\n<give item=\"Slug Driver\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Outback A089\" />\n<condition have-item=\"Last message\" />\n<dialog>As you explore the asteroid you find a crashed ship. Inside you find the crew. Dead.\n\nAnd a message.\n  \nWords from dying spacefarers.</dialog>\n<dialog>_We have been attacked by reprogrammed Drones. They are not malfunctioning, someone is doing this to them._</dialog>",
+      "xml": "\n<condition at-dest=\"Outback A563\" />\n<dialog model=\"Rusty Ship\">A scruffy ship is slowly passing by this asteroid. You radio it and ask if anything is wrong.</dialog>\n<dialog model=\"Rusty Ship\">_\"Hey man! I'm ok, my ship is just a bit overloaded. The area *north* of here is full of minerals that I have been mining.\n\nYou should go there - there is enough for everyone.\"_</dialog>\n<dialog>_\"There might be some aggressive drones out there.\nHere, take this a *Slug Driver*. A gift to you. It has to recharge between uses but packs a good punch.\"_</dialog>\n<give item=\"Slug Driver\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Outback A089\" />\n<condition have-item=\"Last message\" />\n<dialog>As you explore the asteroid you find a crashed ship. Inside you find the crew. Dead.\n\nAnd a message.\n  \nWords from dying spacefarers.</dialog>\n<dialog>_We have been attacked by reprogrammed Drones. They are not malfunctioning, someone is doing this to them._</dialog>",
       "tags": "outback",
       "color": "c9f",
       "icon": "rhomb"
@@ -4820,7 +4893,7 @@
     },
     {
       "name": "Joes",
-      "xml": "<condition at-dest=\"Joes\"/>\n\n<dialog ok=\"SMACKYS!\" cancel=\"no thanks\">\"The glare off the neon sign spelling 'JOES BAR' leaves a good impression on your eyes as you hover the landing pads at Joes.\"</dialog>\n<dialog ok=\"Who?\" cancel=\"What?\">_\"How are yez!?\"_ Calls a man as he wobbles to your ship.</dialog>\n<dialog>The man gives the ship a hug and turnes toward you, still holding onto the ship as not to fall on his nose, clearly drunk.</dialog>\n<dialog ok=\"I got it in this condition\">_\"I've been lookin' round for yeh for six months! yeh're a Wreck. Ye arn't lookin' after her. \"_</dialog>\n<dialog ok=\"Really?\">_\"This was my vessel see. Don't worry. It's just a wee lovely to see her after so many years.\"_</dialog>\n<dialog>_\"Aye. Say you don't want to get a Autocannon Mk3 for a deal, I got one but i need liqur badly.\"_</dialog>\n<dialog>_\"Aint got nothin good in these Parts. Have ta go to Brandons to get anything good.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Brandons\" />\n\n\n<condition at-dest=\"Brandons\" trigger=\"ENTER\" have-credits=\"10\" />\n<dialog ok=\"Something to drink please\" cancel=\"Nothing im heading out\">This bar has damp lightning and is quiet, most guests are playing pool further in. You go up to the bartender.\nWhat can I get you this fine eveninin' sir?</dialog>\n<dialog>The bartender pours a beer and you ask for Brandons liqour.</dialog>\n<dialog>_\"We are all out of that feller, Brandons is the darndest best liqour out there, but they have stopped deliverin.\"_</dialog>\n<dialog>_\"I can't tell ye why, but i think the is somethin fishy going on. The distillery is only a couple of jumps from here.\"_</dialog>\n\n<give item=\"Joes Coaster\"/>\n<take credits=\"10\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Brandons\" />\n\n\n<condition have-item=\"Joes Coaster\" at-dest=\"Brandons\" />\n  \n<dialog>You navigate around space junk that is orbiting the distillery, there is no activity to be seen</dialog>\n  \n<dialog>A broken door lets you inside a part of the distillery where there are some broken bottles. Someone leem to have left in a hurry.</dialog>\n\n<dialog ok=\"This is what he wanted\" cancel=\"Put it down\">You find a unbroken bottle of Brandons Single Malt!</dialog>\n<dialog>You go to your ship and take off.</dialog>\n<give item=\"Brandons Whiskey\"/>\n\n\n<condition have-item=\"Brandons Whiskey\" at-dest=\"Joes\" trigger=\"Mr. BRANDON\"/>\n<dialog ok=\"Do you have The Mk3?\" cancel=\"Not Yet.\">\"Can't believe ye'r back, wha? Ye found any liquor yet?</dialog>\n\n<dialog>\"Aw, C'mon, ofcourse. I have it in a garage downere'\" He takes the bottle out of your hand and sips it.</dialog>\n<take item=\"Brandons Whiskey\"/>\n<dialog>\"Here we're, good as new. Now for yeh this might be a high quality automatic machinegun...\" </dialog>\n<dialog ok=\"Not what we agreed\" cancel=\"You are changing the deal\">\"For me, it's an investment. I'm going to have ye ta help me with another thing.\"</dialog>\n<dialog>\"Houl' on. Ye see I'm mr. Brandon\" He says and pulls down his hood. One if his eyes,replaced with a cyborg techpiece. </dialog>\n<dialog>\"Those fuckers have shut down me distillery. ey mean this is bollicks, ey can't even collect me stock that're still down there.\"</dialog>\n<dialog>\"Look, I'm really thankful allright. But I need ye to install this gun and use it on the dron's outside my disillery.\"</dialog>\n<dialog>\"Then ill get me stock back, And ye keep the gun. \"</dialog>\n<mark-on-map dest=\"Brandons Buoy\" />\n<give item=\"Autocannon Mk3\"/>\n\n<condition at-dest=\"Brandons Buoy\" installed-item=\"Autocannon Mk3\"/>\n<dialog>You are in an authorized area! Leave immediately!</dialog>\n\n<remove-map-marker/>\n<place-enemy dest=\"Brandons Buoy\" enemy=\"Security Drone\" loot=\"Shield Battery\"/>\n<place-enemy dest=\"Brandons\" enemy=\"Rocket Drone\" loot=\"\"/>\n\n<condition at-dest=\"Brandons\" no-enemy-at-dest=\"Brandons\"/>\n<dialog>No more drones in sight.</dialog>\n\n<remove-map-marker/>\n<give credits=\"400\"/>\n\n\n\n\n",
+      "xml": "<condition at-dest=\"Joes\"/>\n\n<dialog ok=\"SMACKYS!\" cancel=\"no thanks\">\"The glare off the neon sign spelling 'JOES BAR' leaves a good impression on your eyes as you hover the landing pads at Joes.\"</dialog>\n<dialog ok=\"Who?\" cancel=\"What?\">_\"How are yez!?\"_ Calls a man as he wobbles to your ship.</dialog>\n<dialog>The man gives the ship a hug and turnes toward you, still holding onto the ship as not to fall on his nose, clearly drunk.</dialog>\n<dialog ok=\"I got it in this condition\">_\"I've been lookin' round for yeh for six months! yeh're a Wreck. Ye arn't lookin' after her. \"_</dialog>\n<dialog ok=\"Really?\">_\"This was my vessel see. Don't worry. It's just a wee lovely to see her after so many years.\"_</dialog>\n<dialog>_\"Aye. Say you don't want to get a Autogun Mk3 for a deal, I got one but i need liqur badly.\"_</dialog>\n<dialog>_\"Aint got nothin good in these Parts. Have ta go to Brandons to get anything good.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Brandons\" />\n\n\n<condition at-dest=\"Brandons\" trigger=\"ENTER\" have-credits=\"10\" />\n<dialog ok=\"Something to drink please\" cancel=\"Nothing im heading out\">This bar has damp lightning and is quiet, most guests are playing pool further in. You go up to the bartender.\n_\"What can I get you this fine eveninin' sir?\"_</dialog>\n<dialog>The bartender pours a beer and you ask for Brandons liqour.</dialog>\n<dialog>_\"We are all out of that feller, Brandons is the darndest best liqour out there, but they have stopped deliverin.\"_</dialog>\n<dialog>_\"I can't tell ye why, but i think the is somethin fishy going on. The distillery is only a couple of jumps from here.\"_</dialog>\n\n<give item=\"Joes Coaster\"/>\n<take credits=\"10\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Brandons\" />\n\n\n<condition have-item=\"Joes Coaster\" at-dest=\"Brandons\" />\n  \n<dialog>You navigate around space junk that is orbiting the distillery, there is no activity to be seen</dialog>\n  \n<dialog>A broken door lets you inside a part of the distillery where there are some broken bottles. Someone leem to have left in a hurry.</dialog>\n\n<dialog ok=\"This is what he wanted\" cancel=\"Put it down\">You find a unbroken bottle of Brandons Single Malt!</dialog>\n<dialog>You go to your ship and take off.</dialog>\n<give item=\"Brandons Whiskey\"/>\n\n\n<condition have-item=\"Brandons Whiskey\" at-dest=\"Joes\" trigger=\"Mr. BRANDON\"/>\n<dialog ok=\"Do you have The Mk3?\" cancel=\"Not Yet.\">_\"Can't believe ye'r back, wha? Ye found any liquor yet?\"_</dialog>\n\n<dialog>_\"Aw, c'mon, ofcourse. I have it in a garage downere\"_ He takes the bottle out of your hand and sips it.</dialog>\n<take item=\"Brandons Whiskey\"/>\n<dialog>_\"Here we're, good as new. Now for yeh this might be a high quality automatic machinegun...\"_</dialog>\n<dialog ok=\"Not what we agreed\" cancel=\"You are changing the deal\">_\"For me, it's an investment. I'm going to have ye ta help me with another thing.\"_</dialog>\n<dialog>_\"Houl' on. Ye see I'm mr. Brandon\"_\nHe says and pulls down his hood. One if his eyes,replaced with a cyborg techpiece.</dialog>\n<dialog>_\"Those fuckers have shut down me distillery. ey mean this is bollicks, ey can't even collect me stock that're still down there.\"_</dialog>\n<dialog>_\"Look, I'm really thankful allright. But I need ye to install this gun and use it on the dron's outside my disillery.\"_</dialog>\n<dialog>_\"Then ill get me stock back, And ye keep the gun.\"_</dialog>\n<mark-on-map dest=\"Brandons Buoy\" />\n<give item=\"Autogun Mk3\"/>\n<place-enemy dest=\"Brandons Buoy\" enemy=\"Security Drone\" loot=\"Shield Battery\"/>\n<place-enemy dest=\"Brandons\" enemy=\"Rocket Drone\" loot=\"\"/>\n\n<condition at-dest=\"Brandons Buoy\"/>\n<dialog>You are in an authorized area! Leave immediately!</dialog>\n\n<remove-map-marker/>\n\n<condition at-dest=\"Brandons\" no-enemy-at-dest=\"Brandons\"/>\n<dialog>No more drones in sight.</dialog>\n\n<remove-map-marker/>\n<give credits=\"400\"/>\n\n\n\n\n",
       "color": "0f0",
       "icon": "square",
       "tags": "qdn"
@@ -4839,7 +4912,7 @@
     },
     {
       "name": "Investigate the SS Thunder",
-      "xml": "<condition state=\"space\" at-dest=\"Pavonis Police\" have-item=\"Crew of SS Thunder\"/>\n<dialog model=\"Tiendong Station\" ok=\"YES I HAVE\" cancel=\"NOT A THING\">As you approach the police station they hail you.\n_\"Citizen, we are looking for any information as to the whereabouts of the SS Thunder. Have you seen anything.\"_</dialog>\n\n<condition state=\"surface\" have-item=\"Crew of SS Thunder\" at-dest=\"Pavonis Police\" trigger=\"TURN IN CREW\"/>\n<take item=\"Crew of SS Thunder\" />\n<dialog model=\"Tiendong Station\">The officers look astonished as you present them with the crew of the SS Thunder.\n\n_\"Wow, this was more than we hoped for!\"_</dialog>\n<dialog model=\"Tiendong Station\">_\"But to tell the truth we don't actually know what they have done.\n\nThey won't say a thing to us but we have seen a string of suspicious activity coinciding with the SS Thunders path across the sector.\"_</dialog>\n<dialog model=\"Tiendong Station\" ok=\"OK\" cancel=\"NOT RIGHT NOW\">_\"If we come storming in asking questions we won't get any answers. But a private investigator however...\n\nAre you up for some undercover work?.\"_</dialog>\n<dialog model=\"Tiendong Station\">_\"Investigate what happened to their ship. Any physical evidence that you can find. Someone at the nearby station - the *Black Stump* - must have seen something.\n\nAsk around.\"_</dialog>\n<give credits=\"100\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ship in distress\" />\n<place-item dest=\"Ship in distress\" item=\"Flight log\"/>\n\n<condition have-item=\"Flight log\" />\n<mark-on-map dest=\"Black Stump\" />\n\n<condition state=\"surface\" at-dest=\"Black Stump\" trigger=\"ASK QUESTIONS\"/>\n<dialog model=\"Hermit Home\">You snoop around the station. The deckmen say the crew of the Thunder were really interested in the station's drones.</dialog>\n<dialog>The Flight log say that they visited every destination that had a problem with a malfunctioning drone. They probably caused this whole mess.</dialog>\n\n<condition state=\"surface\" at-dest=\"Pavonis Police\" trigger=\"GIVE INFO\"/>\n<dialog model=\"Tiendong Station\">_\"Drone manipulation? That figures. We started digging into their backstories. They are agents trying to destabilize Pavonis. With the evidence you got we have a solid case.\"_</dialog>\n<dialog model=\"Tiendong Station\">_\"Here is a state mandated reward for your work. Thank you and safe travels.\"_</dialog>\n<give credits=\"1000\"/>",
+      "xml": "<condition at-dest=\"Pavonis Police\" have-item=\"Crew of SS Thunder\"/>\n<dialog model=\"Tiendong Station\" ok=\"YES I HAVE\" cancel=\"NOT A THING\">As you approach the police station they hail you.\n_\"Citizen, we are looking for any information as to the whereabouts of the SS Thunder. Have you seen anything.\"_</dialog>\n\n<condition have-item=\"Crew of SS Thunder\" at-dest=\"Pavonis Police\" trigger=\"TURN IN CREW\"/>\n<take item=\"Crew of SS Thunder\" />\n<dialog model=\"Tiendong Station\">The officers look astonished as you present them with the crew of the SS Thunder.\n\n_\"Wow, this was more than we hoped for!\"_</dialog>\n<dialog model=\"Tiendong Station\">_\"But to tell the truth we don't actually know what they have done.\n\nThey won't say a thing to us but we have seen a string of suspicious activity coinciding with the SS Thunders path across the sector.\"_</dialog>\n<dialog model=\"Tiendong Station\" ok=\"OK\" cancel=\"NOT RIGHT NOW\">_\"If we come storming in asking questions we won't get any answers. But a private investigator however...\n\nAre you up for some undercover work?.\"_</dialog>\n<dialog model=\"Tiendong Station\">_\"Investigate what happened to their ship. Any physical evidence that you can find. Someone at the nearby station - the *Black Stump* - must have seen something.\n\nAsk around.\"_</dialog>\n<give credits=\"100\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ship in distress\" />\n<place-item dest=\"Ship in distress\" item=\"Flight log\"/>\n\n<condition have-item=\"Flight log\" />\n<mark-on-map dest=\"Black Stump\" />\n\n<condition state=\"surface\" at-dest=\"Black Stump\" trigger=\"ASK QUESTIONS\"/>\n<dialog model=\"Hermit Home\">You snoop around the station. The deckmen say the crew of the Thunder were really interested in the station's drones.</dialog>\n<dialog>The Flight log say that they visited every destination that had a problem with a malfunctioning drone. They probably caused this whole mess.</dialog>\n<mark-on-map dest=\"Pavonis Police\" />\n\n<condition state=\"surface\" at-dest=\"Pavonis Police\" trigger=\"GIVE INFO\"/>\n<dialog model=\"Tiendong Station\">_\"Drone manipulation? That figures. We started digging into their backstories. They are agents trying to destabilize Pavonis. With the evidence you got we have a solid case.\"_</dialog>\n<dialog model=\"Tiendong Station\">_\"Here is a state mandated reward for your work. Thank you and safe travels.\"_</dialog>\n<give credits=\"1000\"/>",
       "tags": "outback",
       "color": "4ef",
       "icon": "square"
@@ -4895,7 +4968,7 @@
     },
     {
       "name": "First Contact",
-      "xml": "\n<condition at-dest=\"Alien Reception\" />\n<dialog>The star ahead of you is Beryl Canis. The home of the Soma. A star that no one has visited, they Soma block all jump paths to their home.</dialog>\n<dialog model=\"Alien Meetup\">Around the alien buoy a Soma ship is parked. It does not attack you, perhaps you can approach and try to hail it.</dialog>\n<condition state=\"surface\" at-dest=\"Alien Reception\" trigger=\"HAIL\"/>\n<dialog model=\"Alien Meetup\">_\"Visitor. Starfarer! Many Soma are suspicious. And some are welcoming. Visitors should be careful.\"_</dialog>\n<dialog model=\"Alien Meetup\">_\"You have dealt with the Blue Seeds and Flowers. Be very careful with those. Bring us *Blue Seeds* from the asteroids to the south and we will vouch for you.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"A9725\" />\n<place-item dest=\"A9725\" item=\"Blue seeds\" />\n<condition have-item=\"Blue seeds\" at-dest=\"A9725\"/>\n<mark-on-map dest=\"Alien Reception\" />\n<condition state=\"surface\" have-item=\"Blue seeds\" at-dest=\"Alien Reception\" trigger=\"GIVE SEEDS\"/>\n<dialog model=\"Alien Meetup\">_\"The Soma is grateful. The blue flowers grow and multiply. A cycle. But if a flower is nurtured by us, it will branch that cycle and spawn a Soma.\"_</dialog>\n<dialog>_\"Go to our home world. We will spread the word our friendship. Some will distrust you, but many more will welcome you.\"_</dialog>\n<mark-on-map dest=\"Soma\" />\n<condition state=\"space\" at-dest=\"Soma\" trigger=\"HAIL\"/>\n<dialog>You send a message toward the planet. The supposed home world of the Soma.\nUp until now you almost doubted the stories of their race, and now you are the first human to visit this system.</dialog>\n<dialog>_\"Starfarer. We hear you are a friend.\nWe propose an exchange, a trade as you call it. Go to *Beryl Canis Lookout* and gather the *Essence*.\"_</dialog>\n<dialog>Up until now the communicatio with these aliens have been surprisingly smooth. But now you feel confused.</dialog>\n<mark-on-map dest=\"Beryl Canis Lookout\" />\n<place-item dest=\"Beryl Canis Lookout\" item=\"Soma Essence\"/>\n<mark-on-map dest=\"Soma\" />\n<condition state=\"surface\" have-item=\"Soma Essence\" at-dest=\"Soma\" trigger=\"QUEST\"/>\n<dialog>The \"Essence\" is apparently some sort of data storage. Maybe. You are not sure. Now back to *Soma* to *Land* and hand it over.</dialog>\n<dialog>Hesitantly a small drone approach you. It accepts the Essence and hurries away. The Soma are shy. You hear nothing on the radio. Confused you go back to the ship.</dialog>\n<dialog>In the cargo hold a new item sits. How they managed to deliver it is a mystery. One that you don't intend to investigate.</dialog>\n<give item=\"Self Healing Hull\"/>\n",
+      "xml": "\n<condition at-dest=\"Alien Reception\" />\n<dialog>The star ahead of you is Beryl Canis. The home of the Soma. A star that no one has visited, they Soma block all jump paths to their home.</dialog>\n<dialog model=\"Alien Meetup\">Around the alien buoy a Soma ship is parked. It does not attack you, perhaps you can approach and try to hail it.</dialog>\n\n<condition state=\"surface\" at-dest=\"Alien Reception\" trigger=\"HAIL\"/>\n<dialog model=\"Alien Meetup\">_\"Visitor. Starfarer! Many Soma are suspicious. And some are welcoming. Visitors should be careful.\"_</dialog>\n<dialog model=\"Alien Meetup\">_\"You have dealt with the Blue Seeds and Flowers. Be very careful with those. Bring us *Blue Seeds* from the asteroids to the south and we will vouch for you.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"A9725\" />\n<place-item dest=\"A9725\" item=\"Blue seeds\" />\n\n<condition have-item=\"Blue seeds\" at-dest=\"A9725\"/>\n<mark-on-map dest=\"Alien Reception\" />\n\n<condition state=\"surface\" have-item=\"Blue seeds\" at-dest=\"Alien Reception\" trigger=\"GIVE SEEDS\"/>\n<dialog model=\"Alien Meetup\">_\"The Soma is grateful. The blue flowers grow and multiply. A cycle. But if a flower is nurtured by us, it will branch that cycle and spawn a Soma.\"_</dialog>\n<dialog>_\"Go to our home world. We will spread the word our friendship. Some will distrust you, but many more will welcome you.\"_</dialog>\n<mark-on-map dest=\"Soma\" />\n\n<condition state=\"space\" at-dest=\"Soma\" trigger=\"HAIL\"/>\n<dialog>You send a message toward the planet. The supposed home world of the Soma.\nUp until now you almost doubted the stories of their race, and now you are the first human to visit this system.</dialog>\n<dialog>_\"Starfarer. We hear you are a friend.\nWe propose an exchange, a trade as you call it. Go to *Beryl Canis Lookout* and gather the *Essence*.\"_</dialog>\n<dialog>Up until now the communicatio with these aliens have been surprisingly smooth. But now you feel confused.</dialog>\n<mark-on-map dest=\"Beryl Canis Lookout\" />\n<place-item dest=\"Beryl Canis Lookout\" item=\"Soma Essence\"/>\n\n<condition have-item=\"Soma Essence\" />\n<dialog>The \"Essence\" is apparently some sort of data storage. Maybe. You are not sure. Now back to *Soma* to *Land* and hand it over.</dialog>\n<mark-on-map dest=\"Soma\" />\n\n<condition state=\"surface\" have-item=\"Soma Essence\" at-dest=\"Soma\" trigger=\"GIVE ESSENCE\"/>\n<dialog>The \"Essence\" is apparently some sort of data storage. Maybe. You are not sure. Now back to *Soma* to *Land* and hand it over.</dialog>\n<dialog>Hesitantly a small drone approach you. It accepts the Essence and hurries away. The Soma are shy. You hear nothing on the radio. Confused you go back to the ship.</dialog>\n<dialog>In the cargo hold a new item sits. How they managed to deliver it is a mystery. One that you don't intend to investigate.</dialog>\n<give item=\"Self Healing Hull\"/>\n",
       "tags": "soma",
       "color": "8f0",
       "icon": "rhomb"
@@ -4922,7 +4995,7 @@
     },
     {
       "name": "Rebuild the Thanatos",
-      "xml": "<condition at-dest=\"Thanatos\" trigger=\"QUEST\"/>\n<dialog model=\"Thanatos\">It is the Thanatos derelict. Immensely old. Broken. The intact half is covered in cuneiform markings.</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Thanatos mesh;Thanatos core;Thanatos nacelle\"/>\n<dialog>You now possess all three missing pieces of the Thanatos.</dialog>\n<condition at-dest=\"Thanatos\" trigger=\"REBUILD\"/>\n<dialog model=\"Thanatos\" ok=\"REBUILD THANATOS\" cancel=\"LEAVE\">The relics would restore the form of Thanatos.</dialog>\n<dialog model=\"Thanatos\">As the parts touch the derelict the edges melt and merge. In an instant the dead ship springs to life, fire dancing across its hull as it burns away the dust covering it.</dialog>\n<dialog model=\"Sphere\">The radio warbles as it is flooded with signals. A single grey sphere emerges from the ship and drifts toward you.</dialog>\n<dialog model=\"Sphere\">Touching the sphere cause tiny ripples of light on its surface. It whispers the name \"Momus\" into your mind.</dialog>\n<give item=\"Momus\"/>",
+      "xml": "<condition at-dest=\"Thanatos\" trigger=\"QUEST\"/>\n<dialog model=\"Thanatos\">It is the Thanatos derelict. Immensely old. Broken. The intact half is covered in cuneiform markings.</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Thanatos mesh;Thanatos core;Thanatos nacelle\"/>\n<dialog>You now possess all three missing pieces of the Thanatos.</dialog>\n<condition at-dest=\"Thanatos\" trigger=\"REBUILD\"/>\n<dialog model=\"Thanatos\" ok=\"REBUILD THANATOS\" cancel=\"LEAVE\">The relics would restore the form of Thanatos.</dialog>\n<dialog model=\"Thanatos\">As the parts touch the derelict the edges melt and merge. In an instant the dead ship springs to life, fire dancing across its hull as it burns away the dust covering it.</dialog>\n<dialog model=\"Sphere\">The radio warbles as it is flooded with signals. A single grey sphere emerges from the ship and drifts toward you.</dialog>\n<dialog model=\"Sphere\">Touching the sphere cause tiny ripples of light on its surface. It whispers the name *Momus* into your mind.</dialog>\n<give item=\"Momus\"/>",
       "tags": ""
     },
     {
@@ -4944,7 +5017,7 @@
     },
     {
       "name": "Tau Pavonis Observer",
-      "xml": "<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>You are hailed as you enter orbit: _\"Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"We study Tau Pavonis and need assistance in placing sensors at the *Observatory*. Compensation is 500 credits. Are you interested?\"_</dialog>\n<dialog>_\"First you need protection. Travel to *Pavonis Mirror* and aquire a *Star Shield*.\"_</dialog>\n<give item=\"Star Sensor\"/>\n<mark-on-map dest=\"Pavonis Mirror\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>_\"Traveller. This is Mirror spaceport. We have prepared the *Star Shield* you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed.\"_</dialog>\n<give item=\"Star Shield\"/>\n\n<condition at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed=\"Star Shield\" trigger=\"READY\"/>\n<dialog ok=\"PROCEED\" cancel=\"WAIT\">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>\n<travel dest=\"Pavonis Observatory\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"PUT SENSOR\"/>\n<dialog model=\"Sol Array\">You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\"/>\n<travel dest=\"Pavonis Mirror\"/>\n<dialog>_\"You made it! Must be a sturdy ship you got there.\"_</dialog>\n<dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organisation.</dialog>\n<dialog>_\"Let us remove that Star Shield, you can collect your payment at *Pavonis Smoke*.\"_</dialog>\n<take item=\"Star Shield\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog>_\"You survived! Excellent, we are anxious to get the data from the sensor. Please accept our payment!\"_</dialog>\n<give credits=\"1000\"/>\n<remove-map-marker/>\n\n<condition not-at-dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>_\"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor is most disturbing. Tau Pavonis is behaving unphysically.\"_</dialog>\n<dialog>_\"You must help us collect more data! Please take us to the *Observatory* so we can make further readings.\"_</dialog>\n<dialog>This time you request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>\n<dialog>_\"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental *Shield Reactor*. Ok?\"_</dialog>\n<dialog>You see an opportunity to make demands.\n_\"That sounds useful, give it to me in advance, and a regular reward afterwards!\"_</dialog>\n<give item=\"Shield Core Mk2\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>They load the *Star Shield* onto you ship once again. They tell you to *install* it but they all look a bit worried this time. What is it they have found inside that star?</dialog>\n<give item=\"Star Shield\"/>\n\n<condition at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed=\"Star Shield\" trigger=\"READY\"/>\n<travel dest=\"Pavonis Observatory\"/>\n<dialog>The scientists take readings with arcane instruments they brought. But you don't need any telescopes, looking throught the dimmed windows you can see a region of the stars surface pulsing. Or rather heaving, like it is breathing.</dialog>\n<dialog model=\"Worm\">Suddenly the star's surface open like a flower and something break free from open wound. It trashes like a wounded animal. It looks slow like a ballet, but at these scales it is tremendously fast.</dialog>\n<dialog>The monstrosity accelerates and trace a glowing path towards *Pavonis Charm*. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>\n<place-enemy enemy=\"Worm\" dest=\"Pavonis Charm\"/>\n<mark-on-map dest=\"Pavonis Charm\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\" />\n<travel dest=\"Pavonis Mirror\" />\n\n<condition at-dest=\"A117\"/>\n<dialog model=\"Worm\">Your sensors can make out the entity orbiting Pavonis Charm. Approaching would be devastating.</dialog>\n<dialog>You are hailed by a distant ship. \n\n_\"Traveller. We are the Worshipers. Things have been set in motion and there might still be time to dispel this danger. Seek us out at *Paxos Station*.\"_</dialog>\n<mark-on-map dest=\"Paxos Station\"/>\n\n<condition at-dest=\"Paxos Station\" trigger=\"HAIL\"/>\n<dialog model=\"Paxos Station\">_\"This is Paxos Station, the Cathedral of Worship. The scholars at Pavonis Smoke have woken the Worm. You were their tool and now we can help you undo their foolish work.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The Worm's chains can be restored with the three tools that once bound it originally.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The children of the Worm once bound their progenitor with the artifacts Epiales, Momus and Horkos. Seek them out in the Fields, the Garden and the Ruins.\"_</dialog>\n\n<condition have-item=\"Momus;Horkos;Epiales\" at-dest=\"A2172;Paxos Station\"/>\n<dialog>_\"Traveller. You have gathered the relics.\"_</dialog>\n<dialog>_\"While your hands were busy the Worm multiplied. Sired its seedlings.\nMay the relics help you. Clear out the Seedlings around *Pavonis Charm*!\"_</dialog>\n<mark-on-map dest=\"Pavonis Charm\" />\n<place-enemy dest=\"Charm Beta\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Gamma\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Delta\" enemy=\"Worm Seedling\" loot=\"\"/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" no-enemy-at-dest=\"Charm Beta;Charm Gamma;Charm Delta\" />\n<place-enemy dest=\"Pavonis Charm\" enemy=\"Weakened Worm\" loot=\"Worm Umbra\" />\n<dialog model=\"Worm Seedling\">The final Seedling succumbs to your assault. Somehow you know that the Worm is affected. Touched by your actions here that bestial presence is now weakened. This can now end.</dialog>\n\n<condition no-enemy-at-dest=\"Pavonis Charm\" />\n<dialog model=\"Worm\">The worm is mortally wounded. Its appendages flail and whips up foam on the surface of Pavis Charm as it is pulled below the surface and into the depths of the gas giant.</dialog>\n<mark-on-map dest=\"Paxos Station\" />\n\n<condition at-dest=\"Paxos Station\" />\n<dialog>_\"Traveller. You bested the Worm. The battle was glorious.\nYet many here feel fear. *The Worm is not dead.* It might slumbes for eons inside Pavonis Charm, but it will wake once again.\"_</dialog>\n\n\n\n\n",
+      "xml": "<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>You are hailed as you enter orbit: _\"Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"We study Tau Pavonis and need assistance in placing sensors at the *Observatory*. Compensation is 1000 credits. Are you interested?\"_</dialog>\n<dialog>_\"First you need protection. Travel to *Pavonis Mirror* and aquire a *Star Shield*.\"_</dialog>\n<give item=\"Star Sensor\"/>\n<mark-on-map dest=\"Pavonis Mirror\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>_\"Traveller. This is Mirror spaceport. We have prepared the *Star Shield* you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed.\"_</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed-item=\"Star Shield\" trigger=\"READY\"/>\n<dialog ok=\"PROCEED\" cancel=\"WAIT\">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>\n<travel dest=\"Pavonis Observatory\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"PUT SENSOR\"/>\n<take item=\"Star Sensor\" />\n<dialog model=\"Sol Array\">You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\"/>\n<travel dest=\"Pavonis Mirror\"/>\n<dialog>_\"You made it! Must be a sturdy ship you got there.\"_</dialog>\n<dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organisation.</dialog>\n<dialog>_\"Let us remove that Star Shield, you can collect your payment at *Pavonis Smoke*.\"_</dialog>\n<take item=\"Star Shield\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog>_\"You survived! Excellent, we are anxious to get the data from the sensor. Please accept our payment!\"_</dialog>\n<give credits=\"1000\"/>\n<remove-map-marker/>\n\n<condition not-at-dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>_\"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor is most disturbing. Tau Pavonis is behaving unphysically.\"_</dialog>\n<dialog>_\"You must help us collect more data! Please take us to the *Observatory* so we can make further readings.\"_</dialog>\n<dialog>This time you request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>\n<dialog>_\"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental *Shield Reactor*. Ok?\"_</dialog>\n<dialog>You see an opportunity to make demands.\n_\"That sounds useful, give it to me in advance, and a regular reward afterwards!\"_</dialog>\n<give item=\"Shield Core Mk2\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>They load the *Star Shield* onto you ship once again. They tell you to *install* it but they all look a bit worried this time. What is it they have found inside that star?</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" installed-item=\"Star Shield\" trigger=\"READY\"/>\n<travel dest=\"Pavonis Observatory\"/>\n<dialog>The scientists take readings with their arcane instruments.\nBut you don't need any telescopes. Just looking throught the dimmed windows you can see a region of the stars surface pulsing. Or heaving, as if breathing.</dialog>\n<dialog model=\"Worm\">Suddenly the star's surface open like a flower and something break free from the open wound. It trashes like a wounded animal. It looks slow like a ballet, but at this scale it is tremendously fast.</dialog>\n<dialog>The monstrosity accelerates and trace a glowing path towards *Pavonis Charm*. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>\n<place-enemy enemy=\"Worm\" dest=\"Pavonis Charm\"/>\n<mark-on-map dest=\"Pavonis Charm\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\" />\n<travel dest=\"Pavonis Mirror\" />\n<take item=\"Star Shield\" />\n\n<condition at-dest=\"A117\"/>\n<dialog model=\"Worm\">Your sensors can make out the entity orbiting Pavonis Charm. Approaching would be devastating.</dialog>\n<dialog>You are hailed by a distant ship. \n\n_\"Traveller. We are the Worshipers. Things have been set in motion and there might still be time to dispel this danger. Seek us out at *Paxos Station*.\"_</dialog>\n<mark-on-map dest=\"Paxos Station\"/>\n\n<condition at-dest=\"Paxos Station\" trigger=\"HAIL\"/>\n<dialog model=\"Paxos Station\">_\"This is Paxos Station, the Cathedral of Worship. The scholars at Pavonis Smoke have woken the Worm. You were their tool and now we can help you undo their foolish work.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The Worm's chains can be restored with the three tools that once bound it originally.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The children of the Worm once bound their progenitor with the artifacts Epiales, Momus and Horkos. Seek them out in the Fields, the Garden and the Ruins.\"_</dialog>\n\n<condition have-item=\"Momus;Horkos;Epiales\" at-dest=\"A2172;Paxos Station\"/>\n<dialog>_\"Traveller. You have gathered the relics.\"_</dialog>\n<dialog>_\"While your hands were busy the Worm multiplied. Sired its seedlings.\nMay the relics help you. Clear out the Seedlings around *Pavonis Charm*!\"_</dialog>\n<mark-on-map dest=\"Pavonis Charm\" />\n<place-enemy dest=\"Charm Beta\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Gamma\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Delta\" enemy=\"Worm Seedling\" loot=\"\"/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" no-enemy-at-dest=\"Charm Beta;Charm Gamma;Charm Delta\" />\n<place-enemy dest=\"Pavonis Charm\" enemy=\"Weakened Worm\" loot=\"Worm Umbra\" />\n<dialog model=\"Worm Seedling\">The final Seedling succumbs to your assault. Somehow you know that the Worm is affected. Touched by your actions here that bestial presence is now weakened. This can now end.</dialog>\n\n<condition no-enemy-at-dest=\"Pavonis Charm\" />\n<dialog model=\"Worm\">The worm is mortally wounded. Its appendages flail and whips up foam on the surface of Pavis Charm as it is pulled below the surface and into the depths of the gas giant.</dialog>\n<mark-on-map dest=\"Paxos Station\" />\n\n<condition at-dest=\"Paxos Station\" />\n<dialog>_\"Traveller. You bested the Worm. The battle was glorious.\nYet many here feel fear. *The Worm is not dead.* It might slumbes for eons inside Pavonis Charm, but it will wake once again.\"_</dialog>\n\n\n\n\n",
       "tags": "pavonis"
     },
     {
@@ -5317,7 +5390,7 @@
     {
       "name": "Sentinel",
       "geometry": "composite",
-      "tags": "enemy",
+      "tags": "ship",
       "transform": [
         ["scale", 1, 1, 1],
         ["rotate", 180, 0, 30],
@@ -5351,38 +5424,20 @@
     {
       "name": "Smacky's2",
       "geometry": "composite",
+      "tags": "station",
       "transform": [["scale", 1, 1, 1], ["translate", 20, -120, -50]],
       "parts": [
         {
           "geometry": "lathe",
-          "res": 20,
+          "res": 10,
           "transform": [["rotate", 60, 0, 0], ["radial-wave", 5, 1.3, 0]],
           "path": [
             [0, 0, -100],
             [30, 0, -96],
-            [50, 0, -90],
             [60, 0, -80],
-            [65, 0, -60],
             [70, 0, -40],
-            [70, 0, -20],
-            [60, 0, -10],
-            [0, 0, 0]
-          ]
-        },
-        {
-          "geometry": "lathe",
-          "res": 20,
-          "transform": [["rotate", 60, 0, 0], ["radial-wave", 5, 1.3, 0]],
-          "path": [
-            [0, 0, -100],
-            [30, 0, -96],
-            [50, 0, -90],
-            [60, 0, -80],
-            [65, 0, -60],
-            [70, 0, -40],
-            [70, 0, -20],
-            [60, 0, -10],
-            [0, 0, 0]
+            [55, 0, 0],
+            [0, 0, 20]
           ]
         },
         {
@@ -5408,6 +5463,7 @@
     {
       "name": "Smacky's",
       "geometry": "composite",
+      "tags": "anomaly",
       "transform": [
         ["scale", 0.8, 0.8, 0.8],
         ["rotate", 0, 0, 0],
@@ -5466,9 +5522,10 @@
         {
           "name": "body",
           "geometry": "lathe",
-          "res": 6,
+          "res": 4,
           "transform": [
-            ["scale", 3.6, 1.5, 3],
+            ["rotate", 0, 0, 45],
+            ["scale", 5.2, 1.75, 3],
             ["rotate", 180, 90, 0],
             ["translate", 0, 0, 0]
           ],
@@ -5492,6 +5549,7 @@
     {
       "name": "Cosmic Whales",
       "geometry": "composite",
+      "tags": "anomaly",
       "transform": [["rotate", 180, 0, 0], ["translate", 40, 40, -50]],
       "parts": [
         {
@@ -5665,7 +5723,7 @@
           ]
         }
       ],
-      "tags": "ship"
+      "tags": "anomaly"
     },
     {
       "name": "Sphere",
@@ -5683,9 +5741,9 @@
       "name": "Alien Buoy",
       "geometry": "composite",
       "transform": [
-        ["scale", 1, 1, 1],
         ["rotate", -12, 23, 0],
-        ["translate", 0, 0, -80]
+        ["translate", 0, 0, -80],
+        ["scale", 1.25, 1.25, 1.25]
       ],
       "parts": [
         {
@@ -5805,7 +5863,7 @@
             [200, 0, 5],
             [50, 0, 0]
           ],
-          "tags": "enemy"
+          "tags": "anomaly"
         }
       ]
     },
@@ -5874,7 +5932,7 @@
         [38, 0, -7],
         [40, 0, 0]
       ],
-      "tags": "anomaly"
+      "tags": "ship"
     },
     {
       "name": "Rocket Drone",
@@ -5952,11 +6010,12 @@
         [38, 0, -7],
         [40, 0, 0]
       ],
-      "tags": "anomaly"
+      "tags": "ship"
     },
     {
       "name": "Nanite Megacluster",
       "geometry": "composite",
+      "tags": "ship",
       "transform": [
         ["scale", 1, 1, 1],
         ["rotate", 180, 0, 0],
@@ -6146,7 +6205,7 @@
         [200, 0, 0],
         [90, 0, 22]
       ],
-      "tags": "enemy"
+      "tags": "ship"
     },
     {
       "name": "Soma Saay",
@@ -6165,7 +6224,7 @@
         [200, 0, 5],
         [50, 0, 0]
       ],
-      "tags": "enemy"
+      "tags": "ship"
     },
     {
       "name": "Soma Sonn",
@@ -6196,12 +6255,12 @@
           "path": [[0, 0, -70], [160, 0, -10], [160, 0, 10], [0, 0, 70]]
         }
       ],
-      "tags": "enemy"
+      "tags": "ship"
     },
     {
       "name": "Arrowship",
       "geometry": "composite",
-      "tags": "enemy",
+      "tags": "ship",
       "transform": [
         ["scale", 1, 1, 1],
         ["rotate", 180, 0, 0],
@@ -6225,7 +6284,7 @@
     {
       "name": "Mimos Guard",
       "geometry": "composite",
-      "tags": "enemy",
+      "tags": "ship",
       "transform": [
         ["scale", 0.7, 0.7, 0.7],
         ["rotate", -90, 0, 0],
@@ -6975,7 +7034,7 @@
           "angle": 6
         }
       ],
-      "tags": "enemy"
+      "tags": "ship"
     },
     {
       "name": "Junk",
@@ -7101,7 +7160,7 @@
       "geometry": "composite",
       "tags": "station",
       "transform": [
-        ["rotate", 0, 0.47, 0],
+        ["rotate", 0, 27, 0],
         ["scale", 0.7, 0.7, 0.7],
         ["translate", 60, 0, 30]
       ],
@@ -7110,10 +7169,10 @@
           "geometry": "lathe",
           "res": 12,
           "transform": [
-            ["rotate", 0, 0, 0.262],
+            ["rotate", 0, 0, 15],
             ["radial-wave", 3, 0.5, 0],
             ["parabola", 0, 0, 0.005],
-            ["rotate", 180, 0, -0.515],
+            ["rotate", 180, 0, -30],
             ["scale", 1.5, 1.5, 0.3],
             ["translate", 0, 0, -125]
           ],
@@ -7155,9 +7214,9 @@
       "name": "Landsraad Station",
       "geometry": "composite",
       "transform": [
-        ["scale", 3, 3, 3],
+        ["scale", 4, 4, 4],
         ["rotate", -90, 0, 0],
-        ["translate", 0, -120, -70]
+        ["translate", 0, -160, -80]
       ],
       "parts": [
         {
@@ -7611,7 +7670,7 @@
           "path": [[20, 0, 0], [40, 0, -5], [60, 0, 0], [40, 0, 5], [20, 0, 0]]
         }
       ],
-      "tags": "enemy"
+      "tags": "ship"
     },
     {
       "name": "Worm Seedling",
@@ -7651,7 +7710,7 @@
           ]
         }
       ],
-      "tags": "enemy"
+      "tags": "ship"
     },
     {
       "name": "Paxos Station",
@@ -8017,20 +8076,6 @@
       "model": "Smacky's"
     },
     {
-      "id": "anomaly-Tiendong",
-      "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 20,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["888", "D84"]
-      },
-      "surface": null,
-      "model": "Tiendong Station"
-    },
-    {
       "id": "anomaly-Maxwell_Station",
       "type": "anomaly",
       "desc": "",
@@ -8045,18 +8090,18 @@
       "model": "Ring Station"
     },
     {
-      "id": "anomaly-debris",
+      "id": "anomaly-Tiendong",
       "type": "anomaly",
       "desc": "",
       "celestial": {
-        "r": 4,
+        "r": 20,
         "amb": 0.2,
         "oct": 3,
         "zoom": 10,
-        "color": ["F80", "F80"]
+        "color": ["888", "D84"]
       },
       "surface": null,
-      "model": "Debris"
+      "model": "Tiendong Station"
     },
     {
       "id": "anomaly-apate",
@@ -8115,18 +8160,18 @@
       "model": "Alien Buoy"
     },
     {
+      "id": "anomaly-debris",
       "type": "anomaly",
-      "id": "anomaly-sol-array",
+      "desc": "",
       "celestial": {
         "r": 4,
         "amb": 0.2,
-        "oct": 16,
-        "zoom": 1.2,
-        "color": ["f80", "f80"]
+        "oct": 3,
+        "zoom": 10,
+        "color": ["F80", "F80"]
       },
       "surface": null,
-      "desc": "",
-      "model": "Sol Array"
+      "model": "Debris"
     },
     {
       "id": "anomaly-gate",
@@ -8197,6 +8242,20 @@
       },
       "surface": null,
       "model": "Paxos Station"
+    },
+    {
+      "type": "anomaly",
+      "id": "anomaly-sol-array",
+      "celestial": {
+        "r": 4,
+        "amb": 0.2,
+        "oct": 16,
+        "zoom": 1.2,
+        "color": ["f80", "f80"]
+      },
+      "surface": null,
+      "desc": "",
+      "model": "Sol Array"
     },
     {
       "id": "anomaly-soma-meetup",
@@ -8310,15 +8369,15 @@
       "celestial": {
         "r": 7,
         "amb": 0.1,
-        "oct": 2,
+        "oct": 3,
         "zoom": 0.3,
         "color": ["AFA", "666"]
       },
       "surface": {
-        "zoom": 1.2,
+        "zoom": 0.9,
         "height": 1,
-        "octaves": 2,
-        "falloff": 0.1,
+        "octaves": 3,
+        "falloff": 0.3,
         "curve": [0, 0.25, 0.5, 1, 1, 0.5, 0.25, 0],
         "spectrum": ["040", "0F4", "888", "666", "888", "666"]
       },
@@ -8468,7 +8527,7 @@
         "r": 5,
         "amb": 0.2,
         "oct": 3,
-        "zoom": 10,
+        "zoom": 0.7,
         "color": ["484", "888"]
       },
       "surface": {
@@ -8673,7 +8732,7 @@
         "height": 2,
         "octaves": 3,
         "falloff": 0.2,
-        "curve": [0, 0.8, 1],
+        "curve": [0, 0.65, 1],
         "spectrum": ["20F", "28F", "4AF"]
       },
       "model": null
@@ -8803,7 +8862,7 @@
     },
     {
       "type": "planet",
-      "id": "planet-hell-1",
+      "id": "planet-green-6",
       "desc": "Volcanoes constantly feed the endless forest with nutrients",
       "celestial": {
         "r": 15,
@@ -8818,7 +8877,28 @@
         "octaves": 3,
         "falloff": 0.5,
         "curve": [0, 0.2, 0.4, 0.6, 0.8, 1, 0.9],
-        "spectrum": ["06F", "06F", "8F0", "0F0", "0F0", "0D0", "000", "aaa"]
+        "spectrum": ["06F", "06F", "8F0", "0F0", "0F0", "0D0", "080"]
+      },
+      "model": null
+    },
+    {
+      "type": "planet",
+      "id": "planet-hell-1",
+      "desc": "Scorching hot desert streaked with mysteriously temperate and humid forests",
+      "celestial": {
+        "r": 10,
+        "amb": 0.1,
+        "oct": 2,
+        "zoom": 15,
+        "color": ["f30", "555"]
+      },
+      "surface": {
+        "zoom": 2.5,
+        "height": 2,
+        "octaves": 2,
+        "falloff": 0.2,
+        "curve": [1, 0.75, 0.5, 0.1, 0],
+        "spectrum": ["F00", "888", "888", "444"]
       },
       "model": null
     },
@@ -8882,27 +8962,6 @@
         "curve": [0.4, 0.5, 0.45, 0.5, 0.3, 0, 0],
         "spectrum": ["F80", "F00", "000", "666", "666", "666", "666", "666"]
       }
-    },
-    {
-      "type": "planet",
-      "id": "planet-hell-5",
-      "desc": "Scorching hot desert streaked with mysteriously temperate and humid forests",
-      "celestial": {
-        "r": 10,
-        "amb": 0.1,
-        "oct": 2,
-        "zoom": 15,
-        "color": ["f30", "555"]
-      },
-      "surface": {
-        "zoom": 2.5,
-        "height": 2,
-        "octaves": 2,
-        "falloff": 0.2,
-        "curve": [1, 0.75, 0.5, 0.1, 0],
-        "spectrum": ["F00", "888", "888", "444"]
-      },
-      "model": null
     },
     {
       "type": "planet",

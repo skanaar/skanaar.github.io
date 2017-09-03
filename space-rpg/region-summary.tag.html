@@ -3,7 +3,9 @@
   <label>Summary</label>
   <div class="input-grid">
     <em>treasures</em> <input type=text readonly value={treasureSum()}><br />
-    <em>level</em> <input type=text readonly value={level()}>
+    <em>treasures</em> <input type=text readonly value={treasureLevel()}><br />
+    <em>enemies</em> <input type=text readonly value={enemyLevel()}><br />
+    <em>loot</em> <input type=text readonly value={lootLevel()}>
   </div>
 
   <script>
@@ -32,14 +34,27 @@
       return _.sum(items, 'credits') + ' credits'
     })
 
-    self.level = guard(function (region) {
-      var members = app.world.destinations.filter(e => dist(e.pos, region.pos) < region.radius)
-      var itemIds = _.flatten(members.map(e => [e.treasures, (e.enemy ? e.enemy.loot : [])]))
-      var items = itemIds.map(id => app.world.items.find(item => item.name==id) || { level: 0 })
-      var enemyIds = _.compact(members.map(e => e.enemy && e.enemy.type))
+    var installable = item => item.type != 'rare' && item.type != 'common' && item.type != 'quest'
+    var getItems = ids => ids.map(id => app.world.items.filter(installable).find(item => item.name==id) || { level: 0 })
+    var printableRange = es => _.min(es.map(e => e.level)) + ' - ' + _.max(es.map(e => e.level))
+
+    self.enemyLevel = guard(function (region) {
+      var members = app.world.destinations.filter(e => dist(e.pos, region.pos) < region.radius && e.enemy)
+      var enemyIds = members.map(e => e.enemy.type)
       var enemies = _.compact(enemyIds.map(id => app.world.enemies.find(enemy => enemy.name == id)))
-      var values = _.map(items, 'level').concat(_.map(enemies, 'level'))
-      return _.min(values) + ' - ' + _.max(values)
+      return printableRange(enemies)
+    })
+
+    self.treasureLevel = guard(function (region) {
+      var members = app.world.destinations.filter(e => dist(e.pos, region.pos) < region.radius)
+      var items = getItems(_.flatten(members.map(e => e.treasures)))
+      return printableRange(items)
+    })
+
+    self.lootLevel = guard(function (region) {
+      var members = app.world.destinations.filter(e => dist(e.pos, region.pos) < region.radius && e.enemy)
+      var items = getItems(_.flatten(members.map(e => e.enemy.loot)))
+      return printableRange(items)
     })
   </script>
 

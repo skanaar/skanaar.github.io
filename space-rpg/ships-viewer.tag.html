@@ -75,7 +75,7 @@
     <div class="input-grid">
       <em>visual</em>
       <select ref="visualInput">
-        <option each={e in world.models}>{e.name}</option>
+        <option each={e in shipModels()}>{e.name}</option>
       </select><br />
       <em>flying</em> <input type=checkbox ref=isFlyingInput checked={selected && selected.isFlying}><br />
       <em>level</em> <input type=number ref=levelField value={selected && selected.level || 0}>
@@ -124,6 +124,8 @@
 
     self.isEnemySelected = () => self.world.enemies.some(e => e == self.selected)
 
+    self.shipModels = () => self.world.models.filter(e => !e.tags || e.tags.includes('ship'))
+
     self.remove = function () {
       self.world.ships = self.world.ships.filter(e => e != self.selected)
       self.world.enemies = self.world.enemies.filter(e => e != self.selected)
@@ -135,6 +137,7 @@
         generator:{hull:0, shield:0, energy: 0},
         name: 'unnamed',
         level: 1,
+        slots: 0,
         visual: 'monitor-drone',
         isFlying: true
       })
@@ -146,6 +149,7 @@
         generator:{hull:0, shield:0, energy: 0},
         name: 'unnamed',
         level: 1,
+        slots: 0,
         visual: 'monitor-drone',
         inventory: [],
         isFlying: true
