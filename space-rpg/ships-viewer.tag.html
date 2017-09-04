@@ -97,6 +97,9 @@
     </div>
 
     <label if={isEnemySelected()}>Equipment</label>
+    <div class="input-grid">
+      <em>level range</em> <input readonly value={equipmentLevel}>
+    </div>
     <button if={isEnemySelected()} onclick={chooseEquipment}>Choose equipment</button>
 
     <label if={!isEnemySelected()}>Value</label>
@@ -156,9 +159,12 @@
       })
     }
     
+    var printableRange = es => _.min(es.map(e => e.level)) + ' - ' + _.max(es.map(e => e.level))
     self.edit = function (e) {
       self.selected = e.item.ship
       self.refs.visualInput.value = self.selected.visual
+      var items = self.selected.inventory.map(id => app.world.items.find(item => item.name==id) || { level: 0 })
+      self.equipmentLevel = printableRange(items)
     }
     
     self.endEditing = function () {

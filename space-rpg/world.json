@@ -523,7 +523,16 @@
       "generator": {"hull": 1, "shield": 2, "energy": 2},
       "name": "Soma Reaver",
       "visual": "Soma Saay",
-      "inventory": ["Phased Ray", "Autogun Mk2"],
+      "inventory": [
+        "Focus Beam",
+        "Focus Beam",
+        "EMP Bomb",
+        "Octagon Battery",
+        "Recharge Loop",
+        "Repair Nanites",
+        "Sacrifice Device",
+        "Shield Battery"
+      ],
       "isFlying": true,
       "value": 0,
       "level": 5,
@@ -542,7 +551,12 @@
       "generator": {"hull": 2, "shield": 2, "energy": 10},
       "name": "Soma Predator",
       "visual": "Soma Saay",
-      "inventory": ["Phased Ray", "Autogun"],
+      "inventory": [
+        "Nano Repairers",
+        "Decagon Battery",
+        "Metabomb",
+        "Focus Beam"
+      ],
       "level": 6,
       "value": 0,
       "isFlying": false,
@@ -620,9 +634,75 @@
       "isFlying": true,
       "slots": 0,
       "value": 0
+    },
+    {
+      "attr": {
+        "maxhull": 50,
+        "maxshield": 15,
+        "maxenergy": 30,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 1, "shield": 1, "energy": 0},
+      "name": "Gnats",
+      "level": 6,
+      "slots": 0,
+      "visual": "Gnats",
+      "inventory": [
+        "Soma Emitter",
+        "Null Reactor",
+        "Monopole Shield",
+        "Nanite Swarm",
+        "Repair Nanites",
+        "Nano Repairers"
+      ],
+      "isFlying": true,
+      "value": 0
+    },
+    {
+      "attr": {
+        "maxhull": 120,
+        "maxshield": 50,
+        "maxenergy": 30,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 4, "shield": 2, "energy": 0},
+      "name": "Gnat Assimilate",
+      "level": 7,
+      "slots": 0,
+      "visual": "Gnat Assimilate",
+      "inventory": [
+        "Nano Repairers",
+        "Welding Robot",
+        "Sacrifice Device",
+        "Energy Battery",
+        "Shield Battery",
+        "Decagon Battery",
+        "Null Reactor",
+        "Soma Emitter",
+        "Metabomb"
+      ],
+      "isFlying": true,
+      "value": 0
     }
   ],
   "items": [
+    {
+      "type": "quest",
+      "level": 0,
+      "credits": 0,
+      "name": "Soma Ambassador",
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "critical": 0
+    },
     {
       "type": "quest",
       "attr": {
@@ -4254,7 +4334,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 1082, "y": -1216},
+      "pos": {"x": 1102, "y": -1196},
       "name": "A8216",
       "style": "asteroid-1",
       "trader": null,
@@ -4262,7 +4342,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 961, "y": -1170},
+      "pos": {"x": 981, "y": -1170},
       "name": "A6110",
       "style": "asteroid-1",
       "trader": null,
@@ -4278,7 +4358,7 @@
       "treasures": ["Blue seeds"]
     },
     {
-      "pos": {"x": 941, "y": -1317},
+      "pos": {"x": 941, "y": -1297},
       "name": "Beryl Canis",
       "style": "star-soma",
       "trader": null,
@@ -4318,7 +4398,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 1087, "y": -1482},
+      "pos": {"x": 1087, "y": -1462},
       "name": "A8782",
       "style": "asteroid-4",
       "trader": null,
@@ -4327,7 +4407,7 @@
     },
     {
       "pos": {"x": 1179, "y": -1271},
-      "name": "A7971",
+      "name": "Soma Isolationist Gate",
       "style": "asteroid-7",
       "trader": null,
       "enemy": null,
@@ -4398,7 +4478,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 1155, "y": -1387},
+      "pos": {"x": 1035, "y": -1347},
       "name": "Soma",
       "style": "planet-soma",
       "trader": null,
@@ -5064,6 +5144,150 @@
         ]
       },
       "treasures": []
+    },
+    {
+      "pos": {"x": 972, "y": -1610},
+      "name": "A82",
+      "style": "asteroid-9",
+      "trader": null,
+      "enemy": {"type": "Gnats", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1110, "y": -1664},
+      "name": "A174",
+      "style": "asteroid-2",
+      "trader": null,
+      "enemy": {"type": "Gnats", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1004, "y": -1748},
+      "name": "Debris 152",
+      "style": "anomaly-debris",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1052, "y": -1640},
+      "name": "A92",
+      "style": "asteroid-2",
+      "trader": null,
+      "enemy": {"type": "Gnats", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": 988, "y": -1690},
+      "name": "A78",
+      "style": "asteroid-2",
+      "trader": null,
+      "enemy": {"type": "Gnats", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1096, "y": -1758},
+      "name": "Debris 154",
+      "style": "anomaly-junk",
+      "trader": null,
+      "enemy": {"type": "Gnat Assimilate", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1058, "y": -1812},
+      "name": "Gnat Ground Zero",
+      "style": "anomaly-ruin",
+      "trader": null,
+      "enemy": {"type": "Gnat Assimilate", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1114, "y": -1820},
+      "name": "Debris 134",
+      "style": "anomaly-junk",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 922, "y": -1820},
+      "name": "Debris 42",
+      "style": "anomaly-debris",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1236, "y": -1746},
+      "name": "Debris 82",
+      "style": "anomaly-debris",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 932, "y": -1810},
+      "name": "Gnat Smoke 1",
+      "style": "cloud-smoke",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1094, "y": -1750},
+      "name": "Gnat Smoke 2",
+      "style": "cloud-smoke",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1240, "y": -1136},
+      "name": "A96",
+      "style": "asteroid-9",
+      "trader": null,
+      "enemy": {"type": "Soma Predator", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1332, "y": -1106},
+      "name": "A381",
+      "style": "asteroid-5",
+      "trader": null,
+      "enemy": {"type": "Soma Predator", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1272, "y": -1208},
+      "name": "A100",
+      "style": "asteroid-7",
+      "trader": null,
+      "enemy": {"type": "Soma Reaver", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1392, "y": -1132},
+      "name": "Som Yrri",
+      "style": "planet-soma",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1270, "y": -1056},
+      "name": "A126",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": {"type": "Soma Predator", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1334, "y": -1166},
+      "name": "Soma Isolationist Cloud",
+      "style": "cloud-green",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
     }
   ],
   "quests": [
@@ -5207,6 +5431,13 @@
       "tags": "soma",
       "color": "fff",
       "icon": "drop"
+    },
+    {
+      "name": "Soma Isolationists",
+      "xml": "\n<condition at-dest=\"Soma Isolationist Gate\" />\n<dialog>*Alarms scream!*\nA probe is racing towards you and passes you at tremendous speed. It is a messenger.</dialog>\n<dialog>_\"Visitor. The Opener Soma have invited you. We Isolator Soma will defend our space from corruption.\"_</dialog>\n<add-to-quest-list/>\n\n<condition dest=\"A100\" no-enemy-at-dest=\"A100\"/>\n<dialog>_\"Visitor. We do not oppose you. We will only protect our space.\"_</dialog>\n\n<condition dest=\"A381\" no-enemy-at-dest=\"A381\"/>\n<dialog>_\"Visitor. We do not oppose you. We will only protect our space.\"_</dialog>\n\n<condition at-dest=\"Som Yrri\"/>\n<dialog>Soma ships are orbiting the planet. They do not attack you.</dialog>\n\n<condition at-dest=\"Som Yrri\" trigger=\"HAIL SOMA\"/>\n<dialog>_\"We Isolators do not agree with the Openers. Soma preservation is paramount.\n\nYou are not our enemy however. The Openers caused a greater danger. They caused the Gnats.\"_</dialog>\n<dialog ok=\"I WILL DO IT\" cancel=\"I'M AFRAID\">_\"We Isolators do not embrace you. But you are skilled. Go to the depths of the Gnat infestation. Stop them.\"_</dialog>\n<mark-on-map dest=\"Gnat Ground Zero\" />\n\n<condition at-dest=\"Gnat Ground Zero\" no-enemy-at-dest=\"Gnat Ground Zero\"/>\n<dialog>The Isolator Soma gave you a tool. An information poison. *INSPECT* the *Ground Zero* and release it.</dialog>\n\n<condition state=\"surface\" at-dest=\"Gnat Ground Zero\" no-enemy-at-dest=\"Gnat Ground Zero\" trigger=\"POISON\"/>\n<dialog>As the poison reaches the ruins of the Gnat disaster the effects are spectacular. Out of every crack and pore tiny Gnats pour out, smoking and crumbling as they perish.</dialog>\n<dialog>You should return to *Som Yrri*. Tell them that the work is done.</dialog>\n<mark-on-map dest=\"Som Yrri\" />\n\n<condition at-dest=\"Som Yrri\" trigger=\"HAIL\"/>\n<dialog ok=\"I WILL DO IT\" cancel=\"THIS IS NOT MY PROBLEM\">_\"The Gnats are truly monstrous. The Openers let them into our system as they opened the portals.\n\nWe must talk the the Openers.\nTake our ambassador to Beryl Canis I.\"_</dialog>\n<mark-on-map dest=\"Beryl Canis I\" />\n\n<condition at-dest=\"Beryl Canis I\" trigger=\"LEAVE AMBASSADOR\"/>\n<mark-on-map dest=\"Soma\" />\n<dialog>_\"We will wait here on this neutral ground. Bring an envoy from *Soma*.\"_</dialog>\n\n<condition state=\"surface\" at-dest=\"Soma\" trigger=\"GET ENVOY\"/>\n<dialog>You don't get any response when you over radio tell the Soma that the splinter group Isolator is waiting for peace talks at *Beryl Canis I*.\nAfter a long silence a single Soma ship approaches you.</dialog>\n<dialog>_\"We will talk. Escort us.\"_</dialog>\n<mark-on-map dest=\"Beryl Canis I\" />\n\n<condition at-dest=\"Beryl Canis I\" trigger=\"LEAVE ENVOY\"/>\n<dialog>The representatives of the two factions meet out of sight of your visitor eyes.\nBut they return almost immediately.</dialog>\n<dialog ok=\"OF COURSE\" cancel=\"NOT NOW\">_\"We have an agreement. You freed us from the Gnat danger. You are trusted.\nThe Soma system will remain closed to other humans. But an ambassador will be established at *Pavonis Ember*. Take us there.\"_</dialog>\n<give item=\"Soma Ambassador\"/>\n<mark-on-map dest=\"Pavonis Ember\" />\n\n<condition state=\"surface\" have-item=\"Soma Ambassador\" at-dest=\"Pavonis Ember\" trigger=\"LEAVE AMBASSADOR\"/>\n<dialog>You sense both fear and excitement. The mythical Soma suddenly opening up. Visiting a human world. A new beginning.</dialog>\n<take item=\"Soma Ambassador\"/>\n\n",
+      "color": "0f0",
+      "icon": "",
+      "tags": ""
     },
     {
       "name": "Thanatos relic 1",
@@ -5495,6 +5726,149 @@
   ],
   "initialDestination": "Backwater",
   "models": [
+    {
+      "name": "Gnats",
+      "geometry": "composite",
+      "transform": [["translate", 0, 0, 0], ["scale", 1, 1, 1]],
+      "parts": [
+        {
+          "geometry": "composite",
+          "transform": [["rotate", -53, 0, 60], ["translate", -50, 20, -60]],
+          "parts": [
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "transform": [["rotate", 0, 0, 45], ["rotate", 0, 0, 0]],
+              "path": [[0, 0, 10], [20, 0, 50], [0, 0, 90]]
+            },
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "transform": [["rotate", 0, 0, 45], ["rotate", 0, 40, 0]],
+              "path": [[0, 0, 10], [20, 0, 50], [0, 0, 90]]
+            }
+          ]
+        },
+        {
+          "geometry": "composite",
+          "transform": [["rotate", 27, 47, 70], ["translate", 60, 20, -60]],
+          "parts": [
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "transform": [["rotate", 0, 0, 45], ["rotate", 0, 0, 0]],
+              "path": [[0, 0, 10], [20, 0, 50], [0, 0, 90]]
+            },
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "transform": [["rotate", 0, 0, 45], ["rotate", 0, 180, 0]],
+              "path": [[0, 0, 10], [20, 0, 50], [0, 0, 90]]
+            },
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "transform": [["rotate", 0, 0, 45], ["translate", 0, -15, -50]],
+              "path": [[0, 0, 10], [20, 0, 50], [0, 0, 90]]
+            }
+          ]
+        },
+        {
+          "geometry": "composite",
+          "transform": [
+            ["rotate", -168, -120, 40],
+            ["translate", -20, -40, -60]
+          ],
+          "parts": [
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "transform": [["rotate", 0, 0, 45], ["rotate", 0, 200, 0]],
+              "path": [[0, 0, 10], [20, 0, 50], [0, 0, 90]]
+            },
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "transform": [["rotate", 0, 0, 45], ["rotate", 0, 120, 0]],
+              "path": [[0, 0, 10], [20, 0, 50], [0, 0, 90]]
+            },
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "transform": [["rotate", 0, 0, 45], ["rotate", 0, 160, 0]],
+              "path": [[0, 0, 10], [20, 0, 50], [0, 0, 90]]
+            }
+          ]
+        }
+      ],
+      "tags": "ship"
+    },
+    {
+      "name": "Gnat Assimilate",
+      "geometry": "composite",
+      "transform": [
+        ["rotate", 120, 20, 60],
+        ["translate", 0, 0, -70],
+        ["scale", 1.3, 1.3, 1.3]
+      ],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 4,
+          "transform": [["rotate", 0, 0, 45], ["rotate", 0, 0, 0]],
+          "path": [[0, 0, 10], [20, 0, 50], [0, 0, 90]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 4,
+          "transform": [["rotate", 0, 0, 45], ["rotate", 0, 40, 0]],
+          "path": [[0, 0, 10], [20, 0, 50], [0, 0, 90]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 4,
+          "transform": [["rotate", 0, 0, 45], ["rotate", 0, 80, 0]],
+          "path": [[0, 0, 10], [20, 0, 50], [0, 0, 90]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 4,
+          "transform": [["rotate", 0, 0, 45], ["rotate", -40, 120, 0]],
+          "path": [[0, 0, 10], [20, 0, 50], [0, 0, 90]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 4,
+          "transform": [["rotate", 0, 0, 45], ["rotate", -40, 160, 0]],
+          "path": [[0, 0, 10], [20, 0, 50], [0, 0, 90]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 4,
+          "transform": [["rotate", 0, 0, 45], ["rotate", 0, 200, 0]],
+          "path": [[0, 0, 10], [20, 0, 50], [0, 0, 90]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 4,
+          "transform": [["rotate", 0, 0, 45], ["rotate", 0, 240, 0]],
+          "path": [[0, 0, 10], [20, 0, 50], [0, 0, 90]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 4,
+          "transform": [["rotate", 0, 0, 45], ["rotate", 0, 280, 0]],
+          "path": [[0, 0, 10], [20, 0, 50], [0, 0, 90]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 4,
+          "transform": [["rotate", 0, 0, 45], ["rotate", 40, 240, 0]],
+          "path": [[0, 0, 10], [20, 0, 50], [0, 0, 90]]
+        }
+      ],
+      "tags": "ship"
+    },
     {
       "name": "Seeds",
       "tags": "prop",
@@ -9446,7 +9820,7 @@
     {
       "name": "Soma",
       "audio": "music-ambient",
-      "pos": {"x": 894, "y": -1240},
+      "pos": {"x": 894, "y": -1260},
       "radius": 350
     },
     {
@@ -9514,6 +9888,12 @@
       "audio": "music-1997",
       "pos": {"x": -694, "y": 304},
       "radius": 290
+    },
+    {
+      "name": "Soma Gnat Infestation",
+      "audio": "music-slask",
+      "pos": {"x": 978, "y": -1734},
+      "radius": 180
     }
   ],
   "name": "Skanaar's World"
