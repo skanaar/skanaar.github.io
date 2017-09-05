@@ -154,6 +154,12 @@ button:hover,
 }
 
 /* list */
+.fixed-tools {
+  position: fixed;
+  left: 0;
+  top: 25px;
+  padding: 10px;
+}
 
 .list {
   position: fixed;

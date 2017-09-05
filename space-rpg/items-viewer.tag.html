@@ -1,17 +1,10 @@
 <items-viewer>
-
+  <div class="fixed-tools">
+    <filter-tools ref="filterInput" types={['weapon', 'module', 'tool', 'quest', 'rare', 'common']} onfilter={update}/>
+  </div>
   <div class="toolbox">
     <button onclick={add}>+ New Item</button>
     <button onclick={sort}>Sort</button>
-    <div class="btn-group">
-      <a onclick={setFilter('weapon')} class="toggle-btn {(filter == 'weapon') && 'active'}">Weapons
-      </a><a onclick={setFilter('module')} class="toggle-btn {(filter == 'module') && 'active'}">Modules
-      </a><a onclick={setFilter('tool')} class="toggle-btn {(filter == 'tool') && 'active'}">Tools
-      </a><a onclick={setFilter('quest')} class="toggle-btn {(filter == 'quest') && 'active'}">Quest
-      </a><a onclick={setFilter('rare')} class="toggle-btn {(filter == 'rare') && 'active'}">Rare
-      </a><a onclick={setFilter('common')} class="toggle-btn {(filter == 'common') && 'active'}">Common
-      </a>
-    </div>
   </div>
 
   <div class="table-parent">
@@ -63,6 +56,7 @@
   </div>
 
   <div class="sidebar" show={!!selected}>
+    <filter-tools title='bananer' />
     <input type=text ref="nameField" value={selected && selected.name}>
     <div class="input-grid">
       <em>type</em>
@@ -115,12 +109,7 @@
 
     self.world = { items: [] }
     self.selected = null
-    self.filter = null
     self.focusedIndex = -1
-    
-    self.setFilter = function (type) {
-      return () => self.filter = (self.filter == type ? null : type)
-    }
 
     self.isActivatable = item => item && (item.type == 'weapon' || item.type == 'tool')
 
@@ -135,10 +124,10 @@
 
     self.add = function () {
       self.world.items.unshift({
-        type: self.filter || 'common',
+        type: self.filter.type || 'common',
         level: 0,
         credits: 5,
-        name: 'unnamed',
+        name: 'unnamed ' + self.filter.query,
         cooldown: false,
         attr: { maxhull:0, maxshield:0, maxenergy:0},
         playerBuff:{hull:0, shield:0, energy: 0},
@@ -150,9 +139,7 @@
       self.world.items = self.world.items.filter(e => e != self.selected)
     }
 
-    self.filteredItems = function () {
-      return self.filter ? self.world.items.filter(e => e.type == self.filter) : self.world.items
-    }
+    self.filteredItems = () => self.world.items.filter(self.refs.filterInput.predicate)
     
     self.editItem = function (e) {
       self.selected = e.item.item

@@ -13,11 +13,9 @@
 
   <div class="list">
     <div class="tools">
-      <div class="btn-group">
-        <a each={e in allTags()} onclick={setFilter(e)} class="toggle-btn {(filter == e) && 'active'}">{e}</a>
-      </div>
+      <filter-tools ref="filterInput" types={allTags()} onfilter{onfilter} />
     </div>
-    <div each={model in filteredModels()} onclick={edit} class={ list_item: true, active: model==selected }>
+    <div each={model in filteredItems()} onclick={edit} class={ list_item: true, active: model==selected }>
       {model.name}
     </div>
   </div>
@@ -65,13 +63,14 @@
     self.world = { models: [] }
     self.mesh = []
     self.box = []
-    self.filter = null
-    self.allTags = () => app.allTags(self.world.models).filter(e => e)
-    self.filteredModels = () => app.tagFilter(self.world.models, self.filter)
+    self.selected = null
 
-    self.setFilter = function (type) {
-      return () => self.filter = (self.filter == type ? null : type)
+    self.onfilter = function () {
+      self.selected = null
+      self.update()
     }
+    self.allTags = () => app.allTags(self.world.models).filter(e => e)
+    self.filteredItems = () => self.world.models.filter(self.refs.filterInput.predicate)
 
     self.setCamera = function (mode) {
       self.camera = mode

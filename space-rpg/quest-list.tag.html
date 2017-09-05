@@ -2,13 +2,9 @@
 
   <div class="list">
     <div class="tools">
-      <div class="btn-group">
-        <a each={e in allTags()} onclick={setFilter(e)} class="toggle-btn {(filter == e) && 'active'}">{e}
-        </a><a onclick={setFilter('')} class="toggle-btn {(filter === '') && 'active'}">other
-        </a>
-      </div>
+      <filter-tools ref="filterInput" types={allTags()} onfilter={update} />
     </div>
-    <div each={quest in filteredQuests()} onclick={edit} class={ list_item: true, active: quest==selected }>
+    <div each={quest in filteredItems()} onclick={edit} class={ list_item: true, active: quest==selected }>
       {quest.name}
     </div>
   </div>
@@ -72,12 +68,11 @@
       { name: 'Take item', template: '<take item=""/>' },
       { name: 'Change ship', template: '<change-ship ship=""/>' }
     ]
-    self.filter = null
     self.allTags = () => app.allTags(self.world.quests).filter(e => e)
-    self.filteredQuests = () => app.tagFilter(self.world.quests, self.filter)
 
-    self.setFilter = function (type) {
-      return () => self.filter = (self.filter == type ? null : type)
+    self.filteredItems = function () {
+      var predicate = self.refs.filterInput && self.refs.filterInput.predicate || (() => true)
+      return self.world.quests.filter(predicate)
     }
 
     self.useTemplate = function (e) {

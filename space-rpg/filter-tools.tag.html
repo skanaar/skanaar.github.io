@@ -1,0 +1,26 @@
+<filter-tools>
+  <select onchange={onTypeChange}>
+    <option value="">all types</option>
+    <option disabled>────</option>
+    <option each={e in opts.types}>{e}</option>
+  </select>
+  <input type=text placeholder="filter..." value={query} oninput={onQueryChange}>
+  <script>
+    var self = this
+    self.type = self.opts.type || null
+    self.query = self.opts.query || ''
+    var onchange = self.opts.onfilter || function (){}
+    self.onTypeChange = function (e) {
+      self.type = e.target.value || null
+      onchange(self)
+    }
+    self.onQueryChange = function (e) {
+      self.query = e.target.value || ''
+      onchange(self)
+    }
+    self.predicate = function (e) {
+      return (!self.type || (self.type == e.type || self.type == e.tags)) && 
+        (!self.query || (e.name || e.id).toLowerCase().includes(self.query) || e.level == +self.query)
+    }
+  </script>
+</filter-tools>
