@@ -1,12 +1,12 @@
-<ships-viewer>
+<enemies-viewer>
 
   <div class="table-parent">
     <table class="table attr-4-table">
       <thead>
         <tr>
-          <th>Player ships</th>
+          <th>Enemy ships</th>
           <th>level</th>
-          <th>value</th>
+          <th>equipment</th>
           <th>slots</th>
           <th>maxhull</th>
           <th>maxshield</th>
@@ -17,10 +17,10 @@
         </tr>
       </thead>
       <tbody>
-        <tr each={ship in world.ships} onclick={edit} class={active: selected == ship}>
+        <tr each={ship in world.enemies} onclick={edit} class={active: selected == ship}>
           <td>{ship.name}</td>
           <td>{ship.level}</td>
-          <td>{ship.value} c</td>
+          <td>{ship.inventory.join()}</td>
           <td>{ship.slots}</td>
           <td class={table_zero: !ship.attr.maxhull}>{ship.attr.maxhull}</td>
           <td class={table_zero: !ship.attr.maxshield}>{ship.attr.maxshield}</td>
@@ -34,7 +34,7 @@
   </div>
 
   <div class="toolbox">
-    <button onclick={add}>+ New Ship</button>
+    <button onclick={add}>+ New Enemy</button>
     <div class="btn-group">
       <a class="toggle-btn" onclick={up}>Up in list
       </a><a class="toggle-btn" onclick={down}>Down in list</a>
@@ -48,9 +48,7 @@
       <select ref="visualInput">
         <option each={e in shipModels()}>{e.name}</option>
       </select><br />
-      <em>flying</em> <input type=checkbox ref=isFlyingInput checked={selected && selected.isFlying}><br />
-      <em>level</em>  <input type=number ref=levelField value={selected && selected.level || 0}><br />
-      <em>Value</em>  <input type=number ref=valueField value={selected && selected.value}>
+      <em>level</em> <input type=number ref=levelField value={selected && selected.level || 0}>
     </div>
     
     <label>Attributes</label>
@@ -68,8 +66,13 @@
       <em>energy</em> <input type=number step=1 ref="energyField" value={selected && selected.generator.energy}>
     </div>
 
+    <label>Equipment</label>
+    <div class="input-grid">
+      <em>level range</em> <input readonly value={equipmentLevel}>
+    </div>
+    <button onclick={chooseEquipment}>Choose equipment</button>
+
     <label></label>
-    <button onclick={makeStartingShip}>Make starting ship</button><br/>
     <button onclick={remove}>Delete</button>
     <button onclick={endEditing}>Done</button>
     <button onclick={cancelEditing}>Cancel</button>
@@ -82,10 +85,6 @@
     self.world = { ships: [], enemies: [] }
     self.selected = null
 
-    self.makeStartingShip = function () {
-      if (self.selected) self.world.initialShip = self.selected.name
-    }
-
     self.shipModels = () => self.world.models.filter(e => !e.tags || e.tags.includes('ship'))
 
     self.remove = function () {
@@ -94,20 +93,27 @@
     }
 
     self.add = function () {
-      self.world.ships.push({
+      self.world.enemies.push({
         attr: { maxhull:0, maxshield:0, maxenergy:0, armor:0, cloak:0, jump:0, slots:0},
         generator:{hull:0, shield:0, energy: 0},
         name: 'unnamed',
         level: 1,
         slots: 0,
         visual: 'monitor-drone',
+        inventory: [],
         isFlying: true
       })
     }
     
+    var printableRange = es => _.min(es.map(e => e.level)) + ' - ' + _.max(es.map(e => e.level))
+
     self.edit = function (e) {
       self.selected = e.item.ship
       self.refs.visualInput.value = self.selected.visual
+      if (self.selected.inventory) {
+        var items = self.selected.inventory.map(id => app.world.items.find(item => item.name==id) || { level: 0 })
+        self.equipmentLevel = printableRange(items)
+      }
     }
     
     self.endEditing = function () {
@@ -115,9 +121,7 @@
       self.selected.name = self.refs.nameField.value
       self.selected.level = +self.refs.levelField.value
       self.selected.slots = +self.refs.slotsField.value
-      self.selected.value = +self.refs.valueField.value
       self.selected.visual = self.refs.visualInput.value
-      self.selected.isFlying = !!self.refs.isFlyingInput.checked
       self.selected.attr.maxhull = +self.refs.maxhullField.value
       self.selected.attr.maxshield = +self.refs.maxshieldField.value
       self.selected.attr.maxenergy = +self.refs.maxenergyField.value
@@ -133,12 +137,16 @@
       self.update()
     }
 
+    self.chooseEquipment = function () {
+      app.events.trigger('show-item-chooser', self.selected.inventory)
+    }
+
     self.up = function () {
-      _.bubbleUp(self.world.ships, self.world.ships.findIndex(e => e == self.selected))
+      _.bubbleUp(self.world.enemies, self.world.enemies.findIndex(e => e == self.selected))
     }
 
     self.down = function () {
-      _.bubbleDown(self.world.ships, self.world.ships.findIndex(e => e == self.selected))
+      _.bubbleDown(self.world.enemies, self.world.enemies.findIndex(e => e == self.selected))
     }
 
     self.on('before-mount', function() {
@@ -154,4 +162,4 @@
 
   </script>
 
-</ships-viewer>
+</enemies-viewer>

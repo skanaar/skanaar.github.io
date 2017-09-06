@@ -14,7 +14,7 @@
     var self = this
     self.opts.celestial = self.opts.celestial || { r: 0, color: ['FFF', 'FFF'] }
     self.getColor = function (index) {
-      return opts.celestial.color && opts.celestial.color[index] || 'FFF'
+      return self.opts.celestial.color && self.opts.celestial.color[index] || 'FFF'
     }
   </script>
 

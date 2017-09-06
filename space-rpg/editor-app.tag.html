@@ -13,6 +13,7 @@
   <celestials-viewer app={app} if={page == '#celestials'} />
   <models-viewer app={app} if={page == '#models'} />
   <ships-viewer app={app} if={page == '#ships'} />
+  <enemies-viewer app={app} if={page == '#enemies'} />
   <items-viewer app={app} if={page == '#items'} />
   <quest-list app={app} if={page == '#quests'} />
 
@@ -26,7 +27,7 @@
     var self = this
 
     self.page = '#map'
-    self.tabs = ['map', 'celestials', 'models', 'ships', 'items', 'quests']
+    self.tabs = ['map', 'celestials', 'models', 'ships', 'enemies', 'items', 'quests']
     self.isFileMenuOpen = false
     self.app = {
       isSaved: false,

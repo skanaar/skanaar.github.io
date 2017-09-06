@@ -56,7 +56,6 @@
   </div>
 
   <div class="sidebar" show={!!selected}>
-    <filter-tools title='bananer' />
     <input type=text ref="nameField" value={selected && selected.name}>
     <div class="input-grid">
       <em>type</em>
@@ -124,10 +123,10 @@
 
     self.add = function () {
       self.world.items.unshift({
-        type: self.filter.type || 'common',
+        type: self.refs.filterInput.type || 'common',
         level: 0,
         credits: 5,
-        name: 'unnamed ' + self.filter.query,
+        name: 'unnamed ' + self.refs.filterInput.query,
         cooldown: false,
         attr: { maxhull:0, maxshield:0, maxenergy:0},
         playerBuff:{hull:0, shield:0, energy: 0},
