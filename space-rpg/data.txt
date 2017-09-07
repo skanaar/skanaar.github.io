@@ -1,0 +1,23 @@
+- weapons -
+----  5%   3   .   .  Autogun Mk1,    Autogun Mk2,    Autogun Mk3,   Solenoid gun,   Railgun Mk1,     Railgun Mk2
+----  .%   1   2   .  Heat Ray,       Photon Ray,     Meson Ray,     Tau Ray,        Phased Ray,      Nucleon Ray
+----  .%   .   .   3  Voltaic Pulse,  Field Pulse,    EM Pulse,      Sinusoid Pulse, Coronal Pulse,   Aural Pulse
+---- 10%   1   1   .  Cutting Beam,   Piercing Beam,  Incision Beam, Focal Beam,     Locus Beam,      Apex Beam
+cool 25%   3   .   .  Slug Driver,    Rod Driver,     Mass Driver,   Javelin Driver, Luminal Driver,  Helix Driver
+cool  .%   .   3   .  EM Disruptor,   Tau Disruptor,  Co Disruptor,  Ur Disruptor,   Sc Disruptor,    Au Disruptor
+cool 10%   .   .   3  Quench Device,  Z Device,       Luhn Device,
+
+- modules -
+----       1   .   .  Steel Armor,    Tungsten Armor, Ablative Armor, Active Armor,   Dynamic Armor,  Fluid Armor
+----       .   1   .  Envelope Array, Buffer Array,   Shell Array,    Absorb Array,   Dermal Array,   Aegis Array
+----       .   .   1  MkI Capacitor,  Mk2 Capacitor,  Mk3 Capacitor,  Mk4 Capacitor,  Mk5 Capacitor,  Mk6 Capacitor  
+
+- reactors -
+----       1   .   .  Patch Robot,    Mend Robot,     Repair Robot,   Restore Robot,  Nanite Robot,   Healing Robot
+----       .   1   .  Aura Inducer,   Buffer Inducer, Shell Inducer,  Absorb Inducer, Dermal Inducer, Aegis Inducer
+----       .   .   1  Reactor MkI,    Reactor Mk2,    Reactor Mk3,    Reactor Mk4,    Reactor Mk5,    Reactor Mk6
+
+- tools -
+cool       1   .   .  Patch Kit,      Mend Kit,       Repair Kit,     Restore Kit,    Nanite Kit,     Healing Kit
+cool       .   1   .  Envelope Cell,  Buffer Cell,    Shell Cell,     Absorb Cell,    Dermal Cell,    Aegis Cell 
+cool       .   .   1  Battery MkI,    Battery Mk2,    Battery Mk3,    Battery Mk4,    Battery Mk5,    Battery Mk6 
