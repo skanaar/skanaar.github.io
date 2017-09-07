@@ -4,15 +4,8 @@
     <div class="modal">
       <div class="modal-tools">
         <button class="modal-close" onclick={done}>Done</button>
-        <div class="btn-group">
-          <a onclick={() => filter=null} class="toggle-btn {(filter == null) && 'active'}">All
-          </a><a onclick={() => filter='weapon'} class="toggle-btn {(filter == 'weapon') && 'active'}">Weapons
-          </a><a onclick={() => filter='module'} class="toggle-btn {(filter == 'module') && 'active'}">Modules
-          </a><a onclick={() => filter='tool'} class="toggle-btn {(filter == 'tool') && 'active'}">Tools
-          </a><a onclick={() => filter='quest'} class="toggle-btn {(filter == 'quest') && 'active'}">Quest
-          </a><a onclick={() => filter='rare'} class="toggle-btn {(filter == 'rare') && 'active'}">Rare
-          </a><a onclick={() => filter='common'} class="toggle-btn {(filter == 'common') && 'active'}">Common</a>
-        </div>
+        <filter-tools ref="filterInput" types={['weapon', 'module', 'tool', 'quest', 'rare', 'common']} onfilter={update}/>
+        <button onclick={addAll}>Add all</button>
       </div>
       <div class="modal-list">
         <table class="table attr-table">
@@ -48,7 +41,7 @@
           </tbody>
         </table>
       </div>
-      <div class="modal-list">
+      <div class="modal-picked-list">
         <div class="modal-item" each={id in list} onclick={remove}>{id}</div>
       </div>
     </div>
@@ -68,7 +61,7 @@
       background: #fff;
       border: 1px solid #888;
       border-radius: 2px;
-      margin: 100px auto;
+      margin: 10vh auto;
     }
     .modal-tools {
       padding: 5px;
@@ -76,12 +69,18 @@
     }
     .modal-list {
       display: inline-block;
-      width: 45%;
-      height: 300px;
+      width: 65%;
+      height: 75vh;
       padding: 10px;
       vertical-align: top;
       overflow: auto;
       cursor: pointer;
+    }
+    .modal-picked-list {
+      display: inline-block;
+      width: 190px;
+      padding: 10px;
+      vertical-align: top;
     }
     .modal-list:first-child {
       border-right: 1px solid #888;
@@ -113,16 +112,16 @@
 
     self.world = { items: [] }
     self.list = []
-    self.filter = ''
-
-    self.filteredItems = function () {
-      return self.filter ? self.world.items.filter(e => e.type == self.filter) : self.world.items
-    }
+    self.filteredItems = () => self.world.items.filter(self.refs.filterInput.predicate)
 
     self.toPercent = x => Math.round(x*100)
 
     self.add = function (e) {
       self.list.push(e.item.item.name)
+    }
+
+    self.addAll = function () {
+      self.filteredItems().forEach(e => self.list.push(e.name))
     }
 
     self.remove = function (e) {
