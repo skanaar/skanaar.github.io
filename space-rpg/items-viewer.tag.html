@@ -5,6 +5,7 @@
   <div class="toolbox">
     <button onclick={add}>+ New Item</button>
     <button onclick={sort}>Sort</button>
+    <button onclick={pasteCsv}>Paste tabular data</button>
   </div>
 
   <div class="table-parent">
@@ -12,10 +13,10 @@
       <thead>
         <tr>
           <th>name</th>
-          <th>lvl</th>
           <th>type</th>
-          <th>critical</th>
+          <th>lvl</th>
           <th>credits</th>
+          <th>critical</th>
           <th>maxhull</th>
           <th>maxshield</th>
           <th>maxenergy</th>
@@ -30,10 +31,10 @@
       <tbody>
         <tr each={item in filteredItems()} onclick={editItem} class={active: selected == item}>
           <td>{item.name}</td>
-          <td>L{item.level}</td>
           <td>{item.type}<span if={item.cooldown}>, cooldown</span></td>
-          <td class={table_zero: !item.critical}>{toPercent(item.critical)}%</td>
+          <td>L{item.level}</td>
           <td class={table_zero: !item.credits}>{item.credits}</td>
+          <td class={table_zero: !item.critical}>{toPercent(item.critical)}%</td>
           <td class={table_zero: !item.attr.maxhull}>{item.attr.maxhull}</td>
           <td class={table_zero: !item.attr.maxshield}>{item.attr.maxshield}</td>
           <td class={table_zero: !item.attr.maxenergy}>{item.attr.maxenergy}</td>
@@ -119,14 +120,36 @@
       })
     }
 
+    self.pasteCsv = function () {
+      var data = window.prompt('Provide tab separated data')
+      if (!data) { return }
+      var matrix = data.split('\n').map(line => line.split('\t'))
+      matrix.forEach(function (row) {
+        self.items = self.items.filter(item => item.name != row[0])
+        var i = 0
+        self.items.push({
+          name: row[i++],
+          type: row[i++],
+          level: +row[i++],
+          credits: +row[i++],
+          critical: +row[i++],
+          cooldown: +row[i++] == 'cooldown',
+          attr: { maxhull:+row[i++], maxshield:+row[i++], maxenergy:+row[i++]},
+          playerBuff:{hull:+row[i++], shield:+row[i++], energy: +row[i++]},
+          targetBuff:{hull:+row[i++], shield:+row[i++], energy: +row[i++]}
+        })
+      })
+    }
+
     self.toPercent = x => Math.round(x*100)
 
     self.add = function () {
       self.world.items.unshift({
+        name: 'unnamed ' + self.refs.filterInput.query,
         type: self.refs.filterInput.type || 'common',
         level: 0,
         credits: 5,
-        name: 'unnamed ' + self.refs.filterInput.query,
+        critical: 0,
         cooldown: false,
         attr: { maxhull:0, maxshield:0, maxenergy:0},
         playerBuff:{hull:0, shield:0, energy: 0},

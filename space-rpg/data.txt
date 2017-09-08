@@ -1,23 +1,93 @@
-- weapons -
-----  5%   3   .   .  Autogun Mk1,    Autogun Mk2,    Autogun Mk3,   Solenoid gun,   Railgun Mk1,     Railgun Mk2
-----  .%   1   2   .  Heat Ray,       Photon Ray,     Meson Ray,     Tau Ray,        Phased Ray,      Nucleon Ray
-----  .%   .   .   3  Voltaic Pulse,  Field Pulse,    EM Pulse,      Sinusoid Pulse, Coronal Pulse,   Aural Pulse
----- 10%   1   1   .  Cutting Beam,   Piercing Beam,  Incision Beam, Focal Beam,     Locus Beam,      Apex Beam
-cool 25%   3   .   .  Slug Driver,    Rod Driver,     Mass Driver,   Javelin Driver, Luminal Driver,  Helix Driver
-cool  .%   .   3   .  EM Disruptor,   Tau Disruptor,  Co Disruptor,  Ur Disruptor,   Sc Disruptor,    Au Disruptor
-cool 10%   .   .   3  Quench Device,  Z Device,       Luhn Device,
-
-- modules -
-----       1   .   .  Steel Armor,    Tungsten Armor, Ablative Armor, Active Armor,   Dynamic Armor,  Fluid Armor
-----       .   1   .  Envelope Array, Buffer Array,   Shell Array,    Absorb Array,   Dermal Array,   Aegis Array
-----       .   .   1  MkI Capacitor,  Mk2 Capacitor,  Mk3 Capacitor,  Mk4 Capacitor,  Mk5 Capacitor,  Mk6 Capacitor  
-
-- reactors -
-----       1   .   .  Patch Robot,    Mend Robot,     Repair Robot,   Restore Robot,  Nanite Robot,   Healing Robot
-----       .   1   .  Aura Inducer,   Buffer Inducer, Shell Inducer,  Absorb Inducer, Dermal Inducer, Aegis Inducer
-----       .   .   1  Reactor MkI,    Reactor Mk2,    Reactor Mk3,    Reactor Mk4,    Reactor Mk5,    Reactor Mk6
-
-- tools -
-cool       1   .   .  Patch Kit,      Mend Kit,       Repair Kit,     Restore Kit,    Nanite Kit,     Healing Kit
-cool       .   1   .  Envelope Cell,  Buffer Cell,    Shell Cell,     Absorb Cell,    Dermal Cell,    Aegis Cell 
-cool       .   .   1  Battery MkI,    Battery Mk2,    Battery Mk3,    Battery Mk4,    Battery Mk5,    Battery Mk6 
+weapon	1	----	5	0	0	0	0	0	-1	3	0	0	Autogun Mk1
+weapon	2	----	5	0	0	0	0	0	-1	3	0	0	Autogun Mk2
+weapon	3	----	5	0	0	0	0	0	-1	3	0	0	Autogun Mk3
+weapon	4	----	5	0	0	0	0	0	-1	3	0	0	Solenoid gun
+weapon	5	----	5	0	0	0	0	0	-1	3	0	0	Railgun Mk1
+weapon	6	----	5	0	0	0	0	0	-1	3	0	0	Railgun Mk2
+weapon	1	----	0	0	0	0	0	0	-1	1	2	0	Heat Ray
+weapon	2	----	0	0	0	0	0	0	-1	1	2	0	Photon Ray
+weapon	3	----	0	0	0	0	0	0	-1	1	2	0	Meson Ray
+weapon	4	----	0	0	0	0	0	0	-1	1	2	0	Tau Ray
+weapon	5	----	0	0	0	0	0	0	-1	1	2	0	Phased Ray
+weapon	6	----	0	0	0	0	0	0	-1	1	2	0	Nucleon Ray
+weapon	1	----	0	0	0	0	0	0	-1	0	0	3	Voltaic Pulse
+weapon	2	----	0	0	0	0	0	0	-1	0	0	3	Field Pulse
+weapon	3	----	0	0	0	0	0	0	-1	0	0	3	Soliton Pulse
+weapon	4	----	0	0	0	0	0	0	-1	0	0	3	Sinusoid Pulse
+weapon	5	----	0	0	0	0	0	0	-1	0	0	3	Coronal Pulse
+weapon	6	----	0	0	0	0	0	0	-1	0	0	3	Aural Pulse
+weapon	1	----	0	0	0	0	0	0	-1	1	1	0	Cutting Beam
+weapon	2	----	10	0	0	0	0	0	-1	1	1	0	Piercing Beam
+weapon	3	----	10	0	0	0	0	0	-1	1	1	0	Incision Beam
+weapon	4	----	10	0	0	0	0	0	-1	1	1	0	Focal Beam
+weapon	5	----	10	0	0	0	0	0	-1	1	1	0	Locus Beam
+weapon	6	----	10	0	0	0	0	0	-1	1	1	0	Apex Beam
+weapon	1	cool	25	0	0	0	0	0	-1	3	0	0	Slug Driver
+weapon	2	cool	25	0	0	0	0	0	-1	3	0	0	Rod Driver
+weapon	3	cool	25	0	0	0	0	0	-1	3	0	0	Mass Driver
+weapon	4	cool	25	0	0	0	0	0	-1	3	0	0	Javelin Driver
+weapon	5	cool	25	0	0	0	0	0	-1	3	0	0	Luminal Driver
+weapon	6	cool	25	0	0	0	0	0	-1	3	0	0	Helix Driver
+weapon	1	cool	0	0	0	0	0	0	-1	0	3	0	EM Disruptor
+weapon	2	cool	0	0	0	0	0	0	-1	0	3	0	Tau Disruptor
+weapon	3	cool	0	0	0	0	0	0	-1	0	3	0	Co Disruptor
+weapon	4	cool	0	0	0	0	0	0	-1	0	3	0	Ur Disruptor
+weapon	5	cool	0	0	0	0	0	0	-1	0	3	0	Sc Disruptor
+weapon	6	cool	0	0	0	0	0	0	-1	0	3	0	Au Disruptor
+weapon	1	cool	10	0	0	0	0	0	-1	0	0	3	Quench Device
+weapon	2	cool	10	0	0	0	0	0	-1	0	0	3	Z Device
+weapon	3	cool	10	0	0	0	0	0	-1	0	0	3	Luhn Device
+module	1	----	0	1	0	0	0	0	0	0	0	0	Steel Armor
+module	2	----	0	1	0	0	0	0	0	0	0	0	Tungsten Armor
+module	3	----	0	1	0	0	0	0	0	0	0	0	Ablative Armor
+module	4	----	0	1	0	0	0	0	0	0	0	0	Active Armor
+module	5	----	0	1	0	0	0	0	0	0	0	0	Dynamic Armor
+module	6	----	0	1	0	0	0	0	0	0	0	0	Fluid Armor
+module	1	----	0	0	1	0	0	0	0	0	0	0	Lepton Shield
+module	2	----	0	0	1	0	0	0	0	0	0	0	Proton Shield
+module	3	----	0	0	1	0	0	0	0	0	0	0	Quark Shield
+module	4	----	0	0	1	0	0	0	0	0	0	0	Gluon Shield
+module	5	----	0	0	1	0	0	0	0	0	0	0	Dirac Shield
+module	6	----	0	0	1	0	0	0	0	0	0	0	Pauli Shield
+module	1	----	0	0	0	1	0	0	0	0	0	0	Mk1 Capacitor
+module	2	----	0	0	0	1	0	0	0	0	0	0	Mk2 Capacitor
+module	3	----	0	0	0	1	0	0	0	0	0	0	Mk3 Capacitor
+module	4	----	0	0	0	1	0	0	0	0	0	0	Mk4 Capacitor
+module	5	----	0	0	0	1	0	0	0	0	0	0	Mk5 Capacitor
+module	5	----	0	0	0	1	0	0	0	0	0	0	Mk6 Capacitor
+module	1	----	0	0	0	0	1	0	0	0	0	0	Patch Robot
+module	2	----	0	0	0	0	1	0	0	0	0	0	Mend Robot
+module	3	----	0	0	0	0	1	0	0	0	0	0	Repair Robot
+module	4	----	0	0	0	0	1	0	0	0	0	0	Restore Robot
+module	5	----	0	0	0	0	1	0	0	0	0	0	Nanite Robot
+module	6	----	0	0	0	0	1	0	0	0	0	0	Healing Robot
+module	1	----	0	0	0	0	0	1	0	0	0	0	Aura Inducer
+module	2	----	0	0	0	0	0	1	0	0	0	0	Buffer Inducer
+module	3	----	0	0	0	0	0	1	0	0	0	0	Shell Inducer
+module	4	----	0	0	0	0	0	1	0	0	0	0	Absorb Inducer
+module	5	----	0	0	0	0	0	1	0	0	0	0	Dermal Inducer
+module	6	----	0	0	0	0	0	1	0	0	0	0	Aegis Inducer
+module	1	----	0	0	0	0	0	0	1	0	0	0	Mk1 Reactor
+module	2	----	0	0	0	0	0	0	1	0	0	0	Mk2 Reactor
+module	3	----	0	0	0	0	0	0	1	0	0	0	Mk3 Reactor
+module	4	----	0	0	0	0	0	0	1	0	0	0	Mk4 Reactor
+module	5	----	0	0	0	0	0	0	1	0	0	0	Mk5 Reactor
+module	6	----	0	0	0	0	0	0	1	0	0	0	Mk6 Reactor
+tool	1	cool	0	0	0	0	1	0	0	0	0	0	Patch Kit
+tool	2	cool	0	0	0	0	1	0	0	0	0	0	Mend Kit
+tool	3	cool	0	0	0	0	1	0	0	0	0	0	Repair Kit
+tool	4	cool	0	0	0	0	1	0	0	0	0	0	Restore Kit
+tool	5	cool	0	0	0	0	1	0	0	0	0	0	Nanite Kit
+tool	6	cool	0	0	0	0	1	0	0	0	0	0	Healing Kit
+tool	1	cool	0	0	0	0	0	1	0	0	0	0	Envelope Cell
+tool	2	cool	0	0	0	0	0	1	0	0	0	0	Buffer Cell
+tool	3	cool	0	0	0	0	0	1	0	0	0	0	Shell Cell
+tool	4	cool	0	0	0	0	0	1	0	0	0	0	Absorb Cell
+tool	5	cool	0	0	0	0	0	1	0	0	0	0	Dermal Cell
+tool	6	cool	0	0	0	0	0	1	0	0	0	0	Aegis Cell 
+tool	1	cool	0	0	0	0	0	0	1	0	0	0	Mk1 Battery
+tool	2	cool	0	0	0	0	0	0	1	0	0	0	Mk2 Battery
+tool	3	cool	0	0	0	0	0	0	1	0	0	0	Mk3 Battery
+tool	4	cool	0	0	0	0	0	0	1	0	0	0	Mk4 Battery
+tool	5	cool	0	0	0	0	0	0	1	0	0	0	Mk5 Battery
+tool	6	cool	0	0	0	0	0	0	1	0	0	0	Mk6 Battery 

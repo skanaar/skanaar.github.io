@@ -142,6 +142,24 @@
     {
       "attr": {
         "maxhull": 30,
+        "maxshield": 15,
+        "maxenergy": 15,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 2, "shield": 4, "energy": 5},
+      "name": "Ursula",
+      "level": 5,
+      "slots": 9,
+      "visual": "Ursula",
+      "isFlying": true,
+      "value": 3100
+    },
+    {
+      "attr": {
+        "maxhull": 30,
         "maxshield": 10,
         "maxenergy": 20,
         "armor": 0,
@@ -278,7 +296,7 @@
       "name": "Rugged Drone",
       "level": 0,
       "visual": "Monitor Drone",
-      "inventory": ["Epoxy Injector", "Linear Reactor"],
+      "inventory": ["Linear Reactor", "Epoxy Injector"],
       "isFlying": true,
       "value": 0,
       "slots": 0
@@ -313,7 +331,7 @@
       "generator": {"hull": 0, "shield": 0, "energy": 2},
       "name": "Striker Drone",
       "visual": "Monitor Drone",
-      "inventory": ["Kinetic Gun", "Monitor Beam L2", "Repair Kit", "Autogun"],
+      "inventory": ["Monitor Beam L2", "Repair Kit", "Autogun", "Autogun"],
       "value": 0,
       "isFlying": false,
       "level": 2,
@@ -333,11 +351,11 @@
       "name": "Bandit",
       "visual": "NS Salem",
       "inventory": [
-        "Kinetic Gun",
         "Photon Ray",
         "Energy Cell",
         "Repair Kit",
-        "Shield Cell"
+        "Shield Cell",
+        "Autogun"
       ],
       "value": 0,
       "isFlying": false,
@@ -694,6 +712,23 @@
   "items": [
     {
       "type": "quest",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
+      "name": "Star Sensor",
+      "level": 0,
+      "cooldown": false,
+      "critical": 0
+    },
+    {
+      "type": "quest",
       "level": 0,
       "credits": 0,
       "name": "Soma Ambassador",
@@ -701,61 +736,6 @@
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "critical": 0
-    },
-    {
-      "type": "quest",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Thanatos mesh",
-      "rechargeRequired": false,
-      "level": 0,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "quest",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Thanatos nacelle",
-      "rechargeRequired": false,
-      "level": 0,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "quest",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Eris Splinter",
-      "level": 0,
-      "cooldown": false,
       "critical": 0
     },
     {
@@ -955,7 +935,8 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 0,
-      "name": "Star Sensor",
+      "name": "Thanatos nacelle",
+      "rechargeRequired": false,
       "level": 0,
       "cooldown": false,
       "critical": 0
@@ -1169,6 +1150,43 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 0,
       "name": "Subsystem cache",
+      "level": 0,
+      "cooldown": false,
+      "critical": 0
+    },
+    {
+      "type": "quest",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
+      "name": "Thanatos mesh",
+      "rechargeRequired": false,
+      "level": 0,
+      "cooldown": false,
+      "critical": 0
+    },
+    {
+      "type": "quest",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
+      "name": "Eris Splinter",
       "level": 0,
       "cooldown": false,
       "critical": 0
@@ -1493,6 +1511,23 @@
       "critical": 0
     },
     {
+      "type": "module",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 1, "energy": -1},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 0,
+      "name": "Shield Pump",
+      "level": 1,
+      "cooldown": false,
+      "critical": 0
+    },
+    {
       "type": "quest",
       "level": 1,
       "credits": 0,
@@ -1512,26 +1547,9 @@
       "critical": 0
     },
     {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 1, "energy": -1},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Shield Pump",
-      "level": 1,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
       "type": "weapon",
       "credits": 10,
-      "name": "Rusty Kinetic Gun",
+      "name": "Rusty Autogun",
       "attr": {
         "maxhull": 0,
         "maxshield": 0,
@@ -1568,24 +1586,6 @@
       "critical": 0
     },
     {
-      "type": "weapon",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": -2, "shield": 0, "energy": 0},
-      "credits": 20,
-      "name": "Kinetic Gun",
-      "level": 1,
-      "rechargeRequired": false,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
       "type": "tool",
       "attr": {
         "maxhull": 0,
@@ -1601,24 +1601,6 @@
       "rechageRequired": true,
       "rechargeRequired": true,
       "level": 1,
-      "cooldown": true,
-      "critical": 0
-    },
-    {
-      "type": "tool",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 5},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 20,
-      "name": "Energy Cell",
-      "level": 1,
-      "rechargeRequired": true,
       "cooldown": true,
       "critical": 0
     },
@@ -1658,6 +1640,35 @@
       "level": 1,
       "rechargeRequired": false,
       "cooldown": false,
+      "critical": 0
+    },
+    {
+      "type": "weapon",
+      "level": 5,
+      "credits": 520,
+      "name": "Disrupt Ray",
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
+      "targetBuff": {"hull": -10, "shield": -10, "energy": 0},
+      "critical": 0
+    },
+    {
+      "type": "tool",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 5},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 20,
+      "name": "Energy Cell",
+      "level": 1,
+      "rechargeRequired": true,
+      "cooldown": true,
       "critical": 0
     },
     {
@@ -1706,7 +1717,7 @@
         "slots": 0
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": -3, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": -2, "shield": 0, "energy": 0},
       "credits": 40,
       "name": "Autogun",
       "level": 1,
@@ -1787,24 +1798,6 @@
       "critical": 0
     },
     {
-      "type": "tool",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 5, "energy": -10},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 50,
-      "name": "Shield Charger",
-      "level": 2,
-      "rechargeRequired": false,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
       "type": "weapon",
       "attr": {
         "maxhull": 0,
@@ -1838,6 +1831,24 @@
       "rechargeRequired": true,
       "level": 2,
       "cooldown": true,
+      "critical": 0
+    },
+    {
+      "type": "tool",
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 5, "energy": -10},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "credits": 50,
+      "name": "Shield Charger",
+      "level": 2,
+      "rechargeRequired": false,
+      "cooldown": false,
       "critical": 0
     },
     {
@@ -2005,6 +2016,25 @@
       "type": "tool",
       "level": 3,
       "credits": 50,
+      "name": "Shield Battery",
+      "cooldown": true,
+      "attr": {
+        "maxhull": 0,
+        "maxshield": 0,
+        "maxenergy": 0,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "playerBuff": {"hull": 0, "shield": 10, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "critical": 0
+    },
+    {
+      "type": "tool",
+      "level": 3,
+      "credits": 50,
       "name": "Energy Battery",
       "cooldown": true,
       "attr": {
@@ -2035,25 +2065,6 @@
       "name": "Fold Reactor",
       "level": 3,
       "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "tool",
-      "level": 3,
-      "credits": 50,
-      "name": "Shield Battery",
-      "cooldown": true,
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 10, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "critical": 0
     },
     {
@@ -2710,7 +2721,7 @@
       "trader": {
         "buy": 1.5,
         "sell": 0.75,
-        "inventory": ["Rusty Kinetic Gun", "Steel armor"]
+        "inventory": ["Steel armor", "Rusty Autogun"]
       },
       "treasures": ["Alien Fossil"],
       "enemy": null
@@ -4326,7 +4337,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 1105, "y": -1353},
+      "pos": {"x": 1065, "y": -1333},
       "name": "Beryl Canis I",
       "style": "jovian-mono",
       "trader": null,
@@ -4334,7 +4345,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 1102, "y": -1196},
+      "pos": {"x": 1102, "y": -1176},
       "name": "A8216",
       "style": "asteroid-1",
       "trader": null,
@@ -4414,7 +4425,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 1041, "y": -1258},
+      "pos": {"x": 1061, "y": -1238},
       "name": "A2178",
       "style": "asteroid-6",
       "trader": null,
@@ -4478,7 +4489,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 1035, "y": -1347},
+      "pos": {"x": 1115, "y": -1367},
       "name": "Soma",
       "style": "planet-soma",
       "trader": null,
@@ -4537,7 +4548,7 @@
       "name": "Pine",
       "style": "planet-hell-4",
       "trader": null,
-      "enemy": {"type": "Bandit", "loot": ["Kinetic Gun"]},
+      "enemy": {"type": "Bandit", "loot": ["Autogun Mk2"]},
       "treasures": []
     },
     {
@@ -4762,7 +4773,7 @@
       "style": "anomaly-junk",
       "trader": null,
       "enemy": null,
-      "treasures": ["Rusty Kinetic Gun"]
+      "treasures": ["Cutting Beam"]
     },
     {
       "pos": {"x": -197, "y": -1423},
@@ -4787,7 +4798,7 @@
       "style": "asteroid-4",
       "trader": null,
       "enemy": null,
-      "treasures": ["Rusty Kinetic Gun"]
+      "treasures": ["Autogun"]
     },
     {
       "pos": {"x": -491, "y": -1331},
@@ -5303,7 +5314,7 @@
     },
     {
       "name": "Start of an adventure",
-      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n_\"Hey hitchhiker! This is your stop.\"_\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a _weird_ signature.\n\nIf you explore the area you might score big time!</dialog>\n<add-to-quest-list/>\n<hint layout=\"quest\">Review your objectives here</hint>\n\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog model=\"Rover\">You find the meteorite resting on the ground. A shiny lump that is surprisingly light when you load it into the rover.</dialog>\n<dialog>If you *TRADE* the meteroite for cash, you will earn a small fortune.</dialog>\n<hint layout=\"trade\">Sell your treasures here</hint>\n\n<condition have-credits=\"200\"/>\n<dialog>_\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. Enter the *SHIPYARD* if you are interested.\"_</dialog>\n<hint layout=\"shipyard\">Buy a starship here</hint>\n\n<condition have-ship=\"Kerr Clipper\" />\n<dialog>_\"Now you can *LIFT OFF* and leave this planet.\"\n\n\"And good luck kid! It is dangerous out there.\"_</dialog>\n<hint layout=\"liftoff\">Leave this world</hint>\n<mark-on-map dest=\"Samson's Folly\"/>\n\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>_\"My friend at Backwater said you would be coming.\n\nWe have a cheap *Rusty Kinetic Gun* in stock. You are welcome to *LAND* and *TRADE* with us here at Samson's Folly.\"_</dialog>\n<hint layout=\"quest\">Review you objectives here</hint>\n\n<condition have-item=\"Rusty Kinetic Gun\"/>\n<dialog>You now have a Rusty Kinetic Gun, a basic weapon. Tap you ship hologram to open your *PROFILE* and *INSTALL* your new weapon</dialog>\n<hint layout=\"profile\">Install your equipment here</hint>\n\n<condition installed-item=\"Rusty Kinetic Gun\"/>\n<hint layout=\"profile\"></hint>\n<dialog>_\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"_</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n<place-inventory dest=\"Samson's Folly\" item=\"Cutting Beam;EMP Pulse\"/>\n<mark-on-map dest=\"Samson's Folly\" />\n<dialog>_\"Good. Now you should try to defeat a drone that can self repair. Get back to *Samson's Folly* where I have a *Cutting Beam* and an *EMP Pulse* for you.\"_</dialog>\n\n<condition at-dest=\"Samson's Folly\" have-item=\"Cutting Beam;EMP Pulse\" />\n<dialog>_\"Here, take this *Combat Handbook*. Included in the price. It will be available in your *QUEST* computer in the future.\"_</dialog>\n<dialog>_\"The Rugged Drone is waiting for you at *Samson's Training Ground*, go there.\"_</dialog>\n<give item=\"Combat Handbook\"/>\n<mark-on-map dest=\"Samson's Training Ground\" />\n\n<condition no-enemy-at-dest=\"Samson's Training Ground\" />\n<dialog>Samson radios you.\n\n_\"Looking good kid! Now you have the basic skills needed out here in the nebula.\n\nGood luck!\"_</dialog>\n",
+      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n_\"Hey hitchhiker! This is your stop.\"_\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a _weird_ signature.\n\nIf you explore the area you might score big time!</dialog>\n<add-to-quest-list/>\n<hint layout=\"quest\">Review your objectives here</hint>\n\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog model=\"Rover\">You find the meteorite resting on the ground. A shiny lump that is surprisingly light when you load it into the rover.</dialog>\n<dialog>If you *TRADE* the meteroite for cash, you will earn a small fortune.</dialog>\n<hint layout=\"trade\">Sell your treasures here</hint>\n\n<condition have-credits=\"200\"/>\n<dialog>_\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. Enter the *SHIPYARD* if you are interested.\"_</dialog>\n<hint layout=\"shipyard\">Buy a starship here</hint>\n\n<condition have-ship=\"Kerr Clipper\" />\n<dialog>_\"Now you can *LIFT OFF* and leave this planet.\"\n\n\"And good luck kid! It is dangerous out there.\"_</dialog>\n<hint layout=\"liftoff\">Leave this world</hint>\n<mark-on-map dest=\"Samson's Folly\"/>\n\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>_\"My friend at Backwater said you would be coming.\n\nWe have a cheap *Rusty Autogun* in stock. You are welcome to *LAND* and *TRADE* with us here at Samson's Folly.\"_</dialog>\n<hint layout=\"quest\">Review you objectives here</hint>\n\n<condition have-item=\"Rusty Autogun\"/>\n<dialog>You now have a Rusty Autogun, a basic weapon. Tap you ship hologram to open your *PROFILE* and *INSTALL* your new weapon</dialog>\n<hint layout=\"profile\">Install your equipment here</hint>\n\n<condition installed-item=\"Rusty Autogun\"/>\n<hint layout=\"profile\"></hint>\n<dialog>_\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"_</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n<place-inventory dest=\"Samson's Folly\" item=\"Cutting Beam;EMP Pulse\"/>\n<mark-on-map dest=\"Samson's Folly\" />\n<dialog>_\"Good. Now you should try to defeat a drone that can self repair. Get back to *Samson's Folly* where I have a *Cutting Beam* and an *EMP Pulse* for you.\"_</dialog>\n\n<condition at-dest=\"Samson's Folly\" have-item=\"Cutting Beam;EMP Pulse\" />\n<dialog>_\"Here, take this *Combat Handbook*. Included in the price. It will be available in your *QUEST* computer in the future.\"_</dialog>\n<dialog>_\"The Rugged Drone is waiting for you at *Samson's Training Ground*, go there.\"_</dialog>\n<give item=\"Combat Handbook\"/>\n<mark-on-map dest=\"Samson's Training Ground\" />\n\n<condition no-enemy-at-dest=\"Samson's Training Ground\" />\n<dialog>Samson radios you.\n\n_\"Looking good kid! Now you have the basic skills needed out here in the nebula.\n\nGood luck!\"_</dialog>\n",
       "tags": "outback",
       "color": "6bf",
       "icon": ""
@@ -7026,6 +7037,98 @@
         [50, 0, 73],
         [20, 0, 170],
         [0, 0, 160]
+      ],
+      "tags": "ship"
+    },
+    {
+      "name": "Ursula",
+      "geometry": "composite",
+      "transform": [["scale", 1.2, 1.2, 1.2], ["translate", 0, 10, -50]],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["rotate", 90, 30, 0], ["translate", 60, -60, 0]],
+          "path": [[15, 0, -5], [20, 0, 0], [15, 0, 45], [15, 0, -5]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["rotate", 90, 30, 0], ["translate", -60, -60, 0]],
+          "path": [[15, 0, -5], [20, 0, 0], [15, 0, 45], [15, 0, -5]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["rotate", 90, 30, 0], ["translate", 95, -40, 0]],
+          "path": [[15, 0, -5], [20, 0, 0], [15, 0, 45], [15, 0, -5]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["rotate", 90, 30, 0], ["translate", -95, -40, 0]],
+          "path": [[15, 0, -5], [20, 0, 0], [15, 0, 45], [15, 0, -5]]
+        },
+        {
+          "name": "Compiled Kruft Ursula",
+          "geometry": "mesh",
+          "transform": [["scale", 3, 3, 3], ["rotate", 0, 0, 0]],
+          "quads": [
+            [[36, 7, -3], [19, 13, -3], [8, 8, -8], [18, 4, -8]],
+            [[36, 7, 3], [19, 13, 3], [19, 13, -3], [36, 7, -3]],
+            [[0, 0, 10], [0, 0, 10], [19, 13, 3], [36, 7, 3]],
+            [[19, 13, -3], [13, 19, -3], [8, 8, -8], [8, 8, -8]],
+            [[19, 13, 3], [13, 19, 3], [13, 19, -3], [19, 13, -3]],
+            [[0, 0, 10], [0, 0, 10], [13, 19, 3], [19, 13, 3]],
+            [[8, 8, -8], [4, 18, -8], [-4, 18, -8], [-8, 8, -8]],
+            [[13, 19, -3], [7, 36, -3], [4, 18, -8], [8, 8, -8]],
+            [[13, 19, 3], [7, 36, 3], [7, 36, -3], [13, 19, -3]],
+            [[0, 0, 10], [0, 0, 10], [7, 36, 3], [13, 19, 3]],
+            [[7, 36, -3], [-7, 36, -3], [-4, 18, -8], [4, 18, -8]],
+            [[7, 36, 3], [-7, 36, 3], [-7, 36, -3], [7, 36, -3]],
+            [[0, 0, 10], [0, 0, 10], [-7, 36, 3], [7, 36, 3]],
+            [[-7, 36, -3], [-13, 19, -3], [-8, 8, -8], [-4, 18, -8]],
+            [[-7, 36, 3], [-13, 19, 3], [-13, 19, -3], [-7, 36, -3]],
+            [[0, 0, 10], [0, 0, 10], [-13, 19, 3], [-7, 36, 3]],
+            [[-13, 19, -3], [-19, 13, -3], [-8, 8, -8], [-8, 8, -8]],
+            [[-13, 19, 3], [-19, 13, 3], [-19, 13, -3], [-13, 19, -3]],
+            [[0, 0, 10], [0, 0, 10], [-19, 13, 3], [-13, 19, 3]],
+            [[-8, 8, -8], [-18, 4, -8], [-18, -4, -8], [-8, -8, -8]],
+            [[-19, 13, -3], [-36, 7, -3], [-18, 4, -8], [-8, 8, -8]],
+            [[-19, 13, 3], [-36, 7, 3], [-36, 7, -3], [-19, 13, -3]],
+            [[0, 0, 10], [0, 0, 10], [-36, 7, 3], [-19, 13, 3]],
+            [[-36, 7, -3], [-36, -7, -3], [-18, -4, -8], [-18, 4, -8]],
+            [[-36, 7, 3], [-36, -7, 3], [-36, -7, -3], [-36, 7, -3]],
+            [[0, 0, 10], [0, 0, 10], [-36, -7, 3], [-36, 7, 3]],
+            [[-36, -7, -3], [-19, -13, -3], [-8, -8, -8], [-18, -4, -8]],
+            [[-36, -7, 3], [-19, -13, 3], [-19, -13, -3], [-36, -7, -3]],
+            [[0, 0, 10], [0, 0, 10], [-19, -13, 3], [-36, -7, 3]],
+            [[-8, 8, -8], [-8, -8, -8], [8, -8, -8], [8, 8, -8]],
+            [[-19, -13, -3], [-13, -19, -3], [-8, -8, -8], [-8, -8, -8]],
+            [[-19, -13, 3], [-13, -19, 3], [-13, -19, -3], [-19, -13, -3]],
+            [[0, 0, 10], [0, 0, 10], [-13, -19, 3], [-19, -13, 3]],
+            [[-8, -8, -8], [-4, -18, -8], [4, -18, -8], [8, -8, -8]],
+            [[-13, -19, -3], [-7, -36, -3], [-4, -18, -8], [-8, -8, -8]],
+            [[-13, -19, 3], [-7, -36, 3], [-7, -36, -3], [-13, -19, -3]],
+            [[0, 0, 10], [0, 0, 10], [-7, -36, 3], [-13, -19, 3]],
+            [[-7, -36, -3], [7, -36, -3], [4, -18, -8], [-4, -18, -8]],
+            [[-7, -36, 3], [7, -36, 3], [7, -36, -3], [-7, -36, -3]],
+            [[0, 0, 10], [0, 0, 10], [7, -36, 3], [-7, -36, 3]],
+            [[7, -36, -3], [13, -19, -3], [8, -8, -8], [4, -18, -8]],
+            [[7, -36, 3], [13, -19, 3], [13, -19, -3], [7, -36, -3]],
+            [[0, 0, 10], [0, 0, 10], [13, -19, 3], [7, -36, 3]],
+            [[13, -19, -3], [19, -13, -3], [8, -8, -8], [8, -8, -8]],
+            [[13, -19, 3], [19, -13, 3], [19, -13, -3], [13, -19, -3]],
+            [[0, 0, 10], [0, 0, 10], [19, -13, 3], [13, -19, 3]],
+            [[8, -8, -8], [18, -4, -8], [18, 4, -8], [8, 8, -8]],
+            [[19, -13, -3], [36, -7, -3], [18, -4, -8], [8, -8, -8]],
+            [[19, -13, 3], [36, -7, 3], [36, -7, -3], [19, -13, -3]],
+            [[0, 0, 10], [0, 0, 10], [36, -7, 3], [19, -13, 3]],
+            [[36, -7, -3], [36, 7, -3], [18, 4, -8], [18, -4, -8]],
+            [[36, -7, 3], [36, 7, 3], [36, 7, -3], [36, -7, -3]],
+            [[0, 0, 10], [0, 0, 10], [36, 7, 3], [36, -7, 3]]
+          ]
+        }
       ],
       "tags": "ship"
     },
