@@ -24,9 +24,9 @@
           <tbody>
             <tr each={item in filteredItems()} onclick={add}>
               <td>{item.name}</td>
+              <td>{item.type}{item.cooldown ? ' cooldown' : ''}</td>
               <td>L{item.level}</td>
               <td>{toPercent(item.critical)}%</td>
-              <td>{item.cooldown ? 'cooldown' : ''}</td>
               <td class={table_zero: !item.credits}>{item.credits}</td>
               <td class={table_zero: !item.attr.maxhull}>{item.attr.maxhull}</td>
               <td class={table_zero: !item.attr.maxshield}>{item.attr.maxshield}</td>

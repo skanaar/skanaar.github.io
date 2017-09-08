@@ -123,11 +123,11 @@
     self.pasteCsv = function () {
       var data = window.prompt('Provide tab separated data')
       if (!data) { return }
-      var matrix = data.split('\n').map(line => line.split('\t'))
-      matrix.forEach(function (row) {
-        self.items = self.items.filter(item => item.name != row[0])
+      var table = data.split('\n').map(line => line.split('\t'))
+      table.forEach(function (row) {
+        self.world.items = self.world.items.filter(item => item.name != row[0])
         var i = 0
-        self.items.push({
+        self.world.items.push({
           name: row[i++],
           type: row[i++],
           level: +row[i++],

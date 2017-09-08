@@ -296,7 +296,7 @@
       "name": "Rugged Drone",
       "level": 0,
       "visual": "Monitor Drone",
-      "inventory": ["Linear Reactor", "Epoxy Injector"],
+      "inventory": ["Mk1 Reactor", "Patch Kit"],
       "isFlying": true,
       "value": 0,
       "slots": 0
@@ -402,7 +402,7 @@
         "Monopole Shield",
         "Meson Ray",
         "Railgun",
-        "Fold Reactor"
+        "Mk5 Reactor"
       ],
       "isFlying": true,
       "slots": 0,
@@ -458,13 +458,13 @@
       "name": "Sentinel Pod",
       "visual": "Sentinel",
       "inventory": [
-        "Nanite Swarm",
-        "Torii Reactor",
-        "Hexagon Battery",
         "Mass Driver",
         "Railgun",
         "Incision Beam",
-        "Meson Ray"
+        "Meson Ray",
+        "Mk4 Battery",
+        "Mk4 Reactor",
+        "Welding Robot"
       ],
       "level": 4,
       "value": 0,
@@ -542,14 +542,13 @@
       "name": "Soma Reaver",
       "visual": "Soma Saay",
       "inventory": [
-        "Focus Beam",
-        "Focus Beam",
         "EMP Bomb",
-        "Octagon Battery",
-        "Recharge Loop",
         "Repair Nanites",
         "Sacrifice Device",
-        "Shield Battery"
+        "Shield Battery",
+        "Focal Beam",
+        "Dermal Inducer",
+        "Mk5 Capacitor"
       ],
       "isFlying": true,
       "value": 0,
@@ -571,9 +570,9 @@
       "visual": "Soma Saay",
       "inventory": [
         "Nano Repairers",
-        "Decagon Battery",
         "Metabomb",
-        "Focus Beam"
+        "Focal Beam",
+        "Mk6 Capacitor"
       ],
       "level": 6,
       "value": 0,
@@ -643,11 +642,12 @@
         "Soma Emitter",
         "Meson Ray",
         "Mass Driver",
-        "Null Reactor",
-        "Nanite Swarm",
         "Monopole Shield",
         "Shield Turbopump",
-        "Sacrifice Device"
+        "Sacrifice Device",
+        "Fluid Armor",
+        "Healing Robot",
+        "Mk6 Battery"
       ],
       "isFlying": true,
       "slots": 0,
@@ -670,11 +670,10 @@
       "visual": "Gnats",
       "inventory": [
         "Soma Emitter",
-        "Null Reactor",
         "Monopole Shield",
-        "Nanite Swarm",
         "Repair Nanites",
-        "Nano Repairers"
+        "Nano Repairers",
+        "Mk3 Reactor"
       ],
       "isFlying": true,
       "value": 0
@@ -700,10 +699,10 @@
         "Sacrifice Device",
         "Energy Battery",
         "Shield Battery",
-        "Decagon Battery",
-        "Null Reactor",
         "Soma Emitter",
-        "Metabomb"
+        "Metabomb",
+        "Mk5 Reactor",
+        "Restore Kit"
       ],
       "isFlying": true,
       "value": 0
@@ -1494,40 +1493,6 @@
       "critical": 0
     },
     {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 1, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Self Healing Hull",
-      "level": 1,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 1, "energy": -1},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 0,
-      "name": "Shield Pump",
-      "level": 1,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
       "type": "quest",
       "level": 1,
       "credits": 0,
@@ -1567,93 +1532,6 @@
       "critical": 0
     },
     {
-      "type": "weapon",
-      "level": 1,
-      "credits": 15,
-      "name": "EMP Pulse",
-      "cooldown": false,
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -4},
-      "critical": 0
-    },
-    {
-      "type": "tool",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 10, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 20,
-      "name": "Repair Kit",
-      "rechageRequired": true,
-      "rechargeRequired": true,
-      "level": 1,
-      "cooldown": true,
-      "critical": 0
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 3,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 1, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 20,
-      "name": "Electron Shield",
-      "rechargeRequired": false,
-      "level": 1,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "module",
-      "credits": 20,
-      "name": "Steel armor",
-      "attr": {
-        "maxhull": 2,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "level": 1,
-      "rechargeRequired": false,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "weapon",
-      "level": 5,
-      "credits": 520,
-      "name": "Disrupt Ray",
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
-      "targetBuff": {"hull": -10, "shield": -10, "energy": 0},
-      "critical": 0
-    },
-    {
       "type": "tool",
       "attr": {
         "maxhull": 0,
@@ -1673,79 +1551,6 @@
     },
     {
       "type": "weapon",
-      "level": 1,
-      "credits": 25,
-      "name": "Cutting Beam",
-      "cooldown": false,
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": -1, "shield": 0, "energy": 0},
-      "critical": 0.2
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 2},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 30,
-      "name": "Linear Reactor",
-      "level": 1,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "weapon",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": -2, "shield": 0, "energy": 0},
-      "credits": 40,
-      "name": "Autogun",
-      "level": 1,
-      "rechargeRequired": false,
-      "cooldown": false,
-      "critical": 0.05
-    },
-    {
-      "type": "weapon",
-      "level": 1,
-      "credits": 45,
-      "name": "Slug Driver",
-      "cooldown": true,
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": -5, "shield": 0, "energy": 0},
-      "critical": 0.25
-    },
-    {
-      "type": "weapon",
       "level": 2,
       "credits": -1,
       "name": "Monitor Beam L2",
@@ -1762,58 +1567,6 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
       "targetBuff": {"hull": -5, "shield": -2, "energy": 0},
       "critical": 0.05
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 2, "shield": 0, "energy": -3},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 1,
-      "name": "Epoxy Injector",
-      "level": 2,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 5,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 20,
-      "name": "Tetragon Battery",
-      "level": 2,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "weapon",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": -1, "shield": -2, "energy": 0},
-      "credits": 50,
-      "name": "Photon Ray",
-      "level": 2,
-      "rechargeRequired": false,
-      "cooldown": false,
-      "critical": 0
     },
     {
       "type": "tool",
@@ -1848,133 +1601,6 @@
       "name": "Shield Charger",
       "level": 2,
       "rechargeRequired": false,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "weapon",
-      "credits": 90,
-      "name": "Autogun Mk2",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": -4, "shield": 0, "energy": 0},
-      "level": 2,
-      "rechargeRequired": false,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "weapon",
-      "level": 2,
-      "credits": 95,
-      "name": "Piercing Beam",
-      "cooldown": false,
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
-      "targetBuff": {"hull": -4, "shield": -7, "energy": -4},
-      "critical": 0.1
-    },
-    {
-      "type": "weapon",
-      "level": 2,
-      "credits": 150,
-      "name": "Rod Driver",
-      "cooldown": true,
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": -8, "shield": 0, "energy": 0},
-      "critical": 0.25
-    },
-    {
-      "type": "weapon",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": -2, "shield": -5, "energy": 0},
-      "credits": 160,
-      "name": "Phased Ray",
-      "level": 2,
-      "rechargeRequired": false,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 3, "energy": -3},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 2,
-      "name": "Shield Core",
-      "level": 3,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 3, "shield": 0, "energy": -3},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 2,
-      "name": "Auro X82",
-      "level": 3,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 4, "energy": -4},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 3,
-      "name": "Shield Core Mk2",
-      "level": 3,
       "cooldown": false,
       "critical": 0
     },
@@ -2051,41 +1677,6 @@
       "critical": 0
     },
     {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 6},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 50,
-      "name": "Fold Reactor",
-      "level": 3,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 6,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 2, "energy": -1},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 80,
-      "name": "Proton Shield",
-      "rechargeRequired": false,
-      "level": 3,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
       "type": "tool",
       "level": 3,
       "credits": 100,
@@ -2103,83 +1694,6 @@
       "playerBuff": {"hull": -2, "shield": 10, "energy": 10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "critical": 0
-    },
-    {
-      "type": "weapon",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": -5, "shield": -2, "energy": 0},
-      "credits": 120,
-      "name": "Tau Ray",
-      "level": 3,
-      "rechargeRequired": false,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "weapon",
-      "level": 3,
-      "credits": 170,
-      "name": "Autogun Mk3",
-      "rechargeRequired": false,
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": -7, "shield": -3, "energy": 0},
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "weapon",
-      "credits": 200,
-      "name": "Quench Device",
-      "rechargeRequired": true,
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": -20, "energy": 0},
-      "level": 3,
-      "cooldown": true,
-      "critical": 0
-    },
-    {
-      "type": "weapon",
-      "level": 3,
-      "credits": 250,
-      "name": "Javelin Driver",
-      "cooldown": true,
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": -13, "shield": 0, "energy": 0},
-      "critical": 0.25
     },
     {
       "type": "tool",
@@ -2201,23 +1715,6 @@
       "critical": 0
     },
     {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 4, "shield": 0, "energy": -4},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 3,
-      "name": "Nanite Swarm",
-      "level": 4,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
       "type": "tool",
       "attr": {
         "maxhull": 0,
@@ -2230,111 +1727,6 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 45,
       "name": "Welding Robot",
-      "level": 4,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 4},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 50,
-      "name": "Torii Reactor",
-      "level": 4,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 20,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 80,
-      "name": "Hexagon Battery",
-      "level": 4,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "weapon",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": -25, "shield": 0, "energy": 0},
-      "credits": 500,
-      "name": "Mass Driver",
-      "level": 4,
-      "cooldown": true,
-      "critical": 0.25
-    },
-    {
-      "type": "weapon",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
-      "targetBuff": {"hull": -25, "shield": 0, "energy": 0},
-      "credits": 500,
-      "name": "Railgun",
-      "rechargeRequired": false,
-      "level": 4,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "weapon",
-      "level": 4,
-      "credits": 600,
-      "name": "Incision Beam",
-      "cooldown": false,
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
-      "targetBuff": {"hull": -6, "shield": -12, "energy": 0},
-      "critical": 0.1
-    },
-    {
-      "type": "weapon",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
-      "targetBuff": {"hull": -8, "shield": -25, "energy": 0},
-      "credits": 750,
-      "name": "Meson Ray",
       "level": 4,
       "cooldown": false,
       "critical": 0
@@ -2354,75 +1746,6 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": -15, "shield": -3, "energy": -10},
-      "level": 5,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 5, "energy": 10},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 5,
-      "name": "Recharge Loop",
-      "level": 5,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 8},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 50,
-      "name": "Null Reactor",
-      "level": 5,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 30,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 180,
-      "name": "Octagon Battery",
-      "level": 5,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 10,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 2, "energy": -3},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 180,
-      "name": "Monopole Shield",
-      "rechargeRequired": false,
       "level": 5,
       "cooldown": false,
       "critical": 0
@@ -2500,17 +1823,6 @@
       "critical": 0
     },
     {
-      "type": "weapon",
-      "level": 5,
-      "credits": 500,
-      "name": "Luminal Driver",
-      "cooldown": true,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": -42, "shield": 0, "energy": 0},
-      "critical": 0.25
-    },
-    {
       "type": "tool",
       "level": 5,
       "credits": 700,
@@ -2530,23 +1842,6 @@
       "critical": 0
     },
     {
-      "type": "weapon",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
-      "targetBuff": {"hull": -25, "shield": -25, "energy": 0},
-      "credits": 850,
-      "name": "Focus Beam",
-      "level": 5,
-      "cooldown": false,
-      "critical": 0.1
-    },
-    {
       "type": "tool",
       "attr": {
         "maxhull": 0,
@@ -2559,23 +1854,6 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 80,
       "name": "Nano Repairers",
-      "level": 6,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 40,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 320,
-      "name": "Decagon Battery",
       "level": 6,
       "cooldown": false,
       "critical": 0
@@ -2598,23 +1876,6 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": -20, "shield": -10, "energy": -10},
       "critical": 0.25
-    },
-    {
-      "type": "module",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 40,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 320,
-      "name": "Shield Array",
-      "level": 7,
-      "cooldown": false,
-      "critical": 0
     },
     {
       "type": "weapon",
@@ -2672,6 +1933,1029 @@
       "level": 10,
       "cooldown": false,
       "critical": 0
+    },
+    {
+      "name": "Autogun",
+      "type": "weapon",
+      "level": 1,
+      "credits": 30,
+      "critical": 0.05,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": -5, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Autogun Mk2",
+      "type": "weapon",
+      "level": 2,
+      "credits": 75,
+      "critical": 0.05,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": -9, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Autogun Mk3",
+      "type": "weapon",
+      "level": 3,
+      "credits": 205,
+      "critical": 0.05,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
+      "targetBuff": {"hull": -16, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Solenoid Gun",
+      "type": "weapon",
+      "level": 4,
+      "credits": 555,
+      "critical": 0.05,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
+      "targetBuff": {"hull": -28, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Gauss Gun",
+      "type": "weapon",
+      "level": 5,
+      "credits": 1450,
+      "critical": 0.05,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
+      "targetBuff": {"hull": -48, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Railgun",
+      "type": "weapon",
+      "level": 6,
+      "credits": 3855,
+      "critical": 0.05,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -28},
+      "targetBuff": {"hull": -84, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Heat Ray",
+      "type": "weapon",
+      "level": 1,
+      "credits": 30,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": -2, "shield": -3, "energy": 0}
+    },
+    {
+      "name": "Photon Ray",
+      "type": "weapon",
+      "level": 2,
+      "credits": 75,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": -3, "shield": -6, "energy": 0}
+    },
+    {
+      "name": "Meson Ray",
+      "type": "weapon",
+      "level": 3,
+      "credits": 205,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
+      "targetBuff": {"hull": -5, "shield": -11, "energy": 0}
+    },
+    {
+      "name": "Tau Ray",
+      "type": "weapon",
+      "level": 4,
+      "credits": 530,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
+      "targetBuff": {"hull": -9, "shield": -18, "energy": 0}
+    },
+    {
+      "name": "Phased Ray",
+      "type": "weapon",
+      "level": 5,
+      "credits": 1450,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
+      "targetBuff": {"hull": -16, "shield": -32, "energy": 0}
+    },
+    {
+      "name": "Nucleon Ray",
+      "type": "weapon",
+      "level": 6,
+      "credits": 3855,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -28},
+      "targetBuff": {"hull": -28, "shield": -56, "energy": 0}
+    },
+    {
+      "name": "EM Pulse",
+      "type": "weapon",
+      "level": 1,
+      "credits": 30,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -5}
+    },
+    {
+      "name": "Voltaic Pulse",
+      "type": "weapon",
+      "level": 2,
+      "credits": 75,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -9}
+    },
+    {
+      "name": "Soliton Pulse",
+      "type": "weapon",
+      "level": 3,
+      "credits": 205,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -16}
+    },
+    {
+      "name": "Sinusoid Pulse",
+      "type": "weapon",
+      "level": 4,
+      "credits": 555,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -28}
+    },
+    {
+      "name": "Coronal Pulse",
+      "type": "weapon",
+      "level": 5,
+      "credits": 1450,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -48}
+    },
+    {
+      "name": "Aural Pulse",
+      "type": "weapon",
+      "level": 6,
+      "credits": 3855,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -28},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -84}
+    },
+    {
+      "name": "Cutting Beam",
+      "type": "weapon",
+      "level": 1,
+      "credits": 25,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": -2, "shield": -2, "energy": 0}
+    },
+    {
+      "name": "Piercing Beam",
+      "type": "weapon",
+      "level": 2,
+      "credits": 45,
+      "critical": 0.1,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": -3, "shield": -3, "energy": 0}
+    },
+    {
+      "name": "Incision Beam",
+      "type": "weapon",
+      "level": 3,
+      "credits": 115,
+      "critical": 0.1,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
+      "targetBuff": {"hull": -5, "shield": -5, "energy": 0}
+    },
+    {
+      "name": "Focal Beam",
+      "type": "weapon",
+      "level": 4,
+      "credits": 320,
+      "critical": 0.1,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
+      "targetBuff": {"hull": -9, "shield": -9, "energy": 0}
+    },
+    {
+      "name": "Locus Beam",
+      "type": "weapon",
+      "level": 5,
+      "credits": 875,
+      "critical": 0.1,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
+      "targetBuff": {"hull": -16, "shield": -16, "energy": 0}
+    },
+    {
+      "name": "Apex Beam",
+      "type": "weapon",
+      "level": 6,
+      "credits": 2330,
+      "critical": 0.1,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -28},
+      "targetBuff": {"hull": -28, "shield": -28, "energy": 0}
+    },
+    {
+      "name": "Slug Driver",
+      "type": "weapon",
+      "level": 1,
+      "credits": 30,
+      "critical": 0.25,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": -5, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Rod Driver",
+      "type": "weapon",
+      "level": 2,
+      "credits": 75,
+      "critical": 0.25,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": -9, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mass Driver",
+      "type": "weapon",
+      "level": 3,
+      "credits": 205,
+      "critical": 0.25,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
+      "targetBuff": {"hull": -16, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Javelin Driver",
+      "type": "weapon",
+      "level": 4,
+      "credits": 555,
+      "critical": 0.25,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
+      "targetBuff": {"hull": -28, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Luminal Driver",
+      "type": "weapon",
+      "level": 5,
+      "credits": 1450,
+      "critical": 0.25,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
+      "targetBuff": {"hull": -48, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Helix Driver",
+      "type": "weapon",
+      "level": 6,
+      "credits": 3855,
+      "critical": 0.25,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -28},
+      "targetBuff": {"hull": -84, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "EM Disruptor",
+      "type": "weapon",
+      "level": 1,
+      "credits": 30,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": 0, "shield": -5, "energy": 0}
+    },
+    {
+      "name": "Tau Disruptor",
+      "type": "weapon",
+      "level": 2,
+      "credits": 75,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": 0, "shield": -9, "energy": 0}
+    },
+    {
+      "name": "Co Disruptor",
+      "type": "weapon",
+      "level": 3,
+      "credits": 205,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
+      "targetBuff": {"hull": 0, "shield": -16, "energy": 0}
+    },
+    {
+      "name": "Ur Disruptor",
+      "type": "weapon",
+      "level": 4,
+      "credits": 555,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
+      "targetBuff": {"hull": 0, "shield": -28, "energy": 0}
+    },
+    {
+      "name": "Sc Disruptor",
+      "type": "weapon",
+      "level": 5,
+      "credits": 1450,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
+      "targetBuff": {"hull": 0, "shield": -48, "energy": 0}
+    },
+    {
+      "name": "Au Disruptor",
+      "type": "weapon",
+      "level": 6,
+      "credits": 3855,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -28},
+      "targetBuff": {"hull": 0, "shield": -84, "energy": 0}
+    },
+    {
+      "name": "Quench Device",
+      "type": "weapon",
+      "level": 1,
+      "credits": 30,
+      "critical": 0.1,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -5}
+    },
+    {
+      "name": "Z Device",
+      "type": "weapon",
+      "level": 2,
+      "credits": 75,
+      "critical": 0.1,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -9}
+    },
+    {
+      "name": "Luhn Device",
+      "type": "weapon",
+      "level": 3,
+      "credits": 205,
+      "critical": 0.1,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -16}
+    },
+    {
+      "name": "Steel Armor",
+      "type": "module",
+      "level": 1,
+      "credits": 5,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 2, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Tungsten Armor",
+      "type": "module",
+      "level": 2,
+      "credits": 5,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 3, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Ablative Armor",
+      "type": "module",
+      "level": 3,
+      "credits": 15,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 5, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Active Armor",
+      "type": "module",
+      "level": 4,
+      "credits": 45,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 9, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Dynamic Armor",
+      "type": "module",
+      "level": 5,
+      "credits": 130,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 16, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Fluid Armor",
+      "type": "module",
+      "level": 6,
+      "credits": 340,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 28, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Lepton Shield",
+      "type": "module",
+      "level": 1,
+      "credits": 5,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 2, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Proton Shield",
+      "type": "module",
+      "level": 2,
+      "credits": 5,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 3, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Quark Shield",
+      "type": "module",
+      "level": 3,
+      "credits": 15,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 5, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Gluon Shield",
+      "type": "module",
+      "level": 4,
+      "credits": 45,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 9, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Monopole Shield",
+      "type": "module",
+      "level": 5,
+      "credits": 130,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 16, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Pauli Shield",
+      "type": "module",
+      "level": 6,
+      "credits": 340,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 28, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk1 Capacitor",
+      "type": "module",
+      "level": 1,
+      "credits": 5,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 2},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk2 Capacitor",
+      "type": "module",
+      "level": 2,
+      "credits": 5,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 3},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk3 Capacitor",
+      "type": "module",
+      "level": 3,
+      "credits": 15,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 5},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk4 Capacitor",
+      "type": "module",
+      "level": 4,
+      "credits": 45,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 9},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk5 Capacitor",
+      "type": "module",
+      "level": 5,
+      "credits": 130,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 16},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk6 Capacitor",
+      "type": "module",
+      "level": 6,
+      "credits": 340,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 28},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Patch Robot",
+      "type": "module",
+      "level": 1,
+      "credits": 5,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 2, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mend Robot",
+      "type": "module",
+      "level": 2,
+      "credits": 5,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 3, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Repair Robot",
+      "type": "module",
+      "level": 3,
+      "credits": 15,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 5, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Restore Robot",
+      "type": "module",
+      "level": 4,
+      "credits": 45,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 9, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Nanite Robot",
+      "type": "module",
+      "level": 5,
+      "credits": 130,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 16, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Healing Robot",
+      "type": "module",
+      "level": 6,
+      "credits": 340,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 28, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Aura Inducer",
+      "type": "module",
+      "level": 1,
+      "credits": 5,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 2, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Buffer Inducer",
+      "type": "module",
+      "level": 2,
+      "credits": 5,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 3, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Shell Inducer",
+      "type": "module",
+      "level": 3,
+      "credits": 15,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 5, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Absorb Inducer",
+      "type": "module",
+      "level": 4,
+      "credits": 45,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 9, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Dermal Inducer",
+      "type": "module",
+      "level": 5,
+      "credits": 130,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 16, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Aegis Inducer",
+      "type": "module",
+      "level": 6,
+      "credits": 340,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 28, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk1 Reactor",
+      "type": "module",
+      "level": 1,
+      "credits": 5,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 2},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk2 Reactor",
+      "type": "module",
+      "level": 2,
+      "credits": 5,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 3},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk3 Reactor",
+      "type": "module",
+      "level": 3,
+      "credits": 15,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 5},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk4 Reactor",
+      "type": "module",
+      "level": 4,
+      "credits": 45,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 9},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk5 Reactor",
+      "type": "module",
+      "level": 5,
+      "credits": 130,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 16},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk6 Reactor",
+      "type": "module",
+      "level": 6,
+      "credits": 340,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 28},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Patch Kit",
+      "type": "tool",
+      "level": 1,
+      "credits": 30,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -2},
+      "playerBuff": {"hull": 9, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mend Kit",
+      "type": "tool",
+      "level": 2,
+      "credits": 75,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -3},
+      "playerBuff": {"hull": 15, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Repair Kit",
+      "type": "tool",
+      "level": 3,
+      "credits": 205,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -5},
+      "playerBuff": {"hull": 26, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Restore Kit",
+      "type": "tool",
+      "level": 4,
+      "credits": 555,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -9},
+      "playerBuff": {"hull": 46, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Nanite Kit",
+      "type": "tool",
+      "level": 5,
+      "credits": 1450,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -16},
+      "playerBuff": {"hull": 80, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Healing Kit",
+      "type": "tool",
+      "level": 6,
+      "credits": 3795,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -28},
+      "playerBuff": {"hull": 139, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Envelope Cell",
+      "type": "tool",
+      "level": 1,
+      "credits": 30,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -2},
+      "playerBuff": {"hull": 0, "shield": 9, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Buffer Cell",
+      "type": "tool",
+      "level": 2,
+      "credits": 75,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -3},
+      "playerBuff": {"hull": 0, "shield": 15, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Shell Cell",
+      "type": "tool",
+      "level": 3,
+      "credits": 205,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -5},
+      "playerBuff": {"hull": 0, "shield": 26, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Absorb Cell",
+      "type": "tool",
+      "level": 4,
+      "credits": 555,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -9},
+      "playerBuff": {"hull": 0, "shield": 46, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Dermal Cell",
+      "type": "tool",
+      "level": 5,
+      "credits": 1450,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -16},
+      "playerBuff": {"hull": 0, "shield": 80, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Aegis Cell",
+      "type": "tool",
+      "level": 6,
+      "credits": 3795,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -28},
+      "playerBuff": {"hull": 0, "shield": 139, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk1 Battery",
+      "type": "tool",
+      "level": 1,
+      "credits": 30,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -2},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 9},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk2 Battery",
+      "type": "tool",
+      "level": 2,
+      "credits": 75,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -3},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 15},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk3 Battery",
+      "type": "tool",
+      "level": 3,
+      "credits": 205,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -5},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 26},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk4 Battery",
+      "type": "tool",
+      "level": 4,
+      "credits": 555,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -9},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 46},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk5 Battery",
+      "type": "tool",
+      "level": 5,
+      "credits": 1450,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -16},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 80},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk6 Battery",
+      "type": "tool",
+      "level": 6,
+      "credits": 3795,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -28},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 139},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     }
   ],
   "audioRegions": [
@@ -2695,7 +2979,7 @@
       "trader": {"buy": 1.5, "sell": 0.5, "inventory": []},
       "treasures": [],
       "enemy": null,
-      "shipyard": ["Kerr Clipper", "Kerr Interdictor"]
+      "shipyard": ["Kerr Clipper", "Kerr Interdictor", "Ursula"]
     },
     {
       "name": "Outback 12",
@@ -2721,7 +3005,7 @@
       "trader": {
         "buy": 1.5,
         "sell": 0.75,
-        "inventory": ["Steel armor", "Rusty Autogun"]
+        "inventory": ["Rusty Autogun", "Steel Armor"]
       },
       "treasures": ["Alien Fossil"],
       "enemy": null
@@ -2742,24 +3026,22 @@
         "buy": 1.5,
         "sell": 0.75,
         "inventory": [
-          "Tau Ray",
-          "Quench Device",
-          "Javelin Driver",
-          "Mass Driver",
-          "Railgun",
-          "Shield Core",
-          "Auro X82",
-          "Shield Core Mk2",
-          "Fold Reactor",
-          "Proton Shield",
-          "Nanite Swarm",
-          "Torii Reactor",
-          "Hexagon Battery",
-          "Epoxy Injector",
-          "Repair System",
           "Welding Robot",
-          "Shield Turbopump",
-          "Autogun Mk3"
+          "Solenoid Gun",
+          "Tau Ray",
+          "Sinusoid Pulse",
+          "Focal Beam",
+          "Javelin Driver",
+          "Ur Disruptor",
+          "Active Armor",
+          "Gluon Shield",
+          "Mk4 Capacitor",
+          "Restore Robot",
+          "Absorb Inducer",
+          "Mk4 Reactor",
+          "Restore Kit",
+          "Absorb Cell",
+          "Mk4 Battery"
         ]
       },
       "treasures": [],
@@ -2771,7 +3053,8 @@
         "Kerr Interdictor",
         "CES Marathon",
         "CES Interplan",
-        "CES Bioculus"
+        "CES Bioculus",
+        "Ursula"
       ]
     },
     {
@@ -2930,8 +3213,9 @@
           "Barium Ore",
           "Tungsten",
           "Proton Shield",
-          "Electron Shield",
-          "Linear Reactor"
+          "Z Device",
+          "Mk2 Reactor",
+          "Voltaic Pulse"
         ]
       },
       "enemy": null,
@@ -2960,7 +3244,7 @@
       "style": "asteroid-9",
       "trader": null,
       "enemy": null,
-      "treasures": ["Barium Ore", "Tetragon Battery"]
+      "treasures": ["Barium Ore", "Mk3 Capacitor"]
     },
     {
       "pos": {"x": -590, "y": -950},
@@ -4208,16 +4492,15 @@
         "buy": 1.5,
         "sell": 0.75,
         "inventory": [
-          "Shield Core",
-          "Null Reactor",
-          "Energy Cell",
-          "Cutting Beam",
-          "Tau Ray",
-          "Phased Ray",
-          "Rod Driver",
-          "Piercing Beam",
-          "Photon Ray",
-          "Autogun"
+          "Envelope Cell",
+          "Aura Inducer",
+          "Quench Device",
+          "Autogun",
+          "Lepton Shield",
+          "Buffer Inducer",
+          "Proton Shield",
+          "Mk2 Capacitor",
+          "Mk2 Battery"
         ]
       },
       "enemy": null,
@@ -4519,9 +4802,8 @@
           "Repair Goo",
           "Energy Cell",
           "Repair Kit",
-          "Epoxy Injector",
-          "Tetragon Battery",
-          "Linear Reactor"
+          "Mk2 Reactor",
+          "Mend Kit"
         ]
       },
       "enemy": null,
@@ -5149,9 +5431,9 @@
           "Sky Crystals",
           "Sky Crystals",
           "Repair Nanites",
-          "Octagon Battery",
-          "Monopole Shield",
-          "Contraband"
+          "Contraband",
+          "Gluon Shield",
+          "Mk4 Battery"
         ]
       },
       "treasures": []
@@ -5309,12 +5591,12 @@
     },
     {
       "name": "Fast Forward",
-      "xml": "\n<condition at-dest=\"Fast Forward\" />\n<dialog ok=\"FAST FORWARD!\" cancel=\"NOT NOW\">*Thank you Beta tester for your work*\nWould you like to skip the tutorial zone?</dialog>\n<give credits=\"1000\"/>\n<give item=\"Tau Ray;Autogun Mk3;Quench Device;Javelin Driver;Piercing Beam;Shield Core;Auro X82;Shield Core Mk2;Fold Reactor;Proton Shield;Epoxy Injector;Shield Turbopump;Repair System;Blue seeds\"/>\n<change-ship ship=\"Kerr Runner\"/>\n<travel dest=\"The Bush Transfer Buoy\"/>",
+      "xml": "\n<condition at-dest=\"Fast Forward\" />\n<dialog ok=\"FAST FORWARD!\" cancel=\"NOT NOW\">*Thank you Beta tester for your work*\nWould you like to skip the tutorial zone?</dialog>\n<give credits=\"1000\"/>\n<give item=\"Autogun Mk3;Meson Ray;Soliton Pulse;Incision Beam;Mass Driver;Co Disruptor;Luhn Device;Ablative Armor;Quark Shield;Mk3 Capacitor;Repair Robot;Repair Robot;Shell Inducer;Mk3 Reactor;Repair Kit;Shell Cell;Mk3 Battery;Blue seeds\"/>\n<change-ship ship=\"Kerr Runner\"/>\n<travel dest=\"The Bush Transfer Buoy\"/>",
       "tags": "dev"
     },
     {
       "name": "Start of an adventure",
-      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n_\"Hey hitchhiker! This is your stop.\"_\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a _weird_ signature.\n\nIf you explore the area you might score big time!</dialog>\n<add-to-quest-list/>\n<hint layout=\"quest\">Review your objectives here</hint>\n\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog model=\"Rover\">You find the meteorite resting on the ground. A shiny lump that is surprisingly light when you load it into the rover.</dialog>\n<dialog>If you *TRADE* the meteroite for cash, you will earn a small fortune.</dialog>\n<hint layout=\"trade\">Sell your treasures here</hint>\n\n<condition have-credits=\"200\"/>\n<dialog>_\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. Enter the *SHIPYARD* if you are interested.\"_</dialog>\n<hint layout=\"shipyard\">Buy a starship here</hint>\n\n<condition have-ship=\"Kerr Clipper\" />\n<dialog>_\"Now you can *LIFT OFF* and leave this planet.\"\n\n\"And good luck kid! It is dangerous out there.\"_</dialog>\n<hint layout=\"liftoff\">Leave this world</hint>\n<mark-on-map dest=\"Samson's Folly\"/>\n\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>_\"My friend at Backwater said you would be coming.\n\nWe have a cheap *Rusty Autogun* in stock. You are welcome to *LAND* and *TRADE* with us here at Samson's Folly.\"_</dialog>\n<hint layout=\"quest\">Review you objectives here</hint>\n\n<condition have-item=\"Rusty Autogun\"/>\n<dialog>You now have a Rusty Autogun, a basic weapon. Tap you ship hologram to open your *PROFILE* and *INSTALL* your new weapon</dialog>\n<hint layout=\"profile\">Install your equipment here</hint>\n\n<condition installed-item=\"Rusty Autogun\"/>\n<hint layout=\"profile\"></hint>\n<dialog>_\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"_</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n<place-inventory dest=\"Samson's Folly\" item=\"Cutting Beam;EMP Pulse\"/>\n<mark-on-map dest=\"Samson's Folly\" />\n<dialog>_\"Good. Now you should try to defeat a drone that can self repair. Get back to *Samson's Folly* where I have a *Cutting Beam* and an *EMP Pulse* for you.\"_</dialog>\n\n<condition at-dest=\"Samson's Folly\" have-item=\"Cutting Beam;EMP Pulse\" />\n<dialog>_\"Here, take this *Combat Handbook*. Included in the price. It will be available in your *QUEST* computer in the future.\"_</dialog>\n<dialog>_\"The Rugged Drone is waiting for you at *Samson's Training Ground*, go there.\"_</dialog>\n<give item=\"Combat Handbook\"/>\n<mark-on-map dest=\"Samson's Training Ground\" />\n\n<condition no-enemy-at-dest=\"Samson's Training Ground\" />\n<dialog>Samson radios you.\n\n_\"Looking good kid! Now you have the basic skills needed out here in the nebula.\n\nGood luck!\"_</dialog>\n",
+      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n_\"Hey hitchhiker! This is your stop.\"_\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a _weird_ signature.\n\nIf you explore the area you might score big time!</dialog>\n<add-to-quest-list/>\n<hint layout=\"quest\">Review your objectives here</hint>\n\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog model=\"Rover\">You find the meteorite resting on the ground. A shiny lump that is surprisingly light when you load it into the rover.</dialog>\n<dialog>If you *TRADE* the meteroite for cash, you will earn a small fortune.</dialog>\n<hint layout=\"trade\">Sell your treasures here</hint>\n\n<condition have-credits=\"200\"/>\n<dialog>_\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. Enter the *SHIPYARD* if you are interested.\"_</dialog>\n<hint layout=\"shipyard\">Buy a starship here</hint>\n\n<condition have-ship=\"Kerr Clipper\" />\n<dialog>_\"Now you can *LIFT OFF* and leave this planet.\"\n\n\"And good luck kid! It is dangerous out there.\"_</dialog>\n<hint layout=\"liftoff\">Leave this world</hint>\n<mark-on-map dest=\"Samson's Folly\"/>\n\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>_\"My friend at Backwater said you would be coming.\n\nWe have a cheap *Rusty Autogun* in stock. You are welcome to *LAND* and *TRADE* with us here at Samson's Folly.\"_</dialog>\n<hint layout=\"quest\">Review you objectives here</hint>\n\n<condition have-item=\"Rusty Autogun\"/>\n<dialog>You now have a Rusty Autogun, a basic weapon. Tap you ship hologram to open your *PROFILE* and *INSTALL* your new weapon</dialog>\n<hint layout=\"profile\">Install your equipment here</hint>\n\n<condition installed-item=\"Rusty Autogun\"/>\n<hint layout=\"profile\"></hint>\n<dialog>_\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"_</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n<place-inventory dest=\"Samson's Folly\" item=\"Cutting Beam;EM Pulse\"/>\n<mark-on-map dest=\"Samson's Folly\" />\n<dialog>_\"Good. Now you should try to defeat a drone that can self repair. Get back to *Samson's Folly* where I have a *Cutting Beam* and an *EM Pulse* for you.\"_</dialog>\n\n<condition at-dest=\"Samson's Folly\" have-item=\"Cutting Beam;EM Pulse\" />\n<dialog>_\"Here, take this *Combat Handbook*. Included in the price. It will be available in your *QUEST* computer in the future.\"_</dialog>\n<dialog>_\"The Rugged Drone is waiting for you at *Samson's Training Ground*, go there.\"_</dialog>\n<give item=\"Combat Handbook\"/>\n<mark-on-map dest=\"Samson's Training Ground\" />\n\n<condition no-enemy-at-dest=\"Samson's Training Ground\" />\n<dialog>Samson radios you.\n\n_\"Looking good kid! Now you have the basic skills needed out here in the nebula.\n\nGood luck!\"_</dialog>\n",
       "tags": "outback",
       "color": "6bf",
       "icon": ""
@@ -5431,7 +5713,7 @@
     },
     {
       "name": "First Contact",
-      "xml": "\n<condition at-dest=\"Alien Reception\" />\n<dialog>The star ahead of you is Beryl Canis. The home of the Soma. A star that no one has visited, they Soma block all jump paths to their home.</dialog>\n<dialog model=\"Alien Meetup\">Around the alien buoy a Soma ship is parked. It does not attack you, perhaps you can approach and try to hail it.</dialog>\n\n<condition state=\"surface\" at-dest=\"Alien Reception\" trigger=\"HAIL\"/>\n<dialog model=\"Alien Meetup\">_\"Visitor. Starfarer! Many Soma are suspicious. And some are welcoming. Visitors should be careful.\"_</dialog>\n<dialog model=\"Alien Meetup\">_\"You have dealt with the Blue Seeds and Flowers. Be very careful with those. Bring us *Blue Seeds* from the asteroids to the south and we will vouch for you.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"A9725\" />\n<place-item dest=\"A9725\" item=\"Blue seeds\" />\n\n<condition have-item=\"Blue seeds\" at-dest=\"A9725\"/>\n<mark-on-map dest=\"Alien Reception\" />\n\n<condition state=\"surface\" have-item=\"Blue seeds\" at-dest=\"Alien Reception\" trigger=\"GIVE SEEDS\"/>\n<dialog model=\"Alien Meetup\">_\"The Soma is grateful. The blue flowers grow and multiply. A cycle. But if a flower is nurtured by us, it will branch that cycle and spawn a Soma.\"_</dialog>\n<dialog>_\"Go to our home world. We will spread the word our friendship. Some will distrust you, but many more will welcome you.\"_</dialog>\n<mark-on-map dest=\"Soma\" />\n\n<condition state=\"space\" at-dest=\"Soma\" trigger=\"HAIL\"/>\n<dialog>You send a message toward the planet. The supposed home world of the Soma.\nUp until now you almost doubted the stories of their race, and now you are the first human to visit this system.</dialog>\n<dialog>_\"Starfarer. We hear you are a friend.\nWe propose an exchange, a trade as you call it. Go to *Beryl Canis Lookout* and gather the *Essence*.\"_</dialog>\n<dialog>Up until now the communicatio with these aliens have been surprisingly smooth. But now you feel confused.</dialog>\n<mark-on-map dest=\"Beryl Canis Lookout\" />\n<place-item dest=\"Beryl Canis Lookout\" item=\"Soma Essence\"/>\n\n<condition have-item=\"Soma Essence\" />\n<dialog>The \"Essence\" is apparently some sort of data storage. Maybe. You are not sure. Now back to *Soma* to *Land* and hand it over.</dialog>\n<mark-on-map dest=\"Soma\" />\n\n<condition state=\"surface\" have-item=\"Soma Essence\" at-dest=\"Soma\" trigger=\"GIVE ESSENCE\"/>\n<dialog>The \"Essence\" is apparently some sort of data storage. Maybe. You are not sure. Now back to *Soma* to *Land* and hand it over.</dialog>\n<dialog>Hesitantly a small drone approach you. It accepts the Essence and hurries away. The Soma are shy. You hear nothing on the radio. Confused you go back to the ship.</dialog>\n<dialog>In the cargo hold a new item sits. How they managed to deliver it is a mystery. One that you don't intend to investigate.</dialog>\n<give item=\"Self Healing Hull\"/>\n",
+      "xml": "\n<condition at-dest=\"Alien Reception\" />\n<dialog>The star ahead of you is Beryl Canis. The home of the Soma. A star that no one has visited, they Soma block all jump paths to their home.</dialog>\n<dialog model=\"Alien Meetup\">Around the alien buoy a Soma ship is parked. It does not attack you, perhaps you can approach and try to hail it.</dialog>\n\n<condition state=\"surface\" at-dest=\"Alien Reception\" trigger=\"HAIL\"/>\n<dialog model=\"Alien Meetup\">_\"Visitor. Starfarer! Many Soma are suspicious. And some are welcoming. Visitors should be careful.\"_</dialog>\n<dialog model=\"Alien Meetup\">_\"You have dealt with the Blue Seeds and Flowers. Be very careful with those. Bring us *Blue Seeds* from the asteroids to the south and we will vouch for you.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"A9725\" />\n<place-item dest=\"A9725\" item=\"Blue seeds\" />\n\n<condition have-item=\"Blue seeds\" at-dest=\"A9725\"/>\n<mark-on-map dest=\"Alien Reception\" />\n\n<condition state=\"surface\" have-item=\"Blue seeds\" at-dest=\"Alien Reception\" trigger=\"GIVE SEEDS\"/>\n<dialog model=\"Alien Meetup\">_\"The Soma is grateful. The blue flowers grow and multiply. A cycle. But if a flower is nurtured by us, it will branch that cycle and spawn a Soma.\"_</dialog>\n<dialog>_\"Go to our home world. We will spread the word our friendship. Some will distrust you, but many more will welcome you.\"_</dialog>\n<mark-on-map dest=\"Soma\" />\n\n<condition state=\"space\" at-dest=\"Soma\" trigger=\"HAIL\"/>\n<dialog>You send a message toward the planet. The supposed home world of the Soma.\nUp until now you almost doubted the stories of their race, and now you are the first human to visit this system.</dialog>\n<dialog>_\"Starfarer. We hear you are a friend.\nWe propose an exchange, a trade as you call it. Go to *Beryl Canis Lookout* and gather the *Essence*.\"_</dialog>\n<dialog>Up until now the communicatio with these aliens have been surprisingly smooth. But now you feel confused.</dialog>\n<mark-on-map dest=\"Beryl Canis Lookout\" />\n<place-item dest=\"Beryl Canis Lookout\" item=\"Soma Essence\"/>\n\n<condition have-item=\"Soma Essence\" />\n<dialog>The \"Essence\" is apparently some sort of data storage. Maybe. You are not sure. Now back to *Soma* to *Land* and hand it over.</dialog>\n<mark-on-map dest=\"Soma\" />\n\n<condition state=\"surface\" have-item=\"Soma Essence\" at-dest=\"Soma\" trigger=\"GIVE ESSENCE\"/>\n<dialog>The \"Essence\" is apparently some sort of data storage. Maybe. You are not sure. Now back to *Soma* to *Land* and hand it over.</dialog>\n<dialog>Hesitantly a small drone approach you. It accepts the Essence and hurries away. The Soma are shy. You hear nothing on the radio. Confused you go back to the ship.</dialog>\n<dialog>In the cargo hold a new item sits. How they managed to deliver it is a mystery. One that you don't intend to investigate.</dialog>\n<give item=\"Aegis Inducer\"/>\n\n\n\n\n",
       "tags": "soma",
       "color": "8f0",
       "icon": "rhomb"
@@ -5480,14 +5762,14 @@
     },
     {
       "name": "Ska Ska water quality",
-      "xml": "<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"MAYBE LATER\">_\"Can you help us? We run a large construction project at Ska Ska and need to take water samples at its sea\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ska Ska\"/>\n<place-item dest=\"Ska Ska\" item=\"Water sample\"/>\n<condition have-item=\"Water sample\"/>\n<mark-on-map dest=\"Baola\" />\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>_\"Thank you! These samples are vital for the project. Please, accept this compensation\"_</dialog>\n<take item=\"Water sample\" />\n<give credits=\"100\"/>\n<dialog>_\"We are happy with your work, check back here later if you are looking for assignments.\"_</dialog>\n<condition at-dest=\"Grig\"/>\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>_\"Traveller!\nThe water samples you took revealed a serious contamination at Ska Ska.\"_</dialog>\n<dialog>_\"We need you go get a shipment of *DecontamiNanites* at *Helyon Shipyards*. Then go to *Ska Ska* and decontaminate the site.\"_</dialog>\n<mark-on-map dest=\"Helyon Shipyards\" />\n<place-inventory dest=\"Helyon Shipyards\" item=\"DecontamiNanites\"/>\n<condition have-item=\"DecontamiNanites\" />\n<mark-on-map dest=\"Ska Ska\" />\n<dialog>You got the decontamination substance. Nano machinery, dangerous stuff.</dialog>\n<condition have-item=\"DecontamiNanites\" at-dest=\"Ska Ska\" trigger=\"DECONTAMINATE\"/>\n<take item=\"DecontamiNanites\" />\n<dialog>You launch the self guiding pods with the nanite substance toward the construction site. Ok, only thing left is to collect the pay at *Baola*.</dialog>\n<mark-on-map dest=\"Baola\" color=\"F00\" icon=\"chevrons\"/>\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>_\"Traveller, we have a problem. Out security drones around Ska Ska have mistakenly identified the nanite decontaminant as an aggressor. They are jamming our channels.\"_</dialog>\n<dialog>_\"You must disable the confused drones so we can send control signals to the nanites.\"_</dialog>\n<place-enemy dest=\"Ska Ska\" enemy=\"Security Drone\"/>\n<mark-on-map dest=\"Ska Ska\" />\n<condition no-enemy-at-dest=\"Ska Ska\" />\n<dialog>As the Security Drone is disabled the jamming field is lowered. Now Baola can send control signals to the nanite swarm.</dialog>\n<mark-on-map dest=\"Baola\" />\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>_\"Excellent fighting! All brawn and ... well - we are impressed.\nHere is your reward. We have sent the security override codes. Ska Ska should be clean as a whistle in a jiffy.\"_</dialog>\n<give credits=\"200\" />\n<dialog>You tense up. Something about 'security override codes' sound a bit dubious...</dialog>\n<dialog>_\"Oh no! The nanites have gone rampant, they are absorbing matter and forming some kind of mobile structure. What is happening?! You must save us!\"_</dialog>\n<mark-on-map dest=\"Ska Ska\" />\n<place-enemy dest=\"Ska Ska\" enemy=\"Nanite Megacluster\" />\n<condition no-enemy-at-dest=\"Ska Ska\" />\n<dialog>_\"Thank you! You stopped that monstrosity from wreaking havoc. We can offer you this: an improved reactor from one of our ConstructoBots.\nOut site at Ska Ska is a mess after this but work continues.\"_</dialog>\n<give item=\"Fold Reactor\"/>\n<give credits=\"200\" />\n",
+      "xml": "<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"MAYBE LATER\">_\"Can you help us? We run a large construction project at Ska Ska and need to take water samples at its sea\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ska Ska\"/>\n<place-item dest=\"Ska Ska\" item=\"Water sample\"/>\n<condition have-item=\"Water sample\"/>\n<mark-on-map dest=\"Baola\" />\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>_\"Thank you! These samples are vital for the project. Please, accept this compensation\"_</dialog>\n<take item=\"Water sample\" />\n<give credits=\"100\"/>\n<dialog>_\"We are happy with your work, check back here later if you are looking for assignments.\"_</dialog>\n<condition at-dest=\"Grig\"/>\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>_\"Traveller!\nThe water samples you took revealed a serious contamination at Ska Ska.\"_</dialog>\n<dialog>_\"We need you go get a shipment of *DecontamiNanites* at *Helyon Shipyards*. Then go to *Ska Ska* and decontaminate the site.\"_</dialog>\n<mark-on-map dest=\"Helyon Shipyards\" />\n<place-inventory dest=\"Helyon Shipyards\" item=\"DecontamiNanites\"/>\n<condition have-item=\"DecontamiNanites\" />\n<mark-on-map dest=\"Ska Ska\" />\n<dialog>You got the decontamination substance. Nano machinery, dangerous stuff.</dialog>\n<condition have-item=\"DecontamiNanites\" at-dest=\"Ska Ska\" trigger=\"DECONTAMINATE\"/>\n<take item=\"DecontamiNanites\" />\n<dialog>You launch the self guiding pods with the nanite substance toward the construction site. Ok, only thing left is to collect the pay at *Baola*.</dialog>\n<mark-on-map dest=\"Baola\" color=\"F00\" icon=\"chevrons\"/>\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>_\"Traveller, we have a problem. Out security drones around Ska Ska have mistakenly identified the nanite decontaminant as an aggressor. They are jamming our channels.\"_</dialog>\n<dialog>_\"You must disable the confused drones so we can send control signals to the nanites.\"_</dialog>\n<place-enemy dest=\"Ska Ska\" enemy=\"Security Drone\"/>\n<mark-on-map dest=\"Ska Ska\" />\n<condition no-enemy-at-dest=\"Ska Ska\" />\n<dialog>As the Security Drone is disabled the jamming field is lowered. Now Baola can send control signals to the nanite swarm.</dialog>\n<mark-on-map dest=\"Baola\" />\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>_\"Excellent fighting! All brawn and ... well - we are impressed.\nHere is your reward. We have sent the security override codes. Ska Ska should be clean as a whistle in a jiffy.\"_</dialog>\n<give credits=\"200\" />\n<dialog>You tense up. Something about 'security override codes' sound a bit dubious...</dialog>\n<dialog>_\"Oh no! The nanites have gone rampant, they are absorbing matter and forming some kind of mobile structure. What is happening?! You must save us!\"_</dialog>\n<mark-on-map dest=\"Ska Ska\" />\n<place-enemy dest=\"Ska Ska\" enemy=\"Nanite Megacluster\" />\n<condition no-enemy-at-dest=\"Ska Ska\" />\n<dialog>_\"Thank you! You stopped that monstrosity from wreaking havoc. We can offer you this: an improved reactor from one of our ConstructoBots.\nOut site at Ska Ska is a mess after this but work continues.\"_</dialog>\n<give item=\"Mk4 Reactor\"/>\n<give credits=\"200\" />\n\n\n",
       "tags": "wastes",
       "color": "f00",
       "icon": "chevrons"
     },
     {
       "name": "Tau Pavonis Observer",
-      "xml": "<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>You are hailed as you enter orbit: _\"Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"We study Tau Pavonis and need assistance in placing sensors at the *Observatory*. Compensation is 1000 credits. Are you interested?\"_</dialog>\n<dialog>_\"First you need protection. Travel to *Pavonis Mirror* and aquire a *Star Shield*.\"_</dialog>\n<give item=\"Star Sensor\"/>\n<mark-on-map dest=\"Pavonis Mirror\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>_\"Traveller. This is Mirror spaceport. We have prepared the *Star Shield* you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed.\"_</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed-item=\"Star Shield\" trigger=\"READY\"/>\n<dialog ok=\"PROCEED\" cancel=\"WAIT\">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>\n<travel dest=\"Pavonis Observatory\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"PUT SENSOR\"/>\n<take item=\"Star Sensor\" />\n<dialog model=\"Sol Array\">You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\"/>\n<travel dest=\"Pavonis Mirror\"/>\n<dialog>_\"You made it! Must be a sturdy ship you got there.\"_</dialog>\n<dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organisation.</dialog>\n<dialog>_\"Let us remove that Star Shield, you can collect your payment at *Pavonis Smoke*.\"_</dialog>\n<take item=\"Star Shield\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog>_\"You survived! Excellent, we are anxious to get the data from the sensor. Please accept our payment!\"_</dialog>\n<give credits=\"1000\"/>\n<remove-map-marker/>\n\n<condition not-at-dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>_\"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor is most disturbing. Tau Pavonis is behaving unphysically.\"_</dialog>\n<dialog>_\"You must help us collect more data! Please take us to the *Observatory* so we can make further readings.\"_</dialog>\n<dialog>This time you request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>\n<dialog>_\"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental *Shield Reactor*. Ok?\"_</dialog>\n<dialog>You see an opportunity to make demands.\n_\"That sounds useful, give it to me in advance, and a regular reward afterwards!\"_</dialog>\n<give item=\"Shield Core Mk2\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>They load the *Star Shield* onto you ship once again. They tell you to *install* it but they all look a bit worried this time. What is it they have found inside that star?</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" installed-item=\"Star Shield\" trigger=\"READY\"/>\n<travel dest=\"Pavonis Observatory\"/>\n<dialog>The scientists take readings with their arcane instruments.\nBut you don't need any telescopes. Just looking throught the dimmed windows you can see a region of the stars surface pulsing. Or heaving, as if breathing.</dialog>\n<dialog model=\"Worm\">Suddenly the star's surface open like a flower and something break free from the open wound. It trashes like a wounded animal. It looks slow like a ballet, but at this scale it is tremendously fast.</dialog>\n<dialog>The monstrosity accelerates and trace a glowing path towards *Pavonis Charm*. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>\n<place-enemy enemy=\"Worm\" dest=\"Pavonis Charm\"/>\n<mark-on-map dest=\"Pavonis Charm\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\" />\n<travel dest=\"Pavonis Mirror\" />\n<take item=\"Star Shield\" />\n\n<condition at-dest=\"A117\"/>\n<dialog model=\"Worm\">Your sensors can make out the entity orbiting Pavonis Charm. Approaching would be devastating.</dialog>\n<dialog>You are hailed by a distant ship. \n\n_\"Traveller. We are the Worshipers. Things have been set in motion and there might still be time to dispel this danger. Seek us out at *Paxos Station*.\"_</dialog>\n<mark-on-map dest=\"Paxos Station\"/>\n\n<condition at-dest=\"Paxos Station\" trigger=\"HAIL\"/>\n<dialog model=\"Paxos Station\">_\"This is Paxos Station, the Cathedral of Worship. The scholars at Pavonis Smoke have woken the Worm. You were their tool and now we can help you undo their foolish work.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The Worm's chains can be restored with the three tools that once bound it originally.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The children of the Worm once bound their progenitor with the artifacts Epiales, Momus and Horkos. Seek them out in the Fields, the Garden and the Ruins.\"_</dialog>\n\n<condition have-item=\"Momus;Horkos;Epiales\" at-dest=\"A2172;Paxos Station\"/>\n<dialog>_\"Traveller. You have gathered the relics.\"_</dialog>\n<dialog>_\"While your hands were busy the Worm multiplied. Sired its seedlings.\nMay the relics help you. Clear out the Seedlings around *Pavonis Charm*!\"_</dialog>\n<mark-on-map dest=\"Pavonis Charm\" />\n<place-enemy dest=\"Charm Beta\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Gamma\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Delta\" enemy=\"Worm Seedling\" loot=\"\"/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" no-enemy-at-dest=\"Charm Beta;Charm Gamma;Charm Delta\" />\n<place-enemy dest=\"Pavonis Charm\" enemy=\"Weakened Worm\" loot=\"Worm Umbra\" />\n<dialog model=\"Worm Seedling\">The final Seedling succumbs to your assault. Somehow you know that the Worm is affected. Touched by your actions here that bestial presence is now weakened. This can now end.</dialog>\n\n<condition no-enemy-at-dest=\"Pavonis Charm\" />\n<dialog model=\"Worm\">The worm is mortally wounded. Its appendages flail and whips up foam on the surface of Pavis Charm as it is pulled below the surface and into the depths of the gas giant.</dialog>\n<mark-on-map dest=\"Paxos Station\" />\n\n<condition at-dest=\"Paxos Station\" />\n<dialog>_\"Traveller. You bested the Worm. The battle was glorious.\nYet many here feel fear. *The Worm is not dead.* It might slumbes for eons inside Pavonis Charm, but it will wake once again.\"_</dialog>\n\n\n\n\n",
+      "xml": "<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>You are hailed as you enter orbit: _\"Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"We study Tau Pavonis and need assistance in placing sensors at the *Observatory*. Compensation is 1000 credits. Are you interested?\"_</dialog>\n<dialog>_\"First you need protection. Travel to *Pavonis Mirror* and aquire a *Star Shield*.\"_</dialog>\n<give item=\"Star Sensor\"/>\n<mark-on-map dest=\"Pavonis Mirror\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>_\"Traveller. This is Mirror spaceport. We have prepared the *Star Shield* you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed.\"_</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed-item=\"Star Shield\" trigger=\"READY\"/>\n<dialog ok=\"PROCEED\" cancel=\"WAIT\">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>\n<travel dest=\"Pavonis Observatory\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"PUT SENSOR\"/>\n<take item=\"Star Sensor\" />\n<dialog model=\"Sol Array\">You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\"/>\n<travel dest=\"Pavonis Mirror\"/>\n<dialog>_\"You made it! Must be a sturdy ship you got there.\"_</dialog>\n<dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organisation.</dialog>\n<dialog>_\"Let us remove that Star Shield, you can collect your payment at *Pavonis Smoke*.\"_</dialog>\n<take item=\"Star Shield\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog>_\"You survived! Excellent, we are anxious to get the data from the sensor. Please accept our payment!\"_</dialog>\n<give credits=\"1000\"/>\n<remove-map-marker/>\n\n<condition not-at-dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>_\"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor is most disturbing. Tau Pavonis is behaving unphysically.\"_</dialog>\n<dialog>_\"You must help us collect more data! Please take us to the *Observatory* so we can make further readings.\"_</dialog>\n<dialog>This time you request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>\n<dialog>_\"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental *Shield Reactor*. Ok?\"_</dialog>\n<dialog>You see an opportunity to make demands.\n_\"That sounds useful, give it to me in advance, and a regular reward afterwards!\"_</dialog>\n<give item=\"Dermal Inducer\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>They load the *Star Shield* onto you ship once again. They tell you to *install* it but they all look a bit worried this time. What is it they have found inside that star?</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" installed-item=\"Star Shield\" trigger=\"READY\"/>\n<travel dest=\"Pavonis Observatory\"/>\n<dialog>The scientists take readings with their arcane instruments.\nBut you don't need any telescopes. Just looking throught the dimmed windows you can see a region of the stars surface pulsing. Or heaving, as if breathing.</dialog>\n<dialog model=\"Worm\">Suddenly the star's surface open like a flower and something break free from the open wound. It trashes like a wounded animal. It looks slow like a ballet, but at this scale it is tremendously fast.</dialog>\n<dialog>The monstrosity accelerates and trace a glowing path towards *Pavonis Charm*. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>\n<place-enemy enemy=\"Worm\" dest=\"Pavonis Charm\"/>\n<mark-on-map dest=\"Pavonis Charm\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\" />\n<travel dest=\"Pavonis Mirror\" />\n<take item=\"Star Shield\" />\n\n<condition at-dest=\"A117\"/>\n<dialog model=\"Worm\">Your sensors can make out the entity orbiting Pavonis Charm. Approaching would be devastating.</dialog>\n<dialog>You are hailed by a distant ship. \n\n_\"Traveller. We are the Worshipers. Things have been set in motion and there might still be time to dispel this danger. Seek us out at *Paxos Station*.\"_</dialog>\n<mark-on-map dest=\"Paxos Station\"/>\n\n<condition at-dest=\"Paxos Station\" trigger=\"HAIL\"/>\n<dialog model=\"Paxos Station\">_\"This is Paxos Station, the Cathedral of Worship. The scholars at Pavonis Smoke have woken the Worm. You were their tool and now we can help you undo their foolish work.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The Worm's chains can be restored with the three tools that once bound it originally.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The children of the Worm once bound their progenitor with the artifacts Epiales, Momus and Horkos. Seek them out in the Fields, the Garden and the Ruins.\"_</dialog>\n\n<condition have-item=\"Momus;Horkos;Epiales\" at-dest=\"A2172;Paxos Station\"/>\n<dialog>_\"Traveller. You have gathered the relics.\"_</dialog>\n<dialog>_\"While your hands were busy the Worm multiplied. Sired its seedlings.\nMay the relics help you. Clear out the Seedlings around *Pavonis Charm*!\"_</dialog>\n<mark-on-map dest=\"Pavonis Charm\" />\n<place-enemy dest=\"Charm Beta\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Gamma\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Delta\" enemy=\"Worm Seedling\" loot=\"\"/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" no-enemy-at-dest=\"Charm Beta;Charm Gamma;Charm Delta\" />\n<place-enemy dest=\"Pavonis Charm\" enemy=\"Weakened Worm\" loot=\"Worm Umbra\" />\n<dialog model=\"Worm Seedling\">The final Seedling succumbs to your assault. Somehow you know that the Worm is affected. Touched by your actions here that bestial presence is now weakened. This can now end.</dialog>\n\n<condition no-enemy-at-dest=\"Pavonis Charm\" />\n<dialog model=\"Worm\">The worm is mortally wounded. Its appendages flail and whips up foam on the surface of Pavis Charm as it is pulled below the surface and into the depths of the gas giant.</dialog>\n<mark-on-map dest=\"Paxos Station\" />\n\n<condition at-dest=\"Paxos Station\" />\n<dialog>_\"Traveller. You bested the Worm. The battle was glorious.\nYet many here feel fear. *The Worm is not dead.* It might slumbes for eons inside Pavonis Charm, but it will wake once again.\"_</dialog>\n\n\n\n\n",
       "tags": "pavonis"
     },
     {
