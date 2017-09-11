@@ -198,7 +198,7 @@
 
     function lathe(model) {
       var mesh = []
-      var maxAngle = model.angle || Math.PI*2
+      var maxAngle = (model.angle || 360) * d2r
       _.range(0, model.res).map(function (slice) {
         var vertex = (i,j) => mapply(rotateZ(maxAngle * i/model.res), model.path[j])
         for (var i=1; i<model.path.length; i++) {

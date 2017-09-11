@@ -52,24 +52,6 @@
       "slots": 5
     },
     {
-      "attr": {
-        "maxhull": 12,
-        "maxshield": 2,
-        "maxenergy": 6,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 6
-      },
-      "generator": {"hull": 1, "shield": 0, "energy": 2},
-      "name": "Kerr Harbinger",
-      "visual": "Kerr Harbinger",
-      "isFlying": true,
-      "value": 700,
-      "level": 3,
-      "slots": 7
-    },
-    {
       "name": "Journeyman",
       "visual": "Journeyman",
       "attr": {
@@ -160,20 +142,20 @@
     {
       "attr": {
         "maxhull": 30,
-        "maxshield": 10,
+        "maxshield": 20,
         "maxenergy": 20,
         "armor": 0,
         "cloak": 0,
         "jump": 0,
-        "slots": 6
+        "slots": 0
       },
-      "generator": {"hull": 2, "shield": 3, "energy": 6},
-      "name": "Vanguard",
-      "visual": "NS Vanguard",
-      "isFlying": true,
-      "value": 3500,
+      "generator": {"hull": 2, "shield": 1, "energy": 1},
+      "name": "Argo",
       "level": 5,
-      "slots": 8
+      "slots": 8,
+      "visual": "NS Argo",
+      "isFlying": true,
+      "value": 3500
     },
     {
       "attr": {
@@ -260,6 +242,24 @@
       "isFlying": true,
       "value": 7000,
       "slots": 10
+    },
+    {
+      "attr": {
+        "maxhull": 40,
+        "maxshield": 20,
+        "maxenergy": 50,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 6
+      },
+      "generator": {"hull": 2, "shield": 3, "energy": 6},
+      "name": "Vanguard",
+      "visual": "NS Vanguard",
+      "isFlying": true,
+      "value": 9000,
+      "level": 7,
+      "slots": 12
     }
   ],
   "enemies": [
@@ -296,7 +296,7 @@
       "name": "Rugged Drone",
       "level": 0,
       "visual": "Monitor Drone",
-      "inventory": ["Mk1 Reactor", "Patch Kit"],
+      "inventory": ["Mk1 Reactor", "Epoxy Injector"],
       "isFlying": true,
       "value": 0,
       "slots": 0
@@ -374,7 +374,7 @@
       },
       "generator": {"hull": 1, "shield": 1, "energy": 1},
       "name": "Bandit Striker",
-      "visual": "Kerr Harbinger",
+      "visual": "Ursula",
       "inventory": ["Photon Ray", "Autogun Mk2"],
       "isFlying": true,
       "value": 0,
@@ -709,6 +709,17 @@
     }
   ],
   "items": [
+    {
+      "name": "Epoxy Injector",
+      "type": "tool",
+      "level": 1,
+      "credits": 20,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 2, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
     {
       "type": "quest",
       "attr": {
@@ -2074,7 +2085,7 @@
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
       "targetBuff": {"hull": 0, "shield": 0, "energy": -5}
     },
     {
@@ -2137,10 +2148,10 @@
       "type": "weapon",
       "level": 1,
       "credits": 25,
-      "critical": 0,
+      "critical": 0.25,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
       "targetBuff": {"hull": -2, "shield": -2, "energy": 0}
     },
     {
@@ -3049,11 +3060,11 @@
       "shipyard": [
         "Sloop",
         "Journeyman",
-        "Kerr Harbinger",
         "Kerr Interdictor",
         "CES Marathon",
         "CES Interplan",
         "CES Bioculus",
+        "Ursula",
         "Ursula"
       ]
     },
@@ -4505,7 +4516,7 @@
       },
       "enemy": null,
       "treasures": [],
-      "shipyard": ["Kerr Runner", "Kerr Harbinger", "Kerr Interdictor", "Sloop"]
+      "shipyard": ["Kerr Runner", "Kerr Interdictor", "Sloop", "Journeyman"]
     },
     {
       "pos": {"x": 247, "y": -1829},
@@ -5610,7 +5621,7 @@
     },
     {
       "name": "Peril at Buoy 72",
-      "xml": "<condition at-dest=\"Buoy 68\"/>\n<dialog model=\"Kerr Harbinger\">A private yacht hails you.\n\n_\"Help us. The way ahead is blocked by a malfunctioning drone. We don't dare to proceed.\n\nYour ship is armed, can you clear the path for us!\"_</dialog>\n<mark-on-map dest=\"Buoy 72\"/>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"Buoy 72\"/>\n<dialog model=\"Kerr Harbinger\">_\"Thank you for clearing the way for us! Here, take this *Repair Kit*, you need it more than we do.\"_</dialog>\n<dialog>The *Repair Kit* is a _tool with cooldown_. When used in battle it will repair your hull. It can only be used once per battle.</dialog>\n<give item=\"Repair Kit\"/>\n<dialog model=\"Kerr Harbinger\">When questioned why they were here in the Outback they say they wanted to see the flowers of the *Blue Forest*.</dialog>\n<mark-on-map dest=\"Blue Forest\" />\n<condition at-dest=\"Blue Forest\" />",
+      "xml": "<condition at-dest=\"Buoy 68\"/>\n<dialog model=\"Kerr Runner\">A private yacht hails you.\n\n_\"Help us. The way ahead is blocked by a malfunctioning drone. We don't dare to proceed.\n\nYour ship is armed, can you clear the path for us!\"_</dialog>\n<mark-on-map dest=\"Buoy 72\"/>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"Buoy 72\"/>\n<dialog model=\"Kerr Runner\">_\"Thank you for clearing the way for us! Here, take this *Repair Kit*, you need it more than we do.\"_</dialog>\n<dialog>The *Repair Kit* is a _tool with cooldown_. When used in battle it will repair your hull. It can only be used once per battle.</dialog>\n<give item=\"Repair Kit\"/>\n<dialog model=\"Kerr Runner\">When questioned why they were here in the Outback they say they wanted to see the flowers of the *Blue Forest*.</dialog>\n<mark-on-map dest=\"Blue Forest\" />\n<condition at-dest=\"Blue Forest\" />",
       "tags": "outback",
       "color": "88f",
       "icon": "arrow"
@@ -6221,7 +6232,7 @@
       "tags": "prop",
       "geometry": "composite",
       "transform": [
-        ["scale", 1.7, 1.7, 1.7],
+        ["scale", 1.3, 1.3, 1.3],
         ["rotate", 0, 0, 0],
         ["translate", 0, 0, 0]
       ],
@@ -6234,7 +6245,7 @@
             ["radial-wave", 6, 0.5, 0],
             ["rotate", 0, 0, 27],
             ["parabola", 0, 0, -0.01],
-            ["scale", 1.5, 1.5, 1.5],
+            ["scale", 1.4, 1.4, 1.4],
             ["rotate", 0, 60, 0],
             ["translate", -20, 0, -60]
           ],
@@ -6248,7 +6259,7 @@
             ["radial-wave", 6, 0.5, 0],
             ["rotate", 0, 0, -13],
             ["parabola", 0, 0, -0.01],
-            ["scale", 1.5, 1.5, 1.5],
+            ["scale", 1.4, 1.4, 1.4],
             ["rotate", 0, 60, -90],
             ["translate", 35, 40, -90]
           ],
@@ -6259,7 +6270,7 @@
           "res": 4,
           "transform": [
             ["parabola", 0, -0.005, 0],
-            ["rotate", 180, 0, -150],
+            ["rotate", 180, 0, -100],
             ["translate", 5, -5, 0]
           ],
           "path": [[3, 0, 0], [3, 0, 30], [3, 0, 60], [0, 0, 90]]
@@ -6408,6 +6419,7 @@
     {
       "name": "Rusty Ship",
       "geometry": "composite",
+      "tags": "ship prop",
       "transform": [
         ["scale", 4, 4, 4],
         ["rotate", 90, 0, 90],
@@ -6438,8 +6450,7 @@
           "transform": [["translate", 12, 0, -35], ["rotate", 0, 90, 0]],
           "path": [[5, 0, -3], [10, 0, -5], [11, 0, 0], [10, 0, 5], [5, 0, 3]]
         }
-      ],
-      "tags": "ship"
+      ]
     },
     {
       "name": "Cosmic Whales",
@@ -7128,7 +7139,7 @@
       "parts": [
         {
           "geometry": "lathe",
-          "angle": 4.19,
+          "angle": 240,
           "res": 8,
           "transform": [["rotate", 0, 0, -30]],
           "path": [
@@ -7232,7 +7243,7 @@
       ]
     },
     {
-      "name": "Kerr Clipper",
+      "name": "Kerr Dinghy",
       "geometry": "composite",
       "transform": [["translate", 0, -30, -50]],
       "parts": [
@@ -7254,7 +7265,7 @@
       "tags": "ship"
     },
     {
-      "name": "Kerr Runner",
+      "name": "Kerr Clipper",
       "geometry": "lathe",
       "res": 5,
       "transform": [
@@ -7274,7 +7285,7 @@
       "tags": "ship"
     },
     {
-      "name": "Kerr Harbinger",
+      "name": "Kerr Runner",
       "geometry": "lathe",
       "res": 5,
       "transform": [
@@ -7679,7 +7690,7 @@
       "transform": [
         ["scale", 65, 65, 65],
         ["rotate", 180, 0, 0],
-        ["translate", 0, 0, -55]
+        ["translate", 0, 0, -70]
       ],
       "parts": [
         {
@@ -7872,7 +7883,7 @@
       "transform": [
         ["scale", 1, 1, 1],
         ["rotate", 180, 0, 90],
-        ["translate", 0, 0, -50]
+        ["translate", 0, -10, -50]
       ],
       "parts": [
         {
@@ -7970,6 +7981,120 @@
       "tags": "ship"
     },
     {
+      "name": "NS Argo",
+      "geometry": "composite",
+      "transform": [
+        ["scale", 1.2, 1.2, 1.2],
+        ["rotate", 180, 0, 90],
+        ["translate", 0, 20, -55]
+      ],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["scale", 70, 70, 60],
+            ["rotate", 0, 0, 30],
+            ["rotate", 0, 90, 0],
+            ["translate", -50, 35, 20]
+          ],
+          "path": [
+            [0, 0, -1],
+            [0.2, 0, -0.9],
+            [0.3, 0, -0.7],
+            [0.3, 0, 0.7],
+            [0.2, 0, 0.9],
+            [0, 0, 1]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["scale", 70, 70, 60],
+            ["rotate", 0, 0, 30],
+            ["rotate", 0, 90, 0],
+            ["translate", -50, 35, -20]
+          ],
+          "path": [
+            [0, 0, -1],
+            [0.2, 0, -0.9],
+            [0.3, 0, -0.7],
+            [0.3, 0, 0.7],
+            [0.2, 0, 0.9],
+            [0, 0, 1]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["scale", 70, 70, 60],
+            ["rotate", 0, 0, 30],
+            ["rotate", 0, 90, 0],
+            ["translate", -50, -35, 20]
+          ],
+          "path": [
+            [0, 0, -1],
+            [0.2, 0, -0.9],
+            [0.3, 0, -0.7],
+            [0.3, 0, 0.7],
+            [0.2, 0, 0.9],
+            [0, 0, 1]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["scale", 70, 70, 60],
+            ["rotate", 0, 0, 30],
+            ["rotate", 0, 90, 0],
+            ["translate", -50, -35, -20]
+          ],
+          "path": [
+            [0, 0, -1],
+            [0.2, 0, -0.9],
+            [0.3, 0, -0.7],
+            [0.3, 0, 0.7],
+            [0.2, 0, 0.9],
+            [0, 0, 1]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 9,
+          "transform": [
+            ["scale", 1, 1, 1],
+            ["rotate", 90, 0, 0],
+            ["translate", 45, 0, 0]
+          ],
+          "path": [
+            [0, 0, -50],
+            [30, 0, -50],
+            [45, 0, -15],
+            [35, 0, -5],
+            [35, 0, 5],
+            [45, 0, 15],
+            [30, 0, 50],
+            [0, 0, 50]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 5,
+          "transform": [
+            ["rotate", 90, 0, 0],
+            ["parabola", 0.02, 0, 0],
+            ["translate", -54, 0, 0],
+            ["scale", 1.5, 1, 0.57]
+          ],
+          "path": [[0, 0, -15], [55, 0, -5], [55, 0, 5], [0, 0, 15]]
+        }
+      ],
+      "tags": "ship"
+    },
+    {
       "name": "Monitor Drone",
       "geometry": "composite",
       "res": 8,
@@ -8000,7 +8125,7 @@
             [38, 0, 5],
             [20, 0, 2]
           ],
-          "angle": 6
+          "angle": 344
         },
         {
           "geometry": "lathe",
@@ -8018,7 +8143,7 @@
             [38, 0, 5],
             [20, 0, 2]
           ],
-          "angle": 6
+          "angle": 344
         }
       ],
       "tags": "ship"
@@ -8036,21 +8161,21 @@
           "geometry": "lathe",
           "res": 4,
           "transform": [["rotate", 180, 0, 0], ["translate", 50, 0, 0]],
-          "angle": 2,
+          "angle": 115,
           "path": [[30, 0, 0], [50, 0, 4], [30, 0, 0]]
         },
         {
           "geometry": "lathe",
           "res": 5,
           "transform": [["rotate", 180, -30, 120], ["translate", -50, 30, 0]],
-          "angle": 2.5,
+          "angle": 143,
           "path": [[30, 0, 0], [50, 0, -8], [30, 0, 0]]
         },
         {
           "geometry": "lathe",
           "res": 3,
           "transform": [["rotate", 0, -30, 120], ["translate", 70, 50, 30]],
-          "angle": 1.5,
+          "angle": 86,
           "path": [[30, 0, 4], [50, 0, -4], [30, 0, 4]]
         }
       ],
@@ -8109,14 +8234,14 @@
         {
           "geometry": "lathe",
           "res": 7,
-          "angle": 3,
+          "angle": 170,
           "transform": [["translate", 0, 0, 7]],
           "path": [[10, 0, 3], [10, 0, -3], [12, 0, -2], [12, 0, 2], [10, 0, 3]]
         },
         {
           "geometry": "lathe",
           "res": 5,
-          "angle": 2,
+          "angle": 115,
           "transform": [["rotate", 175, 0, 0], ["translate", -4, -2, 7]],
           "path": [[10, 0, 3], [10, 0, -3], [12, 0, -2], [12, 0, 2], [10, 0, 3]]
         }
@@ -8241,7 +8366,7 @@
         {
           "geometry": "lathe",
           "res": 1,
-          "angle": 0.5,
+          "angle": 30,
           "transform": [["rotate", 0, 0, -14], ["rotate", 0, 12, 30]],
           "path": [
             [2, 0, 0],
@@ -8256,7 +8381,7 @@
         {
           "geometry": "lathe",
           "res": 1,
-          "angle": 0.5,
+          "angle": 30,
           "transform": [["rotate", 0, 0, -14], ["rotate", 0, 12, 90]],
           "path": [
             [2, 0, 0],
@@ -8271,7 +8396,7 @@
         {
           "geometry": "lathe",
           "res": 1,
-          "angle": 0.5,
+          "angle": 30,
           "transform": [["rotate", 0, 0, -14], ["rotate", 0, 12, 149]],
           "path": [
             [2, 0, 0],
@@ -8286,7 +8411,7 @@
         {
           "geometry": "lathe",
           "res": 1,
-          "angle": 0.5,
+          "angle": 30,
           "transform": [["rotate", 0, 0, -14], ["rotate", 0, 12, 208]],
           "path": [
             [2, 0, 0],
@@ -8301,7 +8426,7 @@
         {
           "geometry": "lathe",
           "res": 1,
-          "angle": 0.5,
+          "angle": 30,
           "transform": [["rotate", 0, 0, -14], ["rotate", 0, 12, -90]],
           "path": [
             [2, 0, 0],
@@ -8316,7 +8441,7 @@
         {
           "geometry": "lathe",
           "res": 1,
-          "angle": 0.5,
+          "angle": 30,
           "transform": [["rotate", 0, 0, -14], ["rotate", 0, 12, -30]],
           "path": [
             [2, 0, 0],
@@ -8558,7 +8683,7 @@
             [40, 0, -30],
             [50, 0, 0]
           ],
-          "angle": 6
+          "angle": 344
         },
         {
           "name": "R2",
@@ -8578,7 +8703,7 @@
             [30, 0, -30],
             [40, 0, 0]
           ],
-          "angle": 6.05
+          "angle": 346.6
         },
         {
           "name": "Pillar",
@@ -8859,7 +8984,8 @@
             ["parabola", 0, -0.01, 0],
             ["scale", 0.3, 0.3, 0.3],
             ["rotate", -90, 0, 90],
-            ["translate", -94, 0, 0]
+            ["translate", -94, 0, -22],
+            ["rotate", 0, 0, -120]
           ],
           "path": [
             [0, 0, -130],
@@ -10210,19 +10336,19 @@
     },
     {
       "name": "Outback",
-      "audio": "music-ambient",
+      "audio": "music-world of hope",
       "pos": {"x": 350, "y": -2008},
       "radius": 460
     },
     {
       "name": "Pavonis",
-      "audio": "music-ambient",
+      "audio": "music-final ending",
       "pos": {"x": -420, "y": -680},
       "radius": 510
     },
     {
       "name": "The Bush",
-      "audio": "music-slask",
+      "audio": "music-ocean",
       "pos": {"x": 84, "y": -1302},
       "radius": 270
     },
@@ -10279,6 +10405,12 @@
       "audio": "music-slask",
       "pos": {"x": 978, "y": -1734},
       "radius": 180
+    },
+    {
+      "name": "Dev Zone",
+      "audio": "music-sand dark",
+      "pos": {"x": 732, "y": -2296},
+      "radius": 100
     }
   ],
   "name": "Skanaar's World"

@@ -34,6 +34,11 @@
   stroke: rgba(128,128,128,0.5)
 }
 
+.map-node:hover {
+  stroke: rgba(128,128,128,1);
+  stroke-width: 3;
+}
+
 .map-node.map-selected {
   stroke: #F00;
   fill: #F88
