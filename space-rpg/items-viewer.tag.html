@@ -133,7 +133,7 @@
           level: +row[i++],
           credits: +row[i++],
           critical: +row[i++],
-          cooldown: +row[i++] == 'cooldown',
+          cooldown: row[i++] == 'cooldown',
           attr: { maxhull:+row[i++], maxshield:+row[i++], maxenergy:+row[i++]},
           playerBuff:{hull:+row[i++], shield:+row[i++], energy: +row[i++]},
           targetBuff:{hull:+row[i++], shield:+row[i++], energy: +row[i++]}

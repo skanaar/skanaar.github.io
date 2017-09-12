@@ -296,7 +296,7 @@
       "name": "Rugged Drone",
       "level": 0,
       "visual": "Monitor Drone",
-      "inventory": ["Mk1 Reactor", "Epoxy Injector"],
+      "inventory": ["Epoxy Injector", "Mk0 Reactor"],
       "isFlying": true,
       "value": 0,
       "slots": 0
@@ -522,7 +522,7 @@
       "generator": {"hull": 2, "shield": 2, "energy": 2},
       "name": "Bandit Bosslet",
       "level": 6,
-      "visual": "Kerr Frigate",
+      "visual": "Sailor",
       "inventory": ["Soma Emitter", "EMP Bomb"],
       "isFlying": true,
       "slots": 0,
@@ -1231,59 +1231,8 @@
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 5,
-      "name": "Copper",
-      "level": 0,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "common",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 6,
       "name": "Barium Ore",
-      "level": 0,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "common",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 7,
-      "name": "Tungsten",
-      "level": 0,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "common",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 8,
-      "name": "Platinum",
       "level": 0,
       "cooldown": false,
       "critical": 0
@@ -1319,40 +1268,6 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "credits": 16,
       "name": "Pavonian Mineral",
-      "level": 0,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "common",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 20,
-      "name": "Alien Fossil",
-      "level": 0,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "common",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "credits": 50,
-      "name": "Alien Artifact",
       "level": 0,
       "cooldown": false,
       "critical": 0
@@ -1397,25 +1312,6 @@
       "critical": 0
     },
     {
-      "type": "common",
-      "credits": 80,
-      "name": "Sky Crystals",
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "level": 0,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
       "type": "rare",
       "credits": 150,
       "name": "Sky Alloy",
@@ -1433,17 +1329,6 @@
       "level": 0,
       "rechargeRequired": false,
       "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "common",
-      "level": 0,
-      "credits": 400,
-      "name": "Contraband",
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "critical": 0
     },
     {
@@ -1949,18 +1834,29 @@
       "name": "Autogun",
       "type": "weapon",
       "level": 1,
-      "credits": 30,
+      "credits": 15,
       "critical": 0.05,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
-      "targetBuff": {"hull": -5, "shield": 0, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
+      "targetBuff": {"hull": -2, "shield": 0, "energy": 0}
     },
     {
       "name": "Autogun Mk2",
       "type": "weapon",
       "level": 2,
-      "credits": 75,
+      "credits": 55,
+      "critical": 0.05,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": -4, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Autogun Mk3",
+      "type": "weapon",
+      "level": 3,
+      "credits": 140,
       "critical": 0.05,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -1968,10 +1864,10 @@
       "targetBuff": {"hull": -9, "shield": 0, "energy": 0}
     },
     {
-      "name": "Autogun Mk3",
+      "name": "Solenoid Gun",
       "type": "weapon",
-      "level": 3,
-      "credits": 205,
+      "level": 4,
+      "credits": 315,
       "critical": 0.05,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -1979,10 +1875,10 @@
       "targetBuff": {"hull": -16, "shield": 0, "energy": 0}
     },
     {
-      "name": "Solenoid Gun",
+      "name": "Gauss Gun",
       "type": "weapon",
-      "level": 4,
-      "credits": 555,
+      "level": 5,
+      "credits": 715,
       "critical": 0.05,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -1990,42 +1886,42 @@
       "targetBuff": {"hull": -28, "shield": 0, "energy": 0}
     },
     {
-      "name": "Gauss Gun",
+      "name": "Railgun",
       "type": "weapon",
-      "level": 5,
-      "credits": 1450,
+      "level": 6,
+      "credits": 1705,
       "critical": 0.05,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
-      "targetBuff": {"hull": -48, "shield": 0, "energy": 0}
-    },
-    {
-      "name": "Railgun",
-      "type": "weapon",
-      "level": 6,
-      "credits": 3855,
-      "critical": 0.05,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -28},
-      "targetBuff": {"hull": -84, "shield": 0, "energy": 0}
+      "targetBuff": {"hull": -49, "shield": 0, "energy": 0}
     },
     {
       "name": "Heat Ray",
       "type": "weapon",
       "level": 1,
-      "credits": 30,
+      "credits": 10,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
-      "targetBuff": {"hull": -2, "shield": -3, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
+      "targetBuff": {"hull": -1, "shield": -2, "energy": 0}
     },
     {
       "name": "Photon Ray",
       "type": "weapon",
       "level": 2,
+      "credits": 40,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": -2, "shield": -4, "energy": 0}
+    },
+    {
+      "name": "Meson Ray",
+      "type": "weapon",
+      "level": 3,
       "credits": 75,
       "critical": 0,
       "cooldown": false,
@@ -2034,9 +1930,9 @@
       "targetBuff": {"hull": -3, "shield": -6, "energy": 0}
     },
     {
-      "name": "Meson Ray",
+      "name": "Tau Ray",
       "type": "weapon",
-      "level": 3,
+      "level": 4,
       "credits": 205,
       "critical": 0,
       "cooldown": false,
@@ -2045,301 +1941,290 @@
       "targetBuff": {"hull": -5, "shield": -11, "energy": 0}
     },
     {
-      "name": "Tau Ray",
+      "name": "Phased Ray",
       "type": "weapon",
-      "level": 4,
-      "credits": 530,
+      "level": 5,
+      "credits": 555,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
-      "targetBuff": {"hull": -9, "shield": -18, "energy": 0}
-    },
-    {
-      "name": "Phased Ray",
-      "type": "weapon",
-      "level": 5,
-      "credits": 1450,
-      "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
-      "targetBuff": {"hull": -16, "shield": -32, "energy": 0}
+      "targetBuff": {"hull": -9, "shield": -19, "energy": 0}
     },
     {
       "name": "Nucleon Ray",
       "type": "weapon",
       "level": 6,
-      "credits": 3855,
+      "credits": 1490,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -28},
-      "targetBuff": {"hull": -28, "shield": -56, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
+      "targetBuff": {"hull": -16, "shield": -33, "energy": 0}
     },
     {
       "name": "EM Pulse",
       "type": "weapon",
       "level": 1,
-      "credits": 30,
+      "credits": 15,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -5}
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -4}
     },
     {
       "name": "Voltaic Pulse",
       "type": "weapon",
       "level": 2,
-      "credits": 75,
+      "credits": 45,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -9}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -7}
     },
     {
       "name": "Soliton Pulse",
       "type": "weapon",
       "level": 3,
-      "credits": 205,
+      "credits": 115,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -16}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -12}
     },
     {
       "name": "Sinusoid Pulse",
       "type": "weapon",
       "level": 4,
-      "credits": 555,
+      "credits": 300,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -28}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -21}
     },
     {
       "name": "Coronal Pulse",
       "type": "weapon",
       "level": 5,
-      "credits": 1450,
+      "credits": 845,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -48}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -38}
     },
     {
       "name": "Aural Pulse",
       "type": "weapon",
       "level": 6,
-      "credits": 3855,
+      "credits": 2235,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -28},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -84}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -66}
     },
     {
       "name": "Cutting Beam",
       "type": "weapon",
       "level": 1,
-      "credits": 25,
-      "critical": 0.25,
+      "credits": 40,
+      "critical": 0.2,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": -2, "shield": -2, "energy": 0}
+      "targetBuff": {"hull": -1, "shield": 0, "energy": 0}
     },
     {
       "name": "Piercing Beam",
       "type": "weapon",
       "level": 2,
-      "credits": 45,
-      "critical": 0.1,
+      "credits": 150,
+      "critical": 0.2,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
-      "targetBuff": {"hull": -3, "shield": -3, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": -4, "shield": 0, "energy": 0}
     },
     {
       "name": "Incision Beam",
       "type": "weapon",
       "level": 3,
-      "credits": 115,
-      "critical": 0.1,
+      "credits": 305,
+      "critical": 0.2,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
-      "targetBuff": {"hull": -5, "shield": -5, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": -6, "shield": 0, "energy": 0}
     },
     {
       "name": "Focal Beam",
       "type": "weapon",
       "level": 4,
-      "credits": 320,
-      "critical": 0.1,
+      "credits": 560,
+      "critical": 0.2,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
-      "targetBuff": {"hull": -9, "shield": -9, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
+      "targetBuff": {"hull": -11, "shield": 0, "energy": 0}
     },
     {
       "name": "Locus Beam",
       "type": "weapon",
       "level": 5,
-      "credits": 875,
-      "critical": 0.1,
+      "credits": 975,
+      "critical": 0.2,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
-      "targetBuff": {"hull": -16, "shield": -16, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
+      "targetBuff": {"hull": -19, "shield": 0, "energy": 0}
     },
     {
       "name": "Apex Beam",
       "type": "weapon",
       "level": 6,
-      "credits": 2330,
-      "critical": 0.1,
+      "credits": 1785,
+      "critical": 0.2,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -28},
-      "targetBuff": {"hull": -28, "shield": -28, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
+      "targetBuff": {"hull": -33, "shield": 0, "energy": 0}
     },
     {
       "name": "Slug Driver",
       "type": "weapon",
       "level": 1,
-      "credits": 30,
+      "credits": 60,
       "critical": 0.25,
-      "cooldown": false,
+      "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
-      "targetBuff": {"hull": -5, "shield": 0, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
+      "targetBuff": {"hull": -3, "shield": 0, "energy": 0}
     },
     {
       "name": "Rod Driver",
       "type": "weapon",
       "level": 2,
-      "credits": 75,
+      "credits": 190,
       "critical": 0.25,
-      "cooldown": false,
+      "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
-      "targetBuff": {"hull": -9, "shield": 0, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": -5, "shield": 0, "energy": 0}
     },
     {
       "name": "Mass Driver",
       "type": "weapon",
       "level": 3,
-      "credits": 205,
+      "credits": 405,
       "critical": 0.25,
-      "cooldown": false,
+      "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
-      "targetBuff": {"hull": -16, "shield": 0, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": -9, "shield": 0, "energy": 0}
     },
     {
       "name": "Javelin Driver",
       "type": "weapon",
       "level": 4,
-      "credits": 555,
+      "credits": 745,
       "critical": 0.25,
-      "cooldown": false,
+      "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
-      "targetBuff": {"hull": -28, "shield": 0, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
+      "targetBuff": {"hull": -16, "shield": 0, "energy": 0}
     },
     {
       "name": "Luminal Driver",
       "type": "weapon",
       "level": 5,
-      "credits": 1450,
+      "credits": 1350,
       "critical": 0.25,
-      "cooldown": false,
+      "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
-      "targetBuff": {"hull": -48, "shield": 0, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
+      "targetBuff": {"hull": -28, "shield": 0, "energy": 0}
     },
     {
       "name": "Helix Driver",
       "type": "weapon",
       "level": 6,
-      "credits": 3855,
+      "credits": 2580,
       "critical": 0.25,
-      "cooldown": false,
+      "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -28},
-      "targetBuff": {"hull": -84, "shield": 0, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
+      "targetBuff": {"hull": -49, "shield": 0, "energy": 0}
     },
     {
       "name": "EM Disruptor",
       "type": "weapon",
       "level": 1,
-      "credits": 30,
+      "credits": 10,
       "critical": 0,
-      "cooldown": false,
+      "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
-      "targetBuff": {"hull": 0, "shield": -5, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
+      "targetBuff": {"hull": 0, "shield": -3, "energy": 0}
     },
     {
       "name": "Tau Disruptor",
       "type": "weapon",
       "level": 2,
-      "credits": 75,
+      "credits": 30,
       "critical": 0,
-      "cooldown": false,
+      "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
-      "targetBuff": {"hull": 0, "shield": -9, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": 0, "shield": -5, "energy": 0}
     },
     {
       "name": "Co Disruptor",
       "type": "weapon",
       "level": 3,
-      "credits": 205,
+      "credits": 75,
       "critical": 0,
-      "cooldown": false,
+      "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
-      "targetBuff": {"hull": 0, "shield": -16, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": 0, "shield": -9, "energy": 0}
     },
     {
       "name": "Ur Disruptor",
       "type": "weapon",
       "level": 4,
-      "credits": 555,
+      "credits": 205,
       "critical": 0,
-      "cooldown": false,
+      "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
-      "targetBuff": {"hull": 0, "shield": -28, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
+      "targetBuff": {"hull": 0, "shield": -16, "energy": 0}
     },
     {
       "name": "Sc Disruptor",
       "type": "weapon",
       "level": 5,
-      "credits": 1450,
+      "credits": 555,
       "critical": 0,
-      "cooldown": false,
+      "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
-      "targetBuff": {"hull": 0, "shield": -48, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
+      "targetBuff": {"hull": 0, "shield": -28, "energy": 0}
     },
     {
       "name": "Au Disruptor",
       "type": "weapon",
       "level": 6,
-      "credits": 3855,
+      "credits": 1490,
       "critical": 0,
-      "cooldown": false,
+      "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -28},
-      "targetBuff": {"hull": 0, "shield": -84, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
+      "targetBuff": {"hull": 0, "shield": -49, "energy": 0}
     },
     {
       "name": "Quench Device",
@@ -2347,21 +2232,21 @@
       "level": 1,
       "credits": 30,
       "critical": 0.1,
-      "cooldown": false,
+      "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -5}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -3}
     },
     {
       "name": "Z Device",
       "type": "weapon",
       "level": 2,
-      "credits": 75,
+      "credits": 95,
       "critical": 0.1,
-      "cooldown": false,
+      "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -9}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -5}
     },
     {
       "name": "Luhn Device",
@@ -2369,19 +2254,19 @@
       "level": 3,
       "credits": 205,
       "critical": 0.1,
-      "cooldown": false,
+      "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -16}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -9}
     },
     {
       "name": "Steel Armor",
       "type": "module",
       "level": 1,
-      "credits": 5,
+      "credits": 0,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 2, "maxshield": 0, "maxenergy": 0},
+      "attr": {"maxhull": 1, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2392,7 +2277,7 @@
       "credits": 5,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 3, "maxshield": 0, "maxenergy": 0},
+      "attr": {"maxhull": 2, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2400,6 +2285,17 @@
       "name": "Ablative Armor",
       "type": "module",
       "level": 3,
+      "credits": 5,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 3, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Active Armor",
+      "type": "module",
+      "level": 4,
       "credits": 15,
       "critical": 0,
       "cooldown": false,
@@ -2408,9 +2304,9 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
-      "name": "Active Armor",
+      "name": "Dynamic Armor",
       "type": "module",
-      "level": 4,
+      "level": 5,
       "credits": 45,
       "critical": 0,
       "cooldown": false,
@@ -2419,9 +2315,9 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
-      "name": "Dynamic Armor",
+      "name": "Fluid Armor",
       "type": "module",
-      "level": 5,
+      "level": 6,
       "credits": 130,
       "critical": 0,
       "cooldown": false,
@@ -2430,24 +2326,13 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
-      "name": "Fluid Armor",
-      "type": "module",
-      "level": 6,
-      "credits": 340,
-      "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 28, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
-    },
-    {
       "name": "Lepton Shield",
       "type": "module",
       "level": 1,
-      "credits": 5,
+      "credits": 0,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 2, "maxenergy": 0},
+      "attr": {"maxhull": 0, "maxshield": 1, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2458,7 +2343,7 @@
       "credits": 5,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 3, "maxenergy": 0},
+      "attr": {"maxhull": 0, "maxshield": 2, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2466,6 +2351,17 @@
       "name": "Quark Shield",
       "type": "module",
       "level": 3,
+      "credits": 5,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 3, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Gluon Shield",
+      "type": "module",
+      "level": 4,
       "credits": 15,
       "critical": 0,
       "cooldown": false,
@@ -2474,9 +2370,9 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
-      "name": "Gluon Shield",
+      "name": "Monopole Shield",
       "type": "module",
-      "level": 4,
+      "level": 5,
       "credits": 45,
       "critical": 0,
       "cooldown": false,
@@ -2485,9 +2381,9 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
-      "name": "Monopole Shield",
+      "name": "Pauli Shield",
       "type": "module",
-      "level": 5,
+      "level": 6,
       "credits": 130,
       "critical": 0,
       "cooldown": false,
@@ -2496,24 +2392,13 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
-      "name": "Pauli Shield",
-      "type": "module",
-      "level": 6,
-      "credits": 340,
-      "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 28, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
-    },
-    {
       "name": "Mk1 Capacitor",
       "type": "module",
       "level": 1,
-      "credits": 5,
+      "credits": 10,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 2},
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 4},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2521,10 +2406,10 @@
       "name": "Mk2 Capacitor",
       "type": "module",
       "level": 2,
-      "credits": 5,
+      "credits": 30,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 3},
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 7},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2532,10 +2417,10 @@
       "name": "Mk3 Capacitor",
       "type": "module",
       "level": 3,
-      "credits": 15,
+      "credits": 75,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 5},
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 12},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2543,10 +2428,10 @@
       "name": "Mk4 Capacitor",
       "type": "module",
       "level": 4,
-      "credits": 45,
+      "credits": 205,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 9},
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 21},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2554,10 +2439,10 @@
       "name": "Mk5 Capacitor",
       "type": "module",
       "level": 5,
-      "credits": 130,
+      "credits": 580,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 16},
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 38},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2565,10 +2450,10 @@
       "name": "Mk6 Capacitor",
       "type": "module",
       "level": 6,
-      "credits": 340,
+      "credits": 1530,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 28},
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 66},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2576,132 +2461,143 @@
       "name": "Patch Robot",
       "type": "module",
       "level": 1,
-      "credits": 5,
+      "credits": 0,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 2, "shield": 0, "energy": 0},
+      "playerBuff": {"hull": 1, "shield": 0, "energy": -1},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mend Robot",
       "type": "module",
       "level": 2,
-      "credits": 5,
+      "credits": 0,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 3, "shield": 0, "energy": 0},
+      "playerBuff": {"hull": 2, "shield": 0, "energy": -2},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Repair Robot",
       "type": "module",
       "level": 3,
-      "credits": 15,
+      "credits": 0,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 5, "shield": 0, "energy": 0},
+      "playerBuff": {"hull": 3, "shield": 0, "energy": -3},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Restore Robot",
       "type": "module",
       "level": 4,
-      "credits": 45,
+      "credits": 0,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 9, "shield": 0, "energy": 0},
+      "playerBuff": {"hull": 5, "shield": 0, "energy": -5},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Nanite Robot",
       "type": "module",
       "level": 5,
-      "credits": 130,
+      "credits": 0,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 16, "shield": 0, "energy": 0},
+      "playerBuff": {"hull": 9, "shield": 0, "energy": -9},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Healing Robot",
       "type": "module",
       "level": 6,
-      "credits": 340,
+      "credits": 0,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 28, "shield": 0, "energy": 0},
+      "playerBuff": {"hull": 16, "shield": 0, "energy": -16},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Aura Inducer",
       "type": "module",
       "level": 1,
-      "credits": 5,
+      "credits": 0,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 2, "energy": 0},
+      "playerBuff": {"hull": 0, "shield": 1, "energy": -1},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Buffer Inducer",
       "type": "module",
       "level": 2,
-      "credits": 5,
+      "credits": 0,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 3, "energy": 0},
+      "playerBuff": {"hull": 0, "shield": 2, "energy": -2},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Shell Inducer",
       "type": "module",
       "level": 3,
-      "credits": 15,
+      "credits": 0,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 5, "energy": 0},
+      "playerBuff": {"hull": 0, "shield": 3, "energy": -3},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Absorb Inducer",
       "type": "module",
       "level": 4,
-      "credits": 45,
+      "credits": 0,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 9, "energy": 0},
+      "playerBuff": {"hull": 0, "shield": 5, "energy": -5},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Dermal Inducer",
       "type": "module",
       "level": 5,
-      "credits": 130,
+      "credits": 0,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 16, "energy": 0},
+      "playerBuff": {"hull": 0, "shield": 9, "energy": -9},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Aegis Inducer",
       "type": "module",
       "level": 6,
-      "credits": 340,
+      "credits": 0,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 28, "energy": 0},
+      "playerBuff": {"hull": 0, "shield": 16, "energy": -16},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk0 Reactor",
+      "type": "module",
+      "level": 0,
+      "credits": 0,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 1},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
@@ -2719,253 +2615,385 @@
       "name": "Mk2 Reactor",
       "type": "module",
       "level": 2,
-      "credits": 5,
+      "credits": 10,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 3},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 4},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk3 Reactor",
       "type": "module",
       "level": 3,
-      "credits": 15,
+      "credits": 25,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 5},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 6},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk4 Reactor",
       "type": "module",
       "level": 4,
-      "credits": 45,
+      "credits": 65,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 9},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 11},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk5 Reactor",
       "type": "module",
       "level": 5,
-      "credits": 130,
+      "credits": 175,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 16},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 19},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk6 Reactor",
       "type": "module",
       "level": 6,
-      "credits": 340,
+      "credits": 455,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 28},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 33},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Patch Kit",
       "type": "tool",
       "level": 1,
-      "credits": 30,
+      "credits": 15,
       "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -2},
-      "playerBuff": {"hull": 9, "shield": 0, "energy": 0},
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 5, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mend Kit",
       "type": "tool",
       "level": 2,
-      "credits": 75,
+      "credits": 45,
       "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -3},
-      "playerBuff": {"hull": 15, "shield": 0, "energy": 0},
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 9, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Repair Kit",
       "type": "tool",
       "level": 3,
-      "credits": 205,
+      "credits": 115,
       "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -5},
-      "playerBuff": {"hull": 26, "shield": 0, "energy": 0},
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 15, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Restore Kit",
       "type": "tool",
       "level": 4,
-      "credits": 555,
+      "credits": 320,
       "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -9},
-      "playerBuff": {"hull": 46, "shield": 0, "energy": 0},
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 27, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Nanite Kit",
       "type": "tool",
       "level": 5,
-      "credits": 1450,
+      "credits": 845,
       "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -16},
-      "playerBuff": {"hull": 80, "shield": 0, "energy": 0},
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 47, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Healing Kit",
       "type": "tool",
       "level": 6,
-      "credits": 3795,
+      "credits": 2235,
       "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -28},
-      "playerBuff": {"hull": 139, "shield": 0, "energy": 0},
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 82, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Envelope Cell",
       "type": "tool",
       "level": 1,
-      "credits": 30,
+      "credits": 15,
       "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -2},
-      "playerBuff": {"hull": 0, "shield": 9, "energy": 0},
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 5, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Buffer Cell",
       "type": "tool",
       "level": 2,
-      "credits": 75,
+      "credits": 45,
       "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -3},
-      "playerBuff": {"hull": 0, "shield": 15, "energy": 0},
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 9, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Shell Cell",
       "type": "tool",
       "level": 3,
-      "credits": 205,
+      "credits": 115,
       "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -5},
-      "playerBuff": {"hull": 0, "shield": 26, "energy": 0},
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 15, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Absorb Cell",
       "type": "tool",
       "level": 4,
-      "credits": 555,
+      "credits": 320,
       "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -9},
-      "playerBuff": {"hull": 0, "shield": 46, "energy": 0},
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 27, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Dermal Cell",
       "type": "tool",
       "level": 5,
-      "credits": 1450,
+      "credits": 845,
       "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -16},
-      "playerBuff": {"hull": 0, "shield": 80, "energy": 0},
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 47, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Aegis Cell",
       "type": "tool",
       "level": 6,
-      "credits": 3795,
+      "credits": 2235,
       "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -28},
-      "playerBuff": {"hull": 0, "shield": 139, "energy": 0},
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 82, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk1 Battery",
       "type": "tool",
       "level": 1,
-      "credits": 30,
+      "credits": 15,
       "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -2},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 9},
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 5},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk2 Battery",
       "type": "tool",
       "level": 2,
-      "credits": 75,
+      "credits": 45,
       "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -3},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 15},
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 9},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk3 Battery",
       "type": "tool",
       "level": 3,
-      "credits": 205,
+      "credits": 115,
       "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -5},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 26},
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 15},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk4 Battery",
       "type": "tool",
       "level": 4,
-      "credits": 555,
+      "credits": 320,
       "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -9},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 46},
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 27},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk5 Battery",
       "type": "tool",
       "level": 5,
-      "credits": 1450,
+      "credits": 845,
       "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -16},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 80},
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 47},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk6 Battery",
       "type": "tool",
       "level": 6,
-      "credits": 3795,
+      "credits": 2235,
+      "critical": 0,
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 82},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Copper",
+      "type": "common",
+      "level": 1,
+      "credits": 5,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": -28},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 139},
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Alien Fossil",
+      "type": "common",
+      "level": 1,
+      "credits": 5,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Barium",
+      "type": "common",
+      "level": 2,
+      "credits": 25,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Alien Fungi",
+      "type": "common",
+      "level": 2,
+      "credits": 25,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Tungsten",
+      "type": "common",
+      "level": 3,
+      "credits": 80,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Alien Flora",
+      "type": "common",
+      "level": 3,
+      "credits": 80,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Platinum",
+      "type": "common",
+      "level": 4,
+      "credits": 190,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Alien Fauna",
+      "type": "common",
+      "level": 4,
+      "credits": 190,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Pavonite",
+      "type": "common",
+      "level": 5,
+      "credits": 375,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Alien Artifact",
+      "type": "common",
+      "level": 5,
+      "credits": 375,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Sky Crystals",
+      "type": "common",
+      "level": 6,
+      "credits": 650,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Contraband",
+      "type": "common",
+      "level": 6,
+      "credits": 650,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     }
   ],
@@ -5628,7 +5656,7 @@
     },
     {
       "name": "Combat Handbook",
-      "xml": "\n<condition have-item=\"Combat Handbook\" />\n<add-to-quest-list/>\n<take item=\"Combat Handbook\"/>\n<dialog>_SPACE COMBAT, 3rd EDITION_\n*I.* Armored opponents\n*II.* Shielded opponents\n*III.* Energy consuming opponents\n*IV.* Critical hits\n*V.* Cooldown\n</dialog>\n<dialog>*ARMORED OPPONENTS*\nAn opponent with a strong _hull_ can be dispatched if your ship regenerate its _hull_ or _shield_ fast enough. Take care to install modules and tools that allow you to perform field repairs.</dialog>\n<dialog>*SHIELDED OPPONENTS*\nA shielded opponent is impervious to weak _hull_ damage.\nYou must do more _hull_ damage than what can be absorbed by the shields. Use weapons with _shield_ damage to reduce the shields before attacking with a hull damaging weapon.</dialog>\n<dialog>*ENERGY CONSUMING OPPONENTS*\nAn opponent that consume energy can be crippled by attacking with an _energy_ weapon. A ship with an empty energy buffer is a sitting duck that can be attacked with _shield_ or _hull_ damage.</dialog>\n<dialog>*CRITICAL HITS*\nA _critical hit_ will disable one of the target's subsystems.\nA wise combatant always have redundant shield generators and weapons to mitigate the effect of the enemy's critical hits.</dialog>\n<dialog>*COOLDOWN*\nSome weapons and tools require cooldown. This means they can only be used once per battle, but they are often powerful.</dialog>",
+      "xml": "\n<condition have-item=\"Combat Handbook\" />\n<add-to-quest-list/>\n<take item=\"Combat Handbook\"/>\n<dialog>_SPACE COMBAT, 3rd EDITION_\n*I.* Armored opponents\n*II.* Shielded opponents\n*III.* Energy consuming opponents\n*IV.* Critical hits\n*V.* Cooldown\n</dialog>\n<dialog>*ARMORED OPPONENTS*\nAn opponent with a strong _hull_ can be dispatched if your ship regenerate its _hull_ or _shield_ fast enough. Take care to install modules and tools that allow you to perform field repairs.</dialog>\n<dialog>*SHIELDED OPPONENTS*\nA shielded opponent can block weak _hull_ damage.\nYou must do more _hull_ damage than what can be absorbed by the shields. Reduce the shields of a target with _shield_ damage attacks.</dialog>\n<dialog>*ENERGY CONSUMING OPPONENTS*\nAn opponent that consume energy can be crippled by attacking with an _energy_ weapon. A ship with an empty energy buffer is a sitting duck that can be attacked with _shield_ or _hull_ damage.</dialog>\n<dialog>*CRITICAL HITS*\nA _critical hit_ will disable one of the target's subsystems.\nA wise combatant always have redundant shield generators and weapons to mitigate the effect of the enemy's critical hits.</dialog>\n<dialog>*COOLDOWN*\nSome weapons and tools require cooldown. This means they can only be used once per battle, but they are often powerful.</dialog>",
       "color": "0f0",
       "icon": "",
       "tags": "book"
@@ -7048,6 +7076,81 @@
         }
       ],
       "tags": "anomaly"
+    },
+    {
+      "name": "Sailor",
+      "geometry": "composite",
+      "transform": [
+        ["scale", 1.2, 1.2, 1.2],
+        ["rotate", 0, 0, 0],
+        ["translate", 0, 30, -70]
+      ],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 8,
+          "transform": [["rotate", 90, 22.5, 0], ["scale", 1, 1, 1]],
+          "path": [
+            [0, 0, -70],
+            [16, 0, -80],
+            [26, 0, -30],
+            [14, 0, 70],
+            [0, 0, 70]
+          ]
+        },
+        {
+          "name": "engine",
+          "geometry": "lathe",
+          "res": 8,
+          "transform": [["rotate", 90, 22.5, 0], ["translate", 0, -85, 0]],
+          "path": [[24, 0, 3], [20, 0, 25], [20, 0, 0], [24, 0, 3]]
+        },
+        {
+          "geometry": "composite",
+          "transform": [
+            ["scale", 2, 2, -2],
+            ["rotate", 0, 0, 0],
+            ["parabola", 0, 0.003, 0],
+            ["translate", 0, -80, 0]
+          ],
+          "parts": [
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "angle": 120,
+              "transform": [["rotate", 90, -30, 0], ["scale", 1, 1, 1]],
+              "path": [[18, 0, 0], [26, 0, 0], [18, 0, 0]]
+            },
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "angle": 120,
+              "transform": [["rotate", 90, 150, 0], ["scale", 1, 1, 1]],
+              "path": [[18, 0, 0], [26, 0, 0], [18, 0, 0]]
+            },
+            {
+              "geometry": "mesh",
+              "transform": [["subdivide", 0, 0, 0], ["translate", -40, 0, 0]],
+              "quads": [
+                [[-30, 0, -5], [-30, 0, 5], [0, 0, 10], [0, 0, -10]],
+                [[30, 0, 5], [30, 0, -5], [0, 0, -10], [0, 0, 10]],
+                [[-30, 0, 5], [-30, 0, -5], [0, 0, -10], [0, 0, 10]],
+                [[30, 0, -5], [30, 0, 5], [0, 0, 10], [0, 0, -10]]
+              ]
+            },
+            {
+              "geometry": "mesh",
+              "transform": [["subdivide", 0, 0, 0], ["translate", 40, 0, 0]],
+              "quads": [
+                [[-30, 0, -5], [-30, 0, 5], [0, 0, 10], [0, 0, -10]],
+                [[30, 0, 5], [30, 0, -5], [0, 0, -10], [0, 0, 10]],
+                [[-30, 0, 5], [-30, 0, -5], [0, 0, -10], [0, 0, 10]],
+                [[30, 0, -5], [30, 0, 5], [0, 0, 10], [0, 0, -10]]
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "name": "Rover",
@@ -10336,7 +10439,7 @@
     },
     {
       "name": "Outback",
-      "audio": "music-world of hope",
+      "audio": "music-ambient",
       "pos": {"x": 350, "y": -2008},
       "radius": 460
     },
@@ -10348,7 +10451,7 @@
     },
     {
       "name": "The Bush",
-      "audio": "music-ocean",
+      "audio": "music-sand dark",
       "pos": {"x": 84, "y": -1302},
       "radius": 270
     },
@@ -10408,7 +10511,7 @@
     },
     {
       "name": "Dev Zone",
-      "audio": "music-sand dark",
+      "audio": "music-final ending",
       "pos": {"x": 732, "y": -2296},
       "radius": 100
     }
