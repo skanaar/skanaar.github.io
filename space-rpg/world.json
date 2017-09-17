@@ -391,7 +391,7 @@
         "jump": 0,
         "slots": 0
       },
-      "generator": {"hull": 0, "shield": 0, "energy": 3},
+      "generator": {"hull": 1, "shield": 0, "energy": 1},
       "name": "Bandit Henchman",
       "level": 5,
       "visual": "Rusty Ship",
@@ -401,8 +401,8 @@
         "Repair Goo",
         "Monopole Shield",
         "Meson Ray",
-        "Railgun",
-        "Mk5 Reactor"
+        "Mk5 Reactor",
+        "Gauss Gun"
       ],
       "isFlying": true,
       "slots": 0,
@@ -418,10 +418,20 @@
         "jump": 0,
         "slots": 0
       },
-      "generator": {"hull": 1, "shield": 2, "energy": 5},
+      "generator": {"hull": 1, "shield": 1, "energy": 1},
       "name": "Security Drone",
       "visual": "Security Drone",
-      "inventory": ["Railgun", "Photon Ray"],
+      "inventory": [
+        "Absorb Cell",
+        "Restore Kit",
+        "Mk4 Battery",
+        "Active Armor",
+        "Gluon Shield",
+        "Absorb Inducer",
+        "Mk4 Reactor",
+        "Solenoid Gun",
+        "Tau Ray"
+      ],
       "level": 4,
       "value": 0,
       "isFlying": false,
@@ -474,14 +484,14 @@
     {
       "attr": {
         "maxhull": 70,
-        "maxshield": 10,
+        "maxshield": 4,
         "maxenergy": 50,
         "armor": 0,
         "cloak": 0,
         "jump": 0,
         "slots": 0
       },
-      "generator": {"hull": 2, "shield": 2, "energy": 0},
+      "generator": {"hull": 2, "shield": 1, "energy": 0},
       "name": "Rocket Drone",
       "level": 4,
       "visual": "Rocket Drone",
@@ -538,7 +548,7 @@
         "jump": 0,
         "slots": 2
       },
-      "generator": {"hull": 1, "shield": 2, "energy": 2},
+      "generator": {"hull": 1, "shield": 1, "energy": 1},
       "name": "Soma Reaver",
       "visual": "Soma Saay",
       "inventory": [
@@ -557,22 +567,25 @@
     },
     {
       "attr": {
-        "maxhull": 100,
-        "maxshield": 20,
-        "maxenergy": 100,
+        "maxhull": 20,
+        "maxshield": 10,
+        "maxenergy": 20,
         "armor": 0,
         "cloak": 0,
         "jump": 0,
         "slots": 2
       },
-      "generator": {"hull": 2, "shield": 2, "energy": 10},
+      "generator": {"hull": 1, "shield": 1, "energy": 2},
       "name": "Soma Predator",
       "visual": "Soma Saay",
       "inventory": [
         "Nano Repairers",
         "Metabomb",
         "Focal Beam",
-        "Mk6 Capacitor"
+        "Mk6 Capacitor",
+        "Aegis Inducer",
+        "Healing Robot",
+        "Mk6 Reactor"
       ],
       "level": 6,
       "value": 0,
@@ -633,7 +646,7 @@
         "jump": 0,
         "slots": 0
       },
-      "generator": {"hull": 4, "shield": 2, "energy": 10},
+      "generator": {"hull": 2, "shield": 2, "energy": 2},
       "name": "Weakened Worm",
       "level": 6,
       "visual": "Worm",
@@ -1834,7 +1847,7 @@
       "name": "Autogun",
       "type": "weapon",
       "level": 1,
-      "credits": 15,
+      "credits": 14,
       "critical": 0.05,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -1845,29 +1858,51 @@
       "name": "Autogun Mk2",
       "type": "weapon",
       "level": 2,
-      "credits": 55,
+      "credits": 26,
       "critical": 0.05,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
-      "targetBuff": {"hull": -4, "shield": 0, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
+      "targetBuff": {"hull": -3, "shield": 0, "energy": 0}
     },
     {
       "name": "Autogun Mk3",
       "type": "weapon",
       "level": 3,
-      "credits": 140,
+      "credits": 64,
       "critical": 0.05,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
-      "targetBuff": {"hull": -9, "shield": 0, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": -6, "shield": 0, "energy": 0}
     },
     {
       "name": "Solenoid Gun",
       "type": "weapon",
       "level": 4,
-      "credits": 315,
+      "credits": 104,
+      "critical": 0.05,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": -8, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Gauss Gun",
+      "type": "weapon",
+      "level": 5,
+      "credits": 176,
+      "critical": 0.05,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -4},
+      "targetBuff": {"hull": -12, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Railgun",
+      "type": "weapon",
+      "level": 6,
+      "credits": 264,
       "critical": 0.05,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -1875,32 +1910,10 @@
       "targetBuff": {"hull": -16, "shield": 0, "energy": 0}
     },
     {
-      "name": "Gauss Gun",
-      "type": "weapon",
-      "level": 5,
-      "credits": 715,
-      "critical": 0.05,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
-      "targetBuff": {"hull": -28, "shield": 0, "energy": 0}
-    },
-    {
-      "name": "Railgun",
-      "type": "weapon",
-      "level": 6,
-      "credits": 1705,
-      "critical": 0.05,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
-      "targetBuff": {"hull": -49, "shield": 0, "energy": 0}
-    },
-    {
       "name": "Heat Ray",
       "type": "weapon",
       "level": 1,
-      "credits": 10,
+      "credits": 16,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -1911,7 +1924,18 @@
       "name": "Photon Ray",
       "type": "weapon",
       "level": 2,
-      "credits": 40,
+      "credits": 22,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
+      "targetBuff": {"hull": -1, "shield": -3, "energy": 0}
+    },
+    {
+      "name": "Meson Ray",
+      "type": "weapon",
+      "level": 3,
+      "credits": 42,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -1919,21 +1943,32 @@
       "targetBuff": {"hull": -2, "shield": -4, "energy": 0}
     },
     {
-      "name": "Meson Ray",
+      "name": "Tau Ray",
       "type": "weapon",
-      "level": 3,
-      "credits": 75,
+      "level": 4,
+      "credits": 68,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
-      "targetBuff": {"hull": -3, "shield": -6, "energy": 0}
+      "targetBuff": {"hull": -3, "shield": -5, "energy": 0}
     },
     {
-      "name": "Tau Ray",
+      "name": "Phased Ray",
       "type": "weapon",
-      "level": 4,
-      "credits": 205,
+      "level": 5,
+      "credits": 124,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -4},
+      "targetBuff": {"hull": -4, "shield": -8, "energy": 0}
+    },
+    {
+      "name": "Nucleon Ray",
+      "type": "weapon",
+      "level": 6,
+      "credits": 192,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -1941,32 +1976,10 @@
       "targetBuff": {"hull": -5, "shield": -11, "energy": 0}
     },
     {
-      "name": "Phased Ray",
-      "type": "weapon",
-      "level": 5,
-      "credits": 555,
-      "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
-      "targetBuff": {"hull": -9, "shield": -19, "energy": 0}
-    },
-    {
-      "name": "Nucleon Ray",
-      "type": "weapon",
-      "level": 6,
-      "credits": 1490,
-      "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
-      "targetBuff": {"hull": -16, "shield": -33, "energy": 0}
-    },
-    {
       "name": "EM Pulse",
       "type": "weapon",
       "level": 1,
-      "credits": 15,
+      "credits": 22,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -1977,62 +1990,62 @@
       "name": "Voltaic Pulse",
       "type": "weapon",
       "level": 2,
-      "credits": 45,
+      "credits": 34,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -7}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -6}
     },
     {
       "name": "Soliton Pulse",
       "type": "weapon",
       "level": 3,
-      "credits": 115,
+      "credits": 58,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -12}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -8}
     },
     {
       "name": "Sinusoid Pulse",
       "type": "weapon",
       "level": 4,
-      "credits": 300,
+      "credits": 100,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -21}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -11}
     },
     {
       "name": "Coronal Pulse",
       "type": "weapon",
       "level": 5,
-      "credits": 845,
+      "credits": 162,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -38}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -4},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -15}
     },
     {
       "name": "Aural Pulse",
       "type": "weapon",
       "level": 6,
-      "credits": 2235,
+      "credits": 288,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -66}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -22}
     },
     {
       "name": "Cutting Beam",
       "type": "weapon",
       "level": 1,
-      "credits": 40,
+      "credits": 20,
       "critical": 0.2,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2043,7 +2056,18 @@
       "name": "Piercing Beam",
       "type": "weapon",
       "level": 2,
-      "credits": 150,
+      "credits": 60,
+      "critical": 0.2,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
+      "targetBuff": {"hull": -3, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Incision Beam",
+      "type": "weapon",
+      "level": 3,
+      "credits": 116,
       "critical": 0.2,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2051,21 +2075,32 @@
       "targetBuff": {"hull": -4, "shield": 0, "energy": 0}
     },
     {
-      "name": "Incision Beam",
+      "name": "Focal Beam",
       "type": "weapon",
-      "level": 3,
-      "credits": 305,
+      "level": 4,
+      "credits": 186,
       "critical": 0.2,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
-      "targetBuff": {"hull": -6, "shield": 0, "energy": 0}
+      "targetBuff": {"hull": -5, "shield": 0, "energy": 0}
     },
     {
-      "name": "Focal Beam",
+      "name": "Locus Beam",
       "type": "weapon",
-      "level": 4,
-      "credits": 560,
+      "level": 5,
+      "credits": 290,
+      "critical": 0.2,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -4},
+      "targetBuff": {"hull": -8, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Apex Beam",
+      "type": "weapon",
+      "level": 6,
+      "credits": 412,
       "critical": 0.2,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2073,32 +2108,10 @@
       "targetBuff": {"hull": -11, "shield": 0, "energy": 0}
     },
     {
-      "name": "Locus Beam",
-      "type": "weapon",
-      "level": 5,
-      "credits": 975,
-      "critical": 0.2,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
-      "targetBuff": {"hull": -19, "shield": 0, "energy": 0}
-    },
-    {
-      "name": "Apex Beam",
-      "type": "weapon",
-      "level": 6,
-      "credits": 1785,
-      "critical": 0.2,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
-      "targetBuff": {"hull": -33, "shield": 0, "energy": 0}
-    },
-    {
       "name": "Slug Driver",
       "type": "weapon",
       "level": 1,
-      "credits": 60,
+      "credits": 32,
       "critical": 0.25,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2109,29 +2122,51 @@
       "name": "Rod Driver",
       "type": "weapon",
       "level": 2,
-      "credits": 190,
+      "credits": 76,
       "critical": 0.25,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
-      "targetBuff": {"hull": -5, "shield": 0, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
+      "targetBuff": {"hull": -4, "shield": 0, "energy": 0}
     },
     {
       "name": "Mass Driver",
       "type": "weapon",
       "level": 3,
-      "credits": 405,
+      "credits": 152,
       "critical": 0.25,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
-      "targetBuff": {"hull": -9, "shield": 0, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": -6, "shield": 0, "energy": 0}
     },
     {
       "name": "Javelin Driver",
       "type": "weapon",
       "level": 4,
-      "credits": 745,
+      "credits": 250,
+      "critical": 0.25,
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": -8, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Luminal Driver",
+      "type": "weapon",
+      "level": 5,
+      "credits": 388,
+      "critical": 0.25,
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -4},
+      "targetBuff": {"hull": -12, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Helix Driver",
+      "type": "weapon",
+      "level": 6,
+      "credits": 552,
       "critical": 0.25,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2139,32 +2174,10 @@
       "targetBuff": {"hull": -16, "shield": 0, "energy": 0}
     },
     {
-      "name": "Luminal Driver",
-      "type": "weapon",
-      "level": 5,
-      "credits": 1350,
-      "critical": 0.25,
-      "cooldown": true,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
-      "targetBuff": {"hull": -28, "shield": 0, "energy": 0}
-    },
-    {
-      "name": "Helix Driver",
-      "type": "weapon",
-      "level": 6,
-      "credits": 2580,
-      "critical": 0.25,
-      "cooldown": true,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
-      "targetBuff": {"hull": -49, "shield": 0, "energy": 0}
-    },
-    {
       "name": "EM Disruptor",
       "type": "weapon",
       "level": 1,
-      "credits": 10,
+      "credits": 16,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2175,29 +2188,51 @@
       "name": "Tau Disruptor",
       "type": "weapon",
       "level": 2,
-      "credits": 30,
+      "credits": 22,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
-      "targetBuff": {"hull": 0, "shield": -5, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
+      "targetBuff": {"hull": 0, "shield": -4, "energy": 0}
     },
     {
       "name": "Co Disruptor",
       "type": "weapon",
       "level": 3,
-      "credits": 75,
+      "credits": 42,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
-      "targetBuff": {"hull": 0, "shield": -9, "energy": 0}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": 0, "shield": -6, "energy": 0}
     },
     {
       "name": "Ur Disruptor",
       "type": "weapon",
       "level": 4,
-      "credits": 205,
+      "credits": 68,
+      "critical": 0,
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
+      "targetBuff": {"hull": 0, "shield": -8, "energy": 0}
+    },
+    {
+      "name": "Sc Disruptor",
+      "type": "weapon",
+      "level": 5,
+      "credits": 124,
+      "critical": 0,
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -4},
+      "targetBuff": {"hull": 0, "shield": -12, "energy": 0}
+    },
+    {
+      "name": "Au Disruptor",
+      "type": "weapon",
+      "level": 6,
+      "credits": 192,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2205,32 +2240,10 @@
       "targetBuff": {"hull": 0, "shield": -16, "energy": 0}
     },
     {
-      "name": "Sc Disruptor",
-      "type": "weapon",
-      "level": 5,
-      "credits": 555,
-      "critical": 0,
-      "cooldown": true,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -9},
-      "targetBuff": {"hull": 0, "shield": -28, "energy": 0}
-    },
-    {
-      "name": "Au Disruptor",
-      "type": "weapon",
-      "level": 6,
-      "credits": 1490,
-      "critical": 0,
-      "cooldown": true,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -16},
-      "targetBuff": {"hull": 0, "shield": -49, "energy": 0}
-    },
-    {
       "name": "Quench Device",
       "type": "weapon",
       "level": 1,
-      "credits": 30,
+      "credits": 22,
       "critical": 0.1,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2241,40 +2254,29 @@
       "name": "Z Device",
       "type": "weapon",
       "level": 2,
-      "credits": 95,
+      "credits": 44,
       "critical": 0.1,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -5}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -4}
     },
     {
       "name": "Luhn Device",
       "type": "weapon",
       "level": 3,
-      "credits": 205,
+      "credits": 86,
       "critical": 0.1,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": -3},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -9}
+      "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -6}
     },
     {
       "name": "Steel Armor",
       "type": "module",
       "level": 1,
-      "credits": 0,
-      "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 1, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
-    },
-    {
-      "name": "Tungsten Armor",
-      "type": "module",
-      "level": 2,
-      "credits": 5,
+      "credits": 6,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 2, "maxshield": 0, "maxenergy": 0},
@@ -2282,10 +2284,10 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
-      "name": "Ablative Armor",
+      "name": "Tungsten Armor",
       "type": "module",
-      "level": 3,
-      "credits": 5,
+      "level": 2,
+      "credits": 10,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 3, "maxshield": 0, "maxenergy": 0},
@@ -2293,10 +2295,21 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
+      "name": "Ablative Armor",
+      "type": "module",
+      "level": 3,
+      "credits": 16,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 4, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
       "name": "Active Armor",
       "type": "module",
       "level": 4,
-      "credits": 15,
+      "credits": 22,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 5, "maxshield": 0, "maxenergy": 0},
@@ -2307,10 +2320,10 @@
       "name": "Dynamic Armor",
       "type": "module",
       "level": 5,
-      "credits": 45,
+      "credits": 42,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 9, "maxshield": 0, "maxenergy": 0},
+      "attr": {"maxhull": 8, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2318,10 +2331,10 @@
       "name": "Fluid Armor",
       "type": "module",
       "level": 6,
-      "credits": 130,
+      "credits": 68,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 16, "maxshield": 0, "maxenergy": 0},
+      "attr": {"maxhull": 11, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2329,18 +2342,7 @@
       "name": "Lepton Shield",
       "type": "module",
       "level": 1,
-      "credits": 0,
-      "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 1, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
-    },
-    {
-      "name": "Proton Shield",
-      "type": "module",
-      "level": 2,
-      "credits": 5,
+      "credits": 6,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 2, "maxenergy": 0},
@@ -2348,10 +2350,10 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
-      "name": "Quark Shield",
+      "name": "Proton Shield",
       "type": "module",
-      "level": 3,
-      "credits": 5,
+      "level": 2,
+      "credits": 10,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 3, "maxenergy": 0},
@@ -2359,10 +2361,21 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
+      "name": "Quark Shield",
+      "type": "module",
+      "level": 3,
+      "credits": 16,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 4, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
       "name": "Gluon Shield",
       "type": "module",
       "level": 4,
-      "credits": 15,
+      "credits": 22,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 5, "maxenergy": 0},
@@ -2373,10 +2386,10 @@
       "name": "Monopole Shield",
       "type": "module",
       "level": 5,
-      "credits": 45,
+      "credits": 28,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 9, "maxenergy": 0},
+      "attr": {"maxhull": 0, "maxshield": 6, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2384,10 +2397,10 @@
       "name": "Pauli Shield",
       "type": "module",
       "level": 6,
-      "credits": 130,
+      "credits": 42,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 16, "maxenergy": 0},
+      "attr": {"maxhull": 0, "maxshield": 8, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2395,7 +2408,7 @@
       "name": "Mk1 Capacitor",
       "type": "module",
       "level": 1,
-      "credits": 10,
+      "credits": 16,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 4},
@@ -2406,10 +2419,10 @@
       "name": "Mk2 Capacitor",
       "type": "module",
       "level": 2,
-      "credits": 30,
+      "credits": 28,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 7},
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 6},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2417,10 +2430,10 @@
       "name": "Mk3 Capacitor",
       "type": "module",
       "level": 3,
-      "credits": 75,
+      "credits": 42,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 12},
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 8},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2428,10 +2441,10 @@
       "name": "Mk4 Capacitor",
       "type": "module",
       "level": 4,
-      "credits": 205,
+      "credits": 68,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 21},
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 11},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2439,10 +2452,10 @@
       "name": "Mk5 Capacitor",
       "type": "module",
       "level": 5,
-      "credits": 580,
+      "credits": 112,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 38},
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 15},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2450,10 +2463,10 @@
       "name": "Mk6 Capacitor",
       "type": "module",
       "level": 6,
-      "credits": 1530,
+      "credits": 206,
       "critical": 0,
       "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 66},
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 22},
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
@@ -2461,7 +2474,7 @@
       "name": "Patch Robot",
       "type": "module",
       "level": 1,
-      "credits": 0,
+      "credits": 6,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2472,7 +2485,7 @@
       "name": "Mend Robot",
       "type": "module",
       "level": 2,
-      "credits": 0,
+      "credits": 16,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2483,7 +2496,7 @@
       "name": "Repair Robot",
       "type": "module",
       "level": 3,
-      "credits": 0,
+      "credits": 28,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2494,7 +2507,18 @@
       "name": "Restore Robot",
       "type": "module",
       "level": 4,
-      "credits": 0,
+      "credits": 42,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 4, "shield": 0, "energy": -4},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Nanite Robot",
+      "type": "module",
+      "level": 5,
+      "credits": 58,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2502,32 +2526,21 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
-      "name": "Nanite Robot",
-      "type": "module",
-      "level": 5,
-      "credits": 0,
-      "critical": 0,
-      "cooldown": false,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 9, "shield": 0, "energy": -9},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
-    },
-    {
       "name": "Healing Robot",
       "type": "module",
       "level": 6,
-      "credits": 0,
+      "credits": 100,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 16, "shield": 0, "energy": -16},
+      "playerBuff": {"hull": 7, "shield": 0, "energy": -7},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Aura Inducer",
       "type": "module",
       "level": 1,
-      "credits": 0,
+      "credits": 6,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2538,62 +2551,62 @@
       "name": "Buffer Inducer",
       "type": "module",
       "level": 2,
-      "credits": 0,
+      "credits": 10,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 2, "energy": -2},
+      "playerBuff": {"hull": 0, "shield": 1, "energy": -2},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Shell Inducer",
       "type": "module",
       "level": 3,
-      "credits": 0,
+      "credits": 22,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 3, "energy": -3},
+      "playerBuff": {"hull": 0, "shield": 2, "energy": -3},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Absorb Inducer",
       "type": "module",
       "level": 4,
-      "credits": 0,
+      "credits": 34,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 5, "energy": -5},
+      "playerBuff": {"hull": 0, "shield": 3, "energy": -4},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Dermal Inducer",
       "type": "module",
       "level": 5,
-      "credits": 0,
+      "credits": 50,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 9, "energy": -9},
+      "playerBuff": {"hull": 0, "shield": 4, "energy": -5},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Aegis Inducer",
       "type": "module",
       "level": 6,
-      "credits": 0,
+      "credits": 78,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 16, "energy": -16},
+      "playerBuff": {"hull": 0, "shield": 5, "energy": -7},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk0 Reactor",
       "type": "module",
       "level": 0,
-      "credits": 0,
+      "credits": 4,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2604,7 +2617,7 @@
       "name": "Mk1 Reactor",
       "type": "module",
       "level": 1,
-      "credits": 5,
+      "credits": 6,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2615,7 +2628,7 @@
       "name": "Mk2 Reactor",
       "type": "module",
       "level": 2,
-      "credits": 10,
+      "credits": 16,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2626,7 +2639,7 @@
       "name": "Mk3 Reactor",
       "type": "module",
       "level": 3,
-      "credits": 25,
+      "credits": 28,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2637,40 +2650,40 @@
       "name": "Mk4 Reactor",
       "type": "module",
       "level": 4,
-      "credits": 65,
+      "credits": 42,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 11},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 8},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk5 Reactor",
       "type": "module",
       "level": 5,
-      "credits": 175,
+      "credits": 78,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 19},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 12},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk6 Reactor",
       "type": "module",
       "level": 6,
-      "credits": 455,
+      "credits": 124,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 33},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 16},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Patch Kit",
       "type": "tool",
       "level": 1,
-      "credits": 15,
+      "credits": 22,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2681,29 +2694,51 @@
       "name": "Mend Kit",
       "type": "tool",
       "level": 2,
-      "credits": 45,
+      "credits": 34,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 9, "shield": 0, "energy": 0},
+      "playerBuff": {"hull": 7, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Repair Kit",
       "type": "tool",
       "level": 3,
-      "credits": 115,
+      "credits": 58,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 15, "shield": 0, "energy": 0},
+      "playerBuff": {"hull": 10, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Restore Kit",
       "type": "tool",
       "level": 4,
-      "credits": 320,
+      "credits": 100,
+      "critical": 0,
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 14, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Nanite Kit",
+      "type": "tool",
+      "level": 5,
+      "credits": 162,
+      "critical": 0,
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 19, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Healing Kit",
+      "type": "tool",
+      "level": 6,
+      "credits": 288,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2711,32 +2746,10 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
-      "name": "Nanite Kit",
-      "type": "tool",
-      "level": 5,
-      "credits": 845,
-      "critical": 0,
-      "cooldown": true,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 47, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
-    },
-    {
-      "name": "Healing Kit",
-      "type": "tool",
-      "level": 6,
-      "credits": 2235,
-      "critical": 0,
-      "cooldown": true,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 82, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
-    },
-    {
       "name": "Envelope Cell",
       "type": "tool",
       "level": 1,
-      "credits": 15,
+      "credits": 22,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2747,29 +2760,51 @@
       "name": "Buffer Cell",
       "type": "tool",
       "level": 2,
-      "credits": 45,
+      "credits": 34,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 9, "energy": 0},
+      "playerBuff": {"hull": 0, "shield": 7, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Shell Cell",
       "type": "tool",
       "level": 3,
-      "credits": 115,
+      "credits": 58,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 15, "energy": 0},
+      "playerBuff": {"hull": 0, "shield": 10, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Absorb Cell",
       "type": "tool",
       "level": 4,
-      "credits": 320,
+      "credits": 100,
+      "critical": 0,
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 14, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Dermal Cell",
+      "type": "tool",
+      "level": 5,
+      "credits": 162,
+      "critical": 0,
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 19, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Aegis Cell",
+      "type": "tool",
+      "level": 6,
+      "credits": 288,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2777,32 +2812,10 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
-      "name": "Dermal Cell",
-      "type": "tool",
-      "level": 5,
-      "credits": 845,
-      "critical": 0,
-      "cooldown": true,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 47, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
-    },
-    {
-      "name": "Aegis Cell",
-      "type": "tool",
-      "level": 6,
-      "credits": 2235,
-      "critical": 0,
-      "cooldown": true,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 82, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
-    },
-    {
       "name": "Mk1 Battery",
       "type": "tool",
       "level": 1,
-      "credits": 15,
+      "credits": 22,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2813,29 +2826,51 @@
       "name": "Mk2 Battery",
       "type": "tool",
       "level": 2,
-      "credits": 45,
+      "credits": 34,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 9},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 7},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk3 Battery",
       "type": "tool",
       "level": 3,
-      "credits": 115,
+      "credits": 58,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 15},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 10},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk4 Battery",
       "type": "tool",
       "level": 4,
-      "credits": 320,
+      "credits": 100,
+      "critical": 0,
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 14},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk5 Battery",
+      "type": "tool",
+      "level": 5,
+      "credits": 162,
+      "critical": 0,
+      "cooldown": true,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 19},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
+      "name": "Mk6 Battery",
+      "type": "tool",
+      "level": 6,
+      "credits": 288,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2843,32 +2878,10 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
-      "name": "Mk5 Battery",
-      "type": "tool",
-      "level": 5,
-      "credits": 845,
-      "critical": 0,
-      "cooldown": true,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 47},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
-    },
-    {
-      "name": "Mk6 Battery",
-      "type": "tool",
-      "level": 6,
-      "credits": 2235,
-      "critical": 0,
-      "cooldown": true,
-      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 82},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
-    },
-    {
       "name": "Copper",
       "type": "common",
       "level": 1,
-      "credits": 5,
+      "credits": 4,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2879,7 +2892,7 @@
       "name": "Alien Fossil",
       "type": "common",
       "level": 1,
-      "credits": 5,
+      "credits": 4,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2890,7 +2903,7 @@
       "name": "Barium",
       "type": "common",
       "level": 2,
-      "credits": 25,
+      "credits": 24,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2901,7 +2914,7 @@
       "name": "Alien Fungi",
       "type": "common",
       "level": 2,
-      "credits": 25,
+      "credits": 24,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2912,7 +2925,7 @@
       "name": "Tungsten",
       "type": "common",
       "level": 3,
-      "credits": 80,
+      "credits": 82,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2923,7 +2936,7 @@
       "name": "Alien Flora",
       "type": "common",
       "level": 3,
-      "credits": 80,
+      "credits": 82,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2934,7 +2947,7 @@
       "name": "Platinum",
       "type": "common",
       "level": 4,
-      "credits": 190,
+      "credits": 192,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2945,7 +2958,7 @@
       "name": "Alien Fauna",
       "type": "common",
       "level": 4,
-      "credits": 190,
+      "credits": 192,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2956,7 +2969,7 @@
       "name": "Pavonite",
       "type": "common",
       "level": 5,
-      "credits": 375,
+      "credits": 376,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2967,7 +2980,7 @@
       "name": "Alien Artifact",
       "type": "common",
       "level": 5,
-      "credits": 375,
+      "credits": 376,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2978,7 +2991,7 @@
       "name": "Sky Crystals",
       "type": "common",
       "level": 6,
-      "credits": 650,
+      "credits": 648,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2989,7 +3002,7 @@
       "name": "Contraband",
       "type": "common",
       "level": 6,
-      "credits": 650,
+      "credits": 648,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -3054,7 +3067,7 @@
       "style": "asteroid-9",
       "pos": {"x": 519, "y": -2135},
       "trader": null,
-      "treasures": ["Barium Ore", "Tungsten"],
+      "treasures": ["Alien Fossil"],
       "enemy": null
     },
     {
@@ -3897,7 +3910,7 @@
     {
       "pos": {"x": -1582, "y": -1098},
       "name": "Threshold of the Temple",
-      "style": "planet-hell-1",
+      "style": "planet-neutron-2",
       "trader": null,
       "enemy": {
         "type": "Sentinel Pod",
@@ -4505,7 +4518,7 @@
       "style": "asteroid-6",
       "trader": null,
       "enemy": null,
-      "treasures": ["Tungsten"]
+      "treasures": ["Alien Fungi"]
     },
     {
       "pos": {"x": 110, "y": -1642},
@@ -4560,7 +4573,7 @@
       "style": "planet-hell-4",
       "trader": null,
       "enemy": null,
-      "treasures": ["Barium Ore", "Tungsten", "Sky Crystals"]
+      "treasures": ["Barium Ore"]
     },
     {
       "pos": {"x": 72, "y": -1881},
@@ -4576,7 +4589,7 @@
       "style": "asteroid-7",
       "trader": null,
       "enemy": null,
-      "treasures": ["Tungsten", "Platinum"]
+      "treasures": ["Alien Fossil", "Barium Ore", "Copper"]
     },
     {
       "pos": {"x": 243, "y": -2022},
@@ -4591,7 +4604,7 @@
       "name": "Outback A7769",
       "style": "asteroid-6",
       "trader": null,
-      "enemy": {"type": "Monitor Drone", "loot": ["Tungsten", "Platinum"]},
+      "enemy": {"type": "Monitor Drone", "loot": ["Mk0 Reactor"]},
       "treasures": ["Copper", "Barium Ore"]
     },
     {
@@ -4654,7 +4667,7 @@
       "pos": {"x": -230, "y": -1357},
       "name": "Joes",
       "style": "anomaly-hermit",
-      "trader": {"buy": 1.5, "sell": 0.75, "inventory": []},
+      "trader": null,
       "enemy": null,
       "treasures": []
     },
@@ -4853,7 +4866,10 @@
       "name": "A7544",
       "style": "asteroid-8",
       "trader": null,
-      "enemy": {"type": "Bandit Striker", "loot": ["Cutting Beam"]},
+      "enemy": {
+        "type": "Bandit Striker",
+        "loot": ["Lepton Shield", "Piercing Beam"]
+      },
       "treasures": []
     },
     {
@@ -4861,7 +4877,7 @@
       "name": "A9157",
       "style": "asteroid-1",
       "trader": null,
-      "enemy": {"type": "Bandit Striker", "loot": []},
+      "enemy": {"type": "Bandit Striker", "loot": ["Lepton Shield"]},
       "treasures": []
     },
     {
@@ -4878,7 +4894,7 @@
       "style": "asteroid-2",
       "trader": null,
       "enemy": null,
-      "treasures": ["Alien Artifact", "Platinum", "Barium Ore"]
+      "treasures": ["Barium Ore", "Alien Fungi"]
     },
     {
       "pos": {"x": -48, "y": -1300},
@@ -5100,7 +5116,16 @@
       "pos": {"x": -197, "y": -1423},
       "name": "Maxwell Station",
       "style": "anomaly-Maxwell_Station",
-      "trader": {"buy": 1.75, "sell": 0.75, "inventory": ["Autogun Mk2"]},
+      "trader": {
+        "buy": 1.75,
+        "sell": 0.75,
+        "inventory": [
+          "Autogun Mk2",
+          "Voltaic Pulse",
+          "Tungsten Armor",
+          "Buffer Inducer"
+        ]
+      },
       "enemy": null,
       "treasures": [],
       "shipyard": ["Sloop"]
@@ -5151,7 +5176,7 @@
       "style": "planet-s-rock-1",
       "trader": null,
       "enemy": null,
-      "treasures": ["Platinum"]
+      "treasures": ["Alien Fungi", "Barium"]
     },
     {
       "pos": {"x": -429, "y": -1487},
@@ -5670,21 +5695,21 @@
     },
     {
       "name": "Maxwell Station",
-      "xml": "<condition at-dest=\"Maxwell Station\"/>\n<dialog>As you approach a transmission is recieved from Maxwell Station.</dialog>\n<dialog ok=\"Thank you.\">_\"Welcome to Maxwell station, You have been approved landing pad Beta Twelve.\"_</dialog>\n\n<dialog>After a secure landing you enter the metallic humm of the hangar. You are approached my a service robot.</dialog>\n<give item=\"Maxwell Parking Ticket\"/>\n<dialog>_\"Greetings traveller and welcome to Maxwell Station. If you need a tour or assistance during your visit. Please let us know.\"_</dialog>\n\n<condition at-dest=\"Maxwell Station\" trigger=\"TOUR\" have-item=\"Maxwell Parking Ticket\"/>\n<dialog>_\"Here at Maxwell Station we strive to make your adventures throughout the Nebula as convenient as possible.\"_</dialog>\n<dialog>_\"At the Maxwell Trader you will find some of the best prices on goods from the whole galaxy with adequite garantees.\"_</dialog>\n<dialog>_\"The well known Captain Maxwell was the first to explore this whole nebula. And opened the doors to this open hangar over one hundred years ago. Here all beings are welcome to share tales and trade goods.\"_</dialog>\n<dialog>_\"Maxwell is currently head of developing the vortec technology which will greatly improve travel speeds within the nebula.\"_</dialog>\n<dialog>_\"Please enjoy your stay. If you need any further assistance. Please let us know.\"_</dialog>\n<take item=\"Maxwell Parking Ticket\"/>\n",
+      "xml": "<condition at-dest=\"Maxwell Station\"/>\n<dialog>As you approach a transmission is recieved from Maxwell Station.</dialog>\n<dialog ok=\"Thank you.\">_\"Welcome to Maxwell station, You have been approved landing pad Beta Twelve.\"_</dialog>\n\n<dialog>After a secure landing you enter the metallic humm of the hangar. You are approached my a service robot.</dialog>\n<give item=\"Maxwell Parking Ticket\"/>\n<dialog>_\"Greetings traveller and welcome to Maxwell Station. If you need a tour or assistance during your visit. Please let us know.\"_</dialog>\n\n<condition at-dest=\"Maxwell Station\" trigger=\"TAKE TOUR\" have-item=\"Maxwell Parking Ticket\"/>\n<dialog>_\"Here at Maxwell Station we strive to make your adventures throughout the Nebula as convenient as possible.\"_</dialog>\n<dialog>_\"At the Maxwell Trader you will find some of the best prices on goods from the whole galaxy with adequite garantees.\"_</dialog>\n<dialog>_\"The well known Captain Maxwell was the first to explore this whole nebula. And opened the doors to this open hangar over one hundred years ago. Here all beings are welcome to share tales and trade goods.\"_</dialog>\n<dialog>_\"Maxwell is currently head of developing the vortec technology which will greatly improve travel speeds within the nebula.\"_</dialog>\n<dialog>_\"Please enjoy your stay. If you need any further assistance. Please let us know.\"_</dialog>\n<take item=\"Maxwell Parking Ticket\"/>\n",
       "color": "0f0",
       "icon": "square",
       "tags": "qdn"
     },
     {
       "name": "Joes",
-      "xml": "<condition at-dest=\"Joes\"/>\n\n<dialog ok=\"SMACKYS!\" cancel=\"no thanks\">\"The glare off the neon sign spelling 'JOES BAR' leaves a good impression on your eyes as you hover the landing pads at Joes.\"</dialog>\n<dialog ok=\"Who?\" cancel=\"What?\">_\"How are yez!?\"_ Calls a man as he wobbles to your ship.</dialog>\n<dialog>The man gives the ship a hug and turnes toward you, still holding onto the ship as not to fall on his nose, clearly drunk.</dialog>\n<dialog ok=\"I got it in this condition\">_\"I've been lookin' round for yeh for six months! yeh're a Wreck. Ye arn't lookin' after her. \"_</dialog>\n<dialog ok=\"Really?\">_\"This was my vessel see. Don't worry. It's just a wee lovely to see her after so many years.\"_</dialog>\n<dialog>_\"Aye. Say you don't want to get a Autogun Mk3 for a deal, I got one but i need liqur badly.\"_</dialog>\n<dialog>_\"Aint got nothin good in these Parts. Have ta go to Brandons to get anything good.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Brandons\" />\n\n\n<condition at-dest=\"Brandons\" trigger=\"ENTER\" have-credits=\"10\" />\n<dialog ok=\"Something to drink please\" cancel=\"Nothing im heading out\">This bar has damp lightning and is quiet, most guests are playing pool further in. You go up to the bartender.\n_\"What can I get you this fine eveninin' sir?\"_</dialog>\n<dialog>The bartender pours a beer and you ask for Brandons liqour.</dialog>\n<dialog>_\"We are all out of that feller, Brandons is the darndest best liqour out there, but they have stopped deliverin.\"_</dialog>\n<dialog>_\"I can't tell ye why, but i think the is somethin fishy going on. The distillery is only a couple of jumps from here.\"_</dialog>\n\n<give item=\"Joes Coaster\"/>\n<take credits=\"10\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Brandons\" />\n\n\n<condition have-item=\"Joes Coaster\" at-dest=\"Brandons\" />\n  \n<dialog>You navigate around space junk that is orbiting the distillery, there is no activity to be seen</dialog>\n  \n<dialog>A broken door lets you inside a part of the distillery where there are some broken bottles. Someone leem to have left in a hurry.</dialog>\n\n<dialog ok=\"This is what he wanted\" cancel=\"Put it down\">You find a unbroken bottle of Brandons Single Malt!</dialog>\n<dialog>You go to your ship and take off.</dialog>\n<give item=\"Brandons Whiskey\"/>\n\n\n<condition have-item=\"Brandons Whiskey\" at-dest=\"Joes\" trigger=\"Mr. BRANDON\"/>\n<dialog ok=\"Do you have The Mk3?\" cancel=\"Not Yet.\">_\"Can't believe ye'r back, wha? Ye found any liquor yet?\"_</dialog>\n\n<dialog>_\"Aw, c'mon, ofcourse. I have it in a garage downere\"_ He takes the bottle out of your hand and sips it.</dialog>\n<take item=\"Brandons Whiskey\"/>\n<dialog>_\"Here we're, good as new. Now for yeh this might be a high quality automatic machinegun...\"_</dialog>\n<dialog ok=\"Not what we agreed\" cancel=\"You are changing the deal\">_\"For me, it's an investment. I'm going to have ye ta help me with another thing.\"_</dialog>\n<dialog>_\"Houl' on. Ye see I'm mr. Brandon\"_\nHe says and pulls down his hood. One if his eyes,replaced with a cyborg techpiece.</dialog>\n<dialog>_\"Those fuckers have shut down me distillery. ey mean this is bollicks, ey can't even collect me stock that're still down there.\"_</dialog>\n<dialog>_\"Look, I'm really thankful allright. But I need ye to install this gun and use it on the dron's outside my disillery.\"_</dialog>\n<dialog>_\"Then ill get me stock back, And ye keep the gun.\"_</dialog>\n<mark-on-map dest=\"Brandons Buoy\" />\n<give item=\"Autogun Mk3\"/>\n<place-enemy dest=\"Brandons Buoy\" enemy=\"Security Drone\" loot=\"Shield Battery\"/>\n<place-enemy dest=\"Brandons\" enemy=\"Rocket Drone\" loot=\"\"/>\n\n<condition at-dest=\"Brandons Buoy\"/>\n<dialog>You are in an authorized area! Leave immediately!</dialog>\n\n<remove-map-marker/>\n\n<condition at-dest=\"Brandons\" no-enemy-at-dest=\"Brandons\"/>\n<dialog>No more drones in sight.</dialog>\n\n<remove-map-marker/>\n<give credits=\"400\"/>\n\n\n\n\n",
+      "xml": "<condition at-dest=\"Joes\"/>\n\n<dialog ok=\"SMACKY'S!\" cancel=\"no thanks\">\"The glare off the neon sign spelling 'JOE'S BAR' leaves a good impression on your eyes as you hover the landing pads at Joes.\"</dialog>\n<dialog ok=\"Who?\" cancel=\"What?\">_\"How are yez!?\"_ Calls a man as he wobbles to your ship.</dialog>\n<dialog>The man gives the ship a hug and turnes toward you, still holding onto the ship as not to fall on his nose, clearly drunk.</dialog>\n<dialog ok=\"I got it in this condition\">_\"I've been lookin' round for yeh for six months! yeh're a Wreck. Ye arn't lookin' after her. \"_</dialog>\n<dialog ok=\"Really?\">_\"This was my vessel see. Don't worry. It's just a wee lovely to see her after so many years.\"_</dialog>\n<dialog>_\"Aye. Say you don't want to get a Autogun Mk3 for a deal, I got one but i need liqur badly.\"_</dialog>\n<dialog>_\"Aint got nothin good in these parts. Have ta go to Brandon's to get anything good.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Brandons\" />\n\n\n<condition at-dest=\"Brandons\" trigger=\"ENTER SMACKY'S\" have-credits=\"10\" />\n<dialog ok=\"Something to drink please\" cancel=\"Nothing im heading out\">This bar has damp lightning and is quiet, most guests are playing pool further in. You go up to the bartender.\n_\"What can I get you this fine eveninin' sir?\"_</dialog>\n<dialog>The bartender pours a beer and you ask for Brandons liqour.</dialog>\n<dialog>_\"We are all out of that feller, Brandon's is the darndest best liqour out there, but they have stopped deliverin.\"_</dialog>\n<dialog>_\"I can't tell ye why, but i think the is somethin fishy going on. The distillery is only a couple of jumps from here.\"_</dialog>\n\n<give item=\"Joes Coaster\"/>\n<take credits=\"10\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Brandons\" />\n\n\n<condition have-item=\"Joes Coaster\" at-dest=\"Brandons\" />\n  \n<dialog>You navigate around space junk that is orbiting the distillery, there is no activity to be seen</dialog>\n  \n<dialog>A broken door lets you inside a part of the distillery where there are some broken bottles. Someone leem to have left in a hurry.</dialog>\n\n<dialog ok=\"This is what he wanted\" cancel=\"Put it down\">You find a unbroken bottle of Brandons Single Malt!</dialog>\n<dialog>You go to your ship and take off.</dialog>\n<give item=\"Brandons Whiskey\"/>\n\n\n<condition have-item=\"Brandons Whiskey\" at-dest=\"Joes\" trigger=\"TALK TO DRUNKARD\"/>\n<dialog ok=\"Do you have The Mk3?\" cancel=\"Not Yet.\">_\"Can't believe ye'r back, wha? Ye found any liquor yet?\"_</dialog>\n\n<dialog>_\"Aw, c'mon, ofcourse. I have it in a garage downere\"_ He takes the bottle out of your hand and sips it.</dialog>\n<take item=\"Brandons Whiskey\"/>\n<dialog>_\"Here we're, good as new. Now for yeh this might be a high quality automatic machinegun...\"_</dialog>\n<dialog ok=\"Not what we agreed\" cancel=\"You are changing the deal\">_\"For me, it's an investment. I'm going to have ye ta help me with another thing.\"_</dialog>\n<dialog>_\"Houl' on. Ye see I'm Mr. Brandon\"_\nHe says and pulls down his hood. One if his eyes,replaced with a cyborg techpiece.</dialog>\n<dialog>_\"Those fuckers have shut down me distillery. ey mean this is bollicks, ey can't even collect me stock that're still down there.\"_</dialog>\n<dialog>_\"Look, I'm really thankful allright. But I need ye to install this gun and use it on the dron's outside my disillery.\"_</dialog>\n<dialog>_\"Then ill get me stock back, And ye keep the gun.\"_</dialog>\n<mark-on-map dest=\"Brandons Buoy\" />\n<give item=\"Autogun Mk3\"/>\n<place-enemy dest=\"Brandons Buoy\" enemy=\"Security Drone\" loot=\"Shield Battery\"/>\n<place-enemy dest=\"Brandons\" enemy=\"Rocket Drone\" loot=\"\"/>\n\n<condition at-dest=\"Brandons Buoy\"/>\n<dialog>You are in an authorized area! Leave immediately!</dialog>\n\n<remove-map-marker/>\n\n<condition at-dest=\"Brandons\" no-enemy-at-dest=\"Brandons\"/>\n<dialog>No more drones in sight.</dialog>\n\n<remove-map-marker/>\n<give credits=\"400\"/>\n\n\n\n\n",
       "color": "0f0",
       "icon": "square",
       "tags": "qdn"
     },
     {
       "name": "SS Thunder in Distress",
-      "xml": "\n<condition state=\"space\" at-dest=\"Outback A089\" no-enemy-at-dest=\"Outback A089\" />\n<dialog model=\"Broken Sloop\">_\"Mayday, Mayday, Mayday. This is SS Thunder. We are badly damaged and leaking air. 2 jumps west of Outback A089. Two souls on board.\"_</dialog>\n<dialog>A distress call.\n\nA ship, the SS Thunder, need help.</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ship in distress\" />\n<condition state=\"surface\" at-dest=\"Ship in distress\" trigger=\"SAVE CREW\"/>\n<give item=\"Crew of SS Thunder\"/>\n<dialog>_\"Thank you! We lost our pilot and would surely have died if not for you.\n\nWe need to get to *Mirror Moon* at Pavonis. Can you take us there?\"_</dialog>\n<mark-on-map dest=\"Mirror Moon\" />\n<condition at-dest=\"A6114\"/>\n<dialog>The crew from SS Thunder want your attention.\n_\"Hey, Captain. No need to inform the police. A lot of hassle.\nJust go south to *Mirror Moon* and we will be off your back.\"_</dialog>\n<condition not-have-item=\"Crew of SS Thunder\"/>",
+      "xml": "\n<condition state=\"space\" at-dest=\"Outback A089\" no-enemy-at-dest=\"Outback A089\" />\n<dialog model=\"Broken Sloop\">_\"Mayday, Mayday, Mayday. This is SS Thunder. We are badly damaged and leaking air. 2 jumps west of Outback A089. Two souls on board.\"_</dialog>\n<dialog>A distress call.\n\nA ship, the SS Thunder, need help.</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ship in distress\" />\n<condition state=\"surface\" at-dest=\"Ship in distress\" trigger=\"SAVE CREW\"/>\n<give item=\"Crew of SS Thunder\"/>\n<dialog>_\"Thank you! We lost our pilot and would surely have died if not for you.\n\nWe need to get to *Mirror Moon* at Pavonis. Can you take us there?\"_</dialog>\n<mark-on-map dest=\"Mirror Moon\" />\n<condition at-dest=\"A6114\"/>\n<dialog>The crew from SS Thunder knock on the cockpit bulkhead.\n_\"Hey, Captain. No need to inform the police. A lot of hassle.\nJust go south to *Mirror Moon* and let us off.\"_</dialog>\n<condition not-have-item=\"Crew of SS Thunder\"/>",
       "tags": "outback",
       "color": "f88",
       "icon": ""
@@ -5696,7 +5721,7 @@
     },
     {
       "name": "Investigate the SS Thunder",
-      "xml": "<condition at-dest=\"Pavonis Police\" have-item=\"Crew of SS Thunder\"/>\n<dialog model=\"Tiendong Station\" ok=\"YES I HAVE\" cancel=\"NOT A THING\">As you approach the police station they hail you.\n_\"Citizen, we are looking for any information as to the whereabouts of the SS Thunder. Have you seen anything.\"_</dialog>\n\n<condition have-item=\"Crew of SS Thunder\" at-dest=\"Pavonis Police\" trigger=\"TURN IN CREW\"/>\n<take item=\"Crew of SS Thunder\" />\n<dialog model=\"Tiendong Station\">The officers look astonished as you present them with the crew of the SS Thunder.\n\n_\"Wow, this was more than we hoped for!\"_</dialog>\n<dialog model=\"Tiendong Station\">_\"But to tell the truth we don't actually know what they have done.\n\nThey won't say a thing to us but we have seen a string of suspicious activity coinciding with the SS Thunders path across the sector.\"_</dialog>\n<dialog model=\"Tiendong Station\" ok=\"OK\" cancel=\"NOT RIGHT NOW\">_\"If we come storming in asking questions we won't get any answers. But a private investigator however...\n\nAre you up for some undercover work?.\"_</dialog>\n<dialog model=\"Tiendong Station\">_\"Investigate what happened to their ship. Any physical evidence that you can find. Someone at the nearby station - the *Black Stump* - must have seen something.\n\nAsk around.\"_</dialog>\n<give credits=\"100\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ship in distress\" />\n<place-item dest=\"Ship in distress\" item=\"Flight log\"/>\n\n<condition have-item=\"Flight log\" />\n<mark-on-map dest=\"Black Stump\" />\n\n<condition state=\"surface\" at-dest=\"Black Stump\" trigger=\"ASK QUESTIONS\"/>\n<dialog model=\"Hermit Home\">You snoop around the station. The deckmen say the crew of the Thunder were really interested in the station's drones.</dialog>\n<dialog>The Flight log say that they visited every destination that had a problem with a malfunctioning drone. They probably caused this whole mess.</dialog>\n<mark-on-map dest=\"Pavonis Police\" />\n\n<condition state=\"surface\" at-dest=\"Pavonis Police\" trigger=\"GIVE INFO\"/>\n<dialog model=\"Tiendong Station\">_\"Drone manipulation? That figures. We started digging into their backstories. They are agents trying to destabilize Pavonis. With the evidence you got we have a solid case.\"_</dialog>\n<dialog model=\"Tiendong Station\">_\"Here is a state mandated reward for your work. Thank you and safe travels.\"_</dialog>\n<give credits=\"1000\"/>",
+      "xml": "<condition at-dest=\"Pavonis Police\" have-item=\"Crew of SS Thunder\"/>\n<dialog model=\"Tiendong Station\" ok=\"YES I HAVE\" cancel=\"NOT A THING\">As you approach the police station they hail you.\n_\"Citizen, we are looking for any information as to the whereabouts of the SS Thunder. Have you seen anything.\"_</dialog>\n\n<condition have-item=\"Crew of SS Thunder\" at-dest=\"Pavonis Police\" trigger=\"TURN IN CREW\"/>\n<take item=\"Crew of SS Thunder\" />\n<dialog model=\"Tiendong Station\">The officers look astonished as you present them with the crew of the SS Thunder.\n\n_\"Wow, this was more than we hoped for!\"_</dialog>\n<dialog model=\"Tiendong Station\">_\"But to tell the truth we don't actually know what they have done.\n\nThey won't say a thing to us but we have seen a string of suspicious activity coinciding with the SS Thunder's path across the sector.\"_</dialog>\n<dialog model=\"Tiendong Station\" ok=\"OK\" cancel=\"NOT RIGHT NOW\">_\"If we come storming in asking questions we won't get any answers. But a private investigator however...\n\nAre you up for some undercover work?.\"_</dialog>\n<dialog model=\"Tiendong Station\">_\"Investigate what happened to their ship. Any physical evidence that you can find. Someone at the nearby station - the *Black Stump* - must have seen something.\n\nAsk around.\"_</dialog>\n<give credits=\"100\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ship in distress\" />\n<place-item dest=\"Ship in distress\" item=\"Flight log\"/>\n\n<condition have-item=\"Flight log\" />\n<mark-on-map dest=\"Black Stump\" />\n\n<condition state=\"surface\" at-dest=\"Black Stump\" trigger=\"ASK QUESTIONS\"/>\n<dialog model=\"Hermit Home\">You snoop around the station. The deckmen say the crew of the Thunder were really interested in the station's drones.</dialog>\n<dialog>The Flight log say that they visited every destination that had a problem with a malfunctioning drone. They probably caused this whole mess.</dialog>\n<mark-on-map dest=\"Pavonis Police\" />\n\n<condition state=\"surface\" at-dest=\"Pavonis Police\" trigger=\"GIVE INFO\"/>\n<dialog model=\"Tiendong Station\">_\"Drone manipulation? That figures. We started digging into their backstories. They are agents trying to destabilize Pavonis. With the evidence you got we have a solid case.\"_</dialog>\n<dialog model=\"Tiendong Station\">_\"Here is a state mandated reward for your work. Thank you and safe travels.\"_</dialog>\n<give credits=\"1000\"/>",
       "tags": "outback",
       "color": "4ef",
       "icon": "square"
@@ -5710,7 +5735,7 @@
     },
     {
       "name": "Bandits in The Bush",
-      "xml": "\n<condition at-dest=\"Black Stump\"/>\n<dialog model=\"Hermit Home\">Black Stump station, you have heard of the place. Rough.\nYou listen in on their radio chatter.</dialog>\n<dialog model=\"Hermit Home\">_\"... best booty in town. Say, did you hear about the SS Thunder that passed through here. They got into some trouble. They told us they were tourists but if you ask me there was something fishy with their setup...\"_</dialog>\n\n<condition at-dest=\"Black Stump\" trigger=\"HAIL\"/>\n<dialog model=\"Hermit Home\">_\"Hey traveller! Welcome to Black Stump station. We have some problems with Bandits out here in The Bush right now. We can help you stock up on good equipment so they don't hassle you.\"_</dialog>\n<dialog model=\"Hermit Home\" ok=\"YES\" cancel=\"NOT NOW\">_\"If you are short on cash the outpost on *Spruce* always pay good money for *Supplies*. Would you like to make a supply run?\"_</dialog>\n<add-to-quest-list/>\n<give item=\"Supplies\"/>\n<mark-on-map dest=\"Spruce\" />\n\n<condition have-item=\"Supplies\" at-dest=\"Spruce\" />\n<dialog ok=\"SELL\" cancel=\"LEAVE\">The small outpost on the surface of the planet hail you. Asking if you have supplies they can buy.</dialog>\n<take item=\"Supplies\"/>\n<give credits=\"200\"/>\n<mark-on-map dest=\"Black Stump\" />\n\n<condition at-dest=\"Black Stump\"/>\n<dialog model=\"Hermit Home\">_\"Good work with the supply run. A bit dangerous out there now with all the Bandits.\"_</dialog>\n<dialog model=\"Hermit Home\" ok=\"YES\" cancel=\"NOT NOW\">_\"One of those bandits took out a transport headed here. It crashed on Pine, we are interested in any Supplies that might have survived. Can you help us?\"_</dialog>\n<mark-on-map dest=\"Pine\" />\n<place-item dest=\"Pine\" item=\"Supplies\"/>\n\n<condition have-item=\"Supplies\"/>\n<mark-on-map dest=\"Black Stump\" />\n\n<condition at-dest=\"Black Stump\" have-item=\"Supplies\" trigger=\"GIVE SUPPLIES\"/>\n<take item=\"Supplies\"/>\n<give credits=\"200\"/>\n<dialog model=\"Hermit Home\">_\"Excellent! These supplies are sorely needed out here in The Bush.\"_</dialog>\n<dialog model=\"Hermit Home\">_\"If you want to take on the Bandits to the south you are going to need a better ship. Our *SHIPYARD* can help you.\"_</dialog>\n",
+      "xml": "\n<condition at-dest=\"Black Stump\"/>\n<dialog model=\"Hermit Home\">Black Stump station, you have heard of the place. Rough.\nYou listen in on their radio chatter.</dialog>\n<dialog model=\"Hermit Home\">_\"... best booty in town. Say, did you hear about the SS Thunder that passed through here. They got into some trouble. They told us they were tourists but if you ask me there was something fishy with their setup...\"_</dialog>\n\n<condition at-dest=\"Black Stump\" trigger=\"HAIL STATION\"/>\n<dialog model=\"Hermit Home\">_\"Hey traveller! Welcome to Black Stump station. We have some problems with Bandits out here in The Bush right now. We can help you stock up on good equipment so they don't hassle you.\"_</dialog>\n<dialog model=\"Hermit Home\" ok=\"YES\" cancel=\"NOT NOW\">_\"If you are short on cash the outpost on *Spruce* always pay good money for *Supplies*. Would you like to make a supply run?\"_</dialog>\n<add-to-quest-list/>\n<give item=\"Supplies\"/>\n<mark-on-map dest=\"Spruce\" />\n\n<condition have-item=\"Supplies\" at-dest=\"Spruce\" />\n<dialog ok=\"SELL\" cancel=\"LEAVE\">The small outpost on the surface of the planet hail you. Asking if you have supplies they can buy.</dialog>\n<take item=\"Supplies\"/>\n<give credits=\"200\"/>\n<mark-on-map dest=\"Black Stump\" />\n\n<condition at-dest=\"Black Stump\"/>\n<dialog model=\"Hermit Home\">_\"Good work with the supply run. A bit dangerous out there now with all the Bandits.\"_</dialog>\n<dialog model=\"Hermit Home\" ok=\"YES\" cancel=\"NOT NOW\">_\"One of those bandits took out a transport headed here. It crashed on Pine, we are interested in any Supplies that might have survived. Can you help us?\"_</dialog>\n<mark-on-map dest=\"Pine\" />\n<place-item dest=\"Pine\" item=\"Supplies\"/>\n\n<condition have-item=\"Supplies\"/>\n<mark-on-map dest=\"Black Stump\" />\n\n<condition at-dest=\"Black Stump\" have-item=\"Supplies\" trigger=\"GIVE SUPPLIES\"/>\n<take item=\"Supplies\"/>\n<give credits=\"200\"/>\n<dialog model=\"Hermit Home\">_\"Excellent! These supplies are sorely needed out here in The Bush.\"_</dialog>\n<dialog model=\"Hermit Home\">_\"If you want to take on the Bandits to the south you are going to need a better ship. Our *SHIPYARD* can help you.\"_</dialog>\n",
       "tags": "outback",
       "color": "ff0",
       "icon": "rhomb"
@@ -5724,21 +5749,21 @@
     },
     {
       "name": "Larato Gate",
-      "xml": "<condition at-dest=\"Larato Node\" have-item=\"Larato sigil\" />\n<mark-on-map dest=\"Larato Node\" />\n<condition at-dest=\"Larato Node\" have-item=\"Larato sigil\" trigger=\"ACTIVATE\" />\n<dialog model=\"Larato Gate\" ok=\"ENTER GATE\" cancel=\"LEAVE\">\nThe misty dark cloud in the aperture swirls.\n</dialog>\n<travel dest=\"Larato Gate\"/>\n<goto jump=\"-3\"/>",
+      "xml": "<condition at-dest=\"Larato Node\" have-item=\"Larato sigil\" />\n<mark-on-map dest=\"Larato Node\" />\n<condition at-dest=\"Larato Node\" have-item=\"Larato sigil\" trigger=\"ACTIVATE PORTAL\" />\n<dialog model=\"Larato Gate\" ok=\"ENTER GATE\" cancel=\"LEAVE\">\nThe misty dark cloud in the aperture swirls.\n</dialog>\n<travel dest=\"Larato Gate\"/>\n<goto jump=\"-3\"/>",
       "tags": "pavonis",
       "color": "0ff",
       "icon": "enter"
     },
     {
       "name": "Larato Node",
-      "xml": "<condition at-dest=\"Larato Gate\" have-item=\"Larato sigil\" />\n<mark-on-map dest=\"Larato Gate\" />\n<condition at-dest=\"Larato Gate\" have-item=\"Larato sigil\" trigger=\"ANALYZE\"/>\n<dialog model=\"Larato Gate\" ok=\"APPROACH\" cancel=\"IGNORE\">\nThe Larato Gate is a ring of dirty stone needles. The Larato Sigil in your inventory is humming.\nShould you approach?\n</dialog>\n<dialog model=\"Larato Gate\">\nThe gate's mass of needles swells and twitches. The aperture shimmers and turns into a misty black cloud.\n</dialog>\n<condition at-dest=\"Larato Gate\" trigger=\"ACTIVATE\"/>\n<dialog model=\"Larato Gate\" ok=\"ENTER GATE\" cancel=\"LEAVE\">\nThe misty dark cloud in the aperture swirls.\n</dialog>\n<travel dest=\"Larato Node\"/>\n<goto jump=\"-3\"/>",
+      "xml": "<condition at-dest=\"Larato Gate\" have-item=\"Larato sigil\" />\n<mark-on-map dest=\"Larato Gate\" />\n<condition at-dest=\"Larato Gate\" have-item=\"Larato sigil\" trigger=\"ANALYZE\"/>\n<dialog model=\"Larato Gate\" ok=\"APPROACH\" cancel=\"IGNORE\">\nThe Larato Gate is a ring of dirty stone needles. The Larato Sigil in your inventory is humming.\nShould you approach?\n</dialog>\n<dialog model=\"Larato Gate\">\nThe gate's mass of needles swells and twitches. The aperture shimmers and turns into a misty black cloud.\n</dialog>\n<condition at-dest=\"Larato Gate\" trigger=\"ACTIVATE PORTAL\"/>\n<dialog model=\"Larato Gate\" ok=\"ENTER GATE\" cancel=\"LEAVE\">\nThe misty dark cloud in the aperture swirls.\n</dialog>\n<travel dest=\"Larato Node\"/>\n<goto jump=\"-3\"/>",
       "tags": "",
       "color": "0ff",
       "icon": "exit"
     },
     {
       "name": "Blue seeds",
-      "xml": "<place-item dest=\"Blue Forest\" item=\"Blue seeds\"/>\n<condition have-item=\"Blue seeds\"/>\n<dialog model=\"Seeds\">These Blue Seeds might take root in the right soil.</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Blue Ocean\" state=\"surface\" trigger=\"PLANT SEEDS\"/>\n<dialog model=\"Seeds\">You plant the Blue Seeds on a lonely island.</dialog>\n<condition at-dest=\"Blue Ocean\" state=\"surface\" trigger=\"GATHER FLOWERS\"/>\n<dialog model=\"Flowers\">You gather the Blue Flowers that sprung out of the planted seeds.</dialog>\n<give item=\"Blue flowers\"/>\n<condition at-dest=\"Buoy 187\" />\n<dialog model=\"Flowers\">The flowers fill the cabin with a fragrant smell. Soothing.\nBut suddenly you grow dizzy, intoxicated. Your vision blurs as your work the ships controls in a stupor. _Darkness!_</dialog>\n<travel dest=\"Anomaly 2050\"/>\n<condition at-dest=\"Anomaly 2050\" />\n<dialog model=\"Junk\">You wake up. _Horror!_ While drugged you must have overridden the safeties and made an unguided jump. Extremely dangerous. The ship got an emergency lock on some nearby debris and exited the jump.</dialog>\n<condition at-dest=\"Som Thia\" trigger=\"QUEST\" />\n<dialog model=\"Alien Buoy\">In orbit around the planet you find ancient relics. They seem to contain jump coordinates. With them you might dare to make another far jump back from this dead end.</dialog>\n<dialog>With the *Soma Jump Coords* you should now be able to make Long Jumps between *Buoy 187* and *Anomaly 2050*.</dialog>\n<give item=\"Soma Jump Coords\" />\n<mark-on-map dest=\"Anomaly 2050\" />\n<condition at-dest=\"Anomaly 2050\" have-item=\"Soma Jump Coords\" />",
+      "xml": "<place-item dest=\"Blue Forest\" item=\"Blue seeds\"/>\n<condition have-item=\"Blue seeds\"/>\n<dialog model=\"Seeds\">These Blue Seeds might take root in the right soil.</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Blue Ocean\" state=\"surface\" trigger=\"PLANT SEEDS\"/>\n<dialog model=\"Seeds\">You plant the Blue Seeds on a lonely island.</dialog>\n<condition at-dest=\"Blue Ocean\" state=\"surface\" trigger=\"GATHER FLOWERS\"/>\n<dialog model=\"Flowers\">You gather the Blue Flowers that sprung out of the planted seeds.</dialog>\n<give item=\"Blue flowers\"/>\n<condition at-dest=\"Buoy 187\" />\n<dialog model=\"Flowers\">The flowers fill the cabin with a fragrant smell. Soothing.\nBut suddenly you grow dizzy, intoxicated. Your vision blurs as your work the ships controls in a stupor. _Darkness!_</dialog>\n<travel dest=\"Anomaly 2050\"/>\n<condition at-dest=\"Anomaly 2050\" />\n<dialog model=\"Junk\">You wake up. _Horror!_ While drugged you must have overridden the safeties and made an unguided jump. Extremely dangerous. The ship got an emergency lock on some nearby debris and exited the jump.</dialog>\n<condition at-dest=\"Som Thia\" trigger=\"INVESTIGATE\" />\n<dialog model=\"Alien Buoy\">In orbit around the planet you find ancient relics. They seem to contain jump coordinates. With them you might dare to make another far jump back from this dead end.</dialog>\n<dialog>With the *Soma Jump Coords* you should now be able to make Long Jumps between *Buoy 187* and *Anomaly 2050*.</dialog>\n<give item=\"Soma Jump Coords\" />\n<mark-on-map dest=\"Anomaly 2050\" />\n<condition at-dest=\"Anomaly 2050\" have-item=\"Soma Jump Coords\" />",
       "tags": "outback soma",
       "color": "39f",
       "icon": "arrow"
@@ -5752,14 +5777,14 @@
     },
     {
       "name": "First Contact",
-      "xml": "\n<condition at-dest=\"Alien Reception\" />\n<dialog>The star ahead of you is Beryl Canis. The home of the Soma. A star that no one has visited, they Soma block all jump paths to their home.</dialog>\n<dialog model=\"Alien Meetup\">Around the alien buoy a Soma ship is parked. It does not attack you, perhaps you can approach and try to hail it.</dialog>\n\n<condition state=\"surface\" at-dest=\"Alien Reception\" trigger=\"HAIL\"/>\n<dialog model=\"Alien Meetup\">_\"Visitor. Starfarer! Many Soma are suspicious. And some are welcoming. Visitors should be careful.\"_</dialog>\n<dialog model=\"Alien Meetup\">_\"You have dealt with the Blue Seeds and Flowers. Be very careful with those. Bring us *Blue Seeds* from the asteroids to the south and we will vouch for you.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"A9725\" />\n<place-item dest=\"A9725\" item=\"Blue seeds\" />\n\n<condition have-item=\"Blue seeds\" at-dest=\"A9725\"/>\n<mark-on-map dest=\"Alien Reception\" />\n\n<condition state=\"surface\" have-item=\"Blue seeds\" at-dest=\"Alien Reception\" trigger=\"GIVE SEEDS\"/>\n<dialog model=\"Alien Meetup\">_\"The Soma is grateful. The blue flowers grow and multiply. A cycle. But if a flower is nurtured by us, it will branch that cycle and spawn a Soma.\"_</dialog>\n<dialog>_\"Go to our home world. We will spread the word our friendship. Some will distrust you, but many more will welcome you.\"_</dialog>\n<mark-on-map dest=\"Soma\" />\n\n<condition state=\"space\" at-dest=\"Soma\" trigger=\"HAIL\"/>\n<dialog>You send a message toward the planet. The supposed home world of the Soma.\nUp until now you almost doubted the stories of their race, and now you are the first human to visit this system.</dialog>\n<dialog>_\"Starfarer. We hear you are a friend.\nWe propose an exchange, a trade as you call it. Go to *Beryl Canis Lookout* and gather the *Essence*.\"_</dialog>\n<dialog>Up until now the communicatio with these aliens have been surprisingly smooth. But now you feel confused.</dialog>\n<mark-on-map dest=\"Beryl Canis Lookout\" />\n<place-item dest=\"Beryl Canis Lookout\" item=\"Soma Essence\"/>\n\n<condition have-item=\"Soma Essence\" />\n<dialog>The \"Essence\" is apparently some sort of data storage. Maybe. You are not sure. Now back to *Soma* to *Land* and hand it over.</dialog>\n<mark-on-map dest=\"Soma\" />\n\n<condition state=\"surface\" have-item=\"Soma Essence\" at-dest=\"Soma\" trigger=\"GIVE ESSENCE\"/>\n<dialog>The \"Essence\" is apparently some sort of data storage. Maybe. You are not sure. Now back to *Soma* to *Land* and hand it over.</dialog>\n<dialog>Hesitantly a small drone approach you. It accepts the Essence and hurries away. The Soma are shy. You hear nothing on the radio. Confused you go back to the ship.</dialog>\n<dialog>In the cargo hold a new item sits. How they managed to deliver it is a mystery. One that you don't intend to investigate.</dialog>\n<give item=\"Aegis Inducer\"/>\n\n\n\n\n",
+      "xml": "\n<condition at-dest=\"Alien Reception\" />\n<dialog>The star ahead of you is Beryl Canis. The home of the Soma. A star that no one has visited, they Soma block all jump paths to their home.</dialog>\n<dialog model=\"Alien Meetup\">Around the alien buoy a Soma ship is parked. It does not attack you, perhaps you can approach and try to hail it.</dialog>\n\n<condition state=\"surface\" at-dest=\"Alien Reception\" trigger=\"HAIL ALIENS\"/>\n<dialog model=\"Alien Meetup\">_\"Visitor. Starfarer! Many Soma are suspicious. And some are welcoming. Visitors should be careful.\"_</dialog>\n<dialog model=\"Alien Meetup\">_\"You have dealt with the Blue Seeds and Flowers. Be very careful with those. Bring us *Blue Seeds* from the asteroids to the south and we will vouch for you.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"A9725\" />\n<place-item dest=\"A9725\" item=\"Blue seeds\" />\n\n<condition have-item=\"Blue seeds\" at-dest=\"A9725\"/>\n<mark-on-map dest=\"Alien Reception\" />\n\n<condition state=\"surface\" have-item=\"Blue seeds\" at-dest=\"Alien Reception\" trigger=\"GIVE SEEDS\"/>\n<dialog model=\"Alien Meetup\">_\"The Soma is grateful. The blue flowers grow and multiply. A cycle. But if a flower is nurtured by us, it will branch that cycle and spawn a Soma.\"_</dialog>\n<dialog>_\"Go to our home world. We will spread the word our friendship. Some will distrust you, but many more will welcome you.\"_</dialog>\n<mark-on-map dest=\"Soma\" />\n\n<condition state=\"space\" at-dest=\"Soma\" trigger=\"HAIL\"/>\n<dialog>You send a message toward the planet. The supposed home world of the Soma.\nUp until now you almost doubted the stories of their race, and now you are the first human to visit this system.</dialog>\n<dialog>_\"Starfarer. We hear you are a friend.\nWe propose an exchange, a trade as you call it. Go to *Beryl Canis Lookout* and gather the *Essence*.\"_</dialog>\n<dialog>Up until now the communicatio with these aliens have been surprisingly smooth. But now you feel confused.</dialog>\n<mark-on-map dest=\"Beryl Canis Lookout\" />\n<place-item dest=\"Beryl Canis Lookout\" item=\"Soma Essence\"/>\n\n<condition have-item=\"Soma Essence\" />\n<dialog>The \"Essence\" is apparently some sort of data storage. Maybe. You are not sure. Now back to *Soma* to *land* and hand it over.</dialog>\n<mark-on-map dest=\"Soma\" />\n\n<condition state=\"surface\" have-item=\"Soma Essence\" at-dest=\"Soma\" trigger=\"GIVE ESSENCE\"/>\n<dialog>Hesitantly a small drone approach you. It accepts the Essence and hurries away. The Soma are shy. You hear nothing on the radio. Confused you go back to the ship.</dialog>\n<dialog>In the cargo hold a new item sits. How they managed to deliver it is a mystery. One that you don't intend to investigate.</dialog>\n<give item=\"Aegis Inducer\"/>\n\n\n\n\n",
       "tags": "soma",
       "color": "8f0",
       "icon": "rhomb"
     },
     {
       "name": "Milking Whales",
-      "xml": "<condition at-dest=\"Som Phtia\" trigger=\"HAIL\"/>\n<dialog>_\"We Soma have worshipped the Cosmic Whales for generations. But we cannot approach them. A visitor however can. Be a friend of Soma and find the elusive *Cosmic Whales*. Find them and bring us their milk.\"_</dialog>\n<add-to-quest-list/>\n<condition state=\"surface\" at-dest=\"Cosmic Whales\" trigger=\"MILK\"/>\n<dialog model=\"Cosmic Whales\">The graceful creatures excrete a white liquid that form a glittering trail in space. Probably nothing to do with milk but you collect it anyway.</dialog>\n<mark-on-map dest=\"Som Phtia\" />\n<condition at-dest=\"Som Phtia\" trigger=\"GIVE MILK\"/>\n<dialog>_\"This milk is surely a prize. The visitor is truly a friend of Soma.\"_</dialog>\n<dialog>_\"Whales thrive around the blue Soma sun. But they are not from here. Far to the south are whales that give an even thicker milk. We will mark the grazing grounds for you. Go there!\"_</dialog>\n<mark-on-map dest=\"Grazing Cosmic Whales\" />\n<condition state=\"surface\" at-dest=\"Grazing Cosmic Whales\" trigger=\"MILK\"/>\n<dialog model=\"Cosmic Whales\">Majestic creatures. You carefully collect their milk as they swin in the stellar breeze.</dialog>\n<mark-on-map dest=\"Som Phtia\" />\n<condition state=\"space\" at-dest=\"Som Phtia\" trigger=\"GIVE MILK\"/>\n<dialog>_\"Soma are forever grateful. Wait here while we skim the milk.\"_</dialog>\n<condition state=\"space\" at-dest=\"Som Phtia\" trigger=\"DAIRY\"/>\n<dialog>The Soma don't answer you directly. Silently they send a drone that deliver a thick white liquid to your ship.</dialog>\n<dialog>_\"Friend! Let the cream bake in the hotness of the Soma Sun. Go to the *Lookout* as generations of Soma has done.\"_</dialog>\n<condition state=\"surface\" at-dest=\"Beryl Canis Lookout\" trigger=\"BAKE MILK\"/>\n<dialog>The Soma are peculiar. This substance and this process have hardly anything in common with milk. But that is how they consistently translate it.</dialog>\n<dialog model=\"Observatory\">Scalding heat from Beryl Canis roast your hull, but also bake the mysterious white \"cream\" into something new.</dialog>\n<give item=\"Whale Cheese\"/>",
+      "xml": "<condition at-dest=\"Som Phtia\" trigger=\"HAIL\"/>\n<dialog>_\"We Soma have worshipped the Cosmic Whales for generations. But we cannot approach them. A visitor however can. Be a friend of Soma and find the elusive *Cosmic Whales*. Find them and bring us their milk.\"_</dialog>\n<add-to-quest-list/>\n<condition state=\"surface\" at-dest=\"Cosmic Whales\" trigger=\"MILK\"/>\n<dialog model=\"Cosmic Whales\">The graceful creatures excrete a white liquid that form a glittering trail in space. Probably nothing to do with milk but you collect it anyway.</dialog>\n<mark-on-map dest=\"Som Phtia\" />\n<condition at-dest=\"Som Phtia\" trigger=\"GIVE MILK\"/>\n<dialog>_\"This milk is surely a prize. The visitor is truly a friend of Soma.\"_</dialog>\n<dialog>_\"Whales thrive around the blue Soma sun. But they are not from here. Far to the south are whales that give an even thicker milk. We will mark the grazing grounds for you. Go there!\"_</dialog>\n<mark-on-map dest=\"Grazing Cosmic Whales\" />\n<condition state=\"surface\" at-dest=\"Grazing Cosmic Whales\" trigger=\"MILK\"/>\n<dialog model=\"Cosmic Whales\">Majestic creatures. You carefully collect their milk as they swin in the stellar breeze.</dialog>\n<mark-on-map dest=\"Som Phtia\" />\n<condition state=\"space\" at-dest=\"Som Phtia\" trigger=\"GIVE MILK\"/>\n<dialog>_\"Soma are forever grateful. Wait here while we skim the milk.\"_</dialog>\n<condition state=\"space\" at-dest=\"Som Phtia\" trigger=\"COLLECT CREAM\"/>\n<dialog>The Soma don't answer you directly. Silently they send a drone that deliver a thick white liquid to your ship.</dialog>\n<dialog>_\"Friend! Let the cream bake in the hotness of the Soma Sun. Go to the *Lookout* as generations of Soma has done.\"_</dialog>\n<condition state=\"surface\" at-dest=\"Beryl Canis Lookout\" trigger=\"BAKE MILK\"/>\n<dialog>The Soma are peculiar. This substance and this process have hardly anything in common with milk. But that is how they consistently translate it.</dialog>\n<dialog model=\"Observatory\">Scalding heat from Beryl Canis roast your hull, but also bake the mysterious white \"cream\" into something new.</dialog>\n<give item=\"Whale Cheese\"/>",
       "tags": "soma",
       "color": "fff",
       "icon": "drop"
@@ -5786,12 +5811,12 @@
     },
     {
       "name": "Rebuild the Thanatos",
-      "xml": "<condition at-dest=\"Thanatos\" trigger=\"QUEST\"/>\n<dialog model=\"Thanatos\">It is the Thanatos derelict. Immensely old. Broken. The intact half is covered in cuneiform markings.</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Thanatos mesh;Thanatos core;Thanatos nacelle\"/>\n<dialog>You now possess all three missing pieces of the Thanatos.</dialog>\n<condition at-dest=\"Thanatos\" trigger=\"REBUILD\"/>\n<dialog model=\"Thanatos\" ok=\"REBUILD THANATOS\" cancel=\"LEAVE\">The relics would restore the form of Thanatos.</dialog>\n<dialog model=\"Thanatos\">As the parts touch the derelict the edges melt and merge. In an instant the dead ship springs to life, fire dancing across its hull as it burns away the dust covering it.</dialog>\n<dialog model=\"Sphere\">The radio warbles as it is flooded with signals. A single grey sphere emerges from the ship and drifts toward you.</dialog>\n<dialog model=\"Sphere\">Touching the sphere cause tiny ripples of light on its surface. It whispers the name *Momus* into your mind.</dialog>\n<give item=\"Momus\"/>",
+      "xml": "<condition at-dest=\"Thanatos\" trigger=\"EXPLORE DERELICT\"/>\n<dialog model=\"Thanatos\">It is the Thanatos derelict. Immensely old. Broken. The intact half is covered in cuneiform markings.</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Thanatos mesh;Thanatos core;Thanatos nacelle\"/>\n<dialog>You now possess all three missing pieces of the Thanatos.</dialog>\n<condition at-dest=\"Thanatos\" trigger=\"REBUILD\"/>\n<dialog model=\"Thanatos\" ok=\"REBUILD THANATOS\" cancel=\"LEAVE\">The relics would restore the form of Thanatos.</dialog>\n<take item=\"Thanatos mesh;Thanatos core;Thanatos nacelle\"/>\n<dialog model=\"Thanatos\">As the parts touch the derelict the edges melt and merge. In an instant the dead ship springs to life, fire dancing across its hull as it burns away the dust covering it.</dialog>\n<dialog model=\"Sphere\">The radio warbles as it is flooded with signals. A single grey sphere emerges from the ship and drifts toward you.</dialog>\n<dialog model=\"Sphere\">Touching the sphere cause tiny ripples of light on its surface. It whispers the name *Momus* into your mind.</dialog>\n<give item=\"Momus\"/>",
       "tags": ""
     },
     {
       "name": "Worship the Apate",
-      "xml": "<condition at-dest=\"Path to Apate\"/>\n<add-to-quest-list/>\n<dialog model=\"Temple of Apate\">An ancient derelict, *The Temple of Apate*, appear on the sensors ahead. It might contain riches. Or salvation.</dialog>\n<condition no-enemy-at-dest=\"Threshold of the Temple;Stepstone of the Temple;Marker of the Temple\"/>\n<dialog>As the final sentinel is destroyed it send a subspace signal. Most probably the Temple heard its death cry.\n\nCould be good, could be bad.</dialog>\n<condition at-dest=\"Temple of Apate\"/>\n<dialog model=\"Temple of Apate\">The temple is open now. The clearing of the sentinels must have unlocked it.</dialog>\n<condition at-dest=\"Temple of Apate\" trigger=\"ENTER\"/>\n<dialog model=\"Temple of Apate\">Your vessel enter the open gate of the Temple. As you slowly sink deeper your sensors flicker and give up, one after another. The readings from the Temple is much too strange for the sensors to cope with.</dialog>\n<dialog model=\"Sphere\">Your ship dark as the last subsystem give up. Silently you drift into a central chamber.\n\nOut of a central pillar, a dark sphere emerges. _A gift._</dialog>\n<dialog model=\"Sphere\">You retrieve the artifact from the pillar. As you touch it, it whispers the name *Horkos* into your mind.</dialog>\n<give item=\"Horkos\"/>",
+      "xml": "<condition at-dest=\"Path to Apate\"/>\n<add-to-quest-list/>\n<dialog model=\"Temple of Apate\">An ancient derelict, *The Temple of Apate*, appear on the sensors ahead. It might contain riches. Or salvation.</dialog>\n<condition no-enemy-at-dest=\"Threshold of the Temple;Stepstone of the Temple;Marker of the Temple\"/>\n<dialog>As the final sentinel is destroyed it send a subspace signal. Most probably the Temple heard its death cry.\n\nCould be good, could be bad.</dialog>\n<condition at-dest=\"Temple of Apate\"/>\n<dialog model=\"Temple of Apate\">The temple is open now. The clearing of the sentinels must have unlocked it.</dialog>\n<condition at-dest=\"Temple of Apate\" trigger=\"ENTER TEMPLE\"/>\n<dialog model=\"Temple of Apate\">Your vessel enter the open gate of the Temple. As you slowly sink deeper your sensors flicker and give up, one after another. The readings from the Temple is much too strange for the sensors to cope with.</dialog>\n<dialog model=\"Sphere\">Your ship dark as the last subsystem give up. Silently you drift into a central chamber.\n\nOut of a central pillar, a dark sphere emerges. _A gift._</dialog>\n<dialog model=\"Sphere\">You retrieve the artifact from the pillar. As you touch it, it whispers the name *Horkos* into your mind.</dialog>\n<give item=\"Horkos\"/>",
       "tags": ""
     },
     {
@@ -5808,12 +5833,12 @@
     },
     {
       "name": "Tau Pavonis Observer",
-      "xml": "<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>You are hailed as you enter orbit: _\"Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"We study Tau Pavonis and need assistance in placing sensors at the *Observatory*. Compensation is 1000 credits. Are you interested?\"_</dialog>\n<dialog>_\"First you need protection. Travel to *Pavonis Mirror* and aquire a *Star Shield*.\"_</dialog>\n<give item=\"Star Sensor\"/>\n<mark-on-map dest=\"Pavonis Mirror\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>_\"Traveller. This is Mirror spaceport. We have prepared the *Star Shield* you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed.\"_</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed-item=\"Star Shield\" trigger=\"READY\"/>\n<dialog ok=\"PROCEED\" cancel=\"WAIT\">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>\n<travel dest=\"Pavonis Observatory\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"PUT SENSOR\"/>\n<take item=\"Star Sensor\" />\n<dialog model=\"Sol Array\">You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\"/>\n<travel dest=\"Pavonis Mirror\"/>\n<dialog>_\"You made it! Must be a sturdy ship you got there.\"_</dialog>\n<dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organisation.</dialog>\n<dialog>_\"Let us remove that Star Shield, you can collect your payment at *Pavonis Smoke*.\"_</dialog>\n<take item=\"Star Shield\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog>_\"You survived! Excellent, we are anxious to get the data from the sensor. Please accept our payment!\"_</dialog>\n<give credits=\"1000\"/>\n<remove-map-marker/>\n\n<condition not-at-dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>_\"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor is most disturbing. Tau Pavonis is behaving unphysically.\"_</dialog>\n<dialog>_\"You must help us collect more data! Please take us to the *Observatory* so we can make further readings.\"_</dialog>\n<dialog>This time you request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>\n<dialog>_\"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental *Shield Reactor*. Ok?\"_</dialog>\n<dialog>You see an opportunity to make demands.\n_\"That sounds useful, give it to me in advance, and a regular reward afterwards!\"_</dialog>\n<give item=\"Dermal Inducer\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>They load the *Star Shield* onto you ship once again. They tell you to *install* it but they all look a bit worried this time. What is it they have found inside that star?</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" installed-item=\"Star Shield\" trigger=\"READY\"/>\n<travel dest=\"Pavonis Observatory\"/>\n<dialog>The scientists take readings with their arcane instruments.\nBut you don't need any telescopes. Just looking throught the dimmed windows you can see a region of the stars surface pulsing. Or heaving, as if breathing.</dialog>\n<dialog model=\"Worm\">Suddenly the star's surface open like a flower and something break free from the open wound. It trashes like a wounded animal. It looks slow like a ballet, but at this scale it is tremendously fast.</dialog>\n<dialog>The monstrosity accelerates and trace a glowing path towards *Pavonis Charm*. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>\n<place-enemy enemy=\"Worm\" dest=\"Pavonis Charm\"/>\n<mark-on-map dest=\"Pavonis Charm\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\" />\n<travel dest=\"Pavonis Mirror\" />\n<take item=\"Star Shield\" />\n\n<condition at-dest=\"A117\"/>\n<dialog model=\"Worm\">Your sensors can make out the entity orbiting Pavonis Charm. Approaching would be devastating.</dialog>\n<dialog>You are hailed by a distant ship. \n\n_\"Traveller. We are the Worshipers. Things have been set in motion and there might still be time to dispel this danger. Seek us out at *Paxos Station*.\"_</dialog>\n<mark-on-map dest=\"Paxos Station\"/>\n\n<condition at-dest=\"Paxos Station\" trigger=\"HAIL\"/>\n<dialog model=\"Paxos Station\">_\"This is Paxos Station, the Cathedral of Worship. The scholars at Pavonis Smoke have woken the Worm. You were their tool and now we can help you undo their foolish work.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The Worm's chains can be restored with the three tools that once bound it originally.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The children of the Worm once bound their progenitor with the artifacts Epiales, Momus and Horkos. Seek them out in the Fields, the Garden and the Ruins.\"_</dialog>\n\n<condition have-item=\"Momus;Horkos;Epiales\" at-dest=\"A2172;Paxos Station\"/>\n<dialog>_\"Traveller. You have gathered the relics.\"_</dialog>\n<dialog>_\"While your hands were busy the Worm multiplied. Sired its seedlings.\nMay the relics help you. Clear out the Seedlings around *Pavonis Charm*!\"_</dialog>\n<mark-on-map dest=\"Pavonis Charm\" />\n<place-enemy dest=\"Charm Beta\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Gamma\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Delta\" enemy=\"Worm Seedling\" loot=\"\"/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" no-enemy-at-dest=\"Charm Beta;Charm Gamma;Charm Delta\" />\n<place-enemy dest=\"Pavonis Charm\" enemy=\"Weakened Worm\" loot=\"Worm Umbra\" />\n<dialog model=\"Worm Seedling\">The final Seedling succumbs to your assault. Somehow you know that the Worm is affected. Touched by your actions here that bestial presence is now weakened. This can now end.</dialog>\n\n<condition no-enemy-at-dest=\"Pavonis Charm\" />\n<dialog model=\"Worm\">The worm is mortally wounded. Its appendages flail and whips up foam on the surface of Pavis Charm as it is pulled below the surface and into the depths of the gas giant.</dialog>\n<mark-on-map dest=\"Paxos Station\" />\n\n<condition at-dest=\"Paxos Station\" />\n<dialog>_\"Traveller. You bested the Worm. The battle was glorious.\nYet many here feel fear. *The Worm is not dead.* It might slumbes for eons inside Pavonis Charm, but it will wake once again.\"_</dialog>\n\n\n\n\n",
+      "xml": "<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>You are hailed as you enter orbit: _\"Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"We study Tau Pavonis and need assistance in placing sensors at the *Observatory*. Compensation is 1000 credits. Are you interested?\"_</dialog>\n<dialog>_\"First you need protection. Travel to *Pavonis Mirror* and aquire a *Star Shield*.\"_</dialog>\n<give item=\"Star Sensor\"/>\n<mark-on-map dest=\"Pavonis Mirror\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>_\"Traveller. This is Mirror spaceport. We have prepared the *Star Shield* you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed.\"_</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed-item=\"Star Shield\" trigger=\"READY TO GO\"/>\n<dialog ok=\"PROCEED\" cancel=\"WAIT\">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>\n<travel dest=\"Pavonis Observatory\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"PUT SENSOR\"/>\n<take item=\"Star Sensor\" />\n<dialog model=\"Sol Array\">You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\"/>\n<travel dest=\"Pavonis Mirror\"/>\n<dialog>_\"You made it! Must be a sturdy ship you got there.\"_</dialog>\n<dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organisation.</dialog>\n<dialog>_\"Let us remove that Star Shield, you can collect your payment at *Pavonis Smoke*.\"_</dialog>\n<take item=\"Star Shield\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog>_\"You survived! Excellent, we are anxious to get the data from the sensor. Please accept our payment!\"_</dialog>\n<give credits=\"1000\"/>\n<remove-map-marker/>\n\n<condition not-at-dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>_\"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor is most disturbing. Tau Pavonis is behaving unphysically.\"_</dialog>\n<dialog>_\"You must help us collect more data! Please take us to the *Observatory* so we can make further readings.\"_</dialog>\n<dialog>This time you request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>\n<dialog>_\"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental *Shield Reactor*. Ok?\"_</dialog>\n<dialog>You see an opportunity to make demands.\n_\"That sounds useful, give it to me in advance, and a regular reward afterwards!\"_</dialog>\n<give item=\"Dermal Inducer\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>They load the *Star Shield* onto you ship once again. They tell you to *install* it but they all look a bit worried this time. What is it they have found inside that star?</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" installed-item=\"Star Shield\" trigger=\"READY TO GO\"/>\n<travel dest=\"Pavonis Observatory\"/>\n<dialog>The scientists take readings with their arcane instruments.\nBut you don't need any telescopes. Just looking throught the dimmed windows you can see a region of the stars surface pulsing. Or heaving, as if breathing.</dialog>\n<dialog model=\"Worm\">Suddenly the star's surface open like a flower and something break free from the open wound. It trashes like a wounded animal. It looks slow like a ballet, but at this scale it is tremendously fast.</dialog>\n<dialog>The monstrosity accelerates and trace a glowing path towards *Pavonis Charm*. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>\n<place-enemy enemy=\"Worm\" dest=\"Pavonis Charm\"/>\n<mark-on-map dest=\"Pavonis Charm\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\" />\n<travel dest=\"Pavonis Mirror\" />\n<take item=\"Star Shield\" />\n\n<condition at-dest=\"A117\"/>\n<dialog model=\"Worm\">Your sensors can make out the entity orbiting Pavonis Charm. Approaching would be devastating.</dialog>\n<dialog>You are hailed by a distant ship. \n\n_\"Traveller. We are the Worshipers. Things have been set in motion and there might still be time to dispel this danger. Seek us out at *Paxos Station*.\"_</dialog>\n<mark-on-map dest=\"Paxos Station\"/>\n\n<condition at-dest=\"Paxos Station\" trigger=\"HAIL\"/>\n<dialog model=\"Paxos Station\">_\"This is Paxos Station, the Cathedral of Worship. The scholars at Pavonis Smoke have woken the Worm. You were their tool and now we can help you undo their foolish work.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The Worm's chains can be restored with the three tools that once bound it originally.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The children of the Worm once bound their progenitor with the artifacts Epiales, Momus and Horkos. Seek them out in the Fields, the Garden and the Ruins.\"_</dialog>\n<remove-map-marker/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" at-dest=\"A2172;Paxos Station\"/>\n<dialog>_\"Traveller. You have gathered the relics.\"_</dialog>\n<dialog>_\"While your hands were busy the Worm multiplied. Sired its seedlings.\nMay the relics help you. Clear out the Seedlings around *Pavonis Charm*!\"_</dialog>\n<mark-on-map dest=\"Pavonis Charm\" />\n<place-enemy dest=\"Charm Beta\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Gamma\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Delta\" enemy=\"Worm Seedling\" loot=\"\"/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" no-enemy-at-dest=\"Charm Beta;Charm Gamma;Charm Delta\" />\n<place-enemy dest=\"Pavonis Charm\" enemy=\"Weakened Worm\" loot=\"Worm Umbra\" />\n<dialog model=\"Worm Seedling\">The final Seedling succumbs to your assault. Somehow you know that the Worm is affected. Touched by your actions here that bestial presence is now weakened. This can now end.</dialog>\n\n<condition no-enemy-at-dest=\"Pavonis Charm\" />\n<dialog model=\"Worm\">The worm is mortally wounded. Its appendages flail and whips up foam on the surface of Pavis Charm as it is pulled below the surface and into the depths of the gas giant.</dialog>\n<mark-on-map dest=\"Paxos Station\" />\n\n<condition at-dest=\"Paxos Station\" />\n<dialog>_\"Traveller. You bested the Worm. The battle was glorious.\nYet many here feel fear. *The Worm is not dead.* It might slumbes for eons inside Pavonis Charm, but it will wake once again.\"_</dialog>\n\n\n\n\n",
       "tags": "pavonis"
     },
     {
       "name": "Pavonis Mining Co",
-      "xml": "<place-enemy enemy=\"Rogue\" dest=\"A8761\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A9753\"/>\n<place-enemy enemy=\"Rogue\" dest=\"A2170\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A3566\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A4976\"/>\n<condition at-dest=\"Pavonis A2934\" trigger=\"HAIL\"/>\n<dialog>_\"This is Pavonis Mining Co Headquarters. Are you looking for assignments?\"_</dialog>\n<dialog>_\"There are rogues disturbing our operations at the south asteroid rim. We will pay 100 credits for clearing them out.\"_</dialog>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"A117;A8761;A9753;A2170;A3566;A4976\" at-dest=\"Pavonis A2934\"/>\n<dialog>_\"Excellent work! Transferring reward now.\"_</dialog>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"Many of our contractors are damaged by the rogues. Would you like to run some mining operations? We rent out the needed equipment.\"_</dialog>\n<give item=\"Mining Drill\"/>\n\n<mark-on-map dest=\"A2170\"/>\n<dialog>_\"Readings at A2170 show rich ore. Start there.\"_</dialog>\n<condition at-dest=\"A2170\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Ore\"/>\n\n<mark-on-map dest=\"A8761\"/>\n<dialog>_\"Readings at A8761 show rich ore. Continue there.\"_</dialog>\n<condition at-dest=\"A8761\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Mineral\"/>\n\n<mark-on-map dest=\"Pavonis A2934\"/>\n<condition have-item=\"Pavonian Mineral;Pavonian Ore\" at-dest=\"Pavonis A2934\"/>\n<dialog>_\"Good work, a bit slow, but good. Let us buy that mineral from you.\"_</dialog>\n<take item=\"Pavonian Mineral\"/>\n<take item=\"Pavonian Ore\"/>\n<take item=\"Mining Drill\"/>\n<give credits=\"100\"/>",
+      "xml": "<place-enemy enemy=\"Rogue\" dest=\"A8761\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A9753\"/>\n<place-enemy enemy=\"Rogue\" dest=\"A2170\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A3566\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A4976\"/>\n<condition at-dest=\"Pavonis A2934\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">_\"This is Pavonis Mining Co Headquarters. Are you looking for assignments?\"_</dialog>\n<dialog>_\"There are rogues disturbing our operations at the south asteroid rim. We will pay 100 credits for clearing them out.\"_</dialog>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"A117;A8761;A9753;A2170;A3566;A4976\" at-dest=\"Pavonis A2934\"/>\n<dialog>_\"Excellent work! Transferring reward now.\"_</dialog>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"Many of our contractors are damaged by the rogues. Would you like to run some mining operations? We rent out the needed equipment.\"_</dialog>\n<give item=\"Mining Drill\"/>\n\n<mark-on-map dest=\"A2170\"/>\n<dialog>_\"Readings at A2170 show rich ore. Start there.\"_</dialog>\n<condition at-dest=\"A2170\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Ore\"/>\n\n<mark-on-map dest=\"A8761\"/>\n<dialog>_\"Readings at A8761 show rich ore. Continue there.\"_</dialog>\n<condition at-dest=\"A8761\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Mineral\"/>\n\n<mark-on-map dest=\"Pavonis A2934\"/>\n<condition have-item=\"Pavonian Mineral;Pavonian Ore\" at-dest=\"Pavonis A2934\"/>\n<dialog>_\"Good work, a bit slow, but good. Let us buy that mineral from you.\"_</dialog>\n<take item=\"Pavonian Mineral\"/>\n<take item=\"Pavonian Ore\"/>\n<take item=\"Mining Drill\"/>\n<give credits=\"100\"/>",
       "tags": "pavonis"
     },
     {
@@ -6058,6 +6083,624 @@
   ],
   "initialDestination": "Backwater",
   "models": [
+    {
+      "name": "Concoined",
+      "geometry": "composite",
+      "tags": "ship",
+      "transform": [
+        ["scale", 0.9, 0.9, 0.9],
+        ["rotate", -25, 50, 80],
+        ["translate", 0, 0, -90]
+      ],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 12,
+          "transform": [
+            ["radial-wave", 1, 2.5, 0],
+            ["rotate", 0, 0, 90],
+            ["translate", 0, -10, 0]
+          ],
+          "path": [
+            [20, 0, 5],
+            [20, 0, -5],
+            [40, 0, -20],
+            [50, 0, -20],
+            [60, 0, 0],
+            [50, 0, 20],
+            [40, 0, 20],
+            [20, 0, 5]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 12,
+          "transform": [
+            ["radial-wave", 1, 2.5, 0],
+            ["rotate", 90, 0, -90],
+            ["translate", 0, 10, 0]
+          ],
+          "path": [
+            [20, 0, 5],
+            [20, 0, -5],
+            [40, 0, -20],
+            [50, 0, -20],
+            [60, 0, 0],
+            [50, 0, 20],
+            [40, 0, 20],
+            [20, 0, 5]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Needle Gate",
+      "geometry": "composite",
+      "transform": [
+        ["scale", 0.6, 0.6, 0.6],
+        ["rotate", 90, 0, 10],
+        ["translate", 0, 0, -100]
+      ],
+      "parts": [
+        {
+          "name": "lower",
+          "geometry": "composite",
+          "transform": [["rotate", 90, 0, 0]],
+          "parts": [
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 0, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 52, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 103, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 155, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 206, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 258, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 309, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            }
+          ]
+        },
+        {
+          "name": "upper",
+          "geometry": "composite",
+          "transform": [["rotate", -90, 0, 0]],
+          "parts": [
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 0, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 52, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 103, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 155, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 206, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 258, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 309, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Needle Aperture",
+      "geometry": "composite",
+      "transform": [
+        ["scale", 0.8, 0.8, 0.8],
+        ["rotate", 18, 0, 0],
+        ["translate", 0, 0, -100]
+      ],
+      "parts": [
+        {
+          "name": "lower",
+          "geometry": "composite",
+          "transform": [["rotate", 90, 0, 0]],
+          "parts": [
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 0, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 52, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 103, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 155, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 206, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 258, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 309, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            }
+          ]
+        },
+        {
+          "name": "upper",
+          "geometry": "composite",
+          "transform": [["rotate", -90, 0, 0]],
+          "parts": [
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 0, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 52, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 103, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 155, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 206, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 258, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 309, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            }
+          ]
+        },
+        {
+          "name": "upper",
+          "geometry": "composite",
+          "transform": [["rotate", -90, 0, 0]],
+          "parts": [
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", 20, 0, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", 20, 52, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", 20, 103, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", 20, 155, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", 20, 206, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", 20, 258, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", 20, 309, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            }
+          ]
+        },
+        {
+          "name": "upper",
+          "geometry": "composite",
+          "transform": [["rotate", 90, 0, 0]],
+          "parts": [
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", 20, 0, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", 20, 52, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", 20, 103, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", 20, 155, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", 20, 206, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", 20, 258, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", 20, 309, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            }
+          ]
+        }
+      ]
+    },
     {
       "name": "Gnats",
       "geometry": "composite",
@@ -7238,55 +7881,119 @@
     {
       "name": "Soma Sonn",
       "geometry": "composite",
-      "transform": [["scale", 0.75, 0.75, 0.75], ["translate", 0, 0, -50]],
+      "tags": "ship",
+      "transform": [["scale", 0.85, 0.85, 0.85], ["translate", 0, 0, -50]],
       "parts": [
         {
           "geometry": "lathe",
-          "angle": 240,
-          "res": 8,
-          "transform": [["rotate", 0, 0, -30]],
+          "angle": 280,
+          "res": 9,
+          "transform": [["rotate", 0, 0, -50]],
           "path": [
-            [189, 0, 0],
-            [115, 0, -35],
-            [120, 0, -40],
-            [190, 0, -10],
-            [190, 0, 10],
-            [120, 0, 40],
-            [115, 0, 35],
-            [189, 0, 0]
+            [169, 0, 0],
+            [125, 0, -35],
+            [130, 0, -40],
+            [170, 0, -20],
+            [170, 0, 20],
+            [130, 0, 40],
+            [125, 0, 35],
+            [169, 0, 0]
           ]
         },
         {
-          "name": "Soma Saay",
           "geometry": "lathe",
-          "res": 12,
-          "transform": [],
-          "path": [[0, 0, -70], [160, 0, -10], [160, 0, 10], [0, 0, 70]]
+          "res": 6,
+          "transform": [["rotate", 90, 0, 0], ["translate", 100, 0, 0]],
+          "path": [[0, 0, -100], [35, 0, -30], [35, 0, 30], [0, 0, 100]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["rotate", 90, 0, 0], ["translate", -100, 0, 0]],
+          "path": [[0, 0, -100], [35, 0, -30], [35, 0, 30], [0, 0, 100]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["rotate", 0, 90, 0], ["translate", 0, 100, 0]],
+          "path": [[0, 0, -100], [35, 0, -30], [35, 0, 30], [0, 0, 100]]
         }
-      ],
-      "tags": "ship"
+      ]
     },
     {
-      "name": "Arrowship",
+      "name": "Mimos Dart",
       "geometry": "composite",
       "tags": "ship",
       "transform": [
         ["scale", 1, 1, 1],
-        ["rotate", 180, 0, 0],
-        ["translate", 0, 0, 0]
+        ["rotate", 0, 0, 0],
+        ["translate", 0, 40, -45]
       ],
       "parts": [
         {
           "geometry": "lathe",
           "res": 9,
           "transform": [
-            ["scale", 1, 1, 1],
-            ["radial-wave", 3, 0.4, 0],
+            ["radial-wave", 3, 0.3, 0],
             ["rotate", 180, 0, 30],
-            ["parabola", 0, 0.005, 0],
-            ["translate", 0, 0, 40]
+            ["parabola", 0, -0.008, 0],
+            ["scale", 1, 1.5, 1.5]
           ],
-          "path": [[0, 0, -40], [150, 0, 0], [0, 0, 40]]
+          "path": [
+            [0, 0, -30],
+            [140, 0, -5],
+            [150, 0, 0],
+            [140, 0, 5],
+            [0, 0, 30]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 4,
+          "transform": [
+            ["rotate", 0, 0, 0],
+            ["radial-wave", 1, 3, 0],
+            ["rotate", 0, 0, 90],
+            ["scale", 0.41, 1, 1.5],
+            ["translate", 55, -88, 18]
+          ],
+          "path": [[0, 0, -10], [20, 0, -5], [25, 0, 0], [20, 0, 5], [0, 0, 10]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 4,
+          "transform": [
+            ["rotate", 0, 0, 0],
+            ["radial-wave", 1, 3, 0],
+            ["rotate", 0, 0, 90],
+            ["scale", 0.41, 1, 1.5],
+            ["translate", 55, -88, -18]
+          ],
+          "path": [[0, 0, -10], [20, 0, -5], [25, 0, 0], [20, 0, 5], [0, 0, 10]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 4,
+          "transform": [
+            ["rotate", 0, 0, 0],
+            ["radial-wave", 1, 3, 0],
+            ["rotate", 0, 0, 90],
+            ["scale", 0.41, 1, 1.5],
+            ["translate", -55, -88, 18]
+          ],
+          "path": [[0, 0, -10], [20, 0, -5], [25, 0, 0], [20, 0, 5], [0, 0, 10]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 4,
+          "transform": [
+            ["rotate", 0, 0, 0],
+            ["radial-wave", 1, 3, 0],
+            ["rotate", 0, 0, 90],
+            ["scale", 0.41, 1, 1.5],
+            ["translate", -55, -88, -18]
+          ],
+          "path": [[0, 0, -10], [20, 0, -5], [25, 0, 0], [20, 0, 5], [0, 0, 10]]
         }
       ]
     },
@@ -7297,7 +8004,7 @@
       "transform": [
         ["scale", 0.7, 0.7, 0.7],
         ["rotate", -90, 0, 0],
-        ["translate", 0, 50, -80]
+        ["translate", 0, 50, -70]
       ],
       "parts": [
         {
@@ -7318,7 +8025,7 @@
           "res": 6,
           "transform": [
             ["scale", 1, 1, 1],
-            ["translate", 0, 80, -160],
+            ["translate", 0, 70, -180],
             ["rotate", 0, 0, 60]
           ],
           "path": [[0, 0, -150], [50, 0, 0], [0, 0, 65]]
@@ -7328,7 +8035,7 @@
           "res": 6,
           "transform": [
             ["scale", 1, 1, 1],
-            ["translate", 0, 80, -160],
+            ["translate", 0, 70, -180],
             ["rotate", 0, 0, -60]
           ],
           "path": [[0, 0, -150], [50, 0, 0], [0, 0, 65]]
@@ -7338,7 +8045,7 @@
           "res": 6,
           "transform": [
             ["scale", 1, 1, 1],
-            ["translate", 0, 80, -160],
+            ["translate", 0, 70, -180],
             ["rotate", 0, 0, 180]
           ],
           "path": [[0, 0, -150], [50, 0, 0], [0, 0, 65]]
@@ -9808,7 +10515,7 @@
       "desc": "",
       "celestial": {
         "r": 60,
-        "amb": 0.2,
+        "amb": 0.5,
         "oct": 2,
         "zoom": 0.9,
         "color": ["888", "D84"]
@@ -9835,7 +10542,7 @@
       "id": "cloud-green",
       "celestial": {
         "r": 40,
-        "amb": 0.15,
+        "amb": 0.3,
         "oct": 6,
         "zoom": 1.2,
         "color": ["0f8", "f80"]
@@ -9850,7 +10557,7 @@
       "attr": {},
       "celestial": {
         "r": 40,
-        "amb": 0.15,
+        "amb": 0.3,
         "oct": 5,
         "zoom": 1.4,
         "color": ["f80", "f80"]
@@ -9864,7 +10571,7 @@
       "id": "cloud-purple",
       "celestial": {
         "r": 60,
-        "amb": 0.15,
+        "amb": 0.3,
         "oct": 5,
         "zoom": 1.6,
         "color": ["80f", "f80"]
@@ -9878,7 +10585,7 @@
       "id": "cloud-smoke",
       "celestial": {
         "r": 30,
-        "amb": 0.2,
+        "amb": 0.4,
         "oct": 5,
         "zoom": 1.6,
         "color": ["444", "842"]
@@ -9946,7 +10653,7 @@
         "amb": 0.1,
         "oct": 4,
         "zoom": 10,
-        "color": ["8f8", "ff8"]
+        "color": ["FF8", "6A0"]
       },
       "surface": {
         "zoom": 1.1,
@@ -10049,7 +10756,7 @@
         "amb": 0.1,
         "oct": 3,
         "zoom": 20,
-        "color": ["00f", "0f0"]
+        "color": ["040", "8F0"]
       },
       "surface": {
         "zoom": 1,
@@ -10058,7 +10765,8 @@
         "falloff": 0.2,
         "curve": [1, 0, 1],
         "spectrum": ["040", "0F4", "FF0"]
-      }
+      },
+      "model": null
     },
     {
       "type": "planet",
@@ -10069,7 +10777,7 @@
         "amb": 0.1,
         "oct": 3,
         "zoom": 20,
-        "color": ["00f", "0f0"]
+        "color": ["4F0", "FF8"]
       },
       "surface": {
         "zoom": 1.5,
@@ -10111,7 +10819,7 @@
         "amb": 0.1,
         "oct": 3,
         "zoom": 20,
-        "color": ["00f", "0f0"]
+        "color": ["F88", "0f0"]
       },
       "surface": {
         "zoom": 1,
@@ -10120,7 +10828,8 @@
         "falloff": 0.5,
         "curve": [0.1, 0.2, 0.3, 0.33, 0.37, 0.4, 0.6, 0.8, 0.9, 1],
         "spectrum": ["040", "0F0", "8D0", "F88"]
-      }
+      },
+      "model": null
     },
     {
       "type": "planet",
@@ -10173,7 +10882,7 @@
         "amb": 0.1,
         "oct": 4,
         "zoom": 10,
-        "color": ["8f8", "ff8"]
+        "color": ["666", "F40"]
       },
       "surface": {
         "zoom": 1,
@@ -10182,7 +10891,8 @@
         "falloff": 0.2,
         "curve": [0.4, 0.5, 0.45, 0.3, 0, 0.9, 0.95, 1],
         "spectrum": ["F80", "F00", "666", "666", "666", "666", "666"]
-      }
+      },
+      "model": null
     },
     {
       "type": "planet",
@@ -10316,7 +11026,7 @@
         "amb": 0.1,
         "oct": 4,
         "zoom": 10,
-        "color": ["aaa", "444"]
+        "color": ["BA4", "DB4"]
       },
       "surface": {
         "zoom": 0.7,
@@ -10325,7 +11035,8 @@
         "falloff": 0.5,
         "curve": [0, 1],
         "spectrum": ["BA4", "DB4"]
-      }
+      },
+      "model": null
     },
     {
       "id": "planet-soma",
@@ -10512,7 +11223,7 @@
     {
       "name": "Dev Zone",
       "audio": "music-final ending",
-      "pos": {"x": 732, "y": -2296},
+      "pos": {"x": 726, "y": -2296},
       "radius": 100
     }
   ],
