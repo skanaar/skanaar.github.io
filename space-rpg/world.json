@@ -49,7 +49,7 @@
       "value": 200,
       "isFlying": true,
       "level": 2,
-      "slots": 5
+      "slots": 7
     },
     {
       "name": "Journeyman",
@@ -65,7 +65,7 @@
       "value": 1000,
       "isFlying": true,
       "level": 3,
-      "slots": 6
+      "slots": 8
     },
     {
       "attr": {
@@ -83,7 +83,7 @@
       "value": 2000,
       "isFlying": true,
       "level": 4,
-      "slots": 7
+      "slots": 8
     },
     {
       "attr": {
@@ -101,7 +101,7 @@
       "value": 3000,
       "isFlying": true,
       "level": 4,
-      "slots": 7
+      "slots": 9
     },
     {
       "attr": {
@@ -134,7 +134,7 @@
       "generator": {"hull": 2, "shield": 4, "energy": 5},
       "name": "Ursula",
       "level": 5,
-      "slots": 9,
+      "slots": 10,
       "visual": "Ursula",
       "isFlying": true,
       "value": 3100
@@ -152,7 +152,7 @@
       "generator": {"hull": 2, "shield": 1, "energy": 1},
       "name": "Argo",
       "level": 5,
-      "slots": 8,
+      "slots": 11,
       "visual": "NS Argo",
       "isFlying": true,
       "value": 3500
@@ -172,7 +172,7 @@
       "level": 5,
       "visual": "Kerr Interdictor",
       "isFlying": true,
-      "slots": 8,
+      "slots": 10,
       "value": 3750
     },
     {
@@ -241,7 +241,7 @@
       "visual": "Soma Sonn",
       "isFlying": true,
       "value": 7000,
-      "slots": 10
+      "slots": 12
     },
     {
       "attr": {
@@ -331,7 +331,7 @@
       "generator": {"hull": 0, "shield": 0, "energy": 2},
       "name": "Striker Drone",
       "visual": "Monitor Drone",
-      "inventory": ["Monitor Beam L2", "Repair Kit", "Autogun", "Autogun"],
+      "inventory": ["Monitor Beam L2", "Repair Kit", "Autogun"],
       "value": 0,
       "isFlying": false,
       "level": 2,
@@ -355,7 +355,7 @@
         "Energy Cell",
         "Repair Kit",
         "Shield Cell",
-        "Autogun"
+        "Autogun Mk2"
       ],
       "value": 0,
       "isFlying": false,
@@ -382,31 +382,29 @@
       "slots": 0
     },
     {
+      "name": "Rogue",
+      "visual": "Kerr Interdictor",
       "attr": {
         "maxhull": 20,
-        "maxshield": 5,
+        "maxshield": 7,
         "maxenergy": 20,
-        "armor": 0,
-        "cloak": 0,
         "jump": 0,
-        "slots": 0
+        "slots": 4
       },
-      "generator": {"hull": 1, "shield": 0, "energy": 1},
-      "name": "Bandit Henchman",
-      "level": 5,
-      "visual": "Rusty Ship",
+      "generator": {"hull": 2, "shield": 1, "energy": 1},
       "inventory": [
-        "Repair Nanites",
-        "Shield Battery",
-        "Repair Goo",
-        "Monopole Shield",
         "Meson Ray",
-        "Mk5 Reactor",
-        "Gauss Gun"
+        "Luhn Device",
+        "Co Disruptor",
+        "Repair Robot",
+        "Shell Inducer",
+        "Quark Shield",
+        "Sacrifice Device"
       ],
-      "isFlying": true,
-      "slots": 0,
-      "value": 0
+      "level": 3,
+      "value": 0,
+      "isFlying": false,
+      "slots": 0
     },
     {
       "attr": {
@@ -438,23 +436,6 @@
       "slots": 0
     },
     {
-      "name": "Rogue",
-      "visual": "Kerr Interdictor",
-      "attr": {
-        "maxhull": 20,
-        "maxshield": 20,
-        "maxenergy": 20,
-        "jump": 0,
-        "slots": 4
-      },
-      "generator": {"hull": 2, "shield": 1, "energy": 1},
-      "inventory": ["Photon Ray", "Autogun Mk2"],
-      "level": 3,
-      "value": 0,
-      "isFlying": false,
-      "slots": 0
-    },
-    {
       "attr": {
         "maxhull": 10,
         "maxshield": 4,
@@ -474,7 +455,10 @@
         "Meson Ray",
         "Mk4 Battery",
         "Mk4 Reactor",
-        "Welding Robot"
+        "Welding Robot",
+        "Absorb Inducer",
+        "Absorb Cell",
+        "Restore Kit"
       ],
       "level": 4,
       "value": 0,
@@ -495,10 +479,96 @@
       "name": "Rocket Drone",
       "level": 4,
       "visual": "Rocket Drone",
-      "inventory": ["Meson Ray", "Autogun Mk3"],
+      "inventory": [
+        "Restore Kit",
+        "Mk4 Battery",
+        "Solenoid Gun",
+        "Absorb Cell",
+        "Absorb Inducer",
+        "Solenoid Gun"
+      ],
       "isFlying": true,
       "value": 0,
       "slots": 0
+    },
+    {
+      "attr": {
+        "maxhull": 50,
+        "maxshield": 10,
+        "maxenergy": 20,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 2
+      },
+      "generator": {"hull": 1, "shield": 1, "energy": 1},
+      "name": "Soma Reaver",
+      "visual": "Soma Saay",
+      "inventory": [
+        "EMP Bomb",
+        "Repair Nanites",
+        "Sacrifice Device",
+        "Shield Battery",
+        "Focal Beam",
+        "Dermal Inducer",
+        "Mk5 Capacitor"
+      ],
+      "isFlying": true,
+      "value": 0,
+      "level": 5,
+      "slots": 0
+    },
+    {
+      "attr": {
+        "maxhull": 20,
+        "maxshield": 5,
+        "maxenergy": 20,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 1, "shield": 0, "energy": 1},
+      "name": "Bandit Henchman",
+      "level": 5,
+      "visual": "Rusty Ship",
+      "inventory": [
+        "Repair Nanites",
+        "Shield Battery",
+        "Repair Goo",
+        "Monopole Shield",
+        "Meson Ray",
+        "Mk5 Reactor",
+        "Gauss Gun"
+      ],
+      "isFlying": true,
+      "slots": 0,
+      "value": 0
+    },
+    {
+      "attr": {
+        "maxhull": 40,
+        "maxshield": 20,
+        "maxenergy": 20,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 2, "shield": 3, "energy": 1},
+      "name": "Worm Seedling",
+      "level": 5,
+      "visual": "Worm Seedling",
+      "inventory": [
+        "Worm Beam",
+        "Javelin Driver",
+        "Piercing Beam",
+        "Sacrifice Device",
+        "Repair Goo"
+      ],
+      "isFlying": true,
+      "slots": 0,
+      "value": 0
     },
     {
       "attr": {
@@ -540,33 +610,6 @@
     },
     {
       "attr": {
-        "maxhull": 50,
-        "maxshield": 10,
-        "maxenergy": 20,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 2
-      },
-      "generator": {"hull": 1, "shield": 1, "energy": 1},
-      "name": "Soma Reaver",
-      "visual": "Soma Saay",
-      "inventory": [
-        "EMP Bomb",
-        "Repair Nanites",
-        "Sacrifice Device",
-        "Shield Battery",
-        "Focal Beam",
-        "Dermal Inducer",
-        "Mk5 Capacitor"
-      ],
-      "isFlying": true,
-      "value": 0,
-      "level": 5,
-      "slots": 0
-    },
-    {
-      "attr": {
         "maxhull": 20,
         "maxshield": 10,
         "maxenergy": 20,
@@ -588,50 +631,6 @@
         "Mk6 Reactor"
       ],
       "level": 6,
-      "value": 0,
-      "isFlying": false,
-      "slots": 0
-    },
-    {
-      "attr": {
-        "maxhull": 40,
-        "maxshield": 20,
-        "maxenergy": 20,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "generator": {"hull": 2, "shield": 3, "energy": 1},
-      "name": "Worm Seedling",
-      "level": 5,
-      "visual": "Worm Seedling",
-      "inventory": [
-        "Worm Beam",
-        "Javelin Driver",
-        "Piercing Beam",
-        "Sacrifice Device",
-        "Repair Goo"
-      ],
-      "isFlying": true,
-      "slots": 0,
-      "value": 0
-    },
-    {
-      "attr": {
-        "maxhull": 100,
-        "maxshield": 40,
-        "maxenergy": 500,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "generator": {"hull": 20, "shield": 20, "energy": 20},
-      "name": "Worm",
-      "visual": "Worm",
-      "inventory": ["Worm Beam"],
-      "level": 15,
       "value": 0,
       "isFlying": false,
       "slots": 0
@@ -719,6 +718,25 @@
       ],
       "isFlying": true,
       "value": 0
+    },
+    {
+      "attr": {
+        "maxhull": 100,
+        "maxshield": 40,
+        "maxenergy": 500,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 20, "shield": 20, "energy": 20},
+      "name": "Worm",
+      "visual": "Worm",
+      "inventory": ["Worm Beam"],
+      "level": 15,
+      "value": 0,
+      "isFlying": false,
+      "slots": 0
     }
   ],
   "items": [
@@ -849,26 +867,6 @@
       "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "level": 0,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "quest",
-      "level": 0,
-      "credits": 0,
-      "name": "Maxwell Parking Ticket",
-      "rechargeRequired": false,
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "cooldown": false,
       "critical": 0
     },
@@ -1070,26 +1068,6 @@
       "credits": 0,
       "name": "Blue flowers",
       "level": 0,
-      "cooldown": false,
-      "critical": 0
-    },
-    {
-      "type": "quest",
-      "level": 0,
-      "credits": 0,
-      "name": "Joes Coaster",
-      "rechargeRequired": false,
-      "attr": {
-        "maxhull": 0,
-        "maxshield": 0,
-        "maxenergy": 0,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": 0},
       "cooldown": false,
       "critical": 0
     },
@@ -4961,7 +4939,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -148, "y": -984},
+      "pos": {"x": -134, "y": -772},
       "name": "Pavonis Police",
       "style": "anomaly-tiendong",
       "trader": null,
@@ -5645,6 +5623,69 @@
       "trader": null,
       "enemy": null,
       "treasures": []
+    },
+    {
+      "pos": {"x": 124, "y": 198},
+      "name": "Buoy 104",
+      "style": "anomaly-buoy",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 128, "y": 296},
+      "name": "Buoy 106",
+      "style": "anomaly-buoy",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 252, "y": 296},
+      "name": "Buoy 80",
+      "style": "anomaly-buoy",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 306, "y": 392},
+      "name": "Aesir",
+      "style": "jovian-2",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 266, "y": 418},
+      "name": "Bifrost",
+      "style": "anomaly-elevator",
+      "trader": {
+        "buy": 1.5,
+        "sell": 0.75,
+        "inventory": [
+          "Sacrifice Device",
+          "Repair System",
+          "Autogun Mk3",
+          "Meson Ray",
+          "Soliton Pulse",
+          "Incision Beam",
+          "Mass Driver",
+          "Co Disruptor",
+          "Luhn Device",
+          "Ablative Armor",
+          "Quark Shield",
+          "Mk3 Capacitor",
+          "Repair Robot",
+          "Shell Inducer",
+          "Mk3 Reactor",
+          "Repair Kit",
+          "Shell Cell",
+          "Mk3 Battery"
+        ]
+      },
+      "enemy": null,
+      "treasures": []
     }
   ],
   "quests": [
@@ -5655,12 +5696,12 @@
     },
     {
       "name": "Fast Forward",
-      "xml": "\n<condition at-dest=\"Fast Forward\" />\n<dialog ok=\"FAST FORWARD!\" cancel=\"NOT NOW\">*Thank you Beta tester for your work*\nWould you like to skip the tutorial zone?</dialog>\n<give credits=\"1000\"/>\n<give item=\"Autogun Mk3;Meson Ray;Soliton Pulse;Incision Beam;Mass Driver;Co Disruptor;Luhn Device;Ablative Armor;Quark Shield;Mk3 Capacitor;Repair Robot;Repair Robot;Shell Inducer;Mk3 Reactor;Repair Kit;Shell Cell;Mk3 Battery;Blue seeds\"/>\n<change-ship ship=\"Kerr Runner\"/>\n<travel dest=\"The Bush Transfer Buoy\"/>",
+      "xml": "\n<condition at-dest=\"Fast Forward\" />\n<dialog ok=\"FAST FORWARD!\" cancel=\"NOT NOW\">*Thank you Beta tester for your work*\nWould you like to skip the tutorial zone?</dialog>\n<dialog>`Some quests will trigger dialogs now, it will be a bit weird but just hang in there.`</dialog>\n<give credits=\"300\"/>\n<give item=\"EM Pulse;Photon Ray;Piercing Beam;Autogun Mk3;Welding Robot;Repair Kit;Mk0 Reactor;Lepton Shield;Crew of SS Thunder;Blue seeds\"/>\n<change-ship ship=\"Kerr Runner\"/>\n<travel dest=\"The Bush Transfer Buoy\"/>",
       "tags": "dev"
     },
     {
       "name": "Start of an adventure",
-      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n_\"Hey hitchhiker! This is your stop.\"_\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a _weird_ signature.\n\nIf you explore the area you might score big time!</dialog>\n<add-to-quest-list/>\n<hint layout=\"quest\">Review your objectives here</hint>\n\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog model=\"Rover\">You find the meteorite resting on the ground. A shiny lump that is surprisingly light when you load it into the rover.</dialog>\n<dialog>If you *TRADE* the meteroite for cash, you will earn a small fortune.</dialog>\n<hint layout=\"trade\">Sell your treasures here</hint>\n\n<condition have-credits=\"200\"/>\n<dialog>_\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. Enter the *SHIPYARD* if you are interested.\"_</dialog>\n<hint layout=\"shipyard\">Buy a starship here</hint>\n\n<condition have-ship=\"Kerr Clipper\" />\n<dialog>_\"Now you can *LIFT OFF* and leave this planet.\"\n\n\"And good luck kid! It is dangerous out there.\"_</dialog>\n<hint layout=\"liftoff\">Leave this world</hint>\n<mark-on-map dest=\"Samson's Folly\"/>\n\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>_\"My friend at Backwater said you would be coming.\n\nWe have a cheap *Rusty Autogun* in stock. You are welcome to *LAND* and *TRADE* with us here at Samson's Folly.\"_</dialog>\n<hint layout=\"quest\">Review you objectives here</hint>\n\n<condition have-item=\"Rusty Autogun\"/>\n<dialog>You now have a Rusty Autogun, a basic weapon. Tap you ship hologram to open your *PROFILE* and *INSTALL* your new weapon</dialog>\n<hint layout=\"profile\">Install your equipment here</hint>\n\n<condition installed-item=\"Rusty Autogun\"/>\n<hint layout=\"profile\"></hint>\n<dialog>_\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"_</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n<place-inventory dest=\"Samson's Folly\" item=\"Cutting Beam;EM Pulse\"/>\n<mark-on-map dest=\"Samson's Folly\" />\n<dialog>_\"Good. Now you should try to defeat a drone that can self repair. Get back to *Samson's Folly* where I have a *Cutting Beam* and an *EM Pulse* for you.\"_</dialog>\n\n<condition at-dest=\"Samson's Folly\" have-item=\"Cutting Beam;EM Pulse\" />\n<dialog>_\"Here, take this *Combat Handbook*. Included in the price. It will be available in your *QUEST* computer in the future.\"_</dialog>\n<dialog>_\"The Rugged Drone is waiting for you at *Samson's Training Ground*, go there.\"_</dialog>\n<give item=\"Combat Handbook\"/>\n<mark-on-map dest=\"Samson's Training Ground\" />\n\n<condition no-enemy-at-dest=\"Samson's Training Ground\" />\n<dialog>Samson radios you.\n\n_\"Looking good kid! Now you have the basic skills needed out here in the nebula.\n\nGood luck!\"_</dialog>\n",
+      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n_\"Hey hitchhiker! This is your stop.\"_\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a _weird_ signature.\n\nIf you explore the area you might score big time!</dialog>\n<add-to-quest-list/>\n<hint layout=\"treasure\">Tap to collect treasure</hint>\n\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog model=\"Rover\">You find the meteorite resting on the ground. A shiny lump that is surprisingly light when you load it into the rover.</dialog>\n<dialog>If you *TRADE* the meteroite for cash, you will earn a small fortune.</dialog>\n<hint layout=\"trade\">Sell your treasures here</hint>\n\n<condition have-credits=\"200\"/>\n<dialog>_\"Nice doing business with ya kid! Say, with that money you can buy a starship. I have a nice hull standing here. Enter the *SHIPYARD* if you are interested.\"_</dialog>\n<hint layout=\"shipyard\">Buy a starship here</hint>\n\n<condition have-ship=\"Kerr Clipper\" />\n<dialog>_\"Now you can *LIFT OFF* and leave this planet.\"\n\n\"And good luck kid! It is dangerous out there.\"_</dialog>\n<hint layout=\"liftoff\">Leave this world</hint>\n<mark-on-map dest=\"Samson's Folly\"/>\n\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>_\"My friend at Backwater said you would be coming.\n\nWe have a cheap *Rusty Autogun* in stock. You are welcome to *LAND* and *TRADE* with us here at Samson's Folly.\"_</dialog>\n<hint layout=\"quest\">Review you objectives here</hint>\n\n<condition have-item=\"Rusty Autogun\"/>\n<dialog>You now have a Rusty Autogun, a basic weapon. Tap you ship hologram to open your *PROFILE* and *INSTALL* your new weapon</dialog>\n<hint layout=\"profile\">Install your equipment here</hint>\n\n<condition installed-item=\"Rusty Autogun\"/>\n<hint layout=\"profile\"></hint>\n<dialog>_\"I always let my customers try their new gear\"\n\n\"Head over to my Buoy where I have target drone lined up.\"_</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n<place-inventory dest=\"Samson's Folly\" item=\"Cutting Beam;EM Pulse\"/>\n<mark-on-map dest=\"Samson's Folly\" />\n<dialog>_\"Good. Now you should try to defeat a drone that can self repair. Get back to *Samson's Folly* where I have a *Cutting Beam* and an *EM Pulse* for you.\"_</dialog>\n\n<condition at-dest=\"Samson's Folly\" have-item=\"Cutting Beam;EM Pulse\" />\n<dialog>_\"Here, take this *Combat Handbook*. Included in the price. It will be available in your *QUEST* computer in the future.\"_</dialog>\n<dialog>_\"The Rugged Drone is waiting for you at *Samson's Training Ground*, go there.\"_</dialog>\n<give item=\"Combat Handbook\"/>\n<mark-on-map dest=\"Samson's Training Ground\" />\n\n<condition no-enemy-at-dest=\"Samson's Training Ground\" />\n<dialog>Samson radios you.\n\n_\"Looking good kid! Now you have the basic skills needed out here in the nebula.\n\nGood luck!\"_</dialog>\n",
       "tags": "outback",
       "color": "6bf",
       "icon": ""
@@ -5695,33 +5736,33 @@
     },
     {
       "name": "Maxwell Station",
-      "xml": "<condition at-dest=\"Maxwell Station\"/>\n<dialog>As you approach a transmission is recieved from Maxwell Station.</dialog>\n<dialog ok=\"Thank you.\">_\"Welcome to Maxwell station, You have been approved landing pad Beta Twelve.\"_</dialog>\n\n<dialog>After a secure landing you enter the metallic humm of the hangar. You are approached my a service robot.</dialog>\n<give item=\"Maxwell Parking Ticket\"/>\n<dialog>_\"Greetings traveller and welcome to Maxwell Station. If you need a tour or assistance during your visit. Please let us know.\"_</dialog>\n\n<condition at-dest=\"Maxwell Station\" trigger=\"TAKE TOUR\" have-item=\"Maxwell Parking Ticket\"/>\n<dialog>_\"Here at Maxwell Station we strive to make your adventures throughout the Nebula as convenient as possible.\"_</dialog>\n<dialog>_\"At the Maxwell Trader you will find some of the best prices on goods from the whole galaxy with adequite garantees.\"_</dialog>\n<dialog>_\"The well known Captain Maxwell was the first to explore this whole nebula. And opened the doors to this open hangar over one hundred years ago. Here all beings are welcome to share tales and trade goods.\"_</dialog>\n<dialog>_\"Maxwell is currently head of developing the vortec technology which will greatly improve travel speeds within the nebula.\"_</dialog>\n<dialog>_\"Please enjoy your stay. If you need any further assistance. Please let us know.\"_</dialog>\n<take item=\"Maxwell Parking Ticket\"/>\n",
+      "xml": "<condition at-dest=\"Maxwell Station\"/>\n<dialog model=\"Ring Station\">As you approach a transmission is recieved from Maxwell Station.</dialog>\n<dialog model=\"Ring Station\">_\"Welcome to Maxwell station, You have been approved landing pad Beta Twelve.\"_</dialog>\n\n<dialog model=\"Service Robot\">After a secure landing you enter the metallic humm of the hangar. You are approached my a service robot.</dialog>\n<dialog model=\"Service Robot\">_\"Greetings traveller and welcome to Maxwell Station. If you need a tour or assistance during your visit. Please let us know.\"_</dialog>\n\n<condition at-dest=\"Maxwell Station\" trigger=\"TAKE TOUR\"/>\n<dialog model=\"Service Robot\">_\"Here at Maxwell Station we strive to make your adventures throughout the Nebula as convenient as possible.\"_</dialog>\n<dialog model=\"Service Robot\">_\"At the Maxwell Trader you will find some of the best prices on goods from the whole galaxy with adequite garantees.\"_</dialog>\n<dialog model=\"Service Robot\">_\"The well known Captain Maxwell was the first to explore this whole nebula. And opened the doors to this open hangar over one hundred years ago. Here all beings are welcome to share tales and trade goods.\"_</dialog>\n<dialog model=\"Service Robot\">_\"Maxwell is currently head of developing the vortec technology which will greatly improve travel speeds within the nebula.\"_</dialog>\n<dialog model=\"Service Robot\">_\"Please enjoy your stay. If you need any further assistance. Please let us know.\"_</dialog>\n\n",
       "color": "0f0",
       "icon": "square",
       "tags": "qdn"
     },
     {
       "name": "Joes",
-      "xml": "<condition at-dest=\"Joes\"/>\n\n<dialog ok=\"SMACKY'S!\" cancel=\"no thanks\">\"The glare off the neon sign spelling 'JOE'S BAR' leaves a good impression on your eyes as you hover the landing pads at Joes.\"</dialog>\n<dialog ok=\"Who?\" cancel=\"What?\">_\"How are yez!?\"_ Calls a man as he wobbles to your ship.</dialog>\n<dialog>The man gives the ship a hug and turnes toward you, still holding onto the ship as not to fall on his nose, clearly drunk.</dialog>\n<dialog ok=\"I got it in this condition\">_\"I've been lookin' round for yeh for six months! yeh're a Wreck. Ye arn't lookin' after her. \"_</dialog>\n<dialog ok=\"Really?\">_\"This was my vessel see. Don't worry. It's just a wee lovely to see her after so many years.\"_</dialog>\n<dialog>_\"Aye. Say you don't want to get a Autogun Mk3 for a deal, I got one but i need liqur badly.\"_</dialog>\n<dialog>_\"Aint got nothin good in these parts. Have ta go to Brandon's to get anything good.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Brandons\" />\n\n\n<condition at-dest=\"Brandons\" trigger=\"ENTER SMACKY'S\" have-credits=\"10\" />\n<dialog ok=\"Something to drink please\" cancel=\"Nothing im heading out\">This bar has damp lightning and is quiet, most guests are playing pool further in. You go up to the bartender.\n_\"What can I get you this fine eveninin' sir?\"_</dialog>\n<dialog>The bartender pours a beer and you ask for Brandons liqour.</dialog>\n<dialog>_\"We are all out of that feller, Brandon's is the darndest best liqour out there, but they have stopped deliverin.\"_</dialog>\n<dialog>_\"I can't tell ye why, but i think the is somethin fishy going on. The distillery is only a couple of jumps from here.\"_</dialog>\n\n<give item=\"Joes Coaster\"/>\n<take credits=\"10\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Brandons\" />\n\n\n<condition have-item=\"Joes Coaster\" at-dest=\"Brandons\" />\n  \n<dialog>You navigate around space junk that is orbiting the distillery, there is no activity to be seen</dialog>\n  \n<dialog>A broken door lets you inside a part of the distillery where there are some broken bottles. Someone leem to have left in a hurry.</dialog>\n\n<dialog ok=\"This is what he wanted\" cancel=\"Put it down\">You find a unbroken bottle of Brandons Single Malt!</dialog>\n<dialog>You go to your ship and take off.</dialog>\n<give item=\"Brandons Whiskey\"/>\n\n\n<condition have-item=\"Brandons Whiskey\" at-dest=\"Joes\" trigger=\"TALK TO DRUNKARD\"/>\n<dialog ok=\"Do you have The Mk3?\" cancel=\"Not Yet.\">_\"Can't believe ye'r back, wha? Ye found any liquor yet?\"_</dialog>\n\n<dialog>_\"Aw, c'mon, ofcourse. I have it in a garage downere\"_ He takes the bottle out of your hand and sips it.</dialog>\n<take item=\"Brandons Whiskey\"/>\n<dialog>_\"Here we're, good as new. Now for yeh this might be a high quality automatic machinegun...\"_</dialog>\n<dialog ok=\"Not what we agreed\" cancel=\"You are changing the deal\">_\"For me, it's an investment. I'm going to have ye ta help me with another thing.\"_</dialog>\n<dialog>_\"Houl' on. Ye see I'm Mr. Brandon\"_\nHe says and pulls down his hood. One if his eyes,replaced with a cyborg techpiece.</dialog>\n<dialog>_\"Those fuckers have shut down me distillery. ey mean this is bollicks, ey can't even collect me stock that're still down there.\"_</dialog>\n<dialog>_\"Look, I'm really thankful allright. But I need ye to install this gun and use it on the dron's outside my disillery.\"_</dialog>\n<dialog>_\"Then ill get me stock back, And ye keep the gun.\"_</dialog>\n<mark-on-map dest=\"Brandons Buoy\" />\n<give item=\"Autogun Mk3\"/>\n<place-enemy dest=\"Brandons Buoy\" enemy=\"Security Drone\" loot=\"Shield Battery\"/>\n<place-enemy dest=\"Brandons\" enemy=\"Rocket Drone\" loot=\"\"/>\n\n<condition at-dest=\"Brandons Buoy\"/>\n<dialog>You are in an authorized area! Leave immediately!</dialog>\n\n<remove-map-marker/>\n\n<condition at-dest=\"Brandons\" no-enemy-at-dest=\"Brandons\"/>\n<dialog>No more drones in sight.</dialog>\n\n<remove-map-marker/>\n<give credits=\"400\"/>\n\n\n\n\n",
+      "xml": "<condition at-dest=\"Joes\"/>\n\n<dialog ok=\"SMACKY'S!\" cancel=\"no thanks\">The glare off the neon sign spelling _\"JOE'S BAR\"_ leaves a good impression on your eyes as you hover the landing pads at Joes.</dialog>\n<dialog ok=\"Who?\" cancel=\"What?\">_\"How are yez!?\"_ Calls a man as he wobbles to your ship.</dialog>\n<dialog>The man gives the ship a hug and turnes toward you, still holding onto the ship as not to fall on his nose, clearly drunk.</dialog>\n<dialog ok=\"I got it in this condition\">_\"I've been lookin' round for yeh for six months! yeh're a Wreck. Ye arn't lookin' after her. \"_</dialog>\n<dialog ok=\"Really?\">_\"This was my vessel see. Don't worry. It's just a wee lovely to see her after so many years.\"_</dialog>\n<dialog>_\"Aye. Say you don't want to get a Autogun Mk3 for a deal, I got one but i need liqur badly.\"_</dialog>\n<dialog>_\"Aint got nothin good in these parts. Have ta go to Brandon's to get anything good.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Brandons\" />\n\n\n<condition at-dest=\"Brandons\" trigger=\"ENTER SMACKY'S\" have-credits=\"10\" />\n<dialog ok=\"Something to drink please\" cancel=\"Nothing im heading out\">This bar has damp lightning and is quiet, most guests are playing pool further in. You go up to the bartender.\n_\"What can I get you this fine eveninin' sir?\"_</dialog>\n<dialog>The bartender pours a beer and you ask for Brandons liqour.</dialog>\n<dialog>_\"We are all out of that feller, Brandon's is the darndest best liqour out there, but they have stopped deliverin.\"_</dialog>\n<dialog>_\"I can't tell ye why, but i think the is somethin fishy going on. The distillery is only a couple of jumps from here.\"_</dialog>\n\n<take credits=\"10\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Brandons\" />\n  \n<dialog>You navigate around space junk that is orbiting the distillery, there is no activity to be seen</dialog>\n  \n<dialog>A broken door lets you inside a part of the distillery where there are some broken bottles. Someone leem to have left in a hurry.</dialog>\n\n<dialog ok=\"This is what he wanted\" cancel=\"Put it down\">You find a unbroken bottle of Brandons Single Malt!</dialog>\n<dialog>You go to your ship and take off.</dialog>\n<give item=\"Brandons Whiskey\"/>\n<mark-on-map dest=\"Joes\" />\n\n\n<condition have-item=\"Brandons Whiskey\" at-dest=\"Joes\" trigger=\"TALK TO DRUNKARD\"/>\n<dialog ok=\"Do you have The Mk3?\" cancel=\"Not Yet.\">_\"Can't believe ye'r back, wha? Ye found any liquor yet?\"_</dialog>\n\n<dialog>_\"Aw, c'mon, ofcourse. I have it in a garage downere\"_ He takes the bottle out of your hand and sips it.</dialog>\n<take item=\"Brandons Whiskey\"/>\n<dialog>_\"Here we're, good as new. Now for yeh this might be a high quality automatic machinegun...\"_</dialog>\n<dialog ok=\"Not what we agreed\" cancel=\"You are changing the deal\">_\"For me, it's an investment. I'm going to have ye ta help me with another thing.\"_</dialog>\n<dialog>_\"Houl' on. Ye see I'm Mr. Brandon\"_\nHe says and pulls down his hood. One if his eyes,replaced with a cyborg techpiece.</dialog>\n<dialog>_\"Those fuckers have shut down me distillery. ey mean this is bollicks, ey can't even collect me stock that're still down there.\"_</dialog>\n<dialog>_\"Look, I'm really thankful allright. But I need ye to install this gun and use it on the dron's outside my disillery.\"_</dialog>\n<dialog>_\"Then ill get me stock back, And ye keep the gun.\"_</dialog>\n<mark-on-map dest=\"Brandons Buoy\" />\n<give item=\"Autogun Mk3\"/>\n<place-enemy dest=\"Brandons Buoy\" enemy=\"Security Drone\" loot=\"Shield Battery\"/>\n<place-enemy dest=\"Brandons\" enemy=\"Rocket Drone\" loot=\"\"/>\n\n<condition at-dest=\"Brandons Buoy\"/>\n<dialog>You are in an authorized area! Leave immediately!</dialog>\n\n<remove-map-marker/>\n\n<condition at-dest=\"Brandons\" no-enemy-at-dest=\"Brandons\"/>\n<dialog>No more drones in sight.</dialog>\n\n<remove-map-marker/>\n<give credits=\"400\"/>\n\n\n\n\n",
       "color": "0f0",
       "icon": "square",
       "tags": "qdn"
     },
     {
       "name": "SS Thunder in Distress",
-      "xml": "\n<condition state=\"space\" at-dest=\"Outback A089\" no-enemy-at-dest=\"Outback A089\" />\n<dialog model=\"Broken Sloop\">_\"Mayday, Mayday, Mayday. This is SS Thunder. We are badly damaged and leaking air. 2 jumps west of Outback A089. Two souls on board.\"_</dialog>\n<dialog>A distress call.\n\nA ship, the SS Thunder, need help.</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ship in distress\" />\n<condition state=\"surface\" at-dest=\"Ship in distress\" trigger=\"SAVE CREW\"/>\n<give item=\"Crew of SS Thunder\"/>\n<dialog>_\"Thank you! We lost our pilot and would surely have died if not for you.\n\nWe need to get to *Mirror Moon* at Pavonis. Can you take us there?\"_</dialog>\n<mark-on-map dest=\"Mirror Moon\" />\n<condition at-dest=\"A6114\"/>\n<dialog>The crew from SS Thunder knock on the cockpit bulkhead.\n_\"Hey, Captain. No need to inform the police. A lot of hassle.\nJust go south to *Mirror Moon* and let us off.\"_</dialog>\n<condition not-have-item=\"Crew of SS Thunder\"/>",
+      "xml": "\n<condition state=\"space\" at-dest=\"Outback A089\" no-enemy-at-dest=\"Outback A089\" />\n<dialog model=\"Broken Sloop\">_\"Mayday, Mayday, Mayday. This is SS Thunder. We are badly damaged and leaking air. 2 jumps west of Outback A089. Two souls on board.\"_</dialog>\n<dialog>A distress call.\n\nA ship, the SS Thunder, need help.</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ship in distress\" />\n<condition state=\"surface\" at-dest=\"Ship in distress\" trigger=\"SAVE CREW\"/>\n<give item=\"Crew of SS Thunder\"/>\n<dialog>_\"Thank you! We lost our pilot and would surely have died if not for you.\n\nWe need to get to *Mirror Moon* at Pavonis. Can you take us there?\"_</dialog>\n<mark-on-map dest=\"Mirror Moon\" />\n<condition at-dest=\"A1573\"/>\n<dialog>The crew from SS Thunder knock on the cockpit bulkhead.\n_\"Hey, Captain. No need to inform the police. A lot of hassle.\nJust go to *Mirror Moon* and let us off.\"_</dialog>\n<dialog>Hmm, that was suspicious...</dialog>\n<condition not-have-item=\"Crew of SS Thunder\"/>",
       "tags": "outback",
       "color": "f88",
       "icon": ""
     },
     {
       "name": "Help the crew of SS Thunder",
-      "xml": "<condition state=\"surface\" at-dest=\"Mirror Moon\" have-item=\"Crew of SS Thunder\" trigger=\"RELEASE CREW\"/>\n<dialog>_\"Thank you! A true savior. Take this for your troubles, it might come in handy.\"_</dialog>\n<dialog>You got a reward, but you also have a feeling that maybe it wasn't the good guys who won this time.</dialog>\n<give credits=\"1000\"/>\n<take item=\"Crew of SS Thunder\" />\n",
+      "xml": "<condition state=\"surface\" at-dest=\"Mirror Moon\" have-item=\"Crew of SS Thunder\" trigger=\"RELEASE CREW\"/>\n<dialog ok=\"RELEASE CREW\" cancel=\"CANCEL\">Release the crew of the SS Thunder? The police might be interested in them?</dialog>\n<dialog>_\"Thank you! A true savior. Take this for your troubles, it might come in handy.\"_</dialog>\n<dialog>_\"We will dissapear now, but you seem like a smart kid. If you are strapped for cash you should talk to Mr Tall at *Pavonis Ember*.\"_</dialog>\n<dialog>You got a reward, but you also have a feeling that maybe it wasn't the good guys who won this time.</dialog>\n<add-to-quest-list/>\n<give credits=\"1000\"/>\n<take item=\"Crew of SS Thunder\" />\n<mark-on-map dest=\"Pavonis Ember\" />\n<condition state=\"surface\" at-dest=\"Pavonis Ember\" trigger=\"ASK FOR MR TALL\"/>\n<dialog>The operator at Ember Control Tower hail you. Instead of the usual greeting they just say:\n\n_\"Mr Tall  is ready to see you.\"_</dialog>\n<dialog>Two kids greet you outside the ship.\n_\"Mr Tall says he is grateful for you helping his friends from the Thunder.\"_</dialog>\n<dialog>_\"Mr Tall says you should help him more.\n\nHere are letters. Mr Tall want you to take them to *Bifrost*.\"_</dialog>\n<mark-on-map dest=\"Bifrost\" />\n<condition state=\"surface\" at-dest=\"Bifrost\" trigger=\"DELIVER LETTERS\"/>\n<give credits=\"700\"/>",
       "tags": "outback"
     },
     {
       "name": "Investigate the SS Thunder",
-      "xml": "<condition at-dest=\"Pavonis Police\" have-item=\"Crew of SS Thunder\"/>\n<dialog model=\"Tiendong Station\" ok=\"YES I HAVE\" cancel=\"NOT A THING\">As you approach the police station they hail you.\n_\"Citizen, we are looking for any information as to the whereabouts of the SS Thunder. Have you seen anything.\"_</dialog>\n\n<condition have-item=\"Crew of SS Thunder\" at-dest=\"Pavonis Police\" trigger=\"TURN IN CREW\"/>\n<take item=\"Crew of SS Thunder\" />\n<dialog model=\"Tiendong Station\">The officers look astonished as you present them with the crew of the SS Thunder.\n\n_\"Wow, this was more than we hoped for!\"_</dialog>\n<dialog model=\"Tiendong Station\">_\"But to tell the truth we don't actually know what they have done.\n\nThey won't say a thing to us but we have seen a string of suspicious activity coinciding with the SS Thunder's path across the sector.\"_</dialog>\n<dialog model=\"Tiendong Station\" ok=\"OK\" cancel=\"NOT RIGHT NOW\">_\"If we come storming in asking questions we won't get any answers. But a private investigator however...\n\nAre you up for some undercover work?.\"_</dialog>\n<dialog model=\"Tiendong Station\">_\"Investigate what happened to their ship. Any physical evidence that you can find. Someone at the nearby station - the *Black Stump* - must have seen something.\n\nAsk around.\"_</dialog>\n<give credits=\"100\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ship in distress\" />\n<place-item dest=\"Ship in distress\" item=\"Flight log\"/>\n\n<condition have-item=\"Flight log\" />\n<mark-on-map dest=\"Black Stump\" />\n\n<condition state=\"surface\" at-dest=\"Black Stump\" trigger=\"ASK QUESTIONS\"/>\n<dialog model=\"Hermit Home\">You snoop around the station. The deckmen say the crew of the Thunder were really interested in the station's drones.</dialog>\n<dialog>The Flight log say that they visited every destination that had a problem with a malfunctioning drone. They probably caused this whole mess.</dialog>\n<mark-on-map dest=\"Pavonis Police\" />\n\n<condition state=\"surface\" at-dest=\"Pavonis Police\" trigger=\"GIVE INFO\"/>\n<dialog model=\"Tiendong Station\">_\"Drone manipulation? That figures. We started digging into their backstories. They are agents trying to destabilize Pavonis. With the evidence you got we have a solid case.\"_</dialog>\n<dialog model=\"Tiendong Station\">_\"Here is a state mandated reward for your work. Thank you and safe travels.\"_</dialog>\n<give credits=\"1000\"/>",
+      "xml": "<condition at-dest=\"Pavonis Police\" have-item=\"Crew of SS Thunder\"/>\n<dialog model=\"Tiendong Station\">As you approach the police station they hail you.\n_\"Citizen, we are looking for any information as to the whereabouts of the SS Thunder. Hail us if you have seen anything.\"_</dialog>\n<condition have-item=\"Crew of SS Thunder\" at-dest=\"Pavonis Police\" trigger=\"TURN IN CREW\"/>\n<dialog ok=\"TURN IN CREW\" cancel=\"CANCEL\">Turn in the crew of the SS Thunder to the police? They might have powerful friends.</dialog>\n<take item=\"Crew of SS Thunder\" />\n<dialog model=\"Tiendong Station\">The officers look astonished as you present them with the crew of the SS Thunder.\n\n_\"Wow, this was more than we hoped for!\"_</dialog>\n<dialog model=\"Tiendong Station\">_\"But to tell the truth we don't actually know what they have done.\n\nThey won't say a thing to us but we have seen a string of suspicious activity coinciding with the SS Thunder's path across the sector.\"_</dialog>\n<dialog model=\"Tiendong Station\" ok=\"OK\" cancel=\"NOT RIGHT NOW\">_\"If we come storming in asking questions we won't get any answers. But a private investigator however...\n\nAre you up for some undercover work?.\"_</dialog>\n<dialog model=\"Tiendong Station\">_\"Investigate what happened to their ship. Any physical evidence that you can find. Someone at the nearby station - the *Black Stump* - must have seen something.\n\nAsk around.\"_</dialog>\n<give credits=\"100\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ship in distress\" />\n<place-item dest=\"Ship in distress\" item=\"Flight log\"/>\n\n<condition have-item=\"Flight log\" />\n<mark-on-map dest=\"Black Stump\" />\n\n<condition state=\"surface\" at-dest=\"Black Stump\" trigger=\"ASK QUESTIONS\"/>\n<dialog model=\"Hermit Home\">You snoop around the station. The deckmen say the crew of the Thunder were really interested in the station's drones.</dialog>\n<dialog>The Flight log say that they visited every destination that had a problem with a malfunctioning drone. They probably caused this whole mess.</dialog>\n<mark-on-map dest=\"Pavonis Police\" />\n\n<condition state=\"surface\" at-dest=\"Pavonis Police\" trigger=\"GIVE INFO\"/>\n<dialog model=\"Tiendong Station\">_\"Drone manipulation? That figures. We started digging into their backstories. They are agents trying to destabilize Pavonis. With the evidence you got we have a solid case.\"_</dialog>\n<dialog model=\"Tiendong Station\">_\"Here is a state mandated reward for your work. Thank you and safe travels.\"_</dialog>\n<give credits=\"1000\"/>",
       "tags": "outback",
       "color": "4ef",
       "icon": "square"
@@ -5735,7 +5776,7 @@
     },
     {
       "name": "Bandits in The Bush",
-      "xml": "\n<condition at-dest=\"Black Stump\"/>\n<dialog model=\"Hermit Home\">Black Stump station, you have heard of the place. Rough.\nYou listen in on their radio chatter.</dialog>\n<dialog model=\"Hermit Home\">_\"... best booty in town. Say, did you hear about the SS Thunder that passed through here. They got into some trouble. They told us they were tourists but if you ask me there was something fishy with their setup...\"_</dialog>\n\n<condition at-dest=\"Black Stump\" trigger=\"HAIL STATION\"/>\n<dialog model=\"Hermit Home\">_\"Hey traveller! Welcome to Black Stump station. We have some problems with Bandits out here in The Bush right now. We can help you stock up on good equipment so they don't hassle you.\"_</dialog>\n<dialog model=\"Hermit Home\" ok=\"YES\" cancel=\"NOT NOW\">_\"If you are short on cash the outpost on *Spruce* always pay good money for *Supplies*. Would you like to make a supply run?\"_</dialog>\n<add-to-quest-list/>\n<give item=\"Supplies\"/>\n<mark-on-map dest=\"Spruce\" />\n\n<condition have-item=\"Supplies\" at-dest=\"Spruce\" />\n<dialog ok=\"SELL\" cancel=\"LEAVE\">The small outpost on the surface of the planet hail you. Asking if you have supplies they can buy.</dialog>\n<take item=\"Supplies\"/>\n<give credits=\"200\"/>\n<mark-on-map dest=\"Black Stump\" />\n\n<condition at-dest=\"Black Stump\"/>\n<dialog model=\"Hermit Home\">_\"Good work with the supply run. A bit dangerous out there now with all the Bandits.\"_</dialog>\n<dialog model=\"Hermit Home\" ok=\"YES\" cancel=\"NOT NOW\">_\"One of those bandits took out a transport headed here. It crashed on Pine, we are interested in any Supplies that might have survived. Can you help us?\"_</dialog>\n<mark-on-map dest=\"Pine\" />\n<place-item dest=\"Pine\" item=\"Supplies\"/>\n\n<condition have-item=\"Supplies\"/>\n<mark-on-map dest=\"Black Stump\" />\n\n<condition at-dest=\"Black Stump\" have-item=\"Supplies\" trigger=\"GIVE SUPPLIES\"/>\n<take item=\"Supplies\"/>\n<give credits=\"200\"/>\n<dialog model=\"Hermit Home\">_\"Excellent! These supplies are sorely needed out here in The Bush.\"_</dialog>\n<dialog model=\"Hermit Home\">_\"If you want to take on the Bandits to the south you are going to need a better ship. Our *SHIPYARD* can help you.\"_</dialog>\n",
+      "xml": "\n<condition at-dest=\"Black Stump\"/>\n<dialog model=\"Hermit Home\">Black Stump station, you have heard of the place. Rough.\nYou listen in on their radio chatter.</dialog>\n<dialog model=\"Hermit Home\">_\"... best booty in town. Say, did you hear about the SS Thunder that passed through here?\"_\n  \n_\"They got into some trouble. They told us they were tourists but if you ask me there was something fishy with their setup...\"_</dialog>\n\n<condition at-dest=\"Black Stump\" trigger=\"HAIL STATION\"/>\n<dialog model=\"Hermit Home\">_\"Hey traveller!\"_\n_\"Welcome to Black Stump station. We have some problems with Bandits out here in The Bush right now. We can help you stock up on good equipment so they don't hassle you.\"_</dialog>\n<dialog model=\"Hermit Home\" ok=\"YES\" cancel=\"NOT NOW\">_\"If you are short on cash the outpost on *Spruce* always pay good money for *Supplies*. Would you like to make a supply run?\"_</dialog>\n<add-to-quest-list/>\n<give item=\"Supplies\"/>\n<mark-on-map dest=\"Spruce\" />\n\n<condition have-item=\"Supplies\" at-dest=\"Spruce\" />\n<dialog ok=\"SELL\" cancel=\"LEAVE\">The small outpost on the surface of the planet hail you.\n\nThey ask if you have supplies they can buy.</dialog>\n<take item=\"Supplies\"/>\n<give credits=\"100\"/>\n<mark-on-map dest=\"Black Stump\" />\n\n<condition at-dest=\"Black Stump\"/>\n<dialog model=\"Hermit Home\">_\"Good work with the supply run. A bit dangerous out there now with all the Bandits.\"_</dialog>\n<dialog model=\"Hermit Home\" ok=\"YES\" cancel=\"NOT NOW\">_\"One of those bandits took out a transport headed here. It crashed on Pine, we are interested in any Supplies that might have survived. Can you help us?\"_</dialog>\n<mark-on-map dest=\"Pine\" />\n<place-item dest=\"Pine\" item=\"Supplies\"/>\n\n<condition have-item=\"Supplies\"/>\n<mark-on-map dest=\"Black Stump\" />\n\n<condition at-dest=\"Black Stump\" have-item=\"Supplies\" trigger=\"GIVE SUPPLIES\"/>\n<take item=\"Supplies\"/>\n<give credits=\"150\"/>\n<dialog model=\"Hermit Home\">_\"Excellent! These supplies are sorely needed out here in The Bush.\"_</dialog>\n<dialog model=\"Hermit Home\">_\"If you want to take on the Bandits to the south you are going to need a better ship. Our *SHIPYARD* can help you.\"_</dialog>\n",
       "tags": "outback",
       "color": "ff0",
       "icon": "rhomb"
@@ -6084,6 +6125,179 @@
   "initialDestination": "Backwater",
   "models": [
     {
+      "name": "Space Elevator",
+      "geometry": "composite",
+      "transform": [
+        ["scale", 1, 1, 1],
+        ["rotate", 0, 0, 0],
+        ["translate", 0, 0, -60]
+      ],
+      "parts": [
+        {
+          "name": "Hermit Home",
+          "geometry": "composite",
+          "transform": [["scale", 4, 4, 4]],
+          "parts": [
+            {
+              "name": "Ring",
+              "geometry": "lathe",
+              "res": 9,
+              "transform": [["scale", 1, 1, 0.5], ["translate", 0, 0, 5]],
+              "path": [
+                [22, 0, -1],
+                [34, 0, -1],
+                [33, 0, 1],
+                [21, 0, 1],
+                [22, 0, -1]
+              ]
+            },
+            {
+              "name": "Hub",
+              "geometry": "lathe",
+              "res": 9,
+              "transform": [],
+              "path": [
+                [0, 0, -14],
+                [15, 0, -10],
+                [20, 0, -5],
+                [10, 0, 0],
+                [5, 0, 5],
+                [2, 0, 15],
+                [0.5, 0, 35],
+                [0.5, 0, 115]
+              ]
+            },
+            {
+              "name": "R1",
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [
+                ["scale", 0.125, 0.125, 0.1],
+                ["rotate", -133, 0, 0],
+                ["translate", 10, 6, -13]
+              ],
+              "path": [
+                [0, 0, 0],
+                [15, 0, 2],
+                [25, 0, 10],
+                [28, 0, 15],
+                [25, 0, 10],
+                [15, 0, 2],
+                [0, 0, 0]
+              ]
+            },
+            {
+              "name": "R1",
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [
+                ["scale", 0.125, 0.125, 0.1],
+                ["rotate", -133, 0, 0],
+                ["translate", 11, -3, -13]
+              ],
+              "path": [
+                [0, 0, 0],
+                [15, 0, 2],
+                [25, 0, 10],
+                [28, 0, 15],
+                [25, 0, 10],
+                [15, 0, 2],
+                [0, 0, 0]
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Kerr Frigate",
+          "geometry": "lathe",
+          "res": 8,
+          "transform": [
+            ["rotate", 0, 0, 22.5],
+            ["scale", 1.3, 1.3, 1.3],
+            ["scale", 1.5, 0.5, 1],
+            ["scale", 0.25, 0.25, 0.25],
+            ["rotate", 90, 0, -10],
+            ["translate", -19, -110, 9]
+          ],
+          "path": [
+            [0, 0, -130],
+            [20, 0, -120],
+            [50, 0, -100],
+            [50, 0, -30],
+            [40, 0, -10],
+            [40, 0, 10],
+            [50, 0, 30],
+            [50, 0, 100],
+            [20, 0, 120],
+            [0, 0, 110]
+          ]
+        },
+        {
+          "name": "Kerr Interdictor",
+          "geometry": "lathe",
+          "res": 5,
+          "transform": [
+            ["scale", 3, 0.75, 0.75],
+            ["rotate", 90, 0, 90],
+            ["parabola", 0, -0.007, 0],
+            ["scale", 0.1, 0.1, 0.1],
+            ["rotate", 0, 0, -50],
+            ["translate", -80, -66, 13]
+          ],
+          "path": [
+            [0, 0, -160],
+            [20, 0, -170],
+            [50, 0, -73],
+            [50, 0, -73],
+            [46, 0, -50],
+            [30, 0, -30],
+            [30, 0, 30],
+            [46, 0, 50],
+            [50, 0, 73],
+            [20, 0, 170],
+            [0, 0, 160]
+          ]
+        }
+      ],
+      "tags": "anomaly station"
+    },
+    {
+      "name": "Service Robot",
+      "geometry": "composite",
+      "transform": [
+        ["scale", 5, 5, 5],
+        ["rotate", 90, 0, 90],
+        ["translate", 0, 0, -48]
+      ],
+      "parts": [
+        {
+          "name": "body",
+          "geometry": "cube",
+          "transform": [["scale", 8, 8, 10], ["translate", 0, -6, 0]]
+        },
+        {
+          "name": "head",
+          "geometry": "lathe",
+          "res": 3,
+          "transform": [["rotate", 90, 0, 0], ["translate", 0, -20, 0]],
+          "path": [[0, 0, -3], [10, 0, -5], [11, 0, -3], [0, 0, 5]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["translate", 0, 0, 15]],
+          "path": [[0, 0, -3], [10, 0, -5], [11, 0, 0], [10, 0, 5], [0, 0, 3]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["translate", 0, 0, -15]],
+          "path": [[0, 0, -3], [10, 0, -5], [11, 0, 0], [10, 0, 5], [0, 0, 3]]
+        }
+      ],
+      "tags": "ship"
+    },
+    {
       "name": "Concoined",
       "geometry": "composite",
       "tags": "ship",
@@ -6138,7 +6352,7 @@
       "geometry": "composite",
       "transform": [
         ["scale", 0.6, 0.6, 0.6],
-        ["rotate", 90, 0, 10],
+        ["rotate", 90, 0, 0],
         ["translate", 0, 0, -100]
       ],
       "parts": [
@@ -6330,9 +6544,9 @@
       "name": "Needle Aperture",
       "geometry": "composite",
       "transform": [
-        ["scale", 0.8, 0.8, 0.8],
+        ["scale", 0.75, 0.75, 0.75],
         ["rotate", 18, 0, 0],
-        ["translate", 0, 0, -100]
+        ["translate", 0, 0, -80]
       ],
       "parts": [
         {
@@ -7094,7 +7308,7 @@
       "transform": [
         ["scale", 4, 4, 4],
         ["rotate", 90, 0, 90],
-        ["translate", 0, 20, -45]
+        ["translate", 0, 50, -45]
       ],
       "parts": [
         {
@@ -7191,9 +7405,9 @@
       "name": "Broken Sloop",
       "geometry": "composite",
       "transform": [
-        ["scale", 0.9, 0.9, 0.9],
+        ["scale", 1, 1, 1],
         ["rotate", -151, -14, 90],
-        ["translate", 0, 0, -60]
+        ["translate", 0, 10, -60]
       ],
       "parts": [
         {
@@ -7368,7 +7582,7 @@
       "transform": [
         ["scale", 0.65, 0.65, 0.65],
         ["rotate", -12, 23, 0],
-        ["translate", -40, -40, -50]
+        ["translate", -55, -40, -50]
       ],
       "parts": [
         {
@@ -7716,6 +7930,104 @@
             ["translate", 0, -11, -24]
           ],
           "path": [[1, 0, -1], [1, 0, 1]]
+        }
+      ],
+      "tags": "anomaly"
+    },
+    {
+      "name": "Terran Buoy",
+      "geometry": "composite",
+      "res": 8,
+      "transform": [
+        ["scale", 2, 2, 2],
+        ["rotate", 0, -20, 0],
+        ["translate", 0, 0, -52]
+      ],
+      "path": [
+        [40, 0, 0],
+        [38, 0, 7],
+        [30, 0, 10],
+        [22, 0, 7],
+        [20, 0, 0],
+        [22, 0, -7],
+        [30, 0, -10],
+        [38, 0, -7],
+        [40, 0, 0]
+      ],
+      "parts": [
+        {
+          "name": "R1",
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["scale", 0.75, 0.75, 0.75],
+            ["rotate", -130, 0, 0],
+            ["translate", 0, 0, -40]
+          ],
+          "path": [
+            [0, 0, 0],
+            [15, 0, 2],
+            [25, 0, 10],
+            [28, 0, 15],
+            [25, 0, 10],
+            [15, 0, 2],
+            [0, 0, 0]
+          ]
+        },
+        {
+          "name": "body",
+          "geometry": "lathe",
+          "res": 8,
+          "transform": [
+            ["scale", 0.75, 0.75, 0.75],
+            ["rotate", 180, 0, 0],
+            ["translate", 0, 0, 0]
+          ],
+          "path": [
+            [45, 0, -20],
+            [50, 0, -15],
+            [50, 0, 15],
+            [45, 0, 20],
+            [38, 0, 15],
+            [10, 0, 15],
+            [0, 0, 50]
+          ]
+        },
+        {
+          "geometry": "mesh",
+          "transform": [
+            ["scale", 2.4, 1, 0.2],
+            ["translate", -58, 0, 0],
+            ["rotate", -40, 0, -22.5]
+          ],
+          "quads": [
+            [[10, 0, -10], [10, 0, 10], [-10, 0, 10], [-10, 0, -10]],
+            [[-10, 0, -10], [-10, 0, 10], [10, 0, 10], [10, 0, -10]]
+          ]
+        },
+        {
+          "geometry": "mesh",
+          "transform": [
+            ["scale", 1, 1, 3],
+            ["translate", -70, 0, 0],
+            ["rotate", -40, 0, -22.5]
+          ],
+          "quads": [
+            [[10, 0, -10], [10, 0, 10], [-10, 0, 10], [-10, 0, -10]],
+            [[-10, 0, -10], [-10, 0, 10], [10, 0, 10], [10, 0, -10]]
+          ]
+        },
+        {
+          "geometry": "mesh",
+          "transform": [
+            ["scale", 1, 1, 3],
+            ["translate", -47, 0, 0],
+            ["rotate", -40, 0, -22.5]
+          ],
+          "quads": [
+            [[10, 0, -10], [10, 0, 10], [-10, 0, 10], [-10, 0, -10]],
+            [[-10, 0, -10], [-10, 0, 10], [10, 0, 10], [10, 0, -10]]
+          ]
         }
       ],
       "tags": "anomaly"
@@ -8102,7 +8414,7 @@
         ["scale", 3, 0.75, 0.75],
         ["rotate", 90, 0, 90],
         ["parabola", 0, -0.007, 0],
-        ["translate", 0, 0, -50]
+        ["translate", 0, 20, -50]
       ],
       "path": [
         [0, 0, -170],
@@ -8126,7 +8438,7 @@
         ["scale", 3, 0.75, 0.75],
         ["rotate", 90, 0, 90],
         ["parabola", 0, -0.007, 0],
-        ["translate", 0, 20, -50]
+        ["translate", 0, 40, -50]
       ],
       "path": [
         [0, 0, -160],
@@ -8146,7 +8458,7 @@
     {
       "name": "Ursula",
       "geometry": "composite",
-      "transform": [["scale", 1.2, 1.2, 1.2], ["translate", 0, 10, -50]],
+      "transform": [["scale", 1.2, 1.2, 1.2], ["translate", 0, 20, -50]],
       "parts": [
         {
           "geometry": "lathe",
@@ -8242,7 +8554,7 @@
       "transform": [
         ["scale", 1, 0.3, 2],
         ["rotate", 90, 0, 0],
-        ["translate", 0, 0, -50]
+        ["translate", 0, 20, -50]
       ],
       "path": [
         [0, 0, -70],
@@ -8266,7 +8578,7 @@
         ["translate", 0, 0, -40]
       ],
       "path": [
-        [0, 0, -130],
+        [0, 0, -131],
         [20, 0, -120],
         [50, 0, -100],
         [50, 0, -30],
@@ -8285,7 +8597,7 @@
       "transform": [
         ["scale", 7, 7, 7],
         ["rotate", 90, 0, 0],
-        ["translate", 0, -50, -70]
+        ["translate", 0, -40, -70]
       ],
       "parts": [
         {
@@ -8995,9 +9307,9 @@
       "name": "Debris",
       "geometry": "composite",
       "transform": [
-        ["scale", 1.3, 1.3, 1.3],
+        ["scale", 1.5, 1.5, 1.5],
         ["rotate", 180, 0, 0],
-        ["translate", -20, 40, -30]
+        ["translate", -30, 40, -30]
       ],
       "parts": [
         {
@@ -9032,7 +9344,7 @@
       "transform": [
         ["scale", 10, 10, 10],
         ["rotate", 0, 183, 0],
-        ["translate", 0, 0, -60]
+        ["translate", 0, 0, -50]
       ],
       "parts": [
         {
@@ -9052,7 +9364,7 @@
           "geometry": "lathe",
           "res": 5,
           "angle": 115,
-          "transform": [["rotate", 175, 0, 0], ["translate", -4, -2, 7]],
+          "transform": [["rotate", 183, 0, 0], ["translate", -1, -3, 6]],
           "path": [[10, 0, 3], [10, 0, -3], [12, 0, -2], [12, 0, 2], [10, 0, 3]]
         }
       ]
@@ -9470,9 +9782,9 @@
       "name": "Helyon Shipyards",
       "geometry": "composite",
       "transform": [
-        ["scale", 2, 2, 2],
+        ["scale", 2.3, 2.3, 2.3],
         ["rotate", 0, 0, 80],
-        ["translate", 0, 0, -130]
+        ["translate", 0, 0, -140]
       ],
       "parts": [
         {
@@ -9907,10 +10219,10 @@
       "geometry": "composite",
       "res": 8,
       "transform": [
-        ["scale", 1.4, 1.4, 1.4],
+        ["scale", 1.8, 1.8, 1.8],
         ["rotate", 0, 0, -0.2],
         ["rotate", 0, 63, 0],
-        ["translate", 0, 0, -70]
+        ["translate", 0, 0, -85]
       ],
       "path": [[0, 0, -50], [50, 0, 0], [0, 0, 50]],
       "parts": [
@@ -9999,7 +10311,7 @@
             ["parabola", 0, -0.01, 0],
             ["scale", 0.1, 0.1, 0.1],
             ["rotate", 0, -55, 0],
-            ["translate", -60, -20, -60]
+            ["translate", -60, 30, -50]
           ],
           "path": [
             [0, 0, -130],
@@ -10016,6 +10328,20 @@
     }
   ],
   "celestials": [
+    {
+      "id": "anomaly-elevator",
+      "type": "anomaly",
+      "desc": "",
+      "celestial": {
+        "r": 4,
+        "amb": 0.2,
+        "oct": 3,
+        "zoom": 10,
+        "color": ["F80", "F80"]
+      },
+      "surface": null,
+      "model": "Space Elevator"
+    },
     {
       "id": "anomaly-ruin",
       "type": "anomaly",
@@ -10112,7 +10438,7 @@
       },
       "surface": null,
       "desc": "USO-MG85Q compliant deep space buoy",
-      "model": "Buoy"
+      "model": "Terran Buoy"
     },
     {
       "id": "anomaly-buoy-alien",
@@ -11225,6 +11551,12 @@
       "audio": "music-final ending",
       "pos": {"x": 726, "y": -2296},
       "radius": 100
+    },
+    {
+      "name": "Aesir Volume",
+      "audio": "music-world of hope",
+      "pos": {"x": 322, "y": 372},
+      "radius": 200
     }
   ],
   "name": "Skanaar's World"

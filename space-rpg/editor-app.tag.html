@@ -112,6 +112,8 @@
         self.app.isSaved = false
       })
 
+      self.app.events.on('request-close-filemenu', () => self.isFileMenuOpen = false)
+
       window.addEventListener('keydown', function (e) {
         if (e.key == 's' && e.metaKey) {
           self.app.events.trigger('save-entity')

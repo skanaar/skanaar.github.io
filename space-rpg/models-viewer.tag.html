@@ -9,6 +9,10 @@
       each={e in mesh}
       riot-d="M{e[0][0]},{e[0][1]} L{e[1][0]},{e[1][1]} L{e[2][0]},{e[2][1]} L{e[3][0]},{e[3][1]} Z"
       fill={shading(e)} stroke="#000"/>
+    <path
+      if={camera == 'perspective'}
+      riot-d="M{500+r},{310+r} L{500-r},{310+r} L{500-r},{310-r} L{500+r},{310-r} Z"
+      fill=none stroke="#000"/>
   </svg>
 
   <div class="list">
@@ -27,6 +31,7 @@
       </a><a onclick={setCamera.bind(null, 'front')} class="toggle-btn {(camera == 'front') && 'active'}">Front
       </a><a onclick={setCamera.bind(null, 'back')} class="toggle-btn {(camera == 'back') && 'active'}">Back
       </a><a onclick={setCamera.bind(null, 'side')} class="toggle-btn {(camera == 'side') && 'active'}">Side
+      </a><a onclick={setCamera.bind(null, 'iso')} class="toggle-btn {(camera == 'iso') && 'active'}">Iso
       </a><a onclick={setCamera.bind(null, 'perspective')} class="toggle-btn {(camera == 'perspective') && 'active'}">Perspective</a>
     </div>
     <div class="btn-group">
@@ -59,6 +64,7 @@
   <script>
     var self = this
     var app = self.opts.app || window.app
+    self.r = 250
     self.camera = 'perspective' // top | front | side | perspective
     self.world = { models: [] }
     self.mesh = []
@@ -271,8 +277,9 @@
         front: mmult(zoom, rotateX(-Math.PI/2)),
         back: mmult(zoom, mmult(rotateX(Math.PI/2), rotateZ(Math.PI))),
         side: mmult(zoom, mmult(rotateY(Math.PI/2), rotateZ(Math.PI/2))),
-        perspective: mmult(zoom, mmult(rotateZ(-0.75), rotateX(-1.1)))
-      }[self.camera] || mmult(rotateZ(0.3), rotateX(1.21))
+        iso: mmult(zoom, mmult(rotateZ(-0.75), rotateX(-1.1))),
+        perspective: mmult(zoom, mmult(rotateZ(Math.PI/3-Math.PI/2), rotateX(-1.05)))
+      }[self.camera] || zoom
       return mesh.map(q => transformQuad(q, perspective).map(p => vtranslate(p, [500,400,0])))
     }
 

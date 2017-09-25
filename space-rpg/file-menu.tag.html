@@ -71,6 +71,7 @@ localStorage.cloudStorage = {
         self.s3.getObject({ Key: self.cloudKey }, handleError(loadWorldFrom))
     }
     self.saveToCloud = function () {
+      app.events.trigger('request-close-filemenu')
       var world = app.getWorld()
       if (world.destinations.length) {
         var conf = { Key: self.cloudKey, Body: _.stringify(world), ACL: 'public-read' }
@@ -105,6 +106,8 @@ localStorage.cloudStorage = {
 
     function loadWorldFrom(data) {
       app.setWorld(JSON.parse(data))
+      alert('World successfully loaded')
+      app.events.trigger('request-close-filemenu')
     }
   </script>
   <style>
