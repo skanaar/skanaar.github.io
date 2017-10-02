@@ -284,7 +284,9 @@
       var shortCode = (e) => (1+Math.abs(e.pos.x)%10)+(1+Math.abs(e.pos.y)%100)
       forSelected(function (e){
         if (e.style.startsWith('asteroid')) e.name = 'A' + coords(e)
+        if (e.style.startsWith('cloud')) e.name = 'Cloud ' + coords(e)
         if (e.style == 'anomaly-buoy') e.name = 'Buoy ' + shortCode(e)
+        if (e.style == 'anomaly-ruin') e.name = 'Debris ' + coords(e)
         if (e.style == 'anomaly-junk') e.name = 'Debris ' + coords(e)
         if (e.style == 'anomaly-debris') e.name = 'Debris ' + coords(e)
       })
