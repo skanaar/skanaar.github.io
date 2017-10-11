@@ -24,7 +24,6 @@
       <option each={e in types}>{e}</option>
     </select>
     <input type=text ref="idField" value={selected && selected.id}>
-    <textarea ref="descField" rows=5>{selected && selected.desc}</textarea><br/>
     
     <label>Celestial Attributes</label>
     <div class="input-grid">
@@ -96,7 +95,6 @@
       var obj = {
         id:'unnamed',
         type: 'asteroid',
-        desc: '',
         celestial: {r: 20, amb: 0.2, oct: 3, zoom: 10, color: ['888', 'D84']},
         surface: { zoom: 1.5, height: 2, octaves: 2, falloff: 0.2, curve: [0,1], spectrum: ['000', 'FFF'] }
       }
@@ -121,8 +119,7 @@
       self.selected.type = self.refs.typeChooser.value
       identifier[0] = self.selected.type
       self.selected.id = identifier.join('-')
-      self.selected.desc = self.refs.descField.value
-
+      
       self.selected.celestial.r = +self.refs.rField.value
       self.selected.celestial.amb = +self.refs.ambField.value
       self.selected.celestial.oct = +self.refs.octField.value

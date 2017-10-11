@@ -133,6 +133,7 @@
     }
     
     self.endEditing = function () {
+      if (!self.selected) { return }
       if (!self.isSourceValid()) {
         alert('Model source has parsing errors. Please fix.')
         return

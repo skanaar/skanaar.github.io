@@ -52,6 +52,7 @@
     }
     self.toggleFileMenu = () => self.isFileMenuOpen = ! self.isFileMenuOpen
     self.pageChange = function() {
+      self.app.events.trigger('save-entity')
       self.app.events.trigger('save-world')
       self.app.events.trigger('request-validate')
       window.document.body.scrollTop = 0
