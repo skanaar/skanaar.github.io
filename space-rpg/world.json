@@ -824,6 +824,17 @@
   ],
   "items": [
     {
+      "name": "Mysterious Device",
+      "type": "quest",
+      "level": 0,
+      "credits": -1,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
       "name": "Mimos Key",
       "type": "quest",
       "level": 0,
@@ -6006,7 +6017,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -774, "y": 254},
+      "pos": {"x": -774, "y": 234},
       "name": "Sternrat Station",
       "style": "anomaly-sternrat",
       "trader": {
@@ -6201,7 +6212,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -720, "y": 140},
+      "pos": {"x": -674, "y": 52},
       "name": "Bundeszone",
       "style": "anomaly-hermit",
       "trader": {
@@ -6228,7 +6239,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -824, "y": 268},
+      "pos": {"x": -824, "y": 248},
       "name": "Traum",
       "style": "jovian-3",
       "trader": null,
@@ -6236,7 +6247,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -671, "y": 222},
+      "pos": {"x": -671, "y": 206},
       "name": "Staub",
       "style": "planet-rock-1",
       "trader": null,
@@ -6244,15 +6255,15 @@
       "treasures": []
     },
     {
-      "pos": {"x": -686, "y": 344},
+      "pos": {"x": -688, "y": 326},
       "name": "Dunkel Mond",
-      "style": "asteroid-4",
+      "style": "planet-s-rock-1",
       "trader": null,
       "enemy": null,
       "treasures": []
     },
     {
-      "pos": {"x": -751, "y": 372},
+      "pos": {"x": -739, "y": 342},
       "name": "Dunkel",
       "style": "planet-green-6",
       "trader": null,
@@ -6260,7 +6271,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -873, "y": 355},
+      "pos": {"x": -941, "y": 355},
       "name": "A1593",
       "style": "asteroid-1",
       "trader": null,
@@ -6268,7 +6279,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1001, "y": 299},
+      "pos": {"x": -1001, "y": 279},
       "name": "A1674",
       "style": "asteroid-7",
       "trader": null,
@@ -6276,7 +6287,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -924, "y": 214},
+      "pos": {"x": -924, "y": 194},
       "name": "Wüste",
       "style": "planet-beach",
       "trader": {
@@ -6299,7 +6310,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -974, "y": 111},
+      "pos": {"x": -958, "y": 77},
       "name": "A1551",
       "style": "asteroid-7",
       "trader": null,
@@ -6307,7 +6318,7 @@
       "treasures": ["Platinum", "Alien Flora"]
     },
     {
-      "pos": {"x": -827, "y": 24},
+      "pos": {"x": -827, "y": 4},
       "name": "Tod",
       "style": "planet-hell-1",
       "trader": null,
@@ -6315,7 +6326,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -827, "y": 143},
+      "pos": {"x": -843, "y": 127},
       "name": "Hafen",
       "style": "planet-badlands-1",
       "trader": null,
@@ -6323,7 +6334,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -678, "y": 103},
+      "pos": {"x": -718, "y": 103},
       "name": "A1396",
       "style": "asteroid-5",
       "trader": null,
@@ -6411,15 +6422,15 @@
       "treasures": []
     },
     {
-      "pos": {"x": -587, "y": 186},
+      "pos": {"x": -625, "y": 192},
       "name": "Staub Mond",
-      "style": "asteroid-1",
+      "style": "planet-hell-1",
       "trader": null,
       "enemy": null,
       "treasures": []
     },
     {
-      "pos": {"x": -621, "y": 398},
+      "pos": {"x": -621, "y": 386},
       "name": "Dunkel Trojan",
       "style": "asteroid-2",
       "trader": null,
@@ -6427,7 +6438,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -771, "y": 451},
+      "pos": {"x": -771, "y": 431},
       "name": "A499",
       "style": "asteroid-4",
       "trader": null,
@@ -6435,7 +6446,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -961, "y": 427},
+      "pos": {"x": -981, "y": 427},
       "name": "Debris 503",
       "style": "anomaly-junk",
       "trader": null,
@@ -6467,15 +6478,15 @@
       "treasures": []
     },
     {
-      "pos": {"x": -894, "y": 17},
+      "pos": {"x": -876, "y": -1},
       "name": "Tod Mond",
-      "style": "asteroid-7",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": []
     },
     {
-      "pos": {"x": -688, "y": -25},
+      "pos": {"x": -568, "y": 115},
       "name": "A288",
       "style": "asteroid-1",
       "trader": null,
@@ -6547,7 +6558,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1062, "y": 699},
+      "pos": {"x": -1042, "y": 699},
       "name": "Beendung",
       "style": "planet-hell-3",
       "trader": null,
@@ -6555,7 +6566,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -986, "y": 726},
+      "pos": {"x": -1006, "y": 786},
       "name": "A660",
       "style": "asteroid-1",
       "trader": null,
@@ -6563,7 +6574,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1105, "y": 860},
+      "pos": {"x": -1065, "y": 880},
       "name": "A865",
       "style": "asteroid-9",
       "trader": null,
@@ -6571,7 +6582,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1134, "y": 763},
+      "pos": {"x": -1114, "y": 763},
       "name": "A853",
       "style": "asteroid-4",
       "trader": null,
@@ -6603,7 +6614,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -893, "y": 474},
+      "pos": {"x": -893, "y": 454},
       "name": "A1347",
       "style": "asteroid-6",
       "trader": null,
@@ -6619,7 +6630,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -765, "y": 737},
+      "pos": {"x": -845, "y": 737},
       "name": "A1442",
       "style": "asteroid-7",
       "trader": null,
@@ -6627,23 +6638,23 @@
       "treasures": ["Platinum"]
     },
     {
-      "pos": {"x": -768, "y": 833},
-      "name": "A1541",
+      "pos": {"x": -864, "y": 921},
+      "name": "Teil",
       "style": "asteroid-4",
       "trader": null,
       "enemy": null,
       "treasures": []
     },
     {
-      "pos": {"x": -868, "y": 852},
-      "name": "A1660",
+      "pos": {"x": -828, "y": 806},
+      "name": "Scherbe",
       "style": "asteroid-2",
       "trader": null,
       "enemy": null,
-      "treasures": []
+      "treasures": ["Mysterious Device"]
     },
     {
-      "pos": {"x": -984, "y": 925},
+      "pos": {"x": -880, "y": 861},
       "name": "Mimos Ruins",
       "style": "anomaly-ruin",
       "trader": null,
@@ -6651,15 +6662,15 @@
       "treasures": []
     },
     {
-      "pos": {"x": -975, "y": 828},
-      "name": "A1743",
+      "pos": {"x": -949, "y": 836},
+      "name": "Splitter",
       "style": "asteroid-1",
       "trader": null,
       "enemy": null,
       "treasures": []
     },
     {
-      "pos": {"x": -900, "y": 728},
+      "pos": {"x": -940, "y": 728},
       "name": "Höhle",
       "style": "planet-neutron-3",
       "trader": null,
@@ -6675,7 +6686,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -902, "y": 583},
+      "pos": {"x": -862, "y": 603},
       "name": "A1425",
       "style": "asteroid-7",
       "trader": null,
@@ -6691,7 +6702,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -765, "y": 554},
+      "pos": {"x": -765, "y": 534},
       "name": "A1299",
       "style": "asteroid-3",
       "trader": null,
@@ -6717,6 +6728,14 @@
     {
       "pos": {"x": 36, "y": -1600},
       "name": "Outback Transfer Buoy",
+      "style": "anomaly-buoy",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -822, "y": 114},
+      "name": "Hafen Tracking Station",
       "style": "anomaly-buoy",
       "trader": null,
       "enemy": null,
@@ -6828,6 +6847,20 @@
       "xml": "<condition state=\"surface\" at-dest=\"Bundeszone\" trigger=\"HAIL TRADER\"/>\n<dialog model=\"Hermit Home\">_\"Welcome Traveller.\nOur store is closed right now. The conflict forced the Sternrat to requisition our entire stock.\"_</dialog>\n<dialog model=\"Hermit Home\">_\"We have a delivery incoming but it is stuck at *Tod Mond*.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Tod Mond\" />\n\n<condition at-dest=\"Tod Mond\" trigger=\"SCAN FOR CARGO\"/>\n<dialog>The scanner sweeps across the region.\nNo sign of the trader's cargo at this moon.\n\nBut far north there are traces of a destroyed transport...</dialog>\n<mark-on-map dest=\"Tod Debris\" />\n\n<condition at-dest=\"Tod Debris\" trigger=\"SCAN FOR CARGO\"/>\n<dialog model=\"Debris\">Death. Once a cargo ship. Now a smoldering carcass.\nThe Mimos did this.\n\nIn the breached cargo section the trader's crates sit. You take what you came for.</dialog>\n<mark-on-map dest=\"Bundeszone\" />\n\n<condition state=\"surface\" at-dest=\"Bundeszone\" trigger=\"GIVE CARGO\"/>\n<dialog model=\"Hermit Home\">_\"Amazing!\nPlease, take this reward. And buy here at a discount of course. Our inventory is now restored.\"_</dialog>\n<give credits=\"2000\" />\n<place-inventory dest=\"Bundeszone\" item=\"Nanite Attack;EMP Bomb;Gauss Gun;Phased Ray;Coronal Pulse;Locus Beam;Luminal Driver;Sc Disruptor;Metabomb;Railgun;Nucleon Ray;Aural Pulse;Apex Beam;Helix Driver;Au Disruptor\"/>",
       "color": "0fc",
       "icon": "square",
+      "tags": "sternrat"
+    },
+    {
+      "name": "Outer Dusk Ranger",
+      "xml": "<condition at-dest=\"Hafen Tracking Station\" state=\"surface\" trigger=\"HAIL\"/>\n<dialog ok=\"ENLIST\" cancel=\"NOT NOW\">_\"Traveller, the war effort need help with tracking enemy movements in the *Outer Dusk*.\"_\n\n_\"Can we count on you?\"_</dialog>\n<dialog>_\"Excellent!\"_\n\n_\"Give **Beendung* and *Höhle* any support they require.\nAnd look for any hidden Mimos bases or devices in the surrounding asteroids.\"_</dialog>\n<mark-on-map dest=\"Höhle\" />\n<add-to-quest-list />\n\n<condition at-dest=\"Höhle\" state=\"surface\" trigger=\"REPORT TO HÖHLE\"/>\n<dialog>_\"What? Are the federals sending us mercenaries instead of real military now?\"_</dialog>\n<dialog>You ignore their internal politics and ask if they need any help.</dialog>\n<dialog>_\"The Mimos make occasional forays into the Outer Dusk. We need help with these intrusions.\"_</dialog>\n\n<condition at-dest=\"Höhle\" state=\"surface\" no-enemy-at-dest=\"A646;A823;Beendung\" trigger=\"REPORT AREA CLEAR\"/>\n<dialog>You report that you have cleared the Outer Dusk of Mimos rangers.\n\n_\"Thank you! The intrusions must serve a purpose, they are hiding something out here...\"_</dialog>\n\n<condition at-dest=\"Höhle\" state=\"surface\" trigger=\"SHOW MYSTERIOUS DEVICE\"/>\n<dialog>_\"Did you find that out there? It smells of the Mimos, must be their device.\"_\n\n_\"Wonder what that thing do? Surely nothing good.\"_</dialog>\n<dialog>_\"For being a mercenary, you did really well. Make sure to collect your payment at *Hafen Tracking Station*.\"_</dialog>\n<condition at-dest=\"Hafen Tracking Station\" state=\"surface\" trigger=\"REPORT SUCCESS\"/>\n<dialog>You report that you cleared the Outer Dusk. The Hafen personel don't know what to make of the Mysterious Device but they take it and pay you handsomely.</dialog>\n<give credits=\"400\" />\n<take item=\"Mysterious Device\" />",
+      "color": "0f0",
+      "icon": "square",
+      "tags": "sternrat"
+    },
+    {
+      "name": "Bugging the Outer Dusk",
+      "xml": "<condition state=\"surface\" at-dest=\"Mimos Habitat\" trigger=\"CONTACT MIMOS\"/>\n<dialog>`Mimos. Human.`\n`Activate. Ruins. 3 Devices. Place *Splitter*. Place *Scherbe*. *Place Teil*.`</dialog>\n<dialog>The don't attack you. Perhaps because you hailed them first. They seems to be giving instructions. You radio a question back.</dialog>\n<dialog>`3 Devices. *Ruins*. Activate. Friend. Not weapon. Not harm.`</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Splitter\" />\n<give item=\"Mysterious Device\"/>\n<give item=\"Mysterious Device\"/>\n<give item=\"Mysterious Device\"/>\n\n<condition state=\"surface\" at-dest=\"Splitter\" trigger=\"PLACE DEVICE\"/>\n<take item=\"Mysterious Device\"/>\n<mark-on-map dest=\"Scherbe\" />\n\n<condition state=\"surface\" at-dest=\"Scherbe\" trigger=\"PLACE DEVICE\"/>\n<take item=\"Mysterious Device\"/>\n<mark-on-map dest=\"Teil\" />\n\n<condition state=\"surface\" at-dest=\"Teil\" trigger=\"PLACE DEVICE\"/>\n<take item=\"Mysterious Device\"/>\n\n<mark-on-map dest=\"Mimos Ruins\" />\n\n<condition at-dest=\"Mimos Ruins\" />\n<dialog model=\"Ruin\">As you approach the ruins you see that something has happened to them.\n\nOr is happening.\n\nThey seem to live.</dialog>\n<dialog model=\"Ruin\">The devices you have places have activated the Mimos Ruins.\nChanging. Repairing.\nThey are becoming something.</dialog>\n<dialog model=\"Ruin\">The interior of the ruin starts to shimmer and shift.\nFrom inside the structure Mimos ships emerge. The space ripplings like water as they materialize one after another.</dialog>\n<dialog>They are not warships. They are something else.\n\n`Friend. Mimos. Peace Sternrat. Peace Mimos. *Tell Sternrat Station*.`</dialog>\n<mark-on-map dest=\"Sternrat Station\" />\n\n<condition state=\"surface\" at-dest=\"Sternrat Station\" trigger=\"MEDIATE PEACE\"/>\n<dialog>The senators at Sternrat Stations are not happy. They see the Mimos as aggressors, and you as a traitor for opening the gate.\n\nBut they also see the the Mimos peacefully waiting for a response.</dialog>\n<dialog>The senate at Sternrat Stations send an envoy. A diplomatic mission. They dismiss you. Give their thanks privately, wary of the political ramifications of embracing your actions if the peace falters.</dialog>\n\n<dialog>You, a mediator. And here, perhaps peace.</dialog>\n",
+      "color": "f90",
+      "icon": "bookmark",
       "tags": "sternrat"
     },
     {
@@ -12866,8 +12899,8 @@
     {
       "name": "Sternbund",
       "audio": "music-world of hope",
-      "pos": {"x": -750, "y": 188},
-      "radius": 400
+      "pos": {"x": -820, "y": 202},
+      "radius": 350
     },
     {
       "name": "Outer Dusk",

@@ -101,7 +101,9 @@
 
     self.add = function () {
       self.filter = ''
-      self.world.quests.unshift({ name: 'unnamed', xml: '', color: '0F0', icon: 'arrow' })
+      self.world.quests.unshift({
+        name: 'unnamed', xml: '', color: '0F0', icon: 'arrow', tags: self.refs.filterInput.type
+      })
     }
 
     self.edit = function (e) {
