@@ -34,7 +34,7 @@
   "globalstrict": true,
   "latedef": "nofunc",
   "laxcomma": true,
-  "maxlen": 120,
+  "maxlen": false,
   "maxparams": 5,
   "quotmark": "single",
   "shadow": false,

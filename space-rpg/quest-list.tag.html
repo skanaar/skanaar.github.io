@@ -13,6 +13,8 @@
 
   <div class="toolbox quest-tools">
     <button onclick={add}>+ New Quest</button>
+    <button onclick={popupFormattedText}>{!formattedText ? 'Show' : 'Hide'} formatted</button>
+    <textarea rows=1 if={!!formattedText}>{formattedText}</textarea>
     <div class="btn-group">
       <a class="toggle-btn" onclick={up}>Up in list</a><a class="toggle-btn" onclick={down}>Down in list</a>
     </div>
@@ -47,6 +49,7 @@
     var app = this.opts.app || window.app
     self.world = app.nullWorld()
     self.warnings = []
+    self.formattedText = null
     self.selected = null
     self.icons = 'square bar pillar bookmark star rhomb drop triangle chevron trader enter exit heart shield bolt'.split(' ')
     self.templates = [
@@ -73,6 +76,17 @@
     self.filteredItems = function () {
       var predicate = self.refs.filterInput && self.refs.filterInput.predicate || (() => true)
       return self.world.quests.filter(predicate)
+    }
+
+    self.popupFormattedText = function () {
+      if (self.formattedText) {
+        self.formattedText = null
+        return
+      }
+      var cleanup = s => s.replace(/`|_|\*/g, '')
+      var steps = quest => (quest.xml.match(/>([^>]*)<\/dialog>/g) || []).map(e => cleanup(e.substr(1, e.length-10)))
+      var text = self.filteredItems().map(q => `\n\n\n${q.name.toUpperCase()}\n---------\n${steps(q).join('\n----\n')}`)
+      self.formattedText = text
     }
 
     self.useTemplate = function (e) {
