@@ -426,9 +426,9 @@
         "Active Armor",
         "Gluon Shield",
         "Absorb Inducer",
-        "Mk4 Reactor",
         "Solenoid Gun",
-        "Tau Ray"
+        "Tau Ray",
+        "Mk2 Reactor"
       ],
       "level": 4,
       "value": 0,
@@ -454,11 +454,11 @@
         "Incision Beam",
         "Meson Ray",
         "Mk4 Battery",
-        "Mk4 Reactor",
         "Welding Robot",
         "Absorb Inducer",
         "Absorb Cell",
-        "Restore Kit"
+        "Restore Kit",
+        "Mk2 Reactor"
       ],
       "level": 4,
       "value": 0,
@@ -484,8 +484,8 @@
         "Mk4 Battery",
         "Solenoid Gun",
         "Absorb Cell",
-        "Absorb Inducer",
-        "Solenoid Gun"
+        "Solenoid Gun",
+        "Shell Inducer"
       ],
       "isFlying": true,
       "value": 0,
@@ -510,11 +510,11 @@
         "Javelin Driver",
         "Sinusoid Pulse",
         "Tau Ray",
-        "Restore Robot",
         "Mk4 Capacitor",
         "Absorb Cell",
         "Mk4 Battery",
-        "Welding Robot"
+        "Welding Robot",
+        "Restore Kit"
       ],
       "isFlying": true
     },
@@ -536,11 +536,11 @@
       "inventory": [
         "Nanite Kit",
         "Dermal Cell",
-        "Nanite Robot",
         "Dynamic Armor",
         "Gauss Gun",
         "Phased Ray",
-        "EMP Bomb"
+        "EMP Bomb",
+        "Repair Robot"
       ],
       "isFlying": true
     },
@@ -563,8 +563,8 @@
         "Sacrifice Device",
         "Shield Battery",
         "Focal Beam",
-        "Dermal Inducer",
-        "Mk5 Capacitor"
+        "Mk5 Capacitor",
+        "Shell Inducer"
       ],
       "isFlying": true,
       "value": 0,
@@ -591,8 +591,8 @@
         "Repair Goo",
         "Monopole Shield",
         "Meson Ray",
-        "Mk5 Reactor",
-        "Gauss Gun"
+        "Gauss Gun",
+        "Mk3 Reactor"
       ],
       "isFlying": true,
       "slots": 0,
@@ -679,9 +679,10 @@
         "Metabomb",
         "Focal Beam",
         "Mk6 Capacitor",
-        "Aegis Inducer",
-        "Healing Robot",
-        "Mk6 Reactor"
+        "Mk2 Reactor",
+        "Mk1 Reactor",
+        "Shell Inducer",
+        "Repair Robot"
       ],
       "level": 6,
       "value": 0,
@@ -711,8 +712,8 @@
         "Shield Turbopump",
         "Sacrifice Device",
         "Fluid Armor",
-        "Healing Robot",
-        "Mk6 Battery"
+        "Mk6 Battery",
+        "Repair Robot"
       ],
       "isFlying": true,
       "slots": 0,
@@ -823,6 +824,17 @@
     }
   ],
   "items": [
+    {
+      "name": "Signal Capacitor",
+      "type": "rare",
+      "level": 0,
+      "credits": 40,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
     {
       "name": "Mysterious Device",
       "type": "quest",
@@ -1930,7 +1942,7 @@
       "name": "Autogun",
       "type": "weapon",
       "level": 1,
-      "credits": 14,
+      "credits": 4,
       "critical": 0.05,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -1941,7 +1953,7 @@
       "name": "Autogun Mk2",
       "type": "weapon",
       "level": 2,
-      "credits": 32,
+      "credits": 26,
       "critical": 0.05,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -1952,7 +1964,7 @@
       "name": "Autogun Mk3",
       "type": "weapon",
       "level": 3,
-      "credits": 72,
+      "credits": 90,
       "critical": 0.05,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -1963,7 +1975,7 @@
       "name": "Solenoid Gun",
       "type": "weapon",
       "level": 4,
-      "credits": 148,
+      "credits": 212,
       "critical": 0.05,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -1974,7 +1986,7 @@
       "name": "Gauss Gun",
       "type": "weapon",
       "level": 5,
-      "credits": 244,
+      "credits": 412,
       "critical": 0.05,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -1985,7 +1997,7 @@
       "name": "Railgun",
       "type": "weapon",
       "level": 6,
-      "credits": 474,
+      "credits": 712,
       "critical": 0.05,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -1996,7 +2008,7 @@
       "name": "Heat Ray",
       "type": "weapon",
       "level": 1,
-      "credits": 16,
+      "credits": 4,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2007,7 +2019,7 @@
       "name": "Photon Ray",
       "type": "weapon",
       "level": 2,
-      "credits": 34,
+      "credits": 26,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2018,7 +2030,7 @@
       "name": "Meson Ray",
       "type": "weapon",
       "level": 3,
-      "credits": 50,
+      "credits": 90,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2029,7 +2041,7 @@
       "name": "Tau Ray",
       "type": "weapon",
       "level": 4,
-      "credits": 112,
+      "credits": 212,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2040,7 +2052,7 @@
       "name": "Phased Ray",
       "type": "weapon",
       "level": 5,
-      "credits": 192,
+      "credits": 412,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2051,7 +2063,7 @@
       "name": "Nucleon Ray",
       "type": "weapon",
       "level": 6,
-      "credits": 382,
+      "credits": 712,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2062,73 +2074,73 @@
       "name": "EM Pulse",
       "type": "weapon",
       "level": 1,
-      "credits": 22,
+      "credits": 4,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -4}
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -5}
     },
     {
       "name": "Voltaic Pulse",
       "type": "weapon",
       "level": 2,
-      "credits": 42,
+      "credits": 26,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -6}
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -8}
     },
     {
       "name": "Soliton Pulse",
       "type": "weapon",
       "level": 3,
-      "credits": 68,
+      "credits": 90,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -9}
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -12}
     },
     {
       "name": "Sinusoid Pulse",
       "type": "weapon",
       "level": 4,
-      "credits": 150,
+      "credits": 212,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -4},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -14}
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -18}
     },
     {
       "name": "Coronal Pulse",
       "type": "weapon",
       "level": 5,
-      "credits": 288,
+      "credits": 412,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -22}
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -27}
     },
     {
       "name": "Aural Pulse",
       "type": "weapon",
       "level": 6,
-      "credits": 574,
+      "credits": 712,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -8},
-      "targetBuff": {"hull": 0, "shield": 0, "energy": -33}
+      "targetBuff": {"hull": 0, "shield": 0, "energy": -41}
     },
     {
       "name": "Cutting Beam",
       "type": "weapon",
       "level": 1,
-      "credits": 20,
+      "credits": 4,
       "critical": 0.2,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2139,7 +2151,7 @@
       "name": "Piercing Beam",
       "type": "weapon",
       "level": 2,
-      "credits": 66,
+      "credits": 26,
       "critical": 0.2,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2150,7 +2162,7 @@
       "name": "Incision Beam",
       "type": "weapon",
       "level": 3,
-      "credits": 124,
+      "credits": 90,
       "critical": 0.2,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2161,7 +2173,7 @@
       "name": "Focal Beam",
       "type": "weapon",
       "level": 4,
-      "credits": 214,
+      "credits": 212,
       "critical": 0.2,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2172,7 +2184,7 @@
       "name": "Locus Beam",
       "type": "weapon",
       "level": 5,
-      "credits": 336,
+      "credits": 412,
       "critical": 0.2,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2183,7 +2195,7 @@
       "name": "Apex Beam",
       "type": "weapon",
       "level": 6,
-      "credits": 526,
+      "credits": 712,
       "critical": 0.2,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2194,139 +2206,139 @@
       "name": "Slug Driver",
       "type": "weapon",
       "level": 1,
-      "credits": 50,
+      "credits": 4,
       "critical": 0.5,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": -3, "shield": 0, "energy": 0}
+      "targetBuff": {"hull": -5, "shield": 0, "energy": 0}
     },
     {
       "name": "Rod Driver",
       "type": "weapon",
       "level": 2,
-      "credits": 146,
+      "credits": 26,
       "critical": 0.5,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
-      "targetBuff": {"hull": -5, "shield": 0, "energy": 0}
+      "targetBuff": {"hull": -8, "shield": 0, "energy": 0}
     },
     {
       "name": "Mass Driver",
       "type": "weapon",
       "level": 3,
-      "credits": 272,
+      "credits": 90,
       "critical": 0.5,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
-      "targetBuff": {"hull": -7, "shield": 0, "energy": 0}
+      "targetBuff": {"hull": -12, "shield": 0, "energy": 0}
     },
     {
       "name": "Javelin Driver",
       "type": "weapon",
       "level": 4,
-      "credits": 474,
+      "credits": 212,
       "critical": 0.5,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -4},
-      "targetBuff": {"hull": -11, "shield": 0, "energy": 0}
+      "targetBuff": {"hull": -18, "shield": 0, "energy": 0}
     },
     {
       "name": "Luminal Driver",
       "type": "weapon",
       "level": 5,
-      "credits": 720,
+      "credits": 412,
       "critical": 0.5,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
-      "targetBuff": {"hull": -16, "shield": 0, "energy": 0}
+      "targetBuff": {"hull": -27, "shield": 0, "energy": 0}
     },
     {
       "name": "Helix Driver",
       "type": "weapon",
       "level": 6,
-      "credits": 1122,
+      "credits": 712,
       "critical": 0.5,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -8},
-      "targetBuff": {"hull": -25, "shield": 0, "energy": 0}
+      "targetBuff": {"hull": -41, "shield": 0, "energy": 0}
     },
     {
       "name": "EM Disruptor",
       "type": "weapon",
       "level": 1,
-      "credits": 16,
+      "credits": 4,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -1},
-      "targetBuff": {"hull": 0, "shield": -3, "energy": 0}
+      "targetBuff": {"hull": 0, "shield": -5, "energy": 0}
     },
     {
       "name": "Tau Disruptor",
       "type": "weapon",
       "level": 2,
-      "credits": 34,
+      "credits": 26,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
-      "targetBuff": {"hull": 0, "shield": -5, "energy": 0}
+      "targetBuff": {"hull": 0, "shield": -8, "energy": 0}
     },
     {
       "name": "Co Disruptor",
       "type": "weapon",
       "level": 3,
-      "credits": 50,
+      "credits": 90,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -2},
-      "targetBuff": {"hull": 0, "shield": -7, "energy": 0}
+      "targetBuff": {"hull": 0, "shield": -12, "energy": 0}
     },
     {
       "name": "Ur Disruptor",
       "type": "weapon",
       "level": 4,
-      "credits": 112,
+      "credits": 212,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -4},
-      "targetBuff": {"hull": 0, "shield": -11, "energy": 0}
+      "targetBuff": {"hull": 0, "shield": -18, "energy": 0}
     },
     {
       "name": "Sc Disruptor",
       "type": "weapon",
       "level": 5,
-      "credits": 192,
+      "credits": 412,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
-      "targetBuff": {"hull": 0, "shield": -16, "energy": 0}
+      "targetBuff": {"hull": 0, "shield": -27, "energy": 0}
     },
     {
       "name": "Au Disruptor",
       "type": "weapon",
       "level": 6,
-      "credits": 402,
+      "credits": 712,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
       "playerBuff": {"hull": 0, "shield": 0, "energy": -8},
-      "targetBuff": {"hull": 0, "shield": -25, "energy": 0}
+      "targetBuff": {"hull": 0, "shield": -41, "energy": 0}
     },
     {
       "name": "Quench Device",
       "type": "weapon",
       "level": 1,
-      "credits": 112,
+      "credits": 4,
       "critical": 0.5,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2337,7 +2349,7 @@
       "name": "Z Device",
       "type": "weapon",
       "level": 2,
-      "credits": 302,
+      "credits": 26,
       "critical": 0.5,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2348,7 +2360,7 @@
       "name": "Luhn Device",
       "type": "weapon",
       "level": 3,
-      "credits": 774,
+      "credits": 90,
       "critical": 0.5,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2370,7 +2382,7 @@
       "name": "Tungsten Armor",
       "type": "buffer",
       "level": 2,
-      "credits": 10,
+      "credits": 44,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 3, "maxshield": 0, "maxenergy": 0},
@@ -2381,7 +2393,7 @@
       "name": "Ablative Armor",
       "type": "buffer",
       "level": 3,
-      "credits": 22,
+      "credits": 146,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 5, "maxshield": 0, "maxenergy": 0},
@@ -2392,7 +2404,7 @@
       "name": "Active Armor",
       "type": "buffer",
       "level": 4,
-      "credits": 34,
+      "credits": 346,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 7, "maxshield": 0, "maxenergy": 0},
@@ -2403,7 +2415,7 @@
       "name": "Dynamic Armor",
       "type": "buffer",
       "level": 5,
-      "credits": 68,
+      "credits": 676,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 11, "maxshield": 0, "maxenergy": 0},
@@ -2414,7 +2426,7 @@
       "name": "Fluid Armor",
       "type": "buffer",
       "level": 6,
-      "credits": 124,
+      "credits": 1166,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 16, "maxshield": 0, "maxenergy": 0},
@@ -2436,7 +2448,7 @@
       "name": "Proton Shield",
       "type": "buffer",
       "level": 2,
-      "credits": 10,
+      "credits": 44,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 3, "maxenergy": 0},
@@ -2447,7 +2459,7 @@
       "name": "Quark Shield",
       "type": "buffer",
       "level": 3,
-      "credits": 22,
+      "credits": 146,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 5, "maxenergy": 0},
@@ -2458,7 +2470,7 @@
       "name": "Gluon Shield",
       "type": "buffer",
       "level": 4,
-      "credits": 34,
+      "credits": 346,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 7, "maxenergy": 0},
@@ -2469,7 +2481,7 @@
       "name": "Monopole Shield",
       "type": "buffer",
       "level": 5,
-      "credits": 42,
+      "credits": 676,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 8, "maxenergy": 0},
@@ -2480,7 +2492,7 @@
       "name": "Pauli Shield",
       "type": "buffer",
       "level": 6,
-      "credits": 78,
+      "credits": 1166,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 12, "maxenergy": 0},
@@ -2491,7 +2503,7 @@
       "name": "Mk1 Capacitor",
       "type": "buffer",
       "level": 1,
-      "credits": 16,
+      "credits": 6,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 4},
@@ -2502,7 +2514,7 @@
       "name": "Mk2 Capacitor",
       "type": "buffer",
       "level": 2,
-      "credits": 28,
+      "credits": 44,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 6},
@@ -2513,7 +2525,7 @@
       "name": "Mk3 Capacitor",
       "type": "buffer",
       "level": 3,
-      "credits": 50,
+      "credits": 146,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 9},
@@ -2524,7 +2536,7 @@
       "name": "Mk4 Capacitor",
       "type": "buffer",
       "level": 4,
-      "credits": 100,
+      "credits": 346,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 14},
@@ -2535,7 +2547,7 @@
       "name": "Mk5 Capacitor",
       "type": "buffer",
       "level": 5,
-      "credits": 206,
+      "credits": 676,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 22},
@@ -2546,7 +2558,7 @@
       "name": "Mk6 Capacitor",
       "type": "buffer",
       "level": 6,
-      "credits": 402,
+      "credits": 1166,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 33},
@@ -2567,56 +2579,56 @@
     {
       "name": "Mend Robot",
       "type": "module",
-      "level": 2,
-      "credits": 16,
+      "level": 3,
+      "credits": 142,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 2, "shield": 0, "energy": -2},
+      "playerBuff": {"hull": 2, "shield": 0, "energy": -3},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Repair Robot",
       "type": "module",
-      "level": 3,
-      "credits": 28,
+      "level": 5,
+      "credits": 656,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 3, "shield": 0, "energy": -3},
+      "playerBuff": {"hull": 3, "shield": 0, "energy": -5},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Restore Robot",
       "type": "module",
-      "level": 4,
-      "credits": 42,
+      "level": 7,
+      "credits": 1800,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 4, "shield": 0, "energy": -4},
+      "playerBuff": {"hull": 4, "shield": 0, "energy": -7},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Nanite Robot",
       "type": "module",
-      "level": 5,
-      "credits": 58,
+      "level": 9,
+      "credits": 3828,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 5, "shield": 0, "energy": -5},
+      "playerBuff": {"hull": 5, "shield": 0, "energy": -9},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Healing Robot",
       "type": "module",
-      "level": 6,
-      "credits": 78,
+      "level": 11,
+      "credits": 6988,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 6, "shield": 0, "energy": -6},
+      "playerBuff": {"hull": 6, "shield": 0, "energy": -11},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
@@ -2633,63 +2645,63 @@
     {
       "name": "Buffer Inducer",
       "type": "module",
-      "level": 2,
-      "credits": 16,
+      "level": 3,
+      "credits": 142,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 2, "energy": -2},
+      "playerBuff": {"hull": 0, "shield": 2, "energy": -3},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Shell Inducer",
       "type": "module",
-      "level": 3,
-      "credits": 28,
+      "level": 5,
+      "credits": 656,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 3, "energy": -3},
+      "playerBuff": {"hull": 0, "shield": 3, "energy": -5},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Absorb Inducer",
       "type": "module",
-      "level": 4,
-      "credits": 42,
+      "level": 7,
+      "credits": 1800,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 4, "energy": -4},
+      "playerBuff": {"hull": 0, "shield": 4, "energy": -7},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Dermal Inducer",
       "type": "module",
-      "level": 5,
-      "credits": 58,
+      "level": 9,
+      "credits": 3828,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 5, "energy": -5},
+      "playerBuff": {"hull": 0, "shield": 5, "energy": -9},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Aegis Inducer",
       "type": "module",
-      "level": 6,
-      "credits": 78,
+      "level": 11,
+      "credits": 6988,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 6, "energy": -6},
+      "playerBuff": {"hull": 0, "shield": 6, "energy": -11},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk0 Reactor",
       "type": "module",
       "level": 1,
-      "credits": 4,
+      "credits": 6,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2699,8 +2711,8 @@
     {
       "name": "Mk1 Reactor",
       "type": "module",
-      "level": 1,
-      "credits": 6,
+      "level": 2,
+      "credits": 42,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2710,63 +2722,63 @@
     {
       "name": "Mk2 Reactor",
       "type": "module",
-      "level": 2,
-      "credits": 16,
+      "level": 3,
+      "credits": 142,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 4},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 3},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk3 Reactor",
       "type": "module",
-      "level": 3,
-      "credits": 28,
+      "level": 5,
+      "credits": 656,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 6},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 5},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk4 Reactor",
       "type": "module",
-      "level": 4,
-      "credits": 42,
+      "level": 7,
+      "credits": 1800,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 8},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 7},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk5 Reactor",
       "type": "module",
-      "level": 5,
-      "credits": 58,
+      "level": 9,
+      "credits": 3828,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 10},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 9},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Mk6 Reactor",
       "type": "module",
-      "level": 6,
-      "credits": 78,
+      "level": 11,
+      "credits": 6988,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 0, "shield": 0, "energy": 12},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 11},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
       "name": "Patch Kit",
       "type": "tool",
       "level": 1,
-      "credits": 22,
+      "credits": 2,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2777,7 +2789,7 @@
       "name": "Mend Kit",
       "type": "tool",
       "level": 2,
-      "credits": 42,
+      "credits": 20,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2788,7 +2800,7 @@
       "name": "Repair Kit",
       "type": "tool",
       "level": 3,
-      "credits": 78,
+      "credits": 64,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2799,7 +2811,7 @@
       "name": "Restore Kit",
       "type": "tool",
       "level": 4,
-      "credits": 150,
+      "credits": 154,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2810,7 +2822,7 @@
       "name": "Nanite Kit",
       "type": "tool",
       "level": 5,
-      "credits": 288,
+      "credits": 300,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2821,7 +2833,7 @@
       "name": "Healing Kit",
       "type": "tool",
       "level": 6,
-      "credits": 574,
+      "credits": 518,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2832,7 +2844,7 @@
       "name": "Envelope Cell",
       "type": "tool",
       "level": 1,
-      "credits": 22,
+      "credits": 2,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2843,7 +2855,7 @@
       "name": "Buffer Cell",
       "type": "tool",
       "level": 2,
-      "credits": 42,
+      "credits": 20,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2854,7 +2866,7 @@
       "name": "Shell Cell",
       "type": "tool",
       "level": 3,
-      "credits": 78,
+      "credits": 64,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2865,7 +2877,7 @@
       "name": "Absorb Cell",
       "type": "tool",
       "level": 4,
-      "credits": 150,
+      "credits": 154,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2876,7 +2888,7 @@
       "name": "Dermal Cell",
       "type": "tool",
       "level": 5,
-      "credits": 288,
+      "credits": 300,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2887,7 +2899,7 @@
       "name": "Aegis Cell",
       "type": "tool",
       "level": 6,
-      "credits": 574,
+      "credits": 518,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2898,7 +2910,7 @@
       "name": "Mk1 Battery",
       "type": "tool",
       "level": 1,
-      "credits": 22,
+      "credits": 2,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2909,7 +2921,7 @@
       "name": "Mk2 Battery",
       "type": "tool",
       "level": 2,
-      "credits": 42,
+      "credits": 20,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2920,7 +2932,7 @@
       "name": "Mk3 Battery",
       "type": "tool",
       "level": 3,
-      "credits": 78,
+      "credits": 64,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2931,7 +2943,7 @@
       "name": "Mk4 Battery",
       "type": "tool",
       "level": 4,
-      "credits": 150,
+      "credits": 154,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2942,7 +2954,7 @@
       "name": "Mk5 Battery",
       "type": "tool",
       "level": 5,
-      "credits": 288,
+      "credits": 300,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2953,7 +2965,7 @@
       "name": "Mk6 Battery",
       "type": "tool",
       "level": 6,
-      "credits": 574,
+      "credits": 518,
       "critical": 0,
       "cooldown": true,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2964,7 +2976,7 @@
       "name": "Copper",
       "type": "common",
       "level": 1,
-      "credits": 4,
+      "credits": 2,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2975,7 +2987,7 @@
       "name": "Alien Fossil",
       "type": "common",
       "level": 1,
-      "credits": 4,
+      "credits": 2,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2986,7 +2998,7 @@
       "name": "Barium",
       "type": "common",
       "level": 2,
-      "credits": 24,
+      "credits": 16,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -2997,7 +3009,7 @@
       "name": "Alien Fungi",
       "type": "common",
       "level": 2,
-      "credits": 24,
+      "credits": 16,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -3008,7 +3020,7 @@
       "name": "Tungsten",
       "type": "common",
       "level": 3,
-      "credits": 82,
+      "credits": 56,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -3019,7 +3031,7 @@
       "name": "Alien Flora",
       "type": "common",
       "level": 3,
-      "credits": 82,
+      "credits": 56,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -3030,7 +3042,7 @@
       "name": "Platinum",
       "type": "common",
       "level": 4,
-      "credits": 192,
+      "credits": 134,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -3041,7 +3053,7 @@
       "name": "Alien Fauna",
       "type": "common",
       "level": 4,
-      "credits": 192,
+      "credits": 134,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -3052,7 +3064,7 @@
       "name": "Pavonite",
       "type": "common",
       "level": 5,
-      "credits": 376,
+      "credits": 262,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -3063,7 +3075,7 @@
       "name": "Alien Artifact",
       "type": "common",
       "level": 5,
-      "credits": 376,
+      "credits": 262,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -3074,7 +3086,7 @@
       "name": "Sky Crystals",
       "type": "common",
       "level": 6,
-      "credits": 648,
+      "credits": 454,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -3085,7 +3097,7 @@
       "name": "Contraband",
       "type": "common",
       "level": 6,
-      "credits": 648,
+      "credits": 454,
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
@@ -3366,7 +3378,7 @@
       "treasures": ["Copper", "Barium Ore"]
     },
     {
-      "pos": {"x": -535, "y": -1044},
+      "pos": {"x": -521, "y": -1046},
       "name": "A3556",
       "style": "asteroid-6",
       "trader": null,
@@ -3382,7 +3394,7 @@
       "treasures": ["Barium Ore", "Mk3 Capacitor"]
     },
     {
-      "pos": {"x": -590, "y": -950},
+      "pos": {"x": -576, "y": -952},
       "name": "A9050",
       "style": "asteroid-3",
       "trader": null,
@@ -3390,7 +3402,7 @@
       "treasures": ["Alien Fossil"]
     },
     {
-      "pos": {"x": -549, "y": -689},
+      "pos": {"x": -579, "y": -687},
       "name": "A4911",
       "style": "asteroid-8",
       "trader": null,
@@ -3502,7 +3514,7 @@
       "treasures": ["Barium Ore"]
     },
     {
-      "pos": {"x": -615, "y": -1025},
+      "pos": {"x": -601, "y": -1027},
       "name": "Pavonis A2934",
       "style": "planet-s-rock-1",
       "trader": null,
@@ -3518,7 +3530,7 @@
       "treasures": ["Alien Fossil"]
     },
     {
-      "pos": {"x": -392, "y": -660},
+      "pos": {"x": -410, "y": -660},
       "name": "Pavonis Ember",
       "style": "planet-hell-3",
       "trader": null,
@@ -5235,7 +5247,7 @@
       "style": "anomaly-buoy",
       "trader": null,
       "enemy": null,
-      "treasures": ["Welding Robot"]
+      "treasures": ["Platinum"]
     },
     {
       "pos": {"x": -426, "y": -1266},
@@ -5793,7 +5805,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -506, "y": -566},
+      "pos": {"x": -506, "y": -546},
       "name": "A72",
       "style": "asteroid-5",
       "trader": null,
@@ -6215,26 +6227,7 @@
       "pos": {"x": -674, "y": 52},
       "name": "Bundeszone",
       "style": "anomaly-hermit",
-      "trader": {
-        "buy": 1.25,
-        "sell": 0.75,
-        "inventory": [
-          "Nanite Attack",
-          "Gauss Gun",
-          "Phased Ray",
-          "Coronal Pulse",
-          "Locus Beam",
-          "Luminal Driver",
-          "Sc Disruptor",
-          "Metabomb",
-          "Railgun",
-          "Nucleon Ray",
-          "Aural Pulse",
-          "Apex Beam",
-          "Helix Driver",
-          "Au Disruptor"
-        ]
-      },
+      "trader": {"buy": 1.25, "sell": 0.75, "inventory": []},
       "enemy": null,
       "treasures": []
     },
@@ -6301,9 +6294,7 @@
           "Mk5 Battery",
           "Dermal Cell",
           "Nanite Kit",
-          "Repair Nanites",
-          "Horkos",
-          "Epiales"
+          "Repair Nanites"
         ]
       },
       "enemy": null,
@@ -6740,6 +6731,38 @@
       "trader": null,
       "enemy": null,
       "treasures": []
+    },
+    {
+      "pos": {"x": -568, "y": -1008},
+      "name": "NBN Relay P",
+      "style": "anomaly-relay-60deg",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -96, "y": -956},
+      "name": "NBN Relay W",
+      "style": "anomaly-relay-170deg",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -448, "y": -676},
+      "name": "NBN Relay H",
+      "style": "anomaly-relay-300deg",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -366, "y": -866},
+      "name": "NBN Station",
+      "style": "anomaly-nbn-hq",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
     }
   ],
   "quests": [
@@ -6750,19 +6773,19 @@
     },
     {
       "name": "Fast Forward",
-      "xml": "\n<condition at-dest=\"Fast Forward\" />\n<dialog ok=\"FAST FORWARD!\" cancel=\"NOT NOW\">*Thank you Beta tester for your work*\nWould you like to skip the tutorial zone?</dialog>\n<dialog>`Some quests will trigger dialogs now, it will be a bit weird but just hang in there.`</dialog>\n<give credits=\"300\"/>\n<give item=\"EM Pulse;Photon Ray;Piercing Beam;Autogun Mk3;Welding Robot;Repair Kit;Mk0 Reactor;Lepton Shield;Crew of SS Thunder;Blue seeds\"/>\n<change-ship ship=\"Kerr Runner\"/>\n<travel dest=\"The Bush Transfer Buoy\"/>",
+      "xml": "\n<condition at-dest=\"Fast Forward\" />\n<dialog ok=\"FAST FORWARD!\" cancel=\"NOT NOW\">*Thank you Beta tester for your work*\nWould you like to skip the tutorial zone?</dialog>\n<dialog>`Some quests will trigger dialogs now, it will be a bit weird but just hang in there.`</dialog>\n<give credits=\"300\"/>\n<give item=\"EM Pulse;Photon Ray;Piercing Beam;Autogun Mk3;Repair Kit;Mk0 Reactor;Lepton Shield;Crew of SS Thunder;Blue seeds\"/>\n<change-ship ship=\"Kerr Runner\"/>\n<travel dest=\"The Bush Transfer Buoy\"/>",
       "tags": "dev"
     },
     {
       "name": "Far Forward",
-      "xml": "<condition at-dest=\"Far Forward\" />\n<dialog ok=\"FAST FORWARD!\" cancel=\"NOT NOW\">*Thank you Beta tester for your work*\nWould you like to skip to level 6 in Soma space?</dialog>\n<dialog>`Some quests will trigger dialogs now, it will be a bit weird but just hang in there.`</dialog>\n<give credits=\"300\"/>\n<give item=\"Mk6 Battery;Aegis Cell;Healing Kit;Mk6 Reactor;Aegis Inducer;Healing Robot;Mk6 Capacitor;Pauli Shield;Fluid Armor;Au Disruptor;Helix Driver;Apex Beam;Aural Pulse;Nucleon Ray;Railgun;Nano Repairers\"/>\n<change-ship ship=\"CES Interplan\"/>\n<travel dest=\"Soma Transfer Buoy\"/>",
+      "xml": "<condition at-dest=\"Far Forward\" />\n<dialog ok=\"FAST FORWARD!\" cancel=\"NOT NOW\">*Thank you Beta tester for your work*\nWould you like to skip to level 6 in Soma space?</dialog>\n<dialog>`Some quests will trigger dialogs now, it will be a bit weird but just hang in there.`</dialog>\n<give credits=\"300\"/>\n<give item=\"Mk6 Battery;Aegis Cell;Healing Kit;Mk4 Reactor;Aegis Inducer;Healing Robot;Mk6 Capacitor;Pauli Shield;Fluid Armor;Au Disruptor;Helix Driver;Apex Beam;Aural Pulse;Nucleon Ray;Railgun;Nano Repairers\"/>\n<change-ship ship=\"CES Interplan\"/>\n<travel dest=\"Soma Transfer Buoy\"/>",
       "color": "0f0",
       "icon": "",
       "tags": "dev"
     },
     {
       "name": "Start of an adventure",
-      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n_\"Hey, hitchhiker! This is your stop.\"_\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a _weird_ signature.\n\nIf you explore the area you might score big time!</dialog>\n<add-to-quest-list/>\n<hint layout=\"treasure\">Tap to collect treasure</hint>\n\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog model=\"Rover\">You find the meteorite resting on the ground.\n  \nA shiny lump that is surprisingly light when you load it into the rover.</dialog>\n<dialog>You should be able to *TRADE* the meteorite for some hard cash.</dialog>\n<hint layout=\"trade\">Sell your treasures here</hint>\n\n<condition have-credits=\"200\"/>\n<dialog>_\"Nice doing business with ya kid! Say, with that money you can buy a starship.\"_\n\n_\"Enter the *SHIPYARD* if you are interested.\"_</dialog>\n<hint layout=\"shipyard\">Buy a starship here</hint>\n\n<condition have-ship=\"Kerr Clipper\" />\n<dialog>_\"Now you can *LIFT OFF* and leave this planet.\"_\n\n_\"And good luck kid! It is dangerous out there.\"_</dialog>\n<hint layout=\"liftoff\">Leave this world</hint>\n<mark-on-map dest=\"Samson's Folly\"/>\n\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>_\"My friend at Backwater said you would be coming.\"_\n\n_\"We have a cheap *Rusty Autogun* in stock. You are welcome to *LAND* and *TRADE* with us here at Samson's Folly.\"_</dialog>\n<hint layout=\"quest\">Review you objectives here</hint>\n\n<condition have-item=\"Rusty Autogun\"/>\n<dialog>You now have a Rusty Autogun, a basic weapon. Tap you ship hologram to open your *PROFILE* and *INSTALL* your new weapon</dialog>\n<hint layout=\"profile\">Install your equipment here</hint>\n\n<condition installed-item=\"Rusty Autogun\"/>\n<hint layout=\"profile\"></hint>\n<dialog>_\"I always let my customers try their new gear\"_\n\n_\"Head over to my Buoy where I have target drone lined up.\"_</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n<place-inventory dest=\"Samson's Folly\" item=\"Cutting Beam;EM Pulse\"/>\n<mark-on-map dest=\"Samson's Folly\" />\n<dialog>_\"Good. Now you should try to defeat a drone that can self-repair. Get back to *Samson's Folly* where I have a *Cutting Beam* and an *EM Pulse* for you.\"_</dialog>\n\n<condition at-dest=\"Samson's Folly\" have-item=\"Cutting Beam;EM Pulse\" />\n<dialog>_\"Here, take this *Combat Handbook*. Included in the price. It will be available in your *QUEST* computer in the future.\"_</dialog>\n<dialog>_\"The Rugged Drone is waiting for you at *Samson's Training Ground*, go there.\"_</dialog>\n<give item=\"Combat Handbook\"/>\n<mark-on-map dest=\"Samson's Training Ground\" />\n\n<condition no-enemy-at-dest=\"Samson's Training Ground\" />\n<dialog>Samson radios you.\n\n_\"Looking good kid! Now you have the basic skills needed out here in the nebula.\"_\n\n_\"Good luck!\"_</dialog>\n",
+      "xml": "<condition at-dest=\"Backwater\"/>\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n<dialog>The captain wakes you up.\n_\"Hey, hitchhiker! This is your stop.\"_\n</dialog>\n<dialog>You are at the area where you saw the meteorite hit. It had a _weird_ signature.\n\nIf you explore the area you might score big time!</dialog>\n<add-to-quest-list/>\n<hint layout=\"treasure\">Tap to collect treasure</hint>\n\n<condition have-item=\"Shiny Meteorite\"/>\n<dialog model=\"Rover\">You find the meteorite resting on the ground.\n  \nA shiny lump that is surprisingly light when you load it into the rover.</dialog>\n<dialog>You should be able to *TRADE* the meteorite for some hard cash.</dialog>\n<hint layout=\"trade\">Sell your treasures here</hint>\n\n<condition have-credits=\"200\"/>\n<dialog>_\"Nice doing business with ya kid! Say, with that money you can buy a starship.\"_\n\n_\"Enter the *SHIPYARD* if you are interested.\"_</dialog>\n<hint layout=\"shipyard\">Buy a starship here</hint>\n\n<condition have-ship=\"Kerr Clipper\" />\n<dialog>_\"Now you can *LIFT OFF* and leave this planet.\"_\n\n_\"And good luck kid! It is dangerous out there.\"_</dialog>\n<hint layout=\"liftoff\">Leave this world</hint>\n<mark-on-map dest=\"Samson's Folly\"/>\n\n<condition at-dest=\"Samson's Folly\"/>\n<dialog>_\"My friend at Backwater said you would be coming.\"_\n\n_\"We have a cheap *Rusty Autogun* in stock. You are welcome to *LAND* and *TRADE* with us here at Samson's Folly.\"_</dialog>\n<hint layout=\"quest\">Review you objectives here</hint>\n\n<condition have-item=\"Rusty Autogun\"/>\n<dialog>You now have a Rusty Autogun, a basic weapon. Tap your ship hologram to open your *PROFILE* and *INSTALL* your new weapon</dialog>\n<hint layout=\"profile\">Install your equipment here</hint>\n\n<condition installed-item=\"Rusty Autogun\"/>\n<hint layout=\"profile\"></hint>\n<dialog>_\"I always let my customers try their new gear\"_\n\n_\"Head over to my Buoy where I have target drone lined up.\"_</dialog>\n<mark-on-map dest=\"Samson's Buoy\" />\n\n<condition no-enemy-at-dest=\"Samson's Buoy\" />\n<place-inventory dest=\"Samson's Folly\" item=\"Cutting Beam;EM Pulse\"/>\n<mark-on-map dest=\"Samson's Folly\" />\n<dialog>_\"Good. Now you should try to defeat a drone that can self-repair. Get back to *Samson's Folly* where I have a *Cutting Beam* and an *EM Pulse* for you.\"_</dialog>\n\n<condition at-dest=\"Samson's Folly\" have-item=\"Cutting Beam;EM Pulse\" />\n<dialog>_\"Here, take this *Combat Handbook*. Included in the price. It will be available in your *QUEST* computer in the future.\"_</dialog>\n<dialog>_\"The Rugged Drone is waiting for you at *Samson's Training Ground*, go there.\"_</dialog>\n<give item=\"Combat Handbook\"/>\n<mark-on-map dest=\"Samson's Training Ground\" />\n\n<condition no-enemy-at-dest=\"Samson's Training Ground\" />\n<dialog>Samson radios you.\n\n_\"Looking good kid! Now you have the basic skills needed out here in the nebula.\"_\n\n_\"Good luck!\"_</dialog>\n",
       "tags": "outback",
       "color": "6bf",
       "icon": ""
@@ -6790,7 +6813,7 @@
     },
     {
       "name": "Outback Mining",
-      "xml": "\n<condition at-dest=\"Outback A563\" />\n<dialog model=\"Rusty Ship\">A scruffy ship is slowly passing by this asteroid. You radio it and ask if anything is wrong.</dialog>\n<dialog model=\"Rusty Ship\">_\"Hey man! I'm ok, my ship is just a bit overloaded. The area *north* of here is full of minerals that I have been mining.\n\nYou should go there. More than enough for everyone.\"_</dialog>\n<dialog>_\"There might be some aggressive drones out there.\nHere, take this a *Slug Driver*. A gift to you. It has to recharge between uses but packs a good punch.\"_</dialog>\n<give item=\"Slug Driver\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Outback A089\" />\n<condition have-item=\"Last message\" />\n<dialog>As you explore the asteroid you find a crashed ship. Inside you find the crew.\nDead.\nAnd a message.\n  \nWords from dying explorers.</dialog>\n<dialog>_We have been attacked by hacked Drones. They are not malfunctioning, someone is doing this to them._</dialog>",
+      "xml": "\n<condition at-dest=\"Outback A563\" />\n<dialog model=\"Rusty Ship\">A scruffy ship is slowly passing by this asteroid. You radio it and ask if anything is wrong.</dialog>\n<dialog model=\"Rusty Ship\">_\"Hey man! I'm ok, my ship is just a bit overloaded. The area *north* of here is full of minerals that I have been mining.\n\nYou should go there. More than enough for everyone.\"_</dialog>\n<dialog>_\"There might be some aggressive drones out there.\nHere, take this *Slug Driver*. A gift to you. It has to recharge between uses but packs a good punch.\"_</dialog>\n<give item=\"Slug Driver\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Outback A089\" />\n<condition have-item=\"Last message\" />\n<dialog>As you explore the asteroid you find a crashed ship. Inside you find the crew.\nDead.\nAnd a message.\n  \nWords from dying explorers.</dialog>\n<dialog>_We have been attacked by hacked Drones. They are not malfunctioning, someone is doing this to them._</dialog>",
       "tags": "outback",
       "color": "c9f",
       "icon": "rhomb"
@@ -6851,21 +6874,21 @@
     },
     {
       "name": "Outer Dusk Ranger",
-      "xml": "<condition at-dest=\"Hafen Tracking Station\" state=\"surface\" trigger=\"HAIL\"/>\n<dialog ok=\"ENLIST\" cancel=\"NOT NOW\">_\"Traveller, the war effort need help with tracking enemy movements in the *Outer Dusk*.\"_\n\n_\"Can we count on you?\"_</dialog>\n<dialog>_\"Excellent!\"_\n\n_\"Give **Beendung* and *Höhle* any support they require.\nAnd look for any hidden Mimos bases or devices in the surrounding asteroids.\"_</dialog>\n<mark-on-map dest=\"Höhle\" />\n<add-to-quest-list />\n\n<condition at-dest=\"Höhle\" state=\"surface\" trigger=\"REPORT TO HÖHLE\"/>\n<dialog>_\"What? Are the federals sending us mercenaries instead of real military now?\"_</dialog>\n<dialog>You ignore their internal politics and ask if they need any help.</dialog>\n<dialog>_\"The Mimos make occasional forays into the Outer Dusk. We need help with these intrusions.\"_</dialog>\n\n<condition at-dest=\"Höhle\" state=\"surface\" no-enemy-at-dest=\"A646;A823;Beendung\" trigger=\"REPORT AREA CLEAR\"/>\n<dialog>You report that you have cleared the Outer Dusk of Mimos rangers.\n\n_\"Thank you! The intrusions must serve a purpose, they are hiding something out here...\"_</dialog>\n\n<condition at-dest=\"Höhle\" state=\"surface\" trigger=\"SHOW MYSTERIOUS DEVICE\"/>\n<dialog>_\"Did you find that out there? It smells of the Mimos, must be their device.\"_\n\n_\"Wonder what that thing do? Surely nothing good.\"_</dialog>\n<dialog>_\"For being a mercenary, you did really well. Make sure to collect your payment at *Hafen Tracking Station*.\"_</dialog>\n<condition at-dest=\"Hafen Tracking Station\" state=\"surface\" trigger=\"REPORT SUCCESS\"/>\n<dialog>You report that you cleared the Outer Dusk. The Hafen personel don't know what to make of the Mysterious Device but they take it and pay you handsomely.</dialog>\n<give credits=\"400\" />\n<take item=\"Mysterious Device\" />",
+      "xml": "<condition at-dest=\"Hafen Tracking Station\" state=\"surface\" trigger=\"HAIL\"/>\n<dialog ok=\"ENLIST\" cancel=\"NOT NOW\">_\"Traveller, the war effort need help with tracking enemy movements in the *Outer Dusk*.\"_\n\n_\"Can we count on you?\"_</dialog>\n<dialog>_\"Excellent!\"_\n\n_\"Give *Beendung* and *Höhle* any support they require.\nAnd look for any hidden Mimos bases or devices in the surrounding asteroids.\"_</dialog>\n<mark-on-map dest=\"Höhle\" />\n<add-to-quest-list />\n\n<condition at-dest=\"Höhle\" state=\"surface\" trigger=\"REPORT TO HÖHLE\"/>\n<dialog>_\"What? Are the federals sending us mercenaries instead of real military now?\"_</dialog>\n<dialog>You ignore their internal politics and ask if they need any help.</dialog>\n<dialog>_\"The Mimos make occasional forays into the Outer Dusk. We need help with these intrusions.\"_</dialog>\n\n<condition at-dest=\"Höhle\" state=\"surface\" no-enemy-at-dest=\"A646;A823;Beendung\" trigger=\"REPORT AREA CLEAR\"/>\n<dialog>You report that you have cleared the Outer Dusk of Mimos rangers.\n\n_\"Thank you! The intrusions must serve a purpose, they are hiding something out here...\"_</dialog>\n\n<condition at-dest=\"Höhle\" state=\"surface\" have-item=\"Mysterious Device\" trigger=\"SHOW MYSTERIOUS DEVICE\"/>\n<dialog>_\"Did you find that out there? It smells of the Mimos, must be their device.\"_\n\n_\"Wonder what that thing do? Surely nothing good.\"_</dialog>\n<dialog>_\"For being a mercenary, you did really well. Make sure to collect your payment at *Hafen Tracking Station*.\"_</dialog>\n<mark-on-map dest=\"Hafen Tracking Station\" />\n<condition at-dest=\"Hafen Tracking Station\" state=\"surface\" trigger=\"REPORT SUCCESS\"/>\n<dialog>You report that you cleared the Outer Dusk. The Hafen personel don't know what to make of the Mysterious Device but they take it and pay you handsomely.</dialog>\n<give credits=\"400\" />\n<take item=\"Mysterious Device\" />",
       "color": "0f0",
       "icon": "square",
       "tags": "sternrat"
     },
     {
       "name": "Bugging the Outer Dusk",
-      "xml": "<condition state=\"surface\" at-dest=\"Mimos Habitat\" trigger=\"CONTACT MIMOS\"/>\n<dialog>`Mimos. Human.`\n`Activate. Ruins. 3 Devices. Place *Splitter*. Place *Scherbe*. *Place Teil*.`</dialog>\n<dialog>The don't attack you. Perhaps because you hailed them first. They seems to be giving instructions. You radio a question back.</dialog>\n<dialog>`3 Devices. *Ruins*. Activate. Friend. Not weapon. Not harm.`</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Splitter\" />\n<give item=\"Mysterious Device\"/>\n<give item=\"Mysterious Device\"/>\n<give item=\"Mysterious Device\"/>\n\n<condition state=\"surface\" at-dest=\"Splitter\" trigger=\"PLACE DEVICE\"/>\n<take item=\"Mysterious Device\"/>\n<mark-on-map dest=\"Scherbe\" />\n\n<condition state=\"surface\" at-dest=\"Scherbe\" trigger=\"PLACE DEVICE\"/>\n<take item=\"Mysterious Device\"/>\n<mark-on-map dest=\"Teil\" />\n\n<condition state=\"surface\" at-dest=\"Teil\" trigger=\"PLACE DEVICE\"/>\n<take item=\"Mysterious Device\"/>\n\n<mark-on-map dest=\"Mimos Ruins\" />\n\n<condition at-dest=\"Mimos Ruins\" />\n<dialog model=\"Ruin\">As you approach the ruins you see that something has happened to them.\n\nOr is happening.\n\nThey seem to live.</dialog>\n<dialog model=\"Ruin\">The devices you have places have activated the Mimos Ruins.\nChanging. Repairing.\nThey are becoming something.</dialog>\n<dialog model=\"Ruin\">The interior of the ruin starts to shimmer and shift.\nFrom inside the structure Mimos ships emerge. The space ripplings like water as they materialize one after another.</dialog>\n<dialog>They are not warships. They are something else.\n\n`Friend. Mimos. Peace Sternrat. Peace Mimos. *Tell Sternrat Station*.`</dialog>\n<mark-on-map dest=\"Sternrat Station\" />\n\n<condition state=\"surface\" at-dest=\"Sternrat Station\" trigger=\"MEDIATE PEACE\"/>\n<dialog>The senators at Sternrat Stations are not happy. They see the Mimos as aggressors, and you as a traitor for opening the gate.\n\nBut they also see the the Mimos peacefully waiting for a response.</dialog>\n<dialog>The senate at Sternrat Stations send an envoy. A diplomatic mission. They dismiss you. Give their thanks privately, wary of the political ramifications of embracing your actions if the peace falters.</dialog>\n\n<dialog>You, a mediator. And here, perhaps peace.</dialog>\n",
+      "xml": "<condition state=\"surface\" at-dest=\"Mimos Habitat\" trigger=\"CONTACT MIMOS\"/>\n<dialog>`Mimos. Human.`\n`Activate. Ruins. 3 Devices. Place *Splitter*. Place *Scherbe*. *Place Teil*.`</dialog>\n<dialog>The don't attack you. Perhaps because you hailed them first. They seem to be giving instructions. You radio a question back.</dialog>\n<dialog>`3 Devices. *Ruins*. Activate. Friend. Not weapon. Not harm.`</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Splitter\" />\n<give item=\"Mysterious Device\"/>\n<give item=\"Mysterious Device\"/>\n<give item=\"Mysterious Device\"/>\n\n<condition state=\"surface\" at-dest=\"Splitter\" trigger=\"PLACE DEVICE\"/>\n<take item=\"Mysterious Device\"/>\n<mark-on-map dest=\"Scherbe\" />\n\n<condition state=\"surface\" at-dest=\"Scherbe\" trigger=\"PLACE DEVICE\"/>\n<take item=\"Mysterious Device\"/>\n<mark-on-map dest=\"Teil\" />\n\n<condition state=\"surface\" at-dest=\"Teil\" trigger=\"PLACE DEVICE\"/>\n<take item=\"Mysterious Device\"/>\n\n<mark-on-map dest=\"Mimos Ruins\" />\n\n<condition at-dest=\"Mimos Ruins\" />\n<dialog model=\"Ruin\">As you approach the ruins you see that something has happened to them.\n\nOr is happening.\n\nThey seem to live.</dialog>\n<dialog model=\"Ruin\">The devices you have places have activated the Mimos Ruins.\nChanging. Repairing.\nThey are becoming something.</dialog>\n<dialog model=\"Ruin\">The interior of the ruin starts to shimmer and shift.\nFrom inside the structure Mimos ships emerge. The space rippling like water as they materialize one after another.</dialog>\n<dialog>They are not warships. They are something else.\n\n`Friend. Mimos. Peace Sternrat. Peace Mimos. *Tell Sternrat Station*.`</dialog>\n<mark-on-map dest=\"Sternrat Station\" />\n\n<condition state=\"surface\" at-dest=\"Sternrat Station\" trigger=\"MEDIATE PEACE\"/>\n<dialog>The senators at Sternrat Stations are not happy. They see the Mimos as aggressors, and you as a traitor for opening the gate.\n\nBut they also see the Mimos peacefully waiting for a response.</dialog>\n<dialog>The senate at Sternrat Stations send an envoy. A diplomatic mission. They dismiss you. Give their thanks privately, wary of the political ramifications of embracing your actions if the peace falters.</dialog>\n\n<dialog>You, a mediator. And here, perhaps peace.</dialog>\n",
       "color": "f90",
       "icon": "bookmark",
       "tags": "sternrat"
     },
     {
       "name": "Sternrat Blockade",
-      "xml": "\n<condition state=\"space\" at-dest=\"Staub Mond\" />\n<dialog model=\"Ursula\">A ship hails you.</dialog>\n<dialog model=\"Ursula\">_\"Traveller!\nYou have come to our area in a time of great peril. The Mimos are trying to break through!\n\nIf you want to help us in the fight go to *Sternrat Station*\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Sternrat Station\" />\n\n<condition state=\"surface\" at-dest=\"Sternrat Station\" trigger=\"HAIL STATION\"/>\n<dialog model=\"Sternrat Station\">The operator you speak to at Sternrat Station makes it clear that there is a war going on.\n\nThe Mimos have breached through into Sternbund space.</dialog>\n<dialog model=\"Sternrat Station\">They say that a patrol has cornered a Mimos Dart at *Dunkel Mond* and need help.</dialog>\n<mark-on-map dest=\"Dunkel Trojan\" />\n<place-enemy dest=\"Dunkel Trojan\" enemy=\"Mimos Dart\"/>\n\n<condition no-enemy-at-dest=\"Dunkel Trojan\" />\n<dialog>The cornered Mimos succumbs to your attack. *Sternrat Station* will be pleased.</dialog>\n<mark-on-map dest=\"Sternrat Station\" />\n\n<condition state=\"surface\" at-dest=\"Sternrat Station\" trigger=\"REPORT VICTORY\"/>\n<dialog>_\"Thank you! We need all soldiers we can get. The goal is to quell the Mimos at the source, deep in their cloud banks.\"_</dialog>\n<dialog>_\"The charter forbids weapons here at Sternrat Station, but the trader at *Bundeszone* has a full assortment.\"_</dialog>\n<dialog>_\"When you are prepared, join the fight and bring down the Mimos!\"_</dialog>\n<mark-on-map dest=\"Mimos Habitat\" />\n\n<condition state=\"surface\" at-dest=\"Mimos Aperture\" trigger=\"ANALYZE APERTURE\"/>\n<dialog model=\"Larato Gate\">The structure appears to be a portal. But you are denied access. The Mimos markings clearly show the portal's origin.\n\nThere might be a way to access this portal...</dialog>\n<place-item dest=\"Mimos Ruins\" item=\"Mimos Key\"/>\n\n<condition at-dest=\"Mimos Ruins\" />\n<dialog model=\"Ruin\">These old ruins share the same Mimosian markings as the portal you found earlier.</dialog>\n\n<condition have-item=\"Mimos Key\" at-dest=\"Mimos Aperture\" trigger=\"UNLOCK APERTURE\"/>\n\n\n",
+      "xml": "\n<condition state=\"space\" at-dest=\"Staub Mond\" />\n<dialog model=\"Ursula\">A ship hails you.</dialog>\n<dialog model=\"Ursula\">_\"Traveller!\nYou have come to our area in a time of great peril. The Mimos are trying to break through!\n\nIf you want to help us in the fight go to *Sternrat Station*\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Sternrat Station\" />\n\n<condition state=\"surface\" at-dest=\"Sternrat Station\" trigger=\"HAIL STATION\"/>\n<dialog model=\"Sternrat Station\">The operator you speak to at Sternrat Station makes it clear that there is a war going on.\n\nThe Mimos have breached through into Sternbund space.</dialog>\n<dialog model=\"Sternrat Station\">They say that a patrol has cornered a Mimos Dart at *Dunkel Mond* and need help.</dialog>\n<mark-on-map dest=\"Dunkel Trojan\" />\n<place-enemy dest=\"Dunkel Trojan\" enemy=\"Mimos Dart\"/>\n\n<condition no-enemy-at-dest=\"Dunkel Trojan\" />\n<dialog>The cornered Mimos succumbs to your attack. *Sternrat Station* will be pleased.</dialog>\n<mark-on-map dest=\"Sternrat Station\" />\n\n<condition state=\"surface\" at-dest=\"Sternrat Station\" trigger=\"REPORT VICTORY\"/>\n<dialog>_\"Thank you! We need all soldiers we can get. The goal is to quell the Mimos at the source, deep in their cloud banks.\"_</dialog>\n<dialog>_\"The charter forbids weapons here at Sternrat Station, but the trader at *Bundeszone* has a full assortment.\"_</dialog>\n<dialog>_\"When you are prepared, join the fight and bring down the Mimos!\"_</dialog>\n<mark-on-map dest=\"Mimos Habitat\" />\n\n<condition state=\"surface\" at-dest=\"Mimos Aperture\" trigger=\"ANALYZE APERTURE\"/>\n<dialog model=\"Larato Gate\">The structure appears to be a portal. But you are denied access. The Mimos markings clearly show the portal's origin.\n\nThere might be a way to access this portal...</dialog>\n<place-item dest=\"Mimos Ruins\" item=\"Mimos Key\"/>\n\n<condition at-dest=\"Mimos Ruins\" />\n<dialog model=\"Ruin\">These old ruins share the same Mimosian markings as the portal you found earlier.</dialog>\n",
       "color": "f08",
       "icon": "pillar",
       "tags": "sternrat"
@@ -6935,7 +6958,7 @@
     },
     {
       "name": "Milking Whales",
-      "xml": "<condition at-dest=\"Som Phtia\" trigger=\"HAIL\"/>\n<dialog>_\"We Soma have worshipped the Cosmic Whales for generations. But we cannot approach them. A visitor however can. Be a friend of Soma and find the elusive *Cosmic Whales*. Find them and bring us their milk.\"_</dialog>\n<add-to-quest-list/>\n<condition state=\"surface\" at-dest=\"Cosmic Whales\" trigger=\"MILK\"/>\n<dialog model=\"Cosmic Whales\">The graceful creatures excrete a white liquid that form a glittering trail in space. Probably nothing to do with milk but you collect it anyway.</dialog>\n<mark-on-map dest=\"Som Phtia\" />\n<condition at-dest=\"Som Phtia\" trigger=\"GIVE MILK\"/>\n<dialog>_\"This milk is surely a prize. The visitor is truly a friend of Soma.\"_</dialog>\n<dialog>_\"Whales thrive around the blue Soma sun. But they are not from here. Far to the south are whales that give an even thicker milk. We will mark the grazing grounds for you. Go there!\"_</dialog>\n<mark-on-map dest=\"Grazing Cosmic Whales\" />\n<condition state=\"surface\" at-dest=\"Grazing Cosmic Whales\" trigger=\"MILK\"/>\n<dialog model=\"Cosmic Whales\">Majestic creatures. You carefully collect their milk as they swim in the stellar breeze.</dialog>\n<mark-on-map dest=\"Som Phtia\" />\n<condition state=\"space\" at-dest=\"Som Phtia\" trigger=\"GIVE MILK\"/>\n<dialog>_\"Soma are forever grateful. Wait here while we skim the milk.\"_</dialog>\n<condition state=\"space\" at-dest=\"Som Phtia\" trigger=\"COLLECT CREAM\"/>\n<dialog>The Soma don't answer you directly. Silently they send a drone that deliver a thick white liquid to your ship.</dialog>\n<dialog>_\"Friend! Let the cream bake in the hotness of the Soma Sun. Go to the *Lookout* as generations of Soma has done.\"_</dialog>\n<condition state=\"surface\" at-dest=\"Beryl Canis Lookout\" trigger=\"BAKE MILK\"/>\n<dialog>The Soma are peculiar. This substance and this process have hardly anything in common with milk. But that is how they consistently translate it.</dialog>\n<dialog model=\"Observatory\">Scalding heat from Beryl Canis roast your hull, but also bake the mysterious white \"cream\" into something new.</dialog>\n<give item=\"Whale Cheese\"/>",
+      "xml": "<condition at-dest=\"Som Phtia\" trigger=\"HAIL\"/>\n<dialog>_\"We Soma have worshipped the Cosmic Whales for generations. But we cannot approach them. A visitor however can. Be a friend of Soma and find the elusive *Cosmic Whales*. Find them and bring us their milk.\"_</dialog>\n<add-to-quest-list/>\n\n<condition state=\"surface\" at-dest=\"Cosmic Whales\" trigger=\"MILK\"/>\n<dialog model=\"Cosmic Whales\">The graceful creatures excrete a white liquid that form a glittering trail in space. Probably nothing to do with milk but you collect it anyway.</dialog>\n<mark-on-map dest=\"Som Phtia\" />\n\n<condition state=\"surface\" at-dest=\"Som Phtia\" trigger=\"GIVE MILK\"/>\n<dialog>_\"This milk is surely a prize. The visitor is truly a friend of Soma.\"_</dialog>\n<dialog>_\"Whales thrive around the blue Soma sun. But they are not from here. Far to the south are whales that give an even thicker milk. We will mark the grazing grounds for you. Go there!\"_</dialog>\n<mark-on-map dest=\"Grazing Cosmic Whales\" />\n\n<condition state=\"surface\" at-dest=\"Grazing Cosmic Whales\" trigger=\"MILK\"/>\n<dialog model=\"Cosmic Whales\">Majestic creatures. You carefully collect their milk as they swim in the stellar breeze.</dialog>\n<mark-on-map dest=\"Som Phtia\" />\n\n<condition state=\"surface\" at-dest=\"Som Phtia\" trigger=\"GIVE MILK\"/>\n<dialog>_\"Soma are forever grateful. Wait here while we skim the milk.\"_</dialog>\n\n<condition state=\"surface\" at-dest=\"Som Phtia\" trigger=\"COLLECT CREAM\"/>\n<dialog>The Soma don't answer you directly. Silently they send a drone that deliver a thick white liquid to your ship.</dialog>\n<dialog>_\"Friend! Let the cream bake in the hotness of the Soma Sun. Go to the *Lookout* as generations of Soma has done.\"_</dialog>\n<mark-on-map dest=\"Beryl Canis Lookout\" />\n\n<condition state=\"surface\" at-dest=\"Beryl Canis Lookout\" trigger=\"BAKE MILK\"/>\n<dialog>The Soma are peculiar. This substance and this process have hardly anything in common with milk. But that is how they consistently translate it.</dialog>\n<dialog model=\"Observatory\">Scalding heat from Beryl Canis roast your hull, but also bake the mysterious white \"cream\" into something new.</dialog>\n<give item=\"Whale Cheese\"/>",
       "tags": "soma",
       "color": "fff",
       "icon": "drop"
@@ -6991,12 +7014,19 @@
     },
     {
       "name": "Tau Pavonis Observer",
-      "xml": "<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>You are hailed as you enter orbit: _\"Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"We study Tau Pavonis and need assistance in placing sensors at the *Observatory*. Compensation is 1000 credits. Are you interested?\"_</dialog>\n<dialog>_\"First you need protection. Travel to *Pavonis Mirror* and acquire a *Star Shield*.\"_</dialog>\n<give item=\"Star Sensor\"/>\n<mark-on-map dest=\"Pavonis Mirror\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>_\"Traveller. This is Mirror spaceport. We have prepared the *Star Shield* you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed.\"_</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed-item=\"Star Shield\" trigger=\"READY TO GO\"/>\n<dialog ok=\"PROCEED\" cancel=\"WAIT\">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>\n<travel dest=\"Pavonis Observatory\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"PUT SENSOR\"/>\n<take item=\"Star Sensor\" />\n<dialog model=\"Sol Array\">You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\"/>\n<travel dest=\"Pavonis Mirror\"/>\n<dialog>_\"You made it! Must be a sturdy ship you got there.\"_</dialog>\n<dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organization.</dialog>\n<dialog>_\"Let us remove that Star Shield, you can collect your payment at *Pavonis Smoke*.\"_</dialog>\n<take item=\"Star Shield\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog>_\"You survived! Excellent, we are anxious to get the data from the sensor. Please accept our payment!\"_</dialog>\n<give credits=\"1000\"/>\n<remove-map-marker/>\n\n<condition not-at-dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>_\"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor are most disturbing. Tau Pavonis is behaving unphysically.\"_</dialog>\n<dialog>_\"You must help us collect more data! Please take us to the *Observatory* so we can make further readings.\"_</dialog>\n<dialog>This time you request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>\n<dialog>_\"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental *Shield Reactor*. Ok?\"_</dialog>\n<dialog>You see an opportunity to make demands.\n_\"That sounds useful, give it to me in advance, and a regular reward afterward!\"_</dialog>\n<give item=\"Dermal Inducer\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>They load the *Star Shield* onto your ship once again. They tell you to *install* it but they all look a bit worried this time. What is it they have found inside that star?</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" installed-item=\"Star Shield\" trigger=\"READY TO GO\"/>\n<travel dest=\"Pavonis Observatory\"/>\n<dialog>The scientists take readings with their arcane instruments.\nBut you don't need any telescopes. Just looking through the dimmed windows you can see a region of the star's surface pulsing. Or heaving, as if breathing.</dialog>\n<dialog model=\"Worm\">Suddenly the star's surface opens like a flower and something break free from the open wound. It trashes like a wounded animal. It looks slow like a ballet, but at this scale, it is tremendously fast.</dialog>\n<dialog>The monstrosity accelerates and traces a glowing path towards *Pavonis Charm*. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>\n<place-enemy enemy=\"Worm\" dest=\"Pavonis Charm\"/>\n<mark-on-map dest=\"Pavonis Charm\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\" />\n<travel dest=\"Pavonis Mirror\" />\n<take item=\"Star Shield\" />\n\n<condition at-dest=\"A117\"/>\n<dialog model=\"Worm\">Your sensors can make out the entity orbiting Pavonis Charm. Approaching would be devastating.</dialog>\n<dialog>You are hailed by a distant ship. \n\n_\"Traveller. We are the Worshipers. Things have been set in motion and there might still be time to dispel this danger. Seek us out at *Paxos Station*.\"_</dialog>\n<mark-on-map dest=\"Paxos Station\"/>\n\n<condition at-dest=\"Paxos Station\" trigger=\"HAIL\"/>\n<dialog model=\"Paxos Station\">_\"This is Paxos Station, the Cathedral of Worship. The scholars at Pavonis Smoke have woken the Worm. You were their tool and now we can help you undo their foolish work.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The Worm's chains can be restored with the three tools that once bound it originally.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The children of the Worm once bound their progenitor with the artifacts Epiales, Momus and Horkos. Seek them out in the Fields, the Garden, and the Ruins.\"_</dialog>\n<remove-map-marker/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" at-dest=\"A2172;Paxos Station\"/>\n<dialog>_\"Traveller. You have gathered the relics.\"_</dialog>\n<dialog>_\"While your hands were busy the Worm multiplied. Sired its seedlings.\nMay the relics help you. Clear out the Seedlings around *Pavonis Charm*!\"_</dialog>\n<mark-on-map dest=\"Pavonis Charm\" />\n<place-enemy dest=\"Charm Beta\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Gamma\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Delta\" enemy=\"Worm Seedling\" loot=\"\"/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" no-enemy-at-dest=\"Charm Beta;Charm Gamma;Charm Delta\" />\n<place-enemy dest=\"Pavonis Charm\" enemy=\"Weakened Worm\" loot=\"Worm Umbra\" />\n<dialog model=\"Worm Seedling\">The final Seedling succumbs to your assault. Somehow you know that the Worm is affected. Touched by your actions here that bestial presence is now weakened. This can now end.</dialog>\n\n<condition no-enemy-at-dest=\"Pavonis Charm\" />\n<dialog model=\"Worm\">The worm is mortally wounded. Its appendages flail and whip up foam on the surface of Pavis Charm as it is pulled below the surface and into the depths of the gas giant.</dialog>\n<mark-on-map dest=\"Paxos Station\" />\n\n<condition at-dest=\"Paxos Station\" />\n<dialog>_\"Traveller. You bested the Worm. The battle was glorious.\nYet many here feel fear. *The Worm is not dead.* It might slumber for eons inside Pavonis Charm, but it will wake once again.\"_</dialog>\n\n\n\n\n",
+      "xml": "<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>You are hailed as you enter orbit: _\"Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"We study Tau Pavonis and need assistance in placing sensors at the *Observatory*. Compensation is 1000 credits. Are you interested?\"_</dialog>\n<dialog>_\"First you need protection. Travel to *Pavonis Mirror* and acquire a *Star Shield*.\"_</dialog>\n<give item=\"Star Sensor\"/>\n<mark-on-map dest=\"Pavonis Mirror\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>_\"Traveller. This is Mirror spaceport. We have prepared the *Star Shield* you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed.\"_</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed-item=\"Star Shield\" trigger=\"READY TO GO\"/>\n<dialog ok=\"PROCEED\" cancel=\"WAIT\">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>\n<travel dest=\"Pavonis Observatory\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"PUT SENSOR\"/>\n<take item=\"Star Sensor\" />\n<dialog model=\"Sol Array\">You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\"/>\n<travel dest=\"Pavonis Mirror\"/>\n<dialog>_\"You made it! Must be a sturdy ship you got there.\"_</dialog>\n<dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organization.</dialog>\n<dialog>_\"Let us remove that Star Shield, you can collect your payment at *Pavonis Smoke*.\"_</dialog>\n<take item=\"Star Shield\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog>_\"You survived! Excellent, we are anxious to get the data from the sensor. Please accept our payment!\"_</dialog>\n<give credits=\"1000\"/>\n<remove-map-marker/>\n\n<condition not-at-dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>_\"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor are most disturbing. Tau Pavonis is behaving unphysically.\"_</dialog>\n<dialog>_\"You must help us collect more data! Please take us to the *Observatory* so we can make further readings.\"_</dialog>\n<dialog>This time you request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>\n<dialog>_\"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental *Shield Reactor*. Ok?\"_</dialog>\n<dialog>You see an opportunity to make demands.\n_\"That sounds useful, give it to me in advance, and a regular reward afterward!\"_</dialog>\n<give item=\"Dermal Inducer\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>They load the *Star Shield* onto your ship once again. They tell you to *install* it but they all look a bit worried this time. What is it they have found inside that star?</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" installed-item=\"Star Shield\" trigger=\"READY TO GO\"/>\n<travel dest=\"Pavonis Observatory\"/>\n<dialog>The scientists take readings with their arcane instruments.\nBut you don't need any telescopes. Just looking through the dimmed windows you can see a region of the star's surface pulsing. Or heaving, as if breathing.</dialog>\n<dialog model=\"Worm\">Suddenly the star's surface opens like a flower and something break free from the open wound. It trashes like a wounded animal. It looks slow like a ballet, but at this scale, it is tremendously fast.</dialog>\n<dialog>The monstrosity accelerates and traces a glowing path towards *Pavonis Charm*. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>\n<place-enemy enemy=\"Worm\" dest=\"Pavonis Charm\"/>\n<mark-on-map dest=\"Pavonis Charm\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\" />\n<travel dest=\"Pavonis Mirror\" />\n<take item=\"Star Shield\" />\n\n<condition at-dest=\"A117\"/>\n<dialog model=\"Worm\">Your sensors can make out the entity orbiting Pavonis Charm. Approaching would be devastating.</dialog>\n<dialog>You are hailed by a distant ship. \n\n_\"Traveller. We are the Worshipers. Things have been set in motion and there might still be time to dispel this danger. Seek us out at *Paxos Station*.\"_</dialog>\n<mark-on-map dest=\"Paxos Station\"/>\n\n<condition at-dest=\"Paxos Station\" trigger=\"HAIL\"/>\n<dialog model=\"Paxos Station\">_\"This is Paxos Station, the Cathedral of Worship. The scholars at Pavonis Smoke have woken the Worm. You were their tool and now we can help you undo their foolish work.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The Worm's chains can be restored with the three tools that once bound it originally.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The children of the Worm once bound their progenitor with the artifacts Epiales, Momus and Horkos. Seek them out in the Fields, the Garden, and the Ruins.\"_</dialog>\n<remove-map-marker/>\n\n<condition have-item=\"Momus;Horkos;Epiales\"/>\n<mark-on-map dest=\"Paxos Station\"/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" at-dest=\"Paxos Station\"/>\n<dialog>_\"Traveller. You have gathered the relics.\"_</dialog>\n<dialog>_\"While your hands were busy the Worm multiplied. Sired its seedlings.\nMay the relics help you. Clear out the Seedlings around *Pavonis Charm*!\"_</dialog>\n<mark-on-map dest=\"Pavonis Charm\" />\n<place-enemy dest=\"Charm Beta\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Gamma\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Delta\" enemy=\"Worm Seedling\" loot=\"\"/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" no-enemy-at-dest=\"Charm Beta;Charm Gamma;Charm Delta\" />\n<place-enemy dest=\"Pavonis Charm\" enemy=\"Weakened Worm\" loot=\"Worm Umbra\" />\n<dialog model=\"Worm Seedling\">The final Seedling succumbs to your assault. Somehow you know that the Worm is affected. Touched by your actions here that bestial presence is now weakened. This can now end.</dialog>\n\n<condition no-enemy-at-dest=\"Pavonis Charm\" />\n<dialog model=\"Worm\">The worm is mortally wounded. Its appendages flail and whip up foam on the surface of Pavis Charm as it is pulled below the surface and into the depths of the gas giant.</dialog>\n<mark-on-map dest=\"Paxos Station\" />\n\n<condition at-dest=\"Paxos Station\" />\n<dialog>_\"Traveller. You bested the Worm. The battle was glorious.\nYet many here feel fear. *The Worm is not dead.* It might slumber for eons inside Pavonis Charm, but it will wake once again.\"_</dialog>\n\n\n\n\n",
+      "tags": "pavonis"
+    },
+    {
+      "name": "Poor Reception ",
+      "xml": "\n<condition state=\"surface\" at-dest=\"NBN Station\" trigger=\"HAIL\"/>\n<dialog>It is the local Nebular Broadcasting Network. You watch all of their shows.\n\n_\"Sorry, we are much to busy to handle visitors right now. Our relays are down!\"_</dialog>\n<dialog>You ask if they need any help.\n\n\"All of our spare Signal Capacitors are broken! And there are bandits stopping all trade to our provider at *Maxwell Station*\"</dialog>\n<add-to-quest-list />\n<place-inventory dest=\"Maxwell Station\" item=\"Signal Capacitor\" />\n<place-inventory dest=\"Maxwell Station\" item=\"Signal Capacitor\" />\n<place-inventory dest=\"Maxwell Station\" item=\"Signal Capacitor\" />\n<condition state=\"surface\" at-dest=\"Maxwell Station\" have-item=\"Signal Capacitor\"/>\n<dialog>You manage to get the *Signal Capacitors* that NBN need for their broadcasting relays. Now they just have to be installed.</dialog>\n<mark-on-map dest=\"NBN Relay W\" />\n<condition state=\"surface\" at-dest=\"NBN Relay W\" have-item=\"Signal Capacitor\" trigger=\"INSTALL CAPACITOR\"/>\n<take item=\"Signal Capacitor\" />\n<dialog>You replace the burnt out capacitor with a fresh one.</dialog>\n<mark-on-map dest=\"NBN Relay H\" />\n<condition state=\"surface\" at-dest=\"NBN Relay H\" have-item=\"Signal Capacitor\" trigger=\"INSTALL CAPACITOR\"/>\n<take item=\"Signal Capacitor\" />\n<dialog>You replace the burnt out capacitor with a fresh one.</dialog>\n<mark-on-map dest=\"NBN Relay P\" />\n<condition state=\"surface\" at-dest=\"NBN Relay P\" have-item=\"Signal Capacitor\" trigger=\"INSTALL CAPACITOR\"/>\n<take item=\"Signal Capacitor\" />\n<dialog>You replace the burnt out capacitor with a fresh one.</dialog>\n<mark-on-map dest=\"NBN Station\" />\n<condition at-dest=\"NBN Station\" />\n<dialog>_\"We have perfect reception!!\"_\n\n_\"The signal is back!! Amazing work. Here, take this compensation for your work.\"_</dialog>\n<give credits=\"1200\" />",
+      "color": "950",
+      "icon": "bar",
       "tags": "pavonis"
     },
     {
       "name": "Pavonis Mining Co",
-      "xml": "<place-enemy enemy=\"Rogue\" dest=\"A8761\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A9753\"/>\n<place-enemy enemy=\"Rogue\" dest=\"A2170\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A3566\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A4976\"/>\n<condition at-dest=\"Pavonis A2934\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">_\"This is Pavonis Mining Co Headquarters. Are you looking for assignments?\"_</dialog>\n<dialog>_\"There are rogues disturbing our operations at the south asteroid rim. We will pay 100 credits for clearing them out.\"_</dialog>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"A117;A8761;A9753;A2170;A3566;A4976\" at-dest=\"Pavonis A2934\"/>\n<dialog>_\"Excellent work! Transferring reward now.\"_</dialog>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"Many of our contractors are damaged by the rogues. Would you like to run some mining operations? We rent out the needed equipment.\"_</dialog>\n<give item=\"Mining Drill\"/>\n\n<mark-on-map dest=\"A2170\"/>\n<dialog>_\"Readings at A2170 show rich ore. Start there.\"_</dialog>\n<condition at-dest=\"A2170\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Ore\"/>\n\n<mark-on-map dest=\"A8761\"/>\n<dialog>_\"Readings at A8761 show rich ore. Continue there.\"_</dialog>\n<condition at-dest=\"A8761\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Mineral\"/>\n\n<mark-on-map dest=\"Pavonis A2934\"/>\n<condition have-item=\"Pavonian Mineral;Pavonian Ore\" at-dest=\"Pavonis A2934\"/>\n<dialog>_\"Good work, a bit slow, but good. Let us buy that mineral from you.\"_</dialog>\n<take item=\"Pavonian Mineral\"/>\n<take item=\"Pavonian Ore\"/>\n<take item=\"Mining Drill\"/>\n<give credits=\"100\"/>",
+      "xml": "<place-enemy enemy=\"Rogue\" dest=\"A8761\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A9753\"/>\n<place-enemy enemy=\"Rogue\" dest=\"A2170\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A3566\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A4976\"/>\n<condition at-dest=\"Pavonis A2934\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">_\"This is Pavonis Mining Co Headquarters. Are you looking for assignments?\"_</dialog>\n<dialog>_\"There are rogues disturbing our operations at the north-west asteroid rim. We will pay 100 credits for clearing them out.\"_</dialog>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"A117;A8761;A9753;A2170;A3566;A4976\" at-dest=\"Pavonis A2934\"/>\n<dialog>_\"Excellent work! Transferring reward now.\"_</dialog>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"Many of our contractors are damaged by the rogues. Would you like to run some mining operations? We rent out the needed equipment.\"_</dialog>\n<give item=\"Mining Drill\"/>\n\n<mark-on-map dest=\"A2170\"/>\n<dialog>_\"Readings at A2170 show rich ore. Start there.\"_</dialog>\n<condition at-dest=\"A2170\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Ore\"/>\n\n<mark-on-map dest=\"A8761\"/>\n<dialog>_\"Readings at A8761 show rich ore. Continue there.\"_</dialog>\n<condition at-dest=\"A8761\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Mineral\"/>\n\n<mark-on-map dest=\"Pavonis A2934\"/>\n<condition have-item=\"Pavonian Mineral;Pavonian Ore\" at-dest=\"Pavonis A2934\"/>\n<dialog>_\"Good work, a bit slow, but good. Let us buy that mineral from you.\"_</dialog>\n<take item=\"Pavonian Mineral\"/>\n<take item=\"Pavonian Ore\"/>\n<take item=\"Mining Drill\"/>\n<give credits=\"100\"/>",
       "tags": "pavonis"
     },
     {
@@ -7241,6 +7271,155 @@
   ],
   "initialDestination": "Backwater",
   "models": [
+    {
+      "name": "NBN HQ",
+      "geometry": "composite",
+      "res": 8,
+      "transform": [
+        ["scale", 2, 2, 2],
+        ["rotate", 0, -20, 0],
+        ["translate", 0, 0, -52]
+      ],
+      "path": [
+        [40, 0, 0],
+        [38, 0, 7],
+        [30, 0, 10],
+        [22, 0, 7],
+        [20, 0, 0],
+        [22, 0, -7],
+        [30, 0, -10],
+        [38, 0, -7],
+        [40, 0, 0]
+      ],
+      "parts": [
+        {
+          "name": "Relay 60deg",
+          "tags": "anomaly",
+          "geometry": "composite",
+          "transform": [
+            ["rotate", -20, 0, 0],
+            ["translate", 0, 85, -125],
+            ["scale", 0.45, 0.45, 0.45]
+          ],
+          "parts": [
+            {
+              "geometry": "lathe",
+              "res": 8,
+              "transform": [["rotate", 90, 22.5, 0], ["scale", 1, 1, 1]],
+              "path": [
+                [0, 0, -83],
+                [4, 0, -80],
+                [4, 0, -30],
+                [2, 0, -27],
+                [2, 0, 120],
+                [0, 0, 122]
+              ]
+            },
+            {
+              "name": "engine",
+              "geometry": "lathe",
+              "res": 10,
+              "transform": [["rotate", 90, 17.5, 0], ["translate", 0, -85, 0]],
+              "path": [[24, 0, 3], [20, 0, 25], [20, 0, 0], [24, 0, 3]]
+            },
+            {
+              "name": "dish",
+              "geometry": "composite",
+              "transform": [
+                ["scale", 3, 3, -3],
+                ["rotate", 0, 0, 0],
+                ["parabola", 0, 0.006, 0],
+                ["translate", 0, -95, 0]
+              ],
+              "parts": [
+                {
+                  "geometry": "lathe",
+                  "res": 4,
+                  "angle": 160,
+                  "transform": [["rotate", 90, -10, 0], ["scale", 1, 1, 1]],
+                  "path": [
+                    [10, 0, 0],
+                    [18, 0, 0],
+                    [26, 0, 0],
+                    [18, 0, 0],
+                    [10, 0, 0]
+                  ]
+                },
+                {
+                  "geometry": "lathe",
+                  "res": 4,
+                  "angle": 160,
+                  "transform": [["rotate", 90, 170, 0], ["scale", 1, 1, 1]],
+                  "path": [
+                    [10, 0, 0],
+                    [18, 0, 0],
+                    [26, 0, 0],
+                    [18, 0, 0],
+                    [10, 0, 0]
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "body",
+          "geometry": "lathe",
+          "res": 8,
+          "transform": [
+            ["scale", 0.75, 0.75, 0.75],
+            ["rotate", 180, 0, 0],
+            ["translate", 0, 0, 0]
+          ],
+          "path": [
+            [45, 0, -20],
+            [50, 0, -15],
+            [50, 0, 15],
+            [45, 0, 20],
+            [38, 0, 15],
+            [10, 0, 15],
+            [3, 0, 44]
+          ]
+        },
+        {
+          "geometry": "mesh",
+          "transform": [
+            ["scale", 2.4, 1, 0.2],
+            ["translate", -58, 0, 0],
+            ["rotate", -40, 0, -22.5]
+          ],
+          "quads": [
+            [[10, 0, -10], [10, 0, 10], [-10, 0, 10], [-10, 0, -10]],
+            [[-10, 0, -10], [-10, 0, 10], [10, 0, 10], [10, 0, -10]]
+          ]
+        },
+        {
+          "geometry": "mesh",
+          "transform": [
+            ["scale", 1, 1, 3],
+            ["translate", -70, 0, 0],
+            ["rotate", -40, 0, -22.5]
+          ],
+          "quads": [
+            [[10, 0, -10], [10, 0, 10], [-10, 0, 10], [-10, 0, -10]],
+            [[-10, 0, -10], [-10, 0, 10], [10, 0, 10], [10, 0, -10]]
+          ]
+        },
+        {
+          "geometry": "mesh",
+          "transform": [
+            ["scale", 1, 1, 3],
+            ["translate", -47, 0, 0],
+            ["rotate", -40, 0, -22.5]
+          ],
+          "quads": [
+            [[10, 0, -10], [10, 0, 10], [-10, 0, 10], [-10, 0, -10]],
+            [[-10, 0, -10], [-10, 0, 10], [10, 0, 10], [10, 0, -10]]
+          ]
+        }
+      ],
+      "tags": "anomaly"
+    },
     {
       "name": "Soma Generation Ship",
       "geometry": "composite",
@@ -8531,6 +8710,300 @@
             ["scale", 5, 5, 40],
             ["rotate", 0, 12, 17],
             ["translate", 0, 50, -75]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Relay 60deg",
+      "tags": "anomaly",
+      "geometry": "composite",
+      "transform": [
+        ["scale", 1.2, 1.2, 1.2],
+        ["translate", 0, 40, -95],
+        ["rotate", 0, 0, -10]
+      ],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 8,
+          "transform": [["rotate", 90, 22.5, 0], ["scale", 1, 1, 1]],
+          "path": [
+            [0, 0, -83],
+            [4, 0, -80],
+            [4, 0, -30],
+            [2, 0, -27],
+            [2, 0, 120],
+            [0, 0, 122]
+          ]
+        },
+        {
+          "name": "wing-1",
+          "geometry": "lathe",
+          "res": 3,
+          "transform": [
+            ["rotate", 0, 0, -60],
+            ["translate", -1, 0, 0],
+            ["parabola", 0.056, 0, 0],
+            ["scale", 12, 1.5, 5],
+            ["rotate", 90, 0, 0],
+            ["translate", -57, -66, 0]
+          ],
+          "path": [[0, 0, -6.8], [4, 0, -4.4], [4, 0, 4.4], [0, 0, 8.5]]
+        },
+        {
+          "name": "wing-2",
+          "geometry": "lathe",
+          "res": 3,
+          "transform": [
+            ["rotate", 0, 0, -60],
+            ["translate", -1, 0, 0],
+            ["parabola", 0.056, 0, 0],
+            ["scale", 12, 1.5, 5],
+            ["rotate", 90, 180, 0],
+            ["translate", 57, -66, 0]
+          ],
+          "path": [[0, 0, -6.8], [4, 0, -4.4], [4, 0, 4.4], [0, 0, 8.5]]
+        },
+        {
+          "name": "engine",
+          "geometry": "lathe",
+          "res": 10,
+          "transform": [["rotate", 90, 17.5, 0], ["translate", 0, -85, 0]],
+          "path": [[24, 0, 3], [20, 0, 25], [20, 0, 0], [24, 0, 3]]
+        },
+        {
+          "name": "dish",
+          "geometry": "composite",
+          "transform": [
+            ["scale", 3, 3, -3],
+            ["rotate", 0, 0, 0],
+            ["parabola", 0, 0.006, 0],
+            ["translate", 0, -95, 0]
+          ],
+          "parts": [
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "angle": 160,
+              "transform": [["rotate", 90, -10, 0], ["scale", 1, 1, 1]],
+              "path": [
+                [10, 0, 0],
+                [18, 0, 0],
+                [26, 0, 0],
+                [18, 0, 0],
+                [10, 0, 0]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "angle": 160,
+              "transform": [["rotate", 90, 170, 0], ["scale", 1, 1, 1]],
+              "path": [
+                [10, 0, 0],
+                [18, 0, 0],
+                [26, 0, 0],
+                [18, 0, 0],
+                [10, 0, 0]
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Relay 170deg",
+      "tags": "anomaly",
+      "geometry": "composite",
+      "transform": [
+        ["scale", 1.2, 1.2, 1.2],
+        ["translate", 0, 40, -95],
+        ["rotate", 0, 0, 110]
+      ],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 8,
+          "transform": [["rotate", 90, 22.5, 0], ["scale", 1, 1, 1]],
+          "path": [
+            [0, 0, -83],
+            [4, 0, -80],
+            [4, 0, -30],
+            [2, 0, -27],
+            [2, 0, 120],
+            [0, 0, 122]
+          ]
+        },
+        {
+          "name": "wing-1",
+          "geometry": "lathe",
+          "res": 3,
+          "transform": [
+            ["rotate", 0, 0, -60],
+            ["translate", -1, 0, 0],
+            ["parabola", 0.056, 0, 0],
+            ["scale", 12, 1.5, 5],
+            ["rotate", 90, 0, 0],
+            ["translate", -57, -66, 0]
+          ],
+          "path": [[0, 0, -6.8], [4, 0, -4.4], [4, 0, 4.4], [0, 0, 8.5]]
+        },
+        {
+          "name": "wing-2",
+          "geometry": "lathe",
+          "res": 3,
+          "transform": [
+            ["rotate", 0, 0, -60],
+            ["translate", -1, 0, 0],
+            ["parabola", 0.056, 0, 0],
+            ["scale", 12, 1.5, 5],
+            ["rotate", 90, 180, 0],
+            ["translate", 57, -66, 0]
+          ],
+          "path": [[0, 0, -6.8], [4, 0, -4.4], [4, 0, 4.4], [0, 0, 8.5]]
+        },
+        {
+          "name": "engine",
+          "geometry": "lathe",
+          "res": 10,
+          "transform": [["rotate", 90, 17.5, 0], ["translate", 0, -85, 0]],
+          "path": [[24, 0, 3], [20, 0, 25], [20, 0, 0], [24, 0, 3]]
+        },
+        {
+          "name": "dish",
+          "geometry": "composite",
+          "transform": [
+            ["scale", 3, 3, -3],
+            ["rotate", 0, 0, 0],
+            ["parabola", 0, 0.006, 0],
+            ["translate", 0, -95, 0]
+          ],
+          "parts": [
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "angle": 160,
+              "transform": [["rotate", 90, -10, 0], ["scale", 1, 1, 1]],
+              "path": [
+                [10, 0, 0],
+                [18, 0, 0],
+                [26, 0, 0],
+                [18, 0, 0],
+                [10, 0, 0]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "angle": 160,
+              "transform": [["rotate", 90, 170, 0], ["scale", 1, 1, 1]],
+              "path": [
+                [10, 0, 0],
+                [18, 0, 0],
+                [26, 0, 0],
+                [18, 0, 0],
+                [10, 0, 0]
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Relay 300deg",
+      "tags": "anomaly",
+      "geometry": "composite",
+      "transform": [
+        ["scale", 1.2, 1.2, 1.2],
+        ["translate", 0, 40, -95],
+        ["rotate", 0, 0, 230]
+      ],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 8,
+          "transform": [["rotate", 90, 22.5, 0], ["scale", 1, 1, 1]],
+          "path": [
+            [0, 0, -83],
+            [4, 0, -80],
+            [4, 0, -30],
+            [2, 0, -27],
+            [2, 0, 120],
+            [0, 0, 122]
+          ]
+        },
+        {
+          "name": "wing-1",
+          "geometry": "lathe",
+          "res": 3,
+          "transform": [
+            ["rotate", 0, 0, -60],
+            ["translate", -1, 0, 0],
+            ["parabola", 0.056, 0, 0],
+            ["scale", 12, 1.5, 5],
+            ["rotate", 90, 0, 0],
+            ["translate", -57, -66, 0]
+          ],
+          "path": [[0, 0, -6.8], [4, 0, -4.4], [4, 0, 4.4], [0, 0, 8.5]]
+        },
+        {
+          "name": "wing-2",
+          "geometry": "lathe",
+          "res": 3,
+          "transform": [
+            ["rotate", 0, 0, -60],
+            ["translate", -1, 0, 0],
+            ["parabola", 0.056, 0, 0],
+            ["scale", 12, 1.5, 5],
+            ["rotate", 90, 180, 0],
+            ["translate", 57, -66, 0]
+          ],
+          "path": [[0, 0, -6.8], [4, 0, -4.4], [4, 0, 4.4], [0, 0, 8.5]]
+        },
+        {
+          "name": "engine",
+          "geometry": "lathe",
+          "res": 10,
+          "transform": [["rotate", 90, 17.5, 0], ["translate", 0, -85, 0]],
+          "path": [[24, 0, 3], [20, 0, 25], [20, 0, 0], [24, 0, 3]]
+        },
+        {
+          "name": "dish",
+          "geometry": "composite",
+          "transform": [
+            ["scale", 3, 3, -3],
+            ["rotate", 0, 0, 0],
+            ["parabola", 0, 0.006, 0],
+            ["translate", 0, -95, 0]
+          ],
+          "parts": [
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "angle": 160,
+              "transform": [["rotate", 90, -10, 0], ["scale", 1, 1, 1]],
+              "path": [
+                [10, 0, 0],
+                [18, 0, 0],
+                [26, 0, 0],
+                [18, 0, 0],
+                [10, 0, 0]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 4,
+              "angle": 160,
+              "transform": [["rotate", 90, 170, 0], ["scale", 1, 1, 1]],
+              "path": [
+                [10, 0, 0],
+                [18, 0, 0],
+                [26, 0, 0],
+                [18, 0, 0],
+                [10, 0, 0]
+              ]
+            }
           ]
         }
       ]
@@ -11773,6 +12246,19 @@
       "model": "Mimos Habitat"
     },
     {
+      "id": "anomaly-nbn-hq",
+      "type": "anomaly",
+      "celestial": {
+        "r": 4,
+        "amb": 0.2,
+        "oct": 3,
+        "zoom": 10,
+        "color": ["F80", "F80"]
+      },
+      "surface": null,
+      "model": "NBN HQ"
+    },
+    {
       "id": "anomaly-needle-gate",
       "type": "anomaly",
       "desc": "",
@@ -11799,6 +12285,45 @@
       },
       "surface": null,
       "model": "Paxos Station"
+    },
+    {
+      "id": "anomaly-relay-170deg",
+      "type": "anomaly",
+      "celestial": {
+        "r": 4,
+        "amb": 0.2,
+        "oct": 3,
+        "zoom": 10,
+        "color": ["F80", "F80"]
+      },
+      "surface": null,
+      "model": "Relay 170deg"
+    },
+    {
+      "id": "anomaly-relay-300deg",
+      "type": "anomaly",
+      "celestial": {
+        "r": 4,
+        "amb": 0.2,
+        "oct": 3,
+        "zoom": 10,
+        "color": ["F80", "F80"]
+      },
+      "surface": null,
+      "model": "Relay 300deg"
+    },
+    {
+      "id": "anomaly-relay-60deg",
+      "type": "anomaly",
+      "celestial": {
+        "r": 4,
+        "amb": 0.2,
+        "oct": 3,
+        "zoom": 10,
+        "color": ["F80", "F80"]
+      },
+      "surface": null,
+      "model": "Relay 60deg"
     },
     {
       "id": "anomaly-ruin",
@@ -12043,11 +12568,11 @@
         "color": ["a84", "a84"]
       },
       "surface": {
-        "zoom": 2,
+        "zoom": 1,
         "height": 2,
         "octaves": 4,
         "falloff": 0.3,
-        "curve": [0, 1],
+        "curve": [0, 0.2, 1],
         "spectrum": ["666", "A84"]
       },
       "model": null
@@ -12065,7 +12590,7 @@
       },
       "surface": {
         "zoom": 0.75,
-        "height": 1,
+        "height": 2,
         "octaves": 3,
         "falloff": 0.5,
         "curve": [0, 1],
@@ -12116,12 +12641,12 @@
         "color": ["484", "888"]
       },
       "surface": {
-        "zoom": 1.5,
-        "height": 0.5,
+        "zoom": 1.25,
+        "height": 1.5,
         "octaves": 4,
         "falloff": 0.4,
         "curve": [0, 0.1, 0.2, 0.8, 0.9, 1],
-        "spectrum": ["484", "888"]
+        "spectrum": ["484", "363", "888", "666"]
       },
       "model": null
     },
@@ -12339,9 +12864,10 @@
         "height": 2,
         "octaves": 2,
         "falloff": 0.2,
-        "curve": [0.5, 0.5, 0, 0, 0.5],
-        "spectrum": ["06F", "FF8", "FF8", "884", "884"]
-      }
+        "curve": [0.7, 0.5, 0.2, 0, 0, 0],
+        "spectrum": ["46F", "FF8", "FF8", "884", "884"]
+      },
+      "model": null
     },
     {
       "id": "planet-blue-forest",
@@ -12402,8 +12928,9 @@
         "octaves": 4,
         "falloff": 0.5,
         "curve": [0, 0.3, 0.3, 0.4, 0.8, 1],
-        "spectrum": ["BA4", "888"]
-      }
+        "spectrum": ["05F", "4B4", "3B8", "888"]
+      },
+      "model": null
     },
     {
       "type": "planet",
@@ -12506,7 +13033,7 @@
         "octaves": 3,
         "falloff": 0.5,
         "curve": [0, 0.2, 0.4, 0.6, 0.8, 1, 0.9],
-        "spectrum": ["06F", "06F", "8F0", "0F0", "0F0", "0D0", "080"]
+        "spectrum": ["FF8", "FF8", "8F0", "0F0", "0F0", "0D0", "080"]
       },
       "model": null
     },
@@ -12522,11 +13049,11 @@
         "color": ["f30", "555"]
       },
       "surface": {
-        "zoom": 2.5,
-        "height": 2,
+        "zoom": 2,
+        "height": 3,
         "octaves": 2,
         "falloff": 0.2,
-        "curve": [1, 0.75, 0.5, 0.1, 0],
+        "curve": [0, 0.2, 1],
         "spectrum": ["F00", "888", "888", "444"]
       },
       "model": null
@@ -12564,12 +13091,12 @@
         "color": ["F80", "8f8"]
       },
       "surface": {
-        "zoom": 1,
+        "zoom": 1.5,
         "height": 2,
         "octaves": 4,
-        "falloff": 0.3,
-        "curve": [0.4, 0.5, 0.45, 0.5, 0.3, 0, 0],
-        "spectrum": ["F80", "F00", "000", "8f8", "8f8", "8f8", "8f8"]
+        "falloff": 0.4,
+        "curve": [0.9, 0.5, 0.4, 0.5, 0.3, 0, 0],
+        "spectrum": ["F80", "F80", "8f8", "8f8", "8f8", "8f8"]
       },
       "model": null
     },
@@ -12668,12 +13195,13 @@
       },
       "surface": {
         "zoom": 3,
-        "height": 2,
+        "height": 3,
         "octaves": 4,
         "falloff": 0.25,
         "curve": [0.4, 0.45, 0.6, 1],
         "spectrum": ["666", "666", "666", "666", "666", "F0F"]
-      }
+      },
+      "model": null
     },
     {
       "type": "planet",
