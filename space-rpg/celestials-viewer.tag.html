@@ -2,7 +2,7 @@
 
   <div class="list">
     <div class="tools">
-      <filter-tools ref="filterInput" types={types} onfilter{update} />
+      <filter-tools ref="filterInput" types={types} onfilter={update} />
     </div>
     <div each={e in filteredItems()} onclick={edit} class={ list_item: true, active: e==selected }>
       {e.name}
