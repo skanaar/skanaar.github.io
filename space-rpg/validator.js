@@ -54,10 +54,8 @@ window.validator = (function (){
   }
 
   function validateCelestial(world, celestial, error) {
-      celestial.celestial.color.filter(isInvalidColor).forEach(e => error('invalid color', e))
-      if (celestial.surface)
-        celestial.surface.spectrum.filter(isInvalidColor).forEach(e => error('invalid color', e))
-
+      if (celestial.curve.length < 2) error('invalid curve', celestial)
+      celestial.spectrum.filter(isInvalidColor).forEach(e => error('invalid color', e))
       if (celestial.type == 'anomaly') {
         var referredModel = celestial.model
         if (!world.models.some(e => e.name == referredModel))
@@ -66,7 +64,7 @@ window.validator = (function (){
   }
 
   function validateDestination(world, dest, error) {
-    if (world.celestials.every(e => e.id != dest.style))
+    if (world.celestials.every(e => e.name != dest.style))
       error('undefined celestial', dest.style)    
     if (dest.enemy) {
       undefItem(world, dest.enemy.loot, error, 'undefined loot item')
@@ -96,7 +94,7 @@ window.validator = (function (){
   function errorCollector(type, func) {
     return function (world, entity) {
       var errors = []
-      var collect = (msg, arg) => errors.push({ type: type, name: entity.name || entity.id, msg: msg, arg: arg})
+      var collect = (msg, arg) => errors.push({ type: type, name: entity.name, msg: msg, arg: arg})
       func(world, entity, collect)
       return errors
     }

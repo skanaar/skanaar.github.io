@@ -84,7 +84,7 @@
     <label>Celestial</label>
     <select ref="celestialSelect" onchange={setCelestial}>
       <option value="unknown">- style -</option>
-      <option each={e in world.celestials}>{e.id}</option>
+      <option each={e in world.celestials}>{e.name}</option>
     </select>
     <button onclick={randomizeStyle}>Randomize</button>
 
@@ -319,8 +319,8 @@
     self.randomizeStyle = function () {
       _.filter(self.nodes, 'isSelected').forEach(function (node) {
         var type = node.entity.style.split('-')[0]
-        var stylesOfSameType = self.world.celestials.filter(e => e.id.startsWith(type))
-        node.entity.style = _.sample(stylesOfSameType).id
+        var stylesOfSameType = self.world.celestials.filter(e => e.name.startsWith(type))
+        node.entity.style = _.sample(stylesOfSameType).name
       })
       updateUI()
       calculateLines()
@@ -438,12 +438,15 @@
     }
 
     function buildRadiusCache() {
-      self.radiusCache = _.object(self.world.celestials.map(e => [e.id, e.celestial.r]))
+      self.radiusCache = _.object(self.world.celestials.map(e => [e.name, e.radius]))
       self.radiusCache['region-1'] = 6
     }
 
     function prepareWorldForSave() {
       self.world.destinations = self.nodes.filter(e => e.type === 'celestial').map(e => e.entity)
+      self.world.destinations.forEach(function (e) {
+        delete e.id
+      })
       self.world.regions = self.nodes.filter(e => e.type === 'region').map(e => ({
         name: e.entity.name,
         audio: e.entity.audio,

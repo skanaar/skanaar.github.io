@@ -20,7 +20,7 @@
     }
     self.predicate = function (e) {
       return (!self.type || (self.type == e.type || self.type == e.tags)) && 
-        (!self.query || (e.name || e.id).toLowerCase().includes(self.query) || e.level == +self.query)
+        (!self.query || e.name.toLowerCase().includes(self.query) || e.level == +self.query)
     }
   </script>
 </filter-tools>

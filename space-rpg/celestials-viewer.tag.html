@@ -5,7 +5,7 @@
       <filter-tools ref="filterInput" types={types} onfilter{update} />
     </div>
     <div each={e in filteredItems()} onclick={edit} class={ list_item: true, active: e==selected }>
-      {e.id}
+      {e.name}
     </div>
   </div>
 
@@ -15,40 +15,32 @@
   </div>
 
   <div>
-    <celestial-preview celestial={selected && selected.celestial} />
-    <terrain-preview surface={selected && selected.surface} />
+    <celestial-preview celestial={selected && selected} />
+    <terrain-preview surface={selected && selected} />
   </div>
 
   <div class="sidebar" show={!!selected}>
     <select value={selected && selected.type} ref="typeChooser">
       <option each={e in types}>{e}</option>
     </select>
-    <input type=text ref="idField" value={selected && selected.id}>
+    <input type=text ref="nameField" value={selected && selected.name}>
     
-    <label>Celestial Attributes</label>
+    <label>Attributes</label>
     <div class="input-grid">
-      <em>r</em> <input type=number ref="rField" value={currCelestial && currCelestial.r}><br/>
-      <em>amb</em> <input type=number step=0.05 ref="ambField" value={currCelestial && currCelestial.amb}><br/>
-      <em>oct</em> <input type=number step=1 ref="octField" value={currCelestial && currCelestial.oct}><br/>
-      <em>zoom</em> <input type=number step=0.1 ref="zoomField" value={currCelestial && currCelestial.zoom}><br/>
-      <em>color 1</em> <input type=text ref="color0Field" value={currCelestial && currCelestial.color[0]}><br/>
-      <em>color 2</em> <input type=text ref="color1Field" value={currCelestial && currCelestial.color[1]}><br/>
+      <em>radius</em> <input type=number ref="rField" value={selected && selected.radius}><br/>
+      <em>height</em> <input type=number step=0.1 ref="heightField" value={selected && selected.height}><br/>
+      <em>ambient</em> <input type=number step=0.05 ref="ambField" value={selected && selected.ambient}><br/>
+      <em>octaves</em> <input type=number step=1 ref="octavesField" value={selected && selected.octaves}><br/>
+      <em>zoom</em> <input type=number step=0.1 ref="zoomField" value={selected && selected.zoom}><br/>
+      <em>falloff</em> <input type=number step=0.05 ref="falloffField" value={selected && selected.falloff}><br/>
+      <em>curve</em> <input type=text ref="curveField" value={selected && selected.curve.join()}><br/>
+      <em>spectrum</em> <input type=text ref="spectrumField" value={selected && selected.spectrum}><br/>
     </div>
 
     <label if={hasModel()}>Model</label>
     <select show={hasModel()} value={selected && selected.model} ref="modelChooser">
       <option each={e in world.models}>{e.name}</option>
     </select>
-    
-    <label if={hasSurface()}>Surface Attributes</label>
-    <div class="input-grid" if={hasSurface()}>
-      <em>zoom</em> <input type=number step=0.1 ref="surfZoomField" value={currSurface && currSurface.zoom}><br/>
-      <em>height</em> <input type=number step=0.1 ref="heightField" value={currSurface && currSurface.height}><br/>
-      <em>octaves</em> <input type=number step=1 ref="octavesField" value={currSurface && currSurface.octaves}><br/>
-      <em>falloff</em> <input type=number step=0.05 ref="falloffField" value={currSurface && currSurface.falloff}><br/>
-      <em>curve</em> <input type=text ref="curveField" value={currSurface && currSurface.curve.join()}><br/>
-      <em>spectrum</em> <input type=text ref="spectrumField" value={currSurface && currSurface.spectrum.join()}><br/>
-    </div>
 
     <label></label>
     <button onclick={save}>Save</button>
@@ -88,7 +80,7 @@
     }
 
     self.sort = function () {
-      self.world.celestials.sort((a,b) => (a.id < b.id ? -1 : 1))
+      self.world.celestials.sort((a,b) => (a.name < b.name ? -1 : 1))
     }
 
     self.add = function () {
@@ -115,34 +107,23 @@
     
     self.save = function () {
       if (!self.selected) return
-      var identifier = self.refs.idField.value.split('-')
+      var identifier = self.refs.nameField.value.split('-')
       self.selected.type = self.refs.typeChooser.value
       identifier[0] = self.selected.type
-      self.selected.id = identifier.join('-')
-      
-      self.selected.celestial.r = +self.refs.rField.value
-      self.selected.celestial.amb = +self.refs.ambField.value
-      self.selected.celestial.oct = +self.refs.octField.value
-      self.selected.celestial.zoom = +self.refs.zoomField.value
-      self.selected.celestial.color[0] = self.refs.color0Field.value
-      self.selected.celestial.color[1] = self.refs.color1Field.value
-
+      self.selected.name = identifier.join('-')
       if (self.hasModel()) {
         self.selected.model = self.refs.modelChooser.value || null
       } else {
         self.selected.model = null
       }
-
-      if (self.hasSurface()) {
-        self.selected.surface.zoom = +self.refs.surfZoomField.value
-        self.selected.surface.height = +self.refs.heightField.value
-        self.selected.surface.octaves = +self.refs.octavesField.value
-        self.selected.surface.falloff = +self.refs.falloffField.value
-        self.selected.surface.curve = self.refs.curveField.value.split(',').map(x => +x)
-        self.selected.surface.spectrum = self.refs.spectrumField.value.split(',')
-      } else {
-        self.selected.surface = null
-      }
+      self.selected.radius = +self.refs.rField.value
+      self.selected.zoom = +self.refs.zoomField.value
+      self.selected.height = +self.refs.heightField.value
+      self.selected.ambient = +self.refs.ambField.value
+      self.selected.octaves = +self.refs.octavesField.value
+      self.selected.falloff = (+self.refs.falloffField.value) || 0.4
+      self.selected.curve = self.refs.curveField.value.split(',').map(x => +x)
+      self.selected.spectrum = self.refs.spectrumField.value.split(',')
     }
 
     function loadWorld() {

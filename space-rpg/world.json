@@ -6763,6 +6763,174 @@
       "trader": null,
       "enemy": null,
       "treasures": []
+    },
+    {
+      "pos": {"x": -841, "y": -2700},
+      "name": "BACKWATER",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -910, "y": -2600},
+      "name": "BUSH",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": {"type": "Target Drone", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": -985, "y": -2669},
+      "name": "MAXWELL",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -948, "y": -2502},
+      "name": "PAVONIS",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -893, "y": -2003},
+      "name": "PAXOS",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -788, "y": -2059},
+      "name": "ERIS",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -793, "y": -1932},
+      "name": "APATE",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": {"type": "Target Drone", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": -931, "y": -1896},
+      "name": "THANATOS",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -1143, "y": -2169},
+      "name": "MIMOS",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": {"type": "Target Drone", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": -1049, "y": -2200},
+      "name": "STERNBUND",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -946, "y": -2381},
+      "name": "EXPANSE",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -829, "y": -2300},
+      "name": "AESIR",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -952, "y": -2149},
+      "name": "BANDITS LAIR",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": {"type": "Target Drone", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": -948, "y": -2273},
+      "name": "WEAVER",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": {"type": "Target Drone", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": -853, "y": -2442},
+      "name": "SOMA",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -1003, "y": -2037},
+      "name": "ELYSIUM",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -1106, "y": -1977},
+      "name": "NEUTRON STAR",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -156, "y": 919},
+      "name": "Buoy 8",
+      "style": "anomaly-buoy",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -128, "y": 1024},
+      "name": "Buoy 74",
+      "style": "anomaly-buoy",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -176, "y": 1124},
+      "name": "Buoy 54",
+      "style": "anomaly-buoy",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": -184, "y": 1240},
+      "name": "Neutron Star",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
     }
   ],
   "quests": [
@@ -7037,238 +7205,6 @@
       "icon": ""
     }
   ],
-  "surface": [
-    {
-      "id": "anomaly-observatory",
-      "desc": "",
-      "zoom": 1,
-      "height": 1,
-      "octaves": 1,
-      "falloff": 0.1,
-      "curve": [],
-      "spectrum": []
-    },
-    {
-      "id": "anomaly-buoy",
-      "desc": "",
-      "zoom": 1,
-      "height": 1,
-      "octaves": 1,
-      "falloff": 0.1,
-      "curve": [],
-      "spectrum": []
-    },
-    {
-      "id": "volcano",
-      "desc": "Volcanoes constantly feed the endless forest with nutrients",
-      "zoom": 1,
-      "height": 3,
-      "octaves": 3,
-      "falloff": 0.5,
-      "curve": [0, 0.2, 0.4, 0.6, 0.8, 1, 0.9],
-      "spectrum": ["06F", "06F", "8F0", "0F0", "0F0", "0D0", "000", "F00"]
-    },
-    {
-      "id": "hell-1",
-      "desc": "The thin crust has cracked, revealing canyons of lava",
-      "zoom": 1,
-      "height": 2,
-      "octaves": 2,
-      "falloff": 0.2,
-      "curve": [0.4, 0.5, 0.45, 0.3, 0, 0.9, 0.95, 1],
-      "spectrum": ["F80", "F00", "666", "666", "666", "666", "666"]
-    },
-    {
-      "id": "hell-2",
-      "desc": "A hellish world with lakes of molten lava dotting the surface",
-      "zoom": 1,
-      "height": 2,
-      "octaves": 4,
-      "falloff": 0.3,
-      "curve": [0.4, 0.5, 0.45, 0.5, 0.3, 0, 0],
-      "spectrum": ["F80", "F00", "000", "666", "666", "666", "666", "666"]
-    },
-    {
-      "id": "xeno",
-      "desc": "A blue xenofungus only grows at a certain altitude",
-      "zoom": 0.75,
-      "height": 3,
-      "octaves": 3,
-      "falloff": 0.5,
-      "curve": [0, 1],
-      "spectrum": [
-        "666",
-        "666",
-        "666",
-        "666",
-        "0DF",
-        "888",
-        "888",
-        "555",
-        "555"
-      ]
-    },
-    {
-      "id": "brass",
-      "desc": "A lunar desert, with every grain of sand made of brass",
-      "zoom": 0.7,
-      "height": 2,
-      "octaves": 4,
-      "falloff": 0.5,
-      "curve": [0, 1],
-      "spectrum": ["BA4", "DB4"]
-    },
-    {
-      "id": "rock-1",
-      "desc": "A barren lunar landscape, littered with rocks",
-      "zoom": 0.7,
-      "height": 2,
-      "octaves": 4,
-      "falloff": 0.5,
-      "curve": [0, 1],
-      "spectrum": ["666", "888"]
-    },
-    {
-      "id": "rock-2",
-      "desc": "Featureless regolith all the way to the horizon",
-      "zoom": 0.7,
-      "height": 2,
-      "octaves": 4,
-      "falloff": 0.3,
-      "curve": [0, 1],
-      "spectrum": ["666", "888"]
-    },
-    {
-      "id": "rock-3",
-      "desc": "Inexplicably covered with deep wrinkles that cuts into the bedrock",
-      "zoom": 2,
-      "height": 2,
-      "octaves": 1,
-      "falloff": 0.5,
-      "curve": [0, 0.25, 0.5, 1, 1, 0.5, 0.25, 0],
-      "spectrum": ["040", "0F4", "888"]
-    },
-    {
-      "id": "rock-4",
-      "desc": "Purple crystals as tall as mountains protrude through the regolith ",
-      "zoom": 3,
-      "height": 2,
-      "octaves": 4,
-      "falloff": 0.25,
-      "curve": [0.4, 0.45, 0.6, 1],
-      "spectrum": ["666", "666", "666", "666", "666", "F0F"]
-    },
-    {
-      "id": "rock-5",
-      "desc": "Airless and radiation blasted, mysterious lichens grow in the valleys",
-      "zoom": 2,
-      "height": 2,
-      "octaves": 4,
-      "falloff": 0.3,
-      "curve": [0, 1],
-      "spectrum": ["0F0", "0FF", "666", "666", "666", "666", "666"]
-    },
-    {
-      "id": "green-1",
-      "desc": "Vast plains and tall mountains, nothing else",
-      "zoom": 0.7,
-      "height": 2,
-      "octaves": 4,
-      "falloff": 0.5,
-      "curve": [0, 0.3, 0.3, 0.4, 0.8, 1],
-      "spectrum": ["BA4", "888"]
-    },
-    {
-      "id": "green-2",
-      "desc": "Sand and grass",
-      "zoom": 1.5,
-      "height": 2,
-      "octaves": 2,
-      "falloff": 0.2,
-      "curve": [1, 0, 0.5],
-      "spectrum": ["4F0", "FF8", "FF8", "884", "884"]
-    },
-    {
-      "id": "green-3",
-      "desc": "Boulbous hills snake around the entire planet, with an infinite meadow sprouting yellow flowers",
-      "zoom": 1,
-      "height": 2,
-      "octaves": 2,
-      "falloff": 0.2,
-      "curve": [1, 0, 1],
-      "spectrum": ["040", "0F4", "FF0"]
-    },
-    {
-      "id": "green-4",
-      "desc": "Rolling hills, snow covered mountains and lush forests",
-      "zoom": 1,
-      "height": 2,
-      "octaves": 6,
-      "falloff": 0.65,
-      "curve": [0, 1],
-      "spectrum": ["04F", "0F0", "8D0", "FFF"]
-    },
-    {
-      "id": "green-5",
-      "desc": "Pink soft peaks tower over a vast double layered forest",
-      "zoom": 1,
-      "height": 2,
-      "octaves": 4,
-      "falloff": 0.5,
-      "curve": [0.1, 0.2, 0.3, 0.33, 0.37, 0.4, 0.6, 0.8, 0.9, 1],
-      "spectrum": ["040", "0F0", "8D0", "F88"]
-    },
-    {
-      "id": "desert-1",
-      "desc": "Scorching hot desert streaked with mysteriously temperate and humid forests",
-      "zoom": 2.5,
-      "height": 2,
-      "octaves": 2,
-      "falloff": 0.2,
-      "curve": [1, 0.75, 0.5, 0.1, 0],
-      "spectrum": ["4F0", "FF8", "FF8", "884", "884"]
-    },
-    {
-      "id": "desert-2",
-      "desc": "A completely uniform desert, any traces of life long since ground into dust",
-      "zoom": 1.5,
-      "height": 2,
-      "octaves": 2,
-      "falloff": 0.2,
-      "curve": [1, 0, 0.5],
-      "spectrum": ["FF8", "FF8", "884"]
-    },
-    {
-      "id": "beach",
-      "desc": "Covered with an infinite beach, and blasted into lifelessness by unrelenting radiation",
-      "zoom": 1.5,
-      "height": 2,
-      "octaves": 2,
-      "falloff": 0.2,
-      "curve": [0.5, 0.5, 0, 0, 0.5],
-      "spectrum": ["06F", "FF8", "FF8", "884", "884"]
-    },
-    {
-      "id": "water",
-      "desc": "A single frozen sea of water and salt",
-      "zoom": 1.5,
-      "height": 1,
-      "octaves": 5,
-      "falloff": 0.5,
-      "curve": [0.45, 0.4, 0.45, 0.4, 0.7, 0.7, 0.7, 0.7],
-      "spectrum": ["68F", "36F", "36F", "FFF", "FFF", "FFF"]
-    },
-    {
-      "id": "unnamed",
-      "desc": "",
-      "zoom": 1,
-      "height": 3,
-      "octaves": 3,
-      "falloff": 0.5,
-      "curve": [0, 1],
-      "spectrum": ["06F", "F00"]
-    }
-  ],
   "initialDestination": "Backwater",
   "models": [
     {
@@ -7533,6 +7469,64 @@
             [0.3, 0, 0.7],
             [0.2, 0, 0.9],
             [0, 0, 1]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Shards",
+      "geometry": "composite",
+      "transform": [
+        ["scale", 1.15, 1.15, 1.15],
+        ["rotate", 0, 0, 0],
+        ["translate", 0, 0, -90]
+      ],
+      "parts": [
+        {
+          "geometry": "cube",
+          "transform": [
+            ["subdivide", 0, 0, 0],
+            ["sphere", 20, 20, 80],
+            ["rotate", -10, 8, 0],
+            ["translate", -40, -50, 0]
+          ]
+        },
+        {
+          "geometry": "cube",
+          "transform": [
+            ["rotate", 50, 70, 50],
+            ["subdivide", 0, 0, 0],
+            ["sphere", 20, 20, 80],
+            ["rotate", 0, -5, 15],
+            ["translate", 40, -40, -5]
+          ]
+        },
+        {
+          "geometry": "cube",
+          "transform": [
+            ["rotate", 30, 0, 0],
+            ["subdivide", 0, 0, 0],
+            ["sphere", 20, 20, 80],
+            ["rotate", 20, 0, -17],
+            ["translate", 20, 40, -10]
+          ]
+        },
+        {
+          "geometry": "cube",
+          "transform": [
+            ["rotate", 30, 40, 0],
+            ["sphere", 10, 5, 60],
+            ["rotate", 10, 0, 17],
+            ["translate", -30, 10, 20]
+          ]
+        },
+        {
+          "geometry": "cube",
+          "transform": [
+            ["rotate", 30, 50, 0],
+            ["sphere", 10, 5, 60],
+            ["rotate", 10, -30, 17],
+            ["translate", 70, 20, 30]
           ]
         }
       ]
@@ -12036,1294 +12030,1026 @@
   ],
   "celestials": [
     {
-      "id": "anomaly- Smackys asteroid",
       "type": "anomaly",
-      "desc": "Smacky's!\nThe number # one best selling in the galaxy!",
-      "celestial": {
-        "r": 5,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["888", "D84"]
-      },
-      "surface": null,
-      "model": "Smacky's"
-    },
-    {
-      "id": "anomaly-Maxwell_Station",
-      "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 15,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["888", "D84"]
-      },
-      "surface": null,
-      "model": "Ring Station"
-    },
-    {
-      "id": "anomaly-Tiendong",
-      "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 20,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["888", "D84"]
-      },
-      "surface": null,
-      "model": "Tiendong Station"
-    },
-    {
-      "id": "anomaly-apate",
-      "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "F80"]
-      },
-      "surface": null,
-      "model": "Temple of Apate"
-    },
-    {
-      "id": "anomaly-broken-sloop",
-      "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "F80"]
-      },
-      "surface": null,
-      "model": "Broken Sloop"
+      "model": "Smacky's",
+      "name": "anomaly- Smackys asteroid",
+      "radius": 5,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["888", "D84"],
+      "falloff": 0.4
     },
     {
       "type": "anomaly",
-      "id": "anomaly-buoy",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 16,
-        "zoom": 1.2,
-        "color": ["f80", "f80"]
-      },
-      "surface": null,
-      "desc": "USO-MG85Q compliant deep space buoy",
-      "model": "Terran Buoy"
-    },
-    {
-      "id": "anomaly-buoy-alien",
-      "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "F80"]
-      },
-      "surface": null,
-      "model": "Alien Buoy"
-    },
-    {
-      "id": "anomaly-debris",
-      "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "F80"]
-      },
-      "surface": null,
-      "model": "Debris"
-    },
-    {
-      "id": "anomaly-elevator",
-      "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "F80"]
-      },
-      "surface": null,
-      "model": "Space Elevator"
-    },
-    {
-      "id": "anomaly-gate",
-      "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "D84"]
-      },
-      "surface": null,
-      "model": "Larato Gate"
-    },
-    {
-      "id": "anomaly-generation-ship",
-      "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "F80"]
-      },
-      "surface": null,
-      "model": "Soma Generation Ship"
-    },
-    {
-      "id": "anomaly-helyon_shipyards",
-      "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["FFF", "D84"]
-      },
-      "surface": null,
-      "model": "Helyon Shipyards"
-    },
-    {
-      "id": "anomaly-hermit",
-      "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "D84"]
-      },
-      "surface": null,
-      "model": "Hermit Home"
-    },
-    {
-      "id": "anomaly-junk",
-      "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "D84"]
-      },
-      "surface": null,
-      "model": "Junk"
-    },
-    {
-      "id": "anomaly-mimos-habitat",
-      "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "F80"]
-      },
-      "surface": null,
-      "model": "Mimos Habitat"
-    },
-    {
-      "id": "anomaly-nbn-hq",
-      "type": "anomaly",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "F80"]
-      },
-      "surface": null,
-      "model": "NBN HQ"
-    },
-    {
-      "id": "anomaly-needle-gate",
-      "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "F80"]
-      },
-      "surface": null,
-      "model": "Needle Gate"
-    },
-    {
-      "id": "anomaly-paxos",
-      "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "D84"]
-      },
-      "surface": null,
-      "model": "Paxos Station"
-    },
-    {
-      "id": "anomaly-relay-170deg",
-      "type": "anomaly",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "F80"]
-      },
-      "surface": null,
-      "model": "Relay 170deg"
-    },
-    {
-      "id": "anomaly-relay-300deg",
-      "type": "anomaly",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "F80"]
-      },
-      "surface": null,
-      "model": "Relay 300deg"
-    },
-    {
-      "id": "anomaly-relay-60deg",
-      "type": "anomaly",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "F80"]
-      },
-      "surface": null,
-      "model": "Relay 60deg"
-    },
-    {
-      "id": "anomaly-ruin",
-      "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "F80"]
-      },
-      "surface": null,
-      "model": "Ruin"
+      "model": "Ring Station",
+      "name": "anomaly-Maxwell_Station",
+      "radius": 15,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["888", "D84"],
+      "falloff": 0.4
     },
     {
       "type": "anomaly",
-      "id": "anomaly-sol-array",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 16,
-        "zoom": 1.2,
-        "color": ["f80", "f80"]
-      },
-      "surface": null,
-      "desc": "",
-      "model": "Sol Array"
+      "model": "Tiendong Station",
+      "name": "anomaly-Tiendong",
+      "radius": 20,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["888", "D84"],
+      "falloff": 0.4
     },
     {
-      "id": "anomaly-soma-meetup",
       "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["f84", "D84"]
-      },
-      "surface": null,
-      "model": "Alien Meetup"
+      "model": "Temple of Apate",
+      "name": "anomaly-apate",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "falloff": 0.4
     },
     {
-      "id": "anomaly-soma-observatory",
       "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F84", "F84"]
-      },
-      "surface": null,
-      "model": "Observatory"
+      "model": "Broken Sloop",
+      "name": "anomaly-broken-sloop",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "falloff": 0.4
     },
     {
-      "id": "anomaly-station-ring",
       "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["FA4", "FA4"]
-      },
-      "surface": null,
-      "model": "Ring Station"
+      "model": "Terran Buoy",
+      "name": "anomaly-buoy",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 16,
+      "curve": [0, 1],
+      "spectrum": ["f80", "f80"],
+      "falloff": 0.4
     },
     {
-      "id": "anomaly-sternrat",
       "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "F80"]
-      },
-      "surface": null,
-      "model": "Sternrat Station"
+      "model": "Alien Buoy",
+      "name": "anomaly-buoy-alien",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "falloff": 0.4
     },
     {
-      "id": "anomaly-thanatos",
       "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["f80", "f80"]
-      },
-      "surface": null,
-      "model": "Thanatos"
+      "model": "Debris",
+      "name": "anomaly-debris",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "falloff": 0.4
     },
     {
-      "id": "anomaly-tiendong",
       "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F80", "F80"]
-      },
-      "surface": null,
-      "model": "Tiendong Station"
+      "model": "Space Elevator",
+      "name": "anomaly-elevator",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "falloff": 0.4
     },
     {
-      "id": "anomaly-whales",
       "type": "anomaly",
-      "desc": "",
-      "celestial": {
-        "r": 4,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["F84", "F84"]
-      },
-      "surface": null,
-      "model": "Cosmic Whales"
+      "model": "Larato Gate",
+      "name": "anomaly-gate",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "D84"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Soma Generation Ship",
+      "name": "anomaly-generation-ship",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Helyon Shipyards",
+      "name": "anomaly-helyon_shipyards",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["FFF", "D84"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Hermit Home",
+      "name": "anomaly-hermit",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "D84"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Junk",
+      "name": "anomaly-junk",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "D84"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Mimos Habitat",
+      "name": "anomaly-mimos-habitat",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "NBN HQ",
+      "name": "anomaly-nbn-hq",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Needle Gate",
+      "name": "anomaly-needle-gate",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Paxos Station",
+      "name": "anomaly-paxos",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "D84"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Relay 170deg",
+      "name": "anomaly-relay-170deg",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Relay 300deg",
+      "name": "anomaly-relay-300deg",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Relay 60deg",
+      "name": "anomaly-relay-60deg",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Ruin",
+      "name": "anomaly-ruin",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Sol Array",
+      "name": "anomaly-sol-array",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 16,
+      "curve": [0, 1],
+      "spectrum": ["f80", "f80"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Alien Meetup",
+      "name": "anomaly-soma-meetup",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["f84", "D84"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Observatory",
+      "name": "anomaly-soma-observatory",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F84", "F84"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Ring Station",
+      "name": "anomaly-station-ring",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["FA4", "FA4"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Sternrat Station",
+      "name": "anomaly-sternrat",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Thanatos",
+      "name": "anomaly-thanatos",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["f80", "f80"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Tiendong Station",
+      "name": "anomaly-tiendong",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Cosmic Whales",
+      "name": "anomaly-whales",
+      "radius": 4,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["F84", "F84"],
+      "falloff": 0.4
     },
     {
       "type": "asteroid",
-      "id": "asteroid-1",
-      "desc": "Featureless regolith all the way to the horizon",
-      "celestial": {
-        "r": 7,
-        "amb": 0.1,
-        "oct": 1,
-        "zoom": 0.2,
-        "color": ["888", "888"]
-      },
-      "surface": {
-        "zoom": 0.7,
-        "height": 2,
-        "octaves": 4,
-        "falloff": 0.3,
-        "curve": [0, 1],
-        "spectrum": ["666", "888"]
-      },
-      "model": null
+      "model": null,
+      "name": "asteroid-1",
+      "radius": 7,
+      "ambient": 0.1,
+      "zoom": 0.7,
+      "height": 2,
+      "octaves": 4,
+      "falloff": 0.3,
+      "curve": [0, 1],
+      "spectrum": ["666", "888"]
     },
     {
       "type": "asteroid",
-      "id": "asteroid-2",
-      "desc": "Inexplicably covered with deep wrinkles that cuts into the bedrock",
-      "celestial": {
-        "r": 7,
-        "amb": 0.1,
-        "oct": 3,
-        "zoom": 0.3,
-        "color": ["AFA", "666"]
-      },
-      "surface": {
-        "zoom": 0.9,
-        "height": 1,
-        "octaves": 3,
-        "falloff": 0.3,
-        "curve": [0, 0.25, 0.5, 1, 1, 0.5, 0.25, 0],
-        "spectrum": ["040", "0F4", "888", "666", "888", "666"]
-      },
-      "model": null
+      "model": null,
+      "name": "asteroid-2",
+      "radius": 7,
+      "ambient": 0.1,
+      "zoom": 0.9,
+      "height": 1,
+      "octaves": 3,
+      "falloff": 0.3,
+      "curve": [0, 0.25, 0.5, 1, 1, 0.5, 0.25, 0],
+      "spectrum": ["040", "0F4", "888", "666", "888", "666"]
     },
     {
       "type": "asteroid",
-      "id": "asteroid-3",
-      "desc": "Airless and radiation blasted, mysterious lichens grow in the valleys",
-      "celestial": {
-        "r": 7,
-        "amb": 0.1,
-        "oct": 2,
-        "zoom": 0.4,
-        "color": ["8a6", "484"]
-      },
-      "surface": {
-        "zoom": 2,
-        "height": 2,
-        "octaves": 3,
-        "falloff": 0.4,
-        "curve": [0, 1],
-        "spectrum": ["0F0", "0FF", "666", "666", "666", "666", "666"]
-      },
-      "model": null
+      "model": null,
+      "name": "asteroid-3",
+      "radius": 7,
+      "ambient": 0.1,
+      "zoom": 2,
+      "height": 2,
+      "octaves": 3,
+      "falloff": 0.4,
+      "curve": [0, 1],
+      "spectrum": ["0F0", "0FF", "666", "666", "666", "666", "666"]
     },
     {
       "type": "asteroid",
-      "id": "asteroid-4",
-      "desc": "A porous asteroid, mor like a cloud of dust",
-      "celestial": {
-        "r": 8,
-        "amb": 0.1,
-        "oct": 3,
-        "zoom": 0.3,
-        "color": ["aaa", "aaa"]
-      },
-      "surface": {
-        "zoom": 2,
-        "height": 2,
-        "octaves": 4,
-        "falloff": 0.3,
-        "curve": [0, 1],
-        "spectrum": ["888", "666", "666", "666"]
-      },
-      "model": null
+      "model": null,
+      "name": "asteroid-4",
+      "radius": 8,
+      "ambient": 0.1,
+      "zoom": 2,
+      "height": 2,
+      "octaves": 4,
+      "falloff": 0.3,
+      "curve": [0, 1],
+      "spectrum": ["888", "666", "666", "666"]
     },
     {
       "type": "asteroid",
-      "id": "asteroid-5",
-      "desc": "Silicate rich asteroid",
-      "celestial": {
-        "r": 8,
-        "amb": 0.1,
-        "oct": 3,
-        "zoom": 0.4,
-        "color": ["8a6", "8a6"]
-      },
-      "surface": {
-        "zoom": 1.5,
-        "height": 3,
-        "octaves": 3,
-        "falloff": 0.3,
-        "curve": [0, 0.4, 0.6, 1],
-        "spectrum": ["880", "666", "884"]
-      },
-      "model": null
+      "model": null,
+      "name": "asteroid-5",
+      "radius": 8,
+      "ambient": 0.1,
+      "zoom": 1.5,
+      "height": 3,
+      "octaves": 3,
+      "falloff": 0.3,
+      "curve": [0, 0.4, 0.6, 1],
+      "spectrum": ["880", "666", "884"]
     },
     {
       "type": "asteroid",
-      "id": "asteroid-6",
-      "desc": "Carbonous rock of soft filthy rock",
-      "celestial": {
-        "r": 9,
-        "amb": 0.1,
-        "oct": 4,
-        "zoom": 0.5,
-        "color": ["a84", "a84"]
-      },
-      "surface": {
-        "zoom": 1,
-        "height": 2,
-        "octaves": 4,
-        "falloff": 0.3,
-        "curve": [0, 0.2, 1],
-        "spectrum": ["666", "A84"]
-      },
-      "model": null
+      "model": null,
+      "name": "asteroid-6",
+      "radius": 9,
+      "ambient": 0.1,
+      "zoom": 1,
+      "height": 2,
+      "octaves": 4,
+      "falloff": 0.3,
+      "curve": [0, 0.2, 1],
+      "spectrum": ["666", "A84"]
     },
     {
       "type": "asteroid",
-      "id": "asteroid-7",
-      "desc": "A blue xenofungus only grows at a certain altitude",
-      "celestial": {
-        "r": 10,
-        "amb": 0.1,
-        "oct": 2,
-        "zoom": 0.6,
-        "color": ["abb", "0DF"]
-      },
-      "surface": {
-        "zoom": 0.75,
-        "height": 2,
-        "octaves": 3,
-        "falloff": 0.5,
-        "curve": [0, 1],
-        "spectrum": [
-          "666",
-          "666",
-          "666",
-          "666",
-          "0DF",
-          "888",
-          "888",
-          "555",
-          "555"
-        ]
-      },
-      "model": null
+      "model": null,
+      "name": "asteroid-7",
+      "radius": 10,
+      "ambient": 0.1,
+      "zoom": 0.75,
+      "height": 2,
+      "octaves": 3,
+      "falloff": 0.5,
+      "curve": [0, 1],
+      "spectrum": [
+        "666",
+        "666",
+        "666",
+        "666",
+        "0DF",
+        "888",
+        "888",
+        "555",
+        "555"
+      ]
     },
     {
-      "id": "asteroid-8",
       "type": "asteroid",
-      "desc": "",
-      "celestial": {
-        "r": 8,
-        "amb": 0.1,
-        "oct": 2,
-        "zoom": 0.4,
-        "color": ["888", "D84"]
-      },
-      "surface": {
-        "zoom": 1,
-        "height": 2,
-        "octaves": 3,
-        "falloff": 0.4,
-        "curve": [0, 0.12, 0.24, 0.36, 0.5, 0.9, 1],
-        "spectrum": ["666", "A84"]
-      },
-      "model": null
+      "model": null,
+      "name": "asteroid-8",
+      "radius": 8,
+      "ambient": 0.1,
+      "zoom": 1,
+      "height": 2,
+      "octaves": 3,
+      "falloff": 0.4,
+      "curve": [0, 0.12, 0.24, 0.36, 0.5, 0.9, 1],
+      "spectrum": ["666", "A84"]
     },
     {
-      "id": "asteroid-9",
       "type": "asteroid",
-      "desc": "",
-      "celestial": {
-        "r": 5,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 0.7,
-        "color": ["484", "888"]
-      },
-      "surface": {
-        "zoom": 1.25,
-        "height": 1.5,
-        "octaves": 4,
-        "falloff": 0.4,
-        "curve": [0, 0.1, 0.2, 0.8, 0.9, 1],
-        "spectrum": ["484", "363", "888", "666"]
-      },
-      "model": null
-    },
-    {
-      "id": "cloud-dirt",
-      "type": "cloud",
-      "desc": "",
-      "celestial": {
-        "r": 60,
-        "amb": 0.4,
-        "oct": 2,
-        "zoom": 0.9,
-        "color": ["888", "D84"]
-      },
-      "surface": null,
-      "model": null
+      "model": null,
+      "name": "asteroid-9",
+      "radius": 5,
+      "ambient": 0.2,
+      "zoom": 1.25,
+      "height": 1.5,
+      "octaves": 4,
+      "falloff": 0.4,
+      "curve": [0, 0.1, 0.2, 0.8, 0.9, 1],
+      "spectrum": ["484", "363", "888", "666"]
     },
     {
       "type": "cloud",
-      "id": "cloud-fiery",
-      "celestial": {
-        "r": 25,
-        "amb": 0.25,
-        "oct": 4,
-        "zoom": 1.6,
-        "color": ["ff8", "f04"]
-      },
-      "surface": null,
-      "desc": "",
-      "model": null
-    },
-    {
-      "id": "cloud-fog-1",
-      "type": "cloud",
-      "desc": "",
-      "celestial": {
-        "r": 50,
-        "amb": 0.3,
-        "oct": 4,
-        "zoom": 0.9,
-        "color": ["FFF", "AFD"]
-      },
-      "surface": null,
-      "model": null
-    },
-    {
-      "id": "cloud-fog-2",
-      "type": "cloud",
-      "desc": "",
-      "celestial": {
-        "r": 45,
-        "amb": 0.3,
-        "oct": 4,
-        "zoom": 1.2,
-        "color": ["DFA", "FFD"]
-      },
-      "surface": null,
-      "model": null
-    },
-    {
-      "id": "cloud-fog-3",
-      "type": "cloud",
-      "desc": "",
-      "celestial": {
-        "r": 65,
-        "amb": 0.3,
-        "oct": 3,
-        "zoom": 1.3,
-        "color": ["FDA", "FFA"]
-      },
-      "surface": null,
-      "model": null
+      "model": null,
+      "name": "cloud-dirt",
+      "radius": 60,
+      "ambient": 0.4,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 2,
+      "curve": [0, 1],
+      "spectrum": ["888", "D84"],
+      "falloff": 0.4
     },
     {
       "type": "cloud",
-      "id": "cloud-green",
-      "celestial": {
-        "r": 40,
-        "amb": 0.3,
-        "oct": 6,
-        "zoom": 1.2,
-        "color": ["0f8", "f80"]
-      },
-      "surface": null,
-      "desc": "",
-      "model": null
+      "model": null,
+      "name": "cloud-fiery",
+      "radius": 25,
+      "ambient": 0.25,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 4,
+      "curve": [0, 1],
+      "spectrum": ["ff8", "f04"],
+      "falloff": 0.4
     },
     {
       "type": "cloud",
-      "id": "cloud-orange",
+      "model": null,
+      "name": "cloud-fog-1",
+      "radius": 50,
+      "ambient": 0.3,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 4,
+      "curve": [0, 1],
+      "spectrum": ["FFF", "AFD"],
+      "falloff": 0.4
+    },
+    {
+      "type": "cloud",
+      "model": null,
+      "name": "cloud-fog-2",
+      "radius": 45,
+      "ambient": 0.3,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 4,
+      "curve": [0, 1],
+      "spectrum": ["DFA", "FFD"],
+      "falloff": 0.4
+    },
+    {
+      "type": "cloud",
+      "model": null,
+      "name": "cloud-fog-3",
+      "radius": 65,
+      "ambient": 0.3,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["FDA", "FFA"],
+      "falloff": 0.4
+    },
+    {
+      "type": "cloud",
+      "model": null,
+      "name": "cloud-green",
+      "radius": 40,
+      "ambient": 0.3,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 6,
+      "curve": [0, 1],
+      "spectrum": ["0f8", "f80"],
+      "falloff": 0.4
+    },
+    {
+      "type": "cloud",
       "attr": {},
-      "celestial": {
-        "r": 40,
-        "amb": 0.3,
-        "oct": 5,
-        "zoom": 1.4,
-        "color": ["f80", "f80"]
-      },
-      "surface": null,
-      "desc": "",
-      "model": null
+      "model": null,
+      "name": "cloud-orange",
+      "radius": 40,
+      "ambient": 0.3,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 5,
+      "curve": [0, 1],
+      "spectrum": ["f80", "f80"],
+      "falloff": 0.4
     },
     {
       "type": "cloud",
-      "id": "cloud-purple",
-      "celestial": {
-        "r": 60,
-        "amb": 0.3,
-        "oct": 5,
-        "zoom": 1.6,
-        "color": ["80f", "f80"]
-      },
-      "surface": null,
-      "desc": "",
-      "model": null
+      "model": null,
+      "name": "cloud-purple",
+      "radius": 60,
+      "ambient": 0.3,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 5,
+      "curve": [0, 1],
+      "spectrum": ["80f", "f80"],
+      "falloff": 0.4
     },
     {
       "type": "cloud",
-      "id": "cloud-smoke",
-      "celestial": {
-        "r": 30,
-        "amb": 0.4,
-        "oct": 5,
-        "zoom": 1.6,
-        "color": ["444", "842"]
-      },
-      "surface": null,
-      "desc": "",
-      "model": null
+      "model": null,
+      "name": "cloud-smoke",
+      "radius": 30,
+      "ambient": 0.4,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 5,
+      "curve": [0, 1],
+      "spectrum": ["444", "842"],
+      "falloff": 0.4
     },
     {
       "type": "jovian",
-      "id": "jovian-1",
-      "celestial": {
-        "r": 25,
-        "amb": 0,
-        "oct": 3,
-        "zoom": 20,
-        "color": ["5fe", "c6f"]
-      },
-      "surface": null
+      "name": "jovian-1",
+      "radius": 25,
+      "ambient": 0,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["5fe", "c6f"],
+      "model": null,
+      "falloff": 0.4
     },
     {
       "type": "jovian",
-      "id": "jovian-2",
-      "celestial": {
-        "r": 30,
-        "amb": 0,
-        "oct": 3,
-        "zoom": 20,
-        "color": ["fa5", "e74"]
-      },
-      "surface": null
+      "name": "jovian-2",
+      "radius": 30,
+      "ambient": 0,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["fa5", "e74"],
+      "model": null,
+      "falloff": 0.4
     },
     {
       "type": "jovian",
-      "id": "jovian-3",
-      "celestial": {
-        "r": 25,
-        "amb": 0,
-        "oct": 3,
-        "zoom": 20,
-        "color": ["576", "0c6"]
-      },
-      "surface": null
+      "name": "jovian-3",
+      "radius": 25,
+      "ambient": 0,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["576", "0c6"],
+      "model": null,
+      "falloff": 0.4
     },
     {
-      "id": "jovian-mono",
       "type": "jovian",
-      "desc": "",
-      "celestial": {
-        "r": 27,
-        "amb": 0,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["eee", "444"]
-      },
-      "surface": null,
+      "model": null,
+      "name": "jovian-mono",
+      "radius": 27,
+      "ambient": 0,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["eee", "444", "eee"],
+      "falloff": 0.4
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-badlands-1",
+      "radius": 20,
+      "ambient": 0.1,
+      "zoom": 1.1,
+      "height": 2,
+      "octaves": 4,
+      "falloff": 0.45,
+      "curve": [0, 0.2, 1],
+      "spectrum": ["6A0", "FF8", "884"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-beach",
+      "radius": 10,
+      "ambient": 0.1,
+      "zoom": 1.5,
+      "height": 2,
+      "octaves": 2,
+      "falloff": 0.2,
+      "curve": [0.7, 0.5, 0.2, 0, 0, 0],
+      "spectrum": ["46F", "FF8", "FF8", "884", "884"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-blue-forest",
+      "radius": 15,
+      "ambient": 0.2,
+      "zoom": 1.5,
+      "height": 2,
+      "octaves": 3,
+      "falloff": 0.2,
+      "curve": [0, 0.65, 1],
+      "spectrum": ["20F", "28F", "4AF"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-blue-ocean",
+      "radius": 18,
+      "ambient": 0.2,
+      "zoom": 1.2,
+      "height": 2,
+      "octaves": 2,
+      "falloff": 0.2,
+      "curve": [0, 0, 0.2, 1],
+      "spectrum": ["20F", "2FA", "4AF", "4AF"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-green-1",
+      "radius": 20,
+      "ambient": 0.1,
+      "zoom": 0.7,
+      "height": 2,
+      "octaves": 4,
+      "falloff": 0.5,
+      "curve": [0, 0.3, 0.3, 0.4, 0.8, 1],
+      "spectrum": ["05F", "4B4", "3B8", "888"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-green-2",
+      "radius": 15,
+      "ambient": 0.1,
+      "zoom": 1,
+      "height": 2,
+      "octaves": 2,
+      "falloff": 0.2,
+      "curve": [1, 0, 1],
+      "spectrum": ["040", "0F4", "FF0"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-green-3",
+      "radius": 10,
+      "ambient": 0.1,
+      "zoom": 1.5,
+      "height": 2,
+      "octaves": 2,
+      "falloff": 0.2,
+      "curve": [1, 0, 0.5],
+      "spectrum": ["4F0", "FF8", "FF8", "884", "884"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-green-4",
+      "radius": 10,
+      "ambient": 0.1,
+      "zoom": 0.5,
+      "height": 1,
+      "octaves": 4,
+      "falloff": 0.65,
+      "curve": [0, 1],
+      "spectrum": ["04F", "0F0", "8D0", "FFF"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-green-5",
+      "radius": 10,
+      "ambient": 0.1,
+      "zoom": 1,
+      "height": 2,
+      "octaves": 4,
+      "falloff": 0.5,
+      "curve": [0.1, 0.2, 0.3, 0.33, 0.37, 0.4, 0.6, 0.8, 0.9, 1],
+      "spectrum": ["040", "0F0", "8D0", "F88"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-green-6",
+      "radius": 15,
+      "ambient": 0.1,
+      "zoom": 1,
+      "height": 2,
+      "octaves": 3,
+      "falloff": 0.5,
+      "curve": [0, 0.2, 0.4, 0.6, 0.8, 1, 0.9],
+      "spectrum": ["FF8", "FF8", "8F0", "0F0", "0F0", "0D0", "080"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-hell-1",
+      "radius": 10,
+      "ambient": 0.1,
+      "zoom": 2,
+      "height": 3,
+      "octaves": 2,
+      "falloff": 0.2,
+      "curve": [0, 0.2, 1],
+      "spectrum": ["F00", "888", "888", "444"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-hell-2",
+      "radius": 10,
+      "ambient": 0.1,
+      "zoom": 1,
+      "height": 2,
+      "octaves": 2,
+      "falloff": 0.2,
+      "curve": [0.4, 0.5, 0.45, 0.3, 0, 0.9, 0.95, 1],
+      "spectrum": ["F80", "F00", "666", "666", "666", "666", "666"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-hell-3",
+      "radius": 20,
+      "ambient": 0.1,
+      "zoom": 1.5,
+      "height": 2,
+      "octaves": 4,
+      "falloff": 0.4,
+      "curve": [0.9, 0.5, 0.4, 0.5, 0.3, 0, 0],
+      "spectrum": ["F80", "F80", "8f8", "8f8", "8f8", "8f8"]
+    },
+    {
+      "type": "planet",
+      "name": "planet-hell-4",
+      "radius": 20,
+      "ambient": 0.1,
+      "zoom": 1,
+      "height": 2,
+      "octaves": 4,
+      "falloff": 0.3,
+      "curve": [0.4, 0.5, 0.45, 0.5, 0.3, 0, 0],
+      "spectrum": ["F80", "F00", "000", "666", "666", "666", "666", "666"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-neutron-1",
+      "radius": 10,
+      "ambient": 0.5,
+      "zoom": 1,
+      "height": 2,
+      "octaves": 4,
+      "falloff": 0.3,
+      "curve": [0.4, 0.5, 0.45, 0.5, 0.3, 0, 0],
+      "spectrum": ["8AF", "48F", "666", "666", "666", "666", "666"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-neutron-2",
+      "radius": 15,
+      "ambient": 0.3,
+      "zoom": 1,
+      "height": 2,
+      "octaves": 4,
+      "falloff": 0.3,
+      "curve": [0.4, 1, 0.45, 0.5, 0.3, 0, 0],
+      "spectrum": ["000", "000", "000", "666", "666", "666", "FFF", "FFF"]
+    },
+    {
+      "type": "planet",
+      "name": "planet-neutron-3",
+      "radius": 15,
+      "ambient": 0.8,
+      "zoom": 1,
+      "height": 2,
+      "octaves": 4,
+      "falloff": 0.3,
+      "curve": [0.4, 0.5, 0.45, 0.5, 0.3, 0, 0],
+      "spectrum": ["F80", "F00", "000", "666", "666", "666", "666", "666"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-rock-1",
+      "radius": 20,
+      "ambient": 0.1,
+      "zoom": 3,
+      "height": 3,
+      "octaves": 4,
+      "falloff": 0.25,
+      "curve": [0.4, 0.45, 0.6, 1],
+      "spectrum": ["666", "666", "666", "666", "666", "F0F"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-s-rock-1",
+      "radius": 10,
+      "ambient": 0.1,
+      "zoom": 0.7,
+      "height": 2,
+      "octaves": 4,
+      "falloff": 0.5,
+      "curve": [0, 1],
+      "spectrum": ["BA4", "DB4"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-soma",
+      "radius": 8,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 4,
+      "falloff": 0.3,
+      "curve": [0, 0.2, 1],
+      "spectrum": ["20F", "2FA", "4AF", "4AF"]
+    },
+    {
+      "type": "planet",
+      "name": "planet-water-1",
+      "radius": 20,
+      "ambient": 0.1,
+      "zoom": 1.5,
+      "height": 1,
+      "octaves": 5,
+      "falloff": 0.5,
+      "curve": [0.45, 0.4, 0.45, 0.4, 0.7, 0.7, 0.7, 0.7],
+      "spectrum": ["68F", "36F", "36F", "FFF", "FFF", "FFF"]
+    },
+    {
+      "type": "planet",
+      "name": "planet-water-frozen",
+      "radius": 15,
+      "ambient": 0.1,
+      "zoom": 1.5,
+      "height": 1,
+      "octaves": 5,
+      "falloff": 0.5,
+      "curve": [0.45, 0.4, 0.45, 0.4, 0.7, 0.7, 0.7, 0.7],
+      "spectrum": ["68F", "36F", "36F", "FFF", "FFF", "FFF"],
       "model": null
-    },
-    {
-      "type": "planet",
-      "id": "planet-badlands-1",
-      "desc": "",
-      "celestial": {
-        "r": 20,
-        "amb": 0.1,
-        "oct": 4,
-        "zoom": 10,
-        "color": ["FF8", "6A0"]
-      },
-      "surface": {
-        "zoom": 1.1,
-        "height": 2,
-        "octaves": 4,
-        "falloff": 0.45,
-        "curve": [0, 0.2, 1],
-        "spectrum": ["6A0", "FF8", "884"]
-      },
-      "model": null
-    },
-    {
-      "type": "planet",
-      "id": "planet-beach",
-      "desc": "Covered with an infinite beach, and blasted into lifelessness by unrelenting radiation",
-      "celestial": {
-        "r": 10,
-        "amb": 0.1,
-        "oct": 3,
-        "zoom": 20,
-        "color": ["00f", "777"]
-      },
-      "surface": {
-        "zoom": 1.5,
-        "height": 2,
-        "octaves": 2,
-        "falloff": 0.2,
-        "curve": [0.7, 0.5, 0.2, 0, 0, 0],
-        "spectrum": ["46F", "FF8", "FF8", "884", "884"]
-      },
-      "model": null
-    },
-    {
-      "id": "planet-blue-forest",
-      "type": "planet",
-      "desc": "",
-      "celestial": {
-        "r": 15,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["20F", "4AF"]
-      },
-      "surface": {
-        "zoom": 1.5,
-        "height": 2,
-        "octaves": 3,
-        "falloff": 0.2,
-        "curve": [0, 0.65, 1],
-        "spectrum": ["20F", "28F", "4AF"]
-      },
-      "model": null
-    },
-    {
-      "id": "planet-blue-ocean",
-      "type": "planet",
-      "desc": "",
-      "celestial": {
-        "r": 18,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["20F", "2FA"]
-      },
-      "surface": {
-        "zoom": 1.2,
-        "height": 2,
-        "octaves": 2,
-        "falloff": 0.2,
-        "curve": [0, 0, 0.2, 1],
-        "spectrum": ["20F", "2FA", "4AF", "4AF"]
-      },
-      "model": null
-    },
-    {
-      "type": "planet",
-      "id": "planet-green-1",
-      "desc": "Vast plains and tall mountains, nothing else",
-      "celestial": {
-        "r": 20,
-        "amb": 0.1,
-        "oct": 3,
-        "zoom": 20,
-        "color": ["00f", "0f0"]
-      },
-      "surface": {
-        "zoom": 0.7,
-        "height": 2,
-        "octaves": 4,
-        "falloff": 0.5,
-        "curve": [0, 0.3, 0.3, 0.4, 0.8, 1],
-        "spectrum": ["05F", "4B4", "3B8", "888"]
-      },
-      "model": null
-    },
-    {
-      "type": "planet",
-      "id": "planet-green-2",
-      "desc": "Boulbous hills snake around the entire planet, with an infinite meadow sprouting yellow flowers",
-      "celestial": {
-        "r": 15,
-        "amb": 0.1,
-        "oct": 3,
-        "zoom": 20,
-        "color": ["040", "8F0"]
-      },
-      "surface": {
-        "zoom": 1,
-        "height": 2,
-        "octaves": 2,
-        "falloff": 0.2,
-        "curve": [1, 0, 1],
-        "spectrum": ["040", "0F4", "FF0"]
-      },
-      "model": null
-    },
-    {
-      "type": "planet",
-      "id": "planet-green-3",
-      "desc": "Sand and grass",
-      "celestial": {
-        "r": 10,
-        "amb": 0.1,
-        "oct": 3,
-        "zoom": 20,
-        "color": ["4F0", "FF8"]
-      },
-      "surface": {
-        "zoom": 1.5,
-        "height": 2,
-        "octaves": 2,
-        "falloff": 0.2,
-        "curve": [1, 0, 0.5],
-        "spectrum": ["4F0", "FF8", "FF8", "884", "884"]
-      },
-      "model": null
-    },
-    {
-      "type": "planet",
-      "id": "planet-green-4",
-      "desc": "Rolling hills, snow covered mountains and lush forests",
-      "celestial": {
-        "r": 10,
-        "amb": 0.1,
-        "oct": 3,
-        "zoom": 20,
-        "color": ["00f", "0f0"]
-      },
-      "surface": {
-        "zoom": 0.5,
-        "height": 1,
-        "octaves": 4,
-        "falloff": 0.65,
-        "curve": [0, 1],
-        "spectrum": ["04F", "0F0", "8D0", "FFF"]
-      },
-      "model": null
-    },
-    {
-      "type": "planet",
-      "id": "planet-green-5",
-      "desc": "Pink soft peaks tower over a vast double layered forest",
-      "celestial": {
-        "r": 10,
-        "amb": 0.1,
-        "oct": 3,
-        "zoom": 20,
-        "color": ["F88", "0f0"]
-      },
-      "surface": {
-        "zoom": 1,
-        "height": 2,
-        "octaves": 4,
-        "falloff": 0.5,
-        "curve": [0.1, 0.2, 0.3, 0.33, 0.37, 0.4, 0.6, 0.8, 0.9, 1],
-        "spectrum": ["040", "0F0", "8D0", "F88"]
-      },
-      "model": null
-    },
-    {
-      "type": "planet",
-      "id": "planet-green-6",
-      "desc": "Volcanoes constantly feed the endless forest with nutrients",
-      "celestial": {
-        "r": 15,
-        "amb": 0.1,
-        "oct": 4,
-        "zoom": 10,
-        "color": ["8f8", "ff8"]
-      },
-      "surface": {
-        "zoom": 1,
-        "height": 2,
-        "octaves": 3,
-        "falloff": 0.5,
-        "curve": [0, 0.2, 0.4, 0.6, 0.8, 1, 0.9],
-        "spectrum": ["FF8", "FF8", "8F0", "0F0", "0F0", "0D0", "080"]
-      },
-      "model": null
-    },
-    {
-      "type": "planet",
-      "id": "planet-hell-1",
-      "desc": "Scorching hot desert streaked with mysteriously temperate and humid forests",
-      "celestial": {
-        "r": 10,
-        "amb": 0.1,
-        "oct": 2,
-        "zoom": 15,
-        "color": ["f30", "555"]
-      },
-      "surface": {
-        "zoom": 2,
-        "height": 3,
-        "octaves": 2,
-        "falloff": 0.2,
-        "curve": [0, 0.2, 1],
-        "spectrum": ["F00", "888", "888", "444"]
-      },
-      "model": null
-    },
-    {
-      "type": "planet",
-      "id": "planet-hell-2",
-      "desc": "The thin crust has cracked, revealing canyons of lava",
-      "celestial": {
-        "r": 10,
-        "amb": 0.1,
-        "oct": 4,
-        "zoom": 10,
-        "color": ["666", "F40"]
-      },
-      "surface": {
-        "zoom": 1,
-        "height": 2,
-        "octaves": 2,
-        "falloff": 0.2,
-        "curve": [0.4, 0.5, 0.45, 0.3, 0, 0.9, 0.95, 1],
-        "spectrum": ["F80", "F00", "666", "666", "666", "666", "666"]
-      },
-      "model": null
-    },
-    {
-      "type": "planet",
-      "id": "planet-hell-3",
-      "desc": "A hellish world with lakes of molten lava dotting the surface",
-      "celestial": {
-        "r": 20,
-        "amb": 0.1,
-        "oct": 4,
-        "zoom": 10,
-        "color": ["F80", "8f8"]
-      },
-      "surface": {
-        "zoom": 1.5,
-        "height": 2,
-        "octaves": 4,
-        "falloff": 0.4,
-        "curve": [0.9, 0.5, 0.4, 0.5, 0.3, 0, 0],
-        "spectrum": ["F80", "F80", "8f8", "8f8", "8f8", "8f8"]
-      },
-      "model": null
-    },
-    {
-      "type": "planet",
-      "id": "planet-hell-4",
-      "desc": "A hellish world with lakes of molten lava dotting the surface",
-      "celestial": {
-        "r": 20,
-        "amb": 0.1,
-        "oct": 2,
-        "zoom": 15,
-        "color": ["f30", "555"]
-      },
-      "surface": {
-        "zoom": 1,
-        "height": 2,
-        "octaves": 4,
-        "falloff": 0.3,
-        "curve": [0.4, 0.5, 0.45, 0.5, 0.3, 0, 0],
-        "spectrum": ["F80", "F00", "000", "666", "666", "666", "666", "666"]
-      }
-    },
-    {
-      "type": "planet",
-      "id": "planet-neutron-1",
-      "desc": "A hellish world with lakes of molten lava dotting the surface",
-      "celestial": {
-        "r": 10,
-        "amb": 0.5,
-        "oct": 2,
-        "zoom": 15,
-        "color": ["000", "024"]
-      },
-      "surface": {
-        "zoom": 1,
-        "height": 2,
-        "octaves": 4,
-        "falloff": 0.3,
-        "curve": [0.4, 0.5, 0.45, 0.5, 0.3, 0, 0],
-        "spectrum": ["8AF", "48F", "666", "666", "666", "666", "666"]
-      },
-      "model": null
-    },
-    {
-      "type": "planet",
-      "id": "planet-neutron-2",
-      "desc": "A hellish world with lakes of molten lava dotting the surface",
-      "celestial": {
-        "r": 15,
-        "amb": 0.3,
-        "oct": 3,
-        "zoom": 15,
-        "color": ["000", "024"]
-      },
-      "surface": {
-        "zoom": 1,
-        "height": 2,
-        "octaves": 4,
-        "falloff": 0.3,
-        "curve": [0.4, 1, 0.45, 0.5, 0.3, 0, 0],
-        "spectrum": ["000", "000", "000", "666", "666", "666", "FFF", "FFF"]
-      },
-      "model": null
-    },
-    {
-      "type": "planet",
-      "id": "planet-neutron-3",
-      "desc": "A hellish world with lakes of molten lava dotting the surface",
-      "celestial": {
-        "r": 15,
-        "amb": 0.8,
-        "oct": 4,
-        "zoom": 15,
-        "color": ["000", "024"]
-      },
-      "surface": {
-        "zoom": 1,
-        "height": 2,
-        "octaves": 4,
-        "falloff": 0.3,
-        "curve": [0.4, 0.5, 0.45, 0.5, 0.3, 0, 0],
-        "spectrum": ["F80", "F00", "000", "666", "666", "666", "666", "666"]
-      }
-    },
-    {
-      "type": "planet",
-      "id": "planet-rock-1",
-      "desc": "Purple crystals as tall as mountains protrude through the regolith ",
-      "celestial": {
-        "r": 20,
-        "amb": 0.1,
-        "oct": 4,
-        "zoom": 10,
-        "color": ["aaa", "444"]
-      },
-      "surface": {
-        "zoom": 3,
-        "height": 3,
-        "octaves": 4,
-        "falloff": 0.25,
-        "curve": [0.4, 0.45, 0.6, 1],
-        "spectrum": ["666", "666", "666", "666", "666", "F0F"]
-      },
-      "model": null
-    },
-    {
-      "type": "planet",
-      "id": "planet-s-rock-1",
-      "desc": "A lunar desert, with every grain of sand made of brass",
-      "celestial": {
-        "r": 10,
-        "amb": 0.1,
-        "oct": 4,
-        "zoom": 10,
-        "color": ["BA4", "DB4"]
-      },
-      "surface": {
-        "zoom": 0.7,
-        "height": 2,
-        "octaves": 4,
-        "falloff": 0.5,
-        "curve": [0, 1],
-        "spectrum": ["BA4", "DB4"]
-      },
-      "model": null
-    },
-    {
-      "id": "planet-soma",
-      "type": "planet",
-      "desc": "",
-      "celestial": {
-        "r": 8,
-        "amb": 0.2,
-        "oct": 3,
-        "zoom": 10,
-        "color": ["20F", "2FA"]
-      },
-      "surface": {
-        "zoom": 1,
-        "height": 1,
-        "octaves": 4,
-        "falloff": 0.3,
-        "curve": [0, 0.2, 1],
-        "spectrum": ["20F", "2FA", "4AF", "4AF"]
-      },
-      "model": null
-    },
-    {
-      "type": "planet",
-      "id": "planet-water-1",
-      "desc": "A single frozen sea of water and salt",
-      "celestial": {
-        "r": 20,
-        "amb": 0.1,
-        "oct": 3,
-        "zoom": 20,
-        "color": ["00f", "777"]
-      },
-      "surface": {
-        "zoom": 1.5,
-        "height": 1,
-        "octaves": 5,
-        "falloff": 0.5,
-        "curve": [0.45, 0.4, 0.45, 0.4, 0.7, 0.7, 0.7, 0.7],
-        "spectrum": ["68F", "36F", "36F", "FFF", "FFF", "FFF"]
-      }
-    },
-    {
-      "type": "planet",
-      "id": "planet-water-frozen",
-      "desc": "A single frozen sea of water and salt",
-      "celestial": {
-        "r": 15,
-        "amb": 0.1,
-        "oct": 3,
-        "zoom": 20,
-        "color": ["00f", "777"]
-      },
-      "surface": {
-        "zoom": 1.5,
-        "height": 1,
-        "octaves": 5,
-        "falloff": 0.5,
-        "curve": [0.45, 0.4, 0.45, 0.4, 0.7, 0.7, 0.7, 0.7],
-        "spectrum": ["68F", "36F", "36F", "FFF", "FFF", "FFF"]
-      }
     },
     {
       "type": "star",
-      "id": "star-m-ff0",
-      "celestial": {
-        "r": 30,
-        "amb": 1,
-        "oct": 2,
-        "zoom": 15,
-        "color": ["fc3", "ff5"]
-      },
-      "surface": null
+      "model": null,
+      "name": "star-m-ff0",
+      "radius": 30,
+      "ambient": 1,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 2,
+      "curve": [0, 1],
+      "spectrum": ["fc3", "ff5"],
+      "falloff": 0.4
     },
     {
-      "id": "star-paxos",
       "type": "star",
-      "desc": "",
-      "celestial": {
-        "r": 25,
-        "amb": 1,
-        "oct": 2,
-        "zoom": 15,
-        "color": ["FFF", "DFD"]
-      },
-      "surface": null,
-      "model": null
+      "model": null,
+      "name": "star-neutron",
+      "radius": 25,
+      "ambient": 0.8,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["000", "004"],
+      "falloff": 0.4
     },
     {
-      "id": "star-soma",
       "type": "star",
-      "desc": "",
-      "celestial": {
-        "r": 40,
-        "amb": 1,
-        "oct": 2,
-        "zoom": 15,
-        "color": ["DDF", "9AF"]
-      },
-      "surface": null,
-      "model": null
+      "model": null,
+      "name": "star-paxos",
+      "radius": 25,
+      "ambient": 1,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 2,
+      "curve": [0, 1],
+      "spectrum": ["FFF", "DFD"],
+      "falloff": 0.4
+    },
+    {
+      "type": "star",
+      "model": null,
+      "name": "star-soma",
+      "radius": 40,
+      "ambient": 1,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 2,
+      "curve": [0, 1],
+      "spectrum": ["DDF", "9AF"],
+      "falloff": 0.4
     }
   ],
   "initialState": "surface",

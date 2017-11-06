@@ -24,7 +24,7 @@
         </table>
       </div>
       <div class="modal-list">
-        <div class="modal-item" each={id in list} onclick={remove}>{id}</div>
+        <div class="modal-item" each={e in list} onclick={remove}>{e}</div>
       </div>
     </div>
   </div>
@@ -94,7 +94,7 @@
     }
 
     self.remove = function (e) {
-      self.list.splice(self.list.indexOf(e.item.id), 1)
+      self.list.splice(self.list.indexOf(e.item.e), 1)
     }
     
     self.done = function () {

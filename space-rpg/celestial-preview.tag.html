@@ -1,6 +1,6 @@
 <celestial-preview>
 
-  <div class="celestial" style="width: {opts.celestial.r*2}px; height: {opts.celestial.r*2}px; background: linear-gradient(0deg, #{getColor(0)}, #{getColor(1)})"></div>
+  <div class="celestial" style="width: {opts.celestial.radius*2}px; height: {opts.celestial.radius*2}px; background: linear-gradient(0deg, #{getColor(0)}, #{getColor(1)})"></div>
 
   <style>
     .celestial {
@@ -14,7 +14,7 @@
     var self = this
     self.opts.celestial = self.opts.celestial || { r: 0, color: ['FFF', 'FFF'] }
     self.getColor = function (index) {
-      return self.opts.celestial.color && self.opts.celestial.color[index] || 'FFF'
+      return self.opts.celestial.spectrum && self.opts.celestial.spectrum[index] || 'FFF'
     }
   </script>
 
