@@ -3139,7 +3139,7 @@
     },
     {
       "name": "Shady",
-      "style": "asteroid-6",
+      "style": "asteroid-1",
       "pos": {"x": 622, "y": -2118},
       "trader": null,
       "treasures": ["Barium Ore"],
@@ -3147,7 +3147,7 @@
     },
     {
       "name": "Samson's Folly",
-      "style": "asteroid-1",
+      "style": "asteroid-8",
       "pos": {"x": 468, "y": -2248},
       "trader": {
         "buy": 1.5,
@@ -3159,7 +3159,7 @@
     },
     {
       "name": "Outback 82",
-      "style": "asteroid-9",
+      "style": "asteroid-11",
       "pos": {"x": 519, "y": -2135},
       "trader": null,
       "treasures": ["Alien Fossil"],
@@ -3238,7 +3238,7 @@
     },
     {
       "name": "A6114",
-      "style": "asteroid-1",
+      "style": "asteroid-12",
       "pos": {"x": -39, "y": -986},
       "trader": null,
       "treasures": [],
@@ -3263,7 +3263,7 @@
     {
       "pos": {"x": -7, "y": -777},
       "name": "A9323",
-      "style": "asteroid-8",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": null,
       "treasures": ["Platinum"]
@@ -3271,7 +3271,7 @@
     {
       "pos": {"x": 35, "y": -890},
       "name": "A3314",
-      "style": "asteroid-5",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": ["Platinum"]
@@ -3279,7 +3279,7 @@
     {
       "pos": {"x": -103, "y": -927},
       "name": "A373",
-      "style": "asteroid-3",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3287,7 +3287,7 @@
     {
       "pos": {"x": -230, "y": -998},
       "name": "A302",
-      "style": "asteroid-6",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": null,
       "treasures": ["Alien Fossil", "Copper", "Barium Ore"]
@@ -3295,7 +3295,7 @@
     {
       "pos": {"x": -436, "y": -970},
       "name": "A3630",
-      "style": "asteroid-8",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": ["Copper"]
@@ -3303,7 +3303,7 @@
     {
       "pos": {"x": -416, "y": -1082},
       "name": "A1618",
-      "style": "asteroid-8",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": ["Copper"]
@@ -3311,7 +3311,7 @@
     {
       "pos": {"x": -493, "y": -907},
       "name": "A9393",
-      "style": "asteroid-4",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3319,7 +3319,7 @@
     {
       "pos": {"x": -537, "y": -833},
       "name": "A3767",
-      "style": "asteroid-1",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": null,
       "treasures": ["Barium Ore"]
@@ -3327,7 +3327,7 @@
     {
       "pos": {"x": -629, "y": -758},
       "name": "A2942",
-      "style": "asteroid-2",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3372,7 +3372,7 @@
     {
       "pos": {"x": -301, "y": -1065},
       "name": "A135",
-      "style": "asteroid-5",
+      "style": "asteroid-10",
       "trader": null,
       "enemy": null,
       "treasures": ["Copper", "Barium Ore"]
@@ -3380,7 +3380,7 @@
     {
       "pos": {"x": -521, "y": -1046},
       "name": "A3556",
-      "style": "asteroid-6",
+      "style": "asteroid-3",
       "trader": null,
       "enemy": null,
       "treasures": ["Alien Fossil", "Copper", "Platinum"]
@@ -3388,7 +3388,7 @@
     {
       "pos": {"x": -129, "y": -1051},
       "name": "A4989",
-      "style": "asteroid-9",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": null,
       "treasures": ["Barium Ore", "Mk3 Capacitor"]
@@ -3396,7 +3396,7 @@
     {
       "pos": {"x": -576, "y": -952},
       "name": "A9050",
-      "style": "asteroid-3",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": null,
       "treasures": ["Alien Fossil"]
@@ -3420,7 +3420,7 @@
     {
       "pos": {"x": -677, "y": -1079},
       "name": "A7367",
-      "style": "asteroid-2",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": null,
       "treasures": ["Alien Fossil", "Barium Ore", "Platinum"]
@@ -3428,7 +3428,7 @@
     {
       "pos": {"x": -79, "y": -689},
       "name": "A2111",
-      "style": "asteroid-1",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": ["Alien Fossil"]
@@ -3436,7 +3436,7 @@
     {
       "pos": {"x": -6, "y": -585},
       "name": "A9415",
-      "style": "asteroid-3",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3452,7 +3452,7 @@
     {
       "pos": {"x": -617, "y": -1156},
       "name": "A4976",
-      "style": "asteroid-3",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": null,
       "treasures": ["Platinum"]
@@ -3460,7 +3460,7 @@
     {
       "pos": {"x": -815, "y": -954},
       "name": "A3566",
-      "style": "asteroid-3",
+      "style": "asteroid-10",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3476,7 +3476,7 @@
     {
       "pos": {"x": -85, "y": -827},
       "name": "A1573",
-      "style": "asteroid-5",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": null,
       "treasures": ["Platinum"]
@@ -3484,7 +3484,7 @@
     {
       "pos": {"x": -71, "y": -577},
       "name": "A2923",
-      "style": "asteroid-2",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": null,
       "treasures": ["Alien Fossil"]
@@ -3492,7 +3492,7 @@
     {
       "pos": {"x": -601, "y": -583},
       "name": "A117",
-      "style": "asteroid-1",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": ["Barium Ore"]
@@ -3500,7 +3500,7 @@
     {
       "pos": {"x": -680, "y": -857},
       "name": "A8043",
-      "style": "asteroid-6",
+      "style": "asteroid-3",
       "trader": null,
       "enemy": null,
       "treasures": ["Barium Ore"]
@@ -3524,7 +3524,7 @@
     {
       "pos": {"x": -779, "y": -1021},
       "name": "A8761",
-      "style": "asteroid-2",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": ["Alien Fossil"]
@@ -3541,7 +3541,7 @@
     {
       "pos": {"x": 100, "y": -522},
       "name": "A078",
-      "style": "asteroid-7",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3549,7 +3549,7 @@
     {
       "pos": {"x": 212, "y": -472},
       "name": "A1620",
-      "style": "asteroid-1",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": ["Alien Fossil", "Barium Ore"]
@@ -3557,7 +3557,7 @@
     {
       "pos": {"x": 324, "y": -428},
       "name": "A2472",
-      "style": "asteroid-6",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3565,7 +3565,7 @@
     {
       "pos": {"x": 394, "y": -386},
       "name": "A9414",
-      "style": "asteroid-5",
+      "style": "asteroid-10",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3573,7 +3573,7 @@
     {
       "pos": {"x": 546, "y": -380},
       "name": "A4620",
-      "style": "asteroid-4",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": ["Alien Fossil"]
@@ -3581,7 +3581,7 @@
     {
       "pos": {"x": 615, "y": -278},
       "name": "A1522",
-      "style": "asteroid-8",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3589,7 +3589,7 @@
     {
       "pos": {"x": 472, "y": -460},
       "name": "A7240",
-      "style": "asteroid-8",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3613,7 +3613,7 @@
     {
       "pos": {"x": 886, "y": -459},
       "name": "A8641",
-      "style": "asteroid-3",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3645,7 +3645,7 @@
     {
       "pos": {"x": 496, "y": -189},
       "name": "A9611",
-      "style": "asteroid-1",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3653,7 +3653,7 @@
     {
       "pos": {"x": 650, "y": 198},
       "name": "A5098",
-      "style": "asteroid-2",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3661,7 +3661,7 @@
     {
       "pos": {"x": 872, "y": 43},
       "name": "A7243",
-      "style": "asteroid-1",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3669,7 +3669,7 @@
     {
       "pos": {"x": 706, "y": -75},
       "name": "A625",
-      "style": "asteroid-5",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3677,7 +3677,7 @@
     {
       "pos": {"x": 536, "y": 39},
       "name": "A3639",
-      "style": "asteroid-1",
+      "style": "asteroid-3",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3693,7 +3693,7 @@
     {
       "pos": {"x": 1106, "y": -127},
       "name": "A673",
-      "style": "asteroid-6",
+      "style": "asteroid-5",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3701,7 +3701,7 @@
     {
       "pos": {"x": 1141, "y": -340},
       "name": "A4160",
-      "style": "asteroid-1",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3717,7 +3717,7 @@
     {
       "pos": {"x": 1026, "y": -374},
       "name": "A2626",
-      "style": "asteroid-1",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3725,7 +3725,7 @@
     {
       "pos": {"x": 862, "y": -346},
       "name": "A6254",
-      "style": "asteroid-9",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3773,7 +3773,7 @@
     {
       "pos": {"x": 823, "y": -257},
       "name": "A2343",
-      "style": "asteroid-9",
+      "style": "asteroid-11",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3781,7 +3781,7 @@
     {
       "pos": {"x": 994, "y": -176},
       "name": "A9424",
-      "style": "asteroid-9",
+      "style": "asteroid-11",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3813,7 +3813,7 @@
     {
       "pos": {"x": 777, "y": 29},
       "name": "A7729",
-      "style": "asteroid-5",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3829,7 +3829,7 @@
     {
       "pos": {"x": 948, "y": 146},
       "name": "A4846",
-      "style": "asteroid-4",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3837,7 +3837,7 @@
     {
       "pos": {"x": 1010, "y": 42},
       "name": "A5042",
-      "style": "asteroid-3",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3941,7 +3941,7 @@
     {
       "pos": {"x": -1558, "y": -915},
       "name": "Path to Apate",
-      "style": "asteroid-7",
+      "style": "asteroid-11",
       "trader": null,
       "enemy": {"type": "Sentinel Pod", "loot": []},
       "treasures": []
@@ -3957,7 +3957,7 @@
     {
       "pos": {"x": -1715, "y": -905},
       "name": "A9655",
-      "style": "asteroid-1",
+      "style": "asteroid-3",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3973,7 +3973,7 @@
     {
       "pos": {"x": -1825, "y": -1007},
       "name": "A9247",
-      "style": "asteroid-2",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3981,7 +3981,7 @@
     {
       "pos": {"x": -1779, "y": -1119},
       "name": "A5050",
-      "style": "asteroid-2",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3997,7 +3997,7 @@
     {
       "pos": {"x": -1575, "y": -1177},
       "name": "A648",
-      "style": "asteroid-2",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4032,7 +4032,7 @@
     {
       "pos": {"x": -973, "y": -1370},
       "name": "A1310",
-      "style": "asteroid-5",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": ["Thanatos nacelle"]
@@ -4040,7 +4040,7 @@
     {
       "pos": {"x": -1048, "y": -1311},
       "name": "A9859",
-      "style": "asteroid-2",
+      "style": "asteroid-5",
       "trader": null,
       "enemy": null,
       "treasures": ["Eris Grain"]
@@ -4048,7 +4048,7 @@
     {
       "pos": {"x": -1097, "y": -1211},
       "name": "Gateway of Eris",
-      "style": "asteroid-6",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4088,7 +4088,7 @@
     {
       "pos": {"x": -1161, "y": -1283},
       "name": "A123",
-      "style": "asteroid-1",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": ["Eris Dust"]
@@ -4096,7 +4096,7 @@
     {
       "pos": {"x": -1272, "y": -1326},
       "name": "A1266",
-      "style": "asteroid-5",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4104,7 +4104,7 @@
     {
       "pos": {"x": -1167, "y": -1377},
       "name": "A717",
-      "style": "asteroid-5",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": null,
       "treasures": ["Eris Splinter"]
@@ -4112,7 +4112,7 @@
     {
       "pos": {"x": -1222, "y": -1479},
       "name": "A6219",
-      "style": "asteroid-7",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": ["Eris Shard"]
@@ -4128,7 +4128,7 @@
     {
       "pos": {"x": -1116, "y": -1477},
       "name": "A5617",
-      "style": "asteroid-6",
+      "style": "asteroid-1",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4136,7 +4136,7 @@
     {
       "pos": {"x": -1049, "y": -1434},
       "name": "A8974",
-      "style": "asteroid-7",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4144,7 +4144,7 @@
     {
       "pos": {"x": -1376, "y": -1388},
       "name": "A968",
-      "style": "asteroid-6",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4152,7 +4152,7 @@
     {
       "pos": {"x": -1314, "y": -1496},
       "name": "A5436",
-      "style": "asteroid-5",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4160,7 +4160,7 @@
     {
       "pos": {"x": -1202, "y": -1226},
       "name": "A4266",
-      "style": "asteroid-2",
+      "style": "asteroid-10",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4232,7 +4232,7 @@
     {
       "pos": {"x": -60, "y": -54},
       "name": "Weaver 452",
-      "style": "asteroid-2",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4240,7 +4240,7 @@
     {
       "pos": {"x": -56, "y": 59},
       "name": "Weaver 039",
-      "style": "asteroid-7",
+      "style": "asteroid-5",
       "trader": null,
       "enemy": null,
       "treasures": ["Nebular Dust"]
@@ -4248,7 +4248,7 @@
     {
       "pos": {"x": -121, "y": 109},
       "name": "Weaver 5377",
-      "style": "asteroid-5",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4256,7 +4256,7 @@
     {
       "pos": {"x": -303, "y": 192},
       "name": "Weaver 9540",
-      "style": "asteroid-3",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": {"type": "Bandit Henchman", "loot": ["Contraband"]},
       "treasures": []
@@ -4264,7 +4264,7 @@
     {
       "pos": {"x": -385, "y": 158},
       "name": "Weaver 5814",
-      "style": "asteroid-4",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": null,
       "treasures": ["Nebular Dust"]
@@ -4272,7 +4272,7 @@
     {
       "pos": {"x": -342, "y": 54},
       "name": "Weaver 2634",
-      "style": "asteroid-3",
+      "style": "asteroid-5",
       "trader": null,
       "enemy": {"type": "Bandit Henchman", "loot": []},
       "treasures": []
@@ -4280,7 +4280,7 @@
     {
       "pos": {"x": 12, "y": -95},
       "name": "Weaver 5688",
-      "style": "asteroid-4",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4288,7 +4288,7 @@
     {
       "pos": {"x": -278, "y": -89},
       "name": "Weaver 7484",
-      "style": "asteroid-2",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4296,7 +4296,7 @@
     {
       "pos": {"x": -202, "y": -125},
       "name": "Weaver 109",
-      "style": "asteroid-3",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": null,
       "treasures": ["Nebular Dust"]
@@ -4304,7 +4304,7 @@
     {
       "pos": {"x": -103, "y": -128},
       "name": "Weaver 3512",
-      "style": "asteroid-4",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4312,7 +4312,7 @@
     {
       "pos": {"x": 32, "y": 122},
       "name": "Weaver 7187",
-      "style": "asteroid-7",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4320,7 +4320,7 @@
     {
       "pos": {"x": -42, "y": 173},
       "name": "Weaver 1427",
-      "style": "asteroid-4",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4328,7 +4328,7 @@
     {
       "pos": {"x": -188, "y": 161},
       "name": "Weaver 817",
-      "style": "asteroid-5",
+      "style": "asteroid-1",
       "trader": null,
       "enemy": {"type": "Bandit Henchman", "loot": []},
       "treasures": []
@@ -4336,7 +4336,7 @@
     {
       "pos": {"x": -254, "y": 92},
       "name": "Weaver 5560",
-      "style": "asteroid-1",
+      "style": "asteroid-11",
       "trader": null,
       "enemy": {"type": "Bandit Henchman", "loot": ["Sky Crystals"]},
       "treasures": ["Nebular Dust"]
@@ -4344,7 +4344,7 @@
     {
       "pos": {"x": -275, "y": 31},
       "name": "Weaver 7111",
-      "style": "asteroid-5",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": {"type": "Bandit Striker", "loot": []},
       "treasures": []
@@ -4352,7 +4352,7 @@
     {
       "pos": {"x": -203, "y": -8},
       "name": "Weaver 1116",
-      "style": "asteroid-4",
+      "style": "asteroid-1",
       "trader": null,
       "enemy": {"type": "Bandit", "loot": []},
       "treasures": []
@@ -4360,7 +4360,7 @@
     {
       "pos": {"x": -122, "y": 3},
       "name": "Weaver 545",
-      "style": "asteroid-2",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4426,7 +4426,7 @@
     {
       "pos": {"x": -1058, "y": -786},
       "name": "A3932",
-      "style": "asteroid-7",
+      "style": "asteroid-1",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4450,7 +4450,7 @@
     {
       "pos": {"x": -1166, "y": -725},
       "name": "A6627",
-      "style": "asteroid-2",
+      "style": "asteroid-5",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4466,7 +4466,7 @@
     {
       "pos": {"x": -1361, "y": -870},
       "name": "A210",
-      "style": "asteroid-5",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4474,7 +4474,7 @@
     {
       "pos": {"x": -1253, "y": -894},
       "name": "A4996",
-      "style": "asteroid-1",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4482,7 +4482,7 @@
     {
       "pos": {"x": -1188, "y": -991},
       "name": "A7743",
-      "style": "asteroid-2",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4490,7 +4490,7 @@
     {
       "pos": {"x": -1133, "y": -885},
       "name": "A2172",
-      "style": "asteroid-7",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4498,7 +4498,7 @@
     {
       "pos": {"x": -937, "y": -768},
       "name": "A2931",
-      "style": "asteroid-6",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4514,7 +4514,7 @@
     {
       "pos": {"x": -840, "y": -592},
       "name": "Charm Beta",
-      "style": "asteroid-7",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4522,7 +4522,7 @@
     {
       "pos": {"x": -756, "y": -454},
       "name": "Charm Gamma",
-      "style": "asteroid-2",
+      "style": "asteroid-11",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4602,7 +4602,7 @@
     {
       "pos": {"x": 132, "y": -1790},
       "name": "Outback A34",
-      "style": "asteroid-6",
+      "style": "asteroid-3",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4610,7 +4610,7 @@
     {
       "pos": {"x": 174, "y": -1720},
       "name": "Outback A37",
-      "style": "asteroid-6",
+      "style": "asteroid-11",
       "trader": null,
       "enemy": null,
       "treasures": ["Alien Fungi"]
@@ -4657,7 +4657,7 @@
     {
       "pos": {"x": 247, "y": -1829},
       "name": "Outback A474",
-      "style": "asteroid-1",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": {"type": "Monitor Drone", "loot": ["Alien Fossil"]},
       "treasures": []
@@ -4673,7 +4673,7 @@
     {
       "pos": {"x": 72, "y": -1881},
       "name": "Outback A1551",
-      "style": "asteroid-4",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4681,7 +4681,7 @@
     {
       "pos": {"x": 143, "y": -2024},
       "name": "Outback A3069",
-      "style": "asteroid-7",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": ["Alien Fossil", "Barium Ore", "Copper"]
@@ -4689,7 +4689,7 @@
     {
       "pos": {"x": 223, "y": -2002},
       "name": "Outback A089",
-      "style": "asteroid-2",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": ["Barium Ore", "Last message"]
@@ -4697,7 +4697,7 @@
     {
       "pos": {"x": 212, "y": -2112},
       "name": "Outback A7769",
-      "style": "asteroid-6",
+      "style": "asteroid-3",
       "trader": null,
       "enemy": {"type": "Monitor Drone", "loot": ["Mk0 Reactor"]},
       "treasures": ["Copper", "Barium Ore"]
@@ -4705,7 +4705,7 @@
     {
       "pos": {"x": 288, "y": -1942},
       "name": "Outback A563",
-      "style": "asteroid-6",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4721,7 +4721,7 @@
     {
       "pos": {"x": 536, "y": -1908},
       "name": "Outback A168",
-      "style": "asteroid-3",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4729,7 +4729,7 @@
     {
       "pos": {"x": 2, "y": -2134},
       "name": "Outback A1874",
-      "style": "asteroid-7",
+      "style": "asteroid-5",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4737,7 +4737,7 @@
     {
       "pos": {"x": 476, "y": -1826},
       "name": "Outback A1626",
-      "style": "asteroid-5",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4745,7 +4745,7 @@
     {
       "pos": {"x": -244, "y": -1368},
       "name": "A152",
-      "style": "asteroid-9",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4753,7 +4753,7 @@
     {
       "pos": {"x": 350, "y": -1746},
       "name": "Outback A106",
-      "style": "asteroid-8",
+      "style": "asteroid-11",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4777,7 +4777,7 @@
     {
       "pos": {"x": 1102, "y": -1176},
       "name": "A8216",
-      "style": "asteroid-1",
+      "style": "asteroid-5",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4785,7 +4785,7 @@
     {
       "pos": {"x": 981, "y": -1170},
       "name": "A6110",
-      "style": "asteroid-1",
+      "style": "asteroid-3",
       "trader": null,
       "enemy": {"type": "Soma Predator", "loot": []},
       "treasures": []
@@ -4793,7 +4793,7 @@
     {
       "pos": {"x": 797, "y": -1125},
       "name": "A9725",
-      "style": "asteroid-2",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": ["Blue seeds"]
@@ -4809,7 +4809,7 @@
     {
       "pos": {"x": 729, "y": -1356},
       "name": "A6356",
-      "style": "asteroid-6",
+      "style": "asteroid-1",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4817,7 +4817,7 @@
     {
       "pos": {"x": 783, "y": -1451},
       "name": "A2331",
-      "style": "asteroid-6",
+      "style": "asteroid-5",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4825,7 +4825,7 @@
     {
       "pos": {"x": 870, "y": -1540},
       "name": "A7040",
-      "style": "asteroid-5",
+      "style": "asteroid-3",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4833,7 +4833,7 @@
     {
       "pos": {"x": 1013, "y": -1401},
       "name": "A9321",
-      "style": "asteroid-2",
+      "style": "asteroid-3",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4841,7 +4841,7 @@
     {
       "pos": {"x": 1087, "y": -1462},
       "name": "A8782",
-      "style": "asteroid-4",
+      "style": "asteroid-3",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4849,7 +4849,7 @@
     {
       "pos": {"x": 1179, "y": -1271},
       "name": "Soma Isolationist Gate",
-      "style": "asteroid-7",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4857,7 +4857,7 @@
     {
       "pos": {"x": 1061, "y": -1238},
       "name": "A2178",
-      "style": "asteroid-6",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4881,7 +4881,7 @@
     {
       "pos": {"x": 831, "y": -1188},
       "name": "A5128",
-      "style": "asteroid-2",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4913,7 +4913,7 @@
     {
       "pos": {"x": 990, "y": -1540},
       "name": "A9040",
-      "style": "asteroid-3",
+      "style": "asteroid-11",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4929,7 +4929,7 @@
     {
       "pos": {"x": 168, "y": -1235},
       "name": "A8855",
-      "style": "asteroid-5",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4959,7 +4959,7 @@
     {
       "pos": {"x": 35, "y": -1164},
       "name": "A7544",
-      "style": "asteroid-8",
+      "style": "asteroid-10",
       "trader": null,
       "enemy": {
         "type": "Bandit Striker",
@@ -4970,7 +4970,7 @@
     {
       "pos": {"x": -29, "y": -1217},
       "name": "A9157",
-      "style": "asteroid-1",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": {"type": "Bandit Striker", "loot": ["Lepton Shield"]},
       "treasures": []
@@ -4986,7 +4986,7 @@
     {
       "pos": {"x": -104, "y": -1374},
       "name": "A9654",
-      "style": "asteroid-2",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": null,
       "treasures": ["Barium Ore", "Alien Fungi"]
@@ -4994,7 +4994,7 @@
     {
       "pos": {"x": -48, "y": -1300},
       "name": "A7280",
-      "style": "asteroid-6",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": {"type": "Bandit", "loot": ["Autogun"]},
       "treasures": []
@@ -5010,7 +5010,7 @@
     {
       "pos": {"x": 53, "y": -1344},
       "name": "A7324",
-      "style": "asteroid-6",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5018,7 +5018,7 @@
     {
       "pos": {"x": 150, "y": -1382},
       "name": "A7096",
-      "style": "asteroid-6",
+      "style": "asteroid-10",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5074,7 +5074,7 @@
     {
       "pos": {"x": -1652, "y": -1264},
       "name": "A524",
-      "style": "asteroid-2",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5082,7 +5082,7 @@
     {
       "pos": {"x": -1916, "y": -1168},
       "name": "A168",
-      "style": "asteroid-8",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5090,7 +5090,7 @@
     {
       "pos": {"x": -1850, "y": -884},
       "name": "A5024",
-      "style": "asteroid-2",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5236,7 +5236,7 @@
     {
       "pos": {"x": -372, "y": -1362},
       "name": "A54",
-      "style": "asteroid-4",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": ["Autogun"]
@@ -5252,7 +5252,7 @@
     {
       "pos": {"x": -426, "y": -1266},
       "name": "A112",
-      "style": "asteroid-4",
+      "style": "asteroid-1",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5260,7 +5260,7 @@
     {
       "pos": {"x": -519, "y": -1399},
       "name": "A178",
-      "style": "asteroid-1",
+      "style": "asteroid-10",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5308,7 +5308,7 @@
     {
       "pos": {"x": -389, "y": -1549},
       "name": "A118",
-      "style": "asteroid-6",
+      "style": "asteroid-10",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5324,7 +5324,7 @@
     {
       "pos": {"x": -698, "y": -1609},
       "name": "A167",
-      "style": "asteroid-6",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5340,7 +5340,7 @@
     {
       "pos": {"x": -404, "y": -1678},
       "name": "A162",
-      "style": "asteroid-9",
+      "style": "asteroid-11",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5348,7 +5348,7 @@
     {
       "pos": {"x": -370, "y": -1788},
       "name": "A38",
-      "style": "asteroid-1",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5356,7 +5356,7 @@
     {
       "pos": {"x": -330, "y": -1576},
       "name": "A186",
-      "style": "asteroid-4",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5500,7 +5500,7 @@
     {
       "pos": {"x": -250, "y": 265},
       "name": "A114",
-      "style": "asteroid-5",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5508,7 +5508,7 @@
     {
       "pos": {"x": -58, "y": 641},
       "name": "A69",
-      "style": "asteroid-4",
+      "style": "asteroid-1",
       "trader": null,
       "enemy": {"type": "Bandit Striker", "loot": []},
       "treasures": []
@@ -5516,7 +5516,7 @@
     {
       "pos": {"x": -117, "y": 813},
       "name": "A137",
-      "style": "asteroid-4",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5524,7 +5524,7 @@
     {
       "pos": {"x": -234, "y": 676},
       "name": "A71",
-      "style": "asteroid-2",
+      "style": "asteroid-10",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5532,7 +5532,7 @@
     {
       "pos": {"x": -331, "y": 639},
       "name": "A29",
-      "style": "asteroid-8",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5540,7 +5540,7 @@
     {
       "pos": {"x": -267, "y": 486},
       "name": "A119",
-      "style": "asteroid-9",
+      "style": "asteroid-11",
       "trader": null,
       "enemy": {"type": "Bandit Henchman", "loot": []},
       "treasures": []
@@ -5548,7 +5548,7 @@
     {
       "pos": {"x": -330, "y": 543},
       "name": "A36",
-      "style": "asteroid-8",
+      "style": "asteroid-11",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5556,7 +5556,7 @@
     {
       "pos": {"x": -250, "y": 386},
       "name": "A136",
-      "style": "asteroid-6",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5564,7 +5564,7 @@
     {
       "pos": {"x": -340, "y": 291},
       "name": "A170",
-      "style": "asteroid-5",
+      "style": "asteroid-1",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5572,7 +5572,7 @@
     {
       "pos": {"x": -72, "y": 504},
       "name": "A88",
-      "style": "asteroid-9",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": {"type": "Bandit Henchman", "loot": []},
       "treasures": []
@@ -5600,7 +5600,7 @@
     {
       "pos": {"x": 972, "y": -1610},
       "name": "A82",
-      "style": "asteroid-9",
+      "style": "asteroid-10",
       "trader": null,
       "enemy": {"type": "Gnats", "loot": []},
       "treasures": []
@@ -5608,7 +5608,7 @@
     {
       "pos": {"x": 1110, "y": -1664},
       "name": "A174",
-      "style": "asteroid-2",
+      "style": "asteroid-11",
       "trader": null,
       "enemy": {"type": "Gnats", "loot": []},
       "treasures": []
@@ -5624,7 +5624,7 @@
     {
       "pos": {"x": 1052, "y": -1640},
       "name": "A92",
-      "style": "asteroid-2",
+      "style": "asteroid-10",
       "trader": null,
       "enemy": {"type": "Gnats", "loot": []},
       "treasures": []
@@ -5632,7 +5632,7 @@
     {
       "pos": {"x": 988, "y": -1690},
       "name": "A78",
-      "style": "asteroid-2",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": {"type": "Gnats", "loot": []},
       "treasures": []
@@ -5704,7 +5704,7 @@
     {
       "pos": {"x": 1332, "y": -1106},
       "name": "A381",
-      "style": "asteroid-5",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": {"type": "Soma Predator", "loot": []},
       "treasures": []
@@ -5712,7 +5712,7 @@
     {
       "pos": {"x": 1272, "y": -1208},
       "name": "A100",
-      "style": "asteroid-7",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": {"type": "Soma Reaver", "loot": []},
       "treasures": []
@@ -5728,7 +5728,7 @@
     {
       "pos": {"x": 1270, "y": -1056},
       "name": "A126",
-      "style": "asteroid-1",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": {"type": "Soma Predator", "loot": []},
       "treasures": []
@@ -5807,7 +5807,7 @@
     {
       "pos": {"x": -506, "y": -546},
       "name": "A72",
-      "style": "asteroid-5",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5815,7 +5815,7 @@
     {
       "pos": {"x": -398, "y": -562},
       "name": "A101",
-      "style": "asteroid-3",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5831,7 +5831,7 @@
     {
       "pos": {"x": -326, "y": -430},
       "name": "A98",
-      "style": "asteroid-9",
+      "style": "asteroid-3",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5839,7 +5839,7 @@
     {
       "pos": {"x": -290, "y": -516},
       "name": "A166",
-      "style": "asteroid-8",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5847,7 +5847,7 @@
     {
       "pos": {"x": -166, "y": -524},
       "name": "A132",
-      "style": "asteroid-2",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5975,7 +5975,7 @@
     {
       "pos": {"x": 1583, "y": -1281},
       "name": "A864",
-      "style": "asteroid-5",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5983,7 +5983,7 @@
     {
       "pos": {"x": 1427, "y": -1316},
       "name": "A854",
-      "style": "asteroid-6",
+      "style": "asteroid-10",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5991,7 +5991,7 @@
     {
       "pos": {"x": 1472, "y": -1446},
       "name": "A979",
-      "style": "asteroid-7",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5999,7 +5999,7 @@
     {
       "pos": {"x": 1610, "y": -1404},
       "name": "A10147",
-      "style": "asteroid-5",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6007,7 +6007,7 @@
     {
       "pos": {"x": 1679, "y": -1555},
       "name": "A1068",
-      "style": "asteroid-6",
+      "style": "asteroid-3",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6015,7 +6015,7 @@
     {
       "pos": {"x": 1707, "y": -1353},
       "name": "A1058",
-      "style": "asteroid-7",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6146,7 +6146,7 @@
     {
       "pos": {"x": -1208, "y": 430},
       "name": "A1407",
-      "style": "asteroid-6",
+      "style": "asteroid-3",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6154,7 +6154,7 @@
     {
       "pos": {"x": -1287, "y": 433},
       "name": "A1479",
-      "style": "asteroid-8",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6162,7 +6162,7 @@
     {
       "pos": {"x": -1308, "y": 509},
       "name": "A1547",
-      "style": "asteroid-3",
+      "style": "asteroid-5",
       "trader": null,
       "enemy": {"type": "Mimos Dart", "loot": []},
       "treasures": []
@@ -6170,7 +6170,7 @@
     {
       "pos": {"x": -1359, "y": 451},
       "name": "A1566",
-      "style": "asteroid-7",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6178,7 +6178,7 @@
     {
       "pos": {"x": -1403, "y": 514},
       "name": "A1626",
-      "style": "asteroid-8",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": {"type": "Mimos Arrow", "loot": []},
       "treasures": []
@@ -6186,7 +6186,7 @@
     {
       "pos": {"x": -1456, "y": 423},
       "name": "A1608",
-      "style": "asteroid-2",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6194,7 +6194,7 @@
     {
       "pos": {"x": -1394, "y": 380},
       "name": "A1511",
-      "style": "asteroid-9",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6202,7 +6202,7 @@
     {
       "pos": {"x": -1397, "y": 307},
       "name": "A1469",
-      "style": "asteroid-9",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6210,7 +6210,7 @@
     {
       "pos": {"x": -1314, "y": 298},
       "name": "A1393",
-      "style": "asteroid-4",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6218,7 +6218,7 @@
     {
       "pos": {"x": -1254, "y": 362},
       "name": "A1403",
-      "style": "asteroid-1",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": {"type": "Mimos Dart", "loot": []},
       "treasures": []
@@ -6266,7 +6266,7 @@
     {
       "pos": {"x": -941, "y": 355},
       "name": "A1593",
-      "style": "asteroid-1",
+      "style": "asteroid-11",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6274,7 +6274,7 @@
     {
       "pos": {"x": -1001, "y": 279},
       "name": "A1674",
-      "style": "asteroid-7",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6343,7 +6343,7 @@
     {
       "pos": {"x": -1497, "y": 935},
       "name": "A587",
-      "style": "asteroid-2",
+      "style": "asteroid-5",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6351,7 +6351,7 @@
     {
       "pos": {"x": -1578, "y": 900},
       "name": "A721",
-      "style": "asteroid-9",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6359,7 +6359,7 @@
     {
       "pos": {"x": -1614, "y": 945},
       "name": "A788",
-      "style": "asteroid-5",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6367,7 +6367,7 @@
     {
       "pos": {"x": -1689, "y": 879},
       "name": "A790",
-      "style": "asteroid-3",
+      "style": "asteroid-10",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6375,7 +6375,7 @@
     {
       "pos": {"x": -1667, "y": 816},
       "name": "A699",
-      "style": "asteroid-3",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6383,7 +6383,7 @@
     {
       "pos": {"x": -1674, "y": 737},
       "name": "A641",
-      "style": "asteroid-4",
+      "style": "asteroid-3",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6391,7 +6391,7 @@
     {
       "pos": {"x": -1574, "y": 690},
       "name": "A534",
-      "style": "asteroid-2",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": {"type": "Mimos Arrow", "loot": []},
       "treasures": []
@@ -6399,7 +6399,7 @@
     {
       "pos": {"x": -1502, "y": 720},
       "name": "A473",
-      "style": "asteroid-3",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": {"type": "Mimos Guard", "loot": []},
       "treasures": []
@@ -6407,7 +6407,7 @@
     {
       "pos": {"x": -1440, "y": 844},
       "name": "A500",
-      "style": "asteroid-2",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": {"type": "Mimos Arrow", "loot": []},
       "treasures": []
@@ -6423,7 +6423,7 @@
     {
       "pos": {"x": -621, "y": 386},
       "name": "Dunkel Trojan",
-      "style": "asteroid-2",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6431,7 +6431,7 @@
     {
       "pos": {"x": -771, "y": 431},
       "name": "A499",
-      "style": "asteroid-4",
+      "style": "asteroid-1",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6471,7 +6471,7 @@
     {
       "pos": {"x": -876, "y": -1},
       "name": "Tod Mond",
-      "style": "asteroid-9",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6479,7 +6479,7 @@
     {
       "pos": {"x": -568, "y": 115},
       "name": "A288",
-      "style": "asteroid-1",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6543,7 +6543,7 @@
     {
       "pos": {"x": -1066, "y": 608},
       "name": "A646",
-      "style": "asteroid-3",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": {"type": "Mimos Dart", "loot": []},
       "treasures": []
@@ -6559,7 +6559,7 @@
     {
       "pos": {"x": -1006, "y": 786},
       "name": "A660",
-      "style": "asteroid-1",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6567,7 +6567,7 @@
     {
       "pos": {"x": -1065, "y": 880},
       "name": "A865",
-      "style": "asteroid-9",
+      "style": "asteroid-5",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6575,7 +6575,7 @@
     {
       "pos": {"x": -1114, "y": 763},
       "name": "A853",
-      "style": "asteroid-4",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6583,7 +6583,7 @@
     {
       "pos": {"x": -1200, "y": 683},
       "name": "A823",
-      "style": "asteroid-2",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": {"type": "Mimos Arrow", "loot": []},
       "treasures": []
@@ -6591,7 +6591,7 @@
     {
       "pos": {"x": -1173, "y": 562},
       "name": "A675",
-      "style": "asteroid-8",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6599,7 +6599,7 @@
     {
       "pos": {"x": -1089, "y": 466},
       "name": "A495",
-      "style": "asteroid-9",
+      "style": "asteroid-5",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6607,7 +6607,7 @@
     {
       "pos": {"x": -893, "y": 454},
       "name": "A1347",
-      "style": "asteroid-6",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6615,7 +6615,7 @@
     {
       "pos": {"x": -1013, "y": 515},
       "name": "A519",
-      "style": "asteroid-2",
+      "style": "asteroid-5",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6623,7 +6623,7 @@
     {
       "pos": {"x": -845, "y": 737},
       "name": "A1442",
-      "style": "asteroid-7",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": ["Platinum"]
@@ -6631,7 +6631,7 @@
     {
       "pos": {"x": -864, "y": 921},
       "name": "Teil",
-      "style": "asteroid-4",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6639,7 +6639,7 @@
     {
       "pos": {"x": -828, "y": 806},
       "name": "Scherbe",
-      "style": "asteroid-2",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": null,
       "treasures": ["Mysterious Device"]
@@ -6655,7 +6655,7 @@
     {
       "pos": {"x": -949, "y": 836},
       "name": "Splitter",
-      "style": "asteroid-1",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6671,7 +6671,7 @@
     {
       "pos": {"x": -956, "y": 600},
       "name": "A1496",
-      "style": "asteroid-8",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6679,7 +6679,7 @@
     {
       "pos": {"x": -862, "y": 603},
       "name": "A1425",
-      "style": "asteroid-7",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6687,7 +6687,7 @@
     {
       "pos": {"x": -867, "y": 667},
       "name": "A1457",
-      "style": "asteroid-5",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6695,7 +6695,7 @@
     {
       "pos": {"x": -765, "y": 534},
       "name": "A1299",
-      "style": "asteroid-3",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6767,7 +6767,7 @@
     {
       "pos": {"x": -841, "y": -2700},
       "name": "BACKWATER",
-      "style": "asteroid-1",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6775,7 +6775,7 @@
     {
       "pos": {"x": -910, "y": -2600},
       "name": "BUSH",
-      "style": "asteroid-1",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": {"type": "Target Drone", "loot": []},
       "treasures": []
@@ -6791,7 +6791,7 @@
     {
       "pos": {"x": -948, "y": -2502},
       "name": "PAVONIS",
-      "style": "asteroid-1",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6799,7 +6799,7 @@
     {
       "pos": {"x": -893, "y": -2003},
       "name": "PAXOS",
-      "style": "asteroid-1",
+      "style": "asteroid-10",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6807,7 +6807,7 @@
     {
       "pos": {"x": -788, "y": -2059},
       "name": "ERIS",
-      "style": "asteroid-1",
+      "style": "asteroid-11",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6815,7 +6815,7 @@
     {
       "pos": {"x": -793, "y": -1932},
       "name": "APATE",
-      "style": "asteroid-1",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": {"type": "Target Drone", "loot": []},
       "treasures": []
@@ -6823,7 +6823,7 @@
     {
       "pos": {"x": -931, "y": -1896},
       "name": "THANATOS",
-      "style": "asteroid-1",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6831,7 +6831,7 @@
     {
       "pos": {"x": -1143, "y": -2169},
       "name": "MIMOS",
-      "style": "asteroid-1",
+      "style": "asteroid-11",
       "trader": null,
       "enemy": {"type": "Target Drone", "loot": []},
       "treasures": []
@@ -6839,7 +6839,7 @@
     {
       "pos": {"x": -1049, "y": -2200},
       "name": "STERNBUND",
-      "style": "asteroid-1",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6847,7 +6847,7 @@
     {
       "pos": {"x": -946, "y": -2381},
       "name": "EXPANSE",
-      "style": "asteroid-1",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6855,7 +6855,7 @@
     {
       "pos": {"x": -829, "y": -2300},
       "name": "AESIR",
-      "style": "asteroid-1",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6863,7 +6863,7 @@
     {
       "pos": {"x": -952, "y": -2149},
       "name": "BANDITS LAIR",
-      "style": "asteroid-1",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": {"type": "Target Drone", "loot": []},
       "treasures": []
@@ -6871,7 +6871,7 @@
     {
       "pos": {"x": -948, "y": -2273},
       "name": "WEAVER",
-      "style": "asteroid-1",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": {"type": "Target Drone", "loot": []},
       "treasures": []
@@ -6887,7 +6887,7 @@
     {
       "pos": {"x": -1003, "y": -2037},
       "name": "ELYSIUM",
-      "style": "asteroid-1",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6895,7 +6895,7 @@
     {
       "pos": {"x": -1106, "y": -1977},
       "name": "NEUTRON STAR",
-      "style": "asteroid-1",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6927,7 +6927,7 @@
     {
       "pos": {"x": -184, "y": 1240},
       "name": "Neutron Star",
-      "style": "asteroid-1",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -12431,6 +12431,58 @@
       "falloff": 0.3,
       "curve": [0, 1],
       "spectrum": ["666", "888"]
+    },
+    {
+      "name": "asteroid-10",
+      "type": "asteroid",
+      "radius": 8,
+      "height": 3,
+      "ambient": 0.2,
+      "octaves": 3,
+      "zoom": 1.5,
+      "falloff": 0.3,
+      "curve": [0, 0.3, 1],
+      "spectrum": ["888", "777", "4F8"],
+      "model": null
+    },
+    {
+      "name": "asteroid-11",
+      "type": "asteroid",
+      "radius": 6,
+      "height": 2,
+      "ambient": 0.3,
+      "octaves": 3,
+      "zoom": 1.25,
+      "falloff": 0.3,
+      "curve": [0, 0.2, 1],
+      "spectrum": ["aaa", "666", "444"],
+      "model": null
+    },
+    {
+      "name": "asteroid-12",
+      "type": "asteroid",
+      "radius": 9,
+      "height": 1,
+      "ambient": 0.2,
+      "octaves": 2,
+      "zoom": 1,
+      "falloff": 0.3,
+      "curve": [0, 0.2, 1, 0.2, 0],
+      "spectrum": ["777", "A70"],
+      "model": null
+    },
+    {
+      "name": "asteroid-13",
+      "type": "asteroid",
+      "radius": 6,
+      "height": 1,
+      "ambient": 0.2,
+      "octaves": 3,
+      "zoom": 0.9,
+      "falloff": 0.4,
+      "curve": [1, 0.9, 0, 0.9, 1],
+      "spectrum": ["8FF", "777"],
+      "model": null
     },
     {
       "type": "asteroid",

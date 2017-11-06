@@ -84,11 +84,11 @@
     }
 
     self.add = function () {
+      var type = self.refs.filterInput.type || 'asteroid'
       var obj = {
-        id:'unnamed',
-        type: 'asteroid',
-        celestial: {r: 20, amb: 0.2, oct: 3, zoom: 10, color: ['888', 'D84']},
-        surface: { zoom: 1.5, height: 2, octaves: 2, falloff: 0.2, curve: [0,1], spectrum: ['000', 'FFF'] }
+        name: type + '-unnamed', type: type,
+        radius: 4, height: 2, ambient: 0.2, octaves: 3, zoom: 1.5, falloff: 0.3,
+        curve: [0,1], spectrum: ['F80', 'F80']
       }
       self.world.celestials.unshift(obj)
       self.edit({ item: { e: self.world.celestials[0] } })
