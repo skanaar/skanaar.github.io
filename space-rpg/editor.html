@@ -49,28 +49,33 @@
     <script src="validator.js"></script>
     <script>
 
-      function startEditor(data){
-        localStorage['world'] = data
-        riot.mount('editor-app')
+      function parseWorld(worldJson) {
+        var world = JSON.parse(worldJson)
+        if (!_.isArray(world.destinations)) throw new Error()
+        if (!_.isArray(world.celestials)) throw new Error()
+        if (!_.isArray(world.regions)) throw new Error()
+        if (!_.isArray(world.quests)) throw new Error()
+        if (!_.isArray(world.items)) throw new Error()
+        if (!_.isArray(world.ships)) throw new Error()
+        if (!_.isArray(world.enemies)) throw new Error()
+        return world
+      }
+
+      function startEditor(world){
+        riot.mount('editor-app', { world: world })
       }
       function loadFromServer() {
-        _.fetch('world.json', startEditor)
+        _.fetch('world.json', data => startEditor(parseWorld(data)))
       }
-      var worldJson = localStorage['world']
-      if (!worldJson) {
+      var useLocalStorage = !! _.jsonParse(localStorage['nebula:use-local-storage'] || 'false')
+      var worldJson = localStorage['nebula:world']
+      //console.log('useLocalStorage', useLocalStorage, !!worldJson)
+      if (!useLocalStorage || !worldJson) {
         loadFromServer()
       }
       else {
         try {
-          var world = JSON.parse(worldJson)
-          world.regions = world.regions || world.audioRegions
-          if (!_.isArray(world.destinations)) throw new Error()
-          if (!_.isArray(world.regions)) throw new Error()
-          if (!_.isArray(world.quests)) throw new Error()
-          if (!_.isArray(world.items)) throw new Error()
-          if (!_.isArray(world.ships)) throw new Error()
-          if (!_.isArray(world.enemies)) throw new Error()
-          startEditor(worldJson)            
+          startEditor(parseWorld(worldJson))            
         } catch(e) {
           alert('locally stored world was corrupt, loading world from server')
           loadFromServer()

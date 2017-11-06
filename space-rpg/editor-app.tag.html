@@ -4,7 +4,8 @@
     <a onclick={toggleFileMenu} class={ 'tab toggle-tab': true, active: isFileMenuOpen }>file</a>
     <a each={e in tabs} href="#{e}" onclick={pageChange} class={tab:true, active: page=='#'+e}>{e}</a>
     <div class="file-tools">
-      <i>{!app.isSaved ? 'Unsaved' : 'Saved'}</i>
+      <label><input type=checkbox ref="useStorageInput" checked={useLocalStorage} onchange={updateAutoSaving}> Use localstorage</label>
+      <i>{app.isSaved ? 'Saved' : 'Unsaved'}</i>
       <b>{app.world.name}</b>
     </div>
   </div>
@@ -31,9 +32,10 @@
     self.page = '#map'
     self.tabs = ['map', 'celestials', 'models', 'ships', 'enemies', 'items', 'quests']
     self.isFileMenuOpen = false
+    self.useLocalStorage = !! _.jsonParse(localStorage['nebula:use-local-storage'] || 'false')
     self.app = {
       isSaved: false,
-      world: JSON.parse(localStorage['world']),
+      world: self.opts.world,
       events: riot.observable(),
       notify: notify,
       setWorld: setWorld,
@@ -62,6 +64,24 @@
       self.app.events.trigger('save-world')
       self.app.events.trigger('request-validate')
       window.document.body.scrollTop = 0
+    }
+
+    self.updateAutoSaving = function () {
+      self.useLocalStorage = !!self.refs.useStorageInput.checked
+      localStorage['nebula:use-local-storage'] = JSON.stringify(self.useLocalStorage)
+      if (self.useLocalStorage) {
+        if (localStorage['nebula:world'])
+          try {
+            setWorld(parseWorld(localStorage['nebula:world']))
+          }
+          catch(e) {
+            alert('locally stored world was corrupt, removing data from localStorage')
+            delete localStorage['nebula:world']
+            self.useLocalStorage = false
+            localStorage['nebula:use-local-storage'] = JSON.stringify(self.useLocalStorage)
+            self.update()
+          }
+      }
     }
 
     function nullWorld() {
@@ -94,14 +114,17 @@
 
     function saveWorld() {
       self.app.events.trigger('save-world')
-      localStorage['world'] = _.stringify(self.app.world)
-      self.app.isSaved = true
-      self.update()
+      if (self.useLocalStorage) {
+        self.app.isSaved = true
+        self.update()
+        localStorage['nebula:world'] = _.stringify(self.app.world)
+      }
     }
 
     function setWorld(world) {
-      _.extend(self.app.world, world)
-      localStorage['world'] = _.stringify(world)
+      self.app.world = world
+      if (self.useLocalStorage)
+        localStorage['nebula:world'] = _.stringify(world)
       self.app.isSaved = true
       self.app.events.trigger('world-updated')
       self.update()
