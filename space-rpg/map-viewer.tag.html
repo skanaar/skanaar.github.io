@@ -60,6 +60,9 @@
     <div class="btn-group" style="opacity: {selectionSize > 1 ? 1 : 0.5}">
       <a class="toggle-btn" onclick={() => repulseAttract(2)}>Repulse</a><a class="toggle-btn" onclick={() => repulseAttract(-2)}>Attract</a>
     </div>
+    <div class="btn-group" style="opacity: {selectionSize > 1 ? 1 : 0.5}">
+      <a class="toggle-btn" onclick={() => rotate(0.2618)}>Rotate +</a><a class="toggle-btn" onclick={() => rotate(-0.2618)}>Rotate -</a>
+    </div>
     <button onclick={() => isDark = !isDark}>dark</button>
   </div>
 
@@ -345,6 +348,16 @@
       var centroid = mult(positions.reduce(add, Vec(0,0)), 1/subset.length)
       subset.forEach(function (a) {
         a.entity.pos = rund(add(centroid, mult(diff(a.entity.pos, centroid), coefficient)))
+        a.screenPos = transform(a.entity.pos)
+      })
+      calculateLines()
+    }
+    self.rotate = function (angle) {
+      var subset = _.filter(self.nodes, 'isSelected')
+      var positions = subset.map(e => e.entity.pos)
+      var centroid = mult(positions.reduce(add, Vec(0,0)), 1/subset.length)
+      subset.forEach(function (a) {
+        a.entity.pos = rund(add(centroid, rotate(diff(a.entity.pos, centroid), angle)))
         a.screenPos = transform(a.entity.pos)
       })
       calculateLines()

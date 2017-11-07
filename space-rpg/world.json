@@ -3179,7 +3179,7 @@
     {
       "name": "Helyon Shipyards",
       "style": "anomaly-helyon_shipyards",
-      "pos": {"x": 426, "y": -520},
+      "pos": {"x": 526, "y": -540},
       "trader": {
         "buy": 1.5,
         "sell": 0.75,
@@ -3606,7 +3606,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 661, "y": -530},
+      "pos": {"x": 741, "y": -590},
       "name": "Grazing Cosmic Whales",
       "style": "anomaly-whales",
       "trader": null,
@@ -3926,7 +3926,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -788, "y": -520},
+      "pos": {"x": 421, "y": 426},
       "name": "Pavonis Charm",
       "style": "jovian-3",
       "trader": null,
@@ -3942,7 +3942,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1565, "y": -1023},
+      "pos": {"x": 1044, "y": 1114},
       "name": "A5463",
       "style": "asteroid-2",
       "trader": null,
@@ -3950,7 +3950,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1558, "y": -915},
+      "pos": {"x": 1062, "y": 1009},
       "name": "Path to Apate",
       "style": "asteroid-11",
       "trader": null,
@@ -3958,7 +3958,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1649, "y": -964},
+      "pos": {"x": 1139, "y": 1079},
       "name": "A2913",
       "style": "asteroid-9",
       "trader": null,
@@ -3966,7 +3966,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1715, "y": -905},
+      "pos": {"x": 1216, "y": 1039},
       "name": "A9655",
       "style": "asteroid-3",
       "trader": null,
@@ -3974,7 +3974,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1732, "y": -1014},
+      "pos": {"x": 1206, "y": 1149},
       "name": "Stepstone of the Temple",
       "style": "planet-hell-2",
       "trader": null,
@@ -3982,7 +3982,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1825, "y": -1007},
+      "pos": {"x": 1296, "y": 1166},
       "name": "A9247",
       "style": "asteroid-4",
       "trader": null,
@@ -3990,7 +3990,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1779, "y": -1119},
+      "pos": {"x": 1222, "y": 1262},
       "name": "A5050",
       "style": "asteroid-13",
       "trader": null,
@@ -3998,7 +3998,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1677, "y": -1125},
+      "pos": {"x": 1123, "y": 1240},
       "name": "Marker of the Temple",
       "style": "planet-hell-1",
       "trader": null,
@@ -4006,7 +4006,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1575, "y": -1177},
+      "pos": {"x": 1012, "y": 1265},
       "name": "A648",
       "style": "asteroid-8",
       "trader": null,
@@ -4014,7 +4014,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1582, "y": -1098},
+      "pos": {"x": 1038, "y": 1189},
       "name": "Threshold of the Temple",
       "style": "planet-neutron-2",
       "trader": null,
@@ -4025,7 +4025,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1454, "y": -916},
+      "pos": {"x": 961, "y": 981},
       "name": "Buoy 533",
       "style": "anomaly-buoy",
       "trader": null,
@@ -4033,7 +4033,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1668, "y": -1064},
+      "pos": {"x": 1132, "y": 1180},
       "name": "Temple of Apate",
       "style": "anomaly-apate",
       "trader": null,
@@ -4041,7 +4041,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -973, "y": -1370},
+      "pos": {"x": 377, "y": 1297},
       "name": "A1310",
       "style": "asteroid-9",
       "trader": null,
@@ -4049,7 +4049,7 @@
       "treasures": ["Thanatos nacelle"]
     },
     {
-      "pos": {"x": -1048, "y": -1311},
+      "pos": {"x": 468, "y": 1257},
       "name": "A9859",
       "style": "asteroid-5",
       "trader": null,
@@ -4057,7 +4057,7 @@
       "treasures": ["Eris Grain"]
     },
     {
-      "pos": {"x": -1097, "y": -1211},
+      "pos": {"x": 540, "y": 1173},
       "name": "Gateway of Eris",
       "style": "asteroid-13",
       "trader": null,
@@ -4065,7 +4065,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1222, "y": -1478},
+      "pos": {"x": 591, "y": 1466},
       "name": "A6219 Smoke",
       "style": "cloud-smoke",
       "trader": null,
@@ -4073,7 +4073,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1166, "y": -1376},
+      "pos": {"x": 564, "y": 1352},
       "name": "A717 Smoke",
       "style": "cloud-smoke",
       "trader": null,
@@ -4081,7 +4081,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1160, "y": -1282},
+      "pos": {"x": 585, "y": 1259},
       "name": "A123 Smoke",
       "style": "cloud-smoke",
       "trader": null,
@@ -4089,7 +4089,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1048, "y": -1310},
+      "pos": {"x": 468, "y": 1257},
       "name": "A9859 Smoke",
       "style": "cloud-smoke",
       "trader": null,
@@ -4097,7 +4097,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1161, "y": -1283},
+      "pos": {"x": 583, "y": 1261},
       "name": "A123",
       "style": "asteroid-6",
       "trader": null,
@@ -4105,7 +4105,7 @@
       "treasures": ["Eris Dust"]
     },
     {
-      "pos": {"x": -1272, "y": -1326},
+      "pos": {"x": 679, "y": 1329},
       "name": "A1266",
       "style": "asteroid-12",
       "trader": null,
@@ -4113,7 +4113,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1167, "y": -1377},
+      "pos": {"x": 564, "y": 1353},
       "name": "A717",
       "style": "asteroid-2",
       "trader": null,
@@ -4121,7 +4121,7 @@
       "treasures": ["Eris Splinter"]
     },
     {
-      "pos": {"x": -1222, "y": -1479},
+      "pos": {"x": 591, "y": 1467},
       "name": "A6219",
       "style": "asteroid-6",
       "trader": null,
@@ -4129,7 +4129,7 @@
       "treasures": ["Eris Shard"]
     },
     {
-      "pos": {"x": -1268, "y": -1409},
+      "pos": {"x": 654, "y": 1410},
       "name": "Locus of Eris",
       "style": "planet-hell-2",
       "trader": null,
@@ -4137,7 +4137,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1116, "y": -1477},
+      "pos": {"x": 491, "y": 1435},
       "name": "A5617",
       "style": "asteroid-1",
       "trader": null,
@@ -4145,7 +4145,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1049, "y": -1434},
+      "pos": {"x": 436, "y": 1379},
       "name": "A8974",
       "style": "asteroid-4",
       "trader": null,
@@ -4153,7 +4153,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1376, "y": -1388},
+      "pos": {"x": 765, "y": 1418},
       "name": "A968",
       "style": "asteroid-2",
       "trader": null,
@@ -4161,7 +4161,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1314, "y": -1496},
+      "pos": {"x": 677, "y": 1506},
       "name": "A5436",
       "style": "asteroid-4",
       "trader": null,
@@ -4169,7 +4169,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1202, "y": -1226},
+      "pos": {"x": 638, "y": 1214},
       "name": "A4266",
       "style": "asteroid-10",
       "trader": null,
@@ -4177,7 +4177,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1110, "y": -1056},
+      "pos": {"x": 594, "y": 1028},
       "name": "Buoy 197",
       "style": "anomaly-buoy",
       "trader": null,
@@ -4185,7 +4185,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1068, "y": -1140},
+      "pos": {"x": 530, "y": 1099},
       "name": "Buoy 981",
       "style": "anomaly-buoy",
       "trader": null,
@@ -4193,7 +4193,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -293, "y": 32},
+      "pos": {"x": -133, "y": 332},
       "name": "Sad Weaver",
       "style": "cloud-purple",
       "trader": null,
@@ -4201,7 +4201,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -148, "y": -120},
+      "pos": {"x": 12, "y": 180},
       "name": "Blind Weaver",
       "style": "cloud-orange",
       "trader": null,
@@ -4209,7 +4209,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -38, "y": 58},
+      "pos": {"x": 122, "y": 358},
       "name": "Old Weaver",
       "style": "cloud-purple",
       "trader": null,
@@ -4217,7 +4217,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -124, "y": 146},
+      "pos": {"x": 36, "y": 446},
       "name": "Quick Weaver",
       "style": "cloud-orange",
       "trader": null,
@@ -4225,7 +4225,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -320, "y": 181},
+      "pos": {"x": -160, "y": 481},
       "name": "Young Weaver",
       "style": "cloud-smoke",
       "trader": null,
@@ -4233,7 +4233,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -168, "y": 24},
+      "pos": {"x": -8, "y": 324},
       "name": "Sick Weaver",
       "style": "cloud-green",
       "trader": null,
@@ -4241,7 +4241,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -60, "y": -54},
+      "pos": {"x": 100, "y": 246},
       "name": "Weaver 452",
       "style": "asteroid-8",
       "trader": null,
@@ -4249,7 +4249,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -56, "y": 59},
+      "pos": {"x": 104, "y": 359},
       "name": "Weaver 039",
       "style": "asteroid-5",
       "trader": null,
@@ -4257,7 +4257,7 @@
       "treasures": ["Nebular Dust"]
     },
     {
-      "pos": {"x": -121, "y": 109},
+      "pos": {"x": 39, "y": 409},
       "name": "Weaver 5377",
       "style": "asteroid-13",
       "trader": null,
@@ -4265,7 +4265,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -303, "y": 192},
+      "pos": {"x": -143, "y": 492},
       "name": "Weaver 9540",
       "style": "asteroid-4",
       "trader": null,
@@ -4273,7 +4273,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -385, "y": 158},
+      "pos": {"x": -225, "y": 458},
       "name": "Weaver 5814",
       "style": "asteroid-12",
       "trader": null,
@@ -4281,7 +4281,7 @@
       "treasures": ["Nebular Dust"]
     },
     {
-      "pos": {"x": -342, "y": 54},
+      "pos": {"x": -182, "y": 354},
       "name": "Weaver 2634",
       "style": "asteroid-5",
       "trader": null,
@@ -4289,7 +4289,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 12, "y": -95},
+      "pos": {"x": 172, "y": 205},
       "name": "Weaver 5688",
       "style": "asteroid-9",
       "trader": null,
@@ -4297,7 +4297,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -278, "y": -89},
+      "pos": {"x": -118, "y": 211},
       "name": "Weaver 7484",
       "style": "asteroid-9",
       "trader": null,
@@ -4305,7 +4305,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -202, "y": -125},
+      "pos": {"x": -42, "y": 175},
       "name": "Weaver 109",
       "style": "asteroid-8",
       "trader": null,
@@ -4313,7 +4313,7 @@
       "treasures": ["Nebular Dust"]
     },
     {
-      "pos": {"x": -103, "y": -128},
+      "pos": {"x": 57, "y": 172},
       "name": "Weaver 3512",
       "style": "asteroid-6",
       "trader": null,
@@ -4321,7 +4321,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 32, "y": 122},
+      "pos": {"x": 192, "y": 422},
       "name": "Weaver 7187",
       "style": "asteroid-2",
       "trader": null,
@@ -4329,7 +4329,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -42, "y": 173},
+      "pos": {"x": 118, "y": 473},
       "name": "Weaver 1427",
       "style": "asteroid-7",
       "trader": null,
@@ -4337,7 +4337,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -188, "y": 161},
+      "pos": {"x": -28, "y": 461},
       "name": "Weaver 817",
       "style": "asteroid-1",
       "trader": null,
@@ -4345,7 +4345,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -254, "y": 92},
+      "pos": {"x": -94, "y": 392},
       "name": "Weaver 5560",
       "style": "asteroid-11",
       "trader": null,
@@ -4353,7 +4353,7 @@
       "treasures": ["Nebular Dust"]
     },
     {
-      "pos": {"x": -275, "y": 31},
+      "pos": {"x": -115, "y": 331},
       "name": "Weaver 7111",
       "style": "asteroid-7",
       "trader": null,
@@ -4361,7 +4361,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -203, "y": -8},
+      "pos": {"x": -43, "y": 292},
       "name": "Weaver 1116",
       "style": "asteroid-1",
       "trader": null,
@@ -4369,7 +4369,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -122, "y": 3},
+      "pos": {"x": 38, "y": 303},
       "name": "Weaver 545",
       "style": "asteroid-4",
       "trader": null,
@@ -4377,7 +4377,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 11, "y": -3},
+      "pos": {"x": 171, "y": 297},
       "name": "Weaver 5511",
       "style": "asteroid-1",
       "trader": null,
@@ -4385,7 +4385,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 96, "y": -186},
+      "pos": {"x": 236, "y": 154},
       "name": "Buoy 77",
       "style": "anomaly-buoy",
       "trader": null,
@@ -4393,7 +4393,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 122, "y": -308},
+      "pos": {"x": 349, "y": 148},
       "name": "Buoy 329",
       "style": "anomaly-buoy",
       "trader": null,
@@ -4401,7 +4401,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 172, "y": -402},
+      "pos": {"x": 434, "y": 66},
       "name": "Buoy 323",
       "style": "anomaly-buoy",
       "trader": null,
@@ -4409,7 +4409,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -156, "y": 42},
+      "pos": {"x": 4, "y": 342},
       "name": "Weaver Alpha",
       "style": "planet-beach",
       "surface": "rock-1",
@@ -4426,7 +4426,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1224, "y": -824},
+      "pos": {"x": 762, "y": 834},
       "name": "Paxos Station",
       "style": "anomaly-paxos",
       "trader": null,
@@ -4435,7 +4435,7 @@
       "shipyard": ["CES Marathon", "Kerr Frigate"]
     },
     {
-      "pos": {"x": -1058, "y": -786},
+      "pos": {"x": 614, "y": 753},
       "name": "A3932",
       "style": "asteroid-1",
       "trader": null,
@@ -4443,7 +4443,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -952, "y": -703},
+      "pos": {"x": 533, "y": 647},
       "name": "Debris 3558",
       "style": "anomaly-junk",
       "trader": null,
@@ -4451,7 +4451,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1282, "y": -694},
+      "pos": {"x": 853, "y": 724},
       "name": "Paxosi",
       "style": "planet-hell-2",
       "trader": null,
@@ -4459,7 +4459,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1166, "y": -725},
+      "pos": {"x": 732, "y": 724},
       "name": "A6627",
       "style": "asteroid-5",
       "trader": null,
@@ -4467,7 +4467,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1275, "y": -806},
+      "pos": {"x": 817, "y": 829},
       "name": "Paxos",
       "style": "star-paxos",
       "trader": null,
@@ -4475,7 +4475,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1361, "y": -870},
+      "pos": {"x": 885, "y": 912},
       "name": "A210",
       "style": "asteroid-6",
       "trader": null,
@@ -4483,7 +4483,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1253, "y": -894},
+      "pos": {"x": 772, "y": 910},
       "name": "A4996",
       "style": "asteroid-9",
       "trader": null,
@@ -4491,7 +4491,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1188, "y": -991},
+      "pos": {"x": 685, "y": 984},
       "name": "A7743",
       "style": "asteroid-6",
       "trader": null,
@@ -4499,7 +4499,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1133, "y": -885},
+      "pos": {"x": 659, "y": 870},
       "name": "A2172",
       "style": "asteroid-8",
       "trader": null,
@@ -4507,7 +4507,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -937, "y": -768},
+      "pos": {"x": 499, "y": 705},
       "name": "A2931",
       "style": "asteroid-13",
       "trader": null,
@@ -4515,7 +4515,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -824, "y": -718},
+      "pos": {"x": 405, "y": 628},
       "name": "Buoy 719",
       "style": "anomaly-buoy",
       "trader": null,
@@ -4523,7 +4523,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -840, "y": -592},
+      "pos": {"x": 453, "y": 512},
       "name": "Charm Beta",
       "style": "asteroid-9",
       "trader": null,
@@ -4531,7 +4531,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -756, "y": -454},
+      "pos": {"x": 408, "y": 354},
       "name": "Charm Gamma",
       "style": "asteroid-11",
       "trader": null,
@@ -4539,7 +4539,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -658, "y": -412},
+      "pos": {"x": 324, "y": 288},
       "name": "Charm Delta",
       "style": "asteroid-2",
       "trader": null,
@@ -4547,7 +4547,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -756, "y": -618},
+      "pos": {"x": 364, "y": 513},
       "name": "Charm Transfer Buoy C",
       "style": "anomaly-buoy",
       "trader": null,
@@ -4555,7 +4555,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -676, "y": -468},
+      "pos": {"x": 324, "y": 346},
       "name": "Charm Transfer Buoy A",
       "style": "anomaly-buoy",
       "trader": null,
@@ -4563,7 +4563,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -672, "y": -540},
+      "pos": {"x": 305, "y": 417},
       "name": "Charm Transfer Buoy B",
       "style": "anomaly-buoy",
       "trader": null,
@@ -5083,7 +5083,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1652, "y": -1264},
+      "pos": {"x": 1062, "y": 1371},
       "name": "A524",
       "style": "asteroid-12",
       "trader": null,
@@ -5091,7 +5091,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1916, "y": -1168},
+      "pos": {"x": 1341, "y": 1345},
       "name": "A168",
       "style": "asteroid-4",
       "trader": null,
@@ -5099,7 +5099,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1850, "y": -884},
+      "pos": {"x": 1352, "y": 1053},
       "name": "A5024",
       "style": "asteroid-12",
       "trader": null,
@@ -5107,7 +5107,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1094, "y": -1396},
+      "pos": {"x": 488, "y": 1351},
       "name": "unnamed",
       "style": "cloud-dirt",
       "trader": null,
@@ -5115,7 +5115,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1360, "y": -654},
+      "pos": {"x": 939, "y": 705},
       "name": "Debris 8094",
       "style": "anomaly-junk",
       "trader": null,
@@ -5123,7 +5123,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1434, "y": -614},
+      "pos": {"x": 1020, "y": 684},
       "name": "Debris 8634",
       "style": "anomaly-junk",
       "trader": null,
@@ -5131,7 +5131,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1556, "y": -558},
+      "pos": {"x": 1154, "y": 665},
       "name": "Thanatos",
       "style": "anomaly-thanatos",
       "trader": null,
@@ -5139,7 +5139,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1482, "y": -624},
+      "pos": {"x": 1063, "y": 707},
       "name": "Debris 115",
       "style": "anomaly-ruin",
       "trader": null,
@@ -5147,7 +5147,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1516, "y": -499},
+      "pos": {"x": 1129, "y": 597},
       "name": "Debris 125",
       "style": "anomaly-debris",
       "trader": null,
@@ -5155,7 +5155,7 @@
       "treasures": ["Platinum"]
     },
     {
-      "pos": {"x": -1555, "y": -444},
+      "pos": {"x": 1182, "y": 552},
       "name": "Debris 90",
       "style": "anomaly-junk",
       "trader": null,
@@ -5163,7 +5163,7 @@
       "treasures": ["Thanatos mesh"]
     },
     {
-      "pos": {"x": -1729, "y": -425},
+      "pos": {"x": 1352, "y": 577},
       "name": "Debris 185",
       "style": "anomaly-debris",
       "trader": null,
@@ -5171,7 +5171,7 @@
       "treasures": ["Thanatos nacelle"]
     },
     {
-      "pos": {"x": -1718, "y": -498},
+      "pos": {"x": 1324, "y": 647},
       "name": "Debris 99",
       "style": "anomaly-junk",
       "trader": null,
@@ -5179,7 +5179,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1679, "y": -545},
+      "pos": {"x": 1275, "y": 683},
       "name": "Debris 129",
       "style": "anomaly-ruin",
       "trader": null,
@@ -5187,7 +5187,7 @@
       "treasures": ["Energy Cell"]
     },
     {
-      "pos": {"x": -1780, "y": -659},
+      "pos": {"x": 1342, "y": 818},
       "name": "Debris 123",
       "style": "anomaly-debris",
       "trader": null,
@@ -5195,7 +5195,7 @@
       "treasures": ["Copper", "Platinum"]
     },
     {
-      "pos": {"x": -1706, "y": -626},
+      "pos": {"x": 1281, "y": 766},
       "name": "Debris 121",
       "style": "anomaly-debris",
       "trader": null,
@@ -5203,7 +5203,7 @@
       "treasures": ["Thanatos core"]
     },
     {
-      "pos": {"x": -1580, "y": -726},
+      "pos": {"x": 1130, "y": 830},
       "name": "Debris 94",
       "style": "anomaly-junk",
       "trader": null,
@@ -5211,7 +5211,7 @@
       "treasures": ["Shield Battery"]
     },
     {
-      "pos": {"x": -1583, "y": -608},
+      "pos": {"x": 1165, "y": 720},
       "name": "Debris 98",
       "style": "anomaly-junk",
       "trader": null,
@@ -5381,7 +5381,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 208, "y": -592},
+      "pos": {"x": 228, "y": -592},
       "name": "Debris Cloud",
       "style": "cloud-purple",
       "trader": null,
@@ -5389,7 +5389,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 244, "y": -596},
+      "pos": {"x": 264, "y": -596},
       "name": "Debris 102",
       "style": "anomaly-debris",
       "trader": null,
@@ -5397,7 +5397,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 188, "y": -616},
+      "pos": {"x": 208, "y": -616},
       "name": "Debris 64",
       "style": "anomaly-junk",
       "trader": null,
@@ -5405,7 +5405,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -14, "y": -300},
+      "pos": {"x": 290, "y": 25},
       "name": "Debris 6",
       "style": "anomaly-debris",
       "trader": null,
@@ -5413,7 +5413,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 256, "y": -276},
+      "pos": {"x": 504, "y": 184},
       "name": "Debris 132",
       "style": "anomaly-junk",
       "trader": null,
@@ -5421,7 +5421,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 20, "y": -404},
+      "pos": {"x": 355, "y": -44},
       "name": "Debris 52",
       "style": "anomaly-ruin",
       "trader": null,
@@ -5429,7 +5429,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -88, "y": 585},
+      "pos": {"x": 72, "y": 885},
       "name": "Debris 89",
       "style": "anomaly-junk",
       "trader": null,
@@ -5437,7 +5437,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -24, "y": 719},
+      "pos": {"x": 136, "y": 1019},
       "name": "Debris 25",
       "style": "anomaly-junk",
       "trader": null,
@@ -5445,7 +5445,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -136, "y": 672},
+      "pos": {"x": 24, "y": 972},
       "name": "Debris 91",
       "style": "anomaly-debris",
       "trader": null,
@@ -5453,7 +5453,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -216, "y": 748},
+      "pos": {"x": -56, "y": 1048},
       "name": "Debris 53",
       "style": "anomaly-junk",
       "trader": null,
@@ -5461,7 +5461,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -397, "y": 716},
+      "pos": {"x": -237, "y": 1016},
       "name": "Debris 84",
       "style": "anomaly-junk",
       "trader": null,
@@ -5469,7 +5469,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -285, "y": 590},
+      "pos": {"x": -125, "y": 890},
       "name": "Debris 124",
       "style": "anomaly-ruin",
       "trader": null,
@@ -5477,7 +5477,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -340, "y": 429},
+      "pos": {"x": -180, "y": 729},
       "name": "Debris 174",
       "style": "anomaly-junk",
       "trader": null,
@@ -5485,7 +5485,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -191, "y": 473},
+      "pos": {"x": -31, "y": 773},
       "name": "Debris 97",
       "style": "anomaly-debris",
       "trader": null,
@@ -5493,7 +5493,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -79, "y": 423},
+      "pos": {"x": 81, "y": 723},
       "name": "Debris 104",
       "style": "anomaly-junk",
       "trader": null,
@@ -5501,7 +5501,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -146, "y": 518},
+      "pos": {"x": 14, "y": 818},
       "name": "Debris 78",
       "style": "anomaly-debris",
       "trader": null,
@@ -5509,7 +5509,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -250, "y": 265},
+      "pos": {"x": -90, "y": 565},
       "name": "A114",
       "style": "asteroid-8",
       "trader": null,
@@ -5517,7 +5517,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -58, "y": 641},
+      "pos": {"x": 102, "y": 941},
       "name": "A69",
       "style": "asteroid-1",
       "trader": null,
@@ -5525,7 +5525,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -117, "y": 813},
+      "pos": {"x": 43, "y": 1113},
       "name": "A137",
       "style": "asteroid-8",
       "trader": null,
@@ -5533,7 +5533,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -234, "y": 676},
+      "pos": {"x": -74, "y": 976},
       "name": "A71",
       "style": "asteroid-10",
       "trader": null,
@@ -5541,7 +5541,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -331, "y": 639},
+      "pos": {"x": -171, "y": 939},
       "name": "A29",
       "style": "asteroid-13",
       "trader": null,
@@ -5549,7 +5549,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -267, "y": 486},
+      "pos": {"x": -107, "y": 786},
       "name": "A119",
       "style": "asteroid-11",
       "trader": null,
@@ -5557,7 +5557,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -330, "y": 543},
+      "pos": {"x": -170, "y": 843},
       "name": "A36",
       "style": "asteroid-11",
       "trader": null,
@@ -5565,7 +5565,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -250, "y": 386},
+      "pos": {"x": -90, "y": 686},
       "name": "A136",
       "style": "asteroid-9",
       "trader": null,
@@ -5573,7 +5573,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -340, "y": 291},
+      "pos": {"x": -180, "y": 591},
       "name": "A170",
       "style": "asteroid-1",
       "trader": null,
@@ -5581,7 +5581,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -72, "y": 504},
+      "pos": {"x": 88, "y": 804},
       "name": "A88",
       "style": "asteroid-13",
       "trader": null,
@@ -5589,7 +5589,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -199, "y": 581},
+      "pos": {"x": -39, "y": 881},
       "name": "The Lair",
       "style": "planet-green-6",
       "trader": null,
@@ -5753,7 +5753,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 124, "y": 198},
+      "pos": {"x": 1204, "y": -102},
       "name": "Buoy 104",
       "style": "anomaly-buoy",
       "trader": null,
@@ -5761,7 +5761,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 128, "y": 296},
+      "pos": {"x": 1248, "y": -24},
       "name": "Buoy 106",
       "style": "anomaly-buoy",
       "trader": null,
@@ -5769,7 +5769,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 252, "y": 296},
+      "pos": {"x": 1372, "y": -24},
       "name": "Buoy 80",
       "style": "anomaly-buoy",
       "trader": null,
@@ -5777,7 +5777,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 306, "y": 392},
+      "pos": {"x": 1426, "y": 72},
       "name": "Aesir",
       "style": "jovian-2",
       "trader": null,
@@ -5785,7 +5785,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 266, "y": 418},
+      "pos": {"x": 1386, "y": 98},
       "name": "Bifrost",
       "style": "anomaly-elevator",
       "trader": {
@@ -6040,7 +6040,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -774, "y": 234},
+      "pos": {"x": -616, "y": 361},
       "name": "Sternrat Station",
       "style": "anomaly-sternrat",
       "trader": {
@@ -6066,7 +6066,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1562, "y": 822},
+      "pos": {"x": -1530, "y": 725},
       "name": "Mimos Habitat",
       "style": "anomaly-mimos-habitat",
       "trader": {"buy": 1.5, "sell": 0.75, "inventory": []},
@@ -6075,7 +6075,7 @@
       "shipyard": null
     },
     {
-      "pos": {"x": -1248, "y": 419},
+      "pos": {"x": -1122, "y": 417},
       "name": "Cloud 638",
       "style": "cloud-smoke",
       "trader": null,
@@ -6083,7 +6083,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1240, "y": 495},
+      "pos": {"x": -1134, "y": 493},
       "name": "Cloud 693",
       "style": "cloud-smoke",
       "trader": null,
@@ -6091,7 +6091,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1311, "y": 451},
+      "pos": {"x": -1191, "y": 432},
       "name": "Cloud 770",
       "style": "cloud-fog-1",
       "trader": null,
@@ -6099,7 +6099,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1358, "y": 528},
+      "pos": {"x": -1257, "y": 494},
       "name": "Cloud 783",
       "style": "cloud-fog-1",
       "trader": null,
@@ -6107,7 +6107,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1509, "y": 495},
+      "pos": {"x": -1394, "y": 423},
       "name": "Cloud 824",
       "style": "cloud-fiery",
       "trader": null,
@@ -6115,7 +6115,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1459, "y": 415},
+      "pos": {"x": -1325, "y": 359},
       "name": "Cloud 779",
       "style": "cloud-orange",
       "trader": null,
@@ -6123,7 +6123,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1416, "y": 347},
+      "pos": {"x": -1266, "y": 304},
       "name": "Cloud 722",
       "style": "cloud-fiery",
       "trader": null,
@@ -6131,7 +6131,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1331, "y": 283},
+      "pos": {"x": -1167, "y": 265},
       "name": "Cloud 613",
       "style": "cloud-purple",
       "trader": null,
@@ -6139,7 +6139,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1333, "y": 384},
+      "pos": {"x": -1195, "y": 362},
       "name": "Cloud 649",
       "style": "cloud-orange",
       "trader": null,
@@ -6147,7 +6147,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1221, "y": 327},
+      "pos": {"x": -1072, "y": 336},
       "name": "Cloud 552",
       "style": "cloud-smoke",
       "trader": null,
@@ -6155,7 +6155,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1208, "y": 430},
+      "pos": {"x": -1086, "y": 438},
       "name": "A1407",
       "style": "asteroid-3",
       "trader": null,
@@ -6163,7 +6163,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1287, "y": 433},
+      "pos": {"x": -1163, "y": 421},
       "name": "A1479",
       "style": "asteroid-13",
       "trader": null,
@@ -6171,7 +6171,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1308, "y": 509},
+      "pos": {"x": -1203, "y": 489},
       "name": "A1547",
       "style": "asteroid-5",
       "trader": null,
@@ -6179,7 +6179,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1359, "y": 451},
+      "pos": {"x": -1238, "y": 420},
       "name": "A1566",
       "style": "asteroid-8",
       "trader": null,
@@ -6187,7 +6187,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1403, "y": 514},
+      "pos": {"x": -1296, "y": 469},
       "name": "A1626",
       "style": "asteroid-7",
       "trader": null,
@@ -6195,7 +6195,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1456, "y": 423},
+      "pos": {"x": -1324, "y": 367},
       "name": "A1608",
       "style": "asteroid-7",
       "trader": null,
@@ -6203,7 +6203,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1394, "y": 380},
+      "pos": {"x": -1253, "y": 342},
       "name": "A1511",
       "style": "asteroid-4",
       "trader": null,
@@ -6211,7 +6211,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1397, "y": 307},
+      "pos": {"x": -1237, "y": 271},
       "name": "A1469",
       "style": "asteroid-7",
       "trader": null,
@@ -6219,7 +6219,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1314, "y": 298},
+      "pos": {"x": -1155, "y": 283},
       "name": "A1393",
       "style": "asteroid-2",
       "trader": null,
@@ -6227,7 +6227,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1254, "y": 362},
+      "pos": {"x": -1113, "y": 361},
       "name": "A1403",
       "style": "asteroid-7",
       "trader": null,
@@ -6235,7 +6235,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -674, "y": 52},
+      "pos": {"x": -473, "y": 212},
       "name": "Bundeszone",
       "style": "anomaly-hermit",
       "trader": {"buy": 1.25, "sell": 0.75, "inventory": []},
@@ -6243,7 +6243,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -824, "y": 248},
+      "pos": {"x": -668, "y": 362},
       "name": "Traum",
       "style": "jovian-3",
       "trader": null,
@@ -6251,7 +6251,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -671, "y": 206},
+      "pos": {"x": -510, "y": 361},
       "name": "Staub",
       "style": "planet-rock-1",
       "trader": null,
@@ -6259,7 +6259,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -688, "y": 326},
+      "pos": {"x": -557, "y": 473},
       "name": "Dunkel Mond",
       "style": "planet-s-rock-1",
       "trader": null,
@@ -6267,7 +6267,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -739, "y": 342},
+      "pos": {"x": -611, "y": 475},
       "name": "Dunkel",
       "style": "planet-green-6",
       "trader": null,
@@ -6275,7 +6275,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -941, "y": 355},
+      "pos": {"x": -809, "y": 435},
       "name": "A1593",
       "style": "asteroid-11",
       "trader": null,
@@ -6283,7 +6283,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1001, "y": 279},
+      "pos": {"x": -847, "y": 346},
       "name": "A1674",
       "style": "asteroid-13",
       "trader": null,
@@ -6291,7 +6291,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -924, "y": 194},
+      "pos": {"x": -751, "y": 284},
       "name": "Wüste",
       "style": "planet-beach",
       "trader": {
@@ -6312,7 +6312,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -958, "y": 77},
+      "pos": {"x": -754, "y": 162},
       "name": "A1551",
       "style": "asteroid-7",
       "trader": null,
@@ -6320,7 +6320,7 @@
       "treasures": ["Platinum", "Alien Flora"]
     },
     {
-      "pos": {"x": -827, "y": 4},
+      "pos": {"x": -608, "y": 126},
       "name": "Tod",
       "style": "planet-hell-1",
       "trader": null,
@@ -6328,7 +6328,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -843, "y": 127},
+      "pos": {"x": -655, "y": 240},
       "name": "Hafen",
       "style": "planet-badlands-1",
       "trader": null,
@@ -6336,7 +6336,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -718, "y": 103},
+      "pos": {"x": -528, "y": 249},
       "name": "A1396",
       "style": "asteroid-5",
       "trader": null,
@@ -6344,7 +6344,7 @@
       "treasures": ["Tungsten", "Barium"]
     },
     {
-      "pos": {"x": -1432, "y": 783},
+      "pos": {"x": -1394, "y": 721},
       "name": "A438",
       "style": "asteroid-3",
       "trader": null,
@@ -6352,7 +6352,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1497, "y": 935},
+      "pos": {"x": -1496, "y": 851},
       "name": "A587",
       "style": "asteroid-5",
       "trader": null,
@@ -6360,7 +6360,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1578, "y": 900},
+      "pos": {"x": -1565, "y": 797},
       "name": "A721",
       "style": "asteroid-4",
       "trader": null,
@@ -6368,7 +6368,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1614, "y": 945},
+      "pos": {"x": -1612, "y": 831},
       "name": "A788",
       "style": "asteroid-7",
       "trader": null,
@@ -6376,7 +6376,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1689, "y": 879},
+      "pos": {"x": -1667, "y": 748},
       "name": "A790",
       "style": "asteroid-10",
       "trader": null,
@@ -6384,7 +6384,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1667, "y": 816},
+      "pos": {"x": -1630, "y": 692},
       "name": "A699",
       "style": "asteroid-13",
       "trader": null,
@@ -6392,7 +6392,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1674, "y": 737},
+      "pos": {"x": -1616, "y": 614},
       "name": "A641",
       "style": "asteroid-3",
       "trader": null,
@@ -6400,7 +6400,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1574, "y": 690},
+      "pos": {"x": -1507, "y": 595},
       "name": "A534",
       "style": "asteroid-12",
       "trader": null,
@@ -6408,7 +6408,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1502, "y": 720},
+      "pos": {"x": -1445, "y": 642},
       "name": "A473",
       "style": "asteroid-9",
       "trader": null,
@@ -6416,7 +6416,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1440, "y": 844},
+      "pos": {"x": -1418, "y": 778},
       "name": "A500",
       "style": "asteroid-6",
       "trader": null,
@@ -6424,7 +6424,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -625, "y": 192},
+      "pos": {"x": -462, "y": 359},
       "name": "Staub Mond",
       "style": "planet-hell-1",
       "trader": null,
@@ -6432,7 +6432,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -621, "y": 386},
+      "pos": {"x": -508, "y": 548},
       "name": "Dunkel Trojan",
       "style": "asteroid-12",
       "trader": null,
@@ -6440,7 +6440,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -771, "y": 431},
+      "pos": {"x": -665, "y": 552},
       "name": "A499",
       "style": "asteroid-1",
       "trader": null,
@@ -6448,7 +6448,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -981, "y": 427},
+      "pos": {"x": -866, "y": 494},
       "name": "Debris 503",
       "style": "anomaly-junk",
       "trader": null,
@@ -6456,7 +6456,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1116, "y": 286},
+      "pos": {"x": -960, "y": 323},
       "name": "A586",
       "style": "asteroid-7",
       "trader": null,
@@ -6464,7 +6464,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1221, "y": 251},
+      "pos": {"x": -1053, "y": 262},
       "name": "Debris 478",
       "style": "anomaly-junk",
       "trader": null,
@@ -6472,7 +6472,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -879, "y": -81},
+      "pos": {"x": -636, "y": 30},
       "name": "Tod Debris",
       "style": "anomaly-debris",
       "trader": null,
@@ -6480,7 +6480,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -876, "y": -1},
+      "pos": {"x": -654, "y": 108},
       "name": "Tod Mond",
       "style": "asteroid-13",
       "trader": null,
@@ -6488,7 +6488,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -568, "y": 115},
+      "pos": {"x": -387, "y": 300},
       "name": "A288",
       "style": "asteroid-2",
       "trader": null,
@@ -6496,7 +6496,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -477, "y": 180},
+      "pos": {"x": -316, "y": 386},
       "name": "Debris 350",
       "style": "anomaly-junk",
       "trader": null,
@@ -6504,7 +6504,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1528, "y": 925},
+      "pos": {"x": -1524, "y": 834},
       "name": "Cloud 1531",
       "style": "cloud-fog-2",
       "trader": null,
@@ -6512,7 +6512,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1624, "y": 902},
+      "pos": {"x": -1610, "y": 787},
       "name": "Cloud 1600",
       "style": "cloud-orange",
       "trader": null,
@@ -6520,7 +6520,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1578, "y": 820},
+      "pos": {"x": -1545, "y": 719},
       "name": "Cloud 1478",
       "style": "cloud-fog-3",
       "trader": null,
@@ -6528,7 +6528,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1656, "y": 768},
+      "pos": {"x": -1607, "y": 649},
       "name": "Cloud 1502",
       "style": "cloud-fog-2",
       "trader": null,
@@ -6536,7 +6536,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1577, "y": 712},
+      "pos": {"x": -1516, "y": 615},
       "name": "Cloud 1373",
       "style": "cloud-orange",
       "trader": null,
@@ -6544,7 +6544,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1471, "y": 775},
+      "pos": {"x": -1430, "y": 704},
       "name": "Cloud 1332",
       "style": "cloud-fog-2",
       "trader": null,
@@ -6552,7 +6552,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1066, "y": 608},
+      "pos": {"x": -995, "y": 647},
       "name": "A646",
       "style": "asteroid-8",
       "trader": null,
@@ -6560,7 +6560,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1042, "y": 699},
+      "pos": {"x": -996, "y": 741},
       "name": "Beendung",
       "style": "planet-hell-3",
       "trader": null,
@@ -6568,7 +6568,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1006, "y": 786},
+      "pos": {"x": -983, "y": 835},
       "name": "A660",
       "style": "asteroid-2",
       "trader": null,
@@ -6576,7 +6576,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1065, "y": 880},
+      "pos": {"x": -1065, "y": 910},
       "name": "A865",
       "style": "asteroid-5",
       "trader": null,
@@ -6584,7 +6584,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1114, "y": 763},
+      "pos": {"x": -1082, "y": 784},
       "name": "A853",
       "style": "asteroid-2",
       "trader": null,
@@ -6592,7 +6592,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1200, "y": 683},
+      "pos": {"x": -1144, "y": 685},
       "name": "A823",
       "style": "asteroid-12",
       "trader": null,
@@ -6600,7 +6600,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1173, "y": 562},
+      "pos": {"x": -1087, "y": 575},
       "name": "A675",
       "style": "asteroid-7",
       "trader": null,
@@ -6608,7 +6608,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1089, "y": 466},
+      "pos": {"x": -981, "y": 504},
       "name": "A495",
       "style": "asteroid-5",
       "trader": null,
@@ -6616,7 +6616,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -893, "y": 454},
+      "pos": {"x": -788, "y": 543},
       "name": "A1347",
       "style": "asteroid-12",
       "trader": null,
@@ -6624,7 +6624,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1013, "y": 515},
+      "pos": {"x": -920, "y": 571},
       "name": "A519",
       "style": "asteroid-5",
       "trader": null,
@@ -6632,7 +6632,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -845, "y": 737},
+      "pos": {"x": -815, "y": 829},
       "name": "A1442",
       "style": "asteroid-6",
       "trader": null,
@@ -6640,7 +6640,7 @@
       "treasures": ["Platinum"]
     },
     {
-      "pos": {"x": -864, "y": 921},
+      "pos": {"x": -881, "y": 1002},
       "name": "Teil",
       "style": "asteroid-12",
       "trader": null,
@@ -6648,7 +6648,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -828, "y": 806},
+      "pos": {"x": -817, "y": 900},
       "name": "Scherbe",
       "style": "asteroid-8",
       "trader": null,
@@ -6656,7 +6656,7 @@
       "treasures": ["Mysterious Device"]
     },
     {
-      "pos": {"x": -880, "y": 861},
+      "pos": {"x": -881, "y": 940},
       "name": "Mimos Ruins",
       "style": "anomaly-ruin",
       "trader": null,
@@ -6664,7 +6664,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -949, "y": 836},
+      "pos": {"x": -941, "y": 898},
       "name": "Splitter",
       "style": "asteroid-2",
       "trader": null,
@@ -6672,7 +6672,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -940, "y": 728},
+      "pos": {"x": -905, "y": 796},
       "name": "Höhle",
       "style": "planet-neutron-3",
       "trader": null,
@@ -6680,7 +6680,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -956, "y": 600},
+      "pos": {"x": -887, "y": 668},
       "name": "A1496",
       "style": "asteroid-7",
       "trader": null,
@@ -6688,7 +6688,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -862, "y": 603},
+      "pos": {"x": -797, "y": 695},
       "name": "A1425",
       "style": "asteroid-12",
       "trader": null,
@@ -6696,7 +6696,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -867, "y": 667},
+      "pos": {"x": -818, "y": 756},
       "name": "A1457",
       "style": "asteroid-9",
       "trader": null,
@@ -6704,7 +6704,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -765, "y": 534},
+      "pos": {"x": -685, "y": 654},
       "name": "A1299",
       "style": "asteroid-7",
       "trader": null,
@@ -6712,7 +6712,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1508, "y": 486},
+      "pos": {"x": -1391, "y": 415},
       "name": "Mimos Aperture",
       "style": "anomaly-gate",
       "trader": null,
@@ -6720,7 +6720,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1598, "y": 680},
+      "pos": {"x": -1528, "y": 579},
       "name": "Mimos Gate",
       "style": "anomaly-gate",
       "trader": null,
@@ -6736,7 +6736,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -822, "y": 114},
+      "pos": {"x": -632, "y": 233},
       "name": "Hafen Tracking Station",
       "style": "anomaly-buoy",
       "trader": null,
@@ -6776,7 +6776,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -841, "y": -2700},
+      "pos": {"x": -741, "y": -2600},
       "name": "BACKWATER",
       "style": "asteroid-12",
       "trader": null,
@@ -6784,7 +6784,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -910, "y": -2600},
+      "pos": {"x": -810, "y": -2500},
       "name": "BUSH",
       "style": "asteroid-9",
       "trader": null,
@@ -6792,7 +6792,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -985, "y": -2669},
+      "pos": {"x": -885, "y": -2569},
       "name": "MAXWELL",
       "style": "asteroid-1",
       "trader": null,
@@ -6800,7 +6800,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -948, "y": -2502},
+      "pos": {"x": -848, "y": -2402},
       "name": "PAVONIS",
       "style": "asteroid-7",
       "trader": null,
@@ -6808,7 +6808,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -893, "y": -2003},
+      "pos": {"x": -725, "y": -2157},
       "name": "PAXOS",
       "style": "asteroid-10",
       "trader": null,
@@ -6816,7 +6816,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -788, "y": -2059},
+      "pos": {"x": -687, "y": -2226},
       "name": "ERIS",
       "style": "asteroid-11",
       "trader": null,
@@ -6824,7 +6824,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -793, "y": -1932},
+      "pos": {"x": -611, "y": -2114},
       "name": "APATE",
       "style": "asteroid-8",
       "trader": null,
@@ -6832,7 +6832,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -931, "y": -1896},
+      "pos": {"x": -734, "y": -2045},
       "name": "THANATOS",
       "style": "asteroid-2",
       "trader": null,
@@ -6840,7 +6840,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1143, "y": -2169},
+      "pos": {"x": -1063, "y": -2129},
       "name": "MIMOS",
       "style": "asteroid-11",
       "trader": null,
@@ -6848,7 +6848,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1049, "y": -2200},
+      "pos": {"x": -969, "y": -2180},
       "name": "STERNBUND",
       "style": "asteroid-7",
       "trader": null,
@@ -6856,7 +6856,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -946, "y": -2381},
+      "pos": {"x": -846, "y": -2281},
       "name": "EXPANSE",
       "style": "asteroid-13",
       "trader": null,
@@ -6864,7 +6864,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -829, "y": -2300},
+      "pos": {"x": -949, "y": -2320},
       "name": "AESIR",
       "style": "asteroid-9",
       "trader": null,
@@ -6872,7 +6872,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -952, "y": -2149},
+      "pos": {"x": -870, "y": -2069},
       "name": "BANDITS LAIR",
       "style": "asteroid-6",
       "trader": null,
@@ -6880,7 +6880,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -948, "y": -2273},
+      "pos": {"x": -848, "y": -2173},
       "name": "WEAVER",
       "style": "asteroid-9",
       "trader": null,
@@ -6888,7 +6888,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -853, "y": -2442},
+      "pos": {"x": -753, "y": -2342},
       "name": "SOMA",
       "style": "asteroid-1",
       "trader": null,
@@ -6896,7 +6896,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1003, "y": -2037},
+      "pos": {"x": -921, "y": -1957},
       "name": "ELYSIUM",
       "style": "asteroid-7",
       "trader": null,
@@ -6904,7 +6904,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -1106, "y": -1977},
+      "pos": {"x": -1024, "y": -1897},
       "name": "NEUTRON STAR",
       "style": "asteroid-2",
       "trader": null,
@@ -6912,7 +6912,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -156, "y": 919},
+      "pos": {"x": 4, "y": 1219},
       "name": "Buoy 8",
       "style": "anomaly-buoy",
       "trader": null,
@@ -6920,7 +6920,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -128, "y": 1024},
+      "pos": {"x": 32, "y": 1324},
       "name": "Buoy 74",
       "style": "anomaly-buoy",
       "trader": null,
@@ -6928,7 +6928,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": -176, "y": 1124},
+      "pos": {"x": -16, "y": 1424},
       "name": "Buoy 54",
       "style": "anomaly-buoy",
       "trader": null,
@@ -6936,9 +6936,17 @@
       "treasures": []
     },
     {
-      "pos": {"x": -184, "y": 1240},
+      "pos": {"x": -24, "y": 1540},
       "name": "Neutron Star",
       "style": "asteroid-8",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 182, "y": -346},
+      "name": "Debris 528",
+      "style": "anomaly-ruin",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -13171,8 +13179,8 @@
     {
       "name": "Pavonis",
       "audio": "music-final ending",
-      "pos": {"x": -390, "y": -744},
-      "radius": 500
+      "pos": {"x": -290, "y": -764},
+      "radius": 450
     },
     {
       "name": "The Bush",
@@ -13183,37 +13191,37 @@
     {
       "name": "Paxos Volume",
       "audio": "music-ambient",
-      "pos": {"x": -1192, "y": -840},
+      "pos": {"x": 808, "y": 879},
       "radius": 300
     },
     {
       "name": "Fields of Eris",
       "audio": "music-1997",
-      "pos": {"x": -1218, "y": -1404},
+      "pos": {"x": 689, "y": 1432},
       "radius": 250
     },
     {
       "name": "Garden of Apate",
       "audio": "music-1997",
-      "pos": {"x": -1696, "y": -1050},
+      "pos": {"x": 1241, "y": 1212},
       "radius": 250
     },
     {
       "name": "Weaver Nebula",
       "audio": "music-slask",
-      "pos": {"x": -182, "y": 78},
+      "pos": {"x": -22, "y": 378},
       "radius": 270
     },
     {
       "name": "Al Se Expanse",
       "audio": "music-ambient",
-      "pos": {"x": 812, "y": -224},
-      "radius": 500
+      "pos": {"x": 842, "y": -220},
+      "radius": 470
     },
     {
       "name": "Ruins of Thanatos",
       "audio": "music-slask",
-      "pos": {"x": -1640, "y": -590},
+      "pos": {"x": 1305, "y": 755},
       "radius": 230
     },
     {
@@ -13225,7 +13233,7 @@
     {
       "name": "Bandits Lair",
       "audio": "music-1997",
-      "pos": {"x": -174, "y": 604},
+      "pos": {"x": -14, "y": 904},
       "radius": 290
     },
     {
@@ -13243,7 +13251,7 @@
     {
       "name": "Aesir Volume",
       "audio": "music-world of hope",
-      "pos": {"x": 322, "y": 372},
+      "pos": {"x": 1442, "y": 52},
       "radius": 200
     },
     {
@@ -13255,26 +13263,32 @@
     {
       "name": "Sternbund",
       "audio": "music-world of hope",
-      "pos": {"x": -820, "y": 202},
+      "pos": {"x": -653, "y": 319},
       "radius": 350
     },
     {
       "name": "Outer Dusk",
       "audio": "music-world of hope",
-      "pos": {"x": -980, "y": 740},
+      "pos": {"x": -946, "y": 797},
       "radius": 270
     },
     {
       "name": "Mimos Reach",
       "audio": "music-sand dark",
-      "pos": {"x": -1380, "y": 330},
+      "pos": {"x": -1227, "y": 297},
       "radius": 220
     },
     {
       "name": "Mimos",
       "audio": "music-sand dark",
-      "pos": {"x": -1616, "y": 838},
+      "pos": {"x": -1586, "y": 727},
       "radius": 200
+    },
+    {
+      "name": "Outer Pavonis",
+      "audio": "music-sand dark",
+      "pos": {"x": -722, "y": -1064},
+      "radius": 150
     }
   ],
   "name": "Skanaar's World"
