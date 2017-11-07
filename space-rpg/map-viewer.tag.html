@@ -12,7 +12,7 @@
       riot-cx={e.screenPos.x} riot-cy={e.screenPos.y}
       riot-rx={scale * e.entity.radius} riot-ry={scale * e.entity.radius}/>
     <line each={lines} class="map-pathway" riot-x1={a.x} riot-x2={b.x} riot-y1={a.y} riot-y2={b.y} />
-    <text class="map-label" each={nodes} riot-x={screenPos.x+radiusFor(entity)+4} riot-y={screenPos.y+7}>
+    <text class="map-label" if={scale > 0.25} each={nodes} riot-x={screenPos.x+radiusFor(entity)+4} riot-y={screenPos.y+7}>
       {entity.name}
     </text>
     <ellipse
@@ -126,7 +126,7 @@
     self.regions = []
     self.lines = []
     self.jumpRange = 125
-    self.scale = (+ location.search.substring(1).split('=')[1]) || 0.5
+    self.scale = 0.5
     self.tool = 'select' // draw | spray | audio
     self.dx = window.innerWidth
     self.dy = window.innerWidth
@@ -234,7 +234,7 @@
       document.activeElement.blur()
       self.input.b = Vec(e.offsetX, e.offsetY)
       if (0 == dist(self.input.a, self.input.b) && self.tool != 'select') {
-        var pos = mult(diff(self.input.a, Vec(self.dx, self.dy)), 1/self.scale)
+        var pos = rund(mult(diff(self.input.a, Vec(self.dx, self.dy)), 1/self.scale))
         if (self.tool == 'draw')
           addAsteroid(pos)
         else if (self.tool == 'spray'){
