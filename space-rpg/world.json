@@ -825,6 +825,17 @@
   ],
   "items": [
     {
+      "name": "Lost keys",
+      "type": "quest",
+      "level": 0,
+      "credits": -1,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
       "name": "Green Seed",
       "type": "quest",
       "level": 0,
@@ -6958,9 +6969,24 @@
       "trader": null,
       "enemy": null,
       "treasures": []
+    },
+    {
+      "pos": {"x": -648, "y": -576},
+      "name": "Drok Heights",
+      "style": "anomaly-hermit",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
     }
   ],
   "quests": [
+    {
+      "name": "Locked Out",
+      "xml": "\n<condition state=\"surface\" at-dest=\"Drok Heights\"/>\n<dialog>\nAt the space station's airlock you see a suited figure. The person is banging on the controls.\n\nClearly in distress.\n</dialog>\n\n<condition state=\"surface\" at-dest=\"Drok Heights\" trigger=\"HAIL PERSON IN DISTRESS\"/>\n<dialog>\n_\"Help me! I have left my keys at work. On Pavonis Ember.\n\nI need to get in!!\"_\n</dialog>\n<place-item dest=\"Pavonis Ember\" item=\"Lost keys\" />\n\n<condition state=\"surface\" at-dest=\"Drok Heights\" have-item=\"Lost keys\" trigger=\"RETURN KEYS\"/>\n<dialog>_\"Thank you! Please, take this as a reward.\"_</dialog>\n<give credits=\"50\"/>\n",
+      "color": "ccc",
+      "icon": "triangle",
+      "tags": "pavonis"
+    },
     {
       "name": "REFERENCE",
       "xml": "<!-- Pause the quest until all conditions are fulfilled. All attributes are optional. -->\n<!-- have-item accepts: semicolon separated list of items that the player must possess -->\n<!-- at-dest accepts: single destination name -->\n<!-- no-enemy-at-dest: semicolon separated list of destination names that must be cleared of enemies -->\n<!-- not-at-dest: single destination name -->\n<!-- have-credits: number of credits that player must possess -->\n<!-- trigger: if omitted condition is triggered automatically. If present the condition is triggered with a button in the Radar View with the text set to the provided string -->\n<condition have-item=\"Shiny Meteorite;Blue seeds\" at-dest=\"Backwater\" no-enemy-at-dest=\"Baola\" not-at-dest=\"Backwater\" have-credits=\"3000\" trigger=\"EXPLORE\"/>\n\n<!-- Add a lootable item to the destination. -->\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n\n<!-- Add a purchasable item to the destination's trader. -->\n<place-inventory dest=\"Backwater\" item=\"Phased Ray\"/>\n\n<!-- Set enemy at destination -->\n<place-enemy dest=\"Backwater\" enemy=\"Monitor Drone\"/>\n\n<!-- Display a message. If the optional ok and cancel attributes are provided they will appear as buttons. Cancel will rewinds the quest one step, so that the same trigger that triggered the quest will display the same message the next turn. Ok will progress the quest as normally. -->\n<dialog>\"Hey, hitchhiker!\"</dialog>\n<dialog ok=\"YES PLEASE\" cancel=\"NO THANKS\">\"Would you like some tea?\"</dialog>\n\n<!-- Include this quest in the quest list. -->\n<add-to-quest-list/>\n<!-- Add item or credits to the player's inventory. -->\n<give credits=\"900\"/>\n<give item=\"Phased Ray\"/>\n\n<!-- Remove an item or credits from the player's inventory. -->\n<take credits=\"900\"/>\n<take item=\"Phased Ray\"/>\n\n<!-- Place a quest marker on the map. color and icon attributes are optional. icon can take these values: \"arrow\", \"square\", \"enter\", \"exit\". A quest can only have a single map marker. -->\n<mark-on-map dest=\"Samson's Folly\" color=\"0F0\" icon=\"arrow\"/>\n\n<!-- Change the player's ship. -->\n<change-ship ship=\"Kerr Clipper\"/>\n\n<!-- Clear the map marker for this quest. -->\n<remove-map-marker/>\n\n<!-- Transports the player to another destination. -->\n<travel dest=\"Backwater\"/>\n\n<!-- Rewinds or fast forwards the quest a set number of steps. -->\n<goto jump=\"-3\"/>",
@@ -7194,7 +7220,7 @@
     },
     {
       "name": "Rebuild the Thanatos",
-      "xml": "<condition at-dest=\"Thanatos\" trigger=\"EXPLORE DERELICT\"/>\n<dialog model=\"Thanatos\">It is the Thanatos derelict. Immensely old. Broken. The intact half is covered in cuneiform markings.</dialog>\n<add-to-quest-list/>\n<condition have-item=\"Thanatos mesh;Thanatos core;Thanatos nacelle\"/>\n<dialog>You now possess all three missing pieces of the Thanatos.</dialog>\n<condition at-dest=\"Thanatos\" trigger=\"REBUILD\"/>\n<dialog model=\"Thanatos\" ok=\"REBUILD THANATOS\" cancel=\"LEAVE\">The relics would restore the form of Thanatos.</dialog>\n<take item=\"Thanatos mesh;Thanatos core;Thanatos nacelle\"/>\n<dialog model=\"Thanatos\">As the parts touch the derelict the edges melt and merge. In an instant the dead ship springs to life, fire dancing across its hull as it burns away the dust covering it.</dialog>\n<dialog model=\"Sphere\">The radio warbles as it is flooded with signals. A single grey sphere emerges from the ship and drifts toward you.</dialog>\n<dialog model=\"Sphere\">Touching the sphere cause tiny ripples of light on its surface. It whispers the name *Momus* into your mind.</dialog>\n<give item=\"Momus\"/>",
+      "xml": "<condition at-dest=\"Thanatos\" trigger=\"EXPLORE DERELICT\"/>\n<dialog model=\"Thanatos\">It is the Thanatos derelict. Immensely old. Broken. The intact half is covered in cuneiform markings.</dialog>\n<add-to-quest-list/>\n\n<condition have-item=\"Thanatos mesh;Thanatos core;Thanatos nacelle\"/>\n<dialog>You now possess all three missing pieces of the Thanatos.</dialog>\n\n<condition at-dest=\"Thanatos\" trigger=\"REBUILD\"/>\n<dialog model=\"Thanatos\" ok=\"REBUILD THANATOS\" cancel=\"LEAVE\">The relics would restore the form of Thanatos.</dialog>\n<take item=\"Thanatos mesh;Thanatos core;Thanatos nacelle\"/>\n<dialog model=\"Thanatos\">As the parts touch the derelict the edges melt and merge. In an instant the dead ship springs to life, fire dancing across its hull as it burns away the dust covering it.</dialog>\n<dialog model=\"Sphere\">The radio warbles as it is flooded with signals. A single grey sphere emerges from the ship and drifts toward you.</dialog>\n<dialog model=\"Sphere\">Touching the sphere cause tiny ripples of light on its surface. It whispers the name *Momus* into your mind.</dialog>\n<give item=\"Momus\"/>",
       "tags": ""
     },
     {
