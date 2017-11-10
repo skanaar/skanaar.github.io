@@ -93,6 +93,7 @@ localStorage.cloudStorage = {
         secretAccessKey: conf.secretAccessKey
       })
       self.s3 = new AWS.S3({ apiVersion: '2006-03-01', params: { Bucket: conf.s3Bucket } })
+      self.cloudKey = conf.path || self.cloudKey
     }
 
     function handleError(callback) {
