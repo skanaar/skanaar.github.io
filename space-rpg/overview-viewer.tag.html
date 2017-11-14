@@ -5,7 +5,8 @@
       riot-height={2*dy}>
     <ellipse
       each={e in regions()}
-      class="map-region"
+      class="overview-region"
+      fill={colorForLevel(enemyLevel(e.entity))}
       riot-cx={e.screenPos.x} riot-cy={e.screenPos.y}
       riot-rx={scale * e.entity.radius} riot-ry={scale * e.entity.radius}/>
   </svg>
@@ -26,6 +27,14 @@
     </div>
   </div>
 
+  <style>
+    .overview-region {
+      stroke-width: 1;
+      stroke-dasharray: 3,3;
+      stroke: gray;
+    }
+  </style>
+
   <script>
     var self = this
     var app = this.opts.app || window.app
@@ -39,9 +48,7 @@
     self.dx = Math.max(window.innerWidth/2, 2800*self.scale)
     self.dy = Math.max(window.innerHeight/2, 2800*self.scale)
     self.world = app.nullWorld()
-    self.audios = app.audios
-    self.radiusCache = {}
-
+    
     self.zoom = function (factor) {
       self.scale *= factor
       self.dx *= factor
@@ -49,6 +56,19 @@
       self.dx = Math.max(window.innerWidth/2, 2800*self.scale)
       self.dy = Math.max(window.innerHeight/2, 2800*self.scale)
       loadDestinations(self.world)
+    }
+
+    //function dist(a, b){ return Math.sqrt(a*a, b*b) }
+
+    self.enemyLevel = function (region) {
+      var members = app.world.destinations.filter(e => dist(e.pos, region.pos) < region.radius && e.enemy)
+      var enemyIds = members.map(e => e.enemy.type)
+      var enemies = _.compact(enemyIds.map(id => app.world.enemies.find(enemy => enemy.name == id)))
+      return enemies.length ? _.max(enemies.map(e => e.level)) : 0
+    }
+
+    self.colorForLevel = function (level) {
+      return ['#EEE', '#8CF', '#88F', '#C8F', '#F8F', '#F8C', '#F88', '#F44'][level]
     }
 
     function singleSelected() { return (_.find(self.nodes, e => e.isSelected) || {}).entity || {} }
@@ -61,52 +81,17 @@
     self.traderDestinations = () => self.nodes.filter(e => e.entity.trader)
     self.treasureDestinations = () => self.nodes.filter(e => (e.entity.treasures || []).length)
 
-    var fills = {
-      cloud: 'rgba(221, 136, 221, 0.5)', star: '#dd0', jovian: '#fa8',
-      planet: '#4d4', asteroid: '#888', anomaly: '#fa0', ring: '#8af', region: '#aaa'
-    }
-    self.fillFor = entity => fills[entity.style.split('-')[0]]
-    self.radiusFor = function (ent) {
-      return 1 + self.scale * (self.radiusCache[ent.style] || 5)
-    }
-
     function transform(p) { return Vec(self.dx+self.scale*p.x, self.dy+self.scale*p.y) }
 
     function loadDestinations(world) {
-      self.nodes = world.destinations.map(e => ({
-        type: 'celestial',
-        screenPos: transform(e.pos),
-        isSelected: false,
-        entity: e
-      }))
-      var regions = world.regions.map(e => ({
+      self.nodes = world.regions.map(e => ({
         type: 'region',
         screenPos: transform(e.pos),
-        isSelected: false,
         entity: {
           pos: e.pos, name: e.name, audio: e.audio, radius: e.radius, style: 'region-1',
           trader: null, enemy: null, treasures: []
         }
       }))
-      self.nodes.push(...regions)
-      calculateLines()
-    }
-
-    function calculateLines() {
-      self.lines = []
-      _.pairs(self.nodes, function (a, b) {
-        if (self.jumpRange > dist(a.entity.pos, b.entity.pos) && isTravellable(a.entity) && isTravellable(b.entity))
-          self.lines.push({ a: transform(a.entity.pos), b: transform(b.entity.pos) })
-      })
-    }
-
-    function isTravellable(entity) {
-      return ['jovian', 'planet', 'asteroid', 'anomaly'].includes(entity.style.split('-')[0])
-    }
-
-    function buildRadiusCache() {
-      self.radiusCache = _.object(self.world.celestials.map(e => [e.name, e.radius]))
-      self.radiusCache['region-1'] = 6
     }
 
     function loadWorld() {
@@ -118,7 +103,6 @@
       self.world = app.getWorld()
       app.events.on('world-updated', loadWorld)
       loadWorld()
-      buildRadiusCache()
       window.scrollTo(self.dx/3, self.dy/3)
     })
 
