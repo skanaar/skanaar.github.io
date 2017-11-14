@@ -11,6 +11,7 @@
   </div>
 
   <galactic-map app={app} if={page == '#map'} />
+  <overview-viewer app={app} if={page == '#overview'} />
   <celestials-viewer app={app} if={page == '#celestials'} />
   <models-viewer app={app} if={page == '#models'} />
   <ships-viewer app={app} if={page == '#ships'} />
@@ -30,7 +31,7 @@
     var self = this
 
     self.page = '#map'
-    self.tabs = ['map', 'celestials', 'models', 'ships', 'enemies', 'items', 'quests']
+    self.tabs = ['map', 'overview', 'celestials', 'models', 'ships', 'enemies', 'items', 'quests']
     self.isFileMenuOpen = false
     self.useLocalStorage = !! _.jsonParse(localStorage['nebula:use-local-storage'] || 'false')
     self.app = {

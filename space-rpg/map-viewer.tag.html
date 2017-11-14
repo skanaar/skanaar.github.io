@@ -76,6 +76,7 @@
     <select ref="audioSelect" onchange={setRegionAudio}>
       <option each={e in audios}>{e}</option>
     </select>
+    <label>Summary</label>
     <region-summary app={opts.app} region={singleSelected()} if={regionSelected} />
   </div>
 
@@ -128,8 +129,8 @@
     self.jumpRange = 125
     self.scale = 0.5
     self.tool = 'select' // draw | spray | audio
-    self.dx = window.innerWidth
-    self.dy = window.innerWidth
+    self.dx = Math.max(window.innerWidth/2, 2800*self.scale)
+    self.dy = Math.max(window.innerHeight/2, 2800*self.scale)
     self.input = { a: Vec(0,0), b: Vec(0,0) }
     self.isDown = false
     self.select = { pos: Vec(0,0), dim: Vec(0,0) }
@@ -169,6 +170,8 @@
       self.scale *= factor
       self.dx *= factor
       self.dy *= factor
+      self.dx = Math.max(window.innerWidth/2, 2800*self.scale)
+      self.dy = Math.max(window.innerHeight/2, 2800*self.scale)
       loadDestinations(self.world)
     }
 

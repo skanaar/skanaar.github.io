@@ -1,0 +1,132 @@
+<overview-viewer>
+
+  <svg
+      riot-width={2*dx}
+      riot-height={2*dy}>
+    <ellipse
+      each={e in regions()}
+      class="map-region"
+      riot-cx={e.screenPos.x} riot-cy={e.screenPos.y}
+      riot-rx={scale * e.entity.radius} riot-ry={scale * e.entity.radius}/>
+  </svg>
+
+  <div style="position: absolute; top: 25px">
+    <div
+      each={e in regions()}
+      class="map-region"
+      style={'position: absolute; text-align: center; width: 200px; top: ' + (e.screenPos.y - 15) + 'px; left: ' + (e.screenPos.x - 100) + 'px'}>
+      <b>{e.entity.name}</b>
+      <region-summary app={app} region={e.entity} compact="true"/>
+    </div>
+  </div>
+
+  <div class="toolbox">
+    <div class="btn-group">
+      <a class="toggle-btn" onclick={() => zoom(1.2)}>+</a><a class="toggle-btn" onclick={() => zoom(1/1.2)}>-</a>
+    </div>
+  </div>
+
+  <script>
+    var self = this
+    var app = this.opts.app || window.app
+
+    self.app = app
+    self.nodes = []
+    self.regions = []
+    self.lines = []
+    self.jumpRange = 125
+    self.scale = 0.25
+    self.dx = Math.max(window.innerWidth/2, 2800*self.scale)
+    self.dy = Math.max(window.innerHeight/2, 2800*self.scale)
+    self.world = app.nullWorld()
+    self.audios = app.audios
+    self.radiusCache = {}
+
+    self.zoom = function (factor) {
+      self.scale *= factor
+      self.dx *= factor
+      self.dy *= factor
+      self.dx = Math.max(window.innerWidth/2, 2800*self.scale)
+      self.dy = Math.max(window.innerHeight/2, 2800*self.scale)
+      loadDestinations(self.world)
+    }
+
+    function singleSelected() { return (_.find(self.nodes, e => e.isSelected) || {}).entity || {} }
+    self.singleSelected = singleSelected
+    self.chooseTreasures = () => app.events.trigger('show-item-chooser', singleSelected().treasures)
+    self.chooseTraderInventory = () => app.events.trigger('show-item-chooser', singleSelected().trader.inventory)
+
+    self.regions = () => self.nodes.filter(e => e.type == 'region')
+    self.enemyDestinations = () => self.nodes.filter(e => e.entity.enemy)
+    self.traderDestinations = () => self.nodes.filter(e => e.entity.trader)
+    self.treasureDestinations = () => self.nodes.filter(e => (e.entity.treasures || []).length)
+
+    var fills = {
+      cloud: 'rgba(221, 136, 221, 0.5)', star: '#dd0', jovian: '#fa8',
+      planet: '#4d4', asteroid: '#888', anomaly: '#fa0', ring: '#8af', region: '#aaa'
+    }
+    self.fillFor = entity => fills[entity.style.split('-')[0]]
+    self.radiusFor = function (ent) {
+      return 1 + self.scale * (self.radiusCache[ent.style] || 5)
+    }
+
+    function transform(p) { return Vec(self.dx+self.scale*p.x, self.dy+self.scale*p.y) }
+
+    function loadDestinations(world) {
+      self.nodes = world.destinations.map(e => ({
+        type: 'celestial',
+        screenPos: transform(e.pos),
+        isSelected: false,
+        entity: e
+      }))
+      var regions = world.regions.map(e => ({
+        type: 'region',
+        screenPos: transform(e.pos),
+        isSelected: false,
+        entity: {
+          pos: e.pos, name: e.name, audio: e.audio, radius: e.radius, style: 'region-1',
+          trader: null, enemy: null, treasures: []
+        }
+      }))
+      self.nodes.push(...regions)
+      calculateLines()
+    }
+
+    function calculateLines() {
+      self.lines = []
+      _.pairs(self.nodes, function (a, b) {
+        if (self.jumpRange > dist(a.entity.pos, b.entity.pos) && isTravellable(a.entity) && isTravellable(b.entity))
+          self.lines.push({ a: transform(a.entity.pos), b: transform(b.entity.pos) })
+      })
+    }
+
+    function isTravellable(entity) {
+      return ['jovian', 'planet', 'asteroid', 'anomaly'].includes(entity.style.split('-')[0])
+    }
+
+    function buildRadiusCache() {
+      self.radiusCache = _.object(self.world.celestials.map(e => [e.name, e.radius]))
+      self.radiusCache['region-1'] = 6
+    }
+
+    function loadWorld() {
+      loadDestinations(self.world)
+      self.update()
+    }
+
+    self.on('mount', function() {
+      self.world = app.getWorld()
+      app.events.on('world-updated', loadWorld)
+      loadWorld()
+      buildRadiusCache()
+      window.scrollTo(self.dx/3, self.dy/3)
+    })
+
+    self.on('unmount', function () {
+      app.events.off('world-updated', loadWorld)
+      window.document.removeEventListener('keydown', self.keydown)
+    })
+
+  </script>
+
+</overview-viewer>

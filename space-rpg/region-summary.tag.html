@@ -1,12 +1,23 @@
 <region-summary>
 
-  <label>Summary</label>
-  <div class="input-grid">
-    <em>treasures </em> <input type=text readonly value={treasureSum()}><br />
-    <em>treasures</em> <input type=text readonly value={treasureLevel()}><br />
-    <em>enemies</em> <input type=text readonly value={enemyLevel()}><br />
-    <em>loot</em> <input type=text readonly value={lootLevel()}>
+  <div class="summary" if={opts.compact}>
+    <div><b title="Level range of enemies">👾 {enemyLevel()}</b></div>
+    <div><span title="Total collectable credits">💵 </span> {creditsSum()}</div>
+    <div if={treasureLevel() != 'none'}><span title="Level range of treasures">📦</span> {treasureLevel()}</div>
   </div>
+
+  <div class="summary" if={!opts.compact}>
+    <div>Collectable: {creditsSum()}</div>
+    <div>Enemy Lvl: {enemyLevelRange()}</div>
+    <div>Loot Lvl: {lootLevel()}</div>
+    <div>Treasure Lvl: {treasureLevel()}</div>
+  </div>
+
+  <style>
+    .summary {
+      line-height: 14px;
+    }
+  </style>
 
   <script>
     var self = this
@@ -27,22 +38,35 @@
       }
     }
 
-    self.treasureSum = guard(function (region) {
+    self.creditsSum = guard(function (region) {
       var members = app.world.destinations.filter(e => dist(e.pos, region.pos) < region.radius)
       var itemIds = _.flatten(members.map(e => [e.treasures, (e.enemy ? e.enemy.loot : 0)]))
       var items = itemIds.map(id => app.world.items.find(item => item.name==id) || { credits: 0 })
-      return _.sum(items, 'credits') + ' credits'
+      return _.sum(items, 'credits') + ' c'
     })
 
-    var installable = item => item.type != 'rare' && item.type != 'common' && item.type != 'quest'
-    var getItems = ids => ids.map(id => app.world.items.filter(installable).find(item => item.name==id) || { level: 0 })
-    var printableRange = es => _.min(es.map(e => e.level)) + ' - ' + _.max(es.map(e => e.level))
+    function installable(item) {
+      return item.type != 'rare' && item.type != 'common' && item.type != 'quest'
+    }
+    function getItems(ids) {
+      return ids.map(id => app.world.items.find(item => item.name==id) || { level: 0 }).filter(installable)
+    }
+    var printableRange = function (es) {
+      return es.length ? (_.min(es.map(e => e.level)) + ' - ' + _.max(es.map(e => e.level))) : 'none'
+    }
+
+    self.enemyLevelRange = guard(function (region) {
+      var members = app.world.destinations.filter(e => dist(e.pos, region.pos) < region.radius && e.enemy)
+      var enemyIds = members.map(e => e.enemy.type)
+      var enemies = _.compact(enemyIds.map(id => app.world.enemies.find(enemy => enemy.name == id)))
+      return printableRange(enemies)
+    })
 
     self.enemyLevel = guard(function (region) {
       var members = app.world.destinations.filter(e => dist(e.pos, region.pos) < region.radius && e.enemy)
       var enemyIds = members.map(e => e.enemy.type)
       var enemies = _.compact(enemyIds.map(id => app.world.enemies.find(enemy => enemy.name == id)))
-      return printableRange(enemies)
+      return enemies.length ? _.max(enemies.map(e => e.level)) : 0
     })
 
     self.treasureLevel = guard(function (region) {
