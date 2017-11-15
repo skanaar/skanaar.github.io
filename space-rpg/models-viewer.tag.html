@@ -17,7 +17,7 @@
 
   <div class="list">
     <div class="tools">
-      <filter-tools ref="filterInput" types={allTags()} onfilter{onfilter} />
+      <filter-tools ref="filterInput" types={allTags()} onfilter={onfilter} />
     </div>
     <div each={model in filteredItems()} onclick={edit} class={ list_item: true, active: model==selected }>
       {model.name}
