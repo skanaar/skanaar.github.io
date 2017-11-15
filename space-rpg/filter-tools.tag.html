@@ -1,15 +1,35 @@
 <filter-tools>
+  <div class="filter-tabs">
+    <div class="filter-tab" onclick={setType(null)}>all</div>
+    <div class="filter-tab" each={e in opts.types} onclick={setType(e)}>{e.substr(0,4)}</div>
+  </div>
   <select onchange={onTypeChange}>
     <option value="">all types</option>
     <option disabled>────</option>
     <option each={e in opts.types}>{e}</option>
   </select>
   <input type=text placeholder="filter..." value={query} oninput={onQueryChange}>
+  <style>
+    .filter-tabs {
+      display: flex;
+      padding: 0 !important;
+    }
+    .filter-tabs div.filter-tab {
+      flex-grow: 1;
+      text-align: center;
+      background: #eee;
+      padding: 8px 0;
+    }
+  </style>
   <script>
     var self = this
     self.type = self.opts.type || null
     self.query = self.opts.query || ''
     var onchange = self.opts.onfilter || function (){}
+    self.setType = function (type) {
+      self.type = type
+      onchange(self)
+    }
     self.onTypeChange = function (e) {
       self.type = e.target.value || null
       onchange(self)
