@@ -7041,7 +7041,7 @@
     },
     {
       "name": "Maxwell Station",
-      "xml": "<condition at-dest=\"Maxwell Station\"/>\n<dialog model=\"Ring Station\">As you approach a transmission is received from Maxwell Station.</dialog>\n<dialog model=\"Ring Station\">_\"Welcome to Maxwell station, you have been assigned to landing pad Beta Twelve.\"_</dialog>\n\n<dialog model=\"Service Robot\">After a secure landing, you enter the metallic hum of the hangar. You are approached by a service robot.</dialog>\n<dialog model=\"Service Robot\">_\"Greetings traveller and welcome to Maxwell Station. If you need a tour or assistance during your visit. Please let us know.\"_</dialog>\n\n<condition at-dest=\"Maxwell Station\" trigger=\"TAKE TOUR\"/>\n<dialog model=\"Service Robot\">_\"Here at Maxwell Station, we strive to make your adventures throughout the Nebula as convenient as possible.\"_</dialog>\n<dialog model=\"Service Robot\">_\"At the Maxwell Trader, you will find some of the best prices on goods from the whole galaxy with adequate guarantees.\"_</dialog>\n<dialog model=\"Service Robot\">_\"The well known Captain Maxwell was the first to explore this whole nebula. And opened the doors to this open hangar over one hundred years ago. Here all beings are welcome to share tales and trade goods.\"_</dialog>\n<dialog model=\"Service Robot\">_\"Maxwell is currently head of developing the Vortec technology which will greatly improve travel speeds within the nebula.\"_</dialog>\n<dialog model=\"Service Robot\">_\"Please enjoy your stay. If you need any further assistance. Please let us know.\"_</dialog>\n\n",
+      "xml": "<condition at-dest=\"Maxwell Station\"/>\n<dialog model=\"Ring Station\">As you approach a transmission is received from Maxwell Station.</dialog>\n<dialog model=\"Ring Station\">_\"Welcome to Maxwell station, you have been assigned to landing pad Beta Twelve.\"_</dialog>\n\n<dialog model=\"Service Robot\">After a secure landing, you enter the metallic hum of the hangar. You are approached by a service robot.</dialog>\n<dialog model=\"Service Robot\">_\"Greetings traveller and welcome to Maxwell Station. If you need a tour or assistance during your visit. Please let us know.\"_</dialog>\n\n<condition at-dest=\"Maxwell Station\" trigger=\"TAKE TOUR\"/>\n<dialog model=\"Service Robot\">_\"Here at Maxwell Station, we strive to make your adventures throughout the Nebula as convenient as possible.\"_</dialog>\n<dialog model=\"Service Robot\">_\"At the Maxwell Trader, you will find some of the best prices on goods from the whole galaxy with adequate guarantees.\"_</dialog>\n<dialog model=\"Service Robot\">_\"The well known Captain Maxwell was the first to explore this whole nebula. And opened the doors to this open hangar over one hundred years ago. Here all beings are welcome to share tales and trade goods.\"_</dialog>\n<dialog model=\"Service Robot\">_\"Maxwell is currently head of developing the Vortec technology which will greatly improve travel speeds within the nebula.\"_</dialog>\n<dialog model=\"Service Robot\">_\"Please enjoy your stay. If you need any further assistance. Please let us know.\"_</dialog>\n",
       "color": "0f0",
       "icon": "square",
       "tags": "qdn"
@@ -7131,9 +7131,9 @@
     {
       "name": "Bal Gru's stolen subsystems",
       "xml": "<condition at-dest=\"Pizbui\" />\n<dialog model=\"Kerr Clipper\">A ship orbiting the planet is sending a distress signal.</dialog>\n<condition at-dest=\"Pizbui\" trigger=\"HAIL SHIP\"/>\n<dialog ok=\"YES\" cancel=\"NOT NOW\" model=\"Kerr Clipper\">\n_\"Hey, traveller! I'm Bal Gru, merchant in distress. Can you help me? Bandits robbed me of all of my subsystems. Can you get them back for me?\"_\n</dialog>\n<place-enemy dest=\"A3639\" enemy=\"Bandit\" loot=\"Subsystem cache\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"A3639\" />\n<condition have-item=\"Subsystem cache\"/>\n<mark-on-map dest=\"Pizbui\" />\n<condition at-dest=\"Pizbui\" have-item=\"Subsystem cache\"/>\n<dialog>\n_\"You have our stolen subsystems! This is invaluable to us. Here, take this artifact, it is the least we can give you.\"_\n</dialog>\n<give item=\"Larato sigil\"/>\n<take item=\"Subsystem cache\"/>",
-      "tags": "wastes",
+      "tags": "expanse",
       "color": "f48",
-      "icon": "chevrons"
+      "icon": "chevron"
     },
     {
       "name": "Beggars at Aldo Nova",
@@ -7236,9 +7236,9 @@
     {
       "name": "Ska Ska water quality",
       "xml": "<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"MAYBE LATER\">_\"Can you help us? We run a large construction project at Ska Ska and need to take water samples at its sea\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Ska Ska\"/>\n<place-item dest=\"Ska Ska\" item=\"Water sample\"/>\n<condition have-item=\"Water sample\"/>\n<mark-on-map dest=\"Baola\" />\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>_\"Thank you! These samples are vital for the project. Please, accept this compensation\"_</dialog>\n<take item=\"Water sample\" />\n<give credits=\"100\"/>\n<dialog>_\"We are happy with your work, check back here later if you are looking for assignments.\"_</dialog>\n<condition at-dest=\"Grig\"/>\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>_\"Traveller!\nThe water samples you took revealed a serious contamination at Ska Ska.\"_</dialog>\n<dialog>_\"We need you go get a shipment of *DecontamiNanites* at *Helyon Shipyards*. Then go to *Ska Ska* and decontaminate the site.\"_</dialog>\n<mark-on-map dest=\"Helyon Shipyards\" />\n<place-inventory dest=\"Helyon Shipyards\" item=\"DecontamiNanites\"/>\n<condition have-item=\"DecontamiNanites\" />\n<mark-on-map dest=\"Ska Ska\" />\n<dialog>You got the decontamination substance. Nanomachinery, dangerous stuff.</dialog>\n<condition have-item=\"DecontamiNanites\" at-dest=\"Ska Ska\" trigger=\"DECONTAMINATE\"/>\n<take item=\"DecontamiNanites\" />\n<dialog>You launch the self-guiding pods with the nanite substance toward the construction site. The only thing left is to collect the pay at *Baola*.</dialog>\n<mark-on-map dest=\"Baola\" color=\"F00\" icon=\"chevrons\"/>\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>_\"Traveller, we have a problem. Out security drones around Ska Ska have mistakenly identified the nanite decontaminant as an aggressor. They are jamming our channels.\"_</dialog>\n<dialog>_\"You must disable the confused drones so we can send control signals to the nanites.\"_</dialog>\n<place-enemy dest=\"Ska Ska\" enemy=\"Security Drone\"/>\n<mark-on-map dest=\"Ska Ska\" />\n<condition no-enemy-at-dest=\"Ska Ska\" />\n<dialog>As the Security Drone is disabled the jamming field is lowered. Now Baola can send control signals to the nanite swarm.</dialog>\n<mark-on-map dest=\"Baola\" />\n<condition at-dest=\"Baola\" trigger=\"HAIL\"/>\n<dialog>_\"Excellent fighting! All brawn and ... well - we are impressed.\nHere is your reward. We have sent the security override codes. Ska Ska should be clean as a whistle in a jiffy.\"_</dialog>\n<give credits=\"200\" />\n<dialog>You tense up. Something about 'security override codes' sound a bit dubious...</dialog>\n<dialog>_\"Oh no! The nanites have gone rampant, they are absorbing matter and forming some kind of mobile structure. What is happening?! You must save us!\"_</dialog>\n<mark-on-map dest=\"Ska Ska\" />\n<place-enemy dest=\"Ska Ska\" enemy=\"Nanite Megacluster\" />\n<condition no-enemy-at-dest=\"Ska Ska\" />\n<dialog>_\"Thank you! You stopped that monstrosity from wreaking havoc. We can offer you this: an improved reactor from one of our ConstructoBots.\nOut site at Ska Ska is a mess after this but work continues.\"_</dialog>\n<give item=\"Mk4 Reactor\"/>\n<give credits=\"200\" />\n\n\n",
-      "tags": "wastes",
+      "tags": "expanse",
       "color": "f00",
-      "icon": "chevrons"
+      "icon": "chevron"
     },
     {
       "name": "Tau Pavonis Observer",
@@ -7419,6 +7419,7 @@
     {
       "name": "Soma Generation Ship",
       "geometry": "composite",
+      "tags": "anomaly",
       "transform": [
         ["scale", 1.2, 1.2, 1.2],
         ["rotate", -30, 75, 40],
@@ -7536,6 +7537,7 @@
     {
       "name": "Shards",
       "geometry": "composite",
+      "tags": "anomaly",
       "transform": [
         ["scale", 1.15, 1.15, 1.15],
         ["rotate", 0, 0, 0],
@@ -7594,6 +7596,7 @@
     {
       "name": "Space Elevator",
       "geometry": "composite",
+      "tags": "anomaly",
       "transform": [
         ["scale", 1, 1, 1],
         ["rotate", 0, 0, 0],
@@ -7725,8 +7728,7 @@
             [0, 0, 160]
           ]
         }
-      ],
-      "tags": "anomaly station"
+      ]
     },
     {
       "name": "Service Robot",
@@ -7762,12 +7764,12 @@
           "path": [[0, 0, -3], [10, 0, -5], [11, 0, 0], [10, 0, 5], [0, 0, 3]]
         }
       ],
-      "tags": "ship"
+      "tags": "prop"
     },
     {
       "name": "Concoined",
       "geometry": "composite",
-      "tags": "ship",
+      "tags": "prop",
       "transform": [
         ["scale", 0.9, 0.9, 0.9],
         ["rotate", -25, 50, 80],
@@ -7817,6 +7819,7 @@
     {
       "name": "Needle Gate",
       "geometry": "composite",
+      "tags": "anomaly",
       "transform": [
         ["scale", 0.6, 0.6, 0.6],
         ["rotate", 90, 0, 0],
@@ -8010,6 +8013,7 @@
     {
       "name": "Needle Aperture",
       "geometry": "composite",
+      "tags": "anomaly",
       "transform": [
         ["scale", 0.75, 0.75, 0.75],
         ["rotate", 18, 0, 0],
@@ -8457,7 +8461,7 @@
           ]
         }
       ],
-      "tags": "ship"
+      "tags": "foe"
     },
     {
       "name": "Gnat Assimilate",
@@ -8523,7 +8527,7 @@
           "path": [[0, 0, 10], [20, 0, 50], [0, 0, 90]]
         }
       ],
-      "tags": "ship"
+      "tags": "foe"
     },
     {
       "name": "Seeds",
@@ -8648,7 +8652,7 @@
     {
       "name": "Sentinel",
       "geometry": "composite",
-      "tags": "ship",
+      "tags": "foe",
       "transform": [
         ["scale", 1, 1, 1],
         ["rotate", 180, 0, 30],
@@ -8682,7 +8686,7 @@
     {
       "name": "Smacky's",
       "geometry": "composite",
-      "tags": "station",
+      "tags": "anomaly",
       "transform": [["scale", 1, 1, 1], ["translate", 20, -120, -50]],
       "parts": [
         {
@@ -9084,7 +9088,7 @@
     {
       "name": "Rusty Ship",
       "geometry": "composite",
-      "tags": "ship prop",
+      "tags": "prop",
       "transform": [
         ["scale", 4, 4, 4],
         ["rotate", 90, 0, 90],
@@ -9503,7 +9507,7 @@
         [38, 0, -7],
         [40, 0, 0]
       ],
-      "tags": "ship"
+      "tags": "foe"
     },
     {
       "name": "Rocket Drone",
@@ -9581,12 +9585,12 @@
         [38, 0, -7],
         [40, 0, 0]
       ],
-      "tags": "ship"
+      "tags": "foe"
     },
     {
       "name": "Nanite Megacluster",
       "geometry": "composite",
-      "tags": "ship",
+      "tags": "foe",
       "transform": [
         ["scale", 1, 1, 1],
         ["rotate", 180, 0, 0],
@@ -9815,6 +9819,7 @@
     {
       "name": "Sailor",
       "geometry": "composite",
+      "tags": "foe",
       "transform": [
         ["scale", 1.2, 1.2, 1.2],
         ["rotate", 0, 0, 0],
@@ -9949,7 +9954,7 @@
         [200, 0, 0],
         [90, 0, 22]
       ],
-      "tags": "ship"
+      "tags": "foe"
     },
     {
       "name": "Soma Saay",
@@ -9968,12 +9973,12 @@
         [200, 0, 5],
         [50, 0, 0]
       ],
-      "tags": "ship"
+      "tags": "foe"
     },
     {
       "name": "Soma Sonn",
       "geometry": "composite",
-      "tags": "ship",
+      "tags": "foe",
       "transform": [["scale", 0.85, 0.85, 0.85], ["translate", 0, 0, -50]],
       "parts": [
         {
@@ -10015,7 +10020,7 @@
     {
       "name": "Mimos Dart",
       "geometry": "composite",
-      "tags": "ship",
+      "tags": "foe",
       "transform": [
         ["scale", 1, 1, 1],
         ["rotate", 0, 0, 0],
@@ -10092,7 +10097,7 @@
     {
       "name": "Mimos Guard",
       "geometry": "composite",
-      "tags": "ship",
+      "tags": "foe",
       "transform": [
         ["scale", 0.7, 0.7, 0.7],
         ["rotate", -90, 0, 0],
@@ -11048,7 +11053,7 @@
           "angle": 344
         }
       ],
-      "tags": "ship"
+      "tags": "foe"
     },
     {
       "name": "Junk",
@@ -11204,7 +11209,7 @@
     {
       "name": "Mimos Habitat",
       "geometry": "composite",
-      "tags": "station",
+      "tags": "anomaly",
       "transform": [
         ["rotate", 0, 27, 0],
         ["scale", 0.7, 0.7, 0.7],
@@ -11373,7 +11378,7 @@
           ]
         }
       ],
-      "tags": "station"
+      "tags": "anomaly"
     },
     {
       "name": "Sol Array",
@@ -11556,7 +11561,7 @@
           ]
         }
       ],
-      "tags": "anomaly station"
+      "tags": "anomaly"
     },
     {
       "name": "Helyon Shipyards",
@@ -11664,7 +11669,7 @@
           ]
         }
       ],
-      "tags": "anomaly station"
+      "tags": "anomaly"
     },
     {
       "name": "Worm",
@@ -11716,7 +11721,7 @@
           "path": [[20, 0, 0], [40, 0, -5], [60, 0, 0], [40, 0, 5], [20, 0, 0]]
         }
       ],
-      "tags": "ship"
+      "tags": "foe"
     },
     {
       "name": "Worm Seedling",
@@ -11756,7 +11761,7 @@
           ]
         }
       ],
-      "tags": "ship"
+      "tags": "foe"
     },
     {
       "name": "Paxos Station",
@@ -11808,7 +11813,7 @@
           ]
         }
       ],
-      "tags": "anomaly station"
+      "tags": "anomaly"
     },
     {
       "name": "Hermit Home",
@@ -11899,7 +11904,7 @@
           ]
         }
       ],
-      "tags": "anomaly station"
+      "tags": "anomaly"
     },
     {
       "name": "Ring Station",
@@ -11992,7 +11997,7 @@
           ]
         }
       ],
-      "tags": "anomaly station"
+      "tags": "anomaly"
     },
     {
       "name": "Tiendong Station",
@@ -12104,7 +12109,7 @@
           "tags": "ship"
         }
       ],
-      "tags": "anomaly station"
+      "tags": "anomaly"
     }
   ],
   "celestials": [
