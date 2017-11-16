@@ -38,7 +38,8 @@ window.validator = (function (){
     inXml(quest.xml, /jump="[^"]+/gm).filter(e => isNaN(+e)).forEach(e => error('jump must be a number', e))
     var steps = [
       'condition', 'place-item', 'place-inventory', 'place-enemy', 'add-to-quest-list', 'dialog',
-      'give', 'take', 'mark-on-map', 'remove-map-marker', 'change-ship', 'travel', 'goto', 'hint'
+      'give', 'take', 'mark-on-map', 'remove-map-marker', 'change-ship', 'travel', 'hint',
+      'mark', 'modify-quest', 'goto'
     ]
     _.uniq(_.difference(inXmlTags(quest.xml, /<[a-z-]+/gm), steps)).forEach(e => error('unknown step', e))
   }
