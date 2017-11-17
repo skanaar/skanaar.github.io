@@ -7109,14 +7109,14 @@
     },
     {
       "name": "Mimos Aperture",
-      "xml": "\n<condition have-item=\"Mimos Key\" at-dest=\"Mimos Aperture\" trigger=\"UNLOCK APERTURE\"/>\n<travel dest=\"Mimos Gate\" />\n<goto jump=\"-2\"/>",
+      "xml": "\n<mark id=\"jump_ready\"/>\n<condition have-item=\"Mimos Key\" at-dest=\"Mimos Aperture\" trigger=\"UNLOCK APERTURE\"/>\n<travel dest=\"Mimos Gate\" />\n<goto mark=\"jump_ready\"/>\n",
       "color": "0f0",
       "icon": "",
       "tags": "sternrat"
     },
     {
       "name": "Mimos Gate",
-      "xml": "\n<condition have-item=\"Mimos Key\" at-dest=\"Mimos Gate\" trigger=\"UNLOCK GATE\"/>\n<travel dest=\"Mimos Aperture\" />\n<goto jump=\"-2\"/>",
+      "xml": "\n<mark id=\"jump_ready\"/>\n<condition have-item=\"Mimos Key\" at-dest=\"Mimos Gate\" trigger=\"UNLOCK GATE\"/>\n<travel dest=\"Mimos Aperture\" />\n<goto mark=\"jump_ready\"/>",
       "color": "0f0",
       "icon": "",
       "tags": "sternrat"
