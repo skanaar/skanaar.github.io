@@ -38,6 +38,7 @@
   <script>
     var self = this
     var app = this.opts.app || window.app
+    window.world = app.world
 
     self.app = app
     self.nodes = []
@@ -58,17 +59,21 @@
       loadDestinations(self.world)
     }
 
-    //function dist(a, b){ return Math.sqrt(a*a, b*b) }
+    var spawnedEnemies = _.object(
+      _.flatten(self.app.world.quests.map(e => e.xml.split('\n')))
+      .filter(e => e.includes('<place-enemy'))
+      .map(e => [e.match(/dest="([^"]*)"/)[1], e.match(/enemy="([^"]*)"/)[1]])
+    )
 
     self.enemyLevel = function (region) {
-      var members = app.world.destinations.filter(e => dist(e.pos, region.pos) < region.radius && e.enemy)
-      var enemyIds = members.map(e => e.enemy.type)
+      var members = app.world.destinations.filter(e => dist(e.pos, region.pos) < region.radius)
+      var enemyIds = _.flatten(members.map(e => [e.enemy && e.enemy.type, spawnedEnemies[e.name]]))
       var enemies = _.compact(enemyIds.map(id => app.world.enemies.find(enemy => enemy.name == id)))
       return enemies.length ? _.max(enemies.map(e => e.level)) : 0
     }
 
     self.colorForLevel = function (level) {
-      return ['#EEE', '#8CF', '#88F', '#C8F', '#F8F', '#F8C', '#F88', '#F44'][level]
+      return ['#EEE', '#44e', '#afa', '#4f5', '#FF4', '#FC4', '#F94', '#F44'][level]
     }
 
     function singleSelected() { return (_.find(self.nodes, e => e.isSelected) || {}).entity || {} }

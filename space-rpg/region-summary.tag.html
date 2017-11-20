@@ -45,6 +45,12 @@
       return _.sum(items, 'credits') + ' c'
     })
 
+    var spawnedEnemies = _.object(
+      _.flatten(app.world.quests.map(e => e.xml.split('\n')))
+      .filter(e => e.includes('<place-enemy'))
+      .map(e => [e.match(/dest="([^"]*)"/)[1], e.match(/enemy="([^"]*)"/)[1]])
+    )
+
     function installable(item) {
       return item.type != 'rare' && item.type != 'common' && item.type != 'quest'
     }
@@ -63,8 +69,8 @@
     })
 
     self.enemyLevel = guard(function (region) {
-      var members = app.world.destinations.filter(e => dist(e.pos, region.pos) < region.radius && e.enemy)
-      var enemyIds = members.map(e => e.enemy.type)
+      var members = app.world.destinations.filter(e => dist(e.pos, region.pos) < region.radius)
+      var enemyIds = _.flatten(members.map(e => [e.enemy && e.enemy.type, spawnedEnemies[e.name]]))
       var enemies = _.compact(enemyIds.map(id => app.world.enemies.find(enemy => enemy.name == id)))
       return enemies.length ? _.max(enemies.map(e => e.level)) : 0
     })

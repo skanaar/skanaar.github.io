@@ -3436,7 +3436,7 @@
       "name": "A9753",
       "style": "asteroid-3",
       "trader": null,
-      "enemy": null,
+      "enemy": {"type": "Monitor Drone", "loot": []},
       "treasures": []
     },
     {
@@ -3476,7 +3476,7 @@
       "name": "A4976",
       "style": "asteroid-2",
       "trader": null,
-      "enemy": null,
+      "enemy": {"type": "Monitor Drone", "loot": []},
       "treasures": ["Platinum"]
     },
     {
@@ -3484,7 +3484,7 @@
       "name": "A3566",
       "style": "asteroid-10",
       "trader": null,
-      "enemy": null,
+      "enemy": {"type": "Monitor Drone", "loot": []},
       "treasures": []
     },
     {
@@ -3532,7 +3532,7 @@
       "name": "A2170",
       "style": "asteroid-1",
       "trader": null,
-      "enemy": null,
+      "enemy": {"type": "Rogue", "loot": []},
       "treasures": ["Barium Ore"]
     },
     {
@@ -3548,7 +3548,7 @@
       "name": "A8761",
       "style": "asteroid-7",
       "trader": null,
-      "enemy": null,
+      "enemy": {"type": "Rogue", "loot": []},
       "treasures": ["Alien Fossil"]
     },
     {
@@ -6787,142 +6787,6 @@
       "treasures": []
     },
     {
-      "pos": {"x": -741, "y": -2600},
-      "name": "BACKWATER",
-      "style": "asteroid-12",
-      "trader": null,
-      "enemy": null,
-      "treasures": []
-    },
-    {
-      "pos": {"x": -810, "y": -2500},
-      "name": "BUSH",
-      "style": "asteroid-9",
-      "trader": null,
-      "enemy": {"type": "Target Drone", "loot": []},
-      "treasures": []
-    },
-    {
-      "pos": {"x": -885, "y": -2569},
-      "name": "MAXWELL",
-      "style": "asteroid-1",
-      "trader": null,
-      "enemy": null,
-      "treasures": []
-    },
-    {
-      "pos": {"x": -848, "y": -2402},
-      "name": "PAVONIS",
-      "style": "asteroid-7",
-      "trader": null,
-      "enemy": null,
-      "treasures": []
-    },
-    {
-      "pos": {"x": -725, "y": -2157},
-      "name": "PAXOS",
-      "style": "asteroid-10",
-      "trader": null,
-      "enemy": null,
-      "treasures": []
-    },
-    {
-      "pos": {"x": -687, "y": -2226},
-      "name": "ERIS",
-      "style": "asteroid-11",
-      "trader": null,
-      "enemy": null,
-      "treasures": []
-    },
-    {
-      "pos": {"x": -611, "y": -2114},
-      "name": "APATE",
-      "style": "asteroid-8",
-      "trader": null,
-      "enemy": {"type": "Target Drone", "loot": []},
-      "treasures": []
-    },
-    {
-      "pos": {"x": -734, "y": -2045},
-      "name": "THANATOS",
-      "style": "asteroid-2",
-      "trader": null,
-      "enemy": null,
-      "treasures": []
-    },
-    {
-      "pos": {"x": -1063, "y": -2129},
-      "name": "MIMOS",
-      "style": "asteroid-11",
-      "trader": null,
-      "enemy": {"type": "Target Drone", "loot": []},
-      "treasures": []
-    },
-    {
-      "pos": {"x": -969, "y": -2180},
-      "name": "STERNBUND",
-      "style": "asteroid-7",
-      "trader": null,
-      "enemy": null,
-      "treasures": []
-    },
-    {
-      "pos": {"x": -846, "y": -2281},
-      "name": "EXPANSE",
-      "style": "asteroid-13",
-      "trader": null,
-      "enemy": null,
-      "treasures": []
-    },
-    {
-      "pos": {"x": -949, "y": -2320},
-      "name": "AESIR",
-      "style": "asteroid-9",
-      "trader": null,
-      "enemy": null,
-      "treasures": []
-    },
-    {
-      "pos": {"x": -870, "y": -2069},
-      "name": "BANDITS LAIR",
-      "style": "asteroid-6",
-      "trader": null,
-      "enemy": {"type": "Target Drone", "loot": []},
-      "treasures": []
-    },
-    {
-      "pos": {"x": -848, "y": -2173},
-      "name": "WEAVER",
-      "style": "asteroid-9",
-      "trader": null,
-      "enemy": {"type": "Target Drone", "loot": []},
-      "treasures": []
-    },
-    {
-      "pos": {"x": -753, "y": -2342},
-      "name": "SOMA",
-      "style": "asteroid-1",
-      "trader": null,
-      "enemy": null,
-      "treasures": []
-    },
-    {
-      "pos": {"x": -921, "y": -1957},
-      "name": "ELYSIUM",
-      "style": "asteroid-7",
-      "trader": null,
-      "enemy": null,
-      "treasures": []
-    },
-    {
-      "pos": {"x": -1024, "y": -1897},
-      "name": "NEUTRON STAR",
-      "style": "asteroid-2",
-      "trader": null,
-      "enemy": null,
-      "treasures": []
-    },
-    {
       "pos": {"x": 4, "y": 1219},
       "name": "Buoy 8",
       "style": "anomaly-buoy",
@@ -6983,7 +6847,9 @@
     {
       "name": "REFERENCE",
       "xml": "<!-- Pause the quest until all conditions are fulfilled. All attributes are optional. -->\n<!-- have-item accepts: semicolon separated list of items that the player must possess -->\n<!-- at-dest accepts: single destination name -->\n<!-- no-enemy-at-dest: semicolon separated list of destination names that must be cleared of enemies -->\n<!-- not-at-dest: single destination name -->\n<!-- have-credits: number of credits that player must possess -->\n<!-- trigger: if omitted condition is triggered automatically. If present the condition is triggered with a button in the Radar View with the text set to the provided string -->\n<condition have-item=\"Shiny Meteorite;Blue seeds\" at-dest=\"Backwater\" no-enemy-at-dest=\"Baola\" not-at-dest=\"Backwater\" have-credits=\"3000\" trigger=\"EXPLORE\"/>\n\n<!-- Add a lootable item to the destination. -->\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n\n<!-- Add a purchasable item to the destination's trader. -->\n<place-inventory dest=\"Backwater\" item=\"Phased Ray\"/>\n\n<!-- Set enemy at destination -->\n<place-enemy dest=\"Backwater\" enemy=\"Monitor Drone\"/>\n\n<!-- Display a message.\nIf the optional ok and cancel attributes are present they will appear as buttons. Cancel will rewinds the quest one step, so that the same trigger that triggered the quest will display the same message the next turn. Ok will progress the quest as normally. \nIf the optional ok-goto=\"x\" and cancel-goto=\"x\" attributes are present ok and cancel will jump to the corresponding <mark id=\"x\"/> tags in this script.\n-->\n<dialog>\"Hey, hitchhiker!\"</dialog>\n<dialog ok=\"YES PLEASE\" cancel=\"NO THANKS\">\"Would you like some tea?\"</dialog>\n<dialog ok=\"YES PLEASE\" cancel=\"NO THANKS\" ok-goto=\"tea_drink\" cancel-goto=\"end_quest\">\"Would you like some tea?\"</dialog>\n\n<!-- Include this quest in the quest list. -->\n<add-to-quest-list/>\n<!-- Add item or credits to the player's inventory. -->\n<give credits=\"900\"/>\n<give item=\"Phased Ray\"/>\n\n<!-- Remove an item or credits from the player's inventory. -->\n<take credits=\"900\"/>\n<take item=\"Phased Ray\"/>\n\n<!-- Place a quest marker on the map. color and icon attributes are optional. icon can take these values: \"arrow\", \"square\", \"enter\", \"exit\". A quest can only have a single map marker. -->\n<mark-on-map dest=\"Samson's Folly\" color=\"0F0\" icon=\"arrow\"/>\n\n<!-- Change the player's ship. -->\n<change-ship ship=\"Kerr Clipper\"/>\n\n<!-- Clear the map marker for this quest. -->\n<remove-map-marker/>\n\n<!-- Transports the player to another destination. -->\n<travel dest=\"Backwater\"/>\n\n<!-- Labels this line in the script. This mark can then be referred to in goto directives -->\n<mark id=\"quest_position\" />\n\n<!-- Sets the quest progress to the <mark/> tag with the provided id -->\n<goto mark=\"quest_position\"/>\n\n<!-- A goto directive that modified another quest -->\n<modify-quest quest=\"A Quest Name\" goto-mark=\"quest_position\"/>\n",
-      "tags": ""
+      "tags": "dev",
+      "color": "888",
+      "icon": "square"
     },
     {
       "name": "Fast Forward",
@@ -7023,7 +6889,7 @@
       "xml": "\n<condition have-item=\"Combat Handbook\" />\n<add-to-quest-list/>\n<take item=\"Combat Handbook\"/>\n<dialog voice=\"none\">_SPACE COMBAT, 3rd EDITION_\n*1.* Armored opponents\n*2.* Shielded opponents\n*3.* Energy consuming opponents\n*4.* Critical hits\n*5.* Cooldown\n</dialog>\n<dialog voice=\"none\">*ARMORED OPPONENTS*\nAn opponent with a strong _hull_ can be dispatched if your ship regenerates its _hull_ or _shield_ fast enough. Take care to install modules and tools that allow you to perform field repairs.</dialog>\n<dialog voice=\"none\">*SHIELDED OPPONENTS*\nA shielded opponent can block weak _hull_ damage.\nYou must do more _hull_ damage than what can be absorbed by the shields. Reduce the shields of a target with _shield_ damage attacks.</dialog>\n<dialog voice=\"none\">*ENERGY CONSUMING OPPONENTS*\nAn opponent that consumes energy can be crippled by attacking with an _energy_ weapon. A ship with an empty energy buffer is a sitting duck that can be attacked with _shield_ or _hull_ damage.</dialog>\n<dialog voice=\"none\">*CRITICAL HITS*\nA _critical hit_ will disable one of the target's subsystems.\nA wise combatant has redundant shield generators and weapons to mitigate the effect of the enemy's critical hits.</dialog>\n<dialog voice=\"none\">*COOLDOWN*\nSome weapons and tools require cooldown. This means they can only be used once per battle, but they are often powerful.</dialog>",
       "color": "0f0",
       "icon": "",
-      "tags": "book"
+      "tags": "outback"
     },
     {
       "name": "Outback Mining",
@@ -7037,14 +6903,14 @@
       "xml": "<condition at-dest=\"Maxwell Station\"/>\n<dialog model=\"Ring Station\">As you approach a transmission is received from Maxwell Station.</dialog>\n<dialog model=\"Ring Station\">_\"Welcome to Maxwell station, you have been assigned to landing pad Beta Twelve.\"_</dialog>\n\n<dialog model=\"Service Robot\">After a secure landing, you enter the metallic hum of the hangar. You are approached by a service robot.</dialog>\n<dialog model=\"Service Robot\">_\"Greetings traveller and welcome to Maxwell Station. If you need a tour or assistance during your visit. Please let us know.\"_</dialog>\n\n<condition at-dest=\"Maxwell Station\" trigger=\"TAKE TOUR\"/>\n<dialog model=\"Service Robot\">_\"Here at Maxwell Station, we strive to make your adventures throughout the Nebula as convenient as possible.\"_</dialog>\n<dialog model=\"Service Robot\">_\"At the Maxwell Trader, you will find some of the best prices on goods from the whole galaxy with adequate guarantees.\"_</dialog>\n<dialog model=\"Service Robot\">_\"The well known Captain Maxwell was the first to explore this whole nebula. And opened the doors to this open hangar over one hundred years ago. Here all beings are welcome to share tales and trade goods.\"_</dialog>\n<dialog model=\"Service Robot\">_\"Maxwell is currently head of developing the Vortec technology which will greatly improve travel speeds within the nebula.\"_</dialog>\n<dialog model=\"Service Robot\">_\"Please enjoy your stay. If you need any further assistance. Please let us know.\"_</dialog>\n",
       "color": "0f0",
       "icon": "square",
-      "tags": "qdn"
+      "tags": "outback"
     },
     {
       "name": "Joe's",
       "xml": "<condition at-dest=\"Joe's Bar\"/>\n\n<dialog ok=\"JOE'S!\" cancel=\"no thanks\">The glare off the neon sign spelling _\"JOE'S BAR\"_ leaves a good impression on your eyes as you hover the landing pads at Joe's.</dialog>\n<dialog ok=\"Who?\" cancel=\"What?\">_\"How are yez!?\"_ Calls a man as he wobbles to your ship.</dialog>\n<dialog>The man gives the ship a hug and turn toward you, still holding onto the ship as not to fall on his nose, clearly drunk.</dialog>\n<dialog ok=\"I got it in this condition\">_\"I've been lookin' round for yeh for six months! yeh're a Wreck. Ye arn't lookin' after her. \"_</dialog>\n<dialog ok=\"Really?\">_\"This was my vessel see. Don't worry. It's just a wee lovely to see her after so many years.\"_</dialog>\n<dialog>_\"Aye. Say you don't want to get an Autogun Mk3 for a deal, I got one but I need liquor badly.\"_</dialog>\n<dialog>_\"Aint got nothin good in these parts. Have ta go to Smacky's to get anything good.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Smacky's\" />\n\n\n<condition at-dest=\"Smacky's\" trigger=\"ENTER SMACKY'S\" have-credits=\"10\" />\n<dialog ok=\"Something to drink please\" cancel=\"Nothing im heading out\">This bar has damp lightning and is quiet, most guests are playing pool further in. You go up to the bartender.\n_\"What can I get you this fine eveninin' sir?\"_</dialog>\n<dialog>The bartender pours a beer and you ask for Brandons liqour.</dialog>\n<dialog>_\"We are all out of that feller, Brandon's is the darndest best liqour out there, but they have stopped deliverin.\"_</dialog>\n<dialog>_\"I can't tell ye why, but i think the is somethin fishy going on. The distillery is only a couple of jumps from here.\"_</dialog>\n\n<take credits=\"10\"/>\n<add-to-quest-list/>\n<mark-on-map dest=\"Brandons\" />\n\n<condition at-dest=\"Brandons\" trigger=\"INVESTIGATE\" />\n<dialog>You navigate around space junk that is orbiting the distillery, there is no activity to be seen</dialog>\n  \n<dialog>A broken door lets you inside a part of the distillery where there are some broken bottles. Someone seem to have left in a hurry.</dialog>\n\n<dialog ok=\"This is what he wanted\" cancel=\"Put it down\">You find an intact bottle of Brandon's Single Malt!</dialog>\n<dialog>You go to your ship and take off.</dialog>\n<give item=\"Brandons Whiskey\"/>\n<mark-on-map dest=\"Joe's Bar\" />\n\n\n<condition have-item=\"Brandons Whiskey\" at-dest=\"Joe's Bar\" trigger=\"TALK TO DRUNKARD\"/>\n<dialog ok=\"Do you have The Mk3?\" cancel=\"Not Yet.\">_\"Can't believe ye'r back, wha? Ye found any liquor yet?\"_</dialog>\n\n<dialog>_\"Aw, c'mon, ofcourse. I have it in a garage downere\"_ He takes the bottle out of your hand and sips it.</dialog>\n<take item=\"Brandons Whiskey\"/>\n<dialog>_\"Here we're, good as new. Now for yeh this might be a high quality automatic machine gun...\"_</dialog>\n<dialog ok=\"Not what we agreed\" cancel=\"You are changing the deal\">_\"For me, it's an investment. I'm going to have ye ta help me with another thing.\"_</dialog>\n<dialog>_\"Houl' on. Ye see I'm Mr. Brandon\"_\nHe says and pulls down his hood. One if his eyes,replaced with a cyborg techpiece.</dialog>\n<dialog>_\"Those fuckers have shut down me distillery. ey mean this is bollicks, ey can't even collect me stock that're still down there.\"_</dialog>\n<dialog>_\"Look, I'm really thankful allright. But I need ye to install this gun and use it on the dron's outside my disillery.\"_</dialog>\n<dialog>_\"Then I'll get me stock back, And ye keep the gun.\"_</dialog>\n<mark-on-map dest=\"Brandons Buoy\" />\n<give item=\"Autogun Mk3\"/>\n<place-enemy dest=\"Brandons Buoy\" enemy=\"Security Drone\" loot=\"Shield Battery\"/>\n<place-enemy dest=\"Brandons\" enemy=\"Rocket Drone\" loot=\"\"/>\n\n<condition at-dest=\"Brandons Buoy\"/>\n<dialog>You are in an authorized area! Leave immediately!</dialog>\n\n<remove-map-marker/>\n\n<condition no-enemy-at-dest=\"Brandons\"/>\n<dialog>No more drones in sight.</dialog>\n\n<remove-map-marker/>\n<give credits=\"400\"/>\n\n\n\n\n",
       "color": "0f0",
       "icon": "square",
-      "tags": "qdn"
+      "tags": "outback"
     },
     {
       "name": "SS Thunder in Distress",
@@ -7138,23 +7004,23 @@
     {
       "name": "Larato Gate",
       "xml": "<condition at-dest=\"Larato Node\" have-item=\"Larato sigil\" />\n<mark-on-map dest=\"Larato Node\" />\n<mark id=\"ready_for_jump\" />\n<condition at-dest=\"Larato Node\" have-item=\"Larato sigil\" trigger=\"ACTIVATE PORTAL\" />\n<dialog model=\"Larato Gate\" ok=\"ENTER GATE\" cancel=\"LEAVE\">\nThe misty dark cloud in the aperture swirls.\n</dialog>\n<travel dest=\"Larato Gate\"/>\n<goto mark=\"ready_for_jump\" />",
-      "tags": "pavonis",
+      "tags": "soma",
       "color": "0ff",
       "icon": "enter"
     },
     {
       "name": "Larato Node",
       "xml": "<condition at-dest=\"Larato Gate\" have-item=\"Larato sigil\" />\n<mark-on-map dest=\"Larato Gate\" />\n<condition at-dest=\"Larato Gate\" have-item=\"Larato sigil\" trigger=\"ANALYZE\"/>\n<dialog model=\"Larato Gate\" ok=\"APPROACH\" cancel=\"IGNORE\">\nThe Larato Gate is a ring of dirty stone needles. The Larato Sigil in your inventory is humming.\nShould you approach?\n</dialog>\n<dialog model=\"Larato Gate\">\nThe gate's mass of needles swells and twitches. The aperture shimmers and turns into a misty black cloud.\n</dialog>\n<mark id=\"ready_for_jump\" />\n<condition at-dest=\"Larato Gate\" trigger=\"ACTIVATE PORTAL\"/>\n<dialog model=\"Larato Gate\" ok=\"ENTER GATE\" cancel=\"LEAVE\">\nThe misty dark cloud in the aperture swirls.\n</dialog>\n<travel dest=\"Larato Node\"/>\n<goto mark=\"ready_for_jump\" />",
-      "tags": "",
+      "tags": "soma",
       "color": "0ff",
       "icon": "exit"
     },
     {
       "name": "Blue seeds",
       "xml": "<place-item dest=\"Blue Forest\" item=\"Blue seeds\"/>\n<condition have-item=\"Blue seeds\"/>\n<dialog model=\"Seeds\">These Blue Seeds might take root in the right soil.</dialog>\n<add-to-quest-list/>\n<condition at-dest=\"Blue Ocean\" state=\"surface\" trigger=\"PLANT SEEDS\"/>\n<dialog model=\"Seeds\">You plant the Blue Seeds on a lonely island.</dialog>\n<condition at-dest=\"Blue Ocean\" state=\"surface\" trigger=\"GATHER FLOWERS\"/>\n<dialog model=\"Flowers\">You gather the Blue Flowers that sprung out of the planted seeds.</dialog>\n<give item=\"Blue flowers\"/>\n<condition at-dest=\"Buoy 187\" />\n<dialog model=\"Flowers\">The flowers fill the cabin with a fragrant smell. Soothing.\nBut suddenly you grow dizzy, intoxicated. Your vision blurs as your work the ships controls in a stupor. _Darkness!_</dialog>\n<travel dest=\"Anomaly 2050\"/>\n<condition at-dest=\"Anomaly 2050\" />\n<dialog model=\"Junk\">You wake up. _Horror!_ While drugged you must have overridden the safeties and made an unguided jump. Extremely dangerous. The ship got an emergency lock on some nearby debris and exited the jump.</dialog>\n<condition at-dest=\"Som Thia\" trigger=\"INVESTIGATE\" />\n<dialog model=\"Alien Buoy\">In orbit around the planet, you find ancient relics. They seem to contain jump coordinates. With them, you might dare to make another far jump back from this dead end.</dialog>\n<dialog>With the *Soma Jump Coords*, you should now be able to make Long Jumps between *Buoy 187* and *Anomaly 2050*.</dialog>\n<give item=\"Soma Jump Coords\" />\n<mark-on-map dest=\"Anomaly 2050\" />\n<condition at-dest=\"Anomaly 2050\" have-item=\"Soma Jump Coords\" />",
-      "tags": "outback soma",
+      "tags": "soma",
       "color": "39f",
-      "icon": "arrow"
+      "icon": ""
     },
     {
       "name": "Soma Long Jump",
@@ -7189,7 +7055,7 @@
       "xml": "\n<condition at-dest=\"Soma Isolationist Gate\" />\n<dialog>*Alarms scream!*\nA probe is racing towards you and passes you at tremendous speed. It is a messenger.</dialog>\n<dialog>_\"Visitor. The Opener Soma have invited you. We, Isolator Soma, will defend our space from corruption.\"_</dialog>\n<add-to-quest-list/>\n\n<condition dest=\"A100\" no-enemy-at-dest=\"A100\"/>\n<dialog>_\"Visitor. We do not oppose you. We will only protect our space.\"_</dialog>\n\n<condition dest=\"A381\" no-enemy-at-dest=\"A381\"/>\n<dialog>_\"Visitor. We do not oppose you. We will only protect our space.\"_</dialog>\n\n<condition at-dest=\"Som Yrri\"/>\n<dialog>Soma ships are orbiting the planet. They do not attack you.</dialog>\n\n<condition at-dest=\"Som Yrri\" trigger=\"HAIL SOMA\"/>\n<dialog>_\"We Isolators do not agree with the Openers. Soma preservation is paramount.\n\nHowever, you are not our enemy. The Openers caused a greater danger. They caused the Gnats.\"_</dialog>\n<dialog ok=\"I WILL DO IT\" cancel=\"I'M AFRAID\">_\"We Isolators do not embrace you. But you are skilled. Go to the depths of the Gnat infestation. Stop them.\"_</dialog>\n<mark-on-map dest=\"Gnat Ground Zero\" />\n\n<condition at-dest=\"Gnat Ground Zero\" no-enemy-at-dest=\"Gnat Ground Zero\"/>\n<dialog>The Isolator Soma gave you a tool. An information poison. *INSPECT* the *Ground Zero* and release it.</dialog>\n\n<condition state=\"surface\" at-dest=\"Gnat Ground Zero\" no-enemy-at-dest=\"Gnat Ground Zero\" trigger=\"POISON\"/>\n<dialog>As the poison reaches the ruins of the Gnat disaster the effects are spectacular. Out of every crack and pore, tiny Gnats pour out, smoking and crumbling as they perish.</dialog>\n<dialog>You should return to *Som Yrri*. Tell them that the work is done.</dialog>\n<mark-on-map dest=\"Som Yrri\" />\n\n<condition at-dest=\"Som Yrri\" trigger=\"HAIL\"/>\n<dialog ok=\"I WILL DO IT\" cancel=\"THIS IS NOT MY PROBLEM\">_\"The Gnats are truly monstrous. The Openers let them into our system as they opened the portals.\n\nWe must talk the Openers.\nTake our ambassador to Beryl Canis I.\"_</dialog>\n<mark-on-map dest=\"Beryl Canis I\" />\n\n<condition at-dest=\"Beryl Canis I\" trigger=\"LEAVE AMBASSADOR\"/>\n<mark-on-map dest=\"Soma\" />\n<dialog>_\"We will wait here on this neutral ground. Bring an envoy from *Soma*.\"_</dialog>\n\n<condition state=\"surface\" at-dest=\"Soma\" trigger=\"GET ENVOY\"/>\n<dialog>You don't get any response when you over radio tell the Soma that the splinter group Isolator is waiting for peace talks at *Beryl Canis I*.\nAfter a long silence, a single Soma ship approaches you.</dialog>\n<dialog>_\"We will talk. Escort us.\"_</dialog>\n<mark-on-map dest=\"Beryl Canis I\" />\n\n<condition at-dest=\"Beryl Canis I\" trigger=\"LEAVE ENVOY\"/>\n<dialog>The representatives of the two factions meet out of sight of your visitor's eyes.\nBut they return almost immediately.</dialog>\n<dialog ok=\"OF COURSE\" cancel=\"NOT NOW\">_\"We have an agreement. You freed us from the Gnat danger. You are trusted.\nThe Soma system will remain closed to other humans. But an ambassador will be established at *Pavonis Ember*. Take us there.\"_</dialog>\n<give item=\"Soma Ambassador\"/>\n<mark-on-map dest=\"Pavonis Ember\" />\n\n<condition state=\"surface\" have-item=\"Soma Ambassador\" at-dest=\"Pavonis Ember\" trigger=\"LEAVE AMBASSADOR\"/>\n<dialog>You sense both fear and excitement. The mythical Soma suddenly opening up. Visiting a human world. A new beginning.</dialog>\n<take item=\"Soma Ambassador\"/>\n\n",
       "color": "0f0",
       "icon": "",
-      "tags": ""
+      "tags": "soma"
     },
     {
       "name": "Eye of the Needle",
@@ -7199,32 +7065,46 @@
       "tags": "soma"
     },
     {
+      "name": "Rebuild the Thanatos",
+      "xml": "<condition at-dest=\"Thanatos\" trigger=\"EXPLORE DERELICT\"/>\n<dialog model=\"Thanatos\">It is the Thanatos derelict. Immensely old. Broken. The intact half is covered in cuneiform markings.</dialog>\n<add-to-quest-list/>\n\n<condition have-item=\"Thanatos mesh;Thanatos core;Thanatos nacelle\"/>\n<dialog>You now possess all three missing pieces of the Thanatos.</dialog>\n\n<condition at-dest=\"Thanatos\" trigger=\"REBUILD\"/>\n<dialog model=\"Thanatos\" ok=\"REBUILD THANATOS\" cancel=\"LEAVE\">The relics would restore the form of Thanatos.</dialog>\n<take item=\"Thanatos mesh;Thanatos core;Thanatos nacelle\"/>\n<dialog model=\"Thanatos\">As the parts touch the derelict the edges melt and merge. In an instant the dead ship springs to life, fire dancing across its hull as it burns away the dust covering it.</dialog>\n<dialog model=\"Sphere\">The radio warbles as it is flooded with signals. A single grey sphere emerges from the ship and drifts toward you.</dialog>\n<dialog model=\"Sphere\">Touching the sphere cause tiny ripples of light on its surface. It whispers the name *Momus* into your mind.</dialog>\n<give item=\"Momus\"/>",
+      "tags": "paxos",
+      "color": "888",
+      "icon": ""
+    },
+    {
       "name": "Thanatos relic 1",
-      "xml": "<condition have-item=\"Thanatos mesh\"/>\n<dialog>You found a relic, a machine part covered with cuneiform markings.</dialog>"
+      "xml": "<condition have-item=\"Thanatos mesh\"/>\n<dialog>You found a relic, a machine part covered with cuneiform markings.</dialog>",
+      "color": "888",
+      "icon": "",
+      "tags": "paxos"
     },
     {
       "name": "Thanatos relic 2",
-      "xml": "<condition have-item=\"Thanatos core\"/>\n<dialog>You found a relic, a machine part covered with cuneiform markings.</dialog>"
+      "xml": "<condition have-item=\"Thanatos core\"/>\n<dialog>You found a relic, a machine part covered with cuneiform markings.</dialog>",
+      "color": "888",
+      "icon": "",
+      "tags": "paxos"
     },
     {
       "name": "Thanatos relic 3",
       "xml": "<condition have-item=\"Thanatos nacelle\"/>\n<dialog>You found a relic, a machine part covered with cuneiform markings.</dialog>",
-      "tags": ""
-    },
-    {
-      "name": "Rebuild the Thanatos",
-      "xml": "<condition at-dest=\"Thanatos\" trigger=\"EXPLORE DERELICT\"/>\n<dialog model=\"Thanatos\">It is the Thanatos derelict. Immensely old. Broken. The intact half is covered in cuneiform markings.</dialog>\n<add-to-quest-list/>\n\n<condition have-item=\"Thanatos mesh;Thanatos core;Thanatos nacelle\"/>\n<dialog>You now possess all three missing pieces of the Thanatos.</dialog>\n\n<condition at-dest=\"Thanatos\" trigger=\"REBUILD\"/>\n<dialog model=\"Thanatos\" ok=\"REBUILD THANATOS\" cancel=\"LEAVE\">The relics would restore the form of Thanatos.</dialog>\n<take item=\"Thanatos mesh;Thanatos core;Thanatos nacelle\"/>\n<dialog model=\"Thanatos\">As the parts touch the derelict the edges melt and merge. In an instant the dead ship springs to life, fire dancing across its hull as it burns away the dust covering it.</dialog>\n<dialog model=\"Sphere\">The radio warbles as it is flooded with signals. A single grey sphere emerges from the ship and drifts toward you.</dialog>\n<dialog model=\"Sphere\">Touching the sphere cause tiny ripples of light on its surface. It whispers the name *Momus* into your mind.</dialog>\n<give item=\"Momus\"/>",
-      "tags": ""
+      "tags": "paxos",
+      "color": "888",
+      "icon": ""
     },
     {
       "name": "Worship the Apate",
       "xml": "<condition at-dest=\"Path to Apate\"/>\n<add-to-quest-list/>\n<dialog model=\"Temple of Apate\">An ancient derelict, *The Temple of Apate*, appear on the sensors ahead. It might contain riches. Or salvation.</dialog>\n<condition no-enemy-at-dest=\"Threshold of the Temple;Stepstone of the Temple;Marker of the Temple\"/>\n<dialog>As the final sentinel is destroyed it send a subspace signal. Most probably the Temple heard its death cry.\n\nCould be good, could be bad.</dialog>\n<condition at-dest=\"Temple of Apate\"/>\n<dialog model=\"Temple of Apate\">The temple is open now. The clearing of the sentinels must have unlocked it.</dialog>\n<condition at-dest=\"Temple of Apate\" trigger=\"ENTER TEMPLE\"/>\n<dialog model=\"Temple of Apate\">Your vessel enters the open gate of the Temple. As you slowly sink deeper your sensors flicker and give up, one after another. The readings from the Temple is much too strange for the sensors to cope with.</dialog>\n<dialog model=\"Sphere\">Your ship dark as the last subsystem give up. Silently you drift into a central chamber.\n\nOut of a central pillar, a dark sphere emerges. _A gift._</dialog>\n<dialog model=\"Sphere\">You retrieve the artifact from the pillar. As you touch it, it whispers the name *Horkos* into your mind.</dialog>\n<give item=\"Horkos\"/>",
-      "tags": ""
+      "tags": "paxos",
+      "color": "888",
+      "icon": ""
     },
     {
       "name": "Navigate the Eris",
       "xml": "<condition at-dest=\"Gateway of Eris\"/>\n<add-to-quest-list/>\n<dialog>A dusty nebula spread out in front of you. The dirty fields of Eris.</dialog>\n<condition at-dest=\"Locus of Eris\" have-item=\"Eris Shard;Eris Dust;Eris Splinter;Eris Grain\"/>\n<dialog ok=\"GIVE GIFTS\" cancel=\"LEAVE\">Something stirs in the Locus of Eris. It reacts to something you carry.</dialog>\n<take item=\"Eris Shard\"/>\n<take item=\"Eris Dust\"/>\n<take item=\"Eris Splinter\"/>\n<take item=\"Eris Grain\"/>\n<dialog>You place the artifacts of Eris on the dusty sands of the Locus. They sink into the drifting dunes. In their place a shiny cube emerges, spreading a dazzling light.</dialog>\n<dialog>The cube unfolds slowly to reveal a dirty, lumpy rock. It drifts into your ship, leaving dark dirty marks on every surface it touches. It whispers its name - *Epiales* - into your mind.</dialog>\n<give item=\"Epiales\"/>",
-      "tags": ""
+      "tags": "paxos",
+      "color": "888",
+      "icon": ""
     },
     {
       "name": "Ska Ska water quality",
@@ -7254,7 +7134,7 @@
     },
     {
       "name": "Pavonis Mining Co",
-      "xml": "<place-enemy enemy=\"Rogue\" dest=\"A8761\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A9753\"/>\n<place-enemy enemy=\"Rogue\" dest=\"A2170\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A3566\"/>\n<place-enemy enemy=\"Monitor Drone\" dest=\"A4976\"/>\n<condition at-dest=\"Pavonis A2934\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">_\"This is Pavonis Mining Co Headquarters. Are you looking for assignments?\"_</dialog>\n<dialog>_\"There are rogues disturbing our operations at the north-west asteroid rim. We will pay 100 credits for clearing them out.\"_</dialog>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"A117;A8761;A9753;A2170;A3566;A4976\" at-dest=\"Pavonis A2934\"/>\n<dialog>_\"Excellent work! Transferring reward now.\"_</dialog>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"Many of our contractors are damaged by the rogues. Would you like to run some mining operations? We rent out the needed equipment.\"_</dialog>\n<give item=\"Mining Drill\"/>\n\n<mark-on-map dest=\"A2170\"/>\n<dialog>_\"Readings at A2170 show rich ore. Start there.\"_</dialog>\n<condition at-dest=\"A2170\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Ore\"/>\n\n<mark-on-map dest=\"A8761\"/>\n<dialog>_\"Readings at A8761 show rich ore. Continue there.\"_</dialog>\n<condition at-dest=\"A8761\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Mineral\"/>\n\n<mark-on-map dest=\"Pavonis A2934\"/>\n<condition have-item=\"Pavonian Mineral;Pavonian Ore\" at-dest=\"Pavonis A2934\"/>\n<dialog>_\"Good work, a bit slow, but good. Let us buy that mineral from you.\"_</dialog>\n<take item=\"Pavonian Mineral\"/>\n<take item=\"Pavonian Ore\"/>\n<take item=\"Mining Drill\"/>\n<give credits=\"100\"/>",
+      "xml": "<condition at-dest=\"Pavonis A2934\" trigger=\"HAIL\"/>\n<dialog ok=\"YES\" cancel=\"NOT NOW\">_\"This is Pavonis Mining Co Headquarters. Are you looking for assignments?\"_</dialog>\n<dialog>_\"There are rogues disturbing our operations at the north-west asteroid rim. We will pay 100 credits for clearing them out.\"_</dialog>\n<add-to-quest-list/>\n<condition no-enemy-at-dest=\"A117;A8761;A9753;A2170;A3566;A4976\" at-dest=\"Pavonis A2934\"/>\n<dialog>_\"Excellent work! Transferring reward now.\"_</dialog>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"Many of our contractors are damaged by the rogues. Would you like to run some mining operations? We rent out the needed equipment.\"_</dialog>\n<give item=\"Mining Drill\"/>\n\n<mark-on-map dest=\"A2170\"/>\n<dialog>_\"Readings at A2170 show rich ore. Start there.\"_</dialog>\n<condition at-dest=\"A2170\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Ore\"/>\n\n<mark-on-map dest=\"A8761\"/>\n<dialog>_\"Readings at A8761 show rich ore. Continue there.\"_</dialog>\n<condition at-dest=\"A8761\" have-item=\"Mining Drill\" trigger=\"DRILL\"/>\n<give item=\"Pavonian Mineral\"/>\n\n<mark-on-map dest=\"Pavonis A2934\"/>\n<condition have-item=\"Pavonian Mineral;Pavonian Ore\" at-dest=\"Pavonis A2934\"/>\n<dialog>_\"Good work, a bit slow, but good. Let us buy that mineral from you.\"_</dialog>\n<take item=\"Pavonian Mineral\"/>\n<take item=\"Pavonian Ore\"/>\n<take item=\"Mining Drill\"/>\n<give credits=\"100\"/>",
       "tags": "pavonis"
     },
     {
@@ -13249,7 +13129,7 @@
     {
       "name": "Fields of Eris",
       "audio": "music-1997",
-      "pos": {"x": 749, "y": 1432},
+      "pos": {"x": 629, "y": 1312},
       "radius": 250
     },
     {
@@ -13273,7 +13153,7 @@
     {
       "name": "Ruins of Thanatos",
       "audio": "music-slask",
-      "pos": {"x": 1365, "y": 755},
+      "pos": {"x": 1325, "y": 675},
       "radius": 230
     },
     {
@@ -13341,6 +13221,18 @@
       "audio": "music-sand dark",
       "pos": {"x": -722, "y": -1064},
       "radius": 150
+    },
+    {
+      "name": "Charm Sphere",
+      "audio": "music-world of hope",
+      "pos": {"x": 420, "y": 424},
+      "radius": 200
+    },
+    {
+      "name": "Soma Isola",
+      "audio": "music-sand dark",
+      "pos": {"x": 1300, "y": -1140},
+      "radius": 130
     }
   ],
   "name": "Skanaar's World"

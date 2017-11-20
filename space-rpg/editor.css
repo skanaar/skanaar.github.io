@@ -142,6 +142,10 @@ button:hover,
   cursor: pointer;
   user-select: none;
 }
+.btn-group .toggle-btn.active + .toggle-btn {
+  margin: 0px;
+  border-left: 0;
+}
 .btn-group .toggle-btn:hover {
   background: linear-gradient(to top, #8bf, #adf);
   border-color: #8af;
