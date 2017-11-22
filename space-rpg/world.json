@@ -88,7 +88,7 @@
     {
       "attr": {
         "maxhull": 25,
-        "maxshield": 10,
+        "maxshield": 5,
         "maxenergy": 15,
         "armor": 0,
         "cloak": 0,
@@ -106,14 +106,14 @@
     {
       "attr": {
         "maxhull": 30,
-        "maxshield": 16,
-        "maxenergy": 0,
+        "maxshield": 8,
+        "maxenergy": 15,
         "armor": 0,
         "cloak": 0,
         "jump": 0,
         "slots": 6
       },
-      "generator": {"hull": 4, "shield": 4, "energy": 2},
+      "generator": {"hull": 0, "shield": 2, "energy": 4},
       "name": "CES Marathon",
       "level": 4,
       "visual": "CES Marathon",
@@ -124,14 +124,14 @@
     {
       "attr": {
         "maxhull": 30,
-        "maxshield": 15,
+        "maxshield": 10,
         "maxenergy": 15,
         "armor": 0,
         "cloak": 0,
         "jump": 0,
         "slots": 0
       },
-      "generator": {"hull": 2, "shield": 4, "energy": 5},
+      "generator": {"hull": 2, "shield": 3, "energy": 3},
       "name": "Ursula",
       "level": 5,
       "slots": 10,
@@ -142,7 +142,7 @@
     {
       "attr": {
         "maxhull": 30,
-        "maxshield": 20,
+        "maxshield": 15,
         "maxenergy": 20,
         "armor": 0,
         "cloak": 0,
@@ -167,7 +167,7 @@
         "jump": 0,
         "slots": 0
       },
-      "generator": {"hull": 2, "shield": 2, "energy": 2},
+      "generator": {"hull": 2, "shield": 2, "energy": 3},
       "name": "Kerr Interdictor",
       "level": 5,
       "visual": "Kerr Interdictor",
@@ -196,12 +196,12 @@
       "visual": "Kerr Frigate",
       "attr": {
         "maxhull": 40,
-        "maxshield": 40,
+        "maxshield": 20,
         "maxenergy": 30,
         "jump": 125,
         "slots": 6
       },
-      "generator": {"hull": 2, "shield": 1, "energy": 2},
+      "generator": {"hull": 2, "shield": 0, "energy": 2},
       "value": 5000,
       "isFlying": true,
       "level": 6,
@@ -210,7 +210,7 @@
     {
       "attr": {
         "maxhull": 45,
-        "maxshield": 20,
+        "maxshield": 15,
         "maxenergy": 40,
         "armor": 0,
         "cloak": 0,
@@ -386,7 +386,7 @@
       "visual": "Kerr Interdictor",
       "attr": {
         "maxhull": 20,
-        "maxshield": 7,
+        "maxshield": 3,
         "maxenergy": 20,
         "jump": 0,
         "slots": 4
@@ -396,41 +396,13 @@
         "Meson Ray",
         "Luhn Device",
         "Co Disruptor",
-        "Repair Robot",
-        "Shell Inducer",
         "Quark Shield",
-        "Sacrifice Device"
+        "Sacrifice Device",
+        "Buffer Inducer",
+        "Mend Robot",
+        "Mk3 Reactor"
       ],
       "level": 3,
-      "value": 0,
-      "isFlying": false,
-      "slots": 0
-    },
-    {
-      "attr": {
-        "maxhull": 35,
-        "maxshield": 7,
-        "maxenergy": 30,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "generator": {"hull": 1, "shield": 1, "energy": 1},
-      "name": "Security Drone",
-      "visual": "Security Drone",
-      "inventory": [
-        "Absorb Cell",
-        "Restore Kit",
-        "Mk4 Battery",
-        "Active Armor",
-        "Gluon Shield",
-        "Absorb Inducer",
-        "Solenoid Gun",
-        "Tau Ray",
-        "Mk2 Reactor"
-      ],
-      "level": 4,
       "value": 0,
       "isFlying": false,
       "slots": 0
@@ -475,7 +447,7 @@
         "jump": 0,
         "slots": 0
       },
-      "generator": {"hull": 2, "shield": 1, "energy": 0},
+      "generator": {"hull": 1, "shield": 0, "energy": 0},
       "name": "Rocket Drone",
       "level": 4,
       "visual": "Rocket Drone",
@@ -485,7 +457,8 @@
         "Solenoid Gun",
         "Absorb Cell",
         "Solenoid Gun",
-        "Shell Inducer"
+        "Buffer Inducer",
+        "Mk2 Reactor"
       ],
       "isFlying": true,
       "value": 0,
@@ -514,9 +487,66 @@
         "Absorb Cell",
         "Mk4 Battery",
         "Welding Robot",
-        "Restore Kit"
+        "Restore Kit",
+        "Mk3 Reactor"
       ],
       "isFlying": true
+    },
+    {
+      "attr": {
+        "maxhull": 20,
+        "maxshield": 5,
+        "maxenergy": 20,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 1, "shield": 0, "energy": 1},
+      "name": "Bandit Henchman",
+      "level": 4,
+      "visual": "Rusty Ship",
+      "inventory": [
+        "Repair Nanites",
+        "Shield Battery",
+        "Repair Goo",
+        "Monopole Shield",
+        "Meson Ray",
+        "Gauss Gun",
+        "Mk3 Reactor"
+      ],
+      "isFlying": true,
+      "slots": 0,
+      "value": 0
+    },
+    {
+      "attr": {
+        "maxhull": 35,
+        "maxshield": 7,
+        "maxenergy": 30,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 1, "shield": 1, "energy": 1},
+      "name": "Security Drone",
+      "visual": "Security Drone",
+      "inventory": [
+        "Absorb Cell",
+        "Restore Kit",
+        "Mk4 Battery",
+        "Active Armor",
+        "Gluon Shield",
+        "Absorb Inducer",
+        "Solenoid Gun",
+        "Tau Ray",
+        "Mk2 Reactor"
+      ],
+      "level": 5,
+      "value": 0,
+      "isFlying": false,
+      "slots": 0
     },
     {
       "attr": {
@@ -540,7 +570,9 @@
         "Gauss Gun",
         "Phased Ray",
         "EMP Bomb",
-        "Repair Robot"
+        "Repair Robot",
+        "Mk3 Reactor",
+        "Mk2 Reactor"
       ],
       "isFlying": true
     },
@@ -564,39 +596,14 @@
         "Shield Battery",
         "Focal Beam",
         "Mk5 Capacitor",
-        "Shell Inducer"
+        "Shell Inducer",
+        "Mk2 Reactor",
+        "Mk1 Reactor"
       ],
       "isFlying": true,
       "value": 0,
       "level": 5,
       "slots": 0
-    },
-    {
-      "attr": {
-        "maxhull": 20,
-        "maxshield": 5,
-        "maxenergy": 20,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "generator": {"hull": 1, "shield": 0, "energy": 1},
-      "name": "Bandit Henchman",
-      "level": 5,
-      "visual": "Rusty Ship",
-      "inventory": [
-        "Repair Nanites",
-        "Shield Battery",
-        "Repair Goo",
-        "Monopole Shield",
-        "Meson Ray",
-        "Gauss Gun",
-        "Mk3 Reactor"
-      ],
-      "isFlying": true,
-      "slots": 0,
-      "value": 0
     },
     {
       "attr": {
@@ -656,7 +663,13 @@
       "name": "Bandit Bosslet",
       "level": 6,
       "visual": "Sailor",
-      "inventory": ["Soma Emitter", "EMP Bomb"],
+      "inventory": [
+        "EMP Bomb",
+        "Healing Kit",
+        "Railgun",
+        "Mk3 Reactor",
+        "Soma Emitter"
+      ],
       "isFlying": true,
       "slots": 0,
       "value": 0
@@ -665,7 +678,7 @@
       "attr": {
         "maxhull": 20,
         "maxshield": 10,
-        "maxenergy": 20,
+        "maxenergy": 60,
         "armor": 0,
         "cloak": 0,
         "jump": 0,
@@ -677,12 +690,11 @@
       "inventory": [
         "Nano Repairers",
         "Metabomb",
-        "Focal Beam",
         "Mk6 Capacitor",
-        "Mk2 Reactor",
-        "Mk1 Reactor",
         "Shell Inducer",
-        "Repair Robot"
+        "Repair Robot",
+        "Mk4 Reactor",
+        "Apex Beam"
       ],
       "level": 6,
       "value": 0,
@@ -722,7 +734,7 @@
     {
       "attr": {
         "maxhull": 50,
-        "maxshield": 15,
+        "maxshield": 9,
         "maxenergy": 30,
         "armor": 0,
         "cloak": 0,
@@ -777,7 +789,7 @@
     {
       "attr": {
         "maxhull": 120,
-        "maxshield": 50,
+        "maxshield": 40,
         "maxenergy": 30,
         "armor": 0,
         "cloak": 0,
@@ -3005,7 +3017,7 @@
     },
     {
       "type": "weapon",
-      "level": 7,
+      "level": 6,
       "credits": 2500,
       "name": "Soma Emitter",
       "cooldown": false,
@@ -3019,7 +3031,7 @@
         "slots": 0
       },
       "playerBuff": {"hull": 0, "shield": 0, "energy": -5},
-      "targetBuff": {"hull": -20, "shield": -10, "energy": -5},
+      "targetBuff": {"hull": -12, "shield": -6, "energy": -5},
       "critical": 0
     },
     {

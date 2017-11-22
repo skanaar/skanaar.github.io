@@ -1,11 +1,11 @@
 <items-viewer>
-  <div class="fixed-tools">
-    <filter-tools ref="filterInput" types={['weapon', 'module', 'tool', 'quest', 'rare', 'common']} onfilter={update}/>
-  </div>
   <div class="toolbox">
     <button onclick={add}>+ New Item</button>
     <button onclick={sort}>Sort</button>
     <button onclick={pasteCsv}>Paste tabular data</button>
+  </div>
+  <div class="fixed-tools">
+    <filter-tools ref="filterInput" types={['weapon', 'module', 'tool', 'quest', 'rare', 'common']} onfilter={update}/>
   </div>
 
   <div class="table-parent">

@@ -46,7 +46,7 @@
     <div class="input-grid">
       <em>visual</em>
       <select ref="visualInput">
-        <option each={e in shipModels()}>{e.name}</option>
+        <option each={e in models()}>{e.name}</option>
       </select><br />
       <em>level</em> <input type=number ref=levelField value={selected && selected.level || 0}>
     </div>
@@ -85,7 +85,7 @@
     self.world = { ships: [], enemies: [] }
     self.selected = null
 
-    self.shipModels = () => self.world.models.filter(e => !e.tags || e.tags.includes('ship'))
+    self.models = () => self.world.models.filter(e => !e.tags || !e.tags.includes('anomaly'))
 
     self.remove = function () {
       self.world.ships = self.world.ships.filter(e => e != self.selected)
