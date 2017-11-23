@@ -475,10 +475,10 @@
         "slots": 0
       },
       "generator": {"hull": 0, "shield": 0, "energy": 0},
-      "name": "Mimos Dart",
+      "name": "Bandit Reaver",
       "level": 4,
       "slots": 0,
-      "visual": "Mimos Dart",
+      "visual": "Hover",
       "inventory": [
         "Javelin Driver",
         "Sinusoid Pulse",
@@ -559,7 +559,7 @@
         "slots": 0
       },
       "generator": {"hull": 0, "shield": 0, "energy": 0},
-      "name": "Mimos Arrow",
+      "name": "Mimos Dart",
       "level": 5,
       "slots": 0,
       "visual": "Mimos Dart",
@@ -660,7 +660,7 @@
         "slots": 0
       },
       "generator": {"hull": 2, "shield": 2, "energy": 2},
-      "name": "Bandit Bosslet",
+      "name": "Bandit Cohort",
       "level": 6,
       "visual": "Sailor",
       "inventory": [
@@ -767,7 +767,7 @@
         "slots": 0
       },
       "generator": {"hull": 1, "shield": 1, "energy": 1},
-      "name": "Mimos Guard",
+      "name": "Mimos Arrow",
       "level": 6,
       "slots": 0,
       "visual": "Mimos Guard",
@@ -817,6 +817,63 @@
     },
     {
       "attr": {
+        "maxhull": 30,
+        "maxshield": 30,
+        "maxenergy": 30,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 2, "shield": 2, "energy": 4},
+      "name": "Bandit Hegemon",
+      "level": 8,
+      "slots": 0,
+      "visual": "NS Argo",
+      "inventory": [
+        "Mk4 Reactor",
+        "Metabomb",
+        "Metabomb",
+        "Aural Pulse",
+        "Apex Beam",
+        "Nucleon Ray",
+        "Au Disruptor",
+        "Healing Kit",
+        "Aegis Cell",
+        "Soma Emitter"
+      ],
+      "isFlying": true
+    },
+    {
+      "attr": {
+        "maxhull": 30,
+        "maxshield": 30,
+        "maxenergy": 30,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 2, "shield": 1, "energy": 4},
+      "name": "Mimos Guard",
+      "level": 8,
+      "slots": 0,
+      "visual": "Mimos Guard",
+      "inventory": [
+        "Absorb Inducer",
+        "Restore Robot",
+        "Mk5 Reactor",
+        "Au Disruptor",
+        "Nucleon Ray",
+        "Apex Beam",
+        "Aural Pulse",
+        "Railgun",
+        "Metabomb"
+      ],
+      "isFlying": true
+    },
+    {
+      "attr": {
         "maxhull": 100,
         "maxshield": 40,
         "maxenergy": 500,
@@ -836,6 +893,17 @@
     }
   ],
   "items": [
+    {
+      "name": "Gnat Incubator",
+      "type": "quest",
+      "level": 0,
+      "credits": -1,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
     {
       "name": "Lost keys",
       "type": "quest",
@@ -1738,7 +1806,7 @@
     },
     {
       "type": "weapon",
-      "credits": 10,
+      "credits": 3,
       "name": "Rusty Autogun",
       "attr": {
         "maxhull": 0,
@@ -4364,7 +4432,7 @@
       "name": "Weaver 817",
       "style": "asteroid-1",
       "trader": null,
-      "enemy": {"type": "Bandit Henchman", "loot": []},
+      "enemy": {"type": "Bandit Reaver", "loot": []},
       "treasures": []
     },
     {
@@ -5334,7 +5402,7 @@
     {
       "pos": {"x": -684, "y": -1420},
       "name": "Brandons",
-      "style": "anomaly-Tiendong",
+      "style": "anomaly-brewery",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5472,7 +5540,7 @@
       "name": "Debris 91",
       "style": "anomaly-debris",
       "trader": null,
-      "enemy": {"type": "Bandit Henchman", "loot": []},
+      "enemy": {"type": "Bandit Cohort", "loot": []},
       "treasures": []
     },
     {
@@ -5528,7 +5596,7 @@
       "name": "Debris 78",
       "style": "anomaly-debris",
       "trader": null,
-      "enemy": {"type": "Bandit Striker", "loot": []},
+      "enemy": {"type": "Bandit Cohort", "loot": []},
       "treasures": []
     },
     {
@@ -5544,7 +5612,7 @@
       "name": "A69",
       "style": "asteroid-1",
       "trader": null,
-      "enemy": {"type": "Bandit Striker", "loot": []},
+      "enemy": {"type": "Bandit Reaver", "loot": []},
       "treasures": []
     },
     {
@@ -5608,7 +5676,7 @@
       "name": "A88",
       "style": "asteroid-13",
       "trader": null,
-      "enemy": {"type": "Bandit Henchman", "loot": []},
+      "enemy": {"type": "Bandit Cohort", "loot": []},
       "treasures": []
     },
     {
@@ -5617,7 +5685,7 @@
       "style": "planet-green-6",
       "trader": null,
       "enemy": {
-        "type": "Bandit Bosslet",
+        "type": "Bandit Hegemon",
         "loot": [
           "Contraband",
           "Contraband",
@@ -6850,6 +6918,62 @@
       "pos": {"x": -648, "y": -576},
       "name": "Drok Heights",
       "style": "anomaly-hermit",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1996, "y": -1698},
+      "name": "Eye D",
+      "style": "planet-hell-2",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1886, "y": -1726},
+      "name": "Eye B",
+      "style": "planet-hell-2",
+      "trader": null,
+      "enemy": {"type": "Gnats", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1954, "y": -1778},
+      "name": "Eye C",
+      "style": "planet-hell-2",
+      "trader": null,
+      "enemy": {"type": "Gnat Assimilate", "loot": []},
+      "treasures": []
+    },
+    {
+      "pos": {"x": 2018, "y": -1840},
+      "name": "Eye A",
+      "style": "planet-hell-2",
+      "trader": null,
+      "enemy": null,
+      "treasures": ["Gnat Incubator"]
+    },
+    {
+      "pos": {"x": 1344, "y": 462},
+      "name": "Debris 806",
+      "style": "anomaly-ruin",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1304, "y": 902},
+      "name": "Debris 1206",
+      "style": "anomaly-ruin",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1520, "y": 710},
+      "name": "Debris 1230",
+      "style": "anomaly-ruin",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -8682,6 +8806,141 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Brewery",
+      "geometry": "composite",
+      "res": 8,
+      "transform": [
+        ["scale", 1.8, 1.8, 1.8],
+        ["rotate", 0, 0, 80],
+        ["translate", 0, 0, -81]
+      ],
+      "path": [[0, 0, -50], [50, 0, 0], [0, 0, 50]],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["translate", 0, 17, 0]],
+          "path": [
+            [0, 0, -70],
+            [20, 0, -70],
+            [25, 0, -65],
+            [25, 0, -55],
+            [10, 0, -45],
+            [3, 0, -25],
+            [3, 0, 30]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["translate", -15, -8.5, 50]],
+          "path": [
+            [0, 0, -70],
+            [20, 0, -70],
+            [25, 0, -65],
+            [25, 0, -55],
+            [10, 0, -45],
+            [3, 0, -25],
+            [3, 0, -20]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["translate", 15, -8.5, 25]],
+          "path": [
+            [0, 0, -70],
+            [20, 0, -70],
+            [25, 0, -65],
+            [25, 0, -55],
+            [10, 0, -45],
+            [3, 0, -25],
+            [3, 0, 5]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["translate", 0, 0, 90]],
+          "path": [
+            [0, 0, -60],
+            [25, 0, -60],
+            [25, 0, -70],
+            [30, 0, -65],
+            [30, 0, -55],
+            [0, 0, -45]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 12,
+          "transform": [["translate", 0, 0, 29]],
+          "path": [[63, 0, 5], [65, 0, -3], [70, 0, 0], [70, 0, 2], [63, 0, 5]]
+        }
+      ],
+      "tags": "anomaly"
+    },
+    {
+      "name": "Hover",
+      "geometry": "composite",
+      "transform": [
+        ["scale", 3, 3, 3],
+        ["rotate", 90, 0, 90],
+        ["translate", 0, 0, -32]
+      ],
+      "parts": [
+        {
+          "name": "body",
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [
+            ["rotate", 0, 0, 30],
+            ["scale", 3.6, 2, 3],
+            ["rotate", 180, 90, 0],
+            ["translate", 0, 0, 0]
+          ],
+          "path": [[0, 0, -11], [3, 0, -10], [5, 0, -1], [5, 0, 7], [0, 0, 10]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["rotate", 90, 12, 0], ["translate", 20, 0, 23]],
+          "path": [[0, 0, -3], [10, 0, -5], [11, 0, 0], [10, 0, 5], [0, 0, 3]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["rotate", 90, -12, 0], ["translate", 20, 0, -23]],
+          "path": [[0, 0, -3], [10, 0, -5], [11, 0, 0], [10, 0, 5], [0, 0, 3]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["rotate", 90, 0, 0], ["translate", -8, 0, 26]],
+          "path": [[0, 0, -3], [10, 0, -5], [11, 0, 0], [10, 0, 5], [0, 0, 3]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["rotate", 90, 0, 0], ["translate", -8, 0, -26]],
+          "path": [[0, 0, -3], [10, 0, -5], [11, 0, 0], [10, 0, 5], [0, 0, 3]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["rotate", 90, 0, 0], ["translate", -35, 0, 13]],
+          "path": [[0, 0, -3], [10, 0, -5], [11, 0, 0], [10, 0, 5], [0, 0, 3]]
+        },
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [["rotate", 90, 0, 0], ["translate", -35, 0, -13]],
+          "path": [[0, 0, -3], [10, 0, -5], [11, 0, 0], [10, 0, 5], [0, 0, 3]]
+        }
+      ],
+      "tags": "foe"
     },
     {
       "name": "Relay 60deg",
@@ -12005,6 +12264,19 @@
     }
   ],
   "celestials": [
+    {
+      "name": "anomaly-brewery",
+      "type": "anomaly",
+      "radius": 4,
+      "height": 2,
+      "ambient": 0.2,
+      "octaves": 3,
+      "zoom": 1.5,
+      "falloff": 0.3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "model": "Brewery"
+    },
     {
       "name": "asteroid-14",
       "type": "asteroid",
