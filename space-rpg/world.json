@@ -9597,7 +9597,7 @@
       "name": "Security Drone",
       "geometry": "composite",
       "transform": [
-        ["scale", 2, 2, 2],
+        ["scale", 2.5, 2.5, 2.5],
         ["rotate", 0, 72, 0],
         ["translate", 0, 0, -80]
       ],
@@ -9664,9 +9664,9 @@
       "name": "Rocket Drone",
       "geometry": "composite",
       "transform": [
-        ["scale", 2, 2, 2],
+        ["scale", 2.5, 2.5, 2.5],
         ["rotate", 0, 72, 30],
-        ["translate", 0, 0, -80]
+        ["translate", 0, 0, -90]
       ],
       "parts": [
         {
@@ -10582,7 +10582,7 @@
       "name": "CES Bioculus",
       "geometry": "composite",
       "transform": [
-        ["scale", 7, 7, 7],
+        ["scale", 7.5, 7.5, 7.5],
         ["rotate", 90, 0, 0],
         ["translate", 0, -50, -40]
       ],
@@ -10893,7 +10893,7 @@
       "name": "NS Salem",
       "geometry": "composite",
       "transform": [
-        ["scale", 2, 2, 2],
+        ["scale", 2.3, 2.3, 2.3],
         ["rotate", 90, 0, 0],
         ["translate", 0, 0, -70]
       ],
@@ -10939,7 +10939,7 @@
       "name": "NS Sloop",
       "geometry": "composite",
       "transform": [
-        ["scale", 1, 1, 1],
+        ["scale", 1.2, 1.2, 1.2],
         ["rotate", 180, 0, 90],
         ["translate", 0, -10, -50]
       ],
@@ -11042,9 +11042,9 @@
       "name": "NS Argo",
       "geometry": "composite",
       "transform": [
-        ["scale", 1.2, 1.2, 1.2],
+        ["scale", 1.4, 1.4, 1.4],
         ["rotate", 180, 0, 90],
-        ["translate", 0, 20, -55]
+        ["translate", 0, 20, -65]
       ],
       "parts": [
         {
