@@ -63,7 +63,6 @@
     <div class="btn-group" style="opacity: {selectionSize > 1 ? 1 : 0.5}">
       <a class="toggle-btn" onclick={() => rotate(0.2618)}>Rotate +</a><a class="toggle-btn" onclick={() => rotate(-0.2618)}>Rotate -</a>
     </div>
-    <button onclick={() => isDark = !isDark}>dark</button>
   </div>
 
   <div class="sidebar" show={selectionSize == 1 && regionSelected}>
@@ -122,7 +121,7 @@
     var self = this
     var app = this.opts.app || window.app
 
-    self.isDark = false
+    self.isDark = true
     self.nodes = []
     self.regions = []
     self.lines = []

@@ -16,40 +16,6 @@
     </div>
   </div>
 
-  <style>
-    .card {
-      border: 2px solid #888;
-      padding: 5px;
-      margin: 10px;
-      border-radius: 5px;
-      text-align: center;
-      font-family: "Avenir next condensed", "Impact";
-    }
-    .card h2 {
-      color: #000;
-      margin: 0;
-      font-size: 14px;
-      font-weight: normal;
-    }
-    .card-row {
-      border-top: 1px solid #aaa;
-      margin-top: 3px;
-      padding-top: 3px;
-      color: #888;
-      text-align: center;
-      font-size: 10px;
-    }
-    .card-row b {
-      display: inline-block;
-      width: 30%;
-      font-weight: normal;
-      font-size: 16px;
-    }
-    .card-row b:nth-child(2) { color: #a00; }
-    .card-row b:nth-child(3) { color: #00a; }
-    .card-row b:nth-child(4) { color: #0a0; }
-  </style>
-
   <script>
     var self = this
     var app = self.opts.app
@@ -57,11 +23,13 @@
     self.ship = () => self.opts.ship || { name: '', attr: {}, generators: {} }
     self.generated = function () {
       if (!self.opts.ship) { return {} }
-      var items = self.opts.ship.inventory.map(e => _.findWhere(app.world.items, { name: e })).filter(e => e.type == 'module')
+      var items = (self.opts.ship.inventory || [])
+        .map(e => _.findWhere(app.world.items, { name: e }))
+        .filter(e => e.type == 'module')
       return {
-        hull: _.sum(items, item => item.playerBuff.hull),
-        shield: _.sum(items, item => item.playerBuff.shield),
-        energy: _.sum(items, item => item.playerBuff.energy)
+        hull: self.opts.ship.generator.hull + _.sum(items, item => item.playerBuff.hull),
+        shield: self.opts.ship.generator.shield + _.sum(items, item => item.playerBuff.shield),
+        energy: self.opts.ship.generator.energy + _.sum(items, item => item.playerBuff.energy)
       }
     }
   </script>

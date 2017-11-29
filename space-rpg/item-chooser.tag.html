@@ -42,69 +42,13 @@
         </table>
       </div>
       <div class="modal-picked-list">
-        <div class="modal-item" each={id in list} onclick={remove}>{id}</div>
+        <div class="modal-item" each={id in list}>
+          <item-card item={itemForId(id)} />
+          <div class="modal-item-close" onclick={remove}>&times;</div>
+        </div>
       </div>
     </div>
   </div>
-
-  <style>
-    .modal-parent {
-      position: fixed;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      background: rgba(0,0,0,0.1);
-    }
-    .modal {
-      width: 85%;
-      background: #fff;
-      border: 1px solid #888;
-      border-radius: 2px;
-      margin: 10vh auto;
-    }
-    .modal-tools {
-      padding: 5px;
-      border-bottom: 1px solid #ddd;
-    }
-    .modal-list {
-      display: inline-block;
-      width: 65%;
-      height: 75vh;
-      padding: 10px;
-      vertical-align: top;
-      overflow: auto;
-      cursor: pointer;
-    }
-    .modal-picked-list {
-      display: inline-block;
-      width: 190px;
-      padding: 10px;
-      vertical-align: top;
-    }
-    .modal-list:first-child {
-      border-right: 1px solid #888;
-    }
-    .modal-close {
-      float: right;
-    }
-    .modal-item {
-      display: inline-block;
-      width: 180px;
-      margin: 2px;
-      padding: 2px 6px;
-      border: 1px solid #eee;
-      background: #f8f8f8;
-      border-radius: 2px;
-    }
-    .modal-item .price {
-      float: right;
-    }
-    .item:hover {
-      border: 1px solid #ddd;
-      background: #eee;
-    }
-  </style>
 
   <script>
     var self = this
@@ -126,6 +70,10 @@
 
     self.remove = function (e) {
       self.list.splice(self.list.indexOf(e.item.id), 1)
+    }
+
+    self.itemForId = function (id) {
+      return _.findWhere(app.world.items, { name: id })
     }
     
     self.done = function () {

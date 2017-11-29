@@ -400,7 +400,8 @@
         "Sacrifice Device",
         "Buffer Inducer",
         "Mend Robot",
-        "Mk3 Reactor"
+        "Mk3 Reactor",
+        "Fluid Armor"
       ],
       "level": 3,
       "value": 0,
@@ -454,7 +455,6 @@
       "inventory": [
         "Restore Kit",
         "Mk4 Battery",
-        "Solenoid Gun",
         "Absorb Cell",
         "Solenoid Gun",
         "Buffer Inducer",
@@ -538,10 +538,14 @@
         "Mk4 Battery",
         "Active Armor",
         "Gluon Shield",
-        "Absorb Inducer",
         "Solenoid Gun",
         "Tau Ray",
-        "Mk2 Reactor"
+        "Mk4 Reactor",
+        "Shell Inducer",
+        "Eris Grain",
+        "Supplies",
+        "Eris Grain",
+        "Green Seed"
       ],
       "level": 5,
       "value": 0,
@@ -3469,7 +3473,7 @@
       },
       "enemy": null,
       "treasures": [],
-      "shipyard": ["Sloop", "Salem", "Vanguard"]
+      "shipyard": ["Salem", "Vanguard", "Sloop"]
     },
     {
       "pos": {"x": -301, "y": -1065},
@@ -7284,6 +7288,78 @@
   "initialDestination": "Backwater",
   "models": [
     {
+      "name": "Hauler",
+      "geometry": "composite",
+      "tags": "ship",
+      "transform": [
+        ["scale", 1.7, 1.7, 1.7],
+        ["rotate", 0, 0, 180],
+        ["translate", 0, 0, -70]
+      ],
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 7,
+          "transform": [["rotate", 90, 0, 0], ["translate", 20, 40, 0]],
+          "path": [
+            [0, 0, -45],
+            [13, 0, -45],
+            [15, 0, -50],
+            [17, 0, -45],
+            [22, 0, 0],
+            [24, 0, 50],
+            [0, 0, 60]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 7,
+          "transform": [["rotate", 90, 180, 0], ["translate", -20, 40, 0]],
+          "path": [
+            [0, 0, -45],
+            [13, 0, -45],
+            [15, 0, -50],
+            [17, 0, -45],
+            [22, 0, 0],
+            [24, 0, 50],
+            [0, 0, 60]
+          ]
+        },
+        {
+          "geometry": "cube",
+          "transform": [
+            ["subdivide", 0, 0, 0],
+            ["subdivide", 0, 0, 0],
+            ["scale", 50, 40, 3],
+            ["parabola", 0, 0, 0.005],
+            ["scale", 1, 2, 1],
+            ["translate", 0, 0, -30]
+          ]
+        },
+        {
+          "geometry": "cube",
+          "transform": [
+            ["subdivide", 0, 0, 0],
+            ["subdivide", 0, 0, 0],
+            ["scale", 50, 40, 3],
+            ["parabola", 0, 0, -0.005],
+            ["scale", 1, 2, 1],
+            ["translate", 0, 0, 30]
+          ]
+        },
+        {
+          "geometry": "cube",
+          "transform": [
+            ["subdivide", 0, 0, 0],
+            ["sphere", 1, 1, 1],
+            ["subdivide", 0, 0, 0],
+            ["sphere", 47, 40, 20],
+            ["translate", 0, -60, 0]
+          ]
+        }
+      ]
+    },
+    {
       "name": "NBN HQ",
       "geometry": "composite",
       "res": 8,
@@ -9457,6 +9533,7 @@
       "tags": "prop",
       "transform": [
         ["subdivide", 0, 0, 0],
+        ["sphere", 100, 100, 100],
         ["subdivide", 0, 0, 0],
         ["sphere", 100, 100, 100],
         ["rotate", 30, -20, -70],
