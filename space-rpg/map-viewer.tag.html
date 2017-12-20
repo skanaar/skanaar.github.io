@@ -436,6 +436,7 @@
       }))
       self.nodes.push(...regions)
       calculateLines()
+      buildQuestCache()
     }
 
     function calculateLines() {
@@ -497,7 +498,6 @@
       window.document.addEventListener('keydown', self.keydown)
       loadWorld()
       buildRadiusCache()
-      buildQuestCache()
       window.scrollTo(self.dx/3, self.dy/3)
     })
 

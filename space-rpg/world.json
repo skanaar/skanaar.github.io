@@ -898,6 +898,17 @@
   ],
   "items": [
     {
+      "name": "Alien Relic",
+      "type": "quest",
+      "level": 0,
+      "credits": -1,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
       "name": "Gnat Incubator",
       "type": "quest",
       "level": 0,
@@ -3564,7 +3575,7 @@
       "treasures": ["Platinum"]
     },
     {
-      "pos": {"x": -815, "y": -954},
+      "pos": {"x": -785, "y": -938},
       "name": "A3566",
       "style": "asteroid-10",
       "trader": null,
@@ -3766,8 +3777,8 @@
     },
     {
       "pos": {"x": 872, "y": 43},
-      "name": "A7243",
-      "style": "asteroid-9",
+      "name": "Zealou Workshops",
+      "style": "anomaly-helyon_shipyards",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3934,7 +3945,7 @@
     },
     {
       "pos": {"x": 948, "y": 146},
-      "name": "A4846",
+      "name": "A4847",
       "style": "asteroid-13",
       "trader": null,
       "enemy": null,
@@ -5955,7 +5966,7 @@
       "name": "A132",
       "style": "asteroid-7",
       "trader": null,
-      "enemy": null,
+      "enemy": {"type": "Rugged Drone", "loot": []},
       "treasures": []
     },
     {
@@ -7053,6 +7064,14 @@
       "trader": null,
       "enemy": null,
       "treasures": []
+    },
+    {
+      "pos": {"x": -802, "y": -886},
+      "name": "A4846",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
     }
   ],
   "quests": [
@@ -7236,6 +7255,14 @@
       "tags": "soma",
       "color": "0ff",
       "icon": "enter"
+    },
+    {
+      "name": "Expanse Archeology",
+      "xml": "\n<condition state=\"surface\" at-dest=\"Zealou Workshops\" trigger=\"HAIL STATION\"/>\n<dialog>A weak signal from one of the docked ships is broadcasting a call for freelancer.\n\n`Assignment available. Historians needed.`</dialog>\n<condition state=\"surface\" at-dest=\"Zealou Workshops\" trigger=\"HAIL SHIP\"/>\n<dialog model=\"Helyon Shipyards\">\n_\"Finally! An answer to out bulletin.\"_\n_\"I am from the Archeology Institution and we will pay good credits for help in excavations of the Al Se Expanse\"_\n</dialog>\n<dialog model=\"Helyon Shipyards\" ok=\"OK\" cancel=\"MAYBE LATER\">\n_\"Are you willing to help us? Look for *Alien Relics* that might be present on planets in the *Al Se Expanse*. Unknown exactly where.\"_\n</dialog>\n<place-item item=\"Alien Relic\" dest=\"Mammon\"/>\n<place-item item=\"Alien Relic\" dest=\"Grig\"/>\n<place-item item=\"Alien Relic\" dest=\"Ko\"/>\n<condition state=\"surface\" have-item=\"Alien Relic\" at-dest=\"Zealou Workshops\" trigger=\"DELIVER ALIEN RELIC\"/>\n<take item=\"Alien Relic\" />\n<dialog>_\"Good work. Please, there might be more out there.\"_</dialog>\n<condition state=\"surface\" have-item=\"Alien Relic\" at-dest=\"Zealou Workshops\" trigger=\"DELIVER ALIEN RELIC\"/>\n<take item=\"Alien Relic\" />\n<dialog>_\"Excellent work. Please, there might be more out there.\"_</dialog>\n<condition state=\"surface\" have-item=\"Alien Relic\" at-dest=\"Zealou Workshops\" trigger=\"DELIVER ALIEN RELIC\"/>\n<take item=\"Alien Relic\" />\n<dialog>_\"Fantastic work. This is enough for several years of research. Please, accept this compensation.\"_</dialog>\n<give credits=\"1200\"/>\n\n\n\n\n",
+      "color": "990",
+      "icon": "star",
+      "tags": "expanse",
+      "isFile": false
     },
     {
       "name": "Larato Node",
@@ -13688,8 +13715,8 @@
     {
       "name": "Outer Pavonis",
       "audio": "music-sand dark",
-      "pos": {"x": -722, "y": -1064},
-      "radius": 150
+      "pos": {"x": -760, "y": -1056},
+      "radius": 190
     },
     {
       "name": "Charm Sphere",
