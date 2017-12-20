@@ -1,7 +1,7 @@
 <editor-app>
 
   <div class="main-menu">
-    <a onclick={toggleFileMenu} class={ 'tab toggle-tab': true, active: isFileMenuOpen }>file</a>
+    <a onclick={toggleFileMenu} class={ 'tab toggle-tab': true, active: isFileMenuOpen }>file ▾</a>
     <a each={e in tabs} href="#{e}" onclick={pageChange} class={tab:true, active: page=='#'+e}>{e}</a>
     <div class="file-tools">
       <label><input type=checkbox ref="useStorageInput" checked={useLocalStorage} onchange={updateAutoSaving}> Use localstorage</label>
@@ -193,16 +193,21 @@
       float: right;
       margin: 6px 6px 0 0;
     }
-    a.toggle-tab {
-      width: 20px;
-      border-left: 1px solid #f8f8f8;
-      border-right: 1px solid #f8f8f8;
+    a.tab.toggle-tab {
+      width: 35px;
+      border-left: 1px solid transparent;
+      border-right: 1px solid #ddd;
+      background: rgba(0,0,0,0.05);
+      padding-right: 0;
+      cursor: pointer;
+    }
+    a.tab {
+      padding: 5px 10px;
     }
     a.tab, a.tab:active, a.tab:hover, a.tab:visited {
       display: inline-block;
       text-decoration: none;
       color: #000;
-      padding: 5px 10px;
     }
     a.tab.active {
       background: #ddd;

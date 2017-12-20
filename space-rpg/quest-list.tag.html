@@ -29,7 +29,8 @@
       <em>icon</em>
       <select ref="iconSelect" onchange={setFields} value={selected && selected.icon}>
         <option each={icon in icons}>{icon}</option>
-      </select>
+      </select><br/>
+      <em>is file</em><input type=checkbox onchange={setFields} ref="isFileCheckbox" checked={selected && selected.isFile}>
     </div>
     <label>Tags</label>
     <input type="text" value={selected && selected.tags} onchange={setFields} ref="tagsField" placeholder="Tags...">
@@ -122,6 +123,7 @@
         self.selected.color = self.toShortColor(self.refs.colorField.value)
         self.selected.icon = self.refs.iconSelect.value
         self.selected.tags = self.refs.tagsField.value
+        self.selected.isFile = self.refs.isFileCheckbox.checked
       }
     }
 

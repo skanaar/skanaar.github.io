@@ -29,6 +29,11 @@
       d="M-2,2 L0,-2 L2,2 Z"
       riot-transform={'translate(' + (screenPos.x+radiusFor(entity)+3) + ',' + (screenPos.y-radiusFor(entity)-3) + ')'}
       fill="rgba(255,0,0,0.5)" stroke="#F00"/>
+    <path
+      each={questDestinations}
+      d="M-2,0 L0,3 L2,0 L0,-3 Z"
+      riot-transform={'translate(' + screenPos.x + ',' + (screenPos.y-radiusFor(entity)-3) + ')'}
+      fill="#08F" stroke="#08F"/>
     <ellipse
       each={treasureDestinations()}
       riot-cx={screenPos.x+3} riot-cy={screenPos.y+3}
@@ -457,6 +462,13 @@
       self.radiusCache['region-1'] = 6
     }
 
+    self.questDestinations = []
+    function buildQuestCache() {
+      var dests = _.compact(_.flatten(self.world.quests.map(e => e.xml.match(/dest="[^"]+/gm))))
+        .map(e => e.substr(6))
+      self.questDestinations = self.nodes.filter(e => dests.includes(e.entity.name))
+    }
+
     function prepareWorldForSave() {
       self.world.destinations = self.nodes.filter(e => e.type === 'celestial').map(e => e.entity)
       self.world.destinations.forEach(function (e) {
@@ -485,6 +497,7 @@
       window.document.addEventListener('keydown', self.keydown)
       loadWorld()
       buildRadiusCache()
+      buildQuestCache()
       window.scrollTo(self.dx/3, self.dy/3)
     })
 
