@@ -7188,15 +7188,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 864, "y": 1964},
-      "name": "Buoy 54",
-      "style": "anomaly-buoy",
-      "trader": null,
-      "enemy": null,
-      "treasures": []
-    },
-    {
-      "pos": {"x": 856, "y": 2080},
+      "pos": {"x": 916, "y": 2040},
       "name": "Neutron Star",
       "style": "star-neutron",
       "trader": null,
@@ -7394,9 +7386,161 @@
       },
       "enemy": null,
       "treasures": []
+    },
+    {
+      "pos": {"x": 1158, "y": 2140},
+      "name": "Cloud 816",
+      "style": "cloud-purple",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 960, "y": 2244},
+      "name": "Cloud 735",
+      "style": "cloud-purple",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 811, "y": 2275},
+      "name": "Cloud 634",
+      "style": "cloud-purple",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 639, "y": 2136},
+      "name": "Cloud 353",
+      "style": "cloud-purple",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 663, "y": 1926},
+      "name": "Cloud 187",
+      "style": "cloud-purple",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 789, "y": 1861},
+      "name": "Cloud 254",
+      "style": "cloud-purple",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 915, "y": 1867},
+      "name": "Cloud 406",
+      "style": "cloud-purple",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1142, "y": 1974},
+      "name": "Cloud 672",
+      "style": "cloud-purple",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1044, "y": 1998},
+      "name": "A1142",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1002, "y": 2056},
+      "name": "A1158",
+      "style": "planet-neutron-3",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 959, "y": 2113},
+      "name": "A1172",
+      "style": "planet-neutron-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 880, "y": 2187},
+      "name": "A1167",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 872, "y": 2086},
+      "name": "Eye of the Storm",
+      "style": "planet-blue-forest",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 841, "y": 2032},
+      "name": "A973",
+      "style": "planet-neutron-2",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 775, "y": 1954},
+      "name": "A829",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 884, "y": 1946},
+      "name": "A930",
+      "style": "planet-neutron-3",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 981, "y": 1973},
+      "name": "A1054",
+      "style": "planet-neutron-2",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 808, "y": 2049},
+      "name": "A957",
+      "style": "asteroid-1",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
     }
   ],
   "quests": [
+    {
+      "name": "Hive Mind",
+      "xml": "\n<condition state=\"space\" at-dest=\"Eye of the Storm\" trigger=\"TRIGGER\"/>\n<dialog model=\"Ursula\">The freelancer's ship stops dead in front of you. A voice is heard in your cabin.\n\n_\"We have reached home. Come. Join us.\"_</dialog>\n<dialog model=\"Ursula\">\nThe freelancer turns toward you, her weapons hot.\n\n*Betrayal!*\n</dialog>",
+      "color": "7ff",
+      "icon": "star",
+      "tags": "end",
+      "isFile": false
+    },
     {
       "name": "REFERENCE",
       "xml": "<!-- Pause the quest until all conditions are fulfilled. All attributes are optional. -->\n<!-- have-item accepts: semicolon separated list of items that the player must possess -->\n<!-- at-dest accepts: single destination name -->\n<!-- no-enemy-at-dest: semicolon separated list of destination names that must be cleared of enemies -->\n<!-- not-at-dest: single destination name -->\n<!-- have-credits: number of credits that player must possess -->\n<!-- trigger: if omitted condition is triggered automatically. If present the condition is triggered with a button in the Radar View with the text set to the provided string -->\n<condition have-item=\"Shiny Meteorite;Blue seeds\" at-dest=\"Backwater\" no-enemy-at-dest=\"Baola\" not-at-dest=\"Backwater\" have-credits=\"3000\" trigger=\"EXPLORE\"/>\n\n<!-- Add a lootable item to the destination. -->\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n\n<!-- Add a purchasable item to the destination's trader. -->\n<place-inventory dest=\"Backwater\" item=\"Phased Ray\"/>\n\n<!-- Set enemy at destination -->\n<place-enemy dest=\"Backwater\" enemy=\"Monitor Drone\"/>\n\n<!-- Display a message.\nIf the optional ok and cancel attributes are present they will appear as buttons. Cancel will rewinds the quest one step, so that the same trigger that triggered the quest will display the same message the next turn. Ok will progress the quest as normally. \nIf the optional ok-goto=\"x\" and cancel-goto=\"x\" attributes are present ok and cancel will jump to the corresponding <mark id=\"x\"/> tags in this script.\n-->\n<dialog>\"Hey, hitchhiker!\"</dialog>\n<dialog ok=\"YES PLEASE\" cancel=\"NO THANKS\">\"Would you like some tea?\"</dialog>\n<dialog ok=\"YES PLEASE\" cancel=\"NO THANKS\" ok-goto=\"tea_drink\" cancel-goto=\"end_quest\">\"Would you like some tea?\"</dialog>\n\n<!-- Include this quest in the quest list. -->\n<add-to-quest-list/>\n<!-- Add item or credits to the player's inventory. -->\n<give credits=\"900\"/>\n<give item=\"Phased Ray\"/>\n\n<!-- Remove an item or credits from the player's inventory. -->\n<take credits=\"900\"/>\n<take item=\"Phased Ray\"/>\n\n<!-- Place a quest marker on the map. color and icon attributes are optional. icon can take these values: \"arrow\", \"square\", \"enter\", \"exit\". A quest can only have a single map marker. -->\n<mark-on-map dest=\"Samson's Folly\" color=\"0F0\" icon=\"arrow\"/>\n\n<!-- Change the player's ship. -->\n<change-ship ship=\"Kerr Clipper\"/>\n\n<!-- Clear the map marker for this quest. -->\n<remove-map-marker/>\n\n<!-- Transports the player to another destination. -->\n<travel dest=\"Backwater\"/>\n\n<!-- Labels this line in the script. This mark can then be referred to in goto directives -->\n<mark id=\"quest_position\" />\n\n<!-- Sets the quest progress to the <mark/> tag with the provided id -->\n<goto mark=\"quest_position\"/>\n\n<!-- A goto directive that modified another quest -->\n<modify-quest quest=\"A Quest Name\" goto-mark=\"quest_position\"/>\n",
@@ -7580,7 +7724,7 @@
     },
     {
       "name": "Deluvian Tablet",
-      "xml": "\n<condition at-dest=\"Obria\" />\n<place-item item=\"Deluvian Tablet\" dest=\"Obria\" />\n<condition have-item=\"Deluvian Tablet\"/>\n<take item=\"Deluvian Tablet\"/>\n<dialog>The signal source leads to ancient ruins that reveal stone tablets filled with inscriptions.</dialog>\n<dialog model=\"Tablet\">`These inscriptions are our legacy. Our last exodus ship has left, we that remain leave have our fate sealed.`</dialog>\n<dialog model=\"Tablet\">`Our society was a peaceful one, and it ended when our oceans dried up. Deep in the Pio mountains we will now go to store our knowledge.`</dialog>\n<add-to-quest-list />\n<condition state=\"surface\" at-dest=\"Obria\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Obria\" item=\"Deluvian Tablet\" />\n<condition have-item=\"Deluvian Tablet\"/>\n<take item=\"Deluvian Tablet\"/>\n<dialog model=\"Tablet\">`Ahead of our fleets we send probes. Their task is to pave the way, find planets and turn dry worlds into oceans. Prepare for our survival.`</dialog>\n<dialog model=\"Tablet\">`The first exodus ship left a full generation ago. That ship went past the great star, to the other side of this Expanse.`</dialog>\n<mark-on-map dest=\"Fatos\" />\n<condition state=\"surface\" at-dest=\"Fatos\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Fatos\" item=\"Deluvian Tablet\" />\n<condition have-item=\"Deluvian Tablet\"/>\n<take item=\"Deluvian Tablet\"/>\n<dialog model=\"Tablet\">`Our probes must have failed. This world is dry. We will continue our journey in search for a better world.`</dialog>\n<dialog model=\"Tablet\">`We leave this tablet here as a marker for others. We hope we will find a safe haven near the bright blue star.`</dialog>\n",
+      "xml": "\n<condition at-dest=\"Obria\" />\n<take item=\"Deluvian Tablet\"/>\n<dialog>The signal source leads to ancient ruins that reveal stone tablets filled with inscriptions.</dialog>\n<dialog model=\"Tablet\">`These inscriptions are our legacy. Our last exodus ship has left, we that remain leave have our fate sealed.`</dialog>\n<dialog model=\"Tablet\">`Our society was a peaceful one, and it ended when our oceans dried up. Deep in the Pio mountains we will now go to store our knowledge.`</dialog>\n<add-to-quest-list />\n<condition state=\"surface\" at-dest=\"Obria\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Obria\" item=\"Deluvian Tablet\" />\n<condition have-item=\"Deluvian Tablet\"/>\n<take item=\"Deluvian Tablet\"/>\n<dialog model=\"Tablet\">`Ahead of our fleets we send probes. Their task is to pave the way, find planets and turn dry worlds into oceans. Prepare for our survival.`</dialog>\n<dialog model=\"Tablet\">`The first exodus ship left a full generation ago. That ship went past the great star, to the other side of this Expanse.`</dialog>\n<mark-on-map dest=\"Fatos\" />\n<condition state=\"surface\" at-dest=\"Fatos\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Fatos\" item=\"Deluvian Tablet\" />\n<condition have-item=\"Deluvian Tablet\"/>\n<take item=\"Deluvian Tablet\"/>\n<dialog model=\"Tablet\">`Our probes must have failed. This world is dry. We will continue our journey in search for a better world.`</dialog>\n<dialog model=\"Tablet\">`We leave this tablet here as a marker for others. We hope we will find a safe haven near the bright blue star.`</dialog>\n",
       "color": "0f0",
       "icon": "square",
       "tags": "expanse",
@@ -7757,7 +7901,11 @@
       "name": "Tablet",
       "tags": "prop",
       "geometry": "composite",
-      "transform": [["rotate", 55, 0, 0], ["translate", 0, 0, -100]],
+      "transform": [
+        ["rotate", 55, 0, 0],
+        ["translate", -30, 30, -100],
+        ["scale", 1.2, 1.2, 1.2]
+      ],
       "parts": [
         {
           "geometry": "cube",
@@ -7786,7 +7934,7 @@
       "geometry": "composite",
       "tags": "ship",
       "transform": [
-        ["scale", 1.7, 1.7, 1.7],
+        ["scale", 1.6, 1.6, 1.6],
         ["rotate", 0, 0, 180],
         ["translate", 0, 0, -70]
       ],
@@ -14101,6 +14249,12 @@
       "audio": "music-sand dark",
       "pos": {"x": 1300, "y": -1140},
       "radius": 130
+    },
+    {
+      "name": "Exclusion Zone",
+      "audio": "music-sand dark",
+      "pos": {"x": 914, "y": 2066},
+      "radius": 300
     }
   ],
   "name": "Skanaar's World"
