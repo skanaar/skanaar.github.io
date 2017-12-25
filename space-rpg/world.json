@@ -7509,7 +7509,7 @@
     },
     {
       "name": "University Bulletin",
-      "xml": "\n<condition at-dest=\"The Bush Transfer Buoy\"/>\n<dialog>This buoy is looping a bulletin broadcast.\n\n`*Pavonis Smoke* University is offering contract work.`\n`Pavonis Mining Corp is offering contract work.`</dialog>",
+      "xml": "\n<condition at-dest=\"The Bush Transfer Buoy\"/>\n<add-to-quest-list />\n<dialog>This buoy is looping a bulletin broadcast.\n`- Pavonis Smoke University is offering contract work.`\n`- Pavonis Mining Corp is offering contract work.`</dialog>",
       "color": "0f0",
       "icon": "square",
       "tags": "pavonis",
@@ -7580,7 +7580,7 @@
     },
     {
       "name": "Deluvian Tablet",
-      "xml": "\n<condition have-item=\"Deluvian Tablet\"/>\n<take item=\"Deluvian Tablet\"/>\n<dialog>The signal source leads to ancient ruins that reveal stone tablets filled with inscriptions.</dialog>\n<dialog>`These inscriptions are our legacy. Our last exodus ship has left, we that remain leave have our fate sealed.`</dialog>\n<dialog>`Our society was a peaceful one, and it ended when our oceans dried up. Deep in the Pio mountains we will now go to store our knowledge.`</dialog>\n<add-to-quest-list />\n<condition state=\"surface\" at-dest=\"Obria\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Obria\" item=\"Deluvian Tablet\" />\n<condition have-item=\"Deluvian Tablet\"/>\n<take item=\"Deluvian Tablet\"/>\n<dialog>`Ahead of our fleets we send probes. Their task is to pave the way, find planets and turn dry worlds into oceans. Prepare for our survival.`</dialog>\n<dialog>`The first exodus ship left a full generation ago. That ship went past the great star, to the other side of this Expanse.`</dialog>\n<mark-on-map dest=\"Fatos\" />\n<condition state=\"surface\" at-dest=\"Fatos\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Fatos\" item=\"Deluvian Tablet\" />\n<condition have-item=\"Deluvian Tablet\"/>\n<take item=\"Deluvian Tablet\"/>\n<dialog>`Our probes must have failed. This world is dry. We will continue our journey in search for a better world.`</dialog>\n<dialog>`We leave this tablet here as a marker for others. We hope we will find a safe haven near the bright blue star.`</dialog>\n",
+      "xml": "\n<condition at-dest=\"Obria\" />\n<place-item item=\"Deluvian Tablet\" dest=\"Obria\" />\n<condition have-item=\"Deluvian Tablet\"/>\n<take item=\"Deluvian Tablet\"/>\n<dialog>The signal source leads to ancient ruins that reveal stone tablets filled with inscriptions.</dialog>\n<dialog model=\"Tablet\">`These inscriptions are our legacy. Our last exodus ship has left, we that remain leave have our fate sealed.`</dialog>\n<dialog model=\"Tablet\">`Our society was a peaceful one, and it ended when our oceans dried up. Deep in the Pio mountains we will now go to store our knowledge.`</dialog>\n<add-to-quest-list />\n<condition state=\"surface\" at-dest=\"Obria\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Obria\" item=\"Deluvian Tablet\" />\n<condition have-item=\"Deluvian Tablet\"/>\n<take item=\"Deluvian Tablet\"/>\n<dialog model=\"Tablet\">`Ahead of our fleets we send probes. Their task is to pave the way, find planets and turn dry worlds into oceans. Prepare for our survival.`</dialog>\n<dialog model=\"Tablet\">`The first exodus ship left a full generation ago. That ship went past the great star, to the other side of this Expanse.`</dialog>\n<mark-on-map dest=\"Fatos\" />\n<condition state=\"surface\" at-dest=\"Fatos\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Fatos\" item=\"Deluvian Tablet\" />\n<condition have-item=\"Deluvian Tablet\"/>\n<take item=\"Deluvian Tablet\"/>\n<dialog model=\"Tablet\">`Our probes must have failed. This world is dry. We will continue our journey in search for a better world.`</dialog>\n<dialog model=\"Tablet\">`We leave this tablet here as a marker for others. We hope we will find a safe haven near the bright blue star.`</dialog>\n",
       "color": "0f0",
       "icon": "square",
       "tags": "expanse",
@@ -7753,6 +7753,34 @@
   ],
   "initialDestination": "Backwater",
   "models": [
+    {
+      "name": "Tablet",
+      "tags": "prop",
+      "geometry": "composite",
+      "transform": [["rotate", 55, 0, 0], ["translate", 0, 0, -100]],
+      "parts": [
+        {
+          "geometry": "cube",
+          "transform": [
+            ["rotate", 0, 0, 45],
+            ["parabola", 0, 0.2, 0],
+            ["scale", 70, 70, 10]
+          ]
+        },
+        {
+          "geometry": "mesh",
+          "transform": [["scale", 3, 3, 3], ["rotate", 0, 0, 0]],
+          "quads": [
+            [[2, 20, -2], [18, 20, -2], [15, 22, -2], [2, 22, -2]],
+            [[-25, 10, -2], [-2, 10, -2], [-2, 12, -2], [-27, 12, -2]],
+            [[-16, 0, -2], [-2, 0, -2], [-2, 2, -2], [-18, 2, -2]],
+            [[2, -10, -2], [10, -10, -2], [12, -8, -2], [2, -8, -2]],
+            [[2, -5, -2], [14, -5, -2], [16, -3, -2], [2, -3, -2]],
+            [[-9, -10, -2], [-2, -10, -2], [-2, -8, -2], [-11, -8, -2]]
+          ]
+        }
+      ]
+    },
     {
       "name": "Hauler",
       "geometry": "composite",
