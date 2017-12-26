@@ -11,13 +11,21 @@
 
   <textarea id="quest-editor"></textarea>
 
-  <div class="toolbox quest-tools">
+  <div if={selected} class="toolbox quest-tools">
     <button onclick={add}>+ New Quest</button>
     <button onclick={popupFormattedText}>{!formattedText ? 'Show' : 'Hide'} formatted</button>
-    <textarea rows=1 if={!!formattedText}>{formattedText}</textarea>
+    <button onclick={previewDialog}>{!preview ? 'Show' : 'Hide'} preview</button>
     <div class="btn-group">
       <a class="toggle-btn" onclick={up}>Up in list</a><a class="toggle-btn" onclick={down}>Down in list</a>
     </div>
+  </div>
+
+  <div if={!!formattedText} class="quest-preview">
+    <textarea rows=10 class="quest-all-formatted">{formattedText}</textarea>
+  </div>
+
+  <div if={preview} class="quest-preview">
+    <div each={page in preview}>{page}</div>
   </div>
 
   <div class="sidebar" if={selected}>
@@ -51,6 +59,7 @@
     self.world = app.nullWorld()
     self.warnings = []
     self.formattedText = null
+    self.preview = null
     self.selected = null
     self.icons = 'square bar pillar bookmark star rhomb drop triangle chevron trader enter exit heart shield bolt'.split(' ')
     self.templates = [
@@ -83,15 +92,22 @@
       return self.world.quests.filter(predicate)
     }
 
+    function getDialogs(quest) {
+      var cleanup = s => s.replace(/^[\n ]+|[\n ]+$|`|_|\*/g, '')
+      var dialogs = quest.xml.match(/>([^>]*)<\/dialog>/g) || []
+      return dialogs.map(e => cleanup(e.substr(1, e.length-10)))
+    }
+
     self.popupFormattedText = function () {
-      if (self.formattedText) {
+      if (self.formattedText)
         self.formattedText = null
-        return
-      }
-      var cleanup = s => s.replace(/`|_|\*/g, '')
-      var steps = quest => (quest.xml.match(/>([^>]*)<\/dialog>/g) || []).map(e => cleanup(e.substr(1, e.length-10)))
-      var text = self.filteredItems().map(q => `\n\n\n${q.name.toUpperCase()}\n---------\n${steps(q).join('\n----\n')}`)
-      self.formattedText = text
+      else
+        self.formattedText = self.filteredItems().filter(e => e.name != 'REFERENCE').map(q => `\n\n\n${q.name.toUpperCase()}\n---------\n${getDialogs(q).join('\n----\n')}`)
+    }
+
+    self.previewDialog = function () {
+      if (self.preview) self.preview = null
+      else self.preview = getDialogs(self.selected)
     }
 
     self.useTemplate = function (e) {
@@ -191,6 +207,39 @@
     .quest-template {
       margin-bottom: 2px;
       width: 95%;
+    }
+    .quest-preview {
+      position: absolute;
+      top: 100px;
+      left: 0;
+      right: 0;
+    }
+    .quest-preview div {
+      width: 340px;
+      height: 140px;
+      margin: 10px auto;
+      overflow: hidden;
+      font-family: "Avenir Next Condensed";
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 120%;
+      color: #ddd;
+      background: black;
+      border-radius: 2px;
+      padding: 10px;
+      box-shadow: 0 0 20px #888;
+      white-space: pre-line;
+    }
+    .quest-all-formatted {
+      display: block;
+      width: 500px;
+      height: 400px;
+      color: #ddd;
+      background: black;
+      border-radius: 2px;
+      padding: 10px;
+      margin: 10px auto;
+      box-shadow: 0 0 20px #888;
     }
   </style>
 

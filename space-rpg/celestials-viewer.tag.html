@@ -15,30 +15,30 @@
   </div>
 
   <div>
-    <celestial-preview celestial={selected && selected} />
-    <terrain-preview surface={selected && selected} />
+    <celestial-preview if={!!selected} celestial={selected} />
+    <terrain-preview if={hasSurface()} surface={selected} />
   </div>
 
   <div class="sidebar" show={!!selected}>
-    <select value={selected && selected.type} ref="typeChooser">
+    <select value={selection().type} ref="typeChooser">
       <option each={e in types}>{e}</option>
     </select>
-    <input type=text ref="nameField" value={selected && selected.name}>
+    <input type=text ref="nameField" value={selection().name}>
     
     <label>Attributes</label>
     <div class="input-grid">
-      <em>radius</em> <input type=number ref="rField" value={selected && selected.radius}><br/>
-      <em>height</em> <input type=number step=0.1 ref="heightField" value={selected && selected.height}><br/>
-      <em>ambient</em> <input type=number step=0.05 ref="ambField" value={selected && selected.ambient}><br/>
-      <em>octaves</em> <input type=number step=1 ref="octavesField" value={selected && selected.octaves}><br/>
-      <em>zoom</em> <input type=number step=0.1 ref="zoomField" value={selected && selected.zoom}><br/>
-      <em>falloff</em> <input type=number step=0.05 ref="falloffField" value={selected && selected.falloff}><br/>
-      <em>curve</em> <input type=text ref="curveField" value={selected && selected.curve.join()}><br/>
-      <em>spectrum</em> <input type=text ref="spectrumField" value={selected && selected.spectrum}><br/>
+      <em>radius</em> <input type=number ref="rField" value={selection().radius}><br/>
+      <em>height</em> <input type=number step=0.1 ref="heightField" value={selection().height}><br/>
+      <em>ambient</em> <input type=number step=0.05 ref="ambField" value={selection().ambient}><br/>
+      <em>octaves</em> <input type=number step=1 ref="octavesField" value={selection().octaves}><br/>
+      <em>zoom</em> <input type=number step=0.1 ref="zoomField" value={selection().zoom}><br/>
+      <em>falloff</em> <input type=number step=0.05 ref="falloffField" value={selection().falloff}><br/>
+      <em>curve</em> <input type=text ref="curveField" value={selection().curve.join()}><br/>
+      <em>spectrum</em> <input type=text ref="spectrumField" value={selection().spectrum}><br/>
     </div>
 
     <label if={hasModel()}>Model</label>
-    <select show={hasModel()} value={selected && selected.model} ref="modelChooser">
+    <select show={hasModel()} value={selection().model} ref="modelChooser">
       <option each={e in world.models}>{e.name}</option>
     </select>
 
@@ -70,6 +70,8 @@
     self.types = app.celestialTypes
 
     self.filteredItems = () => self.world.celestials.filter(self.refs.filterInput.predicate)
+
+    self.selection = () => self.selected || { curve: [] }
 
     self.hasSurface = function () {
       return self.selected && ['planet', 'asteroid'].includes(self.selected.type)
