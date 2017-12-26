@@ -894,6 +894,39 @@
       "value": 0,
       "isFlying": false,
       "slots": 0
+    },
+    {
+      "attr": {
+        "maxhull": 250,
+        "maxshield": 50,
+        "maxenergy": 200,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 2, "shield": 2, "energy": 2},
+      "name": "Pilot",
+      "level": 9,
+      "slots": 0,
+      "visual": "Ursula",
+      "inventory": [
+        "Mk8 Battery",
+        "Aegis Cell",
+        "Mk8 Capacitor",
+        "Remedy Kit",
+        "Onaut Shield",
+        "Boson Armor",
+        "Mw Disruptor",
+        "Charge Driver",
+        "Zeus Beam",
+        "Henon Pulse",
+        "Chrono Ray",
+        "Karan Gun",
+        "Dermal Inducer",
+        "Mk6 Reactor"
+      ],
+      "isFlying": true
     }
   ],
   "items": [
@@ -3746,7 +3779,7 @@
     {
       "pos": {"x": -412, "y": -854},
       "name": "Pavonis Smoke",
-      "style": "planet-badlands-1",
+      "style": "planet-green-6",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -3935,7 +3968,7 @@
     {
       "pos": {"x": -410, "y": -660},
       "name": "Pavonis Ember",
-      "style": "planet-hell-3",
+      "style": "planet-badlands-3",
       "trader": null,
       "enemy": null,
       "treasures": ["Tungsten", "Alien Fossil", "Alien Artifact"],
@@ -3984,7 +4017,7 @@
     {
       "pos": {"x": 615, "y": -278},
       "name": "A1522",
-      "style": "asteroid-7",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4008,7 +4041,7 @@
     {
       "pos": {"x": 670, "y": -389},
       "name": "Obria",
-      "style": "planet-green-1",
+      "style": "planet-badlands-3",
       "trader": null,
       "enemy": null,
       "treasures": ["Deluvian Tablet"]
@@ -4032,7 +4065,7 @@
     {
       "pos": {"x": 1048, "y": -263},
       "name": "Grig",
-      "style": "planet-hell-4",
+      "style": "planet-green-6",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4040,7 +4073,7 @@
     {
       "pos": {"x": 720, "y": -188},
       "name": "Galata",
-      "style": "jovian-3",
+      "style": "jovian-4",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4048,7 +4081,7 @@
     {
       "pos": {"x": 496, "y": -189},
       "name": "A9611",
-      "style": "asteroid-7",
+      "style": "asteroid-11",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4087,7 +4120,7 @@
     {
       "pos": {"x": 706, "y": -75},
       "name": "A625",
-      "style": "asteroid-2",
+      "style": "asteroid-1",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4127,7 +4160,7 @@
     {
       "pos": {"x": 1065, "y": -486},
       "name": "Maw",
-      "style": "planet-badlands-1",
+      "style": "planet-badlands-2",
       "trader": {"buy": 1.5, "sell": 0.75, "inventory": []},
       "enemy": null,
       "treasures": []
@@ -4135,7 +4168,7 @@
     {
       "pos": {"x": 1026, "y": -374},
       "name": "A2626",
-      "style": "asteroid-4",
+      "style": "asteroid-1",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4191,7 +4224,7 @@
     {
       "pos": {"x": 823, "y": -257},
       "name": "A2343",
-      "style": "asteroid-11",
+      "style": "asteroid-5",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4199,7 +4232,7 @@
     {
       "pos": {"x": 994, "y": -176},
       "name": "A9424",
-      "style": "asteroid-11",
+      "style": "asteroid-14",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4231,7 +4264,7 @@
     {
       "pos": {"x": 777, "y": 29},
       "name": "A7729",
-      "style": "asteroid-4",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5476,7 +5509,7 @@
     {
       "pos": {"x": -212, "y": -840},
       "name": "Mirror Moon",
-      "style": "planet-hell-1",
+      "style": "planet-s-rock-1",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -7489,7 +7522,7 @@
     {
       "pos": {"x": 872, "y": 2086},
       "name": "Eye of the Storm",
-      "style": "planet-blue-forest",
+      "style": "planet-green-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -7907,7 +7940,7 @@
     },
     {
       "name": "Hive Mind",
-      "xml": "\n<condition state=\"space\" at-dest=\"Eye of the Storm\" trigger=\"TRIGGER\"/>\n<dialog model=\"Ursula\">The freelancer's ship stops dead in front of you. A voice is heard in your cabin.\n\n_\"We have reached home. Come. Join us.\"_</dialog>\n<dialog model=\"Ursula\">\nThe freelancer turns toward you, her weapons hot.\n\n*Betrayal!*\n</dialog>",
+      "xml": "<condition state=\"space\" at-dest=\"Eye of the Storm\" trigger=\"TRIGGER\"/>\n<dialog model=\"Ursula\">The Freelancer's ship stop dead in front of you. A voice is heard in your cabin.\n\n_\"We have reached home. Come. Join us.\"_</dialog>\n<dialog model=\"Ursula\">\nThe Freelancer turns toward you, her weapons hot.\n\n*Betrayal!*\n</dialog>\n<place-enemy dest=\"Eye of the Storm\" enemy=\"Pilot\" loot=\"\"/>\n<condition no-enemy-at-dest=\"Eye of the Storm\" />\n<dialog model=\"Ursula\">\nYour barrage disable the Freelancer's ship. Parts of her hull come peeling off and severed pipes send burning fires into the vacuum.\n\nNo escape pod is launched.\n</dialog>\n<dialog>\nMatching speed and rotation, you maneuver alongside the crippled ship and dock to it.\n\nIf the Freelancer survived you will need some answers.\n</dialog>\n<dialog>\nThe airlock opens and out of the opening a wave of dust and particles flood the chamber. Tendrils hang from the walls inside the ship. Sheets of fungal growth obscure hang like curtains.\n\nThe entire ship is filled with a moist mold.\n</dialog>\n<dialog>\nForcing your way inside through the forest of mushroom stalks and furry stalactites of mold, you find the ship empty. No one is here. It has been empty all along.\n\n_\"Welcome. To Me. To Us.\"_\n</dialog>\n<dialog>\nInside your helmet a discreet message from your ship's computer light up. `Disabled ship is receiving data from the planet.`\n\n_\"This vessel is now forfeit. The new one is suitable. Are you suitable? Are You potentially We?\"_\n</dialog>\n<dialog>\nMoldy wines fall from the walls and enclose you. The air liquifies and in seconds you suit is torn in shreads from your body.\n\nThe fungal growth enclose you, and penetrates you. The last thing you feel is it filling your every pore.\n</dialog>\n<dialog>\n*You* never really wake up.\nBut your consciousness does. Not solitary any more, but as a part of *Me*.\n\nThe old ship is discarded and the extension of *Me* is moved over to the new ship.\n</dialog>\n<dialog>\n*You* learn so much. *You* are so old. A whole planetary surface, a single consciousness.\n\n_\"The last *Agent*, the Freelancer, was recruiting a new template. A successor to continue its work. *You* are now *I*. Go out and explore. Become an *Agent*.\"_\n</dialog>\n<dialog>\nInstincts guide you. And reason. On this planet *You* are eternal. But the outsiders are forever changing.\n\nYou MUST go out and explore. Posing as your old form, assessing the other races. Posing as your old form. And if need be take action. *I* must be protected. *I* must survive.\n</dialog>\n",
       "color": "7ff",
       "icon": "star",
       "tags": "end",
@@ -13930,11 +13963,11 @@
       "name": "jovian-1",
       "radius": 25,
       "ambient": 0,
-      "zoom": 1,
+      "zoom": 2,
       "height": 1,
       "octaves": 3,
       "curve": [0, 1],
-      "spectrum": ["5fe", "c6f"],
+      "spectrum": ["5fe", "c6f", "D8F"],
       "model": null,
       "falloff": 0.4
     },
@@ -13943,7 +13976,7 @@
       "name": "jovian-2",
       "radius": 30,
       "ambient": 0,
-      "zoom": 1,
+      "zoom": 2,
       "height": 1,
       "octaves": 3,
       "curve": [0, 1],
@@ -13956,7 +13989,7 @@
       "name": "jovian-3",
       "radius": 25,
       "ambient": 0,
-      "zoom": 1,
+      "zoom": 2,
       "height": 1,
       "octaves": 3,
       "curve": [0, 1],
@@ -13966,15 +13999,28 @@
     },
     {
       "type": "jovian",
+      "name": "jovian-4",
+      "radius": 30,
+      "ambient": 0,
+      "zoom": 2,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["C84", "A87", "DEE"],
+      "model": null,
+      "falloff": 0.4
+    },
+    {
+      "type": "jovian",
       "model": null,
       "name": "jovian-mono",
       "radius": 27,
       "ambient": 0,
-      "zoom": 1,
+      "zoom": 2,
       "height": 1,
       "octaves": 3,
       "curve": [0, 1],
-      "spectrum": ["eee", "444", "eee"],
+      "spectrum": ["AAA", "666", "EEE"],
       "falloff": 0.4
     },
     {
@@ -13989,6 +14035,32 @@
       "falloff": 0.45,
       "curve": [0, 0.2, 1],
       "spectrum": ["6A0", "FF8", "884"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-badlands-2",
+      "radius": 20,
+      "ambient": 0.1,
+      "zoom": 0.4,
+      "height": 1,
+      "octaves": 4,
+      "falloff": 0.6,
+      "curve": [0, 1],
+      "spectrum": ["444", "450", "898", "FFF"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-badlands-3",
+      "radius": 17,
+      "ambient": 0,
+      "zoom": 0.5,
+      "height": 0.8,
+      "octaves": 4,
+      "falloff": 0.6,
+      "curve": [0.5, 0.75, 0.9, 0.25, 0],
+      "spectrum": ["431", "540", "898", "BA9"]
     },
     {
       "type": "planet",
@@ -14085,7 +14157,7 @@
       "type": "planet",
       "model": null,
       "name": "planet-green-5",
-      "radius": 10,
+      "radius": 14,
       "ambient": 0.1,
       "zoom": 1,
       "height": 2,
@@ -14106,6 +14178,19 @@
       "falloff": 0.5,
       "curve": [0, 0.2, 0.4, 0.6, 0.8, 1, 0.9],
       "spectrum": ["FF8", "FF8", "8F0", "0F0", "0F0", "0D0", "080"]
+    },
+    {
+      "type": "planet",
+      "model": null,
+      "name": "planet-green-7",
+      "radius": 22,
+      "ambient": 0.1,
+      "zoom": 0.5,
+      "height": 1,
+      "octaves": 4,
+      "falloff": 0.65,
+      "curve": [0, 1],
+      "spectrum": ["449", "8A8", "8A0", "FFF"]
     },
     {
       "type": "planet",
@@ -14180,9 +14265,9 @@
       "zoom": 1,
       "height": 2,
       "octaves": 4,
-      "falloff": 0.3,
-      "curve": [0.4, 1, 0.45, 0.5, 0.3, 0, 0],
-      "spectrum": ["000", "000", "000", "666", "666", "666", "FFF", "FFF"]
+      "falloff": 0.4,
+      "curve": [0.4, 0.8, 0.45, 0.5, 0.3, 0, 0],
+      "spectrum": ["333", "444", "000", "666", "666", "666", "FFF", "FFF"]
     },
     {
       "type": "planet",

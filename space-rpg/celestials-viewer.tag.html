@@ -11,6 +11,7 @@
 
   <div class="toolbox">
     <button onclick={add}>+ New Celestial</button>
+    <button onclick={duplicate}>Duplicate</button>
     <button onclick={sort}>Sort list</button>
   </div>
 
@@ -94,6 +95,14 @@
       }
       self.world.celestials.unshift(obj)
       self.edit({ item: { e: self.world.celestials[0] } })
+    }
+
+    self.duplicate = function () {
+      var i = self.world.celestials.findIndex(e => e == self.selected)
+      var obj = JSON.parse(JSON.stringify(self.selected))
+      obj.name = obj.name + '-copy'
+      self.world.celestials.splice(i, 0, obj)
+      self.edit({ item: { e: obj } })
     }
 
     self.remove = function () {
