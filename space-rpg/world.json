@@ -898,6 +898,17 @@
   ],
   "items": [
     {
+      "name": "Deluvian Marker",
+      "type": "quest",
+      "level": 0,
+      "credits": -1,
+      "critical": 0,
+      "cooldown": false,
+      "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
+      "playerBuff": {"hull": 0, "shield": 0, "energy": 0},
+      "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
+    },
+    {
       "name": "Deluvian Tablet",
       "type": "quest",
       "level": 0,
@@ -4330,14 +4341,6 @@
       "treasures": []
     },
     {
-      "pos": {"x": 1142, "y": 8},
-      "name": "Debris 523",
-      "style": "anomaly-junk",
-      "trader": null,
-      "enemy": null,
-      "treasures": []
-    },
-    {
       "pos": {"x": 1405, "y": 1017},
       "name": "A5463",
       "style": "asteroid-2",
@@ -7249,7 +7252,7 @@
       "style": "planet-hell-2",
       "trader": null,
       "enemy": null,
-      "treasures": ["Gnat Incubator"]
+      "treasures": ["Gnat Incubator", "Deluvian Marker"]
     },
     {
       "pos": {"x": 2036, "y": 725},
@@ -7530,17 +7533,17 @@
       "trader": null,
       "enemy": null,
       "treasures": []
+    },
+    {
+      "pos": {"x": 1064, "y": 96},
+      "name": "Ancient Needle Ruin",
+      "style": "anomaly-needle-gate-broken",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
     }
   ],
   "quests": [
-    {
-      "name": "Hive Mind",
-      "xml": "\n<condition state=\"space\" at-dest=\"Eye of the Storm\" trigger=\"TRIGGER\"/>\n<dialog model=\"Ursula\">The freelancer's ship stops dead in front of you. A voice is heard in your cabin.\n\n_\"We have reached home. Come. Join us.\"_</dialog>\n<dialog model=\"Ursula\">\nThe freelancer turns toward you, her weapons hot.\n\n*Betrayal!*\n</dialog>",
-      "color": "7ff",
-      "icon": "star",
-      "tags": "end",
-      "isFile": false
-    },
     {
       "name": "REFERENCE",
       "xml": "<!-- Pause the quest until all conditions are fulfilled. All attributes are optional. -->\n<!-- have-item accepts: semicolon separated list of items that the player must possess -->\n<!-- at-dest accepts: single destination name -->\n<!-- no-enemy-at-dest: semicolon separated list of destination names that must be cleared of enemies -->\n<!-- not-at-dest: single destination name -->\n<!-- have-credits: number of credits that player must possess -->\n<!-- trigger: if omitted condition is triggered automatically. If present the condition is triggered with a button in the Radar View with the text set to the provided string -->\n<condition have-item=\"Shiny Meteorite;Blue seeds\" at-dest=\"Backwater\" no-enemy-at-dest=\"Baola\" not-at-dest=\"Backwater\" have-credits=\"3000\" trigger=\"EXPLORE\"/>\n\n<!-- Add a lootable item to the destination. -->\n<place-item dest=\"Backwater\" item=\"Shiny Meteorite\"/>\n\n<!-- Add a purchasable item to the destination's trader. -->\n<place-inventory dest=\"Backwater\" item=\"Phased Ray\"/>\n\n<!-- Set enemy at destination -->\n<place-enemy dest=\"Backwater\" enemy=\"Monitor Drone\"/>\n\n<!-- Display a message.\nIf the optional ok and cancel attributes are present they will appear as buttons. Cancel will rewinds the quest one step, so that the same trigger that triggered the quest will display the same message the next turn. Ok will progress the quest as normally. \nIf the optional ok-goto=\"x\" and cancel-goto=\"x\" attributes are present ok and cancel will jump to the corresponding <mark id=\"x\"/> tags in this script.\n-->\n<dialog>\"Hey, hitchhiker!\"</dialog>\n<dialog ok=\"YES PLEASE\" cancel=\"NO THANKS\">\"Would you like some tea?\"</dialog>\n<dialog ok=\"YES PLEASE\" cancel=\"NO THANKS\" ok-goto=\"tea_drink\" cancel-goto=\"end_quest\">\"Would you like some tea?\"</dialog>\n\n<!-- Include this quest in the quest list. -->\n<add-to-quest-list/>\n<!-- Add item or credits to the player's inventory. -->\n<give credits=\"900\"/>\n<give item=\"Phased Ray\"/>\n\n<!-- Remove an item or credits from the player's inventory. -->\n<take credits=\"900\"/>\n<take item=\"Phased Ray\"/>\n\n<!-- Place a quest marker on the map. color and icon attributes are optional. icon can take these values: \"arrow\", \"square\", \"enter\", \"exit\". A quest can only have a single map marker. -->\n<mark-on-map dest=\"Samson's Folly\" color=\"0F0\" icon=\"arrow\"/>\n\n<!-- Change the player's ship. -->\n<change-ship ship=\"Kerr Clipper\"/>\n\n<!-- Clear the map marker for this quest. -->\n<remove-map-marker/>\n\n<!-- Transports the player to another destination. -->\n<travel dest=\"Backwater\"/>\n\n<!-- Labels this line in the script. This mark can then be referred to in goto directives -->\n<mark id=\"quest_position\" />\n\n<!-- Sets the quest progress to the <mark/> tag with the provided id -->\n<goto mark=\"quest_position\"/>\n\n<!-- A goto directive that modified another quest -->\n<modify-quest quest=\"A Quest Name\" goto-mark=\"quest_position\"/>\n",
@@ -7724,10 +7727,18 @@
     },
     {
       "name": "Deluvian Tablet",
-      "xml": "\n<condition at-dest=\"Obria\" />\n<take item=\"Deluvian Tablet\"/>\n<dialog>The signal source leads to ancient ruins that reveal stone tablets filled with inscriptions.</dialog>\n<dialog model=\"Tablet\">`These inscriptions are our legacy. Our last exodus ship has left, we that remain leave have our fate sealed.`</dialog>\n<dialog model=\"Tablet\">`Our society was a peaceful one, and it ended when our oceans dried up. Deep in the Pio mountains we will now go to store our knowledge.`</dialog>\n<add-to-quest-list />\n<condition state=\"surface\" at-dest=\"Obria\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Obria\" item=\"Deluvian Tablet\" />\n<condition have-item=\"Deluvian Tablet\"/>\n<take item=\"Deluvian Tablet\"/>\n<dialog model=\"Tablet\">`Ahead of our fleets we send probes. Their task is to pave the way, find planets and turn dry worlds into oceans. Prepare for our survival.`</dialog>\n<dialog model=\"Tablet\">`The first exodus ship left a full generation ago. That ship went past the great star, to the other side of this Expanse.`</dialog>\n<mark-on-map dest=\"Fatos\" />\n<condition state=\"surface\" at-dest=\"Fatos\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Fatos\" item=\"Deluvian Tablet\" />\n<condition have-item=\"Deluvian Tablet\"/>\n<take item=\"Deluvian Tablet\"/>\n<dialog model=\"Tablet\">`Our probes must have failed. This world is dry. We will continue our journey in search for a better world.`</dialog>\n<dialog model=\"Tablet\">`We leave this tablet here as a marker for others. We hope we will find a safe haven near the bright blue star.`</dialog>\n",
+      "xml": "\n<condition have-item=\"Deluvian Tablet\" />\n<take item=\"Deluvian Tablet\"/>\n<dialog>The signal source leads to ancient ruins that reveal stone tablets filled with inscriptions.</dialog>\n<dialog model=\"Tablet\">_These inscriptions are our legacy. Our last exodus ship has left, we that remain have sealed our fate._</dialog>\n<dialog model=\"Tablet\">_Our society was a peaceful one, and it ended when our oceans dried up. Drop by drop the Scourge stole them. Unstoppable, they siphoned it from our planet._</dialog>\n<dialog model=\"Tablet\">_Deep in the Pio mountains we will now go to store our knowledge._</dialog>\n<add-to-quest-list />\n<condition state=\"surface\" at-dest=\"Obria\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Obria\" item=\"Deluvian Tablet\" />\n<condition have-item=\"Deluvian Tablet\"/>\n<take item=\"Deluvian Tablet\"/>\n<dialog model=\"Tablet\">_Ahead of our fleets we send probes. Their task is to pave the way, find planets and turn dry worlds into oceans. To make preparations for our survival._</dialog>\n<dialog model=\"Tablet\">_The first exodus ship left a full generation ago. That ship went past The Great Star, to the other side of this Expanse._</dialog>\n<mark-on-map dest=\"Fatos\" />\n<condition state=\"surface\" at-dest=\"Fatos\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Fatos\" item=\"Deluvian Tablet\" />\n<condition have-item=\"Deluvian Tablet\"/>\n<take item=\"Deluvian Tablet\"/>\n<dialog model=\"Tablet\">_Our probes must have failed, this is a dry world. We could stay and complete the work of the probes, but we must press on. For our worst fears have been made reality._\n_The Scourge are following us._</dialog>\n<dialog model=\"Tablet\">_We leave this tablet here as a marker for others. As warning. We hope we will find a safe haven near the bright blue star._</dialog>\n<dialog>_To cross The Great Void means we must construct a sacred aperture, and make a Great Jump._\n\n_It is our hope that the Scourge will not follow us across the Void._</dialog>\n",
       "color": "0f0",
       "icon": "square",
       "tags": "expanse",
+      "isFile": true
+    },
+    {
+      "name": "Deluvian Marker",
+      "xml": "\n<condition have-item=\"Deluvian Marker\" />\n<take item=\"Deluvian Marker\"/>\n<dialog>Among crumbling ruins an alien marker stands, its surface covered with inscriptions.</dialog>\n<dialog model=\"Tablet\">_Our exodus through the sacred apertures led  us here. Our new homeworld. Our haven._\n\n_This time we did not flee again when the Scourge finally found us._</dialog>\n<dialog model=\"Tablet\">_How the Scourge could travel across The Great Void is a mystery. It took them generations, but of such things the mindless Scourge care little._</dialog>\n<dialog model=\"Tablet\">_A myriad of tiny specks, the formless Scourge are like gnats. They seem unbeatable. This will be our last stand._</dialog>\n",
+      "color": "0f0",
+      "icon": "",
+      "tags": "soma",
       "isFile": true
     },
     {
@@ -7892,6 +7903,14 @@
       "color": "fff",
       "icon": "enter",
       "tags": "sternrat",
+      "isFile": false
+    },
+    {
+      "name": "Hive Mind",
+      "xml": "\n<condition state=\"space\" at-dest=\"Eye of the Storm\" trigger=\"TRIGGER\"/>\n<dialog model=\"Ursula\">The freelancer's ship stops dead in front of you. A voice is heard in your cabin.\n\n_\"We have reached home. Come. Join us.\"_</dialog>\n<dialog model=\"Ursula\">\nThe freelancer turns toward you, her weapons hot.\n\n*Betrayal!*\n</dialog>",
+      "color": "7ff",
+      "icon": "star",
+      "tags": "end",
       "isFile": false
     }
   ],
@@ -8546,6 +8565,177 @@
             [50, 0, 20],
             [40, 0, 20],
             [20, 0, 5]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Broken Needle Gate",
+      "geometry": "composite",
+      "tags": "anomaly",
+      "transform": [
+        ["scale", 0.6, 0.6, 0.6],
+        ["rotate", 20, -20, 0],
+        ["translate", 0, 0, -100]
+      ],
+      "parts": [
+        {
+          "name": "lower",
+          "geometry": "composite",
+          "transform": [["rotate", 90, 0, 0]],
+          "parts": [
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -27, 0, 60], ["translate", 0, 0, -70]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [
+                ["rotate", -7, 32, 0],
+                ["translate", 0, 0, -150],
+                ["parabola", 0, 0, 0.005]
+              ],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [
+                ["rotate", -7, 103, 0],
+                ["translate", 0, 120, -50],
+                ["parabola", 0, 0.002, 0]
+              ],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -27, 150, 0]],
+              "path": [[3, 0, -180], [1, 0, -50]]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 258, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            }
+          ]
+        },
+        {
+          "name": "upper",
+          "geometry": "composite",
+          "transform": [["rotate", -90, 0, 0]],
+          "parts": [
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 0, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 52, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 103, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 155, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 206, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 258, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            },
+            {
+              "geometry": "lathe",
+              "res": 6,
+              "transform": [["rotate", -7, 309, 0]],
+              "path": [
+                [10, 0, -160],
+                [40, 0, -170],
+                [35, 0, -120],
+                [3, 0, -120],
+                [1, 0, -50]
+              ]
+            }
           ]
         }
       ]
@@ -12984,71 +13174,6 @@
   ],
   "celestials": [
     {
-      "name": "anomaly-hauler",
-      "type": "anomaly",
-      "radius": 4,
-      "height": 2,
-      "ambient": 0.2,
-      "octaves": 3,
-      "zoom": 1.5,
-      "falloff": 0.3,
-      "curve": [0, 1],
-      "spectrum": ["F80", "F80"],
-      "model": "Hauler"
-    },
-    {
-      "name": "anomaly-brewery",
-      "type": "anomaly",
-      "radius": 4,
-      "height": 2,
-      "ambient": 0.2,
-      "octaves": 3,
-      "zoom": 1.5,
-      "falloff": 0.3,
-      "curve": [0, 1],
-      "spectrum": ["F80", "F80"],
-      "model": "Brewery"
-    },
-    {
-      "name": "asteroid-14",
-      "type": "asteroid",
-      "radius": 6,
-      "height": 1.4,
-      "ambient": 0,
-      "octaves": 4,
-      "zoom": 0.8,
-      "falloff": 0.3,
-      "curve": [0, 0.6, 1, 0.6, 0],
-      "spectrum": ["444", "666", "840", "844", "444"],
-      "model": null
-    },
-    {
-      "name": "anomaly-joes",
-      "type": "anomaly",
-      "radius": 4,
-      "height": 2,
-      "ambient": 0.2,
-      "octaves": 3,
-      "zoom": 1.5,
-      "falloff": 0.3,
-      "curve": [0, 1],
-      "spectrum": ["F80", "F80"],
-      "model": "Joe's Bar"
-    },
-    {
-      "type": "anomaly",
-      "model": "Smacky's",
-      "name": "anomaly-smackys",
-      "radius": 5,
-      "ambient": 0.2,
-      "zoom": 1,
-      "height": 1,
-      "octaves": 3,
-      "curve": [0, 1],
-      "spectrum": ["888", "D84"],
-      "falloff": 0.4
-    },
-    {
       "type": "anomaly",
       "model": "Ring Station",
       "name": "anomaly-Maxwell_Station",
@@ -13086,6 +13211,19 @@
       "curve": [0, 1],
       "spectrum": ["F80", "F80"],
       "falloff": 0.4
+    },
+    {
+      "name": "anomaly-brewery",
+      "type": "anomaly",
+      "radius": 4,
+      "height": 2,
+      "ambient": 0.2,
+      "octaves": 3,
+      "zoom": 1.5,
+      "falloff": 0.3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "model": "Brewery"
     },
     {
       "type": "anomaly",
@@ -13179,6 +13317,19 @@
       "falloff": 0.4
     },
     {
+      "name": "anomaly-hauler",
+      "type": "anomaly",
+      "radius": 4,
+      "height": 2,
+      "ambient": 0.2,
+      "octaves": 3,
+      "zoom": 1.5,
+      "falloff": 0.3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "model": "Hauler"
+    },
+    {
       "type": "anomaly",
       "model": "Helyon Shipyards",
       "name": "anomaly-helyon_shipyards",
@@ -13203,6 +13354,19 @@
       "curve": [0, 1],
       "spectrum": ["F80", "D84"],
       "falloff": 0.4
+    },
+    {
+      "name": "anomaly-joes",
+      "type": "anomaly",
+      "radius": 4,
+      "height": 2,
+      "ambient": 0.2,
+      "octaves": 3,
+      "zoom": 1.5,
+      "falloff": 0.3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "model": "Joe's Bar"
     },
     {
       "type": "anomaly",
@@ -13255,6 +13419,19 @@
       "curve": [0, 1],
       "spectrum": ["F80", "F80"],
       "falloff": 0.4
+    },
+    {
+      "name": "anomaly-needle-gate-broken",
+      "type": "anomaly",
+      "radius": 4,
+      "height": 2,
+      "ambient": 0.2,
+      "octaves": 3,
+      "zoom": 1.5,
+      "falloff": 0.3,
+      "curve": [0, 1],
+      "spectrum": ["F80", "F80"],
+      "model": "Broken Needle Gate"
     },
     {
       "type": "anomaly",
@@ -13319,6 +13496,19 @@
       "octaves": 3,
       "curve": [0, 1],
       "spectrum": ["F80", "F80"],
+      "falloff": 0.4
+    },
+    {
+      "type": "anomaly",
+      "model": "Smacky's",
+      "name": "anomaly-smackys",
+      "radius": 5,
+      "ambient": 0.2,
+      "zoom": 1,
+      "height": 1,
+      "octaves": 3,
+      "curve": [0, 1],
+      "spectrum": ["888", "D84"],
       "falloff": 0.4
     },
     {
@@ -13488,6 +13678,19 @@
       "falloff": 0.4,
       "curve": [1, 0.9, 0, 0.9, 1],
       "spectrum": ["8FF", "777"],
+      "model": null
+    },
+    {
+      "name": "asteroid-14",
+      "type": "asteroid",
+      "radius": 6,
+      "height": 1.4,
+      "ambient": 0,
+      "octaves": 4,
+      "zoom": 0.8,
+      "falloff": 0.3,
+      "curve": [0, 0.6, 1, 0.6, 0],
+      "spectrum": ["444", "666", "840", "844", "444"],
       "model": null
     },
     {
