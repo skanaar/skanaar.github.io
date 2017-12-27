@@ -32,7 +32,7 @@ body.enable-scroll {
 .sidebar {
   position: fixed;
   right: 0;
-  top: 26px;
+  top: 25px;
   bottom: 0;
   padding: 5px;
   background: #fafafa;
