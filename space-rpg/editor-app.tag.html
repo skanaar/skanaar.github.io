@@ -1,7 +1,7 @@
 <editor-app>
 
   <div class="main-menu">
-    <a onclick={toggleFileMenu} class={ 'tab toggle-tab': true, active: isFileMenuOpen }>file ▾</a>
+    <a onclick={toggleFileMenu} class={ 'tab toggle-tab': true, active: isFileMenuOpen }>file <svg height="6" width="6" style="display: inline-block"><path d="M0,0 L6,0 L3,5 Z" fill="#444" stroke="none"></path></svg></a>
     <a each={e in tabs} href="#{e}" onclick={pageChange} class={tab:true, active: page=='#'+e}>{e}</a>
     <div class="file-tools">
       <label><input type=checkbox ref="useStorageInput" checked={useLocalStorage} onchange={updateAutoSaving}> Use localstorage</label>
