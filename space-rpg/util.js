@@ -34,6 +34,10 @@ _.mixin({
     list.splice(index+1, 0, slice[0])
   },
 
+  hasPrefix: function (str, prefix) {
+    return str.substr(0,prefix.length) == prefix
+  },
+
   toDataUrl: function (payload) {
     return 'data:text;charset=utf-8,' + encodeURIComponent(payload)
   },

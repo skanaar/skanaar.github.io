@@ -92,6 +92,30 @@ window.validator = (function (){
     return errors
   }
 
+  function uniquePositions(entities) {
+    var errors = []
+    _.forEach(entities, function (a) {
+      _.forEach(entities, function (b) {
+        if (a === b) { return }
+        if (a.pos.x == b.pos.x && a.pos.y == b.pos.y) {
+          errors.push({ type:'destination', name:a.name, msg:'not unique position', arg:a.name })
+        }
+      })
+    })
+    return errors
+  }
+
+  function uniqueNeighbors(entities) {
+    var errors = []
+    _.pairs(entities, function (a, b) {
+      if (_.hasPrefix(a.style, 'anomaly') || _.hasPrefix(a.style, 'cloud')) { return }
+      if (a.style == b.style && dist(a.pos, b.pos) < 200) {
+        errors.push({ type: 'destination', name: a.name, msg: 'similar neighbors', arg: b.name })
+      }
+    })
+    return errors
+  }
+
   function errorCollector(type, func) {
     return function (world, entity) {
       var errors = []
@@ -109,6 +133,8 @@ window.validator = (function (){
     enemy: errorCollector('enemy', validateEnemy),
     world: function (world) {
       return _.flatten([
+        uniquePositions(world.destinations),
+        uniqueNeighbors(world.destinations),
         uniqueness('destination', world.destinations),
         uniqueness('item', world.items),
         world.quests.map(e => self.quest(world, e)),

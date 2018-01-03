@@ -729,7 +729,8 @@
         "Sacrifice Device",
         "Fluid Armor",
         "Mk6 Battery",
-        "Repair Robot"
+        "Repair Robot",
+        "Mk3 Reactor"
       ],
       "isFlying": true,
       "slots": 0,
@@ -942,7 +943,7 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
-      "name": "Deluvian Marker",
+      "name": "Diluvian Marker",
       "type": "quest",
       "level": 0,
       "credits": -1,
@@ -953,7 +954,7 @@
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
-      "name": "Deluvian Tablet",
+      "name": "Diluvian Tablet",
       "type": "quest",
       "level": 0,
       "credits": -1,
@@ -3766,7 +3767,7 @@
     {
       "pos": {"x": -537, "y": -833},
       "name": "A3767",
-      "style": "asteroid-2",
+      "style": "asteroid-14",
       "trader": null,
       "enemy": null,
       "treasures": ["Barium Ore"]
@@ -3827,7 +3828,7 @@
     {
       "pos": {"x": -521, "y": -1046},
       "name": "A3556",
-      "style": "asteroid-3",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": null,
       "treasures": ["Alien Fossil", "Copper", "Platinum"]
@@ -3851,7 +3852,7 @@
     {
       "pos": {"x": -579, "y": -687},
       "name": "A4911",
-      "style": "asteroid-8",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": ["Alien Fossil", "Barium Ore"]
@@ -3955,7 +3956,7 @@
     {
       "pos": {"x": -743, "y": -1020},
       "name": "A2170",
-      "style": "asteroid-1",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": {"type": "Rogue", "loot": []},
       "treasures": ["Barium Ore"]
@@ -4004,7 +4005,7 @@
     {
       "pos": {"x": 324, "y": -428},
       "name": "A2472",
-      "style": "asteroid-12",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4055,7 +4056,7 @@
       "style": "planet-badlands-3",
       "trader": null,
       "enemy": null,
-      "treasures": ["Deluvian Tablet"]
+      "treasures": ["Diluvian Tablet"]
     },
     {
       "pos": {"x": 886, "y": -459},
@@ -4427,7 +4428,7 @@
     {
       "pos": {"x": 1546, "y": 1232},
       "name": "A9247",
-      "style": "asteroid-4",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4508,7 +4509,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 835, "y": 944},
+      "pos": {"x": 835, "y": 948},
       "name": "A6219 Smoke",
       "style": "cloud-smoke",
       "trader": null,
@@ -4516,7 +4517,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 897, "y": 846},
+      "pos": {"x": 895, "y": 848},
       "name": "A717 Smoke",
       "style": "cloud-smoke",
       "trader": null,
@@ -4524,7 +4525,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 978, "y": 795},
+      "pos": {"x": 976, "y": 799},
       "name": "A123 Smoke",
       "style": "cloud-smoke",
       "trader": null,
@@ -4532,7 +4533,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 897, "y": 711},
+      "pos": {"x": 897, "y": 713},
       "name": "A9859 Smoke",
       "style": "cloud-smoke",
       "trader": null,
@@ -4686,7 +4687,7 @@
     {
       "pos": {"x": 100, "y": 286},
       "name": "Weaver 452",
-      "style": "asteroid-8",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -4782,7 +4783,7 @@
     {
       "pos": {"x": -28, "y": 501},
       "name": "Weaver 817",
-      "style": "asteroid-1",
+      "style": "asteroid-10",
       "trader": null,
       "enemy": {"type": "Bandit Reaver", "loot": []},
       "treasures": []
@@ -4829,24 +4830,24 @@
     },
     {
       "pos": {"x": 236, "y": 194},
-      "name": "Buoy 77",
-      "style": "anomaly-buoy",
+      "name": "Debris 430",
+      "style": "anomaly-debris",
       "trader": null,
       "enemy": null,
       "treasures": []
     },
     {
       "pos": {"x": 349, "y": 188},
-      "name": "Buoy 329",
-      "style": "anomaly-buoy",
+      "name": "Debris 537",
+      "style": "anomaly-ruin",
       "trader": null,
       "enemy": null,
       "treasures": []
     },
     {
       "pos": {"x": 434, "y": 106},
-      "name": "Buoy 323",
-      "style": "anomaly-buoy",
+      "name": "Debris 540",
+      "style": "anomaly-junk",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5064,7 +5065,7 @@
     {
       "pos": {"x": 174, "y": -1720},
       "name": "Outback A37",
-      "style": "asteroid-11",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": null,
       "treasures": ["Alien Fungi"]
@@ -5287,7 +5288,7 @@
     {
       "pos": {"x": 1013, "y": -1401},
       "name": "A9321",
-      "style": "asteroid-3",
+      "style": "asteroid-10",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5367,7 +5368,7 @@
     {
       "pos": {"x": 990, "y": -1540},
       "name": "A9040",
-      "style": "asteroid-11",
+      "style": "asteroid-5",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5424,7 +5425,7 @@
     {
       "pos": {"x": -29, "y": -1217},
       "name": "A9157",
-      "style": "asteroid-4",
+      "style": "asteroid-7",
       "trader": null,
       "enemy": {"type": "Bandit Striker", "loot": ["Lepton Shield"]},
       "treasures": []
@@ -5714,7 +5715,7 @@
     {
       "pos": {"x": -519, "y": -1399},
       "name": "A178",
-      "style": "asteroid-10",
+      "style": "asteroid-13",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -5994,7 +5995,7 @@
     {
       "pos": {"x": 773, "y": 1326},
       "name": "A119",
-      "style": "asteroid-11",
+      "style": "asteroid-12",
       "trader": null,
       "enemy": {"type": "Bandit Henchman", "loot": []},
       "treasures": []
@@ -6054,7 +6055,7 @@
     {
       "pos": {"x": 972, "y": -1610},
       "name": "A82",
-      "style": "asteroid-10",
+      "style": "asteroid-2",
       "trader": null,
       "enemy": {"type": "Gnats", "loot": []},
       "treasures": []
@@ -6198,7 +6199,7 @@
     {
       "pos": {"x": 1204, "y": -102},
       "name": "Buoy 104",
-      "style": "anomaly-buoy",
+      "style": "anomaly-buoy-alien",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6277,7 +6278,7 @@
     {
       "pos": {"x": -422, "y": -478},
       "name": "A115",
-      "style": "asteroid-7",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6293,7 +6294,7 @@
     {
       "pos": {"x": -290, "y": -516},
       "name": "A166",
-      "style": "asteroid-7",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6445,7 +6446,7 @@
     {
       "pos": {"x": 1472, "y": -1446},
       "name": "A979",
-      "style": "asteroid-6",
+      "style": "asteroid-8",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6600,7 +6601,7 @@
     {
       "pos": {"x": -186, "y": 1378},
       "name": "A1407",
-      "style": "asteroid-3",
+      "style": "asteroid-1",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6640,7 +6641,7 @@
     {
       "pos": {"x": -424, "y": 1307},
       "name": "A1608",
-      "style": "asteroid-7",
+      "style": "asteroid-9",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6656,7 +6657,7 @@
     {
       "pos": {"x": -337, "y": 1211},
       "name": "A1469",
-      "style": "asteroid-7",
+      "style": "asteroid-10",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -6672,7 +6673,7 @@
     {
       "pos": {"x": -213, "y": 1301},
       "name": "A1403",
-      "style": "asteroid-7",
+      "style": "asteroid-3",
       "trader": null,
       "enemy": {"type": "Mimos Dart", "loot": []},
       "treasures": []
@@ -7013,7 +7014,7 @@
     {
       "pos": {"x": -83, "y": 1775},
       "name": "A660",
-      "style": "asteroid-2",
+      "style": "asteroid-14",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -7053,7 +7054,7 @@
     {
       "pos": {"x": -81, "y": 1444},
       "name": "A495",
-      "style": "asteroid-5",
+      "style": "asteroid-4",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -7061,7 +7062,7 @@
     {
       "pos": {"x": 112, "y": 1483},
       "name": "A1347",
-      "style": "asteroid-12",
+      "style": "asteroid-10",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -7109,7 +7110,7 @@
     {
       "pos": {"x": -41, "y": 1838},
       "name": "Splitter",
-      "style": "asteroid-2",
+      "style": "asteroid-11",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -7181,7 +7182,7 @@
     {
       "pos": {"x": 268, "y": 1173},
       "name": "Hafen Tracking Station",
-      "style": "anomaly-buoy",
+      "style": "anomaly-relay-60deg",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -7221,7 +7222,7 @@
     {
       "pos": {"x": 884, "y": 1759},
       "name": "Buoy 8",
-      "style": "anomaly-buoy",
+      "style": "anomaly-buoy-alien",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -7229,7 +7230,7 @@
     {
       "pos": {"x": 912, "y": 1864},
       "name": "Buoy 74",
-      "style": "anomaly-buoy",
+      "style": "anomaly-buoy-alien",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -7269,7 +7270,7 @@
     {
       "pos": {"x": 1996, "y": -1698},
       "name": "Eye D",
-      "style": "planet-hell-2",
+      "style": "planet-hell-1",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -7285,7 +7286,7 @@
     {
       "pos": {"x": 1954, "y": -1778},
       "name": "Eye C",
-      "style": "planet-hell-2",
+      "style": "planet-neutron-1",
       "trader": null,
       "enemy": {"type": "Gnat Assimilate", "loot": []},
       "treasures": []
@@ -7293,10 +7294,10 @@
     {
       "pos": {"x": 2018, "y": -1840},
       "name": "Eye A",
-      "style": "planet-hell-2",
+      "style": "planet-badlands-3",
       "trader": null,
       "enemy": null,
-      "treasures": ["Gnat Incubator", "Deluvian Marker"]
+      "treasures": ["Gnat Incubator", "Diluvian Marker"]
     },
     {
       "pos": {"x": 2036, "y": 725},
@@ -7508,7 +7509,7 @@
     },
     {
       "pos": {"x": 1002, "y": 2056},
-      "name": "A1158",
+      "name": "Gale",
       "style": "planet-neutron-3",
       "trader": null,
       "enemy": null,
@@ -7516,8 +7517,8 @@
     },
     {
       "pos": {"x": 959, "y": 2113},
-      "name": "A1172",
-      "style": "planet-neutron-1",
+      "name": "Gust",
+      "style": "planet-hell-1",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -7525,7 +7526,7 @@
     {
       "pos": {"x": 880, "y": 2187},
       "name": "A1167",
-      "style": "asteroid-1",
+      "style": "asteroid-6",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -7540,8 +7541,8 @@
     },
     {
       "pos": {"x": 841, "y": 2032},
-      "name": "A973",
-      "style": "planet-neutron-2",
+      "name": "Mistral",
+      "style": "planet-neutron-1",
       "trader": null,
       "enemy": null,
       "treasures": []
@@ -7549,22 +7550,22 @@
     {
       "pos": {"x": 775, "y": 1954},
       "name": "A829",
-      "style": "asteroid-1",
+      "style": "asteroid-14",
       "trader": null,
       "enemy": null,
       "treasures": []
     },
     {
       "pos": {"x": 884, "y": 1946},
-      "name": "A930",
-      "style": "planet-neutron-3",
+      "name": "Typhoon",
+      "style": "planet-hell-4",
       "trader": null,
       "enemy": null,
       "treasures": []
     },
     {
       "pos": {"x": 981, "y": 1973},
-      "name": "A1054",
+      "name": "Chinook",
       "style": "planet-neutron-2",
       "trader": null,
       "enemy": null,
@@ -7581,6 +7582,14 @@
     {
       "pos": {"x": 1064, "y": 96},
       "name": "Ancient Needle Ruin",
+      "style": "anomaly-needle-gate-broken",
+      "trader": null,
+      "enemy": null,
+      "treasures": []
+    },
+    {
+      "pos": {"x": 1898, "y": -1906},
+      "name": "Diluvian Ruin",
       "style": "anomaly-needle-gate-broken",
       "trader": null,
       "enemy": null,
@@ -7772,16 +7781,16 @@
       "icon": "enter"
     },
     {
-      "name": "Deluvian Tablet",
-      "xml": "\n<condition have-item=\"Deluvian Tablet\" />\n<take item=\"Deluvian Tablet\"/>\n<dialog>The signal source leads to ancient ruins that reveal stone tablets filled with inscriptions.</dialog>\n<dialog model=\"Tablet\">_These inscriptions are our legacy. Our last exodus ship has left, we that remain have sealed our fate._</dialog>\n<dialog model=\"Tablet\">_Our society was a peaceful one, and it ended when our oceans dried up. Drop by drop the Scourge stole them. Unstoppable, they siphoned it from our planet._</dialog>\n<dialog model=\"Tablet\">_Deep in the Pio mountains we will now go to store our knowledge._</dialog>\n<add-to-quest-list />\n<condition state=\"surface\" at-dest=\"Obria\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Obria\" item=\"Deluvian Tablet\" />\n<condition have-item=\"Deluvian Tablet\"/>\n<take item=\"Deluvian Tablet\"/>\n<dialog model=\"Tablet\">_Ahead of our fleets we send probes. Their task is to pave the way, find planets and turn dry worlds into oceans. To make preparations for our survival._</dialog>\n<dialog model=\"Tablet\">_The first exodus ship left a full generation ago. That ship went past The Great Star, to the other side of this Expanse._</dialog>\n<mark-on-map dest=\"Fatos\" />\n<condition state=\"surface\" at-dest=\"Fatos\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Fatos\" item=\"Deluvian Tablet\" />\n<condition have-item=\"Deluvian Tablet\"/>\n<take item=\"Deluvian Tablet\"/>\n<dialog model=\"Tablet\">_Our probes must have failed, this is a dry world. We could stay and complete the work of the probes, but we must press on. For our worst fears have been made reality._\n_The Scourge are following us._</dialog>\n<dialog model=\"Tablet\">_We leave this tablet here as a marker for others. As warning. We hope we will find a safe haven near the bright blue star._</dialog>\n<dialog>_To cross The Great Void means we must construct a sacred aperture, and make a Great Jump._\n\n_It is our hope that the Scourge will not follow us across the Void._</dialog>\n",
+      "name": "Diluvian Tablet",
+      "xml": "\n<condition have-item=\"Diluvian Tablet\" />\n<take item=\"Diluvian Tablet\"/>\n<dialog>The signal source leads to ancient ruins that reveal stone tablets filled with inscriptions.</dialog>\n<dialog model=\"Tablet\">_These inscriptions are our legacy. Our last exodus ship has left, we that remain have sealed our fate._</dialog>\n<dialog model=\"Tablet\">_Our society was a peaceful one, and it ended when our oceans dried up. Drop by drop the Scourge stole them. Unstoppable, they siphoned it from our planet._</dialog>\n<dialog model=\"Tablet\">_Deep in the Pio mountains, we will now go to store our knowledge._</dialog>\n<add-to-quest-list />\n<condition state=\"surface\" at-dest=\"Obria\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Obria\" item=\"Diluvian Tablet\" />\n<condition have-item=\"Diluvian Tablet\"/>\n<take item=\"Diluvian Tablet\"/>\n<dialog model=\"Tablet\">_Ahead of our fleets, we send probes. Their task is to pave the way, find planets and turn dry worlds into oceans. To make preparations for our survival._</dialog>\n<dialog model=\"Tablet\">_The first exodus ship left a full generation ago. That ship went past The Great Star, to the other side of this Expanse._</dialog>\n<mark-on-map dest=\"Fatos\" />\n<condition state=\"surface\" at-dest=\"Fatos\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Fatos\" item=\"Diluvian Tablet\" />\n<condition have-item=\"Diluvian Tablet\"/>\n<take item=\"Diluvian Tablet\"/>\n<dialog model=\"Tablet\">_Our probes must have failed, this is a dry world. We could stay and complete the work of the probes, but we must press on. For our worst fears have been made real._\n_The Scourge are following us._</dialog>\n<dialog model=\"Tablet\">_We leave this tablet here as a marker for others. As warning. We hope we will find a safe haven near the bright blue star._</dialog>\n<dialog>_To cross The Great Void means we must construct a sacred aperture, and make a Great Jump._\n\n_It is our hope that the Scourge will not follow us across the Void._</dialog>\n",
       "color": "0f0",
       "icon": "square",
       "tags": "expanse",
       "isFile": true
     },
     {
-      "name": "Deluvian Marker",
-      "xml": "\n<condition have-item=\"Deluvian Marker\" />\n<take item=\"Deluvian Marker\"/>\n<dialog>Among crumbling ruins an alien marker stands, its surface covered with inscriptions.</dialog>\n<dialog model=\"Tablet\">_Our exodus through the sacred apertures led  us here. Our new homeworld. Our haven._\n\n_This time we did not flee again when the Scourge finally found us._</dialog>\n<dialog model=\"Tablet\">_How the Scourge could travel across The Great Void is a mystery. It took them generations, but of such things the mindless Scourge care little._</dialog>\n<dialog model=\"Tablet\">_A myriad of tiny specks, the formless Scourge are like gnats. They seem unbeatable. This will be our last stand._</dialog>\n",
+      "name": "Diluvian Marker",
+      "xml": "\n<condition have-item=\"Diluvian Marker\" />\n<take item=\"Diluvian Marker\"/>\n<dialog>Among crumbling ruins, an alien marker stands, its surface covered with inscriptions.</dialog>\n<dialog model=\"Tablet\">_Our exodus through the sacred apertures led us here. Our new homeworld._\n\n_This time we did not flee again when the Scourge finally found us._</dialog>\n<dialog model=\"Tablet\">_How the Scourge could travel across The Great Void is a mystery. It took them generations. But of such things, the mindless Scourge cares little._</dialog>\n<dialog model=\"Tablet\">_A myriad of tiny specks, the formless Scourge are like gnats. They seem unbeatable. This will be our last stand._</dialog>\n",
       "color": "0f0",
       "icon": "",
       "tags": "soma",
@@ -7853,7 +7862,7 @@
     },
     {
       "name": "Tau Pavonis Observer",
-      "xml": "<mark-on-map dest=\"Pavonis Smoke\" />\n<condition at-dest=\"Pavonis Smoke\"/>\n<remove-map-marker/>\n<dialog>You are hailed as you enter orbit: _\"Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"We study Tau Pavonis and need assistance in placing sensors at the *Observatory*. Compensation is 1000 credits. Are you interested?\"_</dialog>\n<dialog>_\"First you need protection. Travel to *Pavonis Mirror* and acquire a *Star Shield*.\"_</dialog>\n<give item=\"Star Sensor\"/>\n<mark-on-map dest=\"Pavonis Mirror\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>_\"Traveller. This is Mirror spaceport. We have prepared the *Star Shield* you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed.\"_</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed-item=\"Star Shield\" trigger=\"READY TO GO\"/>\n<dialog ok=\"PROCEED\" cancel=\"WAIT\">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>\n<travel dest=\"Pavonis Observatory\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"PUT SENSOR\"/>\n<take item=\"Star Sensor\" />\n<dialog model=\"Sol Array\">You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\"/>\n<travel dest=\"Pavonis Mirror\"/>\n<dialog>_\"You made it! Must be a sturdy ship you got there.\"_</dialog>\n<dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organization.</dialog>\n<dialog>_\"Let us remove that Star Shield, you can collect your payment at *Pavonis Smoke*.\"_</dialog>\n<take item=\"Star Shield\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog>_\"You survived! Excellent, we are anxious to get the data from the sensor. Please accept our payment!\"_</dialog>\n<give credits=\"1000\"/>\n<remove-map-marker/>\n\n<condition not-at-dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>_\"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor are most disturbing. Tau Pavonis is behaving unphysically.\"_</dialog>\n<dialog>_\"You must help us collect more data! Please take us to the *Observatory* so we can make further readings.\"_</dialog>\n<dialog>This time you request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>\n<dialog>_\"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental *Shield Reactor*. Ok?\"_</dialog>\n<dialog>You see an opportunity to make demands.\n_\"That sounds useful, give it to me in advance, and a regular reward afterward!\"_</dialog>\n<give item=\"Dermal Inducer\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>They load the *Star Shield* onto your ship once again. They tell you to *install* it but they all look a bit worried this time. What is it they have found inside that star?</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" installed-item=\"Star Shield\" trigger=\"READY TO GO\"/>\n<travel dest=\"Pavonis Observatory\"/>\n<dialog>The scientists take readings with their arcane instruments.\nBut you don't need any telescopes. Just looking through the dimmed windows you can see a region of the star's surface pulsing. Or heaving, as if breathing.</dialog>\n<dialog model=\"Worm\">Suddenly the star's surface opens like a flower and something break free from the open wound. It trashes like a wounded animal. It looks slow like a ballet, but at this scale, it is tremendously fast.</dialog>\n<dialog>The monstrosity accelerates and traces a glowing path. South. Toward *Charm*. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>\n<give item=\"Worm Recording\" />\n<place-enemy enemy=\"Worm\" dest=\"Charm\"/>\n<mark-on-map dest=\"Charm\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\" />\n<travel dest=\"Pavonis Mirror\" />\n<take item=\"Star Shield\" />\n\n<condition at-dest=\"A117\"/>\n<dialog model=\"Worm\">Your sensors can make out the entity orbiting Charm. Approaching would be devastating.</dialog>\n<dialog>You are hailed by a distant ship. \n\n_\"Traveller. We are the Worshipers. Things have been set in motion and there might still be time to dispel this danger. Seek us out at *Paxos Station*.\"_</dialog>\n<mark-on-map dest=\"Paxos Station\"/>\n\n<condition at-dest=\"Paxos Station\" trigger=\"HAIL\"/>\n<dialog model=\"Paxos Station\">_\"This is Paxos Station, the Cathedral of Worship. The scholars at Pavonis Smoke have woken the Worm. You were their tool and now we can help you undo their foolish work.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The Worm's chains can be restored with the three tools that once bound it originally.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The children of the Worm once bound their progenitor with the artifacts Epiales, Momus and Horkos. Seek them out in the Fields, the Garden, and the Ruins.\"_</dialog>\n<take item=\"Worm Recording\" />\n<remove-map-marker/>\n\n<condition have-item=\"Momus;Horkos;Epiales\"/>\n<mark-on-map dest=\"Paxos Station\"/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" at-dest=\"Paxos Station\"/>\n<dialog>_\"Traveller. You have gathered the relics.\"_</dialog>\n<dialog>_\"While your hands were busy the Worm multiplied. Sired its seedlings.\nMay the relics help you. Clear out the Seedlings around *Charm*!\"_</dialog>\n<mark-on-map dest=\"Charm\" />\n<place-enemy dest=\"Charm Beta\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Gamma\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Delta\" enemy=\"Worm Seedling\" loot=\"\"/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" no-enemy-at-dest=\"Charm Beta;Charm Gamma;Charm Delta\" />\n<place-enemy dest=\"Charm\" enemy=\"Weakened Worm\" loot=\"Worm Umbra\" />\n<dialog model=\"Worm Seedling\">The final Seedling succumbs to your assault. Somehow you know that the Worm is affected. Touched by your actions here that bestial presence is now weakened. This can now end.</dialog>\n\n<condition no-enemy-at-dest=\"Charm\" />\n<dialog model=\"Worm\">The worm is mortally wounded. Its appendages flail and whip up foam on the surface of Charm as it is pulled below the surface and into the depths of the gas giant.</dialog>\n<mark-on-map dest=\"Paxos Station\" />\n\n<condition at-dest=\"Paxos Station\" />\n<dialog>_\"Traveller. You bested the Worm. The battle was glorious.\nYet many here feel fear. *The Worm is not dead.* It might slumber for eons inside Charm, but it will wake once again.\"_</dialog>\n<dialog>_\"We bestow upon you our highest honors and free access to the holy *Paxos Gate*\"_</dialog>\n\n\n\n",
+      "xml": "<mark-on-map dest=\"Pavonis Smoke\" />\n<condition at-dest=\"Pavonis Smoke\"/>\n<remove-map-marker/>\n<dialog>You are hailed as you enter orbit: _\"Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"We study Tau Pavonis and need assistance in placing sensors at the *Observatory*. Compensation is 1000 credits. Are you interested?\"_</dialog>\n<dialog>_\"First you need protection. Travel to *Pavonis Mirror* and acquire a *Star Shield*.\"_</dialog>\n<give item=\"Star Sensor\"/>\n<mark-on-map dest=\"Pavonis Mirror\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>_\"Traveller. This is Mirror spaceport. We have prepared the *Star Shield* you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed.\"_</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed-item=\"Star Shield\" trigger=\"READY TO GO\"/>\n<dialog ok=\"PROCEED\" cancel=\"WAIT\">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>\n<travel dest=\"Pavonis Observatory\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"PUT SENSOR\"/>\n<take item=\"Star Sensor\" />\n<dialog model=\"Sol Array\">You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\"/>\n<travel dest=\"Pavonis Mirror\"/>\n<dialog>_\"You made it! Must be a sturdy ship you got there.\"_</dialog>\n<dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organization.</dialog>\n<dialog>_\"Let us remove that Star Shield, you can collect your payment at *Pavonis Smoke*.\"_</dialog>\n<take item=\"Star Shield\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog>_\"You survived! Excellent, we are anxious to get the data from the sensor. Please accept our payment!\"_</dialog>\n<give credits=\"1000\"/>\n<remove-map-marker/>\n\n<condition not-at-dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>_\"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor are most disturbing. Tau Pavonis is behaving unphysically.\"_</dialog>\n<dialog>_\"You must help us collect more data! Please take us to the *Observatory* so we can make further readings.\"_</dialog>\n<dialog>This time you request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>\n<dialog>_\"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental *Shield Reactor*. Ok?\"_</dialog>\n<dialog>You see an opportunity to make demands.\n_\"That sounds useful, give it to me in advance, and a regular reward afterward!\"_</dialog>\n<give item=\"Dermal Inducer\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>They load the *Star Shield* onto your ship once again. They tell you to *install* it but they all look a bit worried this time. What is it they have found inside that star?</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" installed-item=\"Star Shield\" trigger=\"READY TO GO\"/>\n<travel dest=\"Pavonis Observatory\"/>\n<dialog>The scientists take readings with their arcane instruments.\nBut you don't need any telescopes. Just looking through the dimmed windows you can see a region of the star's surface pulsing. Or heaving, as if breathing.</dialog>\n<dialog model=\"Worm\">Suddenly the star's surface opens like a flower and something break free from the open wound. It trashes like a wounded animal. It looks slow like a ballet, but at this scale, it is tremendously fast.</dialog>\n<dialog>The monstrosity accelerates and traces a glowing path. South. Toward *Charm*. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>\n<give item=\"Worm Recording\" />\n<place-enemy enemy=\"Worm\" dest=\"Charm\"/>\n<mark-on-map dest=\"Charm\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\" />\n<travel dest=\"Pavonis Mirror\" />\n<take item=\"Star Shield\" />\n\n<condition at-dest=\"A117\"/>\n<dialog model=\"Worm\">Your sensors can make out the entity orbiting Charm. Approaching would be devastating.</dialog>\n<dialog>You are hailed by a distant ship. \n\n_\"Traveller. We are the Worshipers. Things have been set in motion and there might still be time to dispel this danger. Seek us out at *Paxos Station*.\"_</dialog>\n<mark-on-map dest=\"Paxos Station\"/>\n\n<condition at-dest=\"Paxos Station\" trigger=\"HAIL\"/>\n<dialog model=\"Paxos Station\">_\"This is Paxos Station, the Cathedral of Worship. The scholars at Pavonis Smoke have woken the Worm. You were their tool and now we can help you undo their foolish work.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The Worm's chains can be restored with the three tools that once bound it originally.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The children of the Worm once bound their progenitor with the artifacts Epiales, Momus and Horkos. Seek them out in the Fields, the Garden, and the Ruins.\"_</dialog>\n<take item=\"Worm Recording\" />\n<remove-map-marker/>\n\n<condition have-item=\"Momus;Horkos;Epiales\"/>\n<mark-on-map dest=\"Paxos Station\"/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" at-dest=\"Paxos Station\"/>\n<dialog>_\"Traveller. You have gathered the relics.\"_</dialog>\n<dialog>_\"While your hands were busy the Worm multiplied. Sired its seedlings.\nMay the relics help you. Clear out the Seedlings around *Charm*!\"_</dialog>\n<mark-on-map dest=\"Charm\" />\n<place-enemy dest=\"Charm Beta\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Gamma\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Delta\" enemy=\"Worm Seedling\" loot=\"\"/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" no-enemy-at-dest=\"Charm Beta;Charm Gamma;Charm Delta\" />\n<place-enemy dest=\"Charm\" enemy=\"Weakened Worm\" loot=\"Worm Umbra\" />\n<dialog model=\"Worm Seedling\">The final Seedling succumbs to your assault. Somehow you know that the Worm is affected. Touched by your actions here that bestial presence is now weakened. This can now end.</dialog>\n\n<condition no-enemy-at-dest=\"Charm\" />\n<dialog model=\"Worm\">The worm is mortally wounded. Its appendages flail and whip up foam on the surface of Charm as it is pulled below the surface and into the depths of the gas giant.</dialog>\n<mark-on-map dest=\"Paxos Station\" />\n\n<condition at-dest=\"Paxos Station\" />\n<dialog>_\"Traveller. You bested the Worm. The battle was glorious.\nYet many here feel fear. *The Worm is not dead.* It might slumber for eons inside Charm, but it will wake once again.\"_</dialog>\n<dialog>_\"We bestow upon you our highest honors and free access to the holy *Paxos Gate*\"_</dialog>\n<modify-quest quest=\"Enter Pavonis Gate\" goto-mark=\"sternrat-access\"/>\n",
       "tags": "main",
       "color": "7df",
       "icon": "triangle",
@@ -8079,7 +8088,7 @@
       "transform": [
         ["scale", 2, 2, 2],
         ["rotate", 0, -20, 0],
-        ["translate", 0, 0, -52]
+        ["translate", 0, 0, -75]
       ],
       "path": [
         [40, 0, 0],
@@ -8098,9 +8107,10 @@
           "tags": "anomaly",
           "geometry": "composite",
           "transform": [
-            ["rotate", -20, 0, 0],
-            ["translate", 0, 85, -125],
-            ["scale", 0.45, 0.45, 0.45]
+            ["translate", 0, 70, 0],
+            ["rotate", -30, 0, 0],
+            ["translate", 0, 0, -25],
+            ["scale", 0.6, 0.6, 0.6]
           ],
           "parts": [
             {
@@ -8166,56 +8176,22 @@
         {
           "name": "body",
           "geometry": "lathe",
-          "res": 8,
+          "res": 16,
           "transform": [
-            ["scale", 0.75, 0.75, 0.75],
-            ["rotate", 180, 0, 0],
+            ["scale", 1.4, 1.4, 1.4],
+            ["rotate", 0, 0, 0],
             ["translate", 0, 0, 0]
           ],
           "path": [
-            [45, 0, -20],
-            [50, 0, -15],
-            [50, 0, 15],
-            [45, 0, 20],
-            [38, 0, 15],
-            [10, 0, 15],
-            [3, 0, 44]
-          ]
-        },
-        {
-          "geometry": "mesh",
-          "transform": [
-            ["scale", 2.4, 1, 0.2],
-            ["translate", -58, 0, 0],
-            ["rotate", -40, 0, -22.5]
-          ],
-          "quads": [
-            [[10, 0, -10], [10, 0, 10], [-10, 0, 10], [-10, 0, -10]],
-            [[-10, 0, -10], [-10, 0, 10], [10, 0, 10], [10, 0, -10]]
-          ]
-        },
-        {
-          "geometry": "mesh",
-          "transform": [
-            ["scale", 1, 1, 3],
-            ["translate", -70, 0, 0],
-            ["rotate", -40, 0, -22.5]
-          ],
-          "quads": [
-            [[10, 0, -10], [10, 0, 10], [-10, 0, 10], [-10, 0, -10]],
-            [[-10, 0, -10], [-10, 0, 10], [10, 0, 10], [10, 0, -10]]
-          ]
-        },
-        {
-          "geometry": "mesh",
-          "transform": [
-            ["scale", 1, 1, 3],
-            ["translate", -47, 0, 0],
-            ["rotate", -40, 0, -22.5]
-          ],
-          "quads": [
-            [[10, 0, -10], [10, 0, 10], [-10, 0, 10], [-10, 0, -10]],
-            [[-10, 0, -10], [-10, 0, 10], [10, 0, 10], [10, 0, -10]]
+            [45, 0, -10],
+            [50, 0, -5],
+            [50, 0, 5],
+            [45, 0, 10],
+            [42, 0, 8],
+            [44, 0, 5],
+            [44, 0, -5],
+            [42, 0, -8],
+            [45, 0, -10]
           ]
         }
       ],
@@ -14513,7 +14489,7 @@
       "name": "Needle's Land",
       "audio": "music-sand dark",
       "pos": {"x": 1926, "y": -1688},
-      "radius": 200
+      "radius": 250
     },
     {
       "name": "Sternbund",
