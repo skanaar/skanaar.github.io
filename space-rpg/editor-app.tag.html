@@ -116,6 +116,7 @@
     function saveWorld() {
       self.app.events.trigger('save-world')
       if (self.useLocalStorage) {
+        self.app.world.modified = (new Date()).toISOString().substr(0,10)
         self.app.isSaved = true
         self.update()
         localStorage['nebula:world'] = _.stringify(self.app.world)

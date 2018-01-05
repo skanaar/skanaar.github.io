@@ -1,8 +1,15 @@
 <file-menu>
   <div class="sidebar file-menu">
 
-    <label>World name</label>
-    <input type=text ref="nameField" onchange={setWorldName} value={world.name}><br/>
+    <label>World</label>
+    <div class="input-grid">
+      <em>Name</em>
+      <input type=text ref="nameField" onchange={setWorldName} value={world.name}><br/>
+      <em>Version</em>
+      <input type=number step=1 min=0 ref="versionField" onchange={setWorldVersion} value={world.version}><br/>
+      <em>Modified</em>
+      <input readonly value={world.modified}>
+    </div>
 
     <label>Starting conditions</label>
     <div class="input-grid">
@@ -53,6 +60,7 @@ localStorage.cloudStorage = {
     self.cloudKey = 'worlds/world.json'
 
     self.setWorldName = () => app.world.name = self.refs.nameField.value
+    self.setWorldVersion = () => app.world.version = +self.refs.versionField.value
     self.setInitialState = () => self.world.initialState = self.refs.stateSelect.value
 
     self.loadDefault = () => _.fetch('world.json', loadWorldFrom)

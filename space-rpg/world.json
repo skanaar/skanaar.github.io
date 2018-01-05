@@ -46,7 +46,7 @@
       "generator": {"hull": 1, "shield": 0, "energy": 1},
       "name": "Kerr Runner",
       "visual": "Kerr Runner",
-      "value": 200,
+      "value": 300,
       "isFlying": true,
       "level": 2,
       "slots": 7
@@ -62,7 +62,7 @@
         "slots": 5
       },
       "generator": {"hull": 1, "shield": 0, "energy": 2},
-      "value": 1000,
+      "value": 800,
       "isFlying": true,
       "level": 3,
       "slots": 8
@@ -80,7 +80,7 @@
       "generator": {"hull": 2, "shield": 1, "energy": 2},
       "name": "Sloop",
       "visual": "NS Sloop",
-      "value": 2000,
+      "value": 1500,
       "isFlying": true,
       "level": 4,
       "slots": 8
@@ -98,7 +98,7 @@
       "generator": {"hull": 5, "shield": 0, "energy": 2},
       "name": "Salem",
       "visual": "NS Salem",
-      "value": 3000,
+      "value": 2000,
       "isFlying": true,
       "level": 4,
       "slots": 9
@@ -118,7 +118,7 @@
       "level": 4,
       "visual": "CES Marathon",
       "isFlying": true,
-      "value": 4500,
+      "value": 2800,
       "slots": 10
     },
     {
@@ -222,7 +222,7 @@
       "level": 6,
       "visual": "CES Bioculus",
       "isFlying": true,
-      "value": 4000,
+      "value": 6000,
       "slots": 10
     },
     {
@@ -410,36 +410,6 @@
     },
     {
       "attr": {
-        "maxhull": 10,
-        "maxshield": 4,
-        "maxenergy": 100,
-        "armor": 0,
-        "cloak": 0,
-        "jump": 0,
-        "slots": 0
-      },
-      "generator": {"hull": 2, "shield": 1, "energy": 1},
-      "name": "Sentinel Pod",
-      "visual": "Sentinel",
-      "inventory": [
-        "Mass Driver",
-        "Railgun",
-        "Incision Beam",
-        "Meson Ray",
-        "Mk4 Battery",
-        "Welding Robot",
-        "Absorb Inducer",
-        "Absorb Cell",
-        "Restore Kit",
-        "Mk2 Reactor"
-      ],
-      "level": 4,
-      "value": 0,
-      "isFlying": false,
-      "slots": 0
-    },
-    {
-      "attr": {
         "maxhull": 70,
         "maxshield": 4,
         "maxenergy": 50,
@@ -521,6 +491,33 @@
     },
     {
       "attr": {
+        "maxhull": 20,
+        "maxshield": 8,
+        "maxenergy": 50,
+        "armor": 0,
+        "cloak": 0,
+        "jump": 0,
+        "slots": 0
+      },
+      "generator": {"hull": 2, "shield": 1, "energy": 1},
+      "name": "Sentinel Pod",
+      "visual": "Sentinel",
+      "inventory": [
+        "Coronal Pulse",
+        "Luminal Driver",
+        "Phased Ray",
+        "Mk3 Reactor",
+        "Monopole Shield",
+        "Mk5 Capacitor",
+        "Dermal Cell"
+      ],
+      "level": 5,
+      "value": 0,
+      "isFlying": false,
+      "slots": 0
+    },
+    {
+      "attr": {
         "maxhull": 35,
         "maxshield": 7,
         "maxenergy": 30,
@@ -529,7 +526,7 @@
         "jump": 0,
         "slots": 0
       },
-      "generator": {"hull": 1, "shield": 1, "energy": 1},
+      "generator": {"hull": 1, "shield": 0, "energy": 1},
       "name": "Security Drone",
       "visual": "Security Drone",
       "inventory": [
@@ -541,11 +538,7 @@
         "Solenoid Gun",
         "Tau Ray",
         "Mk4 Reactor",
-        "Shell Inducer",
-        "Eris Grain",
-        "Supplies",
-        "Eris Grain",
-        "Green Seed"
+        "Buffer Inducer"
       ],
       "level": 5,
       "value": 0,
@@ -898,9 +891,9 @@
     },
     {
       "attr": {
-        "maxhull": 250,
-        "maxshield": 50,
-        "maxenergy": 200,
+        "maxhull": 100,
+        "maxshield": 30,
+        "maxenergy": 40,
         "armor": 0,
         "cloak": 0,
         "jump": 0,
@@ -1756,7 +1749,7 @@
       "critical": 0,
       "cooldown": false,
       "attr": {"maxhull": 0, "maxshield": 0, "maxenergy": 0},
-      "playerBuff": {"hull": 2, "shield": 0, "energy": -3},
+      "playerBuff": {"hull": 3, "shield": 0, "energy": -3},
       "targetBuff": {"hull": 0, "shield": 0, "energy": 0}
     },
     {
@@ -3574,7 +3567,7 @@
       "trader": {"buy": 1.5, "sell": 0.5, "inventory": []},
       "treasures": [],
       "enemy": null,
-      "shipyard": ["Kerr Clipper", "Kerr Interdictor", "Ursula"]
+      "shipyard": ["Kerr Clipper", "Journeyman"]
     },
     {
       "name": "Outback 12",
@@ -3642,14 +3635,12 @@
       "treasures": [],
       "enemy": null,
       "shipyard": [
-        "Sloop",
-        "Journeyman",
-        "Kerr Interdictor",
+        "Salem",
         "CES Marathon",
-        "CES Interplan",
-        "CES Bioculus",
         "Ursula",
-        "Ursula"
+        "Argo",
+        "Kerr Interdictor",
+        "CES Interplan"
       ]
     },
     {
@@ -3815,7 +3806,7 @@
       },
       "enemy": null,
       "treasures": [],
-      "shipyard": ["Salem", "Vanguard", "Sloop"]
+      "shipyard": ["Journeyman", "Sloop", "Salem"]
     },
     {
       "pos": {"x": -301, "y": -1065},
@@ -4490,7 +4481,7 @@
       "style": "asteroid-9",
       "trader": null,
       "enemy": null,
-      "treasures": ["Thanatos nacelle"]
+      "treasures": []
     },
     {
       "pos": {"x": 897, "y": 711},
@@ -4859,7 +4850,14 @@
       "surface": "rock-1",
       "trader": {"buy": 1.5, "sell": 0.75, "inventory": []},
       "enemy": null,
-      "treasures": ["Copper", "Platinum", "Alien Fossil", "Repair Kit"]
+      "treasures": ["Copper", "Platinum", "Alien Fossil", "Repair Kit"],
+      "shipyard": [
+        "CES Marathon",
+        "Ursula",
+        "Argo",
+        "Kerr Interdictor",
+        "CES Interplan"
+      ]
     },
     {
       "pos": {"x": 856, "y": -1014},
@@ -5107,7 +5105,7 @@
       },
       "enemy": null,
       "treasures": [],
-      "shipyard": ["Kerr Runner", "Kerr Interdictor", "Sloop", "Journeyman"]
+      "shipyard": ["Kerr Runner", "Journeyman", "Sloop"]
     },
     {
       "pos": {"x": 247, "y": -1829},
@@ -5251,7 +5249,7 @@
       "style": "asteroid-9",
       "trader": null,
       "enemy": null,
-      "treasures": ["Blue seeds"]
+      "treasures": []
     },
     {
       "pos": {"x": 941, "y": -1297},
@@ -5379,7 +5377,8 @@
       "style": "planet-soma",
       "trader": null,
       "enemy": null,
-      "treasures": []
+      "treasures": [],
+      "shipyard": ["Soma Sonn"]
     },
     {
       "pos": {"x": 168, "y": -1235},
@@ -6257,7 +6256,8 @@
         ]
       },
       "enemy": null,
-      "treasures": []
+      "treasures": [],
+      "shipyard": ["Salem", "CES Marathon"]
     },
     {
       "pos": {"x": -506, "y": -546},
@@ -6308,7 +6308,7 @@
       "treasures": []
     },
     {
-      "pos": {"x": 1062, "y": -1870},
+      "pos": {"x": 1080, "y": -1850},
       "name": "Needle Gate",
       "style": "anomaly-needle-gate",
       "trader": null,
@@ -6507,7 +6507,8 @@
         ]
       },
       "enemy": null,
-      "treasures": []
+      "treasures": [],
+      "shipyard": null
     },
     {
       "pos": {"x": -630, "y": 1665},
@@ -7433,7 +7434,8 @@
         ]
       },
       "enemy": null,
-      "treasures": []
+      "treasures": [],
+      "shipyard": ["Kerr Interdictor", "CES Interplan", "Kerr Frigate"]
     },
     {
       "pos": {"x": 1158, "y": 2140},
@@ -7594,6 +7596,15 @@
       "trader": null,
       "enemy": null,
       "treasures": []
+    },
+    {
+      "pos": {"x": 460, "y": 1270},
+      "name": "Staub Werften",
+      "style": "anomaly-helyon_shipyards",
+      "trader": null,
+      "enemy": null,
+      "treasures": [],
+      "shipyard": ["CES Interplan", "Kerr Frigate", "CES Bioculus", "Vanguard"]
     }
   ],
   "quests": [
@@ -7719,7 +7730,7 @@
     },
     {
       "name": "Trader Without a Cause",
-      "xml": "<condition state=\"surface\" at-dest=\"Bundeszone\" trigger=\"HAIL TRADER\"/>\n<dialog model=\"Hermit Home\">_\"Welcome Traveller.\nOur store is closed right now. The conflict forced the Sternrat to requisition our entire stock.\"_</dialog>\n<dialog model=\"Hermit Home\">_\"We have a delivery incoming but it is stuck at *Tod Mond*.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Tod Mond\" />\n\n<condition at-dest=\"Tod Mond\" trigger=\"SCAN FOR CARGO\"/>\n<dialog>The scanner sweeps across the region.\nNo sign of the trader's cargo at this moon.\n\nBut far north there are traces of a destroyed transport...</dialog>\n<mark-on-map dest=\"Tod Debris\" />\n\n<condition at-dest=\"Tod Debris\" trigger=\"SCAN FOR CARGO\"/>\n<dialog model=\"Debris\">Death. Once a cargo ship. Now a smoldering carcass.\nThe Mimos did this.\n\nIn the breached cargo section the trader's crates sit. You take what you came for.</dialog>\n<mark-on-map dest=\"Bundeszone\" />\n\n<condition state=\"surface\" at-dest=\"Bundeszone\" trigger=\"GIVE CARGO\"/>\n<dialog model=\"Hermit Home\">_\"Amazing!\nPlease, take this reward. And buy here at a discount of course. Our inventory is now restored.\"_</dialog>\n<give credits=\"2000\" />\n<place-inventory dest=\"Bundeszone\" item=\"Nanite Attack;EMP Bomb;Gauss Gun;Phased Ray;Coronal Pulse;Locus Beam;Luminal Driver;Sc Disruptor;Metabomb;Railgun;Nucleon Ray;Aural Pulse;Apex Beam;Helix Driver;Au Disruptor\"/>",
+      "xml": "<condition state=\"surface\" at-dest=\"Bundeszone\" trigger=\"HAIL TRADER\"/>\n<dialog model=\"Hermit Home\">_\"Welcome Traveller.\nOur store is closed right now. The conflict forced the Sternrat to requisition our entire stock.\"_</dialog>\n<dialog model=\"Hermit Home\">_\"We have a delivery incoming but it is stuck at *Tod Mond*.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Tod Mond\" />\n\n<condition at-dest=\"Tod Mond\" trigger=\"SCAN FOR CARGO\"/>\n<dialog>The scanner sweeps across the region.\nNo sign of the trader's cargo at this moon.\n\nBut far north there are traces of a destroyed transport...</dialog>\n<mark-on-map dest=\"Tod Debris\" />\n\n<condition at-dest=\"Tod Debris\" trigger=\"SCAN FOR CARGO\"/>\n<dialog model=\"Debris\">Death. Once a cargo ship. Now a smoldering carcass.\nThe Mimos did this.\n\nIn the breached cargo section the trader's crates sit. You take what you came for.</dialog>\n<mark-on-map dest=\"Bundeszone\" />\n\n<condition state=\"surface\" at-dest=\"Bundeszone\" trigger=\"GIVE CARGO\"/>\n<dialog model=\"Hermit Home\">_\"Amazing!\nPlease, take this reward. And buy here at a discount of course. Our inventory is now restored.\"_</dialog>\n<give credits=\"2000\" />\n<place-inventory dest=\"Bundeszone\" item=\"EMP Bomb;Gauss Gun;Phased Ray;Coronal Pulse;Locus Beam;Luminal Driver;Sc Disruptor;Metabomb;Railgun;Nucleon Ray;Aural Pulse;Apex Beam;Helix Driver;Au Disruptor\"/>",
       "color": "0fc",
       "icon": "square",
       "tags": "sternrat"
@@ -7740,10 +7751,11 @@
     },
     {
       "name": "Sternrat Blockade",
-      "xml": "\n<condition state=\"space\" at-dest=\"Staub Trojan\" />\n<dialog model=\"Ursula\">A ship hails you.</dialog>\n<dialog model=\"Ursula\">_\"Traveller!\nYou have come to our area in a time of great peril. The Mimos are trying to break through!\n\nIf you want to help us in the fight go to *Sternrat Station*\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Sternrat Station\" />\n\n<condition state=\"surface\" at-dest=\"Sternrat Station\" trigger=\"HAIL STATION\"/>\n<dialog model=\"Sternrat Station\">The operator you speak to at Sternrat Station makes it clear that there is a war going on.\n\nThe Mimos have breached through into Sternbund space.</dialog>\n<dialog model=\"Sternrat Station\">They say that a patrol has cornered a Mimos Dart at *Dunkel Mond* and need help.</dialog>\n<mark-on-map dest=\"Dunkel Trojan\" />\n<place-enemy dest=\"Dunkel Trojan\" enemy=\"Mimos Dart\"/>\n\n<condition no-enemy-at-dest=\"Dunkel Trojan\" />\n<dialog>The cornered Mimos succumbs to your attack. *Sternrat Station* will be pleased.</dialog>\n<mark-on-map dest=\"Sternrat Station\" />\n\n<condition state=\"surface\" at-dest=\"Sternrat Station\" trigger=\"REPORT VICTORY\"/>\n<dialog>_\"Thank you! We need all soldiers we can get. The goal is to quell the Mimos at the source, deep in their cloud banks.\"_</dialog>\n<dialog>_\"The charter forbids weapons here at Sternrat Station, but the trader at *Bundeszone* has a full assortment.\"_</dialog>\n<dialog>_\"When you are prepared, join the fight and bring down the Mimos!\"_</dialog>\n<mark-on-map dest=\"Mimos Habitat\" />\n\n<condition state=\"surface\" at-dest=\"Mimos Aperture\" trigger=\"ANALYZE APERTURE\"/>\n<dialog model=\"Larato Gate\">The structure appears to be a portal. But you are denied access. The Mimos markings clearly show the portal's origin.\n\nThere might be a way to access this portal...</dialog>\n<place-item dest=\"Mimos Ruins\" item=\"Mimos Key\"/>\n\n<condition at-dest=\"Mimos Ruins\" />\n<dialog model=\"Ruin\">These old ruins share the same Mimosian markings as the portal you found earlier.</dialog>\n",
+      "xml": "\n<condition state=\"space\" at-dest=\"Staub Trojan\" />\n<dialog model=\"Ursula\">A ship hails you.</dialog>\n<dialog model=\"Ursula\">_\"Traveller!\nYou have come to our area in a time of great peril. The Mimos are trying to break through!\n\nIf you want to help us in the fight go to *Sternrat Station*\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Sternrat Station\" />\n\n<condition state=\"surface\" at-dest=\"Sternrat Station\" trigger=\"HAIL STATION\"/>\n<dialog model=\"Sternrat Station\">The operator you speak to at Sternrat Station makes it clear that there is a war going on.\n\nThe Mimos have breached through into Sternbund space.</dialog>\n<dialog model=\"Sternrat Station\">They say that a patrol has cornered a Mimos Dart at *Dunkel Mond* and need help.</dialog>\n<mark-on-map dest=\"Dunkel Trojan\" />\n<place-enemy dest=\"Dunkel Trojan\" enemy=\"Mimos Dart\"/>\n\n<condition no-enemy-at-dest=\"Dunkel Trojan\" />\n<dialog>The cornered Mimos succumbs to your attack. *Sternrat Station* will be pleased.</dialog>\n<mark-on-map dest=\"Sternrat Station\" />\n\n<condition state=\"surface\" at-dest=\"Sternrat Station\" trigger=\"REPORT VICTORY\"/>\n<dialog>_\"Thank you! We need all soldiers we can get. The goal is to quell the Mimos at the source, deep in their cloud banks.\"_</dialog>\n<dialog>_\"The charter forbids weapons here at Sternrat Station, but the trader at *Bundeszone* has a full assortment.\"_</dialog>\n<dialog>_\"When you are prepared, join the fight and bring down the Mimos!\"_</dialog>\n<mark-on-map dest=\"Mimos Habitat\" />\n\n<condition state=\"surface\" at-dest=\"Mimos Aperture\" trigger=\"ANALYZE APERTURE\"/>\n<dialog model=\"Larato Gate\">The structure appears to be a portal. But you are denied access. The Mimos markings clearly show the portal's origin.\n\nThere might be a way to access this portal...</dialog>\n\n<place-item dest=\"Mimos Ruins\" item=\"Mimos Key\"/>\n<mark-on-map dest=\"Mimos Ruins\" />\n\n<condition at-dest=\"Mimos Ruins\" />\n<dialog model=\"Ruin\">These old ruins share the same Mimosian markings as the portal you found earlier.</dialog>\n",
       "color": "f08",
-      "icon": "pillar",
-      "tags": "sternrat"
+      "icon": "triangle",
+      "tags": "sternrat",
+      "isFile": false
     },
     {
       "name": "Mimos Aperture",
@@ -7768,7 +7780,7 @@
     },
     {
       "name": "Beggars at Aldo Nova",
-      "xml": "<condition at-dest=\"Lij\" state=\"surface\" />\n\n<dialog>\n\tA peculiar, but still kind of friendly character approaches you.\n\n\t_\"Can you help me with a simple task stranger? Go to the planet *Aldo Nova* and bring me a *strange item* and you will get greatly rewarded.\"_\n</dialog>\n\n<mark-on-map dest=\"Aldo Nova\" />\n<condition at-dest=\"Aldo Nova\" state=\"surface\" />\n\n<dialog>\n\tA skinny old man greets you.\n\n\t_\"What brings you to to this miserable place, we were so great once...\"_\n</dialog>\n\n<condition at-dest=\"Aldo Nova\" state=\"surface\" trigger=\"SEARCH\"/>\n\n<dialog>After some intense digging you find a chip with 2 credits.</dialog>\n\n<give credits=\"2\" />\n\n<condition at-dest=\"Aldo Nova\" state=\"surface\" trigger=\"CONTINUE SEARCH\"/>\n\n<dialog>\n\tYou find an old destroyed harvester.\n\n\tYou ask yourself, how can this be of a value, and removes whats intact. \n\tOne part stands out and the rocket-like item seems like it could be the *strange item*.\n</dialog>\n\n<mark-on-map dest=\"Lij\" />\n<condition at-dest=\"Lij\" state=\"surface\" trigger=\"DELIVER ITEM\" />\n\n<dialog>\n\t_\"I am impressed! Very well done.\"_\n\n\t_\"And as per our agreement, here is a reward.\"_\n</dialog>\n\n<give item=\"Green Seed\" />\n\n<dialog>\n\tThe man hands over a single green furry seed.\n\tAs you glare at him he smiles.\n\n\t_\"It might be worthless to you and me, but go to *Aldo Nova* and you might be surprised.\"_\n</dialog>\n<dialog>\n\tYou feel defeated but decide to trust the strange man. You don't have much to loose anyhow, it is clear he will not give you any riches.\n</dialog>\n\n<mark-on-map dest=\"Aldo Nova\" />\n<condition at-dest=\"Aldo Nova\" state=\"surface\" trigger=\"VISIT VILLAGE\" />\n\n<dialog>\n\tYou arrive quietly to a deserted smaller settlement.\n\n\t_\"Hello foreigner, could you spare a credit, or something more suitable, anything is better that nothing?\"_\n</dialog>\n<dialog>\n\t_\"Do you have anything that grows? We once had such sumptuous forests here.\"_\n\n\tHmm, you have the ugly seed that you got as a reward.\n</dialog>\n\n<condition at-dest=\"Aldo Nova\" state=\"surface\" trigger=\"GIVE SEED\" />\n\n<dialog>\n\tYou give them the strange item you found. They get very excited!\n\n\t_\"Thank you! This is a amazing gift.\"_\n</dialog>\n<dialog>\n  You stay a few days and get to see how the villages get the seed to sprout. And how they prepare for the coming of a new golden age for this planet.\n</dialog>",
+      "xml": "<condition at-dest=\"Lij\" state=\"surface\" />\n\n<dialog>\nA peculiar, but still kind of friendly character approaches you.\n\n_\"Can you help me with a simple task stranger? Go to the planet *Aldo Nova* and bring me a *strange item* and you will get greatly rewarded.\"_\n</dialog>\n\n<mark-on-map dest=\"Aldo Nova\" />\n<add-to-quest-list/>\n<condition at-dest=\"Aldo Nova\" state=\"surface\" />\n\n<dialog>\nA skinny old man greets you.\n\n_\"What brings you to to this miserable place, we were so great once...\"_\n</dialog>\n\n<condition at-dest=\"Aldo Nova\" state=\"surface\" trigger=\"SEARCH\"/>\n\n<dialog>After some intense digging you find a chip with 2 credits.</dialog>\n\n<give credits=\"2\" />\n\n<condition at-dest=\"Aldo Nova\" state=\"surface\" trigger=\"CONTINUE SEARCH\"/>\n\n<dialog>\nYou find an old destroyed harvester.\n\nYou search the wreck for anything valuable and one part stands out.\nA rocket-like item that semms like it could be the *strange item*.\n</dialog>\n\n<mark-on-map dest=\"Lij\" />\n<condition at-dest=\"Lij\" state=\"surface\" trigger=\"DELIVER ITEM\" />\n\n<dialog>\n_\"I am impressed! Very well done.\"_\n\n_\"And as per our agreement, here is a reward.\"_\n</dialog>\n\n<give item=\"Green Seed\" />\n\n<dialog>\nThe man hands over a single green furry seed.\nAs you glare at him he smiles.\n\n_\"It might be worthless to you and me, but go to *Aldo Nova* and you might be surprised.\"_\n</dialog>\n<dialog>\n\tYou feel defeated but decide to trust the strange man. You don't have much to loose anyhow, it is clear he will not give you any riches.\n</dialog>\n\n<mark-on-map dest=\"Aldo Nova\" />\n<condition at-dest=\"Aldo Nova\" state=\"surface\" trigger=\"VISIT VILLAGE\" />\n\n<dialog>\nYou arrive quietly to a deserted smaller settlement.\n\n_\"Hello foreigner, could you spare a credit, or something more suitable, anything is better that nothing?\"_\n</dialog>\n<dialog>\n_\"Do you have anything that grows? We once had such sumptuous forests here.\"_\n\nHmm, you have the ugly seed that you got as a reward.\n</dialog>\n\n<condition at-dest=\"Aldo Nova\" state=\"surface\" trigger=\"GIVE SEED\" />\n\n<dialog>\nYou give them the strange item you found. They get very excited!\n\n_\"Thank you! This is a amazing gift.\"_\n</dialog>\n<dialog>\nYou stay a few days and get to see how the villages get the seed to sprout. And how they prepare for the coming of a new golden age for this planet.\n</dialog>\n",
       "color": "0f0",
       "icon": "star",
       "tags": "expanse"
@@ -7777,14 +7789,15 @@
       "name": "Larato Gate",
       "xml": "<condition at-dest=\"Larato Node\" have-item=\"Larato sigil\" />\n<mark-on-map dest=\"Larato Node\" />\n<mark id=\"ready_for_jump\" />\n<condition at-dest=\"Larato Node\" have-item=\"Larato sigil\" trigger=\"ACTIVATE PORTAL\" />\n<dialog model=\"Larato Gate\" ok=\"ENTER GATE\" cancel=\"LEAVE\">\nThe misty dark cloud in the aperture swirls.\n</dialog>\n<travel dest=\"Larato Gate\"/>\n<goto mark=\"ready_for_jump\" />",
       "tags": "soma",
-      "color": "0ff",
-      "icon": "enter"
+      "color": "fff",
+      "icon": "enter",
+      "isFile": false
     },
     {
       "name": "Diluvian Tablet",
-      "xml": "\n<condition have-item=\"Diluvian Tablet\" />\n<take item=\"Diluvian Tablet\"/>\n<dialog>The signal source leads to ancient ruins that reveal stone tablets filled with inscriptions.</dialog>\n<dialog model=\"Tablet\">_These inscriptions are our legacy. Our last exodus ship has left, we that remain have sealed our fate._</dialog>\n<dialog model=\"Tablet\">_Our society was a peaceful one, and it ended when our oceans dried up. Drop by drop the Scourge stole them. Unstoppable, they siphoned it from our planet._</dialog>\n<dialog model=\"Tablet\">_Deep in the Pio mountains, we will now go to store our knowledge._</dialog>\n<add-to-quest-list />\n<condition state=\"surface\" at-dest=\"Obria\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Obria\" item=\"Diluvian Tablet\" />\n<condition have-item=\"Diluvian Tablet\"/>\n<take item=\"Diluvian Tablet\"/>\n<dialog model=\"Tablet\">_Ahead of our fleets, we send probes. Their task is to pave the way, find planets and turn dry worlds into oceans. To make preparations for our survival._</dialog>\n<dialog model=\"Tablet\">_The first exodus ship left a full generation ago. That ship went past The Great Star, to the other side of this Expanse._</dialog>\n<mark-on-map dest=\"Fatos\" />\n<condition state=\"surface\" at-dest=\"Fatos\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Fatos\" item=\"Diluvian Tablet\" />\n<condition have-item=\"Diluvian Tablet\"/>\n<take item=\"Diluvian Tablet\"/>\n<dialog model=\"Tablet\">_Our probes must have failed, this is a dry world. We could stay and complete the work of the probes, but we must press on. For our worst fears have been made real._\n_The Scourge are following us._</dialog>\n<dialog model=\"Tablet\">_We leave this tablet here as a marker for others. As warning. We hope we will find a safe haven near the bright blue star._</dialog>\n<dialog>_To cross The Great Void means we must construct a sacred aperture, and make a Great Jump._\n\n_It is our hope that the Scourge will not follow us across the Void._</dialog>\n",
+      "xml": "\n<condition have-item=\"Diluvian Tablet\" />\n<take item=\"Diluvian Tablet\"/>\n<dialog>The signal source leads to ancient ruins that reveal stone tablets filled with inscriptions.</dialog>\n<dialog model=\"Tablet\">_These inscriptions are our legacy. Our last exodus ship has left, we that remain have sealed our fate._</dialog>\n<dialog model=\"Tablet\">_Our society was a peaceful one, and it ended when our oceans dried up. Drop by drop the Scourge stole them. Unstoppable, they siphoned it from our planet._</dialog>\n<dialog model=\"Tablet\">_Deep in the Pio mountains, we will now go to store our knowledge._</dialog>\n<add-to-quest-list />\n<condition state=\"surface\" at-dest=\"Obria\" trigger=\"SEARCH FOR TABLETS\"/>\n<place-item dest=\"Obria\" item=\"Diluvian Tablet\" />\n<condition have-item=\"Diluvian Tablet\"/>\n<take item=\"Diluvian Tablet\"/>\n<dialog model=\"Tablet\">_Ahead of our fleets, we send probes. Their task is to pave the way, find planets and turn dry worlds into oceans. To make preparations for our survival._</dialog>\n<dialog model=\"Tablet\">_The first exodus ship left a full generation ago. That ship went past The Great Star, to the other side of this Expanse._</dialog>\n<mark-on-map dest=\"Fatos\" />\n<condition state=\"surface\" at-dest=\"Fatos\" trigger=\"SEARCH FOR TABLETS\"/>\n<remove-map-marker/>\n<place-item dest=\"Fatos\" item=\"Diluvian Tablet\" />\n<condition have-item=\"Diluvian Tablet\"/>\n<take item=\"Diluvian Tablet\"/>\n<dialog model=\"Tablet\">_Our probes must have failed, this is a dry world. We could stay and complete the work of the probes, but we must press on. For our worst fears have been made real._\n_The Scourge are following us._</dialog>\n<dialog model=\"Tablet\">_We leave this tablet here as a marker for others. As warning. We hope we will find a safe haven near the bright blue star._</dialog>\n<dialog>_To cross The Great Void means we must construct a sacred aperture, and make a Great Jump._\n\n_It is our hope that the Scourge will not follow us across the Void._</dialog>\n",
       "color": "0f0",
-      "icon": "square",
+      "icon": "triangle",
       "tags": "expanse",
       "isFile": true
     },
@@ -7798,7 +7811,7 @@
     },
     {
       "name": "Expanse Archeology",
-      "xml": "\n<condition state=\"surface\" at-dest=\"Zealou Workshops\" trigger=\"HAIL STATION\"/>\n<dialog>A weak signal from one of the docked ships is broadcasting a call for freelancer.\n\n`Assignment available. Historians needed.`</dialog>\n<condition state=\"surface\" at-dest=\"Zealou Workshops\" trigger=\"HAIL SHIP\"/>\n<dialog model=\"Helyon Shipyards\">\n_\"Finally! An answer to out bulletin.\"_\n_\"I am from the Archeology Institution and we will pay good credits for help in excavations of the Al Se Expanse\"_\n</dialog>\n<dialog model=\"Helyon Shipyards\" ok=\"OK\" cancel=\"MAYBE LATER\">\n_\"Are you willing to help us? Look for *Alien Relics* that might be present on planets in the *Al Se Expanse*. Unknown exactly where.\"_\n</dialog>\n<place-item item=\"Alien Relic\" dest=\"Mammon\"/>\n<place-item item=\"Alien Relic\" dest=\"Grig\"/>\n<place-item item=\"Alien Relic\" dest=\"Ko\"/>\n<condition state=\"surface\" have-item=\"Alien Relic\" at-dest=\"Zealou Workshops\" trigger=\"DELIVER ALIEN RELIC\"/>\n<take item=\"Alien Relic\" />\n<dialog>_\"Good work. Please, there might be more out there.\"_</dialog>\n<condition state=\"surface\" have-item=\"Alien Relic\" at-dest=\"Zealou Workshops\" trigger=\"DELIVER ALIEN RELIC\"/>\n<take item=\"Alien Relic\" />\n<dialog>_\"Excellent work. Please, there might be more out there.\"_</dialog>\n<condition state=\"surface\" have-item=\"Alien Relic\" at-dest=\"Zealou Workshops\" trigger=\"DELIVER ALIEN RELIC\"/>\n<take item=\"Alien Relic\" />\n<dialog>_\"Fantastic work. This is enough for several years of research. Please, accept this compensation.\"_</dialog>\n<give credits=\"1200\"/>\n\n\n\n\n",
+      "xml": "\n<condition state=\"surface\" at-dest=\"Zealou Workshops\" trigger=\"HAIL STATION\"/>\n<dialog>A weak signal from one of the docked ships is broadcasting a call for contractors.\n\n`Assignment available.`\n`Historians needed.`</dialog>\n<condition state=\"surface\" at-dest=\"Zealou Workshops\" trigger=\"HAIL SHIP\"/>\n<dialog model=\"Helyon Shipyards\">\n_\"Finally! An answer to our bulletin.\"_\n_\"I am from the Archeology Institution and we will pay good credits for help in excavations of the Al Se Expanse\"_\n</dialog>\n<dialog model=\"Helyon Shipyards\" ok=\"OK\" cancel=\"MAYBE LATER\">\n_\"Are you willing to help us? Look for *Alien Relics* that might be present on planets in the *Al Se Expanse*. Unknown exactly where.\"_\n</dialog>\n<place-item item=\"Alien Relic\" dest=\"Mammon\"/>\n<place-item item=\"Alien Relic\" dest=\"Grig\"/>\n<place-item item=\"Alien Relic\" dest=\"Ko\"/>\n<condition state=\"surface\" have-item=\"Alien Relic\" at-dest=\"Zealou Workshops\" trigger=\"DELIVER ALIEN RELIC\"/>\n<take item=\"Alien Relic\" />\n<dialog>_\"Good work. Please, there might be more out there.\"_</dialog>\n<condition state=\"surface\" have-item=\"Alien Relic\" at-dest=\"Zealou Workshops\" trigger=\"DELIVER ALIEN RELIC\"/>\n<take item=\"Alien Relic\" />\n<dialog>_\"Excellent work. Please, there might be more out there.\"_</dialog>\n<condition state=\"surface\" have-item=\"Alien Relic\" at-dest=\"Zealou Workshops\" trigger=\"DELIVER ALIEN RELIC\"/>\n<take item=\"Alien Relic\" />\n<dialog>_\"Fantastic work. This is enough for several years of research. Please, accept this compensation.\"_</dialog>\n<give credits=\"1200\"/>\n\n\n\n\n",
       "color": "990",
       "icon": "star",
       "tags": "expanse",
@@ -7808,8 +7821,9 @@
       "name": "Larato Node",
       "xml": "<condition at-dest=\"Larato Gate\" have-item=\"Larato sigil\" />\n<mark-on-map dest=\"Larato Gate\" />\n<condition at-dest=\"Larato Gate\" have-item=\"Larato sigil\" trigger=\"ANALYZE\"/>\n<dialog model=\"Larato Gate\" ok=\"APPROACH\" cancel=\"IGNORE\">\nThe Larato Gate is a ring of dirty stone needles. The Larato Sigil in your inventory is humming.\nShould you approach?\n</dialog>\n<dialog model=\"Larato Gate\">\nThe gate's mass of needles swells and twitches. The aperture shimmers and turns into a misty black cloud.\n</dialog>\n<mark id=\"ready_for_jump\" />\n<condition at-dest=\"Larato Gate\" trigger=\"ACTIVATE PORTAL\"/>\n<dialog model=\"Larato Gate\" ok=\"ENTER GATE\" cancel=\"LEAVE\">\nThe misty dark cloud in the aperture swirls.\n</dialog>\n<travel dest=\"Larato Node\"/>\n<goto mark=\"ready_for_jump\" />",
       "tags": "soma",
-      "color": "0ff",
-      "icon": "exit"
+      "color": "fff",
+      "icon": "enter",
+      "isFile": false
     },
     {
       "name": "Blue seeds",
@@ -7829,8 +7843,9 @@
       "name": "Soma Return Jump",
       "xml": "<condition have-item=\"Soma Jump Coords\" />\n<mark-on-map dest=\"Anomaly 2050\" />\n<mark id=\"ready_for_jump\" />\n<condition at-dest=\"Buoy 187\" have-item=\"Soma Jump Coords\" trigger=\"LONG JUMP\" />\n<travel dest=\"Anomaly 2050\"/>\n<goto mark=\"ready_for_jump\" />",
       "color": "fff",
-      "icon": "exit",
-      "tags": "soma"
+      "icon": "enter",
+      "tags": "soma",
+      "isFile": false
     },
     {
       "name": "First Contact",
@@ -7862,7 +7877,7 @@
     },
     {
       "name": "Tau Pavonis Observer",
-      "xml": "<mark-on-map dest=\"Pavonis Smoke\" />\n<condition at-dest=\"Pavonis Smoke\"/>\n<remove-map-marker/>\n<dialog>You are hailed as you enter orbit: _\"Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"We study Tau Pavonis and need assistance in placing sensors at the *Observatory*. Compensation is 1000 credits. Are you interested?\"_</dialog>\n<dialog>_\"First you need protection. Travel to *Pavonis Mirror* and acquire a *Star Shield*.\"_</dialog>\n<give item=\"Star Sensor\"/>\n<mark-on-map dest=\"Pavonis Mirror\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>_\"Traveller. This is Mirror spaceport. We have prepared the *Star Shield* you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed.\"_</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed-item=\"Star Shield\" trigger=\"READY TO GO\"/>\n<dialog ok=\"PROCEED\" cancel=\"WAIT\">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>\n<travel dest=\"Pavonis Observatory\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"PUT SENSOR\"/>\n<take item=\"Star Sensor\" />\n<dialog model=\"Sol Array\">You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\"/>\n<travel dest=\"Pavonis Mirror\"/>\n<dialog>_\"You made it! Must be a sturdy ship you got there.\"_</dialog>\n<dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organization.</dialog>\n<dialog>_\"Let us remove that Star Shield, you can collect your payment at *Pavonis Smoke*.\"_</dialog>\n<take item=\"Star Shield\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog>_\"You survived! Excellent, we are anxious to get the data from the sensor. Please accept our payment!\"_</dialog>\n<give credits=\"1000\"/>\n<remove-map-marker/>\n\n<condition not-at-dest=\"Pavonis Smoke\"/>\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>_\"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor are most disturbing. Tau Pavonis is behaving unphysically.\"_</dialog>\n<dialog>_\"You must help us collect more data! Please take us to the *Observatory* so we can make further readings.\"_</dialog>\n<dialog>This time you request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>\n<dialog>_\"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental *Shield Reactor*. Ok?\"_</dialog>\n<dialog>You see an opportunity to make demands.\n_\"That sounds useful, give it to me in advance, and a regular reward afterward!\"_</dialog>\n<give item=\"Dermal Inducer\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>They load the *Star Shield* onto your ship once again. They tell you to *install* it but they all look a bit worried this time. What is it they have found inside that star?</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" installed-item=\"Star Shield\" trigger=\"READY TO GO\"/>\n<travel dest=\"Pavonis Observatory\"/>\n<dialog>The scientists take readings with their arcane instruments.\nBut you don't need any telescopes. Just looking through the dimmed windows you can see a region of the star's surface pulsing. Or heaving, as if breathing.</dialog>\n<dialog model=\"Worm\">Suddenly the star's surface opens like a flower and something break free from the open wound. It trashes like a wounded animal. It looks slow like a ballet, but at this scale, it is tremendously fast.</dialog>\n<dialog>The monstrosity accelerates and traces a glowing path. South. Toward *Charm*. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>\n<give item=\"Worm Recording\" />\n<place-enemy enemy=\"Worm\" dest=\"Charm\"/>\n<mark-on-map dest=\"Charm\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\" />\n<travel dest=\"Pavonis Mirror\" />\n<take item=\"Star Shield\" />\n\n<condition at-dest=\"A117\"/>\n<dialog model=\"Worm\">Your sensors can make out the entity orbiting Charm. Approaching would be devastating.</dialog>\n<dialog>You are hailed by a distant ship. \n\n_\"Traveller. We are the Worshipers. Things have been set in motion and there might still be time to dispel this danger. Seek us out at *Paxos Station*.\"_</dialog>\n<mark-on-map dest=\"Paxos Station\"/>\n\n<condition at-dest=\"Paxos Station\" trigger=\"HAIL\"/>\n<dialog model=\"Paxos Station\">_\"This is Paxos Station, the Cathedral of Worship. The scholars at Pavonis Smoke have woken the Worm. You were their tool and now we can help you undo their foolish work.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The Worm's chains can be restored with the three tools that once bound it originally.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The children of the Worm once bound their progenitor with the artifacts Epiales, Momus and Horkos. Seek them out in the Fields, the Garden, and the Ruins.\"_</dialog>\n<take item=\"Worm Recording\" />\n<remove-map-marker/>\n\n<condition have-item=\"Momus;Horkos;Epiales\"/>\n<mark-on-map dest=\"Paxos Station\"/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" at-dest=\"Paxos Station\"/>\n<dialog>_\"Traveller. You have gathered the relics.\"_</dialog>\n<dialog>_\"While your hands were busy the Worm multiplied. Sired its seedlings.\nMay the relics help you. Clear out the Seedlings around *Charm*!\"_</dialog>\n<mark-on-map dest=\"Charm\" />\n<place-enemy dest=\"Charm Beta\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Gamma\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Delta\" enemy=\"Worm Seedling\" loot=\"\"/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" no-enemy-at-dest=\"Charm Beta;Charm Gamma;Charm Delta\" />\n<place-enemy dest=\"Charm\" enemy=\"Weakened Worm\" loot=\"Worm Umbra\" />\n<dialog model=\"Worm Seedling\">The final Seedling succumbs to your assault. Somehow you know that the Worm is affected. Touched by your actions here that bestial presence is now weakened. This can now end.</dialog>\n\n<condition no-enemy-at-dest=\"Charm\" />\n<dialog model=\"Worm\">The worm is mortally wounded. Its appendages flail and whip up foam on the surface of Charm as it is pulled below the surface and into the depths of the gas giant.</dialog>\n<mark-on-map dest=\"Paxos Station\" />\n\n<condition at-dest=\"Paxos Station\" />\n<dialog>_\"Traveller. You bested the Worm. The battle was glorious.\nYet many here feel fear. *The Worm is not dead.* It might slumber for eons inside Charm, but it will wake once again.\"_</dialog>\n<dialog>_\"We bestow upon you our highest honors and free access to the holy *Paxos Gate*\"_</dialog>\n<modify-quest quest=\"Enter Pavonis Gate\" goto-mark=\"sternrat-access\"/>\n",
+      "xml": "<mark-on-map dest=\"Pavonis Smoke\" />\n<condition at-dest=\"Pavonis Smoke\"/>\n<remove-map-marker/>\n<dialog>You are hailed as you enter orbit: _\"Traveller. Welcome to Pavonis Smoke, the leading university of the sector. Hail us if you are interested in contract work.\"_</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog ok=\"ACCEPT\" cancel=\"NOT NOW\">_\"We study Tau Pavonis and need assistance in placing sensors at the *Observatory*. Compensation is 1000 credits. Are you interested?\"_</dialog>\n<dialog>_\"First you need protection. Travel to *Pavonis Mirror* and acquire a *Star Shield*.\"_</dialog>\n<give item=\"Star Sensor\"/>\n<mark-on-map dest=\"Pavonis Mirror\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>_\"Traveller. This is Mirror spaceport. We have prepared the *Star Shield* you will need. A drone will transfer it immediately, install it and hail us when you are ready to proceed.\"_</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" have-item=\"Star Sensor\" installed-item=\"Star Shield\" trigger=\"READY TO GO\"/>\n<dialog ok=\"PROCEED\" cancel=\"WAIT\">The heavy shield turns your ship into a sluggish barge. Are you ready to proceed down toward the fiery star?</dialog>\n<travel dest=\"Pavonis Observatory\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"PUT SENSOR\"/>\n<take item=\"Star Sensor\" />\n<dialog model=\"Sol Array\">You don't understand how the delicate Star Sensor will withstand the scalding radiation but you install it as requested.</dialog>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\"/>\n<travel dest=\"Pavonis Mirror\"/>\n<dialog>_\"You made it! Must be a sturdy ship you got there.\"_</dialog>\n<dialog>Did they send me on a suicide mission? That must be why they hired someone outside of their organization.</dialog>\n<dialog>_\"Let us remove that Star Shield, you can collect your payment at *Pavonis Smoke*.\"_</dialog>\n<take item=\"Star Shield\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\" trigger=\"HAIL\"/>\n<dialog>_\"You survived! Excellent, we are anxious to get the data from the sensor. Please accept our payment!\"_</dialog>\n<give credits=\"1000\"/>\n<remove-map-marker/>\n\n<condition not-at-dest=\"Pavonis Smoke\"/>\n<mark-on-map dest=\"Pavonis Smoke\"/>\n\n<condition at-dest=\"Pavonis Smoke\"/>\n<dialog>_\"Traveller! You helped us install the Star Sensor at Pavonis Observatory. The readings from that sensor are most disturbing. Tau Pavonis is behaving unphysically.\"_</dialog>\n<dialog>_\"You must help us collect more data! Please take us to the *Observatory* so we can make further readings.\"_</dialog>\n<dialog>This time you request a much larger reward than last time, reminding them that they failed to mention the danger of the last mission.</dialog>\n<dialog>_\"Our resources are stretched thin, but this mission is critical! Tau Pavonis contains... something. We can offer you the experimental *Dermal Inducer*. Ok?\"_</dialog>\n<dialog>You see an opportunity to make demands.\n_\"That sounds useful, give it to me in advance, and a regular reward afterward!\"_</dialog>\n<give item=\"Dermal Inducer\"/>\n\n<condition at-dest=\"Pavonis Mirror\"/>\n<dialog>They load the *Star Shield* onto your ship once again. They tell you to *install* it but they all look a bit worried this time. What is it they have found inside that star?</dialog>\n<give item=\"Star Shield\"/>\n\n<condition state=\"space\" at-dest=\"Pavonis Mirror\" installed-item=\"Star Shield\" trigger=\"READY TO GO\"/>\n<travel dest=\"Pavonis Observatory\"/>\n<dialog>The scientists take readings with their arcane instruments.\nBut you don't need any telescopes. Just looking through the dimmed windows you can see a region of the star's surface pulsing. Or heaving, as if breathing.</dialog>\n<dialog model=\"Worm\">Suddenly the star's surface opens like a flower and something break free from the open wound. It trashes like a wounded animal. It looks slow like a ballet, but at this scale, it is tremendously fast.</dialog>\n<dialog>The monstrosity accelerates and traces a glowing path. South. Toward *Charm*. You decide to not press the scientists for that extra reward. This system got bigger problems to deal with now.</dialog>\n<give item=\"Worm Recording\" />\n<place-enemy enemy=\"Worm\" dest=\"Charm\"/>\n<mark-on-map dest=\"Charm\"/>\n\n<condition at-dest=\"Pavonis Observatory\" trigger=\"LEAVE\" />\n<travel dest=\"Pavonis Mirror\" />\n<take item=\"Star Shield\" />\n\n<condition at-dest=\"A117\"/>\n<dialog model=\"Worm\">Your sensors can make out the entity orbiting Charm. Approaching would be devastating.</dialog>\n<dialog model=\"Journeyman\">You are hailed by a distant ship. \n\n_\"Traveller. We are the Worshipers. Things have been set in motion and there might still be time to dispel this danger. Seek us out at *Paxos Station*.\"_</dialog>\n<mark-on-map dest=\"Paxos Station\"/>\n\n<condition at-dest=\"Paxos Station\" trigger=\"HAIL\"/>\n<dialog model=\"Paxos Station\">_\"This is Paxos Station, the Cathedral of Worship. The scholars at Pavonis Smoke have woken the Worm. You were their tool and now we can help you undo their foolish work.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The Worm's chains can be restored with the three tools that once bound it originally.\"_</dialog>\n<dialog model=\"Paxos Station\">_\"The children of the Worm once bound their progenitor with the artifacts Epiales, Momus and Horkos. Seek them out in the Fields, the Garden, and the Ruins.\"_</dialog>\n<take item=\"Worm Recording\" />\n<remove-map-marker/>\n\n<condition have-item=\"Momus;Horkos;Epiales\"/>\n<mark-on-map dest=\"Paxos Station\"/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" at-dest=\"Paxos Station\"/>\n<dialog>_\"Traveller. You have gathered the relics.\"_</dialog>\n<dialog>_\"While your hands were busy the Worm multiplied. Sired its seedlings.\nMay the relics help you. Clear out the Seedlings around *Charm*!\"_</dialog>\n<mark-on-map dest=\"Charm\" />\n<place-enemy dest=\"Charm Beta\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Gamma\" enemy=\"Worm Seedling\" loot=\"\"/>\n<place-enemy dest=\"Charm Delta\" enemy=\"Worm Seedling\" loot=\"\"/>\n\n<condition have-item=\"Momus;Horkos;Epiales\" no-enemy-at-dest=\"Charm Beta;Charm Gamma;Charm Delta\" />\n<place-enemy dest=\"Charm\" enemy=\"Weakened Worm\" loot=\"Worm Umbra\" />\n<dialog model=\"Worm Seedling\">The final Seedling succumbs to your assault. Somehow you know that the Worm is affected. Touched by your actions here that bestial presence is now weakened. This can now end.</dialog>\n\n<condition no-enemy-at-dest=\"Charm\" />\n<dialog model=\"Worm\">The worm is mortally wounded. Its appendages flail and whip up foam on the surface of Charm as it is pulled below the surface and into the depths of the gas giant.</dialog>\n<mark-on-map dest=\"Paxos Station\" />\n\n<condition at-dest=\"Paxos Station\" />\n<dialog>_\"Traveller. You bested the Worm. The battle was glorious.\nYet many here feel fear. *The Worm is not dead.* It might slumber for eons inside Charm, but it will wake once again.\"_</dialog>\n<dialog>_\"We bestow upon you our highest honors and free access to the holy *Paxos Gate*\"_</dialog>\n<modify-quest quest=\"Enter Pavonis Gate\" goto-mark=\"sternrat-access\"/>\n",
       "tags": "main",
       "color": "7df",
       "icon": "triangle",
@@ -7932,7 +7947,7 @@
     },
     {
       "name": "Locked Out",
-      "xml": "\n<condition state=\"surface\" at-dest=\"Drok Heights\"/>\n<dialog>\nAt the space station's airlock you see a suited figure. The person is banging on the controls.\n\nClearly in distress.\n</dialog>\n\n<condition state=\"surface\" at-dest=\"Drok Heights\" trigger=\"HAIL PERSON IN DISTRESS\"/>\n<dialog>\n_\"Help me! I have left my keys at work. On Pavonis Ember.\n\nI need to get in!!\"_\n</dialog>\n<place-item dest=\"Pavonis Ember\" item=\"Lost keys\" />\n\n<condition state=\"surface\" at-dest=\"Drok Heights\" have-item=\"Lost keys\" trigger=\"RETURN KEYS\"/>\n<dialog>_\"Thank you! Please, take this as a reward.\"_</dialog>\n<give credits=\"50\"/>\n",
+      "xml": "\n<condition state=\"surface\" at-dest=\"Drok Heights\"/>\n<add-to-quest-list/>\n<dialog>\nAt the space station's airlock you see a suited figure. The person is banging on the controls.\n\nClearly in distress.\n</dialog>\n\n<condition state=\"surface\" at-dest=\"Drok Heights\" trigger=\"HAIL PERSON IN DISTRESS\"/>\n<dialog>\n_\"Help me! I have left my keys at work. On Pavonis Ember.\n\nI need to get in!!\"_\n</dialog>\n<place-item dest=\"Pavonis Ember\" item=\"Lost keys\" />\n\n<condition state=\"surface\" at-dest=\"Drok Heights\" have-item=\"Lost keys\" trigger=\"RETURN KEYS\"/>\n<dialog>_\"Thank you! Please, take this as a reward.\"_</dialog>\n<give credits=\"50\"/>\n",
       "color": "ccc",
       "icon": "triangle",
       "tags": "pavonis"
@@ -7947,7 +7962,7 @@
       "xml": "<condition at-dest=\"Clear Skies\" trigger=\"HAIL\"/>\n<dialog>\nYou hail the small base at the planet Clear Skies.\n\n_\"Welcome to Clear Skies. We are a team of astral historians who will pay good money for *Nebular Dust* samples from the *Weaver* Nebula to the west.\"_\n</dialog>\n<add-to-quest-list/>\n<mark-on-map dest=\"Weaver Alpha\" />\n<condition have-item=\"Nebular Dust\"/>\n<dialog>The sample of Nebular Dust is fragile, more smoke than dust. Wonder what the historians at Clear Skies can decipher from this?</dialog>\n<mark-on-map dest=\"Clear Skies\" />\n<condition have-item=\"Nebular Dust\" at-dest=\"Clear Skies\" trigger=\"HAIL\"/>\n<dialog>_\"Excellent. These dust samples from Weaver are essential for our studies. Here, accept this compensation.\"_</dialog>\n<take item=\"Nebular Dust\" />\n<give credits=\"100\" />\n<dialog>_\"We can also sell you some of our refined products. Hail us if you are interested.\"_</dialog>\n<condition at-dest=\"Clear Skies\" have-credits=\"100\" trigger=\"HAIL\"/>\n<dialog ok=\"BUY\" cancel=\"NOT NOW\">_\"We produce large quantities of Sky Alloy in our research. We sell it for 100 credits per ingot.\n\nWould you like to invest?\"_</dialog>\n<take credits=\"100\" />\n<give item=\"Sky Alloy\" />",
       "tags": "expanse",
       "color": "c89",
-      "icon": "",
+      "icon": "rhomb",
       "isFile": false
     },
     {
@@ -7968,7 +7983,7 @@
     },
     {
       "name": "The Freelancer",
-      "xml": "<condition state=\"space\" at-dest=\"Outback Transfer Buoy\" />\n<dialog model=\"Ursula\">\nA passing freelancer ship hail you.\n\n_\"Hey kid! take care. There are some nasty bandits up ahead.\"_\n_\"If you can handle them, look me up. I might have some work for you. Call me Freelancer. I'm an Agent of sorts.\"_\n</dialog>\n<add-to-quest-list />\n\n<condition state=\"space\" at-dest=\"A6114\" />\n<dialog model=\"Ursula\">\nThe Freelancer is hiding among the asteroids. She emerges as you exit the jump.\n\n_\"Hey kid! Good work with those bandits.\"_\n_\"You should be careful with those University dudes, I don't think they know what they are doing.\"_\n_\"See you around!\"_\n</dialog>\n\n<condition state=\"space\" at-dest=\"A1620\" have-item=\"Worm Recording\" />\n<dialog model=\"Ursula\">\nThe Freelancer slide up behind you.\n\n_\"Oh boy kid! You have create some mess here. The Worm was not easy to contain the last time.\"_\n_\"You have to go the cultist at *Paxos*. Its your only chance!\"_\n</dialog>\n<mark-on-map dest=\"Paxos Station\" />\n\n<condition state=\"space\" at-dest=\"Paxos Station\" />\n<remove-map-marker />\n\n<condition state=\"space\" at-dest=\"Belleros\" />\n<dialog model=\"Ursula\">\nThe Freelancer pops out of jump right after you. How does she do this?\n\n_\"Hey kid! We are so close now. So very close.\"_\n_\"There is a lot of danger around. A lot. I have tried to set things right but it is hard. You have to clean up all of the mess around here!\"_\n</dialog>\n\n<condition state=\"space\" at-dest=\"A137\" />\n<dialog model=\"Ursula\">\nYou hear a familiar greeting on the radio.\n\n_\"Hey kid! Its me, the Freelancer. Nice to see you broke through that Bandit blockade.\"_\n_\"I'll follow you the rest of the way. *Eye of the Storm*. Up ahead. That's where we must go.\"_\n</dialog>\n<mark-on-map dest=\"Eye of the Storm\" />\n\n<condition state=\"space\" at-dest=\"Eye of the Storm\" trigger=\"TRIGGER\"/>\n<dialog model=\"Ursula\">The Freelancer's ship stop dead in front of you. A voice is heard in your cabin.\n\n_\"We have reached home. Come. Join us.\"_</dialog>\n<dialog model=\"Ursula\">\nThe Freelancer turns toward you, her weapons hot.\n\n*Betrayal!*\n</dialog>\n<place-enemy dest=\"Eye of the Storm\" enemy=\"Pilot\" loot=\"\"/>\n<condition no-enemy-at-dest=\"Eye of the Storm\" />\n<dialog model=\"Ursula\">\nYour barrage disable the Freelancer's ship. Parts of her hull come peeling off and severed pipes send burning fires into the vacuum.\n\nNo escape pod is launched.\n</dialog>\n<dialog>\nMatching speed and rotation, you maneuver alongside the crippled ship and dock to it.\n\nIf the Freelancer survived you will need some answers.\n</dialog>\n<dialog>\nThe airlock opens and out of the opening a wave of dust and particles flood the chamber. Tendrils hang from the walls inside the ship. Sheets of fungal growth obscure hang like curtains.\n\nThe entire ship is filled with a moist mold.\n</dialog>\n<dialog>\nForcing your way inside through the forest of mushroom stalks and furry stalactites of mold, you find the ship empty. No one is here. It has been empty all along.\n\n_\"Welcome. To Us.\"_\n</dialog>\n<dialog>\nInside your helmet a discreet message from your ship's computer light up. `Disabled ship is receiving data from the planet.`\n\n_\"This vessel is now forfeit. The new one is suitable. Are you suitable? Are You potentially *Me*?\"_\n</dialog>\n<dialog>\nMoldy wines fall from the walls and enclose you. The air liquifies and in seconds you suit is torn in shreads from your body.\n\nThe fungal growth enclose you, and penetrates you. The last thing you feel is it filling your every pore.\n</dialog>\n<dialog>\n*You* never really wake up.\nBut your consciousness does. Not solitary any more, but as a part of *Me*.\n\nThe old ship is discarded and the extension of *Me* is moved over to the new ship.\n</dialog>\n<dialog>\n*You* learn so much. *You* are so old. A whole planetary surface, a single consciousness.\n\n_\"The last *Agent*, the Freelancer, was recruiting a new template. A successor to continue its work. *You* are now *I*. Go out and explore. Become an *Agent*.\"_\n</dialog>\n<dialog>\nInstincts guide you. And reason. On this planet *You* are eternal. But the outsiders are forever changing.\n\nYou MUST go out and explore. Assessing the other races. Posing as your old form. And if need be take action. *I* must be protected. *I* must survive.\n</dialog>\n",
+      "xml": "<condition state=\"space\" at-dest=\"Outback Transfer Buoy\" />\n<dialog model=\"Ursula\">\nA passing freelancer ship hail you.\n\n_\"Hey kid! take care. There are some nasty bandits up ahead.\"_\n_\"If you can handle them, look me up. I might have some work for you. Call me Freelancer. I'm an Agent of sorts.\"_\n</dialog>\n<add-to-quest-list />\n\n<condition state=\"space\" at-dest=\"A6114\" />\n<dialog model=\"Ursula\">\nThe Freelancer is hiding among the asteroids. She emerges as you exit the jump.\n\n_\"Hey kid! Good work with those bandits.\"_\n_\"You should be careful with those University dudes, I don't think they know what they are doing.\"_\n_\"See you around!\"_\n</dialog>\n\n<condition state=\"space\" at-dest=\"A1620\" have-item=\"Worm Recording\" />\n<dialog model=\"Ursula\">\nThe Freelancer slide up behind you.\n\n_\"Oh boy kid! You have really made a mess here. The Worm was not easy to contain the last time.\"_\n_\"You have to go the cultist at *Paxos*. Its your only chance!\"_\n</dialog>\n<mark-on-map dest=\"Paxos Station\" />\n\n<condition state=\"space\" at-dest=\"Paxos Station\" />\n<remove-map-marker />\n\n<condition state=\"space\" at-dest=\"Belleros\" />\n<dialog model=\"Ursula\">\nThe Freelancer pops out of jump right after you. How does she do this?\n\n_\"Hey kid! We are so close now. So very close.\"_\n_\"There is a lot of danger around. A lot. I have tried to set things right but it is hard. You have to clean up all of the mess around here!\"_\n</dialog>\n\n<condition state=\"space\" at-dest=\"A137\" />\n<dialog model=\"Ursula\">\nYou hear a familiar greeting on the radio.\n\n_\"Hey kid! Its me, the Freelancer. Nice to see you broke through that Bandit blockade.\"_\n_\"I'll follow you the rest of the way. *Eye of the Storm*. Up ahead. That's where we must go.\"_\n</dialog>\n<mark-on-map dest=\"Eye of the Storm\" />\n\n<condition state=\"space\" at-dest=\"Eye of the Storm\" trigger=\"TRIGGER\"/>\n<dialog model=\"Ursula\">The Freelancer's ship stop dead in front of you. A voice is heard in your cabin.\n\n_\"We have reached home. Come. Join us.\"_</dialog>\n<dialog model=\"Ursula\">\nThe Freelancer turns toward you, her weapons hot.\n\n*Betrayal!*\n</dialog>\n<place-enemy dest=\"Eye of the Storm\" enemy=\"Pilot\" loot=\"\"/>\n<condition no-enemy-at-dest=\"Eye of the Storm\" />\n<dialog model=\"Ursula\">\nYour barrage disable the Freelancer's ship. Parts of her hull come peeling off and severed pipes send burning fires into the vacuum.\n\nNo escape pod is launched.\n</dialog>\n<dialog>\nMatching speed and rotation, you maneuver alongside the crippled ship and dock to it.\n\nIf the Freelancer survived you will need some answers.\n</dialog>\n<dialog>\nThe airlock opens and out of the opening a wave of dust and particles flood the chamber. Tendrils hang from the walls inside the ship. Sheets of fungal growth obscure hang like curtains.\n\nThe entire ship is filled with a moist mold.\n</dialog>\n<dialog>\nForcing your way inside through the forest of mushroom stalks and furry stalactites of mold, you find the ship empty. No one is here. It has been empty all along.\n\n_\"Welcome. To Us.\"_\n</dialog>\n<dialog>\nInside your helmet a discreet message from your ship's computer light up. `Disabled ship is receiving data from the planet.`\n\n_\"This vessel is now forfeit. The new one is suitable. Are you suitable? Are You potentially *Me*?\"_\n</dialog>\n<dialog>\nMoldy wines fall from the walls and enclose you. The air liquifies and in seconds you suit is torn in shreads from your body.\n\nThe fungal growth enclose you, and penetrates you. The last thing you feel is it filling your every pore.\n</dialog>\n<dialog>\n*You* never really wake up.\nBut your consciousness does. Not solitary any more, but as a part of *Me*.\n\nThe old ship is discarded and the extension of *Me* is moved over to the new ship.\n</dialog>\n<dialog>\n*You* learn so much. *You* are so old. A whole planetary surface, a single consciousness.\n\n_\"The last *Agent*, the Freelancer, was recruiting a new template. A successor to continue its work. *You* are now *I*. Go out and explore. Become an *Agent*.\"_\n</dialog>\n<dialog>\nInstincts guide you. And reason. On this planet *You* are eternal. But the outsiders are forever changing.\n\nYou MUST go out and explore. Assessing the other races. Posing as your old form. And if need be take action. *I* must be protected. *I* must survive.\n</dialog>\n",
       "color": "ff0",
       "icon": "square",
       "tags": "main",
@@ -8415,7 +8430,7 @@
                 [5, 0, 5],
                 [2, 0, 15],
                 [0.5, 0, 35],
-                [0.5, 0, 115]
+                [0.5, 0, 42]
               ]
             },
             {
@@ -11422,20 +11437,58 @@
     },
     {
       "name": "Journeyman",
-      "geometry": "lathe",
+      "geometry": "composite",
       "res": 6,
       "transform": [
         ["scale", 1, 0.3, 2],
         ["rotate", 90, 0, 0],
-        ["translate", 0, 20, -50]
+        ["translate", 0, 25, -50]
       ],
-      "path": [
-        [0, 0, -70],
-        [75, 0, -20],
-        [50, 0, -10],
-        [125, 0, 40],
-        [40, 0, 70],
-        [0, 0, 60]
+      "parts": [
+        {
+          "geometry": "lathe",
+          "res": 6,
+          "transform": [],
+          "path": [
+            [0, 0, -70],
+            [75, 0, -20],
+            [50, 0, -10],
+            [125, 0, 38],
+            [125, 0, 42],
+            [40, 0, 70],
+            [0, 0, 60]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 3,
+          "transform": [["rotate", 0, 0, -45], ["scale", 1, 0.8, 1]],
+          "angle": 90,
+          "path": [
+            [88, 0, 10],
+            [130, 0, 36],
+            [130, 0, 44],
+            [78, 0, 60],
+            [130, 0, 44],
+            [130, 0, 36],
+            [88, 0, 10]
+          ]
+        },
+        {
+          "geometry": "lathe",
+          "res": 3,
+          "transform": [["rotate", 0, 0, -225], ["scale", 1, 0.8, 1]],
+          "angle": 90,
+          "path": [
+            [88, 0, 10],
+            [130, 0, 36],
+            [130, 0, 44],
+            [78, 0, 60],
+            [130, 0, 44],
+            [130, 0, 36],
+            [88, 0, 10]
+          ]
+        }
       ],
       "tags": "ship"
     },
@@ -14540,5 +14593,8 @@
       "radius": 300
     }
   ],
-  "name": "Skanaar's World"
+  "name": "Skanaar's World",
+  "version": 0,
+  "date": "2018-01-04",
+  "modified": "2018-01-05"
 }
