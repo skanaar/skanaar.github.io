@@ -75,13 +75,13 @@ _.mixin({
     // are present (unless the user supplied a weird `options.indent` but in
     // that case we don’t care since the output would be invalid anyway).
     var stringOrChar = /("(?:[^"]|\\.)*")|[:,]/g
-    function prettify (string) {
+    function prettify(string) {
       return string.replace(stringOrChar, function (match, string) {
         return string ? match : match + ' '
       })
     }
 
-    function get (options, name, defaultValue) {
+    function get(options, name, defaultValue) {
       return (name in options ? options[name] : defaultValue)
     }
     options = options || {}
@@ -102,6 +102,9 @@ _.mixin({
       var length = maxLength - currentIndent.length - reserved
 
       if (string.length <= length) {
+        if (options.compact) {
+          return string
+        }
         var prettified = prettify(string)
         if (prettified.length <= length) {
           return prettified
