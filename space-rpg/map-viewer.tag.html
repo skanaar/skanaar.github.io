@@ -161,6 +161,28 @@
       e.preventDefault()
     }
 
+    self.copy = function(e){
+      var data = _.stringify(self.nodes.filter(e => e.isSelected).map(e => e.entity))
+      e.clipboardData.setData('text/plain', data)
+      e.preventDefault()
+    }
+
+    self.paste = function(e){
+      var list = _.jsonParse(e.clipboardData.getData('text/plain')) || []
+      self.nodes = self.nodes.filter(old => !list.some(ny => ny.name == old.entity.name))
+      list.forEach(function (e) {
+        self.nodes.push({
+          type: 'celestial',
+          screenPos: transform(e.pos),
+          isSelected: true,
+          entity: e
+        })
+      })
+      e.preventDefault()
+      calculateLines()
+      buildQuestCache()
+    }
+
     function translateSelection(delta) {
       _.filter(self.nodes, 'isSelected').forEach(function (node) {
         node.entity.pos = rund(add(node.entity.pos, delta))
@@ -501,6 +523,8 @@
       app.events.on('world-updated', loadWorld)
       app.events.on('highlight-entity', onHighlightRequested)
       window.document.addEventListener('keydown', self.keydown)
+      document.addEventListener('copy', self.copy);
+      document.addEventListener('paste', self.paste);
       loadWorld()
       buildRadiusCache()
       window.scrollTo(self.dx/3, self.dy/3)
@@ -511,6 +535,8 @@
       app.events.off('save-world', prepareWorldForSave)
       app.events.off('world-updated', loadWorld)
       window.document.removeEventListener('keydown', self.keydown)
+      window.document.removeEventListener('copy', self.copy)
+      window.document.removeEventListener('paste', self.paste)
     })
 
   </script>
