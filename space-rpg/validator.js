@@ -27,6 +27,8 @@ window.validator = (function (){
     }
     undefErrors(/state="[^"]+/gm, ['space', 'surface'], 'state should be either "space" or "surface"')
     undefErrors(/item="[^"]+/gm, world.items.map(e => e.name), 'undefined item')
+    undefErrors(/goto mark="[^"]+/gm, inXml(quest.xml, /mark id="[^"]+/gm), 'undefined mark')
+    undefErrors(/quest="[^"]+/gm, world.quests.map(e => e.name), 'undefined quest')
     undefErrors(/model="[^"]+/gm, world.models.map(e => e.name), 'undefined model')
     undefErrors(/loot="[^"]+/gm, world.items.map(e => e.name), 'undefined loot item')
     undefErrors(/dest="[^"]+/gm, world.destinations.map(e => e.name), 'undefined destination')
@@ -39,7 +41,7 @@ window.validator = (function (){
     var steps = [
       'condition', 'place-item', 'place-inventory', 'place-enemy', 'add-to-quest-list', 'dialog',
       'give', 'take', 'mark-on-map', 'remove-map-marker', 'change-ship', 'travel', 'hint',
-      'mark', 'modify-quest', 'goto'
+      'mark', 'modify-quest', 'goto', 'halt'
     ]
     _.uniq(_.difference(inXmlTags(quest.xml, /<[a-z-]+/gm), steps)).forEach(e => error('unknown step', e))
   }
