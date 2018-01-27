@@ -63,6 +63,7 @@
         if (!_.isArray(world.items)) throw new Error()
         if (!_.isArray(world.ships)) throw new Error()
         if (!_.isArray(world.enemies)) throw new Error()
+        window.world = world
         return world
       }
 
@@ -72,20 +73,24 @@
       function loadFromServer() {
         _.fetch('world.json', data => startEditor(parseWorld(data)))
       }
-      var useLocalStorage = !! _.jsonParse(localStorage['nebula:use-local-storage'] || 'false')
-      var worldJson = localStorage['nebula:world']
-      //console.log('useLocalStorage', useLocalStorage, !!worldJson)
-      if (!useLocalStorage || !worldJson) {
-        loadFromServer()
-      }
-      else {
-        try {
-          startEditor(parseWorld(worldJson))            
-        } catch(e) {
-          alert('locally stored world was corrupt, loading world from server')
+
+      function initialize() {
+        var useLocalStorage = !! _.jsonParse(localStorage['nebula:use-local-storage'] || 'false')
+        var worldJson = localStorage['nebula:world']
+        if (!useLocalStorage || !worldJson) {
           loadFromServer()
         }
+        else {
+          try {
+            startEditor(parseWorld(worldJson))            
+          } catch(e) {
+            alert('locally stored world was corrupt, loading world from server')
+            loadFromServer()
+          }
+        }
       }
+
+      initialize()
 
     </script>
 </body>

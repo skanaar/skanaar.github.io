@@ -67,6 +67,7 @@
       { name: 'Add to quest list', template: '<add-to-quest-list/>' },
       { name: 'Mark on map', template: '<mark-on-map dest="" />' },
       { name: 'Remove map marker', template: '<remove-map-marker/>' },
+      { name: 'Halt script', template: '<halt/>' },
       { name: 'Condition', template: '<condition state="space" have-item="" installed-item="" have-ship="" at-dest="" no-enemy-at-dest="" not-at-dest="" have-credits="" trigger="TRIGGER"/>' },
       { name: 'Dialog', template: '<dialog>"Hey hitchhiker!"</dialog>' },
       { name: 'Dialog with model', template: '<dialog model="portrait">"Hey hitchhiker!"</dialog>' },
@@ -83,7 +84,11 @@
       { name: 'Give item', template: '<give item=""/>' },
       { name: 'Take credits', template: '<take credits=""/>' },
       { name: 'Take item', template: '<take item=""/>' },
-      { name: 'Change ship', template: '<change-ship ship=""/>' }
+      { name: 'Change ship', template: '<change-ship ship=""/>' },
+      { name: 'Play animation', template: '<play animation="end-of-game"/>' },
+      { name: 'Play audio', template: '<play audio="Ending"/>' },
+      { name: 'Request review', template: '<request-review />' },
+      { name: 'No Operation', template: '<noop/>' }
     ]
     self.allTags = () => app.allTags(self.world.quests).filter(e => e)
 

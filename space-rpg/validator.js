@@ -41,7 +41,7 @@ window.validator = (function (){
     var steps = [
       'condition', 'place-item', 'place-inventory', 'place-enemy', 'add-to-quest-list', 'dialog',
       'give', 'take', 'mark-on-map', 'remove-map-marker', 'change-ship', 'travel', 'hint',
-      'mark', 'modify-quest', 'goto', 'halt'
+      'mark', 'modify-quest', 'goto', 'halt', 'play', 'request-review', 'noop'
     ]
     _.uniq(_.difference(inXmlTags(quest.xml, /<[a-z-]+/gm), steps)).forEach(e => error('unknown step', e))
   }
