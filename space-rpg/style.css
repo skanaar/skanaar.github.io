@@ -36,7 +36,7 @@ img {
   margin: 20px 0;
   border: 1px solid #333;
 }
-a, a:hover, a:active, a:visited {
+a.btn, a.btn:hover, a.btn:active, a.btn:visited {
   display: inline-block;
   color: #fa0;
   text-decoration: none;
@@ -46,6 +46,9 @@ a, a:hover, a:active, a:visited {
   border-width: 0 3px;
   min-width: 100px;
   font-weight: 200;
+}
+.appstore-link {
+  margin-top: 30px;
 }
 pre {
   font-size: 14px;

@@ -11,15 +11,17 @@
 
 <p>An adventure in deep space. In development now.</p>
 
-<a href="editor.html">EDITOR</a>
+<a class=btn href="editor.html">EDITOR</a>
 
 <h2>TRAVEL IN SPACE</h2>
 <img src="screens/screen-radar.png">
 
 <div class="commercial-title" id="commercial-title">
 	<div class="commercial-dismiss" onclick="closeCommercial()">&times;</div>
-	<img src="commercial/appstore.svg">
-	I have made a game<br/>Play Nebular Winds :)
+	<a href="https://itunes.apple.com/se/app/nebula-sky/id1268430694&mt=8">
+		<img src="commercial/appstore.svg">
+		I have made a game!<br/>Try Nebula Sky now!
+	</a>
 </div>
 <div class="commercial show1" id="commercial" onclick="cycleCommercial()">
 	<div class="commercial-shadowcaster"></div>
@@ -69,6 +71,10 @@
 		font-size: 12px;
 		color: #807C72;
 		transition: bottom 1s;
+	}
+	.commercial-title a, .commercial-title a:hover, .commercial-title a:active, .commercial-title a:visited {
+		text-decoration: none;
+		color: inherit;
 	}
 	.commercial-title img {
 		width: 80px;
