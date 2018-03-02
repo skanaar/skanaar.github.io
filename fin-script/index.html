@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>azaScript</title>
+  <style>
+    input[type=range] { width: 1024px }
+  </style>
+  <script src="underscore.js"></script>
+  <script src="riot.min.js"></script>
+  <script src="fin-script.parser.js"></script>
+  <script type="riot/tag" src="rule-simulator.tag.html"></script>
+  <style>
+    html, body { margin: 0; background: #333; }
+  </style>
+</head>
+<body class="enable-scroll">
+  <rule-simulator></rule-simulator>
+  <script type="fin-script/text" id="example-source">
+func acquire(stock:Stock, units:Units): Command {}
+  => buy(stock, units, price(stock), 1_Days)
+
+func bailout(stock:Stock): Command {
+  let sell_price: Price = (95% * price(stock))
+  let volume: Units = count(holding(stock))
+} => sell(stock, volume, sell_price, 1 Days)
+
+func super_trade(stock:Stock): Command {
+  case have_orders(stock) => noaction()
+  case (average(stock, 7 Days) < price(stock)) => acquire(stock)
+  case (average(stock, 7 Days) < price(stock)) => bailout(stock)
+} => noaction()
+
+case yes() => average(#GOOG, 7 Days)
+
+rule super_trade_avanza {} => super_trade(#AZA)
+rule super_trade_finger {} => super_trade(#FING)
+  </script>
+  <script>
+    riot.mount('*')
+  </script>
+</body>
+</html>

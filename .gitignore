@@ -2,6 +2,8 @@ stockholmsstad-arkitektur/
 *.sublime-workspace
 *.sublime-project
 
+node_modules
+
 space-rpg/quest-disposition.nomnoml
 space-rpg/load-world.js
 
