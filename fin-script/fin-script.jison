@@ -28,56 +28,58 @@
 %% /* -------------------------------------- */
 
 root
-  : lines EOF                { return $1; };
+  : body EOF                 { return $1; };
 
 exp
-  : ID                       {$$ = {node:'deref', name:$1}; }
-  | ID '(' args ')'          {$$ = {node:'invoke', name:$1, args:$3}; }
-  | ID '(' ')'               {$$ = {node:'invoke', name:$1, args:[]}; }
-  | func_invoke              {$$ = $1; }
-  | NUMBER TYPE              {$$ = {node: 'number', value:$1, unit:$2}; }
-  | SYM                      {$$ = $1; }
-  | '(' exp OP exp ')'       {$$ = {node:'expr', operator:$1, a:$2, b:$3}; };
+  : ID                       {$$ = {node:'deref', name:$1, loc:@1}; }
+  | ID '(' args ')'          {$$ = {node:'invoke', name:$1, args:$3, loc:@1}; }
+  | ID '(' ')'               {$$ = {node:'invoke', name:$1, args:[], loc:@1}; }
+  | NUMBER TYPE              {$$ = {node: 'number', value:$1, type:$2, loc:@1}; }
+  | SYM                      {$$ = {node: 'symbol', name:$1, type:'Stock', loc:@1}; }
+  | '(' exp OP exp ')'       {$$ = {node:'operator', operator:$1, a:$2, b:$3, loc:@1}; };
 
 args
   : exp                      {$$ = [$1]; }
   | args ',' exp             {$$ = $1.concat($3); };
 
 param
-  : ID ':' TYPE              {$$ = {node:'param', name:$1, type:$3}; };
+  : ID ':' TYPE              {$$ = {node:'param', name:$1, type:$3, loc:@1}; };
 
 params
   : param                    {$$ = [$1]; }
   | params ',' param         {$$ = $1.concat($3); };
 
 case
-  : CASE exp RETURN exp      {$$ = {node:'case', predicate:$2, value: $4}; };
+  : CASE exp RETURN exp      {$$ = {node:'case', predicate:$2, value: $4, loc:@1}; };
 
 let
-  : LET ID ':' TYPE '=' exp  {$$ = {node:'let', name:$2, type:$4, value: $6}; };
+  : LET ID ':' TYPE '=' exp  {$$ = {node:'let', name:$2, type:$4, value: $6, loc:@1}; };
 
 func
-  : FUNC ID '(' params ')' ':' TYPE '{' lines '}' RETURN exp
-    {$$ = {node:'func', name:$2, type: $7, params: $4, body: $9, default: $12}; }
+  : FUNC ID '(' params ')' ':' TYPE '{' body '}' RETURN exp
+    {$$ = {node:'func', name:$2, type: $7, params: $4, body: $9, default: $12, loc:@1}; $9.params=$4 }
   | FUNC ID '(' params ')' ':' TYPE '{' '}' RETURN exp 
-    {$$ = {node:'func', name:$2, type: $7, params: $4, body: [], default: $11}; }
-  | FUNC ID '(' ')' ':' TYPE '{' lines '}' RETURN exp 
-    {$$ = {node:'func', name:$2, type: $6, params: [], body: $8, default: $11}; }
+    {$$ = {
+      node:'func', name:$2, type: $7, params: $4,
+      body: {node:'body', cases:[], lets:[], funcs:[], params:$4},
+      default: $11, loc:@1};
+    }
+  | FUNC ID '(' ')' ':' TYPE '{' body '}' RETURN exp 
+    {$$ = {node:'func', name:$2, type: $6, params: [], body: $8, default: $11, loc:@1}; }
   | FUNC ID '(' ')' ':' TYPE '{' '}' RETURN exp 
-    {$$ = {node:'func', name:$2, type: $6, params: [], body: [], default: $10}; }
-  | RULE ID '{' lines '}' RETURN exp
-    {$$ = {node:'func', name:$2, type: 'Command', params: [], body: $4, default: $7}; }
+    {$$ = {node:'func', name:$2, type: $6, params: [], body: {node:'body', cases:[], lets:[], funcs:[], params:[]}, default: $10, loc:@1}; }
+  | RULE ID '{' body '}' RETURN exp
+    {$$ = {node:'func', name:$2, type: 'Command', params: [], body: $4, default: $7, loc:@1}; }
   | RULE ID '{' '}' RETURN exp
-    {$$ = {node:'func', name:$2, type: 'Command', params: [], body: [], default: $6}; };
+    {$$ = {node:'func', name:$2, type: 'Command', params: [], body: {node:'body', cases:[], lets:[], funcs:[], params:[]}, default: $6, loc:@1}; };
 
-lines 
-  : case                     {$$ = {node:'body', cases: [$1], lets: [], funcs: []}; }
-  | let                      {$$ = {node:'body', cases: [], lets: [$1], funcs: []}; }
-  | func                     {$$ = {node:'body', cases: [], lets: [], funcs: [$1]}; }
-  | lines case               {$$ = [$1.cases.push($2), $1][1]; }
-  | lines let                {$$ = [$1.lets.push($2), $1][1]; }
-  | lines func               {$$ = [$1.funcs.push($2), $1][1]; };
-
+body 
+  : case                     {$$ = {node:'body', cases:[$1], lets:[], funcs:[], params:[], loc:@1}; }
+  | let                      {$$ = {node:'body', cases:[], lets:[$1], funcs:[], params:[], loc:@1}; }
+  | func                     {$$ = {node:'body', cases:[], lets:[], funcs:[$1], params:[], loc:@1}; }
+  | body case                {$$ = [$1.cases.push($2), $1][1]; }
+  | body let                 {$$ = [$1.lets.push($2), $1][1]; }
+  | body func                {$$ = [$1.funcs.push($2), $1][1]; };
 
 
 

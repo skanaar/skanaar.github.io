@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>azaScript</title>
+  <title>FinScript</title>
   <style>
     input[type=range] { width: 1024px }
   </style>
@@ -16,26 +16,32 @@
 </head>
 <body class="enable-scroll">
   <rule-simulator></rule-simulator>
+
+  <script type="fin-script/text" id="example-source-basic">
+func acquire(stock:Stock, units:Units): Command {}
+  => buy(stock, units, 100 Sek, 1_Days)
+rule super_trade_finger {} => acquire(#FING, 100 Units)
+  </script>
+
   <script type="fin-script/text" id="example-source">
 func acquire(stock:Stock, units:Units): Command {}
   => buy(stock, units, price(stock), 1_Days)
 
 func bailout(stock:Stock): Command {
-  let sell_price: Price = (95% * price(stock))
+  let sell_price: Sek = (95% * price(stock))
   let volume: Units = count(holding(stock))
 } => sell(stock, volume, sell_price, 1 Days)
 
 func super_trade(stock:Stock): Command {
   case have_orders(stock) => noaction()
-  case (average(stock, 7 Days) < price(stock)) => acquire(stock)
+  case (average(stock, 7 Days) < price(stock)) => acquire(stock, 7 Units)
   case (average(stock, 7 Days) < price(stock)) => bailout(stock)
 } => noaction()
-
-case yes() => average(#GOOG, 7 Days)
 
 rule super_trade_avanza {} => super_trade(#AZA)
 rule super_trade_finger {} => super_trade(#FING)
   </script>
+  
   <script>
     riot.mount('*')
   </script>

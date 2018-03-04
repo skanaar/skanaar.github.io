@@ -1,10 +1,23 @@
 <rule-simulator>
   <div>
+
+    <div class=band>
+      <textarea class=editor rows=20 ref="editor" value={example}>
+      </textarea>
+      <div class=output>
+        <div class="output-info" each={e in infos}>{e}</div>
+        <div class="output-error" each={err in errors}>{err}</div>
+      </div>
+    </div>
+    <div class=row>
+      <button onclick={parseSource}>Compile</button>
+    </div>
+
     <div class=row>
       <div>
         <input type=range step=3 min=0 max=512 onchange={calc}>
       </div>
-      <svg width=1024 height=300>
+      <svg width=1024 height=200>
         <g transform="scale(1,1) translate(0,0)">
           <path each={e in graphs}
             riot-d={e.path}
@@ -15,24 +28,43 @@
         </g>
       </svg>
     </div>
-
-    <textarea class=editor rows=20 ref="editor" value={example}>
-    </textarea>
-    <div class=row>
-      <button onclick={parseSource}>Compile</button>
-    </div>
   </div>
 
   <style>
     .svg-stock-graph { opacity: 0.5; }
     .row { margin: 20px; }
-    .editor {
+    .band {
       width: 100%;
       font-family: Consolas, Menlo, monospace;
       background: #444;
       color: #2A5;
+      padding: 10px;
+    }
+    .editor {
+      display: inline-block;
+      vertical-align: top;
+      width: 50%;
+      font-family: Consolas, Menlo, monospace;
+      font-size: 14px;
+      background: #444;
+      color: #2A5;
       border: 0;
       padding: 10px;
+    }
+    .output {
+      display: inline-block;
+      vertical-align: top;
+      width: 40%;
+      font-size: 14px;
+      padding: 10px;
+    }
+    .output-info {
+      color: #49A;
+      white-space: pre;
+    }
+    .output-error {
+      color: #A94;
+      white-space: pre;
     }
   </style>
   <script>
@@ -107,32 +139,28 @@
       return Buy(100, stockAverage('tobi', 1, t))
     }
 
-    self.parseSource = function () {
-      var source = self.refs.editor.value
-      var ast = parser.parse(source)
-      var invokes = getInvokesFromNode(ast)
-      self.invokes = _.flatten(invokes).filter(e => e.args.length > 1 && e.args[0][0] === '#')
+    self.errors = []
+    self.infos = []
+
+    function error(msg, node) {
+      self.errors.push('#' + node.loc.first_line + ',' + node.loc.first_column + ' ' + msg)
     }
 
-    function getInvokesFromNode(node){
-      if (node.node === 'invoke')
-        return node
-      if (node.node === 'body')
-        return [
-          node.lets.map(getInvokesFromNode),
-          node.cases.map(getInvokesFromNode),
-          node.funcs.map(getInvokesFromNode),
-        ]
-      if (node.node === 'expr')
-        return [
-          getInvokesFromNode(node.a),
-          getInvokesFromNode(node.b)
-        ]
-      if (node.node === 'func')
-        return [getInvokesFromNode(node.default), getInvokesFromNode(node.body)]
-      if (node.node === 'case')
-        return [getInvokesFromNode(node.predicate), getInvokesFromNode(node.value)]
-      return []
+    self.parseSource = function () {
+      self.infos = []
+      self.errors = []
+      var source = self.refs.editor.value
+      try {
+        var ast = finscript.parse(source, error)
+        finscript.populateScopes(ast, error)
+        finscript.markupTypes(ast, error)
+        finscript.checkTypes(ast, error)
+        if (self.errors.length === 0) {
+          self.infos.push('SUCCESS')
+        }
+      } catch(e) {
+        self.errors.push(e.message)
+      }
     }
     // ----------
 
