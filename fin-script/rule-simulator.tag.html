@@ -9,11 +9,12 @@
       </button>
     </div>
     <div class=card>
-      <textarea class=editor rows=20 ref="editor" value={example}></textarea><div class=output>
+      <textarea class=editor rows=20 ref="editor" value={example}
+       autocomplete="off" autocorrect="off" spellcheck="false"></textarea><div class=output>
         <div class="output-info" each={e in infos}>{e}</div>
         <div class="output-error" each={err in errors}>{err}</div>
       </div>
-      <div class="editor-error" style={'top:'+(17*e.first_column)+'px'} each={e in errorLines}></div>
+      <div class="editor-error" style={'top:'+(17*e.first_line)+'px'} each={e in errorLines}></div>
     </div>
 
     <div class="card card-padded">
@@ -68,7 +69,7 @@
     .editor-error {
       position: absolute;
       left: 0;
-      width: 10;
+      width: 10px;
       height: 15px;
       background: rgba(255,0,0,0.3);
     }
