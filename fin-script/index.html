@@ -11,10 +11,24 @@
   <script src="compiler.js"></script>
   <script type="riot/tag" src="rule-simulator.tag.html"></script>
   <style>
-    html, body { margin: 0; background: #333; }
+    html, body {
+      margin: 0;
+      background: #efefef;
+      z-index: 0;
+      position: relative;
+    }
+    .bg-header {
+        width: 100%;
+        background: #4A4;
+        height: 300px;
+        position: fixed;
+        top: 0;
+        z-index: -1;
+    }
   </style>
 </head>
-<body class="enable-scroll">
+<body>
+  <div class="bg-header"></div>
   <rule-simulator></rule-simulator>
 
   <script type="fin-script/text" id="example-source-basic">
