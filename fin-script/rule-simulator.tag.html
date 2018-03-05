@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <div class=card>
+    <div class="card card-padded">
       <div>
         <input type=range step=3 min=0 max=512 onchange={calc}>
       </div>
@@ -43,7 +43,7 @@
     }
     .row button {
       -webkit-appearance: none;
-      background: #4a5;
+      background: #03A678;
       padding: 5px 10px;
       border: none;
       color: white;
@@ -52,12 +52,18 @@
       font-family: Roboto;
       letter-spacing: 1px;
     }
+    row button:hover {
+      background: #038B69;
+    }
     .card {
       max-width: 1000px;
       margin: 10px auto;
       border-radius: 4px;
-      border: 1px solid #ddd;
-      box-shadow: 0 4px 12px #ccc;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .card.card-padded {
+      padding: 10px;
     }
     .band {
       width: 100%;
@@ -69,11 +75,12 @@
     .editor {
       display: inline-block;
       vertical-align: top;
-      width: 50%;
+      resize: none;
+      width: 75%;
       font-family: Consolas, Menlo, monospace;
       font-size: 14px;
       background: none;
-      color: #2A5;
+      color: #03A678;
       border: 0;
       padding: 15px;
       border-right: 1px solid #eee;
@@ -81,7 +88,7 @@
     .output {
       display: inline-block;
       vertical-align: top;
-      width: 40%;
+      width: 20%;
       font-size: 14px;
       padding: 15px;
     }
