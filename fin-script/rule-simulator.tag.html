@@ -9,11 +9,11 @@
       </button>
     </div>
     <div class=card>
-      <textarea class=editor rows=20 ref="editor" value={example}>
-      </textarea><div class=output>
+      <textarea class=editor rows=20 ref="editor" value={example}></textarea><div class=output>
         <div class="output-info" each={e in infos}>{e}</div>
         <div class="output-error" each={err in errors}>{err}</div>
       </div>
+      <div class="editor-error" style={'top:'+(17*e.first_column)+'px'} each={e in errorLines}></div>
     </div>
 
     <div class="card card-padded">
@@ -55,6 +55,7 @@
       background: #038B69;
     }
     .card {
+      position: relative;
       max-width: 1000px;
       margin: 10px auto;
       border-radius: 4px;
@@ -63,6 +64,13 @@
     }
     .card.card-padded {
       padding: 10px;
+    }
+    .editor-error {
+      position: absolute;
+      left: 0;
+      width: 10;
+      height: 15px;
+      background: rgba(255,0,0,0.3);
     }
     .band {
       width: 100%;
@@ -75,6 +83,7 @@
       display: inline-block;
       vertical-align: top;
       resize: none;
+      outline: none;
       width: 70%;
       font-family: Consolas, Menlo, monospace;
       font-size: 14px;
@@ -174,16 +183,19 @@
       return Buy(100, stockAverage('tobi', 1, t))
     }
 
-    self.errors = []
     self.infos = []
+    self.errors = []
+    self.errorLines = []
 
     function error(msg, node) {
       self.errors.push('#' + node.loc.first_line + ',' + node.loc.first_column + ' ' + msg)
+      self.errorLines.push(node.loc)
     }
 
     self.parseSource = function () {
       self.infos = []
       self.errors = []
+      self.errorLines = []
       var source = self.refs.editor.value
       try {
         var ast = finscript.parse(source, error)

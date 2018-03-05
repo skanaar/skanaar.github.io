@@ -11,13 +11,27 @@ function funcDef(name, type, params) {
 	}
 }
 
+var externals = {
+	noaction: function (){ return 'noaction' },
+	price: function (price){ return  },
+	count: function (holding) {},
+	have_orders: function (stock) {},
+	average: function (stock,days) {},
+	buy: function (stock,units,price,period) {},
+	sell: function (stock,units,price,period) {}
+}
+
 var finscript = {
 	fallbackFunction: funcDef('noaction', 'MissingFunctionReturnType', []),
+
 	globalScope: {
 		node: 'body',
+		lets: [],
+		cases: [],
+		params: [],
 		funcs: [
 			funcDef('noaction', 'Command', []),
-			funcDef('price', 'Sek', ['price:Stock']),
+			funcDef('price', 'Sek', ['stock:Stock']),
 			funcDef('count', 'Units', ['holding:Holding']),
 			funcDef('have_orders', 'Bool', ['stock:Stock']),
 			funcDef('average', 'Sek', ['stock:Stock','days:Days']),
