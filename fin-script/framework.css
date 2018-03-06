@@ -32,8 +32,6 @@
   padding: 10px;
 }
 
-// forms
-
 input[type=range] {
   height: 24px;
   -webkit-appearance: none;
