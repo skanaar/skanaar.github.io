@@ -5,9 +5,10 @@
       <button onclick={parseSource}>
         <svg height="20px" viewBox="0 0 20 20" width="20px" style="vertical-align: middle; margin-right: 5px;">
           <path d="M405.2,232.9L126.8,67.2c-3.4-2-6.9-3.2-10.9-3.2c-10.9,0-19.8,9-19.8,20H96v344h0.1c0,11,8.9,20,19.8,20  c4.1,0,7.5-1.4,11.2-3.4l278.1-165.5c6.6-5.5,10.8-13.8,10.8-23.1C416,246.7,411.8,238.5,405.2,232.9z" transform="scale(0.035,0.035)" fill="white"></path>
-        </svg> Compile
+        </svg>Run
       </button>
       <button onclick={loadDefault}>Load default</button>
+      <button onclick={download}>Download</button>
     </div>
     <div class="card card-editor">
       <div class="editor-error" style={e} each={e in errorLines}></div>
@@ -50,6 +51,7 @@
     }
     .editor {
       display: inline-block;
+      position: relative;
       vertical-align: top;
       resize: none;
       outline: none;
@@ -160,8 +162,12 @@
     self.errorLines = []
 
     function error(msg, node) {
-      self.errors.push('#' + node.loc.first_line + ',' + node.loc.first_column + ' ' + msg)
-      self.errorLines.push({top: (node.loc.first_line * 17 - 2) + 'px'})
+      self.errors.push('#' + node.loc[0].first_line + ',' + node.loc[0].first_column + ' ' + msg)
+      self.errorLines.push({
+        top: (node.loc[0].first_line * 17 - 2) + 'px',
+        left: (node.loc[0].first_column * 8.4 + 15) + 'px',
+        width: ((node.loc[1].last_column-node.loc[0].first_column) * 8.4) + 'px'
+      })
     }
 
     self.loadDefault = function () {
@@ -182,16 +188,21 @@
         finscript.checkTypes(ast, error)
         if (self.errors.length === 0) {
           self.infos.push('SUCCESS')
+        } else {
+          return
         }
         self.infos.push('------')
         ast.funcs.filter(e => !e.params.length).forEach(fn => {
           try {
-            self.infos.push(fn.name + '() ' + evaluate(fn.body, env))
+            var res = evaluate(fn.body, env)
+            if (res.cmd) {
+              res = res.cmd+' '+res.units+'*'+res.stock.name+' @ '+res.price
+            }
+            self.infos.push(fn.name + '() ' + res)
           } catch (e) {
             self.infos.push(fn.name + '() ' + e.message)
           }
         })
-        console.log(ast)
       } catch(e) {
         self.errors.push(e.message)
       }

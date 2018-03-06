@@ -87,47 +87,49 @@ case 1:
     return $$[$0-1];
   
 break;
-case 2:this.$ = {node:'deref', name:$$[$0], loc:_$[$0]}; 
+case 2:this.$ = {node:'deref', name:$$[$0], loc:[_$[$0],_$[$0]]}; 
 break;
-case 3:this.$ = {node:'invoke', name:$$[$0-3], args:$$[$0-1], loc:_$[$0-3]}; 
+case 3:this.$ = {node:'invoke', name:$$[$0-3], args:$$[$0-1], loc:[_$[$0-3],_$[$0]]}; 
 break;
-case 4:this.$ = {node:'invoke', name:$$[$0-2], args:[], loc:_$[$0-2]}; 
+case 4:this.$ = {node:'invoke', name:$$[$0-2], args:[], loc:[_$[$0-2],_$[$0]]}; 
 break;
-case 5:this.$ = {node:'number', value:+$$[$0-1], type:$$[$0], loc:_$[$0-1]}; 
+case 5:this.$ = 
+    {node:'number', value:($$[$0]==='%'?(+$$[$0-1])/100:+$$[$0-1]), type:($$[$0]==='%'?'Factor':$$[$0]), loc:[_$[$0-1],_$[$0]]};
+  
 break;
-case 6:this.$ = {node:'symbol', name:$$[$0], type:'Stock', loc:_$[$0]}; 
+case 6:this.$ = {node:'symbol', name:$$[$0], type:'Stock', loc:[_$[$0],_$[$0]]}; 
 break;
-case 7:this.$ = {node:'operator', lhs:$$[$0-3], operator:$$[$0-2], rhs:$$[$0-1], loc:_$[$0-4]}; 
+case 7:this.$ = {node:'operator', lhs:$$[$0-3], operator:$$[$0-2], rhs:$$[$0-1], loc:[_$[$0-4],_$[$0]]}; 
 break;
 case 8:this.$ = [$$[$0]]; 
 break;
 case 9:this.$ = $$[$0-2].concat($$[$0]); 
 break;
-case 10:this.$ = {node:'param', name:$$[$0-2], type:$$[$0], loc:_$[$0-2]}; 
+case 10:this.$ = {node:'param', name:$$[$0-2], type:$$[$0], loc:[_$[$0-2],_$[$0]]}; 
 break;
 case 11:this.$ = [$$[$0]]; 
 break;
 case 12:this.$ = $$[$0-2].concat($$[$0]); 
 break;
-case 13:this.$ = {node:'case', predicate:$$[$0-2], value: $$[$0], loc:_$[$0-3]}; 
+case 13:this.$ = {node:'case', predicate:$$[$0-2], value: $$[$0], loc:[_$[$0-3],_$[$0]]}; 
 break;
-case 14:this.$ = {node:'let', name:$$[$0-4], type:$$[$0-2], value: $$[$0], loc:_$[$0-5]}; 
+case 14:this.$ = {node:'let', name:$$[$0-4], type:($$[$0-2]=='%'?'Factor':$$[$0-2]), value: $$[$0], loc:[_$[$0-5],_$[$0]]}; 
 break;
-case 15:this.$ = {node:'func', name:$$[$0-10], type: $$[$0-5], params: $$[$0-8], body: $$[$0-3], default: $$[$0], loc:_$[$0-11]}; $$[$0-3].params=$$[$0-8]; $$[$0-3].default=$$[$0]; 
+case 15:this.$ = {node:'func', name:$$[$0-10], type: $$[$0-5], params: $$[$0-8], body: $$[$0-3], default: $$[$0], loc:[_$[$0-11],_$[$0-7]]}; $$[$0-3].params=$$[$0-8]; $$[$0-3].default=$$[$0]; 
 break;
 case 16:this.$ = {
       node:'func', name:$$[$0-9], type: $$[$0-4], params: $$[$0-7],
       body: {node:'body', cases:[], lets:[], funcs:[], params:$$[$0-7], default: $$[$0]},
-      default: $$[$0], loc:_$[$0-10]};
+      default: $$[$0], loc:[_$[$0-10],_$[$0-6]]};
     
 break;
-case 17:this.$ = {node:'func', name:$$[$0-9], type: $$[$0-5], params: [], body: $$[$0-3], default: $$[$0], loc:_$[$0-10]}; $$[$0-3].default = $$[$0]; 
+case 17:this.$ = {node:'func', name:$$[$0-9], type: $$[$0-5], params: [], body: $$[$0-3], default: $$[$0], loc:[_$[$0-10],_$[$0-7]]}; $$[$0-3].default = $$[$0]; 
 break;
-case 18:this.$ = {node:'func', name:$$[$0-8], type: $$[$0-4], params: [], body: {node:'body', cases:[], lets:[], funcs:[], params:[], default:$$[$0]}, default: $$[$0], loc:_$[$0-9]}; 
+case 18:this.$ = {node:'func', name:$$[$0-8], type: $$[$0-4], params: [], body: {node:'body', cases:[], lets:[], funcs:[], params:[], default:$$[$0]}, default: $$[$0], loc:[_$[$0-9],_$[$0-6]]}; 
 break;
-case 19:this.$ = {node:'func', name:$$[$0-5], type: 'Command', params: [], body: $$[$0-3], default: $$[$0], loc:_$[$0-6]}; $$[$0-3].default = $$[$0]; 
+case 19:this.$ = {node:'func', name:$$[$0-5], type: 'Command', params: [], body: $$[$0-3], default: $$[$0], loc:[_$[$0-6],_$[$0-5]]}; $$[$0-3].default = $$[$0]; 
 break;
-case 20:this.$ = {node:'func', name:$$[$0-4], type: 'Command', params: [], body: {node:'body', cases:[], lets:[], funcs:[], params:[], default:$$[$0]}, default: $$[$0], loc:_$[$0-5]}; 
+case 20:this.$ = {node:'func', name:$$[$0-4], type: 'Command', params: [], body: {node:'body', cases:[], lets:[], funcs:[], params:[], default:$$[$0]}, default: $$[$0], loc:[_$[$0-5],_$[$0-4]]}; 
 break;
 case 21:this.$ = {node:'body', cases:[$$[$0]], lets:[], funcs:[], params:[], loc:_$[$0]}; 
 break;
@@ -388,7 +390,7 @@ case 21:return 'INVALID'
 break;
 }
 },
-rules: [/^(?:\s+)/,/^(?:let\b)/,/^(?:case\b)/,/^(?:func\b)/,/^(?:rule\b)/,/^(?:[a-z_]+)/,/^(?:[A-Z%][a-z_]*)/,/^(?:[0-9_]+)/,/^(?:[#][A-Z]+)/,/^(?:=>)/,/^(?:[-+<>*/])/,/^(?:=)/,/^(?::)/,/^(?:,)/,/^(?:\()/,/^(?:\))/,/^(?:\[)/,/^(?:\])/,/^(?:\{)/,/^(?:\})/,/^(?:$)/,/^(?:.)/],
+rules: [/^(?:\s+)/,/^(?:let\b)/,/^(?:case\b)/,/^(?:func\b)/,/^(?:rule\b)/,/^(?:[a-z_]+)/,/^(?:[A-Z%][a-z_]*)/,/^(?:[-]?[0-9_]*\.?[0-9_]+)/,/^(?:[#][A-Z]+)/,/^(?:=>)/,/^(?:[-+<>*/])/,/^(?:=)/,/^(?::)/,/^(?:,)/,/^(?:\()/,/^(?:\))/,/^(?:\[)/,/^(?:\])/,/^(?:\{)/,/^(?:\})/,/^(?:$)/,/^(?:.)/],
 conditions: {"INITIAL":{"rules":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],"inclusive":true}}
 };
 return lexer;

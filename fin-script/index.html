@@ -47,7 +47,7 @@ func bailout(stock:Stock): Command {
 } => sell(stock, volume, sell_price, 1 Days)
 
 func super_trade(stock:Stock): Command {
-  case have_orders(stock) => noaction()
+  case not(have_orders(stock)) => noaction()
   case (average(stock, 7 Days) < price(stock)) => acquire(stock, 7 Units)
   case (average(stock, 7 Days) < price(stock)) => bailout(stock)
 } => noaction()

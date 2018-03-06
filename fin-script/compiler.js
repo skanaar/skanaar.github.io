@@ -11,16 +11,6 @@ function funcDef(name, type, params) {
 	}
 }
 
-var externals = {
-	noaction: function (){ return 'noaction' },
-	price: function (price){ return  },
-	count: function (holding) {},
-	have_orders: function (stock) {},
-	average: function (stock,days) {},
-	buy: function (stock,units,price,period) {},
-	sell: function (stock,units,price,period) {}
-}
-
 var finscript = {
 	fallbackFunction: funcDef('noaction', 'MissingFunctionReturnType', []),
 
@@ -30,11 +20,13 @@ var finscript = {
 		cases: [],
 		params: [],
 		funcs: [
-			funcDef('noaction', 'Command', []),
+			funcDef('not', 'Bool', ['bool:Bool']),
 			funcDef('price', 'Sek', ['stock:Stock']),
 			funcDef('count', 'Units', ['holding:Holding']),
 			funcDef('have_orders', 'Bool', ['stock:Stock']),
+			funcDef('holding', 'Holding', ['stock:Stock']),
 			funcDef('average', 'Sek', ['stock:Stock','days:Days']),
+			funcDef('noaction', 'Command', []),
 			funcDef('buy', 'Command', ['stock:Stock','units:Units','price:Sek','period:Days']),
 			funcDef('sell', 'Command', ['stock:Stock','units:Units','price:Sek','period:Days']),
 		]
@@ -44,8 +36,8 @@ var finscript = {
 		try {
 			return parser.parse(source)
 		} catch (e) {
-			var line = +(e.message.match(/line ([0-9]*)/) || [0,0])[1]
-			onerror(e.message, {loc:{first_line: line, first_column:0}})
+			var line = +(e.message.match(/line ([0-9]*)/) || [0,0])[1]
+			onerror(e.message, {loc:[{first_line: line, first_column:0},{last_column: 70}]})
 			throw new Error('Parse error')
 		}
 	},
@@ -56,6 +48,8 @@ var finscript = {
 			finscript.walkTree(e, enter, exit)
 			exit(e, node)
 		}
+		if (node.node === 'let')
+			visit(node.value)
 		if (node.node === 'invoke')
 			node.args.forEach(visit)
 		if (node.node === 'body') {
@@ -91,34 +85,34 @@ var finscript = {
 		}, function (){})
 	},
 
-	findLet: function(node, scope) {
+	findLet: function(node, scope, onerror) {
 		if (!scope) {
 			onerror('Undeclared constant "' + node.name + '"', node)
 			throw new Error('Parse error')
 		}
 		var foundLet = scope.lets.find(e => e.name === node.name)
 		var foundParam = scope.params.find(e => e.name === node.name)
-		return foundLet || foundParam || finscript.findLet(node, scope.parentScope)
+		return foundLet || foundParam || finscript.findLet(node, scope.parentScope, onerror)
 	},
 
-	findFunc: function(node, scope) {
+	findFunc: function(node, scope, onerror) {
 		if (!scope) {
 			onerror('Undeclared function "' + node.name + '"', node)
 			throw new Error('Parse error')
 		}
 		var found = scope.funcs.find(e => e.name === node.name)
-		return found || finscript.findFunc(node, scope.parentScope)
+		return found || finscript.findFunc(node, scope.parentScope, onerror)
 	},
 
 	markupTypes: function(root, onerror) {
 		finscript.walkTree(root, function (){}, function (node, parent) {
 			if (node.node === 'invoke'){
-				var fn = finscript.findFunc(node, node.scope)
+				var fn = finscript.findFunc(node, node.scope, onerror)
 				node.func = fn
 				node.type = fn.type
 			}
 			if (node.node === 'deref') {
-				var ref = finscript.findLet(node, node.scope)
+				var ref = finscript.findLet(node, node.scope, onerror)
 				node.ref = ref
 				node.type = ref.type
 			}
@@ -176,8 +170,13 @@ var finscript = {
 			}
 			if (node.node === 'func'){
 				ok = ok && node.type === node.body.default.type
-				ok = ok && node.body.cases.every(c => c.type === node.type)
-				if (!ok) onerror('All return points must have type "' + node.type + '"', node)
+				if (!ok) onerror('Return type "' + node.type + '" expected', node.body.default)
+				node.body.cases.forEach(c => {
+					if (c.type !== node.type) {
+						ok = false
+						onerror('Return type "' + node.type + '" expected', c.value)
+					}
+				})
 			}
 			isConsistent = isConsistent && ok
 		})
