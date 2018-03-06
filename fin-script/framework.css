@@ -1,7 +1,9 @@
-.page { margin: 0 50px; }
+.page { margin: 20px 50px; }
 .row {
   max-width: 1200px;
   margin: 15px auto;
+  display: flex;
+  justify-content: flex-end;
 }
 .row button {
   -webkit-appearance: none;
@@ -21,8 +23,19 @@
 .row button:hover {
   background: #038B69;
 }
+.row button:active {
+  background: #075;
+}
 .row svg {
   margin: -3px 5px -3px 0;
+}
+.row .pull-right {
+  display: inline-block;
+  flex-grow: 1;
+  text-align: right;
+}
+.row .pull-right button:last-child {
+  margin: 0;
 }
 .card {
   position: relative;
@@ -35,6 +48,30 @@
 .card.card-padded {
   padding: 10px;
 }
+
+
+label {
+  display: inline-block;
+  background: #eee;
+  padding: 4px 4px 4px 12px;
+  border-radius: 3px;
+  font-size: 14px;
+  font-family: Avenir, Roboto, sans-serif;
+  letter-spacing: 1px;
+  margin: 4px;
+  color: #666;
+}
+label input[type=number] {
+  appearance: none;
+  border: none;
+  padding: 4px 8px;
+  margin-left: 4px;
+  font-size: 14px;
+  border-radius: 2px;
+  font-family: Avenir, Roboto, sans-serif;
+  width: 70px;
+}
+
 
 input[type=range] {
   height: 24px;
