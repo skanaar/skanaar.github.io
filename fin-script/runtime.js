@@ -52,7 +52,13 @@ function evaluate(node, env) {
 			return env.externals[node.name].apply(null, args)
 		}
 		var body = finscript.findFunc(node, node.scope).body
-		return evaluate(body, env)
+		for (var i=0; i<node.params.length; i++) {
+			var name = node.params[i].name
+			var arg = node.args[i]
+			var value = evaluate(arg.value, env)
+			body.lets.unshift({node:'let', name:name, type:arg.type, value:value})
+		}
+		return evaluate(stackBody, env)
 	}
 	if (node.node === 'deref') {
 		return evaluate(finscript.findLet(node, node.scope), env)
