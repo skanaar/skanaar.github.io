@@ -44,7 +44,8 @@ var finscript = {
 		try {
 			return parser.parse(source)
 		} catch (e) {
-			onerror(e.message, {loc:{first_line: 0, first_column:0}})
+			var line = +(e.message.match(/line ([0-9]*)/) || [0,0])[1]
+			onerror(e.message, {loc:{first_line: line, first_column:0}})
 			throw new Error('Parse error')
 		}
 	},
@@ -64,8 +65,8 @@ var finscript = {
 			visit(node.default)
 		}
 		if (node.node === 'operator'){
-			visit(node.a)
-			visit(node.b)
+			visit(node.lhs)
+			visit(node.rhs)
 		}
 		if (node.node === 'func') {
 			node.params.forEach(visit)
@@ -124,10 +125,10 @@ var finscript = {
 					node.type = 'Bool'
 				}
 				if (node.operator === '+' || node.operator === '-') {
-					node.type = node.a.type
+					node.type = node.lhs.type
 				}
 				if (node.operator === '*' || node.operator === '/') {
-					node.type = (node.a.type === 'Factor') ? node.b.type : node.a.type
+					node.type = (node.lhs.type === 'Factor') ? node.rhs.type : node.lhs.type
 				}
 			}
 			if (node.node === 'case'){
@@ -158,16 +159,16 @@ var finscript = {
 			}
 			if (node.node === 'operator'){
 				if (node.operator === '<' || node.operator === '>') {
-					ok = node.a.type === node.b.type
+					ok = node.lhs.type === node.rhs.type
 					if (!ok) onerror('Cannot compare two different types', node)
 				}
 				if (node.operator === '+' || node.operator === '-') {
-					ok = node.a.type === node.b.type
+					ok = node.lhs.type === node.rhs.type
 					if (!ok) onerror('Cannot add/subtract two different types', node)
 				}
 				if (node.operator === '*' || node.operator === '/') {
-					var oneIsFactor = (node.a.type === 'Factor' || node.b.type === 'Factor')
-					ok = (oneIsFactor || node.a.type === node.b.type)
+					var oneIsFactor = (node.lhs.type === 'Factor' || node.rhs.type === 'Factor')
+					ok = (oneIsFactor || node.lhs.type === node.rhs.type)
 					if (!ok) onerror('Cannot multiply incompatible types', node)
 				}
 			}

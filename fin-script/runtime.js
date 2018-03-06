@@ -37,12 +37,12 @@ function evaluate(node, env) {
 	}
 	if (node.node === 'operator') {
 		switch (node.operator) {
-			case '<': return evaluate(node.a) < evaluate(node.b)
-			case '>': return evaluate(node.a) > evaluate(node.b)
-			case '+': return evaluate(node.a) + evaluate(node.b)
-			case '-': return evaluate(node.a) - evaluate(node.b)
-			case '*': return evaluate(node.a) * evaluate(node.b)
-			case '/': return evaluate(node.a) / evaluate(node.b)
+			case '<': return evaluate(node.lhs) < evaluate(node.rhs)
+			case '>': return evaluate(node.lhs) > evaluate(node.rhs)
+			case '+': return evaluate(node.lhs) + evaluate(node.rhs)
+			case '-': return evaluate(node.lhs) - evaluate(node.rhs)
+			case '*': return evaluate(node.lhs) * evaluate(node.rhs)
+			case '/': return evaluate(node.lhs) / evaluate(node.rhs)
 			default: throw new Error('Unknown operator "'+node.operator+'"')
 		}
 	}
@@ -66,6 +66,6 @@ function evaluate(node, env) {
 	}
 }
 
-function executeScript(ast, env) {
+function executeScript(ast) {
 	evaluate(ast, env)
 }

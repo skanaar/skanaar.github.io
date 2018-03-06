@@ -2,10 +2,12 @@
 <html>
 <head>
   <title>FinScript</title>
+  <link rel="stylesheet" href="framework.css">
   <script src="underscore.js"></script>
   <script src="riot.min.js"></script>
   <script src="fin-script.parser.js"></script>
   <script src="compiler.js"></script>
+  <script src="runtime.js"></script>
   <script type="riot/tag" src="rule-simulator.tag.html"></script>
   <style>
     html, body {
@@ -52,6 +54,7 @@ func super_trade(stock:Stock): Command {
 
 rule super_trade_avanza {} => super_trade(#AZA)
 rule super_trade_finger {} => super_trade(#FING)
+func nine_days(): Days {} => (7 Days + 2 Days)
   </script>
   
   <script>

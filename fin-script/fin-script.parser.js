@@ -97,7 +97,7 @@ case 5:this.$ = {node:'number', value:+$$[$0-1], type:$$[$0], loc:_$[$0-1]};
 break;
 case 6:this.$ = {node:'symbol', name:$$[$0], type:'Stock', loc:_$[$0]}; 
 break;
-case 7:this.$ = {node:'operator', operator:$$[$0-4], a:$$[$0-3], b:$$[$0-2], loc:_$[$0-4]}; 
+case 7:this.$ = {node:'operator', lhs:$$[$0-3], operator:$$[$0-2], rhs:$$[$0-1], loc:_$[$0-4]}; 
 break;
 case 8:this.$ = [$$[$0]]; 
 break;

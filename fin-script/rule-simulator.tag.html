@@ -14,7 +14,7 @@
         <div class="output-info" each={e in infos}>{e}</div>
         <div class="output-error" each={err in errors}>{err}</div>
       </div>
-      <div class="editor-error" style={'top:'+(17*e.first_line)+'px'} each={e in errorLines}></div>
+      <div class="editor-error" style={e} each={e in errorLines}></div>
     </div>
 
     <div class="card card-padded">
@@ -36,68 +36,32 @@
 
   <style>
     .svg-stock-graph { opacity: 0.5; }
-    .page { margin: 0 50px; }
-    .row {
-      max-width: 1000px;
-      margin: 10px auto;
-    }
-    .row button {
-      -webkit-appearance: none;
-      background: #03A678;
-      padding: 5px 10px;
-      border: none;
-      color: white;
-      border-radius: 3px;
-      font-size: 14px;
-      font-family: Roboto;
-      letter-spacing: 1px;
-    }
-    .row button:hover {
-      background: #038B69;
-    }
-    .card {
-      position: relative;
-      max-width: 1000px;
-      margin: 10px auto;
-      border-radius: 4px;
-      background: #fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-    .card.card-padded {
-      padding: 10px;
-    }
     .editor-error {
       position: absolute;
       left: 0;
       width: 10px;
-      height: 15px;
+      height: 17px;
       background: rgba(255,0,0,0.3);
-    }
-    .band {
-      width: 100%;
-      font-family: Consolas, Menlo, monospace;
-      background: #444;
-      color: #2A5;
-      padding: 10px;
     }
     .editor {
       display: inline-block;
       vertical-align: top;
       resize: none;
       outline: none;
-      width: 70%;
+      width: 60%;
       font-family: Consolas, Menlo, monospace;
       font-size: 14px;
+      line-height: 17px;
       background: none;
       color: #03A678;
       border: 0;
       padding: 15px;
-      border-right: 1px solid #eee;
+      border-right: 2px solid #ddd;
     }
     .output {
       display: inline-block;
       vertical-align: top;
-      width: 29%;
+      width: 39%;
       font-family: Consolas, Menlo, monospace;
       font-size: 14px;
       padding: 15px;
@@ -190,7 +154,7 @@
 
     function error(msg, node) {
       self.errors.push('#' + node.loc.first_line + ',' + node.loc.first_column + ' ' + msg)
-      self.errorLines.push(node.loc)
+      self.errorLines.push({top: (node.loc.first_line * 17 - 2) + 'px'})
     }
 
     self.parseSource = function () {
@@ -206,6 +170,15 @@
         if (self.errors.length === 0) {
           self.infos.push('SUCCESS')
         }
+        self.infos.push('------')
+        ast.funcs.filter(e => !e.params.length).forEach(fn => {
+          try {
+            self.infos.push(fn.name + '() ' + evaluate(fn.body, env))
+          } catch (e) {
+            self.infos.push(fn.name + '() ' + e.message)
+          }
+        })
+        console.log(ast)
       } catch(e) {
         self.errors.push(e.message)
       }
