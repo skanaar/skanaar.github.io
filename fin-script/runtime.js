@@ -37,32 +37,33 @@ function evaluate(node, env) {
 	}
 	if (node.node === 'operator') {
 		switch (node.operator) {
-			case '<': return evaluate(node.lhs) < evaluate(node.rhs)
-			case '>': return evaluate(node.lhs) > evaluate(node.rhs)
-			case '+': return evaluate(node.lhs) + evaluate(node.rhs)
-			case '-': return evaluate(node.lhs) - evaluate(node.rhs)
-			case '*': return evaluate(node.lhs) * evaluate(node.rhs)
-			case '/': return evaluate(node.lhs) / evaluate(node.rhs)
+			case '<': return evaluate(node.lhs, env) < evaluate(node.rhs, env)
+			case '>': return evaluate(node.lhs, env) > evaluate(node.rhs, env)
+			case '+': return evaluate(node.lhs, env) + evaluate(node.rhs, env)
+			case '-': return evaluate(node.lhs, env) - evaluate(node.rhs, env)
+			case '*': return evaluate(node.lhs, env) * evaluate(node.rhs, env)
+			case '/': return evaluate(node.lhs, env) / evaluate(node.rhs, env)
 			default: throw new Error('Unknown operator "'+node.operator+'"')
 		}
 	}
 	if (node.node === 'invoke') {
 		if (node.func.extern) {
-			var args = node.args.map(e => evaluate(e))
+			var args = node.args.map(e => evaluate(e, env))
 			return env.externals[node.name].apply(null, args)
 		}
-		return evaluate(finscript.findFunc(node, node.scope).body)
+		var body = finscript.findFunc(node, node.scope).body
+		return evaluate(body, env)
 	}
 	if (node.node === 'deref') {
-		return evaluate(finscript.findLet(node, node.scope).value)
+		return evaluate(finscript.findLet(node, node.scope), env)
 	}
 	if (node.node === 'body') {
 		for (var i=0; i<node.cases.length; i++) {
-			if (true === evaluate(node.cases[i].predicate)) {
-				return evaluate(node.cases[i].value)
+			if (true === evaluate(node.cases[i].predicate, env)) {
+				return evaluate(node.cases[i].value, env)
 			}
 		}
-		return evaluate(node.default)
+		return evaluate(node.default, env)
 	}
 }
 
