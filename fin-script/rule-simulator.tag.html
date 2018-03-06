@@ -7,14 +7,16 @@
           <path d="M405.2,232.9L126.8,67.2c-3.4-2-6.9-3.2-10.9-3.2c-10.9,0-19.8,9-19.8,20H96v344h0.1c0,11,8.9,20,19.8,20  c4.1,0,7.5-1.4,11.2-3.4l278.1-165.5c6.6-5.5,10.8-13.8,10.8-23.1C416,246.7,411.8,238.5,405.2,232.9z" transform="scale(0.035,0.035)" fill="white"></path>
         </svg> Compile
       </button>
+      <button onclick={loadDefault>Load default</button>
     </div>
-    <div class=card>
+    <div class="card card-editor">
+      <div class="editor-error" style={e} each={e in errorLines}></div>
       <textarea class=editor rows=20 ref="editor" value={example}
-       autocomplete="off" autocorrect="off" spellcheck="false"></textarea><div class=output>
+       autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
+      <div class=output>
         <div class="output-info" each={e in infos}>{e}</div>
         <div class="output-error" each={err in errors}>{err}</div>
       </div>
-      <div class="editor-error" style={e} each={e in errorLines}></div>
     </div>
 
     <div class="card card-padded">
@@ -43,6 +45,9 @@
       height: 17px;
       background: rgba(255,0,0,0.3);
     }
+    .card-editor {
+      display: flex;
+    }
     .editor {
       display: inline-block;
       vertical-align: top;
@@ -56,15 +61,16 @@
       color: #03A678;
       border: 0;
       padding: 15px;
-      border-right: 2px solid #ddd;
     }
     .output {
       display: inline-block;
       vertical-align: top;
-      width: 39%;
+      width: 40%;
       font-family: Consolas, Menlo, monospace;
       font-size: 14px;
       padding: 15px;
+      border-radius: 0 4px 4px 0;
+      background: #444;
     }
     .output-info {
       color: #49A;
@@ -106,7 +112,8 @@
     var stocks = { omx, tobi, fing, goog }
     var stockList = [omx, tobi, fing, goog]
 
-    self.example = document.getElementById('example-source').innerHTML.trim()
+    var defaultExample = document.getElementById('example-source').innerHTML.trim()
+    self.example = localStorage['finscript:lastSource'] || defaultExample
     self.graphs = stockList.map(e => ({ color: e.color, path: toPath(e.data, 0) }))
     self.intervals = []
 
@@ -155,6 +162,12 @@
     function error(msg, node) {
       self.errors.push('#' + node.loc.first_line + ',' + node.loc.first_column + ' ' + msg)
       self.errorLines.push({top: (node.loc.first_line * 17 - 2) + 'px'})
+    }
+
+    self.loadDefault = function () {
+      self.example = defaultExample
+      self.refs.editor.value = defaultExample
+      localStorage['finscript:lastSource'] = defaultExample
     }
 
     self.parseSource = function () {

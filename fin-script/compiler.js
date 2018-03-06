@@ -91,32 +91,34 @@ var finscript = {
 		}, function (){})
 	},
 
+	findLet: function(node, scope) {
+		if (!scope) {
+			onerror('Undeclared constant "' + node.name + '"', node)
+			throw new Error('Parse error')
+		}
+		var foundLet = scope.lets.find(e => e.name === node.name)
+		var foundParam = scope.params.find(e => e.name === node.name)
+		return foundLet || foundParam || finscript.findLet(node, scope.parentScope)
+	},
+
+	findFunc: function(node, scope) {
+		if (!scope) {
+			onerror('Undeclared function "' + node.name + '"', node)
+			throw new Error('Parse error')
+		}
+		var found = scope.funcs.find(e => e.name === node.name)
+		return found || finscript.findFunc(node, scope.parentScope)
+	},
+
 	markupTypes: function(root, onerror) {
-		function findLet(node, scope) {
-			if (!scope) {
-				onerror('Undeclared constant "' + node.name + '"', node)
-				throw new Error('Parse error')
-			}
-			var foundLet = scope.lets.find(e => e.name === node.name)
-			var foundParam = scope.params.find(e => e.name === node.name)
-			return foundLet || foundParam || findLet(node, scope.parentScope)
-		}
-		function findFunc(node, scope) {
-			if (!scope) {
-				onerror('Undeclared function "' + node.name + '"', node)
-				throw new Error('Parse error')
-			}
-			var found = scope.funcs.find(e => e.name === node.name)
-			return found || findFunc(node, scope.parentScope)
-		}
 		finscript.walkTree(root, function (){}, function (node, parent) {
 			if (node.node === 'invoke'){
-				var fn = findFunc(node, node.scope)
+				var fn = finscript.findFunc(node, node.scope)
 				node.func = fn
 				node.type = fn.type
 			}
 			if (node.node === 'deref') {
-				var ref = findLet(node, node.scope)
+				var ref = finscript.findLet(node, node.scope)
 				node.ref = ref
 				node.type = ref.type
 			}

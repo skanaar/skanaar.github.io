@@ -51,10 +51,10 @@ function evaluate(node, env) {
 			var args = node.params.map(e => evaluate(e.value))
 			return env.externals[node.name].apply(null, args)
 		}
-		return evaluate(findFunc(node, node.scope).body) // TODO implement stack
+		return evaluate(finscript.findFunc(node, node.scope).body)
 	}
 	if (node.node === 'deref') {
-		return evaluate(findLet(node, node.scope).value) // TODO implement stack retrieval
+		return evaluate(finscript.findLet(node, node.scope).value)
 	}
 	if (node.node === 'body') {
 		for (var i=0; i<node.cases.length; i++) {
