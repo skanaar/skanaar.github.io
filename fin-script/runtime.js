@@ -48,7 +48,7 @@ function evaluate(node, env) {
 	}
 	if (node.node === 'invoke') {
 		if (node.func.extern) {
-			var args = node.args.map(e => evaluate(e.value))
+			var args = node.args.map(e => evaluate(e))
 			return env.externals[node.name].apply(null, args)
 		}
 		return evaluate(finscript.findFunc(node, node.scope).body)
