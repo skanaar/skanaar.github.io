@@ -33,6 +33,7 @@
     
     var self = this
     var env = finscript.env
+    var colorIndex = 1
     var colors = '#8b5d3b #5777aa #f6ae9b #575656 #009ECF #ff501b #e8d5a6 #71bb75 #9adae7'.split(' ')
     var omx = Stock('OMX30', '#666', noise([120,120], 60, 5))
     env.symbols.OMX30 = omx
@@ -40,15 +41,17 @@
     env.getSymbol = function (id) {
       if (!this.symbols[id]) {
         var data = listSum(omx.data, noise([0,0], 30, 5))
-        this.symbols[id] = {name:id, color:_.sample(colors), data:data}
+        this.symbols[id] = {name:id, color:colors[colorIndex], data:data}
+        colorIndex = (colorIndex+1) % colors.length
       }
       return this.symbols[id]
     }
+    var defaultExample = document.getElementById('example-source').innerHTML.trim()
 
     self.app = {
       env: env,
       timeRange: omx.data.length,
-      source: localStorage['finscript:lastSource'],
+      source: localStorage['finscript:lastSource'] || defaultExample,
       events: riot.observable(),
       setHoldingCount: function (symbol, count) {
         env.holdings[symbol] = env.getHolding(symbol)

@@ -1,5 +1,16 @@
 <rule-simulator>
 
+  <div class=row>
+    <button onclick={parseSource}>
+      <svg height="20px" viewBox="0 0 20 20" width="20px" style="vertical-align: middle; margin-right: 5px;">
+        <path d="M405.2,232.9L126.8,67.2c-3.4-2-6.9-3.2-10.9-3.2c-10.9,0-19.8,9-19.8,20H96v344h0.1c0,11,8.9,20,19.8,20  c4.1,0,7.5-1.4,11.2-3.4l278.1-165.5c6.6-5.5,10.8-13.8,10.8-23.1C416,246.7,411.8,238.5,405.2,232.9z" transform="scale(0.035,0.035)" fill="white"></path>
+      </svg> Simulate
+    </button>
+    <div class=ticker-screen>
+      <span class="ticker-tag" each={e in commands}>{e}</span>
+    </div>
+  </div>
+
   <div class="card card-graph">
     <svg width="100%" height=200 preserveAspectRatio="none" viewBox="0 0 1000 200">
       <g transform="scale(1,1) translate(0,0)">
@@ -10,9 +21,6 @@
           stroke-width={e.thickness} fill=none></path>
       </g>
     </svg>
-    <div class="evaluated-commands" style={'right: '+(100-refs.timeSlider.value/10)+'%'}>
-      <div each={e in commands}>{e}</div>
-    </div>
     <div class="graph-slider">
       <input type=range ref=timeSlider step=1 min=0 max=1000 onchange={reevaluate}>
     </div>
@@ -38,23 +46,6 @@
       position: absolute;
       top: 0;
       left: 0;
-    }
-    .evaluated-commands {
-      position: absolute;
-      text-align: right;
-      top: 140px;
-      padding-right: 5px;
-    }
-    .evaluated-commands div {
-      display: block;
-      width; auto;
-      padding: 2px 8px;
-      background: #09C;
-      border-radius: 20px;
-      color: white;
-      font-family: Avenir, Roboto, sans-serif;
-      font-size: 13px;
-      margin: 3px;
     }
     .graph-slider {
       position: absolute;
