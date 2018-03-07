@@ -50,8 +50,8 @@ func bailout(stock:Stock): Command {
 
 func super_trade(stock:Stock): Command {
   case not(have_orders(stock)) => noaction()
-  case (average(stock, 7 Days) < price(stock)) => acquire(stock, 7 Units)
-  case (average(stock, 7 Days) < price(stock)) => bailout(stock)
+  case (average(stock, 20 Days) < price(stock)) => acquire(stock, 7 Units)
+  case (average(stock, 20 Days) < price(stock)) => bailout(stock)
 } => noaction()
 
 rule super_trade_avanza {} => super_trade(#AZA)

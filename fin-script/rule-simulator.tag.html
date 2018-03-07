@@ -3,14 +3,16 @@
   <div class="card card-graph">
     <svg width="100%" height=200 preserveAspectRatio="none" viewBox="0 0 1000 200">
       <g transform="scale(1,1) translate(0,0)">
-        <path each={e in graphs}
-          riot-d={e.path}
-          fill=none riot-stroke={e.color} class="svg-stock-graph"></path>
+        <path each={e in graphs} class="svg-stock-graph" fill=none 
+          riot-d={e.path} stroke-width={e.thickness} riot-stroke={e.color}></path>
         <path 
-          each={e in intervals} riot-stroke={e.color} riot-d={e.path}
-          stroke-width="3" fill=none></path>
+          each={e in intervals} riot-stroke={e.color} riot-d={intervalToPath(e)}
+          stroke-width={e.thickness} fill=none></path>
       </g>
     </svg>
+    <div class="evaluated-commands" style={'right: '+(100-refs.timeSlider.value/10)+'%'}>
+      <div each={e in commands}>{e}</div>
+    </div>
     <div class="graph-slider">
       <input type=range ref=timeSlider step=1 min=0 max=1000 onchange={reevaluate}>
     </div>
@@ -28,14 +30,31 @@
     }
     .card-graph svg {
     }
-    .svg-stock-graph {
-      opacity: 0.5;
+    .svg-graph {
+      opacity: 0.85;
     }
     .stock-widgets {
       padding: 10px;
       position: absolute;
       top: 0;
       left: 0;
+    }
+    .evaluated-commands {
+      position: absolute;
+      text-align: right;
+      top: 140px;
+      padding-right: 5px;
+    }
+    .evaluated-commands div {
+      display: block;
+      width; auto;
+      padding: 2px 8px;
+      background: #09C;
+      border-radius: 20px;
+      color: white;
+      font-family: Avenir, Roboto, sans-serif;
+      font-size: 13px;
+      margin: 3px;
     }
     .graph-slider {
       position: absolute;
@@ -73,12 +92,11 @@
   </style>
   <script>
     var self = this
-
     var app = self.opts.app
-    self.count = function (symbol) {
-      return app.env.getHolding(symbol).count
-    }
 
+    const round = (x) => Math.round(x)
+    const t2x = t => round(1000-t*1000/app.timeRange)
+    const value2y = x => round(200-x)
     const rnd = (low,high) => low + (high-low) * Math.random()
     const flatmap = (list, op) => _.flatten(list.map(op))
     const sum = (list) => list.reduce((a,b) => a+b)
@@ -86,16 +104,56 @@
     const max = (list) => list.reduce((a,b) => Math.max(a,b))
     const min = (list) => list.reduce((a,b) => Math.min(a,b))
     const listSum = (listA,listB) => listA.map((e,i) => listA[i] + listB[i])
-    const round = (x) => Math.round(x)
-    const toPath = (data) => 'M' + data.map((e,i) => i*1000/data.length+','+round(200-e)).join(' L')
+    const toPath = (data) => 'M' + data.map((e,i) => t2x(i)+','+value2y(e)).join(' L')
+
+    self.count = function (symbol) {
+      return app.env.getHolding(symbol).count
+    }
+
+    app.env.onCall = function (func, value, args) {
+      if (func === 'average') {
+        self.intervals.push({
+          value: value,
+          color: args.stock.color,
+          left: app.env.t,
+          right: app.env.t+args.days,
+          thickness: 3
+        })
+      }
+      if (func === 'historic_average') {
+        self.intervals.push({
+          value:value,
+          color: args.stock.color,
+          left:app.env.t+args.offset,
+          right:app.env.t+args.days+args.offset,
+          thickness: 3
+        })
+      }
+      if (func === 'number' && args.type === 'Sek') {
+        self.intervals.push({
+          value:value,
+          color: 'rgba(0,0,0,0.1)',
+          left:0,
+          right:1000,
+          thickness: 1
+        })
+      }
+    }
 
     self.onFieldUpdate = function (e) {
       var symbolName = e.item.sym
       app.setHoldingCount(symbolName, e.target.value)
     }
 
+    self.intervalToPath = function (e) {
+      return 'M'+t2x(e.left)+','+value2y(e.value)+' L'+t2x(e.right)+','+value2y(e.value)
+    }
+
+    self.ast = null
     self.symbols = []
     self.graphs = []
+    self.intervals = []
+    self.commands = []
     self.t = 0
 
     self.on('updated', function () {
@@ -103,21 +161,16 @@
     })
 
     self.reevaluate = function() {
-      self.t = Math.round(self.refs.timeSlider.value*app.env.symbols.OMX30.data.length/1000)
+      if (!self.ast) { return }
+      self.intervals = []
+      self.commands = []
+      self.t = round((1000-self.refs.timeSlider.value) * app.timeRange/1000)
       app.env.t = self.t
-
       self.ast.funcs.filter(e => !e.params.length).forEach(fn => {
-        try {
-          var res = finscript.evaluate(fn.body, app.env)
-          if (res.cmd === 'noaction') {
-            res = res.cmd
-          }
-          else if (res.cmd) {
-            res = res.cmd+' '+res.units+'*'+res.stock.name+' @ '+res.price
-          }
-          console.log(fn.name + '() ' + res)
-        } catch (e) {
-          console.log(fn.name + '() ' + e.message)
+        var res = finscript.evaluate(fn.body, app.env)
+        if (res.cmd && res.cmd !== 'noaction') {
+          var summary = res.cmd+' '+res.units+' '+res.stock.name+' @ '+round(res.price)+'Sek'
+          self.commands.push(summary)
         }
       })
       self.update()
@@ -125,6 +178,7 @@
     
     app.events.on('ast-changed', function (ast) {
       self.symbols = []
+      self.graphs = []
       self.ast = ast
       finscript.walkTree(ast, function () {}, function (node){
         if (node.node === 'symbol') {
@@ -132,9 +186,12 @@
         }
       })
       self.symbols = _.uniq(self.symbols)
-      self.graphs = self.symbols
-        .map(s => app.env.getSymbol(s))
-        .map(e => ({ color: e.color, path: toPath(e.data) }))
+      self.symbols.forEach(function (sym) {
+        var symbol = app.env.getSymbol(sym)
+        var path = toPath(symbol.data)
+        self.graphs.push({ color: 'rgba(255,255,255,0.75)', thickness: 3, path: path })
+        self.graphs.push({ color: symbol.color, thickness: 1, path: path })
+      })
 
       self.reevaluate()
     })

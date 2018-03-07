@@ -8,6 +8,11 @@ finscript.env = {
 	getHolding: function (sym) {
 		return this.holdings[sym] || {name: sym, count: 0, gav: 0}
 	},
+	onCall: function (){},
+	numericValue: function (node) {
+		this.onCall('number', node.value, { value:node.value, type:node.type })
+		return node.value
+	},
 	externals: {
 		not: function (bool){
 			return !bool
@@ -25,7 +30,18 @@ finscript.env = {
 			return this.getHolding(stock.name).count > 0
 		},
 		average: function (stock,days) {
-			return 0
+			for (var i=0,sum=0; i<days; i++)
+				sum += (stock.data[this.t+i] || 0)
+			var res = sum / days
+			this.onCall('average', res, { stock, days })
+			return res
+		},
+		historic_average: function (stock,days,offset) {
+			for (var i=Math.round(offset),sum=0; i<days; i++)
+				sum += (stock.data[this.t+i] || 0)
+			var res = sum / (days-offset)
+			this.onCall('historic_average', res, { stock, days, offset })
+			return res
 		},
 		noaction: function (){
 			return {cmd:'noaction'}
@@ -44,7 +60,7 @@ function evaluate(node, env) {
 		throw new Error(e, nod)
 	}
 	if (node.node === 'number') {
-		return node.value
+		return env.numericValue(node)
 	}
 	if (node.node === 'symbol') {
 		return env.symbols[node.name.substr(1)]
