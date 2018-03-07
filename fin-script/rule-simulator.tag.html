@@ -17,8 +17,8 @@
       <input type=range ref=timeSlider step=1 min=0 max=1000 onchange={reevaluate}>
     </div>
     <div class="stock-widgets">
-      <label class=input-pair each={sym in symbols}>
-        {sym} <input type="number" ref={'symfield_'+sym} onchange={onFieldUpdate}>
+      <label class=input-pair each={sym in symbols} style={'background: '+sym.color}>
+        {sym.name} <input type="number" ref={'symfield_'+sym.name} onchange={onFieldUpdate}>
       </label>
     </div>
   </div>
@@ -73,7 +73,7 @@
       font-family: Avenir, Roboto, sans-serif;
       letter-spacing: 1px;
       margin: 4px;
-      color: #666;
+      color: #FFF;
     }
     label.input-pair input[type=number] {
       appearance: none;
@@ -157,7 +157,9 @@
     self.t = 0
 
     self.on('updated', function () {
-      self.symbols.forEach(sym => self.refs['symfield_'+sym].value = self.count(sym))
+      self.symbols.forEach(function (sym) {
+        self.refs['symfield_'+sym.name].value = self.count(sym.name)
+      })
     })
 
     self.reevaluate = function() {
@@ -182,14 +184,12 @@
       self.ast = ast
       finscript.walkTree(ast, function () {}, function (node){
         if (node.node === 'symbol') {
-          self.symbols.push(node.name.substr(1))
+          self.symbols.push(app.env.getSymbol(node.name.substr(1)))
         }
       })
-      self.symbols = _.uniq(self.symbols)
-      self.symbols.forEach(function (sym) {
-        var symbol = app.env.getSymbol(sym)
+      self.symbols = _.uniq(self.symbols, s => s.name)
+      self.symbols.forEach(function (symbol) {
         var path = toPath(symbol.data)
-        self.graphs.push({ color: 'rgba(255,255,255,0.75)', thickness: 3, path: path })
         self.graphs.push({ color: symbol.color, thickness: 1, path: path })
       })
 

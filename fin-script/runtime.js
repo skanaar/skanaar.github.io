@@ -6,7 +6,7 @@ finscript.env = {
 	},
 	holdings: {},
 	getHolding: function (sym) {
-		return this.holdings[sym] || {name: sym, count: 0, gav: 0}
+		return this.holdings[sym] || {name: sym, count: 10, gav: 10}
 	},
 	onCall: function (){},
 	numericValue: function (node) {
