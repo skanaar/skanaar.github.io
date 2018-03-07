@@ -1,14 +1,7 @@
 <rule-simulator>
 
-  <div class="card card-padded">
-    <label class=input-pair each={sym in symbols}>
-      {sym}
-      <input type="number" ref={'symfield_'+sym} onchange={onFieldUpdate}>
-    </label>
-    <div>
-      <input type=range step=3 min=0 max=512 onchange={calc}>
-    </div>
-    <svg width=1000 height=200>
+  <div class="card card-graph">
+    <svg width="100%" height=200 preserveAspectRatio="none" viewBox="0 0 1000 200">
       <g transform="scale(1,1) translate(0,0)">
         <path each={e in graphs}
           riot-d={e.path}
@@ -18,10 +11,38 @@
           stroke-width="3" fill=none></path>
       </g>
     </svg>
+    <div class="graph-slider">
+      <input type=range ref=timeSlider step=1 min=0 max=1000 onchange={reevaluate}>
+    </div>
+    <div class="stock-widgets">
+      <label class=input-pair each={sym in symbols}>
+        {sym} <input type="number" ref={'symfield_'+sym} onchange={onFieldUpdate}>
+      </label>
+    </div>
   </div>
 
   <style>
-    .svg-stock-graph { opacity: 0.5; }
+    .card-graph {
+      position: relative;
+      height: 200px;
+    }
+    .card-graph svg {
+    }
+    .svg-stock-graph {
+      opacity: 0.5;
+    }
+    .stock-widgets {
+      padding: 10px;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .graph-slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
 
     label.input-pair {
       display: inline-block;
@@ -44,7 +65,10 @@
       font-family: Avenir, Roboto, sans-serif;
       width: 70px;
     }
-    input[type=range] { width: 100% }
+    input[type=range] {
+      width: 100%;
+      background: none;
+    }
   </style>
   <script>
     var self = this
@@ -54,8 +78,6 @@
       return app.env.getHolding(symbol).count
     }
 
-    const clamp = (low, high, x) => Math.max(low, Math.min(high, x))
-    const range = (end) => [...Array(end).keys()]
     const rnd = (low,high) => low + (high-low) * Math.random()
     const flatmap = (list, op) => _.flatten(list.map(op))
     const sum = (list) => list.reduce((a,b) => a+b)
@@ -64,35 +86,7 @@
     const min = (list) => list.reduce((a,b) => Math.min(a,b))
     const listSum = (listA,listB) => listA.map((e,i) => listA[i] + listB[i])
     const round = (x) => Math.round(x)
-    const toPath = (data,dx) => 'M' + data.map((e,i) => 2*(dx+i)+','+round(e)).join(' L')
-
-    function smooth(es){
-      return es.map((x,i) => (es[Math.max(0,i-1)] + 4*es[i] + es[Math.min(es.length-1,i+1)])/6)
-    }
-    function noise(source, amp, level) {
-      if (!level) { return source }
-      var d = _.flatten(source.map(x => [x+rnd(-amp, amp), x, x+rnd(-amp, amp)]))
-      return smooth(noise(d, amp*0.75, level-1))
-    }
-    const Stock = (name, color, data) => ({ name, color, data })
-    var omx = Stock('OMX', '#666', noise([120,120], 60, 5))
-    var tobi = Stock('TOBI', '#4F4', listSum(omx.data, noise([0,0], 30, 5)))
-    var fing = Stock('FING', '#F44', listSum(omx.data, noise([0,0], 30, 5)))
-    var goog = Stock('GOOG', '#44F', listSum(omx.data, noise([0,0], 30, 5)))
-    var stocks = { omx, tobi, fing, goog }
-    var stockList = [omx, tobi, fing, goog]
-
-    self.graphs = stockList.map(e => ({ color: e.color, path: toPath(e.data, 0) }))
-    self.intervals = []
-
-    function applyFunc(id, len, offset, func) {
-      var stock = stocks[id]
-      var t = Math.min(stock.data.length-len, offset)
-      var span = stock.data.slice(t, t+len)
-      var y = func(span)
-      self.intervals.push({ color: stock.color, path: toPath(span.map(()=>y), t) })
-      return y
-    }
+    const toPath = (data,dx) => 'M' + data.map((e,i) => (dx+i)*1000/data.length+','+round(e)).join(' L')
 
     self.onFieldUpdate = function (e) {
       var symbolName = e.item.sym
@@ -100,23 +94,24 @@
     }
 
     self.symbols = []
+    self.graphs = []
+    self.t = 0
 
     self.on('updated', function () {
       self.symbols.forEach(sym => self.refs['symfield_'+sym].value = self.count(sym))
     })
-    
-    app.events.on('ast-changed', function (ast) {
-      self.symbols = []
-      finscript.walkTree(ast, function () {}, function (node){
-        if (node.node === 'symbol') {
-          self.symbols.push(node.name.substr(1))
-        }
-      })
-      self.symbols = _.uniq(self.symbols)
-      ast.funcs.filter(e => !e.params.length).forEach(fn => {
+
+    self.reevaluate = function() {
+      self.t = Math.round(self.refs.timeSlider.value)
+      app.env.t = self.t
+
+      self.ast.funcs.filter(e => !e.params.length).forEach(fn => {
         try {
           var res = finscript.evaluate(fn.body, app.env)
-          if (res.cmd) {
+          if (res.cmd === 'noaction') {
+            res = res.cmd
+          }
+          else if (res.cmd) {
             res = res.cmd+' '+res.units+'*'+res.stock.name+' @ '+res.price
           }
           console.log(fn.name + '() ' + res)
@@ -125,6 +120,22 @@
         }
       })
       self.update()
+    }
+    
+    app.events.on('ast-changed', function (ast) {
+      self.symbols = []
+      self.ast = ast
+      finscript.walkTree(ast, function () {}, function (node){
+        if (node.node === 'symbol') {
+          self.symbols.push(node.name.substr(1))
+        }
+      })
+      self.symbols = _.uniq(self.symbols)
+      self.graphs = self.symbols
+        .map(s => app.env.getSymbol(s))
+        .map(e => ({ color: e.color, path: toPath(e.data, 0) }))
+
+      self.reevaluate()
     })
 
   </script>

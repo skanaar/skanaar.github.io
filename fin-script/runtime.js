@@ -1,15 +1,10 @@
 finscript.env = {
 	t: 0,
-	symbols: {
-		OMX30: {name:'OMX30', data:[1,2,3]},
-		AZA: {name:'AZA', data:[1,2,3]},
-		FING: {name:'FING', data:[1,2,3]},
-		GOOG: {name:'GOOG', data:[1,2,3]}
+	symbols: {},
+	getSymbol: function (id) {
+		return this.symbols[id]
 	},
-	holdings: {
-		AZA: {name:'AZA', count:12, gav:300},
-		FING: {name:'FING', count:1000, gav: 50}
-	},
+	holdings: {},
 	getHolding: function (sym) {
 		return this.holdings[sym] || {name: sym, count: 0, gav: 0}
 	},
