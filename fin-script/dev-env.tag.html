@@ -1,0 +1,161 @@
+<dev-env>
+  <div class=page>
+    <code-editor app={app} />
+    <rule-simulator app={app} />
+  </div>
+
+  <style>
+  </style>
+  <script>
+    var self = this
+
+    var env = finscript.env
+
+    self.app = {
+      env: env,
+      source: localStorage['finscript:lastSource'],
+      events: riot.observable(),
+      setHoldingCount: function (symbol, count) {
+        env.holdings[symbol] = env.holdings[symbol] || {name:symbol, count:0, gav:0}
+        env.holdings[symbol].count = count
+      }
+    }
+
+    var self = this
+    const clamp = (low, high, x) => Math.max(low, Math.min(high, x))
+    const range = (end) => [...Array(end).keys()]
+    const rnd = (low,high) => low + (high-low) * Math.random()
+    const flatmap = (list, op) => _.flatten(list.map(op))
+    const sum = (list) => list.reduce((a,b) => a+b)
+    const average = (list) => list.reduce((a,b) => a+b) / list.length
+    const max = (list) => list.reduce((a,b) => Math.max(a,b))
+    const min = (list) => list.reduce((a,b) => Math.min(a,b))
+    const listSum = (listA,listB) => listA.map((e,i) => listA[i] + listB[i])
+    const round = (x) => Math.round(x)
+    const toPath = (data,dx) => 'M' + data.map((e,i) => 2*(dx+i)+','+round(e)).join(' L')
+
+    function smooth(es){
+      return es.map((x,i) => (es[Math.max(0,i-1)] + 4*es[i] + es[Math.min(es.length-1,i+1)])/6)
+    }
+    function noise(source, amp, level) {
+      if (!level) { return source }
+      var d = _.flatten(source.map(x => [x+rnd(-amp, amp), x, x+rnd(-amp, amp)]))
+      return smooth(noise(d, amp*0.75, level-1))
+    }
+    const Stock = (name, color, data) => ({ name, color, data })
+    var omx = Stock('OMX', '#666', noise([120,120], 60, 5))
+    var tobi = Stock('TOBI', '#4F4', listSum(omx.data, noise([0,0], 30, 5)))
+    var fing = Stock('FING', '#F44', listSum(omx.data, noise([0,0], 30, 5)))
+    var goog = Stock('GOOG', '#44F', listSum(omx.data, noise([0,0], 30, 5)))
+    var stocks = { omx, tobi, fing, goog }
+    var stockList = [omx, tobi, fing, goog]
+
+    var defaultExample = document.getElementById('example-source').innerHTML.trim()
+    self.example = localStorage['finscript:lastSource'] || defaultExample
+    self.graphs = stockList.map(e => ({ color: e.color, path: toPath(e.data, 0) }))
+    self.intervals = []
+
+    function applyFunc(id, len, offset, func) {
+      var stock = stocks[id]
+      var t = Math.min(stock.data.length-len, offset)
+      var span = stock.data.slice(t, t+len)
+      var y = func(span)
+      self.intervals.push({ color: stock.color, path: toPath(span.map(()=>y), t) })
+      return y
+    }
+
+    function Buy(count, price, expires) {
+      return { command: 'Buy', count, price, expires: expires || 10 }
+    }
+
+    // ----------
+    var stockAverage = (id, len, offset) => applyFunc(id, len, offset, average)
+    var stockMin = (id, len, offset) => applyFunc(id, len, offset, min)
+    var stockMax = (id, len, offset) => applyFunc(id, len, offset, max)
+
+    self.invokes = []
+
+    self.calc = function (e) {
+      self.intervals = []
+      var t = Math.round(e.target.value)
+      var toSymbol = s => s.substr(1).toLowerCase()
+      self.invokes.forEach(e => {
+        if (e.name === 'average') {
+          stockAverage(toSymbol(e.args[0]), +e.args[1].value, t)
+        }
+        if (e.name === 'max') {
+          stockMax(toSymbol(e.args[0]), +e.args[1].value, t)
+        }
+        if (e.name === 'min') {
+          stockMin(toSymbol(e.args[0]), +e.args[1].value, t)
+        }
+      })
+      return Buy(100, stockAverage('tobi', 1, t))
+    }
+
+    self.infos = []
+    self.errors = []
+    self.errorLines = []
+    self.symbols = []
+
+    function error(msg, node) {
+      self.errors.push('#' + node.loc[0].first_line + ',' + node.loc[0].first_column + ' ' + msg)
+      self.errorLines.push({
+        top: (node.loc[0].first_line * 17 - 2) + 'px',
+        left: (node.loc[0].first_column * 8.4 + 15) + 'px',
+        width: ((node.loc[1].last_column-node.loc[0].first_column) * 8.4) + 'px'
+      })
+    }
+
+    self.loadDefault = function () {
+      self.example = defaultExample
+      self.refs.editor.value = defaultExample
+      localStorage['finscript:lastSource'] = defaultExample
+    }
+
+    self.sourceChanged = _.debounce(function (){
+      self.parseSource()
+      self.update()
+    }, 1000)
+
+    self.parseSource = function () {
+      self.infos = []
+      self.errors = []
+      self.errorLines = []
+      self.symbols = []
+      var source = self.refs.editor.value
+      try {
+        var ast = finscript.parse(source, error)
+        finscript.populateScopes(ast, error)
+        finscript.markupTypes(ast, error)
+        finscript.checkTypes(ast, error)
+        finscript.walkTree(ast, function () {}, function (node){
+          if (node.node === 'symbol') {
+            self.symbols.push(node.name.substr(1))
+          }
+        })
+        self.symbols = _.uniq(self.symbols)
+        if (self.errors.length === 0) {
+          self.infos.push('SUCCESS')
+        } else {
+          return
+        }
+        self.infos.push('------')
+        ast.funcs.filter(e => !e.params.length).forEach(fn => {
+          try {
+            var res = evaluate(fn.body, env)
+            if (res.cmd) {
+              res = res.cmd+' '+res.units+'*'+res.stock.name+' @ '+res.price
+            }
+            self.infos.push(fn.name + '() ' + res)
+          } catch (e) {
+            self.infos.push(fn.name + '() ' + e.message)
+          }
+        })
+      } catch(e) {
+        self.errors.push(e.message)
+      }
+    }
+
+  </script>
+</dev-env>

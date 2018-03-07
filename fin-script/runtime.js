@@ -1,4 +1,4 @@
-var env = {
+finscript.env = {
 	t: 0,
 	symbols: {
 		OMX30: {name:'OMX30', data:[1,2,3]},
@@ -11,23 +11,23 @@ var env = {
 		FING: {name:'FING', count:1000, gav: 50}
 	},
 	getHolding: function (sym) {
-		return env.holdings[sym] || {name: sym, count: 0, gav: 0}
+		return this.holdings[sym] || {name: sym, count: 0, gav: 0}
 	},
 	externals: {
 		not: function (bool){
 			return !bool
 		},
 		price: function (stock){
-			return env.symbols[stock.name].data[env.t]
+			return this.symbols[stock.name].data[this.t]
 		},
 		count: function (holding) {
 			return holding.count
 		},
 		holding: function (stock) {
-			return env.getHolding(stock.name)
+			return this.getHolding(stock.name)
 		},
 		have_orders: function (stock) {
-			return env.getHolding(stock.name).count > 0
+			return this.getHolding(stock.name).count > 0
 		},
 		average: function (stock,days) {
 			return 0
@@ -68,7 +68,7 @@ function evaluate(node, env) {
 	if (node.node === 'invoke') {
 		if (node.func.extern) {
 			var args = node.args.map(e => evaluate(e, env))
-			return env.externals[node.name].apply(null, args)
+			return env.externals[node.name].apply(env, args)
 		}
 		var body = finscript.findFunc(node, node.scope, onerr).body
 		for (var i=0; i<node.func.params.length; i++) {
@@ -92,3 +92,5 @@ function evaluate(node, env) {
 	}
 	return node
 }
+
+finscript.evaluate = evaluate

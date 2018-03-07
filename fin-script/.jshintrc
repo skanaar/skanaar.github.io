@@ -7,7 +7,8 @@
     "dagre": false,
     "nomnomlCoreParser": false,
     "require": false,
-    "finscript":true,
+    "finscript": true,
+    "riot": false,
     "CodeMirror": false
   },
 

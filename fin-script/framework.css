@@ -50,29 +50,6 @@
 }
 
 
-label {
-  display: inline-block;
-  background: #eee;
-  padding: 4px 4px 4px 12px;
-  border-radius: 3px;
-  font-size: 14px;
-  font-family: Avenir, Roboto, sans-serif;
-  letter-spacing: 1px;
-  margin: 4px;
-  color: #666;
-}
-label input[type=number] {
-  appearance: none;
-  border: none;
-  padding: 4px 8px;
-  margin-left: 4px;
-  font-size: 14px;
-  border-radius: 2px;
-  font-family: Avenir, Roboto, sans-serif;
-  width: 70px;
-}
-
-
 input[type=range] {
   height: 24px;
   -webkit-appearance: none;

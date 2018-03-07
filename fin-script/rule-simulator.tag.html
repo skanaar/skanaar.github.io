@@ -1,105 +1,59 @@
 <rule-simulator>
-  <div class=page>
 
-    <div class=row>
-      <button onclick={parseSource}>
-        <svg height="20px" viewBox="0 0 20 20" width="20px" style="vertical-align: middle; margin-right: 5px;">
-          <path d="M405.2,232.9L126.8,67.2c-3.4-2-6.9-3.2-10.9-3.2c-10.9,0-19.8,9-19.8,20H96v344h0.1c0,11,8.9,20,19.8,20  c4.1,0,7.5-1.4,11.2-3.4l278.1-165.5c6.6-5.5,10.8-13.8,10.8-23.1C416,246.7,411.8,238.5,405.2,232.9z" transform="scale(0.035,0.035)" fill="white"></path>
-        </svg> Run
-      </button>
-      <button onclick={parseSource}>
-        <svg width="20px" height="20px" viewBox="0 0 46 46">
-          <path transform="translate(-6,4)" d="M40 16h-5.62c-.9-1.56-2.14-2.91-3.63-3.92l3.25-3.25-2.83-2.83-4.35 4.35c-.9-.22-1.85-.35-2.82-.35-.97 0-1.92.13-2.82.35l-4.35-4.35-2.83 2.83 3.25 3.25c-1.49 1.01-2.73 2.36-3.63 3.92h-5.62v4h4.18c-.11.65-.18 1.32-.18 2v2h-4v4h4v2c0 .68.07 1.35.18 2h-4.18v4h5.62c2.07 3.58 5.94 6 10.38 6s8.31-2.42 10.38-6h5.62v-4h-4.18c.11-.65.18-1.32.18-2v-2h4v-4h-4v-2c0-.68-.07-1.35-.18-2h4.18v-4zm-12 16h-8v-4h8v4zm0-8h-8v-4h8v4z" fill="#fff"></path>
-        </svg> Debug
-      </button>
-      <button onclick={parseSource}>Compile</button>
-      <div class=pull-right>
-        <button onclick={loadDefault}>Load default</button>
-      </div>
+  <div class="card card-padded">
+    <label class=input-pair each={sym in symbols}>
+      {sym}
+      <input type="number" ref={'symfield_'+sym} onchange={onFieldUpdate}>
+    </label>
+    <div>
+      <input type=range step=3 min=0 max=512 onchange={calc}>
     </div>
-
-    <div class="card card-editor">
-      <div class="editor-error" style={e} each={e in errorLines}></div>
-      <textarea
-        class=editor rows=18 ref="editor" value={example}
-        onkeyup={sourceChanged}
-        autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
-      <div class=output>
-        <div class="output-info" each={e in infos}>{e}</div>
-        <div class="output-error" each={err in errors}>{err}</div>
-      </div>
-    </div>
-
-    <div class="card card-padded">
-      <label each={sym in symbols}>
-        {sym}
-        <input type=number>
-      </label>
-      <div>
-        <input type=range step=3 min=0 max=512 onchange={calc}>
-      </div>
-      <svg width=1000 height=200>
-        <g transform="scale(1,1) translate(0,0)">
-          <path each={e in graphs}
-            riot-d={e.path}
-            fill=none riot-stroke={e.color} class="svg-stock-graph"></path>
-          <path 
-            each={e in intervals} riot-stroke={e.color} riot-d={e.path}
-            stroke-width="3" fill=none></path>
-        </g>
-      </svg>
-    </div>
+    <svg width=1000 height=200>
+      <g transform="scale(1,1) translate(0,0)">
+        <path each={e in graphs}
+          riot-d={e.path}
+          fill=none riot-stroke={e.color} class="svg-stock-graph"></path>
+        <path 
+          each={e in intervals} riot-stroke={e.color} riot-d={e.path}
+          stroke-width="3" fill=none></path>
+      </g>
+    </svg>
   </div>
 
   <style>
     .svg-stock-graph { opacity: 0.5; }
-    .editor-error {
-      position: absolute;
-      left: 0;
-      width: 10px;
-      height: 17px;
-      background: rgba(255,0,0,0.3);
-    }
-    .card-editor {
-      display: flex;
-    }
-    .editor {
+
+    label.input-pair {
       display: inline-block;
-      position: relative;
-      vertical-align: top;
-      resize: none;
-      outline: none;
-      width: 60%;
-      font-family: Consolas, Menlo, monospace;
+      background: #eee;
+      padding: 4px 4px 4px 12px;
+      border-radius: 3px;
       font-size: 14px;
-      line-height: 17px;
-      background: none;
-      color: #03A678;
-      border: 0;
-      padding: 15px;
+      font-family: Avenir, Roboto, sans-serif;
+      letter-spacing: 1px;
+      margin: 4px;
+      color: #666;
     }
-    .output {
-      display: inline-block;
-      vertical-align: top;
-      width: 40%;
-      font-family: Consolas, Menlo, monospace;
+    label.input-pair input[type=number] {
+      appearance: none;
+      border: none;
+      padding: 4px 8px;
+      margin-left: 4px;
       font-size: 14px;
-      padding: 15px;
-      border-radius: 0 4px 4px 0;
-      background: #444;
-    }
-    .output-info {
-      color: #49A;
-      white-space: pre;
-    }
-    .output-error {
-      color: #A94;
-      white-space: pre;
+      border-radius: 2px;
+      font-family: Avenir, Roboto, sans-serif;
+      width: 70px;
     }
     input[type=range] { width: 100% }
   </style>
   <script>
     var self = this
+
+    var app = self.opts.app
+    self.count = function (symbol) {
+      return app.env.getHolding(symbol).count
+    }
+
     const clamp = (low, high, x) => Math.max(low, Math.min(high, x))
     const range = (end) => [...Array(end).keys()]
     const rnd = (low,high) => low + (high-low) * Math.random()
@@ -128,8 +82,6 @@
     var stocks = { omx, tobi, fing, goog }
     var stockList = [omx, tobi, fing, goog]
 
-    var defaultExample = document.getElementById('example-source').innerHTML.trim()
-    self.example = localStorage['finscript:lastSource'] || defaultExample
     self.graphs = stockList.map(e => ({ color: e.color, path: toPath(e.data, 0) }))
     self.intervals = []
 
@@ -142,99 +94,38 @@
       return y
     }
 
-    function Buy(count, price, expires) {
-      return { command: 'Buy', count, price, expires: expires || 10 }
+    self.onFieldUpdate = function (e) {
+      var symbolName = e.item.sym
+      app.setHoldingCount(symbolName, e.target.value)
     }
 
-    // ----------
-    var stockAverage = (id, len, offset) => applyFunc(id, len, offset, average)
-    var stockMin = (id, len, offset) => applyFunc(id, len, offset, min)
-    var stockMax = (id, len, offset) => applyFunc(id, len, offset, max)
-
-    self.invokes = []
-
-    self.calc = function (e) {
-      self.intervals = []
-      var t = Math.round(e.target.value)
-      var toSymbol = s => s.substr(1).toLowerCase()
-      self.invokes.forEach(e => {
-        if (e.name === 'average') {
-          stockAverage(toSymbol(e.args[0]), +e.args[1].value, t)
-        }
-        if (e.name === 'max') {
-          stockMax(toSymbol(e.args[0]), +e.args[1].value, t)
-        }
-        if (e.name === 'min') {
-          stockMin(toSymbol(e.args[0]), +e.args[1].value, t)
-        }
-      })
-      return Buy(100, stockAverage('tobi', 1, t))
-    }
-
-    self.infos = []
-    self.errors = []
-    self.errorLines = []
     self.symbols = []
 
-    function error(msg, node) {
-      self.errors.push('#' + node.loc[0].first_line + ',' + node.loc[0].first_column + ' ' + msg)
-      self.errorLines.push({
-        top: (node.loc[0].first_line * 17 - 2) + 'px',
-        left: (node.loc[0].first_column * 8.4 + 15) + 'px',
-        width: ((node.loc[1].last_column-node.loc[0].first_column) * 8.4) + 'px'
-      })
-    }
-
-    self.loadDefault = function () {
-      self.example = defaultExample
-      self.refs.editor.value = defaultExample
-      localStorage['finscript:lastSource'] = defaultExample
-    }
-
-    self.sourceChanged = _.debounce(function (){
-      self.parseSource()
-      self.update()
-    }, 1000)
-
-    self.parseSource = function () {
-      self.infos = []
-      self.errors = []
-      self.errorLines = []
+    self.on('updated', function () {
+      self.symbols.forEach(sym => self.refs['symfield_'+sym].value = self.count(sym))
+    })
+    
+    app.events.on('ast-changed', function (ast) {
       self.symbols = []
-      var source = self.refs.editor.value
-      try {
-        var ast = finscript.parse(source, error)
-        finscript.populateScopes(ast, error)
-        finscript.markupTypes(ast, error)
-        finscript.checkTypes(ast, error)
-        finscript.walkTree(ast, function () {}, function (node){
-          if (node.node === 'symbol') {
-            self.symbols.push(node.name.substr(1))
-          }
-        })
-        self.symbols = _.uniq(self.symbols)
-        if (self.errors.length === 0) {
-          self.infos.push('SUCCESS')
-        } else {
-          return
+      finscript.walkTree(ast, function () {}, function (node){
+        if (node.node === 'symbol') {
+          self.symbols.push(node.name.substr(1))
         }
-        self.infos.push('------')
-        ast.funcs.filter(e => !e.params.length).forEach(fn => {
-          try {
-            var res = evaluate(fn.body, env)
-            if (res.cmd) {
-              res = res.cmd+' '+res.units+'*'+res.stock.name+' @ '+res.price
-            }
-            self.infos.push(fn.name + '() ' + res)
-          } catch (e) {
-            self.infos.push(fn.name + '() ' + e.message)
+      })
+      self.symbols = _.uniq(self.symbols)
+      ast.funcs.filter(e => !e.params.length).forEach(fn => {
+        try {
+          var res = finscript.evaluate(fn.body, app.env)
+          if (res.cmd) {
+            res = res.cmd+' '+res.units+'*'+res.stock.name+' @ '+res.price
           }
-        })
-      } catch(e) {
-        self.errors.push(e.message)
-      }
-    }
-    // ----------
+          console.log(fn.name + '() ' + res)
+        } catch (e) {
+          console.log(fn.name + '() ' + e.message)
+        }
+      })
+      self.update()
+    })
 
   </script>
 </rule-simulator>

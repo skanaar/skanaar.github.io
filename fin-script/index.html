@@ -4,10 +4,12 @@
   <title>FinScript</title>
   <link rel="stylesheet" href="framework.css">
   <script src="underscore.js"></script>
-  <script src="riot.min.js"></script>
+  <script src="riot-3.3.js"></script>
   <script src="fin-script.parser.js"></script>
   <script src="compiler.js"></script>
   <script src="runtime.js"></script>
+  <script type="riot/tag" src="dev-env.tag.html"></script>
+  <script type="riot/tag" src="code-editor.tag.html"></script>
   <script type="riot/tag" src="rule-simulator.tag.html"></script>
   <style>
     html, body {
@@ -29,7 +31,7 @@
 </head>
 <body>
   <div class="bg-header"></div>
-  <rule-simulator></rule-simulator>
+  <dev-env></dev-env>
 
   <script type="fin-script/text" id="example-source-basic">
 func acquire(stock:Stock, units:Units): Command {}
