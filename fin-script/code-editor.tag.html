@@ -95,8 +95,9 @@
     }
 
     self.loadDefault = function () {
-      self.refs.editor.value = defaultExample
-      localStorage['finscript:lastSource'] = defaultExample
+      var defaultExample = document.getElementById('example-source').innerHTML.trim()
+      app.source = defaultExample
+      app.events.trigger('source-changed', defaultExample)
     }
 
     self.sourceChanged = _.debounce(function (){
@@ -109,6 +110,7 @@
       self.errors = []
       self.errorLines = []
       var source = self.refs.editor.value
+      app.source = source
       var ast = {}
       try {
         ast = finscript.parse(source, error)

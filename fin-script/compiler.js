@@ -12,8 +12,6 @@ function funcDef(name, type, params) {
 }
 
 var finscript = {
-	fallbackFunction: funcDef('noaction', 'MissingFunctionReturnType', []),
-
 	globalScope: {
 		node: 'body',
 		lets: [],

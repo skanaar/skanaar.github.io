@@ -34,7 +34,8 @@
     var self = this
     var env = finscript.env
     var colors = '#4F4 #F44 #44F #DD4 #D4D #4DD #FA2 #F2A #2FA #AF2 #2AF #A2F'.split(' ')
-    var omx = Stock('OMX', '#666', noise([120,120], 60, 5))
+    var omx = Stock('OMX30', '#666', noise([120,120], 60, 5))
+    env.symbols.OMX30 = omx
 
     env.getSymbol = function (id) {
       if (!this.symbols[id]) {
@@ -47,6 +48,7 @@
 
     self.app = {
       env: env,
+      timeRange: omx.data.length,
       source: localStorage['finscript:lastSource'],
       events: riot.observable(),
       setHoldingCount: function (symbol, count) {

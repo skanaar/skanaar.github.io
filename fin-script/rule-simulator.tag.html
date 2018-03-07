@@ -48,6 +48,7 @@
       display: inline-block;
       background: #eee;
       padding: 4px 4px 4px 12px;
+      box-shadow: 0 0 0 2px white;
       border-radius: 3px;
       font-size: 14px;
       font-family: Avenir, Roboto, sans-serif;
@@ -86,7 +87,7 @@
     const min = (list) => list.reduce((a,b) => Math.min(a,b))
     const listSum = (listA,listB) => listA.map((e,i) => listA[i] + listB[i])
     const round = (x) => Math.round(x)
-    const toPath = (data,dx) => 'M' + data.map((e,i) => (dx+i)*1000/data.length+','+round(e)).join(' L')
+    const toPath = (data) => 'M' + data.map((e,i) => i*1000/data.length+','+round(200-e)).join(' L')
 
     self.onFieldUpdate = function (e) {
       var symbolName = e.item.sym
@@ -102,7 +103,7 @@
     })
 
     self.reevaluate = function() {
-      self.t = Math.round(self.refs.timeSlider.value)
+      self.t = Math.round(self.refs.timeSlider.value*app.env.symbols.OMX30.data.length/1000)
       app.env.t = self.t
 
       self.ast.funcs.filter(e => !e.params.length).forEach(fn => {
@@ -133,7 +134,7 @@
       self.symbols = _.uniq(self.symbols)
       self.graphs = self.symbols
         .map(s => app.env.getSymbol(s))
-        .map(e => ({ color: e.color, path: toPath(e.data, 0) }))
+        .map(e => ({ color: e.color, path: toPath(e.data) }))
 
       self.reevaluate()
     })
