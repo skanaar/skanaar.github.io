@@ -7,14 +7,7 @@
   <style>
   </style>
   <script>
-    const clamp = (low, high, x) => Math.max(low, Math.min(high, x))
-    const range = (end) => [...Array(end).keys()]
     const rnd = (low,high) => low + (high-low) * Math.random()
-    const flatmap = (list, op) => _.flatten(list.map(op))
-    const sum = (list) => list.reduce((a,b) => a+b)
-    const average = (list) => list.reduce((a,b) => a+b) / list.length
-    const max = (list) => list.reduce((a,b) => Math.max(a,b))
-    const min = (list) => list.reduce((a,b) => Math.min(a,b))
     const listSum = (listA,listB) => listA.map((e,i) => listA[i] + listB[i])
     const round = (x) => Math.round(x)
     const toPath = (data,dx) => 'M' + data.map((e,i) => 2*(dx+i)+','+round(e)).join(' L')
@@ -38,10 +31,23 @@
     var omx = Stock('OMX30', '#666', noise([120,120], 60, 5))
     env.symbols.OMX30 = omx
 
+    function fetchStockData(symbol, callback) {
+      fetch('/history?symbol=' + symbol.toUpperCase())
+        .then(e => e.json())
+        .then(e => {
+          callback(e.dataPoints.map(pair => pair[1]).reverse())
+        })
+    }
+
     env.getSymbol = function (id) {
       if (!this.symbols[id]) {
-        var data = listSum(omx.data, noise([0,0], 30, 5))
-        this.symbols[id] = {name:id, color:colors[colorIndex], data:data}
+        var data = noise([120,120], 30, 5).slice(0,252)
+        var stock = {name:id, color:colors[colorIndex], data:data}
+        fetchStockData(id, function (data) {
+          stock.data = data
+          self.update()
+        })
+        this.symbols[id] = stock
         colorIndex = (colorIndex+1) % colors.length
       }
       return this.symbols[id]
@@ -50,12 +56,11 @@
 
     self.app = {
       env: env,
-      timeRange: omx.data.length,
+      timeRange: 252,
       source: localStorage['finscript:lastSource'] || defaultExample,
       events: riot.observable(),
       setHoldingCount: function (symbol, count) {
-        env.holdings[symbol] = env.getHolding(symbol)
-        env.holdings[symbol].count = count
+        env.getHolding(symbol.name).count = +count
       }
     }
 

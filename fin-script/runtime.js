@@ -64,12 +64,13 @@ finscript.env = {
 		},
 		buy: function (stock,units,price,period) {
 			var maxUnits = Math.min(units, Math.floor(this.balance/price))
-			if (maxUnits === 0) {
-				return { cmd:'noaction' }
-			}
+			if (maxUnits === 0) { return { cmd:'noaction' } }
 			return { cmd:'buy', stock:stock, units:maxUnits, price:price, period:period }
 		},
 		sell: function (stock,units,price,period) {
+			var holding = this.getHolding(stock.name).count
+			units = Math.min(holding, units)
+			if (Math.floor(units) <= 0){ return { cmd:'noaction' } }
 			return {cmd:'sell', stock:stock, units:units, price:price, period:period }
 		}
 	}

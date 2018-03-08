@@ -15,7 +15,7 @@
       Stop
     </button>
     <label class="input-pair" style="color: #888">
-      Initial Balance <input type="number" ref="balanceField" onchange={onBalanceUpdate}>
+      Initial Balance <input type="number" ref="balanceField" onchange={onBalanceUpdate}> SEK
     </label>
     <div class="ticker-screen">
       <span class="ticker-tag" each={e in commands}>{e}</span>
@@ -96,10 +96,12 @@
     var self = this
     var app = self.opts.app
 
+    var graphMax = 200
+
     const round = (x) => Math.round(x)
     const t2x = t => round(1000 - t*1000/app.timeRange)
     const x2t = x => round((1000-x) * app.timeRange/1000)
-    const value2y = x => round(200-x)
+    const value2y = x => round(200-170*x/graphMax)
     const rnd = (low,high) => low + (high-low) * Math.random()
     const flatmap = (list, op) => _.flatten(list.map(op))
     const sum = (list) => list.reduce((a,b) => a+b)
@@ -121,22 +123,22 @@
       if (func === 'historic_average') {
         interval(value, args.stock.color, t+args.offset, t+args.days+args.offset, 3)
       }
-      if (func === 'number' && args.type === 'Sek') {
-        interval(value, 'rgba(0,0,0,0.1)', 0, 1000, 1)
-      }
+      //if (func === 'number' && args.type === 'Sek') {
+      //  interval(value, 'rgba(0,0,0,0.1)', 0, 1000, 1)
+      //}
       if (func === 'operator' && (value === '<' || value === '>')) {
         if (args.lhs.node === 'number' && args.lhs.type === 'Sek') {
-          interval(args.lhs.value, 'rgba(0,0,0,0.1)', 0, 1000, 1)
+          interval(args.lhs.value, 'rgba(0,0,0,0.07)', 0, 1000, 1)
         }
         else if (args.rhs.node === 'number' && args.lhs.type === 'Sek') {
-          interval(args.rhs.value, 'rgba(0,0,0,0.1)', 0, 1000,  1)
+          interval(args.rhs.value, 'rgba(0,0,0,0.07)', 0, 1000,  1)
         }
       }
     }
 
     self.onFieldUpdate = function (e) {
       var symbolName = e.item.sym
-      app.setHoldingCount(symbolName, e.target.value)
+      app.setHoldingCount(symbolName, +e.target.value)
     }
 
     self.intervalToPath = function (e) {
@@ -173,7 +175,8 @@
       self.ast.funcs.filter(e => e.rule).forEach(fn => {
         var res = finscript.evaluate(fn.body, app.env)
         if (res.cmd && res.cmd !== 'noaction') {
-          var summary = res.cmd+' '+res.units+' '+res.stock.name+' @ '+round(res.price)+'Sek'
+          var name = res.cmd.toUpperCase()
+          var summary = name+' '+res.units+' '+res.stock.name+' @ '+round(res.price)+'Sek'
           self.commands.push(summary)
         }
       })
@@ -248,6 +251,7 @@
         }
       })
       self.symbols = _.uniq(self.symbols, s => s.name)
+      graphMax = _.max(self.symbols.map(sym => _.max(sym.data))) || 200
       self.symbols.forEach(function (symbol) {
         var path = toPath(symbol.data)
         self.graphs.push({ color: symbol.color, thickness: 1, path: path })
