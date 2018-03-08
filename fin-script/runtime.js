@@ -8,9 +8,9 @@ finscript.env = {
 	getHolding: function (sym) {
 		return this.holdings[sym] || {name: sym, count: 10, gav: 10}
 	},
-	onCall: function (){},
+	eavesdrop: function (){},
 	numericValue: function (node) {
-		this.onCall('number', node.value, { value:node.value, type:node.type })
+		this.eavesdrop('number', node.value, { value:node.value, type:node.type })
 		return node.value
 	},
 	externals: {
@@ -33,14 +33,14 @@ finscript.env = {
 			for (var i=0,sum=0; i<days; i++)
 				sum += (stock.data[this.t+i] || 0)
 			var res = sum / days
-			this.onCall('average', res, { stock, days })
+			this.eavesdrop('average', res, { stock, days })
 			return res
 		},
 		historic_average: function (stock,days,offset) {
 			for (var i=Math.round(offset),sum=0; i<days; i++)
 				sum += (stock.data[this.t+i] || 0)
 			var res = sum / (days-offset)
-			this.onCall('historic_average', res, { stock, days, offset })
+			this.eavesdrop('historic_average', res, { stock, days, offset })
 			return res
 		},
 		noaction: function (){
@@ -66,6 +66,7 @@ function evaluate(node, env) {
 		return env.symbols[node.name.substr(1)]
 	}
 	if (node.node === 'operator') {
+		env.eavesdrop('operator', node.operator, { node, lhs:node.lhs, rhs:node.rhs })
 		switch (node.operator) {
 			case '<': return evaluate(node.lhs, env) < evaluate(node.rhs, env)
 			case '>': return evaluate(node.lhs, env) > evaluate(node.rhs, env)
