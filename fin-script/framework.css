@@ -1,13 +1,29 @@
 .page { margin: 20px 50px; }
-.row {
+.toolbar {
   max-width: 1200px;
   margin: 15px auto;
   display: flex;
 }
-.row .ticker-screen {
+.toolbar .input-pair {
+  background: #FFF;
+  margin: 0 10px 0 0;
+  color: #444;
+  border-radius: 3px;
+  font-size: 14px;
+  font-family: Avenir, Roboto, sans-serif;
+  letter-spacing: 1px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.toolbar label.input-pair input[type=number] {
+  border: 1px solid #DDD;
+  width: 120px;
+}
+.toolbar .ticker-screen {
   flex-grow: 1;
   background: #FFF;
   width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
   padding: 4px;
   color: #444;
   border-radius: 3px;
@@ -16,14 +32,14 @@
   letter-spacing: 1px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
-.row .ticker-screen .ticker-tag {
+.toolbar .ticker-screen .ticker-tag {
   display: inline-block;
   padding: 3px 6px;
   background: #eee;
   margin: 0 4px;
   border-radius: 2px;
 }
-.row button {
+.toolbar button {
   -webkit-appearance: none;
   background: #06BB89;
   padding: 7px 12px;
@@ -38,21 +54,21 @@
   outline: none;
   cursor: pointer;
 }
-.row button:hover {
+.toolbar button:hover {
   background: #038B69;
 }
-.row button:active {
+.toolbar button:active {
   background: #075;
 }
-.row svg {
+.toolbar svg {
   margin: -3px 5px -3px 0;
 }
-.row .pull-right {
+.toolbar .pull-right {
   display: inline-block;
   flex-grow: 1;
   text-align: right;
 }
-.row .pull-right button:last-child {
+.toolbar .pull-right button:last-child {
   margin: 0;
 }
 .card {

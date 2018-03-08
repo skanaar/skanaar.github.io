@@ -24,6 +24,8 @@ var finscript = {
 			funcDef('have_orders', 'Bool', ['stock:Stock']),
 			funcDef('holding', 'Holding', ['stock:Stock']),
 			funcDef('average', 'Sek', ['stock:Stock','days:Days']),
+			funcDef('historic_average', 'Sek', ['stock:Stock','days:Days','offset:Days']),
+			funcDef('volatility', 'Factor', ['stock:Stock','days:Days']),
 			funcDef('noaction', 'Command', []),
 			funcDef('buy', 'Command', ['stock:Stock','units:Units','price:Sek','period:Days']),
 			funcDef('sell', 'Command', ['stock:Stock','units:Units','price:Sek','period:Days']),

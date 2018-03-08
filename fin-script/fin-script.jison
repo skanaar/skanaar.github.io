@@ -74,9 +74,9 @@ func
   | FUNC ID '(' ')' ':' TYPE '{' '}' RETURN exp 
     {$$ = {node:'func', name:$2, type: $6, params: [], body: {node:'body', cases:[], lets:[], funcs:[], params:[], default:$10}, default: $10, loc:[@1,@4]}; }
   | RULE ID '{' body '}' RETURN exp
-    {$$ = {node:'func', name:$2, type: 'Command', params: [], body: $4, default: $7, loc:[@1,@2]}; $4.default = $7; }
+    {$$ = {node:'func', rule:true, name:$2, type: 'Command', params: [], body: $4, default: $7, loc:[@1,@2]}; $4.default = $7; }
   | RULE ID '{' '}' RETURN exp
-    {$$ = {node:'func', name:$2, type: 'Command', params: [], body: {node:'body', cases:[], lets:[], funcs:[], params:[], default:$6}, default: $6, loc:[@1,@2]}; };
+    {$$ = {node:'func', rule:true, name:$2, type: 'Command', params: [], body: {node:'body', cases:[], lets:[], funcs:[], params:[], default:$6}, default: $6, loc:[@1,@2]}; };
 
 body 
   : case                     {$$ = {node:'body', cases:[$1], lets:[], funcs:[], params:[], loc:@1}; }

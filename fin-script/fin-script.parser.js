@@ -127,9 +127,9 @@ case 17:this.$ = {node:'func', name:$$[$0-9], type: $$[$0-5], params: [], body: 
 break;
 case 18:this.$ = {node:'func', name:$$[$0-8], type: $$[$0-4], params: [], body: {node:'body', cases:[], lets:[], funcs:[], params:[], default:$$[$0]}, default: $$[$0], loc:[_$[$0-9],_$[$0-6]]}; 
 break;
-case 19:this.$ = {node:'func', name:$$[$0-5], type: 'Command', params: [], body: $$[$0-3], default: $$[$0], loc:[_$[$0-6],_$[$0-5]]}; $$[$0-3].default = $$[$0]; 
+case 19:this.$ = {node:'func', rule:true, name:$$[$0-5], type: 'Command', params: [], body: $$[$0-3], default: $$[$0], loc:[_$[$0-6],_$[$0-5]]}; $$[$0-3].default = $$[$0]; 
 break;
-case 20:this.$ = {node:'func', name:$$[$0-4], type: 'Command', params: [], body: {node:'body', cases:[], lets:[], funcs:[], params:[], default:$$[$0]}, default: $$[$0], loc:[_$[$0-5],_$[$0-4]]}; 
+case 20:this.$ = {node:'func', rule:true, name:$$[$0-4], type: 'Command', params: [], body: {node:'body', cases:[], lets:[], funcs:[], params:[], default:$$[$0]}, default: $$[$0], loc:[_$[$0-5],_$[$0-4]]}; 
 break;
 case 21:this.$ = {node:'body', cases:[$$[$0]], lets:[], funcs:[], params:[], loc:_$[$0]}; 
 break;

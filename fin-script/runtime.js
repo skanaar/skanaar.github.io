@@ -5,8 +5,12 @@ finscript.env = {
 		return this.symbols[id]
 	},
 	holdings: {},
+	balance: 10000,
 	getHolding: function (sym) {
-		return this.holdings[sym] || {name: sym, count: 10, gav: 10}
+		if (!this.holdings[sym]){
+			this.holdings[sym] = {name: sym, count: 10, gav: 10}
+		}
+		return this.holdings[sym]
 	},
 	eavesdrop: function (){},
 	numericValue: function (node) {
@@ -43,11 +47,26 @@ finscript.env = {
 			this.eavesdrop('historic_average', res, { stock, days, offset })
 			return res
 		},
+		volatility: function (stock,days) {
+			var diffs = []
+			for (var i=1; i<days; i++)
+				diffs.push((stock.data[this.t+i] || 0) / (stock.data[this.t+i-1] || 1) - 1)
+			function std(list){
+				var mean = list.reduce((a,b) => a+b) / list.length;
+				var sqd = list.reduce((a,b) => a + (b-mean)*(b-mean), 0)
+				return (Math.sqrt(sqd / list.length))
+			}
+			return std(diffs) / Math.sqrt(252/days)
+		},
 		noaction: function (){
 			return {cmd:'noaction'}
 		},
 		buy: function (stock,units,price,period) {
-			return { cmd:'buy', stock:stock, units:units, price:price, period:period }
+			var maxUnits = Math.min(units, Math.floor(this.balance/price))
+			if (maxUnits === 0) {
+				return { cmd:'noaction' }
+			}
+			return { cmd:'buy', stock:stock, units:maxUnits, price:price, period:period }
 		},
 		sell: function (stock,units,price,period) {
 			return {cmd:'sell', stock:stock, units:units, price:price, period:period }
@@ -82,13 +101,16 @@ function evaluate(node, env) {
 			var args = node.args.map(e => evaluate(e, env))
 			return env.externals[node.name].apply(env, args)
 		}
+		var eavesdropArgs = []
 		var body = finscript.findFunc(node, node.scope, onerr).body
 		for (var i=0; i<node.func.params.length; i++) {
 			var name = node.func.params[i].name
 			var arg = node.args[i]
 			var value = evaluate(arg, env)
+			eavesdropArgs.push(value)
 			body.lets.unshift({node:'let', name:name, type:arg.type, value:value})
 		}
+		env.eavesdrop('invoke', node.name, eavesdropArgs)
 		return evaluate(body, env)
 	}
 	if (node.node === 'deref') {
