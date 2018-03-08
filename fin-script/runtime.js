@@ -2,6 +2,7 @@ finscript.env = {
 	t: 0,
 	symbols: {},
 	getSymbol: function (id) {
+		// override in execution environment
 		return this.symbols[id]
 	},
 	holdings: {},

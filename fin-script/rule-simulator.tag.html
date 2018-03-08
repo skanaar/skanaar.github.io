@@ -218,7 +218,14 @@
         if (app.env.t <= 0) {
           self.isSimulating = false
         }
-        self.commands = ['Balance ' + Math.floor(app.env.balance) + ' SEK']
+        var portfolioValue = Object.keys(app.env.holdings)
+          .map(e => app.env.holdings[e])
+          .map(e => e.count * app.env.getSymbol(e.name).data[app.env.t])
+          .reduce((a,b) => a+b)
+        self.commands = [
+          'Balance ' + Math.floor(app.env.balance) + ' SEK',
+          'Total ' + Math.floor(app.env.balance+portfolioValue) + ' SEK'
+        ]
         self.update()
         if (self.isSimulating) {
           animateSimulation()
