@@ -44,17 +44,17 @@ http://ethanschoonover.com/solarized/img/solarized-palette.png
   text-shadow: none;
 }
 
-.cm-s-solarized .cm-keyword { color: #93a1a1; font-style: italic }
+.cm-s-solarized .cm-keyword { color: #268bd2; font-weight: bold }
 .cm-s-solarized .cm-atom { color: #d33682; }
-.cm-s-solarized .cm-number { color: #d33682; }
+.cm-s-solarized .cm-number { color: #6c71c4; }
 .cm-s-solarized .cm-def { color: #2aa198; }
 
-.cm-s-solarized .cm-variable { color: #268bd2; }
+.cm-s-solarized .cm-variable { color: #b58900; }
 .cm-s-solarized .cm-variable-2 { color: #b58900; }
 .cm-s-solarized .cm-variable-3 { color: #6c71c4; }
 
-.cm-s-solarized .cm-property { color: #2aa198; }
-.cm-s-solarized .cm-operator {color: #657b83; }
+.cm-s-solarized .cm-property { color: #657b83; }
+.cm-s-solarized .cm-operator {color: #93a1a1; }
 
 .cm-s-solarized .cm-comment { opacity: 0.5; }
 

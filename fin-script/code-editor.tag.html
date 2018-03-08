@@ -99,7 +99,7 @@
     self.loadDefault = function () {
       var defaultExample = document.getElementById('example-source').innerHTML.trim()
       app.source = defaultExample
-      app.events.trigger('source-changed', defaultExample)
+      app.events.trigger('source-loaded', defaultExample)
     }
 
     self.sourceChanged = _.debounce(function (){
@@ -133,7 +133,7 @@
       self.editor = CodeMirror.fromTextArea(self.refs.editor, {
         lineNumbers: true,
         lineWrapping: true,
-        mode: 'lua',
+        mode: 'finscript',
         matchBrackets: true,
         theme: 'solarized light',
         keyMap: 'sublime'
