@@ -12,7 +12,6 @@
   </div>
 
   <div class="card card-editor">
-    <div class="editor-error" style={e} each={e in errorLines}></div>
     <textarea
       class=editor rows=18 ref="editor" value={source}
       onkeyup={sourceChanged}
@@ -35,7 +34,7 @@
     .card-editor {
       display: flex;
     }
-    .editor {
+    .editor, .CodeMirror {
       display: inline-block;
       position: relative;
       vertical-align: top;
@@ -48,7 +47,6 @@
       background: none;
       color: #03A678;
       border: 0;
-      padding: 15px;
     }
     .output {
       display: inline-block;
@@ -68,6 +66,9 @@
       color: #A94;
       white-space: pre;
     }
+    .syntax-error {
+      color: #F00;
+    }
     input[type=range] { width: 100% }
   </style>
   <script>
@@ -77,15 +78,22 @@
 
     self.infos = []
     self.errors = []
-    self.errorLines = []
+    var errorMarks = []
+
+    function clearErrorMarks() {
+      errorMarks.forEach(e => e.clear())
+      errorMarks = []
+    }
 
     function error(msg, node) {
       self.errors.push('#' + node.loc[0].first_line + ',' + node.loc[0].first_column + ' ' + msg)
-      self.errorLines.push({
-        top: (node.loc[0].first_line * 17 - 2) + 'px',
-        left: (node.loc[0].first_column * 8.4 + 15) + 'px',
-        width: ((node.loc[1].last_column-node.loc[0].first_column) * 8.4) + 'px'
-      })
+      var mark = self.editor.markText(
+        {line: node.loc[0].first_line-1, ch: node.loc[0].first_column},
+        {line: node.loc[1].last_line-1, ch: node.loc[1].last_column},
+        { css: 'background: #F88' }
+      )
+      //{ className: 'syntax-error' }
+      errorMarks.push(mark)
     }
 
     self.loadDefault = function () {
@@ -102,8 +110,8 @@
     self.parseSource = function () {
       self.infos = []
       self.errors = []
-      self.errorLines = []
-      var source = self.refs.editor.value
+      clearErrorMarks()
+      var source = self.editor.getValue()
       app.source = source
       var ast = {}
       try {
@@ -120,9 +128,23 @@
     }
 
     self.source = app.source
+
+    self.on('mount', function() {
+      self.editor = CodeMirror.fromTextArea(self.refs.editor, {
+        lineNumbers: true,
+        lineWrapping: true,
+        mode: 'lua',
+        matchBrackets: true,
+        theme: 'solarized light',
+        keyMap: 'sublime'
+      });
+      self.editor.on('change', self.sourceChanged)
+      self.update()
+    })
     
-    app.events.on('source-changed', function (src){
-      self.refs.editor.value = src
+    app.events.on('source-loaded', function (src){
+      clearErrorMarks()
+      self.editor.setValue(src)
       self.update()
     })
 
