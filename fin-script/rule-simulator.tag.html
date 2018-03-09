@@ -208,9 +208,17 @@
       self.savedTime = app.env.t
       self.savedBalance = app.env.balance
       self.savedHoldings = JSON.parse(JSON.stringify(app.env.holdings))
+      self.portfolioStartValue = holdingsValue(app.env.holdings, app.env.t)
       app.env.balance = 10000
       self.isSimulating = true
       animateSimulation()
+    }
+
+    function holdingsValue(holdings, time) {
+      return Object.keys(holdings)
+        .map(e => holdings[e])
+        .map(e => e.count * app.env.getSymbol(e.name).data[time])
+        .reduce((a,b) => a+b)
     }
 
     function animateSimulation() {
@@ -221,13 +229,12 @@
         if (app.env.t <= 0) {
           self.isSimulating = false
         }
-        var portfolioValue = Object.keys(app.env.holdings)
-          .map(e => app.env.holdings[e])
-          .map(e => e.count * app.env.getSymbol(e.name).data[app.env.t])
-          .reduce((a,b) => a+b)
+        var total = app.env.balance+holdingsValue(app.env.holdings, app.env.t)
+        var performance = (self.savedBalance+self.portfolioStartValue) / total
         self.commands = [
           'Balance ' + Math.floor(app.env.balance) + ' SEK',
-          'Total ' + Math.floor(app.env.balance+portfolioValue) + ' SEK'
+          'Total ' + Math.floor(total) + ' SEK',
+          'Performance ' + Math.round(100*performance-100) + ' %'
         ]
         self.update()
         if (self.isSimulating) {
