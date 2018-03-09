@@ -74,7 +74,7 @@
       fetch('/history?symbol=' + symbol.toUpperCase())
         .then(e => e.json())
         .then(e => {
-          callback(e.dataPoints.map(pair => pair[1]).reverse())
+          callback(e.dataPoints.map((pair,i) => pair[1] || e.dataPoints[i-1][1] || 0).reverse())
         })
     }
 

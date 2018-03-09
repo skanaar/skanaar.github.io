@@ -97,11 +97,12 @@
     var app = self.opts.app
 
     var graphMax = 200
+    var graphMin = 0
 
     const round = (x) => Math.round(x)
     const t2x = t => round(1000 - t*1000/app.timeRange)
     const x2t = x => round((1000-x) * app.timeRange/1000)
-    const value2y = x => round(200-170*x/graphMax)
+    const value2y = x => round(200-150*(x-graphMin+10)/(graphMax-graphMin))
     const rnd = (low,high) => low + (high-low) * Math.random()
     const flatmap = (list, op) => _.flatten(list.map(op))
     const sum = (list) => list.reduce((a,b) => a+b)
@@ -259,6 +260,7 @@
       })
       self.symbols = _.uniq(self.symbols, s => s.name)
       graphMax = _.max(self.symbols.map(sym => _.max(sym.data))) || 200
+      graphMin = _.min(self.symbols.map(sym => _.min(sym.data))) || 0
       self.symbols.forEach(function (symbol) {
         var path = toPath(symbol.data)
         self.graphs.push({ color: symbol.color, thickness: 1, path: path })
