@@ -231,11 +231,11 @@
           self.isSimulating = false
         }
         var total = app.env.balance+holdingsValue(app.env.holdings, app.env.t)
-        var performance = (self.savedBalance+self.portfolioStartValue) / total
+        //var performance = (self.savedBalance+self.portfolioStartValue) / total
         self.commands = [
           'Balance ' + Math.floor(app.env.balance) + ' SEK',
-          'Total ' + Math.floor(total) + ' SEK',
-          'Performance ' + Math.round(100*performance-100) + ' %'
+          'Total ' + Math.floor(total) + ' SEK'
+          //,'Performance ' + Math.round(100*performance-100) + ' %'
         ]
         self.update()
         if (self.isSimulating) {

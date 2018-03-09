@@ -25,6 +25,9 @@ finscript.env = {
 		price: function (stock){
 			return this.symbols[stock.name].data[this.t]
 		},
+		historic_price: function (stock, offset){
+			return this.symbols[stock.name].data[this.t - offset]
+		},
 		count: function (holding) {
 			return holding.count
 		},
@@ -42,9 +45,9 @@ finscript.env = {
 			return res
 		},
 		historic_average: function (stock,days,offset) {
-			for (var i=Math.round(offset),sum=0; i<days; i++)
-				sum += (stock.data[this.t+i] || 0)
-			var res = sum / (days-offset)
+			for (var i=0,sum=0; i<days; i++)
+				sum += (stock.data[this.t+i+Math.round(offset)] || 0)
+			var res = sum / (days)
 			this.eavesdrop('historic_average', res, { stock, days, offset })
 			return res
 		},

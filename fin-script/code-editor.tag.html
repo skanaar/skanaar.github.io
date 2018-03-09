@@ -2,7 +2,7 @@
 
   <div class="card card-editor">
     <textarea
-      class=editor rows=18 ref="editor" value={source}
+      class=editor rows=10 ref="editor" value={source}
       onkeyup={sourceChanged}
       autocomplete="off" autocorrect="off" spellcheck="false"></textarea>
     <div class=output>
@@ -29,9 +29,9 @@
       vertical-align: top;
       resize: none;
       outline: none;
-      width: 60%;
+      width: 75%;
       font-family: Consolas, Menlo, monospace;
-      font-size: 16px;
+      font-size: 12px;
       background: none;
       color: #03A678;
       border: 0;
@@ -39,7 +39,7 @@
     .output {
       display: inline-block;
       vertical-align: top;
-      width: 40%;
+      width: 25%;
       font-family: Consolas, Menlo, monospace;
       font-size: 14px;
       padding: 15px;

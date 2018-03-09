@@ -20,6 +20,7 @@ var finscript = {
 		funcs: [
 			funcDef('not', 'Bool', ['bool:Bool']),
 			funcDef('price', 'Sek', ['stock:Stock']),
+			funcDef('historic_price', 'Sek', ['stock:Stock','offset:Days']),
 			funcDef('count', 'Units', ['holding:Holding']),
 			funcDef('have_orders', 'Bool', ['stock:Stock']),
 			funcDef('holding', 'Holding', ['stock:Stock']),
