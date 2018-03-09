@@ -248,8 +248,8 @@
         }
       }, 20)
     }
-    
-    app.events.on('ast-changed', function (ast) {
+
+    function processAst(ast) {
       self.symbols = []
       self.graphs = []
       self.ast = ast
@@ -265,9 +265,12 @@
         var path = toPath(symbol.data)
         self.graphs.push({ color: symbol.color, thickness: 1, path: path })
       })
-
       self.reevaluate()
-    })
+    }
+    
+    app.events.on('ast-changed', (ast) => processAst(ast))
+
+    app.events.on('async-data-loaded', () => processAst(self.ast))
 
     self.on('mount', function () {
       self.refs.balanceField.value = app.env.balance

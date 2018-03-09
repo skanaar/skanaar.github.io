@@ -10,8 +10,8 @@
             <path d="M604 452 L 600 223 L 336 316 L 339 545 Z" fill="#a5170a" stroke="none"></path>
             <path d="M336 316 L 600 223 L 460 54 L 195 147 Z" fill="#cb200e" stroke="none"></path>
           </g>
-          <rect x="5" y="60" width="350" height="92" fill="#a25320"></rect>
-          <text x="20" y="135" font-family="Avenir Next Condensed" font-size="80" fill="#fff">FIN-SCRIPT</text>
+          <rect x="5" y="60" width="390" height="92" fill="#a25320"></rect>
+          <text x="20" y="135" font-family="Avenir Next Condensed, Arial Condensed, Agency FB, Roboto" font-size="80" fill="#fff">FIN-SCRIPT</text>
         </svg>
       </div>
 
@@ -84,7 +84,7 @@
         var stock = {name:id, color:colors[colorIndex], data:data}
         fetchStockData(id, function (data) {
           stock.data = data
-          self.update()
+          self.app.events.trigger('async-data-loaded')
         })
         this.symbols[id] = stock
         colorIndex = (colorIndex+1) % colors.length
