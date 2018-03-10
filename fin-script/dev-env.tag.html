@@ -23,10 +23,18 @@
           </svg> Compile
         </button>
 
+        <button onclick={toggleDoc}>Function list</button>
+
         <button onclick={loadDefault}>Load default</button>
 
       </div>
 
+    </div>
+    <div class={card:1, documentation:1, 'card-collapsed':!showDoc}>
+      <div class=heading>Available functions</div>
+      <div class=func each={fn in globalFuncs}>
+        {fn.name}(<span class=param each={p,i in fn.params}><span class=func if={i}>, </span>{p.name}<span class=type>:{p.type}</span></span>)<span class=type> : {fn.type}</span>
+      </div>
     </div>
     <code-editor app={app} />
     <rule-simulator app={app} />
@@ -44,6 +52,20 @@
       height: 50px;
       margin: -8px 0 -15px 0;
     }
+    .documentation {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-family: Menlo, Consolas, monospace;
+      max-height: 500px;
+    }
+    .documentation .heading { 
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+    .documentation .func { color: #657b83; padding: 3px; }
+    .documentation .func:hover { background: #eee; }
+    .documentation .param { color: #b58900 }
+    .documentation .type { color: #2aa198 }
   </style>
   <script>
     const rnd = (low,high) => low + (high-low) * Math.random()
@@ -64,6 +86,10 @@
     //-----
     
     var self = this
+    self.showDoc = false
+    self.toggleDoc = () => self.showDoc = !self.showDoc
+    self.globalFuncs = finscript.globalScope.funcs
+
     var env = finscript.env
     var colorIndex = 0
     var colors = '#5777aa #f6ae9b #009ECF #575656 #e8d5a6 #71bb75 #8b5d3b #ff501b #9adae7'.split(' ')

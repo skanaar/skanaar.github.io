@@ -37,6 +37,30 @@ finscript.env = {
 		have_orders: function (stock) {
 			return this.getHolding(stock.name).count > 0
 		},
+		max_price: function(stock,days) {
+			for (var i=0,res=0; i<days; i++)
+				res = Math.max(res, stock.data[this.t+i] || 0)
+			this.eavesdrop('max_price', res, { stock, days })
+			return res
+		},
+		min_price: function(stock,days) {
+			for (var i=0,res=Infinity; i<days; i++)
+				res = Math.min(res, stock.data[this.t+i] || Infinity)
+			this.eavesdrop('min_price', res, { stock, days })
+			return res
+		},
+		historic_max: function(stock,days,offset) {
+			for (var i=0,res=0; i<days; i++)
+				res = Math.max(res, stock.data[this.t+i+Math.round(offset)] || 0)
+			this.eavesdrop('historic_max', res, { stock, days, offset })
+			return res
+		},
+		historic_min: function(stock,days,offset) {
+			for (var i=0,res=Infinity; i<days; i++)
+				res = Math.min(res, stock.data[this.t+i+Math.round(offset)] || Infinity)
+			this.eavesdrop('historic_min', res, { stock, days, offset })
+			return res
+		},
 		average: function (stock,days) {
 			for (var i=0,sum=0; i<days; i++)
 				sum += (stock.data[this.t+i] || 0)
@@ -55,6 +79,18 @@ finscript.env = {
 			var diffs = []
 			for (var i=1; i<days; i++)
 				diffs.push((stock.data[this.t+i] || 0) / (stock.data[this.t+i-1] || 1) - 1)
+			function std(list){
+				var mean = list.reduce((a,b) => a+b) / list.length;
+				var sqd = list.reduce((a,b) => a + (b-mean)*(b-mean), 0)
+				return (Math.sqrt(sqd / list.length))
+			}
+			return std(diffs) / Math.sqrt(252/days)
+		},
+		historic_volatility: function (stock,days,offset) {
+			var diffs = []
+			var t = this.t + Math.round(offset)
+			for (var i=1; i<days; i++)
+				diffs.push((stock.data[t+i] || 0) / (stock.data[t+i-1] || 1) - 1)
 			function std(list){
 				var mean = list.reduce((a,b) => a+b) / list.length;
 				var sqd = list.reduce((a,b) => a + (b-mean)*(b-mean), 0)
