@@ -18,13 +18,6 @@ CodeMirror.defineMode("finscript", function(config) {
     func: true, let: true, case: true, rule: true
   };
 
-  var atoms = {
-    "true":true, "false":true, "iota":true, "nil":true, "append":true,
-    "cap":true, "close":true, "complex":true, "copy":true, "delete":true, "imag":true,
-    "len":true, "make":true, "new":true, "panic":true, "print":true,
-    "println":true, "real":true, "recover":true
-  };
-
   var isOperatorChar = /[+\-*&^%:=<>!|\/]/;
 
   var curPunc;
@@ -68,7 +61,6 @@ CodeMirror.defineMode("finscript", function(config) {
     if (keywords.propertyIsEnumerable(cur)) {
       return "keyword";
     }
-    if (atoms.propertyIsEnumerable(cur)) return "atom";
     if (stream.peek() === "(")
       return "property"
     else if (cur[0] === "#")

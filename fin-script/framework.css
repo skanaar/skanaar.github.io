@@ -76,6 +76,7 @@
   max-width: 1200px;
   margin: 10px auto 20px auto;
   border-radius: 4px;
+  overflow: hidden;
   background: #fff;
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   transition: max-height 0.5s, margin 0.5s, padding 0.5s;

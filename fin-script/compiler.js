@@ -19,20 +19,22 @@ var finscript = {
 		params: [],
 		funcs: [
 			funcDef('not', 'Bool', ['bool:Bool']),
+			funcDef('all', 'Bool', ['bool:Bool','bool:Bool']),
+			funcDef('any', 'Bool', ['bool:Bool','bool:Bool']),
 			funcDef('price', 'Sek', ['stock:Stock']),
 			funcDef('max', 'Sek', ['stock:Stock','period:Days']),
 			funcDef('min', 'Sek', ['stock:Stock','period:Days']),
 			funcDef('average', 'Sek', ['stock:Stock','period:Days']),
-			funcDef('volatility', 'Factor', ['stock:Stock','period:Days']),
+			funcDef('volatility', 'Dimensionless', ['stock:Stock','period:Days']),
 			funcDef('historic_price', 'Sek', ['stock:Stock','offset:Days']),
 			funcDef('historic_max', 'Sek', ['stock:Stock','period:Days','offset:Days']),
 			funcDef('historic_min', 'Sek', ['stock:Stock','period:Days','offset:Days']),
 			funcDef('historic_average', 'Sek', ['stock:Stock','period:Days','offset:Days']),
-			funcDef('historic_volatility', 'Factor', ['stock:Stock','period:Days','offset:Days']),
+			funcDef('historic_volatility', 'Dimensionless', ['stock:Stock','period:Days','offset:Days']),
 			funcDef('count', 'Units', ['holding:Holding']),
 			funcDef('have_orders', 'Bool', ['stock:Stock']),
 			funcDef('holding', 'Holding', ['stock:Stock']),
-			funcDef('noaction', 'Command', []),
+			funcDef('no_action', 'Command', []),
 			funcDef('buy', 'Command', ['stock:Stock','units:Units','price:Sek','period:Days']),
 			funcDef('sell', 'Command', ['stock:Stock','units:Units','price:Sek','period:Days'])
 		]
@@ -129,8 +131,15 @@ var finscript = {
 				if (node.operator === '+' || node.operator === '-') {
 					node.type = node.lhs.type
 				}
-				if (node.operator === '*' || node.operator === '/') {
-					node.type = (node.lhs.type === 'Factor') ? node.rhs.type : node.lhs.type
+				if (node.operator === '*') {
+					if (node.lhs.type === 'Dimensionless') { node.type = node.rhs.type }
+					if (node.rhs.type === 'Dimensionless') { node.type = node.lhs.type }
+					node.type = node.rhs.type+'x'+node.lhs.type
+				}
+				if (node.operator === '/') {
+					if (node.lhs.type === 'Dimensionless') { node.type = node.rhs.type }
+					if (node.rhs.type === 'Dimensionless') { node.type = node.lhs.type }
+					if (node.rhs.type === node.rhs.type) { node.type = 'Dimensionless' }
 				}
 			}
 			if (node.node === 'case'){
@@ -143,6 +152,9 @@ var finscript = {
 	},
 
 	checkTypes: function(root, onerror) {
+		function aliasType(type) {
+			return ['Units', 'Factor'].includes(type) ? 'Dimensionless' : type
+		}
 		var isConsistent = true
 		finscript.walkTree(root, function (){}, function (node, parent) {
 			var ok = true
@@ -153,25 +165,31 @@ var finscript = {
 					for (var i=0; i<node.func.params.length; i++) {
 						var actual = node.args[i].type
 						var expected = node.func.params[i].type
-						if (actual === expected) continue
+						if (aliasType(actual) === aliasType(expected)) { continue }
 						ok = false
 						onerror('Argument '+(1+i)+' expect "'+expected+'" got "'+actual+'"', node)
 					}
 				}
 			}
 			if (node.node === 'operator'){
+				var a = node.lhs
+				var b = node.rhs
 				if (node.operator === '<' || node.operator === '>') {
-					ok = node.lhs.type === node.rhs.type
-					if (!ok) onerror('Cannot compare two different types', node)
+					ok = a.type === b.type
+					if (!ok) onerror('Cannot compare "'+a.type+'" and "'+b.type+'"', node)
 				}
 				if (node.operator === '+' || node.operator === '-') {
-					ok = node.lhs.type === node.rhs.type
-					if (!ok) onerror('Cannot add/subtract two different types', node)
+					ok = a.type === b.type
+					var op = node.operator === '+' ? 'add' : 'subtract'
+					if (!ok) onerror('Cannot '+op+' "'+a.type+'" and "'+b.type+'"', node)
 				}
-				if (node.operator === '*' || node.operator === '/') {
-					var oneIsFactor = (node.lhs.type === 'Factor' || node.rhs.type === 'Factor')
-					ok = (oneIsFactor || node.lhs.type === node.rhs.type)
-					if (!ok) onerror('Cannot multiply incompatible types', node)
+				if (node.operator === '*') {
+					ok = (a.type === 'Dimensionless' || b.type === 'Dimensionless')
+					if (!ok) onerror('Cannot multiply unsupported types', node)
+				}
+				if (node.operator === '/') {
+					ok = (a.type === 'Dimensionless' || b.type === 'Dimensionless' || a.type === b.type)
+					if (!ok) onerror('Cannot divide incompatible types', node)
 				}
 			}
 			if (node.node === 'func'){

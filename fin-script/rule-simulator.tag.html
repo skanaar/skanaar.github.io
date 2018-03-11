@@ -118,11 +118,11 @@
         self.intervals.push({ value, color, left, right, thickness })
       }
       var t = app.env.t
-      if (func === 'average') {
-        interval(value, args.stock.color, t, t+args.days, 3)
+      if (['average', 'min', 'max'].includes(func)) {
+        interval(value, args.stock.color, t, t+args.days, 2)
       }
-      if (func === 'historic_average') {
-        interval(value, args.stock.color, t+args.offset, t+args.days+args.offset, 3)
+      if (['historic_average', 'historic_min', 'historic_max'].includes(func)) {
+        interval(value, args.stock.color, t+args.offset, t+args.days+args.offset, 2)
       }
       //if (func === 'number' && args.type === 'Sek') {
       //  interval(value, 'rgba(0,0,0,0.1)', 0, 1000, 1)
@@ -175,7 +175,7 @@
       app.env.t = self.t
       self.ast.funcs.filter(e => e.rule).forEach(fn => {
         var res = finscript.evaluate(fn.body, app.env)
-        if (res.cmd && res.cmd !== 'noaction') {
+        if (res.cmd && res.cmd !== 'no_action') {
           var name = res.cmd.toUpperCase()
           var summary = name+' '+res.units+' '+res.stock.name+' @ '+round(res.price)+'Sek'
           self.commands.push(summary)

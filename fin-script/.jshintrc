@@ -17,7 +17,7 @@
 
   "asi": true,
   "bitwise": true,
-  "eqeqeq": true,
+  "eqeqeq": false,
   "freeze": true,
   "globalstrict": true,
   "latedef": "nofunc",

@@ -22,6 +22,12 @@ finscript.env = {
 		not: function (bool){
 			return !bool
 		},
+		any: function (a, b){
+			return a || b
+		},
+		all: function (a, b){
+			return a && b
+		},
 		price: function (stock){
 			return this.symbols[stock.name].data[this.t]
 		},
@@ -37,16 +43,16 @@ finscript.env = {
 		have_orders: function (stock) {
 			return this.getHolding(stock.name).count > 0
 		},
-		max_price: function(stock,days) {
+		max: function(stock,days) {
 			for (var i=0,res=0; i<days; i++)
 				res = Math.max(res, stock.data[this.t+i] || 0)
-			this.eavesdrop('max_price', res, { stock, days })
+			this.eavesdrop('max', res, { stock, days })
 			return res
 		},
-		min_price: function(stock,days) {
+		min: function(stock,days) {
 			for (var i=0,res=Infinity; i<days; i++)
 				res = Math.min(res, stock.data[this.t+i] || Infinity)
-			this.eavesdrop('min_price', res, { stock, days })
+			this.eavesdrop('min', res, { stock, days })
 			return res
 		},
 		historic_max: function(stock,days,offset) {
@@ -98,18 +104,18 @@ finscript.env = {
 			}
 			return std(diffs) / Math.sqrt(252/days)
 		},
-		noaction: function (){
-			return {cmd:'noaction'}
+		no_action: function (){
+			return {cmd:'no_action'}
 		},
 		buy: function (stock,units,price,period) {
 			var maxUnits = Math.min(units, Math.floor(this.balance/price))
-			if (maxUnits === 0) { return { cmd:'noaction' } }
+			if (maxUnits === 0) { return { cmd:'no_action' } }
 			return { cmd:'buy', stock:stock, units:maxUnits, price:price, period:period }
 		},
 		sell: function (stock,units,price,period) {
 			var holding = this.getHolding(stock.name).count
 			units = Math.min(holding, units)
-			if (Math.floor(units) <= 0){ return { cmd:'noaction' } }
+			if (Math.floor(units) <= 0){ return { cmd:'no_action' } }
 			return {cmd:'sell', stock:stock, units:units, price:price, period:period }
 		}
 	}
