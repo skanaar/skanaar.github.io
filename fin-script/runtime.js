@@ -108,7 +108,7 @@ finscript.env = {
 			return {cmd:'no_action'}
 		},
 		buy: function (stock,units,price,period) {
-			var maxUnits = Math.min(units, Math.floor(this.balance/price))
+			var maxUnits = Math.floor(Math.min(units, this.balance/price))
 			if (maxUnits === 0) { return { cmd:'no_action' } }
 			return { cmd:'buy', stock:stock, units:maxUnits, price:price, period:period }
 		},

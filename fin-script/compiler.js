@@ -113,6 +113,9 @@ var finscript = {
 	},
 
 	markupTypes: function(root, onerror) {
+		function aliasType(type) {
+			return ['Units', 'Factor'].includes(type) ? 'Dimensionless' : type
+		}
 		finscript.walkTree(root, function (){}, function (node, parent) {
 			if (node.node === 'invoke'){
 				var fn = finscript.findFunc(node, node.scope, onerror)
@@ -125,21 +128,23 @@ var finscript = {
 				node.type = ref.type
 			}
 			if (node.node === 'operator'){
+				var Left = aliasType(node.lhs.type)
+				var Right = aliasType(node.rhs.type)
 				if (node.operator === '<' || node.operator === '>') {
 					node.type = 'Bool'
 				}
 				if (node.operator === '+' || node.operator === '-') {
-					node.type = node.lhs.type
+					node.type = Left
 				}
 				if (node.operator === '*') {
-					if (node.lhs.type === 'Dimensionless') { node.type = node.rhs.type }
-					if (node.rhs.type === 'Dimensionless') { node.type = node.lhs.type }
-					node.type = node.rhs.type+'x'+node.lhs.type
+					if (Left === 'Dimensionless') { node.type = Right }
+					else if (Right === 'Dimensionless') { node.type = Left }
+					else { node.type = Right+'x'+Left }
 				}
 				if (node.operator === '/') {
-					if (node.lhs.type === 'Dimensionless') { node.type = node.rhs.type }
-					if (node.rhs.type === 'Dimensionless') { node.type = node.lhs.type }
-					if (node.rhs.type === node.rhs.type) { node.type = 'Dimensionless' }
+					if (Left === 'Dimensionless') { node.type = Right }
+					if (Right === 'Dimensionless') { node.type = Left }
+					if (Left === Right) { node.type = 'Dimensionless' }
 				}
 			}
 			if (node.node === 'case'){
@@ -172,23 +177,23 @@ var finscript = {
 				}
 			}
 			if (node.node === 'operator'){
-				var a = node.lhs
-				var b = node.rhs
+				var Left = aliasType(node.lhs.type)
+				var Right = aliasType(node.rhs.type)
 				if (node.operator === '<' || node.operator === '>') {
-					ok = a.type === b.type
-					if (!ok) onerror('Cannot compare "'+a.type+'" and "'+b.type+'"', node)
+					ok = Left === Right
+					if (!ok) onerror('Cannot compare "'+Left+'" and "'+Right+'"', node)
 				}
 				if (node.operator === '+' || node.operator === '-') {
-					ok = a.type === b.type
+					ok = Left === Right
 					var op = node.operator === '+' ? 'add' : 'subtract'
-					if (!ok) onerror('Cannot '+op+' "'+a.type+'" and "'+b.type+'"', node)
+					if (!ok) onerror('Cannot '+op+' "'+Left+'" and "'+Right+'"', node)
 				}
 				if (node.operator === '*') {
-					ok = (a.type === 'Dimensionless' || b.type === 'Dimensionless')
+					ok = (Left === 'Dimensionless' || Right === 'Dimensionless')
 					if (!ok) onerror('Cannot multiply unsupported types', node)
 				}
 				if (node.operator === '/') {
-					ok = (a.type === 'Dimensionless' || b.type === 'Dimensionless' || a.type === b.type)
+					ok = (Left === 'Dimensionless' || Right === 'Dimensionless' || Left === Right)
 					if (!ok) onerror('Cannot divide incompatible types', node)
 				}
 			}
