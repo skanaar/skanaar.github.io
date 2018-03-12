@@ -24,7 +24,7 @@
 
   <div class="debug-pane">
     <div class="card card-stacktrace">
-      <div class="stackframe" each={e in stacktrace}>
+      <div class={stackframe:1, divider:e.divider} each={e in stacktrace}>
         {e.name}(<span each={arg,i in e.args}><span if={i}>, </span>{arg}</span>)
       </div>
     </div>
@@ -53,7 +53,6 @@
     .debug-pane {
       height: 200px;
       display: flex;
-      width: 200px;
       margin: 0 20px 0 0;
     }
     .card-stacktrace {
@@ -66,8 +65,12 @@
     .card-stacktrace .stackframe {
       padding: 5px;
       font-family: Menlo, Consolas, monospace;
-      font-size: 10px;
+      font-size: 12px;
       border-bottom: 1px solid #eee;
+    }
+    .card-stacktrace .stackframe.divider:first-child {
+      border-top: 2px solid #888;
+      margin-top: -1px;
     }
     .card-graph {
       position: relative;
@@ -140,6 +143,7 @@
     const listSum = (listA,listB) => listA.map((e,i) => listA[i] + listB[i])
     const toPath = (data) => 'M' + data.map((e,i) => t2x(i)+','+value2y(e)).join(' L')
 
+    var startStack = true
     app.env.eavesdrop = function (func, value, args) {
       if (self.isSimulating) return
       function interval(value, color, left, right, thickness) {
@@ -164,7 +168,12 @@
         }
       }
       if (func === 'invoke') {
-        self.stacktrace.push({ name: value, args: args.map(e => e.name || e) })
+        self.stacktrace.push({
+          name: value,
+          args: args.map(e => e.name || e),
+          divider: startStack
+        })
+        startStack = false
       }
     }
 
@@ -207,6 +216,7 @@
       self.t = x2t(self.refs.timeSlider.value)
       app.env.t = self.t
       self.ast.funcs.filter(e => e.rule).forEach(fn => {
+        startStack = true
         var res = finscript.evaluate(fn.body, app.env)
         if (res.cmd && res.cmd !== 'no_action') {
           var name = res.cmd.toUpperCase()
