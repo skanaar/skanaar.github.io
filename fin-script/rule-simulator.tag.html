@@ -25,7 +25,7 @@
   <div class="debug-pane">
     <div class="card card-stacktrace">
       <div class="stackframe" each={e in stacktrace}>
-        {e.func.name}(<span each={arg in e.args}>{arg} </span>)
+        {e.name}(<span each={arg,i in e.args}><span if={i}>, </span>{arg}</span>)
       </div>
     </div>
     <div class="card card-graph">
@@ -59,18 +59,21 @@
     .card-stacktrace {
       position: relative;
       height: 200px;
-      width: 100%;
-      margin: 0;
+      width: 250px;
       padding: 0;
+      margin: 0 20px 0 0;
     }
     .card-stacktrace .stackframe {
       padding: 5px;
       font-family: Menlo, Consolas, monospace;
+      font-size: 10px;
       border-bottom: 1px solid #eee;
     }
     .card-graph {
       position: relative;
       height: 200px;
+      width: 100%;
+      margin: 0;
     }
     .card-graph svg {
     }
@@ -161,7 +164,7 @@
         }
       }
       if (func === 'invoke') {
-        self.stacktrace.push({ name: value, args: args })
+        self.stacktrace.push({ name: value, args: args.map(e => e.name || e) })
       }
     }
 
