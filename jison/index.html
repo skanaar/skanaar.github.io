@@ -280,7 +280,7 @@
         printOut('good', 'Parsing...');
         var source = $("#source").val();
         try {
-          printOut('good', stringify(parser2.parse(source)));
+          printOut('good', stringify(parser2.parse(source), {maxLength:100}));
         } catch(e) {
           printOut('bad', e.message || e);
         }
