@@ -315,7 +315,7 @@
     {"name":"Alien Artifact","type":"common","level":5,"credits":262,"critical":0,"cooldown":false,"attr":{"maxhull":0,"maxshield":0,"maxenergy":0},"playerBuff":{"hull":0,"shield":0,"energy":0},"targetBuff":{"hull":0,"shield":0,"energy":0}},
     {"type":"tool","attr":{"maxhull":1,"maxshield":1,"maxenergy":1},"playerBuff":{"hull":0,"shield":-1,"energy":10},"targetBuff":{"hull":0,"shield":0,"energy":0},"credits":290,"name":"Epiales","level":5,"cooldown":false,"critical":0},
     {"type":"tool","attr":{"maxhull":3,"maxshield":2,"maxenergy":1},"playerBuff":{"hull":10,"shield":0,"energy":-1},"targetBuff":{"hull":0,"shield":0,"energy":0},"credits":310,"name":"Horkos","level":5,"cooldown":false,"critical":0},
-    {"type":"weapon","attr":{"maxhull":0,"maxshield":0,"maxenergy":0},"playerBuff":{"hull":0,"shield":0,"energy":-5},"targetBuff":{"hull":0,"shield":0,"energy":-200},"credits":500,"name":"EMP Bomb","level":5,"cooldown":false,"critical":0},
+    {"type":"weapon","attr":{"maxhull":0,"maxshield":0,"maxenergy":0},"playerBuff":{"hull":0,"shield":0,"energy":-5},"targetBuff":{"hull":0,"shield":0,"energy":-200},"credits":500,"name":"EMP Bomb","level":5,"cooldown":true,"critical":0},
     {"type":"tool","level":5,"credits":700,"name":"Repair Nanites","cooldown":true,"attr":{"maxhull":0,"maxshield":0,"maxenergy":0},"playerBuff":{"hull":70,"shield":0,"energy":0},"targetBuff":{"hull":0,"shield":0,"energy":0},"critical":0},
     {"type":"tool","attr":{"maxhull":0,"maxshield":0,"maxenergy":0},"playerBuff":{"hull":20,"shield":0,"energy":-10},"targetBuff":{"hull":0,"shield":0,"energy":0},"credits":80,"name":"Nano Repairers","level":6,"cooldown":false,"critical":0},
     {"name":"Contraband","type":"common","level":6,"credits":454,"critical":0,"cooldown":false,"attr":{"maxhull":0,"maxshield":0,"maxenergy":0},"playerBuff":{"hull":0,"shield":0,"energy":0},"targetBuff":{"hull":0,"shield":0,"energy":0}},
@@ -694,7 +694,7 @@
     {"pos":{"x":22,"y":-1431},"name":"A2211","style":"asteroid-3","trader":null,"enemy":null,"treasures":[]},
     {"pos":{"x":53,"y":-1344},"name":"A7324","style":"asteroid-2","trader":null,"enemy":null,"treasures":[]},
     {"pos":{"x":150,"y":-1382},"name":"A7096","style":"asteroid-10","trader":null,"enemy":null,"treasures":[]},
-    {"pos":{"x":672,"y":-2252},"name":"Fast Forward","style":"anomaly-gate","trader":null,"enemy":null,"treasures":[]},
+    {"pos":{"x":692,"y":-2252},"name":"Fast Forward","style":"anomaly-junk","trader":null,"enemy":null,"treasures":[]},
     {"pos":{"x":884,"y":-1362},"name":"Beryl Canis Lookout","style":"anomaly-soma-observatory","trader":null,"enemy":null,"treasures":[]},
     {"pos":{"x":682,"y":-1466},"name":"Cosmic Whales","style":"anomaly-whales","trader":null,"enemy":null,"treasures":[]},
     {"pos":{"x":62,"y":-2016},"name":"Ship in distress","style":"anomaly-broken-sloop","trader":null,"enemy":null,"treasures":[]},
@@ -976,7 +976,8 @@
     {"pos":{"x":-444,"y":-466},"name":"Sternbund Trade Conduit","style":"anomaly-trade-conduit","trader":null,"enemy":null,"treasures":[]},
     {"pos":{"x":1231,"y":537},"name":"Nixos","style":"jovian-3","trader":null,"enemy":null,"treasures":[]},
     {"pos":{"x":1263,"y":509},"name":"Vortec Trade Conduit","style":"anomaly-trade-conduit","trader":null,"enemy":null,"treasures":[]},
-    {"pos":{"x":-274,"y":-1526},"name":"Paxos Trade Conduit","style":"anomaly-trade-conduit","trader":null,"enemy":null,"treasures":[]}
+    {"pos":{"x":-274,"y":-1526},"name":"Paxos Trade Conduit","style":"anomaly-trade-conduit","trader":null,"enemy":null,"treasures":[]},
+    {"pos":{"x":662,"y":-2238},"name":"Forward Ruins","style":"anomaly-ruin","trader":null,"enemy":null,"treasures":[]}
   ],
   "quests": [
     {
@@ -985,14 +986,6 @@
       "tags": "",
       "color": "888",
       "icon": "square",
-      "isFile": false
-    },
-    {
-      "name": "Fast Forward",
-      "xml": "\n<condition at-dest=\"Fast Forward\" state=\"surface\"/>\n<dialog ok=\"FAST FORWARD!\" cancel=\"NOT NOW\">*Thank you Beta tester for your work*\nWould you like to skip the tutorial zone?</dialog>\n<dialog>`Some quests will trigger dialogs now, it will be a bit weird but just hang in there.`</dialog>\n<give credits=\"300\"/>\n<give item=\"EM Pulse;Photon Ray;Piercing Beam;Autogun Mk3;Repair Kit;Mk0 Reactor;Lepton Shield;Crew of SS Thunder;Blue seeds\"/>\n<travel dest=\"Traum\"/>\n<change-ship ship=\"Kerr Runner\"/>",
-      "tags": "",
-      "color": "888",
-      "icon": "",
       "isFile": false
     },
     {
@@ -2621,5 +2614,5 @@
   "name": "Skanaar's World",
   "version": 0,
   "date": "2018-01-04",
-  "modified": "2018-01-23"
+  "modified": "2018-02-15"
 }
