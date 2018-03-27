@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nebula Cards</title>
+  <link rel="icon shortcut" href="favicon.png">
+  <link rel="stylesheet" href="framework.css">
+  <script src="lib/underscore.js"></script>
+  <script src="lib/riot-3.3.js"></script>
+  <script type="riot/tag" src="tags/card.tag.html"></script>
+  <script type="riot/tag" src="tags/rules.tag.html"></script>
+  <script type="riot/tag" src="tags/playing-field.tag.html"></script>
+  <style>
+    html, body {
+      margin: 0;
+      background: linear-gradient(#000, #024);
+      z-index: 0;
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    * { box-sizing: border-box; }
+  </style>
+</head>
+<body>
+  <rules></rules>
+  <playing-field></playing-field>
+  
+  <script>
+    riot.mount('*')
+  </script>
+</body>
+</html>

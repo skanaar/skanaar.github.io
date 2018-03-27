@@ -1,0 +1,71 @@
+<card>
+	<div
+		class="card"
+		style={' top:'+model.y+'px; left:'+model.x+'px; z-index:' + model.z}
+		onmousedown={startDrag}
+		onmousemove={drag}
+		onmouseup={endDrag}>
+		<h4>{model.type.name}</h4>
+		<hr/>
+		<div class="property">Value: {model.type.credits}</div>
+	</div>
+	
+	<style>
+		.card {
+			position: absolute;
+			width: 100px;
+			height: 160px;
+			background: #000;
+			border: 2px solid #F80;
+			border-radius: 10px;
+			transform: rotate(5deg);
+			box-shadow: 0 0 10px black;
+			user-select: none;
+			z-index: 0;
+		}
+		h4 {
+			color: white;
+			margin: 5px 0 0 0;
+			font-family: Avenir;
+			font-size: 12px;
+			text-align: center;
+		}
+		hr {
+			margin: 6px 0;
+			height: 1px;
+			border: none;
+			background: #888
+		}
+		.property {
+			color: #ddd;
+			margin: 5px 0 0 0;
+			font-family: Avenir;
+			font-size: 12px;
+			font-weight: normal;
+			text-align: center;
+		}
+	</style>
+
+	<script>
+		var self = this
+		self.model = self.opts.card
+		var app = self.opts.appcore
+		var startEvent = null
+
+		self.startDrag = function (e) {
+			self.model.bringToTop(self.model)
+			startEvent = e
+		}
+		self.drag = function (e) {
+			if (startEvent) {
+				self.model.x += e.screenX - startEvent.screenX
+				self.model.y += e.screenY - startEvent.screenY
+				startEvent = e
+				self.update()
+			}
+		}
+		self.endDrag = function (e) {
+			startEvent = null
+		}
+	</script>
+</card>

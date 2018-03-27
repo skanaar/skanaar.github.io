@@ -1,0 +1,29 @@
+<playing-field>
+	<card each={e in cards} card={e}></card>
+	
+	<style>
+	</style>
+
+	<script>
+		var self = this
+
+		function Card(type) {
+			return {
+				x: 200,
+				y: 200,
+				z: 0,
+				type: type,
+				bringToTop: function (card) {
+					card.z = 1+self.cards.reduce((agg,e) => Math.max(agg,e.z),0)
+				}
+			}
+		}
+
+		self.cards = [
+			Card({ name: 'Kinetic gun', credits: 7 }),
+			Card({ name: 'Abatron', credits: 3 }),
+			Card({ name: 'Platinum', credits: 4 }),
+			Card({ name: 'Photon ray', credits: 2 }),
+		]
+	</script>
+</playing-field>
