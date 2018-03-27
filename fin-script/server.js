@@ -41,9 +41,6 @@ app.use('/history', jsonParser, function (req, res) {
 		});
   })
 
-
-//app.get('/data', (req, res) => res.send('Hello World!'))
-
 app.use('/', express.static(__dirname))
 
-app.listen(7000, () => console.log('Example app listening on port 7000!'))
+app.listen(7000, () => console.log('Fin-Script served from port 7000!'))

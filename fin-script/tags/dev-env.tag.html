@@ -4,6 +4,7 @@
     <div class=toolbar>
 
       <div ref="logo" class="logo" onclick={startEditor}>
+
         <svg viewBox="0 0 500 250" width="100%" height="100%">
           <g transform="scale(1,0.5) skewX(-1) translate(-100,-50)">
             <path d="M339 545 L 336 316 L 195 147 L 199 376 Z" fill="#be1b0c" stroke="none"></path>
@@ -18,8 +19,8 @@
       <div class=pull-right>
 
         <button onclick={compile}>
-          <svg width="20px" height="20px" viewBox="0 0 46 46">
-            <path transform="translate(-6,4)" d="M40 16h-5.62c-.9-1.56-2.14-2.91-3.63-3.92l3.25-3.25-2.83-2.83-4.35 4.35c-.9-.22-1.85-.35-2.82-.35-.97 0-1.92.13-2.82.35l-4.35-4.35-2.83 2.83 3.25 3.25c-1.49 1.01-2.73 2.36-3.63 3.92h-5.62v4h4.18c-.11.65-.18 1.32-.18 2v2h-4v4h4v2c0 .68.07 1.35.18 2h-4.18v4h5.62c2.07 3.58 5.94 6 10.38 6s8.31-2.42 10.38-6h5.62v-4h-4.18c.11-.65.18-1.32.18-2v-2h4v-4h-4v-2c0-.68-.07-1.35-.18-2h4.18v-4zm-12 16h-8v-4h8v4zm0-8h-8v-4h8v4z" fill="#fff"></path>
+          <svg viewBox="0 0 303 303" width="16px" height="16px">
+            <path fill="#fff" d="M298,64 l-49,49 L204,98 L189,54 l49-49 c-32-10-70-3-96,22   c-25,25-33,62-23,94 c-1,1-2,2-3,3 L12,228   c-17,17-17,45,0,62 c17,17,45,17,62,0 l102-102 c1-1,2-2,3-3   c32,10,69,2,94-23 C302,134,309,97,298,64 z"></path>
           </svg> Compile
         </button>
 
@@ -100,7 +101,7 @@
       fetch('/history?symbol=' + symbol.toUpperCase())
         .then(e => e.json())
         .then(e => {
-          callback(e.dataPoints.map((pair,i) => pair[1] || e.dataPoints[i-1][1] || 0).reverse())
+          callback(e.dataPoints.map((pair,i) => pair[1] || (e.dataPoints[i-1]||[0,0])[1] || 0).reverse())
         })
     }
 

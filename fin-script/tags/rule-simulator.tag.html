@@ -1,6 +1,11 @@
 <rule-simulator>
 
   <div class=toolbar>
+    <button onclick={() => showLog = !showLog}>
+      <svg width="20px" height="20px" viewBox="0 0 46 46">
+        <path transform="translate(-6,4)" d="M40 16h-5.62c-.9-1.56-2.14-2.91-3.63-3.92l3.25-3.25-2.83-2.83-4.35 4.35c-.9-.22-1.85-.35-2.82-.35-.97 0-1.92.13-2.82.35l-4.35-4.35-2.83 2.83 3.25 3.25c-1.49 1.01-2.73 2.36-3.63 3.92h-5.62v4h4.18c-.11.65-.18 1.32-.18 2v2h-4v4h4v2c0 .68.07 1.35.18 2h-4.18v4h5.62c2.07 3.58 5.94 6 10.38 6s8.31-2.42 10.38-6h5.62v-4h-4.18c.11-.65.18-1.32.18-2v-2h4v-4h-4v-2c0-.68-.07-1.35-.18-2h4.18v-4zm-12 16h-8v-4h8v4zm0-8h-8v-4h8v4z" fill="#fff"></path>
+      </svg> {showLog ? 'Hide Log' : 'Show Log'}
+    </button>
     <button if={!isSimulating} onclick={simulate}>
       <svg height="20px" viewBox="0 0 20 20" width="20px" style="vertical-align: middle; margin-right: 5px;">
         <path d="M405,232L126,67c-3-2-6-3-10-3c-10,0-19,9-19,20H96v344h0c0,11,8,20,19,20  c4,0,7-1,11-3l278-165c6-5,10-13,10-23C416,246,411,238,405,232z" transform="scale(0.035,0.035)" fill="white"></path>
@@ -23,7 +28,7 @@
   </div>
 
   <div class="debug-pane">
-    <div class="card card-stacktrace">
+    <div class="card card-stacktrace" if={showLog}>
       <div class={stackframe:1, divider:e.divider} each={e in stacktrace}>
         {e.name}(<span each={arg,i in e.args}><span if={i}>, </span>{arg}</span>)
       </div>
@@ -53,7 +58,6 @@
     .debug-pane {
       height: 200px;
       display: flex;
-      margin: 0 20px 0 0;
     }
     .card-stacktrace {
       position: relative;
@@ -129,6 +133,8 @@
   <script>
     var self = this
     var app = self.opts.app
+    self.showLog = false
+    self.isSimulating = false
 
     var graphMax = 200
     var graphMin = 0

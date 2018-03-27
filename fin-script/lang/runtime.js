@@ -105,16 +105,19 @@ finscript.env = {
 			return std(diffs) / Math.sqrt(252/days)
 		},
 		no_action: function (){
+			this.eavesdrop('invoke', 'no_action', [])
 			return {cmd:'no_action'}
 		},
 		buy: function (stock,units,price,period) {
 			var maxUnits = Math.floor(Math.min(units, this.balance/price))
+			this.eavesdrop('invoke', 'buy', [stock.name, maxUnits, Math.round(price)])
 			if (maxUnits === 0) { return { cmd:'no_action' } }
 			return { cmd:'buy', stock:stock, units:maxUnits, price:price, period:period }
 		},
 		sell: function (stock,units,price,period) {
 			var holding = this.getHolding(stock.name).count
 			units = Math.min(holding, units)
+			this.eavesdrop('invoke', 'sell', [stock.name, units, Math.round(price)])
 			if (Math.floor(units) <= 0){ return { cmd:'no_action' } }
 			return {cmd:'sell', stock:stock, units:units, price:price, period:period }
 		}
