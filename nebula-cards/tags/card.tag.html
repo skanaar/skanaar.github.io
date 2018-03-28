@@ -49,11 +49,10 @@
 	<script>
 		var self = this
 		self.model = self.opts.card
-		var app = self.opts.appcore
 		var startEvent = null
 
 		self.startDrag = function (e) {
-			self.model.bringToTop(self.model)
+			self.model.app.bringToTop(self.model)
 			startEvent = e
 		}
 		self.drag = function (e) {
