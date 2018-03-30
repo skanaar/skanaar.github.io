@@ -1,27 +1,33 @@
-<card>
-	<div
-		class="card"
-		style={' top:'+model.y+'px; left:'+model.x+'px; z-index:' + model.z}
-		onmousedown={startDrag}
-		onmousemove={drag}
-		onmouseup={endDrag}>
-		<h4>{model.type.name}</h4>
-		<hr/>
-		<div class="property">Value: {model.type.credits}</div>
+<item-card>
+	<div class="card" ondblclick={flip}>
+		<div class="card-face" if={isopen}>
+			<h4>{model.name}</h4>
+			<hr/>
+			<div class="property">Value: {model.credits}</div>
+		</div>
+		<div class="card-back" if={!isopen}></div>
 	</div>
 	
 	<style>
 		.card {
-			position: absolute;
 			width: 100px;
 			height: 160px;
 			background: #000;
-			border: 2px solid #F80;
 			border-radius: 10px;
 			transform: rotate(5deg);
 			box-shadow: 0 0 10px black;
-			user-select: none;
-			z-index: 0;
+		}
+		.card-face {
+			border: 2px solid #F80;
+			border-radius: 10px;
+			height: 100%;
+		}
+		.card-back {
+			background: url(img/logo.jpg) center center no-repeat;
+			background-size: contain;
+			border: 2px solid #222;
+			border-radius: 10px;
+			height: 100%;
 		}
 		h4 {
 			color: white;
@@ -48,23 +54,11 @@
 
 	<script>
 		var self = this
-		self.model = self.opts.card
-		var startEvent = null
-
-		self.startDrag = function (e) {
-			self.model.app.bringToTop(self.model)
-			startEvent = e
-		}
-		self.drag = function (e) {
-			if (startEvent) {
-				self.model.x += e.screenX - startEvent.screenX
-				self.model.y += e.screenY - startEvent.screenY
-				startEvent = e
-				self.update()
-			}
-		}
-		self.endDrag = function (e) {
-			startEvent = null
-		}
+		self.isopen = self.opts.card.open
+		self.model = self.opts.card.type
+	    self.flip = function (e) {
+	    	self.opts.card.open = !self.opts.card.open
+			self.isopen = self.opts.card.open
+	    }
 	</script>
-</card>
+</item-card>

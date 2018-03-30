@@ -1,0 +1,42 @@
+<draggable>
+  <div
+    class="draggable"
+    style={styleCss()}
+    onmousedown={startDrag}
+    onmousemove={drag}
+    onmouseup={endDrag}>
+    <yield/>
+  </div>
+  <style>
+    .draggable {
+      position: absolute;
+      user-select: none;
+      z-index: 0;
+    }
+  </style>
+  <script>
+    var self = this
+    var model = self.opts.model
+    var startEvent = null
+    self.styleCss = () => ({
+      top: Math.round(model.y)+'px',
+      left: Math.round(model.x)+'px',
+      'z-index': model.z
+    })
+    self.startDrag = function (e) {
+      self.opts.app.bringToTop(model)
+      startEvent = e
+    }
+    self.drag = function (e) {
+      if (startEvent) {
+        model.x += e.screenX - startEvent.screenX
+        model.y += e.screenY - startEvent.screenY
+        startEvent = e
+        self.update()
+      }
+    }
+    self.endDrag = function (e) {
+      startEvent = null
+    }
+  </script>
+</draggable>
