@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no" />
+    <title>Konsultprofil - Kallin CV</title>
+    <style>
+        ol,
+        ul {
+            list-style: none;
+        }
+        html {
+            height: 100%;
+            background: #fff;
+        }
+        div.main {
+            padding: 30px 0;
+            max-width: 800px;
+            background: #fff;
+            margin: 30px auto;
+            border-radius: 2px;
+            column-count: 2;
+        }
+        @media screen {
+            html {
+                background: #ededed;
+            }
+            div.main {
+                box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
+            }
+        }
+        .only-mobile {
+            display: none;
+        }
+        .mobile-focus .not-mobile {
+            display: none;
+        }
+        .mobile-focus .only-mobile {
+            display: block;
+        }
+        #skills ul.skill-group li h4 span.skill-level {
+            line-height: 30px !important;
+        }
+        * {
+            box-sizing: border-box;
+        }
+        html {
+            width: 100%;
+            height: 100%;
+        }
+        body {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            color: #444;
+            font-family: Helvetica;
+        }
+        p {
+            margin: 0 0 10px 0;
+        }
+        h1, h2, h3, .skill-groups ul .group, h4, h5, h6 {
+            color: #222;
+            margin-bottom: 5px;
+        }
+        h1 {
+            font-size: 30px;
+            line-height: 1em;
+            color: #000;
+        }
+        h2 {
+            display: inline-block;
+            font-size: 18px;
+            color: #000;
+        }
+        h3,
+        .skill-groups ul .group {
+            font-size: 16px;
+            color: #222;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        .container {
+            margin: 0 20px;
+        }
+        .profile-pic {
+            display: block;
+            position: relative;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .profile-pic img {
+            bottom: 1px;
+            left: 0;
+            max-width: 90%;
+            max-height: 350px;
+        }
+        .skills::after {
+            clear: both;
+            content: "";
+            display: table;
+        }
+        .profile-skills .skills li {
+            position: relative;
+        }
+        .skills li:before {
+            position: absolute;
+            content: "";
+            width: 4px;
+            height: 4px;
+            top: 50%;
+            left: 20px;
+            margin-top: -2px;
+            background: #333;
+        }
+        .skills li {
+            text-indent: 40px;
+            font-size: 20px;
+            line-height: 50px;
+        }
+        #projects {
+            margin-bottom: 30px;
+            padding-top: 20px;
+        }
+        .project:not(:first-of-type) {
+            border-top: 1px solid lightgrey;
+            padding-top: 20px;
+        }
+        .project {
+            page-break-inside: avoid;
+            margin-bottom: 20px;
+        }
+        .project::after {
+            clear: both;
+            content: "";
+            display: table;
+        }
+        .project .business {
+            margin: 0 0 5px 0;
+            font-weight: 600;
+        }
+        .project .title {
+            margin: 0 0 5px 0;
+            font-style: italic;
+        }
+        .project .description {
+            margin-bottom: 10px;
+        }
+        .project .location {
+            margin-bottom: 10px;
+        }
+        .project .period {
+            margin-bottom: 0px;
+        }
+        ul.keywords {
+            font-size: 12px;
+            margin: 0;
+            padding: 0;
+        }
+        ul.keywords li {
+            margin: 0;
+            line-height: 16px;
+            padding: 0 5px;
+            background: #e6e6e6;
+            border: 1px solid #e6e6e6;
+            float: left;
+            margin-right: 8px;
+            margin-bottom: 5px;
+            border-radius: 2px;
+        }
+        ul.keywords li:before {
+            display: none;
+        }
+        ul.table {
+            page-break-inside: avoid;
+            margin: 0;
+            padding: 0;
+            line-height: 1.5em;
+        }
+        ul.table li {
+            width: 100%;
+            margin: 0;
+            padding: 10px 0;
+        }
+        ul.table li::after {
+            clear: both;
+            content: "";
+            display: table;
+        }
+        ul.table li:nth-child(even) {
+            background: #e6e6e6;
+        }
+        ul.table li div {
+            padding: 0 10px 0 10px;
+        }
+        ul.table li .left {
+            float: left;
+            width: 60%;
+            margin: 0;
+        }
+        ul.table li .right {
+            float: left;
+            width: 40%;
+            text-align: right;
+            margin: 0;
+        }
+        .skill-groups {
+            margin-top: 60px;
+        }
+        .skill-groups ul {
+            float: left;
+            width: 50%;
+            margin-bottom: 30px;
+        }
+        .skill-groups ul .group {
+            list-style: none;
+        }
+        .skill-groups ul li {
+            list-style-type: disc;
+            list-style-position: inside;
+            padding: 5px 0;
+        }
+        #skills {
+            page-break-inside: avoid;
+        }
+        #skills::after {
+            clear: both;
+            content: "";
+            display: table;
+        }
+        #skills ul.skill-group {
+            margin: 0;
+            padding: 0;
+        }
+        #skills ul.skill-group::after {
+            clear: both;
+            content: "";
+            display: table;
+        }
+        #skills ul.skill-group li {
+            page-break-inside: avoid;
+            width: 100%;
+            display: block;
+            margin: 0 0 30px 0;
+        }
+        #skills ul.skill-group li::after {
+            clear: both;
+            content: "";
+            display: table;
+        }
+        #skills ul.skill-group li h4 {
+            border: none;
+            color: #333;
+            line-height: 30px;
+            margin: 0 0 10px 0;
+        }
+        #skills ul.skill-group li h4::after {
+            clear: both;
+            content: "";
+            display: table;
+        }
+        #skills ul.skill-group li h4 span.skill-level {
+            display: inline-block;
+            line-height: 24px;
+            text-align: center;
+            border-radius: 100%;
+            width: 30px;
+            height: 30px;
+            color: #333;
+            margin-right: 5px;
+            border: 2px solid #333;
+        }
+        #skills ul.skill-group li ul.keywords li {
+            float: left;
+            width: auto;
+            line-height: 24px;
+            color: #333;
+            padding: 0 10px;
+            margin-bottom: 5px;
+            margin-right: 5px;
+            background: #e6e6e6;
+        }
+    </style>
+  </head>
+  <body>
+    <!-- BEGIN RESUME -->
+    <div class="main">
+    <div class="container">
+      <div>
+        <div class="profile-pic">
+          <img src="hipster.jpg" alt="Daniel Kallin" />
+        </div>
+        <div class="profile-content">
+          <h1 class="profile-name">Daniel Kallin</h1>
+          <p class="title">Developer</p>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div>
+        <div class="profile-about">
+          <h2>About Daniel</h2>
+          <p>
+            Daniel is a software engineer with solid theoretical base in mathematics and numerical analysis. He is interested in visualization, simulation and user experience/interface design. Specialties include software architecture, UX, Lean development, Numerical analysis.  Daniel is a pragmatic &quot;doer&quot; with a creative flare and passion for his work. He wishes to contribute to a maintainable and solid software architecture; have a great influence on the design of the user interface; be shaping the software design and be able to work with the latest tools and technologies.
+          </p>
+        </div>
+      </div>
+    </div>
+      <section id="projects">
+        <div class="container">
+          <h2>Top projects</h2>
+          <div class="project not-mobile">
+            <div>
+              <b class=business>Tobii Technology AB</b>
+              <span class=period>Apr 2018 - Jul 2018</span>
+            </div>
+            <div>
+              <p class="title">Software engineer</p>
+              <p>
+                Software architecture and user interface implementation. Enforced strong code quality and consistency. Worked closely with the UX team.
+              </p>
+              <ul class="keywords">
+                <li>LINQ</li>
+                <li>C#</li>
+                <li>UX</li>
+                <li>.NET</li>
+                <li>Windows Presentation Foundation (WPF)</li>
+                <li>Software Architecture</li>
+              </ul>
+            </div>
+          </div>
+          <div class="project not-mobile">
+            <div>
+              <b class=business>Avanza Bank</b>
+              <span class=period>May 2017 - Mar 2018</span>
+            </div>
+            <div>
+              <p class="title">Consultant, Front-end developer</p>
+              <p>
+                Took a leading role in developing Avanza's new mortgage application in an agile team. Strong focus on responsive design and close team work with UX designers and graphics designers.
+              </p>
+              <ul class="keywords">
+                <li>Angular2</li>
+                <li>Responsive</li>
+                <li>Scss</li>
+                <li>Java</li>
+              </ul>
+            </div>
+          </div>
+          <div class="project">
+            <div>
+              <b class=business>iOS Game &quot;Nebula Sky&quot;</b>
+              <span class=period>2017 - 2018</span>
+            </div>
+            <div>
+              <p class="title">Personal project</p>
+              <p>
+                Developed and released the iOS game <i>Nebula Sky</i> on the App Store.
+              </p>
+              <ul class="keywords">
+                <li>Swift</li>
+                <li>iOS</li>
+                <li>Cocoa</li>
+                <li>App Store</li>
+                <li>RiotJS</li>
+              </ul>
+            </div>
+          </div>
+          <div class="project not-mobile">
+            <div>
+              <b class=business>ComHem AB</b>
+              <span class=period>Nov 2016 - Apr 2017</span>
+            </div>
+            <div>
+              <p class="title">Consultant, Front-end developer</p>
+              <p>
+                ReactJS developer in a large agile front-end team.
+              </p>
+              <ul class="keywords">
+                <li>React</li>
+                <li>Redux</li>
+                <li>Sass</li>
+                <li>Node.js</li>
+              </ul>
+            </div>
+          </div>
+          <div class="project">
+            <div>
+              <b class=business>Cool Company AB</b>
+              <span class=period>Apr 2016 - Nov 2016</span>
+            </div>
+            <div>
+              <p class="title">Consultant, Full stack developer</p>
+              <p>
+                Architect and development lead on Cool Company&#39;s iOS app. Developed in Swift and UIKit with a REST backend in .Net cloud-hosted on Azure.
+              </p>
+              <ul class="keywords">
+                <li>Swift</li>
+                <li>Cocoa</li>
+                <li>C#</li>
+                <li>Microsoft Azure</li>
+              </ul>
+            </div>
+          </div>
+          <div class="project only-mobile">
+            <div>
+              <b class=business>Avanza Bank</b>
+              <span class=period>May 2017 - Ongoing</span>
+            </div>
+            <div>
+              <p class="title">Consultant, Front-end developer</p>
+              <p>
+                Took a leading role in developing Avanza's mobile-first web app for mortgages. Strong focus on responsive design and close team work with UX designers and graphics designers.
+              </p>
+              <ul class="keywords">
+                <li>Mobile First</li>
+                <li>Angular2</li>
+                <li>Scss</li>
+                <li>Java</li>
+              </ul>
+            </div>
+          </div>
+          <h2 class="only-mobile">Other projects</h2>
+          <div class="project only-mobile">
+            <div>
+              <b class=business>ComHem AB</b>
+              <span class=period>Nov 2016 - Apr 2017</span>
+            </div>
+            <div>
+              <p class="title">Consultant, Front-end developer</p>
+              <p>
+                ReactJS developer in a large agile front-end team.
+              </p>
+              <ul class="keywords">
+                <li>React</li>
+                <li>Redux</li>
+                <li>Sass</li>
+                <li>Node.js</li>
+              </ul>
+            </div>
+          </div>
+          <div class="project">
+            <div>
+              <b class=business>TV4</b>
+              <span class=period>Feb 2015 - Apr 2016</span>
+            </div>
+            <div>
+              <p class="title">Consultant, Front-end developer</p>
+              <p>
+                Developing web frontend for Video-on-Demand as part of a larger team.  Daniel was the technology leader of the team in the development of an high performance isomorphic web app designed to handle the load of a nation wide Video on Demand service.
+              </p>
+              <ul class="keywords">
+                <li>HTML5</li>
+                <li>Backbone.js</li>
+                <li>Grunt</li>
+                <li>Node.js</li>
+                <li>Mocha</li>
+                <li>JSHint</li>
+                <li>RendrJS</li>
+                <li>Browserify</li>
+                <li>Handlebars</li>
+                <li>Lodash</li>
+                <li>Virtual DOM</li>
+              </ul>
+            </div>
+          </div>
+          <div class="project">
+            <div>
+              <b class=business>H&amp;M</b>
+              <span class=period>Sep 2014 - Feb 2015</span>
+            </div>
+            <div>
+              <p class="title">Consultant, Front-end developer</p>
+              <p>
+                Developed a new internal tool with AngularJS and C#. Using SignalR for real time communication, event sourcing as persistence strategy and static code analysis with Inchworm. Key challenges where achieving high performance in Angular with large data sets and complex user interfaces.
+              </p>
+              <ul class="keywords">
+                <li>JavaScript</li>
+                <li>C#</li>
+                <li>AngularJS</li>
+                <li>.NET</li>
+                <li>Single-page application</li>
+                <li>Event Sourcing</li>
+              </ul>
+            </div>
+          </div>
+          <div class="project">
+            <div>
+              <b class=business>21st century Frontiers</b>
+              <span class=period>Jan 2014 - Aug 2014</span>
+            </div>
+            <div>
+              <p class="title">Consultant, Web Application Developer</p>
+              <p>
+                Developed a prototype application for identifying clusters of companies that can offer solutions for a more sustainable world. In a tight feedback loop with the graphic designer and the transformative solution expert we quickly created a prototype front-end that behaves and looks like a fully working application in only 1.5 months.
+              </p>
+              <ul class="keywords">
+                <li>AngularJS</li>
+                <li>Bootstrap3</li>
+                <li>Underscore.js</li>
+                <li>HTML5 LocalStorage</li>
+                <li>Processing.JS</li>
+                <li>HTML5 Canvas</li>
+              </ul>
+            </div>
+          </div>
+          <div class="project">
+            <div>
+              <b class=business>TradeDoubler</b>
+              <span class=period>Sep 2013 - Feb 2014</span>
+            </div>
+            <div>
+              <p class="title">Consultant, Web Application Developer</p>
+              <p>
+                Developed a responsive single-page web application together with a large team. Worked extensively to ensure a great user experience and to maintain flawless support for both desktop and phone browsers.
+              </p>
+              <ul class="keywords">
+                <li>JavaScript</li>
+                <li>HTML5</li>
+                <li>REST</li>
+                <li>AngularJS</li>
+                <li>Underscore.js</li>
+              </ul>
+            </div>
+          </div>
+          <div class="project">
+            <div>
+              <b class=business>Paradox Interactive</b>
+              <span class=period>Jun 2011 - May 2013</span>
+            </div>
+            <div>
+              <p class="title">Technical Producer</p>
+              <p>
+                Lead the development of shared web services. Focus on maintainable, web-scale systems.
+              </p>
+              <ul class="keywords">
+                <li>Scala</li>
+                <li>Amazon Web Services</li>
+                <li>Amazon S3</li>
+                <li>Software Architecture</li>
+                <li>NoSQL</li>
+                <li>Amazon DynamoDB</li>
+              </ul>
+            </div>
+          </div>
+          <div class="project">
+            <div>
+              <b class=business>Avalanche Studios</b>
+              <span class=period>Feb 2008 - Aug 2008</span>
+            </div>
+            <div>
+              <p class="title"> Master Thesis student</p>
+              <p>
+                Simulated large water flows over terrain in real time in C++.
+              </p>
+              <ul class="keywords">
+                <li>C++</li>
+                <li>OpenGL</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills">
+        <div class="container">
+          <h2>Skills</h2>
+          <ul class="skill-group">
+            <li>
+              <h4><span class="skill-level">5</span> Expert</h4>
+              <ul class="keywords">
+                <li>JavaScript</li>
+                <li>C#</li>
+                <li>LINQ</li>
+                <li>JSHint</li>
+                <li>Lodash</li>
+                <li>Single-page application</li>
+                <li>Underscore.js</li>
+                <li>Node.js</li>
+              </ul>
+            </li>
+            <li>
+              <h4><span class="skill-level">4</span> Advanced</h4>
+              <ul class="keywords">
+                <li>Swift</li>
+                <li>AngularJS</li>
+                <li>HTML5 Canvas</li>
+                <li>Processing.JS</li>
+                <li>UML</li>
+                <li>UX</li>
+                <li>Windows Presentation Foundation (WPF)</li>
+                <li>Architecture</li>
+              </ul>
+            </li>
+            <li>
+              <h4><span class="skill-level">3</span> High Competence</h4>
+              <ul class="keywords">
+                <li>Bootstrap</li>
+                <li>Grunt</li>
+                <li>Handlebars</li>
+                <li>HTML5</li>
+                <li>REST</li>
+                <li>Scala</li>
+                <li>Software Architecture</li>
+              </ul>
+            </li>
+            <li>
+              <h4><span class="skill-level">2</span> Intermediate</h4>
+              <ul class="keywords">
+                <li>Browserify</li>
+                <li>C++</li>
+                <li>Entity Framework</li>
+                <li>Event Sourcing</li>
+                <li>Microsoft Azure</li>
+                <li>NHibernate</li>
+                <li>Virtual DOM</li>
+              </ul>
+            </li>
+    
+          </ul>
+        </div>
+
+      </section>
+      <section>
+        <div class="container">
+          <ul class="table">
+            <li><h2>Courses &amp; Certifications</h2></li>
+            <li>
+              <div class="left">Functional Programming Principles in Scala  (&#201;cole Polytechnique F&#233;d&#233;rale de Lausanne) Web course</div>
+              <div class="right">2015</div>
+            </li>
+            <li>
+              <div class="left">.NET Best Practices and Design Patterns  (Learning Tree)</div>
+              <div class="right">2009</div>
+            </li>
+          </ul>
+          <ul class="table">
+            <li><h2>Education</h2></li>
+            <li>
+              <div class="left">Engineering Physics<br/>Royal Institute of Technology</div>
+              <div class="right">2006</div>
+            </li>
+            <li>
+              <div class="left">Master of Science in Engineering and of Education<br/>Royal Institute of Technology</div>
+              <div class="right">2002</div>
+            </li>
+          </ul>
+          <ul class="table">
+            <li><h2>Languages</h2></li>
+            <li>
+              <div class="left">Swedish</div>
+              <div class="right">Native</div>
+            </li>
+            <li>
+              <div class="left">English</div>
+              <div class="right">Full proficiency</div>
+            </li>
+          </ul>
+          <ul class="table">
+            <li><h2>Commitments</h2></li>
+            <li>
+              <div class="left">iOS Game: Nebula Sky</div>
+              <div class="right">2016 - 2018</div>
+            </li>
+            <li>
+              <div class="left">Open Source Diagram tool: www.nomnoml.com</div>
+              <div class="right">2014 - Ongoing</div>
+            </li>
+            <li>
+              <div class="left">Publication: Real Time Large Scale Fluids for Games</div>
+              <div class="right">2008</div>
+            </li>
+            <li>
+              <div class="left">F&#246;reningsliv: Scoutledare</div>
+              <div class="right">2000 - 2008</div>
+            </li>
+          </ul>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
