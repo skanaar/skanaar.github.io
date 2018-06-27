@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Deimos Editor</title>
+  <link rel="shortcut icon" href="favicon.png">
+  <link rel="stylesheet" href="editor.css">
+  <style>
+    body, html {
+      padding: 0;
+      margin: 0;
+      background: #f8f8f8;
+    }
+    .card {
+      background: white;
+      border-radius: 5px;
+      box-shadow: 0 5px 20px #ddd;
+      font-family: "Avenir", "Calibri", sans-serif;
+      font-size: 20px;
+      color: #888;
+      padding: 10px 20px;
+      box-sizing: content-box;
+      border: none;
+    }
+    .view-mode {
+      position: fixed;
+      left: 30px;
+      top: 30px;
+      width: 180px;
+    }
+    .entity-selector {
+      position: fixed;
+      right: 30px;
+      top: 30px;
+      width: 260px;
+    }
+    .sidebar {
+      position: fixed;
+      right: 30px;
+      top: 100px;
+      bottom: 30px;
+      width: 260px;
+      padding-top: 20px;
+    }
+    select.dropdown {
+      -webkit-appearance: none;
+    }
+    button {
+      appearance: none;
+      border: none;
+      margin: 0 .5rem .5rem 0;
+      padding: .25rem .5rem;
+      border-radius: .1875rem;
+      color: #fff;
+      background: #0fd5bf;
+      font-family: "Avenir", "Calibri", sans-serif;
+      font-size: 20px;
+    }
+    svg path {
+      stroke-linejoin: bevel;
+      stroke-width: 2px;
+      stroke: #333;
+    }
+    svg path.outline {
+      stroke: #EEE;
+      stroke-width: 5px;
+    }
+
+  </style>
+</head>
+<body class="enable-scroll">
+    <editor-app></editor-app>
+
+    <!-- riot tags -->
+    <script type="riot/tag" src="editor-app.tag.html"></script>
+    <script type="riot/tag" src="models-viewer.tag.html"></script>
+
+    <script src="lib/riot.js"></script>
+    <script src="lib/underscore.js"></script>
+    <script src="lib/aws.js"></script>
+    <script src="util.js"></script>
+    <script>
+
+      function parseWorld(worldJson) {
+        var world = JSON.parse(worldJson)
+        if (!_.isArray(world.celestials)) throw new Error()
+        window.world = world
+        return world
+      }
+
+      function startEditor(world){
+        riot.mount('editor-app', { world: world })
+      }
+      function loadFromServer() {
+        _.fetch('world.json', data => startEditor(parseWorld(data)))
+      }
+
+      function initialize() {
+        var useLocalStorage = !! _.jsonParse(localStorage['deimos:use-local-storage'] || 'false')
+        var worldJson = localStorage['deimos:world']
+        if (!useLocalStorage || !worldJson) {
+          loadFromServer()
+        }
+        else {
+          try {
+            startEditor(parseWorld(worldJson))            
+          } catch(e) {
+            alert('locally stored world was corrupt, loading world from server')
+            loadFromServer()
+          }
+        }
+      }
+
+      initialize()
+
+    </script>
+</body>
+</html>

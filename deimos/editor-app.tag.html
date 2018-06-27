@@ -1,0 +1,229 @@
+<editor-app>
+
+  <models-viewer app={app} if={page == '#models'} />
+
+  <validation-report app={app} />
+
+  <div class="toast">{notification || ''}</div>
+
+  <script>
+    var self = this
+
+    self.page = '#map'
+    self.isFileMenuOpen = false
+    self.useLocalStorage = !! _.jsonParse(localStorage['deimos:use-local-storage'] || 'false')
+    self.app = {
+      isSaved: false,
+      world: self.opts.world,
+      events: riot.observable(),
+      notify: notify,
+      setWorld: setWorld,
+      getWorld: () => self.app.world,
+      allTags: allTags,
+      tagFilter: tagFilter,
+      nullWorld: nullWorld,
+      celestialTypes: ['cloud', 'star', 'jovian', 'planet', 'asteroid', 'anomaly'],
+      audios: [
+        'Bladerunner',
+        'Cosmic Whales',
+        'Cult',
+        'Mysterious Trip',
+        'Ending',
+        'Market',
+        'Mystic Desert',
+        'Nebulosa',
+        'Space Fight',
+        'Starry Sky',
+        'The Sun',
+        'World of Hope'
+      ]
+    }
+    function notify(msg) {
+      self.app.events.trigger('notify', msg)
+    }
+    self.toggleFileMenu = () => self.isFileMenuOpen = ! self.isFileMenuOpen
+    self.pageChange = function() {
+      self.app.events.trigger('save-entity')
+      self.app.events.trigger('save-world')
+      self.app.events.trigger('request-validate')
+      window.document.body.scrollTop = 0
+    }
+
+    self.updateAutoSaving = function () {
+      self.useLocalStorage = !!self.refs.useStorageInput.checked
+      localStorage['deimos:use-local-storage'] = JSON.stringify(self.useLocalStorage)
+      if (self.useLocalStorage) {
+        if (localStorage['deimos:world'])
+          try {
+            setWorld(parseWorld(localStorage['deimos:world']))
+          }
+          catch(e) {
+            alert('locally stored world was corrupt, removing data from localStorage')
+            delete localStorage['deimos:world']
+            self.useLocalStorage = false
+            localStorage['deimos:use-local-storage'] = JSON.stringify(self.useLocalStorage)
+            self.update()
+          }
+      }
+    }
+
+    function nullWorld() {
+      return {
+        name: 'nullworld',
+        about: '',
+        initialShip: '',
+        initialState: 'surface',
+        initialDestination: '',
+        destinations: [],
+        regions: [],
+        quests: [],
+        items: [],
+        ships: [],
+        enemies: [],
+        celestials: [],
+        models: []
+      }
+    }
+
+    function allTags(items) {
+      return _.uniq(_.flatten(items.map(e => (e.tags || '').split(' ')))).sort()
+    }
+
+    function tagFilter(items, query) {
+      return (query === '' ?
+        items.filter(e => !e.tags) :
+        (query ? items.filter(e => (e.tags || '').includes(query)) : items))
+    }
+
+    function saveWorld() {
+      self.app.events.trigger('save-world')
+      if (self.useLocalStorage) {
+        self.app.world.modified = (new Date()).toISOString().substr(0,10)
+        self.app.isSaved = true
+        self.update()
+        localStorage['deimos:world'] = _.stringify(self.app.world)
+      }
+    }
+
+    function setWorld(world) {
+      self.app.world = world
+      if (self.useLocalStorage)
+        localStorage['deimos:world'] = _.stringify(world)
+      self.app.isSaved = true
+      self.app.events.trigger('world-updated')
+      self.update()
+    }
+
+    self.app.events.on('notify', function (msg) {
+        self.notification = (self.notification ? self.notification + ' ' + msg : msg)
+        self.update()
+        setTimeout(function(){
+          self.notification = ''
+          self.update()
+        }, 2000)
+    })
+
+    self.on('mount', function() {
+      function updatePage() {
+        self.page = (window.location.hash || '#map')
+        self.update()
+      }
+      window.addEventListener('hashchange', updatePage)
+      updatePage()
+
+      window.addEventListener('click', function onUserInteraction() {
+        self.app.isSaved = false
+      })
+
+      self.app.events.on('request-close-filemenu', () => self.isFileMenuOpen = false)
+
+      window.addEventListener('keydown', function (e) {
+        if (e.key == 's' && e.metaKey) {
+          self.app.events.trigger('save-entity')
+          self.app.events.trigger('notify', 'Saving entity')
+          e.preventDefault()
+        }
+      })
+
+      window.setInterval(function () {
+        if (!self.app.isSaved) {
+          saveWorld()
+          self.app.events.trigger('request-validate')
+        } else {
+          self.isSaved = true
+          self.update()
+        }
+      }, 2000)
+    })
+
+  </script>
+  <style>
+    .main-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, #f0f0f0, #fff);
+      border-bottom: 1px solid #aaa;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 12px;
+    }
+    i {
+      color: #888;
+      padding: 0 10px;
+    }
+    .file-tools {
+      float: right;
+      margin: 2px 6px 0 0;
+    }
+    a.tab.toggle-tab {
+      width: 35px;
+      border-left: 1px solid transparent;
+      border-right: 1px solid #ddd;
+      background: rgba(0,0,0,0.05);
+      padding-right: 0;
+      cursor: pointer;
+    }
+    a.tab {
+      padding: 5px 10px;
+    }
+    a.tab, a.tab:active, a.tab:hover, a.tab:visited {
+      display: inline-block;
+      height: 14px;
+      text-decoration: none;
+      color: #000;
+    }
+    a.tab.active {
+      background: #ddd;
+      border-left: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+      font-weight: bold;
+      box-shadow: 0 3px 6px #ccc inset;
+    }
+    .file-menu-backdrop {
+      z-index: 9;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0,0,0,0);
+    }
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      width: 200px;
+      padding: 8px;
+      background: #2c8;
+      color: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      transition: top 0.3s;
+
+    }
+    .toast:empty {
+      top: -40px;
+    }
+  </style>
+
+</editor-app>
