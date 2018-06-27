@@ -12,30 +12,26 @@
       fill={shading(e)}/>
   </svg>
 
-  <div class="card view-mode" onclick={cycleMode}>{cameraModes[cameraIndex]}</div>
+  <div class="card view-mode btn" onclick={cycleMode}>{cameraModes[cameraIndex]}</div>
 
-  <select class="card entity-selector dropdown" ref="entitySelector" onchange={onSelect}>
+  <select class="card entity-selector dropdown btn" ref="entitySelector" onchange={onSelect}>
+    <option>select model...</option>
     <option each={model in world.models}>{model.name}</option>
   </select>
 
-  <div class="card sidebar" show={!!selected}>
-    <textarea value={asJson(selected)} ref="sourceField"></textarea>
+  <textarea class="card sidebar" value={asJson(selected)} ref="sourceField"></textarea>
 
-    <button onclick={up}>Up in list</button>
-    <button onclick={down}>Down in list</button>
-    <button onclick={compile}>Compile Mesh</button>
-    <button onclick={remove}>Delete</button><br/>
-    <button onclick={endEditing}>Done</button>
-    <button onclick={cancelEditing}>Cancel</button>
-    <button onclick={addComposition}>+ New Model</button>
+  <div class="toolbox" show={!!selected}>
+    <button class="card btn" onclick={up}>Up in list</button>
+    <button class="card btn" onclick={down}>Down in list</button>
+    <button class="card btn" onclick={compile}>Compile Mesh</button>
+    <button class="card btn" onclick={remove}>Delete</button><br/>
+    <button class="card btn" onclick={endEditing}>Done</button>
+    <button class="card btn" onclick={cancelEditing}>Cancel</button>
+    <button class="card btn" onclick={addComposition}>+ New Model</button>
   </div>
 
   <style>
-    .sidebar textarea {
-      width: 240px;
-      height: 80%;
-      border: none;
-    }
     .canvas-3d {
       display: block;
     }
