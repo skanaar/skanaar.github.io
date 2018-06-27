@@ -1,4 +1,4 @@
-<models-viewer>
+<model-editor>
 
   <svg width=1000 height=800 class="canvas-3d">
     <path
@@ -12,23 +12,33 @@
       fill={shading(e)}/>
   </svg>
 
-  <div class="card view-mode btn" onclick={cycleMode}>{cameraModes[cameraIndex]}</div>
+  <div class="nav">
+    <a class="card btn" href="#map">Maps</button>
+    <a class="card btn" href="#models">Models</button>
+  </div>
+
 
   <select class="card entity-selector dropdown btn" ref="entitySelector" onchange={onSelect}>
-    <option>select model...</option>
+    <option value="#title">select model...</option>
+    <option disabled>──────────</option>
+    <option value="#new">+ New model</option>
+    <option disabled>──────────</option>
     <option each={model in world.models}>{model.name}</option>
   </select>
 
   <textarea class="card sidebar" value={asJson(selected)} ref="sourceField"></textarea>
 
+  <div class="file-toolbox" show={!!selected}>
+    <button class="card btn" onclick={up}>▲</button>
+    <button class="card btn" onclick={down}>▼</button>
+  </div>
+
   <div class="toolbox" show={!!selected}>
-    <button class="card btn" onclick={up}>Up in list</button>
-    <button class="card btn" onclick={down}>Down in list</button>
+    <button class="card cycle-btn btn" onclick={cycleMode}>{cameraModes[cameraIndex]}</button>
     <button class="card btn" onclick={compile}>Compile Mesh</button>
-    <button class="card btn" onclick={remove}>Delete</button><br/>
-    <button class="card btn" onclick={endEditing}>Done</button>
-    <button class="card btn" onclick={cancelEditing}>Cancel</button>
-    <button class="card btn" onclick={addComposition}>+ New Model</button>
+    <button class="card btn" onclick={endEditing}>Save</button>
+    <button class="card btn" onclick={cancelEditing}>Discard changes</button>
+    <button class="card btn" onclick={remove}>Delete</button>
   </div>
 
   <style>
@@ -79,6 +89,7 @@
         ]
       })
       self.selected = self.world.models[0]
+      self.refs.entitySelector.value = self.selected.name
       updateMesh()
     }
 
@@ -92,8 +103,13 @@
     
     self.onSelect = function (e) {
       var name = self.refs.entitySelector.value
-      self.selected = _.findWhere(self.world.models, { name: name })
-      updateMesh()
+      if (name == "#new") {
+        self.addComposition()
+      }
+      else if (name != "#title") {
+        self.selected = _.findWhere(self.world.models, { name: name })
+        updateMesh()
+      }
     }
 
     self.isSourceValid = function () {
@@ -305,4 +321,4 @@
 
   </script>
 
-</models-viewer>
+</model-editor>

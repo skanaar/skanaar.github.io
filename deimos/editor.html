@@ -9,11 +9,12 @@
       padding: 0;
       margin: 0;
       background: #f8f8f8;
+      overflow: hidden;
     }
     .card {
       background: white;
       border-radius: 5px;
-      box-shadow: 0 5px 20px #ddd;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
       font-family: "Avenir", "Calibri", sans-serif;
       font-size: 20px;
       color: #888;
@@ -21,20 +22,25 @@
       box-sizing: content-box;
       border: none;
     }
-    .toolbox {
-      position: fixed;
-      left: 30px;
-      bottom: 30px;
-    }
-    .toolbox .card {
-      margin-right: 10px;
-    }
-    .view-mode {
+    .nav {
       position: fixed;
       left: 30px;
       top: 30px;
       width: 180px;
       text-align: center;
+    }
+    .file-toolbox {
+      position: fixed;
+      right: 345px;
+      top: 30px;
+    }
+    .toolbox {
+      position: fixed;
+      left: 30px;
+      bottom: 30px;
+    }
+    .file-toolbox .card, .toolbox .card, .nav .card {
+      margin-right: 10px;
     }
     .entity-selector {
       position: fixed;
@@ -67,6 +73,9 @@
       font-family: "Avenir", "Calibri", sans-serif;
       font-size: 20px;
     }
+    button.cycle-btn {
+      width: 100px;
+    }
     svg path {
       stroke-linejoin: bevel;
       stroke-width: 2px;
@@ -79,12 +88,13 @@
 
   </style>
 </head>
-<body class="enable-scroll">
+<body>
     <editor-app></editor-app>
 
     <!-- riot tags -->
     <script type="riot/tag" src="editor-app.tag.html"></script>
-    <script type="riot/tag" src="models-viewer.tag.html"></script>
+    <script type="riot/tag" src="map-editor.tag.html"></script>
+    <script type="riot/tag" src="model-editor.tag.html"></script>
 
     <script src="lib/riot.js"></script>
     <script src="lib/underscore.js"></script>

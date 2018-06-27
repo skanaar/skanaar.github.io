@@ -1,0 +1,331 @@
+<map-editor>
+
+  <svg
+      riot-width={2*dx}
+      riot-height={2*dy}
+      onmousedown={mousedown}
+      onmousemove={mousemove}
+      onmouseup={mouseup}>
+    <line each={lines} class="map-pathway" riot-x1={a.x} riot-x2={b.x} riot-y1={a.y} riot-y2={b.y} />
+    <text class="map-label" if={scale > 0.25} each={nodes} riot-x={screenPos.x+radiusFor(entity)+4} riot-y={screenPos.y+7}>
+      {entity.name}
+    </text>
+    <ellipse
+      each={nodes}
+      class={ 'map-node': true, 'map-selected': isSelected }
+      stroke-width={isSelected ? 2 : 0.5}
+      fill={fillFor(entity)}
+      riot-cx={screenPos.x} riot-cy={screenPos.y}
+      riot-rx={1+radiusFor(entity)} riot-ry={1+radiusFor(entity)}
+      onmouseup={mouseupOnItem}/>
+    <rect class="map-rubberrect"
+      riot-x={select.pos.x} riot-y={select.pos.y} riot-width={select.dim.x} riot-height={select.dim.y}/>
+  </svg>
+
+  <select class="card entity-selector dropdown btn" ref="entitySelector" onchange={onSelect}>
+    <option value="#title">select map...</option>
+    <option disabled>──────────</option>
+    <option value="#new">+ New map</option>
+    <option disabled>──────────</option>
+    <option each={model in maps}>{model.name}</option>
+  </select>
+
+  <div class="file-toolbox">
+    <button class="card btn" onclick={() => zoom(1.2)}>+</button>
+    <button class="card btn" onclick={() => zoom(1/1.2)}>-</button>
+  </div>
+  <div class="toolbox">
+    <button class="card btn" onclick={() => tool='select'} class="toggle-btn {(tool == 'select') && 'active'}">Select
+    </button>
+    <button class="card btn" onclick={() => tool='draw'} class="toggle-btn {(tool == 'draw') && 'active'}">Add Celestial</button>
+    <button class="card btn" onclick={removeSelected} style="opacity: {selectionSize > 0 ? 1 : 0.5}">Delete</button>
+  </div>
+
+  <div class="sidebar" show={selectionSize}>
+    <label>Name</label>
+    <input show={selectionSize == 1} type=text ref="nameField" placeholder="name" onchange={setName}>
+    <button onclick={autoNameNodes}>Autoname</button>
+
+    <label>Celestial</label>
+    <select ref="celestialSelect" onchange={setCelestial}>
+      <option value="unknown">- style -</option>
+      <option each={e in world.celestials}>{e.name}</option>
+    </select>
+
+  </div>
+
+  <script>
+    var self = this
+    var app = this.opts.app || window.app
+
+    self.maps = [{name: 'dummy'}]
+    self.nodes = []
+    self.lines = []
+    self.jumpRange = 125
+    self.scale = 0.5
+    self.tool = 'select' // draw | spray | audio
+    self.dx = Math.max(window.innerWidth/2, 2800*self.scale)
+    self.dy = Math.max(window.innerHeight/2, 2800*self.scale)
+    self.input = { a: Vec(0,0), b: Vec(0,0) }
+    self.isDown = false
+    self.select = { pos: Vec(0,0), dim: Vec(0,0) }
+    self.world = app.nullWorld()
+    self.selectionSize = 0
+    self.radiusCache = {}
+
+    self.keydown = function (e) {
+      if (document.activeElement && document.activeElement.nodeName === 'INPUT') return;
+      var step = e.shiftKey ? 2 : (e.metaKey ? 100 : 20)
+      switch (e.key) {
+        case 'Backspace':
+        case 'Delete':     self.removeSelected(); break;
+        case 'ArrowLeft':  translateSelection(Vec(-step, 0)); break;
+        case 'ArrowRight': translateSelection(Vec(step, 0)); break;
+        case 'ArrowUp':    translateSelection(Vec(0, -step)); break;
+        case 'ArrowDown':  translateSelection(Vec(0, step)); break;
+        default: return;
+      }
+      e.preventDefault()
+    }
+
+    function translateSelection(delta) {
+      _.filter(self.nodes, 'isSelected').forEach(function (node) {
+        node.entity.pos = rund(add(node.entity.pos, delta))
+        node.screenPos = transform(node.entity.pos)
+      })
+      calculateLines()
+      self.update()
+    }
+
+    self.zoom = function (factor) {
+      self.scale *= factor
+      self.dx *= factor
+      self.dy *= factor
+      self.dx = Math.max(window.innerWidth/2, 2800*self.scale)
+      self.dy = Math.max(window.innerHeight/2, 2800*self.scale)
+      loadDestinations(self.world)
+    }
+
+    self.selectAsteroids = function () {
+      self.nodes.forEach(e => e.isSelected = e.entity.style && e.entity.style.startsWith('asteroid-'))
+      updateUI()
+    }
+
+    self.mousedown = function (e) { // 132
+      e.preventDefault()
+      self.input.a = Vec(e.offsetX, e.offsetY)
+      self.isDown = true
+    }
+    self.mousemove = function (e) {
+      e.preventDefault()
+      if (!self.isDown) return;
+      self.input.b = Vec(e.offsetX, e.offsetY)
+      var d = diff(self.input.b, self.input.a)
+      self.select.dim = Vec(Math.abs(d.x), Math.abs(d.y))
+      self.select.pos = Vec(Math.min(self.input.a.x, self.input.b.x), Math.min(self.input.a.y, self.input.b.y))
+    }
+    self.mouseupOnItem = function (e) {
+      e.stopPropagation()
+      if (!self.isDown) { return }
+      if (e.shiftKey) {
+        e.item.isSelected = !e.item.isSelected
+      }
+      else {
+        self.nodes.forEach(function (e){ e.isSelected = false })
+        e.item.isSelected = true
+      }
+      updateUI()
+      self.isDown = false
+      self.select = { pos: Vec(0,0), dim: Vec(0,0) }
+      self.input.a = Vec(0,0)
+      self.input.b = Vec(0,0)
+    }
+
+    function addAsteroid(pos) {
+        self.nodes.push({
+          type: 'celestial',
+          screenPos: transform(pos),
+          isSelected: false,
+          entity: { pos: pos, name: 'unnamed', style: 'asteroid-1', trader: null, enemy: null, treasures: [] }
+        })
+    }
+
+    self.mouseup = function (e) {
+      e.preventDefault()
+      if (!self.isDown) { return }
+      document.activeElement.blur()
+      self.input.b = Vec(e.offsetX, e.offsetY)
+      if (0 == dist(self.input.a, self.input.b) && self.tool != 'select') {
+        var pos = rund(mult(diff(self.input.a, Vec(self.dx, self.dy)), 1/self.scale))
+        if (self.tool == 'draw')
+          addAsteroid(pos)
+        else if (self.tool == 'spray'){
+          for (var i = 0, a = 0; i < 10; i++, a=6.28*Math.random()){
+            var delta = mult(Vec(Math.cos(6.28*i/10), Math.sin(6.28*i/10)), 80)
+            addAsteroid(rund(add(pos, add(delta, Vec(60*Math.random(), 60*Math.random())))))
+          }
+        }
+        calculateLines()
+      } else {
+        self.nodes.forEach(function (node) {
+          var p = transform(node.entity.pos)
+          var isLassood = (
+            p.x > self.select.pos.x &&
+            p.y > self.select.pos.y &&
+            p.x < self.select.pos.x + self.select.dim.x &&
+            p.y < self.select.pos.y + self.select.dim.y)
+          node.isSelected = e.shiftKey ? (node.isSelected || isLassood) : isLassood
+          updateUI()
+        })
+      }
+      self.isDown = false
+      self.select = { pos: Vec(0,0), dim: Vec(0,0) }
+      self.input.a = Vec(0,0)
+      self.input.b = Vec(0,0)
+    }
+
+    self.removeSelected = function () {
+      self.nodes = self.nodes.filter(e => !e.isSelected)
+      updateUI()
+      calculateLines()
+    }
+
+    self.makeStartingDest = function () {
+      self.world.initialDestination = singleSelected().name
+    }
+
+    function singleSelected() { return (_.find(self.nodes, e => e.isSelected) || {}).entity || {} }
+    self.singleSelected = singleSelected
+    self.chooseTreasures = () => app.events.trigger('show-item-chooser', singleSelected().treasures)
+    self.chooseTraderInventory = () => app.events.trigger('show-item-chooser', singleSelected().trader.inventory)
+    self.chooseLoot = () =>app.events.trigger('show-item-chooser', singleSelected().enemy.loot)
+
+    self.chooseShipyardInventory = () => app.events.trigger('show-ship-chooser', singleSelected().shipyard)
+
+    self.autoNameNodes = function () {
+      var coords = (e) => Math.abs(e.pos.x%1000)+Math.abs(e.pos.y%1000)
+      var shortCode = (e) => (1+Math.abs(e.pos.x)%10)+(1+Math.abs(e.pos.y)%100)
+      forSelected(function (e){
+        if (e.style.startsWith('asteroid')) e.name = 'A' + coords(e)
+        if (e.style.startsWith('cloud')) e.name = 'Cloud ' + coords(e)
+        if (e.style == 'anomaly-buoy') e.name = 'Buoy ' + shortCode(e)
+        if (e.style == 'anomaly-ruin') e.name = 'Debris ' + coords(e)
+        if (e.style == 'anomaly-junk') e.name = 'Debris ' + coords(e)
+        if (e.style == 'anomaly-debris') e.name = 'Debris ' + coords(e)
+      })
+    }
+
+    self.setCelestial = function (e) {
+      forSelected(ent => ent.style = e.target.value)
+      calculateLines()
+    }
+
+    self.setName = function () {
+      singleSelected().name = self.refs.nameField.value
+    }
+
+    var fills = {
+      cloud: 'rgba(221, 136, 221, 0.5)', star: '#dd0', jovian: '#fa8',
+      planet: '#4d4', asteroid: '#888', anomaly: '#fa0', ring: '#8af'
+    }
+    self.fillFor = entity => fills[entity.style.split('-')[0]]
+    self.radiusFor = function (ent) {
+      return 1 + self.scale * (self.radiusCache[ent.style] || 5)
+    }
+    self.transformFor = function (node, dx, dy) {
+      var x = node.screenPos.x + dx*(3+self.radiusFor(node.entity))
+      var y = node.screenPos.y + dy*(3+self.radiusFor(node.entity))
+      return 'translate(' + x + ',' + y + ')'
+    }
+
+    function forSelected(action) {
+      self.nodes.filter(e => e.isSelected && e.type === 'celestial').forEach(o => action(o.entity))
+      updateUI()
+    }
+
+    function uniqueSelectedProp(key) {
+      var x = null
+      self.nodes.forEach(function (e) {
+        if (e.isSelected && e.entity[key])
+          x = x == null ? e.entity[key] : (e.entity[key] == x ? e.entity[key] : 'unknown')
+      })
+      return x
+    }
+
+    function updateUI() {
+      self.refs.celestialSelect.value = uniqueSelectedProp('style') || 'unknown'
+      var selection = _.filter(self.nodes, 'isSelected')
+      self.selectionSize = selection.length
+      self.refs.nameField.value = selection.length == 1 ? selection[0].entity.name : ''
+    }
+
+    function transform(p) { return Vec(self.dx+self.scale*p.x, self.dy+self.scale*p.y) }
+
+    function loadDestinations(world) {
+      self.nodes = world.nodes.map(e => ({
+        type: 'celestial',
+        screenPos: transform(e.pos),
+        isSelected: false,
+        entity: e
+      }))
+      calculateLines()
+    }
+
+    function calculateLines() {
+      self.lines = []
+      _.pairs(self.nodes, function (a, b) {
+        if (self.jumpRange > dist(a.entity.pos, b.entity.pos) && isTravellable(a.entity) && isTravellable(b.entity))
+          self.lines.push({ a: transform(a.entity.pos), b: transform(b.entity.pos) })
+      })
+    }
+
+    function isTravellable(entity) {
+      return ['jovian', 'planet', 'asteroid', 'anomaly'].includes(entity.style.split('-')[0])
+    }
+
+    function onHighlightRequested(e) {
+      if (e.type == 'destination') {
+        self.nodes.forEach(node => node.isSelected = (node.entity.name == e.name))
+        updateUI()
+      }
+    }
+
+    function buildRadiusCache() {
+      self.radiusCache = _.object(self.world.celestials.map(e => [e.name, e.radius]))
+    }
+
+    function prepareWorldForSave() {
+      self.world.nodes = self.nodes.filter(e => e.type === 'celestial').map(e => e.entity)
+      self.world.nodes.forEach(function (e) {
+        delete e.id
+      })
+      return self.world
+    }
+
+    function loadWorld() {
+      loadDestinations(self.world)
+      updateUI()
+      self.update()
+    }
+
+    self.on('mount', function() {
+      self.world = app.getWorld()
+      app.events.on('save-world', prepareWorldForSave)
+      app.events.on('world-updated', loadWorld)
+      app.events.on('highlight-entity', onHighlightRequested)
+      window.document.addEventListener('keydown', self.keydown)
+      loadWorld()
+      buildRadiusCache()
+      window.scrollTo(self.dx/3, self.dy/3)
+    })
+
+    self.on('unmount', function () {
+      app.events.off('world-updated', loadWorld)
+      app.events.off('save-world', prepareWorldForSave)
+      app.events.off('world-updated', loadWorld)
+      window.document.removeEventListener('keydown', self.keydown)
+    })
+
+  </script>
+
+</map-editor>
