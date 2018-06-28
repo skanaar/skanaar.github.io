@@ -12,11 +12,7 @@
       fill={shading(e)}/>
   </svg>
 
-  <div class="nav">
-    <a class="card btn" href="#map">Maps</button>
-    <a class="card btn" href="#models">Models</button>
-  </div>
-
+  <!-------- gui -------->
 
   <select class="card entity-selector dropdown btn" ref="entitySelector" onchange={onSelect}>
     <option value="#title">select model...</option>
@@ -44,6 +40,15 @@
   <style>
     .canvas-3d {
       display: block;
+    }
+    svg.canvas-3d path {
+      stroke-linejoin: bevel;
+      stroke-width: 2px;
+      stroke: #333;
+    }
+    svg.canvas-3d path.outline {
+      stroke: #EEE;
+      stroke-width: 5px;
     }
   </style>
 

@@ -1,5 +1,14 @@
 {
-  "nodes": [],
+  "maps": [
+    {
+      "name": "The Rising Star",
+      "nodes": [
+        { "name": "Procyon", "type": "planet-badlands-1", "pos": { "x": -100, "y": -100 }, "faction": "player" },
+        { "name": "Tau Ceti", "type": "planet-badlands-2", "pos": { "x": 20, "y": 20 }, "faction": "enemy" }
+      ],
+      "units": []
+    }
+  ],
   "models": [
     {
       "name": "Trade Conduit",

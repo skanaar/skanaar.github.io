@@ -22,13 +22,6 @@
       box-sizing: content-box;
       border: none;
     }
-    .nav {
-      position: fixed;
-      left: 30px;
-      top: 30px;
-      width: 180px;
-      text-align: center;
-    }
     .file-toolbox {
       position: fixed;
       right: 345px;
@@ -76,15 +69,6 @@
     button.cycle-btn {
       width: 100px;
     }
-    svg path {
-      stroke-linejoin: bevel;
-      stroke-width: 2px;
-      stroke: #333;
-    }
-    svg path.outline {
-      stroke: #EEE;
-      stroke-width: 5px;
-    }
 
   </style>
 </head>
@@ -93,6 +77,7 @@
 
     <!-- riot tags -->
     <script type="riot/tag" src="editor-app.tag.html"></script>
+    <script type="riot/tag" src="nav-menu.tag.html"></script>
     <script type="riot/tag" src="map-editor.tag.html"></script>
     <script type="riot/tag" src="model-editor.tag.html"></script>
 

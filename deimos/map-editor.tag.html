@@ -7,27 +7,29 @@
       onmousemove={mousemove}
       onmouseup={mouseup}>
     <line each={lines} class="map-pathway" riot-x1={a.x} riot-x2={b.x} riot-y1={a.y} riot-y2={b.y} />
-    <text class="map-label" if={scale > 0.25} each={nodes} riot-x={screenPos.x+radiusFor(entity)+4} riot-y={screenPos.y+7}>
+    <text class="map-label" if={scale > 0.25} each={nodes} riot-x={screenPos.x+(scale*r)+4} riot-y={screenPos.y+7}>
       {entity.name}
     </text>
     <ellipse
       each={nodes}
       class={ 'map-node': true, 'map-selected': isSelected }
       stroke-width={isSelected ? 2 : 0.5}
-      fill={fillFor(entity)}
+      fill="#BBB"
       riot-cx={screenPos.x} riot-cy={screenPos.y}
-      riot-rx={1+radiusFor(entity)} riot-ry={1+radiusFor(entity)}
+      riot-rx={1+(scale*r)} riot-ry={1+(scale*r)}
       onmouseup={mouseupOnItem}/>
     <rect class="map-rubberrect"
       riot-x={select.pos.x} riot-y={select.pos.y} riot-width={select.dim.x} riot-height={select.dim.y}/>
   </svg>
 
-  <select class="card entity-selector dropdown btn" ref="entitySelector" onchange={onSelect}>
+  <!-------- gui -------->
+
+  <select class="card entity-selector dropdown btn" ref="mapSelector" onchange={onSelect}>
     <option value="#title">select map...</option>
     <option disabled>──────────</option>
     <option value="#new">+ New map</option>
     <option disabled>──────────</option>
-    <option each={model in maps}>{model.name}</option>
+    <option each={e in world.maps}>{e.name}</option>
   </select>
 
   <div class="file-toolbox">
@@ -51,18 +53,18 @@
       <option value="unknown">- style -</option>
       <option each={e in world.celestials}>{e.name}</option>
     </select>
-
   </div>
 
   <script>
     var self = this
     var app = this.opts.app || window.app
 
-    self.maps = [{name: 'dummy'}]
+    self.currentMap = null
     self.nodes = []
     self.lines = []
     self.jumpRange = 125
-    self.scale = 0.5
+    self.r = 10
+    self.scale = 0.1
     self.tool = 'select' // draw | spray | audio
     self.dx = Math.max(window.innerWidth/2, 2800*self.scale)
     self.dy = Math.max(window.innerHeight/2, 2800*self.scale)
@@ -72,6 +74,10 @@
     self.world = app.nullWorld()
     self.selectionSize = 0
     self.radiusCache = {}
+
+    self.onSelect = function () {
+      self.currentMap = _.findWhere(self.world.maps, { name: self.refs.mapSelector.value })
+    }
 
     self.keydown = function (e) {
       if (document.activeElement && document.activeElement.nodeName === 'INPUT') return;
@@ -103,12 +109,7 @@
       self.dy *= factor
       self.dx = Math.max(window.innerWidth/2, 2800*self.scale)
       self.dy = Math.max(window.innerHeight/2, 2800*self.scale)
-      loadDestinations(self.world)
-    }
-
-    self.selectAsteroids = function () {
-      self.nodes.forEach(e => e.isSelected = e.entity.style && e.entity.style.startsWith('asteroid-'))
-      updateUI()
+      loadWorld() // forceful update
     }
 
     self.mousedown = function (e) { // 132
@@ -141,7 +142,7 @@
       self.input.b = Vec(0,0)
     }
 
-    function addAsteroid(pos) {
+    function addNode(pos) {
         self.nodes.push({
           type: 'celestial',
           screenPos: transform(pos),
@@ -158,11 +159,11 @@
       if (0 == dist(self.input.a, self.input.b) && self.tool != 'select') {
         var pos = rund(mult(diff(self.input.a, Vec(self.dx, self.dy)), 1/self.scale))
         if (self.tool == 'draw')
-          addAsteroid(pos)
+          addNode(pos)
         else if (self.tool == 'spray'){
           for (var i = 0, a = 0; i < 10; i++, a=6.28*Math.random()){
             var delta = mult(Vec(Math.cos(6.28*i/10), Math.sin(6.28*i/10)), 80)
-            addAsteroid(rund(add(pos, add(delta, Vec(60*Math.random(), 60*Math.random())))))
+            addNode(rund(add(pos, add(delta, Vec(60*Math.random(), 60*Math.random())))))
           }
         }
         calculateLines()
@@ -188,10 +189,6 @@
       self.nodes = self.nodes.filter(e => !e.isSelected)
       updateUI()
       calculateLines()
-    }
-
-    self.makeStartingDest = function () {
-      self.world.initialDestination = singleSelected().name
     }
 
     function singleSelected() { return (_.find(self.nodes, e => e.isSelected) || {}).entity || {} }
@@ -224,17 +221,9 @@
       singleSelected().name = self.refs.nameField.value
     }
 
-    var fills = {
-      cloud: 'rgba(221, 136, 221, 0.5)', star: '#dd0', jovian: '#fa8',
-      planet: '#4d4', asteroid: '#888', anomaly: '#fa0', ring: '#8af'
-    }
-    self.fillFor = entity => fills[entity.style.split('-')[0]]
-    self.radiusFor = function (ent) {
-      return 1 + self.scale * (self.radiusCache[ent.style] || 5)
-    }
     self.transformFor = function (node, dx, dy) {
-      var x = node.screenPos.x + dx*(3+self.radiusFor(node.entity))
-      var y = node.screenPos.y + dy*(3+self.radiusFor(node.entity))
+      var x = node.screenPos.x + dx*(3+(scale*r))
+      var y = node.screenPos.y + dy*(3+(scale*r))
       return 'translate(' + x + ',' + y + ')'
     }
 
@@ -261,8 +250,9 @@
 
     function transform(p) { return Vec(self.dx+self.scale*p.x, self.dy+self.scale*p.y) }
 
-    function loadDestinations(world) {
-      self.nodes = world.nodes.map(e => ({
+    function loadDestinations(world, map) {
+      self.currentMap = map
+      self.nodes = self.currentMap.nodes.map(e => ({
         type: 'celestial',
         screenPos: transform(e.pos),
         isSelected: false,
@@ -274,13 +264,9 @@
     function calculateLines() {
       self.lines = []
       _.pairs(self.nodes, function (a, b) {
-        if (self.jumpRange > dist(a.entity.pos, b.entity.pos) && isTravellable(a.entity) && isTravellable(b.entity))
+        if (self.jumpRange > dist(a.entity.pos, b.entity.pos))
           self.lines.push({ a: transform(a.entity.pos), b: transform(b.entity.pos) })
       })
-    }
-
-    function isTravellable(entity) {
-      return ['jovian', 'planet', 'asteroid', 'anomaly'].includes(entity.style.split('-')[0])
     }
 
     function onHighlightRequested(e) {
@@ -290,20 +276,13 @@
       }
     }
 
-    function buildRadiusCache() {
-      self.radiusCache = _.object(self.world.celestials.map(e => [e.name, e.radius]))
-    }
-
     function prepareWorldForSave() {
-      self.world.nodes = self.nodes.filter(e => e.type === 'celestial').map(e => e.entity)
-      self.world.nodes.forEach(function (e) {
-        delete e.id
-      })
+      self.currentMap.nodes = self.nodes.filter(e => e.type === 'celestial').map(e => e.entity)
       return self.world
     }
 
     function loadWorld() {
-      loadDestinations(self.world)
+      loadDestinations(self.world, self.currentMap || self.world.maps[0])
       updateUI()
       self.update()
     }
@@ -315,7 +294,6 @@
       app.events.on('highlight-entity', onHighlightRequested)
       window.document.addEventListener('keydown', self.keydown)
       loadWorld()
-      buildRadiusCache()
       window.scrollTo(self.dx/3, self.dy/3)
     })
 
