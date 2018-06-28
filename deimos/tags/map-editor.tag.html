@@ -11,14 +11,15 @@
       {entity.name}
     </text>
     <ellipse
-      each={nodes}
-      class={ 'map-node': true, 'map-selected': isSelected }
-      stroke-width={isSelected ? 2 : 0.5}
-      fill="#BBB"
-      riot-cx={screenPos.x} riot-cy={screenPos.y}
+      each={e in nodes}
+      class={ 'map-node': true, 'map-selected': e.isSelected }
+      stroke-width={e.isSelected ? 3 : 0}
+      stroke="#000"
+      fill="#888"
+      riot-cx={e.screenPos.x} riot-cy={e.screenPos.y}
       riot-rx={1+(scale*r)} riot-ry={1+(scale*r)}
       onmouseup={mouseupOnItem}/>
-    <rect class="map-rubberrect"
+    <rect class="rubberrect"
       riot-x={select.pos.x} riot-y={select.pos.y} riot-width={select.dim.x} riot-height={select.dim.y}/>
   </svg>
 
@@ -37,23 +38,50 @@
     <button class="card btn" onclick={() => zoom(1/1.2)}>-</button>
   </div>
   <div class="toolbox">
-    <button class="card btn" onclick={() => tool='select'} class="toggle-btn {(tool == 'select') && 'active'}">Select
-    </button>
-    <button class="card btn" onclick={() => tool='draw'} class="toggle-btn {(tool == 'draw') && 'active'}">Add Celestial</button>
+    <button class="card btn btn-left {(tool == 'select') && 'active'}" onclick={() => tool='select'} >Select
+    </button><button class="card btn btn-right {(tool == 'draw') && 'active'}" onclick={() => tool='draw'}>Add Celestial</button>
     <button class="card btn" onclick={removeSelected} style="opacity: {selectionSize > 0 ? 1 : 0.5}">Delete</button>
   </div>
 
-  <div class="sidebar" show={selectionSize}>
-    <label>Name</label>
-    <input show={selectionSize == 1} type=text ref="nameField" placeholder="name" onchange={setName}>
-    <button onclick={autoNameNodes}>Autoname</button>
+  <div class="card sidebar" show={selectionSize}>
+    <div>
+      <label>Name</label>
+      <input show={selectionSize == 1} type=text ref="nameField" placeholder="name" onchange={setName}>
 
-    <label>Celestial</label>
-    <select ref="celestialSelect" onchange={setCelestial}>
-      <option value="unknown">- style -</option>
-      <option each={e in world.celestials}>{e.name}</option>
-    </select>
+      <label>Celestial</label>
+      <select ref="celestialSelect" onchange={setCelestial}>
+        <option value="unknown">- style -</option>
+        <option each={e in world.celestials}>{e.name}</option>
+      </select>
+    </div>
   </div>
+
+  <style>
+    .rubberrect {
+      fill: rgba(255, 255, 255, 0.5);
+      stroke: #888;
+      stroke-width: 3px;
+    }
+    .sidebar label {
+      display: inline-block;
+      box-sizing: content-box;
+      width: 30%;
+      padding: 4px;
+      margin: 4px 0;
+    }
+    .sidebar select, .sidebar input {
+      display: inline-block;
+      box-sizing: content-box;
+      width: 60%;
+      -webkit-appearance: none;
+      border: 1px solid #a0a0a0;
+      border-radius: 3px;
+      background: #ffffff;
+      color: #000000;
+      padding: 4px;
+      margin: 4px 0;
+    }
+  </style>
 
   <script>
     var self = this
@@ -63,11 +91,11 @@
     self.nodes = []
     self.lines = []
     self.jumpRange = 125
-    self.r = 10
+    self.r = 50
     self.scale = 0.1
     self.tool = 'select' // draw | spray | audio
-    self.dx = Math.max(window.innerWidth/2, 2800*self.scale)
-    self.dy = Math.max(window.innerHeight/2, 2800*self.scale)
+    self.dx = 1000
+    self.dy = 1000
     self.input = { a: Vec(0,0), b: Vec(0,0) }
     self.isDown = false
     self.select = { pos: Vec(0,0), dim: Vec(0,0) }
@@ -129,11 +157,11 @@
       e.stopPropagation()
       if (!self.isDown) { return }
       if (e.shiftKey) {
-        e.item.isSelected = !e.item.isSelected
+        e.item.e.isSelected = !e.item.e.isSelected
       }
       else {
         self.nodes.forEach(function (e){ e.isSelected = false })
-        e.item.isSelected = true
+        e.item.e.isSelected = true
       }
       updateUI()
       self.isDown = false
@@ -193,24 +221,6 @@
 
     function singleSelected() { return (_.find(self.nodes, e => e.isSelected) || {}).entity || {} }
     self.singleSelected = singleSelected
-    self.chooseTreasures = () => app.events.trigger('show-item-chooser', singleSelected().treasures)
-    self.chooseTraderInventory = () => app.events.trigger('show-item-chooser', singleSelected().trader.inventory)
-    self.chooseLoot = () =>app.events.trigger('show-item-chooser', singleSelected().enemy.loot)
-
-    self.chooseShipyardInventory = () => app.events.trigger('show-ship-chooser', singleSelected().shipyard)
-
-    self.autoNameNodes = function () {
-      var coords = (e) => Math.abs(e.pos.x%1000)+Math.abs(e.pos.y%1000)
-      var shortCode = (e) => (1+Math.abs(e.pos.x)%10)+(1+Math.abs(e.pos.y)%100)
-      forSelected(function (e){
-        if (e.style.startsWith('asteroid')) e.name = 'A' + coords(e)
-        if (e.style.startsWith('cloud')) e.name = 'Cloud ' + coords(e)
-        if (e.style == 'anomaly-buoy') e.name = 'Buoy ' + shortCode(e)
-        if (e.style == 'anomaly-ruin') e.name = 'Debris ' + coords(e)
-        if (e.style == 'anomaly-junk') e.name = 'Debris ' + coords(e)
-        if (e.style == 'anomaly-debris') e.name = 'Debris ' + coords(e)
-      })
-    }
 
     self.setCelestial = function (e) {
       forSelected(ent => ent.style = e.target.value)

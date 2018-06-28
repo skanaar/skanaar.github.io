@@ -5,81 +5,16 @@
   <link rel="shortcut icon" href="favicon.png">
   <link rel="stylesheet" href="editor.css">
   <style>
-    body, html {
-      padding: 0;
-      margin: 0;
-      background: #f8f8f8;
-      overflow: hidden;
-    }
-    .card {
-      background: white;
-      border-radius: 5px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-      font-family: "Avenir", "Calibri", sans-serif;
-      font-size: 20px;
-      color: #888;
-      padding: 10px 20px;
-      box-sizing: content-box;
-      border: none;
-    }
-    .file-toolbox {
-      position: fixed;
-      right: 345px;
-      top: 30px;
-    }
-    .toolbox {
-      position: fixed;
-      left: 30px;
-      bottom: 30px;
-    }
-    .file-toolbox .card, .toolbox .card, .nav .card {
-      margin-right: 10px;
-    }
-    .entity-selector {
-      position: fixed;
-      right: 30px;
-      top: 30px;
-      width: 260px;
-    }
-    .sidebar {
-      position: fixed;
-      right: 30px;
-      top: 100px;
-      bottom: 30px;
-      width: 260px;
-      padding-top: 20px;
-    }
-    .card.btn {
-      user-select: none;
-      cursor: pointer;
-      text-align: center;
-    }
-    select.dropdown {
-      appearance: none;
-      -webkit-appearance: none;
-    }
-    button.card {
-      appearance: none;
-      -webkit-appearance: none;
-      border: none;
-      margin-right: 10px;
-      font-family: "Avenir", "Calibri", sans-serif;
-      font-size: 20px;
-    }
-    button.cycle-btn {
-      width: 100px;
-    }
-
   </style>
 </head>
 <body>
     <editor-app></editor-app>
 
     <!-- riot tags -->
-    <script type="riot/tag" src="editor-app.tag.html"></script>
-    <script type="riot/tag" src="nav-menu.tag.html"></script>
-    <script type="riot/tag" src="map-editor.tag.html"></script>
-    <script type="riot/tag" src="model-editor.tag.html"></script>
+    <script type="riot/tag" src="tags/editor-app.tag.html"></script>
+    <script type="riot/tag" src="tags/nav-menu.tag.html"></script>
+    <script type="riot/tag" src="tags/map-editor.tag.html"></script>
+    <script type="riot/tag" src="tags/model-editor.tag.html"></script>
 
     <script src="lib/riot.js"></script>
     <script src="lib/underscore.js"></script>
