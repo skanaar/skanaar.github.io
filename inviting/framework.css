@@ -1,0 +1,50 @@
+:root {
+  --box-border: 1px solid rgba(255,255,255,0.3);
+  --box-background: rgba(255,255,255,0.2);
+}
+
+html, body {
+  margin: 0;
+  background: #efefef;
+  background: linear-gradient(45deg, #ffc4dd, #9df3ff);
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  font-family: "Avenir", sans-serif;
+}
+* { box-sizing: border-box; }
+
+.page { margin: 20px 50px; }
+
+.box {
+  border: var(--box-border);
+  background: var(--box-background);
+  padding: 5px 15px;
+  margin: 0 0 10px 0;
+}
+
+.capsule {
+  display: inline-block;
+  margin: 0 10px 10px 0;
+  padding: 5px 15px;
+  border-radius: 20px;
+  border: var(--box-border);
+  background: var(--box-background);
+}
+
+.action {
+  display: inline-block;
+  margin: 0 10px 10px 0;
+  padding: 5px 15px;
+  border-radius: 20px;
+  border: linear-gradient(45deg, #ffc4dd, #9df3ff);
+  background: linear-gradient(45deg, #ffc4dd, #9df3ff);
+}
+
+hr {
+  border: none;
+  background: rgba(255,255,255,0.5);
+  height: 4px;
+}

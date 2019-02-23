@@ -1,0 +1,14 @@
+<invitee>
+  <span class=capsule>{invitee.name}: {opts.id}</span>
+
+  <style>
+  </style>
+  <script>
+
+    var self = this
+    self.app = self.opts.app
+    self.invitee = {}
+    self.app.api.invitee(self.opts.id, e => self.invitee = e || { name: '[unknown]'})
+
+  </script>
+</invitee>
