@@ -250,7 +250,7 @@
 
         if (cfg.moduleInclude) {
           // put the %{ ... %} preamble in the global scope
-          eval(cfg.moduleInclude)
+          eval.call(window, cfg.moduleInclude)
         }
         Jison.print = function () {};
         parser = Jison.Generator(cfg, {type: 'lalr'});
