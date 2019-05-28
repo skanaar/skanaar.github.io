@@ -74,7 +74,8 @@
         margin: 0;
         border: 0 solid grey;
         border-width: 1px 0;
-        font-family: Consolas, monospace;
+        font-family: Consolas, Menlo, monospace;
+        font-size: 12px;
         background: #fff;
         overflow: auto;
       }
@@ -247,6 +248,9 @@
           return;
         }
 
+        if (cgf.moduleInclude) {
+          eval(cgf.moduleInclude) // put the %{ ... %} preamble in the global scope
+        }
         Jison.print = function () {};
         parser = Jison.Generator(cfg, {type: 'lalr'});
 
