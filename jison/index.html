@@ -2,101 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-  	<title>Jison</title>
+    <title>Jison Editor</title>
     <link rel="shortcut icon" href="favicon.png">
-    <style>
-      html, body {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        overflow-x: hidden;
-        overflow-y: hidden;
-        background: #E5E9EB;
-        font-family: Helvetica, Calibri, sans-serif;
-      }
-      .wrap {
-        position: relative;
-        background: #E5E9EB;
-        min-height: 100%;
-      }
-      .left {
-        width: 50%;
-        min-height: 100%;
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-      }
-      textarea {
-        border: 0 solid gray;
-        outline: none;
-        font-family: Consolas, Menlo, monospace;
-        font-size: 12px;
-        padding: 10px;
-      }
-      .right {
-        width: 50%;
-        min-height: 100%;
-        position: absolute;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        border: 0 solid gray;
-        border-left-width: 1px;
-      }
-      .right textarea {
-        min-height: 30%;
-        margin: 0;
-        border-bottom-width: 1px;
-      }
-      #grammar {
-        /*outline: none;
-        position: absolute;
-        background: rgba(0,0,0,0);
-        border: 0;
-        */
-        height: 100%;
-        width: 100%;
-        box-sizing: border-box;
-        color: #444;
-      }
-      #source {
-        width: 100%;
-      }
-      #out {
-        white-space: pre-wrap;
-      }
-      pre {
-        box-sizing: border-box;
-        white-space: normal;
-        padding: 5px;
-        margin: 0;
-        border: 0 solid grey;
-        border-width: 1px 0;
-        font-family: Consolas, Menlo, monospace;
-        font-size: 12px;
-        background: #fff;
-        overflow: auto;
-      }
-      .buttongroup {
-        box-sizing: border-box;
-        margin: 5px;
-      }
-      .good {
-        background: #dfd;
-      }
-      .bad {
-        background: #fdd;
-      }
-      .logo-container {
-        margin: 60px 0;
-        text-align: center
-      }
-      .logo-container img {
-        width: 146px;
-        height: 50px;
-      }
-    </style>
+    <link rel=stylesheet href="codemirror/codemirror.css">
+    <link rel=stylesheet href="codemirror/solarized.jison.css">
+    <link rel=stylesheet href="style.css">
   </head>
   <body>
     <div class="wrap">
@@ -107,210 +17,78 @@
 
       <div class="right">
         <textarea id="source" spellcheck="false"></textarea>
-
-        <div class="buttongroup">
-          <select id="examples">
-            <option value="" selected="selected" disabled>Load example</option>
-            <option value="calculator.jison">Calculator</option>
-            <option value="lambdacalc.jison">Lambda Calculus</option>
-          </select>
-          <button id="process_btn">Generate Parser</button>
-          <button id="download_btn" disabled>Download</button>
+        <div id="output">
+          <pre id="out"></pre>
         </div>
-        <pre id="gen_out"></pre>
-        <div id="nonterminals"></div>
-        <div id="productions"></div>
-        <div id="table"></div>
-        <div id="parsing" class="buttongroup">
+      </div>
+
+      <div class="toolbar">
+        <!-- <select id="examples">
+          <option value="" selected="selected" disabled>Load example</option>
+          <option value="calculator.jison">Calculator</option>
+          <option value="lambdacalc.jison">Lambda Calculus</option>
+        </select> -->
+        <div class=toolbar-group>
+          <span class=logo>Jison Editor</span>
           <button id="parse_btn">Parse</button>
         </div>
-        <pre id="out"></pre>
-
-        <div id="loading"></div>
-
-        <div class="logo-container">
-          <a href="http://zaach.github.io/jison">
-            <img src="/jison/jison_logo.png">
-          </a>
+        <div class=toolbar-group>
+          <div id=message-field class=message-field>Parsing...</div>
+        </div>
+        <div class=toolbar-group>
+          <button onclick="document.body.classList.value = 'text-s'">S</button>
+          <button onclick="document.body.classList.value = 'text-m'">M</button>
+          <button onclick="document.body.classList.value = 'text-l'">L</button>
+          <a href="http://zaach.github.io/jison">About Jison</a>
         </div>
       </div>
 
     </div>
 
-    <script src="http://zaach.github.io/jison/assets/js/webtoolkit.js"></script>
-    <script src="http://zaach.github.io/jison/assets/js/jquery.js"></script>
-    <script src="http://zaach.github.io/jison/assets/js/jison.js"></script>
+    <script src="codemirror/codemirror-compressed.js"></script>
+    <script src="codemirror/jison.codemirror-mode.js"></script>
+    <script src="jison.js"></script>
+    <script src=stringify.js></script>
+    <script src="app.js"></script>
     <script>
-    function stringify(obj, options) {
-      // Note: This regex matches even invalid JSON strings, but since we’re
-      // working on the output of `JSON.stringify` we know that only valid strings
-      // are present (unless the user supplied a weird `options.indent` but in
-      // that case we don’t care since the output would be invalid anyway).
-      var stringOrChar = /("(?:[^"]|\\.)*")|[:,]/g
-      function prettify(string) {
-        return string.replace(stringOrChar, function (match, string) {
-          return string ? match : match + ' '
-        })
-      }
 
-      function get(options, name, defaultValue) {
-        return (name in options ? options[name] : defaultValue)
-      }
-      options = options || {}
-      var indent = JSON.stringify([1], null, get(options, 'indent', 2)).slice(2, -3)
-      var maxLength = (indent === '' ? Infinity : get(options, 'maxLength', 80))
-
-      return (function _stringify (obj, currentIndent, reserved) {
-        if (obj && typeof obj.toJSON === 'function') {
-          obj = obj.toJSON()
-        }
-
-        var string = JSON.stringify(obj)
-
-        if (string === undefined) {
-          return string
-        }
-
-        var length = maxLength - currentIndent.length - reserved
-
-        if (string.length <= length) {
-          if (options.compact) {
-            return string
-          }
-          var prettified = prettify(string)
-          if (prettified.length <= length) {
-            return prettified
-          }
-        }
-
-        if (typeof obj === 'object' && obj !== null) {
-          var nextIndent = currentIndent + indent
-          var items = []
-          var delimiters
-          var comma = function (array, index) {
-            return (index === array.length - 1 ? 0 : 1)
-          }
-
-          if (Array.isArray(obj)) {
-            for (var index = 0; index < obj.length; index++) {
-              items.push(
-                _stringify(obj[index], nextIndent, comma(obj, index)) || 'null'
-              )
-            }
-            delimiters = '[]'
-          } else {
-            Object.keys(obj).forEach(function (key, index, array) {
-              var keyPart = JSON.stringify(key) + ': '
-              var value = _stringify(obj[key], nextIndent,
-                                     keyPart.length + comma(array, index))
-              if (value !== undefined) {
-                items.push(keyPart + value)
-              }
-            })
-            delimiters = '{}'
-          }
-
-          if (items.length > 0) {
-            return [
-              delimiters[0],
-              indent + items.join(',\n' + nextIndent),
-              delimiters[1]
-            ].join('\n' + currentIndent)
-          }
-        }
-        return string
-      }(obj, '', 0))
-    }
-    </script>
-    <script>
-      var parser, parser2;
-
-      $(document).ready(function () {
-        $("#process_btn").click(processGrammar);
-        $("#parse_btn").click(runParser);
-        $("#examples").change(function(ev) {
-          var file = this.options[this.selectedIndex].value;
-          $(document.body).addClass("loading");
-          $.get("/jison/examples/"+file, function (data) {
-            $("#grammar").val(data);
-            $(document.body).removeClass("loading");
-          });
-        });
+      var editor = CodeMirror.fromTextArea(document.getElementById('grammar'), {
+        lineNumbers: false,
+        mode: 'jison',
+        matchBrackets: true,
+        theme: 'solarized light',
+        keyMap: 'sublime'
       });
 
-      function processGrammar () {
-        var grammar = $("#grammar").val();
-        try {
-          var cfg = bnf.parse(grammar);
-        } catch (e) {
-          $("#gen_out").text("Oops. Make sure your grammar is in the correct format.\n"+e).addClass('bad');
-          return;
-        }
-
-        if (cfg.moduleInclude) {
-          // put the %{ ... %} preamble in the global scope
-          eval.call(window, cfg.moduleInclude)
-        }
-        Jison.print = function () {};
-        parser = Jison.Generator(cfg, {type: 'lalr'});
-
-        $("#out").removeClass("good").removeClass("bad").html('');
-        $("#gen_out").removeClass("good").removeClass("bad");
-        if (!parser.conflicts) {
-          $("#gen_out").text('Generated successfully!').addClass('good');
-        } else {
-          $("#gen_out").text('Conflicts encountered:\n').addClass('bad');
-        }
-
-        $("#download_btn").click(function () {
-          window.location.href = "data:application/javascript;charset=utf-8;base64,"+Base64.encode(parser.generate());
-        }).removeAttr('disabled');
-
-        parser.resolutions.forEach(function (res) {
-          var r = res[2];
-          if (!r.bydefault) return;
-          $("#gen_out").append(r.msg+"\n"+"("+r.s+", "+r.r+") -> "+r.action);
-        });
-
-        parser2 = parser.createParser();
+      var elements = {
+        source: document.getElementById('source'),
+        process_btn: document.getElementById('process_btn'),
+        parse_btn: document.getElementById('parse_btn'),
+        examples: document.getElementById('examples'),
+        message: document.getElementById('message-field'),
+        output: document.getElementById('out'),
+        source: document.getElementById('source')
       }
 
-      function runParser () {
-        function printOut(clas, str) {
-          $("#out").removeClass("good").removeClass("bad").addClass(clas);
-          $("#out").text(str);
-        }
-        if (!parser) processGrammar();
-        printOut('good', 'Parsing...');
-        var source = $("#source").val();
-        try {
-          printOut('good', stringify(parser2.parse(source), {maxLength:100}));
-        } catch(e) {
-          printOut('bad', e.message || e);
-        }
-      }
+      new App(editor, elements)
+
     </script>
 
     <script>
-      var grammar = document.getElementById('grammar')
-      var source = document.getElementById('source')
 
       if (localStorage['jison.grammar']){
-        grammar.value = localStorage['jison.grammar']
+        editor.setValue(localStorage['jison.grammar'])
       }
+      editor.on('change', function () {
+        localStorage['jison.grammar'] = editor.getValue()
+      })
+
       if (localStorage['jison.source']){
         source.value = localStorage['jison.source']
       }
-
-      function grammarChanged(){
-        localStorage['jison.grammar'] = grammar.value
-      }
-      function sourceChanged(){
+      source.addEventListener('input', function () {
         localStorage['jison.source'] = source.value
-      }
-
-      grammar.addEventListener('input', grammarChanged)
-      source.addEventListener('input', sourceChanged)
+      })
 
     </script>
 
