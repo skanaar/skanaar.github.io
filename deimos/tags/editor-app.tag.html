@@ -2,10 +2,11 @@
 
   <map-editor app={app} if={page == '#map'} />
   <model-editor app={app} if={page == '#models'} />
+  <scenario-editor app={app} if={page == '#scenario'} />
 
   <validation-report app={app} />
 
-  <nav-menu page={page}></nav-menu>
+  <nav-menu app={app} page={page}></nav-menu>
 
   <div class="toast">{notification || ''}</div>
 

@@ -73,3 +73,7 @@ button.card {
 button.cycle-btn {
   width: 100px;
 }
+button svg {
+  vertical-align: bottom;
+  fill: #888;
+}

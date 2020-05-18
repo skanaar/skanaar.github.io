@@ -1,0 +1,23 @@
+<scenario-editor>
+
+  <div class="file-toolbox">
+    <a class="card btn" ref="downloadLink" onmouseenter={primeDownloadLink} download="scenario.deimos.json" href='#'>Save to file</a>
+  </div>
+
+  <style>
+    a.card {
+      text-decoration: none;
+      display: block;
+    }
+  </style>
+
+  <script>
+    var self = this
+    var app = self.opts.app
+    self.primeDownloadLink = function () {
+      app.events.trigger('save-world')
+      var json = _.stringify(app.getWorld(), { maxLength: 300, compact: true })
+      self.refs.downloadLink.setAttribute('href', _.toDataUrl(json))
+    }
+  </script>
+</scenario-editor>
