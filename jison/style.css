@@ -84,7 +84,7 @@ pre {
   right: 0;
   top: 0;
   height: var(--toolbar-size);
-  padding: 5px 5px 0 5px;
+  padding: 4px 4px 0 4px;
   box-sizing: border-box;
   border-bottom: 1px solid var(--edge-color);
   background: #f8f8f8;
@@ -105,7 +105,7 @@ pre {
   border-radius: 4px;
   font-size: 11px;
   color: #333;
-  padding: 2px 8px;
+  padding: 3px 8px;
   line-height: 13px;
   text-align: center;
   box-sizing: border-box;
@@ -126,4 +126,5 @@ button:active {
 .CodeMirror {
   height: 100%;
   font-family: Menlo, monospace;
+  padding-left: 5px;
 }

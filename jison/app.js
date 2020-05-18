@@ -20,6 +20,8 @@ function throttle(delay, action) {
 function App(editor, elements) {
   var isGrammarValid = false
   var parser, parser2;
+  
+  setTimeout(run, 0);
 
   elements.parse_btn.addEventListener('click', run);
   editor.on('change', throttle(1000, run));
@@ -32,6 +34,16 @@ function App(editor, elements) {
   //     $(document.body).removeClass("loading");
   //   });
   // });
+  
+  editor.setValue(localStorage['jison.grammar'] || '');
+  editor.on('change', function () {
+    localStorage['jison.grammar'] = editor.getValue()
+  })
+
+  source.value = localStorage['jison.source'] || '';
+  source.addEventListener('input', function () {
+    localStorage['jison.source'] = source.value
+  })
 
   function printOut(str) {
     elements.output.innerText += str;

@@ -46,7 +46,7 @@
     </div>
 
     <script src="codemirror/codemirror-compressed.js"></script>
-    <script src="codemirror/jison.codemirror-mode.js"></script>
+    <script src="codemirror/javascript.mode.js"></script>
     <script src="jison.js"></script>
     <script src=stringify.js></script>
     <script src="app.js"></script>
@@ -54,7 +54,7 @@
 
       var editor = CodeMirror.fromTextArea(document.getElementById('grammar'), {
         lineNumbers: false,
-        mode: 'jison',
+        mode: 'javascript',
         matchBrackets: true,
         theme: 'solarized light',
         keyMap: 'sublime'
@@ -71,24 +71,6 @@
       }
 
       new App(editor, elements)
-
-    </script>
-
-    <script>
-
-      if (localStorage['jison.grammar']){
-        editor.setValue(localStorage['jison.grammar'])
-      }
-      editor.on('change', function () {
-        localStorage['jison.grammar'] = editor.getValue()
-      })
-
-      if (localStorage['jison.source']){
-        source.value = localStorage['jison.source']
-      }
-      source.addEventListener('input', function () {
-        localStorage['jison.source'] = source.value
-      })
 
     </script>
 
