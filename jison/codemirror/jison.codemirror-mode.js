@@ -42,7 +42,7 @@ CodeMirror.defineMode('jison', function() {
 
       case 'matchers':
 
-        if (stream.match(/[^\{]*/)){
+        if (stream.match(/[^\{-]*/)){
           state.section = 'action'
           return 'variable'
         }
@@ -50,7 +50,7 @@ CodeMirror.defineMode('jison', function() {
 
       case 'action':
 
-        if (stream.match(/\{[^|]*\}/)){
+        if (stream.match(/-> [^|]*|\{[^|]*\}/)){
           state.section = null
           return 'string'
         }

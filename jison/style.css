@@ -96,7 +96,8 @@ pre {
   padding: 0 10px 0 4px;
   font-size: 14px;
 }
-.message-field {
+.message-field, button {
+  -wekbit-appearance: none;
   border: 1px solid #ccc;
   display: inline-block;
   background: #fff;
@@ -104,13 +105,19 @@ pre {
   border-radius: 4px;
   font-size: 11px;
   color: #333;
-  padding: 2px 4px;
-  width: 300px;
+  padding: 2px 8px;
   line-height: 13px;
   text-align: center;
   box-sizing: border-box;
-  vertical-align: top;
   letter-spacing: 0.5px;
+  outline: none;
+}
+.message-field {
+  width: 300px;
+}
+button:active {
+  user-select: none;
+  background: lightblue;
 }
 .message-field.warning {
   background: #fff8f8;
