@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Är det Tisdag?</title>
+	<meta name="description" content="Tisdag är veckans sämsta dag. Var vaksam.">
+	<link id="favicon" rel="icon" type="image/png" href="favicon.png">
+	<style>
+		html, body { height: 100%; background-color: #90c0de; overflow: hidden; }
+		h1 {
+			position: absolute;
+			top: 50%;
+			left: 0;
+			right: 0;
+			margin: -110px 0 0 0;
+			height: 220px;
+			text-align: center;
+			color: #1c7bb7;
+			font-family: Arial, serif;
+			font-size: 80px;
+			line-height: 227px;
+			font-weight: bold;
+		}
+	</style>
+</head>
+<body>
+	<h1 id=meddelande>Det är tisdag</h1>
+
+	<script>
+		(function () {
+			var datum = new Date();
+			var veckodag = datum.getDay();
+			var tisdag = 2;
+			if (veckodag != tisdag) {
+				document.getElementById('meddelande').innerText = 'Det är inte tisdag'
+			}
+
+			favicon((veckodag === tisdag) ? '👎' : '👍');
+
+			function favicon(symbol){
+				var canvas = document.createElement('canvas');
+				var oldLink = document.getElementById('favicon');
+				var link = oldLink.cloneNode(true);
+				canvas.height = canvas.width = 32;
+				var ctx = canvas.getContext('2d');
+				ctx.font = '26px sans-serif';
+				var textWidth = ctx.measureText(symbol).width;
+				ctx.ellipse(16, 16, 16, 16, 0, 0, Math.PI*2);
+				ctx.fillStyle = '#fff'
+				ctx.fill();
+				ctx.fillText(symbol, (canvas.width / 2) - (textWidth / 2), 24);
+				link.href = canvas.toDataURL('image/png');
+				var head = document.head || document.getElementsByTagName('head')[0];
+				head.removeChild(document.getElementById('favicon'));
+				head.appendChild(link);
+			}
+		})();
+
+		setTimeout(function() { location.reload(); }, 5*3600*1000);
+	</script>
+</body>
+</html>
