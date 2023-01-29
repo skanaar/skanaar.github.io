@@ -1,4 +1,6 @@
-function Entity(mass, pos, vel, force){
+import { vec } from './vec.js'
+
+export function Entity(mass, pos, vel, force){
   return {
     mass: mass,
     pos: vec.clone(pos),
@@ -14,14 +16,14 @@ function Entity(mass, pos, vel, force){
   };
 }
 
-function solveEuler(dt, entities){
+export function solveEuler(dt, entities){
   entities.forEach(function (e){
     vec.addTo(e.vel, e.force, dt/e.mass);
     vec.addTo(e.pos, e.vel, dt);
   })
 }
 
-function resetForces(entities){
+export function resetForces(entities){
   entities.forEach(function (e){
     vec.multTo(e.force, 0);
   })

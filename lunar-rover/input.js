@@ -1,4 +1,4 @@
-var input = {
+export var input = {
   keys: {},
   NUMBER: {},
   onNumber: function (action) {

@@ -1,3 +1,6 @@
+import { quad } from './quadtree.js'
+import { vec } from './vec.js'
+import { ImprovedNoise } from './ImprovedNoise.js'
 
 var perlin = ImprovedNoise();
 function terrainHeightAt(x, y, sampleSize){
@@ -25,7 +28,7 @@ function craterOffset(height, x){
   return height*(Math.pow(Math.sin(x*x*3),2) + (x*x-1)*1.1);
 }
 
-function generateLandscape(res, subdivs){
+export function generateLandscape(res, subdivs){
 
   function addCrater(terrain, x, y, r, height){
     var centerHeight = quad.at(terrain, x,y).value;

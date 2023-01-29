@@ -7,6 +7,9 @@
 		<link rel="icon" type="image/png" href="favicon.png" />
 		<style>
 			body {
+				display: grid;
+				grid-template-rows: 1fr 25px;
+				height: 100vh;
 				color: #61443e;
 				font-family:Monospace;
 				font-size:13px;
@@ -16,10 +19,6 @@
 				overflow: hidden;
 			}
 			.buttons {
-				position: fixed;
-				bottom: 0;
-				left: 0;
-				right: 0;
 				background-color: black;
 				text-align: center;
 			}
@@ -40,23 +39,23 @@
 	</head>
 	<body>
 
-		<div id="container"><br /><br /><br /><br /><br />Generating world...</div>
+		<div id="container"></div>
 		<div class="buttons" onclick="location.reload()">
 			<span id="instructions">Steer with W A S D or arrow keys. Choose one of three rover sizes: </span>
 			<a href="#scout">Scout</a>
 			<a href="#ranger">Ranger</a>
 			<a href="#juggernaut">Juggernaut</a>
 		</div>
-		<script src="three.min.js"></script>
-		<script src="OrbitControls.js"></script>
-		<script src="ImprovedNoise.js"></script>
-		<script src="quadtree.js"></script>
-		<script src="skanaar.vector.js"></script>
-		<script src="rover.js"></script>
-		<script src="wheel.js"></script>
-		<script src="entity.js"></script>
-		<script src="input.js"></script>
-		<script src="landscape.js"></script>
-		<script src="script.js"></script>
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "https://unpkg.com/three@0.149.0/build/three.module.js"
+				}
+			}
+		</script>
+		<script type="module">
+			import { start } from './script.js'
+			start(document.getElementById('container'))
+		</script>
 	</body>
 </html>

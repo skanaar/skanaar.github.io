@@ -1,4 +1,6 @@
-var quad = {
+import { vec } from './vec.js'
+
+export var quad = {
 	build: function buildQuadtree(w, h, level) {
 		return {
 			nodes: !level ? [] : [

@@ -1,0 +1,40 @@
+mine-sweep h2 {
+  margin: 0;
+  text-align: center;
+}
+mine-field {
+  margin: -5px;
+}
+mine-field.disabled {
+  color: #888;
+}
+mine-field button {
+  width: 26px;
+  height: 26px;
+  appearance: none;
+  background-color: #fff;
+  border: 2px solid var(--win-color);
+  border-radius: 4px;
+  padding: 0;
+  margin: 2px;
+  text-align: center;
+  font-weight: bold;
+  font-family: inherit;
+  font-size: inherit;
+}
+mine-field.disabled button {
+  border-color: #888;
+  color: #888;
+}
+mine-field:not(.disabled) button:hover:not([disabled]) {
+  background-color: #000;
+  color: #fff;
+}
+mine-field button:disabled {
+  color: inherit;
+  border-color: transparent;
+}
+mine-field:not(.disabled) button:active:not([disabled]) {
+  color: #fff;
+  background-color: #000;
+}

@@ -1,4 +1,8 @@
-function Rover(wheelA, wheelB, wheelC, wheelD, width){
+import * as THREE from 'three';
+import { vec } from './vec.js'
+import { Entity } from './entity.js';
+
+export function Rover(wheelA, wheelB, wheelC, wheelD, width){
   return {
     _drawObject: null,
     turn: 0,
@@ -39,7 +43,7 @@ function Rover(wheelA, wheelB, wheelC, wheelD, width){
         new THREE.Vector2(-width/2,  -width/16)
       ]);
       var extrude = {
-        amount: 0,
+        depth: 0,
         steps: 1,
         material: 1,
         extrudeMaterial: 0,

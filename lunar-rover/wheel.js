@@ -1,4 +1,9 @@
-function Wheel(x, y, z, r){
+import * as THREE from 'three';
+import { vec } from './vec.js'
+import { quad } from './quadtree.js'
+import { Entity } from './entity.js';
+
+export function Wheel(x, y, z, r){
   var groundForce = 2500;
   var groundFriction = 0.6;
   var tireGrip = 2.9;
@@ -70,9 +75,9 @@ function Wheel(x, y, z, r){
       var geometry = new THREE.LatheGeometry(profile);
       var m = new THREE.Matrix4();
       m.makeRotationX(Math.PI/2);
-      geometry.applyMatrix(m);
+      geometry.applyMatrix4(m);
       var material = new THREE.MeshLambertMaterial({color: 0xdd8800});
-      material.shading = THREE.FlatShading;
+      material.flatShading = true;
       this._drawObject = new THREE.Mesh(geometry, material);
       this._drawObject.castShadow = true;
       this._drawObject.receiveShadow = true;

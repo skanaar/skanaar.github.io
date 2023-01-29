@@ -1,40 +1,43 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>skanaar</title>
-	<style>
-  body {
-    font-family: "helvetica neue", "Segoe UI", sans-serif;
-    font-weight: 100;
-    text-align: center;
-    padding: 5em;
-    font-size: 30px;
-    background: beige;
-  }
-	h1 {
-		font-family: inherit;
-    font-weight: 100;
-		text-align: center;
-    font-size: 60px;
-	}
-  a, a:hover, a:active, a:visited {
-    display: block;
-    color: black;
-    text-decoration: none;
-    padding: 5px;
-  }
-	</style>
-</head>
-<body>
-<h1>Daniel Kallin</h1>
-<a href="http://www.rymdmotor.se">rymdmotor ab</a>
-<a href="https://www.linkedin.com/in/danielkallin">linkedin</a>
-<a href="daniel/cv.html">résumé</a>
-<a href="http://www.nomnoml.com">nomnoml.com</a>
-<a href="http://www.rymdmotor.se/nebula-sky">nebula sky</a>
-<a href="css2sql">css 2 sql</a>
-<a href="lunar-rover">lunar rover</a>
-<a href="jison">parser generator editor</a>
-<a href="cytank">cytank</a>
-</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Daniel Kallin</title>
+    <link rel="icon" type="image/svg+xml" href="assets/devices.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/system.css">
+    <link rel="stylesheet" href="Minesweep.css">
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "https://unpkg.com/three@0.149.0/build/three.module.js"
+				}
+			}
+		</script>
+		<script type="module">
+			import { start } from './lunar-rover/script.js'
+      window.initLunarRover = start
+		</script>
+    <script type="module">
+      import { Desktop, App } from './assets/system.js'
+      import { app as css2sql } from './Css2Sql.js'
+      import { app as readme } from './Readme.js'
+      import { app as minesweep } from './Minesweep.js'
+      import { app as lunarRover } from './LunarRover.js'
+      
+      const os = React.createElement(Desktop, {
+        title: 'Daniel Kallin',
+        apps: [css2sql, minesweep, lunarRover, readme]
+      })
+
+      const root = ReactDOM.createRoot(document.getElementById('root'))
+      root.render(os)
+    </script>
+  </body>
 </html>

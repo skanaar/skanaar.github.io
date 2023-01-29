@@ -1,3 +1,12 @@
+import * as THREE from 'three';
+import { Wheel } from './wheel.js'
+import { Rover } from './rover.js'
+import { solveEuler, resetForces } from './entity.js'
+import { generateLandscape } from './landscape.js'
+import { input } from './input.js'
+import { vec } from './vec.js'
+import { quad } from './quadtree.js'
+
 var cameraPos = vec.Vec(100,100,100);
 var timestep = 2;
 var showDebug = false;
@@ -11,13 +20,16 @@ var unit = {
 
 var clock = new THREE.Clock();
 
-var viewer = buildViewer(window.innerWidth,
-                         window.innerHeight,
-                         window.devicePixelRatio)
-var engine = buildEngine(256, viewer);
+var viewer = null
+var engine = null
 
-init(viewer);
-animate();
+export function start(host) {
+  viewer = buildViewer(host.offsetWidth, host.offsetHeight, window.devicePixelRatio)
+  engine = buildEngine(256, viewer);
+
+  init(host, viewer);
+  animate();
+}
 
 function buildViewer(viewW, viewH, pixelRatio) {
   var camera = new THREE.PerspectiveCamera(60, viewW / viewH, 1, 20000);
@@ -41,7 +53,7 @@ function buildEngine(res) {
   var quadtree = generateLandscape(res, 8);
 
   var scene = new THREE.Scene();
-  var geometry = new THREE.PlaneBufferGeometry(res, res, res-1, res-1);
+  var geometry = new THREE.PlaneGeometry(res, res, res-1, res-1);
   geometry.rotateX(- Math.PI / 2);
 
   var vertices = geometry.attributes.position.array;
@@ -51,14 +63,14 @@ function buildEngine(res) {
     }
   }
 
-  geometry.computeFaceNormals();
   geometry.computeVertexNormals();
   var material = new THREE.MeshPhongMaterial({color: 0x888888});
+  material.flatShading = true;
   var mesh = new THREE.Mesh(geometry, material);
 	mesh.receiveShadow = true;
 
-  var sun = new THREE.SpotLight(0xffffff, 1, 0, Math.PI / 2);
-  sun.position.set(250, 70, 0);
+  var sun = new THREE.SpotLight(0xffffff, 1.25, 0, Math.PI / 2);
+  sun.position.set(250, 140, 0);
   sun.target.position.set(0, 0, 0);
 
 	sun.castShadow = true;
@@ -105,21 +117,18 @@ function buildEngine(res) {
   };
 }
 
-function init(viewer) {
-  var container = document.getElementById('container');
-  container.innerHTML = '';
+function init(container, viewer) {
   container.appendChild(viewer.renderer.domElement);
-  window.addEventListener('resize', onWindowResize);
   input.onNumber(function(i) { timestep = Math.exp(i/4) / 2 });
   input.on('i', function() { showDebug = !showDebug });
   input.on(' ', function() { showOverview = !showOverview });
   input.on('p', function() { isPaused = !isPaused });
 }
 
-function onWindowResize() {
-  viewer.camera.aspect = window.innerWidth / window.innerHeight;
+export function updateSize(host) {
+  viewer.camera.aspect = host.offsetWidth / host.offsetHeight;
   viewer.camera.updateProjectionMatrix();
-  viewer.renderer.setSize(window.innerWidth, window.innerHeight);
+  viewer.renderer.setSize(host.offsetWidth, host.offsetHeight);
 }
 var even = true;
 function animate() {
@@ -156,7 +165,7 @@ function updateDebugInfo() {
 function updateChaseCam() {
   var p = vec.clone(engine.rover.obj.pos);
   var dir = engine.rover.dir;
-  var camDist = showOverview ? 40 : 8*unit;
+  var camDist = showOverview ? 40 : 2;
   var pos = vec.add(p, vec.Vec(dir.x*-camDist, camDist, dir.z*-camDist));
   vec.multTo(cameraPos, 0.98);
   vec.addTo(cameraPos, pos, 0.02);
