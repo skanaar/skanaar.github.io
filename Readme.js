@@ -16,6 +16,7 @@ export function Readme() {
       el('a', { href: "daniel/cv.html" }, 'résumé'),
       el('h2', {}, 'Projects'),
       el('a', { href: "http://www.nomnoml.com" }, 'nomnoml.com'),
+      el('a', { href: "https://gissa-krogen.vercel.app/" }, 'Gissa Krogen'),
       el('a', { href: "http://www.rymdmotor.se/nebula-sky" }, 'nebula sky'),
       el('a', { href: "deimos/editor.html#models" }, 'deimos'),
       el('a', { href: "fin-script" }, 'fin-script'),

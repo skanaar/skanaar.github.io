@@ -62,6 +62,7 @@ window-frame window-title button:active {
 }
 
 window-frame window-body {
+  position: relative;
   border-top: var(--line) solid var(--win-color);
   padding: 10px;
   overflow-y: auto;
