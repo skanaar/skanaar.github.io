@@ -8,7 +8,7 @@ const icon = 'cube.svg'
 export const app = new App('Modeller', Modeller, icon, [400, 475], 'noresize')
 
 export function Modeller() {
-  const zoom = 0.7
+  const zoom = 0.85
   const [mesh, setMesh] = React.useState([])
   const [box, setBox] = React.useState([])
   const [selected, setSelected] = React.useState(0)
@@ -70,16 +70,16 @@ export function Modeller() {
   }
 
   return (
-    el('div', {},
+    el('modeller-viewer', {},
       el('style', {},
-        `header {
+        `modeller-viewer header {
           text-align: center;
           position: absolute;
           left: 10px;
           right: 10px;
           top: 10px;
         }
-        footer {
+        modeller-viewer footer {
           display: flex;
           justify-content: space-between;
           position: absolute;
@@ -87,31 +87,33 @@ export function Modeller() {
           right: 10px;
           bottom: 10px;
         }
-        .canvas-3d {
+        modeller-viewer .canvas-3d {
           display: block;
+          position: relative;
           margin: -10px;
+          top: 20px;
           width: 400px;
           height: 450px;
         }
-        svg.canvas-3d path {
+        modeller-viewer .canvas-3d.offset {
+          top: -65px;
+        }
+        modeller-viewer svg.canvas-3d path {
+          fill: #fff;
           stroke-linejoin: bevel;
           stroke-width: 1px;
-          stroke: #00000044;
+          stroke: #000;
         }
-        svg.canvas-3d path.outline {
-          stroke: #EEE;
-          stroke-width: 5px;
+        modeller-viewer svg.canvas-3d path.outline {
+          stroke: #000;
+          stroke-width: 1px;
+          stroke-dasharray: 1 5;
         }`),
 
-        el('header', {}, models[selected].name),
-
-        el('footer', {},
-          el(Button, { onClick: () => changeSelected(-1) }, '<'),
-          el(Button, { onClick: cycleMode }, 'Camera'),
-          el(Button, { onClick: () => changeSelected(+1) }, '>'),
-        ),
-
-      el('svg', { className: 'canvas-3d', viewBox: '350 220 300 300' },
+      el('svg', {
+        className: 'canvas-3d ' + (cameraIndex === 1 ? 'offset' : ''),
+        viewBox: '350 220 300 300'
+      },
         box.map((e, i) => el('path', {
           key: `b${i}`,
           d: `M${e[0][0]},${e[0][1]} L${e[1][0]},${e[1][1]} L${e[2][0]},${e[2][1]} L${e[3][0]},${e[3][1]} Z`,
@@ -124,7 +126,15 @@ export function Modeller() {
           fill: 'none',
           className: shading(e)
         } ))
-      )
+      ),
+
+      el('header', {}, models[selected].name),
+
+      el('footer', {},
+        el(Button, { onClick: () => changeSelected(-1) }, '<'),
+        el(Button, { onClick: cycleMode }, 'Camera'),
+        el(Button, { onClick: () => changeSelected(+1) }, '>'),
+      ),
     )
   )
 }

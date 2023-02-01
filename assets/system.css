@@ -10,6 +10,11 @@
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
 window-frame {
   display: grid;
   grid-template-rows: 28px 1fr;
