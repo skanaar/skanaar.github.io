@@ -30,16 +30,6 @@ export function Modeller() {
     updateMesh(cameraModes[cameraIndex], models[index])
   }
 
-  function compile(model) {
-    var compilate = {
-      name: 'Compiled ' + model.name,
-      geometry: 'mesh',
-      transform: [['scale', 1, 1, 1], ['rotate', 0, 0, 0], ['translate', 0, 0, 0]],
-      quads: buildMesh(model).map(q => q.map(p => p.map(x => Math.round(x))))
-    }
-    models.push(compilate)
-  }
-
   function buildMesh(model){
     switch(model.geometry) {
     case 'lathe': return applyTransforms(lathe(model), model)
@@ -241,7 +231,6 @@ var rotateY = (a) => [Math.cos(a),0,Math.sin(a), 0,1,0, -Math.sin(a),0,Math.cos(
 var rotateZ = (a) => [Math.cos(a),-Math.sin(a),0,  Math.sin(a),Math.cos(a),0,  0,0,1]
 var rotateXYZ = (x,y,z) => mmult(mmult(rotateX(d2r*x), rotateY(d2r*y)), rotateZ(d2r*z))
 var scale = (x,y,z) => [x,0,0,  0,y,0,  0,0,z]
-var identity = () => [1,0,0, 0,1,0, 0,0,1]
 var vtranslate = (vec, delta) => [vec[0]+delta[0], vec[1]+delta[1], vec[2]+delta[2]]
 var vadd = (a, b) => [a[0]+b[0], a[1]+b[1], a[2]+b[2]]
 var vdiff = (a, b) => [a[0]-b[0], a[1]-b[1], a[2]-b[2]]

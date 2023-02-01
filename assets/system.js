@@ -42,7 +42,7 @@ export function Desktop({ title, apps }) {
           key: `icon-${app.name}`,
           icon: openApps[app.name] ? null : 'assets/'+app.icon,
           title: app.name,
-          style: { left: 20, top: 50 + 100 * i },
+          style: { left: i % 2 ? 130 : 20, top: 50 + 120 * Math.floor(i / 2) },
           onClick: () => {
             setOpenApps({ ...openApps, [app.name]: true })
             setCurrent(app.name)
