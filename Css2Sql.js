@@ -1,6 +1,6 @@
 import { el, App } from './assets/system.js'
 
-export const app = new App('Css2Sql', Css2Sql, 'cube.svg', [450, 250])
+export const app = new App('Css2Sql', Css2Sql, 'database.svg', [450, 250])
 
 export function Css2Sql() {
   const [input, setInput] = React.useState('')

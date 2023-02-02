@@ -82,6 +82,7 @@ a.app-icon {
   appearance: none;
   border: none;
   background: none;
+  text-decoration: none;
 }
 
 a.app-icon img {
@@ -95,6 +96,7 @@ a.app-icon span {
   padding: 3px;
   border-radius: 4px;
   background-color: #fff;
+  text-align: center;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }

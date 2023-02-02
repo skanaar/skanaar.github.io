@@ -1,4 +1,7 @@
-function conduct(world, input, deltaT){
+import { V } from './vector.js'
+import { Unit } from './game.js'
+
+export function conduct(world, input, deltaT){
 	var player = world.units[0]
 
 	var weapons = {

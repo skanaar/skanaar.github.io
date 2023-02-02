@@ -6,13 +6,14 @@
     <link rel="icon" type="image/svg+xml" href="assets/devices.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/system.css">
-    <link rel="stylesheet" href="Minesweep.css">
     </style>
   </head>
   <body>
     <div id="root"></div>
     <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="cytank/js/underscore.js"></script>
+    <script src="cytank/js/Bacon.js"></script>
 		<script type="importmap">
 			{
 				"imports": {
@@ -20,22 +21,22 @@
 				}
 			}
 		</script>
-		<script type="module">
-			import { start } from './lunar-rover/script.js'
-      window.initLunarRover = start
-		</script>
     <script type="module">
       import { Desktop, App } from './assets/system.js'
       import { app as css2sql } from './Css2Sql.js'
       import { app as readme } from './Readme.js'
       import { app as minesweep } from './Minesweep.js'
       import { app as lunarRover } from './LunarRover.js'
+      import { app as cytank } from './Cytank.js'
       import { app as modeller } from './Modeller.js'
       import { app as terrain } from './Terrain.js'
       
+      const nebula = new App('Nebula Sky', 'http://www.rymdmotor.se/nebula-sky', 'joystick.svg')
+      const beer = new App('Gissa Krogen', 'https://gissa-krogen.vercel.app/', 'beer.svg')
+      
       const os = React.createElement(Desktop, {
         title: 'Daniel Kallin',
-        apps: [css2sql, minesweep, lunarRover, modeller, terrain, readme]
+        apps: [css2sql, minesweep, lunarRover, cytank, modeller, terrain, nebula, beer, readme]
       })
 
       const root = ReactDOM.createRoot(document.getElementById('root'))

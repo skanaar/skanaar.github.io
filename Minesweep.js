@@ -39,7 +39,7 @@ function openCell(field, i, j) {
       if (neighbor.open === false) openCell(field, x, y)
 }
 
-const icon = 'cube.svg'
+const icon = 'bomb.svg'
 export const app = new App('Minesweep', Minesweep, icon, [150, 50], 'noresize')
 
 export function Minesweep() {
@@ -59,6 +59,7 @@ export function Minesweep() {
     return el(
       'mine-sweep',
       {},
+      el('style', {}, style),
       el(
         'grid-2col',
         {},
@@ -77,6 +78,7 @@ export function Minesweep() {
     return el(
       'mine-sweep',
       {},
+      el('style', {}, style),
       el('h2', {}, 'Success!'),
       el('hr'),
       el(MineField, { field, disabled: true }),
@@ -85,6 +87,7 @@ export function Minesweep() {
     return el(
       'mine-sweep',
       {},
+      el('style', {}, style),
       el('h2', {}, 'Failure'),
       el('hr'),
       el(MineField, { field, disabled: true }),
@@ -93,6 +96,7 @@ export function Minesweep() {
   return el(
     'mine-sweep',
     {},
+    el('style', {}, style),
     el('h2', {}, gameSpec.mines, ' mines'),
     el('hr'),
     el(MineField, {
@@ -172,3 +176,46 @@ function CellSymbol({ cell }) {
   }
   return cell.flag ? 'F' : ''
 }
+
+const style = `
+mine-sweep h2 {
+  margin: 0;
+  text-align: center;
+}
+mine-field {
+  margin: -5px;
+}
+mine-field.disabled {
+  color: #888;
+}
+mine-field button {
+  width: 26px;
+  height: 26px;
+  appearance: none;
+  background-color: #fff;
+  border: 2px solid var(--win-color);
+  border-radius: 4px;
+  padding: 0;
+  margin: 2px;
+  text-align: center;
+  font-weight: bold;
+  font-family: inherit;
+  font-size: inherit;
+}
+mine-field.disabled button {
+  border-color: #888;
+  color: #888;
+}
+mine-field:not(.disabled) button:hover:not([disabled]) {
+  background-color: #000;
+  color: #fff;
+}
+mine-field button:disabled {
+  color: inherit;
+  border-color: transparent;
+}
+mine-field:not(.disabled) button:active:not([disabled]) {
+  color: #fff;
+  background-color: #000;
+}
+`

@@ -1,6 +1,7 @@
-var V = skanaar.V
+/* global _ */
+import { V } from './vector.js'
 
-function Terrain(points){
+export function Terrain(points){
 	var verts = points
 	function vertex(i){ return verts[(i + verts.length) % verts.length] }
 	return {
@@ -16,7 +17,7 @@ function Terrain(points){
 	}
 }
 
-function Particles(w, h, scale, maxCount){
+export function Particles(w, h, scale, maxCount){
 	var field = V.VectorField(w, h, {
 		initializer: function (i,j){
 			return V.add(V.random(10), V.Vec(0, (j/2-h/2)))
@@ -61,7 +62,7 @@ function Particles(w, h, scale, maxCount){
 	}
 }
 
-function Unit(pos, opt){
+export function Unit(pos, opt){
 	opt = opt || {}
 	return _.extend({
 		style: null,
@@ -86,7 +87,7 @@ function Unit(pos, opt){
 	}, opt)
 }
 
-function Explosion(pos, opt){
+export function Explosion(pos, opt){
 	return Unit(pos, _.extend(opt, {
 		style: 'explosion',
 		airFriction: 0,
@@ -96,7 +97,7 @@ function Explosion(pos, opt){
 	}))
 }
 
-function World(){
+export function World(){
 	var units = [
 		Unit(V.Vec(250, 20), { groundFriction: 0.99 }),
 		Unit(V.Vec(80, 30), { airFriction: 0.7, radius: 3 }),
@@ -110,12 +111,12 @@ function World(){
 		terrains: [
 			Terrain([V.Vec(350, 150), V.Vec(550, 150), V.Vec(450, 200)]),
 			Terrain([
-				{x:0,y:400},{x:0,y:0},{x:30,y:209},{x:75,y:248},{x:85,y:250},
+				{x:-5,y:405},{x:-5,y:-5},{x:30,y:209},{x:75,y:248},{x:85,y:250},
 				{x:145,y:219},{x:170,y:146},{x:144,y:112},{x:124,y:70},
 				{x:223,y:54},{x:336,y:89},{x:320,y:119},{x:258,y:176},
 				{x:244,y:256},{x:227,y:280},{x:251,y:316},{x:457,y:349},
-				{x:550,y:300},{x:690,y:300},{x:700,y:295},{x:800,y:0},
-				{x:800,y:400}])
+				{x:550,y:300},{x:690,y:300},{x:700,y:295},{x:805,y:-5},
+				{x:805,y:405}])
 		],
 		units: units
 	}

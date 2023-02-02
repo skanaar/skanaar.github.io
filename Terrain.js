@@ -1,6 +1,6 @@
 import { el, Button, App } from './assets/system.js'
 
-export const app = new App('Terrain', Terrain, 'cube.svg', [650, 400], 'noresize')
+export const app = new App('Terrain', Terrain, 'landscape.svg', [650, 400], 'noresize')
 
 export function Terrain() {
   

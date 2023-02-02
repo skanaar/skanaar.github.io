@@ -1,7 +1,12 @@
-function render(world, input, g){
-	var player = world.units[0]
+/* global _ */
+import { V } from './vector.js'
 
-	g.background(200,200,200)
+export function render(world, input, g){
+	var player = world.units[0]
+	
+	g.ctx.lineJoin = 'round'
+
+	g.background(230,230,230)
 
 	g.inTransform(function (){
 		shakeViewportIfFallingDangerouslyFast()
@@ -23,8 +28,9 @@ function render(world, input, g){
 	}
 
 	function renderTerrain(){
-		g.ctx.strokeStyle = '#555'
-		g.ctx.fillStyle = '#aaa'
+		g.ctx.strokeStyle = '#000'
+		g.ctx.lineWidth = 2
+		g.ctx.fillStyle = '#fff'
 		_.each(world.terrains, function(t){
 			g.circuit(t.vertices).fill().stroke()
 		})
@@ -55,9 +61,9 @@ function render(world, input, g){
 	function renderUnits(){
 		_.each(_.where(world.units, { style: null }), function(e){
 			g.ctx.strokeStyle = '#000'
-			g.ctx.fillStyle = '#444'
+			g.ctx.fillStyle = '#000'
 			g.ellipse(e.pos, e.radius, e.radius).fill().stroke()
-			g.ctx.strokeStyle = '#aaa'
+			g.ctx.strokeStyle = '#fff'
 			var health = 2*Math.PI*e.health/e.maxHealth
 			g.ellipse(e.pos, e.radius-2, e.radius-2, 0, health).stroke()
 		})
@@ -87,7 +93,8 @@ function render(world, input, g){
 	}
 
 	function renderBallisticPath(){
-		g.ctx.strokeStyle = '#faa'
+		g.ctx.strokeStyle = '#000'
+		g.ctx.setLineDash([1, 4])
 
 		if(!player.weapon || player.weapon.airFriction < 1) return
 

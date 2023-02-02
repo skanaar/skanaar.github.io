@@ -1,5 +1,4 @@
-var skanaar = skanaar || {}
-skanaar.Canvas = function (canvas, callbacks){
+export function Canvas(canvas, callbacks){
 	var ctx = canvas.getContext('2d');
 	var mousePos = { x: 0, y: 0 }
 	var twopi = 2*3.1416
@@ -140,6 +139,7 @@ skanaar.Canvas = function (canvas, callbacks){
 		radialGradient: function (x, y, r1, r2, colors){
 			var grad = ctx.createRadialGradient(x, y, r1, x, y, r2)
 			for(var key in colors)
+				// eslint-disable-next-line no-prototype-builtins
 				if (colors.hasOwnProperty(key))
 					grad.addColorStop(key, colors[key])
 			return grad

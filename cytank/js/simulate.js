@@ -1,5 +1,8 @@
+/* global _ */
+import { Explosion } from './game.js'
+import { V } from './vector.js'
 
-function simulate(world, deltaT){
+export function simulate(world, deltaT){
 	var fallingUnits = _.where(world.units, {isGrounded: false})
 
 	ageUnits()
@@ -36,17 +39,17 @@ function simulate(world, deltaT){
 		})
 	}
 	function intersection(p1, p2, q1, q2) {
-	    var vp = V.diff(p2, p1)
-	    var vq = V.diff(q2, q1)
-	    var det = vq.y * vp.x - vq.x * vp.y
-	    if (det === 0)
-	        return false
-	    var w = V.diff(p1, q1)
-	    var t = (vq.x * w.y - vq.y * w.x) / det
-	    var u = (vp.x * w.y - vp.y * w.x) / det
-	    if(t < 0 || t > 1 || u < 0 || u > 1)
-	    	return false
-	    return V.add(p1, V.mult(vp, t))
+		var vp = V.diff(p2, p1)
+		var vq = V.diff(q2, q1)
+		var det = vq.y * vp.x - vq.x * vp.y
+		if (det === 0)
+			return false
+		var w = V.diff(p1, q1)
+		var t = (vq.x * w.y - vq.y * w.x) / det
+		var u = (vp.x * w.y - vp.y * w.x) / det
+		if(t < 0 || t > 1 || u < 0 || u > 1)
+			return false
+		return V.add(p1, V.mult(vp, t))
 	}
 
 	function unitCollisions(){

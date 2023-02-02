@@ -40,9 +40,10 @@ export function Desktop({ title, apps }) {
       apps.map((app, i) =>
         el(AppIcon, {
           key: `icon-${app.name}`,
+          component: app.component,
           icon: openApps[app.name] ? null : 'assets/'+app.icon,
           title: app.name,
-          style: { left: i % 2 ? 130 : 20, top: 50 + 120 * Math.floor(i / 2) },
+          style: { left: 20 + 100*(i % 3), top: 50 + 120 * Math.floor(i / 3) },
           onClick: () => {
             setOpenApps({ ...openApps, [app.name]: true })
             setCurrent(app.name)
@@ -137,7 +138,14 @@ function Window({
   )
 }
 
-function AppIcon({ icon, title, style, onClick }) {
+function AppIcon({ icon, component, title, style, onClick }) {
+  if (typeof component === 'string') return el(
+    'a',
+    { style, className: 'app-icon', href: component, target: '_blank' },
+    el('img', { src: icon }),
+    el('span', {}, title),
+  )
+
   return el(
     'a',
     { style, className: 'app-icon', onClick },
