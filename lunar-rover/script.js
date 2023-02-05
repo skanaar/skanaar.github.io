@@ -11,12 +11,16 @@ import { input } from './input.js'
 import { vec } from './vec.js'
 import { quad } from './quadtree.js'
 
-var cameraPos = vec.Vec(100,100,100);
+var cameraPos = vec.Vec(100,100,0);
 var timestep = 2;
-var showDebug = false;
-var showOverview = false;
-var isPaused = false;
-var isTwoTone = true;
+
+var settings = {
+  showDebug: false,
+  showOverview: false,
+  isPaused: false,
+  isTwoTone: true,
+};
+
 var unit = {
   '#scout': 0.25,
   '#ranger': 0.60,
@@ -39,6 +43,8 @@ export function start(host) {
 
   init(host, viewer);
   animate();
+  
+  return settings;
 }
 
 function buildPostProcessing(engine, viewer, w, h) {
@@ -140,10 +146,10 @@ function buildEngine(res) {
 function init(container, viewer) {
   container.appendChild(viewer.renderer.domElement);
   input.onNumber(function(i) { timestep = Math.exp(i/4) / 2 });
-  input.on('i', function() { showDebug = !showDebug });
-  input.on(' ', function() { showOverview = !showOverview });
-  input.on('p', function() { isPaused = !isPaused });
-  input.on('x', function() { isTwoTone = !isTwoTone });
+  input.on('i', function() { settings.showDebug = !settings.showDebug });
+  input.on(' ', function() { settings.showOverview = !settings.showOverview });
+  input.on('p', function() { settings.isPaused = !settings.isPaused });
+  input.on('x', function() { settings.isTwoTone = !settings.isTwoTone });
 }
 
 export function updateSize(host) {
@@ -177,7 +183,7 @@ function updateDebugInfo() {
   var n = quad.normalAt(engine.quadtree, x, z);
   engine.marker.position.set(x, y, z);
   engine.normalMarker.position.set(x+2*n.x, y+2*n.y, z+2*n.z);
-  if (!showDebug) {
+  if (!settings.showDebug) {
     engine.marker.position.set(0, -100, 0);
     engine.normalMarker.position.set(0, -100, 0);
   }
@@ -187,7 +193,7 @@ function updateChaseCam() {
   var chaseSpeed = 0.04
   var p = vec.clone(engine.rover.obj.pos);
   var dir = engine.rover.dir;
-  var camDist = showOverview ? 40 : 2;
+  var camDist = settings.showOverview ? 40 : 2;
   var pos = vec.add(p, vec.Vec(dir.x*-camDist, camDist, dir.z*-camDist));
   vec.multTo(cameraPos, 1-chaseSpeed);
   vec.addTo(cameraPos, pos, chaseSpeed);
@@ -199,7 +205,7 @@ function update(composer) {
   var dt = clock.getDelta();
   if (dt > 1) dt = 0.015; // pause simulation in background tabs
 
-  if (!isPaused){
+  if (!settings.isPaused){
     updateDebugInfo();
     updateChaseCam();
 
@@ -214,6 +220,6 @@ function update(composer) {
     engine.rover.steerAhead(0.1);
   }
 
-  if (isTwoTone) composer.render();
+  if (settings.isTwoTone) composer.render();
   else viewer.renderer.render(engine.scene, viewer.camera);
 }

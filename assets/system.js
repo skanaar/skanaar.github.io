@@ -12,7 +12,23 @@ export class App {
       y: Math.floor(Math.random() * 300),
     }
     this.resizeable = size !== 'noresize'
+    this.menus = [
+      { title: name, items: [{ title: 'Quit', app: name, event: 'quit' }]
+    }]
   }
+  addMenu(menuTitle, ...items) {
+    this.menus.push({
+      title: menuTitle,
+      items: items.map(({ title, event, arg }) => ({ title, app: this.name, event, arg }))
+    })
+  }
+}
+
+export function useEvent(app, event, callback) {
+  React.useEffect(() => {
+    const cleanup = signals.on(app.name, event, callback)
+    return cleanup
+  }, [])
 }
 
 function Clock() {
@@ -23,17 +39,69 @@ function Clock() {
     return () => clearInterval(handle)
   }, [])
 
-  return el('span', {}, time.toLocaleTimeString())
+  return el('clock-widget', {}, time.toLocaleTimeString())
+}
+
+const signals = {
+  listeners: [],
+  on(app, event, callback) {
+    this.listeners.push({ app, event, callback })
+    return () => this.off(app, event, callback)
+  },
+  off(app, event, callback) {
+    this.listeners = this.listeners.filter(
+      (e) => !(e.app === app && e.event === event && e.callback === callback)
+    )
+  },
+  trigger(app, event, arg) {
+    for (const item of this.listeners) {
+      const appMatches = item.app === null || item.app === app
+      const eventMatches = item.event === null || item.event === event
+      if (appMatches && eventMatches) item.callback(arg, event, app)
+    }
+  }
 }
 
 export function Desktop({ title, apps }) {
-  const [current, setCurrent] = React.useState('setting')
+  const [current, setCurrent] = React.useState(null)
   const [openApps, setOpenApps] = React.useState({})
+  
+  const openAppNames = [...Object.entries(openApps)].filter(([, open]) => open).map(pair => pair[0])
+  
+  React.useEffect(() => {
+    const onEvent = (arg, event, app) => {
+      if (event == 'restart') location.reload()
+      if (event == 'focus') setCurrent(app)
+      if (event == 'quit') {
+        setCurrent(null)
+        setOpenApps((state) => ({ ...state, [app]: false }))
+      }
+    }
+    signals.on(null, null, onEvent)
+    return () => { signals.off(onEvent)}
+  }, [])
+  
+  const systemMenu = el(
+    Menu,
+    {
+      title,
+      items: [
+        ...openAppNames.map(name => ({ title: name, app: name, event: 'focus' })),
+        { title: null },
+        { title: 'Restart', app: null, event: 'restart' }
+      ]
+    },
+  )
+  
+  const appMenuSpecs = apps.find(e => e.name === current)?.menus ?? []
+  const appMenus = appMenuSpecs.map(e =>
+    el(Menu, { title: e.title, items: e.items })
+  )
 
   return el(
     'desktop-host',
     { class: 'halftone' },
-    el('header', {}, title, el(Clock)),
+    el('header', {}, systemMenu, ...appMenus, el(Clock)),
     el(
       'main',
       {},
@@ -45,7 +113,7 @@ export function Desktop({ title, apps }) {
           title: app.name,
           style: { left: 20 + 100*(i % 3), top: 50 + 120 * Math.floor(i / 3) },
           onClick: () => {
-            setOpenApps({ ...openApps, [app.name]: true })
+            setOpenApps((state) => ({ ...state, [app.name]: true }))
             setCurrent(app.name)
           },
         }),
@@ -67,10 +135,10 @@ export function Desktop({ title, apps }) {
               onFocus: () => setCurrent(app.name),
               onClose: ({ pos }) => {
                 app.pos = pos
-                setOpenApps({ ...openApps, [app.name]: false })
+                signals.trigger(app.name, 'quit')
               },
             },
-            el(app.component),
+            el(app.component, {}),
           ),
         ),
     ),
@@ -156,4 +224,46 @@ function AppIcon({ icon, component, title, style, onClick }) {
 
 export function Button(props) {
   return el('button', { ...props, className: 'btn ' + (props.className ?? '') })
+}
+
+export function Menu({ title, items }) {
+  const [open, setOpen] = React.useState(false)
+  const ref = React.useRef()
+  const isOpen = React.useRef(false)
+  const showDropdown = open && items
+  function activate() {
+    setOpen(!open)
+    isOpen.current = !open
+  }
+
+  return el(React.Fragment, {},
+    open && el('menu-backdrop', { onClick: () => setOpen(false) }),
+    el(
+      'menu-root',
+      { ref },
+      el('button', { className: 'menu-item', onClick: activate }, title),
+      showDropdown &&
+        el(
+          'menu-dropdown',
+          {},
+          items.map((item, i) => el(
+            MenuItem, 
+            { key: i, item, onClose: () => setOpen(false) }
+          ))
+        )
+    ),
+  )
+}
+
+export function MenuItem({ item, onClose }) {
+  if (item.title === null) return el(Divider)
+  const onClick = () => {
+    signals.trigger(item.app, item.event, item.arg)
+    onClose()
+  }
+  return el('menu-item', {}, el('button', { onClick }, item.title))
+}
+
+export function Divider() {
+  return el('menu-item', {}, el('hr'))
 }

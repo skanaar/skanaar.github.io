@@ -138,10 +138,16 @@ desktop-host {
 
 desktop-host > header {
   border-bottom: var(--line) solid var(--win-color);
-  padding: 3px 6px;
+  padding: 0 5px;
   background-color: #fff;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+}
+header > clock-widget {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  padding: 3px
 }
 
 .halftone {
@@ -198,9 +204,9 @@ grid-2col {
 }
 
 select {
-  border: 2px solid black;
+  border: 2px solid var(--win-color);
   border-radius: 0;
-  box-shadow: 3px 3px 0 -1px black;
+  box-shadow: 3px 3px 0 -1px var(--win-color);
   padding: 2px;
   margin: 2px 6px 4px 2px;
   font-family: inherit;
@@ -210,12 +216,12 @@ select {
 hr {
   border: none;
   height: 2px;
-  background-color: black;
+  background-color: var(--win-color);
   margin: 10px -10px;
 }
 
 input {
-  border: 2px solid black;
+  border: 2px solid var(--win-color);
   border-radius: 0;
   padding: 3px;
   margin: 2px 2px 4px 2px;
@@ -225,4 +231,43 @@ input {
 }
 input.long {
   width: 100%;
+}
+
+menu-root button, menu-item button {
+  position: relative;
+  appearance: none;
+  font-family: inherit;
+  font-size: inherit;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 3px 15px;
+  white-space: nowrap;
+}
+menu-root { position: relative }
+menu-root button:hover { background-color: var(--win-color); color: #fff }
+menu-item hr { margin: 3px 0 }
+menu-item button:hover { background-color: var(--win-color); color: #fff }
+menu-dropdown {
+  position: absolute;
+  z-index: 10;
+  top: 27px;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border: var(--line) solid var(--win-color);
+  min-width: 120px;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 8px 8px 0 #0003;
+}
+menu-backdrop {
+  position: fixed;
+  z-index: 9;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
 }
