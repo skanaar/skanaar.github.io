@@ -13,8 +13,8 @@ export class App {
     }
     this.resizeable = size !== 'noresize'
     this.menus = [
-      { title: name, items: [{ title: 'Quit', app: name, event: 'quit' }]
-    }]
+      { title: name, items: [{ title: 'Quit', app: name, event: 'quit' }]},
+    ]
   }
   addMenu(menuTitle, ...items) {
     this.menus.push({
@@ -71,7 +71,10 @@ export function Desktop({ title, apps }) {
   React.useEffect(() => {
     const onEvent = (arg, event, app) => {
       if (event == 'restart') location.reload()
-      if (event == 'focus') setCurrent(app)
+      if (event == 'focus') {
+        setCurrent(app)
+        setOpenApps((state) => ({ ...state, [app]: true }))
+      }
       if (event == 'quit') {
         setCurrent(null)
         setOpenApps((state) => ({ ...state, [app]: false }))
@@ -86,6 +89,8 @@ export function Desktop({ title, apps }) {
     {
       title,
       items: [
+        { title: 'About Skanaar', app: 'Readme', event: 'focus' },
+        { title: null },
         ...openAppNames.map(name => ({ title: name, app: name, event: 'focus' })),
         { title: null },
         { title: 'Restart', app: null, event: 'restart' }
@@ -112,10 +117,7 @@ export function Desktop({ title, apps }) {
           icon: openApps[app.name] ? null : 'assets/'+app.icon,
           title: app.name,
           style: { left: 20 + 100*(i % 3), top: 50 + 120 * Math.floor(i / 3) },
-          onClick: () => {
-            setOpenApps((state) => ({ ...state, [app.name]: true }))
-            setCurrent(app.name)
-          },
+          onClick: () => signals.trigger(app.name, 'focus', null)
         }),
       ),
       apps

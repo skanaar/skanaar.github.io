@@ -244,6 +244,7 @@ menu-root button, menu-item button {
   text-align: left;
   padding: 3px 15px;
   white-space: nowrap;
+  user-select: none;
 }
 menu-root { position: relative }
 menu-root button:hover { background-color: var(--win-color); color: #fff }

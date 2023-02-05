@@ -2,16 +2,24 @@ import { el, Button, App } from './assets/system.js'
 
 export const app = new App('Terrain', Terrain, 'landscape.svg', [650, 400], 'noresize')
 
+app.menus[0].items.unshift({ title: 'Toggle rotation', app: 'Terrain', event: 'rotation' })
+
 export function Terrain() {
   
   const [selected, setSelected] = React.useState(0)
+  const [angle, setAngle] = React.useState(0.3)
   const surface = surfaces[selected]
+  
+  React.useEffect(() => {
+    const handle = setInterval(() => setAngle(a => (a + 0.002) % (2*Math.PI)))
+    return () => clearInterval(handle)
+  }, [])
 
   function changeSelected(delta) {
     setSelected((selected + delta + surfaces.length) % surfaces.length)
   }
   
-  const mesh = drawTerrain(surface)
+  const mesh = drawTerrain(surface, angle)
   
   return el(
     'terrain-viewer',
@@ -77,14 +85,17 @@ function spectrumSample(spectrum, x){
   return [r, g, b].join('')
 }
 
-function drawTerrain(style){
+const noises = new Map()
+
+function drawTerrain(style, angle = 0.3){
   var center = Vec(400, 250)
   var radius = 300
-  var angle = 0.3
   var res = 20
   var shadow = '000'
 
-  var noise = Noise({ persistence: style.falloff, octaves: style.octaves, zoom: 0.2 })
+  if (!noises.has(style))
+    noises.set(style, Noise({ persistence: style.falloff, octaves: style.octaves, zoom: 0.2 }))
+  var noise = noises.get(style)
 
   function terrainPoint(i, j, h){
     var p = rotate(mult(Vec(i-res, j-res), radius/res), angle)
