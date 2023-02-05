@@ -1,4 +1,8 @@
 import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
+import { DotScreenShader } from 'three/addons/shaders/DotScreenShader.js';
 import { Wheel } from './wheel.js'
 import { Rover } from './rover.js'
 import { solveEuler, resetForces } from './entity.js'
@@ -12,6 +16,7 @@ var timestep = 2;
 var showDebug = false;
 var showOverview = false;
 var isPaused = false;
+var isTwoTone = true;
 var unit = {
   '#scout': 0.25,
   '#ranger': 0.60,
@@ -22,13 +27,28 @@ var clock = new THREE.Clock();
 
 var viewer = null
 var engine = null
+var composer = null
 
 export function start(host) {
-  viewer = buildViewer(host.offsetWidth, host.offsetHeight, window.devicePixelRatio)
+  var w = host.offsetWidth;
+  var h = host.offsetHeight;
+  viewer = buildViewer(w, h, window.devicePixelRatio)
   engine = buildEngine(256, viewer);
+  composer = buildPostProcessing(engine, viewer, w, h)
+
 
   init(host, viewer);
   animate();
+}
+
+function buildPostProcessing(engine, viewer, w, h) {
+  var composer = new EffectComposer(viewer.renderer);
+  composer.setSize(w, h);
+  composer.addPass(new RenderPass(engine.scene, viewer.camera));
+  const effect = new ShaderPass(DotScreenShader);
+  effect.uniforms['scale'].value = 2;
+  composer.addPass(effect);
+  return composer;
 }
 
 function buildViewer(viewW, viewH, pixelRatio) {
@@ -113,7 +133,7 @@ function buildEngine(res) {
     normalMarker: normalMarker,
     wheels: [wheelA, wheelB, wheelC, wheelD],
     rover: rover,
-  	quadtree: quadtree
+    quadtree: quadtree
   };
 }
 
@@ -123,6 +143,7 @@ function init(container, viewer) {
   input.on('i', function() { showDebug = !showDebug });
   input.on(' ', function() { showOverview = !showOverview });
   input.on('p', function() { isPaused = !isPaused });
+  input.on('x', function() { isTwoTone = !isTwoTone });
 }
 
 export function updateSize(host) {
@@ -134,7 +155,7 @@ var even = true;
 function animate() {
   requestAnimationFrame(animate);
   even = !even;
-  if (even) update();
+  if (even) update(composer);
 }
 
 function simulate(dt, iterations) {
@@ -163,17 +184,18 @@ function updateDebugInfo() {
 }
 
 function updateChaseCam() {
+  var chaseSpeed = 0.04
   var p = vec.clone(engine.rover.obj.pos);
   var dir = engine.rover.dir;
   var camDist = showOverview ? 40 : 2;
   var pos = vec.add(p, vec.Vec(dir.x*-camDist, camDist, dir.z*-camDist));
-  vec.multTo(cameraPos, 0.98);
-  vec.addTo(cameraPos, pos, 0.02);
+  vec.multTo(cameraPos, 1-chaseSpeed);
+  vec.addTo(cameraPos, pos, chaseSpeed);
   viewer.camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
   viewer.camera.lookAt(new THREE.Vector3(p.x, p.y, p.z));
 }
 
-function update() {
+function update(composer) {
   var dt = clock.getDelta();
   if (dt > 1) dt = 0.015; // pause simulation in background tabs
 
@@ -192,5 +214,6 @@ function update() {
     engine.rover.steerAhead(0.1);
   }
 
-  viewer.renderer.render(engine.scene, viewer.camera);
+  if (isTwoTone) composer.render();
+  else viewer.renderer.render(engine.scene, viewer.camera);
 }
