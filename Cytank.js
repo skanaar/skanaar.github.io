@@ -3,10 +3,7 @@ import { start } from './cytank/js/engine.js'
 
 export const app = new App('Cytank', Cytank, 'joystick.svg', [800, 400], 'noresize')
 
-app.addToAppMenu(
-  { title: 'Pause/Play', event: 'play' },
-  { title: null }
-)
+app.addToAppMenu({ title: 'Pause/Play', event: 'play' })
 
 export function Cytank() {
   const hostRef = React.useRef()

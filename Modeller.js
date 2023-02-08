@@ -28,7 +28,7 @@ export function Modeller() {
   const zoom = 0.85
   const [mesh, setMesh] = React.useState([])
   const [box, setBox] = React.useState([])
-  const [selected, setSelected] = React.useState(0)
+  const [selected, setSelected] = React.useState(Math.floor(models.length*Math.random()))
 
   const [cameraIndex, setCameraIndex] = React.useState(0)
   

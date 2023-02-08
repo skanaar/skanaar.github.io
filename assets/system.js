@@ -15,9 +15,12 @@ export class App {
     this.menus = [
       { title: name, items: [{ title: 'Quit', app: name, event: 'quit' }]},
     ]
+    this.args = { app: this }
   }
   addToAppMenu(...items) {
-    this.menus[0].items.unshift(...items.map(({ title, event, arg }) => ({ title, app: this.name, event, arg }))
+    this.menus[0].items.unshift(
+      ...items.map(({ title, event, arg }) => ({ title, app: this.name, event, arg })),
+      { title: null }
     )
   }
   addMenu(menuTitle, ...items) {
@@ -145,7 +148,7 @@ export function Desktop({ title, apps }) {
                 signals.trigger(app.name, 'quit')
               },
             },
-            el(app.component, {}),
+            el(app.component, app.args),
           ),
         ),
     ),

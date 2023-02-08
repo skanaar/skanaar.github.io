@@ -1,6 +1,6 @@
 import { el, Button, App } from './assets/system.js'
 
-export const app = new App('Terrain', Terrain, 'landscape.svg', [650, 400], 'noresize')
+export const app = new App('Terrain', Terrain, 'landscape.svg', [650, 460], 'noresize')
 
 export function Terrain() {
   
@@ -30,10 +30,10 @@ export function Terrain() {
       terrain-viewer { background:#000; display:block; margin:-10px }
       terrain-viewer .canvas-3d { display:block }
       terrain-viewer footer {
+        background: #fff;
         display: flex; justify-content: space-between; align-items: center;
-        position: absolute; left: 10px; right: 10px; bottom: 10px;
+        position: absolute; left: 0; right: 0; bottom: 0; padding: 10px;
       }
-      terrain-viewer footer span { color: #fff }
     `),
     el('svg', { width: 650, height: 400, className: 'canvas-3d', viewBox: '100 50 600 400' },
       mesh.map((e, i) => el('path', {

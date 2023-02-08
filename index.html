@@ -31,13 +31,15 @@
       import { app as cytank } from './Cytank.js'
       import { app as modeller } from './Modeller.js'
       import { app as terrain } from './Terrain.js'
+      import { Browser, BrowserApp } from './Browser.js'
       
-      const nebula = new App('Nebula Sky', 'http://www.rymdmotor.se/nebula-sky', 'joystick.svg')
-      const beer = new App('Gissa Krogen', 'https://gissa-krogen.vercel.app/', 'beer.svg')
+      const nebula = new BrowserApp('Nebula Sky', 'planet.svg', 'http://www.rymdmotor.se/nebula-sky')
+      const beer = new BrowserApp('Gissa Krogen', 'beer.svg', 'https://gissa-krogen.vercel.app/')
+      const finscript = new BrowserApp('FinScript', 'chart.svg', '/fin-script', [800, 600])
       
       const os = React.createElement(Desktop, {
         title: '💬',
-        apps: [css2sql, minesweep, lunarRover, cytank, modeller, terrain, nebula, beer, readme]
+        apps: [minesweep, lunarRover, cytank, modeller, terrain, css2sql, nebula, beer, finscript, readme]
       })
 
       const root = ReactDOM.createRoot(document.getElementById('root'))
