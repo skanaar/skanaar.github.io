@@ -1,4 +1,12 @@
-import * as THREE from 'three';
+import {
+  ExtrudeGeometry,
+  Mesh,
+  MeshLambertMaterial,
+  Quaternion,
+  Shape,
+  Vector2,
+  Vector3
+} from 'three';
 import { vec } from './vec.js'
 import { Entity } from './entity.js';
 
@@ -34,13 +42,13 @@ export function Rover(wheelA, wheelB, wheelC, wheelD, width){
       wheelD.turn(this.dir, -rightFactor * this.turn);
     },
     drawObject: function (){
-      var shape = new THREE.Shape([
-        new THREE.Vector2( width/2,  -width/16),
-        new THREE.Vector2( width/2,         0 ),
-        new THREE.Vector2( width/8,   width/8 ),
-        new THREE.Vector2(-width/1.8, width/8 ),
-        new THREE.Vector2(-width/2,         0 ),
-        new THREE.Vector2(-width/2,  -width/16)
+      var shape = new Shape([
+        new Vector2( width/2,  -width/16),
+        new Vector2( width/2,         0 ),
+        new Vector2( width/8,   width/8 ),
+        new Vector2(-width/1.8, width/8 ),
+        new Vector2(-width/2,         0 ),
+        new Vector2(-width/2,  -width/16)
       ]);
       var extrude = {
         depth: 0,
@@ -52,19 +60,19 @@ export function Rover(wheelA, wheelB, wheelC, wheelD, width){
         bevelSize: width*0.1,
         bevelSegments: 1
       };
-      var geometry = new THREE.ExtrudeGeometry(shape, extrude);
+      var geometry = new ExtrudeGeometry(shape, extrude);
 
-      //var geometry = new THREE.BoxGeometry(width, width/3, width/2);
-      var material = new THREE.MeshLambertMaterial({color: 0xdd8800});
-      this._drawObject = new THREE.Mesh(geometry, material);
+      //var geometry = new BoxGeometry(width, width/3, width/2);
+      var material = new MeshLambertMaterial({color: 0xdd8800});
+      this._drawObject = new Mesh(geometry, material);
       this._drawObject.matrixAutoUpdate = false;
       this._drawObject.castShadow = true;
       return this._drawObject;
     },
     apply: function (){
-      var q = new THREE.Quaternion();
-      q.setFromUnitVectors(new THREE.Vector3(1, 0, 0), this.dir);
-      var p = new THREE.Vector3(this.obj.x, this.obj.y + width/3, this.obj.z);
+      var q = new Quaternion();
+      q.setFromUnitVectors(new Vector3(1, 0, 0), this.dir);
+      var p = new Vector3(this.obj.x, this.obj.y + width/3, this.obj.z);
       this._drawObject.position.copy(p);
       this._drawObject.quaternion.copy(q);
       this._drawObject.updateMatrix();

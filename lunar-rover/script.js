@@ -1,4 +1,17 @@
-import * as THREE from 'three';
+import {
+  Clock,
+  Mesh,
+  MeshBasicMaterial,
+  MeshPhongMaterial,
+  PCFShadowMap,
+  PerspectiveCamera,
+  PlaneGeometry,
+  Scene,
+  SphereGeometry,
+  SpotLight,
+  Vector3,
+  WebGLRenderer
+} from 'three';
 import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
 import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
 import { ShaderPass } from 'three/addons/postprocessing/ShaderPass.js';
@@ -27,7 +40,7 @@ var unit = {
   '#juggernaut': 1.5
 }[location.hash] || 0.4
 
-var clock = new THREE.Clock();
+var clock = new Clock();
 
 var viewer = null
 var engine = null
@@ -58,15 +71,15 @@ function buildPostProcessing(engine, viewer, w, h) {
 }
 
 function buildViewer(viewW, viewH, pixelRatio) {
-  var camera = new THREE.PerspectiveCamera(60, viewW / viewH, 1, 20000);
+  var camera = new PerspectiveCamera(60, viewW / viewH, 1, 20000);
   camera.position.y = 16;
   camera.position.x = 50;
-  var renderer = new THREE.WebGLRenderer();
+  var renderer = new WebGLRenderer();
   renderer.setClearColor(0x000000);
   renderer.setPixelRatio(pixelRatio);
   renderer.setSize(viewW, viewH);
 	renderer.shadowMap.enabled = true;
-	renderer.shadowMap.type = THREE.PCFShadowMap;
+	renderer.shadowMap.type = PCFShadowMap;
   return {
     camera: camera,
     //controls: controls,
@@ -78,8 +91,8 @@ function buildViewer(viewW, viewH, pixelRatio) {
 function buildEngine(res) {
   var quadtree = generateLandscape(res, 8);
 
-  var scene = new THREE.Scene();
-  var geometry = new THREE.PlaneGeometry(res, res, res-1, res-1);
+  var scene = new Scene();
+  var geometry = new PlaneGeometry(res, res, res-1, res-1);
   geometry.rotateX(- Math.PI / 2);
 
   var vertices = geometry.attributes.position.array;
@@ -90,12 +103,12 @@ function buildEngine(res) {
   }
 
   geometry.computeVertexNormals();
-  var material = new THREE.MeshPhongMaterial({color: 0x888888});
+  var material = new MeshPhongMaterial({color: 0x888888});
   material.flatShading = true;
-  var mesh = new THREE.Mesh(geometry, material);
+  var mesh = new Mesh(geometry, material);
 	mesh.receiveShadow = true;
 
-  var sun = new THREE.SpotLight(0xffffff, 1.25, 0, Math.PI / 2);
+  var sun = new SpotLight(0xffffff, 1.25, 0, Math.PI / 2);
   sun.position.set(250, 140, 0);
   sun.target.position.set(0, 0, 0);
 
@@ -125,11 +138,11 @@ function buildEngine(res) {
 
   rover.steer(0);
 
-  var markerGeo = new THREE.SphereGeometry(0.2, 4, 4);
-	var markerMaterial = new THREE.MeshBasicMaterial({color: 0xffff00});
-  var marker = new THREE.Mesh(markerGeo, markerMaterial);
+  var markerGeo = new SphereGeometry(0.2, 4, 4);
+	var markerMaterial = new MeshBasicMaterial({color: 0xffff00});
+  var marker = new Mesh(markerGeo, markerMaterial);
   scene.add(marker);
-	var normalMarker = new THREE.Mesh(markerGeo.clone(), markerMaterial);
+	var normalMarker = new Mesh(markerGeo.clone(), markerMaterial);
 	scene.add(normalMarker);
 
   return {
@@ -198,7 +211,7 @@ function updateChaseCam() {
   vec.multTo(cameraPos, 1-chaseSpeed);
   vec.addTo(cameraPos, pos, chaseSpeed);
   viewer.camera.position.set(cameraPos.x, cameraPos.y, cameraPos.z);
-  viewer.camera.lookAt(new THREE.Vector3(p.x, p.y, p.z));
+  viewer.camera.lookAt(new Vector3(p.x, p.y, p.z));
 }
 
 function update(composer) {

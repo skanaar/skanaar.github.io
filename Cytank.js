@@ -1,13 +1,21 @@
-import { el, App } from './assets/system.js'
+import { el, App, useEvent } from './assets/system.js'
 import { start } from './cytank/js/engine.js'
 
 export const app = new App('Cytank', Cytank, 'joystick.svg', [800, 400], 'noresize')
 
+app.addToAppMenu(
+  { title: 'Pause/Play', event: 'play' },
+  { title: null }
+)
+
 export function Cytank() {
   const hostRef = React.useRef()
+  const gameRef = React.useRef()
+  
+  useEvent(app, 'play', () => gameRef.current.isPaused = !gameRef.current.isPaused)
 
   React.useEffect(() => {
-    start(hostRef.current)
+    gameRef.current = start(hostRef.current)
   }, [])
 
   return el('canvas', {

@@ -2,8 +2,6 @@ import { el, Button, App } from './assets/system.js'
 
 export const app = new App('Terrain', Terrain, 'landscape.svg', [650, 400], 'noresize')
 
-app.menus[0].items.unshift({ title: 'Toggle rotation', app: 'Terrain', event: 'rotation' })
-
 export function Terrain() {
   
   const [selected, setSelected] = React.useState(0)

@@ -84,13 +84,15 @@ a.app-icon {
   background: none;
   text-decoration: none;
 }
-
 a.app-icon img {
   display: block;
   width: 64px;
   height: 64px;
 }
-
+a.app-icon.open img {
+  filter: brightness(0%);
+  opacity: 25%;
+}
 a.app-icon span {
   display: block;
   padding: 3px;

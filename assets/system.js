@@ -16,6 +16,10 @@ export class App {
       { title: name, items: [{ title: 'Quit', app: name, event: 'quit' }]},
     ]
   }
+  addToAppMenu(...items) {
+    this.menus[0].items.unshift(...items.map(({ title, event, arg }) => ({ title, app: this.name, event, arg }))
+    )
+  }
   addMenu(menuTitle, ...items) {
     this.menus.push({
       title: menuTitle,
@@ -114,7 +118,8 @@ export function Desktop({ title, apps }) {
         el(AppIcon, {
           key: `icon-${app.name}`,
           component: app.component,
-          icon: openApps[app.name] ? null : 'assets/'+app.icon,
+          icon: 'assets/'+app.icon,
+          open: !!openApps[app.name],
           title: app.name,
           style: { left: 20 + 100*(i % 3), top: 50 + 120 * Math.floor(i / 3) },
           onClick: () => signals.trigger(app.name, 'focus', null)
@@ -208,7 +213,7 @@ function Window({
   )
 }
 
-function AppIcon({ icon, component, title, style, onClick }) {
+function AppIcon({ icon, component, open, title, style, onClick }) {
   if (typeof component === 'string') return el(
     'a',
     { style, className: 'app-icon', href: component, target: '_blank' },
@@ -218,8 +223,8 @@ function AppIcon({ icon, component, title, style, onClick }) {
 
   return el(
     'a',
-    { style, className: 'app-icon', onClick },
-    el('img', { src: icon ?? 'assets/open-app.svg' }),
+    { style, className: 'app-icon ' + (open ? 'open' : ''), onClick },
+    el('img', { src: icon }),
     el('span', {}, title),
   )
 }

@@ -7,6 +7,8 @@ import { render } from './render.js'
 import { conduct } from './conduct.js'
 
 export function start(canvas) {
+  var handle = { isPaused: false }
+  
   var g = new Canvas(canvas, {})
   var world = new World()
 
@@ -49,11 +51,11 @@ export function start(canvas) {
       .filter(function(e){ return e.keyCode in keyMap })
       .onValue(function(e) { return input[keyMap[e.keyCode]] = false })
 
-  Bacon.fromEventTarget(document.body, 'click').onValue(function() {
+  Bacon.fromEventTarget(canvas, 'click').onValue(function() {
     input.fire = true
   })
 
-  Bacon.fromEventTarget(document.body, 'mousemove')
+  Bacon.fromEventTarget(canvas, 'mousemove')
       .onValue(function(e) {
       var scale = canvas.width / canvas.offsetWidth 
       var cursor = V.Vec(e.offsetX * scale, e.offsetY * scale)
@@ -67,6 +69,7 @@ export function start(canvas) {
 
   function update(){
     requestAnimationFrame(function(){
+      if (handle.isPaused) return
 
       var pad = navigator.getGamepads()[0]
       if (pad){
@@ -88,4 +91,8 @@ export function start(canvas) {
     })
   }
   setInterval(update, 25)
+
+  update()
+  
+  return handle
 }

@@ -1,4 +1,10 @@
-import * as THREE from 'three';
+import {
+  LatheGeometry,
+  Matrix4,
+  Mesh,
+  MeshLambertMaterial,
+  Vector2
+} from 'three';
 import { vec } from './vec.js'
 import { quad } from './quadtree.js'
 import { Entity } from './entity.js';
@@ -65,20 +71,20 @@ export function Wheel(x, y, z, r){
     },
     drawObject: function (){
       var profile = [
-        new THREE.Vector2(this.r*0.4, this.r*-0),
-        new THREE.Vector2(this.r*0.8, this.r*-0.5),
-        new THREE.Vector2(this.r*1,   this.r*-0.3),
-        new THREE.Vector2(this.r*1,   this.r* 0.3),
-        new THREE.Vector2(this.r*0.8, this.r* 0.5),
-        new THREE.Vector2(this.r*0.4, this.r* 0),
+        new Vector2(this.r*0.4, this.r*-0),
+        new Vector2(this.r*0.8, this.r*-0.5),
+        new Vector2(this.r*1,   this.r*-0.3),
+        new Vector2(this.r*1,   this.r* 0.3),
+        new Vector2(this.r*0.8, this.r* 0.5),
+        new Vector2(this.r*0.4, this.r* 0),
       ];
-      var geometry = new THREE.LatheGeometry(profile);
-      var m = new THREE.Matrix4();
+      var geometry = new LatheGeometry(profile);
+      var m = new Matrix4();
       m.makeRotationX(Math.PI/2);
       geometry.applyMatrix4(m);
-      var material = new THREE.MeshLambertMaterial({color: 0xdd8800});
+      var material = new MeshLambertMaterial({color: 0xdd8800});
       material.flatShading = true;
-      this._drawObject = new THREE.Mesh(geometry, material);
+      this._drawObject = new Mesh(geometry, material);
       this._drawObject.castShadow = true;
       this._drawObject.receiveShadow = true;
       return this._drawObject;
