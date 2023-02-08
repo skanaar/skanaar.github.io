@@ -4,12 +4,12 @@ export const app = new App('Terrain', Terrain, 'landscape.svg', [650, 400], 'nor
 
 export function Terrain() {
   
-  const [selected, setSelected] = React.useState(0)
-  const [angle, setAngle] = React.useState(0.3)
+  const [selected, setSelected] = React.useState(Math.floor(surfaces.length*Math.random()))
+  const [angle, setAngle] = React.useState(0)
   const surface = surfaces[selected]
   
   React.useEffect(() => {
-    const handle = setInterval(() => setAngle(a => (a + 0.002) % (2*Math.PI)))
+    const handle = setInterval(() => setAngle(a => (a + 0.005) % (2*Math.PI)), 25)
     return () => clearInterval(handle)
   }, [])
 
@@ -17,7 +17,11 @@ export function Terrain() {
     setSelected((selected + delta + surfaces.length) % surfaces.length)
   }
   
-  const mesh = drawTerrain(surface, angle)
+  var center = Vec(400, 250)
+  var radius = 300
+  const mesh = drawTerrain(center, radius, surface, angle)
+  
+  if (angle > Math.PI * 1) mesh.reverse()
   
   return el(
     'terrain-viewer',
@@ -26,9 +30,10 @@ export function Terrain() {
       terrain-viewer { background:#000; display:block; margin:-10px }
       terrain-viewer .canvas-3d { display:block }
       terrain-viewer footer {
-        display: flex; justify-content: space-between;
+        display: flex; justify-content: space-between; align-items: center;
         position: absolute; left: 10px; right: 10px; bottom: 10px;
       }
+      terrain-viewer footer span { color: #fff }
     `),
     el('svg', { width: 650, height: 400, className: 'canvas-3d', viewBox: '100 50 600 400' },
       mesh.map((e, i) => el('path', {
@@ -39,6 +44,7 @@ export function Terrain() {
     ),
     el('footer', {},
     el(Button, { onClick: () => changeSelected(-1) }, '<'),
+    el('span', {}, surface.name),
     el(Button, { onClick: () => changeSelected(+1) }, '>'),
   ),
   )
@@ -85,9 +91,7 @@ function spectrumSample(spectrum, x){
 
 const noises = new Map()
 
-function drawTerrain(style, angle = 0.3){
-  var center = Vec(400, 250)
-  var radius = 300
+function drawTerrain(center, radius, style, angle = 0.3){
   var res = 20
   var shadow = '000'
 
@@ -119,11 +123,16 @@ function drawTerrain(style, angle = 0.3){
       var sunAngle = 0.75 + (terrain[i][j]-terrain[i+1][j])*res/15
       var color = colorLerp(shadow, spectrumSample(style.spectrum, terrain[i][j]), sunAngle)
       var alpha = constrain(0, 1, 0.25*(res - mag(Vec(i-res+0.5, j-res+0.5))))
+      var aZ = terrain[i+0][j+0]
+      var bZ = terrain[i+1][j+0]
+      var cZ = terrain[i+1][j+1]
+      var dZ = terrain[i+0][j+1]
       mesh.push({
-        a: add(center, terrainPoint(i+0, j+0, terrain[i+0][j+0]-0.3)),
-        b: add(center, terrainPoint(i+1, j+0, terrain[i+1][j+0]-0.3)),
-        c: add(center, terrainPoint(i+1, j+1, terrain[i+1][j+1]-0.3)),
-        d: add(center, terrainPoint(i+0, j+1, terrain[i+0][j+1]-0.3)),
+        a: add(center, terrainPoint(i+0, j+0, aZ-0.3)),
+        b: add(center, terrainPoint(i+1, j+0, bZ-0.3)),
+        c: add(center, terrainPoint(i+1, j+1, cZ-0.3)),
+        d: add(center, terrainPoint(i+0, j+1, dZ-0.3)),
+        height: (aZ+bZ+cZ+dZ) / 4,
         fill: color + toHex(15 * alpha)
       })
     }
@@ -173,29 +182,29 @@ function Noise(conf) {
 }
 
 var surfaces = [
-  {name:"planet-badlands-1",radius:20,ambient:0.1,zoom:1.1,height:2,octaves:4,falloff:0.45,curve:[0,0.2,1],spectrum:["6A0","FF8","884"]},
-  {name:"planet-badlands-2",radius:20,ambient:0.1,zoom:0.4,height:1,octaves:4,falloff:0.6,curve:[0,1],spectrum:["444","450","898","FFF"]},
-  {name:"planet-badlands-3",radius:17,ambient:0,zoom:0.4,height:0.9,octaves:4,falloff:0.6,curve:[0.5,0.75,0.9,0.25,0],spectrum:["431","540","898","BA9"]},
-  {name:"planet-beach",radius:10,ambient:0.1,zoom:1.2,height:2,octaves:3,falloff:0.3,curve:[0.7,0.5,0.2,0,0,0],spectrum:["46F","FF8","FF8","884","884"]},
-  {name:"planet-blue-forest",radius:15,ambient:0.1,zoom:1.5,height:2,octaves:3,falloff:0.2,curve:[0,0.65,1],spectrum:["20F","28F","4AF"]},
-  {name:"planet-blue-ocean",radius:18,ambient:0.2,zoom:1.2,height:2,octaves:2,falloff:0.2,curve:[0,0,0.2,1],spectrum:["20F","2FA","4AF","4AF"]},
-  {name:"planet-green-1",radius:20,ambient:0.1,zoom:0.7,height:2,octaves:4,falloff:0.5,curve:[0,0.3,0.3,0.4,0.8,1],spectrum:["05F","4B4","3B8","888"]},
-  {name:"planet-green-2",radius:15,ambient:0.1,zoom:1,height:2,octaves:2,falloff:0.2,curve:[1,0,1],spectrum:["040","0F4","FF0"]},
-  {name:"planet-green-3",radius:10,ambient:0.1,zoom:1.5,height:2,octaves:2,falloff:0.2,curve:[1,0,0.5],spectrum:["4F0","FF8","FF8","884","884"]},
-  {name:"planet-green-4",radius:10,ambient:0.1,zoom:0.5,height:1,octaves:4,falloff:0.65,curve:[0,1],spectrum:["04F","0F0","8D0","FFF"]},
-  {name:"planet-green-5",radius:14,ambient:0.1,zoom:1,height:2,octaves:4,falloff:0.5,curve:[0.1,0.2,0.3,0.33,0.37,0.4,0.6,0.8,0.9,1],spectrum:["040","0F0","8D0","F88"]},
-  {name:"planet-green-6",radius:15,ambient:0.1,zoom:1,height:2,octaves:3,falloff:0.5,curve:[0,0.2,0.4,0.6,0.8,1,0.9],spectrum:["FF8","FF8","8F0","0F0","0F0","0D0","080"]},
-  {name:"planet-green-7",radius:22,ambient:0.1,zoom:0.5,height:1,octaves:4,falloff:0.65,curve:[0,1],spectrum:["449","8A8","8A0","FFF"]},
-  {name:"planet-hell-1",radius:10,ambient:0.1,zoom:2,height:3,octaves:2,falloff:0.2,curve:[0,0.2,1],spectrum:["F00","888","888","444"]},
-  {name:"planet-hell-2",radius:10,ambient:0.1,zoom:1,height:2,octaves:2,falloff:0.2,curve:[0.4,0.5,0.45,0.3,0,0.9,0.95,1],spectrum:["F80","F00","666","666","666","666","666"]},
-  {name:"planet-hell-3",radius:20,ambient:0.1,zoom:1.5,height:2,octaves:4,falloff:0.4,curve:[0.9,0.5,0.4,0.5,0.3,0,0],spectrum:["F80","F80","8f8","8f8","8f8","8f8"]},
-  {type:"planet",name:"planet-hell-4",radius:20,ambient:0.1,zoom:1,height:2,octaves:4,falloff:0.3,curve:[0.6,0.32,0.45,0.5,0.3,0,0],spectrum:["F80","F00","A00","666","666","666","666","666"],model:null},
-  {name:"planet-neutron-1",radius:10,ambient:0,zoom:1,height:2,octaves:4,falloff:0.3,curve:[0.4,0.5,0.45,0.5,0.3,0,0],spectrum:["8AF","48F","666","666","666","666","666"]},
-  {name:"planet-neutron-2",radius:15,ambient:0.3,zoom:1,height:2,octaves:4,falloff:0.4,curve:[0.4,0.8,0.45,0.5,0.3,0,0],spectrum:["333","444","000","666","666","666","FFF","FFF"]},
-  {type:"planet",name:"planet-neutron-3",radius:15,ambient:0,zoom:1,height:2,octaves:4,falloff:0.3,curve:[0.4,0.5,0.45,0.5,0.3,0,0],spectrum:["F80","F00","A00","666","666","666","666","666"],model:null},
-  {name:"planet-rock-1",radius:20,ambient:0.1,zoom:3,height:3,octaves:4,falloff:0.25,curve:[0.4,0.45,0.6,1],spectrum:["666","666","666","666","666","F0F"]},
-  {name:"planet-s-rock-1",radius:10,ambient:0.1,zoom:0.8,height:2,octaves:4,falloff:0.4,curve:[0,0.2,1],spectrum:["8A6","BA4","DB4"]},
-  {name:"planet-soma",radius:8,ambient:0,zoom:1,height:1.5,octaves:4,falloff:0.3,curve:[0,0.2,1],spectrum:["20F","2FA","4AF","4AF"]},
-  {type:"planet",name:"planet-water-1",radius:20,ambient:0.1,zoom:1.1,height:1,octaves:5,falloff:0.5,curve:[0.45,0.4,0.45,0.4,0.7,0.7,0.7,0.7],spectrum:["68F","36F","36F","FFF","FFF","FFF"],model:null},
-  {type:"planet",name:"planet-water-frozen",radius:15,ambient:0.1,zoom:1,height:1,octaves:4,falloff:0.5,curve:[0.9,0.45,0.4,0.45,0.4,0.7,0.7,0.7,0.7],spectrum:["68F","36F","36F","FFF","FFF","FFF"],model:null}
+  {name:"badlands-1",radius:20,ambient:0.1,zoom:1.1,height:2,octaves:4,falloff:0.45,curve:[0,0.2,1],spectrum:["6A0","FF8","884"]},
+  {name:"badlands-2",radius:20,ambient:0.1,zoom:0.4,height:1,octaves:4,falloff:0.6,curve:[0,1],spectrum:["444","450","898","FFF"]},
+  {name:"badlands-3",radius:17,ambient:0,zoom:0.4,height:0.9,octaves:4,falloff:0.6,curve:[0.5,0.75,0.9,0.25,0],spectrum:["431","540","898","BA9"]},
+  {name:"beach",radius:10,ambient:0.1,zoom:1.2,height:2,octaves:3,falloff:0.3,curve:[0.7,0.5,0.2,0,0,0],spectrum:["46F","FF8","FF8","884","884"]},
+  {name:"blue-forest",radius:15,ambient:0.1,zoom:1.5,height:2,octaves:3,falloff:0.2,curve:[0,0.65,1],spectrum:["20F","28F","4AF"]},
+  {name:"blue-ocean",radius:18,ambient:0.2,zoom:1.2,height:2,octaves:2,falloff:0.2,curve:[0,0,0.2,1],spectrum:["20F","2FA","4AF","4AF"]},
+  {name:"green-1",radius:20,ambient:0.1,zoom:0.7,height:2,octaves:4,falloff:0.5,curve:[0,0.3,0.3,0.4,0.8,1],spectrum:["05F","4B4","3B8","888"]},
+  {name:"green-2",radius:15,ambient:0.1,zoom:1,height:2,octaves:2,falloff:0.2,curve:[1,0,1],spectrum:["040","0F4","FF0"]},
+  {name:"green-3",radius:10,ambient:0.1,zoom:1.5,height:2,octaves:2,falloff:0.2,curve:[1,0,0.5],spectrum:["4F0","FF8","FF8","884","884"]},
+  {name:"green-4",radius:10,ambient:0.1,zoom:0.5,height:1,octaves:4,falloff:0.65,curve:[0,1],spectrum:["04F","0F0","8D0","FFF"]},
+  {name:"green-5",radius:14,ambient:0.1,zoom:1,height:2,octaves:4,falloff:0.5,curve:[0.1,0.2,0.3,0.33,0.37,0.4,0.6,0.8,0.9,1],spectrum:["040","0F0","8D0","F88"]},
+  {name:"green-6",radius:15,ambient:0.1,zoom:1,height:2,octaves:3,falloff:0.5,curve:[0,0.2,0.4,0.6,0.8,1,0.9],spectrum:["FF8","FF8","8F0","0F0","0F0","0D0","080"]},
+  {name:"green-7",radius:22,ambient:0.1,zoom:0.5,height:1,octaves:4,falloff:0.65,curve:[0,1],spectrum:["449","8A8","8A0","FFF"]},
+  {name:"hell-1",radius:10,ambient:0.1,zoom:2,height:3,octaves:2,falloff:0.2,curve:[0,0.2,1],spectrum:["F00","888","888","444"]},
+  {name:"hell-2",radius:10,ambient:0.1,zoom:1,height:2,octaves:2,falloff:0.2,curve:[0.4,0.5,0.45,0.3,0,0.9,0.95,1],spectrum:["F80","F00","666","666","666","666","666"]},
+  {name:"hell-3",radius:20,ambient:0.1,zoom:1.5,height:2,octaves:4,falloff:0.4,curve:[0.9,0.5,0.4,0.5,0.3,0,0],spectrum:["F80","F80","8f8","8f8","8f8","8f8"]},
+  {name:"hell-4",radius:20,ambient:0.1,zoom:1,height:2,octaves:4,falloff:0.3,curve:[0.6,0.32,0.45,0.5,0.3,0,0],spectrum:["F80","F00","A00","666","666","666","666","666"],model:null},
+  {name:"neutron-1",radius:10,ambient:0,zoom:1,height:2,octaves:4,falloff:0.3,curve:[0.4,0.5,0.45,0.5,0.3,0,0],spectrum:["8AF","48F","666","666","666","666","666"]},
+  {name:"neutron-2",radius:15,ambient:0.3,zoom:1,height:2,octaves:4,falloff:0.4,curve:[0.4,0.8,0.45,0.5,0.3,0,0],spectrum:["333","444","000","666","666","666","FFF","FFF"]},
+  {name:"neutron-3",radius:15,ambient:0,zoom:1,height:2,octaves:4,falloff:0.3,curve:[0.4,0.5,0.45,0.5,0.3,0,0],spectrum:["F80","F00","A00","666","666","666","666","666"],model:null},
+  {name:"rock-1",radius:20,ambient:0.1,zoom:3,height:3,octaves:4,falloff:0.25,curve:[0.4,0.45,0.6,1],spectrum:["666","666","666","666","666","F0F"]},
+  {name:"s-rock-1",radius:10,ambient:0.1,zoom:0.8,height:2,octaves:4,falloff:0.4,curve:[0,0.2,1],spectrum:["8A6","BA4","DB4"]},
+  {name:"soma",radius:8,ambient:0,zoom:1,height:1.5,octaves:4,falloff:0.3,curve:[0,0.2,1],spectrum:["20F","2FA","4AF","4AF"]},
+  {name:"water-1",radius:20,ambient:0.1,zoom:1.1,height:1,octaves:5,falloff:0.5,curve:[0.45,0.4,0.45,0.4,0.7,0.7,0.7,0.7],spectrum:["68F","36F","36F","FFF","FFF","FFF"],model:null},
+  {name:"water-frozen",radius:15,ambient:0.1,zoom:1,height:1,octaves:4,falloff:0.5,curve:[0.9,0.45,0.4,0.45,0.4,0.7,0.7,0.7,0.7],spectrum:["68F","36F","36F","FFF","FFF","FFF"],model:null}
 ]
