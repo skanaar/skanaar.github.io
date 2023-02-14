@@ -1,6 +1,6 @@
 import { el, Button, App } from './assets/system.js'
 
-export const app = new App('Terrain', Terrain, 'landscape.svg', [650, 460], 'noresize')
+export const app = new App('Terrain', Terrain, 'landscape.svg', [650, 460], 'autosize')
 
 export function Terrain() {
   
@@ -44,7 +44,7 @@ export function Terrain() {
     ),
     el('footer', {},
     el(Button, { onClick: () => changeSelected(-1) }, '<'),
-    el('span', {}, surface.name),
+    el('label', {}, surface.name),
     el(Button, { onClick: () => changeSelected(+1) }, '>'),
   ),
   )

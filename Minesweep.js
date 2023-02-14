@@ -40,7 +40,7 @@ function openCell(field, i, j) {
 }
 
 const icon = 'bomb.svg'
-export const app = new App('Minesweep', Minesweep, icon, [150, 50], 'noresize')
+export const app = new App('Minesweep', Minesweep, icon, [150, 50], 'autosize')
 
 export function Minesweep() {
   const [field, setField] = React.useState(null)

@@ -14,7 +14,7 @@ function modelMenuItems(tags) {
 }
 
 const icon = 'cube.svg'
-export const app = new App('Modeller', Modeller, icon, [400, 475], 'noresize')
+export const app = new App('Modeller', Modeller, icon, [400, 475], 'autosize')
 app.addMenu('Ships', ...modelMenuItems('ship'))
 app.addMenu('Enemies', ...modelMenuItems('foe'))
 app.addMenu('Stations', ...modelMenuItems('station'))

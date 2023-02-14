@@ -21,8 +21,6 @@ window-frame {
   position: absolute;
   left: 10%;
   top: 10%;
-  max-width: 75vw;
-  max-height: 75vh;
   border: var(--line) solid var(--win-color);
   background-color: #fff;
   box-shadow: 8px 8px 0 #0003;
@@ -70,11 +68,9 @@ window-frame window-body {
   position: relative;
   border-top: var(--line) solid var(--win-color);
   padding: 10px;
-  overflow-y: auto;
 }
 
 a.app-icon {
-  position: absolute;
   width: 80px;
   display: flex;
   flex-direction: column;
@@ -112,6 +108,11 @@ h2 {
 
 h2:first-child {
   margin: 0 0 10px 0;
+}
+
+span {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 a, a:hover, a:active {

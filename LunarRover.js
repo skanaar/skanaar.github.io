@@ -1,7 +1,7 @@
 import { el, App, useEvent } from './assets/system.js'
 import { start as initLunarRover } from './lunar-rover/script.js'
 
-export const app = new App('LunarRover', LunarRover, 'moon.svg', [500, 375], 'noresize')
+export const app = new App('LunarRover', LunarRover, 'moon.svg', [500, 375], 'autosize')
 
 app.addMenu(
   'View',

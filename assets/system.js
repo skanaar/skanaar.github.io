@@ -1,7 +1,7 @@
 export const el = (...args) => React.createElement(...args)
 
 export class App {
-  constructor(name, component, icon, [width, height] = [300, 200], size) {
+  constructor(name, component, icon, [width, height] = [300, 200], sizing) {
     this.name = name
     this.component = component
     this.icon = icon
@@ -11,7 +11,7 @@ export class App {
       x: 100 + Math.floor(Math.random() * 500),
       y: Math.floor(Math.random() * 300),
     }
-    this.resizeable = size !== 'noresize'
+    this.sizing = sizing
     this.menus = [
       { title: name, items: [{ title: 'Quit', app: name, event: 'quit' }]},
     ]
@@ -124,7 +124,11 @@ export function Desktop({ title, apps }) {
           icon: 'assets/'+app.icon,
           open: !!openApps[app.name],
           title: app.name,
-          style: { left: 20 + 100*(i % 3), top: 50 + 120 * Math.floor(i / 3) },
+          style: {
+            position: 'absolute',
+            left: 20 + 100*(i % 3),
+            top: 50 + 120 * Math.floor(i / 3)
+          },
           onClick: () => signals.trigger(app.name, 'focus', null)
         }),
       ),
@@ -139,7 +143,7 @@ export function Desktop({ title, apps }) {
               y: app.pos.y,
               w: app.width,
               h: app.height,
-              resizeable: app.resizeable,
+              sizing: app.sizing,
               title: app.name,
               focused: current === app.name,
               onFocus: () => setCurrent(app.name),
@@ -160,7 +164,7 @@ function Window({
   y,
   w,
   h,
-  resizeable,
+  sizing,
   title,
   focused,
   onFocus,
@@ -174,9 +178,9 @@ function Window({
     const handleMouseMove = (e) => {
       if (pressed.current) {
         setPos(({ x, y }) => ({
-          x: Math.min(window.innerWidth - w, Math.max(0, x + e.movementX)),
+          x: Math.min(window.innerWidth - 30, Math.max(0, x + e.movementX)),
           y: Math.min(
-            window.innerHeight - 28 - h,
+            window.innerHeight - 28 - 30,
             Math.max(28, y + e.movementY),
           ),
         }))
@@ -191,16 +195,19 @@ function Window({
     return () => window.removeEventListener('mouseup', handleMouseUp)
   }, [])
 
-  const style = { left: pos.x, top: pos.y, minWidth: w, minHeight: h }
-  if (resizeable) style.resize = 'both'
-  const className = focused ? 'focused' : ''
+  const style = { left: pos.x, top: pos.y }
+  const bodyStyle = sizing === 'noresize'
+    ? { minWidth: w, minHeight: h, resize: 'both', overflowY: 'auto' }
+    : sizing === 'autosize'
+    ? {}
+    : { width: w, minWidth: w, height: h, resize: 'both', overflowY: 'auto' }
 
   return el(
     React.Fragment,
     {},
     el(
       'window-frame',
-      { style, onMouseDown: onFocus, class: className },
+      { style, onMouseDown: onFocus, class: focused ? 'focused' : '' },
       el(
         'window-title',
         {
@@ -211,12 +218,12 @@ function Window({
         el('button', { onClick: () => onClose({ pos }) }),
         title,
       ),
-      el('window-body', {}, children),
+      el('window-body', { style: bodyStyle }, children),
     ),
   )
 }
 
-function AppIcon({ icon, component, open, title, style, onClick }) {
+export function AppIcon({ icon, component, open, title, style, onClick }) {
   if (typeof component === 'string') return el(
     'a',
     { style, className: 'app-icon', href: component, target: '_blank' },
