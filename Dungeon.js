@@ -2,9 +2,11 @@ import {
   CompositeGeometry,
   CubeGeometry,
   ExtrudeGeometry,
+  LatheGeometry,
   buildMesh,
   cullMesh,
   degToRad,
+  lerp,
   mmults,
   perspective,
   rotateXYZ,
@@ -15,31 +17,45 @@ import { el, App, Button } from './assets/system.js'
 
 const map = [
   '##########',
-  '#0## ## ##',
+  '#.#  ## ##',
   '# ##     #',
   '# ##  ## #',
   '#        #',
-  '##### # ##',
-  '#  #    ##',
-  '#  0  # ##',
-  '#     ####',
+  '###O° ° ##',
+  '#  °    ##',
+  'O  .  # ##',
+  'O     ####',
   '#### #####',
 ]
 
-const wallGeo = new ExtrudeGeometry('', [['scale',50,50,50]], [
+const stoneWallGeo = new ExtrudeGeometry('', [['scale',50,50,50]], [
   [-1,-0.8,-1],[-1,0,-1],[-1,0.8,-1],
   [-0.8,1,-1],[0,1,-1],[0.8,1,-1],
   [1,0.8,-1],[1,0,-1],[1,-0.8,-1],
   [0.8,-1,-1],[0,-1,-1],[-0.8,-1,-1],[-1,-0.8,-1]
 ], 2)
 
+const pillarWallGeo = new LatheGeometry('', [], 16, [
+  [-55,0,-50],[-55,0,-45],[-50,0,-40],[-45,0,-30],[-45,0,30],[-50,0,40],[-55,0,45],[-55,0,50]
+])
+
+const pillarGeo = new LatheGeometry('', [], 8, [
+  [-35,0,-50],[-35,0,-45],[-30,0,-40],[-25,0,-30],[-25,0,30],[-30,0,40],[-35,0,45],[-35,0,50]
+])
+
+const artefactGeo = new CubeGeometry('', [['subdivide'], ['subdivide'], ['sphere',15,15,15], ['rotate',40,40,40], ['translate',0,0,-35]])
+
+const floorGeo = new CubeGeometry('', [['subdivide'], ['scale',45,45,0.01], ['translate',0,0,-50]])
+
 const cubes = new CompositeGeometry('map', [], map.flatMap((row, y) => {
   return row.split('').map((cell, x) => {
-    if (cell === '#')
-      return new CompositeGeometry('', [['translate',x*100,y*100,0]], [wallGeo])
-    if (cell === '0')
-      return new CubeGeometry('', [['subdivide'], ['sphere',20,20,20], ['rotate',40,40,40], ['translate',x*100,y*100,0]])
-    return new CompositeGeometry('', [], [])
+    switch(cell) {
+      case '#': return new CompositeGeometry('', [['translate',x*100,y*100,0]], [stoneWallGeo])
+      case 'O': return new CompositeGeometry('', [['translate',x*100,y*100,0]], [pillarWallGeo])
+      case '°': return new CompositeGeometry('', [['translate',x*100,y*100,0]], [pillarGeo])
+      case '.': return new CompositeGeometry('', [['translate',x*100,y*100,0]], [artefactGeo])
+      default: return new CompositeGeometry('', [['translate',x*100,y*100,0]], [floorGeo])
+    }
   })
 }))
 
@@ -49,13 +65,13 @@ const icon = 'arch.svg'
 export const app = new App('Dungeon', Dungeon, icon, [150, 50], 'noresize')
 
 export function Dungeon() {
-  const [x, setX] = React.useState(-300)
-  const [y, setY] = React.useState(-800)
-  const [rot, setRot] = React.useState(0)
+  const [x, setX] = React.useState(3)
+  const [y, setY] = React.useState(8)
+  const [rot, setRot] = React.useState(180)
 
   const matrix = mmults(
-    translate(x,y,0),
-    rotateXYZ(-90,rot,0),
+    translate(-x*100,-y*100,0),
+    rotateXYZ(90,rot,0),
     perspective(0.6, 1000, 20000),
     translate(200,150,0),
   )
@@ -106,14 +122,25 @@ export function Dungeon() {
       ),
 
       el('footer', {},
-        `${Math.floor(x)},${Math.floor(y)} | ${Math.floor(rot)}`,
-        el(Button, { onClick: () => setRot(k => k + 10) }, '←'),
+        `${Math.round(x)},${Math.round(y)} | ${Math.round(rot)}`,
+        el(Button, { onClick: () => animate(rot, rot+90, (r) => setRot((r+360)%360)) }, '←'),
         el(Button, { onClick: () => {
-          setX(k => k + 20 * Math.sin(degToRad(rot)))
-          setY(k => k + 20 * Math.cos(degToRad(rot)))
+          const x2 = x - Math.sin(degToRad(rot))
+          const y2 = y + Math.cos(degToRad(rot))
+          if (x2 < 0 || x2 >= map[0].length || y2 < 0 || y2 >= map.length) return
+          if (map[y2][x2] !== ' ') return
+          animate(x, x2, setX)
+          animate(y, y2, setY)
         } }, '↑'),
-        el(Button, { onClick: () => setRot(k => k - 10) }, '→'),
+        el(Button, { onClick: () => animate(rot, rot-90, setRot) }, '→'),
       ),
     )
   )
+}
+
+const STEPS = 25
+function animate(from, to, setter) {
+  for (let i=0; i<=STEPS; i++) {
+    setTimeout(() => setter(lerp(i/STEPS, from, to)), i*500/STEPS)
+  }
 }
