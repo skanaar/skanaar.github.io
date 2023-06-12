@@ -10,8 +10,8 @@
   </head>
   <body>
     <div id="root"></div>
-    <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
     <script src="cytank/js/underscore.js"></script>
     <script src="cytank/js/Bacon.js"></script>
 		<script type="importmap">
@@ -30,6 +30,7 @@
       import { app as lunarRover } from './LunarRover.js'
       import { app as cytank } from './Cytank.js'
       import { app as modeller } from './Modeller.js'
+      import { app as dungeon, Dungeon } from './Dungeon.js'
       import { app as terrain } from './Terrain.js'
       import { Browser, BrowserApp } from './Browser.js'
       
@@ -39,11 +40,11 @@
       
       const os = React.createElement(Desktop, {
         title: '💬',
-        apps: [minesweep, lunarRover, cytank, modeller, terrain, css2sql, nebula, beer, finscript, readme]
+        apps: [minesweep, lunarRover, cytank, modeller, terrain, css2sql, nebula, beer, finscript, dungeon, readme]
       })
 
       const root = ReactDOM.createRoot(document.getElementById('root'))
-      root.render(os)
+      root.render(React.createElement(Dungeon))
     </script>
   </body>
 </html>
