@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Daniel Kallin</title>
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../assets/system.css">
+    <style>
+      body {
+        background: #000;
+      }
+      #root {
+        width: 100%;
+        height: 100%;
+        background: #fff;
+      }
+      #root dungeon-crawler {
+        margin: 0;
+      }
+      @media (min-width: 500px) {
+        #root {
+          width: 375px;
+          height: 600px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="../assets/react.production.min.js"></script>
+    <script src="../assets/react-dom.production.min.js"></script>
+    <script type="module">
+      import { Dungeon } from './Dungeon.js'
+      const root = ReactDOM.createRoot(document.getElementById('root'))
+      root.render(React.createElement(Dungeon))
+    </script>
+  </body>
+</html>

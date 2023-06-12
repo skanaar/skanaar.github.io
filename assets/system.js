@@ -141,15 +141,19 @@ export function Desktop(props) {
     {
       title: systemMenuLabel,
       items: [
-        { title: 'About '+systemName, app: aboutApp, event: 'focus' },
-        { title: null },
+        aboutApp && {
+          title: `About ${systemName}`,
+          app: aboutApp,
+          event: 'focus'
+        },
+        aboutApp && { title: null },
         ...Object
           .entries(openApps)
           .filter(([, open]) => open)
           .map(([name]) => ({ title: name, app: name, event: 'focus' })),
         { title: null },
         { title: 'Restart', app: null, event: 'restart' }
-      ]
+        ].filter(e => !!e)
     },
   )
 
@@ -169,7 +173,7 @@ export function Desktop(props) {
         el(AppIcon, {
           key: `icon-${app.name}`,
           component: app.component,
-          icon: 'assets/'+app.icon,
+          icon: '/assets/'+app.icon,
           open: !!openApps[app.name],
           title: app.name,
           style: {

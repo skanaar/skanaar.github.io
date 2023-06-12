@@ -183,6 +183,7 @@ button.btn {
   font-family: inherit;
   font-size: inherit;
 }
+button.btn.small { min-width: auto }
 button.btn:hover:not([disabled]) {
   outline: 3px solid #000;
   outline-offset: 1px;

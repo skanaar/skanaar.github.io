@@ -1,0 +1,84 @@
+modeller-viewer {
+  display: grid;
+  height: 400px;
+  margin: -10px;
+  grid-template-columns: auto auto;
+}
+
+modeller-viewer header {
+  text-align: center;
+}
+
+modeller-viewer footer {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+}
+
+modeller-viewer .canvas-3d {
+  display: block;
+  position: relative;
+  margin: -10px;
+  top: 20px;
+  width: 400px;
+  height: 400px;
+}
+
+modeller-viewer .canvas-3d.offset {
+  top: -65px;
+}
+
+modeller-viewer svg.canvas-3d path {
+  fill: #fff;
+  stroke-linejoin: bevel;
+  stroke-width: 1px;
+  stroke: #000;
+}
+
+modeller-viewer svg.canvas-3d path.outline {
+  stroke: #000;
+  stroke-width: 1px;
+  stroke-dasharray: 1 5;
+}
+
+geometry-editor {
+  display: block;
+  border: 2px solid black;
+  border-radius: 3px;
+  padding: 5px;
+}
+
+geometry-editor transform-editor {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr 1fr auto;
+  gap: 5px;
+  align-items: center;
+}
+
+geometry-editor .composite-parts {
+  display: grid;
+  gap: 10px;
+}
+
+geometry-editor transform-editor select {
+  width: auto;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+modeller-viewer geometry-editor input {
+  margin: 0
+}
+
+modeller-viewer geometry-editor input[type=number] {
+  width: 45px
+}
+
+modeller-viewer geometry-editor hr {
+  margin: 5px -5px
+}
+
+.scrollable { overflow-y: auto }
+.padded { padding: 10px }
