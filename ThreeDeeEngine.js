@@ -88,7 +88,7 @@ function parabola(p, vec) {
   return vadd(p, vmult(sq(vmag(p2)), vec))
 }
 
-function lerp(k, a, b) { return (1-k)*a + k*b }
+export function lerp(k, a, b) { return (1-k)*a + k*b }
 
 function radialWave(p, args) {
   let radius = lerp(args[1], 0.5 + 0.5 * Math.cos(args[0] * Math.atan2(p[1], p[0])), 1)
