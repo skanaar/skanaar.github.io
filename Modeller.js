@@ -1,7 +1,7 @@
 import { el, App, useEvent, Button } from './assets/system.js'
 
 const models = getModels()
-const cameraModes = ['perspective', 'top', 'front', 'back', 'side', 'iso']
+const cameraModes = ['iso', 'perspective', 'top', 'front', 'back', 'side']
 
 function seq(count) {
   return [...new Array(count)].map((_, i) => i)
@@ -28,7 +28,8 @@ export function Modeller() {
   const zoom = 0.85
   const [mesh, setMesh] = React.useState([])
   const [box, setBox] = React.useState([])
-  const [selected, setSelected] = React.useState(Math.floor(models.length*Math.random()))
+  const initialModel = Math.floor(models.length * Math.random())
+  const [selected, setSelected] = React.useState(initialModel)
 
   const [cameraIndex, setCameraIndex] = React.useState(0)
   
@@ -142,14 +143,20 @@ export function Modeller() {
           d: `M${e[0][0]},${e[0][1]} L${e[1][0]},${e[1][1]} L${e[2][0]},${e[2][1]} L${e[3][0]},${e[3][1]} Z`,
           fill: 'none',
           className: shading(e)
-        } ))
+        } )),
+        //mesh.map((e, i) => el('text', {
+        //  key: `t${i}`,
+        //  x: `${e[0][0]}`,
+        //  y: `${e[0][1]}`,
+        //  style: {'fontSize': '40%'}
+        //}, e[0][2].toFixed(1)))
       ),
 
       el('header', {}, models[selected].name),
 
       el('footer', {},
         el(Button, { onClick: () => changeSelected(-1) }, '<'),
-        el(Button, { onClick: cycleMode }, 'Camera'),
+        el(Button, { onClick: cycleMode }, cameraModes[cameraIndex]),
         el(Button, { onClick: () => changeSelected(+1) }, '>'),
       ),
     )
@@ -241,23 +248,30 @@ function applyTransforms(mesh, model) {
 
 function applyPerspective(camera, scaleFactor, mesh) {
   var zoom = scale(scaleFactor, scaleFactor, scaleFactor)
-  var perspective = {
+  var view = {
     top: zoom,
-    front: mmult(zoom, rotateX(-Math.PI/2)),
-    back: mmult(zoom, mmult(rotateX(Math.PI/2), rotateZ(Math.PI))),
-    side: mmult(zoom, mmult(rotateY(Math.PI/2), rotateZ(Math.PI/2))),
-    iso: mmult(zoom, mmult(rotateZ(-0.75), rotateX(-1.1))),
-    perspective: mmult(zoom, mmult(rotateZ(Math.PI/3-Math.PI/2), rotateX(-1.05)))
+    front: mmults(zoom, rotateX(-Math.PI/2)),
+    back: mmults(zoom, rotateX(Math.PI/2), rotateZ(Math.PI)),
+    side: mmults(zoom, rotateY(Math.PI/2), rotateZ(Math.PI/2)),
+    iso: mmults(zoom, rotateZ(-0.75), rotateX(-1.1)),
+    perspective: mmults(
+      zoom,
+      rotateZ(Math.PI/3-Math.PI/2),
+      rotateX(-1.05),
+      translate(0,0,700),
+      perspective(0.175, 1000, 20000),
+    ),
   }[camera] || zoom
-  return mesh.map(q => transformQuad(q, perspective).map(p => vtranslate(p, [500,400,0])))
+  return mesh.map(q => transformQuad(q, view).map(p => vtranslate(p, [500,400,0])))
 }
 
 var d2r = Math.PI*2/360
-var rotateX = (a) => [1,0,0,  0,Math.cos(a),-Math.sin(a),  0,Math.sin(a),Math.cos(a)]
-var rotateY = (a) => [Math.cos(a),0,Math.sin(a), 0,1,0, -Math.sin(a),0,Math.cos(a)]
-var rotateZ = (a) => [Math.cos(a),-Math.sin(a),0,  Math.sin(a),Math.cos(a),0,  0,0,1]
+var rotateX = (a) => [1,0,0,0,  0,Math.cos(a),-Math.sin(a),0,  0,Math.sin(a),Math.cos(a),0, 0,0,0,1]
+var rotateY = (a) => [Math.cos(a),0,Math.sin(a),0, 0,1,0,0, -Math.sin(a),0,Math.cos(a),0, 0,0,0,1]
+var rotateZ = (a) => [Math.cos(a),-Math.sin(a),0,0,  Math.sin(a),Math.cos(a),0,0,  0,0,1,0, 0,0,0,1]
 var rotateXYZ = (x,y,z) => mmult(mmult(rotateX(d2r*x), rotateY(d2r*y)), rotateZ(d2r*z))
-var scale = (x,y,z) => [x,0,0,  0,y,0,  0,0,z]
+var scale = (x,y,z) => [x,0,0,0,  0,y,0,0,  0,0,z,0, 0,0,0,1]
+var translate = (dx,dy,dz) => [1,0,0,dx,  0,1,0,dy,  0,0,1,dz, 0,0,0,1]
 var vtranslate = (vec, delta) => [vec[0]+delta[0], vec[1]+delta[1], vec[2]+delta[2]]
 var vadd = (a, b) => [a[0]+b[0], a[1]+b[1], a[2]+b[2]]
 var vdiff = (a, b) => [a[0]-b[0], a[1]-b[1], a[2]-b[2]]
@@ -267,18 +281,42 @@ var vmag = v => Math.sqrt(vdot(v, v))
 var vnormalize = v => vmult(1/vmag(v), v)
 var vcross = (a, b) => [a[1]*b[2] - a[2]*b[1], a[2]*b[0] - a[0]*b[2], a[0]*b[1] - a[1]*b[0]]
 
-function mapply (matrix, vec) {
-    return [vec[0]*matrix[0+3*0] + vec[1]*matrix[1+3*0] + vec[2]*matrix[2+3*0],
-            vec[0]*matrix[0+3*1] + vec[1]*matrix[1+3*1] + vec[2]*matrix[2+3*1],
-            vec[0]*matrix[0+3*2] + vec[1]*matrix[1+3*2] + vec[2]*matrix[2+3*2]]
+function perspective(degrees, near, far) {
+    var angle = degrees * 3.1416 / 180
+    var s = 1 / Math.tan(angle / 2)
+    var a = -(far + near) / (far - near)
+    var b = -2 * (far * near) / (far - near)
+    return [
+      s, 0, 0, 0,
+      0, s, 0, 0,
+      0, 0, a, b,
+      0, 0, 1, 0
+    ]
 }
 
-function mmult (a, b) {
-    var m = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-    for (var i=0; i<3; i++) {
-        for (var j=0; j<3; j++) {
-            for (var k=0; k<3; k++) {
-                m[i+3*j] += a[i+3*k]*b[k+3*j]
+function mapply(m, v) {
+    var out = [v[0]*m[0+4*0] + v[1]*m[1+4*0] + v[2]*m[2+4*0] + 1*m[3+4*0],
+               v[0]*m[0+4*1] + v[1]*m[1+4*1] + v[2]*m[2+4*1] + 1*m[3+4*1],
+               v[0]*m[0+4*2] + v[1]*m[1+4*2] + v[2]*m[2+4*2] + 1*m[3+4*2],
+               v[0]*m[0+4*3] + v[1]*m[1+4*3] + v[2]*m[2+4*3] + 1*m[3+4*3]]
+    // normalize if w is different than 1 (convert from homogeneous to Cartesian coordinates)
+    var w = out[3]
+    return (w != 0) ? vmult(1/w, out) : out
+}
+
+function mmults(...matrixes) {
+  if (matrixes.length === 2)
+    return mmult(matrixes[0], matrixes[1])
+  else
+    return mmult(matrixes[0], mmults(...matrixes.slice(1)))
+}
+
+function mmult(a, b) {
+    var m = [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0]
+    for (var i=0; i<4; i++) {
+        for (var j=0; j<4; j++) {
+            for (var k=0; k<4; k++) {
+                m[i+4*j] += a[i+4*k]*b[k+4*j]
             }
         }
     }
