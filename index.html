@@ -29,7 +29,7 @@
       import { app as lunarRover } from './LunarRover.js'
       import { app as cytank } from './Cytank.js'
       import { app as modeller } from './Modeller.js'
-      import { app as dungeon, Dungeon } from './Dungeon.js'
+      import { app as dungeon } from './Dungeon.js'
       import { app as terrain } from './Terrain.js'
       import { app as raytracer } from './RayTracer.js'
       import { Browser, BrowserApp } from './Browser.js'
@@ -54,11 +54,12 @@
           finscript,
           dungeon,
           readme
-        ]
+        ],
+        startupApps: { Dungeon: true }
       })
 
       const root = ReactDOM.createRoot(document.getElementById('root'))
-      root.render(React.createElement(Dungeon))
+      root.render(os)
     </script>
   </body>
 </html>

@@ -69,10 +69,10 @@ const signals = {
   }
 }
 
-export function Desktop({ title, columns = 3, apps }) {
+export function Desktop({ title, columns = 3, apps, startupApps = {} }) {
   const [current, setCurrent] = React.useState(null)
-  const [openApps, setOpenApps] = React.useState({})
-
+  const [openApps, setOpenApps] = React.useState(startupApps)
+  
   const openAppNames = [...Object.entries(openApps)].filter(([, open]) => open).map(pair => pair[0])
 
   React.useEffect(() => {
