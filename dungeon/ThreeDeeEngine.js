@@ -55,7 +55,7 @@ function lathe(model) {
   var mesh = []
   var maxAngle = (model.angle || 360) * d2r
   seq(model.res).map(function (slice) {
-    var vertex = (i,j) => mapply(rotateZ(maxAngle * i/model.res), model.path[j])
+    var vertex = (i,j) => mapply(RotateZ(maxAngle * i/model.res), model.path[j])
     for (var i=1; i<model.path.length; i++) {
       mesh.push([vertex(slice,i), vertex(slice+1,i), vertex(slice+1,i-1), vertex(slice,i-1)])
     }
@@ -108,9 +108,9 @@ function subdivideQuad(quad) {
 
 function transformMesh(mesh, m) {
   if (m[0] == 'scale')
-    return mesh.map(quad => transformQuad(quad, scale(m[1], m[2], m[3])))
+    return mesh.map(quad => transformQuad(quad, Scale(m[1], m[2], m[3])))
   if (m[0] == 'rotate')
-    return mesh.map(quad => transformQuad(quad, rotateXYZ(m[1], m[2], m[3])))
+    return mesh.map(quad => transformQuad(quad, RotateXYZ(m[1], m[2], m[3])))
   if (m[0] == 'translate')
     return mesh.map(quad => quad.map(p => [p[0]+m[1], p[1]+m[2], p[2]+m[3]]))
   if (m[0] == 'subdivide')
@@ -120,7 +120,7 @@ function transformMesh(mesh, m) {
     return mesh.map(quad => quad.map(p => parabola(p, vec)))
   }
   if (m[0] == 'sphere'){
-    var s = scale(m[1], m[2], m[3])
+    var s = Scale(m[1], m[2], m[3])
     return mesh.map(quad => quad.map(p => mapply(s, vnormalize(p))))
   }
   if (m[0] == 'radial-wave'){
@@ -135,12 +135,12 @@ function applyTransforms(mesh, model) {
 
 export var d2r = Math.PI*2/360
 export var degToRad = (deg) => deg * Math.PI*2/360
-export var rotateX = (a) => [1,0,0,0,  0,Math.cos(a),-Math.sin(a),0,  0,Math.sin(a),Math.cos(a),0, 0,0,0,1]
-export var rotateY = (a) => [Math.cos(a),0,Math.sin(a),0, 0,1,0,0, -Math.sin(a),0,Math.cos(a),0, 0,0,0,1]
-export var rotateZ = (a) => [Math.cos(a),-Math.sin(a),0,0,  Math.sin(a),Math.cos(a),0,0,  0,0,1,0, 0,0,0,1]
-export var rotateXYZ = (x,y,z) => mmult(mmult(rotateX(d2r*x), rotateY(d2r*y)), rotateZ(d2r*z))
-export var scale = (x,y,z) => [x,0,0,0,  0,y,0,0,  0,0,z,0, 0,0,0,1]
-export var translate = (dx,dy,dz) => [1,0,0,dx,  0,1,0,dy,  0,0,1,dz, 0,0,0,1]
+export var RotateX = (a) => [1,0,0,0,  0,Math.cos(a),-Math.sin(a),0,  0,Math.sin(a),Math.cos(a),0, 0,0,0,1]
+export var RotateY = (a) => [Math.cos(a),0,Math.sin(a),0, 0,1,0,0, -Math.sin(a),0,Math.cos(a),0, 0,0,0,1]
+export var RotateZ = (a) => [Math.cos(a),-Math.sin(a),0,0,  Math.sin(a),Math.cos(a),0,0,  0,0,1,0, 0,0,0,1]
+export var RotateXYZ = (x,y,z) => mmult(mmult(RotateX(d2r*x), RotateY(d2r*y)), RotateZ(d2r*z))
+export var Scale = (x,y,z) => [x,0,0,0,  0,y,0,0,  0,0,z,0, 0,0,0,1]
+export var Translate = (dx,dy,dz) => [1,0,0,dx,  0,1,0,dy,  0,0,1,dz, 0,0,0,1]
 export var vtranslate = (vec, delta) => [vec[0]+delta[0], vec[1]+delta[1], vec[2]+delta[2]]
 export var vadd = (a, b) => [a[0]+b[0], a[1]+b[1], a[2]+b[2]]
 export var vdiff = (a, b) => [a[0]-b[0], a[1]-b[1], a[2]-b[2]]
@@ -150,7 +150,7 @@ export var vmag = v => Math.sqrt(vdot(v, v))
 export var vnormalize = v => vmult(1/vmag(v), v)
 export var vcross = (a, b) => [a[1]*b[2] - a[2]*b[1], a[2]*b[0] - a[0]*b[2], a[0]*b[1] - a[1]*b[0]]
 
-export function perspective(degrees, near, far) {
+export function Perspective(degrees, near, far) {
     var angle = degrees * 3.1416 / 180
     var s = 1 / Math.tan(angle / 2)
     var a = -(far + near) / (far - near)

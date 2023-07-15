@@ -30,7 +30,7 @@
       import { app as lunarRover } from './LunarRover.js'
       import { app as cytank } from './Cytank.js'
       import { app as modeller } from './Modeller.js'
-      import { app as dungeon, Dungeon } from './Dungeon.js'
+      import { app as dungeon } from './Dungeon.js'
       import { app as terrain } from './Terrain.js'
       import { Browser, BrowserApp } from './Browser.js'
       
@@ -40,11 +40,12 @@
       
       const os = React.createElement(Desktop, {
         title: '💬',
-        apps: [minesweep, lunarRover, cytank, modeller, terrain, css2sql, nebula, beer, finscript, dungeon, readme]
+        apps: [minesweep, lunarRover, cytank, modeller, terrain, css2sql, nebula, beer, finscript, dungeon, readme],
+        startupApps: { Dungeon: true }
       })
 
       const root = ReactDOM.createRoot(document.getElementById('root'))
-      root.render(React.createElement(Dungeon))
+      root.render(os)
     </script>
   </body>
 </html>

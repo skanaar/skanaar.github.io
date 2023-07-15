@@ -69,9 +69,9 @@ const signals = {
   }
 }
 
-export function Desktop({ title, apps }) {
+export function Desktop({ title, apps, startupApps = {} }) {
   const [current, setCurrent] = React.useState(null)
-  const [openApps, setOpenApps] = React.useState({})
+  const [openApps, setOpenApps] = React.useState(startupApps)
   
   const openAppNames = [...Object.entries(openApps)].filter(([, open]) => open).map(pair => pair[0])
   
@@ -126,8 +126,8 @@ export function Desktop({ title, apps }) {
           title: app.name,
           style: {
             position: 'absolute',
-            left: 20 + 100*(i % 3),
-            top: 50 + 120 * Math.floor(i / 3)
+            left: 20 + 100*(i % 4),
+            top: 50 + 120 * Math.floor(i / 4)
           },
           onClick: () => signals.trigger(app.name, 'focus', null)
         }),
