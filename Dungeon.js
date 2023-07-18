@@ -4,7 +4,7 @@ import { DungeonGame } from './dungeon/DungeonGame.js'
 const game = new DungeonGame()
 
 const icon = 'arch.svg'
-export const app = new App('Dungeon', Dungeon, icon, [400, 295], 'noresize')
+export const app = new App('Dungeon', Dungeon, icon, [300, 500], 'noresize')
 
 const frameMs = 20
 
@@ -20,7 +20,8 @@ export function Dungeon() {
   React.useEffect(() => {
     const handle = setInterval(() => {
       game.update(frameMs/1000)
-      const newState = `${game.x} ${game.y} ${game.rot}`
+      const { x, y, rot, message, inventory: inv } = game
+      const newState = `${x} ${y} ${rot} ${message} ${inv.map(e => e.name)}`
       if (state != newState) setState(newState)
     }, frameMs)
     return () => clearInterval(handle)
@@ -41,16 +42,30 @@ export function Dungeon() {
           fill: `rgb(${rund(-e[3][2]*15)}, ${rund(-e[3][2]*15)}, ${rund(-e[3][2]*15)})`,
         } )),
       ),
-      
-      game.message ? el('message-dialog', {}, game.message) : null,
-
-      el('footer', {},
-        `${Math.round(game.x)},${Math.round(game.y)} | ${Math.round(game.rot)}`,
-        el(Button, { className: 'small', onClick: () => game.turn(90) }, '←'),
-        el(Button, { className: 'small', onClick: () => game.walk(1) }, '↑'),
-        el(Button, { className: 'small', onClick: () => game.turn(-90) }, '→'),
-        el(Button, { className: 'small', onClick: () => game.inspect() }, 'inspect'),
+      el('hr'),
+      el('message-panel', {}, game.message ?? '-'),
+      el('hr'),
+      el('game-buttons', {},
+      el(Button, { onClick: () => game.interact() }, 'inspect'),
+      el(Button, { onClick: () => game.walk(1) }, '↑'),
+      el(Button, { onClick: () => game.take() }, 'take'),
+        el(Button, { onClick: () => game.turn(90) }, '←'),
+        el(Button, { onClick: () => game.walk(-1) }, '↓'),
+        el(Button, { onClick: () => game.turn(-90) }, '→'),
       ),
+      el('hr'),
+      el(
+        'inventory-panel',
+        {},
+        game.inventory.map(e => 
+          el(React.Fragment, { key: e.name },
+            el('label', {}, e.name),
+            el(Button, { onClick: () => game.use(e) }, 'use')
+          )
+        )
+      ),
+      el('hr'),
+      el('message-panel', {}, `${Math.round(game.x)},${Math.round(game.y)} | ${Math.round(game.rot)}`),
     )
   )
 }
@@ -66,20 +81,16 @@ function rund(x) {
 
 const style = `
 dungeon-crawler {
-  position: relative;
+  margin: -10px;
+  display: grid;
 }
-dungeon-crawler svg { display: block; background: linear-gradient(to top, #eee, #000, #eee) }
-dungeon-crawler footer {
-  display: flex;
-  justify-content: space-between;
-  position: absolute;
-  left: 10px;
-  right: 10px;
-  bottom: 10px;
+
+dungeon-crawler svg {
+  display: block;
+  background: linear-gradient(to top, #eee, #000, #eee)
 }
 dungeon-crawler .canvas-3d {
   display: block;
-  margin: -10px;
 }
 dungeon-crawler svg.canvas-3d path {
   stroke-linejoin: bevel;
@@ -91,12 +102,29 @@ dungeon-crawler svg.canvas-3d path.outline {
   stroke-width: 1px;
   stroke-dasharray: 1 5;
 }
-dungeon-crawler message-dialog {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  right: 20px;
-  bottom: 20px;
-  border: 2px solid black;
-  padding: 20px;
+
+dungeon-crawler hr {
+  height: 2px;
+  border: none;
+  background: #000;
+  margin: 0;
+}
+
+dungeon-crawler message-panel {
+  padding: 10px;
+}
+dungeon-crawler inventory-panel {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  margin: 5px 10px;
+}
+dungeon-crawler inventory-panel label {
+  align-self: center;
+}
+
+dungeon-crawler game-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 10px;
+  gap: 5px;
 }`

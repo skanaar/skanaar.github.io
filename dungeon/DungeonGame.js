@@ -16,23 +16,27 @@ import {
   vmult
 } from './ThreeDeeEngine.js'
 
+const items = {
+  a: { model: 'bottle', name: 'arboga 7,2', pickable: true, obstacle: false },
+  s: { model: 'stone', name: 'rock', pickable: false, obstacle: false },
+  k: { model: 'chest', name: 'key', pickable: true, obstacle: false },
+  '-': { model: 'door_h', name: 'door', pickable: false, obstacle: true },
+  '|': { model: 'door_h', name: 'door', pickable: false, obstacle: true },
+}
+
 const map = [
   '##########',
-  '#.#  ## ##',
-  '# ##     #',
+  '#s#  ## ##',
+  '# ##    a#',
   '# ##  ## #',
   '#     :  #',
   '#-#O° ° ##',
-  '#  °    ##',
-  'O  .  # ##',
+  '#  °  a ##',
+  'O  k  # ##',
   'O     | ##',
   '##########',
 ]
-const walkables = ['.', ' ']
-
-const triggers = [
-  { loc: [3,7], trigger: 'visit', message: 'You have found a golden key' }
-]
+const walkables = [' ', ...Object.keys(items)]
 
 const stoneWallGeo = new ExtrudeGeometry('', [['scale',50,50,50]], [
   [-1,-0.8,-1],[-1,0,-1],[-1,0.8,-1],
@@ -49,33 +53,55 @@ const pillarGeo = new LatheGeometry('', [], 8, [
   [-35,0,-50],[-35,0,-45],[-30,0,-40],[-25,0,-30],[-25,0,30],[-30,0,40],[-35,0,45],[-35,0,50]
 ])
 
-const artefactGeo = new CubeGeometry('', [['subdivide'], ['sphere',15,15,5], ['rotate',0,0,20], ['translate',0,0,-42]])
+const stoneGeo = new CubeGeometry('', [['subdivide'], ['sphere',15,15,5], ['rotate',0,0,20], ['translate',0,0,-42]])
+
+const bottleGeo = new LatheGeometry('', [['scale',0.1,0.1,0.1], ['translate',30,30,-35]], 8, [
+  [0,0,-140],[50,0,-150],[55,0,-145],[55,0,-40],[52,0,-10],[42,0,20],[28,0,50],[20,0,80],[18,0,110],[23,0,115],[20,0,135],[22,0,155],[18,0,159],[0,0,160]
+])
+
+const chestGeo = new CompositeGeometry('', [['rotate',90,0,-30], ['translate',20,20,-45]], [
+  new LatheGeometry('', [['translate',0,5,0]], 8, [[2,0,-15],[10,0,-15],[10,0,15],[2,0,15]], 180),
+  new CubeGeometry('', [['scale',10,5,15]])
+])
+
 
 const floorGeo = new MeshGeometry('', [['subdivide'], ['scale',45,45,0.01], ['translate',0,0,-50]], [[[1,-1,0],[-1,-1,0],[-1,1,0],[1,1,0]]])
 
-const hDoorGeo = new CompositeGeometry('', [], [...[-40, -20, 0, 20, 40].map(x => 
-  new CubeGeometry('', [['scale',5,5,50], ['translate',x,0,0]])
-)])
-const vDoorGeo = new CompositeGeometry('', [], [...[-40, -20, 0, 20, 40].map(y => 
-  new CubeGeometry('', [['scale',5,5,50], ['translate',0,y,0]])
-)])
+const bars = [-40, -20, 0, 20, 40]
+const hDoorGeo = new CompositeGeometry('', [], [
+  ...bars.map(x => new CubeGeometry('', [['scale',5,5,50], ['translate',x,0,0]])),
+  floorGeo
+])
+const vDoorGeo = new CompositeGeometry('', [], [
+  ...bars.map(y => new CubeGeometry('', [['scale',5,5,50], ['translate',0,y,0]])),
+  floorGeo
+])
 
-const cubes = new CompositeGeometry('map', [], map.flatMap((row, y) => {
+const blocks = map.flatMap((row, y) => {
   return row.split('').map((cell, x) => {
     switch(cell) {
       case '#': return new CompositeGeometry('', [['translate',x*100,y*100,0]], [stoneWallGeo])
       case 'O': return new CompositeGeometry('', [['translate',x*100,y*100,0]], [pillarWallGeo])
       case '°': return new CompositeGeometry('', [['translate',x*100,y*100,0]], [pillarGeo])
-      case '.': return new CompositeGeometry('', [['translate',x*100,y*100,0]], [artefactGeo, floorGeo])
+      case '.': return new CompositeGeometry('', [['translate',x*100,y*100,0]], [floorGeo])
       case '-': return new CompositeGeometry('', [['translate',x*100,y*100,0]], [hDoorGeo])
       case '|': return new CompositeGeometry('', [['translate',x*100,y*100,0]], [vDoorGeo])
-      case ' ': return new CompositeGeometry('', [['translate',x*100,y*100,0]], [floorGeo])
-      default: return new MeshGeometry('', [], [])
+      default: return new CompositeGeometry('', [['translate',x*100,y*100,0]], [floorGeo])
     }
   })
-}))
+})
+const entities = map.flatMap((row, y) => {
+  return row.split('').map((cell, x) => {
+    if (!items[cell]) return null
+    switch(items[cell].model) {
+      case 'bottle': return new CompositeGeometry('', [['translate',x*100,y*100,0]], [bottleGeo])
+      case 'stone': return new CompositeGeometry('', [['translate',x*100,y*100,0]], [stoneGeo])
+      case 'chest': return new CompositeGeometry('', [['translate',x*100,y*100,0]], [chestGeo])
+    }
+  })
+}).filter(Boolean)
 
-const scene = buildMesh(cubes)
+const scene = buildMesh(new CompositeGeometry('map', [], [...blocks, ...entities]))
 
 export class DungeonGame {
   turnRate = 2 * 90
@@ -87,6 +113,7 @@ export class DungeonGame {
   y = 8
   rot = 180
   message = null
+  inventory = []
   
   input(key) {
     if (this.message) return
@@ -100,6 +127,7 @@ export class DungeonGame {
   
   turn(angle) {
     if (this.rot % 90 != 0) return
+    this.message = null
     this.targetRot = this.rot+angle
   }
 
@@ -108,11 +136,12 @@ export class DungeonGame {
     const x2 = targetX - stride * Math.round(Math.sin(degToRad(targetRot)))
     const y2 = targetY + stride * Math.round(Math.cos(degToRad(targetRot)))
     if (x2 < 0 || x2 >= map[0].length || y2 < 0 || y2 >= map.length) {
-      console.log('out of bounds', { x2, y2 })
+      this.message = 'the map ends here'
       return
     }
+    this.message = null
     if (!walkables.includes(map[y2][x2])) {
-      console.log('not empty cell', { x2, y2, targetRot })
+      this.message = 'there is something in the way'
       return
     }
     this.targetX = x2
@@ -120,7 +149,25 @@ export class DungeonGame {
   }
   
   inspect() {
-    this.message = 'you see nothing'
+    const item = items[map[this.targetY][this.targetX]]
+    if (item)
+      this.message =  'you find a ' + item.name
+    else
+      this.message =  'you find nothing'
+  }
+  
+  take() {
+    const item = items[map[this.targetY][this.targetX]]
+    if (item) {
+      this.message =  'you take a ' + item.name
+      this.inventory.push(item)
+    } else
+      this.message =  'you find nothing'
+  }
+  
+  use(item) {
+    this.message =  'you use ' + item.name
+    this.inventory.splice(this.inventory.findIndex(e => e === item), 1)
   }
   
   update(dt) {

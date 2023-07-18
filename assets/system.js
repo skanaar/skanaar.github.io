@@ -9,7 +9,7 @@ export class App {
     this.height = height
     this.pos = {
       x: 100 + Math.floor(Math.random() * 500),
-      y: Math.floor(Math.random() * 300),
+      y: 30 + Math.floor(Math.random() * Math.max(0, window.innerHeight/2 - height)),
     }
     this.sizing = sizing
     this.menus = [
