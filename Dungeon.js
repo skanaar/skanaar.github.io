@@ -1,7 +1,8 @@
 import { el, App, Button } from './assets/system.js'
 import { DungeonGame } from './dungeon/DungeonGame.js'
+import { World } from './dungeon/World.js'
 
-const game = new DungeonGame()
+const game = new DungeonGame(new World())
 
 const icon = 'arch.svg'
 export const app = new App('Dungeon', Dungeon, icon, [300, 500], 'noresize')
@@ -12,7 +13,14 @@ export function Dungeon() {
   const [state, setState] = React.useState('')
   
   React.useEffect(() => {
-    const handler = (event) => game.input(event.key)
+    const handler = (event) => {
+      switch(event.key) {
+        case "ArrowLeft": return game.turn(90)
+        case "ArrowRight": return game.turn(-90)
+        case "ArrowUp": return game.walk(1)
+        case "ArrowDown": return game.walk(-1)
+      }
+    }
     document.addEventListener('keydown', handler)
     return () => document.removeEventListener('keydown', handler)
   })
@@ -60,7 +68,7 @@ export function Dungeon() {
         game.inventory.map(e => 
           el(React.Fragment, { key: e.name },
             el('label', {}, e.name),
-            el(Button, { onClick: () => game.use(e) }, 'use')
+            e.effect ? el(Button, { onClick: () => game.use(e) }, 'use') : el('div')
           )
         )
       ),
