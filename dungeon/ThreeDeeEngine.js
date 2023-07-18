@@ -33,7 +33,7 @@ export function buildMesh(model){
 }
 
 export function cullMesh(quads){
-  const sorter = (quad) => -(quad[0][2]+quad[2][2])
+  const sorter = ([a,b,c,d]) => -Math.max(a[2],b[2],c[2],d[2])
   return quads
     .filter(([a,b,c,d]) => a[2] < 0 && b[2] < 0 && c[2] < 0 && d[2] < 0)
     .filter(([a,b,c,d]) => vcross(vdiff(c, a), vdiff(b, d))[2] < 0)
