@@ -17,10 +17,10 @@ export class DungeonGame {
   strideRate = 2
   targetX = 3
   targetY = 8
-  targetRot = 180
+  targetRot = 0
   x = 3
   y = 8
-  rot = 180
+  rot = 0
   message = null
   inventory = []
   
@@ -39,7 +39,7 @@ export class DungeonGame {
   strideEnd(stride) {
     const { targetX, targetY, targetRot } = this
     const x2 = targetX - stride * Math.round(Math.sin(degToRad(targetRot)))
-    const y2 = targetY + stride * Math.round(Math.cos(degToRad(targetRot)))
+    const y2 = targetY - stride * Math.round(Math.cos(degToRad(targetRot)))
     return [x2, y2]
   }
   
@@ -130,7 +130,7 @@ export class DungeonGame {
     const {x,y,rot} = this
     const matrix = mmults(
       Translate(-x*100,-y*100,0),
-      RotateXYZ(90,rot,0),
+      RotateXYZ(-90,rot,0),
       Perspective(0.6, 1000, 20000),
       Translate(200,150,0),
     )

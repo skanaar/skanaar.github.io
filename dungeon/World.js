@@ -43,7 +43,7 @@ export class World {
     '#s#  ## ##',
     '# ##    a#',
     '# ##  ## #',
-    '#     :  #',
+    '#        #',
     '#-#O° ° ##',
     '#  °  a ##',
     'O  k  # ##',
@@ -88,27 +88,25 @@ export class World {
       [-35,0,-50],[-35,0,-45],[-30,0,-40],[-25,0,-30],[-25,0,30],[-30,0,40],[-35,0,45],[-35,0,50]
     ]),
 
-    stone: new CubeGeometry('stone', [['subdivide'], ['sphere',15,15,5], ['rotate',0,0,20], ['translate',0,0,-42]]),
+    stone: new CubeGeometry('stone', [['subdivide'], ['sphere',15,15,5], ['rotate',0,0,20], ['translate',0,0,42]]),
 
-    bottle: new LatheGeometry('bottle', [['scale',0.1,0.1,0.1], ['translate',30,30,-35]], 8, [
+    bottle: new LatheGeometry('bottle', [['rotate',180,0,0], ['scale',0.1,0.1,0.1], ['translate',30,30,35]], 8, [
       [0,0,-140],[50,0,-150],[55,0,-145],[55,0,-40],[52,0,-10],[42,0,20],[28,0,50],[20,0,80],[18,0,110],[23,0,115],[20,0,135],[22,0,155],[18,0,159],[0,0,160]
     ]),
 
-    chest: new CompositeGeometry('chest', [['rotate',90,0,-30], ['translate',20,20,-45]], [
+    chest: new CompositeGeometry('chest', [['scale',1,1,1], ['rotate',-90,0,30], ['translate',-20,20,45]], [
       new LatheGeometry('', [['translate',0,5,0]], 8, [[2,0,-15],[10,0,-15],[10,0,15],[2,0,15]], 180),
       new CubeGeometry('', [['scale',10,5,15]])
     ]),
 
-    floor: new MeshGeometry('floor', [['subdivide'], ['scale',45,45,0.01], ['translate',0,0,-50]], [[[1,-1,0],[-1,-1,0],[-1,1,0],[1,1,0]]]),
+    floor: new MeshGeometry('floor', [['subdivide'], ['scale',45,45,1], ['translate',0,0,50]], [[[-1,-1,0],[1,-1,0],[1,1,0],[-1,1,0]]]),
 
     hDoor: new CompositeGeometry('hDoor', [], [
-      ...[-40, -20, 0, 20, 40].map(x => new CubeGeometry('', [['scale',5,5,50], ['translate',x,0,0]])),
-      new MeshGeometry('floor', [['subdivide'], ['scale',45,45,0.01], ['translate',0,0,-50]], [[[1,-1,0],[-1,-1,0],[-1,1,0],[1,1,0]]])
+      ...[-40, -20, 0, 20, 40].map(x => new CubeGeometry('', [['scale',5,5,50], ['translate',x,0,0]]))
     ]),
 
     vDoor: new CompositeGeometry('vDoor', [], [
-      ...[-40, -20, 0, 20, 40].map(y => new CubeGeometry('', [['scale',5,5,50], ['translate',0,y,0]])),
-      new MeshGeometry('floor', [['subdivide'], ['scale',45,45,0.01], ['translate',0,0,-50]], [[[1,-1,0],[-1,-1,0],[-1,1,0],[1,1,0]]])
+      ...[-40, -20, 0, 20, 40].map(y => new CubeGeometry('', [['scale',5,5,50], ['translate',0,y,0]]))
     ])
   }
 }
