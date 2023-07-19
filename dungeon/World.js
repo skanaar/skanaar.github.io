@@ -40,35 +40,42 @@ export class World {
 
   map = [
     '##########',
-    '#s#  ## ##',
-    '# ##    a#',
-    '# ##  ## #',
-    '#        #',
-    '#-#O° ° ##',
-    '#  °  a ##',
-    'O  k  # ##',
-    'O     | ##',
+    '#s#a #   #',
+    '# ## ### #',
+    '# #° °## #',
+    '# #° °#v #',
+    '# #° °#v #',
+    '#=#° °##K#',
+    '#  kv  # #',
+    '#      | #',
     '##########',
   ]
 
   items = {
     a: {
       name: 'arboga 7,2', model: 'bottle', pickable: true, walkable: true,
-      effect: { action: 'none', consume: true }
+      effect: { action: 'consume' }
     },
     s: { name: 'rock', model: 'stone', pickable: false, walkable: true },
     k: {
-      name: 'key', model: 'chest', pickable: true, walkable: true,
-      effect: { action: 'unlock', consume: false }
+      name: 'gate key', model: 'chest', pickable: true, walkable: true,
+      effect: { action: 'remove', remove: 'gate' }
     },
-    '-': { name: 'door', model: 'hDoor', pickable: false, walkable: false },
-    '|': { name: 'door', model: 'vDoor', pickable: false, walkable: false },
+    K: {
+      name: 'door key', model: 'chest', pickable: true, walkable: true,
+      effect: { action: 'remove', remove: 'door' }
+    },
+    '-': { name: 'gate', model: 'hGate', pickable: false, walkable: false },
+    '|': { name: 'gate', model: 'vGate', pickable: false, walkable: false },
+    '=': { name: 'door', model: 'hDoor', pickable: false, walkable: false },
+    '‖': { name: 'door', model: 'vDoor', pickable: false, walkable: false },
   }
   
   tiles = {
     '#': { model: 'stoneWall', walkable: false },
     'O': { model: 'pillarWall', walkable: false },
     '°': { model: 'pillar', walkable: false },
+    'v': { model: 'stalactites', walkable: false },
     ' ': { model: 'floor', walkable: true },
   }
 
@@ -88,6 +95,14 @@ export class World {
       [-35,0,-50],[-35,0,-45],[-30,0,-40],[-25,0,-30],[-25,0,30],[-30,0,40],[-35,0,45],[-35,0,50]
     ]),
 
+    stalactites: new CompositeGeometry('stalactites', [], [
+      new LatheGeometry('', [['translate',20,20,0]], 7, [[1,0,0],[10,0,50]]),
+      new LatheGeometry('', [['translate',-20,10,0]], 7, [[1,0,20],[15,0,50]]),
+      new LatheGeometry('', [['translate',-30,5,0]], 7, [[10,0,-50],[1,0,0]]),
+      new LatheGeometry('', [['translate',5,35,0]], 7, [[15,0,-50],[1,0,30]]),
+      new LatheGeometry('', [['translate',0,4,0]], 7, [[15,0,-50],[5,0,-10],[4.5,0,5],[13,0,50]]),
+    ]),
+
     stone: new CubeGeometry('stone', [['subdivide'], ['sphere',15,15,5], ['rotate',0,0,20], ['translate',0,0,42]]),
 
     bottle: new LatheGeometry('bottle', [['rotate',180,0,0], ['scale',0.1,0.1,0.1], ['translate',30,30,35]], 8, [
@@ -102,10 +117,18 @@ export class World {
     floor: new MeshGeometry('floor', [['subdivide'], ['scale',45,45,1], ['translate',0,0,50]], [[[-1,-1,0],[1,-1,0],[1,1,0],[-1,1,0]]]),
 
     hDoor: new CompositeGeometry('hDoor', [], [
-      ...[-40, -20, 0, 20, 40].map(x => new CubeGeometry('', [['scale',5,5,50], ['translate',x,0,0]]))
+      ...[-25, 25].map(x => new CubeGeometry('', [['scale',20,2,50], ['translate',x,0,0]]))
     ]),
 
     vDoor: new CompositeGeometry('vDoor', [], [
+      ...[-25, 25].map(y => new CubeGeometry('', [['scale',2,20,50], ['translate',0,y,0]]))
+    ]),
+
+    hGate: new CompositeGeometry('hGate', [], [
+      ...[-40, -20, 0, 20, 40].map(x => new CubeGeometry('', [['scale',5,5,50], ['translate',x,0,0]]))
+    ]),
+
+    vGate: new CompositeGeometry('vGate', [], [
       ...[-40, -20, 0, 20, 40].map(y => new CubeGeometry('', [['scale',5,5,50], ['translate',0,y,0]]))
     ])
   }
