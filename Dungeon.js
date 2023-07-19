@@ -54,7 +54,7 @@ export function Dungeon() {
       el('message-panel', {}, game.message ?? '-'),
       el('hr'),
       el('game-buttons', {},
-      el(Button, { onClick: () => game.interact() }, 'inspect'),
+      el(Button, { onClick: () => game.inspect() }, 'inspect'),
       el(Button, { onClick: () => game.walk(1) }, '↑'),
       el(Button, { onClick: () => game.take() }, 'take'),
         el(Button, { onClick: () => game.turn(90) }, '←'),

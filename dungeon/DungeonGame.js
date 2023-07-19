@@ -68,40 +68,49 @@ export class DungeonGame {
   }
   
   inspect() {
-    const item = this.entities.find(e => e.y === this.targetY && e.x === this.targetX)
-    if (item)
-      this.message =  'you find a ' + item.name
+    const [x2, y2] = this.strideEnd(1)
+    const itemBelow = this.entities.find(e => e.y === this.targetY && e.x === this.targetX)
+    const itemAhead = this.entities.find(e => e.y === y2 && e.x === x2)
+    if (itemBelow)
+      this.message =  'you find a ' + itemBelow.name
+    else if (itemAhead)
+      this.message =  'there is a ' + itemAhead.name + ' up ahead'
     else
       this.message =  'you find nothing'
   }
   
   take() {
-    const itemIndex = this.entities.findIndex(e => e.y === this.targetY && e.x === this.targetX)
-    if (itemIndex > -1) {
-      const item = this.entities[itemIndex]
+    const item = this.entities.find(e => e.y === this.targetY && e.x === this.targetX)
+    if (item) {
       this.message =  'you take a ' + item.name
       this.inventory.push(item)
-      this.entities.splice(itemIndex, 1)
+      remove(this.entities, item)
     } else
       this.message =  'you find nothing'
   }
   
   use(item) {
     this.message =  'you use ' + item.name
-    this.inventory.splice(this.inventory.findIndex(e => e === item), 1)
     switch (item.effect?.action) {
-      case 'unlock': {
-        const end = this.strideEnd(1)
-        if (!end) return
-        const [x2, y2] = end
-        const entityIndex = this.entities.findIndex(e => e.x === x2 && e.y === y2)
-        if (entityIndex < 0 || this.entities[entityIndex].name !== 'door') {
+      case 'consume':
+        remove(this.inventory, item)
+        break
+      case 'remove': {
+        const entity = this.entityAhead()
+        if (entity && entity.name === item.effect.remove) {
+          remove(this.entities, entity)
+          remove(this.inventory, item)
+        } else {
           this.message = 'does nothing'
-          return
         }
-        this.entities.splice(entityIndex, 1)
+        break
       }
     }
+  }
+  
+  entityAhead() {
+    const [x2, y2] = this.strideEnd(1)
+    return this.entities.find(e => e.x === x2 && e.y === y2)
   }
   
   update(dt) {
@@ -142,4 +151,10 @@ export class DungeonGame {
     const scene = [...this.mapMesh, ...entityMeshes.flatMap(e => e)]
     return cullMesh(scene.map(q => transformQuad(q, matrix)))
   }  
+}
+
+function remove(list, item) {
+  const index = list.findIndex(e => e === item)
+  if (index > -1)
+  list.splice(index, 1)
 }
