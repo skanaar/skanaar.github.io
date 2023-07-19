@@ -72,8 +72,6 @@ export function Dungeon() {
           )
         )
       ),
-      el('hr'),
-      el('message-panel', {}, `${Math.round(game.x)},${Math.round(game.y)} | ${Math.round(game.rot)}`),
     )
   )
 }
