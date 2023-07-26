@@ -92,10 +92,7 @@ function rund(x) {
 const style = `
 dungeon-crawler {
   margin: -10px;
-  display: grid;
   position: relative;
-  --viewport-width: 375px;
-  --viewport-height: 281px;
 }
 
 dungeon-crawler svg {
@@ -124,8 +121,8 @@ dungeon-crawler hr {
 }
 
 dungeon-crawler message-panel {
+  display: block;
   padding: 10px;
-  max-width: var(--viewport-width);
 }
 dungeon-crawler dialog-panel {
   position: absolute;
