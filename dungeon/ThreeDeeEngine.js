@@ -73,8 +73,8 @@ function extrude(model) {
   ])
 }
 
-export function transformQuad(quad, matrix) {
-  return quad.map(p => mapply(matrix, p))
+export function transformQuad([a,b,c,d], matrix) {
+  return [mapply(matrix,a), mapply(matrix,b), mapply(matrix,c), mapply(matrix,d)]
 }
 
 function sq(x) {

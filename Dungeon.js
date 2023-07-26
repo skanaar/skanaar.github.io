@@ -5,7 +5,7 @@ import { World } from './dungeon/World.js'
 const game = new DungeonGame(new World())
 
 const icon = 'arch.svg'
-export const app = new App('Dungeon', Dungeon, icon, [300, 500], 'noresize')
+export const app = new App('Dungeon', Dungeon, icon, [375, 500], 'noresize')
 
 const frameMs = 20
 
@@ -28,8 +28,8 @@ export function Dungeon() {
   React.useEffect(() => {
     const handle = setInterval(() => {
       game.update(frameMs/1000)
-      const { x, y, rot, message, inventory: inv } = game
-      const newState = `${x} ${y} ${rot} ${message} ${inv.map(e => e.name)}`
+      const { x, y, rot, message, dialog, inventory: inv, dialogAnswers } = game
+      const newState = `${x} ${y} ${rot} ${message} ${inv.map(e => e.name)} ${dialog} ${dialogAnswers}`
       if (state != newState) setState(newState)
     }, frameMs)
     return () => clearInterval(handle)
@@ -44,19 +44,23 @@ export function Dungeon() {
         className: 'canvas-3d',
         viewBox: '0 0 400 300'
       },
-        mesh.map((e, i) => el('path', {
-          key: `m${i}`,
-          d: quadPath(e),
-          fill: `rgb(${rund(-e[3][2]*15)}, ${rund(-e[3][2]*15)}, ${rund(-e[3][2]*15)})`,
-        } )),
+      mesh.map((e, i) => el('path', {
+        key: `m${i}`,
+        d: quadPath(e),
+        fill: `rgb(${rund(-e[3][2]*15)}, ${rund(-e[3][2]*15)}, ${rund(-e[3][2]*15)})`,
+      } )),
       ),
+      game.dialog && el('dialog-panel', {}, game.dialog),
       el('hr'),
       el('message-panel', {}, game.message ?? '-'),
       el('hr'),
-      el('game-buttons', {},
-      el(Button, { onClick: () => game.inspect() }, 'inspect'),
-      el(Button, { onClick: () => game.walk(1) }, '↑'),
-      el(Button, { onClick: () => game.take() }, 'take'),
+      game.dialog ? el('game-buttons', {},
+        ...game.dialogAnswers.map((text, i) => el(Button, { onClick: () => game.respond(text, i) }, text)),
+      )
+      : el('game-buttons', {},
+        el(Button, { onClick: () => game.inspect() }, 'inspect'),
+        el(Button, { onClick: () => game.walk(1) }, '↑'),
+        el(Button, { onClick: () => game.take() }, 'take'),
         el(Button, { onClick: () => game.turn(90) }, '←'),
         el(Button, { onClick: () => game.walk(-1) }, '↓'),
         el(Button, { onClick: () => game.turn(-90) }, '→'),
@@ -89,6 +93,9 @@ const style = `
 dungeon-crawler {
   margin: -10px;
   display: grid;
+  position: relative;
+  --viewport-width: 375px;
+  --viewport-height: 281px;
 }
 
 dungeon-crawler svg {
@@ -118,6 +125,18 @@ dungeon-crawler hr {
 
 dungeon-crawler message-panel {
   padding: 10px;
+  max-width: var(--viewport-width);
+}
+dungeon-crawler dialog-panel {
+  position: absolute;
+  display: block;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  background: #fff;
+  border: 2px solid #000;
+  padding: 10px;
+  border-radius: 4px;
 }
 dungeon-crawler inventory-panel {
   display: grid;
