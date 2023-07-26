@@ -41,6 +41,7 @@ export class DungeonGame {
   }
 
   turn(angle) {
+    if (this.dialog) return
     if (this.rot % 90 != 0) return
     this.message = null
     this.targetRot = this.rot+angle
@@ -59,6 +60,7 @@ export class DungeonGame {
   }
 
   walk(stride) {
+    if (this.dialog) return
     const [x2, y2] = this.strideEnd(stride)
     if (!this.world.isWithinBounds(x2, y2)) {
       this.message = 'the map ends here'
