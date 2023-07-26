@@ -15,19 +15,29 @@ import {
 export class DungeonGame {
   turnRate = 2 * 90
   strideRate = 2
-  targetX = 3
-  targetY = 8
+  targetX = 1
+  targetY = 1
   targetRot = 0
-  x = 3
-  y = 8
+  x = 1
+  y = 1
   rot = 0
   message = null
   inventory = []
+  dialogIndex = null
+  dialog = null
+  dialogAnswers = []
+  scriptProgress = []
   
   constructor(world) {
     this.world = world
+    const [x, y] = world.startLocation()
+    this.targetX = x
+    this.targetY = y
+    this.x = x
+    this.y = y
     this.entities = world.cloneEntities()
     this.mapMesh = buildMesh(world.mapModel())
+    this.scriptProgress = world.scripts.map(() => 0)
   }
 
   turn(angle) {
@@ -130,11 +140,42 @@ export class DungeonGame {
     const deltaRot = (this.targetRot - this.rot)
     const mag = Math.abs(deltaRot)
     if (mag < ε)
-      this.rot = this.targetRot
+    this.rot = this.targetRot
     else
-      this.rot += Math.min(1, dt * this.turnRate/mag) * deltaRot
+    this.rot += Math.min(1, dt * this.turnRate/mag) * deltaRot
+    
+    this.updateScripts()
   }
-
+  
+  updateScripts() {
+    this.dialogIndex = null
+    this.dialog = null
+    this.dialogAnswers = []
+    for (const i in this.world.scripts) {
+      const script = this.world.scripts[i]
+      const step = script[this.scriptProgress[i]]
+      if (!step) continue
+      if (step.type === 'condition') {
+        if (step.visit && step.visit[0] === this.x && step.visit[1] === this.y) {
+          this.scriptProgress[i]++
+          this.updateScripts()
+          return
+        }
+      }
+      if (step.type === 'dialog') {
+        this.dialogIndex = i
+        this.dialog = step.text
+        this.dialogAnswers = step.answers
+      }
+    }
+  }
+  
+  respond(text, i) {
+    this.scriptProgress[this.dialogIndex]++
+    this.dialogIndex = null
+    this.updateScripts()
+  }
+  
   mesh() {
     const {x,y,rot} = this
     const matrix = mmults(

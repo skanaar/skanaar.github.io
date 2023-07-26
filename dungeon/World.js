@@ -8,10 +8,17 @@ import {
 
 export class World {
   
+  startLocation() {
+    for (let y=0; y<this.map.length; y++)
+      for (let x=0; x<this.map[0].length; x++)
+        if (this.map[y][x] === '@') return [x,y]
+    return [1,1]
+  }
+  
   cloneEntities() {
     return this.map
       .flatMap((row, y) =>
-        row.split('').map((cell, x) => this.items[cell] ? { ...this.items[cell], x, y } : null))
+        row.split('').map((cell, x) => this.entities[cell] ? { ...this.entities[cell], x, y } : null))
       .filter(e => e)
   }
   
@@ -46,12 +53,24 @@ export class World {
     '# #° °#v #',
     '# #° °#v #',
     '#=#° °##K#',
-    '#  kv  # #',
-    '#      | #',
+    '#     k# #',
+    '#   @  | #',
     '##########',
   ]
+  
+  scripts = [
+    [
+      { type: 'condition', visit: [2,7] },
+      { type: 'dialog', text: 'hello stranger, this is Gullmars Underplan', answers: ['I love it'] }
+    ],
+    [
+      { type: 'condition', visit: [4,7] },
+      { type: 'dialog', text: 'hello stranger, this is Gullmars Underplan', answers: ['I love it'] },
+      { type: 'dialog', text: 'the ljus lager left over from before the Varsam Förnyelse is running out. We need the new brewery up and running soon!', answers: ['OK'] }
+    ]
+  ]
 
-  items = {
+  entities = {
     a: {
       name: 'arboga 7,2', model: 'bottle', pickable: true, walkable: true,
       effect: { action: 'consume' }
@@ -65,6 +84,7 @@ export class World {
       name: 'door key', model: 'chest', pickable: true, walkable: true,
       effect: { action: 'remove', remove: 'door' }
     },
+    '@': { name: 'start', model: 'platform', pickable: false, walkable: true },
     '-': { name: 'gate', model: 'hGate', pickable: false, walkable: false },
     '|': { name: 'gate', model: 'vGate', pickable: false, walkable: false },
     '=': { name: 'door', model: 'hDoor', pickable: false, walkable: false },
@@ -86,6 +106,10 @@ export class World {
       [1,0.8,-1],[1,0,-1],[1,-0.8,-1],
       [0.8,-1,-1],[0,-1,-1],[-0.8,-1,-1],[-1,-0.8,-1]
     ], 2),
+
+    platform: new LatheGeometry('platform', [], 8, [
+      [16,0,50],[20,0,48],[36,0,48],[40,0,50]
+    ]),
 
     pillarWall: new LatheGeometry('pillarWall', [], 16, [
       [-55,0,-50],[-55,0,-45],[-50,0,-40],[-45,0,-30],[-45,0,30],[-50,0,40],[-55,0,45],[-55,0,50]
