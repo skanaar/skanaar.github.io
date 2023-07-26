@@ -1,21 +1,25 @@
-export function CompositeGeometry(name, transform, parts) {
-  return { geometry: 'composite', name, transform, parts }
+export function CompositeGeometry(name, transform, parts, texture = 255) {
+  return { geometry: 'composite', name, transform, parts, texture }
 }
 
-export function LatheGeometry(name, transform, res, path, angle) {
-  return { geometry: 'lathe', name, transform, res, path, angle }
+export function LatheGeometry(name, transform, res, angle, path, texture = 255) {
+  return { geometry: 'lathe', name, transform, res, path, angle, texture }
 }
 
-export function ExtrudeGeometry(name, transform, path, depth) {
-  return { geometry: 'extrude', name, transform, path, depth }
+export function ExtrudeGeometry(name, transform, path, depth, texture = 255) {
+  return { geometry: 'extrude', name, transform, path, depth, texture }
 }
 
-export function CubeGeometry(name, transform) {
-  return { geometry: 'cube', name, transform }
+export function CubeGeometry(name, transform, texture = 255) {
+  return { geometry: 'cube', name, transform, texture }
 }
 
 export function MeshGeometry(name, transform, quads) {
   return { geometry: 'mesh', name, transform, quads }
+}
+
+export function Quad(a, b, c, d, texture = 255) {
+  return [a, b, c, d, texture]
 }
 
 function seq(count) {
@@ -27,7 +31,7 @@ export function buildMesh(model){
     case 'lathe': return applyTransforms(lathe(model), model)
     case 'extrude': return applyTransforms(extrude(model), model)
     case 'composite': return applyTransforms(model.parts.flatMap(buildMesh), model)
-    case 'cube': return applyTransforms(cube(), model)
+    case 'cube': return applyTransforms(cube(model), model)
     case 'mesh': return applyTransforms(model.quads, model)
   }
 }
@@ -40,14 +44,14 @@ export function cullMesh(quads){
     .sort((a,b) => sorter(a) - sorter(b))
 }
 
-function cube() {
+function cube(model) {
   return [
-    [[-1,-1,1],[-1,1,1],[1,1,1],[1,-1,1]],
-    [[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1]],
-    [[-1,-1,-1],[-1,1,-1],[-1,1,1],[-1,-1,1]],
-    [[1,1,-1],[1,-1,-1],[1,-1,1],[1,1,1]],
-    [[1,-1,-1],[-1,-1,-1],[-1,-1,1],[1,-1,1]],
-    [[1,1,1],[-1,1,1],[-1,1,-1],[1,1,-1]]
+    Quad([-1,-1,1],[-1,1,1],[1,1,1],[1,-1,1], model.texture),
+    Quad([-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1], model.texture),
+    Quad([-1,-1,-1],[-1,1,-1],[-1,1,1],[-1,-1,1], model.texture),
+    Quad([1,1,-1],[1,-1,-1],[1,-1,1],[1,1,1], model.texture),
+    Quad([1,-1,-1],[-1,-1,-1],[-1,-1,1],[1,-1,1], model.texture),
+    Quad([1,1,1],[-1,1,1],[-1,1,-1],[1,1,-1], model.texture),
   ]
 }
 
@@ -57,7 +61,15 @@ function lathe(model) {
   seq(model.res).map(function (slice) {
     var vertex = (i,j) => mapply(RotateZ(maxAngle * i/model.res), model.path[j])
     for (var i=1; i<model.path.length; i++) {
-      mesh.push([vertex(slice,i), vertex(slice+1,i), vertex(slice+1,i-1), vertex(slice,i-1)])
+      mesh.push(
+        Quad(
+          vertex(slice,i),
+          vertex(slice+1,i),
+          vertex(slice+1,i-1),
+          vertex(slice,i-1),
+          model.texture
+        )
+      )
     }
   })
   return mesh
@@ -65,16 +77,21 @@ function lathe(model) {
 
 function extrude(model) {
   const path = [...model.path, model.path[0]]
-  return model.path.map((point, i) =>[
+  return model.path.map((point, i) => Quad(
     point,
     path[i+1],
     vadd(path[i+1], [0,0,model.depth]),
-    vadd(point, [0,0,model.depth])
-  ])
+    vadd(point, [0,0,model.depth]),
+    model.texture
+  ))
 }
 
-export function transformQuad([a,b,c,d], matrix) {
-  return [mapply(matrix,a), mapply(matrix,b), mapply(matrix,c), mapply(matrix,d)]
+export function transformQuad([a,b,c,d,texture], matrix) {
+  return Quad(mapply(matrix,a), mapply(matrix,b), mapply(matrix,c), mapply(matrix,d), texture)
+}
+
+export function mapQuad([a,b,c,d,texture], transform) {
+  return Quad(transform(a), transform(b), transform(c), transform(d), texture)
 }
 
 function sq(x) {
@@ -99,10 +116,10 @@ function subdivideQuad(quad) {
   let mid = (i,j) => vmult(0.5, vadd(quad[i], quad[j]))
   let center = vmult(0.5, vadd(mid(0,1), mid(2,3)))
   return [
-    [quad[0], mid(0,1), center, mid(0,3)],
-    [mid(0,1), quad[1], mid(1,2), center],
-    [center, mid(1,2), quad[2], mid(2,3)],
-    [mid(3,0), center, mid(2,3), quad[3]]
+    Quad(quad[0], mid(0,1), center, mid(0,3), quad[4]),
+    Quad(mid(0,1), quad[1], mid(1,2), center, quad[4]),
+    Quad(center, mid(1,2), quad[2], mid(2,3), quad[4]),
+    Quad(mid(3,0), center, mid(2,3), quad[3], quad[4]),
   ]
 }
 
@@ -112,20 +129,20 @@ function transformMesh(mesh, m) {
   if (m[0] == 'rotate')
     return mesh.map(quad => transformQuad(quad, RotateXYZ(m[1], m[2], m[3])))
   if (m[0] == 'translate')
-    return mesh.map(quad => quad.map(p => [p[0]+m[1], p[1]+m[2], p[2]+m[3]]))
+    return mesh.map(quad => transformQuad(quad, Translate(m[1], m[2], m[3])))
   if (m[0] == 'subdivide')
     return mesh.flatMap(subdivideQuad)
   if (m[0] == 'parabola'){
     var vec = [m[1], m[2], m[3]]
-    return mesh.map(quad => quad.map(p => parabola(p, vec)))
+    return mesh.map(quad => mapQuad(quad, p => parabola(p, vec)))
   }
   if (m[0] == 'sphere'){
     var s = Scale(m[1], m[2], m[3])
-    return mesh.map(quad => quad.map(p => mapply(s, vnormalize(p))))
+    return mesh.map(quad => mapQuad(quad, p => mapply(s, vnormalize(p))))
   }
   if (m[0] == 'radial-wave'){
     var args = [m[1], m[2], m[3]]
-    return mesh.map(quad => quad.map(p => radialWave(p, args)))
+    return mesh.map(quad => mapQuad(quad, p => radialWave(p, args)))
   }
 }
 
