@@ -47,7 +47,7 @@ export function Dungeon() {
       mesh.map((e, i) => el('path', {
         key: `m${i}`,
         d: quadPath(e),
-        fill: `rgb(${rund(-e[3][2]*15)}, ${rund(-e[3][2]*15)}, ${rund(-e[3][2]*15)})`,
+        fill: `rgb(${rund(e[4])}, ${rund(e[4])}, ${rund(e[4])})`,
       } )),
       ),
       game.dialog && el('dialog-panel', {}, game.dialog),
@@ -87,7 +87,6 @@ function quadPath([a,b,c,d]) {
 function rund(x) {
   return Math.round(x)
 }
-
 
 const style = `
 dungeon-crawler {

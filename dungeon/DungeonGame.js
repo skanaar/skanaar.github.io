@@ -8,6 +8,7 @@ import {
   RotateXYZ,
   transformQuad,
   Translate,
+  Quad,
   vmag,
   vmult
 } from './ThreeDeeEngine.js'
@@ -192,8 +193,17 @@ export class DungeonGame {
       return buildMesh(new CompositeGeometry('', [['translate',e.x*100,e.y*100,0]], [model]))
     })
     const scene = [...this.mapMesh, ...entityMeshes.flatMap(e => e)]
-    return cullMesh(scene.map(q => transformQuad(q, matrix)))
-  }  
+    const mesh = cullMesh(scene.map(q => transformQuad(q, matrix)))
+    return mesh.map((quad) => Quad(quad[0],quad[1],quad[2],quad[3],fogShader(quad)))
+  }
+}
+
+function fogShader(quad) {
+  return quad[4] * (1 - clamp(5 / Math.abs(quad[3][2]), 0, 1))
+}
+
+function clamp(value, low, high) {
+  return Math.max(low, Math.min(high, value))
 }
 
 function remove(list, item) {
