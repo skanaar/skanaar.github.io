@@ -40,15 +40,13 @@ export function Dungeon() {
   return (
     el('dungeon-crawler', {},
       el('style', {}, style),
-      el('svg', {
-        className: 'canvas-3d',
-        viewBox: '0 0 400 300'
-      },
-      mesh.map((e, i) => el('path', {
-        key: `m${i}`,
-        d: quadPath(e),
-        fill: `rgb(${rund(e[4])}, ${rund(e[4])}, ${rund(e[4])})`,
-      } )),
+      el('svg',
+        { className: 'canvas-3d', viewBox: '0 0 400 300' },
+        mesh.map((e, i) => el('path', {
+          key: `m${i}`,
+          d: quadPath(e),
+          fill: `rgb(${rund(e[4])}, ${rund(e[4])}, ${rund(e[4])})`,
+        } ))
       ),
       game.dialog && el('dialog-panel', {}, game.dialog),
       el('hr'),
@@ -64,6 +62,7 @@ export function Dungeon() {
         el(Button, { onClick: () => game.turn(90) }, '←'),
         el(Button, { onClick: () => game.walk(-1) }, '↓'),
         el(Button, { onClick: () => game.turn(-90) }, '→'),
+        el(Button, { onClick: () => game.interact() }, 'interact'),
       ),
       el('hr'),
       el(

@@ -3,9 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <title>Daniel Kallin</title>
-    <link rel="icon" type="image/svg+xml" href="assets/favicon.png" />
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/system.css">
+    <link rel="stylesheet" href="../assets/system.css">
     <style>
       body {
         background: #000;
@@ -28,10 +28,10 @@
   </head>
   <body>
     <div id="root"></div>
-    <script src="assets/react.production.min.js"></script>
-    <script src="assets/react-dom.production.min.js"></script>
+    <script src="../assets/react.production.min.js"></script>
+    <script src="../assets/react-dom.production.min.js"></script>
     <script type="module">
-      import { Dungeon } from './Dungeon.js'
+      import { Dungeon } from '../Dungeon.js'
       const root = ReactDOM.createRoot(document.getElementById('root'))
       root.render(React.createElement(Dungeon))
     </script>

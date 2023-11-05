@@ -121,7 +121,7 @@ export function Desktop({ title, columns = 3, apps, startupApps = {} }) {
         el(AppIcon, {
           key: `icon-${app.name}`,
           component: app.component,
-          icon: 'assets/'+app.icon,
+          icon: '/assets/'+app.icon,
           open: !!openApps[app.name],
           title: app.name,
           style: {
