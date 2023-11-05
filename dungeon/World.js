@@ -7,8 +7,7 @@ import {
   Quad,
 } from './ThreeDeeEngine.js'
 
-export class World {
-  
+export class World {  
   startLocation() {
     for (let y=0; y<this.map.length; y++)
       for (let x=0; x<this.map[0].length; x++)
@@ -52,9 +51,9 @@ export class World {
     '# ## ### #',
     '# #° °## #',
     '# #° °#v #',
-    '# #° °#v #',
+    '# #°a°#v #',
     '#=#° °##K#',
-    '#     k# #',
+    '#    1k# #',
     '#   @  | #',
     '##########',
   ]
@@ -65,15 +64,21 @@ export class World {
       { type: 'dialog', text: 'hello stranger, this is Gullmars Underplan', answers: ['I love it'] }
     ],
     [
-      { type: 'condition', visit: [4,7] },
+      { type: 'condition', id: 'start', interact: [5,7] },
       { type: 'dialog', text: 'hello stranger, this is Gullmars Underplan', answers: ['I love it'] },
-      { type: 'dialog', text: 'the ljus lager left over from before the Varsam Förnyelse is running out. We need the new brewery up and running soon!', answers: ['OK'] }
+      { type: 'dialog', text: 'the ljus lager left over from before the Varsam Förnyelse is running out. We need the new brewery up and running soon!', answers: ['OK'] },
+      { type: 'condition', visit: [4,5] },
+      { type: 'condition', id: 'have item', haveItem: 'arboga' },
+      { type: 'condition', id: 'start', interact: [5,7] },
+      { type: 'dialog', text: 'Have you found anything?', answers: ['Yes'] },
+      { type: 'dialog', text: 'Excellent, thank you', answers: ['OK'] },
     ]
   ]
 
   entities = {
+    1: { name: 'lodis', model: 'lodis', pickable: false, walkable: true },
     a: {
-      name: 'arboga 7,2', model: 'bottle', pickable: true, walkable: true,
+      name: 'arboga', model: 'bottle', pickable: true, walkable: true,
       effect: { action: 'consume' }
     },
     s: { name: 'rock', model: 'stone', pickable: false, walkable: true },
@@ -130,11 +135,16 @@ export class World {
 
     stone: new CubeGeometry('stone', [['subdivide'], ['sphere',15,15,5], ['rotate',0,0,20], ['translate',0,0,42]]),
 
+    lodis: new CompositeGeometry('lodis', [], [
+      new CubeGeometry('stone', [['subdivide'], ['sphere',15,15,15], ['rotate',0,0,20], ['translate',0,0,42]]),
+      new CubeGeometry('stone', [['subdivide'], ['sphere',15,15,15], ['rotate',0,0,20], ['translate',0,0,0]])
+    ]),
+
     bottle: new LatheGeometry('bottle', [['rotate',180,0,0], ['scale',0.1,0.1,0.1], ['translate',30,30,35]], 8, 360, [
       [0,0,-140],[50,0,-150],[55,0,-145],[55,0,-40],[52,0,-10],[42,0,20],[28,0,50],[20,0,80],[18,0,110],[23,0,115],[20,0,135],[22,0,155],[18,0,159],[0,0,160]
     ]),
 
-    chest: new CompositeGeometry('chest', [['scale',1,1,1], ['rotate',-90,0,30], ['translate',-20,20,45]], [
+    chest: new CompositeGeometry('chest', [['scale',1,1,1], ['rotate',-90,0,30], ['translate',-5,5,45]], [
       new LatheGeometry('', [['translate',0,5,0]], 8, 180, [[2,0,-15],[10,0,-15],[10,0,15],[2,0,15]]),
       new CubeGeometry('', [['scale',10,5,15]])
     ]),

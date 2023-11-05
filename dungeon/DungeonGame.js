@@ -94,12 +94,17 @@ export class DungeonGame {
   
   take() {
     const item = this.entities.find(e => e.y === this.targetY && e.x === this.targetX)
-    if (item) {
+    if (!item || !item.pickable) {
+      this.message =  'nothing to take'
+    } else {
       this.message =  'you take a ' + item.name
       this.inventory.push(item)
       remove(this.entities, item)
-    } else
-      this.message =  'you find nothing'
+    }
+  }
+  
+  interact() {
+    this.updateScripts('interact')
   }
   
   use(item) {
@@ -150,7 +155,7 @@ export class DungeonGame {
     this.updateScripts()
   }
   
-  updateScripts() {
+  updateScripts(event = null) {
     this.dialogIndex = null
     this.dialog = null
     this.dialogAnswers = []
@@ -158,8 +163,23 @@ export class DungeonGame {
       const script = this.world.scripts[i]
       const step = script[this.scriptProgress[i]]
       if (!step) continue
-      if (step.type === 'condition') {
-        if (step.visit && step.visit[0] === this.x && step.visit[1] === this.y) {
+      if (step.type === 'condition' && step.visit) {
+        if (step.visit[0] === this.x && step.visit[1] === this.y) {
+          this.scriptProgress[i]++
+          this.updateScripts()
+          return
+        }
+      }
+      if (step.type === 'condition' && step.interact) {
+        if (event !== 'interact') return
+        if (step.interact[0] === this.x && step.interact[1] === this.y) {
+          this.scriptProgress[i]++
+          this.updateScripts()
+          return
+        }
+      }
+      if (step.type === 'condition' && step.haveItem) {
+        if (this.inventory.some(e => e.name === step.haveItem)) {
           this.scriptProgress[i]++
           this.updateScripts()
           return
@@ -169,6 +189,13 @@ export class DungeonGame {
         this.dialogIndex = i
         this.dialog = step.text
         this.dialogAnswers = step.answers
+      }
+      if (step.type === 'goto' && step.step) {
+        const index = script.findIndex(e => e.id === step.step)
+        if (index == -1) throw new Error('invalid script '+i)
+        this.scriptProgress[i] = index
+        this.updateScripts()
+        return
       }
     }
   }
@@ -184,6 +211,7 @@ export class DungeonGame {
     const matrix = mmults(
       Translate(-x*100,-y*100,0),
       RotateXYZ(-90,rot,0),
+      Translate(0,0,50),
       Perspective(0.6, 1000, 20000),
       Translate(200,150,0),
     )
