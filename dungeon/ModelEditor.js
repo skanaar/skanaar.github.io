@@ -139,31 +139,60 @@ function TransformListEditor({ transforms, onChange }) {
   )
 }
 
-function GeometryEditor({ model, onChange }) {
-  const commonParts = [
+function GeometryEditorHeader({ model, onChange, onDelete }) {
+  return el(React.Fragment, {},
     el('span', {}, model.geometry),
     el('input', { value: model.name, placeholder: 'name', onChange: (e) => onChange({ ...model, name: e.target.value }) }),
+    el('button', { onClick: onDelete }, '✕'),
     el('hr'),
     el(TransformListEditor, { transforms: model.transform, onChange: (value) => onChange({ ...model, transform: value })}),
     el('hr'),
-  ]
+  )
+}
+
+function GeometryEditor({ model, onChange, onDelete }) {
   if (model.geometry === 'composite'){
     return el('geometry-editor', {},
-    ...commonParts,
-      model.parts.map((e, i) => el(GeometryEditor, { model: e, onChange: (value) => onChange({ ...model, parts: model.parts.toSpliced(i, 1, value)}) }))
+      el(GeometryEditorHeader, { model, onChange, onDelete }),
+      el('div', { class: 'composite-parts'},
+        model.parts.map((e, i) => el(GeometryEditor, {
+          model: e,
+          onChange: (value) => onChange({ ...model, parts: model.parts.toSpliced(i, 1, value)})
+        })),
+      ),
+      el('label', {},
+        'Add geometry',
+        el('select', { onChange: () => onChange({ ...model, parts: [...model.parts, new LatheGeometry('', [], 8, 2*Math.PI, [])] }) },
+          el('option', {}, 'composite'),
+          el('option', {}, 'lathe'),
+          el('option', {}, 'cube'),
+          el('option', {}, 'mesh'),
+          el('option', {}, 'extrude'),
+        )
+      )
     )
   }
   if (model.geometry === 'lathe'){
-    return el('geometry-editor', {}, ...commonParts)
+    return el('geometry-editor', {},
+      el(GeometryEditorHeader, { model, onChange, onDelete }),
+      el('label', {}, 'Res', el('input', { type: 'number', value: model.res })),
+      el('label', {}, 'Angle', el('input', { type: 'number', value: model.angle })),
+    )
   }
   if (model.geometry === 'cube'){
-    return el('geometry-editor', {}, ...commonParts)
+    return el('geometry-editor', {},
+      el(GeometryEditorHeader, { model, onChange, onDelete })
+    )
   }
   if (model.geometry === 'mesh'){
-    return el('geometry-editor', {}, ...commonParts)
+    return el('geometry-editor', {},
+      el(GeometryEditorHeader, { model, onChange, onDelete })
+    )
   }
   if (model.geometry === 'extrude'){
-    return el('geometry-editor', {}, ...commonParts)
+    return el('geometry-editor', {},
+      el(GeometryEditorHeader, { model, onChange, onDelete })
+    )
   }
 }
 

@@ -49,7 +49,7 @@ function Clock() {
   return el('clock-widget', {}, time.toLocaleTimeString())
 }
 
-const signals = {
+export const signals = {
   listeners: [],
   on(app, event, callback) {
     this.listeners.push({ app, event, callback })
