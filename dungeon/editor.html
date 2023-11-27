@@ -14,12 +14,15 @@
     <script src="../assets/react.production.min.js"></script>
     <script src="../assets/react-dom.production.min.js"></script>
     <script type="module">
-      import { Desktop, App } from '../assets/system.js'
+      import { Desktop, App, signals } from '../assets/system.js'
       import { app as modeller } from './ModelEditor.js'
+      import { app as dungeon } from './Dungeon.js'
+      import { app as mapEditor } from './MapEditor.js'
+      import { defaultWorld } from './World.js'
       
       const os = React.createElement(Desktop, {
         title: '💬',
-        apps: [modeller]
+        apps: [dungeon, modeller, mapEditor]
       })
 
       const root = ReactDOM.createRoot(document.getElementById('root'))

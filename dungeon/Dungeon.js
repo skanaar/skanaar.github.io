@@ -1,16 +1,21 @@
-import { el, App, Button } from './assets/system.js'
-import { DungeonGame } from './dungeon/DungeonGame.js'
-import { World } from './dungeon/World.js'
+import { el, App, Button, useEvent } from '../assets/system.js'
+import { DungeonGame } from './DungeonGame.js'
+import { World } from './World.js'
+import { files } from './file-system.js'
 
-const game = new DungeonGame(new World())
+let game = new DungeonGame(new World(files['world']))
 
 const icon = 'arch.svg'
 export const app = new App('Dungeon', Dungeon, icon, [375, 500], 'noresize')
+app.addMenu('World', { title: 'Reload world', event: 'reload', arg: null })
 
 const frameMs = 20
 
 export function Dungeon() {
   const [state, setState] = React.useState('')
+  useEvent(app, 'reload', () => {
+    game = new DungeonGame(new World())
+  })
   
   React.useEffect(() => {
     const handler = (event) => {
