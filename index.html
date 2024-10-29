@@ -6,7 +6,6 @@
     <link rel="icon" type="image/svg+xml" href="assets/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/system.css">
-    </style>
   </head>
   <body>
     <div id="root"></div>
@@ -14,14 +13,14 @@
     <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
     <script src="cytank/js/underscore.js"></script>
     <script src="cytank/js/Bacon.js"></script>
-		<script type="importmap">
-			{
-				"imports": {
-					"three": "https://unpkg.com/three@0.149.0/build/three.module.js",
-					"three/addons/": "https://unpkg.com/three@0.149.0/examples/jsm/"
-				}
-			}
-		</script>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.149.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.149.0/examples/jsm/"
+        }
+      }
+    </script>
     <script type="module">
       import { Desktop, App } from './assets/system.js'
       import { app as css2sql } from './Css2Sql.js'
@@ -31,15 +30,28 @@
       import { app as cytank } from './Cytank.js'
       import { app as modeller } from './Modeller.js'
       import { app as terrain } from './Terrain.js'
+      import { app as raytracer } from './RayTracer.js'
       import { Browser, BrowserApp } from './Browser.js'
-      
+
       const nebula = new BrowserApp('Nebula Sky', 'planet.svg', 'https://www.rymdmotor.se/nebula-sky')
       const beer = new BrowserApp('Gissa Krogen', 'beer.svg', 'https://gissa-krogen.vercel.app/')
       const finscript = new BrowserApp('FinScript', 'chart.svg', '/fin-script', [800, 600])
-      
+
       const os = React.createElement(Desktop, {
         title: '💬',
-        apps: [minesweep, lunarRover, cytank, modeller, terrain, css2sql, nebula, beer, finscript, readme]
+        apps: [
+          minesweep,
+          lunarRover,
+          cytank,
+          modeller,
+          raytracer,
+          terrain,
+          css2sql,
+          nebula,
+          beer,
+          finscript,
+          readme
+        ]
       })
 
       const root = ReactDOM.createRoot(document.getElementById('root'))
