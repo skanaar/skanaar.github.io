@@ -23,7 +23,7 @@ export function LunarRover() {
   useEvent(app, 'pause', () => { conf.isPaused = !conf.isPaused })
 
   return el('div', {
-    style: { margin: -10, width: 500, height: 375 },
+    style: { width: 500, height: 375 },
     ref: hostRef
   })
 }

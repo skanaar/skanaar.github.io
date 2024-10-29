@@ -67,7 +67,7 @@ window-frame window-title button:active {
 window-frame window-body {
   position: relative;
   border-top: var(--line) solid var(--win-color);
-  padding: 10px;
+  display: grid;
 }
 
 a.app-icon {
@@ -127,6 +127,9 @@ p {
 }
 .stack {
   max-width: 400px;
+}
+.padded {
+  padding: 10px;
 }
 
 desktop-host {

@@ -69,12 +69,12 @@ const signals = {
   }
 }
 
-export function Desktop({ title, apps }) {
+export function Desktop({ title, columns = 3, apps }) {
   const [current, setCurrent] = React.useState(null)
   const [openApps, setOpenApps] = React.useState({})
-  
+
   const openAppNames = [...Object.entries(openApps)].filter(([, open]) => open).map(pair => pair[0])
-  
+
   React.useEffect(() => {
     const onEvent = (arg, event, app) => {
       if (event == 'restart') location.reload()
@@ -90,7 +90,7 @@ export function Desktop({ title, apps }) {
     signals.on(null, null, onEvent)
     return () => { signals.off(onEvent)}
   }, [])
-  
+
   const systemMenu = el(
     Menu,
     {
@@ -104,7 +104,7 @@ export function Desktop({ title, apps }) {
       ]
     },
   )
-  
+
   const appMenuSpecs = apps.find(e => e.name === current)?.menus ?? []
   const appMenus = appMenuSpecs.map(e =>
     el(Menu, { title: e.title, items: e.items })
@@ -126,8 +126,8 @@ export function Desktop({ title, apps }) {
           title: app.name,
           style: {
             position: 'absolute',
-            left: 20 + 100*(i % 3),
-            top: 50 + 120 * Math.floor(i / 3)
+            left: 20 + 100*(i % columns),
+            top: 50 + 120 * Math.floor(i / columns)
           },
           onClick: () => signals.trigger(app.name, 'focus', null)
         }),
@@ -264,7 +264,7 @@ export function Menu({ title, items }) {
           'menu-dropdown',
           {},
           items.map((item, i) => el(
-            MenuItem, 
+            MenuItem,
             { key: i, item, onClose: () => setOpen(false) }
           ))
         )

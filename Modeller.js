@@ -32,9 +32,9 @@ export function Modeller() {
   const [selected, setSelected] = React.useState(initialModel)
 
   const [cameraIndex, setCameraIndex] = React.useState(0)
-  
+
   React.useEffect(() => updateMesh(cameraModes[cameraIndex], models[selected]), [])
-  
+
   useEvent(app, 'set-model', (arg) => {
     const index = models.findIndex(e => e.name === arg)
     setSelected(index)
@@ -51,7 +51,7 @@ export function Modeller() {
     setCameraIndex(index)
     updateMesh(cameraModes[index], models[selected])
   }
-  
+
   function changeSelected(delta) {
     const index = (selected + delta + models.length) % models.length
     setSelected(index)
@@ -66,7 +66,7 @@ export function Modeller() {
     case 'mesh': return applyTransforms(model.quads, model)
     }
   }
-  
+
   function updateMesh(camera, model){
     let mesh = applyPerspective(camera, zoom, buildMesh(model))
     mesh = mesh.filter(function (quad) {
@@ -108,7 +108,6 @@ export function Modeller() {
         modeller-viewer .canvas-3d {
           display: block;
           position: relative;
-          margin: -10px;
           top: 20px;
           width: 400px;
           height: 450px;

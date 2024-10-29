@@ -3,11 +3,11 @@ import { el, Button, App } from './assets/system.js'
 export const app = new App('Terrain', Terrain, 'landscape.svg', [650, 460], 'autosize')
 
 export function Terrain() {
-  
+
   const [selected, setSelected] = React.useState(Math.floor(surfaces.length*Math.random()))
   const [angle, setAngle] = React.useState(0)
   const surface = surfaces[selected]
-  
+
   React.useEffect(() => {
     const handle = setInterval(() => setAngle(a => (a + 0.005) % (2*Math.PI)), 25)
     return () => clearInterval(handle)
@@ -16,18 +16,18 @@ export function Terrain() {
   function changeSelected(delta) {
     setSelected((selected + delta + surfaces.length) % surfaces.length)
   }
-  
+
   var center = Vec(400, 250)
   var radius = 300
   const mesh = drawTerrain(center, radius, surface, angle)
-  
+
   if (angle > Math.PI * 1) mesh.reverse()
-  
+
   return el(
     'terrain-viewer',
     {},
     el('style', {}, `
-      terrain-viewer { background:#000; display:block; margin:-10px }
+      terrain-viewer { background:#000; display:block; }
       terrain-viewer .canvas-3d { display:block }
       terrain-viewer footer {
         background: #fff;
@@ -112,7 +112,7 @@ function drawTerrain(center, radius, style, angle = 0.3){
       terrain[i][j] = lerp(style.curve, terrain[i][j])
     }
   }
-  
+
   function sq(x) { return x * x }
 
   const mesh = []
@@ -137,7 +137,7 @@ function drawTerrain(center, radius, style, angle = 0.3){
       })
     }
   }
-  
+
   return mesh
 }
 
@@ -151,7 +151,7 @@ function Noise(conf) {
   function smoothstep(x) { return x*x*(3 - 2*x) }
 
   function lerp(factor, a, b) { return a + (b-a)*factor }
-  
+
   function getSingleOctave(p) {
     var x0 = Math.floor(p.x)
     var y0 = Math.floor(p.y)
@@ -163,7 +163,7 @@ function Noise(conf) {
     var yy1 = lerp(uy, val(x1, y0), val(x1, y1))
     return lerp(ux, yy0, yy1)
   }
-  
+
   function val(x, y) {
     return matrix[Math.abs(1024 + x + 7*y) % matrix.length]
   }

@@ -4,7 +4,7 @@ export const app = new App('Css2Sql', Css2Sql, 'database.svg', [450, 250], 'auto
 
 export function Css2Sql() {
   const [input, setInput] = React.useState('')
-  
+
   function link(src, text) {
     return el('a', { href: '#', onClick: (e) => {
       e.preventDefault()
@@ -14,7 +14,7 @@ export function Css2Sql() {
 
   return el(
     'div',
-    {},
+    { className: 'padded' },
     el('div', { className: 'stack' },
       el('input', { value: input, onChange: (e) => setInput(e.target.value) }),
       el('p', {}, css2sql(input)),

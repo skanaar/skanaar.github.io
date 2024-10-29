@@ -5,7 +5,7 @@ export const app = new App('Readme', Readme, 'file.svg', [300, 300])
 export function Readme() {
   return el(
     'div',
-    {},
+    { className: 'padded' },
     el('h2', {}, 'Daniel Kallin'),
     el('h2', {}, 'Links'),
     el('p', { className: 'stack' },
@@ -24,4 +24,3 @@ export function Readme() {
     ),
   )
 }
-

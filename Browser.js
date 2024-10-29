@@ -9,13 +9,13 @@ export class BrowserApp extends App {
 }
 
 export function Browser({ app, url, width, height }) {
-  
+
   useEvent(app, 'visit', () => window.open(url, '_blank'))
-  
+
   return el(
     'browser-view',
     {},
-    el('style', {}, 'browser-view iframe { display: block; margin: -10px; border: none }'),
+    el('style', {}, 'browser-view iframe { display: block; border: none }'),
     el('iframe', { src: url, width, height: height - 25 }),
   )
 }

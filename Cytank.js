@@ -8,7 +8,7 @@ app.addToAppMenu({ title: 'Pause/Play', event: 'play' })
 export function Cytank() {
   const hostRef = React.useRef()
   const gameRef = React.useRef()
-  
+
   useEvent(app, 'play', () => gameRef.current.isPaused = !gameRef.current.isPaused)
 
   React.useEffect(() => {
@@ -18,7 +18,6 @@ export function Cytank() {
   return el('canvas', {
     width: 800,
     height: 400,
-    style: { margin: -10 },
     ref: hostRef
   })
 }

@@ -178,6 +178,10 @@ function CellSymbol({ cell }) {
 }
 
 const style = `
+mine-sweep {
+  display: block;
+  padding: 10px;
+}
 mine-sweep h2 {
   margin: 0;
   text-align: center;
