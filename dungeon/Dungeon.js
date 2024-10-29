@@ -16,7 +16,7 @@ export function Dungeon() {
   useEvent(app, 'reload', () => {
     game = new DungeonGame(new World())
   })
-  
+
   React.useEffect(() => {
     const handler = (event) => {
       switch(event.key) {
@@ -29,7 +29,7 @@ export function Dungeon() {
     document.addEventListener('keydown', handler)
     return () => document.removeEventListener('keydown', handler)
   })
-  
+
   React.useEffect(() => {
     const handle = setInterval(() => {
       game.update(frameMs/1000)
@@ -73,7 +73,7 @@ export function Dungeon() {
       el(
         'inventory-panel',
         {},
-        game.inventory.map(e => 
+        game.inventory.map(e =>
           el(React.Fragment, { key: e.name },
             el('label', {}, e.name),
             e.effect ? el(Button, { onClick: () => game.use(e) }, 'use') : el('div')
@@ -94,10 +94,10 @@ function rund(x) {
 
 const style = `
 dungeon-crawler {
-  margin: -10px;
+  display: flex;
+  flex-direction: column;
   position: relative;
 }
-
 dungeon-crawler svg {
   display: block;
   background: linear-gradient(to top, #eee, #000, #eee)
