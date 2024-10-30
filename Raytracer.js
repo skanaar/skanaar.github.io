@@ -1,4 +1,5 @@
 import { el, App, useEvent } from './assets/system.js'
+import { hilbert } from './Hilbert.js'
 
 export const app = new App('RayTracer', RayTracer, 'aperture.svg', [256, 256], 'autosize')
 
@@ -10,12 +11,6 @@ app.addMenu(
   { title: 'Add sphere', event: 'add_sphere' },
   { title: 'Add many spheres', event: 'add_spheres' },
   { title: 'Reset scene', event: 'reset_scene' },
-)
-app.addMenu(
-  'Dither',
-  { title: 'Small dither', event: 'ditherS' },
-  { title: 'Medium dither', event: 'ditherM' },
-  { title: 'Large dither', event: 'ditherL' },
 )
 
 function RayTracer() {
@@ -39,9 +34,6 @@ function RayTracer() {
     spheres = [[[128, 128, 128], 64, [255, 0, 0]]]
     lights = [[512, 0, 512]]
   }))
-  useEvent(app, 'ditherS', apply(() => { dither = ditherS }))
-  useEvent(app, 'ditherM', apply(() => { dither = ditherM }))
-  useEvent(app, 'ditherL', apply(() => { dither = ditherL }))
 
   return el('canvas', { width: 256, height: 256, ref: hostRef })
 }
@@ -61,33 +53,33 @@ let div = ([a, b, c], k) => [a / k, b / k, c / k]
 let norm = (v) => div(v, mag(v))
 let sq = (x) => x * x
 
-let ditherS = [0.17, 0.75, 0.43, 0.55, 0.56, 0.70, 0.88]
-let ditherM = [0.14, 0.07, 0.21, 0.26, 0.17, 0.67, 0.55, 0.65, 0.06, 0.51, 0.10, 0.66, 0.91, 0.76]
-let ditherL = new Array(137).fill(1).map(() => Math.random())
-let dither = ditherS
-
 function raytrace(canvas, w, spheres, lights) {
   let ctx = canvas.getContext("2d")
+  let curve = hilbert([0, 0], [255, 0], 256)
   let ditherIndex = 0
-  let buffer = []
-  for (let i = 0; i < w; i++)
-    for (let j = 0; j < w; j++) {
-      let depth = -1000
-      let bright = 0
-      for (let [[x, y, z], r] of spheres) {
-        if (sq(i - x) + sq(j - y) > r * r) continue
-        let k = Math.sqrt(r * r - sq(i - x) - sq(j - y)) + z
-        let p = [i, j, k]
-        if (k < depth) continue
-        depth = k
-        bright = 0
-        for (let e of lights)
-          bright += lightBrightness(p, norm(diff(p, [x, y, z])), e)
-      }
-      ditherIndex = (ditherIndex + 1) % dither.length
-      ctx.fillStyle = dither[ditherIndex] < bright ? `#fff` : '#000'
-      ctx.fillRect(i, j, 1, 1)
+  let errorBuffer = [0, 0, 0, 0, 0, 0, 0 ,0]
+
+  for (let [i,j] of curve) {
+    let depth = -1000
+    let bright = 0
+    for (let [[x, y, z], r] of spheres) {
+      if (sq(i - x) + sq(j - y) > r * r) continue
+      let k = Math.sqrt(r * r - sq(i - x) - sq(j - y)) + z
+      let p = [i, j, k]
+      if (k < depth) continue
+      depth = k
+      bright = 0
+      for (let e of lights)
+        bright += lightBrightness(p, norm(diff(p, [x, y, z])), e)
     }
+    ditherIndex = (ditherIndex + 1) % errorBuffer.length
+    let clampedBright = (bright - errorBuffer[ditherIndex]) > 0.5 ? 1 : 0
+    let deviation = (clampedBright - bright) / 8
+    for (let n = 0; n < errorBuffer.length; n++) errorBuffer[n] += deviation
+    errorBuffer[ditherIndex] = 0
+    ctx.fillStyle = clampedBright === 1 ? `#fff` : '#000'
+    ctx.fillRect(i, j, 1, 1)
+  }
 }
 
 function lightBrightness(p, surface_normal, light) {
