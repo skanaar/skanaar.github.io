@@ -1,7 +1,8 @@
 import { el, App, useEvent } from './assets/system.js'
 import { hilbert } from './Hilbert.js'
 
-export const app = new App('RayTracer', RayTracer, 'aperture.svg', [256, 256], 'autosize')
+let size = 256
+export const app = new App('RayTracer', RayTracer, 'aperture.svg', [size, size], 'autosize')
 
 app.addMenu(
   'Scene',
@@ -13,18 +14,27 @@ app.addMenu(
   { title: 'Reset scene', event: 'reset_scene' },
 )
 
+app.addMenu(
+  'Dither',
+  { title: 'Hilbert curve dither', event: 'dither-hilbert' },
+  { title: 'Noise dither', event: 'dither-noise' },
+  { title: 'No dither', event: 'dither-none' },
+)
+
+let ditherMethod = 'hilbert'
+
 function RayTracer() {
   const hostRef = React.useRef()
   const apply = (action) => () => {
     action()
-    raytrace(hostRef.current, w, spheres, lights)
+    raytrace(hostRef.current, size, spheres, lights)
   }
 
   React.useEffect(() => {
-    raytrace(hostRef.current, w, spheres, lights)
+    raytrace(hostRef.current, size, spheres, lights)
   }, [])
 
-  useEvent(app, 'add_light', apply(() => { lights.push([3*rnd(), 3*rnd(), 3*rnd()]) }))
+  useEvent(app, 'add_light', apply(() => { lights.push([rnd(1256)-500, rnd(1256)-500, 500]) }))
   useEvent(app, 'remove_light', apply(() => { lights.pop() }))
   useEvent(app, 'add_sphere', apply(() => { spheres.push([[rnd(), rnd(), rnd()], rnd(50)]) }))
   useEvent(app, 'add_spheres', apply(() => {
@@ -34,13 +44,15 @@ function RayTracer() {
     spheres = [[[128, 128, 128], 64, [255, 0, 0]]]
     lights = [[512, 0, 512]]
   }))
+  useEvent(app, 'dither-hilbert', apply(() => { ditherMethod = 'hilbert' }))
+  useEvent(app, 'dither-noise', apply(() => { ditherMethod = 'noise' }))
+  useEvent(app, 'dither-none', apply(() => { ditherMethod = 'none' }))
 
-  return el('canvas', { width: 256, height: 256, ref: hostRef })
+  return el('canvas', { width: size, height: size, ref: hostRef })
 }
 
-let rnd = (t = 255) => t * Math.random()
+let rnd = (t = size) => t * Math.random()
 
-let w = 256
 let lights = [[512, 0, 512]]
 let spheres = []
 for (let i = 0; i < 32; i++)
@@ -53,11 +65,14 @@ let div = ([a, b, c], k) => [a / k, b / k, c / k]
 let norm = (v) => div(v, mag(v))
 let sq = (x) => x * x
 
-function raytrace(canvas, w, spheres, lights) {
+function raytrace(canvas, size, spheres, lights) {
   let ctx = canvas.getContext("2d")
-  let curve = hilbert([0, 0], [255, 0], 256)
-  let ditherIndex = 0
-  let errorBuffer = [0, 0, 0, 0, 0, 0, 0 ,0]
+  let curve = hilbert([0, 0], [size-1, 0], size)
+  let ditherer = {
+    hilbert: new HilbertDiffusionDitherer(),
+    noise: new NoiseDitherer(),
+    none: { apply: (value) => value },
+  }[ditherMethod]
 
   for (let [i,j] of curve) {
     let depth = -1000
@@ -72,13 +87,37 @@ function raytrace(canvas, w, spheres, lights) {
       for (let e of lights)
         bright += lightBrightness(p, norm(diff(p, [x, y, z])), e)
     }
-    ditherIndex = (ditherIndex + 1) % errorBuffer.length
-    let clampedBright = (bright - errorBuffer[ditherIndex]) > 0.5 ? 1 : 0
-    let deviation = (clampedBright - bright) / 8
-    for (let n = 0; n < errorBuffer.length; n++) errorBuffer[n] += deviation
-    errorBuffer[ditherIndex] = 0
-    ctx.fillStyle = clampedBright === 1 ? `#fff` : '#000'
+
+    ctx.fillStyle = toColor(ditherer.apply(bright))
     ctx.fillRect(i, j, 1, 1)
+  }
+
+  function toColor(value) {
+    let c = Math.min(255, Math.max(0, value * 255))
+    return `rgb(${c},${c},${c})`
+  }
+}
+
+class HilbertDiffusionDitherer {
+  cursor = 0
+  errorBuffer = [0, 0, 0, 0, 0, 0, 0, 0]
+  apply(value) {
+    this.cursor = (this.cursor + 1) % this.errorBuffer.length
+    let clamped = (value - this.errorBuffer[this.cursor]) > 0.5 ? 1 : 0
+    let deviation = (clamped - value) / 8
+    for (let n = 0; n < this.errorBuffer.length; n++)
+      this.errorBuffer[n] += deviation
+    this.errorBuffer[this.cursor] = 0
+    return clamped
+  }
+}
+
+class NoiseDitherer {
+  cursor = 0
+  noise = [0.17, 0.75, 0.43, 0.55, 0.56, 0.70, 0.88]
+  apply(value) {
+    this.cursor = (this.cursor + 1) % this.noise.length
+    return (value > this.noise[this.cursor]) ? 1 : 0
   }
 }
 
