@@ -9,24 +9,24 @@ app.addMenu(
   { title: 'Add light', event: 'add_light' },
   { title: 'Remove light', event: 'remove_light' },
   { title: null },
-  { title: 'Add sphere', event: 'add_sphere' },
-  { title: 'Add many spheres', event: 'add_spheres' },
+  { title: 'Add sphere', event: 'add_spheres', arg: 1 },
+  { title: 'Add many spheres', event: 'add_spheres', arg: 5 },
   { title: 'Reset scene', event: 'reset_scene' },
 )
 
 app.addMenu(
   'Dither',
-  { title: 'Hilbert curve dither', event: 'dither-hilbert' },
-  { title: 'Noise dither', event: 'dither-noise' },
-  { title: 'No dither', event: 'dither-none' },
+  { title: 'Hilbert curve dither', event: 'dither', arg: 'hilbert' },
+  { title: 'Noise dither', event: 'dither', arg: 'noise' },
+  { title: 'No dither', event: 'dither', arg: 'none' },
 )
 
-let ditherMethod = 'dither-hilbert'
+let ditherMethod = 'hilbert'
 
 function RayTracer() {
   const hostRef = React.useRef()
-  const apply = (action) => () => {
-    action()
+  const apply = (action) => (arg, event, app) => {
+    action(arg, event)
     raytrace(hostRef.current, size, spheres, lights)
   }
 
@@ -34,29 +34,20 @@ function RayTracer() {
     raytrace(hostRef.current, size, spheres, lights)
   }, [])
 
-  useEvent(app, 'add_light', apply(() => { lights.push([rnd(1256)-500, rnd(1256)-500, 500]) }))
-  useEvent(app, 'remove_light', apply(() => { lights.pop() }))
-  useEvent(app, 'add_sphere', apply(() => { spheres.push([[rnd(), rnd(), rnd()], rnd(50)]) }))
-  useEvent(app, 'add_spheres', apply(() => {
-    for (let i = 0; i < 5; i++) spheres.push([[rnd(), rnd(), rnd()], rnd(50)])
+  useEvent(app, 'add_light', apply(() => lights.push([rnd(1256)-500, rnd(1256)-500, 500])))
+  useEvent(app, 'remove_light', apply(() => lights.pop()))
+  useEvent(app, 'add_spheres', apply((count) => {
+    for (let i = 0; i < count; i++)
+      spheres.push([[rnd(), rnd(), -256+rnd()], 32+rnd(32)])
   }))
   useEvent(app, 'reset_scene', apply(() => {
-    spheres = [[[128, 128, 128], 64, [255, 0, 0]]]
-    lights = [[512, 0, 512]]
+    spheres = [[[128, 128, -128], 64]]
+    lights = [[200, 50, 128]]
   }))
-  useEvent(app, 'dither-hilbert', apply(() => { ditherMethod = 'hilbert' }))
-  useEvent(app, 'dither-noise', apply(() => { ditherMethod = 'noise' }))
-  useEvent(app, 'dither-none', apply(() => { ditherMethod = 'none' }))
+  useEvent(app, 'dither', apply((value) => { ditherMethod = value }))
 
   return el('canvas', { width: size, height: size, ref: hostRef })
 }
-
-let rnd = (t = size) => t * Math.random()
-
-let lights = [[512, 0, 512]]
-let spheres = []
-for (let i = 0; i < 32; i++)
-  spheres.push([[rnd(), rnd(), rnd()], rnd(50)])
 
 let add = ([a, b, c], [x, y, z]) => [a + x, b + y, c + z]
 let diff = ([a, b, c], [x, y, z]) => [a - x, b - y, c - z]
@@ -66,6 +57,19 @@ let mag = ([a, b, c]) => Math.sqrt(a * a + b * b + c * c)
 let div = ([a, b, c], k) => [a / k, b / k, c / k]
 let norm = (v) => div(v, mag(v))
 let sq = (x) => x * x
+let rnd = (t = size) => t * Math.random()
+
+let lights = [[200, 50, 128]]
+let spheres = []
+let planes = [
+  [[0,0,0], norm([1,0,0.01])],
+  [[0,0,0], norm([0,1,0.01])],
+  [[0,255,0], norm([0,-1,0.01])],
+  [[255,0,0], norm([-1,0,0.01])],
+  [[0,0,-255], norm([0,0,1.01])],
+]
+for (let i = 0; i < 8; i++)
+  spheres.push([[rnd(), rnd(), -256+rnd()], 32+rnd(64)])
 
 function raytrace(canvas, size, spheres, lights) {
   let ctx = canvas.getContext("2d")
@@ -80,8 +84,9 @@ function raytrace(canvas, size, spheres, lights) {
 
   for (let [i,j] of curve) {
     let camDir = norm(diff([i, j, 0], camera))
-    let depth = 1000
-    let bright = 0
+    let hit = { depth: 1000, normal: null, point: [0,0,0] }
+
+    // sphere intersections
     for (let [sphereOrigin, r] of spheres) {
       let a = dot(camDir, camDir)
       let b = 2 * dot(camDir, diff(camera, sphereOrigin))
@@ -89,15 +94,24 @@ function raytrace(canvas, size, spheres, lights) {
       let disc = b*b - 4*a*c
       if (disc < 0) continue
       let t = (-b - Math.sqrt(b*b - 4*a*c))/(2*a)
-
+      if (t > hit.depth) continue
       let p = add(camera, mult(t, camDir))
-      if (t > depth) continue
-      depth = t
-      bright = 0
-      for (let light of lights)
-        bright += lightBrightness(p, mult(1/r, diff(p, sphereOrigin)), light)
+      hit = { depth: t, normal: mult(1/r, diff(p, sphereOrigin)), point: p }
     }
 
+    // plane intersections
+    for (let [planeOrigin, normal] of planes) {
+      if (dot(camDir, normal) > 0) continue
+      let t = (dot(planeOrigin,normal) - dot(camera,normal)) / dot(camDir,normal)
+      if (t > hit.depth) continue
+      hit = { depth: t, normal, point: add(camera, mult(t, camDir)) }
+    }
+
+    // hit patch illumination
+    let bright = 0
+    if (hit.normal != null)
+      for (let light of lights)
+        bright += lightBrightness(hit.point, hit.normal, light)
     ctx.fillStyle = toColor(ditherer.apply(bright))
     ctx.fillRect(i, j, 1, 1)
   }
@@ -106,18 +120,26 @@ function raytrace(canvas, size, spheres, lights) {
     let c = Math.min(255, Math.max(0, value * 255))
     return `rgb(${c},${c},${c})`
   }
+
+  function lightBrightness(p, surface_normal, light) {
+    let light_dir = norm(diff(light, p))
+    let dist = mag(diff(p, light))
+    let intensity = 40000/sq(dist)
+    return Math.max(0, intensity * dot(surface_normal, light_dir))
+  }
 }
 
 class HilbertDiffusionDitherer {
   cursor = 0
-  errorBuffer = [0, 0, 0, 0, 0, 0, 0, 0]
+  errorBuffer = [0,0,0,0,0,0,0,0]
+  errorFalloff = [4,4,2,2,1,1,1,1]
   apply(value) {
-    this.cursor = (this.cursor + 1) % this.errorBuffer.length
+    this.cursor = (this.cursor + 1) % 8
     let clamped = (value - this.errorBuffer[this.cursor]) > 0.5 ? 1 : 0
-    let deviation = (clamped - value) / 8
-    for (let n = 0; n < this.errorBuffer.length; n++)
-      this.errorBuffer[n] += deviation
     this.errorBuffer[this.cursor] = 0
+    let deviation = (clamped - value) / 8
+    for (let n = 0; n < 8; n++)
+      this.errorBuffer[(n+this.cursor) % 8] += deviation * this.errorFalloff[n]
     return clamped
   }
 }
@@ -129,11 +151,4 @@ class NoiseDitherer {
     this.cursor = (this.cursor + 1) % this.noise.length
     return (value > this.noise[this.cursor]) ? 1 : 0
   }
-}
-
-function lightBrightness(p, surface_normal, light) {
-  let light_dir = norm(diff(light, p))
-  let dist = mag(diff(p, light))
-  let intensity = 200000/sq(dist)
-  return Math.max(0, intensity * dot(surface_normal, light_dir))
 }
