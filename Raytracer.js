@@ -21,7 +21,7 @@ app.addMenu(
   { title: 'No dither', event: 'dither-none' },
 )
 
-let ditherMethod = 'hilbert'
+let ditherMethod = 'dither-hilbert'
 
 function RayTracer() {
   const hostRef = React.useRef()
@@ -58,7 +58,9 @@ let spheres = []
 for (let i = 0; i < 32; i++)
   spheres.push([[rnd(), rnd(), rnd()], rnd(50)])
 
+let add = ([a, b, c], [x, y, z]) => [a + x, b + y, c + z]
 let diff = ([a, b, c], [x, y, z]) => [a - x, b - y, c - z]
+let mult = (k, [a, b, c]) => [k*a, k*b, k*c]
 let dot = ([a, b, c], [x, y, z]) => a * x + b * y + c * z
 let mag = ([a, b, c]) => Math.sqrt(a * a + b * b + c * c)
 let div = ([a, b, c], k) => [a / k, b / k, c / k]
@@ -74,18 +76,26 @@ function raytrace(canvas, size, spheres, lights) {
     none: { apply: (value) => value },
   }[ditherMethod]
 
+  let camera = [128, 128, 512]
+
   for (let [i,j] of curve) {
-    let depth = -1000
+    let camDir = norm(diff([i, j, 0], camera))
+    let depth = 1000
     let bright = 0
-    for (let [[x, y, z], r] of spheres) {
-      if (sq(i - x) + sq(j - y) > r * r) continue
-      let k = Math.sqrt(r * r - sq(i - x) - sq(j - y)) + z
-      let p = [i, j, k]
-      if (k < depth) continue
-      depth = k
+    for (let [sphereOrigin, r] of spheres) {
+      let a = dot(camDir, camDir)
+      let b = 2 * dot(camDir, diff(camera, sphereOrigin))
+      let c = dot(sphereOrigin, sphereOrigin) + dot(camera, camera) + -2*dot(sphereOrigin, camera) - r*r
+      let disc = b*b - 4*a*c
+      if (disc < 0) continue
+      let t = (-b - Math.sqrt(b*b - 4*a*c))/(2*a)
+
+      let p = add(camera, mult(t, camDir))
+      if (t > depth) continue
+      depth = t
       bright = 0
-      for (let e of lights)
-        bright += lightBrightness(p, norm(diff(p, [x, y, z])), e)
+      for (let light of lights)
+        bright += lightBrightness(p, mult(1/r, diff(p, sphereOrigin)), light)
     }
 
     ctx.fillStyle = toColor(ditherer.apply(bright))
