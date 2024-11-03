@@ -17,6 +17,7 @@ app.addMenu(
 app.addMenu(
   'Dither',
   { title: 'Hilbert curve dither', event: 'dither', arg: 'hilbert' },
+  { title: 'Floyd-Steinberg dither', event: 'dither', arg: 'floydsteinberg' },
   { title: 'Noise dither', event: 'dither', arg: 'noise' },
   { title: 'No dither', event: 'dither', arg: 'none' },
 )
@@ -57,6 +58,7 @@ let mag = ([a, b, c]) => Math.sqrt(a * a + b * b + c * c)
 let div = ([a, b, c], k) => [a / k, b / k, c / k]
 let norm = (v) => div(v, mag(v))
 let sq = (x) => x * x
+let clamp = (x, low, high) => Math.max(low, Math.min(x, high))
 let rnd = (t = size) => t * Math.random()
 
 let lights = [[200, 50, 128]]
@@ -73,16 +75,16 @@ for (let i = 0; i < 8; i++)
 
 function raytrace(canvas, size, spheres, lights) {
   let ctx = canvas.getContext("2d")
-  let curve = hilbert([0, 0], [size-1, 0], size)
   let ditherer = {
     hilbert: new HilbertDiffusionDitherer(),
+    floydsteinberg: new FloydSteinbergDiffusionDitherer(),
     noise: new NoiseDitherer(),
-    none: { apply: (value) => value },
+    none: new NoDitherer(),
   }[ditherMethod]
 
   let camera = [128, 128, 512]
 
-  for (let [i,j] of curve) {
+  for (let [i,j] of ditherer.coordinates(size)) {
     let camDir = norm(diff([i, j, 0], camera))
     let hit = { depth: 1000, normal: null, point: [0,0,0] }
 
@@ -112,7 +114,8 @@ function raytrace(canvas, size, spheres, lights) {
     if (hit.normal != null)
       for (let light of lights)
         bright += lightBrightness(hit.point, hit.normal, light)
-    ctx.fillStyle = toColor(ditherer.apply(bright))
+    bright = clamp(bright, 0, 1)
+    ctx.fillStyle = toColor(ditherer.apply(bright, [i, j]))
     ctx.fillRect(i, j, 1, 1)
   }
 
@@ -133,6 +136,9 @@ class HilbertDiffusionDitherer {
   cursor = 0
   errorBuffer = [0,0,0,0,0,0,0,0]
   errorFalloff = [4,4,2,2,1,1,1,1]
+  coordinates(size) {
+    return hilbert([0, 0], [size-1, 0], size)
+  }
   apply(value) {
     this.cursor = (this.cursor + 1) % 8
     let clamped = (value - this.errorBuffer[this.cursor]) > 0.5 ? 1 : 0
@@ -144,11 +150,52 @@ class HilbertDiffusionDitherer {
   }
 }
 
+function* generateRowByRowCoordinates(size) {
+  for (let j = 0; j < size; j++)
+    for (let i = 0; i < size; i++)
+      yield [i,j]
+}
+
+class FloydSteinbergDiffusionDitherer {
+  cursor = 0
+  errorBuffer = []
+  coordinates(size) {
+    this.errorBuffer = [new Array(size).fill(0), new Array(size).fill(0)]
+    return generateRowByRowCoordinates(size)
+  }
+  apply(value, [i,j]) {
+    if (i === 0){
+      console.log('FSD::x=', i)
+      let [a, b] = this.errorBuffer
+      this.errorBuffer = [b, a.map(() => 0)]
+    }
+    let [currentRow, nextRow] = this.errorBuffer
+    const valueWithDiffusedError = clamp(value + currentRow[i], 0, 1)
+    let clamped = (valueWithDiffusedError) > 0.5 ? 1 : 0
+    let deviation = (valueWithDiffusedError - clamped) / 16
+    if (i+1 < currentRow.length) currentRow[i+1] += deviation * 7
+    if (i-1 > 0) nextRow[i-1] += deviation * 3
+    nextRow[i] += deviation * 5
+    if (i+1 < nextRow.length) nextRow[i+1] += deviation * 1
+    return clamped
+  }
+}
+
 class NoiseDitherer {
   cursor = 0
   noise = [0.17, 0.75, 0.43, 0.55, 0.56, 0.70, 0.88]
+  coordinates = generateRowByRowCoordinates
   apply(value) {
     this.cursor = (this.cursor + 1) % this.noise.length
     return (value > this.noise[this.cursor]) ? 1 : 0
+  }
+}
+
+class NoDitherer {
+  cursor = 0
+  noise = [0.17, 0.75, 0.43, 0.55, 0.56, 0.70, 0.88]
+  coordinates = generateRowByRowCoordinates
+  apply(value) {
+    return value
   }
 }
