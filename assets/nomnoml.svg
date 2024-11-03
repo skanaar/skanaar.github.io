@@ -1,0 +1,22 @@
+<svg width="24" height="24" viewBox="0 0 213 192" xmlns="http://www.w3.org/2000/svg" >
+	<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="bold" font-style="normal">
+		<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="15" stroke-linejoin="round" stroke-linecap="round" stroke="#000">
+			<g transform="translate(8, 8)" fill="#000">
+				<g transform="translate(20, 20)" fill="#000" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal">
+					<path d="M58.2 32.0 L45.5 42 L45.5 52 L45.5 52.0 " fill="none"></path>
+					<path d="M98.8 32.0 L111.5 42 L111.5 67.5 L111.5 67.5 " fill="none"></path>
+					<path d="M111.5 68.5 L111.5 94 L111.5 104 L111.5 104.0 " fill="none"></path>
+					<g fill="#fff" stroke="#000" data-name="assaddadd">
+						<rect x="28.5" y="0.0" height="32.0" width="100.0" data-name="assaddadd"></rect>
+					</g>
+					<g fill="#fff" stroke="#000" data-name="foofoofoo">
+						<rect x="0.0" y="52.0" height="32.0" width="91.0" data-name="foofoofoo"></rect>
+					</g>
+					<g fill="#fff" stroke="#000" data-name="barbarbar">
+						<rect x="66.0" y="104.0" height="32.0" width="91.0" data-name="barbarbar"></rect>
+					</g>
+				</g>
+			</g>
+		</g>
+	</g>
+</svg>
