@@ -16,13 +16,13 @@ app.addMenu(
 
 app.addMenu(
   'Dither',
-  { title: 'Hilbert curve dither', event: 'dither', arg: 'hilbert' },
   { title: 'Floyd-Steinberg dither', event: 'dither', arg: 'floydsteinberg' },
+  { title: 'Hilbert curve dither', event: 'dither', arg: 'hilbert' },
   { title: 'Noise dither', event: 'dither', arg: 'noise' },
   { title: 'No dither', event: 'dither', arg: 'none' },
 )
 
-let ditherMethod = 'hilbert'
+let ditherMethod = 'floydsteinberg'
 
 function RayTracer() {
   const hostRef = React.useRef()
@@ -70,14 +70,14 @@ let planes = [
   [[255,0,0], norm([-1,0,0.01])],
   [[0,0,-255], norm([0,0,1.01])],
 ]
-for (let i = 0; i < 8; i++)
-  spheres.push([[rnd(), rnd(), -256+rnd()], 32+rnd(64)])
+for (let i = 0; i < 5; i++)
+  spheres.push([[rnd(), rnd(), -256+rnd()], 32+rnd(32)])
 
 function raytrace(canvas, size, spheres, lights) {
   let ctx = canvas.getContext("2d")
   let ditherer = {
-    hilbert: new HilbertDiffusionDitherer(),
     floydsteinberg: new FloydSteinbergDiffusionDitherer(),
+    hilbert: new HilbertDiffusionDitherer(),
     noise: new NoiseDitherer(),
     none: new NoDitherer(),
   }[ditherMethod]
@@ -134,18 +134,20 @@ function raytrace(canvas, size, spheres, lights) {
 
 class HilbertDiffusionDitherer {
   cursor = 0
-  errorBuffer = [0,0,0,0,0,0,0,0]
-  errorFalloff = [4,4,2,2,1,1,1,1]
+  errorBuffer = new Array(32).fill(0)
+  errorWeight = new Array(32).fill(0).map((_,i) => Math.pow(1/8, i/31)/13.6)
   coordinates(size) {
     return hilbert([0, 0], [size-1, 0], size)
   }
   apply(value) {
-    this.cursor = (this.cursor + 1) % 8
-    let clamped = (value - this.errorBuffer[this.cursor]) > 0.5 ? 1 : 0
+    let len = this.errorBuffer.length
+    this.cursor = (this.cursor + 1) % len
+    let adjustedValue = value - this.errorBuffer[this.cursor]
+    let clamped = adjustedValue > 0.5 ? 1 : 0
     this.errorBuffer[this.cursor] = 0
-    let deviation = (clamped - value) / 8
-    for (let n = 0; n < 8; n++)
-      this.errorBuffer[(n+this.cursor) % 8] += deviation * this.errorFalloff[n]
+    let deviation = (clamped - adjustedValue)
+    for (let n = 0; n < len; n++)
+      this.errorBuffer[(n+this.cursor) % len] += deviation * this.errorWeight[n]
     return clamped
   }
 }
@@ -165,7 +167,6 @@ class FloydSteinbergDiffusionDitherer {
   }
   apply(value, [i,j]) {
     if (i === 0){
-      console.log('FSD::x=', i)
       let [a, b] = this.errorBuffer
       this.errorBuffer = [b, a.map(() => 0)]
     }
