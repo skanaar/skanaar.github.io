@@ -7,13 +7,19 @@ let curve = [...hilbert([0,0], [63,0], 64)]
 function Hilbert() {
   const [time, setTime] = React.useState(0)
   const hostRef = React.useRef()
+
+  React.useEffect(() => {
+    const handle = setInterval(() => setTime(t => t+1), 5)
+    return () => clearInterval(handle)
+  }, [])
+
   React.useEffect(() => {
     let ctx = hostRef.current.getContext('2d')
     ctx.scale(4,4)
     ctx.translate(0.5,0.5)
     ctx.lineWidth = 0.25
-    setInterval(() => {setTime(t => t+1)}, 5)
   }, [])
+
   React.useEffect(() => {
     let ctx = hostRef.current.getContext('2d')
     ctx.strokeStyle = '#000'

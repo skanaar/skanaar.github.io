@@ -29,7 +29,9 @@ function Nomnoml() {
 
   return el('nomnoml-app', {},
     el('style', {}, css),
-    el('textarea', { value: source, onChange }),
+    el('textarea-host', {},
+      el('textarea', { value: source, onChange }),
+    ),
     el('canvas', { ref: canvasRef })
   )
 }
@@ -49,10 +51,19 @@ nomnoml-app {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+nomnoml-app textarea-host {
+  display: block;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  padding: 4px;
+}
 nomnoml-app textarea {
+  box-sizing: border-box;
   font-family: 'Monaco', monospace;
   height: 100%;
-  border: none;
+  width: 100%;
+  border: 2px solid black;
   padding: 5px;
   line-height: 22px;
 }
