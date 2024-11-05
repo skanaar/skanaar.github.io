@@ -1,8 +1,16 @@
+// vectors as [x,y,z] tuples = 4534ms to render a simple scene
+// vectors as {x,y,z} objects = 736ms to render a simple scene
+
 import { el, App, useEvent } from './assets/system.js'
 import { hilbert } from './Hilbert.js'
 
+let EPSILON = 0.001
+let debug = false
+
 let size = 256
 export const app = new App('RayTracer', RayTracer, 'aperture.svg', [size, size], 'autosize')
+
+app.addToAppMenu({ title: 'Toggle debug', event: 'debug' })
 
 app.addMenu(
   'Scene',
@@ -35,56 +43,58 @@ function RayTracer() {
     raytrace(hostRef.current, size, spheres, lights)
   }, [])
 
-  useEvent(app, 'add_light', apply(() => lights.push([rnd(1256)-500, rnd(1256)-500, 500])))
+  useEvent(app, 'add_light', apply(() => lights.push(Vec(rnd(1256)-500, rnd(1256)-500, 500))))
   useEvent(app, 'remove_light', apply(() => lights.pop()))
   useEvent(app, 'add_spheres', apply((count) => {
     for (let i = 0; i < count; i++)
-      spheres.push([[rnd(), rnd(), -256+rnd()], 32+rnd(32)])
+      spheres.push([Vec(rnd(), rnd(), -256+rnd()), 32+rnd(32)])
   }))
   useEvent(app, 'reset_scene', apply(() => {
-    spheres = [[[128, 128, -128], 64]]
-    lights = [[200, 50, 128]]
+    spheres = [[Vec(128, 128, -128), 64]]
+    lights = [Vec(200, 50, 128)]
   }))
   useEvent(app, 'dither', apply((value) => { ditherMethod = value }))
+  useEvent(app, 'debug', apply((value) => { debug = !debug }))
 
   return el('canvas', { width: size, height: size, ref: hostRef })
 }
 
-let add = ([a, b, c], [x, y, z]) => [a + x, b + y, c + z]
-let diff = ([a, b, c], [x, y, z]) => [a - x, b - y, c - z]
-let mult = (k, [a, b, c]) => [k*a, k*b, k*c]
-let dot = ([a, b, c], [x, y, z]) => a * x + b * y + c * z
-let cross = ([a, b, c], [x, y, z]) => [b*z-y*c, c*x-a*z, a*y-b*x]
-let mag = ([a, b, c]) => Math.sqrt(a * a + b * b + c * c)
-let div = ([a, b, c], k) => [a / k, b / k, c / k]
+let Vec = (x, y, z) => ({ x, y, z })
+let add = (a, b) => Vec(a.x + b.x, a.y + b.y, a.z + b.z)
+let diff = (a, b) => Vec(a.x - b.x, a.y - b.y, a.z - b.z)
+let mult = (k, vec) => Vec(k*vec.x, k*vec.y, k*vec.z)
+let dot = (a,b) => a.x*b.x + a.y*b.y + a.z*b.z
+let cross = (a, b) => Vec(a.y*b.z-a.z*b.y, a.z*b.x-a.x*b.z, a.x*b.y-a.y*b.x)
+let mag = (vec) => Math.sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z)
+let div = (vec, k) => Vec(vec.x / k, vec.y / k, vec.z / k)
 let norm = (v) => div(v, mag(v))
-let rotx = (a, [x,y,z]) => [x, Math.cos(a)*y - Math.sin(a)*z, Math.sin(a)*y + Math.cos(a)*z]
+let rotx = (a, { x, y, z }) => Vec(x, Math.cos(a)*y - Math.sin(a)*z, Math.sin(a)*y + Math.cos(a)*z)
 let sq = (x) => x * x
 let clamp = (x, low, high) => Math.max(low, Math.min(x, high))
 let rnd = (t = size) => t * Math.random()
 
 function wave(res, scale, periods) {
-  let point = (i,j) => [
+  let point = (i,j) => Vec(
     scale*i,
     scale*Math.cos(periods*3.14*2*(Math.sqrt(sq((i-res/2)/res)+sq((j-res/2)/res)))),
     scale*j,
-  ]
+  )
   return [...generateRowByRowCoordinates(res)].flatMap(([i,j]) => [
     [point(i,j), point(i+1,j), point(i,j+1)],
     [point(i+1,j), point(i+1,j+1), point(i,j+1)],
   ])
 }
 
-let lights = [[200, 50, 128]]
+let lights = [Vec(200, 50, 128)]
 let spheres = []
 let planes = [
-  [[0,0,0], norm([1,0,0.01])],
-  [[0,0,0], norm([0,1,0.01])],
-  [[0,255,0], norm([0,-1,0.01])],
-  [[255,0,0], norm([-1,0,0.01])],
-  [[0,0,-255], norm([0,0,1.01])],
+  [Vec(0,0,0), norm(Vec(1,0,0.01))],
+  [Vec(0,0,0), norm(Vec(0,1,0.01))],
+  [Vec(0,255,0), norm(Vec(0,-1,0.01))],
+  [Vec(255,0,0), norm(Vec(-1,0,0.01))],
+  [Vec(0,0,-255), norm(Vec(0,0,1.01))],
 ]
-let triangles = offsetTriangles([20,200,100], rotateXTriangles(3.0, scaleTriangles(1, [
+let triangles = offsetTriangles(Vec(20,200,100), rotateXTriangles(3.0, scaleTriangles(1, [
   //[[1,0,0],[0,0,1],[0,1,0]],
   //[[-1,0,0],[0,0,1],[0,1,0]],
   //[[1,0,0],[0,0,-1],[0,1,0]],
@@ -103,10 +113,11 @@ let triangles = offsetTriangles([20,200,100], rotateXTriangles(3.0, scaleTriangl
   //[[0,0,-1],[1,0,0],[0,-1,0]],
   //[[0,0,-1],[-1,0,0],[0,-1,0]],
 
-  ...wave(5, 20, 3)
+  ...wave(10, 20, 3)
 ])))
-//for (let i = 0; i < 5; i++)
-//  spheres.push([[rnd(), rnd(), -256+rnd()], 32+rnd(32)])
+
+for (let i = 0; i < 5; i++)
+  spheres.push([Vec(rnd(), rnd(), -256+rnd()), 32+rnd(32)])
 
 function offsetTriangles(v, triangles) {
   return triangles.map(([a,b,c]) => [add(a, v), add(b, v), add(c, v)])
@@ -121,11 +132,11 @@ function rotateXTriangles(rot, triangles) {
 function bezierPatch([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p]) {
 }
 function bezier3D([a,b,c,d], t) {
-  return [
-    bezier1D(a[0], b[0], c[0], d[0], t),
-    bezier1D(a[1], b[1], c[1], d[1], t),
-    bezier1D(a[2], b[2], c[2], d[2], t),
-  ]
+  return Vec(
+    bezier1D(a.x, b.x, c.x, d.x, t),
+    bezier1D(a.y, b.y, c.y, d.y, t),
+    bezier1D(a.z, b.z, c.z, d.z, t),
+  )
 }
 function bezier1D([a,b,c,d], t) {
   let u = 1-1
@@ -141,12 +152,14 @@ function raytrace(canvas, size, spheres, lights) {
     none: new NoDitherer(),
   }[ditherMethod]
 
-  let camera = [128, 128, 512]
+  let camera = Vec(128, 128, 512)
 
   let start = performance.now()
   for (let [i,j] of ditherer.coordinates(size)) {
-    let camDir = norm(diff([i, j, 0], camera))
-    let hit = { depth: 1000, normal: null, point: [0,0,0] }
+    let camdiff = diff(Vec(i, j, 0), camera)
+    let camdist = mag(camdiff)
+    let camDir = norm(camdiff)
+    let hit = { depth: 1000, normal: null, point: Vec(0,0,0) }
 
     // sphere intersections
     for (let [sphereOrigin, r] of spheres) {
@@ -172,8 +185,10 @@ function raytrace(canvas, size, spheres, lights) {
     // triangle intersections
     for (let [a,b,c] of triangles) {
       let normal = norm(cross(diff(c,a), diff(b,a)))
-      if (dot(camDir, normal) > 0) continue
-      let t = (dot(a,normal) - dot(camera,normal)) / dot(camDir,normal)
+      let denominator = dot(camDir,normal)
+      if (denominator > 0) continue
+      if (-denominator < EPSILON) continue
+      let t = (dot(a,normal) - dot(camera,normal)) / denominator
       if (t > hit.depth) continue
       const p = add(camera, mult(t, camDir))
       // is p outside triangle?
@@ -195,7 +210,8 @@ function raytrace(canvas, size, spheres, lights) {
     ctx.fillStyle = toColor(ditherer.apply(bright, [i, j]))
     ctx.fillRect(i, j, 1, 1)
   }
-  console.log(`duration: ${(performance.now() - start).toFixed(0)}ms`)
+
+  if (debug) console.log(`duration: ${(performance.now() - start).toFixed(0)}ms`)
 
   function toColor(value) {
     let c = Math.min(255, Math.max(0, value * 255))
