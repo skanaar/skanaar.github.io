@@ -13,11 +13,8 @@ export function Cytank() {
 
   React.useEffect(() => {
     gameRef.current = start(hostRef.current)
+    return () => gameRef.current.dispose()
   }, [])
 
-  return el('canvas', {
-    width: 800,
-    height: 400,
-    ref: hostRef
-  })
+  return el('canvas', { width: 800, height: 400, ref: hostRef })
 }

@@ -3,7 +3,7 @@ import { V } from './vector.js'
 
 export function render(world, input, g){
 	var player = world.units[0]
-	
+
 	g.ctx.lineJoin = 'round'
 
 	g.background(230,230,230)
@@ -31,16 +31,16 @@ export function render(world, input, g){
 		g.ctx.strokeStyle = '#000'
 		g.ctx.lineWidth = 2
 		g.ctx.fillStyle = '#fff'
-		_.each(world.terrains, function(t){
+		for (let t of world.terrains) {
 			g.circuit(t.vertices).fill().stroke()
-		})
+		}
 		//renderTerrainTopside()
 	}
 
 	function renderTerrainTopside(){
 		g.ctx.lineWidth = 5
 		g.ctx.strokeStyle = '#480'
-		_.each(world.terrains, function(t){
+		for (let t of world.terrains) {
 			g.ctx.beginPath()
 			var lastWasGround = false
 			for(var i=0; i<t.vertices.length+1; i++){
@@ -54,42 +54,45 @@ export function render(world, input, g){
 				lastWasGround = isGround
 			}
 			g.ctx.stroke()
-		})
+		}
 		g.ctx.lineWidth = 1
 	}
 
 	function renderUnits(){
-		_.each(_.where(world.units, { style: null }), function(e){
+		for (let e of world.units){
+			if (e.style !== null) continue
 			g.ctx.strokeStyle = '#000'
 			g.ctx.fillStyle = '#000'
 			g.ellipse(e.pos, e.radius, e.radius).fill().stroke()
 			g.ctx.strokeStyle = '#fff'
 			var health = 2*Math.PI*e.health/e.maxHealth
 			g.ellipse(e.pos, e.radius-2, e.radius-2, 0, health).stroke()
-		})
+		}
 	}
 
 	function renderBullets(){
-		_.each(_.where(world.units, { style: 'bullet' }), function(e){
+		for (let e of world.units){
+			if (e.style !== 'bullet') continue
 			g.ctx.fillStyle = '#000'
 			g.ellipse(e.pos, e.radius, e.radius).fill()
-		})
+		}
 	}
 
 	function renderExplosions(){
-		_.each(_.where(world.units, { style: 'explosion' }), function(e){
+		for (let e of world.units){
+			if (e.style !== 'explosion') continue
 			var aging = e.age/e.maxAge
 			g.ctx.fillStyle = 'rgba(0,0,0,'+(1-aging*aging)+')'
 			var r = e.radius * e.age / e.maxAge
 			g.ellipse(e.pos, r, r).fill()
-		})
+		}
 	}
 
 	function renderParticles(){
-		_.each(world.particles.particles, function (e){
+		for (let e of world.particles.particles) {
 			g.ctx.fillStyle = 'rgba(0, 0, 0, ' + e.value*0.1 + ')'
 			g.ellipse(e.pos, (1-e.value)*10*e.size).fill()
-		})
+		}
 	}
 
 	function renderBallisticPath(){
@@ -100,7 +103,7 @@ export function render(world, input, g){
 
 		var w = player.weapon
 
-		g.path(_.times(100, function (i){
+		g.path(balllisticPathTemplate.map(function (i){
 			var barrelLength = player.radius
 			var aimDir = V.normalize(input.aim)
 			var speed = w.baseSpeed + w.variableSpeed * V.mag(input.aim)
@@ -114,3 +117,5 @@ export function render(world, input, g){
 		})).stroke()
 	}
 }
+
+const balllisticPathTemplate = [...new Array(100)].map((_,i) => i)

@@ -1,4 +1,3 @@
-/* global _ */
 import { V } from './vector.js'
 
 export function Terrain(points){
@@ -26,10 +25,11 @@ export function Particles(w, h, scale, maxCount){
 	var particles = []
 
 	function dropSurplus(){
-		_(Math.max(0, particles.length - maxCount)).times(function () {
-			var i = Math.floor(Math.random()*particles.length)
-			particles.splice(i, 1)
-		})
+		let count = Math.max(0, particles.length - maxCount)
+    for (let i = 0; i < count; i++) {
+			var index = Math.floor(Math.random()*particles.length)
+			particles.splice(index, 1)
+		}
 	}
 
 	return {
@@ -39,22 +39,22 @@ export function Particles(w, h, scale, maxCount){
 				return
 			if (particles.length + density > maxCount)
 				density = Math.round(density/2)
-			_(density).times(function(){
+			for (let i = 0; i < density; i++) {
 				particles.push({
 					size: size,
 					pos: V.add(pos, V.random(Math.random()*radius)),
 					value: Math.random()/2 + 0.5
 				})
-			})
+			}
 			dropSurplus()
 		},
 		update: function (deltaT){
-			_.each(particles, function (e){
+			for (let e of particles) {
 				e.value -= 0.01
 				var cell = V.mult(e.pos, 1/scale)
 				var force = field.sample(cell)
 				e.pos = V.add(e.pos, V.mult(force, deltaT))
-			})
+			}
 			for(var k=0; k<particles.length; k++)
 				if (particles[k].value <= 0)
 					particles.splice(k, 1)
@@ -62,9 +62,8 @@ export function Particles(w, h, scale, maxCount){
 	}
 }
 
-export function Unit(pos, opt){
-	opt = opt || {}
-	return _.extend({
+export function Unit(pos, opt = {}){
+	return {
 		style: null,
 		pos: pos,
 		vel: V.Vec(),
@@ -83,18 +82,20 @@ export function Unit(pos, opt){
 		health: 1000,
 		damageRadius: 50,
 		damageOnDeath: 200,
-		suspension: 200
-	}, opt)
+		suspension: 200,
+		...opt
+	}
 }
 
 export function Explosion(pos, opt){
-	return Unit(pos, _.extend(opt, {
+	return Unit(pos, {
+		...opt,
 		style: 'explosion',
 		airFriction: 0,
 		damageOnDeath: 0,
 		hasVisualDeath: false,
 		isCollider: false
-	}))
+	})
 }
 
 export function World(){

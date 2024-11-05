@@ -1,4 +1,3 @@
-/* global Bacon*/
 import { Canvas } from './skanaar.canvas.js'
 import { World } from './game.js'
 import { V } from './vector.js'
@@ -7,30 +6,21 @@ import { render } from './render.js'
 import { conduct } from './conduct.js'
 
 export function start(canvas) {
-  var handle = { isPaused: false }
-  
   var g = new Canvas(canvas, {})
   var world = new World()
 
   var keyMap = {
-    87: 'up',
-    65: 'left',
-    83: 'down',
-    68: 'right',
-    // numpad arrows
-    38: 'up',
-    37: 'left',
-    12: 'down',
-    40: 'down',
-    39: 'right',
-    // numpad numbers
-    104: 'up',
-    100: 'left',
-    101: 'down',
-    102: 'right',
-    49: 'weapon_shell',
-    50: 'weapon_bullet',
-    51: 'weapon_bomb'
+    ArrowUp: 'up',
+    ArrowLeft: 'left',
+    ArrowDown: 'down',
+    ArrowRight: 'right',
+    KeyW: 'up',
+    KeyA: 'left',
+    KeyS: 'down',
+    KeyD: 'right',
+    Digit1: 'weapon_shell',
+    Digit2: 'weapon_bullet',
+    Digit3: 'weapon_bomb'
   }
 
   var input = {
@@ -43,29 +33,43 @@ export function start(canvas) {
     aim: V.Vec()
   }
 
-  Bacon.fromEventTarget(document.body, 'keydown')
-      .filter(function(e){ return e.keyCode in keyMap })
-      .onValue(function(e) { return input[keyMap[e.keyCode]] = true; })
+  function onKeyDown(e) {
+    if (e.code in keyMap) input[keyMap[e.code]] = true
+  }
 
-  Bacon.fromEventTarget(document.body, 'keyup')
-      .filter(function(e){ return e.keyCode in keyMap })
-      .onValue(function(e) { return input[keyMap[e.keyCode]] = false })
+  function onKeyUp(e) {
+    if (e.code in keyMap) input[keyMap[e.code]] = true
+  }
 
-  Bacon.fromEventTarget(canvas, 'click').onValue(function() {
+  function onClick() {
     input.fire = true
-  })
+  }
 
-  Bacon.fromEventTarget(canvas, 'mousemove')
-      .onValue(function(e) {
-      var scale = canvas.width / canvas.offsetWidth 
-      var cursor = V.Vec(e.offsetX * scale, e.offsetY * scale)
-      input.mouse = cursor
-      var pointing = V.diff(cursor, world.units[0].pos)
-      var d = V.mag(pointing)
-      if (d > 200)
-        pointing = V.mult(pointing, 200/d)
-      input.aim = pointing
-      })
+  function onMouseMove(e) {
+    var scale = canvas.width / canvas.offsetWidth
+    var cursor = V.Vec(e.offsetX * scale, e.offsetY * scale)
+    input.mouse = cursor
+    var pointing = V.diff(cursor, world.units[0].pos)
+    var d = V.mag(pointing)
+    if (d > 200)
+      pointing = V.mult(pointing, 200/d)
+    input.aim = pointing
+  }
+
+  document.body.addEventListener('keydown', onKeyDown)
+  document.body.addEventListener('keyup', onKeyUp)
+  canvas.addEventListener('click', onClick)
+  canvas.addEventListener('mousemove', onMouseMove)
+
+  var handle = {
+    isPaused: false,
+    dispose() {
+      document.body.removeEventListener('keydown', onKeyDown)
+      document.body.removeEventListener('keyup', onKeyUp)
+      canvas.removeEventListener('click', onClick)
+      canvas.removeEventListener('mousemove', onMouseMove)
+    }
+  }
 
   function update(){
     requestAnimationFrame(function(){
@@ -93,6 +97,6 @@ export function start(canvas) {
   setInterval(update, 25)
 
   update()
-  
+
   return handle
 }

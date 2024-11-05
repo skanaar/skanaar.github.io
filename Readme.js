@@ -10,6 +10,7 @@ export function Readme() {
     el('h2', {}, 'Links'),
     el('p', { className: 'stack' },
       el('a', { href: "http://www.rymdmotor.se" }, 'rymdmotor ab'),
+      el('a', { href: "https://github.com/skanaar" }, 'github profile'),
       el('a', { href: "https://www.linkedin.com/in/danielkallin" }, 'linkedin'),
       el('a', { href: "daniel/cv.html" }, 'résumé')
     ),

@@ -3,7 +3,7 @@ import { Explosion } from './game.js'
 import { V } from './vector.js'
 
 export function simulate(world, deltaT){
-	var fallingUnits = _.where(world.units, {isGrounded: false})
+	var fallingUnits = world.units.filter(e => e.isGrounded === false)
 
 	ageUnits()
 	freeFall()
@@ -13,7 +13,7 @@ export function simulate(world, deltaT){
 	cullDeadUnits()
 
 	world.particles.update(deltaT)
-	
+
 	function ageUnits(){
 		world.units.forEach(function (e){
 			e.age += deltaT
@@ -21,9 +21,9 @@ export function simulate(world, deltaT){
 				e.health = 0
 		})
 	}
-	
+
 	function freeFall(){
-		_.each(fallingUnits, function(e){
+		for (let e of fallingUnits) {
 
 			if (e.style == 'bullet'){
 				var trailDensity = 3
@@ -36,7 +36,7 @@ export function simulate(world, deltaT){
 			e.pos = V.add(e.pos, V.mult(e.vel, deltaT))
 			e.vel = V.add(e.vel, V.mult(world.gravity, deltaT))
 			e.vel = V.mult(e.vel, e.airFriction)
-		})
+		}
 	}
 	function intersection(p1, p2, q1, q2) {
 		var vp = V.diff(p2, p1)
@@ -53,9 +53,9 @@ export function simulate(world, deltaT){
 	}
 
 	function unitCollisions(){
-		var collidingUnits = _.where(world.units, { isCollider: true })
-		_.each(collidingUnits, function(a){
-			_.each(collidingUnits, function(b){
+		var collidingUnits = world.units.filter(e => e.isCollider)
+		for (let a of collidingUnits) {
+			for (let b of collidingUnits) {
 				if(a === b) return
 				var radiusSum = a.radius + b.radius
 				var vel = V.mult(V.diff(a.vel, b.vel), deltaT)
@@ -76,19 +76,16 @@ export function simulate(world, deltaT){
 					a.pos = V.add(midPos, V.mult(V.normalize(diff), a.radius))
 					b.pos = V.add(midPos, V.mult(V.normalize(diff), -a.radius))
 				}
-			})
-		})
+			}
+		}
 	}
 
 	function groundCollisions(){
-		var collidingUnits = _.where(world.units, {
-			isGrounded: false,
-			isCollider: true
-		})
-		_.each(collidingUnits, function(e){
+		var collidingUnits = world.units.filter(e => e.isCollider && !e.isGrounded)
+		for (let e of collidingUnits) {
 			var pos1 = e.pos
 			var pos2 = V.add(e.pos, V.mult(e.vel, deltaT))
-			_.each(world.terrains, function(terrain, terrainIndex){
+			world.terrains.forEach((terrain, terrainIndex) => {
 				for(var segment=0; segment<terrain.vertices.length; segment++){
 					var a = terrain.vertex(segment)
 					var b = terrain.vertex(segment+1)
@@ -106,7 +103,7 @@ export function simulate(world, deltaT){
 					}
 				}
 			})
-		})
+		}
 	}
 
 	function landUnit(unit, terrainIndex, segmentIndex, pos){
@@ -129,7 +126,7 @@ export function simulate(world, deltaT){
 	}
 
 	function groundedUnits(){
-		_.each(_.where(world.units, {isGrounded: true}), function(e){
+		for (let e of world.units.filter(e => e.isGrounded === true)){
 			var terrain = world.terrains[e.terrain]
 			e.pos = V.add(e.pos, V.mult(e.vel, deltaT))
 			var segment = terrain.segment(e.segment)
@@ -141,14 +138,14 @@ export function simulate(world, deltaT){
 			var segmentMod = 0
 			if (projPos < 0) segmentMod = -1
 			if (projPos > V.dist(segment.end, segment.start)) segmentMod = 1
-			
+
 			if (segmentMod !== 0){
 				e.segment += segmentMod
 				var seg2 = terrain.segment(e.segment)
 				var projHeight = V.dot(seg2.normal, V.diff(e.pos, seg2.start))
 				var tooSteep = V.dot(world.gravity, seg2.normal) > 0
 				var flyingOfCliff = projHeight > 0
-				
+
 				if(flyingOfCliff)
 					e.isGrounded = false
 				else {
@@ -161,18 +158,18 @@ export function simulate(world, deltaT){
 				}
 			}
 			e.vel = V.mult(e.vel, e.groundFriction)
-		})
+		}
 	}
-	
+
 	function cullDeadUnits(){
-		_.where(world.units, {hasVisualDeath: true}).forEach(function (e){
+		for (let e of world.units.filter(e => e.hasVisualDeath === true)) {
 			if (e.health <= 0){
 				world.units.push(Explosion(e.pos, {
 					maxAge: 0.3,
 					radius: e.damageRadius
 				}))
 			}
-		})
+		}
 		for(var i = 0; i<world.units.length; i++)
 			if (world.units[i].health <= 0){
 				var e = world.units.splice(i, 1)[0]
@@ -180,7 +177,7 @@ export function simulate(world, deltaT){
 					dealDamage(e.pos, e.damageRadius, e.damageOnDeath)
 			}
 	}
-	
+
 	function dealDamage(pos, radius, damage){
 		world.units.forEach(function (e){
 			var d = 1 - V.dist(e.pos, pos) / radius
