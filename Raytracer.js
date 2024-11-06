@@ -66,6 +66,7 @@ let mult = (k, vec) => Vec(k*vec.x, k*vec.y, k*vec.z)
 let dot = (a,b) => a.x*b.x + a.y*b.y + a.z*b.z
 let cross = (a, b) => Vec(a.y*b.z-a.z*b.y, a.z*b.x-a.x*b.z, a.x*b.y-a.y*b.x)
 let mag = (vec) => Math.sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z)
+let sqMag = (vec) => vec.x * vec.x + vec.y * vec.y + vec.z * vec.z
 let div = (vec, k) => Vec(vec.x / k, vec.y / k, vec.z / k)
 let norm = (v) => div(v, mag(v))
 let rotx = (a, { x, y, z }) => Vec(x, Math.cos(a)*y - Math.sin(a)*z, Math.sin(a)*y + Math.cos(a)*z)
@@ -79,7 +80,7 @@ function wave(res, scale, periods) {
     scale*Math.cos(periods*3.14*2*(Math.sqrt(sq((i-res/2)/res)+sq((j-res/2)/res)))),
     scale*j,
   )
-  return [...generateRowByRowCoordinates(res)].flatMap(([i,j]) => [
+  return [...generateRowByRowCoordinates(res)].flatMap(({ x:i, y:j }) => [
     [point(i,j), point(i+1,j), point(i,j+1)],
     [point(i+1,j), point(i+1,j+1), point(i,j+1)],
   ])
@@ -155,11 +156,9 @@ function raytrace(canvas, size, spheres, lights) {
   let camera = Vec(128, 128, 512)
 
   let start = performance.now()
-  for (let [i,j] of ditherer.coordinates(size)) {
-    let camdiff = diff(Vec(i, j, 0), camera)
-    let camdist = mag(camdiff)
-    let camDir = norm(camdiff)
-    let hit = { depth: 1000, normal: null, point: Vec(0,0,0) }
+  for (let screenPoint of ditherer.coordinates(size)) {
+    let camDir = norm(diff(screenPoint, camera))
+    let hit = { depth: 1000.0, normal: Vec(0,0,0), point: Vec(0,0,0) }
 
     // sphere intersections
     for (let [sphereOrigin, r] of spheres) {
@@ -184,31 +183,32 @@ function raytrace(canvas, size, spheres, lights) {
 
     // triangle intersections
     for (let [a,b,c] of triangles) {
-      let normal = norm(cross(diff(c,a), diff(b,a)))
-      let denominator = dot(camDir,normal)
-      if (denominator > 0) continue
-      if (-denominator < EPSILON) continue
-      let t = (dot(a,normal) - dot(camera,normal)) / denominator
+      let surfaceVector = cross(diff(c,a), diff(b,a))
+      let unnormalizedDenominator = dot(camDir,surfaceVector)
+      if (unnormalizedDenominator > 0) continue
+      if (-unnormalizedDenominator < EPSILON) continue
+      let t = (dot(a,surfaceVector) - dot(camera,surfaceVector)) / unnormalizedDenominator
       if (t > hit.depth) continue
       const p = add(camera, mult(t, camDir))
       // is p outside triangle?
-      let to_a = cross(diff(c,b), normal)
-      let to_b = cross(diff(a,c), normal)
-      let to_c = cross(diff(b,a), normal)
+      let to_a = cross(diff(c,b), surfaceVector)
       if (dot(diff(p,b), to_a) < 0) continue
+      let to_b = cross(diff(a,c), surfaceVector)
       if (dot(diff(p,c), to_b) < 0) continue
+      let to_c = cross(diff(b,a), surfaceVector)
       if (dot(diff(p,a), to_c) < 0) continue
+      let normal = norm(surfaceVector)
       hit = { depth: t, normal, point: p }
     }
 
     // hit patch illumination
     let bright = 0
-    if (hit.normal != null)
+    if (hit.depth < 1000)
       for (let light of lights)
         bright += lightBrightness(hit.point, hit.normal, light)
     bright = clamp(bright, 0, 1)
-    ctx.fillStyle = toColor(ditherer.apply(bright, [i, j]))
-    ctx.fillRect(i, j, 1, 1)
+    ctx.fillStyle = toColor(ditherer.apply(bright, screenPoint))
+    ctx.fillRect(screenPoint.x, screenPoint.y, 1, 1)
   }
 
   if (debug) console.log(`duration: ${(performance.now() - start).toFixed(0)}ms`)
@@ -220,8 +220,7 @@ function raytrace(canvas, size, spheres, lights) {
 
   function lightBrightness(p, surface_normal, light) {
     let light_dir = norm(diff(light, p))
-    let dist = mag(diff(p, light))
-    let intensity = 30000/sq(dist)
+    let intensity = 30000/sqMag(diff(p, light))
     return Math.max(0, intensity * dot(surface_normal, light_dir))
   }
 }
@@ -230,8 +229,8 @@ class HilbertDiffusionDitherer {
   cursor = 0
   errorBuffer = new Array(32).fill(0)
   errorWeight = new Array(32).fill(0).map((_,i) => Math.pow(1/8, i/31)/13.6)
-  coordinates(size) {
-    return hilbert([0, 0], [size-1, 0], size)
+  coordinates = function * (size) {
+    for (let [i,j] of hilbert([0, 0], [size-1, 0], size)) yield Vec(i,j,0)
   }
   apply(value) {
     let len = this.errorBuffer.length
@@ -249,7 +248,7 @@ class HilbertDiffusionDitherer {
 function* generateRowByRowCoordinates(size) {
   for (let j = 0; j < size; j++)
     for (let i = 0; i < size; i++)
-      yield [i,j]
+      yield Vec(i,j,0)
 }
 
 class FloydSteinbergDiffusionDitherer {
@@ -259,7 +258,7 @@ class FloydSteinbergDiffusionDitherer {
     this.errorBuffer = [new Array(size).fill(0), new Array(size).fill(0)]
     return generateRowByRowCoordinates(size)
   }
-  apply(value, [i,j]) {
+  apply(value, { x: i, y: j }) {
     if (i === 0){
       let [a, b] = this.errorBuffer
       this.errorBuffer = [b, a.map(() => 0)]

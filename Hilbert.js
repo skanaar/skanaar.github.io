@@ -1,4 +1,4 @@
-import { el, App, useEvent } from './assets/system.js'
+import { el, App } from './assets/system.js'
 
 export const app = new App('Hilbert', Hilbert, 'hilbert.svg', [256, 256], 'autosize')
 
