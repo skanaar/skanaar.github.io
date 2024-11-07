@@ -50,8 +50,9 @@ let lights = [
   Light(Vec(200, 50, 128), 100),
 ]
 let spheres = [
-  Sphere(Vec(32, 32, -256+32), 8),
-  Sphere(Vec(128+64, 128, 0), 32),
+  Sphere(Vec(32, 32, -256+32), 8, 'diffuse'),
+  Sphere(Vec(128+64, 128, 0), 64, 'mirror'),
+  Sphere(Vec(128, 128, 512), 256, 'diffuse'),
 ]
 let planes = [
   Plane(Vec(0,0,0), norm(Vec(1,0,0.01))),

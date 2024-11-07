@@ -4,8 +4,8 @@ export function Light(point, amount) {
   return { point, amount }
 }
 
-export function Sphere(center, r) {
-  return { center, r }
+export function Sphere(center, r, material) {
+  return { center, r, mirror: material == 'mirror' }
 }
 
 export function Plane(point, normal) {
