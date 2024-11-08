@@ -45,19 +45,7 @@ export class FloydSteinbergDitherer {
   }
 }
 
-export class NoiseDitherer {
-  cursor = 0
-  noise = [0.17, 0.75, 0.43, 0.55, 0.56, 0.70, 0.88]
-  coordinates = generateRowByRowCoordinates
-  apply(value) {
-    this.cursor = (this.cursor + 1) % this.noise.length
-    return (value > this.noise[this.cursor]) ? 1 : 0
-  }
-}
-
 export class NoDitherer {
-  cursor = 0
-  noise = [0.17, 0.75, 0.43, 0.55, 0.56, 0.70, 0.88]
   coordinates = generateRowByRowCoordinates
   apply(value) {
     return value
