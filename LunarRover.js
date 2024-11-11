@@ -1,5 +1,4 @@
 import { el, App, useEvent } from './assets/system.js'
-import { start as initLunarRover } from './lunar-rover/script.js'
 
 export const app = new App('LunarRover', LunarRover, 'moon.svg', [500, 375], 'autosize')
 
@@ -16,7 +15,13 @@ let conf = null
 export function LunarRover() {
   const hostRef = React.useRef()
 
-  React.useEffect(() => { conf = initLunarRover(hostRef.current) }, [])
+  React.useEffect(() => {
+    const init = async () => {
+      const { start: initLunarRover } = await import('./lunar-rover/script.js')
+      conf = initLunarRover(hostRef.current)
+    }
+    init()
+  }, [])
 
   useEvent(app, 'dither', () => { conf.isTwoTone = !conf.isTwoTone })
   useEvent(app, 'overview', () => { conf.showOverview = !conf.showOverview })
