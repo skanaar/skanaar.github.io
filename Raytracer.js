@@ -51,11 +51,10 @@ let size = 256
 let ditherMethod = 'floydsteinberg'
 
 let lights = [
-  Light(Vec(32, 32, -256+32), 4),
+  Light(Vec(32, 32, -256+32), 16),
   Light(Vec(200, 50, 128), 100),
 ]
 let spheres = [
-  Sphere(Vec(32, 32, -256+32), 8, 'diffuse'),
   Sphere(Vec(128+50, 128-50, -120), 64, 'mirror'),
 ]
 let planes = [
@@ -66,13 +65,13 @@ let planes = [
   Plane(Vec(0,0,-255), norm(Vec(0,0,1.01))),
 ]
 let triangles = [
-  ...wave(
-    { res: 20, size: 256, periods: 3, height: 40 },
-    matrixStack(Translate(20,0,128), RotateX(3), RotateZ(-1.57))
-  ),
+  //...wave(
+  //  { res: 20, size: 256, periods: 3, height: 40 },
+  //  matrixStack(Translate(20,0,128), RotateX(3), RotateZ(-1.57))
+  //),
   ...bezierMesh(
     teapotPatches,
-    5,
+    3,
     matrixStack(
       Translate(120,256,-80),
       Scale(40,40,40),

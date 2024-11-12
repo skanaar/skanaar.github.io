@@ -3,9 +3,11 @@ import {
   norm,
   diff,
   dot,
+  div,
   add,
-  mult,
   sqMag,
+  mult,
+  mag,
   crossDiff,
   EPSILON
 } from './math.js'
@@ -31,9 +33,18 @@ function raytrace({ area, size, spheres, planes, triangles, lights }) {
 
       // hit patch illumination
       let bright = 0
-      if (hit.depth < 1000)
-        for (let light of lights)
-          bright += lightBrightness(hit.point, hit.normal, light)
+      if (hit.depth < 1000) {
+        for (let light of lights) {
+          let light_vector = diff(hit.point, light.point)
+          let light_dist = mag(light_vector)
+          let light_dir = div(light_vector, light_dist)
+          let beam = trace_ray(light.point, light_dir, maxDepth,
+            { spheres, planes, triangles }
+          )
+          if (beam.depth > light_dist - EPSILON)
+            bright += lightBrightness(hit.point, hit.normal, light)
+        }
+      }
       bright = hdr(bright)
       let value = Math.min(255, Math.floor(bright * 255))
       let offset = (i + j*size)*4
