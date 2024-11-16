@@ -59,11 +59,16 @@ function raytrace({ area, size, spheres, planes, triangles, lights }) {
   return imgdata
 }
 
-function trace_ray(camera, ray, depth, { spheres, planes, triangles }) {
-  let hit = { depth: 1000.0, normal: Vec(0.0,0.0,0.0), point: Vec(0.0,0.0,0.0) }
+function trace_ray(camera, ray, iteration, { spheres, planes, triangles }) {
+  let hit = {
+    depth: 1000.0,
+    normal: Vec(0.0,0.0,0.0),
+    point: Vec(0.0,0.0,0.0),
+    material: 'diffuse',
+  }
 
   // sphere intersections
-  for (let { center, r, mirror } of spheres) {
+  for (let { center, r, material } of spheres) {
     let a = dot(ray, ray)
     let b = 2 * dot(ray, diff(camera, center))
     let c = dot(center,center) + dot(camera,camera) - 2*dot(center,camera) - r*r
@@ -74,31 +79,17 @@ function trace_ray(camera, ray, depth, { spheres, planes, triangles }) {
     if (t < EPSILON) continue // no hits behind camera
     let p = add(camera, mult(t, ray))
     let normal = mult(1 / r, diff(p, center))
-    if (mirror && depth < maxDepth) {
-      let reflection_ray = add(ray, mult(-2*dot(normal, ray), normal))
-      let world = { spheres, planes, triangles }
-      let recursiveHit = trace_ray(p, reflection_ray, depth + 1, world)
-      hit = { depth: t, normal: recursiveHit.normal, point: recursiveHit.point }
-    } else {
-      hit = { depth: t, normal, point: p }
-    }
+    hit = { depth: t, normal, point: p, material }
   }
 
   // plane intersections
-  for (let { point, normal, mirror } of planes) {
+  for (let { point, normal, material } of planes) {
     if (dot(ray, normal) > 0) continue
     let t = (dot(point, normal) - dot(camera, normal)) / dot(ray, normal)
     if (t > hit.depth) continue
     if (t < EPSILON) continue // no hits behind camera
     let p = add(camera, mult(t, ray))
-    if (mirror && depth < maxDepth) {
-      let reflection_ray = add(ray, mult(-2*dot(normal, ray), normal))
-      let world = { spheres, planes, triangles }
-      let recursiveHit = trace_ray(p, reflection_ray, depth + 1, world)
-      hit = { depth: t, normal: recursiveHit.normal, point: recursiveHit.point }
-    } else {
-      hit = { depth: t, normal, point: p }
-    }
+    hit = { depth: t, normal, point: p, material }
   }
 
   // triangle intersections
@@ -120,13 +111,21 @@ function trace_ray(camera, ray, depth, { spheres, planes, triangles }) {
     let to_c = crossDiff(b, a, normal)
     if (dot(diff(p, a), to_c) < 0.0) continue
 
-    hit = { depth: t, normal: triangle.normal, point: p }
+    hit = { depth: t, normal: triangle.normal, point: p, material: 'diffuse' }
   }
+
+  if (hit.material === 'mirror' && iteration < maxDepth) {
+    let reflection_ray = add(ray, mult(-2*dot(hit.normal, ray), hit.normal))
+    let world = { spheres, planes, triangles }
+    let nextHit = trace_ray(hit.point, reflection_ray, iteration + 1, world)
+    hit = { depth: hit.depth, normal: nextHit.normal, point: nextHit.point }
+  }
+
   return hit
 }
 
 function hdr(value) {
-  return 1 + 1 / -(1 + 2 * value)
+  return 1 - 1 / (1 + 2 * value)
 }
 
 function lightBrightness(p, surface_normal, light) {

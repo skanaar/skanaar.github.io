@@ -7,11 +7,11 @@ export function Light(point, amount) {
 }
 
 export function Sphere(center, r, material) {
-  return { center, r, mirror: material == 'mirror' }
+  return { center, r, material }
 }
 
 export function Plane(point, normal, material) {
-  return { point, normal: norm(normal), mirror: material === 'mirror' }
+  return { point, normal: norm(normal), material }
 }
 
 export function Polygon(a, b, c) {

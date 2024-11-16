@@ -26,14 +26,13 @@ app.addToAppMenu({ title: 'Toggle debug', event: 'debug' })
 
 app.addMenu(
   'Scene',
-  { title: 'Teapot', event: 'scene_teapot' },
-  { title: 'Wave', event: 'scene_wave' },
+  { title: 'Teapot', event: 'scene', arg: 'teapot' },
+  { title: 'Wave', event: 'scene', arg: 'wave' },
 )
 
 app.addMenu(
   'Dither',
   { title: 'Floyd-Steinberg dither', event: 'dither', arg: 'floydsteinberg' },
-  { title: 'Hilbert curve dither', event: 'dither', arg: 'hilbert' },
   { title: 'No dither', event: 'dither', arg: 'none' },
 )
 
@@ -82,7 +81,7 @@ function setSceneWave() {
   )
 }
 
-setSceneWave()
+setSceneTeapot()
 
 function RayTracer() {
   const hostRef = React.useRef()
@@ -111,10 +110,12 @@ function RayTracer() {
     render()
   }, [])
 
-  useEvent(app, 'scene_wave', apply(setSceneWave))
-  useEvent(app, 'scene_teapot', apply(setSceneTeapot))
-  useEvent(app, 'dither', apply((value) => { ditherMethod = value }))
-  useEvent(app, 'debug', apply((value) => { debug = !debug }))
+  useEvent(app, 'scene', apply((arg) => {
+    if (arg == 'wave') setSceneWave()
+    else if (arg == 'teapot') setSceneTeapot()
+  }))
+  useEvent(app, 'dither', apply((arg) => { ditherMethod = arg }))
+  useEvent(app, 'debug', apply(() => { debug = !debug }))
 
   return el('canvas', { width: size, height: size, ref: hostRef })
 }
