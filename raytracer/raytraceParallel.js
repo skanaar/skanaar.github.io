@@ -24,10 +24,12 @@ export function raytraceParallel({
   ctx.fillStyle = '#000'
 
   function onComplete() {
+    if (debug)
+      console.log(`duration: ${(performance.now() - start).toFixed(0)}ms`)
     let imgdata = ctx.createImageData(size, size)
     for (let { x, y } of ditherer.coordinates(size)) {
       let j = y % chunkSize
-      let bright = chunks[Math.floor(y / chunkSize)].data[4 * (x + j*size)]
+      let bright = chunks[Math.floor((y) / chunkSize)].data[4 * (x + j*size)]
       let value = Math.floor(ditherer.apply(bright/255, { x, y }) * 255)
       let offset = (x + y*size)*4
       imgdata.data[offset] = value
@@ -46,12 +48,9 @@ export function raytraceParallel({
         ctx.fillRect(size/2-20, size/2-2, 40*progress, 4)
         return
       }
-      pendingWorkers--
       chunks[i] = e.data
-      if (debug && pendingWorkers === 0) {
-        console.log(`duration: ${(performance.now() - start).toFixed(0)}ms`)
-        onComplete()
-      }
+      pendingWorkers--
+      if (pendingWorkers === 0) onComplete()
     }
     let area = {width: size, height: chunkSize, x: 0, y: i*chunkSize }
     worker.postMessage({ area, size, spheres, planes, triangles, lights })
