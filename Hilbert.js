@@ -1,6 +1,6 @@
 import { el, App } from './assets/system.js'
 
-export const app = new App('Hilbert', Hilbert, 'hilbert.svg', [256, 256], 'autosize')
+export const app = new App('Hilbert', Hilbert, 'hilbert.svg')
 
 let curve = [...hilbert([0,0], [63,0], 64)]
 

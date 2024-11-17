@@ -1,8 +1,8 @@
 import { el, App, useEvent } from './assets/system.js'
 import { useScript } from './assets/useScript.js'
 
-export const app = new App('Nomnoml', Nomnoml, 'nomnoml.svg', [600, 350])
-
+export const app = new App('Nomnoml', Nomnoml, 'nomnoml.svg')
+app.resizable([600, 350])
 app.addToAppMenu({ title: 'Visit nomnoml.com', event: 'visit-site' })
 
 function Nomnoml() {

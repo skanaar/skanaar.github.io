@@ -2,7 +2,7 @@ import { el, App, useEvent } from './assets/system.js'
 
 export class BrowserApp extends App {
   constructor(name, icon, url, [width, height] = [400, 500]) {
-    super(name, Browser, icon, [width, height], 'autosize')
+    super(name, Browser, icon, [width, height])
     this.args = { app: this, url, width, height }
     this.addMenu('Browser', { title: 'Visit site...', event: 'visit' })
   }

@@ -1,6 +1,7 @@
 import { el, App } from './assets/system.js'
 
-export const app = new App('Readme', Readme, 'file.svg', [300, 300])
+export const app = new App('Readme', Readme, 'file.svg')
+app.resizable([300, 300])
 
 export function Readme() {
   return el(

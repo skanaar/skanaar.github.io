@@ -39,8 +39,7 @@ function openCell(field, i, j) {
       if (neighbor.open === false) openCell(field, x, y)
 }
 
-const icon = 'bomb.svg'
-export const app = new App('Minesweep', Minesweep, icon, [150, 50], 'autosize')
+export const app = new App('Minesweep', Minesweep, 'bomb.svg')
 
 export function Minesweep() {
   const [field, setField] = React.useState(null)

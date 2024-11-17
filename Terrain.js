@@ -1,9 +1,8 @@
 import { el, Button, App } from './assets/system.js'
 
-export const app = new App('Terrain', Terrain, 'landscape.svg', [650, 460], 'autosize')
+export const app = new App('Terrain', Terrain, 'landscape.svg')
 
 export function Terrain() {
-
   const [selected, setSelected] = React.useState(Math.floor(surfaces.length*Math.random()))
   const [angle, setAngle] = React.useState(0)
   const surface = surfaces[selected]

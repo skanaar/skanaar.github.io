@@ -1,8 +1,7 @@
 import { el, App, useEvent } from './assets/system.js'
 import { start } from './cytank/js/engine.js'
 
-export const app = new App('Cytank', Cytank, 'joystick.svg', [800, 400], 'autosize')
-
+export const app = new App('Cytank', Cytank, 'joystick.svg')
 app.addToAppMenu({ title: 'Pause/Play', event: 'play' })
 
 export function Cytank() {

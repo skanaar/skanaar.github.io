@@ -1,21 +1,27 @@
 export const el = (...args) => React.createElement(...args)
 
 export class App {
-  constructor(name, component, icon, [width, height] = [300, 200], sizing) {
+  constructor(name, component, icon) {
     this.name = name
     this.component = component
     this.icon = icon
-    this.width = width
-    this.height = height
+    this.width = -1
+    this.height = -1
     this.pos = {
       x: 100 + Math.floor(Math.random() * 500),
       y: Math.floor(Math.random() * 300),
     }
-    this.sizing = sizing
+    this.sizing = 'autosize'
     this.menus = [
       { title: name, items: [{ title: 'Quit', app: name, event: 'quit' }]},
     ]
+    this.childWindows = []
     this.args = { app: this }
+  }
+  resizable([width, height]) {
+    this.sizing = 'resizable'
+    this.width = width
+    this.height = height
   }
   addToAppMenu(...items) {
     this.menus[0].items.unshift(
@@ -28,6 +34,9 @@ export class App {
       title: menuTitle,
       items: items.map(({ title, event, arg }) => ({ title, app: this.name, event, arg }))
     })
+  }
+  addWindow(name, component, [width, height] = [300, 200], sizing) {
+    this.childWindows.push({ name, component, width, height, sizing })
   }
 }
 
@@ -69,21 +78,20 @@ const signals = {
   }
 }
 
-export function Desktop({ title, columns = 3, apps }) {
-  const [current, setCurrent] = React.useState(null)
+export function Desktop(props) {
+  const { systemMenuLabel, systemName, aboutApp, columns = 3, apps } = props
+  const [currentApp, setCurrentApp] = React.useState(null)
   const [openApps, setOpenApps] = React.useState({})
-
-  const openAppNames = [...Object.entries(openApps)].filter(([, open]) => open).map(pair => pair[0])
 
   React.useEffect(() => {
     const onEvent = (arg, event, app) => {
       if (event == 'restart') location.reload()
       if (event == 'focus') {
-        setCurrent(app)
+        setCurrentApp(app)
         setOpenApps((state) => ({ ...state, [app]: true }))
       }
       if (event == 'quit') {
-        setCurrent(null)
+        setCurrentApp(null)
         setOpenApps((state) => ({ ...state, [app]: false }))
       }
     }
@@ -94,18 +102,21 @@ export function Desktop({ title, columns = 3, apps }) {
   const systemMenu = el(
     Menu,
     {
-      title,
+      title: systemMenuLabel,
       items: [
-        { title: 'About Skanaar', app: 'Readme', event: 'focus' },
+        { title: 'About '+systemName, app: aboutApp, event: 'focus' },
         { title: null },
-        ...openAppNames.map(name => ({ title: name, app: name, event: 'focus' })),
+        ...Object
+          .entries(openApps)
+          .filter(([, open]) => open)
+          .map(([name]) => ({ title: name, app: name, event: 'focus' })),
         { title: null },
         { title: 'Restart', app: null, event: 'restart' }
       ]
     },
   )
 
-  const appMenuSpecs = apps.find(e => e.name === current)?.menus ?? []
+  const appMenuSpecs = apps.find(e => e.name === currentApp)?.menus ?? []
   const appMenus = appMenuSpecs.map(e =>
     el(Menu, { title: e.title, items: e.items })
   )
@@ -145,8 +156,8 @@ export function Desktop({ title, columns = 3, apps }) {
               h: app.height,
               sizing: app.sizing,
               title: app.name,
-              focused: current === app.name,
-              onFocus: () => setCurrent(app.name),
+              focused: currentApp === app.name,
+              onFocus: () => setCurrentApp(app.name),
               onClose: ({ pos }) => {
                 app.pos = pos
                 signals.trigger(app.name, 'quit')

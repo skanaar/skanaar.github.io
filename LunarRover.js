@@ -1,7 +1,6 @@
 import { el, App, useEvent } from './assets/system.js'
 
-export const app = new App('LunarRover', LunarRover, 'moon.svg', [500, 375], 'autosize')
-
+export const app = new App('LunarRover', LunarRover, 'moon.svg')
 app.addMenu(
   'View',
   { title: 'Toggle dithering', event: 'dither' },

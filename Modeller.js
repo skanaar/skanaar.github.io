@@ -13,8 +13,7 @@ function modelMenuItems(tags) {
     .map(e => ({ title: e.name, event: 'set-model', arg: e.name }))
 }
 
-const icon = 'cube.svg'
-export const app = new App('Modeller', Modeller, icon, [400, 475], 'autosize')
+export const app = new App('Modeller', Modeller, 'cube.svg')
 app.addMenu('Ships', ...modelMenuItems('ship'))
 app.addMenu('Enemies', ...modelMenuItems('foe'))
 app.addMenu('Stations', ...modelMenuItems('station'))

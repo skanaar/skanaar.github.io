@@ -19,22 +19,19 @@ import {
 import { raytraceParallel } from './raytracer/raytraceParallel.js'
 import { teapotPatches } from './raytracer/teapot.js'
 
-export const app =
-  new App('RayTracer', RayTracer, 'aperture.svg', [256, 256], 'autosize')
-
+export const app = new App('RayTracer', RayTracer, 'aperture.svg')
 app.addToAppMenu({ title: 'Toggle debug', event: 'debug' })
-
 app.addMenu(
   'Scene',
   { title: 'Teapot', event: 'scene', arg: 'teapot' },
   { title: 'Wave', event: 'scene', arg: 'wave' },
 )
-
 app.addMenu(
   'Dither',
   { title: 'Floyd-Steinberg dither', event: 'dither', arg: 'floydsteinberg' },
   { title: 'No dither', event: 'dither', arg: 'none' },
 )
+app.addWindow('Tools', () => el('div', {}, 'tools'), [200,300])
 
 let debug = false
 let size = 256
