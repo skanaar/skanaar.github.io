@@ -210,13 +210,19 @@ grid-2col {
 }
 
 select {
+  appearance: none;
   border: 2px solid var(--win-color);
   border-radius: 0;
   box-shadow: 3px 3px 0 -1px var(--win-color);
-  padding: 2px;
+  padding: 2px 2px 2px 5px;
   margin: 2px 6px 4px 2px;
   font-family: inherit;
   font-size: inherit;
+  /* arrow */
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%3E%3Cpath%20fill%3D%22%23000%22%20d%3D%22m12%2017%207-8H5z%22%2F%3E%3C%2Fsvg%3E');
+  background-repeat: no-repeat;
+  background-position: right 0 top 50%;
+  background-size: 24px auto;
 }
 
 hr {
