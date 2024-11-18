@@ -36,7 +36,37 @@ app.addMenu(
   { title: 'Floyd-Steinberg dither', event: 'dither', arg: 'floydsteinberg' },
   { title: 'No dither', event: 'dither', arg: 'none' },
 )
-app.addWindow('Tools', () => el('div', {}, 'tools'), [200,300])
+app.addWindow('Options', RenderOptions, [200,100])
+
+function RenderOptions() {
+  const [reflections, setReflections] = React.useState(maxDepth)
+  const [dither, setDither] = React.useState(ditherMethod)
+  useEvent(app, 'maxdepth', (arg) => setReflections(arg))
+  useEvent(app, 'dither', (arg) => setDither(arg))
+
+  return el(
+    'div',
+    { style: { display: 'flex', flexDirection: 'column', margin: 10 } },
+    el('label', {},
+      el('input', {
+        type: 'checkbox',
+        checked: reflections > 0,
+        onChange: (e) => app.trigger('maxdepth', e.target.checked ? 3 : 0),
+      }),
+      'Reflections'
+    ),
+    el('label', {},
+      el('input', {
+        type: 'checkbox',
+        checked: dither == 'floydsteinberg',
+        onChange: (e) => {
+          app.trigger('dither', e.target.checked ? 'floydsteinberg' : 'none')
+        },
+      }),
+      'Dither'
+    )
+  )
+}
 
 let debug = false
 let size = 256

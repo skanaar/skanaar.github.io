@@ -38,6 +38,9 @@ export class App {
   addWindow(name, component, [width, height] = [300, 200], sizing) {
     this.childWindows.push({ name, component, width, height, sizing })
   }
+  trigger(event, arg) {
+    signals.trigger(this.name, event, arg)
+  }
 }
 
 export function useEvent(app, event, callback) {
@@ -145,7 +148,7 @@ export function Desktop(props) {
       ),
       apps
         .filter((app) => !!openApps[app.name])
-        .map((app) =>
+        .flatMap((app) =>[
           el(
             Window,
             {
@@ -165,7 +168,28 @@ export function Desktop(props) {
             },
             el(app.component, app.args),
           ),
-        ),
+          ...app.childWindows.map(win =>
+            el(
+              Window,
+              {
+                key: app.name + ' childwindow' + win.name,
+                x: app.pos.x + 100,
+                y: app.pos.y + 100,
+                w: win.width,
+                h: win.height,
+                sizing: win.sizing,
+                title: win.name,
+                focused: currentApp === app.name,
+                onFocus: () => setCurrentApp(app.name),
+                onClose: ({ pos }) => {
+                  app.pos = pos
+                  signals.trigger(app.name, 'quit')
+                },
+              },
+              el(win.component, win.args),
+            )
+          )
+        ]),
     ),
   )
 }
@@ -252,6 +276,11 @@ export function AppIcon({ icon, component, open, title, style, onClick }) {
 
 export function Button(props) {
   return el('button', { ...props, className: 'btn ' + (props.className ?? '') })
+}
+
+export function Checkbox({ name, children, onChange }) {
+  const type = 'checkbox'
+  return el('label', {}, el('input', { type, name, onChange }), children)
 }
 
 export function Menu({ title, items }) {

@@ -195,6 +195,26 @@ button.btn:active:not([disabled]) {
   background-color: #000;
 }
 
+input[type='checkbox'] {
+  appearance: none;
+  display: inline-grid;
+  place-content: center;
+  width: 18px;
+  height: 18px;
+  margin: 0 6px 0 3px;
+  font: inherit;
+  border: var(--line) solid var(--win-color);
+}
+input[type='checkbox']::before {
+  content: '✕';
+  margin-top: -2px;
+  color: transparent;
+  font-size: 22px;
+}
+input[type='checkbox']:checked::before {
+  color: var(--win-color);
+}
+
 grid-2col {
   display: grid;
   grid-template-columns: 1fr 1fr;
