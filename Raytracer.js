@@ -36,6 +36,7 @@ app.addMenu(
   { title: 'No dither', event: 'dither', arg: 'none' },
 )
 app.addWindow('Options', RenderOptions, {
+  visible: true,
   offset: [256+20,0],
   size: [200,100]
 })

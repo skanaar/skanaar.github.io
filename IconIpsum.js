@@ -6,6 +6,7 @@ import { templates } from './icon-ipsum/templates.js'
 export const app = new App('Icon Ipsum', IconIpsumApp, 'icon-ipsum.svg')
 app.resizable([256, 256])
 app.addToAppMenu({ title: 'Visit npm package', event: 'visit-site' })
+app.addAbout(About)
 app.addMenu(
   'Template',
   { title: 'all', event: 'template', arg: undefined },
@@ -38,5 +39,11 @@ function IconIpsumApp() {
     seq(25).map((i) =>
       el('div', { key: i, style: { width: 32, height: 32 }, dangerouslySetInnerHTML: { __html: iconIpsum.icon(templateName) } })
     )
+  )
+}
+
+function About() {
+  return el('div', { className: 'padded', style: { maxWidth: 200 } },
+    el('p', {}, 'Lorem Ipsum is a library that generates randomized SVG icons')
   )
 }

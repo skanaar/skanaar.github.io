@@ -8,8 +8,8 @@ export class App {
     this.width = -1
     this.height = -1
     this.pos = {
-      x: 100 + Math.floor(Math.random() * 500),
-      y: Math.floor(Math.random() * 300),
+      x: 30 + Math.floor(Math.random() * window.innerWidth/3),
+      y: 30 + Math.floor(Math.random() * window.innerHeight/2),
     }
     this.sizing = 'autosize'
     this.menus = [
@@ -23,26 +23,36 @@ export class App {
     this.width = width
     this.height = height
   }
+  addAbout(component) {
+    const id = `About ${this.name}`
+    this.addWindow(id, component, { offset: [50, 50], visible: false })
+    this.addToAppMenu({ title: id, event: 'show_child_window', arg: id })
+  }
   addToAppMenu(...items) {
     this.menus[0].items.unshift(
-      ...items.map(({ title, event, arg }) => ({ title, app: this.name, event, arg })),
+      ...items.map(({ title, event, arg }) =>
+        ({ title, app: this.name, event, arg })
+      ),
       { title: null }
     )
   }
   addMenu(menuTitle, ...items) {
     this.menus.push({
       title: menuTitle,
-      items: items.map(({ title, event, arg }) => ({ title, app: this.name, event, arg }))
+      items: items.map(({ title, event, arg }) =>
+        ({ title, app: this.name, event, arg })
+      )
     })
   }
-  addWindow(name, component, { offset, size, sizing }) {
+  addWindow(name, component, { offset, size, sizing, visible }) {
     this.childWindows.push({
       name,
       component,
+      visible: !!visible,
       options: {
         offset,
-        size,
-        sizing
+        size: size ?? [-1,-1],
+        sizing: sizing ?? 'autosize'
       }
     })
   }
@@ -98,6 +108,22 @@ export function Desktop(props) {
     const onEvent = (arg, event, app) => {
       if (event == 'restart') location.reload()
       if (event == 'focus') {
+        setCurrentApp(app)
+        setOpenApps((state) => ({ ...state, [app]: true }))
+      }
+      if (event == 'show_child_window') {
+        apps
+          .find(e => e.name === app)
+          .childWindows
+          .find(e => e.name == arg).visible = true
+        setCurrentApp(app)
+        setOpenApps((state) => ({ ...state, [app]: true }))
+      }
+      if (event == 'hide_child_window') {
+        apps
+          .find(e => e.name === app)
+          .childWindows
+          .find(e => e.name == arg).visible = false
         setCurrentApp(app)
         setOpenApps((state) => ({ ...state, [app]: true }))
       }
@@ -176,7 +202,7 @@ export function Desktop(props) {
             },
             el(app.component, app.args),
           ),
-          ...app.childWindows.map(win =>
+          ...app.childWindows.filter(e => e.visible).map(win =>
             el(
               Window,
               {
@@ -189,9 +215,8 @@ export function Desktop(props) {
                 title: win.name,
                 focused: currentApp === app.name,
                 onFocus: () => setCurrentApp(app.name),
-                onClose: ({ pos }) => {
-                  app.pos = pos
-                  signals.trigger(app.name, 'quit')
+                onClose: () => {
+                  signals.trigger(app.name, 'hide_child_window', win.name)
                 },
               },
               el(win.component, win.args),
