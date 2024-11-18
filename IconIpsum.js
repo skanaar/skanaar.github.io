@@ -4,7 +4,7 @@ import { seq } from './icon-ipsum/random.js'
 import { templates } from './icon-ipsum/templates.js'
 
 export const app = new App('Icon Ipsum', IconIpsumApp, 'icon-ipsum.svg')
-app.resizable([512, 512])
+app.resizable([256, 256])
 app.addToAppMenu({ title: 'Visit npm package', event: 'visit-site' })
 app.addMenu(
   'Template',
@@ -26,7 +26,7 @@ function IconIpsumApp() {
   useEvent(app, 'template', (arg) => setTemplateName(arg))
   useEvent(app, 'stroke', (arg) => setStroke(arg))
 
-  const iconIpsum = new IconIpsum({ strokeWidth: stroke, width: 64, height: 64 })
+  const iconIpsum = new IconIpsum({ strokeWidth: stroke, width: 32, height: 32 })
   iconIpsum.seed(4711)
 
   React.useEffect(() => {
@@ -34,9 +34,9 @@ function IconIpsumApp() {
     return () => clearInterval(handle)
   }, [])
 
-  return el('div', { style: { display: 'flex', flexWrap: 'wrap', gap: 32, margin: 32 } },
+  return el('div', { style: { display: 'flex', flexWrap: 'wrap', gap: 16, margin: 16 } },
     seq(25).map((i) =>
-      el('div', { key: i, style: { width: 64, height: 64 }, dangerouslySetInnerHTML: { __html: iconIpsum.icon(templateName) } })
+      el('div', { key: i, style: { width: 32, height: 32 }, dangerouslySetInnerHTML: { __html: iconIpsum.icon(templateName) } })
     )
   )
 }
