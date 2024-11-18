@@ -3,10 +3,8 @@ let chunkSize = 16
 export function raytraceParallel({
   canvas,
   size,
-  spheres,
-  planes,
-  triangles,
-  lights,
+  maxDepth,
+  scene,
   ditherer,
   debug
 }) {
@@ -53,6 +51,6 @@ export function raytraceParallel({
       if (pendingWorkers === 0) onComplete()
     }
     let area = {width: size, height: chunkSize, x: 0, y: i*chunkSize }
-    worker.postMessage({ area, size, spheres, planes, triangles, lights })
+    worker.postMessage({ area, size, maxDepth, scene })
   }
 }

@@ -12,15 +12,14 @@ import {
   EPSILON
 } from './math.js'
 
-let maxDepth = 3
-
 onmessage = (e) => {
   let imgdata = raytrace(e.data)
   postMessage(imgdata)
 }
 
-function raytrace({ area, size, spheres, planes, triangles, lights }) {
+function raytrace({ area, size, maxDepth, scene }) {
   let { width, height, x, y } = area
+  let { spheres, planes, triangles, lights } = scene
   let imgdata = new ImageData(width, height)
 
   let camera = Vec(128.0, 128.0, 512.0)
@@ -29,7 +28,7 @@ function raytrace({ area, size, spheres, planes, triangles, lights }) {
     for (let i = 0; i < width; i++) {
       let screenPoint = Vec(i+x, j+y, 0)
       let ray = norm(diff(screenPoint, camera))
-      let hit = trace_ray(camera, ray, 0, { spheres, planes, triangles })
+      let hit = trace_ray(camera, ray, maxDepth, { spheres, planes, triangles })
 
       // hit patch illumination
       let bright = 0
@@ -38,7 +37,7 @@ function raytrace({ area, size, spheres, planes, triangles, lights }) {
           let light_vector = diff(hit.point, light.point)
           let light_dist = mag(light_vector)
           let light_dir = div(light_vector, light_dist)
-          let beam = trace_ray(light.point, light_dir, maxDepth,
+          let beam = trace_ray(light.point, light_dir, 0,
             { spheres, planes, triangles }
           )
           if (beam.depth > light_dist - EPSILON)
@@ -59,7 +58,7 @@ function raytrace({ area, size, spheres, planes, triangles, lights }) {
   return imgdata
 }
 
-function trace_ray(camera, ray, iteration, { spheres, planes, triangles }) {
+function trace_ray(camera, ray, depthBudget, { spheres, planes, triangles }) {
   let hit = {
     depth: 1000.0,
     normal: Vec(0.0,0.0,0.0),
@@ -114,10 +113,10 @@ function trace_ray(camera, ray, iteration, { spheres, planes, triangles }) {
     hit = { depth: t, normal: triangle.normal, point: p, material: 'diffuse' }
   }
 
-  if (hit.material === 'mirror' && iteration < maxDepth) {
+  if (hit.material === 'mirror' && depthBudget > 0) {
     let reflection_ray = add(ray, mult(-2*dot(hit.normal, ray), hit.normal))
     let world = { spheres, planes, triangles }
-    let nextHit = trace_ray(hit.point, reflection_ray, iteration + 1, world)
+    let nextHit = trace_ray(hit.point, reflection_ray, depthBudget - 1, world)
     hit = { depth: hit.depth, normal: nextHit.normal, point: nextHit.point }
   }
 

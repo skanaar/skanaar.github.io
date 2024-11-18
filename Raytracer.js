@@ -27,6 +27,11 @@ app.addMenu(
   { title: 'Wave', event: 'scene', arg: 'wave' },
 )
 app.addMenu(
+  'Reflections',
+  { title: 'Enable reflections', event: 'maxdepth', arg: 3 },
+  { title: 'No reflections', event: 'maxdepth', arg: 0 },
+)
+app.addMenu(
   'Dither',
   { title: 'Floyd-Steinberg dither', event: 'dither', arg: 'floydsteinberg' },
   { title: 'No dither', event: 'dither', arg: 'none' },
@@ -36,6 +41,7 @@ app.addWindow('Tools', () => el('div', {}, 'tools'), [200,300])
 let debug = false
 let size = 256
 let ditherMethod = 'floydsteinberg'
+let maxDepth = 3
 
 let lights = [
   Light(Vec(32, 32, -256+32), 16),
@@ -93,10 +99,8 @@ function RayTracer() {
     raytraceParallel({
       canvas: hostRef.current,
       size,
-      spheres,
-      planes,
-      triangles,
-      lights,
+      maxDepth,
+      scene: { spheres, planes, triangles, lights },
       ditherer,
       debug
     })
@@ -112,6 +116,7 @@ function RayTracer() {
     else if (arg == 'teapot') setSceneTeapot()
   }))
   useEvent(app, 'dither', apply((arg) => { ditherMethod = arg }))
+  useEvent(app, 'maxdepth', apply((arg) => { maxDepth = arg }))
   useEvent(app, 'debug', apply(() => { debug = !debug }))
 
   return el('canvas', { width: size, height: size, ref: hostRef })
