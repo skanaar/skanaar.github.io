@@ -35,8 +35,16 @@ export class App {
       items: items.map(({ title, event, arg }) => ({ title, app: this.name, event, arg }))
     })
   }
-  addWindow(name, component, [width, height] = [300, 200], sizing) {
-    this.childWindows.push({ name, component, width, height, sizing })
+  addWindow(name, component, { offset, size, sizing }) {
+    this.childWindows.push({
+      name,
+      component,
+      options: {
+        offset,
+        size,
+        sizing
+      }
+    })
   }
   trigger(event, arg) {
     signals.trigger(this.name, event, arg)
@@ -173,11 +181,11 @@ export function Desktop(props) {
               Window,
               {
                 key: app.name + ' childwindow' + win.name,
-                x: app.pos.x + 100,
-                y: app.pos.y + 100,
-                w: win.width,
-                h: win.height,
-                sizing: win.sizing,
+                x: app.pos.x + win.options.offset[0],
+                y: app.pos.y + win.options.offset[1],
+                w: win.options.size[0],
+                h: win.options.size[1],
+                sizing: win.options.sizing,
                 title: win.name,
                 focused: currentApp === app.name,
                 onFocus: () => setCurrentApp(app.name),

@@ -215,14 +215,6 @@ input[type='checkbox']:checked::before {
   color: var(--win-color);
 }
 
-grid-2col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 5px;
-  margin: 5px 0;
-}
-
 .stack {
   display: grid;
   grid-template-columns: 1fr;
@@ -260,9 +252,6 @@ input {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: inherit;
-}
-input.long {
-  width: 100%;
 }
 
 menu-root button, menu-item button {

@@ -221,4 +221,11 @@ mine-field:not(.disabled) button:active:not([disabled]) {
   color: #fff;
   background-color: #000;
 }
+grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 5px;
+  margin: 5px 0;
+}
 `

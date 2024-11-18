@@ -1,13 +1,7 @@
 let chunkSize = 16
 
-export function raytraceParallel({
-  canvas,
-  size,
-  maxDepth,
-  scene,
-  ditherer,
-  debug
-}) {
+export function raytraceParallel({ canvas, size, maxDepth, scene, ditherer }) {
+  let { promise, resolve } = Promise.withResolvers()
   let ctx = canvas.getContext("2d")
   let start = performance.now()
 
@@ -22,8 +16,7 @@ export function raytraceParallel({
   ctx.fillStyle = '#000'
 
   function onComplete() {
-    if (debug)
-      console.log(`duration: ${(performance.now() - start).toFixed(0)}ms`)
+    resolve({ duration: performance.now() - start })
     let imgdata = ctx.createImageData(size, size)
     for (let { x, y } of ditherer.coordinates(size)) {
       let j = y % chunkSize
@@ -53,4 +46,6 @@ export function raytraceParallel({
     let area = {width: size, height: chunkSize, x: 0, y: i*chunkSize }
     worker.postMessage({ area, size, maxDepth, scene })
   }
+
+  return promise
 }

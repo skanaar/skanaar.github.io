@@ -20,7 +20,6 @@ import { raytraceParallel } from './raytracer/raytraceParallel.js'
 import { teapotPatches } from './raytracer/teapot.js'
 
 export const app = new App('RayTracer', RayTracer, 'aperture.svg')
-app.addToAppMenu({ title: 'Toggle debug', event: 'debug' })
 app.addMenu(
   'Scene',
   { title: 'Teapot', event: 'scene', arg: 'teapot' },
@@ -36,39 +35,11 @@ app.addMenu(
   { title: 'Floyd-Steinberg dither', event: 'dither', arg: 'floydsteinberg' },
   { title: 'No dither', event: 'dither', arg: 'none' },
 )
-app.addWindow('Options', RenderOptions, [200,100])
+app.addWindow('Options', RenderOptions, {
+  offset: [256+20,0],
+  size: [200,100]
+})
 
-function RenderOptions() {
-  const [reflections, setReflections] = React.useState(maxDepth)
-  const [dither, setDither] = React.useState(ditherMethod)
-  useEvent(app, 'maxdepth', (arg) => setReflections(arg))
-  useEvent(app, 'dither', (arg) => setDither(arg))
-
-  return el(
-    'div',
-    { style: { display: 'flex', flexDirection: 'column', margin: 10 } },
-    el('label', {},
-      el('input', {
-        type: 'checkbox',
-        checked: reflections > 0,
-        onChange: (e) => app.trigger('maxdepth', e.target.checked ? 3 : 0),
-      }),
-      'Reflections'
-    ),
-    el('label', {},
-      el('input', {
-        type: 'checkbox',
-        checked: dither == 'floydsteinberg',
-        onChange: (e) => {
-          app.trigger('dither', e.target.checked ? 'floydsteinberg' : 'none')
-        },
-      }),
-      'Dither'
-    )
-  )
-}
-
-let debug = false
 let size = 256
 let ditherMethod = 'floydsteinberg'
 let maxDepth = 3
@@ -118,7 +89,7 @@ setSceneTeapot()
 
 function RayTracer() {
   const hostRef = React.useRef()
-  const apply = (action) => (arg, event, app) => {
+  const apply = (action) => (arg, event) => {
     action(arg, event)
 
     let ditherer = {
@@ -132,8 +103,7 @@ function RayTracer() {
       maxDepth,
       scene: { spheres, planes, triangles, lights },
       ditherer,
-      debug
-    })
+    }).then((result) => app.trigger('done', result))
   }
   let render = apply(() => null)
 
@@ -147,7 +117,39 @@ function RayTracer() {
   }))
   useEvent(app, 'dither', apply((arg) => { ditherMethod = arg }))
   useEvent(app, 'maxdepth', apply((arg) => { maxDepth = arg }))
-  useEvent(app, 'debug', apply(() => { debug = !debug }))
 
   return el('canvas', { width: size, height: size, ref: hostRef })
+}
+
+function RenderOptions() {
+  const [reflections, setReflections] = React.useState(maxDepth)
+  const [dither, setDither] = React.useState(ditherMethod)
+  const [duration, setDuration] = React.useState(0)
+  useEvent(app, 'maxdepth', (arg) => setReflections(arg))
+  useEvent(app, 'dither', (arg) => setDither(arg))
+  useEvent(app, 'done', (arg) => setDuration(arg.duration))
+
+  return el(
+    'div',
+    { style: { display: 'flex', flexDirection: 'column', margin: 10 } },
+    el('label', {},
+      el('input', {
+        type: 'checkbox',
+        checked: reflections > 0,
+        onChange: (e) => app.trigger('maxdepth', e.target.checked ? 3 : 0),
+      }),
+      'Reflections'
+    ),
+    el('label', {},
+      el('input', {
+        type: 'checkbox',
+        checked: dither == 'floydsteinberg',
+        onChange: (e) => {
+          app.trigger('dither', e.target.checked ? 'floydsteinberg' : 'none')
+        },
+      }),
+      'Dither'
+    ),
+    `Duration: ${duration.toFixed(0)}ms`
+  )
 }

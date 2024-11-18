@@ -19,7 +19,6 @@
 
     <script src="lib/riot.js"></script>
     <script src="lib/underscore.js"></script>
-    <script src="lib/aws.js"></script>
     <script src="util.js"></script>
     <script>
 
@@ -45,7 +44,7 @@
         }
         else {
           try {
-            startEditor(parseWorld(worldJson))            
+            startEditor(parseWorld(worldJson))
           } catch(e) {
             alert('locally stored world was corrupt, loading world from server')
             loadFromServer()
