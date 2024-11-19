@@ -1,13 +1,15 @@
+import { DitherImage } from './assets/DitherImage.js'
 import { el, App } from './assets/system.js'
 
 export const app = new App('Readme', Readme, 'file.svg')
-app.resizable([300, 300])
+app.resizable([300, 400])
 
 export function Readme() {
   return el(
     'div',
     { className: 'padded' },
     el('h2', {}, 'Daniel Kallin'),
+    el(DitherImage, { src: '../daniel/autumn.jpg', width: 200, height: 200 }),
     el('h2', {}, 'Links'),
     el('p', { className: 'stack' },
       el('a', { href: "http://www.rymdmotor.se" }, 'rymdmotor ab'),
