@@ -20,6 +20,11 @@ import { raytraceParallel } from './raytracer/raytraceParallel.js'
 import { teapotPatches } from './raytracer/teapot.js'
 
 export const app = new App('RayTracer', RayTracer, 'aperture.svg')
+app.addToAppMenu({
+  title: 'Show options...',
+  event: 'show_child_window',
+  arg: 'Options'
+})
 app.addMenu(
   'Scene',
   { title: 'Teapot', event: 'scene', arg: 'teapot' },

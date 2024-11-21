@@ -102,34 +102,40 @@ const signals = {
 export function Desktop(props) {
   const { systemMenuLabel, systemName, aboutApp, columns = 3, apps } = props
   const [currentApp, setCurrentApp] = React.useState(null)
+  const [fullscreen, setFullscreen] = React.useState(false)
   const [openApps, setOpenApps] = React.useState({})
 
+  const childWindow = (app, window) =>
+    apps.find(e => e.name === app).childWindows.find(e => e.name == window)
+
   React.useEffect(() => {
-    const onEvent = (arg, event, app) => {
+    const onEvent = (arg, event, appName) => {
       if (event == 'restart') location.reload()
       if (event == 'focus') {
-        setCurrentApp(app)
-        setOpenApps((state) => ({ ...state, [app]: true }))
+        setCurrentApp(appName)
+        setOpenApps((state) => ({ ...state, [appName]: true }))
       }
       if (event == 'show_child_window') {
-        apps
-          .find(e => e.name === app)
-          .childWindows
-          .find(e => e.name == arg).visible = true
-        setCurrentApp(app)
-        setOpenApps((state) => ({ ...state, [app]: true }))
+        childWindow(appName, arg).visible = true
+        setCurrentApp(appName)
+        setOpenApps((state) => ({ ...state, [appName]: true }))
       }
       if (event == 'hide_child_window') {
-        apps
-          .find(e => e.name === app)
-          .childWindows
-          .find(e => e.name == arg).visible = false
-        setCurrentApp(app)
-        setOpenApps((state) => ({ ...state, [app]: true }))
+        childWindow(appName, arg).visible = false
+        setCurrentApp(appName)
+        setOpenApps((state) => ({ ...state, [appName]: true }))
+      }
+      if (event === 'enter_fullscreen') {
+        document.querySelector('html').requestFullscreen()
+          .then(() => setFullscreen(true), () => setFullscreen(false))
+      }
+      if (event === 'exit_fullscreen') {
+        document.exitFullscreen()
+        setFullscreen(false)
       }
       if (event == 'quit') {
         setCurrentApp(null)
-        setOpenApps((state) => ({ ...state, [app]: false }))
+        setOpenApps((state) => ({ ...state, [appName]: false }))
       }
     }
     signals.on(null, null, onEvent)
@@ -157,15 +163,24 @@ export function Desktop(props) {
     },
   )
 
-  const appMenuSpecs = apps.find(e => e.name === currentApp)?.menus ?? []
-  const appMenus = appMenuSpecs.map(e =>
-    el(Menu, { title: e.title, items: e.items })
-  )
+  const app = apps.find(e => e.name === currentApp)
+  const appMenus = app
+    ? app.menus.map(e => el(Menu, { title: e.title, items: e.items }))
+    : []
+  const displayMenuItems = fullscreen
+    ? [{ title: 'Exit fullscreen', event: 'exit_fullscreen' }]
+    : [{ title: 'Fullscreen', event: 'enter_fullscreen' }]
 
   return el(
     'desktop-host',
     { class: 'halftone' },
-    el('header', {}, systemMenu, ...appMenus, el(Clock)),
+    el('header', {},
+      el('section', {}, systemMenu, ...appMenus),
+      el('section', {},
+        el(Menu, { title: 'Display', items: displayMenuItems }),
+        el('menu-label', {}, el(Clock))
+      ),
+    ),
     el(
       'main',
       {},
@@ -325,7 +340,7 @@ export function Menu({ title, items }) {
   const ref = React.useRef()
   const isOpen = React.useRef(false)
   const showDropdown = open && items
-  function activate() {
+  const activate = () => {
     setOpen(!open)
     isOpen.current = !open
   }

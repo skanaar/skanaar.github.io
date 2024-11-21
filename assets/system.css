@@ -146,16 +146,18 @@ desktop-host {
 
 desktop-host > header {
   border-bottom: var(--line) solid var(--win-color);
-  padding: 0 5px;
+  display: grid;
+  grid-template-columns: 1fr auto;
   background-color: #fff;
+}
+desktop-host > header > section {
   display: flex;
+  padding: 0 5px;
   justify-content: flex-start;
 }
-header > clock-widget {
-  position: absolute;
-  right: 10px;
-  top: 0;
-  padding: 3px
+desktop-host > header > section > menu-label {
+  display: inline-block;
+  padding: 3px 15px;
 }
 
 .halftone {
