@@ -316,7 +316,10 @@ class ErrorBoundary extends React.Component {
   static getDerivedStateFromError(error) { return { error } }
   render() {
     if (this.state?.error)
-      return el('error-boundary', {}, `Error: ${this.state.error.message}`)
+      return el('error-boundary', {},
+        this.state?.error.name ?? 'ERROR',
+        el('p', {}, `${this.state.error.message}`)
+      )
     return this.props.children
   }
 }

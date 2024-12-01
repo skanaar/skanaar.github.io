@@ -76,6 +76,10 @@ error-boundary {
   text-align: center;
   max-width: 250px;
 }
+error-boundary p {
+    text-align: left;
+    white-space: pre-wrap;
+}
 
 a.app-icon {
   width: 80px;
