@@ -70,6 +70,13 @@ window-frame window-body {
   display: grid;
 }
 
+error-boundary {
+  display: block;
+  padding: 20px;
+  text-align: center;
+  max-width: 250px;
+}
+
 a.app-icon {
   width: 80px;
   display: flex;

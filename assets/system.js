@@ -305,10 +305,22 @@ function Window({
         el('button', { onClick: () => onClose({ pos }) }),
         title,
       ),
-      el('window-body', { style: bodyStyle }, children),
+      el('window-body', { style: bodyStyle },
+        el(ErrorBoundary, {}, children)
+      )
     ),
   )
 }
+
+class ErrorBoundary extends React.Component {
+  static getDerivedStateFromError(error) { return { error } }
+  render() {
+    if (this.state?.error)
+      return el('error-boundary', {}, `Error: ${this.state.error.message}`)
+    return this.props.children
+  }
+}
+
 
 export function AppIcon({ icon, component, open, title, style, onClick }) {
   if (typeof component === 'string') return el(
