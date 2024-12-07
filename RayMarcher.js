@@ -2,7 +2,7 @@ import { el, App, useEvent } from './assets/system.js'
 import { renderScene } from './raymarcher/renderScene.js'
 import { useFetch } from './raymarcher/useFetch.js'
 
-export const app = new App('RayMarcher', RayMarcher, 'aperture.svg')
+export const app = new App('RayMarcher', RayMarcher, 'shader.svg')
 
 function RayMarcher() {
   const hostRef = React.useRef()
