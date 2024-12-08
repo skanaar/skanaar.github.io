@@ -16,12 +16,16 @@ export var input = {
   get up () { return this.keys[87] || this.keys[38] },
   get down () { return this.keys[83] || this.keys[40] },
   get left () { return this.keys[65] || this.keys[37] },
-  get right () { return this.keys[68] || this.keys[39] }
+  get right () { return this.keys[68] || this.keys[39] },
+  dispose: () => {},
+  init() {
+    var onkeydown = (e) => input.keys[e.keyCode] = true;
+    var onkeyup = (e) => input.keys[e.keyCode] = false;
+    document.addEventListener('keydown', onkeydown);
+    document.addEventListener('keyup', onkeyup);
+    this.dispose = () => {
+      document.removeEventListener('keydown', onkeydown);
+      document.removeEventListener('keyup', onkeyup);
+    }
+  }
 }
-
-document.addEventListener('keydown', function(e) {
-  input.keys[e.keyCode] = true;
-});
-document.addEventListener('keyup', function(e) {
-  input.keys[e.keyCode] = false;
-});

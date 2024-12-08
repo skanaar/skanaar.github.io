@@ -16,8 +16,9 @@ export function LunarRover() {
 
   React.useEffect(() => {
     const init = async () => {
-      const { start: initLunarRover } = await import('./lunar-rover/script.js')
-      conf = initLunarRover(hostRef.current)
+      const { start, dispose } = await import('./lunar-rover/script.js')
+      conf = start(hostRef.current)
+      return () => dispose()
     }
     init()
   }, [])

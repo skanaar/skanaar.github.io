@@ -45,19 +45,30 @@ var clock = new Clock();
 var viewer = null
 var engine = null
 var composer = null
+var hostElement = null
 
 export function start(host) {
+  hostElement = host
   var w = host.offsetWidth;
   var h = host.offsetHeight;
   viewer = buildViewer(w, h, window.devicePixelRatio)
   engine = buildEngine(256, viewer);
   composer = buildPostProcessing(engine, viewer, w, h)
 
-
+  input.init()
   init(host, viewer);
   animate();
-  
+
   return settings;
+}
+
+export function dispose() {
+  input.dispose()
+  viewer.renderer.dispose()
+  hostElement.innerHTML = ''
+  viewer = null
+  engine = null
+  composer = null
 }
 
 function buildPostProcessing(engine, viewer, w, h) {
