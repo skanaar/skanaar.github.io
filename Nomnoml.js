@@ -3,6 +3,7 @@ import { useScript } from './assets/useScript.js'
 
 export const app = new App('Nomnoml', Nomnoml, 'nomnoml.svg')
 app.resizable([600, 350])
+app.addAbout(About, { offset: [610,0], visible: true })
 app.addToAppMenu({ title: 'Visit nomnoml.com', event: 'visit-site' })
 
 function Nomnoml() {
@@ -33,6 +34,13 @@ function Nomnoml() {
       el('textarea', { value: source, onChange }),
     ),
     el('canvas', { ref: canvasRef })
+  )
+}
+
+function About() {
+  return el('div', { className: 'padded', style: { maxWidth: 200 } },
+    el('p', {}, `A tool for drawing UML diagrams based on a simple syntax.`),
+    el('p', {}, `Try and edit the code on the left and watch the diagram change`)
   )
 }
 
