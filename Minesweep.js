@@ -1,4 +1,4 @@
-import { el, App, Button } from './assets/system.js'
+import { el, App, Button, useEvent } from './assets/system.js'
 
 function seq(count) {
   return [...new Array(count)].map((_, i) => i)
@@ -40,6 +40,11 @@ function openCell(field, i, j) {
 }
 
 export const app = new App('Minesweep', Minesweep, 'bomb.svg')
+app.addToAppMenu(
+  { title: 'Start 5x5 game', event: 'newgame', arg: { size:5, mines:4 } },
+  { title: 'Start 7x7 game', event: 'newgame', arg: { size:7, mines:10 } },
+  { title: 'Start 10x10 game', event: 'newgame', arg: { size:10, mines:20 } },
+)
 
 export function Minesweep() {
   const [field, setField] = React.useState(null)
@@ -47,8 +52,10 @@ export function Minesweep() {
   const sizePicker = React.useRef()
   const [state, setState] = React.useState('menu')
 
-  function startGame() {
-    const spec = JSON.parse(sizePicker.current.value)
+  useEvent(app, 'newgame', (arg) => startGame(arg))
+
+  function startGame(arg) {
+    const spec = arg ?? JSON.parse(sizePicker.current.value)
     setGameSpec(spec)
     setField(buildField(spec.size, spec.size, spec.mines))
     setState('game')
