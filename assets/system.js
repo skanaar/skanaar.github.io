@@ -23,9 +23,9 @@ export class App {
     this.width = width
     this.height = height
   }
-  addAbout(component) {
+  addAbout(component, opts) {
     const id = `About ${this.name}`
-    this.addWindow(id, component, { offset: [50, 50], visible: false })
+    this.addWindow(id, component, { offset: [50, 50], visible: false, ...opts })
     this.addToAppMenu({ title: id, event: 'show_child_window', arg: id })
   }
   addToAppMenu(...items) {
@@ -147,12 +147,6 @@ export function Desktop(props) {
     {
       title: systemMenuLabel,
       items: [
-        aboutApp && {
-          title: `About ${systemName}`,
-          app: aboutApp,
-          event: 'focus'
-        },
-        aboutApp && { title: null },
         ...Object
           .entries(openApps)
           .filter(([, open]) => open)
@@ -163,10 +157,16 @@ export function Desktop(props) {
     },
   )
 
+  const systemMenuItems = aboutApp ? [{
+    title: `About ${systemName}`,
+    app: aboutApp,
+    event: 'focus'
+  }] : []
+
   const app = apps.find(e => e.name === currentApp)
   const appMenus = app
     ? app.menus.map(e => el(Menu, { title: e.title, items: e.items }))
-    : []
+    : [el(Menu, { title: systemName, items: systemMenuItems })]
   const displayMenuItems = fullscreen
     ? [{ title: 'Exit fullscreen', event: 'exit_fullscreen' }]
     : [{ title: 'Fullscreen', event: 'enter_fullscreen' }]
@@ -183,7 +183,10 @@ export function Desktop(props) {
     ),
     el(
       'main',
-      {},
+      { onClick: (e) => {
+        if (e.target.tagName === 'MAIN')
+          setCurrentApp(null)}
+      },
       apps.map((app, i) =>
         el(AppIcon, {
           key: `icon-${app.name}`,
@@ -290,25 +293,21 @@ function Window({
     : { width: w, minWidth: w, height: h, resize: 'both', overflowY: 'auto' }
 
   return el(
-    React.Fragment,
-    {},
+    'window-frame',
+    { style, onMouseDown: onFocus, class: focused ? 'focused' : '' },
     el(
-      'window-frame',
-      { style, onMouseDown: onFocus, class: focused ? 'focused' : '' },
-      el(
-        'window-title',
-        {
-          onMouseDown: (e) => {
-            if (e.target.nodeName === 'WINDOW-TITLE') pressed.current = true
-          },
+      'window-title',
+      {
+        onMouseDown: (e) => {
+          if (e.target.nodeName === 'WINDOW-TITLE') pressed.current = true
         },
-        el('button', { onClick: () => onClose({ pos }) }),
-        title,
-      ),
-      el('window-body', { style: bodyStyle },
-        el(ErrorBoundary, {}, children)
-      )
+      },
+      el('button', { onClick: () => onClose({ pos }) }),
+      title,
     ),
+    el('window-body', { style: bodyStyle },
+      el(ErrorBoundary, {}, children)
+    )
   )
 }
 
@@ -323,7 +322,6 @@ class ErrorBoundary extends React.Component {
     return this.props.children
   }
 }
-
 
 export function AppIcon({ icon, component, open, title, style, onClick }) {
   if (typeof component === 'string') return el(
@@ -380,14 +378,10 @@ export function Menu({ title, items }) {
 }
 
 export function MenuItem({ item, onClose }) {
-  if (item.title === null) return el(Divider)
+  if (item.title === null) return el('menu-item', {}, el('hr'))
   const onClick = () => {
     signals.trigger(item.app, item.event, item.arg)
     onClose()
   }
   return el('menu-item', {}, el('button', { onClick }, item.title))
-}
-
-export function Divider() {
-  return el('menu-item', {}, el('hr'))
 }

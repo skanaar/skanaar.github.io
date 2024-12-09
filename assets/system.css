@@ -39,13 +39,16 @@ window-frame window-title {
   align-items: center;
   position: relative;
   text-align: center;
-  background-color: #eee;
+  background-color: #fff;
+  color: #888;
   user-select: none;
 }
-
-window-frame window-title.pressed {
-  background-color: #ddd;
+window-frame.focused window-title {
+  background-color: #eee;
+  color: #000;
 }
+window-frame window-title button { visibility: hidden; }
+window-frame.focused window-title button { visibility: visible; }
 
 window-frame window-title button {
   width: 20px;
