@@ -1,25 +1,29 @@
-export function DitherImage({ src, width, height }) {
+export function DitherImage({ src, width, height, exposure = 0 }) {
   const canvasRef = React.useRef()
 
   React.useEffect(() => {
     const canvas = canvasRef.current
     const ctx = canvas.getContext('2d')
-    const ditherer = new FloydSteinbergDitherer(width)
+    const ditherer = new FloydSteinbergDitherer(width, { exposure })
     const image = new Image(width, height)
     image.onload = () => {
       ctx.drawImage(image, 0, 0, width, height)
       ditherer.ditherCanvas(canvas)
     }
     image.src = src
-  }, [src, width, height])
+  }, [src, width, height, exposure])
 
-  return React.createElement('canvas', { ref: canvasRef, width, height })
+  return React.createElement('canvas',
+    { ref: canvasRef, width, height, style: { border: '1px solid black' } }
+  )
 }
 
 export class FloydSteinbergDitherer {
   errorBuffer = []
-  constructor(size) {
+  exposure = 0
+  constructor(size, { exposure = 0 } = {}) {
     this.errorBuffer = [new Array(size).fill(0), new Array(size).fill(0)]
+    this.exposure = exposure
   }
   getValue(value, i, j) {
     if (i === 0){
@@ -39,6 +43,10 @@ export class FloydSteinbergDitherer {
   monochrome(r, g, b) {
     return 0.21*r + 0.72*g + 0.07*b
   }
+  expose(x, amount) {
+    let k = (amount+1)/2
+    return (1-k) * x*x + k * (2*x-x*x)
+  }
   ditherCanvas(canvas) {
     let ctx = canvas.getContext('2d')
     let imgdata = ctx.getImageData(0, 0, canvas.width, canvas.height)
@@ -49,8 +57,9 @@ export class FloydSteinbergDitherer {
           imgdata.data[offset],
           imgdata.data[offset + 1],
           imgdata.data[offset + 2]
-        )
-        let value = Math.floor(this.getValue(bright / 255, x, y) * 255)
+        )/255
+        bright = this.expose(bright, this.exposure)
+        let value = Math.floor(this.getValue(bright, x, y) * 255)
         imgdata.data[offset] = value
         imgdata.data[offset + 1] = value
         imgdata.data[offset + 2] = value

@@ -5,11 +5,17 @@ export const app = new App('Readme', Readme, 'file.svg')
 app.resizable([300, 400])
 
 export function Readme() {
+  const [exp, setExp] = React.useState(0)
   return el(
     'div',
-    { className: 'padded' },
+    { className: 'padded', onClick: () => setExp(exp-0.1) },
     el('h2', {}, 'Daniel Kallin'),
-    el(DitherImage, { src: '../daniel/autumn.jpg', width: 200, height: 200 }),
+    el(DitherImage, {
+      src: '../daniel/autumn.jpg',
+      width: 200,
+      height: 200,
+      exposure: exp
+    }),
     el('h2', {}, 'Links'),
     el('p', { className: 'stack' },
       el('a', { href: "http://www.rymdmotor.se" }, 'rymdmotor ab'),

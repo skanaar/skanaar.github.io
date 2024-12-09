@@ -173,7 +173,13 @@ export function Desktop(props) {
 
   return el(
     'desktop-host',
-    { class: 'halftone' },
+    {
+      style: {
+        backgroundImage: `url(${halfToneTile()})`,
+        backgroundSize: '8px 8px',
+        imageRendering: 'pixelated'
+      }
+    },
     el('header', {},
       el('section', {}, systemMenu, ...appMenus),
       el('section', {},
@@ -384,4 +390,17 @@ export function MenuItem({ item, onClose }) {
     onClose()
   }
   return el('menu-item', {}, el('button', { onClick }, item.title))
+}
+
+function halfToneTile() {
+  const canvas = document.createElement('canvas')
+  canvas.width = 8
+  canvas.height = 8
+  const ctx = canvas.getContext('2d')
+  ctx.fillStyle = '#000'
+  ctx.fillRect(0, 0, 8, 8)
+  ctx.fillStyle = '#fff'
+  for (let i of [1,3,4,6,9,11,12,14])
+    ctx.fillRect(2*(i%4), 2*Math.floor(i/4), 2, 2)
+  return canvas.toDataURL()
 }

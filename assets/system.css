@@ -174,20 +174,6 @@ desktop-host > header > section > menu-label {
   padding: 3px 15px;
 }
 
-.halftone {
-  --dotSize: 1px;
-  --bgSize: 4px;
-  --bgPosition: calc(var(--bgSize) / 2);
-  background-image: radial-gradient(
-      circle at center,
-      black var(--dotSize),
-      transparent 0
-    ),
-    radial-gradient(circle at center, black var(--dotSize), transparent 0);
-  background-size: var(--bgSize) var(--bgSize);
-  background-position: 0 0, var(--bgPosition) var(--bgPosition);
-}
-
 button.btn {
   min-width: 100px;
   appearance: none;
