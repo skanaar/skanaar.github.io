@@ -3,8 +3,8 @@ import { useScript } from './assets/useScript.js'
 
 export const app = new App('Nomnoml', Nomnoml, 'nomnoml.svg')
 app.resizable([600, 350])
-app.addAbout(About, { offset: [610,0], visible: true })
 app.addToAppMenu({ title: 'Visit nomnoml.com', event: 'visit-site' })
+app.addAbout(About, { offset: [610,0], visible: true })
 
 function Nomnoml() {
   const [source, setSource] = React.useState(defaultSource)
