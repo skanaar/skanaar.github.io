@@ -5,7 +5,7 @@
 
 :root {
   --line: 2px;
-  --win-color: #333;
+  --win-color: #000;
   font-family: Chicago, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
@@ -156,8 +156,12 @@ desktop-host {
   display: grid;
   grid-template-rows: auto 1fr;
   user-select: none;
+  background-size: 4px 4px;
+  image-rendering: pixelated;
 }
-
+@media (max-resolution: 1x) {
+  desktop-host { background-size: 8px 8px }
+}
 desktop-host > header {
   border-bottom: var(--line) solid var(--win-color);
   display: grid;

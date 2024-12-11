@@ -54,8 +54,7 @@ export function Minesweep() {
 
   useEvent(app, 'newgame', (arg) => startGame(arg))
 
-  function startGame(arg) {
-    const spec = arg ?? JSON.parse(sizePicker.current.value)
+  function startGame(spec) {
     setGameSpec(spec)
     setField(buildField(spec.size, spec.size, spec.mines))
     setState('game')
@@ -76,7 +75,9 @@ export function Minesweep() {
           el('option', { value: '{"size":7, "mines":10}' }, '7 ✕ 7'),
           el('option', { value: '{"size":10, "mines":20}' }, '10 ✕ 10'),
         ),
-        el(Button, { onClick: startGame }, 'Start'),
+        el(Button, {
+          onClick: () => startGame(JSON.parse(sizePicker.current.value))
+        }, 'Start'),
       ),
     )
 

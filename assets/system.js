@@ -173,13 +173,7 @@ export function Desktop(props) {
 
   return el(
     'desktop-host',
-    {
-      style: {
-        backgroundImage: `url(${halfToneTile()})`,
-        backgroundSize: '8px 8px',
-        imageRendering: 'pixelated'
-      }
-    },
+    { style: { backgroundImage: `url(${halfToneTile()})` } },
     el('header', {},
       el('section', {}, systemMenu, ...appMenus),
       el('section', {},
