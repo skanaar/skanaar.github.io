@@ -1,6 +1,6 @@
-import { el, App, useEvent } from './assets/system.js'
+import { el, App } from './assets/system.js'
+import { useFetch } from './assets/useFetch.js'
 import { renderScene } from './raymarcher/renderScene.js'
-import { useFetch } from './raymarcher/useFetch.js'
 
 export const app = new App('RayMarcher', RayMarcher, 'shader.svg')
 
