@@ -83,13 +83,13 @@ window-frame window-body {
   display: grid;
 }
 
-error-boundary {
+error-msg {
   display: block;
   padding: 20px;
   text-align: center;
   max-width: 250px;
 }
-error-boundary p {
+error-msg p {
     text-align: left;
     white-space: pre-wrap;
 }

@@ -214,6 +214,7 @@ export function Desktop(props) {
               w: app.width,
               h: app.height,
               sizing: app.sizing,
+              app,
               title: app.name,
               focused: currentApp === app.name,
               onFocus: () => setCurrentApp(app.name),
@@ -234,6 +235,7 @@ export function Desktop(props) {
                 w: win.options.size[0],
                 h: win.options.size[1],
                 sizing: win.options.sizing,
+                app,
                 title: win.name,
                 focused: currentApp === app.name,
                 onFocus: () => setCurrentApp(app.name),
@@ -255,6 +257,7 @@ function Window({
   w,
   h,
   sizing,
+  app,
   title,
   focused,
   onFocus,
@@ -262,6 +265,7 @@ function Window({
   children,
 }) {
   const [pos, setPos] = React.useState({ x, y })
+  const [error, setError] = React.useState(null)
   const pressed = React.useRef(false)
 
   React.useEffect(() => {
@@ -284,6 +288,9 @@ function Window({
     window.addEventListener('mouseup', handleMouseUp)
     return () => window.removeEventListener('mouseup', handleMouseUp)
   }, [])
+  useEvent(app, 'error', (err) => {
+    setError(err)
+  })
 
   const style = { left: pos.x, top: pos.y }
   const bodyStyle = sizing === 'noresize'
@@ -306,19 +313,19 @@ function Window({
       title,
     ),
     el('window-body', { style: bodyStyle },
-      el(ErrorBoundary, {}, children)
+      error ? el(ErrorMsg, { error }) : el(ErrorBoundary, {}, children)
     )
   )
+}
+
+function ErrorMsg({ error }) {
+  return el('error-msg', {}, error.name ?? 'ERROR', el('p', {}, error.message ))
 }
 
 class ErrorBoundary extends React.Component {
   static getDerivedStateFromError(error) { return { error } }
   render() {
-    if (this.state?.error)
-      return el('error-boundary', {},
-        this.state?.error.name ?? 'ERROR',
-        el('p', {}, `${this.state.error.message}`)
-      )
+    if (this.state?.error) return el(ErrorMsg, { error: this.state.error })
     return this.props.children
   }
 }
