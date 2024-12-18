@@ -10,6 +10,14 @@ export function GLContext(gl, vertexSrc, fragmentSrc) {
     clear() {
       gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT)
     },
+    prepareModel({ count, vertices, normals, indices }) {
+      return {
+        count,
+        vertices: this.createVec3Buffer(vertices),
+        normals: this.createVec3Buffer(normals),
+        indices: this.createIndexBuffer(indices),
+      }
+    },
     bindMatrix(name, matrix) {
       gl.uniformMatrix4fv(gl.getUniformLocation(program, name), false, matrix)
     },

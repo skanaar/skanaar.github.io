@@ -11,6 +11,10 @@ export function IdentityMatrix() {
   return new Float32Array([1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1])
 }
 
+export function ScaleMatrix(s) {
+  return new Float32Array([s,0,0,0, 0,s,0,0, 0,0,s,0, 0,0,0,s])
+}
+
 export function TranslateMatrix(x, y, z) {
   return new Float32Array([1,0,0,0, 0,1,0,0, 0,0,1,0, x,y,z,1])
 }
@@ -67,6 +71,12 @@ export function mmult(a, b) {
     }
   }
   return m
+}
+
+export function mmults(...matrixes) {
+  if (matrixes.length === 1) return matrixes[0]
+  if (matrixes.length === 2) return mmult(matrixes[0], matrixes[1])
+  return mmult(matrixes[0], mmults(...matrixes.slice(1)))
 }
 
 export var vadd = (a, b) => [a[0]+b[0], a[1]+b[1], a[2]+b[2]]

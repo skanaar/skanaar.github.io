@@ -1,3 +1,4 @@
+import { vcross, vdiff, vnormalize } from './math.js'
 import { quad } from './quadtree.js'
 import { ImprovedNoise } from './ImprovedNoise.js'
 
@@ -25,6 +26,40 @@ function terrainHeightAt(x, y, sampleSize){
 function craterOffset(height, x){
   x = Math.min(x, 1);
   return height*(Math.pow(Math.sin(x*x*3),2) + (x*x-1)*1.1);
+}
+
+export function LandscapeModel(res, size, height) {
+  var quadtree = generateLandscape(res)
+  function point(i,j) {
+    return [
+      size * (i/res-.5),
+      -height * quad.at(quadtree, i, j).value/60,
+      size * (j/res-.5)
+    ]
+  }
+  const vertices = []
+  for (var i=0; i<res; i++) {
+    for (var j=0; j<res; j++) {
+      vertices.push(...point(i,j))
+    }
+  }
+  const normals = []
+  for (var i=0; i<res; i++) {
+    for (var j=0; j<res; j++) {
+      const dx = vdiff(point(i+1,j), point(i-1,j))
+      const dy = vdiff(point(i,j+1), point(i,j-1))
+      normals.push(...vnormalize(vcross(dx, dy)))
+    }
+  }
+  const indices = []
+  for (var i=0; i<res-1; i++) {
+    for (var j=0; j<res-1; j++) {
+      const k = i + res*j
+      indices.push(k, k+1, k+1+res)
+      indices.push(k, k+1+res, k+res)
+    }
+  }
+  return { count: (res-1)*(res-1)*2*3, vertices, normals, indices }
 }
 
 export function generateLandscape(res){
