@@ -1,55 +1,47 @@
 export function Vec4(x, y, z, w = 1) {
-  return new Float32Array([x, y, z, w])
+  const output = new Float32Array(4)
+  output[0] = x
+  output[1] = y
+  output[2] = z
+  output[3] = w
+  return output
 }
 
-export function normalize(v) {
-  const d = Math.sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2])
-  return new Float32Array([v[0]/d, v[1]/d, v[2]/d, v[3]])
-}
+export var vadd = (a, b) => Vec4(a[0]+b[0], a[1]+b[1], a[2]+b[2])
+export var vdiff = (a, b) => Vec4(a[0]-b[0], a[1]-b[1], a[2]-b[2])
+export var vdot = (a, b) => a[0]*b[0] + a[1]*b[1] + a[2]*b[2]
+export var vmult = (k, vec) => Vec4(k*vec[0], k*vec[1], k*vec[2])
+export var vmag = v => Math.sqrt(vdot(v, v))
+export var vnormalize = v => vmult(1/vmag(v), v)
+export var vcross = (a, b) => Vec4(
+  a[1]*b[2] - a[2]*b[1],
+  a[2]*b[0] - a[0]*b[2],
+  a[0]*b[1] - a[1]*b[0]
+)
 
-export function IdentityMatrix() {
-  return new Float32Array([1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1])
-}
+export function vset(vec, x,y,z) { vec[0] = x; vec[1] = y; vec[2] = z }
 
-export function TranslateMatrix(x, y, z) {
-  return new Float32Array([1,0,0,0, 0,1,0,0, 0,0,1,0, x,y,z,1])
-}
-
-export function OrthoMatrix() {
-  return new Float32Array([1,0,0,0,0,1,0,0,0,0,-1,0,0,0,0,1])
-}
-
+const Matrix = (elements) => new Float32Array(elements)
+export const Identity = () => Matrix([1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1])
+export const Scale = (s) => Matrix([s,0,0,0, 0,s,0,0, 0,0,s,0, 0,0,0,s])
+export const Translate = (x,y,z) => Matrix([1,0,0,0, 0,1,0,0, 0,0,1,0, x,y,z,1])
+export const Ortho = () => Matrix([1,0,0,0,0,1,0,0,0,0,-1,0,0,0,0,1])
+const sin = (x) => Math.sin(x)
+const cos = (x) => Math.cos(x)
 export function RotateX(a) {
-  return new Float32Array([
-    1,0,0,0,
-    0,Math.cos(a),-Math.sin(a),0,
-    0,Math.sin(a),Math.cos(a),0,
-    0,0,0,1
-  ])
+  return Matrix([1,0,0,0, 0,cos(a),-sin(a),0, 0,sin(a),cos(a),0, 0,0,0,1])
 }
-
 export function RotateY(a) {
-  return new Float32Array([
-    Math.cos(a),0,Math.sin(a),0,
-    0,1,0,0,
-    -Math.sin(a),0,Math.cos(a),0,
-    0,0,0,1
-  ])
+  return Matrix([cos(a),0,sin(a),0, 0,1,0,0, -sin(a),0,cos(a),0, 0,0,0,1])
 }
-
 export function RotateZ(a) {
-  return new Float32Array([
-    Math.cos(a),-Math.sin(a),0,0,
-    Math.sin(a),Math.cos(a),0,0,
-    0,0,1,0,
-    0,0,0,1
-  ])
+  return Matrix([cos(a),-sin(a),0,0, sin(a),cos(a),0,0, 0,0,1,0, 0,0,0,1])
 }
 
-export function PerspectiveMatrix(fovy, aspect, near, far) {
+export function Perspective(fovy, aspect, near, far) {
   const f = 1.0 / Math.tan(fovy / 2)
   const nf = 1 / (near - far)
-  return new Float32Array([
+  return Matrix([
     f / aspect, 0, 0, 0,
     0, f, 0, 0,
     0, 0, far == Infinity ? -1 : (far + near) * nf, -1,
@@ -58,7 +50,7 @@ export function PerspectiveMatrix(fovy, aspect, near, far) {
 }
 
 export function mmult(a, b) {
-  var m = new Float32Array([0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0])
+  var m = Matrix([0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0])
   for (var i=0; i<4; i++) {
     for (var j=0; j<4; j++) {
       for (var k=0; k<4; k++) {
@@ -69,14 +61,8 @@ export function mmult(a, b) {
   return m
 }
 
-export var vadd = (a, b) => [a[0]+b[0], a[1]+b[1], a[2]+b[2]]
-export var vdiff = (a, b) => [a[0]-b[0], a[1]-b[1], a[2]-b[2]]
-export var vdot = (a, b) => a[0]*b[0] + a[1]*b[1] + a[2]*b[2]
-export var vmult = (k, v) => [k*v[0], k*v[1], k*v[2]]
-export var vmag = v => Math.sqrt(vdot(v, v))
-export var vnormalize = v => vmult(1/vmag(v), v)
-export var vcross = (a, b) => [
-  a[1]*b[2] - a[2]*b[1],
-  a[2]*b[0] - a[0]*b[2],
-  a[0]*b[1] - a[1]*b[0]
-]
+export function mmults(...matrixes) {
+  if (matrixes.length === 1) return matrixes[0]
+  if (matrixes.length === 2) return mmult(matrixes[0], matrixes[1])
+  return mmult(matrixes[0], mmults(...matrixes.slice(1)))
+}

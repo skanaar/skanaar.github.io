@@ -1,8 +1,54 @@
-varying lowp vec4 vColor;
-varying lowp vec4 vSun;
-varying lowp vec4 vNormal;
+precision mediump float;
+varying vec4 vColor;
+varying vec4 vSun;
+varying vec4 vShadower1;
+varying vec4 vShadower2;
+varying vec4 vShadower3;
+varying vec4 vShadower4;
+varying vec4 vNormal;
+varying vec4 vPos;
+
+float random(vec3 p) {
+    return fract(sin(dot(p, vec3(12.8,78.2,53.2))) * 43758.3);
+}
+
+float noise(vec3 st) {
+    vec3 i = floor(st);
+    vec3 f = fract(st);
+    vec3 u = f * f * (3.0 - 2.0 * f);
+    vec3 w = 1. - u;
+    return
+        (u.x*u.y*u.z) * random(i + vec3(1., 1., 1.)) +
+        (u.x*u.y*w.z) * random(i + vec3(1., 1., 0.)) +
+        (u.x*w.y*u.z) * random(i + vec3(1., 0., 1.)) +
+        (u.x*w.y*w.z) * random(i + vec3(1., 0., 0.)) +
+        (w.x*u.y*u.z) * random(i + vec3(0., 1., 1.)) +
+        (w.x*u.y*w.z) * random(i + vec3(0., 1., 0.)) +
+        (w.x*w.y*u.z) * random(i + vec3(0., 0., 1.)) +
+        (w.x*w.y*w.z) * random(i + vec3(0., 0., 0.));
+}
+
+float fbm(vec3 p) {
+    float value = 0.;
+    float amplitude = 0.5;
+    float freq = 0.5;
+    for (int i = 0; i < 4; i++) {
+        value += amplitude * noise(p*freq);
+        freq *= 2.;
+        amplitude *= .5;
+    }
+    return value;
+}
 
 void main(void) {
-    lowp float lux = dot(-normalize(vNormal.xyz), vSun.xyz);
-    gl_FragColor = vec4(lux, lux, lux, 1);
+    float falloff = step(.9, 1.-length(vPos.xz)/50.);
+    vec3 bump = vec3(fbm(8. * vPos.xyz), fbm(8. * vPos.xyz + vec3(25.1,0.,0.)), 0.);
+    vec3 normal = normalize(vNormal.xyz + .4 * (bump - vec3(.5,.5,.5)));
+    float lux = dot(-normal, vSun.xyz);
+    float shadow =
+        (length(vPos.xz - vShadower1.xz) > .5 ? 1. : .5) *
+        (length(vPos.xz - vShadower2.xz) > .5 ? 1. : .5) *
+        (length(vPos.xz - vShadower3.xz) > .5 ? 1. : .5) *
+        (length(vPos.xz - vShadower4.xz) > .5 ? 1. : .5);
+    gl_FragColor = vec4(lux*shadow, lux*shadow, lux*shadow, 1);
 }
