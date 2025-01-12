@@ -13,7 +13,7 @@ export class App {
     }
     this.sizing = 'autosize'
     this.menus = [
-      { title: name, items: [{ title: 'Quit', app: name, event: 'quit' }]},
+      { title: name, items: [{ title: 'Quit', app: name, event: 'app:quit' }]},
     ]
     this.childWindows = []
     this.args = { app: this }
@@ -26,7 +26,7 @@ export class App {
   addAbout(component, opts) {
     const id = `About ${this.name}`
     this.addWindow(id, component, { offset: [50, 50], visible: false, ...opts })
-    this.addToAppMenu({ title: id, event: 'show_child_window', arg: id })
+    this.addToAppMenu({ title: id, event: 'app:show_child_window', arg: id })
   }
   addToAppMenu(...items) {
     this.menus[0].items.unshift(
@@ -110,30 +110,30 @@ export function Desktop(props) {
 
   React.useEffect(() => {
     const onEvent = (arg, event, appName) => {
-      if (event == 'restart') location.reload()
-      if (event == 'focus') {
+      if (event == 'sys:restart') location.reload()
+      if (event == 'app:focus') {
         setCurrentApp(appName)
         setOpenApps((state) => ({ ...state, [appName]: true }))
       }
-      if (event == 'show_child_window') {
+      if (event == 'app:show_child_window') {
         childWindow(appName, arg).visible = true
         setCurrentApp(appName)
         setOpenApps((state) => ({ ...state, [appName]: true }))
       }
-      if (event == 'hide_child_window') {
+      if (event == 'app:hide_child_window') {
         childWindow(appName, arg).visible = false
         setCurrentApp(appName)
         setOpenApps((state) => ({ ...state, [appName]: true }))
       }
-      if (event === 'enter_fullscreen') {
+      if (event === 'sys:enter_fullscreen') {
         document.querySelector('html').requestFullscreen()
           .then(() => setFullscreen(true), () => setFullscreen(false))
       }
-      if (event === 'exit_fullscreen') {
+      if (event === 'sys:exit_fullscreen') {
         document.exitFullscreen()
         setFullscreen(false)
       }
-      if (event == 'quit') {
+      if (event == 'app:quit') {
         setCurrentApp(null)
         setOpenApps((state) => ({ ...state, [appName]: false }))
       }
@@ -150,9 +150,9 @@ export function Desktop(props) {
         ...Object
           .entries(openApps)
           .filter(([, open]) => open)
-          .map(([name]) => ({ title: name, app: name, event: 'focus' })),
+          .map(([name]) => ({ title: name, app: name, event: 'app:focus' })),
         { title: null },
-        { title: 'Restart', app: null, event: 'restart' }
+        { title: 'Restart', app: null, event: 'sys:restart' }
         ].filter(e => !!e)
     },
   )
@@ -160,7 +160,7 @@ export function Desktop(props) {
   const systemMenuItems = aboutApp ? [{
     title: `About ${systemName}`,
     app: aboutApp,
-    event: 'focus'
+    event: 'app:focus'
   }] : []
 
   const app = apps.find(e => e.name === currentApp)
@@ -168,8 +168,8 @@ export function Desktop(props) {
     ? app.menus.map(e => el(Menu, { title: e.title, items: e.items }))
     : [el(Menu, { title: systemName, items: systemMenuItems })]
   const displayMenuItems = fullscreen
-    ? [{ title: 'Exit fullscreen', event: 'exit_fullscreen' }]
-    : [{ title: 'Fullscreen', event: 'enter_fullscreen' }]
+    ? [{ title: 'Exit fullscreen', event: 'sys:exit_fullscreen' }]
+    : [{ title: 'Fullscreen', event: 'sys:enter_fullscreen' }]
 
   return el(
     'desktop-host',
@@ -199,7 +199,7 @@ export function Desktop(props) {
             left: 20 + 100*(i % columns),
             top: 50 + 120 * Math.floor(i / columns)
           },
-          onClick: () => signals.trigger(app.name, 'focus', null)
+          onClick: () => signals.trigger(app.name, 'app:focus', null)
         }),
       ),
       apps
@@ -220,7 +220,7 @@ export function Desktop(props) {
               onFocus: () => setCurrentApp(app.name),
               onClose: ({ pos }) => {
                 app.pos = pos
-                signals.trigger(app.name, 'quit')
+                signals.trigger(app.name, 'app:quit')
               },
             },
             el(app.component, app.args),
@@ -240,7 +240,7 @@ export function Desktop(props) {
                 focused: currentApp === app.name,
                 onFocus: () => setCurrentApp(app.name),
                 onClose: () => {
-                  signals.trigger(app.name, 'hide_child_window', win.name)
+                  signals.trigger(app.name, 'app:hide_child_window', win.name)
                 },
               },
               el(win.component, win.args),
@@ -288,7 +288,7 @@ function Window({
     window.addEventListener('mouseup', handleMouseUp)
     return () => window.removeEventListener('mouseup', handleMouseUp)
   }, [])
-  useEvent(app, 'error', (err) => {
+  useEvent(app, 'app:error', (err) => {
     setError(err)
   })
 
