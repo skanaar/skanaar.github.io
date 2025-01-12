@@ -9,7 +9,7 @@ export class App {
     this.height = -1
     this.pos = {
       x: 30 + Math.floor(Math.random() * window.innerWidth/3),
-      y: 30 + Math.floor(Math.random() * window.innerHeight/2),
+      y: 30 + Math.floor(Math.random() * window.innerHeight/4),
     }
     this.sizing = 'autosize'
     this.menus = [
@@ -101,9 +101,12 @@ const signals = {
 
 export function Desktop(props) {
   const { systemMenuLabel, systemName, aboutApp, columns = 3, apps } = props
+  const { startupApps = [] } = props
   const [currentApp, setCurrentApp] = React.useState(null)
   const [fullscreen, setFullscreen] = React.useState(false)
-  const [openApps, setOpenApps] = React.useState({})
+  const [openApps, setOpenApps] = React.useState(
+    Object.fromEntries(startupApps.map(app => [app, true]))
+  )
 
   const childWindow = (app, window) =>
     apps.find(e => e.name === app).childWindows.find(e => e.name == window)
