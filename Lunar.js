@@ -1,6 +1,6 @@
 import { el, App, useEvent } from './assets/system.js'
 
-export const app = new App('Lunar', Lunar, 'globe.svg')
+export const app = new App('Lunar', Lunar, 'moon.svg')
 app.addToAppMenu({ title: 'Restart', event: 'restart' })
 
 export function Lunar() {
