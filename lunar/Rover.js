@@ -1,9 +1,10 @@
 import { Vec4, Translate, vset } from './math.js'
 import { vnormalize, vdot, vcross, vdiff, vmag, vadd, vmult } from './math.js'
 
-const gravity = 100
-const tirePressure = 10_000
-const friction = 100
+const gravity = 300
+const tirePressure = 20_000
+const tireGrip = 100
+const groundFriction = 0.99
 const wheelBase = 0.75
 
 export class Wheel {
@@ -29,6 +30,7 @@ export class Wheel {
       const forward = vnormalize(vcross(vcross(normal, this.dir), normal))
       this.force = vadd(this.force, vmult(drivingForce, forward))
       this.#transversalFriction(normal)
+      this.#longitudinalFriction(normal)
     }
     var speedForward = vdot(this.dir, this.vel)
     this.rotation -= dt*speedForward*2 / (Math.PI * this.r)
@@ -36,7 +38,10 @@ export class Wheel {
   #transversalFriction(normal) {
     const transversal = vnormalize(vcross(normal, this.dir))
     const sliding = vdot(transversal, this.vel)
-    this.force = vadd(this.force, vmult(-sliding*friction, transversal))
+    this.force = vadd(this.force, vmult(-sliding*tireGrip, transversal))
+  }
+  #longitudinalFriction(normal) {
+    this.vel = vmult(groundFriction, this.vel)
   }
   turn([x,,z], angle) {
     this.turnAngle = Math.atan2(z,x) + angle
@@ -45,7 +50,7 @@ export class Wheel {
     this.dir = Vec4(dx, 0, dz)
   }
   apply(dt) {
-    this.vel = vmult(0.99, vadd(this.vel, vmult(dt/this.mass, this.force)))
+    this.vel = vadd(this.vel, vmult(dt/this.mass, this.force))
     this.pos = vadd(this.pos, vmult(dt, this.vel))
     vset(this.force, 0, 0, 0)
   }

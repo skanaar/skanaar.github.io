@@ -37,8 +37,9 @@ export function Engine(canvas, vertexSrc, fragmentSrc) {
     if (input.isPressed('r')) config.viewDistance *= 0.95
     if (input.isPressed('f')) config.viewDistance *= 1/0.95
     if (input.isPressed('w')) rover.drive += 0.1
-    if (input.isPressed('a')) rover.turn += 0.01
-    if (input.isPressed('d')) rover.turn -= 0.01
+    if (input.isPressed('s')) rover.drive *= 0.9
+    if (input.isPressed('a')) rover.turn += 0.005
+    if (input.isPressed('d')) rover.turn -= 0.005
     rover.drive *= 0.98
     rover.turn *= 0.98
 
