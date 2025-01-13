@@ -21,11 +21,11 @@ export class Wheel {
   simulate(terrain, drivingForce, dt) {
     this.force[1] += gravity*this.mass
     const [x,y,z] = this.pos
-    const h = terrain.valueAt(x, z) - y - this.r*.8
-    this.isTouching = h < 0
+    const dh = terrain.valueAt(x, z) - y - this.r*.9
+    this.isTouching = dh < 0
     if (this.isTouching) {
       const normal = terrain.normal(x, z)
-      this.force = vadd(this.force, vmult(-h*tirePressure, normal))
+      this.force = vadd(this.force, vmult(dh*dh*tirePressure, normal))
       const forward = vnormalize(vcross(vcross(normal, this.dir), normal))
       this.force = vadd(this.force, vmult(drivingForce, forward))
       this.#transversalFriction(normal)
@@ -55,8 +55,9 @@ export class Wheel {
 }
 
 export class Spring {
+  springConstant = 500
+  dampening = 50
   constructor(a, b, distance) {
-    this.springConstant = 200
     this.a = a
     this.b = b
     this.distance = distance
@@ -64,9 +65,14 @@ export class Spring {
   simulate(dt) {
     var diff = vdiff(this.a.pos, this.b.pos)
     var d = vmag(diff)
+    var dir = vmult(1/d, diff)
+    var speed = vdot(vdiff(this.a.vel, this.b.vel), dir)
     var f = this.springConstant * (d - this.distance)
-    this.a.force = vadd(this.a.force, vmult(-f, diff))
-    this.b.force = vadd(this.b.force, vmult( f, diff))
+    this.a.force = vadd(this.a.force, vmult(-f, dir))
+    this.b.force = vadd(this.b.force, vmult( f, dir))
+    // spring dampening
+    this.a.force = vadd(this.a.force, vmult(-this.dampening * speed, dir))
+    this.b.force = vadd(this.b.force, vmult( this.dampening * speed, dir))
   }
 }
 
