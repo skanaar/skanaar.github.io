@@ -19,7 +19,7 @@ export function Engine(canvas, vertexSrc, fragmentSrc) {
   const wheel = ctx.prepareModel(LatheModel(12, .05, [
     [4,0],[8,-5],[10,-3],[10,3],[8,5],[4,0]
   ]))
-  const terrain = Terrain(256, { craters: 30, height: 10, scale: 2 })
+  const terrain = Terrain(256, { craters: 70, height: 10, scale: 1.75 })
   const landscape = ctx.prepareModel(LandscapeModel(terrain, 256))
   const rover = new Rover()
 

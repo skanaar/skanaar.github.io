@@ -43,14 +43,14 @@ export function Terrain(res, { craters, height, scale }){
     x = Math.round(x)
     y = Math.round(y)
     r = Math.round(r)
-    var centerHeight = get(terrain, x, y)
+    var centerHeight = get(terrain, x, y) + height/3
     for (var i = -r; i < r; i++) {
       for (var j = -r; j < r; j++) {
         var coord = Math.sqrt(i*i+j*j) / r
         if (coord>1 || j+y<1 || j+y>res-1 || i+x<1 || i+x>res-1) continue
         var offset = -craterOffset(height, coord)
         var value = get(terrain, x+i, y+j)
-        var smoothness = 0.75 + 0.25*coord
+        var smoothness = 0.97 + 0.03*coord
         terrain[x+i][y+j] = offset +
           (smoothness)*value +
           (1-smoothness)*centerHeight
@@ -72,8 +72,8 @@ export function Terrain(res, { craters, height, scale }){
   }
 
   for (var c = 0; c<craters; c++){
-    var size = scale * 20 * Math.pow(rand(0.5,1), 2)
-    var depth = height * 0.05 * size * rand(0.02,0.2)
+    var size = 25 * Math.pow(rand(0.3,1), 2)
+    var depth = height * 0.1 * size * rand(0.02,0.2)
     addCrater(terrain, rand(-10,res+10), rand(-10,res+10), size, depth)
   }
 
