@@ -29,8 +29,8 @@ export class Input {
     return this.#keys[key]
   }
 
-  get up() { return this.#keys['ArrowUp'] || this.#keys['w'] }
-  get down() { return this.#keys['ArrowDown'] || this.#keys['s'] }
-  get left() { return this.#keys['ArrowLeft'] || this.#keys['a'] }
-  get right() { return this.#keys['ArrowRight'] || this.#keys['d'] }
+  get up() { return this.#keys['ArrowUp'] }
+  get down() { return this.#keys['ArrowDown'] }
+  get left() { return this.#keys['ArrowLeft'] }
+  get right() { return this.#keys['ArrowRight'] }
 }

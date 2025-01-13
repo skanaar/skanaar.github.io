@@ -46,9 +46,9 @@ void main(void) {
     vec3 normal = normalize(vNormal.xyz + .4 * (bump - vec3(.5,.5,.5)));
     float lux = dot(-normal, vSun.xyz);
     float shadow =
-        (length(vPos.xz - vShadower1.xz) > .5 ? 1. : .5) *
-        (length(vPos.xz - vShadower2.xz) > .5 ? 1. : .5) *
-        (length(vPos.xz - vShadower3.xz) > .5 ? 1. : .5) *
-        (length(vPos.xz - vShadower4.xz) > .5 ? 1. : .5);
+        min(1., smoothstep(0., 1., 1.5 * length(vPos.xz - vShadower1.xz))) *
+        min(1., smoothstep(0., 1., 1.5 * length(vPos.xz - vShadower2.xz))) *
+        min(1., smoothstep(0., 1., 1.5 * length(vPos.xz - vShadower3.xz))) *
+        min(1., smoothstep(0., 1., 1.5 * length(vPos.xz - vShadower4.xz)));
     gl_FragColor = vec4(lux*shadow, lux*shadow, lux*shadow, 1);
 }

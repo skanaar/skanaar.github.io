@@ -36,6 +36,11 @@ export function Engine(canvas, vertexSrc, fragmentSrc) {
     if (input.right) yaw -= 0.002 * delta
     if (input.isPressed('r')) config.viewDistance *= 0.95
     if (input.isPressed('f')) config.viewDistance *= 1/0.95
+    if (input.isPressed('w')) rover.drive += 0.1
+    if (input.isPressed('a')) rover.turn += 0.01
+    if (input.isPressed('d')) rover.turn -= 0.01
+    rover.drive *= 0.98
+    rover.turn *= 0.98
 
     if (delta > 0 && delta < 100) {
       rover.simulate(terrain, delta/10000)
@@ -49,8 +54,8 @@ export function Engine(canvas, vertexSrc, fragmentSrc) {
     const objects = [
       ...ws.map(e => ({
         model: wheel,
-        transform: Identity(),
-        translate: mmult(e.transform, RotateZ(e.rotation)),
+        transform: mmults(RotateY(e.turnAngle), RotateZ(e.rotation)),
+        translate: e.transform,
         shadow: Vec4(...e.pos),
       })),
       { model: landscape, transform: Identity(), translate: Identity() },

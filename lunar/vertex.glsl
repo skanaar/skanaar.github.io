@@ -20,8 +20,8 @@ varying lowp vec4 vShadower3;
 varying lowp vec4 vShadower4;
 
 void main(void) {
-    gl_Position = uProjection * uModelView * uModelTranslation * aVertex;
-    vPos = uModelView * uModelTranslation * aVertex;
+    gl_Position = uProjection * uModelTranslation * uModelView * aVertex;
+    vPos = uModelTranslation * uModelView * aVertex;
     vNormal = uModelView * aNormal;
     vSun = uSun;
     vShadower1 = uModelView * uModelTranslation * uShadower1;
