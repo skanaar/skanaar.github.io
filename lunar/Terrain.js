@@ -1,12 +1,6 @@
 import { ImprovedNoise } from './ImprovedNoise.js'
 import { Vec4, vdiff, vcross, vnormalize } from './math.js'
 
-var perlin = ImprovedNoise()
-function terrainHeightAt(x, y, sampleSize, height){
-  const levelOfDetail = Math.round(8 - Math.log(sampleSize) / Math.LN2)
-  return height*perlin(x, y, 128, levelOfDetail)
-}
-
 function array(count, value) {
   return [...new Array(count)].map((_, i) => value)
 }
@@ -35,9 +29,15 @@ function craterOffset(height, x){
   return height*(Math.pow(Math.sin(x*x*3),2) + (x*x-1)*1.1)
 }
 
-export function Terrain(res, { craters, height, scale }){
+var perlin = ImprovedNoise()
+
+export function Terrain(res, { noiseFalloff = 0.5, craters, height, scale }){
   const subdivs = Math.round(Math.log2(res))
   if (2**subdivs != res) throw new Error('resolution must be a power of 2')
+
+  function terrainHeightAt(x, y, height){
+    return height*perlin(x, y, 128, 8, 1/noiseFalloff)
+  }
 
   function addCrater(terrain, x, y, r, height){
     x = Math.round(x)
@@ -66,14 +66,14 @@ export function Terrain(res, { craters, height, scale }){
 
   for (var x = 0; x < res; x++) {
     for (var y = 0; y < res; y++) {
-      const value = terrainHeightAt(scale*x, scale*y, 1, height)
+      const value = terrainHeightAt(scale*x, scale*y, height)
       terrain[x][y] = value
     }
   }
 
   for (var c = 0; c<craters; c++){
     var size = 25 * Math.pow(rand(0.3,1), 2)
-    var depth = height * 0.1 * size * rand(0.02,0.2)
+    var depth = size * rand(0.02,0.2)
     addCrater(terrain, rand(-10,res+10), rand(-10,res+10), size, depth)
   }
 

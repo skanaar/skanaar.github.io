@@ -40,6 +40,10 @@ float fbm(vec3 p) {
     return value;
 }
 
+float map(float value, float min1, float max1, float min2, float max2) {
+  return min2 + (value - min1) * (max2 - min2) / (max1 - min1);
+}
+
 void main(void) {
     float falloff = step(.9, 1.-length(vPos.xz)/50.);
     vec3 bump = vec3(fbm(8. * vPos.xyz), fbm(8. * vPos.xyz + vec3(25.1,0.,0.)), 0.);
@@ -50,5 +54,6 @@ void main(void) {
         min(1., smoothstep(0., 1., 1.5 * length(vPos.xz - vShadower2.xz))) *
         min(1., smoothstep(0., 1., 1.5 * length(vPos.xz - vShadower3.xz))) *
         min(1., smoothstep(0., 1., 1.5 * length(vPos.xz - vShadower4.xz)));
-    gl_FragColor = vec4(lux*shadow, lux*shadow, lux*shadow, 1);
+    float tex = map(cos(vPos.y*.5), -1., 1., .7, 1.);
+    gl_FragColor = vec4(tex*lux*shadow, tex*lux*shadow, tex*lux*shadow, 1);
 }

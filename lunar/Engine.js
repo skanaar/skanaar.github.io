@@ -1,5 +1,5 @@
 import { Identity, mmult, Perspective, RotateX, RotateY, RotateZ, Translate } from './math.js'
-import { Vec4, vnormalize, mmults, vadd, vmult } from './math.js'
+import { Vec4, vnormalize, mmults, vdiff, vadd, vmult } from './math.js'
 import { Terrain } from './Terrain.js'
 import { LandscapeModel } from './LandscapeModel.js'
 import { LatheModel } from './LatheModel.js'
@@ -11,7 +11,7 @@ export function Engine(canvas, vertexSrc, fragmentSrc) {
   const config = {
     viewDistance: 10
   }
-  let yaw = 0
+  let yaw = 1.97
   let pitch = 2.75
   const input = new Input()
   const gl = canvas.getContext('webgl2')
@@ -19,9 +19,14 @@ export function Engine(canvas, vertexSrc, fragmentSrc) {
   const wheel = ctx.prepareModel(LatheModel(12, .05, [
     [4,0],[8,-5],[10,-3],[10,3],[8,5],[4,0]
   ]))
-  const terrain = Terrain(256, { craters: 70, height: 10, scale: 1.75 })
+  const terrain = Terrain(256, {
+    noiseFalloff: 0.4,
+    craters: 70,
+    height: 20,
+    scale: 0.75
+  })
   const landscape = ctx.prepareModel(LandscapeModel(terrain, 256))
-  const rover = new Rover()
+  const rover = new Rover(terrain.valueAt(0, 0) - 1)
 
   let animationCallback = null
   let previous = null
@@ -29,25 +34,31 @@ export function Engine(canvas, vertexSrc, fragmentSrc) {
 
   function render(millis) {
     const delta = (previous != null) ? millis - previous : 0
-    previous = millis
     if (input.up) pitch -= 0.002 * delta
     if (input.down) pitch += 0.002 * delta
     if (input.left) yaw += 0.002 * delta
     if (input.right) yaw -= 0.002 * delta
-    if (input.isPressed('r')) config.viewDistance *= 0.95
-    if (input.isPressed('f')) config.viewDistance *= 1/0.95
-    if (input.isPressed('w')) rover.drive += 0.1
-    if (input.isPressed('s')) rover.drive *= 0.9
-    if (input.isPressed('a')) rover.turn += 0.005
-    if (input.isPressed('d')) rover.turn -= 0.005
-    rover.drive *= 0.98
+    if (input.isPressed('r')) config.viewDistance *= 0.98
+    if (input.isPressed('f')) config.viewDistance *= 1/0.98
+    if (input.isPressed('w')) rover.driveDirection = 1
+    else if (input.isPressed('s')) rover.driveDirection = -1
+    else rover.driveDirection = 0
+    if (input.isPressed('a')) rover.turn += 0.008
+    if (input.isPressed('d')) rover.turn -= 0.008
     rover.turn *= 0.98
 
     if (delta > 0 && delta < 100) {
-      rover.simulate(terrain, delta/10000)
-      rover.simulate(terrain, delta/10000)
-      rover.simulate(terrain, delta/10000)
+      rover.simulateForces(terrain, delta/1000)
+      if (millis%200 < previous%200)
+        engine.onDebugData({
+          drive: rover.drive,
+          driveDirection: rover.driveDirection,
+          ...rover.wheels[1],
+          force: [...rover.wheels[1].force]
+        })
+      rover.apply(delta/1000)
     }
+    previous = millis
 
     focus = vadd(vmult(0.98, focus), vmult(0.02, rover.wheels[0].pos))
 
@@ -57,7 +68,7 @@ export function Engine(canvas, vertexSrc, fragmentSrc) {
         model: wheel,
         transform: mmults(RotateY(e.turnAngle), RotateZ(e.rotation)),
         translate: e.transform,
-        shadow: Vec4(...e.pos),
+        shadow: e.pos,
       })),
       { model: landscape, transform: Identity(), translate: Identity() },
     ]
@@ -65,8 +76,9 @@ export function Engine(canvas, vertexSrc, fragmentSrc) {
     animationCallback = requestAnimationFrame(render)
   }
 
-  return {
+  const engine = {
     config,
+    onDebugData: () => {},
     start() {
       render(0)
     },
@@ -75,6 +87,8 @@ export function Engine(canvas, vertexSrc, fragmentSrc) {
       input.dispose()
     }
   }
+
+  return engine
 }
 //------------------------
 function drawScene(ctx, focus, objects, { viewDistance }, t, u) {
