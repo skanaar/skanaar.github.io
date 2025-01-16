@@ -5,8 +5,8 @@ const gravity = 1000
 const tirePressure = 40_000
 const tireGrip = 500
 const tyreDampening = 10
-const groundFriction = 0.99
-const maxDrive = 400
+const groundFriction = 2
+const maxDrive = 150
 
 export class Rover {
   turn = 0
@@ -54,6 +54,7 @@ export class Wheel {
   constructor(r, [x,y,z]) {
     this.mass = 1
     this.pos = Vec4(x,y,z)
+    this.prevPos = Vec4(x,y,z)
     this.force = Vec4(0,0,0)
     this.dir = Vec4(1,0,0)
     this.vel = Vec4(0,0,0)
@@ -68,7 +69,7 @@ export class Wheel {
   simulate(terrain, drivingForce, dt) {
     this.impulse(dt*gravity*this.mass, Vec4(0,1,0))
     const [x,y,z] = this.pos
-    const dh = terrain.valueAt(x, z) - y - this.r*.9
+    const dh = terrain.valueAt(x, z) - y - this.r
     this.isTouching = dh < 0
     if (this.isTouching) {
       const normal = terrain.normal(x, z)
@@ -82,8 +83,6 @@ export class Wheel {
         vset(this.force, 0,0,0)
       }
     }
-    var speedForward = vdot(this.dir, this.vel)
-    this.rotation -= dt*speedForward*2 / (Math.PI * this.r)
   }
   #transversalFriction(normal, dt) {
     const transversal = vnormalize(vcross(normal, this.dir))
@@ -91,7 +90,7 @@ export class Wheel {
     this.impulse(-dt*sliding*tireGrip, transversal)
   }
   #longitudinalFriction(normal, dt) {
-    this.vel = vmult(groundFriction, this.vel)
+    this.impulse(-dt*groundFriction, this.vel)
   }
   #tireDampening(normal, dt) {
     const speed = vdot(normal, this.vel)
@@ -106,8 +105,19 @@ export class Wheel {
     this.dir = Vec4(dx, 0, dz)
   }
   apply(dt) {
-    this.vel = vadd(this.vel, vmult(dt/this.mass, this.force))
-    this.pos = vadd(this.pos, vmult(dt, this.vel))
+    // verlet integration
+    let temp = this.pos
+    this.pos = vadd(
+      vdiff(vmult(2, this.pos), this.prevPos),
+      vmult(dt*dt/this.mass, this.force)
+    )
+    this.prevPos = temp
+    const step = vdiff(this.pos, this.prevPos)
+    this.vel = vmult(1/dt, step)
+    var stepLength = vdot(this.dir, step)
+    // wheel rotation
+    this.rotation -= stepLength*2 / (Math.PI * this.r)
+    // reset forces
     vset(this.force, 0, 0, 0)
   }
   get transform() {
@@ -116,8 +126,8 @@ export class Wheel {
 }
 
 export class Spring {
-  static springConstant = 500
-  static dampening = 20
+  static springConstant = 2000
+  static dampening = 80
   constructor(a, b, distance) {
     this.a = a
     this.b = b
@@ -129,10 +139,10 @@ export class Spring {
     var dir = vmult(1/d, diff)
     var speed = vdot(vdiff(this.a.vel, this.b.vel), dir)
     var f = Spring.springConstant * (d - this.distance)
-    this.a.force = vadd(this.a.force, vmult(-f, dir))
-    this.b.force = vadd(this.b.force, vmult( f, dir))
+    this.a.impulse(-dt*f, dir)
+    this.b.impulse(+dt*f, dir)
     // spring dampening
-    this.a.force = vadd(this.a.force, vmult(-Spring.dampening * speed, dir))
-    this.b.force = vadd(this.b.force, vmult( Spring.dampening * speed, dir))
+    this.a.impulse(-dt*Spring.dampening * speed, dir)
+    this.b.impulse(+dt*Spring.dampening * speed, dir)
   }
 }

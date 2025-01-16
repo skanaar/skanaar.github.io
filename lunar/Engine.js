@@ -60,7 +60,8 @@ export function Engine(canvas, vertexSrc, fragmentSrc) {
     }
     previous = millis
 
-    focus = vadd(vmult(0.98, focus), vmult(0.02, rover.wheels[0].pos))
+    const glue = 1.0
+    focus = vadd(vmult(1-glue, focus), vmult(glue, rover.wheels[0].pos))
 
     const ws = rover.wheels
     const objects = [
