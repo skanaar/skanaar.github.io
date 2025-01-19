@@ -1,9 +1,9 @@
 import { Vec4, Translate, vset } from './math.js'
 import { vnormalize, vdot, vcross, vdiff, vmag, vadd, vmult } from './math.js'
 
-const gravity = 1000
-const tirePressure = 40_000
-const tireGrip = 500
+const gravity = 300
+const tirePressure = 20_000
+const tireGrip = 100
 const tyreDampening = 10
 const groundFriction = 2
 const maxDrive = 150
@@ -17,7 +17,8 @@ export class Rover {
     let b = new Wheel(0.5, [wheelBase,y,-wheelBase])
     let c = new Wheel(0.5, [-wheelBase,y,wheelBase])
     let d = new Wheel(0.5, [-wheelBase,y,-wheelBase])
-    this.wheels = [a,b,c,d]
+    let cockpit = new Wheel(0.5, [0,y-wheelBase,0])
+    this.wheels = [a,b,c,d,cockpit]
     this.springs = [
       new Spring(a, b, 2*wheelBase),
       new Spring(c, d, 2*wheelBase),
@@ -25,6 +26,10 @@ export class Rover {
       new Spring(b, d, 2*wheelBase),
       new Spring(a, d, 2*wheelBase*1.414),
       new Spring(b, c, 2*wheelBase*1.414),
+      new Spring(a, cockpit, 2*wheelBase),
+      new Spring(b, cockpit, 2*wheelBase),
+      new Spring(c, cockpit, 2*wheelBase),
+      new Spring(d, cockpit, 2*wheelBase),
     ]
   }
   simulateForces(terrain, dt) {
@@ -116,7 +121,7 @@ export class Wheel {
     this.vel = vmult(1/dt, step)
     var stepLength = vdot(this.dir, step)
     // wheel rotation
-    this.rotation -= stepLength*2 / (Math.PI * this.r)
+    this.rotation -= stepLength / (Math.PI * this.r)
     // reset forces
     vset(this.force, 0, 0, 0)
   }

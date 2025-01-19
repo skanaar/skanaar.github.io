@@ -33,11 +33,11 @@ export function Engine(canvas, vertexSrc, fragmentSrc) {
   let focus = Vec4(0,0,0)
 
   function render(millis) {
-    const delta = (previous != null) ? millis - previous : 0
-    if (input.up) pitch -= 0.002 * delta
-    if (input.down) pitch += 0.002 * delta
-    if (input.left) yaw += 0.002 * delta
-    if (input.right) yaw -= 0.002 * delta
+    const delta = (previous != null) ? (millis - previous)/1000 : 0
+    if (input.up) pitch -= 2. * delta
+    if (input.down) pitch += 2. * delta
+    if (input.left) yaw += 2. * delta
+    if (input.right) yaw -= 2. * delta
     if (input.isPressed('r')) config.viewDistance *= 0.98
     if (input.isPressed('f')) config.viewDistance *= 1/0.98
     if (input.isPressed('w')) rover.driveDirection = 1
@@ -47,8 +47,8 @@ export function Engine(canvas, vertexSrc, fragmentSrc) {
     if (input.isPressed('d')) rover.turn -= 0.008
     rover.turn *= 0.98
 
-    if (delta > 0 && delta < 100) {
-      rover.simulateForces(terrain, delta/1000)
+    if (delta > 0 && delta < 0.1) {
+      rover.simulateForces(terrain, delta*1.)
       if (millis%200 < previous%200)
         engine.onDebugData({
           drive: rover.drive,
@@ -56,7 +56,7 @@ export function Engine(canvas, vertexSrc, fragmentSrc) {
           ...rover.wheels[1],
           force: [...rover.wheels[1].force]
         })
-      rover.apply(delta/1000)
+      rover.apply(delta)
     }
     previous = millis
 
