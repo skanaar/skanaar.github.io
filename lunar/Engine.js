@@ -6,6 +6,7 @@ import { LatheModel } from './LatheModel.js'
 import { GLContext } from './GLContext.js'
 import { Input } from './Input.js'
 import { Rover } from './Rover.js'
+import { ChassiModel } from './MeshModel.js'
 
 export function Engine(canvas, vertexSrc, fragmentSrc) {
   const config = {
@@ -19,6 +20,7 @@ export function Engine(canvas, vertexSrc, fragmentSrc) {
   const wheel = ctx.prepareModel(LatheModel(12, .05, [
     [4,0],[8,-5],[10,-3],[10,3],[8,5],[4,0]
   ]))
+  const chassiModel = ctx.prepareModel(ChassiModel())
   const terrain = Terrain(256, {
     noiseFalloff: 0.4,
     craters: 70,
@@ -49,21 +51,19 @@ export function Engine(canvas, vertexSrc, fragmentSrc) {
 
     if (delta > 0 && delta < 0.1) {
       rover.simulateForces(terrain, delta*1.)
-      if (millis%200 < previous%200)
-        engine.onDebugData({
-          drive: rover.drive,
-          driveDirection: rover.driveDirection,
-          ...rover.wheels[1],
-          force: [...rover.wheels[1].force]
-        })
+      if (millis%200 < previous%200) engine.onDebugData(getDebugInfo(rover))
       rover.apply(delta)
     }
     previous = millis
 
     const glue = 1.0
-    focus = vadd(vmult(1-glue, focus), vmult(glue, rover.wheels[0].pos))
+    const roverCenter = vmult(0.25, rover.wheels.map(e => e.pos).reduce(vadd))
+    focus = vadd(vmult(1-glue, focus), vmult(glue, roverCenter))
 
     const ws = rover.wheels
+    const forward = rover.forward
+    const ry = Math.atan2(forward[2], forward[0])
+    const rz = Math.atan2(forward[1], forward[0])
     const objects = [
       ...ws.map(e => ({
         model: wheel,
@@ -71,6 +71,11 @@ export function Engine(canvas, vertexSrc, fragmentSrc) {
         translate: e.transform,
         shadow: e.pos,
       })),
+      {
+        model: chassiModel,
+        transform: mmults(RotateY(ry), RotateZ(-rz), RotateX(Math.PI/2)),
+        translate: rover.chassi.transform
+      },
       { model: landscape, transform: Identity(), translate: Identity() },
     ]
     drawScene(ctx, focus, objects, config, pitch, yaw)
@@ -90,6 +95,16 @@ export function Engine(canvas, vertexSrc, fragmentSrc) {
   }
 
   return engine
+}
+
+function getDebugInfo(rover) {
+  return {
+    drive: rover.drive,
+    driveDirection: rover.driveDirection,
+    forward: rover.forward,
+    ...rover.wheels[1],
+    force: [...rover.wheels[1].force]
+  }
 }
 //------------------------
 function drawScene(ctx, focus, objects, { viewDistance }, t, u) {

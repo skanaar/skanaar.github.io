@@ -4,8 +4,8 @@ import { vnormalize, vdot, vcross, vdiff, vmag, vadd, vmult } from './math.js'
 const gravity = 300
 const tirePressure = 20_000
 const tireGrip = 100
-const tyreDampening = 10
-const groundFriction = 2
+const tyreDampening = 20
+const groundFriction = 20
 const maxDrive = 150
 
 export class Rover {
@@ -17,8 +17,8 @@ export class Rover {
     let b = new Wheel(0.5, [wheelBase,y,-wheelBase])
     let c = new Wheel(0.5, [-wheelBase,y,wheelBase])
     let d = new Wheel(0.5, [-wheelBase,y,-wheelBase])
-    let cockpit = new Wheel(0.5, [0,y-wheelBase,0])
-    this.wheels = [a,b,c,d,cockpit]
+    this.chassi = new Wheel(0.5, [0,y-wheelBase,0])
+    this.wheels = [a,b,c,d]
     this.springs = [
       new Spring(a, b, 2*wheelBase),
       new Spring(c, d, 2*wheelBase),
@@ -26,26 +26,32 @@ export class Rover {
       new Spring(b, d, 2*wheelBase),
       new Spring(a, d, 2*wheelBase*1.414),
       new Spring(b, c, 2*wheelBase*1.414),
-      new Spring(a, cockpit, 2*wheelBase),
-      new Spring(b, cockpit, 2*wheelBase),
-      new Spring(c, cockpit, 2*wheelBase),
-      new Spring(d, cockpit, 2*wheelBase),
+      new Spring(a, this.chassi, 2*wheelBase),
+      new Spring(b, this.chassi, 2*wheelBase),
+      new Spring(c, this.chassi, 2*wheelBase),
+      new Spring(d, this.chassi, 2*wheelBase),
     ]
+  }
+  get forward() {
+    const [a,b,c,d] = this.wheels
+    let frontBoggie = vmult(0.5, vadd(a.pos, b.pos))
+    let backBoggie = vmult(0.5, vadd(c.pos, d.pos))
+    return vnormalize(vdiff(frontBoggie, backBoggie))
   }
   simulateForces(terrain, dt) {
     this.#turnWheelsWithBoggies(this.turn)
     for (let spring of this.springs) spring.simulate(dt)
     const drive = this.driveDirection * maxDrive
     for (let wheel of this.wheels) wheel.simulate(terrain, drive, dt)
+    this.chassi.simulate(terrain, drive, dt)
   }
   apply(dt) {
     for (let wheel of this.wheels) wheel.apply(dt)
+    this.chassi.apply(dt)
   }
   #turnWheelsWithBoggies(turn) {
     const [a,b,c,d] = this.wheels
-    var frontBoggie = vmult(0.5, vadd(a.pos, b.pos))
-    var backBoggie = vmult(0.5, vadd(c.pos, d.pos))
-    var dir = vnormalize(vdiff(frontBoggie, backBoggie))
+    var dir = this.forward
     var leftFactor = turn < 0 ? 0.5 : 1
     var rightFactor = turn > 0 ? 0.5 : 1
     a.turn(dir,  leftFactor  * turn)
