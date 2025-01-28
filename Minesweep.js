@@ -39,12 +39,19 @@ function openCell(field, i, j) {
       if (neighbor.open === false) openCell(field, x, y)
 }
 
+const gameTypes = [
+  { name: '5 ✕ 5', arg: { size: 5, mines: 4 } },
+  { name: '5 ✕ 5 hard', arg: { size: 5, mines: 5 } },
+  { name: '7 ✕ 7', arg: { size: 7, mines: 8 } },
+  { name: '7 ✕ 7 hard', arg: { size: 7, mines: 10 } },
+  { name: '10 ✕ 10', arg: { size: 10, mines: 15 } },
+  { name: '10 ✕ 10 hard', arg: { size: 10, mines: 20 } },
+]
+
 export const app = new App('Minesweep', Minesweep, 'bomb.svg')
-app.addToAppMenu(
-  { title: 'Start 5x5 game', event: 'newgame', arg: { size:5, mines:4 } },
-  { title: 'Start 7x7 game', event: 'newgame', arg: { size:7, mines:10 } },
-  { title: 'Start 10x10 game', event: 'newgame', arg: { size:10, mines:20 } },
-)
+app.addToAppMenu(...gameTypes.map((e) => (
+  { title:`Start ${e.name} game`, event:'newgame', arg:e.arg }
+)))
 
 export function Minesweep() {
   const [field, setField] = React.useState(null)
@@ -68,13 +75,9 @@ export function Minesweep() {
       el(
         'grid-2col',
         {},
-        el(
-          'select',
-          { ref: sizePicker },
-          el('option', { value: '{"size":5, "mines":4}' }, '5 ✕ 5'),
-          el('option', { value: '{"size":7, "mines":10}' }, '7 ✕ 7'),
-          el('option', { value: '{"size":10, "mines":20}' }, '10 ✕ 10'),
-        ),
+        el('select', { ref: sizePicker }, ...gameTypes.map((e) =>
+          el('option', { value: JSON.stringify(e.arg) }, e.name)
+        )),
         el(Button, {
           onClick: () => startGame(JSON.parse(sizePicker.current.value))
         }, 'Start'),
