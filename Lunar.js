@@ -2,8 +2,8 @@ import { el, App, useEvent } from './assets/system.js'
 
 export const app = new App('Lunar', Lunar, 'moon.svg')
 app.addToAppMenu({ title: 'Restart', event: 'restart' },{
-  title: 'Show debug data',
-  event: 'show_child_window',
+  title: 'Show debug data...',
+  event: 'app:show_child_window',
   arg: 'Debug info'
 })
 app.addWindow('Debug info', DebugInfo, {

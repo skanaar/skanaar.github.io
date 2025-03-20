@@ -22,7 +22,7 @@ import { teapotPatches } from './raytracer/teapot.js'
 export const app = new App('RayTracer', RayTracer, 'aperture.svg')
 app.addToAppMenu({
   title: 'Show options...',
-  event: 'show_child_window',
+  event: 'app:show_child_window',
   arg: 'Options'
 })
 app.addMenu(
