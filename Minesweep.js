@@ -130,8 +130,19 @@ export function MineField({ field, disabled = false, onFailure, onSuccess }) {
       .every((cell) => cell.open || cell.item === 'mine')
   }
 
-  function clearCell(i, j) {
-    openCell(field, i, j)
+  function clickCell(i, j) {
+    const cell = field[i][j]
+    if (cell.open) {
+      let flagCount = 0
+      for (let { neighbor } of neighbors(field, i, j))
+        if (neighbor.flag) flagCount += 1
+      if (flagCount === cell.item) {
+        for (let { neighbor, x, y } of neighbors(field, i, j))
+          if (!neighbor.open && !neighbor.flag) clickCell(x, y)
+      }
+    } else {
+      openCell(field, i, j)
+    }
     if (field[i][j].item === 'mine') onFailure?.()
     else if (isFieldCleared()) onSuccess?.()
     render()
@@ -167,9 +178,9 @@ export function MineField({ field, disabled = false, onFailure, onSuccess }) {
             },
             onClick: () => {
               if (disabled) return
-              clearCell(i, j)
+              clickCell(i, j)
             },
-            disabled: cell.open,
+            open: cell.open,
           },
           el(CellSymbol, { cell }),
         ),
@@ -220,11 +231,11 @@ mine-field.disabled button {
   border-color: #888;
   color: #888;
 }
-mine-field:not(.disabled) button:hover:not([disabled]) {
+mine-field:not(.disabled) button:hover:not([disabled]):not([open]) {
   background-color: #000;
   color: #fff;
 }
-mine-field button:disabled {
+mine-field button[open] {
   color: inherit;
   border-color: transparent;
 }
