@@ -119,6 +119,7 @@ export function Minesweep() {
 
 export function MineField({ field, disabled = false, onFailure, onSuccess }) {
   const [, setCounter] = React.useState(0)
+  const isContextClick = React.useRef(false)
 
   function render() {
     setCounter((i) => i + 1)
@@ -175,8 +176,14 @@ export function MineField({ field, disabled = false, onFailure, onSuccess }) {
               if (disabled) return
               event.preventDefault()
               flagCell(cell)
+              // safari fires both contextmenu and click events
+              isContextClick.current = true
+              setTimeout(() => {
+                isContextClick.current = false
+              }, 200)
             },
             onClick: () => {
+              if (isContextClick.current) return
               if (disabled) return
               clickCell(i, j)
             },
