@@ -82,6 +82,7 @@ export function Minesweep() {
           onClick: () => startGame(JSON.parse(sizePicker.current.value))
         }, 'Start'),
       ),
+      el('grid-field', { text: 'huhu' })
     )
 
   if (state === 'success')
@@ -258,3 +259,45 @@ grid-2col {
   margin: 5px 0;
 }
 `
+
+function recursiveAppend(el, childOrArray) {
+	if (childOrArray instanceof HTMLElement)
+		el.appendChild(childOrArray)
+	else if (Array.isArray(childOrArray))
+		for (let child of childOrArray)
+			recursiveAppend(el, child)
+	else if (childOrArray instanceof HTMLComponent)
+		el.appendChild(childOrArray.element)
+}
+
+function h(type, attr, ...children) {
+	let el = document.createElement(type)
+	if (attr) {
+		for (let [key, value] of Object.entries(attr)) {
+			if (key === 'class') { key = 'className' }
+			else if (key === 'text') { key = 'textContent' }
+			el[key] = value
+		}
+	}
+	recursiveAppend(el, children)
+	return el
+}
+
+customElements.define('grid-field', class extends HTMLElement {
+  static observedAttributes = ['text']
+  static style = `
+    display: grid
+  `
+  constructor() { super() }
+  connectedCallback() {
+    const dom = h('div', { text: this.getAttribute('text') })
+    this.appendChild(dom)
+    this.style = Object.getPrototypeOf(this).style
+  }
+  disconnectedCallback() {
+    console.log('Custom element removed from page.')
+  }
+  attributeChangedCallback(name, oldValue, newValue) {
+    console.log(`Attribute ${name} has changed.`, oldValue, newValue)
+  }
+})
