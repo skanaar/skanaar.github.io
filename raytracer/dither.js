@@ -28,7 +28,7 @@ export class FloydSteinbergDitherer {
     this.errorBuffer = [new Array(size).fill(0), new Array(size).fill(0)]
     return generateRowByRowCoordinates(size)
   }
-  apply(value, { x: i, y: j }) {
+  apply(value, [i, j]) {
     if (i === 0){
       let [a, b] = this.errorBuffer
       this.errorBuffer = [b, a.map(() => 0)]

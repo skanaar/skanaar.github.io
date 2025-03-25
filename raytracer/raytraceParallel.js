@@ -1,4 +1,8 @@
-let chunkSize = 16
+// 7452
+// 7546
+// 7496
+
+let chunkSize = 256
 
 export function raytraceParallel({ canvas, size, maxDepth, scene, ditherer }) {
   let { promise, resolve } = Promise.withResolvers()
@@ -18,10 +22,10 @@ export function raytraceParallel({ canvas, size, maxDepth, scene, ditherer }) {
   function onComplete() {
     resolve({ duration: performance.now() - start })
     let imgdata = ctx.createImageData(size, size)
-    for (let { x, y } of ditherer.coordinates(size)) {
+    for (let [x,y] of ditherer.coordinates(size)) {
       let j = y % chunkSize
       let bright = chunks[Math.floor((y) / chunkSize)].data[4 * (x + j*size)]
-      let value = Math.floor(ditherer.apply(bright/255, { x, y }) * 255)
+      let value = Math.floor(ditherer.apply(bright/255, [x,y]) * 255)
       let offset = (x + y*size)*4
       imgdata.data[offset] = value
       imgdata.data[offset + 1] = value
@@ -34,6 +38,7 @@ export function raytraceParallel({ canvas, size, maxDepth, scene, ditherer }) {
   for (let i = 0; i < chunkCount; i++) {
     const worker = new Worker('/raytracer/raytrace.worker.js', {type:'module'})
     worker.onmessage = (e) => {
+      console.log('worker:message', e.data)
       if (e.data.progress == 'row_complete') {
         progress += 1/size
         ctx.fillRect(size/2-20, size/2-2, 40*progress, 4)

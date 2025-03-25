@@ -25,6 +25,7 @@ function raytrace({ area, size, maxDepth, scene }) {
   let camera = Vec(128.0, 128.0, 512.0)
 
   for (let j = 0; j < height; j++) {
+    console.log('worker:row', j)
     for (let i = 0; i < width; i++) {
       let screenPoint = Vec(i+x, j+y, 0)
       let ray = norm(diff(screenPoint, camera))

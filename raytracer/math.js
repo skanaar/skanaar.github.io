@@ -1,89 +1,91 @@
 export const EPSILON = 0.001
+export function Vec(x, y, z) {
+  const output = new Float32Array(3)
+  output[0] = x
+  output[1] = y
+  output[2] = z
+  return output
+}
 
-export const Vec = (x, y, z) => ({ x, y, z })
-export const add = (a, b) => Vec(a.x + b.x, a.y + b.y, a.z + b.z)
-export const diff = (a, b) => Vec(a.x - b.x, a.y - b.y, a.z - b.z)
-export const mult = (k, vec) => Vec(k*vec.x, k*vec.y, k*vec.z)
-export const dot = (a,b) => a.x*b.x + a.y*b.y + a.z*b.z
-export const cross = (a, b) =>
-  Vec(a.y*b.z-a.z*b.y, a.z*b.x-a.x*b.z, a.x*b.y-a.y*b.x)
-export const mag = (vec) =>
-  Math.sqrt(vec.x * vec.x + vec.y * vec.y + vec.z * vec.z)
-export const sqMag = (vec) => vec.x * vec.x + vec.y * vec.y + vec.z * vec.z
-export const div = (vec, k) => Vec(vec.x / k, vec.y / k, vec.z / k)
-export const norm = (v) => div(v, mag(v))
-export const rotx = (a, { x, y, z }) => Vec(
+export var add = (a, b) => Vec(a[0]+b[0], a[1]+b[1], a[2]+b[2])
+export var diff = (a, b) => Vec(a[0]-b[0], a[1]-b[1], a[2]-b[2])
+export var dot = (a, b) => a[0]*b[0] + a[1]*b[1] + a[2]*b[2]
+export var mult = (k, vec) => Vec(k*vec[0], k*vec[1], k*vec[2])
+export var mag = v => Math.sqrt(dot(v, v))
+export var normalize = v => mult(1/mag(v), v)
+export var norm = v => mult(1/mag(v), v)
+export var cross = (a, b) => Vec(
+  a[1]*b[2] - a[2]*b[1],
+  a[2]*b[0] - a[0]*b[2],
+  a[0]*b[1] - a[1]*b[0]
+)
+
+export function vset(vec, x,y,z) { vec[0] = x; vec[1] = y; vec[2] = z }
+
+const Matrix = (elements) => new Float32Array(elements)
+export const Identity = () => Matrix([1,0,0,0, 0,1,0,0, 0,0,1,0, 0,0,0,1])
+export const Scale = (s) => Matrix([s,0,0,0, 0,s,0,0, 0,0,s,0, 0,0,0,s])
+export const Translate = (x,y,z) => Matrix([1,0,0,0, 0,1,0,0, 0,0,1,0, x,y,z,1])
+export const Ortho = () => Matrix([1,0,0,0,0,1,0,0,0,0,-1,0,0,0,0,1])
+const sin = (x) => Math.sin(x)
+const cos = (x) => Math.cos(x)
+export const rotx = (a, [x, y, z]) => Vec(
   x,
   Math.cos(a)*y - Math.sin(a)*z,
   Math.sin(a)*y + Math.cos(a)*z
 )
+export function RotateX(a) {
+  return Matrix([1,0,0,0, 0,cos(a),-sin(a),0, 0,sin(a),cos(a),0, 0,0,0,1])
+}
+export function RotateY(a) {
+  return Matrix([cos(a),0,sin(a),0, 0,1,0,0, -sin(a),0,cos(a),0, 0,0,0,1])
+}
+export function RotateZ(a) {
+  return Matrix([cos(a),-sin(a),0,0, sin(a),cos(a),0,0, 0,0,1,0, 0,0,0,1])
+}
+
+export function Perspective(fovy, aspect, near, far) {
+  const f = 1.0 / Math.tan(fovy / 2)
+  const nf = 1 / (near - far)
+  return Matrix([
+    f / aspect, 0, 0, 0,
+    0, f, 0, 0,
+    0, 0, far == Infinity ? -1 : (far + near) * nf, -1,
+    0, 0, far == Infinity ? -2 * near : 2 * far * near * nf, 0,
+  ])
+}
+
+export function mmult(a, b) {
+  var m = Matrix([0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0])
+  for (var i=0; i<4; i++) {
+    for (var j=0; j<4; j++) {
+      for (var k=0; k<4; k++) {
+        m[i+4*j] += a[i+4*k]*b[k+4*j]
+      }
+    }
+  }
+  return m
+}
+
+export function matrixStack(...matrixes) {
+  if (matrixes.length === 1) return matrixes[0]
+  if (matrixes.length === 2) return mmult(matrixes[0], matrixes[1])
+  return mmult(matrixes[0], matrixStack(...matrixes.slice(1)))
+}
 
 export function mapply(m, v) {
   return Vec(
-    m[0+4*0]*v.x + m[1+4*0]*v.y + m[2+4*0]*v.z + m[3+4*0]*1,
-    m[0+4*1]*v.x + m[1+4*1]*v.y + m[2+4*1]*v.z + m[3+4*1]*1,
-    m[0+4*2]*v.x + m[1+4*2]*v.y + m[2+4*2]*v.z + m[3+4*2]*1,
-    m[0+4*3]*v.x + m[1+4*3]*v.y + m[2+4*3]*v.z + m[3+4*3]*1,
+    m[0+4*0]*v[0] + m[1+4*0]*v[1] + m[2+4*0]*v[2],
+    m[0+4*1]*v[0] + m[1+4*1]*v[1] + m[2+4*1]*v[2],
+    m[0+4*2]*v[0] + m[1+4*2]*v[1] + m[2+4*2]*v[2],
+    m[0+4*3]*v[0] + m[1+4*3]*v[1] + m[2+4*3]*v[2],
   )
 }
 
-export function matrixmult(a, b) {
-  let matrix = new Array(16).fill(0.0)
-  for (let y = 0; y < 4; y++)
-    for (let x = 0; x < 4; x++)
-      matrix[x+4*y] =
-        a[0+4*y]*b[x+4*0] +
-        a[1+4*y]*b[x+4*1] +
-        a[2+4*y]*b[x+4*2] +
-        a[3+4*y]*b[x+4*3]
-  return matrix
-}
-
-export function matrixStack(...matrices) {
-  return matrices.reduce((a,b) => matrixmult(a, b))
-}
-
-export const RotateX = (a) => [
-  1, 0, 0, 0,
-  0, Math.cos(a), -Math.sin(a), 0,
-  0, Math.sin(a), Math.cos(a), 0,
-  0, 0, 0, 1
-]
-export const RotateY = (a) => [
-  Math.cos(a), 0, -Math.sin(a), 0,
-  0, 1, 0, 0,
-  Math.sin(a), 0, Math.cos(a), 0,
-  0, 0, 0, 1
-]
-export const RotateZ = (a) => [
-  Math.cos(a), -Math.sin(a), 0, 0,
-  Math.sin(a), Math.cos(a), 0, 0,
-  0, 0, 1, 0,
-  0, 0, 0, 1
-]
-export const Identity = () => [
-  1, 0, 0, 0,
-  0, 1, 0, 0,
-  0, 0, 1, 0,
-  0, 0, 0, 1
-]
-export const Translate = (dx,dy,dz) => [
-  1, 0, 0, dx,
-  0, 1, 0, dy,
-  0, 0, 1, dz,
-  0, 0, 0, 1
-]
-export const Scale = (sx,sy,sz) => [
-  sx, 0, 0, 0,
-  0, sy, 0, 0,
-  0, 0, sz, 0,
-  0, 0, 0, 1
-]
-
 export const crossDiff = (a, b, v) => Vec(
-  (a.y-b.y)*v.z-(a.z-b.z)*v.y,
-  (a.z-b.z)*v.x-(a.x-b.x)*v.z,
-  (a.x-b.x)*v.y-(a.y-b.y)*v.x
+  (a[1]-b[1])*v[2]-(a[2]-b[2])*v[1],
+  (a[2]-b[2])*v[0]-(a[0]-b[0])*v[2],
+  (a[0]-b[0])*v[1]-(a[1]-b[1])*v[0]
 )
 
 export const sq = (x) => x * x

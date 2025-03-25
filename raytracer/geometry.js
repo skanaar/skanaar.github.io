@@ -19,7 +19,7 @@ export function Polygon(a, b, c) {
 }
 
 function isValidVec(v) {
-  return !Number.isNaN(v.x) && !Number.isNaN(v.y) && !Number.isNaN(v.z)
+  return !Number.isNaN(v[0]) && !Number.isNaN(v[1]) && !Number.isNaN(v[2])
 }
 
 function isValidPolygon({ a, b, c, normal }) {
@@ -28,7 +28,7 @@ function isValidPolygon({ a, b, c, normal }) {
 
 export function patch(vertices, scale) {
   let point = (i, j) => mult(scale, vertices[i+4*j])
-  return [...generateRowByRowCoordinates(3)].flatMap(({ x: i, y: j }) => [
+  return [...generateRowByRowCoordinates(3)].flatMap(([i,j]) => [
     Polygon(point(i, j), point(i, j + 1), point(i + 1, j)),
     Polygon(point(i + 1, j), point(i, j + 1), point(i + 1, j + 1)),
   ]).filter(isValidPolygon)
@@ -43,7 +43,7 @@ export function wave({ res, size, height, periods }, matrix) {
         j * size / res
       )
     }
-  return [...generateRowByRowCoordinates(res)].flatMap(({ x: i, y: j }) => [
+  return [...generateRowByRowCoordinates(res)].flatMap(([i,j]) => [
     Polygon(point(i, j), point(i + 1, j), point(i, j + 1)),
     Polygon(point(i + 1, j), point(i + 1, j + 1), point(i, j + 1)),
   ])
@@ -62,15 +62,15 @@ export function offsetMesh(v, triangles) {
 export function scaleMesh(k, triangles) {
   return triangles.map(({a,b,c}) => Polygon(mult(k, a), mult(k, b), mult(k, c)))
 }
-export function rotateMesh({ x }, triangles) {
+export function rotateMesh([x], triangles) {
   return triangles.map(({a,b,c}) => Polygon(rotx(x,a), rotx(x,b), rotx(x,c)))
 }
 
 export function bezier3DPatch([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p], u, v) {
   return Vec(
-    bezierPatch([a.x,b.x,c.x,d.x,e.x,f.x,g.x,h.x,i.x,j.x,k.x,l.x,m.x,n.x,o.x,p.x], u,v),
-    bezierPatch([a.y,b.y,c.y,d.y,e.y,f.y,g.y,h.y,i.y,j.y,k.y,l.y,m.y,n.y,o.y,p.y], u,v),
-    bezierPatch([a.z,b.z,c.z,d.z,e.z,f.z,g.z,h.z,i.z,j.z,k.z,l.z,m.z,n.z,o.z,p.z], u,v),
+    bezierPatch([a[0],b[0],c[0],d[0],e[0],f[0],g[0],h[0],i[0],j[0],k[0],l[0],m[0],n[0],o[0],p[0]], u,v),
+    bezierPatch([a[1],b[1],c[1],d[1],e[1],f[1],g[1],h[1],i[1],j[1],k[1],l[1],m[1],n[1],o[1],p[1]], u,v),
+    bezierPatch([a[2],b[2],c[2],d[2],e[2],f[2],g[2],h[2],i[2],j[2],k[2],l[2],m[2],n[2],o[2],p[2]], u,v),
   )
 }
 function bezier1D([a,b,c,d], t) {
@@ -95,7 +95,7 @@ export function teapot(res, transformMatrix) {
 
 export function bezierMesh(patches, res, matrix) {
   return [...patches
-    .flatMap(patch => [...generateRowByRowCoordinates(res)].flatMap(({ x: i, y: j }) => [
+    .flatMap(patch => [...generateRowByRowCoordinates(res)].flatMap(([i,j]) => [
       Polygon(
         bezier3DPatch(patch, i/res, j/res),
         bezier3DPatch(patch, i/res, (j+1)/res),
