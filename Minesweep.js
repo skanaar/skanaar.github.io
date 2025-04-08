@@ -40,17 +40,17 @@ function openCell(field, i, j) {
 }
 
 const gameTypes = [
-  { name: '5 ✕ 5', arg: { size: 5, mines: 4 } },
-  { name: '5 ✕ 5 hard', arg: { size: 5, mines: 5 } },
-  { name: '7 ✕ 7', arg: { size: 7, mines: 8 } },
-  { name: '7 ✕ 7 hard', arg: { size: 7, mines: 10 } },
-  { name: '10 ✕ 10', arg: { size: 10, mines: 15 } },
-  { name: '10 ✕ 10 hard', arg: { size: 10, mines: 20 } },
+  { name: '5 ✕ 5 easy', arg: { size: 5, mines: 4 }, cmd: '1' },
+  { name: '5 ✕ 5 hard', arg: { size: 5, mines: 5 }, cmd: '2' },
+  { name: '7 ✕ 7 easy', arg: { size: 7, mines: 8 }, cmd: '3' },
+  { name: '7 ✕ 7 hard', arg: { size: 7, mines: 10 }, cmd: '4' },
+  { name: '10 ✕ 10 easy', arg: { size: 10, mines: 15 }, cmd: '5' },
+  { name: '10 ✕ 10 hard', arg: { size: 10, mines: 20 }, cmd: '6' },
 ]
 
 export const app = new App('Minesweep', Minesweep, 'bomb.svg')
 app.addToAppMenu(...gameTypes.map((e) => (
-  { title:`Start ${e.name} game`, event:'newgame', arg:e.arg }
+  { title: e.name, event: 'newgame', arg: e.arg, cmd: e.cmd }
 )))
 
 export function Minesweep() {

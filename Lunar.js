@@ -4,7 +4,8 @@ export const app = new App('Lunar', Lunar, 'moon.svg')
 app.addToAppMenu({ title: 'Restart', event: 'restart' },{
   title: 'Show debug data...',
   event: 'app:show_child_window',
-  arg: 'Debug info'
+  arg: 'Debug info',
+  cmd: 'i',
 })
 app.addWindow('Debug info', DebugInfo, {
   visible: true,

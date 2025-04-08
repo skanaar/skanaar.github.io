@@ -13,7 +13,7 @@ export class App {
     }
     this.sizing = 'autosize'
     this.menus = [
-      { title: name, items: [{ title: 'Quit', app: name, event: 'app:quit' }]},
+      { title: name, items: [{ title: 'Quit', app: name, event: 'app:quit', cmd: '§' }]},
     ]
     this.childWindows = []
     this.args = { app: this }
@@ -30,8 +30,8 @@ export class App {
   }
   addToAppMenu(...items) {
     this.menus[0].items.unshift(
-      ...items.map(({ title, event, arg }) =>
-        ({ title, app: this.name, event, arg })
+      ...items.map(({ title, event, arg, cmd }) =>
+        ({ title, app: this.name, event, arg, cmd })
       ),
       { title: null }
     )
@@ -39,8 +39,8 @@ export class App {
   addMenu(menuTitle, ...items) {
     this.menus.push({
       title: menuTitle,
-      items: items.map(({ title, event, arg }) =>
-        ({ title, app: this.name, event, arg })
+      items: items.map(({ title, event, arg, cmd }) =>
+        ({ title, app: this.name, event, arg, cmd })
       )
     })
   }
@@ -174,9 +174,22 @@ export function Desktop(props) {
     ? [{ title: 'Exit fullscreen', event: 'sys:exit_fullscreen' }]
     : [{ title: 'Fullscreen', event: 'sys:enter_fullscreen' }]
 
+  const onDesktopKeyDown = (event) => {
+    if (!app || !event.metaKey) return
+    let menuItem = app.menus.flatMap(_ => _.items).find(_ => _.cmd === event.key)
+    if (menuItem) {
+      event.preventDefault()
+      signals.trigger(menuItem.app, menuItem.event, menuItem.arg)
+    }
+  }
+
   return el(
     'desktop-host',
-    { style: { backgroundImage: `url(${halfToneTile()})` } },
+    {
+      style: { backgroundImage: `url(${halfToneTile()})` },
+      tabIndex: -1,
+      onKeyDown: onDesktopKeyDown
+    },
     el('header', {},
       el('section', {}, systemMenu, ...appMenus),
       el('section', {},
@@ -393,7 +406,12 @@ export function MenuItem({ item, onClose }) {
     signals.trigger(item.app, item.event, item.arg)
     onClose()
   }
-  return el('menu-item', {}, el('button', { onClick }, item.title))
+  return el('menu-item', {},
+    el('button', { onClick },
+      item.title,
+      item.cmd && el('kbd', {}, '⌘'+item.cmd)
+    )
+  )
 }
 
 function halfToneTile() {

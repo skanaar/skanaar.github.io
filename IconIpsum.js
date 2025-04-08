@@ -14,9 +14,9 @@ app.addMenu(
 )
 app.addMenu(
   'Stroke',
-  { title: 'Thin', event: 'stroke', arg: 1 },
-  { title: 'Medium', event: 'stroke', arg: 1.5 },
-  { title: 'Thick', event: 'stroke', arg: 2 },
+  { title: 'Thin', event: 'stroke', arg: 1, cmd: '7' },
+  { title: 'Medium', event: 'stroke', arg: 1.5, cmd: '8' },
+  { title: 'Thick', event: 'stroke', arg: 2, cmd: '9' },
 )
 
 function IconIpsumApp() {

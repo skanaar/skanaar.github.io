@@ -23,7 +23,8 @@ export const app = new App('RayTracer', RayTracer, 'aperture.svg')
 app.addToAppMenu({
   title: 'Show options...',
   event: 'app:show_child_window',
-  arg: 'Options'
+  arg: 'Options',
+  cmd: 'i',
 })
 app.addMenu(
   'Scene',
