@@ -9,7 +9,7 @@ app.addToAppMenu({ title: 'Visit npm package', event: 'visit-site' })
 app.addAbout(About)
 app.addMenu(
   'Template',
-  { title: 'all', event: 'template', arg: undefined },
+  { title: 'all', event: 'template', arg: null },
   ...templates.map((e) => ({ title: e.name, event: 'template', arg: e.name }))
 )
 app.addMenu(
@@ -21,23 +21,36 @@ app.addMenu(
 
 function IconIpsumApp() {
   const [, setTime] = React.useState(0)
-  const [templateName, setTemplateName] = React.useState(undefined)
+  const [templateName, setTemplateName] = React.useState(null)
   const [stroke, setStroke] = React.useState(1)
   useEvent(app, 'visit-site', () => location.assign('https://www.npmjs.com/package/icon-ipsum'))
-  useEvent(app, 'template', (arg) => setTemplateName(arg))
-  useEvent(app, 'stroke', (arg) => setStroke(arg))
+  useEvent(app, 'template', (arg) => {
+    setTemplateName(arg)
+    app.check('template', arg)
+  })
+  useEvent(app, 'stroke', (arg) => {
+    setStroke(arg)
+    app.check('stroke', arg)
+  })
 
-  const iconIpsum = new IconIpsum({ strokeWidth: stroke, width: 32, height: 32 })
+  const iconIpsum = new IconIpsum({ strokeWidth: stroke, width:32, height:32 })
   iconIpsum.seed(4711)
+
+  React.useEffect(() => { app.check('stroke', 1) }, [])
+  React.useEffect(() => { app.check('template', null) }, [])
 
   React.useEffect(() => {
     const handle = setInterval(() => setTime(t => t+1), 3000)
     return () => clearInterval(handle)
   }, [])
 
-  return el('div', { style: { display: 'flex', flexWrap: 'wrap', gap: 16, margin: 16 } },
+  return el('div', {
+      style: { display: 'flex', flexWrap: 'wrap', gap: 16, margin: 16 }
+    },
     seq(25).map((i) =>
-      el('div', { key: i, style: { width: 32, height: 32 }, dangerouslySetInnerHTML: { __html: iconIpsum.icon(templateName) } })
+      el('div', { key: i, style: { width: 32, height: 32 },
+        dangerouslySetInnerHTML: { __html: iconIpsum.icon(templateName) } }
+      )
     )
   )
 }

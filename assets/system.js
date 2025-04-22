@@ -17,6 +17,7 @@ export class App {
     ]
     this.childWindows = []
     this.args = { app: this }
+    this.menuState = {}
   }
   resizable([width, height]) {
     this.sizing = 'resizable'
@@ -25,7 +26,7 @@ export class App {
   }
   addAbout(component, opts) {
     const id = `About ${this.name}`
-    this.addWindow(id, component, { offset: [50, 50], visible: false, ...opts })
+    this.addWindow(id, component, { offset: [50,50], visible: false, ...opts })
     this.addToAppMenu({ title: id, event: 'app:show_child_window', arg: id })
   }
   addToAppMenu(...items) {
@@ -55,6 +56,9 @@ export class App {
         sizing: sizing ?? 'autosize'
       }
     })
+  }
+  check(event, arg) {
+    this.menuState[event] = arg
   }
   trigger(event, arg) {
     signals.trigger(this.name, event, arg)
@@ -168,15 +172,15 @@ export function Desktop(props) {
 
   const app = apps.find(e => e.name === currentApp)
   const appMenus = app
-    ? app.menus.map(e => el(Menu, { title: e.title, items: e.items }))
-    : [el(Menu, { title: systemName, items: systemMenuItems })]
+    ? app.menus.map(e => el(Menu, { app, title: e.title, items: e.items }))
+    : [el(Menu, { app, title: systemName, items: systemMenuItems })]
   const displayMenuItems = fullscreen
     ? [{ title: 'Exit fullscreen', event: 'sys:exit_fullscreen' }]
     : [{ title: 'Fullscreen', event: 'sys:enter_fullscreen' }]
 
   const onDesktopKeyDown = (event) => {
     if (!app || !event.metaKey) return
-    let menuItem = app.menus.flatMap(_ => _.items).find(_ => _.cmd === event.key)
+    let menuItem = app.menus.flatMap(_ => _.items).find(_ => _.cmd===event.key)
     if (menuItem) {
       event.preventDefault()
       signals.trigger(menuItem.app, menuItem.event, menuItem.arg)
@@ -371,7 +375,7 @@ export function Checkbox({ name, children, onChange }) {
   return el('label', {}, el('input', { type, name, onChange }), children)
 }
 
-export function Menu({ title, items }) {
+export function Menu({ app, title, items }) {
   const [open, setOpen] = React.useState(false)
   const ref = React.useRef()
   const isOpen = React.useRef(false)
@@ -393,14 +397,14 @@ export function Menu({ title, items }) {
           {},
           items.map((item, i) => el(
             MenuItem,
-            { key: i, item, onClose: () => setOpen(false) }
+            { key: i, app, item, onClose: () => setOpen(false) }
           ))
         )
     ),
   )
 }
 
-export function MenuItem({ item, onClose }) {
+export function MenuItem({ app, item, onClose }) {
   if (item.title === null) return el('menu-item', {}, el('hr'))
   const onClick = () => {
     signals.trigger(item.app, item.event, item.arg)
@@ -408,6 +412,9 @@ export function MenuItem({ item, onClose }) {
   }
   return el('menu-item', {},
     el('button', { onClick },
+      app?.menuState[item.event] === item.arg && item.arg !== undefined
+      ? '✔ '
+      : null,
       item.title,
       item.cmd && el('kbd', {}, '⌘'+item.cmd)
     )
