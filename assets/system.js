@@ -1,3 +1,5 @@
+import { useFetch } from './useFetch.js'
+
 export const el = (...args) => React.createElement(...args)
 
 export class App {
@@ -12,9 +14,10 @@ export class App {
       y: 30 + Math.floor(Math.random() * window.innerHeight/4),
     }
     this.sizing = 'autosize'
-    this.menus = [
-      { title: name, items: [{ title: 'Quit', app: name, event: 'app:quit', cmd: '§' }]},
-    ]
+    this.menus = [{
+      title: name,
+      items: [{ title: 'Quit', app: name, event: 'app:quit', cmd: '§' }]
+    }]
     this.childWindows = []
     this.args = { app: this }
     this.menuState = {}
@@ -70,6 +73,21 @@ export function useEvent(app, event, callback) {
     const cleanup = signals.on(app.name, event, callback)
     return cleanup
   }, [])
+}
+
+function Weather() {
+  const { data } = useFetch('https://api.open-meteo.com/v1/forecast?' + [
+    'latitude=59&longitude=18',
+    'hourly=temperature_2m,precipitation_probability,wind_speed_10m',
+    'forecast_days=1'
+  ].join('&'))
+  if (!data) return el('weather-widget', {}, '-')
+  const maxT = Math.round(Math.max(...data.hourly.temperature_2m))
+  const rain = Math.max(...data.hourly.precipitation_probability) > 25
+  const wind = Math.round(Math.max(...data.hourly.wind_speed_10m) / 3.6)
+  return el('weather-widget', {},
+    `${maxT}° ${wind}m/s ${(rain)?'Rain':''}`
+  )
 }
 
 function Clock() {
@@ -198,7 +216,8 @@ export function Desktop(props) {
       el('section', {}, systemMenu, ...appMenus),
       el('section', {},
         el(Menu, { title: 'Display', items: displayMenuItems }),
-        el('menu-label', {}, el(Clock))
+        el('menu-label', {}, el(Weather)),
+        el('menu-label', {}, el(Clock)),
       ),
     ),
     el(
