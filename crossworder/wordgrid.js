@@ -38,12 +38,12 @@ export class WordGrid {
     this.words = []
     this.reserved = []
   }
-  
+
   reserve({ x, y, width, height, image }) {
     this.reserved.push({ x, y, width, height, image })
     this.fill({ x, y, width: width, height: height })
   }
-  
+
   fill({ x, y, width, height }) {
     for (let i=x; i<x+width; i++)
       for (let j=y; j<y+height; j++){
@@ -55,11 +55,11 @@ export class WordGrid {
   get(p) {
     return this.grid[p.y][p.x]
   }
-  
+
   set(p, value) {
     this.grid[p.y][p.x] = value
   }
-  
+
   setIntersection(p, intersecting) {
     this.grid[p.y][p.x].intersection = intersecting
   }
@@ -136,6 +136,6 @@ export class WordGrid {
     for (var i=0; i<this.size; i++)
       for (var j=0; j<this.size; j++)
         result += isLetter(this.grid[j][i]) ? 1 : 0
-    return result
+    return Math.round(100 * result / ((this.size-2)**2) / 0.75)
   }
 }

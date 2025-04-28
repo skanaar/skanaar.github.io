@@ -1,12 +1,13 @@
 import { el, App, useEvent, Button } from './assets/system.js'
 import { CrosswordGenerator } from './crossworder/CrosswordGenerator.js'
+import { wordlist } from './crossworder/english.js'
+import { ordlista } from './crossworder/svenska.js'
 
 export const app = new App('Crossword', Crossword, 'crossword.svg')
-app.resizable([256, 256])
 app.addAbout(About)
 app.addWindow('Toolbox', Toolbox, {
   visible: true,
-  offset: [276,0],
+  offset: [280,-30],
   size: [200,200]
 })
 app.addMenu(
@@ -21,29 +22,45 @@ app.addMenu(
 )
 app.menuState = { size: 10, lang: 'en' }
 
+function useMenuState(app, name) {
+  const [val, setVal] = React.useState(app.menuState[name])
+  useEvent(app, name, (arg) => {
+    app.check(name, arg)
+    setVal(arg)
+  })
+  return val
+}
+
 function Crossword() {
   const engine = React.useRef(null)
   const displayHost = React.useRef(null)
+  const size = useMenuState(app, 'size')
+  const lang = useMenuState(app, 'lang')
+  const [dict, setDict] = React.useState([])
   React.useEffect(() => {
     engine.current = new CrosswordGenerator({
-      onRender: (svg) => displayHost.current.innerHTML = svg
+      onRender: (svg, score) => {
+        displayHost.current.innerHTML = svg
+        app.trigger('generated', { score })
+      }
     })
-    engine.current.generate(10, [0,0], 1, 'en', [])
   }, [])
-  useEvent(app, 'size', (arg) => app.check('size', arg))
-  useEvent(app, 'lang', (arg) => app.check('lang', arg))
-  useEvent(app, 'generate', (arg) => {
-    console.log('generate', arg)
-    engine.current.generate(
-      app.menuState.size, [0,0], 1, app.menuState.lang, arg.words.filter(e => e)
-    )
-  })
+  React.useEffect(() => {
+    engine?.current.generate(size, [0,0], 1, lang, dict)
+  }, [size, lang, dict])
+  useEvent(app, 'generate', (arg) => setDict(arg.words))
 
-  return el('div', { ref: displayHost, style: { padding: 10 } })
+  return el('div', {
+    ref: displayHost,
+    style: { padding: 10, width: size * 25 } })
 }
 
 function Toolbox() {
   const [words, setWords] = React.useState([])
+  const [score, setScore] = React.useState(null)
+  useEvent(app, 'generated', (arg) => {
+    setScore(arg.score)
+  })
 
   return el('div', { className: 'padded' },
     el('span', {}, 'Custom words'),
@@ -64,7 +81,13 @@ function Toolbox() {
         lineHeight: '22px',
       }
     }),
-    el(Button, { onClick: () => app.trigger('generate', {words}) }, 'Generate'),
+    el(Button,
+      { onClick: () => app.trigger('generate', {words: words.filter(e => e)}) },
+      'Generate'
+    ),
+    el('div', { style: { marginTop: 5 } },
+      el('span', {}, 'Score: ', score)
+    ),
   )
 }
 

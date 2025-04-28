@@ -1,4 +1,4 @@
-import { isBlock } from './wordgrid.js'
+import { isBlock } from './wordgrid.js'
 
 export function ascii(grid) {
   return grid.grid.map(e => e.map(e => e?e:' ').join(' ')).join('\n')
@@ -49,16 +49,16 @@ export function renderSvg(wordgrid, { scale = 20, answer = false }) {
 
   var attrs = 'version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg"'
 
-  return `<svg ${attrs} viewBox="-1 -1 ${wordgrid.size*z+2} ${wordgrid.size*z+2}">
+  return `<svg ${attrs} crossword viewBox="-1 -1 ${wordgrid.size*z+2} ${wordgrid.size*z+2}">
   <style>
-    rect { fill:none; stroke:#000; stroke-width: 5px; }
-    rect.reserved { fill:#fff; }
-    rect.reserved.border { fill:#0000; }
-    .solid { fill:#000 }
-    path { fill:#fff }
-    text { fill: #000; text-anchor: middle; font-family: sans-serif; font-size: ${z*0.8}px; font-weight: bold; }
-    text.clue-h { text-anchor: end; fill: #fff; font-size: ${z*0.4}px }
-    text.clue-v { text-anchor: start; fill: #fff; font-size: ${z*0.4}px }
+    [crossword] rect { fill:none; stroke:#000; stroke-width: 4px; }
+    [crossword] rect.reserved { fill:#fff; }
+    [crossword] rect.reserved.border { fill:#0000; }
+    [crossword] .solid { fill:#000 }
+    [crossword] path { fill:#fff }
+    [crossword] text { fill: #000; text-anchor: middle; font-family: sans-serif; font-size: ${z*0.8}px; font-weight: bold; }
+    [crossword] text.clue-h { text-anchor: end; fill: #fff; font-size: ${z*0.4}px }
+    [crossword] text.clue-v { text-anchor: start; fill: #fff; font-size: ${z*0.4}px }
   </style>
   ${elements.join('')}
   ${wordgrid.reserved.map(renderArea).join('')}

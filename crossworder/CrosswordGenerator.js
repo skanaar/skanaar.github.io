@@ -6,7 +6,7 @@ import { wordlist } from './english.js'
 import { Optimizer, timeout } from './optimizer.js'
 import { WordGrid } from './wordgrid.js'
 
-export function CrosswordGenerator({ onRender }) {
+export function CrosswordGenerator({ minLength = 3, onRender }) {
 
   var self = {
     wordgrid: null,
@@ -48,8 +48,7 @@ export function CrosswordGenerator({ onRender }) {
 
     var optimize = Optimizer({
       seconds: duration,
-      onProgress(progress) {
-        //console.log(`progress: ${progress * 100}%`)
+      onProgress(progress, current) {
       }
     })
 
@@ -71,21 +70,19 @@ export function CrosswordGenerator({ onRender }) {
     var insetSize = { width: inset[0], height: inset[1] }
 
     var grid = await optimize(async function () {
-      var wordlist = randomizeWords({ mandatory, fillers: words })
+      var wordlist = randomizeWords({ mandatory, fillers: words.filter(word => word.length >= minLength) })
       var grid = new WordGrid(size)
       grid.reserve({ ...insetSize, x: 0, y: 0, image: null })
       var result = null
       for(var step of algo(wordlist, grid)) {
         result = step
-        onRender(renderSvg(grid, { scale, answer: true }))
         await timeout(10)
       }
+      onRender(renderSvg(result, { scale, answer: true }), grid.score())
       return result
     })
     self.wordgrid = grid
-    console.log('score: ' + grid.score())
-    console.log(`usedWords: ${grid.words.map(e => e.word).join(',')}`)
-    onRender(renderSvg(grid, { scale, answer: true }))
+    onRender(renderSvg(grid, { scale, answer: true }), grid.score())
   }
 
   return self
