@@ -105,8 +105,9 @@ const signals = {
 
 export function Desktop(props) {
   const { systemMenuLabel, systemName, aboutApp, columns = 3, apps } = props
-  const { startupApps = [] } = props
-  const [currentApp, setCurrentApp] = React.useState(null)
+  const initialApp = (window.location.hash || null)?.substring(1)
+  const { startupApps = initialApp ? [initialApp] : [] } = props
+  const [currentApp, setCurrentApp] = React.useState(initialApp)
   const [fullscreen, setFullscreen] = React.useState(false)
   const [openApps, setOpenApps] = React.useState(
     Object.fromEntries(startupApps.map(app => [app, true]))
