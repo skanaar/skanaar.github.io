@@ -12,7 +12,12 @@ function shuffle(list) {
 }
 
 export function randomizeWords({ mandatory, fillers }) {
-  return [...mandatory.filter(e => e && e.length), ...shuffle(fillers).sort((a,b) => a.length < b.length)]
+  return [
+    ...shuffle(mandatory.filter(e => e)),
+    ...shuffle(fillers)
+      .filter(e => e)
+      .sort((a,b) => a.length < b.length)
+  ]
 }
 
 export function* generateSparse(words, grid) {
@@ -21,7 +26,7 @@ export function* generateSparse(words, grid) {
   var [first, ...tail] = words.filter(e => e.length + 2 <= size)
 
   grid.place(Horizontal, first, number++, Vec(Math.floor((size-first.length-2)/2), Math.floor(size/2)))
-  
+
   var isVertical = true
   for(var word of tail){
     if (isVertical){

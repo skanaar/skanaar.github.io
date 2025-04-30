@@ -11,14 +11,17 @@ export function CrosswordGenerator({ minLength = 3, onRender }) {
   var self = {
     wordgrid: null,
     generate,
+    saveSvg,
   }
 
-  async function saveSvg(size) {
+  async function saveSvg() {
     try {
-      var scale = 500/size
+      var scale = 500/self.wordgrid.size
       var svgSource = renderSvg(self.wordgrid, { scale, answer: false })
       const blob = new Blob([svgSource], {type : 'image/svg+xml'})
-      const newHandle = await window.showSaveFilePicker()
+      const newHandle = await window.showSaveFilePicker({
+        suggestedName: 'crossword.svg'
+      })
       const writableStream = await newHandle.createWritable()
       await writableStream.write(blob)
       await writableStream.close()
@@ -70,7 +73,10 @@ export function CrosswordGenerator({ minLength = 3, onRender }) {
     var insetSize = { width: inset[0], height: inset[1] }
 
     var grid = await optimize(async function () {
-      var wordlist = randomizeWords({ mandatory, fillers: words.filter(word => word.length >= minLength) })
+      var wordlist = randomizeWords({
+        mandatory,
+        fillers: words.filter(e => e.length >= minLength)
+      })
       var grid = new WordGrid(size)
       grid.reserve({ ...insetSize, x: 0, y: 0, image: null })
       var result = null

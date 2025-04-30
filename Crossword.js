@@ -1,15 +1,20 @@
 import { el, App, useEvent, Button } from './assets/system.js'
 import { CrosswordGenerator } from './crossworder/CrosswordGenerator.js'
-import { wordlist } from './crossworder/english.js'
-import { ordlista } from './crossworder/svenska.js'
 
 export const app = new App('Crossword', Crossword, 'crossword.svg')
-app.addAbout(About)
 app.addWindow('Toolbox', Toolbox, {
   visible: true,
   offset: [280,-30],
   size: [200,200]
 })
+app.addToAppMenu({
+  title: 'Show toolbox...',
+  event: 'app:show_child_window',
+  arg: 'Toolbox',
+  cmd: 'i',
+})
+app.addAbout(About)
+app.addMenu('File', { title: 'Save crossword...', event: 'save' })
 app.addMenu(
   'Size',
   { title: '10 x 10', event: 'size', arg: 10 },
@@ -39,6 +44,7 @@ function Crossword() {
   const [dict, setDict] = React.useState([])
   React.useEffect(() => {
     engine.current = new CrosswordGenerator({
+      minLength: 4,
       onRender: (svg, score) => {
         displayHost.current.innerHTML = svg
         app.trigger('generated', { score })
@@ -48,7 +54,8 @@ function Crossword() {
   React.useEffect(() => {
     engine?.current.generate(size, [0,0], 1, lang, dict)
   }, [size, lang, dict])
-  useEvent(app, 'generate', (arg) => setDict(arg.words))
+  useEvent(app, 'generate', (arg) => setDict([...arg.words]))
+  useEvent(app, 'save', () => engine.current.saveSvg())
 
   return el('div', {
     ref: displayHost,
@@ -82,7 +89,7 @@ function Toolbox() {
       }
     }),
     el(Button,
-      { onClick: () => app.trigger('generate', {words: words.filter(e => e)}) },
+      { onClick: () => app.trigger('generate', { words }) },
       'Generate'
     ),
     el('div', { style: { marginTop: 5 } },
