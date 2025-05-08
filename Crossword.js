@@ -1,4 +1,4 @@
-import { el, App, useEvent, Button } from './assets/system.js'
+import { el, App, useEvent, Button, useMenuState } from './assets/system.js'
 import { CrosswordGenerator } from './crossworder/CrosswordGenerator.js'
 
 export const app = new App('Crossword', Crossword, 'crossword.svg')
@@ -26,15 +26,6 @@ app.addMenu(
   { title: 'English word list', event: 'lang', arg: 'en' },
 )
 app.menuState = { size: 10, lang: 'en' }
-
-function useMenuState(app, name) {
-  const [val, setVal] = React.useState(app.menuState[name])
-  useEvent(app, name, (arg) => {
-    app.check(name, arg)
-    setVal(arg)
-  })
-  return val
-}
 
 function Crossword() {
   const engine = React.useRef(null)

@@ -422,6 +422,15 @@ export function MenuItem({ app, item, onClose }) {
   )
 }
 
+export function useMenuState(app, name) {
+  const [val, setVal] = React.useState(app.menuState[name])
+  useEvent(app, name, (arg) => {
+    app.check(name, arg)
+    setVal(arg)
+  })
+  return val
+}
+
 function halfToneTile() {
   const canvas = document.createElement('canvas')
   canvas.width = 8
