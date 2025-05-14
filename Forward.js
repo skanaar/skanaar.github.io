@@ -46,7 +46,10 @@ function interpret(source, out) {
     if (token == 'dup') push(peek())
     if (token == 'neg') push(-pop())
     if (token == 'not') push(!pop())
-    if (token == '?') push(pop() ? pop() : (pop(), pop()))
+    if (token == '?') {
+      let condition = pop(), a = pop(), b = pop()
+      push(condition === true ? b : a)
+    }
     if (token == 'if') if (pop() !== true) ctrl.push('skip;')
     if (token == ':') {
       ctrl.push(peek())
@@ -63,6 +66,7 @@ function interpret(source, out) {
         ctrl.pop()
       }
     }
+    if (token == '(') while (index<tokens.length && tokens[index]!=')') index++
     if (token == 'i') push(ctrl.at(LOOP_COUNT))
 
     if (token == 'true') push(true)
