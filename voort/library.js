@@ -1,7 +1,6 @@
 export const main = `"std" include
 "complex" include
 
-"complex-sq" ( 2n 2n - 2n ) : 2dup complex-mult ;
 "sq" ( n - n ) : dup * ;
 
 "mandelbrot-iter" ( cr ci z0r z0i - cr ci z1r z1i ) :
@@ -10,15 +9,17 @@ export const main = `"std" include
 "sq-mag" ( n n - n ) : sq swap sq + ;
 "mandelbrot-at" ( cr ci - bool ) :
   0 0
-  10 { mandelbrot-iter }loop
+  50 { mandelbrot-iter }loop
   sq-mag 4 >
   -rot drop drop
 ;
+
 "x0" : -1.5 ;
 "xscale" : 2.25 ;
 "y0" : -1.1 ;
 "yscale" : 2.2 ;
 "res" : 20 ;
+
 "mandelbrot-line" ( y s - s ) :
   res 2 * {
     over i res 2 * / xscale * x0 + swap
@@ -39,17 +40,12 @@ export const complex = `"complex-mult" ( a b c d - x y ) :
   + @> swap
 ;
 
-"complex-sq" ( a b - a2-b2 2ab ) :
-  2dup dup * neg swap dup * +
-  -rot * 2 *
-;
-
+"complex-sq" ( 2n 2n - 2n ) : 2dup complex-mult ;
 "complex-add" ( a b c d - x y ) : rot + rot rot + swap ;
 "complex-neg" ( a b - x y ) : neg swap neg swap ;
 `
 
-export const standardLibrary = `
-"2dup" ( a b - a b a b ) : swap dup rot dup rot swap ;
+export const standardLibrary = `"2dup" ( a b - a b a b ) : swap dup rot dup rot swap ;
 "over" ( a b - a b a ) : swap dup rot swap ;
 "factorial" ( i - i ) : dup 2 - { i 1 + * }loop ;
 "trig-taylor" ( x i - x ) : swap over pow swap factorial / ;

@@ -23,6 +23,12 @@ app.addWindow('Voort output', Output, {
 })
 app.menuState = { debug: false }
 
+const files = {
+    std: standardLibrary,
+    complex: complex,
+    main: main
+}
+
 function Voort() {
   const [source, setSource] = React.useState(main)
   const debug = useMenuState(app, 'debug')
@@ -30,10 +36,7 @@ function Voort() {
   const onRun = (e) => {
     app.trigger('clear-output')
     interpret(source, {
-      files: {
-        'std': standardLibrary,
-        'complex': complex,
-      },
+      files: files,
       trace: debug,
       out: (val) => app.trigger('output', val),
     })
@@ -45,10 +48,10 @@ function Voort() {
     el('style', {}, css),
     el('div', { class: 'toolbar' },
       el('button', { className: 'btn', onClick: onRun }, 'Run'),
-      el('select', {},
-        el('option', {}, 'example'),
-        el('option', {}, 'standard lib'),
-        el('option', {}, 'math'),
+      el('select', { onChange: (e) => setSource(files[e.target.value])},
+        el('option', { value: 'main' }, 'main'),
+        el('option', { value: 'std' }, 'std'),
+        el('option', { value: 'complex' }, 'complex'),
       )
     ),
     el('textarea', { value: source, onChange, spellcheck: 'false' }),
