@@ -1,8 +1,5 @@
 import { standardLibrary } from './library.js'
 
-const LOOP_START = -1
-const LOOP_COUNT = -2
-
 function tokenize(tokenObjs, index, file, source) {
   const lines = source.split('\n')
   const objs = lines.map((line, i) => line
@@ -20,7 +17,6 @@ export function json(obj) {
 
 export function interpret(source, { files = {}, out }) {
   files['std'] = standardLibrary
-  source = '"std" include ' + source
   const tokenObjs = []
   tokenize(tokenObjs, -1, 'main', source)
   const stack = []
@@ -38,27 +34,89 @@ export function interpret(source, { files = {}, out }) {
   }
   let index = 0
   const evaluate = (token) => {
-    if (ctrl.at(-1) == 'skip_to_fi') {
-      if (token === 'fi') ctrl.pop()
-      return
+    if (ctrl.at(-1) == 'compile') {
+      if (token == '{') {
+        ctrl.push('compile')
+      }
+      if (token == '}') {
+        ctrl.pop()
+      }
+      if (token == 'include') throw new Error('include not available in blocks')
     }
-    if (ctrl.at(-1) == 'skip_to_;') {
-      if (token === ';') ctrl.pop()
-      return
+    else if (token == 'include') tokenize(tokenObjs, index, peek(), files[pop()])
+    else if (token == '{') {
+      push(index+1)
+      ctrl.push('compile')
     }
-    if (dict[token]) {
-      ctrl.push(index)
-      index = dict[token]
-      return
+    else if (token == '}') {
+      return requireJump(ctrl.pop())
     }
-    if (token == 'include') tokenize(tokenObjs, index, peek(), files[pop()])
+    else if (token == ':') {
+      const jump = requireJump(pop())
+      dict[pop()] = jump
+    }
+    else if (token == '?') {
+      let condition = requireBool(pop()), a = pop(), b = pop()
+      push(condition === true ? b : a)
+    }
+    else if (token == 'if') {
+      let jump = requireJump(pop())
+      if (requireBool(pop()) === true) {
+        ctrl.push(index + 1)
+        return jump
+      }
+    }
+    else if (token == '{') ctrl.push(index, 'compile')
+    else if (token == 'loop') {
+      if (ctrl.at(-1) != 'loop') {
+        ctrl.push(pop(), 'loop')
+      }
+      let jump = ctrl.at(-2)
+      if (requireBool(pop()) === true) {
+        ctrl.push(index)
+        return jump
+      } else {
+        ctrl.pop()
+        ctrl.pop()
+      }
+    }
+    else if (token == 'range') {
+      ctrl.push(requireNumber(pop()))
+      ctrl.push(requireNumber(pop()))
+      ctrl.push(requireJump(pop()))
+    }
+    else if (token == 'enumerate') {
+      const jump = ctrl.pop()
+      const from = ctrl.pop()
+      const to = ctrl.pop()
+      if (from < to) {
+        ctrl.push(to)
+        ctrl.push(from + 1)
+        ctrl.push(jump)
+        ctrl.push(index)
+        return jump
+      }
+    }
+    else if (token == 'i') {
+      push(ctrl.at(-3) - 1)
+    }
+    else if (token == '(') {
+      while (index < tokenObjs.length && tokenObjs[index].token != ')') index++
+    }
+    else if (token == '>@') ctrl.push(pop())
+    else if (token == '@>') push(ctrl.pop())
+    else if (token == '@copy') push(ctrl.at(-1))
+    // ------
+    else if (dict[token]) {
+      ctrl.push(index + 1) // set return adress to next token
+      return dict[token]
+    }
     else if (token == 'log') out(json(peek()))
     else if (token == '.') out(json(pop()))
     else if (token == '...') out(json(stack))
     else if (token == '..c') out(json(ctrl))
     else if (token == '..d') out(json(dict))
-    else if (token == 'trace')
-      out(`${json(stack)} ${json(ctrl)}`)
+    else if (token == 'trace') out(`${json(stack)} ${json(ctrl)}`)
     else if (token == 'drop') pop()
     else if (token == '+') push(pop() + pop())
     else if (token == '-') push(-pop() + pop())
@@ -81,8 +139,6 @@ export function interpret(source, { files = {}, out }) {
       push(c)
       push(b)
     }
-    else if (token == '>@') ctrl.push(pop())
-    else if (token == '@>') push(ctrl.pop())
     else if (token == 'concat') {
       const a = pop(), b = pop()
       push(`${b}${a}`)
@@ -92,45 +148,21 @@ export function interpret(source, { files = {}, out }) {
     else if (token == 'dup') push(peek())
     else if (token == 'neg') push(-requireNumber(pop()))
     else if (token == 'not') push(!requireBool(pop()))
-    else if (token == '?') {
-      let condition = requireBool(pop()), a = pop(), b = pop()
-      push(condition === true ? b : a)
-    }
-    else if (token == 'if') {
-      if (requireBool(pop()) !== true) ctrl.push('skip_to_fi')
-    }
-    else if (token == ':') {
-      ctrl.push('skip_to_;')
-      dict[pop()] = index
-    }
-    else if (token == ';') index = ctrl.pop()
-    else if (token == '{') ctrl.push(pop(), index)
-    else if (token == '}loop') {
-      if (ctrl.at(LOOP_COUNT)>0) {
-        index = ctrl.at(LOOP_START)
-        ctrl[ctrl.length+LOOP_COUNT] -= 1
-      } else {
-        ctrl.pop()
-        ctrl.pop()
-      }
-    }
-    else if (token == '(') {
-      while (index<tokenObjs.length && tokenObjs[index].token!=')') index++
-    }
-    else if (token == 'i') push(ctrl.at(LOOP_COUNT))
     else if (token == 'true') push(true)
     else if (token == 'false') push(false)
     else if (token.match(/^-?[0-9.]+$/)) push(+token)
     else if (token.match(/"[^"]*"/)) push(token.replaceAll('"', ''))
     else throw new Error(`unknown token ${token}`)
+    return index + 1
   }
-  for (; index<tokenObjs.length; index++) {
+  while (index<tokenObjs.length) {
     const { token, line, file } = tokenObjs[index]
     try {
-      evaluate(token)
+      index = evaluate(token)
     } catch (error) {
       out(`${file}:${line} error evaluating "${token}" ${error.message}`)
       console.error(error)
+      throw new Error(`${file}:${line} error evaluating "${token}" ${error.message}`)
     }
   }
   if (ctrl.length > 0) {
@@ -148,4 +180,5 @@ const requireNotNull = asserter(e => e == null, 'null disallowed')
 const requireNumber = asserter(e => 'number' !== typeof e, 'required a number')
 const requireString = asserter(e => 'string' !== typeof e, 'required a string')
 const requireBool = asserter(e => 'boolean' !== typeof e, 'required a boolean')
+const requireJump = asserter(e => e < 0 || e > 10000, 'required a boolean')
 const requireInt = asserter(e => e % 1 !== 0, 'required an integer')

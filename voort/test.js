@@ -21,6 +21,6 @@ export function testsuite() {
   test('7 3 true ? .', 7)
   test('7 3 true not ? .', 3)
   test('7 neg .', -7)
-  test('4 { i }loop + + + .', 3+2+1)
-  test('"foo" : 7 ; foo .', 7)
+  test('"foo" { 7 } : foo .', 7)
+  test('false true true 0 true { 1 + swap } loop .', 3)
 }

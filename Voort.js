@@ -4,7 +4,7 @@ import { complex, standardLibrary, main } from './voort/library.js'
 import { testsuite } from './voort/test.js'
 
 export const app = new App('Voort', Voort, 'voort.svg')
-app.addAbout(About, { offset: [520,0], visible: true })
+app.addAbout(About, { offset: [520,0], visible: false })
 app.addToAppMenu({
   title: 'Show Output...',
   event: 'app:show_child_window',
@@ -31,6 +31,8 @@ const files = {
 
 function Voort() {
   const [source, setSource] = React.useState(main)
+  const [line, setLine] = React.useState(0)
+  const textareaRef = React.useRef()
   const debug = useMenuState(app, 'debug')
   const onChange = (e) => setSource(e.target.value)
   const onRun = (e) => {
@@ -43,18 +45,34 @@ function Voort() {
   }
 
   React.useEffect(testsuite, [])
+  React.useEffect(() => {
+    let onEvent = e => {
+      setLine(source.substring(0, e.target.selectionStart).split('\n').length)
+    }
+    textareaRef.current.addEventListener('selectionchange', onEvent)
+    return () => {
+      textareaRef.current.removeEventListener('selectionchange', onEvent)
+    }
+  }, [textareaRef.current])
 
   return el('voort-app', {},
     el('style', {}, css),
     el('div', { class: 'toolbar' },
-      el('button', { className: 'btn', onClick: onRun }, 'Run'),
       el('select', { onChange: (e) => setSource(files[e.target.value])},
         el('option', { value: 'main' }, 'main'),
         el('option', { value: 'std' }, 'std'),
         el('option', { value: 'complex' }, 'complex'),
-      )
+      ),
+      el('span', { style: { marginRight: 'auto' } }, `Line ${line}`),
+      el('button', { className: 'btn', onClick: onRun }, 'Run'),
+      el('button', { className: 'btn', onClick: onRun }, 'Debug'),
     ),
-    el('textarea', { value: source, onChange, spellcheck: 'false' }),
+    el('textarea', {
+      value: source,
+      spellcheck: 'false',
+      onChange,
+      ref: textareaRef,
+    }),
   )
 }
 
@@ -105,6 +123,11 @@ voort-app textarea:focus {
 voort-app .toolbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 5px;
+  gap: 5px;
+}
+voort-app .toolbar .btn {
+  min-width: 80px;
 }
 `
