@@ -28,6 +28,8 @@ export const main = `"std" include
   swap drop
 } :
 
+debug
+
 { i res / yscale * y0 + "" mandelbrot-line . } 0 res range enumerate
 `
 

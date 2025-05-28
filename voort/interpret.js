@@ -5,24 +5,27 @@ function tokenize(tokenObjs, index, file, source) {
   const objs = lines.map((line, i) => line
     .split(/[ ]+/)
     .filter(e => !!e)
-    .map(token => ({ file, token, line: i }))
+    .map((token, i) => ({ file, token, line: i, first: i == 0 }))
   ).flat()
   tokenObjs.splice(index + 1, 0, ...objs)
 }
 
 // function that stringifies json with numbers with max 2 decimals
 export function json(obj) {
-  return JSON.stringify(obj).replaceAll(/\.\d+/g, (match) => match.slice(0, 4));
+  return JSON.stringify(obj).replaceAll(/\.\d+/g, (match) => match.slice(0, 4))
 }
 
-export function interpret(source, { files = {}, out }) {
+export function interpret(source, opts) {
+  for(const item of interpretIterate(source, opts)) {}
+}
+
+export function* interpretIterate(source, { files = {}, out }) {
   files['std'] = standardLibrary
   const tokenObjs = []
   tokenize(tokenObjs, -1, 'main', source)
   const stack = []
   const ctrl = []
   const dict = {}
-  const data = []
   const push = (e) => stack.push(requireNotNull(e))
   const pop = () => {
     if (stack.length === 0) throw new Error('cannot pop empty stack')
@@ -43,7 +46,9 @@ export function interpret(source, { files = {}, out }) {
       }
       if (token == 'include') throw new Error('include not available in blocks')
     }
-    else if (token == 'include') tokenize(tokenObjs, index, peek(), files[pop()])
+    else if (token == 'include')
+      tokenize(tokenObjs, index, peek(), files[pop()])
+    else if (token == 'debug') { }
     else if (token == '{') {
       push(index+1)
       ctrl.push('compile')
@@ -162,11 +167,12 @@ export function interpret(source, { files = {}, out }) {
     } catch (error) {
       out(`${file}:${line} error evaluating "${token}" ${error.message}`)
       console.error(error)
-      throw new Error(`${file}:${line} error evaluating "${token}" ${error.message}`)
+      throw new Error(`${file}:${line} error on "${token}" ${error.message}`)
     }
+    yield { index, token, stack, ctrl, tokenObjs: tokenObjs }
   }
   if (ctrl.length > 0) {
-    out('Unmatched control flow, are you missing a ":"?')
+    out('Unmatched control flow')
   }
 }
 
