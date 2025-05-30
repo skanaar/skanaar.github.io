@@ -1,5 +1,7 @@
 import { standardLibrary } from './library.js'
 
+export const JUMP_OFFSET = 0x100000000
+
 function tokenize(tokenObjs, index, file, source) {
   const lines = source.split('\n')
   const objs = lines.map((line, i) => line
@@ -46,18 +48,19 @@ export function* interpretIterate(source, { files = {}, out }) {
       }
       if (token == 'include') throw new Error('include not available in blocks')
     }
-    else if (token == 'include')
+    else if (token == 'include') {
       tokenize(tokenObjs, index, peek(), files[pop()])
+    }
     else if (token == 'debug') { }
     else if (token == '{') {
-      push(index+1)
+      push(encodeJump(index+1))
       ctrl.push('compile')
     }
     else if (token == '}') {
-      return requireJump(ctrl.pop())
+      return decodeJump(ctrl.pop())
     }
     else if (token == ':') {
-      const jump = requireJump(pop())
+      const jump = decodeJump(pop())
       dict[pop()] = jump
     }
     else if (token == '?') {
@@ -65,9 +68,9 @@ export function* interpretIterate(source, { files = {}, out }) {
       push(condition === true ? b : a)
     }
     else if (token == 'if') {
-      let jump = requireJump(pop())
+      let jump = decodeJump(pop())
       if (requireBool(pop()) === true) {
-        ctrl.push(index + 1)
+        ctrl.push(encodeJump(index + 1))
         return jump
       }
     }
@@ -76,9 +79,9 @@ export function* interpretIterate(source, { files = {}, out }) {
       if (ctrl.at(-1) != 'loop') {
         ctrl.push(pop(), 'loop')
       }
-      let jump = ctrl.at(-2)
+      let jump = decodeJump(ctrl.at(-2))
       if (requireBool(pop()) === true) {
-        ctrl.push(index)
+        ctrl.push(encodeJump(index))
         return jump
       } else {
         ctrl.pop()
@@ -91,14 +94,14 @@ export function* interpretIterate(source, { files = {}, out }) {
       ctrl.push(requireJump(pop()))
     }
     else if (token == 'enumerate') {
-      const jump = ctrl.pop()
+      const jump = decodeJump(ctrl.pop())
       const from = ctrl.pop()
       const to = ctrl.pop()
       if (from < to) {
         ctrl.push(to)
         ctrl.push(from + 1)
-        ctrl.push(jump)
-        ctrl.push(index)
+        ctrl.push(encodeJump(jump))
+        ctrl.push(encodeJump(index))
         return jump
       }
     }
@@ -113,7 +116,7 @@ export function* interpretIterate(source, { files = {}, out }) {
     else if (token == '@copy') push(ctrl.at(-1))
     // ------
     else if (dict[token]) {
-      ctrl.push(index + 1) // set return adress to next token
+      ctrl.push(encodeJump(index + 1)) // set return adress to next token
       return dict[token]
     }
     else if (token == 'log') out(json(peek()))
@@ -182,9 +185,11 @@ function asserter(test, msg) {
     return value
   }
 }
+const encodeJump = index => index + JUMP_OFFSET
+const decodeJump = (value) => requireJump(value) - JUMP_OFFSET
 const requireNotNull = asserter(e => e == null, 'null disallowed')
-const requireNumber = asserter(e => 'number' !== typeof e, 'required a number')
-const requireString = asserter(e => 'string' !== typeof e, 'required a string')
-const requireBool = asserter(e => 'boolean' !== typeof e, 'required a boolean')
-const requireJump = asserter(e => e < 0 || e > 10000, 'required a boolean')
-const requireInt = asserter(e => e % 1 !== 0, 'required an integer')
+const requireJump = asserter(e => e < JUMP_OFFSET, 'expected a jump')
+const requireNumber = asserter(e => 'number' !== typeof e, 'expected a number')
+const requireString = asserter(e => 'string' !== typeof e, 'expected a string')
+const requireBool = asserter(e => 'boolean' !== typeof e, 'expected a boolean')
+const requireInt = asserter(e => e % 1 !== 0, 'expected an integer')

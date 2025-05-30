@@ -146,6 +146,7 @@ voort-app debug-view debug-source {
   overflow-y: auto;
 }
 voort-app debug-view stack-view {
+  box-sizing: border-box;
   display: flex;
   width: 100px;
   height: 300px;
@@ -160,6 +161,8 @@ voort-app debug-view stack-view {
 }
 voort-app debug-view stack-view source-token {
   border: 1px solid black;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 voort-app debug-view source-token {
   display: inline-block;

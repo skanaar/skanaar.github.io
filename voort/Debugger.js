@@ -1,5 +1,5 @@
 import { el } from '../assets/system.js'
-import { interpretIterate } from './interpret.js'
+import { interpretIterate, JUMP_OFFSET } from './interpret.js'
 
 export function Debugger({ app, source, files, onStop }) {
   const [mode, setMode] = React.useState('stopped')
@@ -66,7 +66,7 @@ export function Debugger({ app, source, files, onStop }) {
       class: 'toolbar',
       style: { display: 'flex', alignItems: 'center', gridColumn: '1 / span 3' }
     },
-      el('span', { style: { marginRight: 'auto' } },
+      el('span', { style: { marginRight: 'auto', paddingLeft: 10 } },
         mode === 'paused'
         ? `Debugger paused at ${debugState?.index}`
         : `Debugger ${mode}`
@@ -92,11 +92,18 @@ export function Debugger({ app, source, files, onStop }) {
     ),
     el('stack-view', {},
       el('div', {}, 'Stack'),
-      debugState?.stack.map(e => el('source-token', {}, e))
+      debugState?.stack.map(e => el('source-token', {}, el(Token, { value:e })))
     ),
     el('stack-view', {},
       el('div', {}, 'Control stack'),
-      debugState?.ctrl.map(e => el('source-token', {}, e))
+      debugState?.ctrl.map(e => el('source-token', {}, el(Token, { value:e })))
     )
   )
+}
+
+function Token({ value }) {
+  if ('string' == typeof value) return JSON.stringify(value)
+  if ('boolean' == typeof value) return JSON.stringify(value)
+  if (value >= JUMP_OFFSET) return `Jump to ${value - JUMP_OFFSET}`
+  return value
 }
