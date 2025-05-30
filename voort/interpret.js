@@ -162,6 +162,7 @@ export function* interpretIterate(source, { files = {}, out }) {
   }
   while (index<tokenObjs.length) {
     const { token, line, file } = tokenObjs[index]
+    yield { index, token, stack, ctrl, tokenObjs: tokenObjs }
     try {
       index = evaluate(token)
     } catch (error) {
@@ -169,7 +170,6 @@ export function* interpretIterate(source, { files = {}, out }) {
       console.error(error)
       throw new Error(`${file}:${line} error on "${token}" ${error.message}`)
     }
-    yield { index, token, stack, ctrl, tokenObjs: tokenObjs }
   }
   if (ctrl.length > 0) {
     out('Unmatched control flow')

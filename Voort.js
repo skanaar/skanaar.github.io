@@ -1,5 +1,6 @@
 import { el, App, useEvent, useMenuState } from './assets/system.js'
-import { interpret, interpretIterate } from './voort/interpret.js'
+import { Debugger } from './voort/Debugger.js'
+import { interpret } from './voort/interpret.js'
 import { complex, standardLibrary, main } from './voort/library.js'
 import { testsuite } from './voort/test.js'
 
@@ -11,11 +12,6 @@ app.addToAppMenu({
   arg: 'Voort output',
   cmd: 'i',
 })
-app.addMenu(
-  'Debug',
-  { title: 'Trace disabled', event: 'debug', arg: false },
-  { title: 'Trace execution', event: 'debug', arg: true },
-)
 app.addWindow('Voort output', Output, {
   visible: true,
   offset: [0,400],
@@ -33,48 +29,19 @@ function Voort() {
   const [mode, setMode] = React.useState('run')
   const [source, setSource] = React.useState(main)
   const [line, setLine] = React.useState(0)
-  const [debugIterator, setDebugIterator] = React.useState(null)
-  const [debugState, setDebugState] = React.useState(null)
   const textareaRef = React.useRef()
-  const debug = useMenuState(app, 'debug')
   const onChange = (e) => setSource(e.target.value)
   const onRun = () => {
-    setMode('run')
     app.trigger('clear-output')
+    setMode('run')
     interpret(source, {
       files: files,
-      trace: debug,
       out: (val) => app.trigger('output', val),
     })
   }
   const onDebug = () => {
-    setMode('debug-pause')
     app.trigger('clear-output')
-    const iterator = interpretIterate(source, {
-      files: files,
-      trace: debug,
-      out: (val) => app.trigger('output', val),
-    })
-    for (let i = 0; ; i++) {
-      const it = iterator.next()
-      if (it.done) break
-      if (i % 100 === 0) setDebugState(it.value)
-      if (it.value.token === 'debug') {
-        setDebugState(it.value)
-        break
-      }
-    }
-    setMode('debug-pause')
-    setDebugIterator(iterator)
-  }
-  const onStop = () => {
-    setMode('run')
-    setDebugState(null)
-  }
-  const onStep = () => {
-    if (!debugIterator) return
-    const state = debugIterator.next()
-    setDebugState(state.value)
+    setMode('debug')
   }
 
   React.useEffect(testsuite, [])
@@ -88,12 +55,11 @@ function Voort() {
     }
   }, [textareaRef.current])
 
-  React.useEffect(() => {
-    if (mode === 'debug-pause') {
-      const token = document.querySelector('voort-app source-token.active')
-      if (token) token.scrollIntoView()
-    }
-  }, [mode])
+  if (mode == 'debug')
+    return el('voort-app', {},
+      el('style', {}, css),
+      el(Debugger, { app, source, files, onStop: () => setMode('run') })
+    )
 
   return el('voort-app', {},
     el('style', {}, css),
@@ -104,39 +70,15 @@ function Voort() {
         el('option', { value: 'complex' }, 'complex'),
       ),
       el('span', { style: { marginRight: 'auto' } }, `Line ${line}`),
-      mode == 'debug-pause' ? el(React.Fragment, {},
-        el('button', { className: 'btn', onClick: onStop }, 'Stop'),
-        el('button', { className: 'btn', onClick: onStep }, 'Next'),
-      ) : el(React.Fragment, {},
-        el('button', { className: 'btn', onClick: onRun }, 'Run'),
-        el('button', { className: 'btn', onClick: onDebug }, 'Debug'),
-      ),
+      el('button', { className: 'btn', onClick: onRun }, 'Run'),
+      el('button', { className: 'btn', onClick: onDebug }, 'Debug'),
     ),
-    mode === 'run' ?
-      el('textarea', {
-        value: source,
-        spellcheck: 'false',
-        onChange,
-        ref: textareaRef,
-      })
-    : el('debug-view', {},
-        el('debug-source', {},
-          debugState?.tokenObjs.map((e, i) => el(React.Fragment, {},
-            e.first && i > 0 ? el('br', {}) : null,
-            el('source-token', {
-              class: i === debugState.index ? 'active' : ''
-            }, e.token),
-          ))
-        ),
-      el('stack-view', {},
-        el('div', {}, 'Stack'),
-        debugState?.stack.map(e => el('source-token', {}, e)),
-      ),
-      el('stack-view', {},
-        el('div', {}, 'Control stack'),
-        debugState?.ctrl.map(e => el('source-token', {}, e)),
-      )
-    ),
+    el('textarea', {
+      value: source,
+      spellcheck: 'false',
+      onChange,
+      ref: textareaRef,
+    })
   )
 }
 
@@ -170,8 +112,8 @@ voort-app textarea, voort-app debug-view debug-source {
   line-height: 18px;
   height: 300px;
   width: 500px;
-  border: 2px solid black;
-  margin: 0 -2px -2px -2px;
+  border: none;
+  border-top: 2px solid black;
   padding: 10px;
   resize: none;
 }
@@ -221,11 +163,15 @@ voort-app debug-view stack-view source-token {
 }
 voort-app debug-view source-token {
   display: inline-block;
-  padding: 1px 3px;
+  padding: 0px 2px;
+  border: 1px solid transparent;
   border-radius: 4px;
 }
-voort-app debug-view source-token.active {
+voort-app debug-view source-token[current] {
   background: black;
   color: white;
+}
+voort-app debug-view source-token[breakpoint] {
+  border: 1px solid black;
 }
 `
