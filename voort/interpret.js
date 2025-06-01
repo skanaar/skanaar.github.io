@@ -1,5 +1,3 @@
-import { standardLibrary } from './library.js'
-
 export const JUMP_OFFSET = 0x100000000
 
 function tokenize(tokenObjs, index, file, source) {
@@ -17,17 +15,17 @@ export function json(obj) {
   return JSON.stringify(obj).replaceAll(/\.\d+/g, (match) => match.slice(0, 4))
 }
 
-export function interpret(source, opts) {
-  for(const item of interpretIterate(source, opts)) {}
+export function interpret(filename, opts) {
+  for(const item of interpretIterate(filename, opts)) {}
 }
 
-export function* interpretIterate(source, { files = {}, out }) {
-  files['std'] = standardLibrary
+export function* interpretIterate(filename, { files, out }) {
   const tokenObjs = []
-  tokenize(tokenObjs, -1, 'main', source)
+  tokenize(tokenObjs, -1, filename, files[filename])
   const stack = []
   const ctrl = []
   const dict = {}
+  const data = {}
   const push = (e) => stack.push(requireNotNull(e))
   const pop = () => {
     if (stack.length === 0) throw new Error('cannot pop empty stack')
@@ -61,11 +59,32 @@ export function* interpretIterate(source, { files = {}, out }) {
     }
     else if (token == ':') {
       const jump = decodeJump(pop())
-      dict[pop()] = jump
+      dict[requireString(pop())] = jump
+    }
+    else if (token == 'create') {
+      const size = requireInt(pop())
+      const name = requireString(pop())
+      data[name] = new Int32Array(size)
+    }
+    else if (token == 'set') {
+      const value = requireNumber(pop())
+      const offset = requireInt(pop())
+      const name = requireString(pop())
+      data[name][offset] = value
+    }
+    else if (token == 'get') {
+      const offset = requireInt(pop())
+      const name = requireString(pop())
+      push(data[name][offset])
+    }
+    else if (token == 'display-image') {
+      const width = requireInt(pop())
+      const ref = requireDataRef(pop())
+      out({ type: 'image', width, data: data[ref] })
     }
     else if (token == '?') {
-      let condition = requireBool(pop()), a = pop(), b = pop()
-      push(condition === true ? b : a)
+      let onFalse = pop(), onTrue = pop(), condition = requireBool(pop())
+      push(condition === true ? onTrue : onFalse)
     }
     else if (token == 'if') {
       let jump = decodeJump(pop())
@@ -120,7 +139,7 @@ export function* interpretIterate(source, { files = {}, out }) {
       return dict[token]
     }
     else if (token == 'log') out(json(peek()))
-    else if (token == '.') out(json(pop()))
+    else if (token == '.') out(pop())
     else if (token == '...') out(json(stack))
     else if (token == '..c') out(json(ctrl))
     else if (token == '..d') out(json(dict))
@@ -130,6 +149,11 @@ export function* interpretIterate(source, { files = {}, out }) {
     else if (token == '-') push(-pop() + pop())
     else if (token == '*') push(pop() * pop())
     else if (token == '/') { let d = pop(); push(pop() / d) }
+    else if (token == 'mod') { let d = pop(); push(pop() % d) }
+    else if (token == 'floor') push(Math.floor(pop()))
+      else if (token == 'ceil') push(Math.ceil(pop()))
+        else if (token == 'round') push(Math.round(pop()))
+    else if (token == 'abs') push(Math.ceil(abs))
     else if (token == 'pow') { const exp = pop(); push(Math.pow(pop(), exp)) }
     else if (token == '=') push(pop() === pop())
     else if (token == '>') push(requireNumber(pop()) > requireNumber(pop()))
@@ -189,6 +213,7 @@ const encodeJump = index => index + JUMP_OFFSET
 const decodeJump = (value) => requireJump(value) - JUMP_OFFSET
 const requireNotNull = asserter(e => e == null, 'null disallowed')
 const requireJump = asserter(e => e < JUMP_OFFSET, 'expected a jump')
+const requireDataRef = asserter(e => 'string' !== typeof e, 'expected data ref')
 const requireNumber = asserter(e => 'number' !== typeof e, 'expected a number')
 const requireString = asserter(e => 'string' !== typeof e, 'expected a string')
 const requireBool = asserter(e => 'boolean' !== typeof e, 'expected a boolean')

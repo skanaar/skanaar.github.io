@@ -1,4 +1,18 @@
-export const main = `"std" include
+export const canvas = `"std" include
+"set-pixel" ( r g b a ref i - ) {
+  2dup >@ >@ 4 * 3 + rot set
+  @> @> 2dup >@ >@ 4 * 2 + rot set
+  @> @> 2dup >@ >@ 4 * 1 + rot set
+  @> @> 4 * rot set
+} :
+
+"canvas" 64 64 * 4 * create
+{
+  i 16 / i 16 / i 16 / 255  "canvas" i set-pixel
+} 0 64 dup * range enumerate
+"canvas" 64 display-image`
+
+export const mandelbrot = `"std" include
 "complex" include
 
 "sq" ( n - n ) { dup * } :
@@ -9,7 +23,7 @@ export const main = `"std" include
 "sq-mag" ( n n - n ) { sq swap sq + } :
 "mandelbrot-at" ( cr ci - bool ) {
   0 0
-  { mandelbrot-iter } 0 50 range enumerate
+  { mandelbrot-iter } 0 20 range enumerate
   sq-mag 4 >
   -rot drop drop
 } :
@@ -23,12 +37,24 @@ export const main = `"std" include
 "mandelbrot-line" ( y s - s ) {
   {
     over i res 2 * / xscale * x0 + swap
-    mandelbrot-at "x" "-" rot ? concat
+    mandelbrot-at "X" "-" ? concat
   } 0 res 2 * range enumerate
   swap drop
 } :
 
 debug
+
+"x" { res mod } :
+"y" { res / floor } :
+"real" { res / xscale * x0 + } :
+"imag" { res / yscale * y0 + } :
+
+"canvas" res res create-canvas
+{
+  i x real i y imag mandelbrot-at 0 255 ?
+  dup dup 255 "canvas" i set-pixel
+} 0 res sq range enumerate
+"canvas" res display-image
 
 { i res / yscale * y0 + "" mandelbrot-line . } 0 res range enumerate
 `
@@ -66,5 +92,12 @@ export const standardLibrary = `
   over 6 trig-taylor neg +
   swap drop
   +
+} :
+"create-canvas" ( ref width height - ) { * 4 * create } :
+"set-pixel" ( r g b a ref i - ) {
+  2dup >@ >@ 4 * 3 + rot set
+  @> @> 2dup >@ >@ 4 * 2 + rot set
+  @> @> 2dup >@ >@ 4 * 1 + rot set
+  @> @> 4 * rot set
 } :
 `

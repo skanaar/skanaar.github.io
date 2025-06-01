@@ -1,7 +1,12 @@
-import { el, App, useEvent, useMenuState } from './assets/system.js'
+import { el, App, useEvent } from './assets/system.js'
 import { Debugger } from './voort/Debugger.js'
 import { interpret } from './voort/interpret.js'
-import { complex, standardLibrary, main } from './voort/library.js'
+import {
+  complex,
+  standardLibrary,
+  mandelbrot,
+  canvas
+} from './voort/library.js'
 import { testsuite } from './voort/test.js'
 
 export const app = new App('Voort', Voort, 'voort.svg')
@@ -20,21 +25,22 @@ app.addWindow('Voort output', Output, {
 app.menuState = { debug: false }
 
 const files = {
+    mandelbrot: mandelbrot,
     std: standardLibrary,
     complex: complex,
-    main: main
+    canvas: canvas,
 }
 
 function Voort() {
   const [mode, setMode] = React.useState('run')
-  const [source, setSource] = React.useState(main)
+  const [filename, setFilename] = React.useState('mandelbrot')
+  const [source, setSource] = React.useState(mandelbrot)
   const [line, setLine] = React.useState(0)
   const textareaRef = React.useRef()
-  const onChange = (e) => setSource(e.target.value)
   const onRun = () => {
     app.trigger('clear-output')
     setMode('run')
-    interpret(source, {
+    interpret(filename, {
       files: files,
       out: (val) => app.trigger('output', val),
     })
@@ -58,16 +64,22 @@ function Voort() {
   if (mode == 'debug')
     return el('voort-app', {},
       el('style', {}, css),
-      el(Debugger, { app, source, files, onStop: () => setMode('run') })
+      el(Debugger, { app, filename, files, onStop: () => setMode('run') })
     )
 
   return el('voort-app', {},
     el('style', {}, css),
     el('div', { class: 'toolbar' },
-      el('select', { onChange: (e) => setSource(files[e.target.value])},
-        el('option', { value: 'main' }, 'main'),
-        el('option', { value: 'std' }, 'std'),
-        el('option', { value: 'complex' }, 'complex'),
+      el('select', {
+        value: filename,
+        onChange: (e) => {
+          setFilename(e.target.value)
+          setSource(files[e.target.value])
+        }
+      },
+        Object.keys(files).map(file =>
+          el('option', { value: file }, file)
+        ),
       ),
       el('span', { style: { marginRight: 'auto' } }, `Line ${line}`),
       el('button', { className: 'btn', onClick: onRun }, 'Run'),
@@ -76,7 +88,10 @@ function Voort() {
     el('textarea', {
       value: source,
       spellcheck: 'false',
-      onChange,
+      onChange: (e) => {
+        setSource(e.target.value)
+        files[filename] = e.target.value
+      },
       ref: textareaRef,
     })
   )
@@ -97,8 +112,29 @@ function Output() {
   const [data, setData] = React.useState([])
   useEvent(app, 'clear-output', () => setData([]))
   useEvent(app, 'output', (data) => setData(s => [...s, data]))
-  if (!data) return null
-  return el('pre', { className: 'voort-console' }, data.join('\n'))
+  return el('pre', { className: 'voort-console' },
+    data.map(e => el(ConsoleEntry, { value: e }))
+  )
+}
+
+function ConsoleEntry({ value }) {
+  if (value.type == 'image')
+    return el(ConsoleImage, { width: value.width, data: value.data })
+  return el('div', {}, value)
+}
+
+// react component that renders an ImageData object to a canvas
+function ConsoleImage({ width, data }) {
+  const ref = React.useRef()
+  React.useEffect(() => {
+    if (!ref.current) return
+    const ctx = ref.current.getContext('2d')
+    ref.current.width = width
+    ref.current.height = data.length / 4 / width
+    const imgData = new ImageData(new Uint8ClampedArray(data), width)
+    ctx.putImageData(imgData, 0, 0)
+  }, [data, ref.current])
+  return el('canvas', { ref })
 }
 
 const css = `

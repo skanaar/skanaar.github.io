@@ -1,7 +1,7 @@
 import { el } from '../assets/system.js'
 import { interpretIterate, JUMP_OFFSET } from './interpret.js'
 
-export function Debugger({ app, source, files, onStop }) {
+export function Debugger({ app, filename, files, onStop }) {
   const [mode, setMode] = React.useState('stopped')
   const [debugIterator, setDebugIterator] = React.useState(null)
   const [debugState, setDebugState] = React.useState(null)
@@ -9,7 +9,7 @@ export function Debugger({ app, source, files, onStop }) {
 
   const onStart = () => {
     app.trigger('clear-output')
-    const iterator = interpretIterate(source, {
+    const iterator = interpretIterate(filename, {
       files: files,
       out: (val) => app.trigger('output', val),
     })
