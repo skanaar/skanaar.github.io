@@ -69,7 +69,7 @@ export function useEvent(app, event, callback) {
   React.useEffect(() => {
     const cleanup = signals.on(app.name, event, callback)
     return cleanup
-  }, [])
+  })
 }
 
 function Clock() {

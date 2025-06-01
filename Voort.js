@@ -17,6 +17,11 @@ app.addToAppMenu({
   arg: 'Voort output',
   cmd: 'i',
 })
+app.addMenu('File',
+  { title: 'New file...', event: 'new_file', cmd: 'n' },
+  { title: 'Rename this file...', event: 'rename_file' },
+  { title: 'Delete this file...', event: 'delete_file' },
+)
 app.addWindow('Voort output', Output, {
   visible: true,
   offset: [0,400],
@@ -33,17 +38,44 @@ const files = {
 
 function Voort() {
   const [mode, setMode] = React.useState('run')
+  const [duration, setDuration] = React.useState(0)
   const [filename, setFilename] = React.useState('mandelbrot')
   const [source, setSource] = React.useState(mandelbrot)
   const [line, setLine] = React.useState(0)
   const textareaRef = React.useRef()
+  useEvent(app, 'new_file', React.useCallback(() => {
+    let name = prompt('Enter filename:', 'untitled')
+    if (!name) return
+    files[name] = ''
+    setFilename(name)
+    setSource(files[name])
+  }, [filename]))
+  useEvent(app, 'rename_file', React.useCallback(() => {
+    let name = prompt('Enter filename:', filename)
+    if (!name) return
+    files[name] = files[filename]
+    delete files[filename]
+    console.log({files})
+    setFilename(name)
+    setSource(files[name])
+  }, [filename]))
+  useEvent(app, 'delete_file', React.useCallback(() => {
+    if (Object.keys(files).length < 2) return
+    delete files[filename]
+    const newSelected = Object.keys(files)[0]
+    console.log({files: Object.keys(files), newSelected})
+    setFilename(newSelected)
+    setSource(files[newSelected])
+  }, [filename]))
   const onRun = () => {
     app.trigger('clear-output')
     setMode('run')
+    const start = Date.now()
     interpret(filename, {
       files: files,
       out: (val) => app.trigger('output', val),
     })
+    setDuration(Date.now() - start)
   }
   const onDebug = () => {
     app.trigger('clear-output')
@@ -82,6 +114,7 @@ function Voort() {
         ),
       ),
       el('span', { style: { marginRight: 'auto' } }, `Line ${line}`),
+      el('span', {}, duration ? `${duration}ms` : null),
       el('button', { className: 'btn', onClick: onRun }, 'Run'),
       el('button', { className: 'btn', onClick: onDebug }, 'Debug'),
     ),

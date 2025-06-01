@@ -26,6 +26,7 @@ export function* interpretIterate(filename, { files, out }) {
   const ctrl = []
   const dict = {}
   const data = {}
+  const blockEnds = []
   const push = (e) => stack.push(requireNotNull(e))
   const pop = () => {
     if (stack.length === 0) throw new Error('cannot pop empty stack')
@@ -39,9 +40,12 @@ export function* interpretIterate(filename, { files, out }) {
   const evaluate = (token) => {
     if (ctrl.at(-1) == 'compile') {
       if (token == '{') {
+        ctrl.push(encodeJump(index))
         ctrl.push('compile')
       }
       if (token == '}') {
+        blockEnds[decodeJump(ctrl.at(-2))] = index + 1
+        ctrl.pop()
         ctrl.pop()
       }
       if (token == 'include') throw new Error('include not available in blocks')
@@ -52,6 +56,8 @@ export function* interpretIterate(filename, { files, out }) {
     else if (token == 'debug') { }
     else if (token == '{') {
       push(encodeJump(index+1))
+      if (blockEnds[index]) return blockEnds[index]
+      ctrl.push(encodeJump(index))
       ctrl.push('compile')
     }
     else if (token == '}') {
@@ -122,6 +128,15 @@ export function* interpretIterate(filename, { files, out }) {
         ctrl.push(encodeJump(jump))
         ctrl.push(encodeJump(index))
         return jump
+      }
+    }
+    else if (token == 'leave-if') {
+      if (requireBool(pop())) {
+        const jump = decodeJump(ctrl.pop())
+        ctrl.pop()
+        ctrl.pop()
+        ctrl.pop()
+        return jump + 1
       }
     }
     else if (token == 'i') {

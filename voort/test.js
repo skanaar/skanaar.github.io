@@ -2,7 +2,7 @@ import { interpret } from './interpret.js'
 
 function test(source, rawExpected) {
   let actual = null
-  interpret('main', { files: { main: source }, out: e => actual = e })
+  interpret('test', { files: { test: source }, out: e => actual = e })
   let expected = rawExpected
   if (actual !== expected)
     throw new Error(`got ${actual} expected ${expected} from "${source}"`)

@@ -15,15 +15,13 @@ export const canvas = `"std" include
 export const mandelbrot = `"std" include
 "complex" include
 
-"sq" ( n - n ) { dup * } :
-
 "mandelbrot-iter" ( cr ci z0r z0i - cr ci z1r z1i ) {
   complex-sq >@ >@ 2dup @> @> complex-add
 } :
-"sq-mag" ( n n - n ) { sq swap sq + } :
+"sq-mag" ( n n - n ) { dup * swap dup * + } :
 "mandelbrot-at" ( cr ci - bool ) {
   0 0
-  { mandelbrot-iter } 0 20 range enumerate
+  { mandelbrot-iter 2dup sq-mag 4 < leave-if } 0 20 range enumerate
   sq-mag 4 >
   -rot drop drop
 } :
@@ -32,31 +30,21 @@ export const mandelbrot = `"std" include
 "xscale" { 2.25 } :
 "y0" { -1.1 } :
 "yscale" { 2.2 } :
-"res" { 20 } :
-
-"mandelbrot-line" ( y s - s ) {
-  {
-    over i res 2 * / xscale * x0 + swap
-    mandelbrot-at "X" "-" ? concat
-  } 0 res 2 * range enumerate
-  swap drop
-} :
-
-debug
+"res" { 128 } :
 
 "x" { res mod } :
 "y" { res / floor } :
 "real" { res / xscale * x0 + } :
 "imag" { res / yscale * y0 + } :
 
+debug
+
 "canvas" res res create-canvas
 {
   i x real i y imag mandelbrot-at 0 255 ?
   dup dup 255 "canvas" i set-pixel
-} 0 res sq range enumerate
+} 0 res res * range enumerate
 "canvas" res display-image
-
-{ i res / yscale * y0 + "" mandelbrot-line . } 0 res range enumerate
 `
 
 export const complex = `"complex-mult" ( a b c d - x y ) {
