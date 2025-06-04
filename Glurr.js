@@ -1,19 +1,19 @@
 import { el, App, useEvent } from './assets/system.js'
-import { Debugger } from './voort/Debugger.js'
-import { interpret } from './voort/interpret.js'
+import { Debugger } from './glurr/Debugger.js'
+import { interpret } from './glurr/interpret.js'
 import {
   complex,
   standardLibrary,
   mandelbrot,
-} from './voort/library.js'
-import { testsuite } from './voort/test.js'
+} from './glurr/library.js'
+import { testsuite } from './glurr/test.js'
 
-export const app = new App('Voort', Voort, 'voort.svg')
+export const app = new App('Glurr', Glurr, 'server.svg')
 app.addAbout(About, { offset: [520,0], visible: false })
 app.addToAppMenu({
   title: 'Show Output...',
   event: 'app:show_child_window',
-  arg: 'Voort output',
+  arg: 'Glurr output',
   cmd: 'i',
 })
 app.addMenu('File',
@@ -21,7 +21,7 @@ app.addMenu('File',
   { title: 'Rename this file...', event: 'rename_file' },
   { title: 'Delete this file', event: 'delete_file' },
 )
-app.addWindow('Voort output', Output, {
+app.addWindow('Glurr output', Output, {
   visible: true,
   offset: [0,400],
   size: [200,100]
@@ -34,7 +34,7 @@ const files = {
     complex: complex,
 }
 
-function Voort() {
+function Glurr() {
   const [mode, setMode] = React.useState('run')
   const [duration, setDuration] = React.useState(0)
   const [filename, setFilename] = React.useState('mandelbrot')
@@ -90,12 +90,12 @@ function Voort() {
   }, [textareaRef.current])
 
   if (mode == 'debug')
-    return el('voort-app', {},
+    return el('glurr-app', {},
       el('style', {}, css),
       el(Debugger, { app, filename, files, onStop: () => setMode('run') })
     )
 
-  return el('voort-app', {},
+  return el('glurr-app', {},
     el('style', {}, css),
     el('div', { class: 'toolbar' },
       el('select', {
@@ -128,7 +128,7 @@ function Voort() {
 
 function About() {
   return el('div', { className: 'padded', style: { maxWidth: 200 } },
-    el('p', {}, `Voort is a stack language inspired by Forth`),
+    el('p', {}, `Glurr is a stack language inspired by Forth`),
     el('p', {}, `Mention values like "strings" and 762 (numbers) to put them on
       the stack.`),
     el('p', {}, `Consume these values with words like + and / and push the
@@ -141,7 +141,7 @@ function Output() {
   const [data, setData] = React.useState([])
   useEvent(app, 'clear-output', () => setData([]))
   useEvent(app, 'output', (data) => setData(s => [...s, data]))
-  return el('pre', { className: 'voort-console' },
+  return el('pre', { className: 'glurr-console' },
     data.map(e => el(ConsoleEntry, { value: e }))
   )
 }
@@ -167,10 +167,10 @@ function ConsoleImage({ width, data }) {
 }
 
 const css = `
-voort-app {
+glurr-app {
   display: grid;
 }
-voort-app textarea, voort-app debug-view debug-source {
+glurr-app textarea, glurr-app debug-view debug-source {
   box-sizing: border-box;
   font-family: 'Monaco', monospace;
   font-size: 12px;
@@ -182,10 +182,10 @@ voort-app textarea, voort-app debug-view debug-source {
   padding: 10px;
   resize: none;
 }
-voort-app textarea:focus {
+glurr-app textarea:focus {
   outline: none;
 }
-.voort-console {
+.glurr-console {
   display: grid;
   border: 2px solid black;
   padding: 2px;
@@ -193,25 +193,25 @@ voort-app textarea:focus {
   min-height: 4em;
   width: 500px;
 }
-.voort-console canvas { border-radius: 4px }
-voort-app .toolbar {
+.glurr-console canvas { border-radius: 4px }
+glurr-app .toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 5px;
   gap: 5px;
 }
-voort-app .toolbar .btn {
+glurr-app .toolbar .btn {
   min-width: 80px;
 }
-voort-app debug-view {
+glurr-app debug-view {
   display: flex;
 }
-voort-app debug-view debug-source {
+glurr-app debug-view debug-source {
   display: block;
   overflow-y: auto;
 }
-voort-app debug-view stack-view {
+glurr-app debug-view stack-view {
   box-sizing: border-box;
   display: flex;
   width: 100px;
@@ -225,22 +225,22 @@ voort-app debug-view stack-view {
   font-family: 'Monaco', monospace;
   font-size: 12px;
 }
-voort-app debug-view stack-view source-token {
+glurr-app debug-view stack-view source-token {
   border: 1px solid black;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-voort-app debug-view source-token {
+glurr-app debug-view source-token {
   display: inline-block;
   padding: 0px 2px;
   border: 1px solid transparent;
   border-radius: 4px;
 }
-voort-app debug-view source-token[current] {
+glurr-app debug-view source-token[current] {
   background: black;
   color: white;
 }
-voort-app debug-view source-token[breakpoint] {
+glurr-app debug-view source-token[breakpoint] {
   border: 1px solid black;
 }
 `
