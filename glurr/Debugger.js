@@ -50,7 +50,7 @@ export function Debugger({ app, filename, files, onStop }) {
   React.useEffect(onStart, [])
   const scrollPausePointIntoView = () => {
     setTimeout(() => {
-      const token = document.querySelector('voort-app source-token[current]')
+      const token = document.querySelector('glurr-app source-token[current]')
       if (token) token.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }, 100)
   }
