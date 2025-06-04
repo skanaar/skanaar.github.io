@@ -13,7 +13,7 @@ export const mandelbrot = `"std" include
   {
     .iter-count @ 1 + .iter-count !
     mandelbrot-iter 2dup sq-mag 4 > leave-if
-  } 0 20 range enumerate
+  } 0 maxiter range enumerate
   sq-mag 4 >
   -rot drop drop
   drop .iter-count @
