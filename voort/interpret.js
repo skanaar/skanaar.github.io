@@ -25,6 +25,7 @@ export function* interpretIterate(filename, { files, out }) {
   const stack = []
   const ctrl = []
   const dict = {}
+  const vars = {}
   const data = {}
   const blockEnds = []
   const push = (e) => stack.push(requireNotNull(e))
@@ -67,20 +68,20 @@ export function* interpretIterate(filename, { files, out }) {
       const jump = decodeJump(pop())
       dict[requireString(pop())] = jump
     }
-    else if (token == 'create') {
+    else if (token == 'byte-array') {
       const size = requireInt(pop())
-      const name = requireString(pop())
-      data[name] = new Int32Array(size)
+      const name = requireSymbol(pop())
+      data[name] = new Uint8Array(size)
     }
     else if (token == 'set') {
       const value = requireNumber(pop())
       const offset = requireInt(pop())
-      const name = requireString(pop())
+      const name = requireSymbol(pop())
       data[name][offset] = value
     }
     else if (token == 'get') {
       const offset = requireInt(pop())
-      const name = requireString(pop())
+      const name = requireSymbol(pop())
       push(data[name][offset])
     }
     else if (token == 'display-image') {
@@ -171,8 +172,8 @@ export function* interpretIterate(filename, { files, out }) {
     else if (token == 'abs') push(Math.ceil(abs))
     else if (token == 'pow') { const exp = pop(); push(Math.pow(pop(), exp)) }
     else if (token == '=') push(pop() === pop())
-    else if (token == '>') push(requireNumber(pop()) > requireNumber(pop()))
-    else if (token == '<') push(requireNumber(pop()) < requireNumber(pop()))
+    else if (token == '>') push(requireNumber(pop()) < requireNumber(pop()))
+    else if (token == '<') push(requireNumber(pop()) > requireNumber(pop()))
     else if (token == 'swap') { const a = pop(), b = pop(); push(a); push(b) }
     else if (token == 'rot') {
       const a = pop(), b = pop(), c = pop();
@@ -197,14 +198,28 @@ export function* interpretIterate(filename, { files, out }) {
     else if (token == 'not') push(!requireBool(pop()))
     else if (token == 'true') push(true)
     else if (token == 'false') push(false)
+    else if (token == '=:') {
+      const value = pop()
+      const name = requireSymbol(pop())
+      if (name in vars) throw new Error(`${name} already bound to variable`)
+      vars[name] = value
+    }
+    else if (token == '@') push(vars[requireSymbol(pop())])
+    else if (token == '!') {
+      const name = requireSymbol(pop())
+      const value = pop()
+      if (!(name in vars)) throw new Error(`${name} not bound to a variable`)
+      vars[name] = value
+    }
     else if (token.match(/^-?[0-9.]+$/)) push(+token)
+    else if (token.match(/^\.[a-z0-9_-]+$/)) push(token)
     else if (token.match(/"[^"]*"/)) push(token.replaceAll('"', ''))
     else throw new Error(`unknown token ${token}`)
     return index + 1
   }
   while (index<tokenObjs.length) {
     const { token, line, file } = tokenObjs[index]
-    yield { index, token, stack, ctrl, tokenObjs: tokenObjs }
+    yield { index, token, stack, ctrl, tokenObjs, vars }
     try {
       index = evaluate(token)
     } catch (error) {
@@ -231,5 +246,9 @@ const requireJump = asserter(e => e < JUMP_OFFSET, 'expected a jump')
 const requireDataRef = asserter(e => 'string' !== typeof e, 'expected data ref')
 const requireNumber = asserter(e => 'number' !== typeof e, 'expected a number')
 const requireString = asserter(e => 'string' !== typeof e, 'expected a string')
+const requireSymbol = asserter(
+  e => 'string' !== typeof e || e.length < 2 || e[0] != '.',
+  'expected a symbol'
+)
 const requireBool = asserter(e => 'boolean' !== typeof e, 'expected a boolean')
 const requireInt = asserter(e => e % 1 !== 0, 'expected an integer')

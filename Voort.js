@@ -5,7 +5,6 @@ import {
   complex,
   standardLibrary,
   mandelbrot,
-  canvas
 } from './voort/library.js'
 import { testsuite } from './voort/test.js'
 
@@ -20,7 +19,7 @@ app.addToAppMenu({
 app.addMenu('File',
   { title: 'New file...', event: 'new_file', cmd: 'n' },
   { title: 'Rename this file...', event: 'rename_file' },
-  { title: 'Delete this file...', event: 'delete_file' },
+  { title: 'Delete this file', event: 'delete_file' },
 )
 app.addWindow('Voort output', Output, {
   visible: true,
@@ -33,7 +32,6 @@ const files = {
     mandelbrot: mandelbrot,
     std: standardLibrary,
     complex: complex,
-    canvas: canvas,
 }
 
 function Voort() {
@@ -55,7 +53,6 @@ function Voort() {
     if (!name) return
     files[name] = files[filename]
     delete files[filename]
-    console.log({files})
     setFilename(name)
     setSource(files[name])
   }, [filename]))
@@ -63,7 +60,6 @@ function Voort() {
     if (Object.keys(files).length < 2) return
     delete files[filename]
     const newSelected = Object.keys(files)[0]
-    console.log({files: Object.keys(files), newSelected})
     setFilename(newSelected)
     setSource(files[newSelected])
   }, [filename]))
@@ -190,13 +186,14 @@ voort-app textarea:focus {
   outline: none;
 }
 .voort-console {
-  display: block;
+  display: grid;
   border: 2px solid black;
   padding: 2px;
   margin: -2px;
   min-height: 4em;
   width: 500px;
 }
+.voort-console canvas { border-radius: 4px }
 voort-app .toolbar {
   display: flex;
   justify-content: space-between;

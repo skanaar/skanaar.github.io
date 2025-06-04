@@ -51,20 +51,20 @@ export function Debugger({ app, filename, files, onStop }) {
   const scrollPausePointIntoView = () => {
     setTimeout(() => {
       const token = document.querySelector('voort-app source-token[current]')
-      if (token) token.scrollIntoView()
+      if (token) token.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }, 100)
   }
 
   return el('debug-view', {
     style: {
       display: 'grid',
-      gridTemplateColumns: 'auto auto auto',
+      gridTemplateColumns: 'auto auto auto auto',
       gridTemplateRows: 'auto 300px'
     }
   },
     el('div', {
       class: 'toolbar',
-      style: { display: 'flex', alignItems: 'center', gridColumn: '1 / span 3' }
+      style: { display: 'flex', alignItems: 'center', gridColumn: '1 / span 4' }
     },
       el('span', { style: { marginRight: 'auto', paddingLeft: 10 } },
         mode === 'paused'
@@ -77,10 +77,11 @@ export function Debugger({ app, filename, files, onStop }) {
         && el('button', { className: 'btn', onClick: onStep }, 'Step'),
       el('button', { className: 'btn', onClick: onStop }, 'Stop'),
     ),
-    el('debug-source', {},
+    el('debug-source', { style: { width: 300 } },
       debugState?.tokenObjs.map((e, i) => el(React.Fragment, {},
         e.first && i > 0 ? el('br', {}) : null,
         el('source-token', {
+          title: `token ${i}`,
           onClick: () => {
             if (breakpoints.includes(i)) setBreakpoints(s=>s.filter(e => e!=i))
             else setBreakpoints(s => [...s, i])
@@ -97,7 +98,11 @@ export function Debugger({ app, filename, files, onStop }) {
     el('stack-view', {},
       el('div', {}, 'Control stack'),
       debugState?.ctrl.map(e => el('source-token', {}, el(Token, { value:e })))
-    )
+    ),
+    el('stack-view', {},
+      el('div', {}, 'Variables'),
+      Object.entries(debugState?.vars || {}).map(([k, v]) => el('source-token', {}, `${k}: ${v}`))
+    ),
   )
 }
 
