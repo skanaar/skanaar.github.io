@@ -42,8 +42,11 @@ export function Debugger({ app, filename, files, onStop }) {
   }
   const onStep = () => {
     if (!debugIterator) return
-    const state = debugIterator.next()
-    setDebugState(state.value)
+    let iterator = debugIterator.next()
+    if (iterator.done) return
+    while (iterator.value.token === '')
+      iterator = debugIterator.next()
+    setDebugState(iterator.value)
     scrollPausePointIntoView()
   }
 
@@ -88,7 +91,7 @@ export function Debugger({ app, filename, files, onStop }) {
           },
           current: i === debugState.index ? 'true' : undefined,
           breakpoint: breakpoints.includes(i) ? 'true' : undefined,
-        }, e.token)
+        }, e.token == '' ? '' : e.token)
       ))
     ),
     el('stack-view', {},

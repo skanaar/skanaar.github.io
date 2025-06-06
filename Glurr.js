@@ -1,11 +1,8 @@
 import { el, App, useEvent } from './assets/system.js'
+import { useFetch } from './assets/useFetch.js'
 import { Debugger } from './glurr/Debugger.js'
 import { interpret } from './glurr/interpret.js'
-import {
-  complex,
-  standardLibrary,
-  mandelbrot,
-} from './glurr/library.js'
+import { files } from './glurr/library.js'
 import { testsuite } from './glurr/test.js'
 
 export const app = new App('Glurr', Glurr, 'server.svg')
@@ -28,17 +25,11 @@ app.addWindow('Glurr output', Output, {
 })
 app.menuState = { debug: false }
 
-const files = {
-    mandelbrot: mandelbrot,
-    std: standardLibrary,
-    complex: complex,
-}
-
 function Glurr() {
   const [mode, setMode] = React.useState('run')
   const [duration, setDuration] = React.useState(0)
   const [filename, setFilename] = React.useState('mandelbrot')
-  const [source, setSource] = React.useState(mandelbrot)
+  const [source, setSource] = React.useState(files.mandelbrot)
   const [line, setLine] = React.useState(0)
   const textareaRef = React.useRef()
   useEvent(app, 'new_file', React.useCallback(() => {
@@ -127,13 +118,26 @@ function Glurr() {
 }
 
 function About() {
-  return el('div', { className: 'padded', style: { maxWidth: 200 } },
+  const { data } = useFetch('./glurr/interpret.js', 'text')
+  const docs = React.useMemo(() => data?.split('\n')
+    .filter(e => e.includes('///'))
+    .map(e => e.match(/"([^"]+)" `([^`]+)` (.*)/) ?? e)
+    .map(e => typeof e === 'string'
+      ? e.split('#')[1]
+      : ({ word: e?.[1], example: e?.[2], desc: e?.[3] }))
+  )
+  return el('div', {
+      className: 'padded',
+      style: { width: 400, height: 300, overflow: 'auto'
+    } },
     el('p', {}, `Glurr is a stack language inspired by Forth`),
-    el('p', {}, `Mention values like "strings" and 762 (numbers) to put them on
-      the stack.`),
-    el('p', {}, `Consume these values with words like + and / and push the
-      results to the stack.`),
-    el('p', {}, `Inspect the stack with the word "..."`)
+    el('p', {}, `Words pop and push values from the stack. 2 3 + leaves 5 on the stack.`),
+    docs?.map(e => 'string' == typeof e
+      ? el('h3', { key: e }, e)
+      : el('details', { key: e.word },
+          el('summary',{},e.word), el('code',{},e.example), el('p',{},e.desc)
+        )
+    )
   )
 }
 
@@ -186,12 +190,15 @@ glurr-app textarea:focus {
   outline: none;
 }
 .glurr-console {
+  box-sizing: border-box;
   display: grid;
-  border: 2px solid black;
   padding: 2px;
-  margin: -2px;
+  margin: 0;
   min-height: 4em;
   width: 500px;
+  height: 150px;
+  resize: both;
+  overflow: auto;
 }
 .glurr-console canvas { border-radius: 4px }
 glurr-app .toolbar {

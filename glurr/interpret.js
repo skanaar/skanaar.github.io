@@ -3,8 +3,7 @@ export const JUMP_OFFSET = 0x100000000
 function tokenize(tokenObjs, index, file, source) {
   const lines = source.split('\n')
   const objs = lines.map((line, i) => line
-    .split(/[ ]+/)
-    .filter(e => !!e)
+    .split(/[ ]/)
     .map((token, i) => ({ file, token, line: i, first: i == 0 }))
   ).flat()
   tokenObjs.splice(index + 1, 0, ...objs)
@@ -39,7 +38,8 @@ export function* interpretIterate(filename, { files, out }) {
   }
   let index = 0
   const evaluate = (token) => {
-    if (ctrl.at(-1) == 'compile') {
+    if (token == '') { }
+    else if (ctrl.at(-1) == 'compile') {
       if (token == '{') {
         ctrl.push(encodeJump(index))
         ctrl.push('compile')
@@ -51,48 +51,62 @@ export function* interpretIterate(filename, { files, out }) {
       }
       if (token == 'include') throw new Error('include not available in blocks')
     }
+    /// #Words
+    /// "include" `"std" include` import a source file
     else if (token == 'include') {
       tokenize(tokenObjs, index, peek(), files[pop()])
     }
+    /// "debug" `debug` pause interpreter in debug mode
     else if (token == 'debug') { }
+    /// "{" `{ ... }` enter compilation mode and push jump reference to the stack
     else if (token == '{') {
       push(encodeJump(index+1))
       if (blockEnds[index]) return blockEnds[index]
       ctrl.push(encodeJump(index))
       ctrl.push('compile')
     }
+    /// "}" `{ ... }` exit compilation, in runtime mode: return to call site
     else if (token == '}') {
       return decodeJump(ctrl.pop())
     }
+    /// ":" `name { ... } :` define a new word that bind name to block
     else if (token == ':') {
       const jump = decodeJump(pop())
       dict[requireString(pop())] = jump
     }
+    /// "byte-array" `.name size byte-array` create byte array bound to symbol
     else if (token == 'byte-array') {
       const size = requireInt(pop())
       const name = requireSymbol(pop())
       data[name] = new Uint8Array(size)
     }
+    /// "set" `.name index value set` write value to array
     else if (token == 'set') {
       const value = requireNumber(pop())
       const offset = requireInt(pop())
       const name = requireSymbol(pop())
       data[name][offset] = value
     }
+    /// "get" `.name index get` read from array
     else if (token == 'get') {
       const offset = requireInt(pop())
       const name = requireSymbol(pop())
       push(data[name][offset])
     }
+    /// "display-image" `.name width display-image` display a byte-array as an rgba image
     else if (token == 'display-image') {
       const width = requireInt(pop())
       const ref = requireDataRef(pop())
       out({ type: 'image', width, data: data[ref] })
     }
+
+    /// #Control flow
+    /// "?" `bool x y ?` if bool is true push x to the stack, otherwise push y
     else if (token == '?') {
       let onFalse = pop(), onTrue = pop(), condition = requireBool(pop())
       push(condition === true ? onTrue : onFalse)
     }
+    /// "if" `bool { block } ?` if bool then invoke block
     else if (token == 'if') {
       let jump = decodeJump(pop())
       if (requireBool(pop()) === true) {
@@ -100,7 +114,7 @@ export function* interpretIterate(filename, { files, out }) {
         return jump
       }
     }
-    else if (token == '{') ctrl.push(index, 'compile')
+    /// "loop" `true { ... bool } loop` repeat block while true is on the stack
     else if (token == 'loop') {
       if (ctrl.at(-1) != 'loop') {
         ctrl.push(pop(), 'loop')
@@ -119,6 +133,7 @@ export function* interpretIterate(filename, { files, out }) {
       ctrl.push(requireNumber(pop()))
       ctrl.push(requireJump(pop()))
     }
+    /// "range enumerate" `{ i ... } 0 10 range enumerate` repeate block 10 times
     else if (token == 'enumerate') {
       const jump = decodeJump(ctrl.pop())
       const from = ctrl.pop()
@@ -131,6 +146,7 @@ export function* interpretIterate(filename, { files, out }) {
         return jump
       }
     }
+    /// "leave-if" `{ true leave-if } 0 10 range enumerate` leave range loop if true is on the stack
     else if (token == 'leave-if') {
       if (requireBool(pop())) {
         const jump = decodeJump(ctrl.pop())
@@ -140,40 +156,55 @@ export function* interpretIterate(filename, { files, out }) {
         return jump + 1
       }
     }
+    /// "i" `{ i } 0 10 range enumerate` push iteration index to the stack
     else if (token == 'i') {
       push(ctrl.at(-3) - 1)
     }
+    /// "( )" `( n - n )` comment
     else if (token == '(') {
       while (index < tokenObjs.length && tokenObjs[index].token != ')') index++
     }
     else if (token == '>@') ctrl.push(pop())
     else if (token == '@>') push(ctrl.pop())
     else if (token == '@copy') push(ctrl.at(-1))
-    // ------
     else if (dict[token]) {
       ctrl.push(encodeJump(index + 1)) // set return adress to next token
       return dict[token]
     }
+
     else if (token == 'log') out(json(peek()))
     else if (token == '.') out(pop())
     else if (token == '...') out(json(stack))
-    else if (token == '..c') out(json(ctrl))
-    else if (token == '..d') out(json(dict))
     else if (token == 'trace') out(`${json(stack)} ${json(ctrl)}`)
+
+    /// #Math words
     else if (token == 'drop') pop()
+    /// "+" `3 2 +` addition
     else if (token == '+') push(pop() + pop())
+    /// "-" `3 2 -` subtraction
     else if (token == '-') push(-pop() + pop())
+    /// "*" `3 2 *` multiplication
     else if (token == '*') push(pop() * pop())
+    /// "/" `3 2 /` division
     else if (token == '/') { let d = pop(); push(pop() / d) }
+    /// "pow" `3 2 pow` exponentiation
+    else if (token == 'pow') { const exp = pop(); push(Math.pow(pop(), exp)) }
     else if (token == 'mod') { let d = pop(); push(pop() % d) }
     else if (token == 'floor') push(Math.floor(pop()))
-      else if (token == 'ceil') push(Math.ceil(pop()))
-        else if (token == 'round') push(Math.round(pop()))
+    else if (token == 'ceil') push(Math.ceil(pop()))
+    else if (token == 'round') push(Math.round(pop()))
     else if (token == 'abs') push(Math.ceil(abs))
-    else if (token == 'pow') { const exp = pop(); push(Math.pow(pop(), exp)) }
+    else if (token == 'neg') push(-requireNumber(pop()))
+
+    /// #Logic words
     else if (token == '=') push(pop() === pop())
     else if (token == '>') push(requireNumber(pop()) < requireNumber(pop()))
     else if (token == '<') push(requireNumber(pop()) > requireNumber(pop()))
+    else if (token == 'not') push(!requireBool(pop()))
+    else if (token == 'true') push(true)
+    else if (token == 'false') push(false)
+
+    /// #Stack manipulation
     else if (token == 'swap') { const a = pop(), b = pop(); push(a); push(b) }
     else if (token == 'rot') {
       const a = pop(), b = pop(), c = pop();
@@ -181,23 +212,13 @@ export function* interpretIterate(filename, { files, out }) {
       push(a)
       push(c)
     }
-    else if (token == '-rot') {
-      const a = pop(), b = pop(), c = pop();
-      push(a)
-      push(c)
-      push(b)
-    }
+    else if (token == 'pick') push(stack.at(-requireInt(pop())))
+    else if (token == 'over') push(stack.at(-2))
+    else if (token == 'dup') push(peek())
     else if (token == 'concat') {
       const a = pop(), b = pop()
       push(`${b}${a}`)
     }
-    else if (token == 'pick') push(stack.at(-requireInt(pop())))
-    else if (token == 'over') push(stack.at(-2))
-    else if (token == 'dup') push(peek())
-    else if (token == 'neg') push(-requireNumber(pop()))
-    else if (token == 'not') push(!requireBool(pop()))
-    else if (token == 'true') push(true)
-    else if (token == 'false') push(false)
     else if (token == '=:') {
       const value = pop()
       const name = requireSymbol(pop())

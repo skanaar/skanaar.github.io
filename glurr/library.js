@@ -1,7 +1,9 @@
-export const mandelbrot = `"std" include
+export const files = {
+
+  mandelbrot: `"std" include
 "complex" include
 
-"mandelbrot-iter" ( cr ci z0r z0i - cr ci z1r z1i ) {
+"mandelbrot-iter" ( c c z0 z0 - c c z1 z1 ) {
   complex-sq >@ >@ 2dup @> @> complex-add
 } :
 "sq-mag" ( n n - n ) { dup * swap dup * + } :
@@ -20,16 +22,15 @@ export const mandelbrot = `"std" include
 } :
 
 "x0" { -1.75 } :
-"xscale" { 2.5 } :
 "y0" { -1.25 } :
-"yscale" { 2.5 } :
+"scale" { 2.5 } :
 "res" { 128 } :
 "maxiter" { 20 } :
 
 "x" { res mod } :
 "y" { res / floor } :
-"real" { res / xscale * x0 + } :
-"imag" { res / yscale * y0 + } :
+"real" { res / scale * x0 + } :
+"imag" { res / scale * y0 + } :
 
 debug
 
@@ -39,9 +40,8 @@ debug
   dup dup 255 .canvas i set-pixel
 } 0 res res * range enumerate
 .canvas res display-image
-`
-
-export const complex = `"complex-mult" ( a b c d - x y ) {
+`,
+  complex: `"complex-mult" ( a b c d - x y ) {
   4 pick 3 pick *
   4 pick 3 pick * neg
   + >@
@@ -50,12 +50,12 @@ export const complex = `"complex-mult" ( a b c d - x y ) {
   + @> swap
 } :
 
- "complex-sq" ( 2n 2n - 2n ) { 2dup complex-mult } :
- "complex-add" ( a b c d - x y ) { rot + rot rot + swap } :
- "complex-neg" ( a b - x y ) { neg swap neg swap } :
-`
-
-export const standardLibrary = `"pi" { 3.14159 } :
+"complex-sq" ( 2n 2n - 2n ) { 2dup complex-mult } :
+"complex-add" ( a b c d - x y ) { rot + rot rot + swap } :
+"complex-neg" ( a b - x y ) { neg swap neg swap } :
+`,
+  std: `"pi" { 3.14159 } :
+"-rot" ( a b c - c a b ) { rot rot } :
 "2dup" ( a b - a b a b ) { swap dup rot dup rot swap } :
 "over" ( a b - a b a ) { swap dup rot swap } :
 "factorial" ( n - n ) { dup >@ { i * } 1 @> range enumerate } :
@@ -85,19 +85,52 @@ export const standardLibrary = `"pi" { 3.14159 } :
   @> @> 2dup >@ >@ 4 * 2 + rot set
   @> @> 2dup >@ >@ 4 * 1 + rot set
   @> @> 4 * rot set
-} :`
-
-export const sine = `"std" include
+} :
+`,
+  draw: `"std" include
 
 "res" { 64 } :
 
+.canvas-stroke 4 byte-array
+.canvas-width 0 =:
+.canvas-ref 0 =:
+"set-stroke" {
+  >@
+  .canvas-stroke 3 255 set
+  .canvas-stroke 2 @copy set
+  .canvas-stroke 1 @copy set
+  .canvas-stroke 0 @> set
+} :
+"stroke-pixel" ( x y - ) {
+  .canvas-width @ * + 4 * >@
+  .canvas-ref @ @copy 0 + .canvas-stroke 0 get set
+  .canvas-ref @ @copy 1 + .canvas-stroke 1 get set
+  .canvas-ref @ @copy 2 + .canvas-stroke 2 get set
+  .canvas-ref @ @copy 3 + .canvas-stroke 3 get set
+  @> drop
+} :
+
+.line-slope 0 =:
+.line-dx 0 =:
+.line-dy 0 =:
+"shallow-line" ( ax ay bx by - ) {
+  2 pick 4 pick - .dx !
+  2 pick 5 pick - .dy !
+  {
+    i 6 pick +
+    i .dy @ .dx @ / * 5 pick +
+    stroke-pixel
+  } 0 .dx @ range enumerate
+} :
+
 .y 0 =:
 .offset 0 =:
-.canvas res res create-canvas
+.bitmap res res create-canvas
 {
   i 0.2 * sin 5 * 32 + floor .y !
   .y @ res * i + .offset !
-  0 0 0 255 .canvas .offset @ set-pixel
+  0 0 0 255 .bitmap .offset @ set-pixel
 } 0 res range enumerate
-.canvas res display-image
+.bitmap res display-image
 `
+}
