@@ -1,28 +1,22 @@
 import { el, App, useEvent } from './assets/system.js'
-import { useFetch } from './assets/useFetch.js'
+import { CodeDoc } from './glurr/CodeDoc.js'
 import { Debugger } from './glurr/Debugger.js'
 import { interpret } from './glurr/interpret.js'
 import { files } from './glurr/library.js'
 import { testsuite } from './glurr/test.js'
 
 export const app = new App('Glurr', Glurr, 'server.svg')
-app.addAbout(About, { offset: [520,0], visible: false })
-app.addToAppMenu({
-  title: 'Show Output...',
-  event: 'app:show_child_window',
-  arg: 'Glurr output',
-  cmd: 'i',
-})
 app.addMenu('File',
   { title: 'New file...', event: 'new_file', cmd: 'n' },
   { title: 'Rename this file...', event: 'rename_file' },
   { title: 'Delete this file', event: 'delete_file' },
 )
-app.addWindow('Glurr output', Output, {
-  visible: true,
-  offset: [0,400],
-  size: [200,100]
-})
+app.addMenu('Window',
+  { title: 'Docs...', event: 'app:show_child_window', arg: 'Glurr docs' },
+  { title: 'Console...', event: 'app:show_child_window', arg: 'Glurr console' }
+)
+app.addWindow('Glurr console', Output, { visible: true, offset: [0,400] })
+app.addWindow('Glurr docs', Docs, { visible: true, offset: [520,0] })
 app.menuState = { debug: false }
 
 function Glurr() {
@@ -117,27 +111,26 @@ function Glurr() {
   )
 }
 
-function About() {
-  const { data } = useFetch('./glurr/interpret.js', 'text')
-  const docs = React.useMemo(() => data?.split('\n')
-    .filter(e => e.includes('///'))
-    .map(e => e.match(/"([^"]+)" `([^`]+)` (.*)/) ?? e)
-    .map(e => typeof e === 'string'
-      ? e.split('#')[1]
-      : ({ word: e?.[1], example: e?.[2], desc: e?.[3] }))
-  )
-  return el('div', {
-      className: 'padded',
-      style: { width: 400, height: 300, overflow: 'auto'
-    } },
+function Docs() {
+  return el('glurr-docs', {
+      class: 'padded',
+      style: { display: 'block', width: 300, height: 300, overflow: 'auto' }
+    },
+    el('style', {}, `
+glurr-docs h2 { border-bottom: 2px solid black; margin: 0 }
+glurr-docs details p { margin: 0 }
+glurr-docs details summary { font-family: Monaco, monospace; }
+glurr-docs details code {
+  display: inline-block;
+  margin: 5px 0;
+  padding: 3px 20px;
+  border: 1px solid #888;
+  border-radius: 3px;
+}
+`),
     el('p', {}, `Glurr is a stack language inspired by Forth`),
     el('p', {}, `Words pop and push values from the stack. 2 3 + leaves 5 on the stack.`),
-    docs?.map(e => 'string' == typeof e
-      ? el('h3', { key: e }, e)
-      : el('details', { key: e.word },
-          el('summary',{},e.word), el('code',{},e.example), el('p',{},e.desc)
-        )
-    )
+    el(CodeDoc, { file: './glurr/interpret.js' })
   )
 }
 

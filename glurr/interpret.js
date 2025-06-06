@@ -177,7 +177,7 @@ export function* interpretIterate(filename, { files, out }) {
     else if (token == '...') out(json(stack))
     else if (token == 'trace') out(`${json(stack)} ${json(ctrl)}`)
 
-    /// #Math words
+    /// #Math
     else if (token == 'drop') pop()
     /// "+" `3 2 +` addition
     else if (token == '+') push(pop() + pop())
@@ -196,8 +196,9 @@ export function* interpretIterate(filename, { files, out }) {
     else if (token == 'abs') push(Math.ceil(abs))
     else if (token == 'neg') push(-requireNumber(pop()))
 
-    /// #Logic words
-    else if (token == '=') push(pop() === pop())
+    /// #Logic
+    /// "=" `1 1 =` Equality
+    else if (token == '=') push(pop() === pop()) /// "=" `1 1 =` Equality
     else if (token == '>') push(requireNumber(pop()) < requireNumber(pop()))
     else if (token == '<') push(requireNumber(pop()) > requireNumber(pop()))
     else if (token == 'not') push(!requireBool(pop()))
@@ -205,7 +206,9 @@ export function* interpretIterate(filename, { files, out }) {
     else if (token == 'false') push(false)
 
     /// #Stack manipulation
+    /// "swap" `3 2 swap` Swaps places of the two top stack items
     else if (token == 'swap') { const a = pop(), b = pop(); push(a); push(b) }
+    /// "rot" `1 2 3 rot` Moves the third stack item to the top. ( a b c - b c a )
     else if (token == 'rot') {
       const a = pop(), b = pop(), c = pop();
       push(b)
