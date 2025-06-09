@@ -198,37 +198,49 @@ export function* interpretIterate(filename, { files, out }) {
 
     /// #Logic
     /// "=" `1 1 =` Equality
-    else if (token == '=') push(pop() === pop()) /// "=" `1 1 =` Equality
+    else if (token == '=') push(pop() === pop())
+    /// ">" `3 2 >` Greater than
     else if (token == '>') push(requireNumber(pop()) < requireNumber(pop()))
+    /// "<" `2 3 <` Less than
     else if (token == '<') push(requireNumber(pop()) > requireNumber(pop()))
+    /// "not" `true not` Invert boolean value
     else if (token == 'not') push(!requireBool(pop()))
+    /// "true" `true` Boolean value
     else if (token == 'true') push(true)
+    /// "false" `false` Boolean value
     else if (token == 'false') push(false)
 
     /// #Stack manipulation
     /// "swap" `3 2 swap` Swaps places of the two top stack items
     else if (token == 'swap') { const a = pop(), b = pop(); push(a); push(b) }
-    /// "rot" `1 2 3 rot` Moves the third stack item to the top. ( a b c - b c a )
+    /// "rot" `1 2 3 rot` Moves the third stack item to the top. (a b c - b c a)
+    /// "-rot" `1 2 3 rot` Moves the top stack two steps down. (a b c - c a b)
     else if (token == 'rot') {
       const a = pop(), b = pop(), c = pop();
       push(b)
       push(a)
       push(c)
     }
+    /// "pick" `7 8 9 3 pick ( 7 8 9 7 )` Copy and push the nth item.
     else if (token == 'pick') push(stack.at(-requireInt(pop())))
+    /// "over" `1 2 over ( 1 2 1 )` Copies the second stack item.
     else if (token == 'over') push(stack.at(-2))
+    /// "dup" `1 dup ( 1 1 )` Duplicates the top stack item
     else if (token == 'dup') push(peek())
     else if (token == 'concat') {
       const a = pop(), b = pop()
       push(`${b}${a}`)
     }
+    /// "=:" `.pi 3.14 =:` Define a variable by binding a value to a symbol
     else if (token == '=:') {
       const value = pop()
       const name = requireSymbol(pop())
       if (name in vars) throw new Error(`${name} already bound to variable`)
       vars[name] = value
     }
+    /// "@" `.counter @` Read value of a variable
     else if (token == '@') push(vars[requireSymbol(pop())])
+    /// "!" `7 .counter !` Write value of a variable
     else if (token == '!') {
       const name = requireSymbol(pop())
       const value = pop()
@@ -276,3 +288,13 @@ const requireSymbol = asserter(
 )
 const requireBool = asserter(e => 'boolean' !== typeof e, 'expected a boolean')
 const requireInt = asserter(e => e % 1 !== 0, 'expected an integer')
+
+/// #Standard library
+/// "-rot" `1 2 3 -rot` Move the top stack items two steps down the stack
+/// "2dup" `1 2 2dup` duplicate the top two stack items
+/// "over" `1 2 over`
+/// "factorial" `"factorial" { dup 1 > { dup 1 - factorial * } if } :`
+/// "sin" `0.4 pi * sin`
+/// "cos" `0.4 pi * cos`
+/// "create-canvas" `.name width height create-canvas` create an RGBA bitmap
+/// "set-pixel" `r g b a .name index set-pixel` set pixel of a bitmap

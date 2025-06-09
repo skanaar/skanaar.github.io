@@ -58,7 +58,8 @@ debug
 "-rot" ( a b c - c a b ) { rot rot } :
 "2dup" ( a b - a b a b ) { swap dup rot dup rot swap } :
 "over" ( a b - a b a ) { swap dup rot swap } :
-"factorial" ( n - n ) { dup >@ { i * } 1 @> range enumerate } :
+"if-else" { >@ over >@ if @> not @> if } :
+"factorial" ( n - n ) { dup 1 > { dup 1 - factorial * } if } :
 
 "trig-taylor" ( x i - x ) { swap over pow swap factorial / } :
 "sin" ( x - x ) {

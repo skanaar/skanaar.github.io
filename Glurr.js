@@ -1,5 +1,5 @@
 import { el, App, useEvent } from './assets/system.js'
-import { CodeDoc } from './glurr/CodeDoc.js'
+import { Docs } from './glurr/Docs.js'
 import { Debugger } from './glurr/Debugger.js'
 import { interpret } from './glurr/interpret.js'
 import { files } from './glurr/library.js'
@@ -111,29 +111,6 @@ function Glurr() {
   )
 }
 
-function Docs() {
-  return el('glurr-docs', {
-      class: 'padded',
-      style: { display: 'block', width: 300, height: 300, overflow: 'auto' }
-    },
-    el('style', {}, `
-glurr-docs h2 { border-bottom: 2px solid black; margin: 0 }
-glurr-docs details p { margin: 0 }
-glurr-docs details summary { font-family: Monaco, monospace; }
-glurr-docs details code {
-  display: inline-block;
-  margin: 5px 0;
-  padding: 3px 20px;
-  border: 1px solid #888;
-  border-radius: 3px;
-}
-`),
-    el('p', {}, `Glurr is a stack language inspired by Forth`),
-    el('p', {}, `Words pop and push values from the stack. 2 3 + leaves 5 on the stack.`),
-    el(CodeDoc, { file: './glurr/interpret.js' })
-  )
-}
-
 function Output() {
   const [data, setData] = React.useState([])
   useEvent(app, 'clear-output', () => setData([]))
@@ -160,7 +137,7 @@ function ConsoleImage({ width, data }) {
     const imgData = new ImageData(new Uint8ClampedArray(data), width)
     ctx.putImageData(imgData, 0, 0)
   }, [data, ref.current])
-  return el('canvas', { ref })
+  return el('canvas', { ref, style: { borderRadius: 4 } })
 }
 
 const css = `
@@ -193,7 +170,6 @@ glurr-app textarea:focus {
   resize: both;
   overflow: auto;
 }
-.glurr-console canvas { border-radius: 4px }
 glurr-app .toolbar {
   display: flex;
   justify-content: space-between;

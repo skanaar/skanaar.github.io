@@ -5,9 +5,9 @@ export function CodeDoc({ file }) {
     const { data } = useFetch(file, 'text');
     const docs = React.useMemo(() => data?.split('\n')
         .filter(e => e.includes('///'))
-        .map(e => e.match(/"([^"]+)" `([^`]+)` (.*)/) ?? e)
+        .map(e => e.match(/"([^"]+)" `([^`]+)` ?(.*)/) ?? e)
         .map(e => typeof e === 'string'
-            ? e.split('#')[1]
+            ? e.split('#')[1] ?? e
             : ({ word: e?.[1], example: e?.[2], desc: e?.[3] }))
     );
     return el('div', {},
