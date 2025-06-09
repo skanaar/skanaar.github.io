@@ -100,6 +100,7 @@ function Glurr() {
       el('button', { className: 'btn', onClick: onDebug }, 'Debug'),
     ),
     el('textarea', {
+      class: 'source',
       value: source,
       spellcheck: 'false',
       onChange: (e) => {
@@ -144,7 +145,7 @@ const css = `
 glurr-app {
   display: grid;
 }
-glurr-app textarea, glurr-app debug-view debug-source {
+glurr-app .source {
   box-sizing: border-box;
   font-family: 'Monaco', monospace;
   font-size: 12px;
@@ -161,7 +162,6 @@ glurr-app textarea:focus {
 }
 .glurr-console {
   box-sizing: border-box;
-  display: grid;
   padding: 2px;
   margin: 0;
   min-height: 4em;
@@ -179,44 +179,5 @@ glurr-app .toolbar {
 }
 glurr-app .toolbar .btn {
   min-width: 80px;
-}
-glurr-app debug-view {
-  display: flex;
-}
-glurr-app debug-view debug-source {
-  display: block;
-  overflow-y: auto;
-}
-glurr-app debug-view stack-view {
-  box-sizing: border-box;
-  display: flex;
-  width: 100px;
-  height: 300px;
-  overflow-y: auto;
-  flex-direction: column;
-  border-left: 2px solid black;
-  border-top: 2px solid black;
-  gap: 2px;
-  padding: 2px;
-  font-family: 'Monaco', monospace;
-  font-size: 12px;
-}
-glurr-app debug-view stack-view source-token {
-  border: 1px solid black;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-glurr-app debug-view source-token {
-  display: inline-block;
-  padding: 0px 2px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-glurr-app debug-view source-token[current] {
-  background: black;
-  color: white;
-}
-glurr-app debug-view source-token[breakpoint] {
-  border: 1px solid black;
 }
 `

@@ -49,6 +49,16 @@ export function Debugger({ app, filename, files, onStop }) {
     setDebugState(iterator.value)
     scrollPausePointIntoView()
   }
+  const onStepOver = () => {
+    if (!debugIterator || !debugState) return
+    let startLen = debugState.ctrl.length
+    let iterator = debugIterator.next()
+    if (iterator.done) return
+    while (iterator.value.token === '' || iterator.value.ctrl.length > startLen)
+      iterator = debugIterator.next()
+    setDebugState(iterator.value)
+    scrollPausePointIntoView()
+  }
 
   React.useEffect(onStart, [])
   const scrollPausePointIntoView = () => {
@@ -65,22 +75,58 @@ export function Debugger({ app, filename, files, onStop }) {
       gridTemplateRows: 'auto 300px'
     }
   },
-    el('div', {
-      class: 'toolbar',
-      style: { display: 'flex', alignItems: 'center', gridColumn: '1 / span 4' }
-    },
-      el('span', { style: { marginRight: 'auto', paddingLeft: 10 } },
-        mode === 'paused'
-        ? `Debugger paused at ${debugState?.index}`
-        : `Debugger ${mode}`
-      ),
-      mode == 'paused'
-        && el('button', { className: 'btn', onClick: onResume }, 'Resume'),
-      mode == 'paused'
-        && el('button', { className: 'btn', onClick: onStep }, 'Step'),
+    el('style', {}, `
+      glurr-app debug-view {
+        display: flex;
+      }
+      glurr-app debug-view .toolbar {
+        display: flex; align-items: center; grid-column: 1 / span 4;
+        & > span { margin-right: auto; padding-left: 10px }
+      }
+      glurr-app debug-source {
+        display: block;
+        overflow-y: auto;
+      }
+      glurr-app stack-view {
+        box-sizing: border-box;
+        display: flex;
+        width: 100px;
+        height: 300px;
+        overflow-y: auto;
+        flex-direction: column;
+        border-left: 2px solid black;
+        border-top: 2px solid black;
+        gap: 2px;
+        padding: 2px;
+        font-family: 'Monaco', monospace;
+        font-size: 12px;
+      }
+      glurr-app stack-view source-token {
+        border: 1px solid black;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      glurr-app source-token {
+        display: inline-block;
+        padding: 0px 2px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+      }
+      glurr-app source-token[current] {
+        background: black;
+        color: white;
+      }
+      glurr-app source-token[breakpoint] {
+        border: 1px solid black;
+      }`),
+    el('div', { class: 'toolbar' },
+      el('span', {}, `Debugger paused at ${debugState?.index}`),
+      el('button', { className: 'btn', onClick: onResume }, 'Resume'),
+      el('button', { className: 'btn', onClick: onStepOver }, 'Step over'),
+      el('button', { className: 'btn', onClick: onStep }, 'Step'),
       el('button', { className: 'btn', onClick: onStop }, 'Stop'),
     ),
-    el('debug-source', { style: { width: 300 } },
+    el('debug-source', { class: 'source', style: { width: 300 } },
       debugState?.tokenObjs.map((e, i) => el(React.Fragment, {},
         e.first && i > 0 ? el('br', {}) : null,
         el('source-token', {

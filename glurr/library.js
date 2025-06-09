@@ -7,18 +7,18 @@ def mandelbrot-iter ( c c z0 z0 - c c z1 z1 ) {
   complex-sq >§ >§ 2dup §> §> complex-add
 } ;
 def sq-mag ( n n - n ) { dup * swap dup * + } ;
+def escaping { 2dup sq-mag 4 > } ;
+def +1! { dup @ 1 + swap ! } ;
 
 .iter-count 0 =:
 def mandelbrot-at ( cr ci - bool ) {
   0 0
   0 .iter-count !
   {
-    .iter-count @ 1 + .iter-count !
-    mandelbrot-iter 2dup sq-mag 4 > leave-if
+    .iter-count +1!
+    mandelbrot-iter escaping leave-if
   } 0 maxiter range enumerate
-  sq-mag 4 >
-  -rot drop drop
-  drop .iter-count @
+  drop drop drop drop .iter-count @
 } ;
 
 def x0 { -1.75 } ;
@@ -31,13 +31,15 @@ def x { res mod } ;
 def y { res / floor } ;
 def real { res / scale * x0 + } ;
 def imag { res / scale * y0 + } ;
+def iter-spectrum { maxiter / 255 * floor } ;
+def rgba { dup dup 255 } ;
 
 debug
 
 .canvas res res create-canvas
 {
-  i x real i y imag mandelbrot-at 255 * maxiter / floor
-  dup dup 255 .canvas i set-pixel
+  i x real i y imag mandelbrot-at iter-spectrum
+  rgba .canvas i set-pixel
 } 0 res res * range enumerate
 .canvas res display-image
 `,
