@@ -21,7 +21,7 @@ export function testsuite() {
   test('true 7 3 ? .', 7)
   test('true not 7 3 ? .', 3)
   test('7 neg .', -7)
-  test('"foo" { 7 } : foo .', 7)
+  test('def foo { 7 } ; foo .', 7)
   test('.foo 4 =: .foo @ .', 4)
   test('false true true 0 true { 1 + swap } loop .', 3)
   test('.foo 7 =: 3 .foo ! .foo @ .', 3)
