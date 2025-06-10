@@ -3,45 +3,38 @@ export const files = {
   mandelbrot: `"std" include
 "complex" include
 
-def mandelbrot-iter ( c c z0 z0 - c c z1 z1 ) {
-  complex-sq >§ >§ 2dup §> §> complex-add
-} ;
+def mandelbrot-iter { complex-sq 2over complex-add } ;
 def sq-mag ( n n - n ) { dup * swap dup * + } ;
 def escaping { 2dup sq-mag 4 > } ;
-def +1! { dup @ 1 + swap ! } ;
+def 4drop { drop drop drop drop } ;
 
 .iter-count 0 =:
-def mandelbrot-at ( cr ci - bool ) {
-  0 0
-  0 .iter-count !
+def mandelbrot-at { 0 0 mandelbrot-iterate 4drop .iter-count @ } ;
+def mandelbrot-iterate ( c z - c z ) {
   {
-    .iter-count +1!
-    mandelbrot-iter escaping leave-if
+    i .iter-count ! mandelbrot-iter escaping leave-if
   } 0 maxiter range enumerate
-  drop drop drop drop .iter-count @
 } ;
 
 def x0 { -1.75 } ;
 def y0 { -1.25 } ;
 def scale { 2.5 } ;
 def res { 128 } ;
-def maxiter { 20 } ;
-
+def maxiter { 50 } ;
 def x { res mod } ;
 def y { res / floor } ;
 def real { res / scale * x0 + } ;
 def imag { res / scale * y0 + } ;
-def iter-spectrum { maxiter / 255 * floor } ;
-def rgba { dup dup 255 } ;
+def to255 { maxiter / 255 * } ;
+def rgba { floor dup dup 255 } ;
+def to-coord { dup x real swap y imag } ;
+def mandelbrot-pixel { to-coord mandelbrot-at to255 rgba } ;
 
 debug
 
-.canvas res res create-canvas
-{
-  i x real i y imag mandelbrot-at iter-spectrum
-  rgba .canvas i set-pixel
-} 0 res res * range enumerate
-.canvas res display-image
+.img res res create-canvas
+{ i mandelbrot-pixel .img i set-pixel } 0 res sq range enumerate
+.img res display-image
 `,
   complex: `def complex-mult ( a b c d - x y ) {
   4 pick 3 pick *
@@ -59,9 +52,13 @@ def complex-neg ( a b - x y ) { neg swap neg swap } ;
   std: `def pi { 3.14159 } ;
 def -rot ( a b c - c a b ) { rot rot } ;
 def 2dup ( a b - a b a b ) { swap dup rot dup rot swap } ;
+def 2over { 4 pick 4 pick } ;
 def over ( a b - a b a ) { swap dup rot swap } ;
 def if-else { >§ over >§ if §> not §> if } ;
+
+def sq { dup * } ;
 def factorial ( n - n ) { dup 1 > { dup 1 - factorial * } if } ;
+def +1! { dup @ 1 + swap ! } ;
 
 def trig-taylor ( x i - x ) { swap over pow swap factorial / } ;
 def sin ( x - x ) {

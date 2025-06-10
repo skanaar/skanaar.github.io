@@ -23,12 +23,16 @@ export function Debugger({ app, filename, files, onStop }) {
       setMode('paused')
     }
   }
+  const end = () => {
+    setMode('ended')
+    setDebugState({ ...debugState, index: -1 })
+  }
   const onResume = () => {
     setMode('running')
     for (let i = 0; ; i++) {
       const { done, value } = debugIterator.next()
       if (done) {
-        setMode('ended')
+        end()
         break
       }
       if (i % 100 === 0) setDebugState(value)
@@ -43,9 +47,17 @@ export function Debugger({ app, filename, files, onStop }) {
   const onStep = () => {
     if (!debugIterator) return
     let iterator = debugIterator.next()
-    if (iterator.done) return
-    while (iterator.value.token === '')
+    if (iterator.done) {
+      end()
+      return
+    }
+    while (iterator.value.token === '') {
       iterator = debugIterator.next()
+      if (iterator.done) {
+        end()
+        return
+      }
+    }
     setDebugState(iterator.value)
     scrollPausePointIntoView()
   }
@@ -53,9 +65,17 @@ export function Debugger({ app, filename, files, onStop }) {
     if (!debugIterator || !debugState) return
     let startLen = debugState.ctrl.length
     let iterator = debugIterator.next()
-    if (iterator.done) return
-    while (iterator.value.token === '' || iterator.value.ctrl.length > startLen)
+    if (iterator.done) {
+      end()
+      return
+    }
+    while (iterator.value.token === '' || iterator.value.ctrl.length > startLen){
       iterator = debugIterator.next()
+      if (iterator.done) {
+        end()
+        return
+      }
+    }
     setDebugState(iterator.value)
     scrollPausePointIntoView()
   }
@@ -119,13 +139,18 @@ export function Debugger({ app, filename, files, onStop }) {
       glurr-app source-token[breakpoint] {
         border: 1px solid black;
       }`),
-    el('div', { class: 'toolbar' },
-      el('span', {}, `Debugger paused at ${debugState?.index}`),
-      el('button', { className: 'btn', onClick: onResume }, 'Resume'),
-      el('button', { className: 'btn', onClick: onStepOver }, 'Step over'),
-      el('button', { className: 'btn', onClick: onStep }, 'Step'),
-      el('button', { className: 'btn', onClick: onStop }, 'Stop'),
-    ),
+    mode == 'paused'
+    ? el('div', { class: 'toolbar' },
+        el('span', {}, `Debugger paused at ${debugState?.index}`),
+        el('button', { className: 'btn', onClick: onResume }, 'Resume'),
+        el('button', { className: 'btn', onClick: onStepOver }, 'Step over'),
+        el('button', { className: 'btn', onClick: onStep }, 'Step'),
+        el('button', { className: 'btn', onClick: onStop }, 'Stop'),
+      )
+    : el('div', { class: 'toolbar' },
+        el('span', {}, `Debugger stopped`),
+        el('button', { className: 'btn', onClick: onStop }, 'Stop'),
+      ),
     el('debug-source', { class: 'source', style: { width: 300 } },
       debugState?.tokenObjs.map((e, i) => el(React.Fragment, {},
         e.first && i > 0 ? el('br', {}) : null,

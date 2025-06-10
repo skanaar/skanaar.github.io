@@ -44,6 +44,11 @@ export function* interpretIterate(filename, { files, out }) {
       push(token)
       ctrl.pop()
     }
+    else if (ctrl.at(-1) == 'quote') {
+      if (!dict[token]) throw new Error('word not defined')
+      push(encodeJump(dict[token]))
+      ctrl.pop()
+    }
     else if (ctrl.at(-1) == 'compile') {
       if (token == '{') {
         ctrl.push(encodeJump(index))
@@ -60,6 +65,10 @@ export function* interpretIterate(filename, { files, out }) {
     /// "def" `def sq { dup * } ;` define a new word
     else if (token == 'def') {
       ctrl.push('def')
+    }
+    /// "'" `' word` push a code block reference to the stack
+    else if (token == '\'') {
+      ctrl.push('quote')
     }
     /// "include" `"std" include` import a source file
     else if (token == 'include') {
@@ -82,6 +91,11 @@ export function* interpretIterate(filename, { files, out }) {
     else if (token == ';') {
       const jump = decodeJump(pop())
       dict[requireString(pop())] = jump
+    }
+    /// "invoke" `{ ... } invoke` invoke a code block reference
+    else if (token == 'invoke') {
+      ctrl.push(encodeJump(index + 1)) // set return adress to next token
+      return decodeJump(pop())
     }
     /// "byte-array" `.name size byte-array` create byte array bound to symbol
     else if (token == 'byte-array') {
@@ -170,6 +184,10 @@ export function* interpretIterate(filename, { files, out }) {
     /// "( )" `( n - n )` comment
     else if (token == '(') {
       while (index < tokenObjs.length && tokenObjs[index].token != ')') index++
+    }
+    /// "--" `-- comment` comment to the end of line
+    else if (token == '--') {
+      while (index + 1 < tokenObjs.length && !tokenObjs[index+1]?.first) index++
     }
     else if (token == '>§') ctrl.push(pop())
     else if (token == '§>') push(ctrl.pop())
