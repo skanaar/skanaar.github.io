@@ -1,6 +1,6 @@
 export const files = {
 
-  mandelbrot: `"std" include
+mandelbrot: `"std" include
 "complex" include
 
 def mandelbrot-iter { complex-sq 2over complex-add } ;
@@ -36,7 +36,8 @@ debug
 { i mandelbrot-pixel .img i set-pixel } 0 res sq range enumerate
 .img res display-image
 `,
-  complex: `def complex-mult ( a b c d - x y ) {
+
+complex: `def complex-mult ( a b c d - x y ) {
   4 pick 3 pick *
   4 pick 3 pick * neg
   + >§
@@ -49,17 +50,25 @@ def complex-sq ( 2n 2n - 2n ) { 2dup complex-mult } ;
 def complex-add ( a b c d - x y ) { rot + rot rot + swap } ;
 def complex-neg ( a b - x y ) { neg swap neg swap } ;
 `,
-  std: `def pi { 3.14159 } ;
+
+std: `
 def -rot ( a b c - c a b ) { rot rot } ;
 def 2dup ( a b - a b a b ) { swap dup rot dup rot swap } ;
 def 2over { 4 pick 4 pick } ;
 def over ( a b - a b a ) { swap dup rot swap } ;
 def if-else { >§ over >§ if §> not §> if } ;
-
-def sq { dup * } ;
-def factorial ( n - n ) { dup 1 > { dup 1 - factorial * } if } ;
 def +1! { dup @ 1 + swap ! } ;
 
+-- random ----
+.rseed 4711 =:
+def rand-ceil { 7537 4711 * } ;
+def rand-next { .rseed @ 17 * 11 + rand-ceil mod .rseed ! } ;
+def rand { rand-next .rseed @ swap mod } ;
+
+-- math ----
+def pi { 3.14159 } ;
+def sq { dup * } ;
+def factorial ( n - n ) { dup 1 > { dup 1 - factorial * } if } ;
 def trig-taylor ( x i - x ) { swap over pow swap factorial / } ;
 def sin ( x - x ) {
   pi 2 * mod
@@ -87,7 +96,8 @@ def set-pixel ( r g b a ref i - ) {
   §> §> 4 * rot set
 } ;
 `,
-  draw: `"std" include
+
+draw: `"std" include
 
 def res { 64 } ;
 
@@ -132,5 +142,36 @@ def shallow-line ( ax ay bx by - ) {
   0 0 0 255 .bitmap .offset @ set-pixel
 } 0 res range enumerate
 .bitmap res display-image
+`,
+
+snake: `"std" include
+
+def w { 128 } ;
+
+.img w w create-canvas
+.trinkets 32 byte-array
+
+.px 0 =: .py 0 =: .pw 0 =: .ph 0 =:
+def rect {
+  .ph ! .pw ! .py ! .px !
+  {
+    0 0 0 255 .img
+      .px @ i .pw @ mod +
+      .py @ i .ph @ / floor + w * +
+    set-pixel
+  } 0 .pw @ .ph @ * range enumerate
+} ;
+
+{ 0 0 0 255 .img i w 0 * + set-pixel } 0 w range enumerate
+{ 0 0 0 255 .img i w w 1 - * + set-pixel } 0 w range enumerate
+{ 0 0 0 255 .img i w * set-pixel } 0 w range enumerate
+{ 0 0 0 255 .img i w * w 1 - + set-pixel } 0 w range enumerate
+
+{ 0 0 0 255 .img w w * rand set-pixel } 0 1024 range enumerate
+
+debug
+{ 31 rand 4 * 31 rand 4 * 4 4 rect } 0 128 range enumerate
+
+.img w display-image
 `
 }

@@ -26,7 +26,6 @@ export function* interpretIterate(filename, { files, out }) {
   const dict = {}
   const vars = {}
   const data = {}
-  const blockEnds = []
   const push = (e) => stack.push(requireNotNull(e))
   const pop = () => {
     if (stack.length === 0) throw new Error('cannot pop empty stack')
@@ -55,7 +54,6 @@ export function* interpretIterate(filename, { files, out }) {
         ctrl.push('compile')
       }
       if (token == '}') {
-        blockEnds[decodeJump(ctrl.at(-2))] = index + 1
         ctrl.pop()
         ctrl.pop()
       }
@@ -79,7 +77,6 @@ export function* interpretIterate(filename, { files, out }) {
     /// "{" `{ ... }` enter compilation mode and push jump reference to the stack
     else if (token == '{') {
       push(encodeJump(index+1))
-      if (blockEnds[index]) return blockEnds[index]
       ctrl.push(encodeJump(index))
       ctrl.push('compile')
     }
