@@ -19,7 +19,11 @@ onmessage = (e) => {
 
 function raytrace({ area, size, maxDepth, scene }) {
   let { width, height, x, y } = area
-  let { spheres, planes, triangles, lights } = scene
+  let spheres = scene.filter(e => e.kind === 'sphere')
+  let planes = scene.filter(e => e.kind === 'plane')
+  let triangles = scene.filter(e => e.kind === 'poly')
+  let lights = scene.filter(e => e.kind === 'light')
+
   let imgdata = new ImageData(width, height)
 
   let camera = Vec(128.0, 128.0, 512.0)

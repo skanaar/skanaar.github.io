@@ -1,21 +1,22 @@
 import { Vec, sq, add, cross, diff, norm, mult, rotx, mapply, Scale } from './math.js'
 import { generateRowByRowCoordinates } from './math.js'
+import { PerlinNoise } from './noise.js'
 import { teapotPatches } from './teapot.js'
 
 export function Light(point, amount) {
-  return { point, amount }
+  return { kind: 'light', point, amount }
 }
 
 export function Sphere(center, r, material) {
-  return { center, r, material }
+  return { kind: 'sphere', center, r, material }
 }
 
 export function Plane(point, normal, material) {
-  return { point, normal: norm(normal), material }
+  return { kind: 'plane', point, normal: norm(normal), material }
 }
 
 export function Polygon(a, b, c) {
-  return { a, b, c, normal: norm(cross(diff(c, a), diff(b, a))) }
+  return { kind: 'poly', a, b, c, normal: norm(cross(diff(c, a), diff(b, a))) }
 }
 
 function isValidVec(v) {
@@ -109,4 +110,22 @@ export function bezierMesh(patches, res, matrix) {
     ]).filter(isValidPolygon))
     .map(p => transformTriangle(p, matrix))
   ]
+}
+
+export function heightMap({ res, size, height }, matrix) {
+  const noise = PerlinNoise()
+  let point = (i, j) => {
+      let r = 2 * (Math.sqrt(sq((i-res/2) / res) + sq((j-res/2) / res)))
+      return Vec(
+        (i / res - 0.5) * size,
+        height * (r < 1 ? Math.cos(3.14 * r) : -1),
+        (j / res - 0.5) * size
+      )
+    }
+  return [...generateRowByRowCoordinates(res)].flatMap(({ x: i, y: j }) => [
+    Polygon(point(i, j), point(i + 1, j), point(i, j + 1)),
+    Polygon(point(i + 1, j), point(i + 1, j + 1), point(i, j + 1)),
+  ])
+  .filter(isValidPolygon)
+  .map(p => transformTriangle(p, matrix))
 }

@@ -6,9 +6,11 @@ import {
   Light,
   bezierMesh,
   wave,
+  heightMap,
 } from './raytracer/geometry.js'
 import {
   RotateX,
+  RotateY,
   RotateZ,
   Scale,
   Translate,
@@ -30,6 +32,7 @@ app.addMenu(
   'Scene',
   { title: 'Teapot', event: 'scene', arg: 'teapot' },
   { title: 'Wave', event: 'scene', arg: 'wave' },
+  { title: 'Island', event: 'scene', arg: 'island' },
 )
 app.addMenu(
   'Reflections',
@@ -48,51 +51,64 @@ app.addWindow('Options', RenderOptions, {
 })
 
 let size = 256
-let ditherMethod = 'floydsteinberg'
+let ditherMethod = 'none' //'floydsteinberg'
 let maxDepth = 3
 
-let lights = [
-  Light(Vec(32, 32, -256+32), 16),
-  Light(Vec(200, 50, 128), 150),
-]
-let spheres = []
-let planes = [
-  Plane(Vec(0,0,0), norm(Vec(1,0,0.01))),
-  Plane(Vec(0,0,0), norm(Vec(0,1,0.01))),
-  Plane(Vec(0,255,0), norm(Vec(0,-1,0.01))),
-  Plane(Vec(255,0,0), norm(Vec(-1,0,0.01))),
-  Plane(Vec(0,0,-255), norm(Vec(0,0,1.01))),
-]
-let triangles = []
+let scene = sceneIsland()
 
-function setSceneTeapot() {
-  spheres = [
-    Sphere(Vec(128+50, 128-50, -120), 64, 'mirror'),
+function sceneCommons() {
+  return [
+    Light(Vec(32, 32, -256+32), 16),
+    Light(Vec(200, 50, 128), 150),
+    Plane(Vec(0,0,0), norm(Vec(1,0,0.01))),
+    Plane(Vec(0,0,0), norm(Vec(0,1,0.01))),
+    Plane(Vec(0,255,0), norm(Vec(0,-1,0.01))),
+    Plane(Vec(255,0,0), norm(Vec(-1,0,0.01))),
+    Plane(Vec(0,0,-255), norm(Vec(0,0,1.01))),
   ]
-  triangles = bezierMesh(
-    teapotPatches,
-    3,
-    matrixStack(
-      Translate(120,256,-80),
-      Scale(40,40,40),
-      RotateX(1.5),
-      RotateZ(0.5)
-    )
-  )
 }
 
-function setSceneWave() {
-  spheres = [
+function sceneTeapot() {
+  return [
+    ...sceneCommons(),
+    Sphere(Vec(128+50, 128-50, -120), 64, 'mirror'),
+    ...bezierMesh(
+      teapotPatches,
+      3,
+      matrixStack(
+        Translate(120,256,-80),
+        Scale(40,40,40),
+        RotateX(1.5),
+        RotateZ(0.5)
+      )
+    )
+  ]
+}
+
+function sceneWave() {
+  return [
+    ...sceneCommons(),
     Sphere(Vec(128, 80, 0), 32, 'diffuse'),
     Sphere(Vec(128, 148, 0), 8, 'diffuse'),
+    ...wave(
+      { res: 20, size: 256, periods: 3, height: 40 },
+      matrixStack(Translate(0,220,128), RotateX(3), RotateZ(0))
+    )
   ]
-  triangles = wave(
-    { res: 20, size: 256, periods: 3, height: 40 },
-    matrixStack(Translate(0,220,128), RotateX(3), RotateZ(0))
-  )
 }
 
-setSceneTeapot()
+function sceneIsland() {
+  return [
+    Light(Vec(32, 32, -256+32), 16),
+    Light(Vec(200, 50, 128), 150),
+    Plane(Vec(0,0,0), norm(Vec(0,1,0.01))),
+    Plane(Vec(0,255,0), norm(Vec(0,-1,0.01))),
+    ...heightMap(
+      { res: 16, size: 256, height: 64 },
+      matrixStack(Translate(128,150,-128), RotateX(3.14), RotateY(0.1))
+    )
+  ]
+}
 
 function RayTracer() {
   const hostRef = React.useRef()
@@ -108,7 +124,7 @@ function RayTracer() {
       canvas: hostRef.current,
       size,
       maxDepth,
-      scene: { spheres, planes, triangles, lights },
+      scene,
       ditherer,
     }).then((result) => app.trigger('done', result))
   }
@@ -119,8 +135,9 @@ function RayTracer() {
   }, [])
 
   useEvent(app, 'scene', apply((arg) => {
-    if (arg == 'wave') setSceneWave()
-    else if (arg == 'teapot') setSceneTeapot()
+    if (arg == 'wave') scene = sceneWave()
+    else if (arg == 'teapot') scene = sceneTeapot()
+    else if (arg == 'island') scene = sceneIsland()
   }))
   useEvent(app, 'dither', apply((arg) => { ditherMethod = arg }))
   useEvent(app, 'maxdepth', apply((arg) => { maxDepth = arg }))
