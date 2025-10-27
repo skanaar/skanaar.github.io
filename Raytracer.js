@@ -7,6 +7,7 @@ import {
   bezierMesh,
   wave,
   heightMap,
+  Sun,
 } from './raytracer/geometry.js'
 import {
   RotateX,
@@ -99,13 +100,12 @@ function sceneWave() {
 
 function sceneIsland() {
   return [
-    Light(Vec(32, 32, -256+32), 16),
-    Light(Vec(200, 50, 128), 150),
+    Sun(Vec(-1, 1, -0.5), 2),
     Plane(Vec(0,0,0), norm(Vec(0,1,0.01))),
     Plane(Vec(0,255,0), norm(Vec(0,-1,0.01))),
     ...heightMap(
-      { res: 16, size: 256, height: 64 },
-      matrixStack(Translate(128,150,-128), RotateX(3.14), RotateY(0.1))
+      { res: 32, size: 256, height: 0, bump: 64 },
+      matrixStack(Translate(128,255,-128), RotateX(3.14), RotateY(-0.3))
     )
   ]
 }

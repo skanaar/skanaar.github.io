@@ -3,6 +3,10 @@ import { generateRowByRowCoordinates } from './math.js'
 import { PerlinNoise } from './noise.js'
 import { teapotPatches } from './teapot.js'
 
+export function Sun(dir, amount) {
+  return { kind: 'sun', dir, amount }
+}
+
 export function Light(point, amount) {
   return { kind: 'light', point, amount }
 }
@@ -112,13 +116,14 @@ export function bezierMesh(patches, res, matrix) {
   ]
 }
 
-export function heightMap({ res, size, height }, matrix) {
+export function heightMap({ res, size, height, bump }, matrix) {
   const noise = PerlinNoise()
   let point = (i, j) => {
       let r = 2 * (Math.sqrt(sq((i-res/2) / res) + sq((j-res/2) / res)))
+      let undulation = noise(i, j, 8, 4, 2)
       return Vec(
         (i / res - 0.5) * size,
-        height * (r < 1 ? Math.cos(3.14 * r) : -1),
+        (height+bump*undulation) * (r < 1 ? Math.cos(3.14 * r) + 1 : 0),
         (j / res - 0.5) * size
       )
     }

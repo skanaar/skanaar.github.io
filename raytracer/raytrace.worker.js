@@ -23,6 +23,7 @@ function raytrace({ area, size, maxDepth, scene }) {
   let planes = scene.filter(e => e.kind === 'plane')
   let triangles = scene.filter(e => e.kind === 'poly')
   let lights = scene.filter(e => e.kind === 'light')
+  let suns = scene.filter(e => e.kind === 'sun')
 
   let imgdata = new ImageData(width, height)
 
@@ -46,6 +47,13 @@ function raytrace({ area, size, maxDepth, scene }) {
           )
           if (beam.depth > light_dist - EPSILON)
             bright += lightBrightness(hit.point, hit.normal, light)
+        }
+        for (let sun of suns) {
+          let sunHit = trace_ray(add(hit.point, mult(-500, sun.dir)), sun.dir, 0,
+            { spheres, planes: [], triangles }
+          )
+          if (sunHit.depth > 500 - EPSILON)
+            bright += Math.max(0, sun.amount * -dot(hit.normal, sun.dir))
         }
       }
       bright = hdr(bright)
