@@ -1,6 +1,6 @@
 import { Vec, sq, add, cross, diff, norm, mult, rotx, mapply, Scale } from './math.js'
 import { generateRowByRowCoordinates } from './math.js'
-import { PerlinNoise } from './noise.js'
+import { Noise } from './noise.js'
 import { teapotPatches } from './teapot.js'
 
 export function Sun(dir, amount) {
@@ -12,7 +12,7 @@ export function Light(point, amount) {
 }
 
 export function Sphere(center, r, material) {
-  return { kind: 'sphere', center, r, material }
+  return { kind: 'sphere', center, r, material, transform }
 }
 
 export function Plane(point, normal, material) {
@@ -21,6 +21,10 @@ export function Plane(point, normal, material) {
 
 export function Polygon(a, b, c) {
   return { kind: 'poly', a, b, c, normal: norm(cross(diff(c, a), diff(b, a))) }
+}
+
+export function lathe(a, b, c) {
+  return { kind: 'lathe', a, b, c, normal: norm(cross(diff(c, a), diff(b, a))) }
 }
 
 function isValidVec(v) {
@@ -117,10 +121,10 @@ export function bezierMesh(patches, res, matrix) {
 }
 
 export function heightMap({ res, size, height, bump }, matrix) {
-  const noise = PerlinNoise()
+  const noise = Noise({ persistence: 0.5, octaves: 4, zoom: 10 })
   let point = (i, j) => {
       let r = 2 * (Math.sqrt(sq((i-res/2) / res) + sq((j-res/2) / res)))
-      let undulation = noise(i, j, 8, 4, 2)
+      let undulation = noise(i, j)
       return Vec(
         (i / res - 0.5) * size,
         (height+bump*undulation) * (r < 1 ? Math.cos(3.14 * r) + 1 : 0),

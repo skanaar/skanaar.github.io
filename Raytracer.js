@@ -105,7 +105,7 @@ function sceneIsland() {
     Plane(Vec(0,255,0), norm(Vec(0,-1,0.01))),
     ...heightMap(
       { res: 32, size: 256, height: 0, bump: 64 },
-      matrixStack(Translate(128,255,-128), RotateX(3.14), RotateY(-0.3))
+      matrixStack(Translate(128,200,-128), RotateX(3.14-0.2), RotateY(-0.3))
     )
   ]
 }
