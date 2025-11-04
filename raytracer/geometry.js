@@ -1,5 +1,5 @@
 import { Vec, sq, add, cross, diff, norm, mult, rotx, mapply, Scale } from './math.js'
-import { generateRowByRowCoordinates } from './math.js'
+import { generateRowByRowCoordinates, matrixStack } from './math.js'
 import { Noise } from './noise.js'
 import { teapotPatches } from './teapot.js'
 
@@ -12,7 +12,7 @@ export function Light(point, amount) {
 }
 
 export function Sphere(center, r, material) {
-  return { kind: 'sphere', center, r, material, transform }
+  return { kind: 'sphere', center, r, material }
 }
 
 export function Plane(point, normal, material) {
@@ -23,8 +23,32 @@ export function Polygon(a, b, c) {
   return { kind: 'poly', a, b, c, normal: norm(cross(diff(c, a), diff(b, a))) }
 }
 
-export function lathe(a, b, c) {
-  return { kind: 'lathe', a, b, c, normal: norm(cross(diff(c, a), diff(b, a))) }
+export function bezierPathes(name, patches) {
+  return { kind: 'patches', name, patches }
+}
+
+export function heightMap(name, { res, size, height, bump }, transforms) {
+  return { kind: 'heightmap', name, res, size, height, bump, transforms }
+}
+
+export function compileScene(objects) {
+  let result = objects.flatMap(e => {
+    switch (e.kind) {
+      case 'sun': return [e]
+      case 'light': return [e]
+      case 'sphere': return [e]
+      case 'plane': return [e]
+      case 'poly': return [e]
+      case 'patches': return [...bezierMesh(e.patches, e.res, matrixStack(...e.transforms))]
+      case 'heightmap': return [
+        ...heightMapMesh(
+          { res: e.res, size: e.size, height: e.height, bump: e.bump },
+          matrixStack(...e.transforms)
+        )
+      ]
+    }
+  })
+  return result
 }
 
 function isValidVec(v) {
@@ -120,7 +144,7 @@ export function bezierMesh(patches, res, matrix) {
   ]
 }
 
-export function heightMap({ res, size, height, bump }, matrix) {
+export function heightMapMesh({ res, size, height, bump }, matrix) {
   const noise = Noise({ persistence: 0.5, octaves: 4, zoom: 10 })
   let point = (i, j) => {
       let r = 2 * (Math.sqrt(sq((i-res/2) / res) + sq((j-res/2) / res)))

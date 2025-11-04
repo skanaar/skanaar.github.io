@@ -8,6 +8,7 @@ import {
   wave,
   heightMap,
   Sun,
+  compileScene,
 } from './raytracer/geometry.js'
 import {
   RotateX,
@@ -35,20 +36,16 @@ app.addMenu(
   { title: 'Wave', event: 'scene', arg: 'wave' },
   { title: 'Island', event: 'scene', arg: 'island' },
 )
-app.addMenu(
-  'Reflections',
-  { title: 'Enable reflections', event: 'maxdepth', arg: 3 },
-  { title: 'No reflections', event: 'maxdepth', arg: 0 },
-)
-app.addMenu(
-  'Dither',
-  { title: 'Floyd-Steinberg dither', event: 'dither', arg: 'floydsteinberg' },
-  { title: 'No dither', event: 'dither', arg: 'none' },
-)
 app.addWindow('Options', RenderOptions, {
   visible: true,
   offset: [256+20,0],
   size: [200,100]
+})
+app.addWindow('Editor', Editor, {
+  visible: true,
+  offset: [0, 256+20],
+  size: [400,300],
+  sizing: 'noresize'
 })
 
 let size = 256
@@ -56,6 +53,7 @@ let ditherMethod = 'none' //'floydsteinberg'
 let maxDepth = 3
 
 let scene = sceneIsland()
+app.check('scene', 'island')
 
 function sceneCommons() {
   return [
@@ -103,9 +101,10 @@ function sceneIsland() {
     Sun(Vec(-1, 1, -0.5), 2),
     Plane(Vec(0,0,0), norm(Vec(0,1,0.01))),
     Plane(Vec(0,255,0), norm(Vec(0,-1,0.01))),
-    ...heightMap(
+    heightMap(
+      'island',
       { res: 32, size: 256, height: 0, bump: 64 },
-      matrixStack(Translate(128,200,-128), RotateX(3.14-0.2), RotateY(-0.3))
+      [Translate(128,200,-128), RotateX(3.14-0.2), RotateY(-0.3)]
     )
   ]
 }
@@ -124,7 +123,7 @@ function RayTracer() {
       canvas: hostRef.current,
       size,
       maxDepth,
-      scene,
+      scene: compileScene(scene),
       ditherer,
     }).then((result) => app.trigger('done', result))
   }
@@ -135,6 +134,7 @@ function RayTracer() {
   }, [])
 
   useEvent(app, 'scene', apply((arg) => {
+    app.check('scene', arg)
     if (arg == 'wave') scene = sceneWave()
     else if (arg == 'teapot') scene = sceneTeapot()
     else if (arg == 'island') scene = sceneIsland()
@@ -175,5 +175,26 @@ function RenderOptions() {
       'Dither'
     ),
     `Duration: ${duration.toFixed(0)}ms`
+  )
+}
+
+function Editor() {
+  function r(x) { return Math.round(x) }
+  return el(
+    'div',
+    {},
+    el('style', {},
+      `svg.canvas-3d path {
+        fill: #fff;
+        stroke-linejoin: bevel;
+        stroke-width: 0.25px;
+        stroke: #000;
+      }`),
+    el('svg', { className: 'canvas-3d', viewBox: '0 0 400 300' },
+      compileScene(scene).filter(e => e.kind == 'poly').map((e, i) => el('path', {
+        key: `m${i}`,
+        d: `M${r(e.a.x)},${r(e.a.y)} L${r(e.b.x)},${r(e.b.y)} L${r(e.c.x)},${r(e.c.y)} Z`,
+      } )),
+    ),
   )
 }
