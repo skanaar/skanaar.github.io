@@ -9,6 +9,7 @@ import {
   heightMap,
   Sun,
   compileScene,
+  bezierPathes,
 } from './raytracer/geometry.js'
 import {
   RotateX,
@@ -22,6 +23,7 @@ import {
 } from './raytracer/math.js'
 import { raytraceParallel } from './raytracer/raytraceParallel.js'
 import { teapotPatches } from './raytracer/teapot.js'
+import { SceneView, SceneObjects } from './raytracer/SceneView.js'
 
 export const app = new App('RayTracer', RayTracer, 'aperture.svg')
 app.addToAppMenu({
@@ -41,10 +43,16 @@ app.addWindow('Options', RenderOptions, {
   offset: [256+20,0],
   size: [200,100]
 })
-app.addWindow('Editor', Editor, {
+app.addWindow('Scene View', SceneView, {
   visible: true,
-  offset: [0, 256+20],
+  offset: [220, 256+40],
   size: [400,300],
+  sizing: 'noresize'
+})
+app.addWindow('Scene Objects', SceneObjects, {
+  visible: true,
+  offset: [0, 256+40],
+  size: [200,300],
   sizing: 'noresize'
 })
 
@@ -52,7 +60,7 @@ let size = 256
 let ditherMethod = 'none' //'floydsteinberg'
 let maxDepth = 3
 
-let scene = sceneIsland()
+export let scene = sceneIsland()
 app.check('scene', 'island')
 
 function sceneCommons() {
@@ -70,16 +78,11 @@ function sceneCommons() {
 function sceneTeapot() {
   return [
     ...sceneCommons(),
-    Sphere(Vec(128+50, 128-50, -120), 64, 'mirror'),
-    ...bezierMesh(
+    Sphere('Mirror', Vec(128+50, 128-50, -120), 64, 'mirror'),
+    bezierPathes('teapot',
       teapotPatches,
       3,
-      matrixStack(
-        Translate(120,256,-80),
-        Scale(40,40,40),
-        RotateX(1.5),
-        RotateZ(0.5)
-      )
+      [Translate(120,256,-80), Scale(40,40,40), RotateX(1.5), RotateZ(0.5)]
     )
   ]
 }
@@ -87,8 +90,8 @@ function sceneTeapot() {
 function sceneWave() {
   return [
     ...sceneCommons(),
-    Sphere(Vec(128, 80, 0), 32, 'diffuse'),
-    Sphere(Vec(128, 148, 0), 8, 'diffuse'),
+    Sphere('Drop', Vec(128, 80, 0), 32, 'diffuse'),
+    Sphere('Drop', Vec(128, 148, 0), 8, 'diffuse'),
     ...wave(
       { res: 20, size: 256, periods: 3, height: 40 },
       matrixStack(Translate(0,220,128), RotateX(3), RotateZ(0))
@@ -138,6 +141,7 @@ function RayTracer() {
     if (arg == 'wave') scene = sceneWave()
     else if (arg == 'teapot') scene = sceneTeapot()
     else if (arg == 'island') scene = sceneIsland()
+    app.trigger('update-scene', scene)
   }))
   useEvent(app, 'dither', apply((arg) => { ditherMethod = arg }))
   useEvent(app, 'maxdepth', apply((arg) => { maxDepth = arg }))
@@ -175,26 +179,5 @@ function RenderOptions() {
       'Dither'
     ),
     `Duration: ${duration.toFixed(0)}ms`
-  )
-}
-
-function Editor() {
-  function r(x) { return Math.round(x) }
-  return el(
-    'div',
-    {},
-    el('style', {},
-      `svg.canvas-3d path {
-        fill: #fff;
-        stroke-linejoin: bevel;
-        stroke-width: 0.25px;
-        stroke: #000;
-      }`),
-    el('svg', { className: 'canvas-3d', viewBox: '0 0 400 300' },
-      compileScene(scene).filter(e => e.kind == 'poly').map((e, i) => el('path', {
-        key: `m${i}`,
-        d: `M${r(e.a.x)},${r(e.a.y)} L${r(e.b.x)},${r(e.b.y)} L${r(e.c.x)},${r(e.c.y)} Z`,
-      } )),
-    ),
   )
 }

@@ -1,0 +1,81 @@
+import { useEvent, el } from '../assets/system.js';
+import { app } from '../Raytracer.js';
+import { compileObject, compileScene } from './geometry.js';
+
+export function SceneView() {
+  function r(x) { return Math.round(x); }
+  const [scene, setScene] = React.useState([]);
+  const [selected, setSelected] = React.useState(null);
+
+  useEvent(app, 'update-scene', (scene) => setScene(scene));
+  useEvent(app, 'select-object', (item) => setSelected(item));
+
+  return el(
+    'div',
+    {},
+    el('style', {},
+      `svg.canvas-3d :is(path, ellipse, rect) {
+        fill: none;
+        stroke-width: 0.5px;
+        stroke: #000;
+      }
+      svg.canvas-3d path:not(.light) {
+        stroke-linejoin: bevel;
+        stroke-width: 0.125px
+      }
+      svg.canvas-3d :is(path, ellipse, rect).active {
+        stroke-width: 2px
+      }`),
+    el('svg', { className: 'canvas-3d', viewBox: '0 0 400 300' },
+      scene
+        .filter(e => ['patches', 'heightmap', 'wave'].includes(e.kind))
+        .map((e, i) => el('path', {
+          key: `mesh${i}`,
+          className: selected == e ? ' active' : '',
+          d: compileObject(e).map(({a,b,c}) => `M${r(a.x)},${r(a.y)} L${r(b.x)},${r(b.y)} L${r(c.x)},${r(c.y)} Z`).join(''),
+        })),
+      scene.filter(e => e.kind === 'light').map((e, i) => el('path', {
+        key: `light${i}`,
+        className: 'light' + (selected == e ? ' active' : ''),
+        d: `M${r(e.point.x) - 3},${r(e.point.y) - 3} l6,0 l0,6 l-6,0 Z m1.5,1.5 l0,3 l3,0 l0,-3 Z`
+      })),
+      scene.filter(e => e.kind === 'sphere').map((e, i) => el('ellipse', {
+        key: `sphere{i}`,
+        className: selected == e ? ' active' : '',
+        cx: e.center.x,
+        cy: e.center.y,
+        rx: e.r, ry: e.r
+      }))
+    )
+  );
+}
+
+export function SceneObjects() {
+  const [selected, setSelected] = React.useState(null);
+  const [scene, setScene] = React.useState([]);
+  useEvent(app, 'update-scene', (scene) => setScene(scene));
+
+  return el(
+    'scene-objects',
+    {},
+    el('style', {},
+      `scene-objects {
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        height: 300px;
+      }
+      scene-objects span { padding: 3px }
+      scene-objects span.active { background: black; color: white; }
+      `),
+    scene.map(e => el('span', {
+        onClick: () => {
+          setSelected(e)
+          app.trigger('select-object', e)
+        },
+        className: selected === e ? 'active' : undefined,
+      },
+      e.name || e.kind
+    ))
+  );
+}

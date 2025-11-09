@@ -11,8 +11,8 @@ export function Light(point, amount) {
   return { kind: 'light', point, amount }
 }
 
-export function Sphere(center, r, material) {
-  return { kind: 'sphere', center, r, material }
+export function Sphere(name, center, r, material) {
+  return { kind: 'sphere', name, center, r, material }
 }
 
 export function Plane(point, normal, material) {
@@ -23,32 +23,33 @@ export function Polygon(a, b, c) {
   return { kind: 'poly', a, b, c, normal: norm(cross(diff(c, a), diff(b, a))) }
 }
 
-export function bezierPathes(name, patches) {
-  return { kind: 'patches', name, patches }
+export function bezierPathes(name, patches, res, transforms) {
+  return { kind: 'patches', name, patches, res, transforms }
 }
 
 export function heightMap(name, { res, size, height, bump }, transforms) {
   return { kind: 'heightmap', name, res, size, height, bump, transforms }
 }
 
+export function compileObject(object) {
+  switch (object.kind) {
+    case 'sun': return [object]
+    case 'light': return [object]
+    case 'sphere': return [object]
+    case 'plane': return [object]
+    case 'poly': return [object]
+    case 'patches': return [...bezierMesh(object.patches, object.res, matrixStack(...object.transforms))]
+    case 'heightmap': return [
+      ...heightMapMesh(
+        { res: object.res, size: object.size, height: object.height, bump: object.bump },
+        matrixStack(...object.transforms)
+      )
+    ]
+  }
+}
+
 export function compileScene(objects) {
-  let result = objects.flatMap(e => {
-    switch (e.kind) {
-      case 'sun': return [e]
-      case 'light': return [e]
-      case 'sphere': return [e]
-      case 'plane': return [e]
-      case 'poly': return [e]
-      case 'patches': return [...bezierMesh(e.patches, e.res, matrixStack(...e.transforms))]
-      case 'heightmap': return [
-        ...heightMapMesh(
-          { res: e.res, size: e.size, height: e.height, bump: e.bump },
-          matrixStack(...e.transforms)
-        )
-      ]
-    }
-  })
-  return result
+  return objects.flatMap(e => compileObject(e))
 }
 
 function isValidVec(v) {
