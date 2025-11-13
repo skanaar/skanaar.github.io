@@ -79,3 +79,56 @@ export function SceneObjects() {
     ))
   );
 }
+
+export function Properties() {
+  const [selected, setSelected] = React.useState(null);
+  useEvent(app, 'select-object', (obj) => setSelected(obj));
+
+  if (!selected) return null
+
+  return el(
+    'obj-properties',
+    {},
+    el('style', {},
+      `obj-properties { display: block }
+      obj-properties input { width: 64px }`),
+    selected.kind === 'sphere'
+      ? el(TransformInput, { transform: selected, title: 'pos' })
+      : null,
+    selected.kind === 'light'
+      ? el(TransformInput, { transform: selected, title: 'pos' })
+      : null,
+    selected
+      .transforms
+      ?.map((e,i) => el(TransformInput, { transform: e, title: e.kind, key: i })),
+  );
+}
+
+export function TransformInput({ transform: trns, title }) {
+  const [selected, setSelected] = React.useState(null);
+  useEvent(app, 'select-object', (obj) => setSelected(obj));
+
+  const update = (field) => (event) => {
+    trns[field] = event.target.value
+    app.trigger('scene-modified')
+  }
+
+  return el(
+    'transform-input',
+    {
+      style: {
+        display: 'grid',
+        gridTemplateColumns: '1fr auto 1fr auto 1fr auto 1fr',
+        alignItems: 'center',
+        justifyItems: 'center',
+      }
+    },
+    el('span', {}, title),
+    el('span', {}, 'X'),
+    el('input', { type: 'number', value: trns.x, onChange: e => update('x') }),
+    el('span', {}, 'Y'),
+    el('input', { type: 'number', value: trns.y, onChange: e => update('y') }),
+    el('span', {}, 'Z'),
+    el('input', { type: 'number', value: trns.z, onChange: e => update('z') }),
+  );
+}

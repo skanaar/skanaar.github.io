@@ -1,7 +1,21 @@
-import { Vec, sq, add, cross, diff, norm, mult, rotx, mapply, Scale } from './math.js'
+import { Vec, Scale, Translate, RotateX, RotateY, RotateZ } from './math.js'
+import { sq, add, cross, diff, norm, mult, rotx, mapply } from './math.js'
 import { generateRowByRowCoordinates, matrixStack } from './math.js'
 import { Noise } from './noise.js'
 import { teapotPatches } from './teapot.js'
+
+export function Offset(x,y,z) { return { kind: 'offset', x, y, z } }
+export function Rotate(x,y,z) { return { kind: 'rotate', x, y, z } }
+export function Scaling(x,y,z) { return { kind: 'scale', x, y, z } }
+export function transformStackToMatrix(transforms) {
+  return matrixStack(...transforms.flatMap(({ kind, x, y, z }) => {
+    switch (kind) {
+      case 'offset': return [Translate(x, y, z)]
+      case 'rotate': return [RotateX(x), RotateY(y), RotateZ(z)]
+      case 'scale': return [Scale(x, y, z)]
+    }
+  }))
+}
 
 export function Sun(dir, amount) {
   return { kind: 'sun', dir, amount }
@@ -38,11 +52,11 @@ export function compileObject(object) {
     case 'sphere': return [object]
     case 'plane': return [object]
     case 'poly': return [object]
-    case 'patches': return [...bezierMesh(object.patches, object.res, matrixStack(...object.transforms))]
+    case 'patches': return [...bezierMesh(object.patches, object.res, transformStackToMatrix(object.transforms))]
     case 'heightmap': return [
       ...heightMapMesh(
         { res: object.res, size: object.size, height: object.height, bump: object.bump },
-        matrixStack(...object.transforms)
+        transformStackToMatrix(object.transforms)
       )
     ]
   }

@@ -10,20 +10,15 @@ import {
   Sun,
   compileScene,
   bezierPathes,
+  Offset,
+  Scaling,
+  Rotate,
+  transformStackToMatrix,
 } from './raytracer/geometry.js'
-import {
-  RotateX,
-  RotateY,
-  RotateZ,
-  Scale,
-  Translate,
-  Vec,
-  matrixStack,
-  norm
-} from './raytracer/math.js'
+import { Vec, norm } from './raytracer/math.js'
 import { raytraceParallel } from './raytracer/raytraceParallel.js'
 import { teapotPatches } from './raytracer/teapot.js'
-import { SceneView, SceneObjects } from './raytracer/SceneView.js'
+import { SceneView, SceneObjects, Properties } from './raytracer/SceneView.js'
 
 export const app = new App('RayTracer', RayTracer, 'aperture.svg')
 app.addToAppMenu({
@@ -55,6 +50,12 @@ app.addWindow('Scene Objects', SceneObjects, {
   size: [200,300],
   sizing: 'noresize'
 })
+app.addWindow('Properties', Properties, {
+  visible: true,
+  offset: [220, 256+40],
+  size: [200,100],
+  sizing: 'noresize'
+})
 
 let size = 256
 let ditherMethod = 'none' //'floydsteinberg'
@@ -82,7 +83,7 @@ function sceneTeapot() {
     bezierPathes('teapot',
       teapotPatches,
       3,
-      [Translate(120,256,-80), Scale(40,40,40), RotateX(1.5), RotateZ(0.5)]
+      [Offset(120,256,-80), Scaling(40,40,40), Rotate(1.5, 0, 0.5)]
     )
   ]
 }
@@ -94,7 +95,7 @@ function sceneWave() {
     Sphere('Drop', Vec(128, 148, 0), 8, 'diffuse'),
     ...wave(
       { res: 20, size: 256, periods: 3, height: 40 },
-      matrixStack(Translate(0,220,128), RotateX(3), RotateZ(0))
+      transformStackToMatrix([Offset(0,220,128), Rotate(3, 0, 0)])
     )
   ]
 }
@@ -107,7 +108,7 @@ function sceneIsland() {
     heightMap(
       'island',
       { res: 32, size: 256, height: 0, bump: 64 },
-      [Translate(128,200,-128), RotateX(3.14-0.2), RotateY(-0.3)]
+      [Offset(128,200,-128), Rotate(3.14-0.2, -0.3, 0)]
     )
   ]
 }
