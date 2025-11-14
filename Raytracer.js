@@ -4,16 +4,13 @@ import {
   Plane,
   Sphere,
   Light,
-  bezierMesh,
-  wave,
-  heightMap,
+  HeightMap,
   Sun,
   compileScene,
-  bezierPathes,
+  BezierPatchSet,
   Offset,
   Scaling,
   Rotate,
-  transformStackToMatrix,
 } from './raytracer/geometry.js'
 import { Vec, norm } from './raytracer/math.js'
 import { raytraceParallel } from './raytracer/raytraceParallel.js'
@@ -30,19 +27,12 @@ app.addToAppMenu({
 app.addMenu(
   'Scene',
   { title: 'Teapot', event: 'scene', arg: 'teapot' },
-  { title: 'Wave', event: 'scene', arg: 'wave' },
   { title: 'Island', event: 'scene', arg: 'island' },
 )
 app.addWindow('Options', RenderOptions, {
   visible: true,
   offset: [256+20,0],
   size: [200,100]
-})
-app.addWindow('Scene View', SceneView, {
-  visible: true,
-  offset: [220, 256+40],
-  size: [400,300],
-  sizing: 'noresize'
 })
 app.addWindow('Scene Objects', SceneObjects, {
   visible: true,
@@ -52,8 +42,14 @@ app.addWindow('Scene Objects', SceneObjects, {
 })
 app.addWindow('Properties', Properties, {
   visible: true,
-  offset: [220, 256+40],
+  offset: [256+20, 100+40],
   size: [200,100],
+  sizing: 'noresize'
+})
+app.addWindow('Scene View', SceneView, {
+  visible: true,
+  offset: [220, 256+40],
+  size: [400,300],
   sizing: 'noresize'
 })
 
@@ -61,8 +57,7 @@ let size = 256
 let ditherMethod = 'none' //'floydsteinberg'
 let maxDepth = 3
 
-export let scene = sceneIsland()
-app.check('scene', 'island')
+export let scene = []
 
 function sceneCommons() {
   return [
@@ -80,22 +75,10 @@ function sceneTeapot() {
   return [
     ...sceneCommons(),
     Sphere('Mirror', Vec(128+50, 128-50, -120), 64, 'mirror'),
-    bezierPathes('teapot',
+    BezierPatchSet('teapot',
       teapotPatches,
       3,
       [Offset(120,256,-80), Scaling(40,40,40), Rotate(1.5, 0, 0.5)]
-    )
-  ]
-}
-
-function sceneWave() {
-  return [
-    ...sceneCommons(),
-    Sphere('Drop', Vec(128, 80, 0), 32, 'diffuse'),
-    Sphere('Drop', Vec(128, 148, 0), 8, 'diffuse'),
-    ...wave(
-      { res: 20, size: 256, periods: 3, height: 40 },
-      transformStackToMatrix([Offset(0,220,128), Rotate(3, 0, 0)])
     )
   ]
 }
@@ -105,7 +88,7 @@ function sceneIsland() {
     Sun(Vec(-1, 1, -0.5), 2),
     Plane(Vec(0,0,0), norm(Vec(0,1,0.01))),
     Plane(Vec(0,255,0), norm(Vec(0,-1,0.01))),
-    heightMap(
+    HeightMap(
       'island',
       { res: 32, size: 256, height: 0, bump: 64 },
       [Offset(128,200,-128), Rotate(3.14-0.2, -0.3, 0)]
@@ -133,19 +116,21 @@ function RayTracer() {
   }
   let render = apply(() => null)
 
-  React.useEffect(() => {
-    render()
-  }, [])
-
   useEvent(app, 'scene', apply((arg) => {
     app.check('scene', arg)
-    if (arg == 'wave') scene = sceneWave()
-    else if (arg == 'teapot') scene = sceneTeapot()
+    if (arg == 'teapot') scene = sceneTeapot()
     else if (arg == 'island') scene = sceneIsland()
     app.trigger('update-scene', scene)
   }))
   useEvent(app, 'dither', apply((arg) => { ditherMethod = arg }))
   useEvent(app, 'maxdepth', apply((arg) => { maxDepth = arg }))
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      scene = sceneTeapot()
+      app.trigger('scene', 'teapot')
+    }, 0)
+  }, [])
 
   return el('canvas', { width: size, height: size, ref: hostRef })
 }

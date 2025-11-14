@@ -17,6 +17,22 @@ export function transformStackToMatrix(transforms) {
   }))
 }
 
+export function Composite(name, children, transforms) {
+  return { kind: 'composite', name, children, transforms }
+}
+
+export function Mesh(polys) {
+  return { kind: 'mesh', polys }
+}
+
+export function compositeHitTest(camera, ray){
+  for (let child of children) {
+    let hit = child.hit(camera, ray)
+    if (hit) return hit
+  }
+  return null
+}
+
 export function Sun(dir, amount) {
   return { kind: 'sun', dir, amount }
 }
@@ -29,41 +45,79 @@ export function Sphere(name, center, r, material) {
   return { kind: 'sphere', name, center, r, material }
 }
 
+export function sphereHitTest(camera, ray){
+  let a = dot(ray, ray)
+  let b = 2 * dot(ray, diff(camera, center))
+  let c = dot(center,center) + dot(camera,camera) - 2*dot(center,camera) - r*r
+  let disc = b * b - 4 * a * c
+  if (disc < 0) return null
+  let t = (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)
+  if (t > hit.depth) return null
+  if (t < EPSILON) return null // no hits behind camera
+  let p = add(camera, mult(t, ray))
+  let normal = mult(1 / r, diff(p, center))
+  return { depth: t, normal, point: p, material }
+}
+
 export function Plane(point, normal, material) {
   return { kind: 'plane', point, normal: norm(normal), material }
 }
-
-export function Polygon(a, b, c) {
-  return { kind: 'poly', a, b, c, normal: norm(cross(diff(c, a), diff(b, a))) }
+export function planeHitTest(camera, ray) {
+  if (dot(ray, normal) > 0) return null
+  let t = (dot(point, normal) - dot(camera, normal)) / dot(ray, normal)
+  if (t > hit.depth) return null
+  if (t < EPSILON) return null // no hits behind camera
+  let p = add(camera, mult(t, ray))
+  return { depth: t, normal, point: p, material }
 }
 
-export function bezierPathes(name, patches, res, transforms) {
+export function Polygon(a, b, c) {
+  const normal = norm(cross(diff(c, a), diff(b, a)))
+  return { kind: 'poly', a, b, c, normal,
+  }
+}
+
+export function polygonHitTest(camera, ray) {
+  let maxDepth = hit.depth
+  let denominator = dot(ray, normal)
+  // expect denominator to be negative (with margin)
+  if (denominator > -EPSILON) return null
+  let t = (dot(triangle.a, normal) - dot(camera, normal)) / denominator
+  if (t > maxDepth) return null
+  if (t < EPSILON) return null // no hits behind camera
+  const p = add(camera, mult(t, ray))
+  // is p outside triangle?
+  let to_a = crossDiff(c, b, normal)
+  if (dot(diff(p, b), to_a) < 0.0) return null
+  let to_b = crossDiff(a, c, normal)
+  if (dot(diff(p, c), to_b) < 0.0) return null
+  let to_c = crossDiff(b, a, normal)
+  if (dot(diff(p, a), to_c) < 0.0) return null
+  return { depth: t, normal: triangle.normal, point: p, material: 'diffuse' }
+}
+
+export function BezierPatchSet(name, patches, res, transforms) {
   return { kind: 'patches', name, patches, res, transforms }
 }
 
-export function heightMap(name, { res, size, height, bump }, transforms) {
+export function HeightMap(name, { res, size, height, bump }, transforms) {
   return { kind: 'heightmap', name, res, size, height, bump, transforms }
 }
 
-export function compileObject(object) {
-  switch (object.kind) {
-    case 'sun': return [object]
-    case 'light': return [object]
-    case 'sphere': return [object]
-    case 'plane': return [object]
-    case 'poly': return [object]
-    case 'patches': return [...bezierMesh(object.patches, object.res, transformStackToMatrix(object.transforms))]
-    case 'heightmap': return [
-      ...heightMapMesh(
-        { res: object.res, size: object.size, height: object.height, bump: object.bump },
-        transformStackToMatrix(object.transforms)
-      )
-    ]
+export function compileObject(obj) {
+  switch (obj.kind) {
+    case 'patches': return Mesh(
+      bezierMesh(obj.patches, obj.res, transformStackToMatrix(obj.transforms))
+    )
+    case 'heightmap': return Mesh(
+      heightMapMesh(obj, transformStackToMatrix(obj.transforms))
+    )
+    default: return obj
   }
 }
 
 export function compileScene(objects) {
-  return objects.flatMap(e => compileObject(e))
+  return objects.map(e => compileObject(e))
 }
 
 function isValidVec(v) {
@@ -80,23 +134,6 @@ export function patch(vertices, scale) {
     Polygon(point(i, j), point(i, j + 1), point(i + 1, j)),
     Polygon(point(i + 1, j), point(i, j + 1), point(i + 1, j + 1)),
   ]).filter(isValidPolygon)
-}
-
-export function wave({ res, size, height, periods }, matrix) {
-  let point = (i, j) => {
-      let r = 2 * (Math.sqrt(sq((i-res/2) / res) + sq((j-res/2) / res)))
-      return Vec(
-        i * size / res,
-        height * (1 / (1+4*r*r)) * Math.cos(periods * 3.14 * r),
-        j * size / res
-      )
-    }
-  return [...generateRowByRowCoordinates(res)].flatMap(({ x: i, y: j }) => [
-    Polygon(point(i, j), point(i + 1, j), point(i, j + 1)),
-    Polygon(point(i + 1, j), point(i + 1, j + 1), point(i, j + 1)),
-  ])
-  .filter(isValidPolygon)
-  .map(p => transformTriangle(p, matrix))
 }
 
 export function transformTriangle(poly, matrix) {
@@ -135,10 +172,6 @@ function bezierPatch([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p], u, v) {
     ],
     v
   )
-}
-
-export function teapot(res, transformMatrix) {
-  return bezierMesh(teapotPatches, res, Scale(50,50,50))
 }
 
 export function bezierMesh(patches, res, matrix) {

@@ -1,14 +1,18 @@
-import { useEvent, el } from '../assets/system.js';
-import { app } from '../Raytracer.js';
-import { compileObject, compileScene } from './geometry.js';
+import { useEvent, el } from '../assets/system.js'
+import { app } from '../Raytracer.js'
+import { compileObject } from './geometry.js'
+
+function isCompilable(obj) {
+  return obj.kind === 'patches' || obj.kind === 'heightmap'
+}
 
 export function SceneView() {
-  function r(x) { return Math.round(x); }
-  const [scene, setScene] = React.useState([]);
-  const [selected, setSelected] = React.useState(null);
+  function r(x) { return Math.round(x) }
+  const [scene, setScene] = React.useState([])
+  const [selected, setSelected] = React.useState(null)
 
-  useEvent(app, 'update-scene', (scene) => setScene(scene));
-  useEvent(app, 'select-object', (item) => setSelected(item));
+  useEvent(app, 'update-scene', (scene) => setScene(scene))
+  useEvent(app, 'select-object', (item) => setSelected(item))
 
   return el(
     'div',
@@ -28,32 +32,34 @@ export function SceneView() {
       }`),
     el('svg', { className: 'canvas-3d', viewBox: '0 0 400 300' },
       scene
-        .filter(e => ['patches', 'heightmap', 'wave'].includes(e.kind))
+        .filter(isCompilable)
         .map((e, i) => el('path', {
           key: `mesh${i}`,
           className: selected == e ? ' active' : '',
-          d: compileObject(e).map(({a,b,c}) => `M${r(a.x)},${r(a.y)} L${r(b.x)},${r(b.y)} L${r(c.x)},${r(c.y)} Z`).join(''),
+          d: compileObject(e).polys.map(({a,b,c}) =>
+            `M${r(a.x)},${r(a.y)} L${r(b.x)},${r(b.y)} L${r(c.x)},${r(c.y)} Z`)
+            .join(''),
         })),
       scene.filter(e => e.kind === 'light').map((e, i) => el('path', {
         key: `light${i}`,
         className: 'light' + (selected == e ? ' active' : ''),
-        d: `M${r(e.point.x) - 3},${r(e.point.y) - 3} l6,0 l0,6 l-6,0 Z m1.5,1.5 l0,3 l3,0 l0,-3 Z`
+        d: `M${r(e.point.x)-3},${r(e.point.y)-3} l6,0 l0,6 l-6,0Zm1.5,1.5 l0,3 l3,0 l0,-3 Z`
       })),
       scene.filter(e => e.kind === 'sphere').map((e, i) => el('ellipse', {
         key: `sphere{i}`,
-        className: selected == e ? ' active' : '',
+        className: selected == e ? ' active' : undefined,
         cx: e.center.x,
         cy: e.center.y,
         rx: e.r, ry: e.r
       }))
     )
-  );
+  )
 }
 
 export function SceneObjects() {
-  const [selected, setSelected] = React.useState(null);
-  const [scene, setScene] = React.useState([]);
-  useEvent(app, 'update-scene', (scene) => setScene(scene));
+  const [selected, setSelected] = React.useState(null)
+  const [scene, setScene] = React.useState([])
+  useEvent(app, 'update-scene', (scene) => setScene(scene))
 
   return el(
     'scene-objects',
@@ -77,12 +83,12 @@ export function SceneObjects() {
       },
       e.name || e.kind
     ))
-  );
+  )
 }
 
 export function Properties() {
-  const [selected, setSelected] = React.useState(null);
-  useEvent(app, 'select-object', (obj) => setSelected(obj));
+  const [selected, setSelected] = React.useState(null)
+  useEvent(app, 'select-object', (obj) => setSelected(obj))
 
   if (!selected) return null
 
@@ -101,12 +107,12 @@ export function Properties() {
     selected
       .transforms
       ?.map((e,i) => el(TransformInput, { transform: e, title: e.kind, key: i })),
-  );
+  )
 }
 
 export function TransformInput({ transform: trns, title }) {
-  const [selected, setSelected] = React.useState(null);
-  useEvent(app, 'select-object', (obj) => setSelected(obj));
+  const [selected, setSelected] = React.useState(null)
+  useEvent(app, 'select-object', (obj) => setSelected(obj))
 
   const update = (field) => (event) => {
     trns[field] = event.target.value
@@ -130,5 +136,5 @@ export function TransformInput({ transform: trns, title }) {
     el('input', { type: 'number', value: trns.y, onChange: e => update('y') }),
     el('span', {}, 'Z'),
     el('input', { type: 'number', value: trns.z, onChange: e => update('z') }),
-  );
+  )
 }

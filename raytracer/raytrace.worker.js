@@ -19,9 +19,6 @@ onmessage = (e) => {
 
 function raytrace({ area, size, maxDepth, scene }) {
   let { width, height, x, y } = area
-  let spheres = scene.filter(e => e.kind === 'sphere')
-  let planes = scene.filter(e => e.kind === 'plane')
-  let triangles = scene.filter(e => e.kind === 'poly')
   let lights = scene.filter(e => e.kind === 'light')
   let suns = scene.filter(e => e.kind === 'sun')
 
@@ -33,7 +30,7 @@ function raytrace({ area, size, maxDepth, scene }) {
     for (let i = 0; i < width; i++) {
       let screenPoint = Vec(i+x, j+y, 0)
       let ray = norm(diff(screenPoint, camera))
-      let hit = trace_ray(camera, ray, maxDepth, { spheres, planes, triangles })
+      let hit = trace_ray(camera, ray, maxDepth, scene)
 
       // hit patch illumination
       let bright = 0
@@ -42,16 +39,13 @@ function raytrace({ area, size, maxDepth, scene }) {
           let light_vector = diff(hit.point, light.point)
           let light_dist = mag(light_vector)
           let light_dir = div(light_vector, light_dist)
-          let beam = trace_ray(light.point, light_dir, 0,
-            { spheres, planes, triangles }
-          )
+          let beam = trace_ray(light.point, light_dir, 0, scene)
           if (beam.depth > light_dist - EPSILON)
             bright += lightBrightness(hit.point, hit.normal, light)
         }
         for (let sun of suns) {
-          let sunHit = trace_ray(add(hit.point, mult(-500, sun.dir)), sun.dir, 0,
-            { spheres, planes: [], triangles }
-          )
+          const p = add(hit.point, mult(-500, sun.dir))
+          let sunHit = trace_ray(p, sun.dir, 0, scene)
           if (sunHit.depth > 500 - EPSILON)
             bright += Math.max(0, sun.amount * -dot(hit.normal, sun.dir))
         }
@@ -70,7 +64,7 @@ function raytrace({ area, size, maxDepth, scene }) {
   return imgdata
 }
 
-function trace_ray(camera, ray, depthBudget, { spheres, planes, triangles }) {
+function trace_ray(camera, ray, depthBudget, scene) {
   let hit = {
     depth: 1000.0,
     normal: Vec(0.0,0.0,0.0),
@@ -79,7 +73,7 @@ function trace_ray(camera, ray, depthBudget, { spheres, planes, triangles }) {
   }
 
   // sphere intersections
-  for (let { center, r, material } of spheres) {
+  for (let { center, r, material } of scene.filter(e => e.kind == 'sphere')) {
     let a = dot(ray, ray)
     let b = 2 * dot(ray, diff(camera, center))
     let c = dot(center,center) + dot(camera,camera) - 2*dot(center,camera) - r*r
@@ -94,7 +88,7 @@ function trace_ray(camera, ray, depthBudget, { spheres, planes, triangles }) {
   }
 
   // plane intersections
-  for (let { point, normal, material } of planes) {
+  for (let { point, normal, material } of scene.filter(e => e.kind == 'plane')) {
     if (dot(ray, normal) > 0) continue
     let t = (dot(point, normal) - dot(camera, normal)) / dot(ray, normal)
     if (t > hit.depth) continue
@@ -103,32 +97,33 @@ function trace_ray(camera, ray, depthBudget, { spheres, planes, triangles }) {
     hit = { depth: t, normal, point: p, material }
   }
 
-  // triangle intersections
-  for (let triangle of triangles) {
-    let { a, b, c, normal } = triangle
-    let maxDepth = hit.depth
-    let denominator = dot(ray, normal)
-    // expect denominator to be negative (with margin)
-    if (denominator > -EPSILON) continue
-    let t = (dot(triangle.a, normal) - dot(camera, normal)) / denominator
-    if (t > maxDepth) continue
-    if (t < EPSILON) continue // no hits behind camera
-    const p = add(camera, mult(t, ray))
-    // is p outside triangle?
-    let to_a = crossDiff(c, b, normal)
-    if (dot(diff(p, b), to_a) < 0.0) continue
-    let to_b = crossDiff(a, c, normal)
-    if (dot(diff(p, c), to_b) < 0.0) continue
-    let to_c = crossDiff(b, a, normal)
-    if (dot(diff(p, a), to_c) < 0.0) continue
+  for (let { polys } of scene.filter(e => e.kind == 'mesh')) {
+    // triangle intersections
+    for (let triangle of polys) {
+      let { a, b, c, normal } = triangle
+      let maxDepth = hit.depth
+      let denominator = dot(ray, normal)
+      // expect denominator to be negative (with margin)
+      if (denominator > -EPSILON) continue
+      let t = (dot(triangle.a, normal) - dot(camera, normal)) / denominator
+      if (t > maxDepth) continue
+      if (t < EPSILON) continue // no hits behind camera
+      const p = add(camera, mult(t, ray))
+      // is p outside triangle?
+      let to_a = crossDiff(c, b, normal)
+      if (dot(diff(p, b), to_a) < 0.0) continue
+      let to_b = crossDiff(a, c, normal)
+      if (dot(diff(p, c), to_b) < 0.0) continue
+      let to_c = crossDiff(b, a, normal)
+      if (dot(diff(p, a), to_c) < 0.0) continue
 
-    hit = { depth: t, normal: triangle.normal, point: p, material: 'diffuse' }
+      hit = { depth: t, normal: triangle.normal, point: p, material: 'diffuse' }
+    }
   }
 
   if (hit.material === 'mirror' && depthBudget > 0) {
     let reflection_ray = add(ray, mult(-2*dot(hit.normal, ray), hit.normal))
-    let world = { spheres, planes, triangles }
-    let nextHit = trace_ray(hit.point, reflection_ray, depthBudget - 1, world)
+    let nextHit = trace_ray(hit.point, reflection_ray, depthBudget - 1, scene)
     hit = { depth: hit.depth, normal: nextHit.normal, point: nextHit.point }
   }
 
