@@ -45,7 +45,8 @@ export function Sphere(name, center, r, material) {
   return { kind: 'sphere', name, center, r, material }
 }
 
-export function sphereHitTest(camera, ray){
+export function sphereHitTest(camera, ray, sphere){
+  let { center, r } = sphere
   let a = dot(ray, ray)
   let b = 2 * dot(ray, diff(camera, center))
   let c = dot(center,center) + dot(camera,camera) - 2*dot(center,camera) - r*r
@@ -62,7 +63,8 @@ export function sphereHitTest(camera, ray){
 export function Plane(point, normal, material) {
   return { kind: 'plane', point, normal: norm(normal), material }
 }
-export function planeHitTest(camera, ray) {
+export function planeHitTest(camera, ray, plane) {
+  let { point, normal } = plane
   if (dot(ray, normal) > 0) return null
   let t = (dot(point, normal) - dot(camera, normal)) / dot(ray, normal)
   if (t > hit.depth) return null
@@ -73,15 +75,15 @@ export function planeHitTest(camera, ray) {
 
 export function Polygon(a, b, c) {
   const normal = norm(cross(diff(c, a), diff(b, a)))
-  return { kind: 'poly', a, b, c, normal,
-  }
+  return { kind: 'poly', a, b, c, normal }
 }
 
-export function polygonHitTest(camera, ray) {
-  let maxDepth = hit.depth
+export function polygonHitTest(camera, ray, polygon) {
+  let { a, b, c, normal } = polygon
   let denominator = dot(ray, normal)
   // expect denominator to be negative (with margin)
   if (denominator > -EPSILON) return null
+  let maxDepth = hit.depth
   let t = (dot(triangle.a, normal) - dot(camera, normal)) / denominator
   if (t > maxDepth) return null
   if (t < EPSILON) return null // no hits behind camera

@@ -1,6 +1,7 @@
 import { useEvent, el } from '../assets/system.js'
 import { app } from '../Raytracer.js'
 import { compileObject } from './geometry.js'
+import { cross, diff, dot } from './math.js'
 
 function isCompilable(obj) {
   return obj.kind === 'patches' || obj.kind === 'heightmap'
@@ -36,7 +37,10 @@ export function SceneView() {
         .map((e, i) => el('path', {
           key: `mesh${i}`,
           className: selected == e ? ' active' : '',
-          d: compileObject(e).polys.map(({a,b,c}) =>
+          d: compileObject(e)
+            .polys
+            .filter(({a,b,c}) => cross(diff(b,a), diff(c,a)).z < 0)
+            .map(({a,b,c}) =>
             `M${r(a.x)},${r(a.y)} L${r(b.x)},${r(b.y)} L${r(c.x)},${r(c.y)} Z`)
             .join(''),
         })),
