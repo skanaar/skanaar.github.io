@@ -2,7 +2,6 @@ import { Vec, Scale, Translate, RotateX, RotateY, RotateZ } from './math.js'
 import { sq, add, cross, diff, norm, mult, rotx, mapply } from './math.js'
 import { generateRowByRowCoordinates, matrixStack } from './math.js'
 import { Noise } from './noise.js'
-import { teapotPatches } from './teapot.js'
 
 export function Offset(x,y,z) { return { kind: 'offset', x, y, z } }
 export function Rotate(x,y,z) { return { kind: 'rotate', x, y, z } }
@@ -98,6 +97,10 @@ export function polygonHitTest(camera, ray, polygon) {
   return { depth: t, normal: triangle.normal, point: p, material: 'diffuse' }
 }
 
+export function Lathe(name, res, path, transforms) {
+  return { kind: 'lathe', name, path, res, transforms }
+}
+
 export function BezierPatchSet(name, patches, res, transforms) {
   return { kind: 'patches', name, patches, res, transforms }
 }
@@ -108,6 +111,9 @@ export function HeightMap(name, { res, size, height, bump }, transforms) {
 
 export function compileObject(obj) {
   switch (obj.kind) {
+    case 'lathe': return Mesh(
+      latheMesh(obj.path, obj.res, transformStackToMatrix(obj.transforms))
+    )
     case 'patches': return Mesh(
       bezierMesh(obj.patches, obj.res, transformStackToMatrix(obj.transforms))
     )
@@ -192,6 +198,18 @@ export function bezierMesh(patches, res, matrix) {
     ]).filter(isValidPolygon))
     .map(p => transformTriangle(p, matrix))
   ]
+}
+
+export function latheMesh(path, res, matrix) {
+  var vertex = (i,j) => mapply(RotateZ(Math.PI * 2 * i/res), path[j])
+  var mesh = []
+  for (let i = 0; i < res; i++) {
+    for (var j=1; j<path.length; j++) {
+      mesh.push(Polygon(vertex(i,j), vertex(i+1,j), vertex(i+1,j-1)))
+      mesh.push(Polygon(vertex(i,j), vertex(i+1,j-1), vertex(i,j-1)))
+    }
+  }
+  return mesh.map(p => transformTriangle(p, matrix))
 }
 
 export function heightMapMesh({ res, size, height, bump }, matrix) {

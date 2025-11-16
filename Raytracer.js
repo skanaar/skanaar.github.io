@@ -11,6 +11,7 @@ import {
   Offset,
   Scaling,
   Rotate,
+  Lathe,
 } from './raytracer/geometry.js'
 import { Vec, norm } from './raytracer/math.js'
 import { raytraceParallel } from './raytracer/raytraceParallel.js'
@@ -79,6 +80,14 @@ function sceneTeapot() {
       teapotPatches,
       3,
       [Offset(120,256,-80), Scaling(40,40,40), Rotate(1.5, 0, 0.5)]
+    ),
+    Lathe("column",
+      16,
+      [
+        Vec(45, 0, -100), Vec(45, 0, -80), Vec(40, 0, -75),
+        Vec(40, 0, 75), Vec(45, 0, 80), Vec(45, 0, 100)
+      ],
+      [Offset(40,128,-80), Scaling(0.5,0.5,0.5), Rotate(1.5,0,0.5)]
     )
   ]
 }

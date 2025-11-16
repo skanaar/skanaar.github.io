@@ -4,7 +4,7 @@ import { compileObject } from './geometry.js'
 import { cross, diff, dot } from './math.js'
 
 function isCompilable(obj) {
-  return obj.kind === 'patches' || obj.kind === 'heightmap'
+  return !['light', 'sun', 'sphere', 'plane'].includes(obj.kind)
 }
 
 export function SceneView() {
