@@ -12,6 +12,7 @@ import {
   Scaling,
   Rotate,
   Lathe,
+  BezierLathe,
 } from './raytracer/geometry.js'
 import { Vec, norm } from './raytracer/math.js'
 import { raytraceParallel } from './raytracer/raytraceParallel.js'
@@ -26,9 +27,10 @@ app.addToAppMenu({
   cmd: 'i',
 })
 app.addMenu(
-  'Scene',
+  'File',
   { title: 'Teapot', event: 'scene', arg: 'teapot' },
   { title: 'Island', event: 'scene', arg: 'island' },
+  { title: 'Mushroom', event: 'scene', arg: 'mushroom' },
 )
 app.addWindow('Options', RenderOptions, {
   visible: true,
@@ -84,8 +86,8 @@ function sceneTeapot() {
     Lathe("column",
       16,
       [
-        Vec(45, 0, -100), Vec(45, 0, -80), Vec(40, 0, -75),
-        Vec(40, 0, 75), Vec(45, 0, 80), Vec(45, 0, 100)
+        Vec(45,0,-100), Vec(45,0,-80), Vec(40,0,-75),
+        Vec(40,0,75), Vec(45,0,80), Vec(45,0,100)
       ],
       [Offset(40,128,-80), Scaling(0.5,0.5,0.5), Rotate(1.5,0,0.5)]
     )
@@ -101,6 +103,22 @@ function sceneIsland() {
       'island',
       { res: 32, size: 256, height: 0, bump: 64 },
       [Offset(128,200,-128), Rotate(3.14-0.2, -0.3, 0)]
+    )
+  ]
+}
+
+function sceneMushroom() {
+  return [
+    Sun(Vec(-1, 1, -0.5), 2),
+    Sun(Vec(1, -1, -0.5), 0.5),
+    BezierLathe('mushroom-bezier',
+      32, 16,
+      [
+        Vec(20,0,0), Vec(30,0,0), Vec(30,0,20), Vec(25,0,50),
+        Vec(25,0,50), Vec(35,0,50), Vec(50,0,40), Vec(50,0,50),
+        Vec(50,0,50), Vec(50,0,80), Vec(15,0,90), Vec(1,0,90)
+      ],
+      [Offset(128,200,-80), Scaling(2,2,2), Rotate(3.14/2,0,0), Rotate(0,0,0.1)]
     )
   ]
 }
@@ -127,8 +145,11 @@ function RayTracer() {
 
   useEvent(app, 'scene', apply((arg) => {
     app.check('scene', arg)
-    if (arg == 'teapot') scene = sceneTeapot()
-    else if (arg == 'island') scene = sceneIsland()
+    scene = {
+      teapot: sceneTeapot(),
+      island: sceneIsland(),
+      mushroom: sceneMushroom(),
+    }[arg]
     app.trigger('update-scene', scene)
   }))
   useEvent(app, 'dither', apply((arg) => { ditherMethod = arg }))

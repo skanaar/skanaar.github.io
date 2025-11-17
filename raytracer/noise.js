@@ -1,9 +1,10 @@
+var res = 256
+var matrix = [...new Array(res)].map(() => Math.random() - 0.5)
+
 export function Noise(conf) {
-  var res = 256
   var persistence = conf.persistence || 0.5
   var octaves = conf.octaves || 1
   var scale = conf.zoom * 2 || 2
-  var matrix = [...new Array(res)].map(() => Math.random() - 0.5)
 
   function smoothstep(x) { return x*x*(3 - 2*x) }
 

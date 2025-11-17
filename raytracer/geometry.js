@@ -101,6 +101,10 @@ export function Lathe(name, res, path, transforms) {
   return { kind: 'lathe', name, path, res, transforms }
 }
 
+export function BezierLathe(name, resU, resV, path, transforms) {
+  return { kind: 'bezierlathe', name, path, resU, resV, transforms }
+}
+
 export function BezierPatchSet(name, patches, res, transforms) {
   return { kind: 'patches', name, patches, res, transforms }
 }
@@ -113,6 +117,9 @@ export function compileObject(obj) {
   switch (obj.kind) {
     case 'lathe': return Mesh(
       latheMesh(obj.path, obj.res, transformStackToMatrix(obj.transforms))
+    )
+    case 'bezierlathe': return Mesh(
+      bezierLatheMesh(obj.path, obj.resU, obj.resV, transformStackToMatrix(obj.transforms))
     )
     case 'patches': return Mesh(
       bezierMesh(obj.patches, obj.res, transformStackToMatrix(obj.transforms))
@@ -207,6 +214,27 @@ export function latheMesh(path, res, matrix) {
     for (var j=1; j<path.length; j++) {
       mesh.push(Polygon(vertex(i,j), vertex(i+1,j), vertex(i+1,j-1)))
       mesh.push(Polygon(vertex(i,j), vertex(i+1,j-1), vertex(i,j-1)))
+    }
+  }
+  return mesh.map(p => transformTriangle(p, matrix))
+}
+
+export function bezierLatheMesh(path, resU, resV, matrix) {
+  var mesh = []
+  for (var n=0; n<path.length/4; n++) {
+    function vertex(i,j) {
+      const controlPoints = path.slice(n * 4, n * 4 + 4)
+      return mapply(RotateZ(Math.PI * 2 * i/resU), Vec(
+        bezier1D(controlPoints.map(e => e.x), j/resV),
+        bezier1D(controlPoints.map(e => e.y), j/resV),
+        bezier1D(controlPoints.map(e => e.z), j/resV)
+      ))
+    }
+    for (let i = 0; i < resU; i++) {
+      for (var j = 1; j < resV+1; j++) {
+        mesh.push(Polygon(vertex(i,j), vertex(i+1,j), vertex(i+1,j-1)))
+        mesh.push(Polygon(vertex(i,j), vertex(i+1,j-1), vertex(i,j-1)))
+      }
     }
   }
   return mesh.map(p => transformTriangle(p, matrix))
