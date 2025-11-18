@@ -16,6 +16,10 @@ export function transformStackToMatrix(transforms) {
   }))
 }
 
+export function Camera(transforms) {
+  return { kind: 'camera', transforms }
+}
+
 export function Composite(name, children, transforms) {
   return { kind: 'composite', name, children, transforms }
 }

@@ -4,12 +4,13 @@ import { compileObject } from './geometry.js'
 import { cross, diff, dot } from './math.js'
 
 function isCompilable(obj) {
-  return !['light', 'sun', 'sphere', 'plane'].includes(obj.kind)
+  return !['light', 'sun', 'sphere', 'plane', 'camera'].includes(obj.kind)
 }
 
 export function SceneView() {
   function x(p) { return Math.round(view == 'side' ? p.z : p.x) }
   function y(p) { return Math.round(view == 'top' ? p.z : p.y) }
+  function z(p) { return view == 'front' ? p.z : view == 'side' ? p.x : p.y }
   const [scene, setScene] = React.useState([])
   const [view, setView] = React.useState('front')
   const [selected, setSelected] = React.useState(null)
@@ -37,7 +38,7 @@ export function SceneView() {
       svg.canvas-3d :is(path, ellipse, rect).active {
         stroke-width: 2px
       }`),
-    el('svg', { className: 'canvas-3d', viewBox: '0 0 400 300' },
+    el('svg', { className: 'canvas-3d', viewBox: '-170 -128 340 256' },
       scene
         .filter(isCompilable)
         .map((e, i) => el('path', {
@@ -45,7 +46,7 @@ export function SceneView() {
           className: selected == e ? ' active' : '',
           d: compileObject(e)
             .polys
-            .filter(({a,b,c}) => cross(diff(b,a), diff(c,a)).z < 0)
+            .filter(({a,b,c}) => z(cross(diff(b,a), diff(c,a))) < 0)
             .map(({a,b,c}) =>
             `M${x(a)},${y(a)} L${x(b)},${y(b)} L${x(c)},${y(c)} Z`)
             .join(''),
@@ -108,7 +109,15 @@ export function Properties() {
     {},
     el('style', {},
       `obj-properties { display: block }
-      obj-properties input { width: 64px }`),
+      obj-properties input { width: 64px }
+      obj-properties input[type='number'] {
+          -moz-appearance: textfield;
+      }
+
+      obj-properties input::-webkit-outer-spin-button,
+      obj-properties input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+      }`),
     selected.kind === 'sphere'
       ? el(TransformInput, { transform: selected, title: 'pos' })
       : null,

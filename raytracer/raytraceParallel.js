@@ -43,8 +43,9 @@ export function raytraceParallel({ canvas, size, maxDepth, scene, ditherer }) {
       pendingWorkers--
       if (pendingWorkers === 0) onComplete()
     }
-    let area = {width: size, height: chunkSize, x: 0, y: i*chunkSize }
-    worker.postMessage({ area, size, maxDepth, scene })
+    let totalArea = { width: size, height: size }
+    let area = { width: size, height: chunkSize, x: 0, y: i*chunkSize }
+    worker.postMessage({ area, totalArea, size, maxDepth, scene })
   }
 
   return promise

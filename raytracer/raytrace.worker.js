@@ -1,3 +1,4 @@
+import { transformStackToMatrix } from './geometry.js'
 import {
   Vec,
   norm,
@@ -9,7 +10,8 @@ import {
   mult,
   mag,
   crossDiff,
-  EPSILON
+  EPSILON,
+  mapply
 } from './math.js'
 
 onmessage = (e) => {
@@ -17,20 +19,28 @@ onmessage = (e) => {
   postMessage(imgdata)
 }
 
-function raytrace({ area, size, maxDepth, scene }) {
+function raytrace({ area, totalArea, size, maxDepth, scene }) {
   let { width, height, x, y } = area
+  let camera = scene.find(e => e.kind === 'camera')
   let lights = scene.filter(e => e.kind === 'light')
   let suns = scene.filter(e => e.kind === 'sun')
 
   let imgdata = new ImageData(width, height)
 
-  let camera = Vec(128.0, 128.0, 512.0)
+  let camMatrix = transformStackToMatrix(camera.transforms)
+  let camPos = mapply(camMatrix, Vec(0,0,0))
+  let camCorner = mapply(camMatrix, Vec(-0.5,-0.5,-1))
+  let camRight = diff(mapply(camMatrix, Vec(1,0,0)), camPos)
+  let camUp = diff(mapply(camMatrix, Vec(0,1,0)), camPos)
 
   for (let j = 0; j < height; j++) {
     for (let i = 0; i < width; i++) {
-      let screenPoint = Vec(i+x, j+y, 0)
-      let ray = norm(diff(screenPoint, camera))
-      let hit = trace_ray(camera, ray, maxDepth, scene)
+      let screenPoint = add(camCorner, add(
+        mult((i+x)/totalArea.width, camRight),
+        mult((j+y)/totalArea.height, camUp)
+      ))
+      let ray = norm(diff(screenPoint, camPos))
+      let hit = trace_ray(camPos, ray, maxDepth, scene)
 
       // hit patch illumination
       let bright = 0

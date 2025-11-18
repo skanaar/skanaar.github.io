@@ -1,6 +1,7 @@
 import { el, App, useEvent } from './assets/system.js'
 import { FloydSteinbergDitherer, NoDitherer } from './raytracer/dither.js'
 import {
+  Camera,
   Plane,
   Sphere,
   Light,
@@ -71,12 +72,13 @@ export let scene = []
 
 function sceneCommons() {
   return [
-    Light(Vec(32, 32, -256+32), 16),
-    Light(Vec(200, 50, 128), 150),
-    Plane(Vec(0,0,0), norm(Vec(1,0,0.01))),
-    Plane(Vec(0,0,0), norm(Vec(0,1,0.01))),
-    Plane(Vec(0,255,0), norm(Vec(0,-1,0.01))),
-    Plane(Vec(255,0,0), norm(Vec(-1,0,0.01))),
+    Camera([Rotate(0,0,0), Offset(0,0,256)]),
+    Light(Vec(32-128, 32-128, -256+32), 16),
+    Light(Vec(200-128, 50-128, 128), 150),
+    Plane(Vec(-128,0,0), norm(Vec(1,0,0.01))),
+    Plane(Vec(0,-128,0), norm(Vec(0,1,0.01))),
+    Plane(Vec(0,128,0), norm(Vec(0,-1,0.01))),
+    Plane(Vec(128,0,0), norm(Vec(-1,0,0.01))),
     Plane(Vec(0,0,-255), norm(Vec(0,0,1.01))),
   ]
 }
@@ -84,11 +86,11 @@ function sceneCommons() {
 function sceneTeapot() {
   return [
     ...sceneCommons(),
-    Sphere('Mirror', Vec(128+50, 128-50, -120), 64, 'mirror'),
+    Sphere('Mirror', Vec(50,-50,-120), 64, 'mirror'),
     BezierPatchSet('teapot',
       teapotPatches,
       3,
-      [Offset(120,256,-80), Scaling(40,40,40), Rotate(Math.PI/2, 0, 0.5)]
+      [Offset(-8,128,0), Scaling(40,40,40), Rotate(Math.PI/2, 0, 0.5)]
     ),
     Lathe("column",
       16,
@@ -96,42 +98,42 @@ function sceneTeapot() {
         Vec(45,0,-100), Vec(45,0,-80), Vec(40,0,-75),
         Vec(40,0,75), Vec(45,0,80), Vec(45,0,100)
       ],
-      [Offset(40,128,-80), Scaling(0.5,0.5,0.5), Rotate(Math.PI/2,0,0.5)]
+      [Offset(-88,0,-20), Scaling(0.5,0.5,0.5), Rotate(Math.PI/2,0,0.5)]
     )
   ]
 }
 
 function sceneIsland() {
   return [
+    Camera([Rotate(0,0,0), Offset(0,0,256)]),
     Sun(Vec(-1, 1, -0.5), 2),
-    Plane(Vec(0,0,0), norm(Vec(0,1,0.01))),
-    Plane(Vec(0,255,0), norm(Vec(0,-1,0.01))),
     HeightMap(
       'island',
       { res: 32, size: 256, height: 0, bump: 64 },
-      [Offset(128,200,-128), Rotate(3.14-0.2, -0.3, 0)]
+      [Offset(0,72,0), Rotate(3.14, -0.3, 0)]
     )
   ]
 }
 
 function sceneMushroom() {
   return [
+    Camera([Rotate(0.4,0.4,0), Offset(0,0,256)]),
     Sun(Vec(-1, 1, -0.5), 2),
     Sun(Vec(1, -1, -0.5), 0.5),
     BezierLathe('mushroom-foot',
       32, 16,
       [Vec(20,0,0), Vec(30,0,0), Vec(30,0,20), Vec(25,0,50)],
-      [Offset(128,200,-80), Scaling(2,2,2), Rotate(3.14/2,0,0), Rotate(0,0,0.1)]
+      [Offset(0,72,-80), Scaling(2,2,2), Rotate(3.14/2,0,0), Rotate(0,0,0.1)]
     ),
     Lathe('mushroom-gills',
       32,
-      [Vec(25,0,50), Vec(50,0,50)],
-      [Offset(128,200,-80), Scaling(2,2,2), Rotate(3.14/2,0,0), Rotate(0,0,0.1)]
+      [Vec(50,0,50), Vec(25,0,50)],
+      [Offset(0,72,-80), Scaling(2,2,2), Rotate(3.14/2,0,0), Rotate(0,0,0.1)]
     ),
     BezierLathe('mushroom-hat',
       32, 16,
       [Vec(50,0,50), Vec(50,0,80), Vec(15,0,90), Vec(1,0,90)],
-      [Offset(128,200,-80), Scaling(2,2,2), Rotate(3.14/2,0,0), Rotate(0,0,0.1)]
+      [Offset(0,72,-80), Scaling(2,2,2), Rotate(3.14/2,0,0), Rotate(0,0,0.1)]
     )
   ]
 }
