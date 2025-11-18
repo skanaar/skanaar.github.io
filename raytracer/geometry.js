@@ -221,20 +221,17 @@ export function latheMesh(path, res, matrix) {
 
 export function bezierLatheMesh(path, resU, resV, matrix) {
   var mesh = []
-  for (var n=0; n<path.length/4; n++) {
-    function vertex(i,j) {
-      const controlPoints = path.slice(n * 4, n * 4 + 4)
-      return mapply(RotateZ(Math.PI * 2 * i/resU), Vec(
-        bezier1D(controlPoints.map(e => e.x), j/resV),
-        bezier1D(controlPoints.map(e => e.y), j/resV),
-        bezier1D(controlPoints.map(e => e.z), j/resV)
-      ))
-    }
-    for (let i = 0; i < resU; i++) {
-      for (var j = 1; j < resV+1; j++) {
-        mesh.push(Polygon(vertex(i,j), vertex(i+1,j), vertex(i+1,j-1)))
-        mesh.push(Polygon(vertex(i,j), vertex(i+1,j-1), vertex(i,j-1)))
-      }
+  function vertex(i,j) {
+    return mapply(RotateZ(Math.PI * 2 * i/resU), Vec(
+      bezier1D(path.map(e => e.x), j/resV),
+      bezier1D(path.map(e => e.y), j/resV),
+      bezier1D(path.map(e => e.z), j/resV)
+    ))
+  }
+  for (let i = 0; i < resU; i++) {
+    for (var j = 1; j < resV+1; j++) {
+      mesh.push(Polygon(vertex(i,j), vertex(i+1,j), vertex(i+1,j-1)))
+      mesh.push(Polygon(vertex(i,j), vertex(i+1,j-1), vertex(i,j-1)))
     }
   }
   return mesh.map(p => transformTriangle(p, matrix))

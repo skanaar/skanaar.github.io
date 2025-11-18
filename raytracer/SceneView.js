@@ -8,10 +8,16 @@ function isCompilable(obj) {
 }
 
 export function SceneView() {
-  function r(x) { return Math.round(x) }
+  function x(p) { return Math.round(view == 'side' ? p.z : p.x) }
+  function y(p) { return Math.round(view == 'top' ? p.z : p.y) }
   const [scene, setScene] = React.useState([])
+  const [view, setView] = React.useState('front')
   const [selected, setSelected] = React.useState(null)
 
+  useEvent(app, 'scene_view', (view) => {
+    app.check('scene_view', view)
+    setView(view)
+  })
   useEvent(app, 'update-scene', (scene) => setScene(scene))
   useEvent(app, 'select-object', (item) => setSelected(item))
 
@@ -41,20 +47,21 @@ export function SceneView() {
             .polys
             .filter(({a,b,c}) => cross(diff(b,a), diff(c,a)).z < 0)
             .map(({a,b,c}) =>
-            `M${r(a.x)},${r(a.y)} L${r(b.x)},${r(b.y)} L${r(c.x)},${r(c.y)} Z`)
+            `M${x(a)},${y(a)} L${x(b)},${y(b)} L${x(c)},${y(c)} Z`)
             .join(''),
         })),
       scene.filter(e => e.kind === 'light').map((e, i) => el('path', {
         key: `light${i}`,
         className: 'light' + (selected == e ? ' active' : ''),
-        d: `M${r(e.point.x)-3},${r(e.point.y)-3} l6,0 l0,6 l-6,0Zm1.5,1.5 l0,3 l3,0 l0,-3 Z`
+        d: `M${x(e.point)-3},${y(e.point)-3}l6,0l0,6l-6,0Zm-3,3l6,-6l6,6l-6,6 Z`
       })),
       scene.filter(e => e.kind === 'sphere').map((e, i) => el('ellipse', {
         key: `sphere{i}`,
         className: selected == e ? ' active' : undefined,
-        cx: e.center.x,
-        cy: e.center.y,
-        rx: e.r, ry: e.r
+        cx: x(e.center),
+        cy: y(e.center),
+        rx: e.r,
+        ry: e.r
       }))
     )
   )

@@ -32,6 +32,13 @@ app.addMenu(
   { title: 'Island', event: 'scene', arg: 'island' },
   { title: 'Mushroom', event: 'scene', arg: 'mushroom' },
 )
+app.addMenu(
+  'View',
+  { title: 'Front', event: 'scene_view', arg: 'front' },
+  { title: 'Side', event: 'scene_view', arg: 'side' },
+  { title: 'Top', event: 'scene_view', arg: 'top' },
+)
+app.check('scene_view', 'front')
 app.addWindow('Options', RenderOptions, {
   visible: true,
   offset: [256+20,0],
@@ -81,7 +88,7 @@ function sceneTeapot() {
     BezierPatchSet('teapot',
       teapotPatches,
       3,
-      [Offset(120,256,-80), Scaling(40,40,40), Rotate(1.5, 0, 0.5)]
+      [Offset(120,256,-80), Scaling(40,40,40), Rotate(Math.PI/2, 0, 0.5)]
     ),
     Lathe("column",
       16,
@@ -89,7 +96,7 @@ function sceneTeapot() {
         Vec(45,0,-100), Vec(45,0,-80), Vec(40,0,-75),
         Vec(40,0,75), Vec(45,0,80), Vec(45,0,100)
       ],
-      [Offset(40,128,-80), Scaling(0.5,0.5,0.5), Rotate(1.5,0,0.5)]
+      [Offset(40,128,-80), Scaling(0.5,0.5,0.5), Rotate(Math.PI/2,0,0.5)]
     )
   ]
 }
@@ -111,13 +118,19 @@ function sceneMushroom() {
   return [
     Sun(Vec(-1, 1, -0.5), 2),
     Sun(Vec(1, -1, -0.5), 0.5),
-    BezierLathe('mushroom-bezier',
+    BezierLathe('mushroom-foot',
       32, 16,
-      [
-        Vec(20,0,0), Vec(30,0,0), Vec(30,0,20), Vec(25,0,50),
-        Vec(25,0,50), Vec(35,0,50), Vec(50,0,40), Vec(50,0,50),
-        Vec(50,0,50), Vec(50,0,80), Vec(15,0,90), Vec(1,0,90)
-      ],
+      [Vec(20,0,0), Vec(30,0,0), Vec(30,0,20), Vec(25,0,50)],
+      [Offset(128,200,-80), Scaling(2,2,2), Rotate(3.14/2,0,0), Rotate(0,0,0.1)]
+    ),
+    Lathe('mushroom-gills',
+      32,
+      [Vec(25,0,50), Vec(50,0,50)],
+      [Offset(128,200,-80), Scaling(2,2,2), Rotate(3.14/2,0,0), Rotate(0,0,0.1)]
+    ),
+    BezierLathe('mushroom-hat',
+      32, 16,
+      [Vec(50,0,50), Vec(50,0,80), Vec(15,0,90), Vec(1,0,90)],
       [Offset(128,200,-80), Scaling(2,2,2), Rotate(3.14/2,0,0), Rotate(0,0,0.1)]
     )
   ]
