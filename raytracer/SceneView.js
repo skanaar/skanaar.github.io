@@ -8,17 +8,19 @@ function isCompilable(obj) {
 }
 
 export function SceneView() {
-  function x(p) { return Math.round(view == 'side' ? p.z : p.x) }
-  function y(p) { return Math.round(view == 'top' ? p.z : p.y) }
+  function x(p) { return Math.round(zoom * (view == 'side' ? p.z : p.x)) }
+  function y(p) { return Math.round(zoom * (view == 'top' ? p.z : p.y)) }
   function z(p) { return view == 'front' ? p.z : view == 'side' ? p.x : p.y }
   const [scene, setScene] = React.useState([])
   const [view, setView] = React.useState('front')
+  const [zoom, setZoom] = React.useState(0.5)
   const [selected, setSelected] = React.useState(null)
 
   useEvent(app, 'scene_view', (view) => {
     app.check('scene_view', view)
     setView(view)
   })
+  useEvent(app, 'zoom', (factor) => setZoom(zoom * factor))
   useEvent(app, 'update-scene', (scene) => setScene(scene))
   useEvent(app, 'select-object', (item) => setSelected(item))
 
@@ -61,8 +63,8 @@ export function SceneView() {
         className: selected == e ? ' active' : undefined,
         cx: x(e.center),
         cy: y(e.center),
-        rx: e.r,
-        ry: e.r
+        rx: zoom * e.r,
+        ry: zoom * e.r
       }))
     )
   )

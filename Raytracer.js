@@ -35,9 +35,12 @@ app.addMenu(
 )
 app.addMenu(
   'View',
-  { title: 'Front', event: 'scene_view', arg: 'front' },
-  { title: 'Side', event: 'scene_view', arg: 'side' },
-  { title: 'Top', event: 'scene_view', arg: 'top' },
+  { title: 'Front', event: 'scene_view', arg: 'front', cmd: '1' },
+  { title: 'Side', event: 'scene_view', arg: 'side', cmd: '2' },
+  { title: 'Top', event: 'scene_view', arg: 'top', cmd: '3' },
+  { title: null },
+  { title: 'Zoom out', event: 'zoom', arg: 0.5, cmd: ',', },
+  { title: 'Zoom in', event: 'zoom', arg: 2, cmd: '.' },
 )
 app.check('scene_view', 'front')
 app.addWindow('Options', RenderOptions, {
@@ -70,36 +73,29 @@ let maxDepth = 3
 
 export let scene = []
 
-function sceneCommons() {
-  return [
-    Camera([Rotate(0,0,0), Offset(0,0,256)]),
-    Light(Vec(32-128, 32-128, -256+32), 16),
-    Light(Vec(200-128, 50-128, 128), 150),
-    Plane(Vec(-128,0,0), norm(Vec(1,0,0.01))),
-    Plane(Vec(0,-128,0), norm(Vec(0,1,0.01))),
-    Plane(Vec(0,128,0), norm(Vec(0,-1,0.01))),
-    Plane(Vec(128,0,0), norm(Vec(-1,0,0.01))),
-    Plane(Vec(0,0,-255), norm(Vec(0,0,1.01))),
-  ]
-}
-
 function sceneTeapot() {
   return [
-    ...sceneCommons(),
-    Sphere('Mirror', Vec(50,-50,-120), 64, 'mirror'),
+    Camera([Rotate(0,0,0), Offset(0,0,256+128)]),
+    Light(Vec(-100, -100, -100), 16),
+    Light(Vec(200-128, 50-128, 256), 256),
+    Lathe('room', 4,
+      [Vec(0.01,0,-4), Vec(1.414,0,-4), Vec(1.414,0,1), Vec(0.01,0,1)],
+      [Rotate(0,0,Math.PI/4),Scaling(150,150,-150)]
+    ),
+    Sphere('mirror sphere', Vec(60,-60,-60), 80, 'mirror'),
     BezierPatchSet('teapot',
       teapotPatches,
       3,
-      [Offset(-8,128,0), Scaling(40,40,40), Rotate(Math.PI/2, 0, 0.5)]
+      [Offset(-8,150,0), Scaling(40,40,40), Rotate(Math.PI/2, 0, 0.5)]
     ),
-    Lathe("column",
+    Lathe('column',
       16,
       [
         Vec(45,0,-100), Vec(45,0,-80), Vec(40,0,-75),
         Vec(40,0,75), Vec(45,0,80), Vec(45,0,100)
       ],
-      [Offset(-88,0,-20), Scaling(0.5,0.5,0.5), Rotate(Math.PI/2,0,0.5)]
-    )
+      [Offset(-100,50,100), Scaling(0.7,1,0.7), Rotate(Math.PI/2,0,0.5)]
+    ),
   ]
 }
 
