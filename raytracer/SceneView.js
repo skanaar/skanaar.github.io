@@ -1,10 +1,10 @@
 import { useEvent, el } from '../assets/system.js'
 import { app } from '../Raytracer.js'
-import { compileObject } from './geometry.js'
-import { cross, diff, dot } from './math.js'
+import { compileObject, latheMesh, Mesh, Rotate, transformStackToMatrix } from './geometry.js'
+import { cross, diff, dot, Vec } from './math.js'
 
 function isCompilable(obj) {
-  return !['light', 'sun', 'sphere', 'plane', 'camera'].includes(obj.kind)
+  return !['light', 'sun', 'sphere', 'plane'].includes(obj.kind)
 }
 
 export function SceneView() {
@@ -46,7 +46,7 @@ export function SceneView() {
         .map((e, i) => el('path', {
           key: `mesh${i}`,
           className: selected == e ? ' active' : '',
-          d: compileObject(e)
+          d: compilePreviewObject(e)
             .polys
             .filter(({a,b,c}) => z(cross(diff(b,a), diff(c,a))) < 0)
             .map(({a,b,c}) =>
@@ -68,6 +68,19 @@ export function SceneView() {
       }))
     )
   )
+}
+
+function compilePreviewObject(obj) {
+  if (obj.kind === 'camera') {
+    return Mesh(
+      latheMesh(
+        [Vec(0.1,0,0), Vec(50*1.414,0,-100)],
+        4,
+        transformStackToMatrix([...obj.transforms, Rotate(0,0,Math.PI/4)])
+      )
+    )
+  }
+  return compileObject(obj)
 }
 
 export function SceneObjects() {
