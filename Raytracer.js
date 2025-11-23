@@ -77,7 +77,7 @@ function sceneTeapot() {
   return [
     Camera([Rotate(0,0,0), Offset(0,0,256+128)]),
     Light(Vec(-100, -100, -100), 16),
-    Light(Vec(200-128, 50-128, 256), 256),
+    Light(Vec(200-128, 50-128, 256), 150),
     Lathe('room', 4,
       [Vec(0.01,0,-4), Vec(1.414,0,-4), Vec(1.414,0,1), Vec(0.01,0,1)],
       [Rotate(0,0,Math.PI/4),Scaling(150,150,-150)]
@@ -86,15 +86,16 @@ function sceneTeapot() {
     BezierPatchSet('teapot',
       teapotPatches,
       3,
-      [Offset(-8,150,0), Scaling(40,40,40), Rotate(Math.PI/2, 0, 0.5)]
+      [Offset(-8,150,0), Scaling(45,45,45), Rotate(Math.PI/2, 0, 0.5)]
     ),
     Lathe('column',
       16,
       [
-        Vec(45,0,-100), Vec(45,0,-80), Vec(40,0,-75),
-        Vec(40,0,75), Vec(45,0,80), Vec(45,0,100)
+        Vec(25,0,-100), Vec(25,0,-80), Vec(20,0,-75),
+        Vec(20,0,75), Vec(25,0,80), Vec(25,0,85), Vec(2,0,90),
+        Vec(2,0,100), Vec(25,0,105), Vec(25,0,110), Vec(20,0,115)
       ],
-      [Offset(-100,50,100), Scaling(0.7,1,0.7), Rotate(Math.PI/2,0,0.5)]
+      [Offset(-100,20,-100), Scaling(0.7,1.26,0.7), Rotate(Math.PI/2,0,0.5)]
     ),
   ]
 }
