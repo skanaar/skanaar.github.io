@@ -2,7 +2,6 @@ import { el, App, useEvent } from './assets/system.js'
 import { FloydSteinbergDitherer, NoDitherer } from './raytracer/dither.js'
 import {
   Camera,
-  Plane,
   Sphere,
   Light,
   HeightMap,

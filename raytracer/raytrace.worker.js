@@ -97,16 +97,6 @@ function trace_ray(camera, ray, depthBudget, scene) {
     hit = { depth: t, normal, point: p, material }
   }
 
-  // plane intersections
-  for (let { point, normal, material } of scene.filter(e => e.kind == 'plane')) {
-    if (dot(ray, normal) > 0) continue
-    let t = (dot(point, normal) - dot(camera, normal)) / dot(ray, normal)
-    if (t > hit.depth) continue
-    if (t < EPSILON) continue // no hits behind camera
-    let p = add(camera, mult(t, ray))
-    hit = { depth: t, normal, point: p, material }
-  }
-
   for (let { polys } of scene.filter(e => e.kind == 'mesh')) {
     // triangle intersections
     for (let triangle of polys) {

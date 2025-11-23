@@ -63,19 +63,6 @@ export function sphereHitTest(camera, ray, sphere){
   return { depth: t, normal, point: p, material }
 }
 
-export function Plane(point, normal, material) {
-  return { kind: 'plane', point, normal: norm(normal), material }
-}
-export function planeHitTest(camera, ray, plane) {
-  let { point, normal } = plane
-  if (dot(ray, normal) > 0) return null
-  let t = (dot(point, normal) - dot(camera, normal)) / dot(ray, normal)
-  if (t > hit.depth) return null
-  if (t < EPSILON) return null // no hits behind camera
-  let p = add(camera, mult(t, ray))
-  return { depth: t, normal, point: p, material }
-}
-
 export function Polygon(a, b, c) {
   const normal = norm(cross(diff(c, a), diff(b, a)))
   return { kind: 'poly', a, b, c, normal }
