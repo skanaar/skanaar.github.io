@@ -214,7 +214,7 @@ export function latheMesh(path, res, matrix) {
       mesh.push(Polygon(vertex(i,j), vertex(i+1,j-1), vertex(i,j-1)))
     }
   }
-  return mesh.map(p => transformTriangle(p, matrix))
+  return mesh.filter(isValidPolygon).map(p => transformTriangle(p, matrix))
 }
 
 export function bezierLatheMesh(path, resU, resV, matrix) {
