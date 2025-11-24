@@ -13,8 +13,9 @@ import {
   Rotate,
   Lathe,
   BezierLathe,
+  Composite,
 } from './raytracer/geometry.js'
-import { Vec, norm } from './raytracer/math.js'
+import { Vec, π } from './raytracer/math.js'
 import { raytraceParallel } from './raytracer/raytraceParallel.js'
 import { teapotPatches } from './raytracer/teapot.js'
 import { SceneView, SceneObjects, Properties } from './raytracer/SceneView.js'
@@ -101,13 +102,34 @@ function sceneTeapot() {
 
 function sceneIsland() {
   return [
-    Camera([Rotate(0,0,0), Offset(0,0,256)]),
+    Camera([Rotate(0,0.3,0), Rotate(0.3,0,0), Offset(0,0,256)]),
     Sun(Vec(-1, 1, -0.5), 2),
+    Light(Vec(0, -30, 0), 16),
     HeightMap(
       'island',
-      { res: 32, size: 256, height: 0, bump: 64 },
-      [Offset(0,72,0), Rotate(3.14, -0.3, 0)]
-    )
+      { res: 16, size: 256, height: 0, bump: 64 },
+      [Offset(0,72,0), Rotate(π,0,0)]
+    ),
+    Composite('temple', [
+      Lathe('p1', 12, [Vec(9,0,0),Vec(8,0,80)],
+        [Rotate(0,0.0,0), Offset(40,0,0), Rotate(π/2,0,0)]
+      ),
+      Lathe('p2', 12, [Vec(9,0,0),Vec(8,0,80)],
+        [Rotate(0,π/3,0), Offset(40,0,0), Rotate(π/2,0,0)]
+      ),
+      Lathe('p3', 12, [Vec(9,0,0),Vec(8,0,80)],
+        [Rotate(0,π*2/3,0), Offset(40,0,0), Rotate(π/2,0,0)]
+      ),
+      Lathe('p4', 12, [Vec(9,0,0),Vec(8,0,80)],
+        [Rotate(0,π,0), Offset(40,0,0), Rotate(π/2,0,0)]
+      ),
+      Lathe('p4', 12, [Vec(9,0,0),Vec(8,0,80)],
+        [Rotate(0,π*4/3,0), Offset(40,0,0), Rotate(π/2,0,0)]
+      ),
+      Lathe('p4', 12, [Vec(9,0,0),Vec(8,0,80)],
+        [Rotate(0,π*5/3,0), Offset(40,0,0), Rotate(π/2,0,0)]
+      ),
+    ], [Scaling(1,2,1), Offset(0,40,0)])
   ]
 }
 

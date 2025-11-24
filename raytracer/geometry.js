@@ -6,7 +6,7 @@ import { Noise } from './noise.js'
 export function Offset(x,y,z) { return { kind: 'offset', x, y, z } }
 export function Rotate(x,y,z) { return { kind: 'rotate', x, y, z } }
 export function Scaling(x,y,z) { return { kind: 'scale', x, y, z } }
-export function transformStackToMatrix(transforms) {
+export function toMatrix(transforms) {
   return matrixStack(...transforms.flatMap(({ kind, x, y, z }) => {
     switch (kind) {
       case 'offset': return [Translate(x, y, z)]
@@ -107,17 +107,22 @@ export function HeightMap(name, { res, size, height, bump }, transforms) {
 export function compileObject(obj) {
   switch (obj.kind) {
     case 'lathe': return Mesh(
-      latheMesh(obj.path, obj.res, transformStackToMatrix(obj.transforms))
+      latheMesh(obj.path, obj.res, toMatrix(obj.transforms))
     )
     case 'bezierlathe': return Mesh(
-      bezierLatheMesh(obj.path, obj.resU, obj.resV, transformStackToMatrix(obj.transforms))
+      bezierLatheMesh(obj.path, obj.resU, obj.resV, toMatrix(obj.transforms))
     )
     case 'patches': return Mesh(
-      bezierMesh(obj.patches, obj.res, transformStackToMatrix(obj.transforms))
+      bezierMesh(obj.patches, obj.res, toMatrix(obj.transforms))
     )
     case 'heightmap': return Mesh(
-      heightMapMesh(obj, transformStackToMatrix(obj.transforms))
+      heightMapMesh(obj, toMatrix(obj.transforms))
     )
+    case 'composite':
+      let fullMesh = obj.children.flatMap(e => compileObject(e).polys)
+      return Mesh(
+        fullMesh.map(p => transformTriangle(p, toMatrix(obj.transforms)))
+      )
     default: return obj
   }
 }
@@ -159,9 +164,9 @@ export function rotateMesh({ x }, triangles) {
 
 export function bezier3DPatch([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p], u, v) {
   return Vec(
-    bezierPatch([a.x,b.x,c.x,d.x,e.x,f.x,g.x,h.x,i.x,j.x,k.x,l.x,m.x,n.x,o.x,p.x], u,v),
-    bezierPatch([a.y,b.y,c.y,d.y,e.y,f.y,g.y,h.y,i.y,j.y,k.y,l.y,m.y,n.y,o.y,p.y], u,v),
-    bezierPatch([a.z,b.z,c.z,d.z,e.z,f.z,g.z,h.z,i.z,j.z,k.z,l.z,m.z,n.z,o.z,p.z], u,v),
+    bezierPatch([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p].map(e => e.x), u, v),
+    bezierPatch([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p].map(e => e.y), u, v),
+    bezierPatch([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p].map(e => e.z), u, v),
   )
 }
 function bezier1D([a,b,c,d], t) {
@@ -182,18 +187,20 @@ function bezierPatch([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p], u, v) {
 
 export function bezierMesh(patches, res, matrix) {
   return [...patches
-    .flatMap(patch => [...generateRowByRowCoordinates(res)].flatMap(({ x: i, y: j }) => [
-      Polygon(
-        bezier3DPatch(patch, i/res, j/res),
-        bezier3DPatch(patch, i/res, (j+1)/res),
-        bezier3DPatch(patch, (i+1)/res, j/res)
-      ),
-      Polygon(
-        bezier3DPatch(patch, (i+1)/res, j/res),
-        bezier3DPatch(patch, i/res, (j+1)/res),
-        bezier3DPatch(patch, (i+1)/res, (j+1)/res)
-      ),
-    ]).filter(isValidPolygon))
+    .flatMap(patch => [...generateRowByRowCoordinates(res)]
+      .flatMap(({ x: i, y: j }) => [
+        Polygon(
+          bezier3DPatch(patch, i/res, j/res),
+          bezier3DPatch(patch, i/res, (j+1)/res),
+          bezier3DPatch(patch, (i+1)/res, j/res)
+        ),
+        Polygon(
+          bezier3DPatch(patch, (i+1)/res, j/res),
+          bezier3DPatch(patch, i/res, (j+1)/res),
+          bezier3DPatch(patch, (i+1)/res, (j+1)/res)
+        ),
+      ]).filter(isValidPolygon)
+    )
     .map(p => transformTriangle(p, matrix))
   ]
 }

@@ -1,6 +1,6 @@
 import { useEvent, el } from '../assets/system.js'
 import { app } from '../Raytracer.js'
-import { compileObject, latheMesh, Mesh, Rotate, transformStackToMatrix } from './geometry.js'
+import { compileObject, latheMesh, Mesh, Rotate, toMatrix } from './geometry.js'
 import { cross, diff, dot, Vec } from './math.js'
 
 function isCompilable(obj) {
@@ -74,9 +74,9 @@ function compilePreviewObject(obj) {
   if (obj.kind === 'camera') {
     return Mesh(
       latheMesh(
-        [Vec(0.1,0,0), Vec(50*1.414,0,-100)],
+        [Vec(50*1.414,0,-100), Vec(0.1,0,0)],
         4,
-        transformStackToMatrix([...obj.transforms, Rotate(0,0,Math.PI/4)])
+        toMatrix([...obj.transforms, Rotate(0,0,Math.PI/4)])
       )
     )
   }

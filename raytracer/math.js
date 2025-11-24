@@ -1,4 +1,5 @@
 export const EPSILON = 0.001
+export const π = Math.PI
 
 export const Vec = (x, y, z) => ({ x, y, z })
 export const add = (a, b) => Vec(a.x + b.x, a.y + b.y, a.z + b.z)

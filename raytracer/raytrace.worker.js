@@ -1,4 +1,4 @@
-import { transformStackToMatrix } from './geometry.js'
+import { toMatrix } from './geometry.js'
 import {
   Vec,
   norm,
@@ -27,7 +27,7 @@ function raytrace({ area, totalArea, size, maxDepth, scene }) {
 
   let imgdata = new ImageData(width, height)
 
-  let camMatrix = transformStackToMatrix(camera.transforms)
+  let camMatrix = toMatrix(camera.transforms)
   let camPos = mapply(camMatrix, Vec(0,0,0))
   let camCorner = mapply(camMatrix, Vec(-0.5,-0.5,-1))
   let camRight = diff(mapply(camMatrix, Vec(1,0,0)), camPos)
