@@ -11,7 +11,7 @@ export function SceneView() {
   function x(p) { return Math.round(zoom * (view == 'side' ? p.z : p.x)) }
   function y(p) { return Math.round(zoom * (view == 'top' ? p.z : p.y)) }
   function z(p) { return view == 'front' ? p.z : view == 'side' ? p.x : -p.y }
-  const [scene, setScene] = React.useState([])
+  const [scene, setScene] = React.useState(app.scene)
   const [view, setView] = React.useState('front')
   const [zoom, setZoom] = React.useState(0.5)
   const [selected, setSelected] = React.useState(null)

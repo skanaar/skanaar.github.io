@@ -22,12 +22,6 @@ import { SceneView, SceneObjects, Properties } from './raytracer/SceneView.js'
 
 export const app = new App('RayTracer', RayTracer, 'aperture.svg')
 app.position(30, 60)
-app.addToAppMenu({
-  title: 'Show options...',
-  event: 'app:show_child_window',
-  arg: 'Options',
-  cmd: 'i',
-})
 app.addMenu(
   'File',
   { title: 'Teapot', event: 'scene', arg: 'teapot' },
@@ -36,6 +30,9 @@ app.addMenu(
 )
 app.addMenu(
   'View',
+  { title: 'Reflections', event: 'toggle_reflections', arg: true, cmd: 'm' },
+  { title: 'Dither', event: 'toggle_dithering', arg: true, cmd: 'd' },
+  { title: null },
   { title: 'Front', event: 'scene_view', arg: 'front', cmd: '1' },
   { title: 'Side', event: 'scene_view', arg: 'side', cmd: '2' },
   { title: 'Top', event: 'scene_view', arg: 'top', cmd: '3' },
@@ -43,13 +40,14 @@ app.addMenu(
   { title: 'Zoom out', event: 'zoom', arg: 0.5, cmd: ',', },
   { title: 'Zoom in', event: 'zoom', arg: 2, cmd: '.' },
 )
+app.addMenu('Window',
+  { title: 'Scene View', event: 'app:show_child_window', arg: 'Scene View' },
+  { title: 'Objects', event: 'app:show_child_window', arg: 'Objects' },
+  { title: 'Properties', event: 'app:show_child_window', arg: 'Properties' }
+)
 app.check('scene_view', 'front')
-app.addWindow('Options', RenderOptions, {
-  visible: true,
-  offset: [256+20,0],
-  size: [200,100]
-})
-app.addWindow('Scene Objects', SceneObjects, {
+app.check('toggle_reflections', true)
+app.addWindow('Objects', SceneObjects, {
   visible: true,
   offset: [0, 256+40],
   size: [200,300],
@@ -68,11 +66,10 @@ app.addWindow('Scene View', SceneView, {
   sizing: 'noresize'
 })
 
+app.scene = []
 let size = 256
-let ditherMethod = 'none' //'floydsteinberg'
-let maxDepth = 3
-
-export let scene = []
+let dithering = false
+let reflections = true
 
 function sceneTeapot() {
   return [
@@ -156,72 +153,39 @@ function RayTracer() {
   const apply = (action) => (arg, event) => {
     action(arg, event)
 
-    let ditherer = {
-      floydsteinberg: new FloydSteinbergDitherer(),
-      none: new NoDitherer(),
-    }[ditherMethod]
-
     raytraceParallel({
       canvas: hostRef.current,
       size,
-      maxDepth,
-      scene: compileScene(scene),
-      ditherer,
+      maxDepth: reflections ? 2 : 0,
+      scene: compileScene(app.scene),
+      ditherer: dithering ? new FloydSteinbergDitherer() : new NoDitherer(),
     }).then((result) => app.trigger('done', result))
   }
-  let render = apply(() => null)
 
   useEvent(app, 'scene', apply((arg) => {
     app.check('scene', arg)
-    scene = {
+    app.scene = {
       teapot: sceneTeapot(),
       island: sceneIsland(),
       mushroom: sceneMushroom(),
     }[arg]
-    app.trigger('update-scene', scene)
+    app.trigger('update-scene', app.scene)
   }))
-  useEvent(app, 'dither', apply((arg) => { ditherMethod = arg }))
-  useEvent(app, 'maxdepth', apply((arg) => { maxDepth = arg }))
+  useEvent(app, 'toggle_reflections', apply(() => {
+    reflections = !reflections
+    app.check('toggle_reflections', reflections)
+  }))
+  useEvent(app, 'toggle_dithering', apply(() => {
+    dithering = !dithering
+    app.check('toggle_dithering', dithering)
+  }))
 
   React.useEffect(() => {
     setTimeout(() => {
-      scene = sceneTeapot()
+      app.scene = sceneTeapot()
       app.trigger('scene', 'teapot')
     }, 0)
   }, [])
 
   return el('canvas', { width: size, height: size, ref: hostRef })
-}
-
-function RenderOptions() {
-  const [reflections, setReflections] = React.useState(maxDepth)
-  const [dither, setDither] = React.useState(ditherMethod)
-  const [duration, setDuration] = React.useState(0)
-  useEvent(app, 'maxdepth', (arg) => setReflections(arg))
-  useEvent(app, 'dither', (arg) => setDither(arg))
-  useEvent(app, 'done', (arg) => setDuration(arg.duration))
-
-  return el(
-    'div',
-    { style: { display: 'flex', flexDirection: 'column', margin: 10 } },
-    el('label', {},
-      el('input', {
-        type: 'checkbox',
-        checked: reflections > 0,
-        onChange: (e) => app.trigger('maxdepth', e.target.checked ? 3 : 0),
-      }),
-      'Reflections'
-    ),
-    el('label', {},
-      el('input', {
-        type: 'checkbox',
-        checked: dither == 'floydsteinberg',
-        onChange: (e) => {
-          app.trigger('dither', e.target.checked ? 'floydsteinberg' : 'none')
-        },
-      }),
-      'Dither'
-    ),
-    `Duration: ${duration.toFixed(0)}ms`
-  )
 }
