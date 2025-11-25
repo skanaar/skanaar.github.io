@@ -63,6 +63,9 @@ export class App {
   trigger(event, arg) {
     signals.trigger(this.name, event, arg)
   }
+  position(x,y) {
+    this.pos = { x, y }
+  }
 }
 
 export function useEvent(app, event, callback) {

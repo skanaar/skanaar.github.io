@@ -21,6 +21,7 @@ import { teapotPatches } from './raytracer/teapot.js'
 import { SceneView, SceneObjects, Properties } from './raytracer/SceneView.js'
 
 export const app = new App('RayTracer', RayTracer, 'aperture.svg')
+app.position(30, 60)
 app.addToAppMenu({
   title: 'Show options...',
   event: 'app:show_child_window',

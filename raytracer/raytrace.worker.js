@@ -1,4 +1,4 @@
-import { toMatrix } from './geometry.js'
+import { Camera, Offset, toMatrix } from './geometry.js'
 import {
   Vec,
   norm,
@@ -21,7 +21,7 @@ onmessage = (e) => {
 
 function raytrace({ area, totalArea, size, maxDepth, scene }) {
   let { width, height, x, y } = area
-  let camera = scene.find(e => e.kind === 'camera')
+  let camera = scene.find(e => e.kind === 'camera') ?? Camera([Offset(0,0,256)])
   let lights = scene.filter(e => e.kind === 'light')
   let suns = scene.filter(e => e.kind === 'sun')
 
