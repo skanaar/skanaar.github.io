@@ -36,6 +36,8 @@ app.addMenu(
 )
 app.addMenu(
   'Camera',
+  { title: 'Render', event: 'render' },
+  { title: null },
   { title: 'Reflections', event: 'toggle_reflections', arg: true, cmd: 'm' },
   { title: 'Dither', event: 'toggle_dithering', arg: true, cmd: 'd' },
 )
@@ -82,13 +84,13 @@ let reflections = true
 function sceneTeapot() {
   return [
     Camera([Rotate(0,0,0), Offset(0,0,256+128)]),
-    Light(Vec(-100, -100, -100), 16),
-    Light(Vec(200-128, 50-128, 256), 150),
+    Light(16, [Offset(-100, -100, -100)]),
+    Light(150, [Offset(200-128, 50-128, 256)]),
     Lathe('room', 4,
       [Vec(0,0,-4), Vec(Math.sqrt(2),0,-4), Vec(Math.sqrt(2),0,1), Vec(0,0,1)],
       [Rotate(0,0,45),Scaling(150,150,-150)]
     ),
-    Sphere('mirror sphere', Vec(60,-60,-60), 80, 'mirror'),
+    Sphere('mirror sphere', 'mirror', [Offset(60,-60,-60), Scaling(80,80,80)]),
     BezierPatchSet('teapot',
       teapotPatches,
       3,
@@ -112,7 +114,7 @@ function sceneIsland() {
   return [
     Camera([Rotate(0,17,0), Rotate(17,0,0), Offset(0,0,256)]),
     Sun(Vec(-1, 1, -0.5), 2),
-    Light(Vec(0, -30, 0), 16),
+    Light(16, [Offset(0, -30, 0)]),
     HeightMap(
       'island',
       { res: 16, size: 256, height: 0, bump: 64 },
@@ -187,6 +189,7 @@ function RayTracer() {
     dithering = !dithering
     app.check('toggle_dithering', dithering)
   }))
+  useEvent(app, 'render', apply(() => {}))
 
   React.useEffect(() => {
     setTimeout(() => {

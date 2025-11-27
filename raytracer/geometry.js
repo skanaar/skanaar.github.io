@@ -1,4 +1,4 @@
-import { Vec, Scale, Translate, RotateX, RotateY, RotateZ, π } from './math.js'
+import { Vec, Scale, Translate, RotateX, RotateY, RotateZ, π, mag } from './math.js'
 import { sq, add, cross, diff, norm, mult, rotx, mapply } from './math.js'
 import { generateRowByRowCoordinates, matrixStack } from './math.js'
 import { Noise } from './noise.js'
@@ -41,12 +41,12 @@ export function Sun(dir, amount) {
   return { kind: 'sun', dir, amount }
 }
 
-export function Light(point, amount) {
-  return { kind: 'light', point, amount }
+export function Light(amount, transforms) {
+  return { kind: 'light', amount, transforms }
 }
 
-export function Sphere(name, center, r, material) {
-  return { kind: 'sphere', name, center, r, material }
+export function Sphere(name, material, transforms) {
+  return { kind: 'sphere', name, material, transforms }
 }
 
 export function sphereHitTest(camera, ray, sphere){
@@ -124,6 +124,17 @@ export function compileObject(obj) {
       return Mesh(
         fullMesh.map(p => transformTriangle(p, toMatrix(obj.transforms)))
       )
+    case 'light':
+      return { ...obj, point: mapply(toMatrix(obj.transforms), Vec(0,0,0)) }
+    case 'sphere': {
+      let offset = toMatrix(obj.transforms.filter(e => e.kind === 'offset'))
+      let scale = toMatrix(obj.transforms.filter(e => e.kind === 'scale'))
+      return {
+        ...obj,
+        center: mapply(offset, Vec(0,0,0)),
+        r: mag(mapply(scale, Vec(1,0,0)))
+      }
+    }
     default: return obj
   }
 }

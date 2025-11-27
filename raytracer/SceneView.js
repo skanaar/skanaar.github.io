@@ -3,7 +3,7 @@ import { app } from '../Raytracer.js'
 import { compileObject, latheMesh, Mesh, Rotate, toMatrix } from './geometry.js'
 import { cross, diff, dot, Vec, π } from './math.js'
 
-function isCompilable(obj) {
+function isMeshRepresentable(obj) {
   return !['light', 'sun', 'sphere'].includes(obj.kind)
 }
 
@@ -44,7 +44,7 @@ export function SceneView() {
       }`),
     el('svg', { className: 'canvas-3d', viewBox: '-170 -128 340 256' },
       scene
-        .filter(isCompilable)
+        .filter(isMeshRepresentable)
         .map((e, i) => el('path', {
           key: `mesh${i}`,
           className: selected == e ? ' active' : '',
@@ -55,19 +55,27 @@ export function SceneView() {
             `M${x(a)},${y(a)} L${x(b)},${y(b)} L${x(c)},${y(c)} Z`)
             .join(''),
         })),
-      scene.filter(e => e.kind === 'light').map((e, i) => el('path', {
-        key: `light${i}`,
-        className: 'light' + (selected == e ? ' active' : ''),
-        d: `M${x(e.point)-3},${y(e.point)-3}l6,0l0,6l-6,0Zm-3,3l6,-6l6,6l-6,6 Z`
-      })),
-      scene.filter(e => e.kind === 'sphere').map((e, i) => el('ellipse', {
-        key: `sphere{i}`,
-        className: selected == e ? ' active' : undefined,
-        cx: x(e.center),
-        cy: y(e.center),
-        rx: zoom * e.r,
-        ry: zoom * e.r
-      }))
+      scene
+        .filter(e => e.kind === 'light')
+        .map((e, i) => {
+          let p = compilePreviewObject(e).point
+          return el('path', {
+            key: `light${i}`,
+            className: 'light' + (selected == e ? ' active' : ''),
+            d: `M${x(p)-3},${y(p)-3}l6,0l0,6l-6,0Zm-3,3l6,-6l6,6l-6,6 Z`
+          })
+        }),
+      scene.filter(e => e.kind === 'sphere').map((e, i) => {
+        let { center, r } = compilePreviewObject(e)
+        return el('ellipse', {
+          key: `sphere{i}`,
+          className: selected == e ? ' active' : undefined,
+          cx: x(center),
+          cy: y(center),
+          rx: zoom * r,
+          ry: zoom * r
+        })
+      })
     )
   )
 }
@@ -145,15 +153,9 @@ export function Properties() {
       obj-properties input::-webkit-inner-spin-button {
           -webkit-appearance: none;
       }`),
-    selected.kind === 'sphere'
-      ? el(TransformInput, { transform: selected, title: 'pos' })
-      : null,
-    selected.kind === 'light'
-      ? el(TransformInput, { transform: selected, title: 'pos' })
-      : null,
     selected
       .transforms
-      ?.map((e,i) => el(TransformInput, { transform: e, title: e.kind, key: i })),
+      ?.map((e,i) => el(TransformInput, { transform:e, title:e.kind, key:i })),
   )
 }
 
