@@ -37,11 +37,11 @@ app.addMenu(
   { title: 'Side', event: 'scene_view', arg: 'side', cmd: '2' },
   { title: 'Top', event: 'scene_view', arg: 'top', cmd: '3' },
   { title: null },
-  { title: 'Zoom out', event: 'zoom', arg: 0.5, cmd: ',', },
-  { title: 'Zoom in', event: 'zoom', arg: 2, cmd: '.' },
+  { title: 'Zoom out', event: 'zoom', arg: 1/1.5, cmd: ',', },
+  { title: 'Zoom in', event: 'zoom', arg: 1.5, cmd: '.' },
 )
 app.addMenu('Window',
-  { title: 'Scene View', event: 'app:show_child_window', arg: 'Scene View' },
+  { title: 'Overview', event: 'app:show_child_window', arg: 'Overview' },
   { title: 'Objects', event: 'app:show_child_window', arg: 'Objects' },
   { title: 'Properties', event: 'app:show_child_window', arg: 'Properties' }
 )
@@ -49,19 +49,19 @@ app.check('scene_view', 'front')
 app.check('toggle_reflections', true)
 app.addWindow('Objects', SceneObjects, {
   visible: true,
-  offset: [0, 256+40],
+  offset: [0, 256+50],
   size: [200,300],
   sizing: 'noresize'
 })
 app.addWindow('Properties', Properties, {
   visible: true,
-  offset: [256+20, 100+40],
+  offset: [200+20, 256+50+50],
   size: [200,100],
   sizing: 'noresize'
 })
-app.addWindow('Scene View', SceneView, {
+app.addWindow('Overview', SceneView, {
   visible: true,
-  offset: [220, 256+40],
+  offset: [256+20, 0],
   size: [400,300],
   sizing: 'noresize'
 })

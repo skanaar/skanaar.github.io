@@ -75,6 +75,11 @@ export function useEvent(app, event, callback) {
   })
 }
 
+export function useForceUpdate() {
+  const [_, forceUpdate] = React.useReducer((x) => x + 1, 0)
+  return forceUpdate
+}
+
 function Clock() {
   const [time, setTime] = React.useState(new Date())
 

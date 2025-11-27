@@ -1,7 +1,7 @@
-import { useEvent, el } from '../assets/system.js'
+import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app } from '../Raytracer.js'
 import { compileObject, latheMesh, Mesh, Rotate, toMatrix } from './geometry.js'
-import { cross, diff, dot, Vec } from './math.js'
+import { cross, diff, dot, Vec, π } from './math.js'
 
 function isCompilable(obj) {
   return !['light', 'sun', 'sphere'].includes(obj.kind)
@@ -12,6 +12,7 @@ export function SceneView() {
   function y(p) { return Math.round(zoom * (view == 'top' ? p.z : p.y)) }
   function z(p) { return view == 'front' ? p.z : view == 'side' ? p.x : -p.y }
   const [scene, setScene] = React.useState(app.scene)
+  const forceUpdate = useForceUpdate()
   const [view, setView] = React.useState('front')
   const [zoom, setZoom] = React.useState(0.5)
   const [selected, setSelected] = React.useState(null)
@@ -23,6 +24,7 @@ export function SceneView() {
   useEvent(app, 'zoom', (factor) => setZoom(zoom * factor))
   useEvent(app, 'update-scene', (scene) => setScene(scene))
   useEvent(app, 'select-object', (item) => setSelected(item))
+  useEvent(app, 'scene-modified', forceUpdate)
 
   return el(
     'div',
@@ -147,12 +149,15 @@ export function Properties() {
 
 export function TransformInput({ transform: trns, title }) {
   const [selected, setSelected] = React.useState(null)
+  const forceUpdate = useForceUpdate()
   useEvent(app, 'select-object', (obj) => setSelected(obj))
+  useEvent(app, 'scene-modified', forceUpdate)
 
   const update = (field) => (event) => {
-    trns[field] = event.target.value
+    trns[field] = event.target.value * (title === 'rotate' ? π/360 : 1)
     app.trigger('scene-modified')
   }
+  const fmt = (x) => x * (title === 'rotate' ? 360/π : 1)
 
   return el(
     'transform-input',
@@ -166,10 +171,10 @@ export function TransformInput({ transform: trns, title }) {
     },
     el('span', {}, title),
     el('span', {}, 'X'),
-    el('input', { type: 'number', value: trns.x, onChange: e => update('x') }),
+    el('input', { type: 'number', value: fmt(trns.x), onChange: update('x') }),
     el('span', {}, 'Y'),
-    el('input', { type: 'number', value: trns.y, onChange: e => update('y') }),
+    el('input', { type: 'number', value: fmt(trns.y), onChange: update('y') }),
     el('span', {}, 'Z'),
-    el('input', { type: 'number', value: trns.z, onChange: e => update('z') }),
+    el('input', { type: 'number', value: fmt(trns.z), onChange: update('z') }),
   )
 }
