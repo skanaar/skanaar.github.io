@@ -1,4 +1,4 @@
-import { Vec, Scale, Translate, RotateX, RotateY, RotateZ } from './math.js'
+import { Vec, Scale, Translate, RotateX, RotateY, RotateZ, π } from './math.js'
 import { sq, add, cross, diff, norm, mult, rotx, mapply } from './math.js'
 import { generateRowByRowCoordinates, matrixStack } from './math.js'
 import { Noise } from './noise.js'
@@ -7,10 +7,11 @@ export function Offset(x,y,z) { return { kind: 'offset', x, y, z } }
 export function Rotate(x,y,z) { return { kind: 'rotate', x, y, z } }
 export function Scaling(x,y,z) { return { kind: 'scale', x, y, z } }
 export function toMatrix(transforms) {
+  let rad = (degrees) => degrees * π/180
   return matrixStack(...transforms.flatMap(({ kind, x, y, z }) => {
     switch (kind) {
       case 'offset': return [Translate(x, y, z)]
-      case 'rotate': return [RotateX(x), RotateY(y), RotateZ(z)]
+      case 'rotate': return [RotateX(rad(x)), RotateY(rad(y)), RotateZ(rad(z))]
       case 'scale': return [Scale(x, y, z)]
     }
   }))

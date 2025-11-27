@@ -22,9 +22,9 @@ export function SceneView() {
     setView(view)
   })
   useEvent(app, 'zoom', (factor) => setZoom(zoom * factor))
-  useEvent(app, 'update-scene', (scene) => setScene(scene))
-  useEvent(app, 'select-object', (item) => setSelected(item))
-  useEvent(app, 'scene-modified', forceUpdate)
+  useEvent(app, 'update_scene', (scene) => setScene(scene))
+  useEvent(app, 'select_object', (item) => setSelected(item))
+  useEvent(app, 'scene_modified', forceUpdate)
 
   return el(
     'div',
@@ -78,7 +78,7 @@ function compilePreviewObject(obj) {
       latheMesh(
         [Vec(50*1.414,0,-100), Vec(0.1,0,0)],
         4,
-        toMatrix([...obj.transforms, Rotate(0,0,Math.PI/4)])
+        toMatrix([...obj.transforms, Rotate(0,0,45)])
       )
     )
   }
@@ -88,7 +88,7 @@ function compilePreviewObject(obj) {
 export function SceneObjects() {
   const [selected, setSelected] = React.useState(null)
   const [scene, setScene] = React.useState([])
-  useEvent(app, 'update-scene', (scene) => setScene(scene))
+  useEvent(app, 'update_scene', (scene) => setScene(scene))
 
   return el(
     'scene-objects',
@@ -106,7 +106,7 @@ export function SceneObjects() {
     scene.map(e => el('span', {
         onClick: () => {
           setSelected(e)
-          app.trigger('select-object', e)
+          app.trigger('select_object', e)
         },
         className: selected === e ? 'active' : undefined,
       },
@@ -117,7 +117,17 @@ export function SceneObjects() {
 
 export function Properties() {
   const [selected, setSelected] = React.useState(null)
-  useEvent(app, 'select-object', (obj) => setSelected(obj))
+  const forceUpdate = useForceUpdate()
+  useEvent(app, 'select_object', (obj) => setSelected(obj))
+  useEvent(app, 'scene_modified', forceUpdate)
+  useEvent(app, 'add_transform', (kind) => {
+    if (!selected) return
+    if (kind == 'scale')
+      selected.transforms.push({ kind: 'scale', x: 1, y: 1, z: 1 })
+    else
+      selected.transforms.push({ kind, x: 0, y: 0, z: 0 })
+    app.trigger('scene_modified')
+  })
 
   if (!selected) return null
 
@@ -150,14 +160,13 @@ export function Properties() {
 export function TransformInput({ transform: trns, title }) {
   const [selected, setSelected] = React.useState(null)
   const forceUpdate = useForceUpdate()
-  useEvent(app, 'select-object', (obj) => setSelected(obj))
-  useEvent(app, 'scene-modified', forceUpdate)
+  useEvent(app, 'select_object', (obj) => setSelected(obj))
+  useEvent(app, 'scene_modified', forceUpdate)
 
   const update = (field) => (event) => {
-    trns[field] = event.target.value * (title === 'rotate' ? π/360 : 1)
-    app.trigger('scene-modified')
+    trns[field] = event.target.value
+    app.trigger('scene_modified')
   }
-  const fmt = (x) => x * (title === 'rotate' ? 360/π : 1)
 
   return el(
     'transform-input',
@@ -171,10 +180,10 @@ export function TransformInput({ transform: trns, title }) {
     },
     el('span', {}, title),
     el('span', {}, 'X'),
-    el('input', { type: 'number', value: fmt(trns.x), onChange: update('x') }),
+    el('input', { type: 'number', value: trns.x, onChange: update('x') }),
     el('span', {}, 'Y'),
-    el('input', { type: 'number', value: fmt(trns.y), onChange: update('y') }),
+    el('input', { type: 'number', value: trns.y, onChange: update('y') }),
     el('span', {}, 'Z'),
-    el('input', { type: 'number', value: fmt(trns.z), onChange: update('z') }),
+    el('input', { type: 'number', value: trns.z, onChange: update('z') }),
   )
 }
