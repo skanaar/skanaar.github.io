@@ -1,15 +1,17 @@
 import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app } from '../Raytracer.js'
 import { compileObject, latheMesh, Mesh, Rotate, toMatrix } from './geometry.js'
-import { cross, diff, dot, Vec, π } from './math.js'
+import { add, cross, diff, dot, EPSILON, Vec, π } from './math.js'
 
 function isMeshRepresentable(obj) {
-  return !['light', 'sun', 'sphere'].includes(obj.kind)
+  return !['light', 'sphere'].includes(obj.kind)
 }
 
 export function SceneView() {
-  function x(p) { return Math.round(zoom * (view == 'side' ? p.z : p.x)) }
-  function y(p) { return Math.round(zoom * (view == 'top' ? p.z : p.y)) }
+  const [startPos, setStartPos] = React.useState(null)
+  const [{ x: ox, y: oy, z: oz }, setOffset] = React.useState(Vec(0,0,0))
+  function x(p) { return Math.round(zoom * (view == 'side' ? p.z-oz : p.x-ox)) }
+  function y(p) { return Math.round(zoom * (view == 'top' ? p.z-oz : p.y-oy)) }
   function z(p) { return view == 'front' ? p.z : view == 'side' ? p.x : -p.y }
   const [scene, setScene] = React.useState(app.scene)
   const forceUpdate = useForceUpdate()
@@ -21,10 +23,22 @@ export function SceneView() {
     app.check('scene_view', view)
     setView(view)
   })
+  useEvent(app, 'reset_view', () => {
+    setZoom(0.5)
+    setOffset(Vec(0,0,0))
+  })
   useEvent(app, 'zoom', (factor) => setZoom(zoom * factor))
   useEvent(app, 'update_scene', (scene) => setScene(scene))
   useEvent(app, 'select_object', (item) => setSelected(item))
   useEvent(app, 'scene_modified', forceUpdate)
+
+  function screenToSpace({ movementX, movementY }) {
+    switch (view) {
+      case 'front': return Vec(movementX/zoom, movementY/zoom, 0)
+      case 'side': return Vec(0, movementY/zoom, movementX/zoom)
+      case 'top': return Vec(movementX/zoom, 0, movementY/zoom)
+    }
+  }
 
   return el(
     'div',
@@ -42,7 +56,18 @@ export function SceneView() {
       svg.canvas-3d :is(path, ellipse, rect).active {
         stroke-width: 2px
       }`),
-    el('svg', { className: 'canvas-3d', viewBox: '-170 -128 340 256' },
+    el('svg', {
+      className: 'canvas-3d',
+      viewBox: '-170 -128 340 256',
+      onMouseDown: (e) => setStartPos(screenToSpace(e)),
+      onMouseMove: (e) => {
+        if (startPos) setOffset(o => add(o, diff(startPos, screenToSpace(e))))
+      },
+      onMouseUp: (e) => {
+        setOffset(o => add(o, diff(startPos, screenToSpace(e))))
+        setStartPos(null)
+      }
+    },
       scene
         .filter(isMeshRepresentable)
         .map((e, i) => el('path', {
@@ -50,7 +75,7 @@ export function SceneView() {
           className: selected == e ? ' active' : '',
           d: compilePreviewObject(e)
             .polys
-            .filter(({a,b,c}) => z(cross(diff(b,a), diff(c,a))) < 0)
+            .filter(({a,b,c}) => z(cross(diff(b,a), diff(c,a))) < EPSILON)
             .map(({a,b,c}) =>
             `M${x(a)},${y(a)} L${x(b)},${y(b)} L${x(c)},${y(c)} Z`)
             .join(''),

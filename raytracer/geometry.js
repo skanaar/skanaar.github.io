@@ -29,64 +29,17 @@ export function Mesh(polys) {
   return { kind: 'mesh', polys }
 }
 
-export function compositeHitTest(camera, ray){
-  for (let child of children) {
-    let hit = child.hit(camera, ray)
-    if (hit) return hit
-  }
-  return null
-}
-
-export function Sun(dir, amount) {
-  return { kind: 'sun', dir, amount }
-}
-
-export function Light(amount, transforms) {
-  return { kind: 'light', amount, transforms }
+export function Light(transforms) {
+  return { kind: 'light', transforms }
 }
 
 export function Sphere(name, material, transforms) {
   return { kind: 'sphere', name, material, transforms }
 }
 
-export function sphereHitTest(camera, ray, sphere){
-  let { center, r } = sphere
-  let a = dot(ray, ray)
-  let b = 2 * dot(ray, diff(camera, center))
-  let c = dot(center,center) + dot(camera,camera) - 2*dot(center,camera) - r*r
-  let disc = b * b - 4 * a * c
-  if (disc < 0) return null
-  let t = (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)
-  if (t > hit.depth) return null
-  if (t < EPSILON) return null // no hits behind camera
-  let p = add(camera, mult(t, ray))
-  let normal = mult(1 / r, diff(p, center))
-  return { depth: t, normal, point: p, material }
-}
-
 export function Polygon(a, b, c) {
   const normal = norm(cross(diff(c, a), diff(b, a)))
   return { kind: 'poly', a, b, c, normal }
-}
-
-export function polygonHitTest(camera, ray, polygon) {
-  let { a, b, c, normal } = polygon
-  let denominator = dot(ray, normal)
-  // expect denominator to be negative (with margin)
-  if (denominator > -EPSILON) return null
-  let maxDepth = hit.depth
-  let t = (dot(triangle.a, normal) - dot(camera, normal)) / denominator
-  if (t > maxDepth) return null
-  if (t < EPSILON) return null // no hits behind camera
-  const p = add(camera, mult(t, ray))
-  // is p outside triangle?
-  let to_a = crossDiff(c, b, normal)
-  if (dot(diff(p, b), to_a) < 0.0) return null
-  let to_b = crossDiff(a, c, normal)
-  if (dot(diff(p, c), to_b) < 0.0) return null
-  let to_c = crossDiff(b, a, normal)
-  if (dot(diff(p, a), to_c) < 0.0) return null
-  return { depth: t, normal: triangle.normal, point: p, material: 'diffuse' }
 }
 
 export function Lathe(name, res, path, transforms) {
@@ -124,15 +77,20 @@ export function compileObject(obj) {
       return Mesh(
         fullMesh.map(p => transformTriangle(p, toMatrix(obj.transforms)))
       )
-    case 'light':
-      return { ...obj, point: mapply(toMatrix(obj.transforms), Vec(0,0,0)) }
-    case 'sphere': {
-      let offset = toMatrix(obj.transforms.filter(e => e.kind === 'offset'))
-      let scale = toMatrix(obj.transforms.filter(e => e.kind === 'scale'))
+    case 'light': {
+      let matrix = toMatrix(obj.transforms)
       return {
         ...obj,
-        center: mapply(offset, Vec(0,0,0)),
-        r: mag(mapply(scale, Vec(1,0,0)))
+        point: mapply(matrix, Vec(0,0,0)),
+        amount: mag(diff(mapply(matrix,Vec(0,0,0)), mapply(matrix,Vec(1,0,0))))
+      }
+    }
+    case 'sphere': {
+      let matrix = toMatrix(obj.transforms)
+      return {
+        ...obj,
+        center: mapply(matrix, Vec(0,0,0)),
+        r: mag(diff(mapply(matrix, Vec(0,0,0)), mapply(matrix, Vec(1,0,0))))
       }
     }
     default: return obj

@@ -5,7 +5,6 @@ import {
   Sphere,
   Light,
   HeightMap,
-  Sun,
   compileScene,
   BezierPatchSet,
   Offset,
@@ -49,6 +48,7 @@ app.addMenu(
   { title: null },
   { title: 'Zoom out', event: 'zoom', arg: 1/1.5, cmd: ',', },
   { title: 'Zoom in', event: 'zoom', arg: 1.5, cmd: '.' },
+  { title: 'Reset view', event: 'reset_view' },
 )
 app.addMenu('Window',
   { title: 'Overview', event: 'app:show_child_window', arg: 'Overview' },
@@ -84,8 +84,8 @@ let reflections = true
 function sceneTeapot() {
   return [
     Camera([Rotate(0,0,0), Offset(0,0,256+128)]),
-    Light(16, [Offset(-100, -100, -100)]),
-    Light(150, [Offset(200-128, 50-128, 256)]),
+    Light([Offset(-100, -100, -100), Scaling(16,0,0)]),
+    Light([Offset(200-128, 50-128, 256), Scaling(150,0,0)]),
     Lathe('room', 4,
       [Vec(0,0,-4), Vec(Math.sqrt(2),0,-4), Vec(Math.sqrt(2),0,1), Vec(0,0,1)],
       [Rotate(0,0,45),Scaling(150,150,-150)]
@@ -113,8 +113,8 @@ function sceneIsland() {
   let pillar = [Vec(9,0,0),Vec(8,0,80)]
   return [
     Camera([Rotate(0,17,0), Rotate(17,0,0), Offset(0,0,256)]),
-    Sun(Vec(-1, 1, -0.5), 2),
-    Light(16, [Offset(0, -30, 0)]),
+    Light([Offset(1000, -1000, 500), Scaling(4000,0,0)]),
+    Light([Offset(0, -30, 0), Scaling(16,0,0)]),
     HeightMap(
       'island',
       { res: 16, size: 256, height: 0, bump: 64 },
@@ -138,8 +138,8 @@ function sceneIsland() {
 function sceneMushroom() {
   return [
     Camera([Rotate(20,20,0), Offset(0,0,256)]),
-    Sun(Vec(-1, 1, -0.5), 2),
-    Sun(Vec(1, -1, -0.5), 0.5),
+    Light([Offset(1000, -1000, 500), Scaling(4000,0,0)]),
+    Light([Offset(-1000, 1000, 500), Scaling(1000,0,0)]),
     BezierLathe('mushroom-foot',
       32, 16,
       [Vec(20,0,0), Vec(30,0,0), Vec(30,0,20), Vec(25,0,50)],

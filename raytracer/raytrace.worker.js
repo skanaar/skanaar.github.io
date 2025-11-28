@@ -14,6 +14,8 @@ import {
   mapply
 } from './math.js'
 
+const FAR_AWAY = 32000
+
 onmessage = (e) => {
   let imgdata = raytrace(e.data)
   postMessage(imgdata)
@@ -23,7 +25,6 @@ function raytrace({ area, totalArea, size, maxDepth, scene }) {
   let { width, height, x, y } = area
   let camera = scene.find(e => e.kind === 'camera') ?? Camera([Offset(0,0,256)])
   let lights = scene.filter(e => e.kind === 'light')
-  let suns = scene.filter(e => e.kind === 'sun')
 
   let imgdata = new ImageData(width, height)
 
@@ -44,7 +45,7 @@ function raytrace({ area, totalArea, size, maxDepth, scene }) {
 
       // hit patch illumination
       let bright = 0
-      if (hit.depth < 1000) {
+      if (hit.depth < FAR_AWAY) {
         for (let light of lights) {
           let light_vector = diff(hit.point, light.point)
           let light_dist = mag(light_vector)
@@ -52,12 +53,6 @@ function raytrace({ area, totalArea, size, maxDepth, scene }) {
           let beam = trace_ray(light.point, light_dir, 0, scene)
           if (beam.depth > light_dist - EPSILON)
             bright += lightBrightness(hit.point, hit.normal, light)
-        }
-        for (let sun of suns) {
-          const p = add(hit.point, mult(-500, sun.dir))
-          let sunHit = trace_ray(p, sun.dir, 0, scene)
-          if (sunHit.depth > 500 - EPSILON)
-            bright += Math.max(0, sun.amount * -dot(hit.normal, sun.dir))
         }
       }
       bright = hdr(bright)
@@ -76,7 +71,7 @@ function raytrace({ area, totalArea, size, maxDepth, scene }) {
 
 function trace_ray(camera, ray, depthBudget, scene) {
   let hit = {
-    depth: 1000.0,
+    depth: FAR_AWAY,
     normal: Vec(0.0,0.0,0.0),
     point: Vec(0.0,0.0,0.0),
     material: 'diffuse',
