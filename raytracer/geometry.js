@@ -26,7 +26,11 @@ export function Composite(name, children, transforms) {
 }
 
 export function Mesh(polys) {
-  return { kind: 'mesh', polys }
+  const vertices = polys
+    .flatMap(({ a, b, c }) => [a, b, c])
+  let center = mult(1/vertices.length, vertices.reduce((acc, e) => add(acc,e)))
+  let radius = vertices.reduce((max,p) => Math.max(mag(diff(center,p)), max), 0)
+  return { kind: 'mesh', polys, center, radius }
 }
 
 export function Light(transforms) {

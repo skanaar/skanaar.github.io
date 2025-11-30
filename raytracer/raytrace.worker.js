@@ -92,7 +92,14 @@ function trace_ray(camera, ray, depthBudget, scene) {
     hit = { depth: t, normal, point: p, material }
   }
 
-  for (let { polys } of scene.filter(e => e.kind == 'mesh')) {
+  for (let { polys, center, radius:r } of scene.filter(e => e.kind == 'mesh')) {
+    // bounding sphere test
+    let a = dot(ray, ray)
+    let b = 2 * dot(ray, diff(camera, center))
+    let c = dot(center,center) + dot(camera,camera) - 2*dot(center,camera) - r*r
+    let disc = b * b - 4 * a * c
+    if (disc < 0) continue
+
     // triangle intersections
     for (let triangle of polys) {
       let { a, b, c, normal } = triangle
