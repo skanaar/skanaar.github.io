@@ -50,6 +50,10 @@ export function Lathe(name, res, path, transforms) {
   return { kind: 'lathe', name, path, res, transforms }
 }
 
+export function Box(name, transforms) {
+  return { kind: 'box', name, transforms }
+}
+
 export function BezierLathe(name, resU, resV, path, transforms) {
   return { kind: 'bezierlathe', name, path, resU, resV, transforms }
 }
@@ -73,6 +77,18 @@ export function compileObject(obj) {
     case 'patches': return Mesh(
       bezierMesh(obj.patches, obj.res, toMatrix(obj.transforms))
     )
+    case 'box':
+      let o = -1
+      let a0 = Vec(o,o,o), b0 = Vec(1,o,o), c0 = Vec(o,1,o), d0 = Vec(1,1,o)
+      let a1 = Vec(o,o,1), b1 = Vec(1,o,1), c1 = Vec(o,1,1), d1 = Vec(1,1,1)
+      return Mesh([
+        Polygon(a0,b0,d0), Polygon(a0,d0,c0),
+        Polygon(a0,c1,a1), Polygon(a0,c0,c1),
+        Polygon(a0,a1,b1), Polygon(a0,b1,b0),
+        Polygon(d1,b1,a1), Polygon(d1,a1,c1),
+        Polygon(d1,c1,c0), Polygon(d1,c0,d0),
+        Polygon(d1,d0,b0), Polygon(d1,b0,b1),
+      ].map(p => transformTriangle(p, toMatrix(obj.transforms))))
     case 'heightmap': return Mesh(
       heightMapMesh(obj, toMatrix(obj.transforms))
     )

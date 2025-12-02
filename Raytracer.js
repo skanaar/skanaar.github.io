@@ -13,11 +13,14 @@ import {
   Lathe,
   BezierLathe,
   Composite,
+  Box,
 } from './raytracer/geometry.js'
 import { Vec } from './raytracer/math.js'
 import { raytraceParallel } from './raytracer/raytraceParallel.js'
 import { teapotPatches } from './raytracer/teapot.js'
-import { SceneView, SceneObjects, Properties } from './raytracer/SceneView.js'
+import { SceneView } from './raytracer/SceneView.js'
+import { SceneObjects } from './raytracer/SceneObjects.js'
+import { Properties } from './raytracer/Properties.js'
 
 export const app = new App('RayTracer', RayTracer, 'aperture.svg')
 app.position(30, 60)
@@ -91,6 +94,7 @@ function sceneTeapot() {
       [Rotate(0,0,45),Scaling(150,150,-150)]
     ),
     Sphere('mirror sphere', 'mirror', [Offset(60,-60,-60), Scaling(80,80,80)]),
+    Box('box', [Rotate(45,45,0), Scaling(40,40,40)]),
     BezierPatchSet('teapot',
       teapotPatches,
       3,
