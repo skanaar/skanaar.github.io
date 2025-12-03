@@ -9,7 +9,7 @@ export function Properties() {
   useEvent(app, 'add_transform', (kind) => {
     if (!selected) return
     let val = (kind == 'scale') ? 1 : 0
-    selected.transforms.push({ kind, x: val, y: val, z: val })
+    selected.transforms.push({ kind, id: Date.now(), x: val, y: val, z: val })
     app.trigger('scene_modified')
   })
 
@@ -27,7 +27,7 @@ export function Properties() {
     selected
       .transforms
       ?.map((e,i) => el(TransformInput, {
-        key: JSON.stringify(e),
+        key: e.id,
         first: i == 0,
         last: selected.transforms.at(-1) == e,
         onUp: () => {
