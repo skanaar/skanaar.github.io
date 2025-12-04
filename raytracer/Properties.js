@@ -24,6 +24,7 @@ export function Properties() {
       obj-props input[type='number'] { -moz-appearance: textfield }
       obj-props input::-webkit-outer-spin-button,
       obj-props input::-webkit-inner-spin-button { -webkit-appearance: none }`),
+    selected.kind == 'light' ? el(LightProperties, { light: selected }) : null,
     selected
       .transforms
       ?.map((e,i) => el(TransformInput, {
@@ -47,9 +48,7 @@ export function Properties() {
 }
 
 export function TransformInput({ transform, name, last, first, onUp, onDown }) {
-  const [selected, setSelected] = React.useState(null)
   const forceUpdate = useForceUpdate()
-  useEvent(app, 'select_object', (obj) => setSelected(obj))
   useEvent(app, 'scene_modified', forceUpdate)
 
   const update = (field) => (event) => {
@@ -88,5 +87,29 @@ export function TransformInput({ transform, name, last, first, onUp, onDown }) {
         onClick: onDown,
         style: { padding: 1 }
       }, '↓')
+  )
+}
+
+export function LightProperties({ light }) {
+  const forceUpdate = useForceUpdate()
+  useEvent(app, 'scene_modified', forceUpdate)
+
+  const update = (event) => {
+    light.amount = event.target.value
+    app.trigger('scene_modified')
+  }
+
+  return el(
+    'light-input',
+    {
+      style: {
+        display: 'grid',
+        gridTemplateColumns: '1fr auto 1fr auto 1fr auto 1fr auto auto',
+        alignItems: 'center',
+        justifyItems: 'center',
+      }
+    },
+    el('span', {}, 'intensity'),
+    el('input', { type: 'number', value: light.amount, onChange: update }),
   )
 }

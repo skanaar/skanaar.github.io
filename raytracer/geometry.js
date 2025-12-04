@@ -34,8 +34,8 @@ export function Mesh(polys) {
   return { kind: 'mesh', polys, center, radius }
 }
 
-export function Light(transforms) {
-  return { kind: 'light', transforms }
+export function Light(amount, transforms) {
+  return { kind: 'light', amount, transforms }
 }
 
 export function Sphere(name, material, transforms) {
@@ -99,12 +99,7 @@ export function compileObject(obj) {
         fullMesh.map(p => transformTriangle(p, toMatrix(obj.transforms)))
       )
     case 'light': {
-      let matrix = toMatrix(obj.transforms)
-      return {
-        ...obj,
-        point: mapply(matrix, Vec(0,0,0)),
-        amount: mag(diff(mapply(matrix,Vec(0,0,0)), mapply(matrix,Vec(1,0,0))))
-      }
+      return { ...obj, point: mapply(toMatrix(obj.transforms), Vec(0,0,0)) }
     }
     case 'sphere': {
       let matrix = toMatrix(obj.transforms)
