@@ -32,13 +32,18 @@ app.addMenu(
 )
 app.addMenu(
   'Edit',
+  { title: 'Rename...', event: 'rename_object' },
+  { title: 'Create light', event: 'create_object', arg: 'light' },
+  { title: 'Create sphere', event: 'create_object', arg: 'sphere' },
+  { title: 'Create box', event: 'create_object', arg: 'box' },
+  { title: null },
   { title: 'Add offset', event: 'add_transform', arg: 'offset' },
   { title: 'Add rotation', event: 'add_transform', arg: 'rotate' },
   { title: 'Add scaling', event: 'add_transform', arg: 'scale' },
 )
 app.addMenu(
   'Camera',
-  { title: 'Render', event: 'render' },
+  { title: 'Render', event: 'render', cmd: 'r' },
   { title: null },
   { title: 'Reflections', event: 'toggle_reflections', arg: true, cmd: 'm' },
   { title: 'Dither', event: 'toggle_dithering', arg: true, cmd: 'd' },
@@ -100,8 +105,7 @@ function sceneTeapot() {
       3,
       [Offset(-8,150,0), Scaling(45,45,45), Rotate(90, 0, 0.5)]
     ),
-    Lathe('column',
-      16,
+    Lathe('column', 16,
       [
         Vec(25,0,-100), Vec(25,0,-80), Vec(20,0,-75),
         Vec(20,0,75), Vec(25,0,80), Vec(25,0,85), Vec(2,0,90),

@@ -1,6 +1,6 @@
 import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app } from '../Raytracer.js'
-import { compileObject, latheMesh, Mesh, Rotate, toMatrix } from './geometry.js'
+import { Box, compileObject, latheMesh, Light, Mesh, Offset, Rotate, Scaling, Sphere, toMatrix } from './geometry.js'
 import { add, cross, diff, dot, EPSILON, Vec, π } from './math.js'
 
 function isMeshRepresentable(obj) {
@@ -30,6 +30,15 @@ export function SceneView() {
   useEvent(app, 'zoom', (factor) => setZoom(zoom * factor))
   useEvent(app, 'update_scene', (scene) => setScene(scene))
   useEvent(app, 'select_object', (item) => setSelected(item))
+  useEvent(app, 'create_object', (kind) => {
+    if (kind == 'light')
+      scene.push(Light(64, [Offset(ox, oy, oz)]))
+    if (kind == 'box')
+      scene.push(Box('box', [Offset(ox, oy, oz), Scaling(30,30,30)]))
+    if (kind == 'sphere')
+      scene.push(Sphere('sphere', 'diffuse', [Offset(ox, oy, oz), Scaling(30,30,30)]))
+    app.trigger('scene_modified')
+  })
   useEvent(app, 'scene_modified', forceUpdate)
 
   function screenToSpace({ movementX, movementY }) {
@@ -108,6 +117,7 @@ export function SceneView() {
 function compilePreviewObject(obj) {
   if (obj.kind === 'camera') {
     return Mesh(
+      obj.material,
       latheMesh(
         [Vec(50*1.414,0,-100), Vec(0.1,0,0)],
         4,

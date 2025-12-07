@@ -24,6 +24,7 @@ export function Properties() {
       obj-props input[type='number'] { -moz-appearance: textfield }
       obj-props input::-webkit-outer-spin-button,
       obj-props input::-webkit-inner-spin-button { -webkit-appearance: none }`),
+    selected.material ? el(MaterialProperties, { object: selected }) : null,
     selected.kind == 'light' ? el(LightProperties, { light: selected }) : null,
     selected
       .transforms
@@ -90,7 +91,7 @@ export function TransformInput({ transform, name, last, first, onUp, onDown }) {
   )
 }
 
-export function LightProperties({ light }) {
+function LightProperties({ light }) {
   const forceUpdate = useForceUpdate()
   useEvent(app, 'scene_modified', forceUpdate)
 
@@ -111,5 +112,32 @@ export function LightProperties({ light }) {
     },
     el('span', {}, 'intensity'),
     el('input', { type: 'number', value: light.amount, onChange: update }),
+  )
+}
+
+function MaterialProperties({ object }) {
+  const forceUpdate = useForceUpdate()
+  useEvent(app, 'scene_modified', forceUpdate)
+
+  const update = (event) => {
+    object.material = event.target.value
+    app.trigger('scene_modified')
+  }
+
+  return el(
+    'light-input',
+    {
+      style: {
+        display: 'grid',
+        gridTemplateColumns: '1fr auto 1fr auto 1fr auto 1fr auto auto',
+        alignItems: 'center',
+        justifyItems: 'center',
+      }
+    },
+    el('span', {}, 'material'),
+    el('select', { value: object.material, onChange: update },
+      el('option', {}, 'diffuse'),
+      el('option', {}, 'mirror'),
+    ),
   )
 }

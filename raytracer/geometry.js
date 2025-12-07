@@ -26,12 +26,12 @@ export function Composite(name, children, transforms) {
   return { kind: 'composite', name, children, transforms }
 }
 
-export function Mesh(polys) {
+export function Mesh(material, polys) {
   const vertices = polys
     .flatMap(({ a, b, c }) => [a, b, c])
   let center = mult(1/vertices.length, vertices.reduce((acc, e) => add(acc,e)))
   let radius = vertices.reduce((max,p) => Math.max(mag(diff(center,p)), max), 0)
-  return { kind: 'mesh', polys, center, radius }
+  return { kind: 'mesh', material, polys, center, radius }
 }
 
 export function Light(amount, transforms) {
@@ -48,19 +48,20 @@ export function Polygon(a, b, c) {
 }
 
 export function Lathe(name, res, path, transforms) {
-  return { kind: 'lathe', name, path, res, transforms }
+  return { kind: 'lathe', name, material: 'diffuse', path, res, transforms }
 }
 
 export function Box(name, transforms) {
-  return { kind: 'box', name, transforms }
+  return { kind: 'box', name, material: 'diffuse', transforms }
 }
 
 export function BezierLathe(name, resU, resV, path, transforms) {
-  return { kind: 'bezierlathe', name, path, resU, resV, transforms }
+  let material = 'diffue'
+  return { kind: 'bezierlathe', name, material, path, resU, resV, transforms }
 }
 
 export function BezierPatchSet(name, patches, res, transforms) {
-  return { kind: 'patches', name, patches, res, transforms }
+  return { kind: 'patches', name, material:'diffuse', patches, res, transforms }
 }
 
 export function HeightMap(name, { res, size, height, bump }, transforms) {
@@ -70,32 +71,40 @@ export function HeightMap(name, { res, size, height, bump }, transforms) {
 export function compileObject(obj) {
   switch (obj.kind) {
     case 'lathe': return Mesh(
+      obj.material,
       latheMesh(obj.path, obj.res, toMatrix(obj.transforms))
     )
     case 'bezierlathe': return Mesh(
+      obj.material,
       bezierLatheMesh(obj.path, obj.resU, obj.resV, toMatrix(obj.transforms))
     )
     case 'patches': return Mesh(
+      obj.material,
       bezierMesh(obj.patches, obj.res, toMatrix(obj.transforms))
     )
     case 'box':
       let o = -1
       let a0 = Vec(o,o,o), b0 = Vec(1,o,o), c0 = Vec(o,1,o), d0 = Vec(1,1,o)
       let a1 = Vec(o,o,1), b1 = Vec(1,o,1), c1 = Vec(o,1,1), d1 = Vec(1,1,1)
-      return Mesh([
-        Polygon(a0,b0,d0), Polygon(a0,d0,c0),
-        Polygon(a0,c1,a1), Polygon(a0,c0,c1),
-        Polygon(a0,a1,b1), Polygon(a0,b1,b0),
-        Polygon(d1,b1,a1), Polygon(d1,a1,c1),
-        Polygon(d1,c1,c0), Polygon(d1,c0,d0),
-        Polygon(d1,d0,b0), Polygon(d1,b0,b1),
-      ].map(p => transformTriangle(p, toMatrix(obj.transforms))))
+      return Mesh(
+        obj.material,
+        [
+          Polygon(a0,b0,d0), Polygon(a0,d0,c0),
+          Polygon(a0,c1,a1), Polygon(a0,c0,c1),
+          Polygon(a0,a1,b1), Polygon(a0,b1,b0),
+          Polygon(d1,b1,a1), Polygon(d1,a1,c1),
+          Polygon(d1,c1,c0), Polygon(d1,c0,d0),
+          Polygon(d1,d0,b0), Polygon(d1,b0,b1),
+        ].map(p => transformTriangle(p, toMatrix(obj.transforms)))
+      )
     case 'heightmap': return Mesh(
+      obj.material,
       heightMapMesh(obj, toMatrix(obj.transforms))
     )
     case 'composite':
       let fullMesh = obj.children.flatMap(e => compileObject(e).polys)
       return Mesh(
+        obj.material,
         fullMesh.map(p => transformTriangle(p, toMatrix(obj.transforms)))
       )
     case 'light': {

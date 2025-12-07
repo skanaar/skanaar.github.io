@@ -1,10 +1,18 @@
-import { useEvent, el } from '../assets/system.js'
+import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app } from '../Raytracer.js'
 
 export function SceneObjects() {
   const [selected, setSelected] = React.useState(null)
   const [scene, setScene] = React.useState([])
+  const forceUpdate = useForceUpdate()
   useEvent(app, 'update_scene', (scene) => setScene(scene))
+  useEvent(app, 'scene_modified', forceUpdate)
+  useEvent(app, 'rename_object', () => {
+    if (!selected) return
+    let name = prompt(`Rename object "${selected.name}"`)
+    if (name) selected.name = name
+    app.trigger('scene_modified')
+  })
 
   return el(
     'scene-objects',

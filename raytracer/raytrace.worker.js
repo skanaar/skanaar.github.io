@@ -92,7 +92,8 @@ function trace_ray(camera, ray, depthBudget, scene) {
     hit = { depth: t, normal, point: p, material }
   }
 
-  for (let { polys, center, radius:r } of scene.filter(e => e.kind == 'mesh')) {
+  const meshes = scene.filter(e => e.kind == 'mesh')
+  for (let { polys, center, radius:r, material } of meshes) {
     // bounding sphere test
     let a = dot(ray, ray)
     let b = 2 * dot(ray, diff(camera, center))
@@ -119,7 +120,7 @@ function trace_ray(camera, ray, depthBudget, scene) {
       let to_c = crossDiff(b, a, normal)
       if (dot(diff(p, a), to_c) < 0.0) continue
 
-      hit = { depth: t, normal: triangle.normal, point: p, material: 'diffuse' }
+      hit = { depth: t, normal: triangle.normal, point: p, material }
     }
   }
 
