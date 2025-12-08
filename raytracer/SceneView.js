@@ -64,19 +64,28 @@ export function SceneView() {
       }
       svg.canvas-3d :is(path, ellipse, rect).active {
         stroke-width: 2px
-      }`),
-    el('svg', {
-      className: 'canvas-3d',
-      viewBox: '-170 -128 340 256',
-      onMouseDown: (e) => setStartPos(screenToSpace(e)),
-      onMouseMove: (e) => {
-        if (startPos) setOffset(o => add(o, diff(startPos, screenToSpace(e))))
-      },
-      onMouseUp: (e) => {
-        setOffset(o => add(o, diff(startPos, screenToSpace(e))))
-        setStartPos(null)
       }
-    },
+      svg.canvas-3d path.crosshair {
+        stroke-dasharray: 2 2;
+        stroke-width: 1px;
+      }`),
+    el('svg',
+      {
+        className: 'canvas-3d',
+        viewBox: '-170 -128 340 256',
+        onMouseDown: (e) => setStartPos(screenToSpace(e)),
+        onMouseMove: (e) => {
+          if (startPos) setOffset(o => add(o, diff(startPos, screenToSpace(e))))
+        },
+        onMouseUp: (e) => {
+          setOffset(o => add(o, diff(startPos, screenToSpace(e))))
+          setStartPos(null)
+        }
+      },
+      el('path', {
+        className: 'crosshair',
+        d: `M${x(Vec(ox,oy,oz))-11},${y(Vec(ox,oy,oz))} l 22,0 m -11,-11 l 0,22`
+      }),
       scene
         .filter(isMeshRepresentable)
         .map((e, i) => el('path', {
