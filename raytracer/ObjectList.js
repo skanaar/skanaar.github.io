@@ -1,7 +1,7 @@
 import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app } from '../Raytracer.js'
 
-export function SceneObjects() {
+export function ObjectList() {
   const [selected, setSelected] = React.useState(null)
   const [scene, setScene] = React.useState([])
   const forceUpdate = useForceUpdate()

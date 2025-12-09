@@ -108,7 +108,8 @@ export function compileObject(obj) {
         fullMesh.map(p => transformTriangle(p, toMatrix(obj.transforms)))
       )
     case 'light': {
-      return { ...obj, point: mapply(toMatrix(obj.transforms), Vec(0,0,0)) }
+      let point = mapply(toMatrix(obj.transforms), Vec(0,0,0))
+      return { ...obj, point, center: point, r: 1 }
     }
     case 'sphere': {
       let matrix = toMatrix(obj.transforms)
@@ -118,7 +119,11 @@ export function compileObject(obj) {
         r: mag(diff(mapply(matrix, Vec(0,0,0)), mapply(matrix, Vec(1,0,0))))
       }
     }
-    default: return obj
+    case 'camera': {
+      let point = mapply(toMatrix(obj.transforms), Vec(0,0,0))
+      return { ...obj, center: point, r: 1 }
+    }
+    default: throw new Error('unknown object kind')
   }
 }
 

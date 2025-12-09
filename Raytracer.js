@@ -18,8 +18,8 @@ import {
 import { Vec } from './raytracer/math.js'
 import { raytraceParallel } from './raytracer/raytraceParallel.js'
 import { teapotPatches } from './raytracer/teapot.js'
-import { SceneView } from './raytracer/SceneView.js'
-import { SceneObjects } from './raytracer/SceneObjects.js'
+import { Editor } from './raytracer/Editor.js'
+import { ObjectList } from './raytracer/ObjectList.js'
 import { Properties } from './raytracer/Properties.js'
 
 export const app = new App('RayTracer', RayTracer, 'aperture.svg')
@@ -57,15 +57,16 @@ app.addMenu(
   { title: 'Zoom out', event: 'zoom', arg: 1/1.5, cmd: ',', },
   { title: 'Zoom in', event: 'zoom', arg: 1.5, cmd: '.' },
   { title: 'Reset view', event: 'reset_view' },
+  { title: 'Focus selection', event: 'focus_selection' },
 )
 app.addMenu('Window',
-  { title: 'Overview', event: 'app:show_child_window', arg: 'Overview' },
+  { title: 'Editor', event: 'app:show_child_window', arg: 'Editor' },
   { title: 'Objects', event: 'app:show_child_window', arg: 'Objects' },
   { title: 'Properties', event: 'app:show_child_window', arg: 'Properties' }
 )
 app.check('scene_view', 'front')
 app.check('toggle_reflections', true)
-app.addWindow('Objects', SceneObjects, {
+app.addWindow('Objects', ObjectList, {
   visible: true,
   offset: [0, 256+50],
   size: [200,300],
@@ -77,7 +78,7 @@ app.addWindow('Properties', Properties, {
   size: [200,100],
   sizing: 'noresize'
 })
-app.addWindow('Overview', SceneView, {
+app.addWindow('Editor', Editor, {
   visible: true,
   offset: [256+20, 0],
   size: [400,300],

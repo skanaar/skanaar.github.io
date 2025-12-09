@@ -7,7 +7,7 @@ function isMeshRepresentable(obj) {
   return !['light', 'sphere'].includes(obj.kind)
 }
 
-export function SceneView() {
+export function Editor() {
   const [startPos, setStartPos] = React.useState(null)
   const [{ x: ox, y: oy, z: oz }, setOffset] = React.useState(Vec(0,0,0))
   function x(p) { return Math.round(zoom * (view == 'side' ? p.z-oz : p.x-ox)) }
@@ -26,6 +26,11 @@ export function SceneView() {
   useEvent(app, 'reset_view', () => {
     setZoom(0.5)
     setOffset(Vec(0,0,0))
+  })
+  useEvent(app, 'focus_selection', () => {
+    if (!selected) return
+    setZoom(0.5)
+    setOffset(compileObject(selected).center)
   })
   useEvent(app, 'zoom', (factor) => setZoom(zoom * factor))
   useEvent(app, 'update_scene', (scene) => setScene(scene))
@@ -51,7 +56,7 @@ export function SceneView() {
 
   return el(
     'div',
-    {},
+    { style: { display: 'grid' } },
     el('style', {},
       `svg.canvas-3d :is(path, ellipse, rect) {
         fill: none;
