@@ -19,36 +19,25 @@ export function Properties() {
     'obj-props',
     {},
     el('style', {},
-      `obj-props { display: block }
+      `obj-props {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+        align-items: center;
+        justify-items: center;
+      }
       obj-props input { width: 64px }
       obj-props input[type='number'] { -moz-appearance: textfield }
       obj-props input::-webkit-outer-spin-button,
       obj-props input::-webkit-inner-spin-button { -webkit-appearance: none }`),
     selected.material ? el(MaterialProperties, { object: selected }) : null,
     selected.kind == 'light' ? el(LightProperties, { light: selected }) : null,
-    selected
-      .transforms
-      ?.map((e,i) => el(TransformInput, {
-        key: e.id,
-        first: i == 0,
-        last: selected.transforms.at(-1) == e,
-        onUp: () => {
-          let [extracted] = selected.transforms.splice(i, 1)
-          selected.transforms.splice(i-1, 0, extracted)
-          app.trigger('scene_modified')
-        },
-        onDown: () => {
-          let [extracted] = selected.transforms.splice(i, 1)
-          selected.transforms.splice(i+1, 0, extracted)
-          app.trigger('scene_modified')
-        },
-        transform: e,
-        name: e.kind,
-      })),
+    el(TransformInput, { name:'Offset', transform:selected.transforms.offset }),
+    el(TransformInput, { name:'Rotate', transform:selected.transforms.rotate }),
+    el(TransformInput, { name:'Scale', transform:selected.transforms.scale })
   )
 }
 
-export function TransformInput({ transform, name, last, first, onUp, onDown }) {
+export function TransformInput({ transform, name }) {
   const forceUpdate = useForceUpdate()
   useEvent(app, 'scene_modified', forceUpdate)
 
@@ -58,36 +47,15 @@ export function TransformInput({ transform, name, last, first, onUp, onDown }) {
   }
 
   return el(
-    'transform-input',
-    {
-      style: {
-        display: 'grid',
-        gridTemplateColumns: '1fr auto 1fr auto 1fr auto 1fr auto auto',
-        alignItems: 'center',
-        justifyItems: 'center',
-      }
-    },
+    React.Fragment,
+    {},
     el('span', {}, name),
     el('span', {}, 'X'),
     el('input', { type: 'number', value: transform.x, onChange: update('x') }),
     el('span', {}, 'Y'),
     el('input', { type: 'number', value: transform.y, onChange: update('y') }),
     el('span', {}, 'Z'),
-    el('input', { type: 'number', value: transform.z, onChange: update('z') }),
-    first
-      ? el('button', { className: 'btn small', style: { padding: 1 }}, ' ')
-      : el('button', {
-        className: 'btn small',
-        onClick: onUp,
-        style: { padding: 1 }
-      }, '↑'),
-    last
-      ? el('button', { className: 'btn small', style: { padding: 1 }}, ' ')
-      : el('button', {
-        className: 'btn small',
-        onClick: onDown,
-        style: { padding: 1 }
-      }, '↓')
+    el('input', { type: 'number', value: transform.z, onChange: update('z') })
   )
 }
 
@@ -101,17 +69,15 @@ function LightProperties({ light }) {
   }
 
   return el(
-    'light-input',
-    {
-      style: {
-        display: 'grid',
-        gridTemplateColumns: '1fr auto 1fr auto 1fr auto 1fr auto auto',
-        alignItems: 'center',
-        justifyItems: 'center',
-      }
-    },
+    React.Fragment,
+    {},
     el('span', {}, 'intensity'),
+    el('div', {}),
     el('input', { type: 'number', value: light.amount, onChange: update }),
+    el('div', {}),
+    el('div', {}),
+    el('div', {}),
+    el('div', {})
   )
 }
 
@@ -125,19 +91,17 @@ function MaterialProperties({ object }) {
   }
 
   return el(
-    'light-input',
-    {
-      style: {
-        display: 'grid',
-        gridTemplateColumns: '1fr auto 1fr auto 1fr auto 1fr auto auto',
-        alignItems: 'center',
-        justifyItems: 'center',
-      }
-    },
+    React.Fragment,
+    {},
     el('span', {}, 'material'),
+    el('div', {}),
     el('select', { value: object.material, onChange: update },
       el('option', {}, 'diffuse'),
       el('option', {}, 'mirror'),
     ),
+    el('div', {}),
+    el('div', {}),
+    el('div', {}),
+    el('div', {})
   )
 }

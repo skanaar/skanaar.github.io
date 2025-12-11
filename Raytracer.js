@@ -14,6 +14,7 @@ import {
   BezierLathe,
   Composite,
   Box,
+  Transforms,
 } from './raytracer/geometry.js'
 import { Vec } from './raytracer/math.js'
 import { raytraceParallel } from './raytracer/raytraceParallel.js'
@@ -92,19 +93,20 @@ let reflections = true
 
 function sceneTeapot() {
   return [
-    Camera([Rotate(0,0,0), Offset(0,0,256+128)]),
-    Light(16, [Offset(-100, -100, -100)]),
-    Light(150, [Offset(200-128, 50-128, 256)]),
+    Camera(Transforms(Offset(0,0,256+128))),
+    Light(16, Offset(-100, -100, -100)),
+    Light(150, Offset(200-128, 50-128, 256)),
     Lathe('room', 4,
       [Vec(0,0,-4), Vec(Math.sqrt(2),0,-4), Vec(Math.sqrt(2),0,1), Vec(0,0,1)],
-      [Rotate(0,0,45),Scaling(150,150,-150)]
+      Transforms(Offset(0,0,0), Rotate(0,0,45),Scaling(150,150,-150))
     ),
-    Sphere('mirror sphere', 'mirror', [Offset(60,-60,-60), Scaling(80,80,80)]),
-    Box('box', [Rotate(45,45,0), Scaling(40,40,40)]),
+    Sphere('mirror sphere', 'mirror',
+      Transforms(Offset(60,-60,-60), Rotate(0,0,0), Scaling(80,80,80))),
+    Box('box', Transforms(Offset(0,0,0), Rotate(45,45,0), Scaling(40,40,40))),
     BezierPatchSet('teapot',
       teapotPatches,
       3,
-      [Offset(-8,150,0), Scaling(45,45,45), Rotate(90, 0, 0.5)]
+      Transforms(Offset(-8,150,0), Rotate(90, 0, 0.5), Scaling(45,45,45))
     ),
     Lathe('column', 16,
       [
@@ -112,7 +114,7 @@ function sceneTeapot() {
         Vec(20,0,75), Vec(25,0,80), Vec(25,0,85), Vec(2,0,90),
         Vec(2,0,100), Vec(25,0,105), Vec(25,0,110), Vec(20,0,115)
       ],
-      [Offset(-100,20,-100), Scaling(0.7,1.26,0.7), Rotate(90,0,0.5)]
+      Transforms(Offset(-100,20,-100), Rotate(90,0,0.5), Scaling(0.7,1.26,0.7))
     ),
   ]
 }
@@ -121,48 +123,43 @@ function sceneIsland() {
   let rx = (y) => Rotate(0, y, 0)
   let pillar = [Vec(9,0,0),Vec(8,0,80)]
   return [
-    Camera([Rotate(0,17,0), Rotate(17,0,0), Offset(0,0,256)]),
-    Light(4000, [Offset(1000, -1000, 500)]),
-    Light(16, [Offset(0, -30, 0)]),
+    Camera(Transforms(Offset(0,0,256), Rotate(17,0,0))),
+    Light(4000, Offset(1000, -1000, 500)),
+    Light(16, Offset(0, -30, 0)),
     HeightMap(
       'island',
       { res: 16, size: 256, height: 0, bump: 64 },
-      [Offset(0,72,0), Rotate(180,0,0)]
+      Transforms(Offset(0,72,0), Rotate(180,0,0))
     ),
     Composite('temple', [
-      Lathe('p1', 12, pillar, [rx(0), Offset(40,0,0), Rotate(90,0,0)]),
-      Lathe('p2', 12, pillar, [rx(60), Offset(40,0,0), Rotate(90,0,0)]),
-      Lathe('p3', 12, pillar, [rx(120), Offset(40,0,0), Rotate(90,0,0)]),
-      Lathe('p4', 12, pillar, [rx(180), Offset(40,0,0), Rotate(90,0,0)]),
-      Lathe('p4', 12, pillar, [rx(240), Offset(40,0,0), Rotate(90,0,0)]),
-      Lathe('p4', 12, pillar, [rx(300), Offset(40,0,0), Rotate(90,0,0)]),
+      Lathe('p1', 12, pillar, Transforms(Offset(40,0,0), Rotate(90,0,0))),
       Lathe('roof', 6,
         [Vec(55,0,0),Vec(55,0,10),Vec(0,0,20)],
-        [Offset(0,-80,0), Rotate(90,0,0)]
+        Transforms(Offset(0,-80,0), Rotate(90,0,0))
       ),
-    ], [Scaling(1,1.5,1), Offset(0,40,0)])
+    ], Transforms(Offset(0,40,0), Scaling(1,1.5,1)))
   ]
 }
 
 function sceneMushroom() {
   return [
-    Camera([Rotate(20,20,0), Offset(0,0,256)]),
-    Light(4000, [Offset(1000, -1000, 500)]),
-    Light(1000, [Offset(-1000, 1000, 500)]),
+    Camera(Transforms(Offset(0,0,256), Rotate(20,20,0))),
+    Light(4000, Offset(1000, -1000, 500)),
+    Light(1000, Offset(-1000, 1000, 500)),
     BezierLathe('mushroom-foot',
       32, 16,
       [Vec(20,0,0), Vec(30,0,0), Vec(30,0,20), Vec(25,0,50)],
-      [Offset(0,72,-80), Scaling(2,2,2), Rotate(90,0,0), Rotate(0,0,1)]
+      Transforms(Offset(0,72,-80), Rotate(90,0,1), Scaling(2,2,2))
     ),
     Lathe('mushroom-gills',
       32,
       [Vec(50,0,50), Vec(25,0,50)],
-      [Offset(0,72,-80), Scaling(2,2,2), Rotate(90,0,0), Rotate(0,0,1)]
+      Transforms(Offset(0,72,-80), Rotate(90,0,1), Scaling(2,2,2))
     ),
     BezierLathe('mushroom-hat',
       32, 16,
       [Vec(50,0,50), Vec(50,0,80), Vec(15,0,90), Vec(1,0,90)],
-      [Offset(0,72,-80), Scaling(2,2,2), Rotate(90,0,0), Rotate(0,0,1)]
+      Transforms(Offset(0,72,-80), Rotate(90,0,1), Scaling(2,2,2))
     )
   ]
 }

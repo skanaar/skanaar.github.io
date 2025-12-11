@@ -7,15 +7,19 @@ let _id = 0
 export function Offset(x,y,z) { return { kind: 'offset', id: _id++, x, y, z } }
 export function Rotate(x,y,z) { return { kind: 'rotate', id: _id++, x, y, z } }
 export function Scaling(x,y,z) { return { kind: 'scale', id: _id++, x, y, z } }
-export function toMatrix(transforms) {
+export function toMatrix({ offset, rotate, scale }) {
   let rad = (degrees) => degrees * π/180
-  return matrixStack(...transforms.flatMap(({ kind, x, y, z }) => {
+  return matrixStack(...[offset, rotate, scale].flatMap(({ kind, x, y, z }) => {
     switch (kind) {
       case 'offset': return [Translate(x, y, z)]
       case 'rotate': return [RotateX(rad(x)), RotateY(rad(y)), RotateZ(rad(z))]
       case 'scale': return [Scale(x, y, z)]
     }
   }))
+}
+
+export function Transforms(offset, rotate, scale = Scaling(1,1,1)) {
+  return { offset, rotate: rotate ?? Rotate(0,0,0), scale }
 }
 
 export function Camera(transforms) {
@@ -34,7 +38,8 @@ export function Mesh(material, polys) {
   return { kind: 'mesh', material, polys, center, radius }
 }
 
-export function Light(amount, transforms) {
+export function Light(amount, offset) {
+  let transforms = Transforms(offset, Rotate(0,0,0), Scaling(1,1,1))
   return { kind: 'light', amount, transforms }
 }
 

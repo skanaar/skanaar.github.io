@@ -1,7 +1,7 @@
 import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app } from '../Raytracer.js'
 import { Box, compileObject, latheMesh, Light, Mesh, Offset, Rotate, Scaling, Sphere, toMatrix } from './geometry.js'
-import { add, cross, diff, dot, EPSILON, Vec, π } from './math.js'
+import { add, cross, diff, dot, EPSILON, matrixmult, RotateZ, Vec, π } from './math.js'
 
 function isMeshRepresentable(obj) {
   return !['light', 'sphere'].includes(obj.kind)
@@ -78,7 +78,9 @@ export function Editor() {
       {
         className: 'canvas-3d',
         viewBox: '-170 -128 340 256',
-        onMouseDown: (e) => setStartPos(screenToSpace(e)),
+        onMouseDown: (e) => {
+          setStartPos(screenToSpace(e))
+        },
         onMouseMove: (e) => {
           if (startPos) setOffset(o => add(o, diff(startPos, screenToSpace(e))))
         },
@@ -135,7 +137,7 @@ function compilePreviewObject(obj) {
       latheMesh(
         [Vec(50*1.414,0,-100), Vec(0.1,0,0)],
         4,
-        toMatrix([...obj.transforms, Rotate(0,0,45)])
+        matrixmult(toMatrix(obj.transforms), RotateZ(0,0,10))
       )
     )
   }
