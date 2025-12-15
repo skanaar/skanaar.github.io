@@ -10,8 +10,8 @@ function isMeshRepresentable(obj) {
 export function Editor() {
   const [startPos, setStartPos] = React.useState(null)
   const [{ x: ox, y: oy, z: oz }, setOffset] = React.useState(Vec(0,0,0))
-  function x(p) { return Math.round(zoom * (view == 'side' ? p.z-oz : p.x-ox)) }
-  function y(p) { return Math.round(zoom * (view == 'top' ? p.z-oz : p.y-oy)) }
+  function x(p) { return zoom * (view == 'side' ? p.z-oz : p.x-ox) }
+  function y(p) { return zoom * (view == 'top' ? p.z-oz : p.y-oy) }
   function z(p) { return view == 'front' ? p.z : view == 'side' ? p.x : -p.y }
   const [scene, setScene] = React.useState(app.scene)
   const forceUpdate = useForceUpdate()

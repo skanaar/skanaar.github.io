@@ -15,15 +15,18 @@ export function Properties() {
 
   if (!selected) return null
 
+  let trns = selected.transforms
+
   return el(
     'obj-props',
     {},
     el('style', {},
       `obj-props {
         display: grid;
-        grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+        grid-template-columns: 70px 1fr 1fr 1fr;
         align-items: center;
-        justify-items: center;
+        justify-items: start;
+        margin: 2px 5px;
       }
       obj-props input { width: 64px }
       obj-props input[type='number'] { -moz-appearance: textfield }
@@ -31,18 +34,18 @@ export function Properties() {
       obj-props input::-webkit-inner-spin-button { -webkit-appearance: none }`),
     selected.material ? el(MaterialProperties, { object: selected }) : null,
     selected.kind == 'light' ? el(LightProperties, { light: selected }) : null,
-    el(TransformInput, { name:'Offset', transform:selected.transforms.offset }),
-    el(TransformInput, { name:'Rotate', transform:selected.transforms.rotate }),
-    el(TransformInput, { name:'Scale', transform:selected.transforms.scale })
+    el(TransformInput, { name:'Offset', step: 1, transform: trns.offset }),
+    el(TransformInput, { name:'Rotate', step: 1, transform: trns.rotate }),
+    el(TransformInput, { name:'Scale', step: 0.1, transform: trns.scale })
   )
 }
 
-export function TransformInput({ transform, name }) {
+export function TransformInput({ transform: tr, name, step }) {
   const forceUpdate = useForceUpdate()
   useEvent(app, 'scene_modified', forceUpdate)
 
   const update = (field) => (event) => {
-    transform[field] = event.target.value
+    tr[field] = event.target.value
     app.trigger('scene_modified')
   }
 
@@ -50,12 +53,9 @@ export function TransformInput({ transform, name }) {
     React.Fragment,
     {},
     el('span', {}, name),
-    el('span', {}, 'X'),
-    el('input', { type: 'number', value: transform.x, onChange: update('x') }),
-    el('span', {}, 'Y'),
-    el('input', { type: 'number', value: transform.y, onChange: update('y') }),
-    el('span', {}, 'Z'),
-    el('input', { type: 'number', value: transform.z, onChange: update('z') })
+    el('input', { type: 'number', value: tr.x, step, onChange: update('x') }),
+    el('input', { type: 'number', value: tr.y, step, onChange: update('y') }),
+    el('input', { type: 'number', value: tr.z, step, onChange: update('z') })
   )
 }
 
@@ -72,10 +72,7 @@ function LightProperties({ light }) {
     React.Fragment,
     {},
     el('span', {}, 'intensity'),
-    el('div', {}),
     el('input', { type: 'number', value: light.amount, onChange: update }),
-    el('div', {}),
-    el('div', {}),
     el('div', {}),
     el('div', {})
   )
@@ -94,14 +91,13 @@ function MaterialProperties({ object }) {
     React.Fragment,
     {},
     el('span', {}, 'material'),
-    el('div', {}),
-    el('select', { value: object.material, onChange: update },
+    el('select', {
+        value: object.material,
+        onChange: update,
+        style: { gridColumn: '2 / span 3', alignSelf: 'start' }
+      },
       el('option', {}, 'diffuse'),
       el('option', {}, 'mirror'),
-    ),
-    el('div', {}),
-    el('div', {}),
-    el('div', {}),
-    el('div', {})
+    )
   )
 }
