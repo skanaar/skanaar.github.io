@@ -1,6 +1,6 @@
 import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app } from '../Raytracer.js'
-import { Box, compileObject, latheMesh, Light, Mesh, Offset, Rotate, Scaling, Sphere, toMatrix } from './geometry.js'
+import { Box, compileObject, latheMesh, Light, Mesh, Offset, Rotate, Scaling, Sphere, toMatrix, Transforms } from './geometry.js'
 import { add, cross, diff, dot, EPSILON, matrixmult, RotateZ, Vec, π } from './math.js'
 
 function isMeshRepresentable(obj) {
@@ -37,11 +37,20 @@ export function Editor() {
   useEvent(app, 'select_object', (item) => setSelected(item))
   useEvent(app, 'create_object', (kind) => {
     if (kind == 'light')
-      scene.push(Light(64, [Offset(ox, oy, oz)]))
+      scene.push(Light(64, Offset(ox, oy, oz)))
     if (kind == 'box')
-      scene.push(Box('box', [Offset(ox, oy, oz), Scaling(30,30,30)]))
+      scene.push(
+        Box(
+          'box',
+          Transforms(Offset(ox, oy, oz), Rotate(0,0,0), Scaling(30,30,30))
+        )
+      )
     if (kind == 'sphere')
-      scene.push(Sphere('sphere', 'diffuse', [Offset(ox, oy, oz), Scaling(30,30,30)]))
+      scene.push(
+        Sphere('sphere', 'diffuse',
+          Transforms(Offset(ox, oy, oz), Rotate(0,0,0), Scaling(30,30,30))
+        )
+      )
     app.trigger('scene_modified')
   })
   useEvent(app, 'scene_modified', forceUpdate)
