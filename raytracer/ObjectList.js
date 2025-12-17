@@ -13,6 +13,13 @@ export function ObjectList() {
     if (name) selected.name = name
     app.trigger('scene_modified')
   })
+  useEvent(app, 'delete_object', () => {
+    if (!selected) return
+    let decision = confirm(`Delete object "${selected.name}"`)
+    let index = scene.findIndex(e => e == selected)
+    if (decision && index >= 0) scene.splice(index, 1)
+    app.trigger('scene_modified')
+  })
 
   return el(
     'scene-objects',

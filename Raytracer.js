@@ -33,14 +33,12 @@ app.addMenu(
 )
 app.addMenu(
   'Edit',
-  { title: 'Rename...', event: 'rename_object' },
+  { title: 'Rename selected...', event: 'rename_object' },
+  { title: 'Delete selected', event: 'delete_object' },
+  { title: null },
   { title: 'Create light', event: 'create_object', arg: 'light' },
   { title: 'Create sphere', event: 'create_object', arg: 'sphere' },
   { title: 'Create box', event: 'create_object', arg: 'box' },
-  { title: null },
-  { title: 'Add offset', event: 'add_transform', arg: 'offset' },
-  { title: 'Add rotation', event: 'add_transform', arg: 'rotate' },
-  { title: 'Add scaling', event: 'add_transform', arg: 'scale' },
 )
 app.addMenu(
   'Camera',

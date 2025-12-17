@@ -6,12 +6,6 @@ export function Properties() {
   const forceUpdate = useForceUpdate()
   useEvent(app, 'select_object', (obj) => setSelected(obj))
   useEvent(app, 'scene_modified', forceUpdate)
-  useEvent(app, 'add_transform', (kind) => {
-    if (!selected) return
-    let val = (kind == 'scale') ? 1 : 0
-    selected.transforms.push({ kind, id: Date.now(), x: val, y: val, z: val })
-    app.trigger('scene_modified')
-  })
 
   if (!selected) return null
 

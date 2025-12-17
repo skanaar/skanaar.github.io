@@ -1,5 +1,25 @@
 export const el = (...args) => React.createElement(...args)
 
+const signals = {
+  listeners: [],
+  on(app, event, callback) {
+    this.listeners.push({ app, event, callback })
+    return () => this.off(app, event, callback)
+  },
+  off(app, event, callback) {
+    this.listeners = this.listeners.filter(
+      (e) => !(e.app === app && e.event === event && e.callback === callback)
+    )
+  },
+  trigger(app, event, arg) {
+    for (const item of this.listeners) {
+      const appMatches = item.app === null || item.app === app
+      const eventMatches = item.event === null || item.event === event
+      if (appMatches && eventMatches) item.callback(arg, event, app)
+    }
+  }
+}
+
 export class App {
   constructor(name, component, icon) {
     this.name = name
@@ -13,7 +33,10 @@ export class App {
     }
     this.sizing = 'autosize'
     this.menus = [
-      { title: name, items: [{ title: 'Quit', app: name, event: 'app:quit', cmd: '§' }]},
+      {
+        title: name,
+        items: [{ title: 'Quit', app: name, event: 'app:quit', cmd: '§' }]
+      },
     ]
     this.childWindows = []
     this.args = { app: this }
@@ -89,26 +112,6 @@ function Clock() {
   }, [])
 
   return el('clock-widget', {}, time.toLocaleTimeString())
-}
-
-const signals = {
-  listeners: [],
-  on(app, event, callback) {
-    this.listeners.push({ app, event, callback })
-    return () => this.off(app, event, callback)
-  },
-  off(app, event, callback) {
-    this.listeners = this.listeners.filter(
-      (e) => !(e.app === app && e.event === event && e.callback === callback)
-    )
-  },
-  trigger(app, event, arg) {
-    for (const item of this.listeners) {
-      const appMatches = item.app === null || item.app === app
-      const eventMatches = item.event === null || item.event === event
-      if (appMatches && eventMatches) item.callback(arg, event, app)
-    }
-  }
 }
 
 export function Desktop(props) {
@@ -192,7 +195,7 @@ export function Desktop(props) {
     let menuItem = app.menus.flatMap(_ => _.items).find(_ => _.cmd===event.key)
     if (menuItem) {
       event.preventDefault()
-      signals.trigger(menuItem.app, menuItem.event, menuItem.arg)
+      safeEmitEvent(menuItem.app, menuItem.event, menuItem.arg)
     }
   }
 
@@ -413,10 +416,19 @@ export function Menu({ app, title, items }) {
   )
 }
 
+function safeEmitEvent(app, event, arg) {
+  try {
+    signals.trigger(app, event, arg)
+  } catch (e) {
+    alert('💣 Sorry, an application error occurred')
+    console.error(e)
+  }
+}
+
 export function MenuItem({ app, item, onClose }) {
   if (item.title === null) return el('menu-item', {}, el('hr'))
   const onClick = () => {
-    signals.trigger(item.app, item.event, item.arg)
+    safeEmitEvent(item.app, item.event, item.arg)
     onClose()
   }
   return el('menu-item', {},

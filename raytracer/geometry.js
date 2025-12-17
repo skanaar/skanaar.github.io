@@ -1,5 +1,5 @@
-import { Vec, Scale, Translate, RotateX, RotateY, RotateZ, π, mag } from './math.js'
-import { sq, add, cross, diff, norm, mult, rotx, mapply } from './math.js'
+import { Vec, Scale, Translate, RotateX, RotateY, RotateZ, π } from './math.js'
+import { sq, add, cross, diff, norm, mult, rotx, mapply, mag } from './math.js'
 import { generateRowByRowCoordinates, matrixStack } from './math.js'
 import { Noise } from './noise.js'
 
