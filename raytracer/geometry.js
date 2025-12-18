@@ -28,12 +28,20 @@ export function Composite(name, children, transforms) {
   return { kind: 'composite', name, children, transforms }
 }
 
+export function Instance(name, ref, transforms) {
+  return { kind: 'instance', name, ref, transforms }
+}
+
 export function Mesh(material, polys) {
   const vertices = polys
     .flatMap(({ a, b, c }) => [a, b, c])
   let center = mult(1/vertices.length, vertices.reduce((acc, e) => add(acc,e)))
   let radius = vertices.reduce((max,p) => Math.max(mag(diff(center,p)), max), 0)
   return { kind: 'mesh', material, polys, center, radius }
+}
+
+export function NullObject() {
+  return { kind: 'null' }
 }
 
 export function Light(amount, offset) {
@@ -71,7 +79,7 @@ export function HeightMap(name, { res, size, height, bump }, transforms) {
   return { kind: 'heightmap', name, res, size, height, bump, transforms }
 }
 
-export function compileObject(obj) {
+export function compileObject(obj, objects) {
   switch (obj.kind) {
     case 'lathe': return Mesh(
       obj.material,
@@ -104,11 +112,22 @@ export function compileObject(obj) {
       obj.material,
       heightMapMesh(obj, toMatrix(obj.transforms))
     )
-    case 'composite':
-      let fullMesh = obj.children.flatMap(e => compileObject(e).polys)
+    case 'composite': {
+      let mesh = obj.children.flatMap(e => compileObject(e, obj.children).polys)
       return Mesh(
         obj.material,
-        fullMesh.map(p => transformTriangle(p, toMatrix(obj.transforms)))
+        mesh.map(p => transformTriangle(p, toMatrix(obj.transforms)))
+      )
+    }
+    case 'instance':
+      let template = objects.find(e => e.name == obj.ref)
+      if (!obj.ref || !template) return NullObject()
+      template = { ...template, transforms: Transforms(Offset(0,0,0)) }
+      // TODO: support for non-mesh objects here
+      let mesh = compileObject(template, template.children ?? []).polys
+      return Mesh(
+        template.material,
+        mesh.map(p => transformTriangle(p, toMatrix(obj.transforms)))
       )
     case 'light': {
       let point = mapply(toMatrix(obj.transforms), Vec(0,0,0))
@@ -131,7 +150,7 @@ export function compileObject(obj) {
 }
 
 export function compileScene(objects) {
-  return objects.map(e => compileObject(e))
+  return objects.map(e => compileObject(e, objects))
 }
 
 function isValidVec(v) {

@@ -1,13 +1,9 @@
 import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app } from '../Raytracer.js'
-import { compileObject, latheMesh, toMatrix } from './geometry.js'
+import { compileObject, Instance, latheMesh, toMatrix } from './geometry.js'
 import { Box, Light, Mesh, Sphere } from './geometry.js'
 import { Offset, Rotate, Scaling, Transforms } from './geometry.js'
 import { add, cross, diff, EPSILON, matrixmult, RotateZ, Vec } from './math.js'
-
-function isMeshRepresentable(obj) {
-  return !['light', 'sphere'].includes(obj.kind)
-}
 
 export function Editor() {
   const [mode, setMode] = React.useState('pan')
@@ -33,7 +29,7 @@ export function Editor() {
   useEvent(app, 'focus_selection', () => {
     if (!selected) return
     setZoom(0.5)
-    setOffset(compileObject(selected).center)
+    setOffset(compileObject(selected, scene).center)
   })
   useEvent(app, 'editor_mode', (mode) => setMode(mode))
   useEvent(app, 'editor_mode', (mode) => app.check('editor_mode', mode))
@@ -56,6 +52,8 @@ export function Editor() {
           Transforms(Offset(ox, oy, oz), Rotate(0,0,0), Scaling(30,30,30))
         )
       )
+    if (kind == 'instance')
+      scene.push(Instance('instance', null, Transforms(Offset(ox, oy, oz))))
     app.trigger('scene_modified')
   })
   useEvent(app, 'scene_modified', forceUpdate)
@@ -114,11 +112,12 @@ export function Editor() {
         d: `M${x(Vec(ox,oy,oz))-11},${y(Vec(ox,oy,oz))} l 22,0 m -11,-11 l 0,22`
       }),
       scene
-        .filter(isMeshRepresentable)
-        .map((e, i) => el('path', {
+        .map(e => ({ entity: e, compiled: compilePreviewObject(e, scene) }))
+        .filter(({ compiled }) => compiled.kind == 'mesh')
+        .map(({ entity, compiled }, i) => el('path', {
           key: `mesh${i}`,
-          className: selected == e ? ' active' : '',
-          d: compilePreviewObject(e)
+          className: selected == entity ? ' active' : '',
+          d: compiled
             .polys
             .filter(({a,b,c}) => z(cross(diff(b,a), diff(c,a))) < EPSILON)
             .map(({a,b,c}) =>
@@ -128,7 +127,7 @@ export function Editor() {
       scene
         .filter(e => e.kind === 'light')
         .map((e, i) => {
-          let p = compilePreviewObject(e).point
+          let p = compilePreviewObject(e, scene).point
           return el('path', {
             key: `light${i}`,
             className: 'light' + (selected == e ? ' active' : ''),
@@ -150,7 +149,7 @@ export function Editor() {
   )
 }
 
-function compilePreviewObject(obj) {
+function compilePreviewObject(obj, scene) {
   if (obj.kind === 'camera') {
     return Mesh(
       obj.material,
@@ -161,5 +160,5 @@ function compilePreviewObject(obj) {
       )
     )
   }
-  return compileObject(obj)
+  return compileObject(obj, scene)
 }

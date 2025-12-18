@@ -7,6 +7,11 @@ export function ObjectList() {
   const forceUpdate = useForceUpdate()
   useEvent(app, 'update_scene', (scene) => setScene(scene))
   useEvent(app, 'scene_modified', forceUpdate)
+  useEvent(app, 'edit_composite', () => {
+    if (selected?.kind !== 'composite') return
+    app.breadcrumbs = [selected.name]
+    app.trigger('update_scene', selected.children)
+  })
   useEvent(app, 'rename_object', () => {
     if (!selected) return
     let name = prompt(`Rename object "${selected.name}"`)
