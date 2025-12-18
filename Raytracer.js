@@ -41,13 +41,6 @@ app.addMenu(
   { title: 'Create box', event: 'create_object', arg: 'box' },
 )
 app.addMenu(
-  'Camera',
-  { title: 'Render', event: 'render', cmd: 'r' },
-  { title: null },
-  { title: 'Reflections', event: 'toggle_reflections', arg: true, cmd: 'm' },
-  { title: 'Dither', event: 'toggle_dithering', arg: true, cmd: 'd' },
-)
-app.addMenu(
   'View',
   { title: 'Front', event: 'scene_view', arg: 'front', cmd: '1' },
   { title: 'Side', event: 'scene_view', arg: 'side', cmd: '2' },
@@ -58,6 +51,18 @@ app.addMenu(
   { title: 'Reset view', event: 'reset_view' },
   { title: 'Focus selection', event: 'focus_selection' },
 )
+app.addMenu(
+  'Camera',
+  { title: 'Render', event: 'render', cmd: 'r' },
+  { title: null },
+  { title: 'Reflections', event: 'toggle_reflections', arg: true },
+  { title: 'Dither', event: 'toggle_dithering', arg: true },
+)
+app.addMenu(
+  'Tool',
+  { title: 'Pan', event: 'editor_mode', arg: 'pan', cmd: 'p' },
+  { title: 'Move', event: 'editor_mode', arg: 'move', cmd: 'm' },
+)
 app.addMenu('Window',
   { title: 'Editor', event: 'app:show_child_window', arg: 'Editor' },
   { title: 'Objects', event: 'app:show_child_window', arg: 'Objects' },
@@ -65,6 +70,7 @@ app.addMenu('Window',
 )
 app.check('scene_view', 'front')
 app.check('toggle_reflections', true)
+app.check('editor_mode', 'pan')
 app.addWindow('Objects', ObjectList, {
   visible: true,
   offset: [0, 256+50],
@@ -100,7 +106,6 @@ function sceneTeapot() {
     ),
     Sphere('mirror sphere', 'mirror',
       Transforms(Offset(60,-60,-60), Rotate(0,0,0), Scaling(80,80,80))),
-    Box('box', Transforms(Offset(0,0,0), Rotate(45,45,0), Scaling(40,40,40))),
     BezierPatchSet('teapot',
       teapotPatches,
       3,
@@ -109,19 +114,18 @@ function sceneTeapot() {
     Lathe('column', 16,
       [
         Vec(25,0,-100), Vec(25,0,-80), Vec(20,0,-75),
-        Vec(20,0,75), Vec(25,0,80), Vec(25,0,85), Vec(2,0,90),
-        Vec(2,0,100), Vec(25,0,105), Vec(25,0,110), Vec(20,0,115)
+        Vec(20,0,75), Vec(25,0,80), Vec(25,0,85), Vec(0,0,90),
+        Vec(0,0,100), Vec(25,0,105), Vec(25,0,110), Vec(20,0,115)
       ],
-      Transforms(Offset(-100,20,-100), Rotate(90,0,0.5), Scaling(0.7,1.26,0.7))
+      Transforms(Offset(-100,20,-100), Rotate(90,0,0.5), Scaling(0.7,0.7,1.25))
     ),
   ]
 }
 
 function sceneIsland() {
-  let rx = (y) => Rotate(0, y, 0)
   let pillar = [Vec(9,0,0),Vec(8,0,80)]
   return [
-    Camera(Transforms(Offset(0,0,256), Rotate(17,0,0))),
+    Camera(Transforms(Offset(64,-64,256), Rotate(17,-12,0))),
     Light(4000, Offset(1000, -1000, 500)),
     Light(16, Offset(0, -30, 0)),
     HeightMap(
@@ -141,7 +145,7 @@ function sceneIsland() {
 
 function sceneMushroom() {
   return [
-    Camera(Transforms(Offset(0,0,256), Rotate(20,20,0))),
+    Camera(Transforms(Offset(-100,-100,178), Rotate(20,20,8))),
     Light(4000, Offset(1000, -1000, 500)),
     Light(1000, Offset(-1000, 1000, 500)),
     BezierLathe('mushroom-foot',

@@ -10,6 +10,7 @@ function isMeshRepresentable(obj) {
 }
 
 export function Editor() {
+  const [mode, setMode] = React.useState('pan')
   const [startPos, setStartPos] = React.useState(null)
   const [{ x: ox, y: oy, z: oz }, setOffset] = React.useState(Vec(0,0,0))
   function x(p) { return zoom * (view == 'side' ? p.z-oz : p.x-ox) }
@@ -34,6 +35,8 @@ export function Editor() {
     setZoom(0.5)
     setOffset(compileObject(selected).center)
   })
+  useEvent(app, 'editor_mode', (mode) => setMode(mode))
+  useEvent(app, 'editor_mode', (mode) => app.check('editor_mode', mode))
   useEvent(app, 'zoom', (factor) => setZoom(zoom * factor))
   useEvent(app, 'update_scene', (scene) => setScene(scene))
   useEvent(app, 'select_object', (item) => setSelected(item))
@@ -93,10 +96,16 @@ export function Editor() {
           setStartPos(screenToSpace(e))
         },
         onMouseMove: (e) => {
-          if (startPos) setOffset(o => add(o, diff(startPos, screenToSpace(e))))
+          if (mode == 'pan' && startPos) {
+            setOffset(o => diff(o, screenToSpace(e)))
+          }
+          if (mode == 'move' && selected && startPos) {
+            let o = selected.transforms.offset
+            selected.transforms.offset = add(o, screenToSpace(e))
+            app.trigger('scene_modified')
+          }
         },
         onMouseUp: (e) => {
-          setOffset(o => add(o, diff(startPos, screenToSpace(e))))
           setStartPos(null)
         }
       },

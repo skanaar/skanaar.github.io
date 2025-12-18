@@ -3,19 +3,17 @@ import { sq, add, cross, diff, norm, mult, rotx, mapply, mag } from './math.js'
 import { generateRowByRowCoordinates, matrixStack } from './math.js'
 import { Noise } from './noise.js'
 
-let _id = 0
-export function Offset(x,y,z) { return { kind: 'offset', id: _id++, x, y, z } }
-export function Rotate(x,y,z) { return { kind: 'rotate', id: _id++, x, y, z } }
-export function Scaling(x,y,z) { return { kind: 'scale', id: _id++, x, y, z } }
+export function Offset(x,y,z) { return { x, y, z } }
+export function Rotate(x,y,z) { return { x, y, z } }
+export function Scaling(x,y,z) { return { x, y, z } }
 export function toMatrix({ offset, rotate, scale }) {
-  let rad = (degrees) => degrees * π/180
-  return matrixStack(...[offset, rotate, scale].flatMap(({ kind, x, y, z }) => {
-    switch (kind) {
-      case 'offset': return [Translate(x, y, z)]
-      case 'rotate': return [RotateX(rad(x)), RotateY(rad(y)), RotateZ(rad(z))]
-      case 'scale': return [Scale(x, y, z)]
-    }
-  }))
+  return matrixStack(
+    Translate(offset.x, offset.y, offset.z),
+    RotateX(rotate.x * π/180),
+    RotateY(rotate.y * π/180),
+    RotateZ(rotate.z * π/180),
+    Scale(scale.x, scale.y, scale.z),
+  )
 }
 
 export function Transforms(offset, rotate, scale = Scaling(1,1,1)) {

@@ -39,7 +39,7 @@ export function TransformInput({ transform: tr, name, step }) {
   useEvent(app, 'scene_modified', forceUpdate)
 
   const update = (field) => (event) => {
-    tr[field] = event.target.value
+    tr[field] = +event.target.value
     app.trigger('scene_modified')
   }
 
