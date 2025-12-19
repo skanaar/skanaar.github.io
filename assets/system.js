@@ -41,6 +41,7 @@ export class App {
     this.childWindows = []
     this.args = { app: this }
     this.menuState = {}
+    this.menuAbility = {}
   }
   resizable([width, height]) {
     this.sizing = 'resizable'
@@ -82,6 +83,9 @@ export class App {
   }
   check(event, arg) {
     this.menuState[event] = arg
+  }
+  enable(event, arg, state) {
+    this.menuAbility[JSON.stringify([event, arg])] = state
   }
   trigger(event, arg) {
     signals.trigger(this.name, event, arg)
@@ -431,8 +435,9 @@ export function MenuItem({ app, item, onClose }) {
     safeEmitEvent(item.app, item.event, item.arg)
     onClose()
   }
+  let abilityKey = JSON.stringify([item.event, item.arg])
   return el('menu-item', {},
-    el('button', { onClick },
+    el('button', { onClick, disabled: app?.menuAbility[abilityKey] === false },
       app?.menuState[item.event] === item.arg && item.arg !== undefined
       ? '✔ '
       : null,

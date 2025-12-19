@@ -66,9 +66,11 @@ export function Editor() {
     }
   }
 
+  let emit = (event, arg) => () => app.trigger(event, arg)
+
   return el(
     'div',
-    { style: { display: 'grid' } },
+    { style: { display: 'grid', gridTemplateRows: 'auto auto' } },
     el('style', {},
       `svg.canvas-3d :is(path, ellipse, rect) {
         fill: none;
@@ -85,7 +87,27 @@ export function Editor() {
       svg.canvas-3d path.crosshair {
         stroke-dasharray: 2 2;
         stroke-width: 1px;
+      }
+      editor-toolbar { display: flex; border-bottom: 1px solid black }
+      editor-toolbar span { margin-left: auto; border-left: 1px solid black }
+      editor-toolbar button {
+        apperance: none;
+        border: 0px;
+        border-right: 1px solid black;
+        background: none;
+        min-width: 20px
       }`),
+    el('editor-toolbar', { style: { display: 'flex' } },
+      el('button', { onClick: emit('scene_view', 'front') }, 'Front'),
+      el('button', { onClick: emit('scene_view', 'side') }, 'Side'),
+      el('button', { onClick: emit('scene_view', 'top') }, 'Top'),
+      el('button', { onClick: emit('reset_zoom') }, '='),
+      el('button', { onClick: emit('zoom', 1/1.5) }, '-'),
+      el('button', { onClick: emit('zoom', 1.5) }, '+'),
+      el('span', {}),
+      el('button', { onClick: emit('editor_mode', 'pan') }, 'Pan'),
+      el('button', { onClick: emit('editor_mode', 'move') }, 'Move'),
+    ),
     el('svg',
       {
         className: 'canvas-3d',

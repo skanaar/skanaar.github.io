@@ -17,8 +17,8 @@ app.addMenu(
 )
 app.addMenu(
   'Edit',
-  { title: 'Edit composite', event: 'edit_composite', cmd: 'e' },
-  { title: 'Edit scene', event: 'edit_scene' },
+  { title: 'Edit composite', event: 'edit_level', arg: 'composite', cmd: 'e' },
+  { title: 'Edit scene', event: 'edit_level', arg: 'scene' },
   { title: 'Rename selected...', event: 'rename_object' },
   { title: 'Delete selected', event: 'delete_object' },
   { title: null },
@@ -37,11 +37,8 @@ app.addMenu(
   { title: 'Zoom in', event: 'zoom', arg: 1.5, cmd: '.' },
   { title: 'Reset view', event: 'reset_view' },
   { title: 'Focus selection', event: 'focus_selection' },
-)
-app.addMenu(
-  'Camera',
-  { title: 'Render', event: 'render', cmd: 'r' },
   { title: null },
+  { title: 'Render', event: 'render', cmd: 'r' },
   { title: 'Reflections', event: 'toggle_reflections', arg: true },
   { title: 'Dither', event: 'toggle_dithering', arg: true },
 )
@@ -58,6 +55,11 @@ app.addMenu('Window',
 app.check('scene_view', 'front')
 app.check('toggle_reflections', true)
 app.check('editor_mode', 'pan')
+app.enable('edit_level', 'composite', false)
+app.enable('edit_level', 'scene', false)
+app.enable('rename_object', null, false)
+app.enable('delete_object', null, false)
+app.enable('focus_selection', null, false)
 app.addWindow('Objects', ObjectList, {
   visible: true,
   offset: [0, 256+50],
@@ -97,6 +99,13 @@ function RayTracer() {
     }).then((result) => app.trigger('done', result))
   }
 
+  useEvent(app, 'select_object', (obj) => {
+    app.enable('edit_level', 'composite', obj.kind == 'composite')
+    app.enable('rename_object', null, !!obj)
+    app.enable('delete_object', null, !!obj)
+    app.enable('focus_selection', null, !!obj)
+  })
+
   useEvent(app, 'scene', apply((arg) => {
     app.check('scene', arg)
     app.scene = {
@@ -106,7 +115,10 @@ function RayTracer() {
     }[arg]
     app.trigger('update_scene', app.scene)
   }))
-  useEvent(app, 'edit_scene', () => {
+  useEvent(app, 'edit_level', (arg) => {
+    if (arg != 'scene') return
+    app.enable('edit_level', 'scene', false)
+    app.enable('edit_level', 'composite', true)
     app.breadcrumbs = []
     app.trigger('update_scene', app.scene)
   })

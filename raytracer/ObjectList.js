@@ -7,8 +7,10 @@ export function ObjectList() {
   const forceUpdate = useForceUpdate()
   useEvent(app, 'update_scene', (scene) => setScene(scene))
   useEvent(app, 'scene_modified', forceUpdate)
-  useEvent(app, 'edit_composite', () => {
-    if (selected?.kind !== 'composite') return
+  useEvent(app, 'edit_level', (arg) => {
+    if (arg != 'composite' || selected?.kind !== 'composite') return
+    app.enable('edit_level', 'scene', true)
+    app.enable('edit_level', 'composite', false)
     app.breadcrumbs = [selected.name]
     app.trigger('update_scene', selected.children)
   })
