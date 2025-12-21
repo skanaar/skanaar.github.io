@@ -88,26 +88,20 @@ export function Editor() {
         stroke-dasharray: 2 2;
         stroke-width: 1px;
       }
-      editor-toolbar { display: flex; border-bottom: 1px solid black }
-      editor-toolbar span { margin-left: auto; border-left: 1px solid black }
+      editor-toolbar { display: flex; position: absolute; inset: 4px 4px auto }
+      editor-toolbar span { margin-left: auto; }
       editor-toolbar button {
         apperance: none;
         border: 0px;
-        border-right: 1px solid black;
-        background: none;
-        min-width: 20px
+        border: 1px solid black;
+        background: #fff;
+        min-width: 20px;
+        margin-right: -1px;
+      }
+      editor-toolbar button:active, editor-toolbar button[active] {
+        color: #fff;
+        background: #000;
       }`),
-    el('editor-toolbar', { style: { display: 'flex' } },
-      el('button', { onClick: emit('scene_view', 'front') }, 'Front'),
-      el('button', { onClick: emit('scene_view', 'side') }, 'Side'),
-      el('button', { onClick: emit('scene_view', 'top') }, 'Top'),
-      el('button', { onClick: emit('reset_zoom') }, '='),
-      el('button', { onClick: emit('zoom', 1/1.5) }, '-'),
-      el('button', { onClick: emit('zoom', 1.5) }, '+'),
-      el('span', {}),
-      el('button', { onClick: emit('editor_mode', 'pan') }, 'Pan'),
-      el('button', { onClick: emit('editor_mode', 'move') }, 'Move'),
-    ),
     el('svg',
       {
         className: 'canvas-3d',
@@ -167,6 +161,17 @@ export function Editor() {
           ry: zoom * r
         })
       })
+    ),
+    el('editor-toolbar', { style: { display: 'flex' } },
+      el(ToolButton, { event: 'scene_view', arg: 'front', toggle: 1 }, 'Front'),
+      el(ToolButton, { event: 'scene_view', arg: 'side', toggle: 1 }, 'Side'),
+      el(ToolButton, { event: 'scene_view', arg: 'top', toggle: 1 }, 'Top'),
+      el(ToolButton, { event: 'reset_zoom' }, '='),
+      el(ToolButton, { event: 'zoom', arg: 1/1.5 }, '-'),
+      el(ToolButton, { event: 'zoom', arg: 1.5 }, '+'),
+      el('span', {}),
+      el(ToolButton, { event: 'editor_mode', arg: 'pan', toggle: 1 }, 'Pan'),
+      el(ToolButton, { event: 'editor_mode', arg: 'move', toggle: 1 }, 'Move'),
     )
   )
 }
@@ -183,4 +188,15 @@ function compilePreviewObject(obj, scene) {
     )
   }
   return compileObject(obj, scene)
+}
+
+function ToolButton({ event, arg, toggle, children }) {
+  let forceUpdate = useForceUpdate()
+  useEvent(app, 'app:menuability', forceUpdate)
+
+  return el('button', {
+    onClick: () => app.trigger(event, arg),
+    disabled: app.isEnabled(event, arg) ? true : undefined,
+    active: (toggle && app.menuState[event] == arg) ? 'true' : undefined,
+  }, children)
 }

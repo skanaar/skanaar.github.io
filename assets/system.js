@@ -82,10 +82,15 @@ export class App {
     })
   }
   check(event, arg) {
+    this.trigger('app:menustate', event)
     this.menuState[event] = arg
   }
   enable(event, arg, state) {
+    this.trigger('app:menuability', event)
     this.menuAbility[JSON.stringify([event, arg])] = state
+  }
+  isEnabled(event, arg) {
+    return this.menuAbility[JSON.stringify([event, arg])]
   }
   trigger(event, arg) {
     signals.trigger(this.name, event, arg)
