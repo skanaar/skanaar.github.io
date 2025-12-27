@@ -66,8 +66,6 @@ export function Editor() {
     }
   }
 
-  let emit = (event, arg) => () => app.trigger(event, arg)
-
   return el(
     'div',
     { style: { display: 'grid', gridTemplateRows: 'auto auto' } },
@@ -162,13 +160,20 @@ export function Editor() {
         })
       })
     ),
-    el('editor-toolbar', { style: { display: 'flex' } },
+    el('editor-toolbar', {},
       el(ToolButton, { event: 'scene_view', arg: 'front', toggle: 1 }, 'Front'),
       el(ToolButton, { event: 'scene_view', arg: 'side', toggle: 1 }, 'Side'),
       el(ToolButton, { event: 'scene_view', arg: 'top', toggle: 1 }, 'Top'),
       el(ToolButton, { event: 'reset_zoom' }, '='),
       el(ToolButton, { event: 'zoom', arg: 1/1.5 }, '-'),
       el(ToolButton, { event: 'zoom', arg: 1.5 }, '+'),
+      el('span', {}),
+      app.breadcrumbs.length == 0
+        ? null
+        : el(ToolButton, { event:'edit_level', arg:'scene' }, 'Back to scene'),
+      selected?.kind == 'composite'
+        ? el(ToolButton, { event:'edit_level', arg:'composite' }, 'Edit')
+        : null,
       el('span', {}),
       el(ToolButton, { event: 'editor_mode', arg: 'pan', toggle: 1 }, 'Pan'),
       el(ToolButton, { event: 'editor_mode', arg: 'move', toggle: 1 }, 'Move'),
@@ -196,7 +201,7 @@ function ToolButton({ event, arg, toggle, children }) {
 
   return el('button', {
     onClick: () => app.trigger(event, arg),
-    disabled: app.isEnabled(event, arg) ? true : undefined,
+    disabled: app.isEnabled(event, arg) ? undefined : true,
     active: (toggle && app.menuState[event] == arg) ? 'true' : undefined,
   }, children)
 }
