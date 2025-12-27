@@ -39,6 +39,7 @@ app.addMenu(
   { title: 'Focus selection', event: 'focus_selection' },
   { title: null },
   { title: 'Render', event: 'render', cmd: 'r' },
+  { title: 'Auto rerender', event: 'toggle_autorender', arg: true },
   { title: 'Reflections', event: 'toggle_reflections', arg: true },
   { title: 'Dither', event: 'toggle_dithering', arg: true },
 )
@@ -54,6 +55,7 @@ app.addMenu('Window',
 )
 app.check('scene_view', 'front')
 app.check('toggle_reflections', true)
+app.check('toggle_autorender', true)
 app.check('editor_mode', 'pan')
 app.enable('edit_level', 'composite', false)
 app.enable('edit_level', 'scene', false)
@@ -82,31 +84,29 @@ app.addWindow('Editor', Editor, {
 app.scene = []
 app.breadcrumbs = []
 let size = 256
-let dithering = false
-let reflections = true
 
 function RayTracer() {
   const hostRef = React.useRef()
-  const apply = (action) => (arg, event) => {
-    action(arg, event)
-
+  const renderScene = () => {
     raytraceParallel({
       canvas: hostRef.current,
       size,
-      maxDepth: reflections ? 2 : 0,
+      maxDepth: app.menuState['toggle_reflections'] == true ? 2 : 0,
       scene: compileScene(app.scene),
-      ditherer: dithering ? new FloydSteinbergDitherer() : new NoDitherer(),
+      ditherer: app.menuState['toggle_dithering'] == true
+        ? new FloydSteinbergDitherer()
+        : new NoDitherer(),
     }).then((result) => app.trigger('done', result))
   }
 
   useEvent(app, 'select_object', (obj) => {
-    app.enable('edit_level', 'composite', obj.kind == 'composite')
+    app.enable('edit_level', 'composite', obj?.kind == 'composite')
     app.enable('rename_object', null, !!obj)
     app.enable('delete_object', null, !!obj)
     app.enable('focus_selection', null, !!obj)
   })
 
-  useEvent(app, 'scene', apply((arg) => {
+  useEvent(app, 'scene', (arg) => {
     app.check('scene', arg)
     app.scene = {
       teapot: sceneTeapot(),
@@ -114,7 +114,7 @@ function RayTracer() {
       mushroom: sceneMushroom(),
     }[arg]
     app.trigger('update_scene', app.scene)
-  }))
+  })
   useEvent(app, 'edit_level', (arg) => {
     if (arg != 'scene') return
     app.enable('edit_level', 'scene', false)
@@ -122,15 +122,20 @@ function RayTracer() {
     app.breadcrumbs = []
     app.trigger('update_scene', app.scene)
   })
-  useEvent(app, 'toggle_reflections', apply(() => {
-    reflections = !reflections
-    app.check('toggle_reflections', reflections)
-  }))
-  useEvent(app, 'toggle_dithering', apply(() => {
-    dithering = !dithering
-    app.check('toggle_dithering', dithering)
-  }))
-  useEvent(app, 'render', apply(() => {}))
+  useEvent(app, 'toggle_reflections', () => {
+    app.check('toggle_reflections', !app.menuState['toggle_reflections'])
+    app.trigger('render')
+  })
+  useEvent(app, 'toggle_dithering', () => {
+    app.check('toggle_dithering', !app.menuState['toggle_dithering'])
+    app.trigger('render')
+  })
+  useEvent(app, 'toggle_autorender', () => {
+    app.check('toggle_autorender', !app.menuState['toggle_autorender'])
+  })
+  useEvent(app, 'update_scene', () => app.trigger('render'))
+  useEvent(app, 'scene_modified', debounce(() => app.trigger('render'), 1000))
+  useEvent(app, 'render', renderScene)
 
   React.useEffect(() => {
     setTimeout(() => {
@@ -140,4 +145,15 @@ function RayTracer() {
   }, [])
 
   return el('canvas', { width: size, height: size, ref: hostRef })
+}
+
+function debounce(callback, delay) {
+  let timeoutId = null
+
+  return (...args) => {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(() => {
+      callback(...args)
+    }, delay)
+  }
 }

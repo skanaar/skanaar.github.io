@@ -86,11 +86,12 @@ export class App {
     this.menuState[event] = arg
   }
   enable(event, arg, state) {
+    if (typeof state != 'boolean') throw new Error('boolean expected')
     this.trigger('app:menuability', event)
     this.menuAbility[JSON.stringify([event, arg])] = state
   }
   isEnabled(event, arg) {
-    return this.menuAbility[JSON.stringify([event, arg])]
+    return this.menuAbility[JSON.stringify([event, arg])] != false
   }
   trigger(event, arg) {
     signals.trigger(this.name, event, arg)

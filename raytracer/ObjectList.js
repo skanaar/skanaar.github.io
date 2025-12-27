@@ -12,6 +12,8 @@ export function ObjectList() {
     app.enable('edit_level', 'scene', true)
     app.enable('edit_level', 'composite', false)
     app.breadcrumbs = [selected.name]
+    setSelected(null)
+    app.trigger('select_object', null)
     app.trigger('update_scene', selected.children)
   })
   useEvent(app, 'rename_object', () => {
