@@ -114,6 +114,7 @@ export function compileObject(obj, objects) {
     )
     case 'composite': {
       let mesh = obj.children.flatMap(e => compileObject(e, obj.children).polys)
+      if (mesh.length == 0) return NullObject()
       return Mesh(
         obj.material,
         mesh.map(p => transformTriangle(p, toMatrix(obj.transforms)))

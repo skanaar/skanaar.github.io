@@ -1,4 +1,4 @@
-import { el, App, useEvent } from './assets/system.js'
+import { el, App, useEvent, useForceUpdate } from './assets/system.js'
 import { FloydSteinbergDitherer, NoDitherer } from './raytracer/dither.js'
 import { compileScene } from './raytracer/geometry.js'
 import { raytraceParallel } from './raytracer/raytraceParallel.js'
@@ -25,6 +25,7 @@ app.addMenu(
   { title: 'Create light', event: 'create_object', arg: 'light' },
   { title: 'Create sphere', event: 'create_object', arg: 'sphere' },
   { title: 'Create box', event: 'create_object', arg: 'box' },
+  { title: 'Create composite', event: 'create_object', arg: 'composite' },
   { title: 'Create instance', event: 'create_object', arg: 'instance' },
 )
 app.addMenu(
