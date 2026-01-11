@@ -28,8 +28,9 @@ export function Editor() {
   })
   useEvent(app, 'focus_selection', () => {
     if (!selected) return
-    setZoom(0.5)
-    setOffset(compileObject(selected, scene).center)
+    let compiled = compileObject(selected, scene)
+    setZoom(100/Math.max(50, compiled.radius ?? 100))
+    setOffset(compiled.center)
   })
   useEvent(app, 'editor_mode', (mode) => setMode(mode))
   useEvent(app, 'editor_mode', (mode) => app.check('editor_mode', mode))
