@@ -1,6 +1,6 @@
 import { el, App, useEvent, useForceUpdate } from './assets/system.js'
 import { FloydSteinbergDitherer, NoDitherer } from './raytracer/dither.js'
-import { compileScene } from './raytracer/geometry.js'
+import { Camera, compileScene, Light, Offset, Rotate, Transforms } from './raytracer/geometry.js'
 import { raytraceParallel } from './raytracer/raytraceParallel.js'
 import { Editor } from './raytracer/Editor.js'
 import { ObjectList } from './raytracer/ObjectList.js'
@@ -71,7 +71,7 @@ app.addWindow('Objects', ObjectList, {
 })
 app.addWindow('Properties', Properties, {
   visible: true,
-  offset: [200+20, 256+50+50],
+  offset: [200+20, 256+80+50],
   size: [200,100],
   sizing: 'noresize'
 })
@@ -84,16 +84,25 @@ app.addWindow('Editor', Editor, {
 
 app.scene = []
 app.breadcrumbs = []
+let currentScene = []
 let size = 256
 
 function RayTracer() {
   const hostRef = React.useRef()
   const renderScene = () => {
+    let lightedScene = currentScene.some(e => e.kind === 'camera')
+      ? currentScene
+      : [
+        Camera(Transforms(Offset(-100,-100,178), Rotate(20,20,8))),
+        Light(128, Offset(100,-100,100)),
+        Light(64, Offset(-100,-100,100)),
+        ...currentScene
+      ]
     raytraceParallel({
       canvas: hostRef.current,
       size,
       maxDepth: app.menuState['toggle_reflections'] == true ? 2 : 0,
-      scene: compileScene(app.scene),
+      scene: compileScene(lightedScene),
       ditherer: app.menuState['toggle_dithering'] == true
         ? new FloydSteinbergDitherer()
         : new NoDitherer(),
@@ -134,7 +143,10 @@ function RayTracer() {
   useEvent(app, 'toggle_autorender', () => {
     app.check('toggle_autorender', !app.menuState['toggle_autorender'])
   })
-  useEvent(app, 'update_scene', () => app.trigger('render'))
+  useEvent(app, 'update_scene', (scene) => {
+    currentScene = scene
+    app.trigger('render')
+  })
   useEvent(app, 'scene_modified', debounce(() => app.trigger('render'), 1000))
   useEvent(app, 'render', renderScene)
 

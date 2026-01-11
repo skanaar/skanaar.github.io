@@ -3,7 +3,6 @@ import {
   Sphere,
   Light,
   HeightMap,
-  compileScene,
   BezierPatchSet,
   Offset,
   Scaling,
@@ -51,8 +50,8 @@ export function sceneIsland() {
     Light(16, Offset(0, -30, 0)),
     HeightMap(
       'island',
-      { res: 16, size: 256, height: 0, bump: 64 },
-      Transforms(Offset(0,72,0), Rotate(180,0,0))
+      { res: 16, size: 256, isola: 1, zoom: 10, persistence: 0.5, octaves: 4 },
+      Transforms(Offset(0,72,0), Rotate(180,0,0), Scaling(200, 50, 200))
     ),
     Composite('temple', [
       Lathe('p1', 12, pillar, Transforms(Offset(40,0,0), Rotate(90,0,0))),

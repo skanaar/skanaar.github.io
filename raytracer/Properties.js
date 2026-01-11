@@ -30,6 +30,9 @@ export function Properties() {
       obj-props input::-webkit-inner-spin-button { -webkit-appearance: none }`),
     selected.material ? el(MaterialField, { object: selected }) : null,
     selected.kind == 'light' ? el(LightField, { light: selected }) : null,
+    selected.kind == 'lathe' ? el(SegmentsField, { object: selected }) : null,
+    selected.kind == 'heightmap'
+      ? el(TerrainFields, { object: selected }) : null,
     selected.kind == 'instance'
       ? el(InstanceField, { instance: selected, objects })
       : null,
@@ -53,15 +56,34 @@ export function TransformInput({ transform: tr, name, step }) {
   )
 }
 
-function LightField({ light }) {
+function NumericInput({ field, object, range }) {
   const update = (event) => {
-    light.amount = event.target.value
+    object[field] = +event.target.value
     app.trigger('scene_modified')
   }
+  return el('input', {
+    type: 'number',
+    value: object[field],
+    onChange: update,
+    min: range?.[0],
+    max: range?.[1],
+    step: range ? (range[1] - range[0] < 10 ? 0.1 : 1) : undefined,
+  })
+}
 
+function LightField({ light }) {
   return el(React.Fragment, {},
     el('span', {}, 'Intensity'),
-    el('input', { type: 'number', value: light.amount, onChange: update }),
+    el(NumericInput, { field: 'amount', object: light, range: [0,10000] }),
+    el('div', {}),
+    el('div', {})
+  )
+}
+
+function SegmentsField({ object }) {
+  return el(React.Fragment, {},
+    el('span', {}, 'Segments'),
+    el(NumericInput, { field: 'res', object, range: [2,64] }),
     el('div', {}),
     el('div', {})
   )
@@ -100,5 +122,22 @@ function MaterialField({ object }) {
       el('option', {}, 'diffuse'),
       el('option', {}, 'mirror'),
     )
+  )
+}
+
+function TerrainFields({ object }) {
+  return el(React.Fragment, {},
+    el('span', {}, 'Res'),
+    el(NumericInput, { field: 'res', object, range: [4,64] }),
+    el('div', {}),
+    el('div', {}),
+    el('span', {}, 'Isola'),
+    el(NumericInput, { field: 'isola', object, range: [0,1] }),
+    el('span', {}, 'Zoom'),
+    el(NumericInput, { field: 'zoom', object, range: [0,200] }),
+    el('span', {}, 'Persist'),
+    el(NumericInput, { field: 'persistence', object, range: [0,1] }),
+    el('span', {}, 'Octaves'),
+    el(NumericInput, { field: 'octaves', object, range: [1,12] }),
   )
 }

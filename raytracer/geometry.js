@@ -75,8 +75,13 @@ export function BezierPatchSet(name, patches, res, transforms) {
   return { kind: 'patches', name, material:'diffuse', patches, res, transforms }
 }
 
-export function HeightMap(name, { res, size, height, bump }, transforms) {
-  return { kind: 'heightmap', name, res, size, height, bump, transforms }
+export function HeightMap(name, opts, transforms) {
+  let { res, zoom, isola, persistence, octaves } = opts
+  return {
+    kind: 'heightmap',
+    name, res, zoom, isola, persistence, octaves,
+    transforms
+  }
 }
 
 export function compileObject(obj, objects) {
@@ -258,15 +263,16 @@ export function bezierLatheMesh(path, resU, resV, matrix) {
   return mesh.map(p => transformTriangle(p, matrix))
 }
 
-export function heightMapMesh({ res, size, height, bump }, matrix) {
-  const noise = Noise({ persistence: 0.5, octaves: 4, zoom: 10 })
+export function heightMapMesh(opts, matrix) {
+  const { res, zoom, isola, octaves, persistence } = opts
+  const noise = Noise({ persistence, octaves, zoom: zoom / 100 })
   let point = (i, j) => {
       let r = 2 * (Math.sqrt(sq((i-res/2) / res) + sq((j-res/2) / res)))
-      let undulation = noise(i, j)
+      let island = isola * (r < 1 ? Math.cos(3.14 * r) + 1 : 0) + (1-isola) * 1
       return Vec(
-        (i / res - 0.5) * size,
-        (height+bump*undulation) * (r < 1 ? Math.cos(3.14 * r) + 1 : 0),
-        (j / res - 0.5) * size
+        (i / res - 0.5),
+        noise(i/res, j/res) * island,
+        (j / res - 0.5)
       )
     }
   return [...generateRowByRowCoordinates(res)].flatMap(({ x: i, y: j }) => [
