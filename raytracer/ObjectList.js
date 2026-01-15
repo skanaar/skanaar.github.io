@@ -42,7 +42,11 @@ export function ObjectList() {
       }
       scene-objects span { padding: 3px }
       scene-objects span.active { background: black; color: white; }
+      scene-objects bread-crumbs { border-bottom: 2px solid black; padding:2px }
       `),
+    el('bread-crumbs', {},
+      el('span', {}, app.breadcrumbs.length ? `scene > ${app.breadcrumbs[0]}` : 'scene')
+    ),
     scene.map(e => el('span', {
       onClick: () => {
         setSelected(e)

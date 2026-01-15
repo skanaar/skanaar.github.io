@@ -1,6 +1,6 @@
 import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app } from '../Raytracer.js'
-import { compileObject, Composite, Instance, latheMesh, toMatrix } from './geometry.js'
+import { Camera, compileObject, Composite, Instance, Lathe, latheMesh, toMatrix } from './geometry.js'
 import { Box, Light, Mesh, Sphere } from './geometry.js'
 import { Offset, Rotate, Scaling, Transforms } from './geometry.js'
 import { add, cross, diff, EPSILON, matrixmult, RotateZ, Vec } from './math.js'
@@ -38,25 +38,7 @@ export function Editor() {
   useEvent(app, 'update_scene', (scene) => setScene(scene))
   useEvent(app, 'select_object', (item) => setSelected(item))
   useEvent(app, 'create_object', (kind) => {
-    if (kind == 'light')
-      scene.push(Light(64, Offset(ox, oy, oz)))
-    if (kind == 'box')
-      scene.push(
-        Box(
-          'box',
-          Transforms(Offset(ox, oy, oz), Rotate(0,0,0), Scaling(30,30,30))
-        )
-      )
-    if (kind == 'sphere')
-      scene.push(
-        Sphere('sphere', 'diffuse',
-          Transforms(Offset(ox, oy, oz), Rotate(0,0,0), Scaling(30,30,30))
-        )
-      )
-    if (kind == 'composite')
-      scene.push(Composite('composite', [], Transforms(Offset(ox, oy, oz))))
-    if (kind == 'instance')
-      scene.push(Instance('instance', null, Transforms(Offset(ox, oy, oz))))
+    scene.push(create(kind, Offset(ox, oy, oz), selected))
     app.trigger('scene_modified')
   })
   useEvent(app, 'scene_modified', forceUpdate)
@@ -188,6 +170,29 @@ export function Editor() {
       })
     ),
   )
+}
+
+function create(kind, pos, selected) {
+  let withSize = (s) => Transforms(pos, Rotate(0,0,0), Scaling(s,s,s))
+  switch (kind) {
+    case 'light': return Light(64, pos)
+    case 'camera': return Camera(withSize(1))
+    case 'box': return Box('box', withSize(30))
+    case 'cylinder':
+      return Lathe('cylinder', 16, [Vec(1,0,-2),Vec(1,0,2)], withSize(30))
+    case 'cone':
+      return Lathe('cone',16,[Vec(0,0,0),Vec(1,0,0),Vec(0,0,2)],withSize(30))
+    case 'sphere': return Sphere('sphere', 'diffuse', withSize(30))
+    case 'composite':
+      return Composite('composite', [create('box', pos)], withSize(1))
+    case 'instance':
+      let ref = isMeshable(selected?.kind) ? null : (selected?.name ?? null)
+      return Instance('instance', ref, withSize(1))
+  }
+}
+
+function isMeshable(kind) {
+  return ['light', 'camera'].includes(kind)
 }
 
 function compilePreviewObject(obj, scene) {
