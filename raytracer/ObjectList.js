@@ -1,20 +1,26 @@
 import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app } from '../Raytracer.js'
+import { LatheEditable, Scene } from './geometry.js'
 
 export function ObjectList() {
   const [selected, setSelected] = React.useState(null)
-  const [scene, setScene] = React.useState([])
+  const [scene, setScene] = React.useState(app.scene)
   const forceUpdate = useForceUpdate()
   useEvent(app, 'update_scene', (scene) => setScene(scene))
   useEvent(app, 'scene_modified', forceUpdate)
   useEvent(app, 'edit_level', (arg) => {
-    if (arg != 'composite' || selected?.kind !== 'composite') return
-    app.enable('edit_level', 'scene', true)
-    app.enable('edit_level', 'composite', false)
-    app.breadcrumbs = [selected.name]
-    setSelected(null)
-    app.trigger('select_object', null)
-    app.trigger('update_scene', selected.children)
+    if (arg == 'composite') {
+      if (selected?.kind != 'composite' && selected?.kind != 'lathe') return
+      app.enable('edit_level', 'scene', true)
+      app.enable('edit_level', 'composite', false)
+      app.breadcrumbs = [selected.name]
+      setSelected(null)
+      app.trigger('select_object', null)
+      if (selected?.kind == 'composite')
+        app.trigger('update_scene', selected)
+      if (selected?.kind == 'lathe')
+        app.trigger('update_scene', LatheEditable(selected))
+    }
   })
   useEvent(app, 'rename_object', () => {
     if (!selected) return
@@ -25,8 +31,8 @@ export function ObjectList() {
   useEvent(app, 'delete_object', () => {
     if (!selected) return
     let decision = confirm(`Delete object "${selected.name}"`)
-    let index = scene.findIndex(e => e == selected)
-    if (decision && index >= 0) scene.splice(index, 1)
+    let index = scene.children.findIndex(e => e == selected)
+    if (decision && index >= 0) scene.children.splice(index, 1)
     app.trigger('scene_modified')
   })
 
@@ -45,9 +51,11 @@ export function ObjectList() {
       scene-objects bread-crumbs { border-bottom: 2px solid black; padding:2px }
       `),
     el('bread-crumbs', {},
-      el('span', {}, app.breadcrumbs.length ? `scene > ${app.breadcrumbs[0]}` : 'scene')
+      el('span', {},
+        app.breadcrumbs.length ? `scene > ${app.breadcrumbs[0]}` : 'scene'
+      )
     ),
-    scene.map(e => el('span', {
+    scene.children.map(e => el('span', {
       onClick: () => {
         setSelected(e)
         app.trigger('select_object', e)

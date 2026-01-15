@@ -20,8 +20,16 @@ export function Transforms(offset, rotate, scale = Scaling(1,1,1)) {
   return { offset, rotate: rotate ?? Rotate(0,0,0), scale }
 }
 
+export function Scene(children) {
+  return { kind: 'scene', children }
+}
+
+export function Point(i, pos) {
+  return { kind: 'point', name: `Point ${i}`, transforms: Transforms(pos) }
+}
+
 export function Camera(transforms) {
-  return { kind: 'camera', transforms }
+  return { kind: 'camera', name: 'camera', transforms }
 }
 
 export function Composite(name, children, transforms) {
@@ -60,6 +68,20 @@ export function Polygon(a, b, c) {
 
 export function Lathe(name, res, path, transforms) {
   return { kind: 'lathe', name, material: 'diffuse', path, res, transforms }
+}
+
+export function LatheEditable(lathe) {
+  return {
+    kind: 'lathe-editable',
+    lathe,
+    get path() { this.children.map(e => e.transforms.offset) },
+    children: lathe.path.map((p,i) => Point(i+1, p)),
+    res: lathe.res,
+    update() {
+      lathe.res = this.res
+      lathe.path = this.children.map(e => e.transforms.offset)
+    }
+  }
 }
 
 export function Box(name, transforms) {
@@ -150,6 +172,9 @@ export function compileObject(obj, objects) {
     case 'camera': {
       let point = mapply(toMatrix(obj.transforms), Vec(0,0,0))
       return { ...obj, center: point, r: 1 }
+    }
+    case 'point': {
+      return NullObject()
     }
     default: throw new Error('unknown object kind')
   }

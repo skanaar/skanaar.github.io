@@ -11,12 +11,13 @@ import {
   BezierLathe,
   Composite,
   Transforms,
+  Scene,
 } from './geometry.js'
 import { Vec } from './math.js'
 import { teapotPatches } from './teapot.js'
 
 export function sceneTeapot() {
-  return [
+  return Scene([
     Camera(Transforms(Offset(0,0,256+128))),
     Light(16, Offset(-100, -100, -100)),
     Light(150, Offset(200-128, 50-128, 256)),
@@ -39,12 +40,12 @@ export function sceneTeapot() {
       ],
       Transforms(Offset(-100,20,-100), Rotate(90,0,0.5), Scaling(0.7,0.7,1.25))
     ),
-  ]
+  ])
 }
 
 export function sceneIsland() {
   let pillar = [Vec(9,0,0),Vec(8,0,80)]
-  return [
+  return Scene([
     Camera(Transforms(Offset(64,-64,256), Rotate(17,-12,0))),
     Light(4000, Offset(1000, -1000, 500)),
     Light(16, Offset(0, -30, 0)),
@@ -60,11 +61,11 @@ export function sceneIsland() {
         Transforms(Offset(0,-80,0), Rotate(90,0,0))
       ),
     ], Transforms(Offset(0,40,0), Scaling(1,1.5,1)))
-  ]
+  ])
 }
 
 export function sceneMushroom() {
-  return [
+  return Scene([
     Camera(Transforms(Offset(-100,-100,178), Rotate(20,20,8))),
     Light(4000, Offset(1000, -1000, 500)),
     Light(1000, Offset(-1000, 1000, 500)),
@@ -83,5 +84,5 @@ export function sceneMushroom() {
       [Vec(50,0,50), Vec(50,0,80), Vec(15,0,90), Vec(1,0,90)],
       Transforms(Offset(0,72,-80), Rotate(90,0,1), Scaling(2,2,2))
     )
-  ]
+  ])
 }

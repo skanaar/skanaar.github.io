@@ -1,6 +1,6 @@
 import { el, App, useEvent, useForceUpdate } from './assets/system.js'
 import { FloydSteinbergDitherer, NoDitherer } from './raytracer/dither.js'
-import { Camera, compileScene, Light, Offset, Rotate, Transforms } from './raytracer/geometry.js'
+import { Camera, compileScene, Light, Offset, Rotate, Scene, Transforms } from './raytracer/geometry.js'
 import { raytraceParallel } from './raytracer/raytraceParallel.js'
 import { Editor } from './raytracer/Editor.js'
 import { ObjectList } from './raytracer/ObjectList.js'
@@ -21,14 +21,18 @@ app.addMenu(
   { title: 'Edit scene', event: 'edit_level', arg: 'scene' },
   { title: 'Rename selected...', event: 'rename_object' },
   { title: 'Delete selected', event: 'delete_object' },
+)
+app.addMenu(
+  'Create',
+  { title: 'Light', event: 'create_object', arg: 'light' },
+  { title: 'Sphere', event: 'create_object', arg: 'sphere' },
+  { title: 'Box', event: 'create_object', arg: 'box' },
+  { title: 'Cylinder', event: 'create_object', arg: 'cylinder' },
+  { title: 'Cone', event: 'create_object', arg: 'cone' },
+  { title: 'Composite', event: 'create_object', arg: 'composite' },
+  { title: 'Instance', event: 'create_object', arg: 'instance' },
   { title: null },
-  { title: 'Create light', event: 'create_object', arg: 'light' },
-  { title: 'Create sphere', event: 'create_object', arg: 'sphere' },
-  { title: 'Create box', event: 'create_object', arg: 'box' },
-  { title: 'Create cylinder', event: 'create_object', arg: 'cylinder' },
-  { title: 'Create cone', event: 'create_object', arg: 'cone' },
-  { title: 'Create composite', event: 'create_object', arg: 'composite' },
-  { title: 'Create instance', event: 'create_object', arg: 'instance' },
+  { title: 'Point', event: 'create_object', arg: 'point' },
 )
 app.addMenu(
   'View',
@@ -84,7 +88,7 @@ app.addWindow('Editor', Editor, {
   sizing: 'noresize'
 })
 
-app.scene = []
+app.scene = Scene([])
 app.breadcrumbs = []
 let currentScene = []
 let size = 256
@@ -92,19 +96,19 @@ let size = 256
 function RayTracer() {
   const hostRef = React.useRef()
   const renderScene = () => {
-    let lightedScene = currentScene.some(e => e.kind === 'camera')
-      ? currentScene
+    let entities = currentScene.children.some(e => e.kind === 'camera')
+      ? currentScene.children
       : [
         Camera(Transforms(Offset(-100,-100,178), Rotate(20,20,8))),
         Light(128, Offset(100,-100,100)),
         Light(64, Offset(-100,-100,100)),
-        ...currentScene
+        ...currentScene.children
       ]
     raytraceParallel({
       canvas: hostRef.current,
       size,
       maxDepth: app.menuState['toggle_reflections'] == true ? 2 : 0,
-      scene: compileScene(lightedScene),
+      scene: compileScene(entities),
       ditherer: app.menuState['toggle_dithering'] == true
         ? new FloydSteinbergDitherer()
         : new NoDitherer(),
@@ -112,7 +116,11 @@ function RayTracer() {
   }
 
   useEvent(app, 'select_object', (obj) => {
-    app.enable('edit_level', 'composite', obj?.kind == 'composite')
+    app.enable(
+      'edit_level',
+      'composite',
+      obj?.kind == 'composite' || obj?.kind == 'lathe'
+    )
     app.enable('rename_object', null, !!obj)
     app.enable('delete_object', null, !!obj)
     app.enable('focus_selection', null, !!obj)

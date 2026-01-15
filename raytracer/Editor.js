@@ -1,6 +1,6 @@
 import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app } from '../Raytracer.js'
-import { Camera, compileObject, Composite, Instance, Lathe, latheMesh, toMatrix } from './geometry.js'
+import { Camera, compileObject, Composite, Instance, Lathe, latheMesh, Point, toMatrix } from './geometry.js'
 import { Box, Light, Mesh, Sphere } from './geometry.js'
 import { Offset, Rotate, Scaling, Transforms } from './geometry.js'
 import { add, cross, diff, EPSILON, matrixmult, RotateZ, Vec } from './math.js'
@@ -38,8 +38,11 @@ export function Editor() {
   useEvent(app, 'update_scene', (scene) => setScene(scene))
   useEvent(app, 'select_object', (item) => setSelected(item))
   useEvent(app, 'create_object', (kind) => {
-    scene.push(create(kind, Offset(ox, oy, oz), selected))
+    scene.children.push(create(kind, Offset(ox, oy, oz), selected, scene))
     app.trigger('scene_modified')
+  })
+  useEvent(app, 'scene_modified', () => {
+    if (scene.kind == 'lathe-editable') scene.update()
   })
   useEvent(app, 'scene_modified', forceUpdate)
 
@@ -60,7 +63,7 @@ export function Editor() {
         stroke-width: 0.5px;
         stroke: #000;
       }
-      svg.canvas-3d path:not(.light) {
+      svg.canvas-3d path.mesh {
         stroke-linejoin: bevel;
         stroke-width: 0.125px
       }
@@ -134,12 +137,18 @@ export function Editor() {
         className: 'crosshair',
         d: `M${x(Vec(ox,oy,oz))-11},${y(Vec(ox,oy,oz))} l 22,0 m -11,-11 l 0,22`
       }),
-      scene
-        .map(e => ({ entity: e, compiled: compilePreviewObject(e, scene) }))
+      el('path', {
+        className: 'crosshair',
+        d: `M${x(Vec(0,0,0))-1000},${y(Vec(0,0,0))}l 2000,0m-1000,-1000 l0,2000`
+      }),
+      scene.children
+        .map(e => (
+          { entity: e, compiled: compilePreviewObject(e, scene.children) }
+        ))
         .filter(({ compiled }) => compiled.kind == 'mesh')
         .map(({ entity, compiled }, i) => el('path', {
           key: `mesh${i}`,
-          className: selected == entity ? ' active' : '',
+          className: 'mesh' + (selected == entity ? ' active' : ''),
           d: compiled
             .polys
             .filter(({a,b,c}) => z(cross(diff(b,a), diff(c,a))) < EPSILON)
@@ -147,32 +156,53 @@ export function Editor() {
             `M${x(a)},${y(a)} L${x(b)},${y(b)} L${x(c)},${y(c)} Z`)
             .join(''),
         })),
-      scene
+      scene.children
         .filter(e => e.kind === 'light')
         .map((e, i) => {
-          let p = compilePreviewObject(e, scene).point
+          let p = compilePreviewObject(e, scene.children).point
           return el('path', {
             key: `light${i}`,
             className: 'light' + (selected == e ? ' active' : ''),
             d: `M${x(p)-3},${y(p)-3}l6,0l0,6l-6,0Zm-3,3l6,-6l6,6l-6,6 Z`
           })
         }),
-      scene.filter(e => e.kind === 'sphere').map((e, i) => {
-        let { center, r } = compilePreviewObject(e)
-        return el('ellipse', {
-          key: `sphere{i}`,
-          className: selected == e ? ' active' : undefined,
-          cx: x(center),
-          cy: y(center),
-          rx: zoom * r,
-          ry: zoom * r
+      scene.children
+        .filter(e => e.kind === 'sphere')
+        .map((e, i) => {
+          let { center, r } = compilePreviewObject(e)
+          return el('ellipse', {
+            key: `sphere{i}`,
+            className: selected == e ? 'active' : undefined,
+            cx: x(center),
+            cy: y(center),
+            rx: zoom * r,
+            ry: zoom * r
+          })
+        }),
+      scene.children
+        .filter(e => e.kind === 'point')
+        .map((e, i) => {
+          return el('ellipse', {
+            key: `point{i}`,
+            className: selected == e ? 'active' : undefined,
+            cx: x(e.transforms.offset),
+            cy: y(e.transforms.offset),
+            rx: 2,
+            ry: 2
+          })
+        }),
+      scene.kind !== 'lathe-editable' ? null :
+        el('path', {
+          className: 'lathe-profile',
+          d: 'M' + scene.children.map(e =>
+            `${x(e.transforms.offset)},${y(e.transforms.offset)}`
+          ).join('L')
         })
-      })
     ),
   )
 }
 
-function create(kind, pos, selected) {
+function create(kind, pos, selected, scene) {
   let withSize = (s) => Transforms(pos, Rotate(0,0,0), Scaling(s,s,s))
   switch (kind) {
     case 'light': return Light(64, pos)
@@ -188,6 +218,7 @@ function create(kind, pos, selected) {
     case 'instance':
       let ref = isMeshable(selected?.kind) ? null : (selected?.name ?? null)
       return Instance('instance', ref, withSize(1))
+    case 'point': return Point(scene.children.length+1, withSize(1).offset)
   }
 }
 
@@ -195,7 +226,7 @@ function isMeshable(kind) {
   return ['light', 'camera'].includes(kind)
 }
 
-function compilePreviewObject(obj, scene) {
+function compilePreviewObject(obj, entities) {
   if (obj.kind === 'camera') {
     return Mesh(
       obj.material,
@@ -206,7 +237,7 @@ function compilePreviewObject(obj, scene) {
       )
     )
   }
-  return compileObject(obj, scene)
+  return compileObject(obj, entities)
 }
 
 function ToolButton({ event, arg, toggle, children }) {
