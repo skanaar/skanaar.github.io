@@ -1,6 +1,6 @@
 import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app } from '../Raytracer.js'
-import { LatheEditable, Scene } from './geometry.js'
+import { LatheEditable } from './geometry.js'
 
 export function ObjectList() {
   const [selected, setSelected] = React.useState(null)

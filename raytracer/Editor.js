@@ -1,7 +1,8 @@
 import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app } from '../Raytracer.js'
-import { Camera, compileObject, Composite, Instance, Lathe, latheMesh, Point, toMatrix } from './geometry.js'
-import { Box, Light, Mesh, Sphere } from './geometry.js'
+import { compileObject, latheMesh, toMatrix, Mesh } from './geometry.js'
+import { Camera, Box, Light, Sphere, Composite, Instance } from './geometry.js'
+import { Lathe, Point } from './geometry.js'
 import { Offset, Rotate, Scaling, Transforms } from './geometry.js'
 import { add, cross, diff, EPSILON, matrixmult, RotateZ, Vec } from './math.js'
 
@@ -38,7 +39,12 @@ export function Editor() {
   useEvent(app, 'update_scene', (scene) => setScene(scene))
   useEvent(app, 'select_object', (item) => setSelected(item))
   useEvent(app, 'create_object', (kind) => {
-    scene.children.push(create(kind, Offset(ox, oy, oz), selected, scene))
+    let spawn = create(kind, Offset(ox, oy, oz), selected, scene)
+    let index = scene.children.indexOf(selected)
+    if (index > -1)
+      scene.children.splice(index+1, 0, spawn)
+    else
+      scene.children.push(spawn)
     app.trigger('scene_modified')
   })
   useEvent(app, 'scene_modified', () => {
