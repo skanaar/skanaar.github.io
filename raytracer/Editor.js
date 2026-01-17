@@ -202,6 +202,8 @@ export function Editor() {
           className: 'lathe-profile',
           d: 'M' + scene.children.map(e =>
             `${x(e.transforms.offset)},${y(e.transforms.offset)}`
+          ).join('L') + 'M' + scene.children.map(e =>
+            `${-x(e.transforms.offset)},${y(e.transforms.offset)}`
           ).join('L')
         })
     ),
