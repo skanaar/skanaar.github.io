@@ -259,7 +259,7 @@ export function bezierMesh(patches, res, matrix) {
 }
 
 export function latheMesh(path, res, matrix) {
-  var vertex = (i,j) => mapply(RotateZ(Math.PI * 2 * i/res), path[j])
+  var vertex = (i,j) => mapply(RotateY(-Math.PI * 2 * i/res), path[j])
   var mesh = []
   for (let i = 0; i < res; i++) {
     for (var j=1; j<path.length; j++) {
@@ -273,7 +273,7 @@ export function latheMesh(path, res, matrix) {
 export function bezierLatheMesh(path, resU, resV, matrix) {
   var mesh = []
   function vertex(i,j) {
-    return mapply(RotateZ(Math.PI * 2 * i/resU), Vec(
+    return mapply(RotateY(Math.PI * 2 * i/resU), Vec(
       bezier1D(path.map(e => e.x), j/resV),
       bezier1D(path.map(e => e.y), j/resV),
       bezier1D(path.map(e => e.z), j/resV)

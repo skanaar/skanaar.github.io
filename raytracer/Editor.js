@@ -4,7 +4,7 @@ import { compileObject, latheMesh, toMatrix, Mesh } from './geometry.js'
 import { Camera, Box, Light, Sphere, Composite, Instance } from './geometry.js'
 import { Lathe, Point } from './geometry.js'
 import { Offset, Rotate, Scaling, Transforms } from './geometry.js'
-import { add, cross, diff, EPSILON, matrixmult, RotateZ, Vec } from './math.js'
+import { add, cross, diff, EPSILON, matrixmult, matrixStack, RotateX, RotateY, RotateZ, Vec } from './math.js'
 
 export function Editor() {
   const [mode, setMode] = React.useState('pan')
@@ -239,9 +239,9 @@ function compilePreviewObject(obj, entities) {
     return Mesh(
       obj.material,
       latheMesh(
-        [Vec(50*1.414,0,-100), Vec(0.1,0,0)],
+        [Vec(50*1.414,-100,0), Vec(0.1,0,0)],
         4,
-        matrixmult(toMatrix(obj.transforms), RotateZ(Math.PI/4))
+        matrixStack(toMatrix(obj.transforms), RotateX(Math.PI/2), RotateY(Math.PI/4))
       )
     )
   }
