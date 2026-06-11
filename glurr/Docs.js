@@ -21,6 +21,10 @@ glurr-docs code {
     el('p', {}, `Glurr is a stack language inspired by Forth`),
     el('p', {}, `Glurr consists of "words" and very little structural syntax.
     Words does not recieve parameters, they pop and push values from and to the stack.`),
+    el('p', {},
+        `There is also a `,
+        el('a', { href: 'https://github.com/skanaar/glurr' }, 'Rust implementation'),
+        '.'),
 
     el('p', {}, `Numbers push a floating point number to the stack.`),
     el('p', {}, el('code', {}, `3.14`)),
