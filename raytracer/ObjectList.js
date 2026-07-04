@@ -55,7 +55,7 @@ export function ObjectList() {
         app.breadcrumbs.length ? `scene > ${app.breadcrumbs[0]}` : 'scene'
       )
     ),
-    scene.children.map(e => el('span', {
+    scene.children.filter(e => !e.renderOnly).map(e => el('span', {
       onClick: () => {
         setSelected(e)
         app.trigger('select_object', e)

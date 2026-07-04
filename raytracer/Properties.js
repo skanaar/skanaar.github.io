@@ -1,22 +1,24 @@
-import { useForceUpdate, useEvent, el } from '../assets/system.js';
-import { app } from '../Raytracer.js';
+import { useForceUpdate, useEvent, el } from "../assets/system.js";
+import { app } from "../Raytracer.js";
 
 export function Properties() {
-  const [selected, setSelected] = React.useState(null)
-  const [objects, setObjects] = React.useState([])
-  const forceUpdate = useForceUpdate()
-  useEvent(app, 'select_object', (obj) => setSelected(obj))
-  useEvent(app, 'scene_modified', forceUpdate)
-  useEvent(app, 'update_scene', (objs) => setObjects(objs))
+  const [selected, setSelected] = React.useState(null);
+  const [objects, setObjects] = React.useState([]);
+  const forceUpdate = useForceUpdate();
+  useEvent(app, "select_object", (obj) => setSelected(obj));
+  useEvent(app, "scene_modified", forceUpdate);
+  useEvent(app, "update_scene", (objs) => setObjects(objs.children));
 
-  if (!selected) return null
+  if (!selected) return null;
 
-  let trns = selected.transforms
+  let trns = selected.transforms;
 
   return el(
-    'obj-props',
+    "obj-props",
     {},
-    el('style', {},
+    el(
+      "style",
+      {},
       `obj-props {
         display: grid;
         grid-template-columns: 80px 1fr 1fr 1fr;
@@ -27,117 +29,135 @@ export function Properties() {
       obj-props input { width: 64px }
       obj-props input[type='number'] { -moz-appearance: textfield }
       obj-props input::-webkit-outer-spin-button,
-      obj-props input::-webkit-inner-spin-button { -webkit-appearance: none }`),
+      obj-props input::-webkit-inner-spin-button { -webkit-appearance: none }`,
+    ),
     selected.material ? el(MaterialField, { object: selected }) : null,
-    selected.kind == 'light' ? el(LightField, { light: selected }) : null,
-    selected.kind == 'lathe' ? el(SegmentsField, { object: selected }) : null,
-    selected.kind == 'heightmap'
-      ? el(TerrainFields, { object: selected }) : null,
-    selected.kind == 'instance'
+    selected.kind == "light" ? el(LightField, { light: selected }) : null,
+    selected.kind == "lathe" ? el(SegmentsField, { object: selected }) : null,
+    selected.kind == "heightmap"
+      ? el(TerrainFields, { object: selected })
+      : null,
+    selected.kind == "instance"
       ? el(InstanceField, { instance: selected, objects })
       : null,
-    el(TransformInput, { name:'Offset', step: 1, transform: trns.offset }),
-    el(TransformInput, { name:'Rotate', step: 1, transform: trns.rotate }),
-    el(TransformInput, { name:'Scale', step: 0.1, transform: trns.scale })
-  )
+    el(TransformInput, { name: "Offset", step: 1, transform: trns.offset }),
+    el(TransformInput, { name: "Rotate", step: 1, transform: trns.rotate }),
+    el(TransformInput, { name: "Scale", step: 0.1, transform: trns.scale }),
+  );
 }
 
 export function TransformInput({ transform: tr, name, step }) {
   const update = (field) => (event) => {
-    tr[field] = +event.target.value
-    app.trigger('scene_modified')
-  }
+    tr[field] = +event.target.value;
+    app.trigger("scene_modified");
+  };
 
-  return el(React.Fragment, {},
-    el('span', {}, name),
-    el('input', { type: 'number', value: tr.x, step, onChange: update('x') }),
-    el('input', { type: 'number', value: tr.y, step, onChange: update('y') }),
-    el('input', { type: 'number', value: tr.z, step, onChange: update('z') })
-  )
+  return el(
+    React.Fragment,
+    {},
+    el("span", {}, name),
+    el("input", { type: "number", value: tr.x, step, onChange: update("x") }),
+    el("input", { type: "number", value: tr.y, step, onChange: update("y") }),
+    el("input", { type: "number", value: tr.z, step, onChange: update("z") }),
+  );
 }
 
 function NumericInput({ field, object, range }) {
   const update = (event) => {
-    object[field] = +event.target.value
-    app.trigger('scene_modified')
-  }
-  return el('input', {
-    type: 'number',
+    object[field] = +event.target.value;
+    app.trigger("scene_modified");
+  };
+  return el("input", {
+    type: "number",
     value: object[field],
     onChange: update,
     min: range?.[0],
     max: range?.[1],
     step: range ? (range[1] - range[0] < 10 ? 0.1 : 1) : undefined,
-  })
+  });
 }
 
 function LightField({ light }) {
-  return el(React.Fragment, {},
-    el('span', {}, 'Intensity'),
-    el(NumericInput, { field: 'amount', object: light, range: [0,10000] }),
-    el('div', {}),
-    el('div', {})
-  )
+  return el(
+    React.Fragment,
+    {},
+    el("span", {}, "Intensity"),
+    el(NumericInput, { field: "amount", object: light, range: [0, 10000] }),
+    el("div", {}),
+    el("div", {}),
+  );
 }
 
 function SegmentsField({ object }) {
-  return el(React.Fragment, {},
-    el('span', {}, 'Segments'),
-    el(NumericInput, { field: 'res', object, range: [2,64] }),
-    el('div', {}),
-    el('div', {})
-  )
+  return el(
+    React.Fragment,
+    {},
+    el("span", {}, "Segments"),
+    el(NumericInput, { field: "res", object, range: [2, 64] }),
+    el("div", {}),
+    el("div", {}),
+  );
 }
 
-const span3col = { gridColumn: '2 / span 3', alignSelf: 'start' }
+const span3col = { gridColumn: "2 / span 3", alignSelf: "start" };
 
 function InstanceField({ instance, objects }) {
   const update = (event) => {
-    instance.ref = event.target.value
-    app.trigger('scene_modified')
-  }
+    instance.ref = event.target.value;
+    app.trigger("scene_modified");
+  };
 
-  return el(React.Fragment, {},
-    el('span', {}, 'Template'),
-    el('select', { value: instance.ref, onChange: update, style: span3col },
-      el('option', {}, ''),
+  return el(
+    React.Fragment,
+    {},
+    el("span", {}, "Template"),
+    el(
+      "select",
+      { value: instance.ref, onChange: update, style: span3col },
+      el("option", {}, ""),
       objects
-        .filter(e => e != instance)
-        .filter(e => e.kind !== 'light')
-        .filter(e => e.kind !== 'camera')
-        .map(e => el('option', {}, e.name ?? e.kind))
-    )
-  )
+        .filter((e) => e != instance)
+        .filter((e) => e.kind !== "light")
+        .filter((e) => e.kind !== "camera")
+        .map((e) => el("option", {}, e.name ?? e.kind)),
+    ),
+  );
 }
 
 function MaterialField({ object }) {
   const update = (event) => {
-    object.material = event.target.value
-    app.trigger('scene_modified')
-  }
+    object.material = event.target.value;
+    app.trigger("scene_modified");
+  };
 
-  return el(React.Fragment, {},
-    el('span', {}, 'Material'),
-    el('select', { value: object.material, onChange: update, style: span3col },
-      el('option', {}, 'diffuse'),
-      el('option', {}, 'mirror'),
-    )
-  )
+  return el(
+    React.Fragment,
+    {},
+    el("span", {}, "Material"),
+    el(
+      "select",
+      { value: object.material, onChange: update, style: span3col },
+      el("option", {}, "diffuse"),
+      el("option", {}, "mirror"),
+    ),
+  );
 }
 
 function TerrainFields({ object }) {
-  return el(React.Fragment, {},
-    el('span', {}, 'Res'),
-    el(NumericInput, { field: 'res', object, range: [4,64] }),
-    el('div', {}),
-    el('div', {}),
-    el('span', {}, 'Isola'),
-    el(NumericInput, { field: 'isola', object, range: [0,1] }),
-    el('span', {}, 'Zoom'),
-    el(NumericInput, { field: 'zoom', object, range: [0,200] }),
-    el('span', {}, 'Persist'),
-    el(NumericInput, { field: 'persistence', object, range: [0,1] }),
-    el('span', {}, 'Octaves'),
-    el(NumericInput, { field: 'octaves', object, range: [1,12] }),
-  )
+  return el(
+    React.Fragment,
+    {},
+    el("span", {}, "Res"),
+    el(NumericInput, { field: "res", object, range: [4, 64] }),
+    el("div", {}),
+    el("div", {}),
+    el("span", {}, "Isola"),
+    el(NumericInput, { field: "isola", object, range: [0, 1] }),
+    el("span", {}, "Zoom"),
+    el(NumericInput, { field: "zoom", object, range: [0, 200] }),
+    el("span", {}, "Persist"),
+    el(NumericInput, { field: "persistence", object, range: [0, 1] }),
+    el("span", {}, "Octaves"),
+    el(NumericInput, { field: "octaves", object, range: [1, 12] }),
+  );
 }

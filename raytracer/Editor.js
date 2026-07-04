@@ -4,7 +4,7 @@ import { compileObject, latheMesh, toMatrix, Mesh } from './geometry.js'
 import { Camera, Box, Light, Sphere, Composite, Instance } from './geometry.js'
 import { Lathe, Point } from './geometry.js'
 import { Offset, Rotate, Scaling, Transforms } from './geometry.js'
-import { add, cross, diff, EPSILON, matrixmult, matrixStack, RotateX, RotateY, RotateZ, Vec } from './math.js'
+import { add, cross, diff, EPSILON, Identity, matrixStack, RotateX, RotateY, Vec } from './math.js'
 
 export function Editor() {
   const [mode, setMode] = React.useState('pan')
@@ -13,6 +13,7 @@ export function Editor() {
   function x(p) { return zoom * (view == 'side' ? p.z-oz : p.x-ox) }
   function y(p) { return zoom * (view == 'top' ? p.z-oz : p.y-oy) }
   function z(p) { return view == 'front' ? p.z : view == 'side' ? p.x : -p.y }
+  function lathex(p) { return zoom * (view == 'side' ? -p.z-oz : -p.x-ox) }
   const [scene, setScene] = React.useState(app.scene)
   const forceUpdate = useForceUpdate()
   const [view, setView] = React.useState('front')
@@ -33,6 +34,7 @@ export function Editor() {
     setZoom(100/Math.max(50, compiled.radius ?? 100))
     setOffset(compiled.center)
   })
+  useEvent(app, 'edit_level', () => setOffset(Vec(0,0,0)))
   useEvent(app, 'editor_mode', (mode) => setMode(mode))
   useEvent(app, 'editor_mode', (mode) => app.check('editor_mode', mode))
   useEvent(app, 'zoom', (factor) => setZoom(zoom * factor))
@@ -48,7 +50,7 @@ export function Editor() {
     app.trigger('scene_modified')
   })
   useEvent(app, 'scene_modified', () => {
-    if (scene.kind == 'lathe-editable') scene.update()
+    scene.update?.()
   })
   useEvent(app, 'scene_modified', forceUpdate)
 
@@ -149,13 +151,13 @@ export function Editor() {
       }),
       scene.children
         .map(e => (
-          { entity: e, compiled: compilePreviewObject(e, scene.children) }
+          { entity: e, preview: compilePreviewObject(e, scene.children) }
         ))
-        .filter(({ compiled }) => compiled.kind == 'mesh')
-        .map(({ entity, compiled }, i) => el('path', {
+        .filter(({ preview }) => preview.kind == 'mesh')
+        .map(({ entity, preview }, i) => el('path', {
           key: `mesh${i}`,
           className: 'mesh' + (selected == entity ? ' active' : ''),
-          d: compiled
+          d: preview
             .polys
             .filter(({a,b,c}) => z(cross(diff(b,a), diff(c,a))) < EPSILON)
             .map(({a,b,c}) =>
@@ -197,15 +199,6 @@ export function Editor() {
             ry: 2
           })
         }),
-      scene.kind !== 'lathe-editable' ? null :
-        el('path', {
-          className: 'lathe-profile',
-          d: 'M' + scene.children.map(e =>
-            `${x(e.transforms.offset)},${y(e.transforms.offset)}`
-          ).join('L') + 'M' + scene.children.map(e =>
-            `${-x(e.transforms.offset)},${y(e.transforms.offset)}`
-          ).join('L')
-        })
     ),
   )
 }
@@ -251,7 +244,6 @@ function compilePreviewObject(obj, entities) {
 function ToolButton({ event, arg, toggle, children }) {
   let forceUpdate = useForceUpdate()
   useEvent(app, 'app:menuability', forceUpdate)
-
   return el('button', {
     style: children.length == 1 ? { fontWeight: 'bold' } : undefined,
     onClick: () => app.trigger(event, arg),

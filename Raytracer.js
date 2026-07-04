@@ -1,4 +1,4 @@
-import { el, App, useEvent, useForceUpdate } from './assets/system.js'
+import { el, App, useEvent } from './assets/system.js'
 import { FloydSteinbergDitherer, NoDitherer } from './raytracer/dither.js'
 import { Camera, compileScene, Light, Offset, Rotate, Scene, Transforms } from './raytracer/geometry.js'
 import { raytraceParallel } from './raytracer/raytraceParallel.js'
@@ -99,7 +99,7 @@ function RayTracer() {
     let entities = currentScene.children.some(e => e.kind === 'camera')
       ? currentScene.children
       : [
-        Camera(Transforms(Offset(-100,-100,178), Rotate(20,20,8))),
+        Camera(Transforms(Offset(-100,-100,240), Rotate(20,20,8))),
         Light(128, Offset(100,-100,100)),
         Light(64, Offset(-100,-100,100)),
         ...currentScene.children

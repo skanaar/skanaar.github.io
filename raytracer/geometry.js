@@ -1,6 +1,6 @@
 import { Vec, Scale, Translate, RotateX, RotateY, RotateZ, π } from './math.js'
 import { sq, add, cross, diff, norm, mult, rotx, mapply, mag } from './math.js'
-import { generateRowByRowCoordinates, matrixStack } from './math.js'
+import { generateRowByRowCoordinates, matrixStack, Identity } from './math.js'
 import { Noise } from './noise.js'
 
 export function Offset(x,y,z) { return { x, y, z } }
@@ -40,12 +40,13 @@ export function Instance(name, ref, transforms) {
   return { kind: 'instance', name, ref, transforms }
 }
 
-export function Mesh(material, polys) {
+export function Mesh(material, polys, ops = {}) {
   const vertices = polys
     .flatMap(({ a, b, c }) => [a, b, c])
   let center = mult(1/vertices.length, vertices.reduce((acc, e) => add(acc,e)))
-  let radius = vertices.reduce((max,p) => Math.max(mag(diff(center,p)), max), 0)
-  return { kind: 'mesh', material, polys, center, radius }
+  let radius = vertices.reduce((max, p) => Math.max(mag(diff(center, p)), max), 0)
+  let renderOnly = ops.renderOnly
+  return { kind: 'mesh', material, polys, center, radius, renderOnly }
 }
 
 export function NullObject() {
@@ -71,15 +72,25 @@ export function Lathe(name, res, path, transforms) {
 }
 
 export function LatheEditable(lathe) {
+  let polys = latheMesh(lathe.path, lathe.res, Identity())
+  let points = lathe.path.map((p, i) => Point(i + 1, p))
+  let children = [Mesh(lathe.material, polys, { renderOnly: true }), ...points]
   return {
-    kind: 'lathe-editable',
+    kind: 'mesh',
     lathe,
-    get path() { this.children.map(e => e.transforms.offset) },
-    children: lathe.path.map((p,i) => Point(i+1, p)),
+    get path() { return this.children.map(e => e.transforms.offset) },
+    get polys() { return this.mesh.polys },
+    get radius() { return this.mesh.radius },
+    get center() { return this.mesh.center },
+    children,
     res: lathe.res,
     update() {
       lathe.res = this.res
-      lathe.path = this.children.map(e => e.transforms.offset)
+      lathe.path = this.children
+        .filter(e => e.kind == 'point')
+        .map(e => e.transforms.offset)
+      let polys = latheMesh(lathe.path, lathe.res, Identity())
+      this.children[0] = Mesh(lathe.material, polys, { renderOnly: true })
     }
   }
 }
@@ -108,6 +119,7 @@ export function HeightMap(name, opts, transforms) {
 
 export function compileObject(obj, objects) {
   switch (obj.kind) {
+    case 'mesh': return obj
     case 'lathe': return Mesh(
       obj.material,
       latheMesh(obj.path, obj.res, toMatrix(obj.transforms))
