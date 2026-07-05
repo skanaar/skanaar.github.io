@@ -113,7 +113,7 @@ function RayTracer() {
       ditherer: app.menuState['toggle_dithering'] == true
         ? new FloydSteinbergDitherer()
         : new NoDitherer(),
-    }).then((result) => app.trigger('done', result))
+    }).then((result) => app.trigger('render_complete', result))
   }
 
   useEvent(app, 'select_object', (obj) => {

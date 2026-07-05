@@ -7,7 +7,9 @@ let creatables = ['box', 'cylinder', 'cone', 'composite', 'instance']
 export function ObjectList() {
   const [selected, setSelected] = React.useState(null)
   const [scene, setScene] = React.useState(app.scene)
+  const [status, setStatus] = React.useState('')
   const forceUpdate = useForceUpdate()
+  useEvent(app, 'render_complete', (data) => setStatus(data.duration))
   useEvent(app, 'update_scene', (scene) => setScene(scene))
   useEvent(app, 'scene_modified', forceUpdate)
   useEvent(app, 'select_object', (obj) => setSelected(obj))
@@ -55,12 +57,13 @@ export function ObjectList() {
       scene-objects span { padding: 3px }
       scene-objects span.active { background: black; color: white; }
       scene-objects bread-crumbs { border-bottom: 2px solid black; padding:2px }
-      scene-objects bread-crumbs { font-style: italic }
+      scene-objects bread-crumbs { display: flex; justify-content: space-between; font-style: italic }
       `),
     el('bread-crumbs', {},
-      el('span', {},
+      el('span', { style: { marginRight: 'auto' }},
         app.breadcrumbs.length ? `scene > ${app.breadcrumbs[0]}` : 'scene'
-      )
+      ),
+      el('span', {}, status+'ms'),
     ),
     scene.children.filter(e => !e.renderOnly).map(e => el('span', {
       onClick: () => app.trigger('select_object', e),
