@@ -251,7 +251,7 @@ function bezierPatch([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p], u, v) {
 }
 
 export function bezierMesh(patches, res, matrix) {
-  return [...patches
+  return patches
     .flatMap(patch => [...generateRowByRowCoordinates(res)]
       .flatMap(({ x: i, y: j }) => [
         Polygon(
@@ -267,7 +267,6 @@ export function bezierMesh(patches, res, matrix) {
       ]).filter(isValidPolygon)
     )
     .map(p => transformTriangle(p, matrix))
-  ]
 }
 
 export function latheMesh(path, res, matrix) {

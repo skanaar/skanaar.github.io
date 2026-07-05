@@ -8,6 +8,7 @@ export function ObjectList() {
   const forceUpdate = useForceUpdate()
   useEvent(app, 'update_scene', (scene) => setScene(scene))
   useEvent(app, 'scene_modified', forceUpdate)
+  useEvent(app, 'select_object', (obj) => setSelected(obj))
   useEvent(app, 'edit_level', (arg) => {
     if (arg == 'composite') {
       if (selected?.kind != 'composite' && selected?.kind != 'lathe') return
@@ -40,15 +41,12 @@ export function ObjectList() {
     'scene-objects',
     {},
     el('style', {},
-      `scene-objects {
-        display: flex;
-        flex-direction: column;
-        overflow-y: auto;
-        height: 300px;
-      }
+      `scene-objects { display: flex; flex-direction: column }
+      scene-objects { overflow-y: auto; height: 300px }
       scene-objects span { padding: 3px }
       scene-objects span.active { background: black; color: white; }
       scene-objects bread-crumbs { border-bottom: 2px solid black; padding:2px }
+      scene-objects bread-crumbs { font-style: italic }
       `),
     el('bread-crumbs', {},
       el('span', {},
@@ -56,10 +54,8 @@ export function ObjectList() {
       )
     ),
     scene.children.filter(e => !e.renderOnly).map(e => el('span', {
-      onClick: () => {
-        setSelected(e)
-        app.trigger('select_object', e)
-      },
+      onClick: () => app.trigger('select_object', e),
+      onDoubleClick: () => app.trigger('rename_object'),
       className: selected === e ? 'active' : undefined,
     },
       e.name || e.kind

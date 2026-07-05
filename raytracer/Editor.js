@@ -4,7 +4,8 @@ import { compileObject, latheMesh, toMatrix, Mesh } from './geometry.js'
 import { Camera, Box, Light, Sphere, Composite, Instance } from './geometry.js'
 import { Lathe, Point } from './geometry.js'
 import { Offset, Rotate, Scaling, Transforms } from './geometry.js'
-import { add, cross, diff, EPSILON, Identity, matrixStack, RotateX, RotateY, Vec } from './math.js'
+import { add, cross, diff, EPSILON, mag, matrixStack } from './math.js'
+import { RotateX, RotateY, Vec } from './math.js'
 
 export function Editor() {
   const [mode, setMode] = React.useState('pan')
@@ -13,7 +14,6 @@ export function Editor() {
   function x(p) { return zoom * (view == 'side' ? p.z-oz : p.x-ox) }
   function y(p) { return zoom * (view == 'top' ? p.z-oz : p.y-oy) }
   function z(p) { return view == 'front' ? p.z : view == 'side' ? p.x : -p.y }
-  function lathex(p) { return zoom * (view == 'side' ? -p.z-oz : -p.x-ox) }
   const [scene, setScene] = React.useState(app.scene)
   const forceUpdate = useForceUpdate()
   const [view, setView] = React.useState('front')
@@ -38,7 +38,14 @@ export function Editor() {
   useEvent(app, 'editor_mode', (mode) => setMode(mode))
   useEvent(app, 'editor_mode', (mode) => app.check('editor_mode', mode))
   useEvent(app, 'zoom', (factor) => setZoom(zoom * factor))
-  useEvent(app, 'update_scene', (scene) => setScene(scene))
+  useEvent(app, 'update_scene', (scene) => {
+    setScene(scene)
+    if (scene.kind === 'lathe-editable') {
+      let r = Math.max(1, ...scene.children.map(e => mag(e.transforms.offset)))
+      setZoom(100 / r)
+      setOffset(Vec(0,0,0))
+    }
+  })
   useEvent(app, 'select_object', (item) => setSelected(item))
   useEvent(app, 'create_object', (kind) => {
     let spawn = create(kind, Offset(ox, oy, oz), selected, scene)
@@ -62,6 +69,24 @@ export function Editor() {
     }
   }
 
+  function pickAt(evt) {
+    let svg = evt.currentTarget
+    let ctm = svg.getScreenCTM()
+    let pt = svg.createSVGPoint()
+    pt.x = evt.clientX
+    pt.y = evt.clientY
+    let c = pt.matrixTransform(ctm.inverse())
+    let hit = null
+    let best = 10
+    for (let e of scene.children) {
+      if (e.renderOnly) continue
+      let p = e.transforms.offset
+      let d = Math.hypot(x(p) - c.x, y(p) - c.y)
+      if (d <= best) { best = d; hit = e }
+    }
+    return hit
+  }
+
   return el(
     'div',
     { style: { display: 'grid', gridTemplateRows: 'auto auto' } },
@@ -71,17 +96,9 @@ export function Editor() {
         stroke-width: 0.5px;
         stroke: #000;
       }
-      svg.canvas-3d path.mesh {
-        stroke-linejoin: bevel;
-        stroke-width: 0.125px
-      }
-      svg.canvas-3d :is(path, ellipse, rect).active {
-        stroke-width: 2px
-      }
-      svg.canvas-3d path.crosshair {
-        stroke-dasharray: 2 2;
-        stroke-width: 1px;
-      }
+      svg.canvas-3d path.mesh { stroke-linejoin: bevel; stroke-width: 0.125px }
+      svg.canvas-3d :is(path, ellipse, rect).active { stroke-width: 2px }
+      svg.canvas-3d path.crosshair { stroke-dasharray: 2 2; stroke-width: 1px }
       editor-toolbar { display:flex; border-bottom:2px solid black; padding:4px}
       editor-toolbar span { margin-left: auto; }
       editor-toolbar button {
@@ -125,6 +142,8 @@ export function Editor() {
         className: 'canvas-3d',
         viewBox: '-170 -128 340 256',
         onMouseDown: (e) => {
+          let hit = pickAt(e)
+          if (hit) app.trigger('select_object', hit)
           setStartPos(screenToSpace(e))
         },
         onMouseMove: (e) => {
@@ -137,9 +156,7 @@ export function Editor() {
             app.trigger('scene_modified')
           }
         },
-        onMouseUp: (e) => {
-          setStartPos(null)
-        }
+        onMouseUp: () => { setStartPos(null) }
       },
       el('path', {
         className: 'crosshair',
@@ -176,7 +193,7 @@ export function Editor() {
         }),
       scene.children
         .filter(e => e.kind === 'sphere')
-        .map((e, i) => {
+        .map((e) => {
           let { center, r } = compilePreviewObject(e)
           return el('ellipse', {
             key: `sphere{i}`,
@@ -189,7 +206,7 @@ export function Editor() {
         }),
       scene.children
         .filter(e => e.kind === 'point')
-        .map((e, i) => {
+        .map((e) => {
           return el('ellipse', {
             key: `point{i}`,
             className: selected == e ? 'active' : undefined,
@@ -210,9 +227,9 @@ function create(kind, pos, selected, scene) {
     case 'camera': return Camera(withSize(1))
     case 'box': return Box('box', withSize(30))
     case 'cylinder':
-      return Lathe('cylinder', 16, [Vec(1,0,-2),Vec(1,0,2)], withSize(30))
+      return Lathe('cylinder', 16, [Vec(1,-2,0),Vec(1,2,0)], withSize(30))
     case 'cone':
-      return Lathe('cone',16,[Vec(0,0,0),Vec(1,0,0),Vec(0,0,2)],withSize(30))
+      return Lathe('cone',16,[Vec(0,-2,0),Vec(1,-2,0),Vec(0,2,0)],withSize(30))
     case 'sphere': return Sphere('sphere', 'diffuse', withSize(30))
     case 'composite':
       return Composite('composite', [create('box', pos)], withSize(1))

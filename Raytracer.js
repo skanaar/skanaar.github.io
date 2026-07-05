@@ -72,19 +72,19 @@ app.enable('focus_selection', null, false)
 app.addWindow('Objects', ObjectList, {
   visible: true,
   offset: [0, 256+50],
-  size: [200,300],
+  size: [256,300],
   sizing: 'noresize'
 })
 app.addWindow('Properties', Properties, {
   visible: true,
-  offset: [200+20, 256+80+50],
+  offset: [256+20, 450+90],
   size: [200,100],
   sizing: 'noresize'
 })
 app.addWindow('Editor', Editor, {
   visible: true,
   offset: [256+20, 0],
-  size: [400,300],
+  size: [600,450],
   sizing: 'noresize'
 })
 
