@@ -69,6 +69,7 @@ app.enable('edit_level', 'scene', false)
 app.enable('rename_object', null, false)
 app.enable('delete_object', null, false)
 app.enable('focus_selection', null, false)
+app.enable('create_object', 'point', false)
 app.addWindow('Objects', ObjectList, {
   visible: true,
   offset: [0, 256+50],
@@ -136,6 +137,7 @@ function RayTracer() {
     app.trigger('update_scene', app.scene)
   })
   useEvent(app, 'edit_level', (arg) => {
+    app.enable('create_object', 'light', arg == 'scene')
     if (arg != 'scene') return
     app.enable('edit_level', 'scene', false)
     app.enable('edit_level', 'composite', true)
@@ -155,7 +157,11 @@ function RayTracer() {
   })
   useEvent(app, 'update_scene', (scene) => {
     currentScene = scene
+    app.enable('create_object', 'point', false)
     app.trigger('render')
+  })
+  useEvent(app, 'select_object', (obj) => {
+    app.enable('create_object', 'point', Boolean(currentScene.lathe && obj))
   })
   useEvent(app, 'scene_modified', debounce(() => app.trigger('render'), 1000))
   useEvent(app, 'render', renderScene)

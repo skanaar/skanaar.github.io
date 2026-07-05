@@ -2,6 +2,8 @@ import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app } from '../Raytracer.js'
 import { LatheEditable } from './geometry.js'
 
+let creatables = ['box', 'cylinder', 'cone', 'composite', 'instance']
+
 export function ObjectList() {
   const [selected, setSelected] = React.useState(null)
   const [scene, setScene] = React.useState(app.scene)
@@ -12,6 +14,9 @@ export function ObjectList() {
   useEvent(app, 'edit_level', (arg) => {
     if (arg == 'composite') {
       if (selected?.kind != 'composite' && selected?.kind != 'lathe') return
+      for (let e of creatables)
+        app.enable('create_object', e, selected.kind != 'lathe')
+      app.enable('create_object', 'sphere', false)
       app.enable('edit_level', 'scene', true)
       app.enable('edit_level', 'composite', false)
       app.breadcrumbs = [selected.name]
@@ -21,6 +26,10 @@ export function ObjectList() {
         app.trigger('update_scene', selected)
       if (selected?.kind == 'lathe')
         app.trigger('update_scene', LatheEditable(selected))
+    } else {
+      app.enable('create_object', 'sphere', true)
+      for (let e of creatables)
+        app.enable('create_object', e, arg == 'scene')
     }
   })
   useEvent(app, 'rename_object', () => {

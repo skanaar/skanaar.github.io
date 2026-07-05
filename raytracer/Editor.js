@@ -55,6 +55,7 @@ export function Editor() {
     else
       scene.children.push(spawn)
     app.trigger('scene_modified')
+    app.trigger('select_object', spawn)
   })
   useEvent(app, 'scene_modified', () => {
     scene.update?.()
@@ -175,6 +176,7 @@ export function Editor() {
       el(ToolButton, { event: 'zoom', arg: 1.5 }, '+'),
       el(ToolButton, { event: 'reset_view' }, '='),
       el('span', {}),
+      el(ToolButton, { event: 'create_object', arg: 'point' }, '⊕'),
       el(ToolButton, { event: 'focus_selection' }, '⌾'),
       el(ToolButton, { event:'edit_level', arg:'composite' }, '↓'),
       el(ToolButton, { event:'edit_level', arg:'scene' }, '⏏'),
