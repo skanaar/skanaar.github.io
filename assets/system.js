@@ -412,7 +412,7 @@ export function Menu({ app, title, items }) {
     el(
       'menu-root',
       { ref },
-      el('button', { className: 'menu-item', onClick: activate }, title),
+      el('button', { className: 'menu-item', onMouseDown: activate }, title),
       showDropdown &&
         el(
           'menu-dropdown',
@@ -437,13 +437,13 @@ function safeEmitEvent(app, event, arg) {
 
 export function MenuItem({ app, item, onClose }) {
   if (item.title === null) return el('menu-item', {}, el('hr'))
-  const onClick = () => {
+  const onMouseUp = () => {
     safeEmitEvent(item.app, item.event, item.arg)
     onClose()
   }
   let abilityKey = JSON.stringify([item.event, item.arg])
   return el('menu-item', {},
-    el('button', { onClick, disabled: app?.menuAbility[abilityKey] === false },
+    el('button', { onMouseUp, disabled: app?.menuAbility[abilityKey]===false },
       app?.menuState[item.event] === item.arg && item.arg !== undefined
       ? '✔ '
       : null,
