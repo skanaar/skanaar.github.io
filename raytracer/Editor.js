@@ -77,6 +77,23 @@ export function Editor() {
     }
   }
 
+  function viewRotation(rot) {
+    let k = 0.5
+    switch (view) {
+      case 'front': return Rotate(0, rot*k, 0)
+      case 'side': return Rotate(rot*k, 0, 0)
+      case 'top': return Rotate(0, 0, rot*k)
+    }
+  }
+
+  function viewScaling(s) {
+    switch (view) {
+      case 'front': return Scaling(s, 1, 1)
+      case 'side': return Scaling(1, 1, s)
+      case 'top': return Scaling(1, s, 1)
+    }
+  }
+
   React.useEffect(() => {
     function onKeyDown(e) {
       if (!selected) return
@@ -179,8 +196,19 @@ export function Editor() {
             setOffset(o => diff(o, screenToSpace(e)))
           }
           if (mode == 'move' && selected && startPos) {
-            let o = selected.transforms.offset
-            selected.transforms.offset = add(o, screenToSpace(e))
+            let t = selected.transforms
+            if (e.altKey) {
+              let r = viewRotation(e.movementX)
+              t.rotate = Rotate(t.rotate.x+r.x, t.rotate.y+r.y, t.rotate.z+r.z)
+            } else if (e.shiftKey) {
+              let f = 1 + (e.movementX - e.movementY) / 100
+              t.scale = Scaling(t.scale.x * f, t.scale.y * f, t.scale.z * f)
+            } else if (e.metaKey) {
+              let s = viewScaling(1 + (e.movementX) / 100)
+              t.scale = Scaling(t.scale.x*s.x, t.scale.y*s.y, t.scale.z*s.z)
+            } else {
+              t.offset = add(t.offset, screenToSpace(e))
+            }
             app.trigger('scene_modified')
           }
         },
