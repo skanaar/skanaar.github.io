@@ -138,6 +138,7 @@ function MaterialField({ object }) {
       "select",
       { value: object.material, onChange: update, style: span3col },
       el("option", {}, "diffuse"),
+      el("option", {}, "dark"),
       el("option", {}, "mirror"),
     ),
   );

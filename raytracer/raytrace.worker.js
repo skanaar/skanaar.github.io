@@ -55,7 +55,7 @@ function raytrace({ area, totalArea, size, maxDepth, scene }) {
             bright += lightBrightness(hit.point, hit.normal, light)
         }
       }
-      bright = hdr(bright)
+      bright = hdr(bright * materialColor(hit))
       let value = Math.min(255, Math.floor(bright * 255))
       let offset = (i + j*size)*4
       imgdata.data[offset] = value
@@ -67,6 +67,12 @@ function raytrace({ area, totalArea, size, maxDepth, scene }) {
   }
 
   return imgdata
+}
+
+function materialColor(hit) {
+  if (hit.material == 'diffuse') return 1
+  if (hit.material == 'dark') return 0.5
+  return 1
 }
 
 function trace_ray(camera, ray, depthBudget, scene) {
