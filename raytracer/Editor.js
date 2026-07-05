@@ -69,6 +69,34 @@ export function Editor() {
     }
   }
 
+  function viewDelta(dx, dy) {
+    switch (view) {
+      case 'front': return Vec(dx, dy, 0)
+      case 'side': return Vec(0, dy, dx)
+      case 'top': return Vec(dx, 0, dy)
+    }
+  }
+
+  React.useEffect(() => {
+    function onKeyDown(e) {
+      if (!selected) return
+      if (/^(input|textarea|select)$/i.test(e.target.tagName)) return
+      let step = e.shiftKey ? 10 : 1
+      let delta = {
+        ArrowLeft: viewDelta(-step, 0),
+        ArrowRight: viewDelta(step, 0),
+        ArrowUp: viewDelta(0, -step),
+        ArrowDown: viewDelta(0, step)
+      }[e.key]
+      if (!delta) return
+      e.preventDefault()
+      selected.transforms.offset = add(selected.transforms.offset, delta)
+      app.trigger('scene_modified')
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [selected, view])
+
   function pickAt(evt) {
     let svg = evt.currentTarget
     let ctm = svg.getScreenCTM()
