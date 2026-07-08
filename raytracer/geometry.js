@@ -44,7 +44,7 @@ export function Mesh(material, polys, ops = {}) {
   const vertices = polys
     .flatMap(({ a, b, c }) => [a, b, c])
   let center = mult(1/vertices.length, vertices.reduce((acc, e) => add(acc,e)))
-  let radius = vertices.reduce((max, p) => Math.max(mag(diff(center, p)), max), 0)
+  let radius = vertices.reduce((max,p) => Math.max(mag(diff(center,p)), max), 0)
   let renderOnly = ops.renderOnly
   return { kind: 'mesh', material, polys, center, radius, renderOnly }
 }
@@ -133,9 +133,10 @@ export function compileObject(obj, objects) {
       bezierMesh(obj.patches, obj.res, toMatrix(obj.transforms))
     )
     case 'box':
-      let o = -1
-      let a0 = Vec(o,o,o), b0 = Vec(1,o,o), c0 = Vec(o,1,o), d0 = Vec(1,1,o)
-      let a1 = Vec(o,o,1), b1 = Vec(1,o,1), c1 = Vec(o,1,1), d1 = Vec(1,1,1)
+      let l = 10
+      let o = -10
+      let a0 = Vec(o,o,o), b0 = Vec(l,o,o), c0 = Vec(o,l,o), d0 = Vec(l,l,o)
+      let a1 = Vec(o,o,l), b1 = Vec(l,o,l), c1 = Vec(o,l,l), d1 = Vec(l,l,l)
       return Mesh(
         obj.material,
         [

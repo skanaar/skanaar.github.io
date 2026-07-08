@@ -4,8 +4,14 @@ import { app } from '../Raytracer.js'
 const style = `scene-objects {
   display: grid; grid-template-rows: auto minmax(0, 1fr); height: 300px;
   & ul { list-style: none; margin: 0; padding: 0; overflow-y: auto }
-  & li { padding: 3px; cursor: default }
+  & li { display: flex; align-items: center; padding: 3px; cursor: default }
   & li.active { background: black; color: white; }
+  & li.hidden > span { opacity: 0.4 }
+  & li button {
+    margin-left: auto; padding: 0 2px; visibility: hidden; font-size: inherit;
+    border: 2px solid black; background: none; color:inherit; border-radius:2px;
+  }
+  & li:hover button, & li.hidden button { visibility: visible }
   & bread-crumbs { border-bottom: 2px solid black; padding:2px }
   & bread-crumbs .info { position: absolute; right: 5px; font-style: italic }
 }`
@@ -33,9 +39,17 @@ export function ObjectList() {
       scene.children.filter(e => !e.renderOnly).map(e => el('li', {
         onClick: () => app.trigger('select_object', e),
         onDoubleClick: () => app.trigger('rename_object'),
-        className: selected === e ? 'active' : undefined,
+        className: [selected === e && 'active', e.hidden && 'hidden']
+          .filter(Boolean).join(' ') || undefined,
       },
-        el('span', {}, e.name || e.kind)
+        el('span', {}, e.name || e.kind),
+        el('button', {
+          onClick: (ev) => {
+            ev.stopPropagation()
+            e.hidden = !e.hidden
+            app.trigger('scene_modified')
+          },
+        }, el('span', {}, e.hidden ? 'show' : 'hide'))
       ))
     )
   )

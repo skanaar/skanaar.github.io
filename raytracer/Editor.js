@@ -164,7 +164,7 @@ export function Editor() {
     let hit = null
     let best = 10
     for (let e of scene.children) {
-      if (e.renderOnly) continue
+      if (e.renderOnly || e.hidden) continue
       let p = e.transforms.offset
       let d = Math.hypot(x(p) - c.x, y(p) - c.y)
       if (d <= best) { best = d; hit = e }
@@ -227,6 +227,7 @@ export function Editor() {
         d: `M${x(Vec(0,0,0))-1000},${y(Vec(0,0,0))}l 2000,0m-1000,-1000 l0,2000`
       }),
       scene.children
+        .filter(e => !e.hidden)
         .map(e => (
           { entity: e, preview: compilePreviewObject(e, scene.children) }
         ))
@@ -242,7 +243,7 @@ export function Editor() {
             .join(''),
         })),
       scene.children
-        .filter(e => e.kind === 'light')
+        .filter(e => e.kind === 'light' && !e.hidden)
         .map((e, i) => {
           let p = compilePreviewObject(e, scene.children).point
           return el('path', {
@@ -252,7 +253,7 @@ export function Editor() {
           })
         }),
       scene.children
-        .filter(e => e.kind === 'sphere')
+        .filter(e => e.kind === 'sphere' && !e.hidden)
         .map((e) => {
           let { center, r } = compilePreviewObject(e)
           return el('ellipse', {
@@ -265,7 +266,7 @@ export function Editor() {
           })
         }),
       scene.children
-        .filter(e => e.kind === 'point')
+        .filter(e => e.kind === 'point' && !e.hidden)
         .map((e) => {
           return el('ellipse', {
             key: `point{i}`,
@@ -281,15 +282,16 @@ export function Editor() {
 }
 
 function create(kind, pos, selected, scene) {
-  let withSize = (s) => Transforms(pos, Rotate(0,0,0), Scaling(s,s,s))
+  let withSize = (s) => Transforms(pos, Rotate(0, 0, 0), Scaling(s, s, s))
+  let l = 100
   switch (kind) {
     case 'light': return Light(64, pos)
     case 'camera': return Camera(withSize(1))
-    case 'box': return Box('box', withSize(30))
+    case 'box': return Box('box', withSize(1))
     case 'cylinder':
-      return Lathe('cylinder', 16, [Vec(1,-2,0),Vec(1,2,0)], withSize(30))
+      return Lathe('cylinder', 16, [Vec(l,-l,0),Vec(l,l,0)], withSize(1))
     case 'cone':
-      return Lathe('cone',16,[Vec(0,-2,0),Vec(1,-2,0),Vec(0,2,0)],withSize(30))
+      return Lathe('cone',16,[Vec(0,-l,0),Vec(l,l,0),Vec(0,l,0)], withSize(1))
     case 'sphere': return Sphere('sphere', 'diffuse', withSize(30))
     case 'composite':
       return Composite('composite', [create('box', pos)], withSize(1))
