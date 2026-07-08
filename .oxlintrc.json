@@ -1,0 +1,30 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oxc-project/oxc/main/npm/oxlint/configuration_schema.json",
+  "ignorePatterns": [
+    "**/lib/**",
+    "**/codemirror/**",
+    "**/*.min.js",
+    "**/*.parser.js",
+    "p5/**"
+  ],
+  "env": {
+    "browser": true,
+    "worker": true,
+    "es2024": true
+  },
+  "globals": {
+    "React": "readonly"
+  },
+  "categories": {
+    "correctness": "error",
+    "suspicious": "warn",
+    "perf": "warn"
+  },
+  "rules": {
+    "no-undef": "error",
+    "no-shadow": "off",
+    "no-new-array": "off",
+    "erasing-op": "off",
+    "require-post-message-target-origin": "off"
+  }
+}

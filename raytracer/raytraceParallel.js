@@ -33,7 +33,7 @@ export function raytraceParallel({ canvas, size, maxDepth, scene, ditherer }) {
 
   for (let i = 0; i < chunkCount; i++) {
     const worker = new Worker('/raytracer/raytrace.worker.js', {type:'module'})
-    worker.onmessage = (e) => {
+    worker.addEventListener('message', (e) => {
       if (e.data.progress == 'row_complete') {
         progress += 1/size
         ctx.fillRect(size/2-20, size/2-2, 40*progress, 4)
@@ -42,7 +42,7 @@ export function raytraceParallel({ canvas, size, maxDepth, scene, ditherer }) {
       chunks[i] = e.data
       pendingWorkers--
       if (pendingWorkers === 0) onComplete()
-    }
+    })
     let totalArea = { width: size, height: size }
     let area = { width: size, height: chunkSize, x: 0, y: i*chunkSize }
     worker.postMessage({ area, totalArea, size, maxDepth, scene })

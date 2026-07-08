@@ -1,14 +1,13 @@
 var res = 256
-var matrix = [...new Array(res)].map(() => Math.random() - 0.5)
+var matrix = Array.from({ length: res }).map(() => Math.random() - 0.5)
+
+function smoothstep(x) { return x*x*(3 - 2*x) }
+function lerp(factor, a, b) { return a + (b - a) * factor }
 
 export function Noise(conf) {
   var persistence = conf.persistence || 0.5
   var octaves = conf.octaves || 1
   var scale = conf.zoom * 2 || 2
-
-  function smoothstep(x) { return x*x*(3 - 2*x) }
-
-  function lerp(factor, a, b) { return a + (b-a)*factor }
 
   function getSingleOctave(x, y) {
     var x0 = Math.floor(x)
@@ -27,11 +26,11 @@ export function Noise(conf) {
   }
 
   return function (i, j) {
-    var sum = 0.0
-    var x = i/scale
-    var y = j/scale
-    var amp = 1.0
-    for (var i=0; i<octaves; i++) {
+    let sum = 0.0
+    let x = i/scale
+    let y = j/scale
+    let amp = 1.0
+    for (let index=0; index<octaves; index++) {
       sum = sum + amp * getSingleOctave(x, y)
       x *= 2
       y *= 2

@@ -307,7 +307,7 @@ function compilePreviewObject(obj, entities) {
     return Mesh(
       obj.material,
       latheMesh(
-        [Vec(50*1.414,-100,0), Vec(0.1,0,0)],
+        [Vec(50*Math.SQRT2,-100,0), Vec(0.1,0,0)],
         4,
         matrixStack(toMatrix(obj.transforms), RotateX(Math.PI/2), RotateY(Math.PI/4))
       )
