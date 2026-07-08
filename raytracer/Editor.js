@@ -6,6 +6,10 @@ import { Lathe, Point } from './geometry.js'
 import { Offset, Rotate, Scaling, Transforms } from './geometry.js'
 import { add, cross, diff, EPSILON, mag, matrixStack } from './math.js'
 import { RotateX, RotateY, Vec } from './math.js'
+import { Toolbar } from './Toolbar.js'
+import { LatheEditable } from './geometry.js'
+
+let creatables = ['box', 'cylinder', 'cone', 'composite', 'instance']
 
 export function Editor() {
   const [mode, setMode] = React.useState('pan')
@@ -61,6 +65,39 @@ export function Editor() {
     scene.update?.()
   })
   useEvent(app, 'scene_modified', forceUpdate)
+  useEvent(app, 'edit_level', (arg) => {
+    if (arg == 'composite') {
+      if (selected?.kind != 'composite' && selected?.kind != 'lathe') return
+      for (let e of creatables)
+        app.enable('create_object', e, selected.kind != 'lathe')
+      app.enable('create_object', 'sphere', false)
+      app.enable('edit_level', 'scene', true)
+      app.enable('edit_level', 'composite', false)
+      app.breadcrumbs = [selected.name]
+      app.trigger('select_object', null)
+      if (selected?.kind == 'composite')
+        app.trigger('update_scene', selected)
+      if (selected?.kind == 'lathe')
+        app.trigger('update_scene', LatheEditable(selected))
+    } else {
+      app.enable('create_object', 'sphere', true)
+      for (let e of creatables)
+        app.enable('create_object', e, arg == 'scene')
+    }
+  })
+  useEvent(app, 'rename_object', () => {
+    if (!selected) return
+    let name = prompt(`Rename object "${selected.name}"`)
+    if (name) selected.name = name
+    app.trigger('scene_modified')
+  })
+  useEvent(app, 'delete_object', () => {
+    if (!selected) return
+    let decision = confirm(`Delete object "${selected.name}"`)
+    let index = scene.children.findIndex(e => e == selected)
+    if (decision && index >= 0) scene.children.splice(index, 1)
+    app.trigger('scene_modified')
+  })
 
   function screenToSpace({ movementX, movementY }) {
     switch (view) {
@@ -136,54 +173,17 @@ export function Editor() {
   return el(
     'div',
     { style: { display: 'grid', gridTemplateRows: 'auto auto' } },
-    el('style', {},
-      `svg.canvas-3d :is(path, ellipse, rect) {
+    el('style', {}, `
+      svg.canvas-3d :is(path, ellipse, rect) {
         fill: none;
         stroke-width: 0.5px;
         stroke: #000;
       }
       svg.canvas-3d path.mesh { stroke-linejoin: bevel; stroke-width: 0.125px }
       svg.canvas-3d :is(path, ellipse, rect).active { stroke-width: 2px }
-      svg.canvas-3d path.crosshair { stroke-dasharray: 2 2; stroke-width: 1px }
-      editor-toolbar { display:flex; border-bottom:2px solid black; padding:4px}
-      editor-toolbar span { margin-left: auto; }
-      editor-toolbar button {
-        apperance: none;
-        border: 2px solid black;
-        background: #fff;
-        min-width: 30px;
-        margin-right: -2px;
-        font-size: 15px;
-        padding: 2px 6px;
-      }
-      editor-toolbar button:active, editor-toolbar button[active] {
-        color: #fff;
-        background: #000;
-      }
-      editor-toolbar button[disabled] { color: #000; position: relative }
-      editor-toolbar button[disabled]:before {
-        content: ''; position: absolute; inset: 0;
-        background: repeating-linear-gradient(
-          45deg, #fff0, #fff0 1.414px, #fff 1.414px, #fff 2.818px
-        );
-      }`
+      svg.canvas-3d path.crosshair { stroke-dasharray: 2 2; stroke-width: 1px }`
     ),
-    el('editor-toolbar', {},
-      el(ToolButton, { event: 'scene_view', arg: 'side', toggle: 1 }, 'X'),
-      el(ToolButton, { event: 'scene_view', arg: 'top', toggle: 1 }, 'Y'),
-      el(ToolButton, { event: 'scene_view', arg: 'front', toggle: 1 }, 'Z'),
-      el(ToolButton, { event: 'zoom', arg: 1/1.5 }, '-'),
-      el(ToolButton, { event: 'zoom', arg: 1.5 }, '+'),
-      el(ToolButton, { event: 'reset_view' }, '='),
-      el('span', {}),
-      el(ToolButton, { event: 'create_object', arg: 'point' }, '⊕'),
-      el(ToolButton, { event: 'focus_selection' }, '⌾'),
-      el(ToolButton, { event:'edit_level', arg:'composite' }, '↓'),
-      el(ToolButton, { event:'edit_level', arg:'scene' }, '⏏'),
-      el('span', {}),
-      el(ToolButton, { event: 'editor_mode', arg: 'pan', toggle: 1 }, 'Pan'),
-      el(ToolButton, { event: 'editor_mode', arg: 'move', toggle: 1 }, 'Move'),
-    ),
+    el(Toolbar, {}),
     el('svg',
       {
         className: 'canvas-3d',
@@ -314,15 +314,4 @@ function compilePreviewObject(obj, entities) {
     )
   }
   return compileObject(obj, entities)
-}
-
-function ToolButton({ event, arg, toggle, children }) {
-  let forceUpdate = useForceUpdate()
-  useEvent(app, 'app:menuability', forceUpdate)
-  return el('button', {
-    style: children.length == 1 ? { fontWeight: 'bold' } : undefined,
-    onClick: () => app.trigger(event, arg),
-    disabled: app.isEnabled(event, arg) ? undefined : true,
-    active: (toggle && app.menuState[event] == arg) ? 'true' : undefined,
-  }, children)
 }
