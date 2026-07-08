@@ -65,6 +65,8 @@ export function Editor() {
     scene.update?.()
   })
   useEvent(app, 'scene_modified', forceUpdate)
+  useEvent(app, 'toggle_axis', forceUpdate)
+  useEvent(app, 'toggle_crosshair', forceUpdate)
   useEvent(app, 'edit_level', (arg) => {
     if (arg == 'composite') {
       if (selected?.kind != 'composite' && selected?.kind != 'lathe') return
@@ -216,11 +218,11 @@ export function Editor() {
         },
         onMouseUp: () => { setStartPos(null) }
       },
-      el('path', {
+      !app.menuState['toggle_crosshair'] ? null : el('path', {
         className: 'crosshair',
         d: `M${x(Vec(ox,oy,oz))-11},${y(Vec(ox,oy,oz))} l 22,0 m -11,-11 l 0,22`
       }),
-      el('path', {
+      !app.menuState['toggle_axis'] ? null : el('path', {
         className: 'crosshair',
         d: `M${x(Vec(0,0,0))-1000},${y(Vec(0,0,0))}l 2000,0m-1000,-1000 l0,2000`
       }),

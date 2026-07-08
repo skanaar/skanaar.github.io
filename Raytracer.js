@@ -44,6 +44,8 @@ app.addMenu(
   { title: 'Zoom in', event: 'zoom', arg: 1.5, cmd: '.' },
   { title: 'Reset view', event: 'reset_view' },
   { title: 'Focus selection', event: 'focus_selection' },
+  { title: 'Axis', event: 'toggle_axis', arg: true },
+  { title: 'Crosshair', event: 'toggle_crosshair', arg: true },
   { title: null },
   { title: 'Render', event: 'render', cmd: 'r' },
   { title: 'Auto rerender', event: 'toggle_autorender', arg: true },
@@ -61,6 +63,8 @@ app.addMenu('Window',
   { title: 'Properties', event: 'app:show_child_window', arg: 'Properties' }
 )
 app.check('scene_view', 'front')
+app.check('toggle_axis', true)
+app.check('toggle_crosshair', true)
 app.check('toggle_reflections', true)
 app.check('toggle_autorender', true)
 app.check('editor_mode', 'pan')
@@ -143,6 +147,12 @@ function RayTracer() {
     app.enable('edit_level', 'composite', true)
     app.breadcrumbs = []
     app.trigger('update_scene', app.scene)
+  })
+  useEvent(app, 'toggle_axis', () => {
+    app.check('toggle_axis', !app.menuState['toggle_axis'])
+  })
+  useEvent(app, 'toggle_crosshair', () => {
+    app.check('toggle_crosshair', !app.menuState['toggle_crosshair'])
   })
   useEvent(app, 'toggle_reflections', () => {
     app.check('toggle_reflections', !app.menuState['toggle_reflections'])
