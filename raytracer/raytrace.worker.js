@@ -26,6 +26,9 @@ function raytrace({ area, totalArea, size, maxDepth, scene }) {
   let camera = scene.find(e => e.kind === 'camera') ?? Camera([Offset(0,0,256)])
   let lights = scene.filter(e => e.kind === 'light')
 
+  let spheres = scene.filter(e => e.kind === 'sphere').map(PrecomputedSphere)
+  let meshes = scene.filter(e => e.kind === 'mesh').map(PrecomputedMesh)
+
   let imgdata = new ImageData(width, height)
 
   let camMatrix = toMatrix(camera.transforms)
@@ -41,7 +44,7 @@ function raytrace({ area, totalArea, size, maxDepth, scene }) {
         mult((j+y)/totalArea.height, camUp)
       ))
       let ray = norm(diff(screenPoint, camPos))
-      let hit = trace_ray(camPos, ray, maxDepth, scene)
+      let hit = trace_ray(camPos, ray, maxDepth, spheres, meshes)
 
       // hit patch illumination
       let bright = 0
@@ -50,7 +53,7 @@ function raytrace({ area, totalArea, size, maxDepth, scene }) {
           let light_vector = diff(hit.point, light.point)
           let light_dist = mag(light_vector)
           let light_dir = div(light_vector, light_dist)
-          let beam = trace_ray(light.point, light_dir, 0, scene)
+          let beam = trace_ray(light.point, light_dir, 0, spheres, meshes)
           if (beam.depth > light_dist - EPSILON)
             bright += lightBrightness(hit.point, hit.normal, light)
         }
@@ -75,7 +78,36 @@ function materialColor(hit) {
   return 1
 }
 
-function trace_ray(camera, ray, depthBudget, scene) {
+// Precompute the ray-invariant terms once per scene so the per-ray hot loop
+// only touches values that actually depend on the ray.
+
+function PrecomputedSphere({ center, r, material }) {
+  return {
+    center, r, material,
+    boundC: dot(center, center) - r * r,
+  }
+}
+
+function PrecomputedMesh({ polys, center, radius, material }) {
+  return {
+    center, material,
+    boundC: dot(center, center) - radius * radius,
+    polys: polys.map(PrecomputedPoly),
+  }
+}
+
+function PrecomputedPoly({ a, b, c, normal }) {
+  return {
+    a, b, c, normal,
+    planeD: dot(a, normal),
+    // inside-test edges (constant per triangle): crossDiff(vertex pair, normal)
+    edgeA: crossDiff(c, b, normal),
+    edgeB: crossDiff(a, c, normal),
+    edgeC: crossDiff(b, a, normal),
+  }
+}
+
+function trace_ray(camera, ray, depthBudget, spheres, meshes) {
   let hit = {
     depth: FAR_AWAY,
     normal: Vec(0.0,0.0,0.0),
@@ -83,56 +115,63 @@ function trace_ray(camera, ray, depthBudget, scene) {
     material: 'diffuse',
   }
 
+  // Ray is unit length, so the quadratic's `a` term is 1. These two dot
+  // products are constant across every object for this ray.
+  let camSq = dot(camera, camera)
+  let rayDotCamera = dot(ray, camera)
+
   // sphere intersections
-  for (let { center, r, material } of scene.filter(e => e.kind == 'sphere')) {
-    let a = dot(ray, ray)
-    let b = 2 * dot(ray, diff(camera, center))
-    let c = dot(center,center) + dot(camera,camera) - 2*dot(center,camera) - r*r
-    let disc = b * b - 4 * a * c
+  for (let s of spheres) {
+    let center = s.center
+    let b = 2 * (rayDotCamera - dot(ray, center))
+    let c = s.boundC + camSq - 2 * dot(center, camera)
+    let disc = b * b - 4 * c
     if (disc < 0) continue
-    let t = (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)
+    let t = (-b - Math.sqrt(disc)) / 2
     if (t > hit.depth) continue
     if (t < EPSILON) continue // no hits behind camera
     let p = add(camera, mult(t, ray))
-    let normal = mult(1 / r, diff(p, center))
-    hit = { depth: t, normal, point: p, material }
+    let normal = mult(1 / s.r, diff(p, center))
+    hit = { depth: t, normal, point: p, material: s.material }
   }
 
-  const meshes = scene.filter(e => e.kind == 'mesh')
-  for (let { polys, center, radius:r, material } of meshes) {
+  for (let m of meshes) {
     // bounding sphere test
-    let a = dot(ray, ray)
-    let b = 2 * dot(ray, diff(camera, center))
-    let c = dot(center,center) + dot(camera,camera) - 2*dot(center,camera) - r*r
-    let disc = b * b - 4 * a * c
-    if (disc < 0) continue
+    let center = m.center
+    let b = 2 * (rayDotCamera - dot(ray, center))
+    let c = m.boundC + camSq - 2 * dot(center, camera)
+    if (b * b - 4 * c < 0) continue
 
     // triangle intersections
-    for (let triangle of polys) {
-      let { a, b, c, normal } = triangle
-      let maxDepth = hit.depth
-      let denominator = dot(ray, normal)
+    let polys = m.polys
+    let material = m.material
+    for (let i = 0; i < polys.length; i++) {
+      let tri = polys[i]
+      let n = tri.normal
+      let denominator = dot(ray, n)
       // expect denominator to be negative (with margin)
       if (denominator > -EPSILON) continue
-      let t = (dot(triangle.a, normal) - dot(camera, normal)) / denominator
-      if (t > maxDepth) continue
+      let t = (tri.planeD - dot(camera, n)) / denominator
+      if (t > hit.depth) continue
       if (t < EPSILON) continue // no hits behind camera
-      const p = add(camera, mult(t, ray))
-      // is p outside triangle?
-      let to_a = crossDiff(c, b, normal)
-      if (dot(diff(p, b), to_a) < 0.0) continue
-      let to_b = crossDiff(a, c, normal)
-      if (dot(diff(p, c), to_b) < 0.0) continue
-      let to_c = crossDiff(b, a, normal)
-      if (dot(diff(p, a), to_c) < 0.0) continue
+      let px = camera.x + t*ray.x
+      let py = camera.y + t*ray.y
+      let pz = camera.z + t*ray.z
+      // is p outside triangle? (edges precomputed on the poly)
+      let vb = tri.b, ea = tri.edgeA
+      if ((px-vb.x)*ea.x + (py-vb.y)*ea.y + (pz-vb.z)*ea.z < 0.0) continue
+      let vc = tri.c, eb = tri.edgeB
+      if ((px-vc.x)*eb.x + (py-vc.y)*eb.y + (pz-vc.z)*eb.z < 0.0) continue
+      let va = tri.a, ec = tri.edgeC
+      if ((px-va.x)*ec.x + (py-va.y)*ec.y + (pz-va.z)*ec.z < 0.0) continue
 
-      hit = { depth: t, normal: triangle.normal, point: p, material }
+      hit = { depth: t, normal: n, point: Vec(px,py,pz), material }
     }
   }
 
   if (hit.material === 'mirror' && depthBudget > 0) {
     let reflection_ray = add(ray, mult(-2*dot(hit.normal, ray), hit.normal))
-    let nextHit = trace_ray(hit.point, reflection_ray, depthBudget - 1, scene)
+    let nextHit = trace_ray(hit.point, reflection_ray, depthBudget - 1, spheres, meshes)
     hit = { depth: hit.depth, normal: nextHit.normal, point: nextHit.point }
   }
 
