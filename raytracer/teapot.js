@@ -309,7 +309,7 @@ const vertexData =
 
 const vertices = vertexData.split('\n').map(e => {
   const tokens = e.split(/ +/)
-  return { x: +tokens.at(-3), y: +tokens.at(-2), z: +tokens.at(-1) }
+  return { x: 50*+tokens.at(-3), y: -50*+tokens.at(-1), z: 50*+tokens.at(-2) }
 })
 
 const patchData =

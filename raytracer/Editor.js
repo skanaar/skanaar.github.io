@@ -21,7 +21,7 @@ export function Editor() {
   const [scene, setScene] = React.useState(app.scene)
   const forceUpdate = useForceUpdate()
   const [view, setView] = React.useState('front')
-  const [zoom, setZoom] = React.useState(0.5)
+  const [zoom, setZoom] = React.useState(0.75)
   const [selected, setSelected] = React.useState(null)
 
   useEvent(app, 'scene_view', (view) => {
@@ -38,7 +38,8 @@ export function Editor() {
     setZoom(100/Math.max(50, compiled.radius ?? 100))
     setOffset(compiled.center)
   })
-  useEvent(app, 'edit_level', () => setOffset(Vec(0,0,0)))
+  useEvent(app, 'edit_object', () => setOffset(Vec(0,0,0)))
+  useEvent(app, 'edit_scene', () => setOffset(Vec(0,0,0)))
   useEvent(app, 'editor_mode', (mode) => setMode(mode))
   useEvent(app, 'editor_mode', (mode) => app.check('editor_mode', mode))
   useEvent(app, 'zoom', (factor) => setZoom(zoom * factor))
@@ -67,27 +68,33 @@ export function Editor() {
   useEvent(app, 'scene_modified', forceUpdate)
   useEvent(app, 'toggle_axis', forceUpdate)
   useEvent(app, 'toggle_crosshair', forceUpdate)
-  useEvent(app, 'edit_level', (arg) => {
-    if (arg == 'composite') {
-      if (!['composite', 'lathe', 'patches'].includes(selected?.kind)) return
-      for (let e of creatables)
-        app.enable('create_object', e,
-          selected.kind != 'lathe' && selected.kind != 'patches'
-        )
-      app.enable('create_object', 'sphere', false)
-      app.enable('edit_level', 'scene', true)
-      app.enable('edit_level', 'composite', false)
-      app.breadcrumbs = [selected.name]
-      app.trigger('select_object', null)
-      if (selected?.kind == 'patches')
-        app.trigger('update_scene', PatchesEditable(selected))
-      if (selected?.kind == 'lathe')
-        app.trigger('update_scene', LatheEditable(selected))
-    } else {
-      app.enable('create_object', 'sphere', true)
-      for (let e of creatables)
-        app.enable('create_object', e, arg == 'scene')
-    }
+  useEvent(app, 'edit_object', () => {
+    if (!['composite', 'lathe', 'patches'].includes(selected?.kind)) return
+    for (let e of creatables)
+      app.enable('create_object', e, selected.kind == 'composite')
+    app.enable('create_object', 'light', false)
+    app.enable('create_object', 'sphere', false)
+    app.enable('edit_object', null, false)
+    app.enable('edit_scene', null, true)
+    app.breadcrumbs = [selected.name]
+    app.trigger('select_object', null)
+    if (selected?.kind == 'patches')
+      app.trigger('update_scene', PatchesEditable(selected))
+    else if (selected?.kind == 'lathe')
+      app.trigger('update_scene', LatheEditable(selected))
+    else if (selected?.kind == 'composite')
+      app.trigger('update_scene', selected)
+    app.trigger('select_object', null)
+  })
+  useEvent(app, 'edit_scene', () => {
+    app.enable('create_object', 'sphere', true)
+    app.enable('create_object', 'light', true)
+    for (let e of creatables) app.enable('create_object', e, true)
+    app.enable('edit_object', null, true)
+    app.enable('edit_scene', null, false)
+    app.breadcrumbs = []
+    app.trigger('update_scene', app.scene)
+    app.trigger('select_object', null)
   })
   useEvent(app, 'rename_object', () => {
     if (!selected) return
@@ -104,11 +111,7 @@ export function Editor() {
   })
 
   function screenToSpace({ movementX, movementY }) {
-    switch (view) {
-      case 'front': return Vec(movementX/zoom, movementY/zoom, 0)
-      case 'side': return Vec(0, movementY/zoom, movementX/zoom)
-      case 'top': return Vec(movementX/zoom, 0, movementY/zoom)
-    }
+    return viewDelta(Math.round(movementX/zoom), Math.round(movementY / zoom))
   }
 
   function viewDelta(dx, dy) {
@@ -120,11 +123,11 @@ export function Editor() {
   }
 
   function viewRotation(rot) {
-    let k = 0.5
+    let k = 1
     switch (view) {
-      case 'front': return Rotate(0, rot*k, 0)
+      case 'front': return Rotate(0, 0, rot*k)
       case 'side': return Rotate(rot*k, 0, 0)
-      case 'top': return Rotate(0, 0, rot*k)
+      case 'top': return Rotate(0, rot*k, 0)
     }
   }
 
@@ -300,7 +303,8 @@ function create(kind, pos, selected, scene) {
     case 'instance':
       let ref = isMeshable(selected?.kind) ? null : (selected?.name ?? null)
       return Instance('instance', ref, withSize(1))
-    case 'point': return Point(scene.children.length+1, withSize(1).offset)
+    case 'point':
+      return Point(`Point ${scene.children.length + 1}`, withSize(1).offset)
   }
 }
 

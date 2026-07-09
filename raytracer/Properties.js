@@ -34,6 +34,7 @@ export function Properties() {
     selected.material ? el(MaterialField, { object: selected }) : null,
     selected.kind == "light" ? el(LightField, { light: selected }) : null,
     selected.kind == "lathe" ? el(SegmentsField, { object: selected }) : null,
+    selected.kind == "patches" ? el(SegmentsField, { object: selected }) : null,
     selected.kind == "heightmap"
       ? el(TerrainFields, { object: selected })
       : null,

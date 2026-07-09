@@ -17,8 +17,8 @@ app.addMenu(
 )
 app.addMenu(
   'Edit',
-  { title: 'Edit composite', event: 'edit_level', arg: 'composite', cmd: 'e' },
-  { title: 'Edit scene', event: 'edit_level', arg: 'scene' },
+  { title: 'Edit object', event: 'edit_object', cmd: 'e' },
+  { title: 'Edit scene', event: 'edit_scene' },
   { title: 'Rename selected...', event: 'rename_object' },
   { title: 'Delete selected', event: 'delete_object' },
 )
@@ -68,8 +68,8 @@ app.check('toggle_crosshair', true)
 app.check('toggle_reflections', true)
 app.check('toggle_autorender', true)
 app.check('editor_mode', 'pan')
-app.enable('edit_level', 'composite', false)
-app.enable('edit_level', 'scene', false)
+app.enable('edit_object', null, false)
+app.enable('edit_scene', null, false)
 app.enable('rename_object', null, false)
 app.enable('delete_object', null, false)
 app.enable('focus_selection', null, false)
@@ -122,8 +122,8 @@ function RayTracer() {
 
   useEvent(app, 'select_object', (obj) => {
     app.enable(
-      'edit_level',
-      'composite',
+      'edit_object',
+      null,
       obj?.kind == 'composite' || obj?.kind == 'lathe' || obj?.kind == 'patches'
     )
     app.enable('rename_object', null, !!obj)
@@ -138,14 +138,6 @@ function RayTracer() {
       island: sceneIsland(),
       mushroom: sceneMushroom(),
     }[arg]
-    app.trigger('update_scene', app.scene)
-  })
-  useEvent(app, 'edit_level', (arg) => {
-    app.enable('create_object', 'light', arg == 'scene')
-    if (arg != 'scene') return
-    app.enable('edit_level', 'scene', false)
-    app.enable('edit_level', 'composite', true)
-    app.breadcrumbs = []
     app.trigger('update_scene', app.scene)
   })
   useEvent(app, 'toggle_axis', () => {

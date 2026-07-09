@@ -30,7 +30,7 @@ export function sceneTeapot() {
     BezierPatchSet('teapot',
       teapotPatches,
       3,
-      Transforms(Offset(-8,150,0), Rotate(90, 0, 0.5), Scaling(45,45,45))
+      Transforms(Offset(-8,150,0), Rotate(0, 0, 0), Scaling(1,1,1))
     ),
     Lathe('column', 16,
       [

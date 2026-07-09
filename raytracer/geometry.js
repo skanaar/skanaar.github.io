@@ -5,7 +5,8 @@ import { Noise } from './noise.js'
 
 export function Offset(x,y,z) { return { x, y, z } }
 export function Rotate(x,y,z) { return { x, y, z } }
-export function Scaling(x,y,z) { return { x, y, z } }
+export function Scaling(x, y, z) { return { x: dec(x), y: dec(y), z: dec(z), } }
+function dec(x) { return +(x.toFixed(2)) }
 export function toMatrix({ offset, rotate, scale }) {
   return matrixStack(
     Translate(offset.x, offset.y, offset.z),
@@ -24,8 +25,8 @@ export function Scene(children) {
   return { kind: 'scene', children }
 }
 
-export function Point(i, pos) {
-  return { kind: 'point', name: `Point ${i}`, transforms: Transforms(pos) }
+export function Point(name, pos) {
+  return { kind: 'point', name, transforms: Transforms(pos) }
 }
 
 export function Camera(transforms) {
@@ -73,7 +74,7 @@ export function Lathe(name, res, path, transforms) {
 
 export function LatheEditable(lathe) {
   let polys = latheMesh(lathe.path, lathe.res, Identity())
-  let points = lathe.path.map((p, i) => Point(i + 1, p))
+  let points = lathe.path.map((p, i) => Point(`Point ${i+1}`, p))
   let children = [Mesh(lathe.material, polys, { renderOnly: true }), ...points]
   return {
     kind: 'mesh',
@@ -98,7 +99,7 @@ export function LatheEditable(lathe) {
 export function PatchesEditable(obj) {
   let polys = bezierMesh(obj.patches, obj.res, Identity())
   let points = obj.patches
-    .flatMap((patch, i) => patch.map((p, j) => Point(i * 16 + j + 1, p)))
+    .flatMap((patch, i) => patch.map((p, j) => Point(`Patch ${i} p${j}`, p)))
   let children = [Mesh(obj.material, polys, { renderOnly: true }), ...points]
   return {
     kind: 'mesh',
