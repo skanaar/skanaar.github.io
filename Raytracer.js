@@ -124,7 +124,7 @@ function RayTracer() {
     app.enable(
       'edit_level',
       'composite',
-      obj?.kind == 'composite' || obj?.kind == 'lathe'
+      obj?.kind == 'composite' || obj?.kind == 'lathe' || obj?.kind == 'patches'
     )
     app.enable('rename_object', null, !!obj)
     app.enable('delete_object', null, !!obj)

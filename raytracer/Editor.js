@@ -7,7 +7,7 @@ import { Offset, Rotate, Scaling, Transforms } from './geometry.js'
 import { add, cross, diff, EPSILON, mag, matrixStack } from './math.js'
 import { RotateX, RotateY, Vec } from './math.js'
 import { Toolbar } from './Toolbar.js'
-import { LatheEditable } from './geometry.js'
+import { LatheEditable, PatchesEditable } from './geometry.js'
 
 let creatables = ['box', 'cylinder', 'cone', 'composite', 'instance']
 
@@ -69,16 +69,18 @@ export function Editor() {
   useEvent(app, 'toggle_crosshair', forceUpdate)
   useEvent(app, 'edit_level', (arg) => {
     if (arg == 'composite') {
-      if (selected?.kind != 'composite' && selected?.kind != 'lathe') return
+      if (!['composite', 'lathe', 'patches'].includes(selected?.kind)) return
       for (let e of creatables)
-        app.enable('create_object', e, selected.kind != 'lathe')
+        app.enable('create_object', e,
+          selected.kind != 'lathe' && selected.kind != 'patches'
+        )
       app.enable('create_object', 'sphere', false)
       app.enable('edit_level', 'scene', true)
       app.enable('edit_level', 'composite', false)
       app.breadcrumbs = [selected.name]
       app.trigger('select_object', null)
-      if (selected?.kind == 'composite')
-        app.trigger('update_scene', selected)
+      if (selected?.kind == 'patches')
+        app.trigger('update_scene', PatchesEditable(selected))
       if (selected?.kind == 'lathe')
         app.trigger('update_scene', LatheEditable(selected))
     } else {
