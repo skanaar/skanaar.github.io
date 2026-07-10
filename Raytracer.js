@@ -29,6 +29,7 @@ app.addMenu(
   { title: 'Box', event: 'create_object', arg: 'box' },
   { title: 'Cylinder', event: 'create_object', arg: 'cylinder' },
   { title: 'Cone', event: 'create_object', arg: 'cone' },
+  { title: 'Tree', event: 'create_object', arg: 'tree' },
   { title: 'Composite', event: 'create_object', arg: 'composite' },
   { title: 'Instance', event: 'create_object', arg: 'instance' },
   { title: null },

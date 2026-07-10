@@ -12,6 +12,7 @@ import {
   Composite,
   Transforms,
   Scene,
+  Tree,
 } from './geometry.js'
 import { Vec } from './math.js'
 import { teapotPatches } from './teapot.js'
@@ -62,13 +63,17 @@ export function sceneIsland() {
       { res: 16, size: 256, isola: 1, zoom: 10, persistence: 0.5, octaves: 4 },
       Transforms(Offset(0,72,0), Rotate(180,0,0), Scaling(200, 50, 200))
     ),
+    Tree('tree',
+      { randomSeed: 8 },
+      Transforms(Offset(-53, 73, 56), Rotate(0, 0, 0), Scaling(0.4, 0.4, 0.4))
+    ),
     Composite('temple', [
       Lathe('p1', 12, pillar, Transforms(Offset(40,0,0), Rotate(0,0,0))),
       Lathe('roof', 6,
         [Vec(0,-20,0),Vec(55,-10,0),Vec(55,0,0)],
         Transforms(Offset(0,-80,0))
       ),
-    ], Transforms(Offset(0,40,0), Scaling(1,1.5,1)))
+    ], Transforms(Offset(0,40,0), Rotate(1,1.5,1)))
   ])
 }
 

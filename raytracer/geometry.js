@@ -149,6 +149,24 @@ export function HeightMap(name, opts, transforms) {
   }
 }
 
+export function Tree(name, opts, transforms) {
+  let {
+    branches = 3,
+    trunkWidth = 28,
+    branchLength = 0.75,
+    iterations = 4,
+    branchAngle = 45,
+    angleRandomness = 20,
+    randomSeed = 1,
+  } = opts
+  return {
+    kind: 'tree', name, material: 'diffuse',
+    branches, trunkWidth, branchLength,
+    iterations, branchAngle, angleRandomness, randomSeed,
+    transforms,
+  }
+}
+
 export function compileObject(obj, objects) {
   switch (obj.kind) {
     case 'mesh': return obj
@@ -183,6 +201,10 @@ export function compileObject(obj, objects) {
     case 'heightmap': return Mesh(
       obj.material,
       heightMapMesh(obj, toMatrix(obj.transforms))
+    )
+    case 'tree': return Mesh(
+      obj.material,
+      treeMesh(obj, toMatrix(obj.transforms))
     )
     case 'composite': {
       let mesh = obj.children.flatMap(e => compileObject(e, obj.children).polys)
@@ -329,6 +351,73 @@ export function bezierLatheMesh(path, resU, resV, matrix) {
       mesh.push(Polygon(vertex(i,j), vertex(i+1,j-1), vertex(i,j-1)))
     }
   }
+  return mesh.map(p => transformTriangle(p, matrix))
+}
+
+// Deterministic PRNG (mulberry32) so a given randomSeed always yields the
+// same tree.
+function seededRandom(seed) {
+  let a = seed >>> 0
+  return () => {
+    a = (a + 0x6D2B79F5) | 0
+    let t = Math.imul(a ^ (a >>> 15), 1 | a)
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+}
+
+function perpendicularAxes(dir) {
+  let ref = Math.abs(dir.z) < 0.9 ? Vec(0,0,1) : Vec(0,1,0)
+  let u = norm(cross(ref, dir))
+  let v = cross(dir, u)
+  return [u, v]
+}
+
+export function treeMesh(opts, matrix) {
+  let {
+    branches, trunkWidth, branchLength,
+    iterations, branchAngle, angleRandomness, randomSeed,
+  } = opts
+  let trunkLength = 100
+  let trunkTop = trunkWidth / 2
+  let res = 6
+  let taper = 0.5
+  let angle = branchAngle * Math.PI / 180
+  let rand = seededRandom(randomSeed)
+  let jitter = () => (rand() * 2 - 1) * angleRandomness * Math.PI / 180
+  let mesh = []
+
+  function frustum(base, top, dir, rBase, rTop) {
+    let [u, v] = perpendicularAxes(dir)
+    let ring = (center, r, i) => {
+      let a = 2 * Math.PI * i / res
+      return add(center, mult(r, add(mult(Math.cos(a),u), mult(Math.sin(a),v))))
+    }
+    for (let i = 0; i < res; i++) {
+      let b0 = ring(base, rBase, i), b1 = ring(base, rBase, i+1)
+      let t0 = ring(top, rTop, i), t1 = ring(top, rTop, i+1)
+      mesh.push(Polygon(b0, t0, t1))
+      mesh.push(Polygon(b0, t1, b1))
+    }
+  }
+
+  function branch(base, dir, length, rBase, rTop, depth) {
+    let top = add(base, mult(length, dir))
+    frustum(base, top, dir, rBase, rTop)
+    if (depth <= 0) return
+    let [u, v] = perpendicularAxes(dir)
+    for (let k = 0; k < branches; k++) {
+      let az = 2 * Math.PI * k / branches + jitter()
+      let tilt = angle + jitter()
+      let side = add(mult(Math.cos(az), u), mult(Math.sin(az), v))
+      let childDir = norm(
+        add(mult(Math.cos(tilt), dir), mult(Math.sin(tilt), side))
+      )
+      branch(top, childDir, length * branchLength, rTop, rTop * taper, depth-1)
+    }
+  }
+
+  branch(Vec(0,0,0), Vec(0,-1,0), trunkLength, trunkWidth, trunkTop, iterations)
   return mesh.map(p => transformTriangle(p, matrix))
 }
 

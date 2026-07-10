@@ -2,14 +2,14 @@ import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app } from '../Raytracer.js'
 import { compileObject, latheMesh, toMatrix, Mesh } from './geometry.js'
 import { Camera, Box, Light, Sphere, Composite, Instance } from './geometry.js'
-import { Lathe, Point } from './geometry.js'
+import { Lathe, Point, Tree } from './geometry.js'
 import { Offset, Rotate, Scaling, Transforms } from './geometry.js'
 import { add, cross, diff, EPSILON, mag, matrixStack } from './math.js'
 import { RotateX, RotateY, Vec } from './math.js'
 import { Toolbar } from './Toolbar.js'
 import { LatheEditable, PatchesEditable } from './geometry.js'
 
-let creatables = ['box', 'cylinder', 'cone', 'composite', 'instance']
+let creatables = ['box', 'cylinder', 'cone', 'tree', 'composite', 'instance']
 
 export function Editor() {
   const [mode, setMode] = React.useState('pan')
@@ -143,6 +143,11 @@ export function Editor() {
     function onKeyDown(e) {
       if (!selected) return
       if (/^(input|textarea|select)$/i.test(e.target.tagName)) return
+      if (e.key == 'Delete' || e.key == 'Backspace') {
+        e.preventDefault()
+        app.trigger('delete_object')
+        return
+      }
       let step = e.shiftKey ? 10 : 1
       let delta = {
         ArrowLeft: viewDelta(-step, 0),
@@ -298,6 +303,7 @@ function create(kind, pos, selected, scene) {
     case 'cone':
       return Lathe('cone',16,[Vec(0,-l,0),Vec(l,l,0),Vec(0,l,0)], withSize(1))
     case 'sphere': return Sphere('sphere', 'diffuse', withSize(30))
+    case 'tree': return Tree('tree', {}, withSize(1))
     case 'composite':
       return Composite('composite', [create('box', pos)], withSize(1))
     case 'instance':

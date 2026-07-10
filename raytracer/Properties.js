@@ -38,6 +38,7 @@ export function Properties() {
     selected.kind == "heightmap"
       ? el(TerrainFields, { object: selected })
       : null,
+    selected.kind == "tree" ? el(TreeFields, { object: selected }) : null,
     selected.kind == "instance"
       ? el(InstanceField, { instance: selected, objects })
       : null,
@@ -63,7 +64,7 @@ export function TransformInput({ transform: tr, name, step }) {
   );
 }
 
-function NumericInput({ field, object, range }) {
+function NumericInput({ field, object, range, step }) {
   const update = (event) => {
     object[field] = +event.target.value;
     app.trigger("scene_modified");
@@ -74,7 +75,7 @@ function NumericInput({ field, object, range }) {
     onChange: update,
     min: range?.[0],
     max: range?.[1],
-    step: range ? (range[1] - range[0] < 10 ? 0.1 : 1) : undefined,
+    step: step ?? (range ? (range[1] - range[0] < 10 ? 0.1 : 1) : undefined),
   });
 }
 
@@ -142,6 +143,29 @@ function MaterialField({ object }) {
       el("option", {}, "dark"),
       el("option", {}, "mirror"),
     ),
+  );
+}
+
+function TreeFields({ object }) {
+  return el(
+    React.Fragment,
+    {},
+    el("span", {}, "Branching"),
+    el(NumericInput, { field: "branches", object, range: [1, 6], step: 1 }),
+    el("span", {}, "Iterations"),
+    el(NumericInput, { field: "iterations", object, range: [1, 5], step: 1 }),
+    el("span", {}, "Branch"),
+    el(NumericInput, { field: "branchLength", object, range: [0, 2] }),
+    el("span", {}, "Trunk"),
+    el(NumericInput, { field: "trunkWidth", object, range: [0, 100] }),
+    el("span", {}, "Angle"),
+    el(NumericInput, { field: "branchAngle", object, range: [0, 180] }),
+    el("span", {}, "Angle rnd"),
+    el(NumericInput, { field: "angleRandomness", object, range: [0, 90] }),
+    el("span", {}, "Seed"),
+    el(NumericInput, { field: "randomSeed", object, range: [0, 9999] }),
+    el("div", {}),
+    el("div", {}),
   );
 }
 
