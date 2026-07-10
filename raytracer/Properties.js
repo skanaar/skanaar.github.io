@@ -164,8 +164,8 @@ function TreeFields({ object }) {
     el(NumericInput, { field: "angleRandomness", object, range: [0, 90] }),
     el("span", {}, "Seed"),
     el(NumericInput, { field: "randomSeed", object, range: [0, 9999] }),
-    el("div", {}),
-    el("div", {}),
+    el("span", {}, "Leaves"),
+    el(NumericInput, { field: "leafCount", object, range: [0, 6], step: 1 }),
   );
 }
 

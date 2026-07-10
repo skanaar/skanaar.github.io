@@ -152,6 +152,7 @@ export function HeightMap(name, opts, transforms) {
 export function Tree(name, opts, transforms) {
   let {
     branches = 3,
+    leafCount = 3,
     trunkWidth = 28,
     branchLength = 0.75,
     iterations = 4,
@@ -161,7 +162,7 @@ export function Tree(name, opts, transforms) {
   } = opts
   return {
     kind: 'tree', name, material: 'diffuse',
-    branches, trunkWidth, branchLength,
+    branches, trunkWidth, branchLength, leafCount,
     iterations, branchAngle, angleRandomness, randomSeed,
     transforms,
   }
@@ -354,8 +355,7 @@ export function bezierLatheMesh(path, resU, resV, matrix) {
   return mesh.map(p => transformTriangle(p, matrix))
 }
 
-// Deterministic PRNG (mulberry32) so a given randomSeed always yields the
-// same tree.
+// Deterministic PRNG (mulberry32)
 function seededRandom(seed) {
   let a = seed >>> 0
   return () => {
@@ -375,7 +375,7 @@ function perpendicularAxes(dir) {
 
 export function treeMesh(opts, matrix) {
   let {
-    branches, trunkWidth, branchLength,
+    branches, trunkWidth, branchLength, leafCount,
     iterations, branchAngle, angleRandomness, randomSeed,
   } = opts
   let trunkLength = 100
@@ -384,7 +384,8 @@ export function treeMesh(opts, matrix) {
   let taper = 0.5
   let angle = branchAngle * Math.PI / 180
   let rand = seededRandom(randomSeed)
-  let jitter = () => (rand() * 2 - 1) * angleRandomness * Math.PI / 180
+  let leafRand = seededRandom(randomSeed)
+  let jitter = (amount) => (amount * 2 - 1) * angleRandomness * Math.PI / 180
   let mesh = []
 
   function frustum(base, top, dir, rBase, rTop) {
@@ -401,14 +402,34 @@ export function treeMesh(opts, matrix) {
     }
   }
 
+  function leaves(tip, dir, size) {
+    let [u, v] = perpendicularAxes(dir)
+    let halfWidth = size * 0.35
+    for (let l = 0; l < leafCount; l++) {
+      let az = 2 * Math.PI * l / leafCount + jitter(leafRand())
+      let tilt = 90 * Math.PI / 180 + jitter(leafRand())
+      let side = add(mult(Math.cos(az), u), mult(Math.sin(az), v))
+      let leafDir = norm(add(mult(Math.cos(tilt), dir), mult(Math.sin(tilt), side)))
+      let far = add(tip, mult(size, leafDir))
+      let perp = norm(cross(leafDir, dir))
+      let b = add(far, mult(halfWidth, perp))
+      let c = add(far, mult(-halfWidth, perp))
+      mesh.push(Polygon(tip, b, c))
+      mesh.push(Polygon(tip, c, b))
+    }
+  }
+
   function branch(base, dir, length, rBase, rTop, depth) {
     let top = add(base, mult(length, dir))
     frustum(base, top, dir, rBase, rTop)
-    if (depth <= 0) return
+    if (depth <= 0) {
+      leaves(top, dir, length*0.7)
+      return
+    }
     let [u, v] = perpendicularAxes(dir)
     for (let k = 0; k < branches; k++) {
-      let az = 2 * Math.PI * k / branches + jitter()
-      let tilt = angle + jitter()
+      let az = 2 * Math.PI * k / branches + jitter(rand())
+      let tilt = angle + jitter(rand())
       let side = add(mult(Math.cos(az), u), mult(Math.sin(az), v))
       let childDir = norm(
         add(mult(Math.cos(tilt), dir), mult(Math.sin(tilt), side))
