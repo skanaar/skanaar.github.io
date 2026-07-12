@@ -141,10 +141,10 @@ export function BezierPatchSet(name, patches, res, transforms) {
 }
 
 export function HeightMap(name, opts, transforms) {
-  let { res, zoom, isola, persistence, octaves } = opts
+  let { res, zoom, isola, persistence, octaves, threshold = -1 } = opts
   return {
     kind: 'heightmap',
-    name, res, zoom, isola, persistence, octaves,
+    name, res, zoom, isola, persistence, octaves, threshold,
     transforms
   }
 }
@@ -409,7 +409,9 @@ export function treeMesh(opts, matrix) {
       let az = 2 * Math.PI * l / leafCount + jitter(leafRand())
       let tilt = 90 * Math.PI / 180 + jitter(leafRand())
       let side = add(mult(Math.cos(az), u), mult(Math.sin(az), v))
-      let leafDir = norm(add(mult(Math.cos(tilt), dir), mult(Math.sin(tilt), side)))
+      let leafDir = norm(
+        add(mult(Math.cos(tilt), dir), mult(Math.sin(tilt), side))
+      )
       let far = add(tip, mult(size, leafDir))
       let perp = norm(cross(leafDir, dir))
       let b = add(far, mult(halfWidth, perp))
@@ -439,13 +441,15 @@ export function treeMesh(opts, matrix) {
     }
   }
 
-  branch(Vec(0,0,0), Vec(0,-1,0), 12, trunkLength, trunkWidth, trunkTop, iterations)
+  let zero = Vec(0,0,0)
+  branch(zero, Vec(0,-1,0), 12, trunkLength, trunkWidth, trunkTop, iterations)
   return mesh.map(p => transformTriangle(p, matrix))
 }
 
 export function heightMapMesh(opts, matrix) {
-  const { res, zoom, isola, octaves, persistence } = opts
+  const { res, zoom, isola, octaves, persistence, threshold } = opts
   const noise = Noise({ persistence, octaves, zoom: zoom / 100 })
+  let above = (p) => p.a.y > threshold || p.b.y > threshold || p.c.y > threshold
   let point = (i, j) => {
       let r = 2 * (Math.sqrt(sq((i-res/2) / res) + sq((j-res/2) / res)))
       let island = isola * (r < 1 ? Math.cos(3.14 * r) + 1 : 0) + (1-isola) * 1
@@ -460,5 +464,6 @@ export function heightMapMesh(opts, matrix) {
     Polygon(point(i + 1, j), point(i + 1, j + 1), point(i, j + 1)),
   ])
   .filter(isValidPolygon)
+  .filter(above)
   .map(p => transformTriangle(p, matrix))
 }
