@@ -53,7 +53,7 @@ export function Editor() {
   })
   useEvent(app, 'select_object', (item) => setSelected(item))
   useEvent(app, 'create_object', (kind) => {
-    let spawn = create(kind, Offset(ox, oy, oz), selected, scene)
+    let spawn = createObject(kind, Offset(ox, oy, oz), selected, scene)
     let index = scene.children.indexOf(selected)
     if (index > -1)
       scene.children.splice(index+1, 0, spawn)
@@ -291,7 +291,7 @@ export function Editor() {
   )
 }
 
-function create(kind, pos, selected, scene) {
+function createObject(kind, pos, selected, scene) {
   let withSize = (s) => Transforms(pos, Rotate(0, 0, 0), Scaling(s, s, s))
   let l = 100
   switch (kind) {
@@ -305,7 +305,7 @@ function create(kind, pos, selected, scene) {
     case 'sphere': return Sphere('sphere', 'diffuse', withSize(30))
     case 'tree': return Tree('tree', {}, withSize(1))
     case 'composite':
-      return Composite('composite', [create('box', pos)], withSize(1))
+      return Composite('composite', [createObject('box', pos)], withSize(1))
     case 'instance':
       let ref = isMeshable(selected?.kind) ? null : (selected?.name ?? null)
       return Instance('instance', ref, withSize(1))

@@ -1,5 +1,6 @@
 import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app } from '../Raytracer.js'
+import { compileObject } from './geometry.js'
 
 const style = `scene-objects {
   display: grid; grid-template-rows: auto minmax(0, 1fr); height: 300px;
@@ -7,14 +8,21 @@ const style = `scene-objects {
   & li { display: flex; align-items: center; padding: 3px; cursor: default }
   & li.active { background: black; color: white; }
   & li.hidden > span { opacity: 0.4 }
+  & li .count { margin-left: auto; }
   & li button {
     margin-left: auto; padding: 0 2px; visibility: hidden; font-size: inherit;
     border: 2px solid black; background: none; color:inherit; border-radius:2px;
   }
   & li:hover button, & li.hidden button { visibility: visible }
+  & li:hover .count, & li.hidden .count { display: none }
+  & li:hover button, & li.hidden button { display: inline-block }
   & bread-crumbs { border-bottom: 2px solid black; padding:2px }
   & bread-crumbs .info { position: absolute; right: 5px; font-style: italic }
 }`
+function polyCount(entity, entities) {
+  return compileObject(entity, entities).polys?.length
+}
+
 export function ObjectList() {
   const [selected, setSelected] = React.useState(null)
   const [scene, setScene] = React.useState(app.scene)
@@ -49,7 +57,8 @@ export function ObjectList() {
             e.hidden = !e.hidden
             app.trigger('scene_modified')
           },
-        }, el('span', {}, e.hidden ? 'show' : 'hide'))
+        }, el('span', {}, e.hidden ? 'show' : 'hide')),
+        el('span', { class: 'count' }, polyCount(e, scene.children))
       ))
     )
   )

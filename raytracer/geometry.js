@@ -155,7 +155,7 @@ export function Tree(name, opts, transforms) {
     leafCount = 3,
     trunkWidth = 28,
     branchLength = 0.75,
-    iterations = 4,
+    iterations = 3,
     branchAngle = 45,
     angleRandomness = 20,
     randomSeed = 1,
@@ -242,7 +242,8 @@ export function compileObject(obj, objects) {
       return { ...obj, center: point, r: 1 }
     }
     case 'point': {
-      return NullObject()
+      let point = mapply(toMatrix(obj.transforms), Vec(0,0,0))
+      return { kind: 'point', center: point }
     }
     default: throw new Error('unknown object kind')
   }
@@ -380,7 +381,6 @@ export function treeMesh(opts, matrix) {
   } = opts
   let trunkLength = 100
   let trunkTop = trunkWidth / 2
-  let res = 6
   let taper = 0.5
   let angle = branchAngle * Math.PI / 180
   let rand = seededRandom(randomSeed)
@@ -388,7 +388,7 @@ export function treeMesh(opts, matrix) {
   let jitter = (amount) => (amount * 2 - 1) * angleRandomness * Math.PI / 180
   let mesh = []
 
-  function frustum(base, top, dir, rBase, rTop) {
+  function frustum(res, base, top, dir, rBase, rTop) {
     let [u, v] = perpendicularAxes(dir)
     let ring = (center, r, i) => {
       let a = 2 * Math.PI * i / res
@@ -419,9 +419,9 @@ export function treeMesh(opts, matrix) {
     }
   }
 
-  function branch(base, dir, length, rBase, rTop, depth) {
+  function branch(base, dir, res, length, rBase, rTop, depth) {
     let top = add(base, mult(length, dir))
-    frustum(base, top, dir, rBase, rTop)
+    frustum(res, base, top, dir, rBase, rTop)
     if (depth <= 0) {
       leaves(top, dir, length*0.7)
       return
@@ -434,11 +434,12 @@ export function treeMesh(opts, matrix) {
       let childDir = norm(
         add(mult(Math.cos(tilt), dir), mult(Math.sin(tilt), side))
       )
-      branch(top, childDir, length * branchLength, rTop, rTop * taper, depth-1)
+      const len = length * branchLength
+      branch(top, childDir, Math.max(3,res/2), len, rTop, rTop * taper, depth-1)
     }
   }
 
-  branch(Vec(0,0,0), Vec(0,-1,0), trunkLength, trunkWidth, trunkTop, iterations)
+  branch(Vec(0,0,0), Vec(0,-1,0), 12, trunkLength, trunkWidth, trunkTop, iterations)
   return mesh.map(p => transformTriangle(p, matrix))
 }
 
