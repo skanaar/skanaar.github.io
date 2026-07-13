@@ -1,4 +1,5 @@
-import { Camera, Offset, toMatrix } from './geometry.js'
+import { Camera, Offset } from './objects.js'
+import { toMatrix } from './geometry.js'
 import {
   Vec,
   norm,

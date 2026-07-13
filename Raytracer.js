@@ -1,6 +1,7 @@
 import { el, App, useEvent } from './assets/system.js'
 import { FloydSteinbergDitherer, NoDitherer } from './raytracer/dither.js'
-import { Camera, compileScene, Light, Offset, Rotate, Scene, Transforms } from './raytracer/geometry.js'
+import { compileScene } from './raytracer/geometry.js'
+import { Camera, Light, Scene, Offset, Rotate, Transforms } from './raytracer/objects.js'
 import { raytraceParallel } from './raytracer/raytraceParallel.js'
 import { Editor } from './raytracer/Editor.js'
 import { ObjectList } from './raytracer/ObjectList.js'

@@ -4,16 +4,13 @@ import {
   Light,
   HeightMap,
   BezierPatchSet,
-  Offset,
-  Scaling,
-  Rotate,
   Lathe,
   BezierLathe,
   Composite,
-  Transforms,
   Scene,
   Tree,
-} from './geometry.js'
+} from './objects.js'
+import { Offset, Scaling, Rotate, Transforms } from './objects.js'
 import { Vec } from './math.js'
 import { teapotPatches } from './teapot.js'
 

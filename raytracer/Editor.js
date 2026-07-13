@@ -1,13 +1,15 @@
 import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app } from '../Raytracer.js'
-import { compileObject, latheMesh, toMatrix, Mesh } from './geometry.js'
-import { Camera, Box, Light, Sphere, Composite, Instance } from './geometry.js'
-import { Lathe, Point, Tree } from './geometry.js'
-import { Offset, Rotate, Scaling, Transforms } from './geometry.js'
+import { compileObject, toMatrix } from './geometry.js'
+import { latheMesh } from './geometry/lathe.js'
+import { Offset, Rotate, Scaling, Transforms, Mesh } from './objects.js'
+import { Camera, Box, Light, Sphere, Composite, Instance } from './objects.js'
+import { Lathe, Point, Tree } from './objects.js'
 import { add, cross, diff, EPSILON, mag, matrixStack } from './math.js'
 import { RotateX, RotateY, Vec } from './math.js'
 import { Toolbar } from './Toolbar.js'
-import { LatheEditable, PatchesEditable } from './geometry.js'
+import { LatheEditable } from './geometry/LatheEditable.js'
+import { PatchesEditable } from './geometry/PatchesEditable.js'
 
 let creatables = ['box', 'cylinder', 'cone', 'tree', 'composite', 'instance']
 
