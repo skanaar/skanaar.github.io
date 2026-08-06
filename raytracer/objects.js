@@ -69,10 +69,10 @@ export function BezierPatchSet(name, patches, res, transforms) {
 }
 
 export function HeightMap(name, opts, transforms) {
-  let { res, zoom, isola, persistence, octaves, threshold = -1 } = opts
+  let { res, rseed, zoom, isola, persistence, octaves, threshold = -1 } = opts
   return {
     kind: 'heightmap',
-    name, res, zoom, isola, persistence, octaves, threshold,
+    name, res, rseed, zoom, isola, persistence, octaves, threshold,
     transforms
   }
 }

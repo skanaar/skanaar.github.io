@@ -1,5 +1,6 @@
+import { seededRandom } from './rand.js'
+
 var res = 256
-var matrix = Array.from({ length: res }).map(() => Math.random() - 0.5)
 
 function smoothstep(x) { return x*x*(3 - 2*x) }
 function lerp(factor, a, b) { return a + (b - a) * factor }
@@ -8,6 +9,8 @@ export function Noise(conf) {
   var persistence = conf.persistence || 0.5
   var octaves = conf.octaves || 1
   var scale = conf.zoom * 2 || 2
+  var rand = seededRandom(conf.rseed)
+  var matrix = Array.from({ length: res }).map(() => rand() - 0.5)
 
   function getSingleOctave(x, y) {
     var x0 = Math.floor(x)

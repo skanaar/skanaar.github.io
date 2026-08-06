@@ -57,8 +57,8 @@ export function sceneIsland() {
     Light(16, Offset(0, -30, 0)),
     HeightMap(
       'island',
-      { res: 16, size: 256, isola: 1, zoom: 10, persistence: 0.5, octaves: 4 },
-      Transforms(Offset(0,72,0), Rotate(180,0,0), Scaling(200, 50, 200))
+      { res: 32, rseed: 17, isola: 1, zoom: 8, persistence: 0.5, octaves: 4 },
+      Transforms(Offset(0,72,0), Rotate(180,0,0), Scaling(300, 20, 300))
     ),
     Tree('tree',
       { randomSeed: 8 },
