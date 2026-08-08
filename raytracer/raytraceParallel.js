@@ -1,28 +1,28 @@
 let chunkSize = 16
 
-export function raytraceParallel({ canvas, size, maxDepth, scene, ditherer }) {
+export function raytraceParallel({ canvas, w, h, maxDepth, scene, ditherer }) {
   let { promise, resolve } = Promise.withResolvers()
   let ctx = canvas.getContext("2d")
   let start = performance.now()
 
-  let chunkCount = size/chunkSize
+  let chunkCount = h/chunkSize
   let pendingWorkers = chunkCount
   let progress = 0
   let chunks = new Array(chunkCount)
 
   ctx.fillStyle = '#fff'
-  ctx.fillRect(0, 0, size, size)
-  ctx.strokeRect(size/2-20, size/2-2, 40, 4)
+  ctx.fillRect(0, 0, w, h)
+  ctx.strokeRect(w/2-20, h/2-2, 40, 4)
   ctx.fillStyle = '#000'
 
   function onComplete() {
     resolve({ duration: performance.now() - start })
-    let imgdata = ctx.createImageData(size, size)
-    for (let { x, y } of ditherer.coordinates(size)) {
+    let imgdata = ctx.createImageData(w, h)
+    for (let { x, y } of ditherer.coordinates(w, h)) {
       let j = y % chunkSize
-      let bright = chunks[Math.floor((y) / chunkSize)].data[4 * (x + j*size)]
+      let bright = chunks[Math.floor((y) / chunkSize)].data[4 * (x + j*w)]
       let value = Math.floor(ditherer.apply(bright/255, { x, y }) * 255)
-      let offset = (x + y*size)*4
+      let offset = (x + y*w)*4
       imgdata.data[offset] = value
       imgdata.data[offset + 1] = value
       imgdata.data[offset + 2] = value
@@ -35,17 +35,17 @@ export function raytraceParallel({ canvas, size, maxDepth, scene, ditherer }) {
     const worker = new Worker('/raytracer/raytrace.worker.js', {type:'module'})
     worker.addEventListener('message', (e) => {
       if (e.data.progress == 'row_complete') {
-        progress += 1/size
-        ctx.fillRect(size/2-20, size/2-2, 40*progress, 4)
+        progress += 1/h
+        ctx.fillRect(w/2-20, h/2-2, 40*progress, 4)
         return
       }
       chunks[i] = e.data
       pendingWorkers--
       if (pendingWorkers === 0) onComplete()
     })
-    let totalArea = { width: size, height: size }
-    let area = { width: size, height: chunkSize, x: 0, y: i*chunkSize }
-    worker.postMessage({ area, totalArea, size, maxDepth, scene })
+    let totalArea = { width: w, height: h }
+    let area = { width: w, height: chunkSize, x: 0, y: i*chunkSize }
+    worker.postMessage({ area, totalArea, maxDepth, scene })
   }
 
   return promise

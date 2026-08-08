@@ -28,7 +28,7 @@ export function bezier3DPatch([a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p], u, v) {
 
 export function bezierMesh(patches, res, matrix) {
   return patches
-    .flatMap(patch => [...generateRowByRowCoordinates(res)]
+    .flatMap(patch => [...generateRowByRowCoordinates(res, res)]
       .flatMap(({ x: i, y: j }) => [
         Polygon(
           bezier3DPatch(patch, i/res, j/res),

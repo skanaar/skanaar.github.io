@@ -5,8 +5,8 @@ export class HilbertDitherer {
   cursor = 0
   errorBuffer = new Array(32).fill(0)
   errorWeight = new Array(32).fill(0).map((_,i) => Math.pow(1/8, i/31)/13.6)
-  coordinates = function * (size) {
-    for (let [i,j] of hilbert([0, 0], [size-1, 0], size)) yield Vec(i,j,0)
+  coordinates = function * (w) {
+    for (let [i,j] of hilbert([0, 0], [w-1, 0], w)) yield Vec(i,j,0)
   }
   apply(value) {
     let len = this.errorBuffer.length
@@ -24,9 +24,9 @@ export class HilbertDitherer {
 export class FloydSteinbergDitherer {
   cursor = 0
   errorBuffer = []
-  coordinates(size) {
-    this.errorBuffer = [new Array(size).fill(0), new Array(size).fill(0)]
-    return generateRowByRowCoordinates(size)
+  coordinates(w, h) {
+    this.errorBuffer = [new Array(w).fill(0), new Array(w).fill(0)]
+    return generateRowByRowCoordinates(w, h)
   }
   apply(value, { x: i }) {
     if (i === 0){

@@ -15,7 +15,7 @@ export function heightMapMesh(opts, matrix) {
         (j / res - 0.5)
       )
     }
-  return [...generateRowByRowCoordinates(res)].flatMap(({ x: i, y: j }) => [
+  return [...generateRowByRowCoordinates(res, res)].flatMap(({ x: i, y: j }) => [
     Polygon(point(i, j), point(i + 1, j), point(i, j + 1)),
     Polygon(point(i + 1, j), point(i + 1, j + 1), point(i, j + 1)),
   ])

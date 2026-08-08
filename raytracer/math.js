@@ -91,8 +91,8 @@ export const sq = (x) => x * x
 export const clamp = (x, low, high) => Math.max(low, Math.min(x, high))
 export const rnd = (t) => t * Math.random()
 
-export function* generateRowByRowCoordinates(size) {
-  for (let j = 0; j < size; j++)
-    for (let i = 0; i < size; i++)
+export function* generateRowByRowCoordinates(w, h) {
+  for (let j = 0; j < h; j++)
+    for (let i = 0; i < w; i++)
       yield Vec(i,j,0)
 }

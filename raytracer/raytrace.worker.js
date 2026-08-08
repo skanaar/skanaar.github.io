@@ -22,7 +22,7 @@ onmessage = (e) => {
   postMessage(imgdata)
 }
 
-function raytrace({ area, totalArea, size, maxDepth, scene }) {
+function raytrace({ area, totalArea, maxDepth, scene }) {
   let { width, height, x, y } = area
   let camera = scene.find(e => e.kind === 'camera') ?? Camera([Offset(0,0,256)])
   let lights = scene.filter(e => e.kind === 'light')
@@ -32,11 +32,13 @@ function raytrace({ area, totalArea, size, maxDepth, scene }) {
 
   let imgdata = new ImageData(width, height)
 
+  let aspect = totalArea.height / totalArea.width
+
   let camMatrix = toMatrix(camera.transforms)
   let camPos = mapply(camMatrix, Vec(0,0,0))
-  let camCorner = mapply(camMatrix, Vec(-0.5,-0.5,-1))
+  let camCorner = mapply(camMatrix, Vec(-0.5,-aspect/2,-1))
   let camRight = diff(mapply(camMatrix, Vec(1,0,0)), camPos)
-  let camUp = diff(mapply(camMatrix, Vec(0,1,0)), camPos)
+  let camUp = diff(mapply(camMatrix, Vec(0,aspect,0)), camPos)
 
   for (let j = 0; j < height; j++) {
     for (let i = 0; i < width; i++) {
@@ -61,7 +63,7 @@ function raytrace({ area, totalArea, size, maxDepth, scene }) {
       }
       bright = hdr(bright * materialColor(hit))
       let value = Math.min(255, Math.floor(bright * 255))
-      let offset = (i + j*size)*4
+      let offset = (i + j*width)*4
       imgdata.data[offset] = value
       imgdata.data[offset + 1] = value
       imgdata.data[offset + 2] = value
