@@ -8,7 +8,8 @@ export function heightMapMesh(opts, matrix) {
   let above = (p) => p.a.y > threshold || p.b.y > threshold || p.c.y > threshold
   let point = (i, j) => {
       let r = 2 * (Math.sqrt(sq((i-res/2) / res) + sq((j-res/2) / res)))
-      let island = isola * (r < 1 ? Math.cos(3.14 * r) + 1 : 0) + (1-isola) * 1
+      let falloff = r < 1 ? Math.cos(3.14 * r*r*r) + 1 : 0
+      let island = isola * falloff + (1-isola) * 1
       return Vec(
         (i / res - 0.5),
         noise(i/res, j/res) * island,
