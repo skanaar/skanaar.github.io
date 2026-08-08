@@ -1,12 +1,12 @@
-import { el, App, useEvent } from './assets/system.js'
-import { FloydSteinbergDitherer, NoDitherer } from './raytracer/dither.js'
-import { compileScene } from './raytracer/geometry.js'
-import { Camera, Light, Scene, Offset, Rotate, Transforms } from './raytracer/objects.js'
-import { raytraceParallel } from './raytracer/raytraceParallel.js'
-import { Editor } from './raytracer/Editor.js'
-import { ObjectList } from './raytracer/ObjectList.js'
-import { Properties } from './raytracer/Properties.js'
-import { sceneIsland, sceneMushroom, sceneTeapot } from './raytracer/scenes.js'
+import { el, App, useEvent } from '../assets/system.js'
+import { FloydSteinbergDitherer, NoDitherer } from './dither.js'
+import { compileScene } from './geometry.js'
+import { Camera, Light, Scene, Offset, Rotate, Transforms } from './objects.js'
+import { raytraceParallel } from './raytraceParallel.js'
+import { Editor } from './Editor.js'
+import { ObjectList } from './ObjectList.js'
+import { Properties } from './Properties.js'
+import { sceneIsland, sceneMushroom, sceneTeapot } from './scenes.js'
 
 export const app = new App('RayTracer', RayTracer, 'aperture.svg')
 app.position(30, 60)
@@ -15,6 +15,9 @@ app.addMenu(
   { title: 'Teapot', event: 'scene', arg: 'teapot' },
   { title: 'Island', event: 'scene', arg: 'island' },
   { title: 'Mushroom', event: 'scene', arg: 'mushroom' },
+  { title: null },
+  { title: 'Open scene', event: 'load_scene', cmd: 'o' },
+  { title: 'Save scene', event: 'save_scene', cmd: 's' },
 )
 app.addMenu(
   'Edit',
@@ -98,7 +101,8 @@ app.addWindow('Editor', Editor, {
 app.scene = Scene([])
 app.breadcrumbs = []
 let currentScene = []
-let size = 256
+let w = 256
+let h = 256
 
 function RayTracer() {
   const hostRef = React.useRef()
@@ -113,7 +117,8 @@ function RayTracer() {
       ]
     raytraceParallel({
       canvas: hostRef.current,
-      size,
+      w,
+      h,
       maxDepth: app.menuState['toggle_reflections'] == true ? 2 : 0,
       scene: compileScene(entities),
       ditherer: app.menuState['toggle_dithering'] == true
@@ -177,7 +182,7 @@ function RayTracer() {
     }, 0)
   }, [])
 
-  return el('canvas', { width: size, height: size, ref: hostRef })
+  return el('canvas', { width: w, height: h, ref: hostRef })
 }
 
 function debounce(callback, delay) {

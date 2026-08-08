@@ -1,5 +1,5 @@
 import { useForceUpdate, useEvent, el } from "../assets/system.js";
-import { app } from "../Raytracer.js";
+import { app } from "./Raytracer.js";
 
 export function Properties() {
   const [selected, setSelected] = React.useState(null);

@@ -1,5 +1,5 @@
 import { useEvent, el, useForceUpdate } from '../assets/system.js'
-import { app } from '../Raytracer.js'
+import { app } from './Raytracer.js'
 import { compileObject } from './geometry.js'
 
 const style = `scene-objects {

@@ -1,5 +1,5 @@
 import { useEvent, el, useForceUpdate } from '../assets/system.js'
-import { app } from '../Raytracer.js'
+import { app } from './Raytracer.js'
 import { compileObject, toMatrix } from './geometry.js'
 import { latheMesh } from './geometry/lathe.js'
 import { Offset, Rotate, Scaling, Transforms, Mesh } from './objects.js'
@@ -110,6 +110,20 @@ export function Editor() {
     let index = scene.children.findIndex(e => e == selected)
     if (decision && index >= 0) scene.children.splice(index, 1)
     app.trigger('scene_modified')
+  })
+
+  const storageKey = `skanaar:raytracer:scene`
+  useEvent(app, 'save_scene', () => {
+    scene.update?.()
+    try { localStorage.setItem(storageKey, JSON.stringify(app.scene)) }
+    catch (e) { alert(`Could not save scene: ${e.message}`) }
+  })
+  useEvent(app, 'load_scene', () => {
+    try {
+      app.trigger('update_scene', JSON.parse(localStorage.getItem(storageKey)))
+      scene.update?.()
+    }
+    catch (e) { alert(`Could not load scene: ${e.message}`) }
   })
 
   function screenToSpace({ movementX, movementY }) {

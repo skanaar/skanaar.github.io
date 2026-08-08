@@ -1,5 +1,5 @@
 import { el, useEvent, useForceUpdate } from '../assets/system.js';
-import { app } from '../Raytracer.js'
+import { app } from './Raytracer.js'
 
 const style = `tool-bar {
   display: flex; border-bottom: 2px solid black; padding: 4px;
