@@ -51,8 +51,8 @@ export function Sphere(name, material, transforms) {
   return { kind: 'sphere', name, material, transforms }
 }
 
-export function Box(name, transforms) {
-  return { kind: 'box', name, material: 'diffuse', transforms }
+export function Box(name, transforms, material = 'diffuse') {
+  return { kind: 'box', name, material, transforms }
 }
 
 export function Lathe(name, res, path, transforms) {

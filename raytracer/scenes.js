@@ -9,6 +9,7 @@ import {
   Composite,
   Scene,
   Tree,
+  Box,
 } from './objects.js'
 import { Offset, Scaling, Rotate, Transforms } from './objects.js'
 import { Vec } from './math.js'
@@ -57,13 +58,14 @@ export function sceneIsland() {
     Light(16, Offset(0, -30, 0)),
     HeightMap(
       'island',
-      { res: 32, rseed: 17, isola: 1, zoom: 8, persistence: 0.5, octaves: 4 },
+      { res: 32, rseed: 34, isola: 1, zoom: 17, persistence: 0.6, octaves: 4, threshold: 0.1 },
       Transforms(Offset(0,72,0), Rotate(180,0,0), Scaling(300, 20, 300))
     ),
     Tree('tree',
       { randomSeed: 8 },
       Transforms(Offset(-53, 73, 56), Rotate(0, 0, 0), Scaling(0.4, 0.4, 0.4))
     ),
+    Box('water', Transforms(Offset(0,70,0), Rotate(0, 0, 0), Scaling(1000, 0.1, 1000)), 'dark'),
     Composite('temple', [
       Lathe('p1', 12, pillar, Transforms(Offset(40,0,0), Rotate(0,0,0))),
       Lathe('roof', 6,
