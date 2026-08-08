@@ -16,19 +16,19 @@ import { teapotPatches } from './teapot.js'
 
 export function sceneTeapot() {
   return Scene([
-    Camera(Transforms(Offset(0,0,256+128))),
+    Camera(Transforms(Offset(0,0,420))),
     Light(16, Offset(-100, -100, -100)),
     Light(150, Offset(200-128, 50-128, 256)),
     Lathe('room', 4,
       [Vec(0,-4,0), Vec(Math.sqrt(2),-4,0), Vec(Math.sqrt(2),1,0), Vec(0,1,0)],
-      Transforms(Offset(0,0,0), Rotate(-90,45,0),Scaling(150,150,-150))
+      Transforms(Offset(0,0,0), Rotate(-90,0,45),Scaling(150,150,-150))
     ),
     Sphere('mirror sphere', 'mirror',
       Transforms(Offset(60,-60,-60), Rotate(0,0,0), Scaling(80,80,80))),
     BezierPatchSet('teapot',
       teapotPatches,
       3,
-      Transforms(Offset(-8,150,0), Rotate(0, 0, 0), Scaling(1,1,1))
+      Transforms(Offset(-8,150,0), Rotate(0, -15, 0), Scaling(0.8,0.8,0.8))
     ),
     Lathe('column', 16,
       [

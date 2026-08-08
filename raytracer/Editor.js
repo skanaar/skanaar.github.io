@@ -255,7 +255,10 @@ export function Editor() {
       scene.children
         .filter(e => !e.hidden)
         .map(e => (
-          { entity: e, preview: compilePreviewObject(e, scene.children) }
+          {
+            entity: e,
+            preview: compilePreviewObject(e, scene.children, selected == e)
+          }
         ))
         .filter(({ preview }) => preview.kind == 'mesh')
         .map(({ entity, preview }, i) => el('path', {
@@ -334,12 +337,14 @@ function isMeshable(kind) {
   return ['light', 'camera'].includes(kind)
 }
 
-function compilePreviewObject(obj, entities) {
+function compilePreviewObject(obj, entities, selected) {
   if (obj.kind === 'camera') {
     return Mesh(
       obj.material,
       latheMesh(
-        [Vec(50*Math.SQRT2,-100,0), Vec(0.1,0,0)],
+        selected
+          ? [Vec(15*Math.SQRT2,-30,0), Vec(0,0,0), Vec(1,-500, 0)]
+          : [Vec(15*Math.SQRT2,-30,0), Vec(0,0,0)],
         4,
         matrixStack(toMatrix(obj.transforms), RotateX(Math.PI/2), RotateY(Math.PI/4))
       )
