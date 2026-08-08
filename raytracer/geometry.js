@@ -6,9 +6,9 @@ import { Offset, Transforms, Mesh, NullObject } from './objects.js'
 export function toMatrix({ offset, rotate, scale }) {
   return matrixStack(
     Translate(offset.x, offset.y, offset.z),
-    RotateX(rotate.x * π/180),
-    RotateY(rotate.y * π/180),
     RotateZ(rotate.z * π/180),
+    RotateY(rotate.y * π/180),
+    RotateX(rotate.x * π/180),
     Scale(scale.x, scale.y, scale.z),
   )
 }
