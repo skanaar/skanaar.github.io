@@ -81,7 +81,7 @@ app.enable('focus_selection', null, false)
 app.enable('create_object', 'point', false)
 app.addWindow('Objects', ObjectList, {
   visible: true,
-  offset: [0, 256+50],
+  offset: [0, 192+50],
   size: [256,300],
   sizing: 'noresize'
 })
@@ -102,7 +102,7 @@ app.scene = Scene([])
 app.breadcrumbs = []
 let currentScene = []
 let w = 256
-let h = 256
+let h = 192
 
 function RayTracer() {
   const hostRef = React.useRef()
