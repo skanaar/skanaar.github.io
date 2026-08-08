@@ -16,22 +16,27 @@ const style = `scene-objects {
   & li:hover button, & li.hidden button { visibility: visible }
   & li:hover .count, & li.hidden .count { display: none }
   & li:hover button, & li.hidden button { display: inline-block }
-  & bread-crumbs { border-bottom: 2px solid black; padding:2px }
-  & bread-crumbs .info { position: absolute; right: 5px; font-style: italic }
+  & bread-crumbs {
+    display: flex; align-items: center;
+    border-bottom: 2px solid black; padding: 2px 2px 2px 4px
+  }
 }`
 function polyCount(entity, entities) {
   return compileObject(entity, entities).polys?.length
 }
 
 export function ObjectList() {
+  const [query, setQuery] = React.useState('')
   const [selected, setSelected] = React.useState(null)
   const [scene, setScene] = React.useState(app.scene)
-  const [status, setStatus] = React.useState('')
   const forceUpdate = useForceUpdate()
-  useEvent(app, 'render_complete', (data) => setStatus(data.duration))
   useEvent(app, 'update_scene', (scene) => setScene(scene))
   useEvent(app, 'scene_modified', forceUpdate)
   useEvent(app, 'select_object', (obj) => setSelected(obj))
+
+  const items = scene.children
+    .filter(e => !e.renderOnly)
+    .filter(e => !query || e.name?.includes(query) || e.kind.includes(query))
 
   return el(
     'scene-objects',
@@ -41,10 +46,15 @@ export function ObjectList() {
       el('span', { style: { marginRight: 'auto' }},
         app.breadcrumbs.length ? `scene > ${app.breadcrumbs[0]}` : 'scene'
       ),
-      el('span', { class: 'info' }, status+'ms'),
+      el("input", {
+        type: "search",
+        style: { width: '100px', margin: '0' },
+        value: query,
+        onChange: e => setQuery(e.target.value),
+      }),
     ),
     el('ul', {},
-      scene.children.filter(e => !e.renderOnly).map(e => el('li', {
+      items.map(e => el('li', {
         onClick: () => app.trigger('select_object', e),
         onDoubleClick: () => app.trigger('rename_object'),
         className: [selected === e && 'active', e.hidden && 'hidden']
