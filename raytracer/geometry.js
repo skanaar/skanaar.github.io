@@ -12,6 +12,16 @@ export function toMatrix({ offset, rotate, scale }) {
     Scale(scale.x, scale.y, scale.z),
   )
 }
+
+export function toInverseMatrix({ offset, rotate, scale }) {
+  return matrixStack(
+    Scale(1/scale.x, 1/scale.y, 1/scale.z),
+    RotateX(-rotate.x * π/180),
+    RotateY(-rotate.y * π/180),
+    RotateZ(-rotate.z * π/180),
+    Translate(-offset.x, -offset.y, -offset.z),
+  )
+}
 import { boxMesh } from './geometry/box.js'
 import { latheMesh } from './geometry/lathe.js'
 import { bezierMesh, bezierLatheMesh } from './geometry/bezier.js'
@@ -79,6 +89,9 @@ export function compileObject(obj, objects) {
     case 'camera': {
       let point = mapply(toMatrix(obj.transforms), Vec(0,0,0))
       return { ...obj, center: point, r: 1 }
+    }
+    case 'link': {
+      return { ...obj, center: Vec(0,0,0), r: 1 }
     }
     case 'point': {
       let point = mapply(toMatrix(obj.transforms), Vec(0,0,0))

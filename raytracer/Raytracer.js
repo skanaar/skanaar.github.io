@@ -28,6 +28,7 @@ app.addMenu(
 )
 app.addMenu(
   'Create',
+  { title: 'Camera', event: 'create_object', arg: 'camera' },
   { title: 'Light', event: 'create_object', arg: 'light' },
   { title: 'Sphere', event: 'create_object', arg: 'sphere' },
   { title: 'Box', event: 'create_object', arg: 'box' },
@@ -37,6 +38,7 @@ app.addMenu(
   { title: 'Composite', event: 'create_object', arg: 'composite' },
   { title: 'Instance', event: 'create_object', arg: 'instance' },
   { title: null },
+  { title: 'Link camera', event: 'link_camera' },
   { title: 'Point', event: 'create_object', arg: 'point' },
 )
 app.addMenu(
@@ -53,9 +55,11 @@ app.addMenu(
   { title: 'Crosshair', event: 'toggle_crosshair', arg: true },
   { title: null },
   { title: 'Render', event: 'render', cmd: 'r' },
+  { title: 'Select camera', event: 'select_camera' },
   { title: 'Auto rerender', event: 'toggle_autorender', arg: true },
   { title: 'Reflections', event: 'toggle_reflections', arg: true },
   { title: 'Dither', event: 'toggle_dithering', arg: true },
+  { title: 'Link hotspots', event: 'toggle_hotspots', arg: true },
 )
 app.addMenu(
   'Tool',
@@ -72,12 +76,14 @@ app.check('toggle_axis', true)
 app.check('toggle_crosshair', true)
 app.check('toggle_reflections', true)
 app.check('toggle_autorender', true)
+app.check('toggle_hotspots', true)
 app.check('editor_mode', 'pan')
 app.enable('edit_object', null, false)
 app.enable('edit_scene', null, false)
 app.enable('rename_object', null, false)
 app.enable('delete_object', null, false)
 app.enable('focus_selection', null, false)
+app.enable('select_camera', null, false)
 app.enable('create_object', 'point', false)
 app.addWindow('Objects', ObjectList, {
   visible: true,
@@ -101,14 +107,18 @@ app.addWindow('Editor', Editor, {
 app.scene = Scene([])
 app.breadcrumbs = []
 let currentScene = []
-let w = 256
-let h = 192
+let cameraIndex = -1
+export const renderSize = { w: 256, h: 192 }
+let { w, h } = renderSize
 
 function RayTracer() {
   const hostRef = React.useRef()
   const renderScene = () => {
-    let entities = currentScene.children.some(e => e.kind === 'camera')
-      ? currentScene.children
+    // the worker renders through the first camera it finds, so hoist the
+    // active one to the front
+    let camera = currentScene.children[cameraIndex]
+    let entities = camera?.kind === 'camera'
+      ? [camera, ...currentScene.children.filter(e => e !== camera)]
       : [
         Camera(Transforms(Offset(-100,-100,240), Rotate(20,20,8))),
         Light(128, Offset(100,-100,100)),
@@ -124,7 +134,11 @@ function RayTracer() {
       ditherer: app.menuState['toggle_dithering'] == true
         ? new FloydSteinbergDitherer()
         : new NoDitherer(),
-    }).then((result) => app.trigger('render_complete', result))
+    }).then((result) => {
+      if (app.menuState['toggle_hotspots'] == true)
+        drawLinks(hostRef.current, currentScene.children, cameraIndex)
+      app.trigger('render_complete', result)
+    })
   }
 
   useEvent(app, 'select_object', (obj) => {
@@ -133,9 +147,12 @@ function RayTracer() {
       null,
       obj?.kind == 'composite' || obj?.kind == 'lathe' || obj?.kind == 'patches'
     )
+    app.enable('create_object', 'point', Boolean(currentScene.lathe && obj))
     app.enable('rename_object', null, !!obj)
     app.enable('delete_object', null, !!obj)
     app.enable('focus_selection', null, !!obj)
+    app.enable('link_camera', null, obj?.kind == 'camera')
+    app.enable('select_camera', null, obj?.kind == 'camera')
   })
 
   useEvent(app, 'scene', (arg) => {
@@ -164,13 +181,19 @@ function RayTracer() {
   useEvent(app, 'toggle_autorender', () => {
     app.check('toggle_autorender', !app.menuState['toggle_autorender'])
   })
-  useEvent(app, 'update_scene', (scene) => {
-    currentScene = scene
-    app.enable('create_object', 'point', false)
+  useEvent(app, 'toggle_hotspots', () => {
+    app.check('toggle_hotspots', !app.menuState['toggle_hotspots'])
     app.trigger('render')
   })
-  useEvent(app, 'select_object', (obj) => {
-    app.enable('create_object', 'point', Boolean(currentScene.lathe && obj))
+  useEvent(app, 'pick_camera', (index) => {
+    cameraIndex = index
+    app.trigger('render')
+  })
+  useEvent(app, 'update_scene', (scene) => {
+    currentScene = scene
+    cameraIndex = scene.children.findIndex(e => e.kind === 'camera')
+    app.enable('create_object', 'point', false)
+    app.trigger('render')
   })
   useEvent(app, 'scene_modified', debounce(() => app.trigger('render'), 1000))
   useEvent(app, 'render', renderScene)
@@ -183,6 +206,32 @@ function RayTracer() {
   }, [])
 
   return el('canvas', { width: w, height: h, ref: hostRef })
+}
+
+function drawLinks(canvas, children, cameraIndex) {
+  if (cameraIndex < 0) return
+  let ctx = canvas.getContext('2d')
+  ctx.save()
+  ctx.lineWidth = 1
+  for (let link of children) {
+    if (link.kind !== 'link' || link.source !== cameraIndex) continue
+    if (link.hidden) continue
+    ctx.strokeStyle = '#fff'
+    ctx.strokeRect(
+      Math.round(link.x * w) + 0.5, // +0.5 to align with pixel grid
+      Math.round(link.y * h) + 0.5,
+      Math.round(link.w * w),
+      Math.round(link.h * h)
+    )
+    ctx.strokeStyle = '#000'
+    ctx.strokeRect(
+      Math.round(link.x * w) + 0.5 - 1,
+      Math.round(link.y * h) + 0.5 - 1,
+      Math.round(link.w * w) + 2,
+      Math.round(link.h * h) + 2
+    )
+  }
+  ctx.restore()
 }
 
 function debounce(callback, delay) {

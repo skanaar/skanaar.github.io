@@ -42,9 +42,12 @@ export function Properties() {
     selected.kind == "instance"
       ? el(InstanceField, { instance: selected, objects })
       : null,
-    el(TransformInput, { name: "Offset", step: 1, transform: trns.offset }),
-    el(TransformInput, { name: "Rotate", step: 1, transform: trns.rotate }),
-    el(TransformInput, { name: "Scale", step: 0.1, transform: trns.scale }),
+    selected.kind == "link" ? el(LinkFields, { object: selected }) : null,
+    selected.trns && el(React.Fragment, {},
+      el(TransformInput, { name: "Offset", step: 1, transform: trns.offset }),
+      el(TransformInput, { name: "Rotate", step: 1, transform: trns.rotate }),
+      el(TransformInput, { name: "Scale", step: 0.1, transform: trns.scale }),
+    )
   );
 }
 
@@ -143,6 +146,24 @@ function MaterialField({ object }) {
       el("option", {}, "dark"),
       el("option", {}, "mirror"),
     ),
+  );
+}
+
+function LinkFields({ object }) {
+  return el(
+    React.Fragment,
+    {},
+    el("span", {}, "From, To"),
+    el(NumericInput, { field: "source", object: object, range: [0, 1024] }),
+    el(NumericInput, { field: "target", object: object, range: [0, 1024] }),
+    el('div', {}),
+    el("span", {}, "Left, Top"),
+    el(NumericInput, { field: "x", object: object, range: [0, 1] }),
+    el(NumericInput, { field: "y", object: object, range: [0, 1] }),
+    el('div', {}),
+    el("span", {}, "Width, Height"),
+    el(NumericInput, { field: "w", object: object, range: [0, 1] }),
+    el(NumericInput, { field: "h", object: object, range: [0, 1] }),
   );
 }
 

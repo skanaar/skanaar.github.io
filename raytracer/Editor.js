@@ -1,11 +1,11 @@
 import { useEvent, el, useForceUpdate } from '../assets/system.js'
-import { app } from './Raytracer.js'
-import { compileObject, toMatrix } from './geometry.js'
+import { app, renderSize } from './Raytracer.js'
+import { compileObject, toMatrix, toInverseMatrix } from './geometry.js'
 import { latheMesh } from './geometry/lathe.js'
-import { Offset, Rotate, Scaling, Transforms, Mesh } from './objects.js'
+import { Offset, Rotate, Scaling, Transforms, Mesh, Link } from './objects.js'
 import { Camera, Box, Light, Sphere, Composite, Instance } from './objects.js'
 import { Lathe, Point, Tree } from './objects.js'
-import { add, cross, diff, EPSILON, mag, matrixStack } from './math.js'
+import { add, cross, diff, EPSILON, mag, mapply, matrixStack } from './math.js'
 import { RotateX, RotateY, Vec } from './math.js'
 import { Toolbar } from './Toolbar.js'
 import { LatheEditable } from './geometry/LatheEditable.js'
@@ -25,6 +25,7 @@ export function Editor() {
   const [view, setView] = React.useState('front')
   const [zoom, setZoom] = React.useState(0.75)
   const [selected, setSelected] = React.useState(null)
+  const [cameraIndex, setCameraIndex] = React.useState(null)
 
   useEvent(app, 'scene_view', (view) => {
     app.check('scene_view', view)
@@ -47,6 +48,7 @@ export function Editor() {
   useEvent(app, 'zoom', (factor) => setZoom(zoom * factor))
   useEvent(app, 'update_scene', (scene) => {
     setScene(scene)
+    setCameraIndex(scene.children.findIndex(e => e.kind == 'camera'))
     if (scene.kind === 'lathe-editable') {
       let r = Math.max(1, ...scene.children.map(e => mag(e.transforms.offset)))
       setZoom(100 / r)
@@ -54,6 +56,11 @@ export function Editor() {
     }
   })
   useEvent(app, 'select_object', (item) => setSelected(item))
+  useEvent(app, 'pick_camera', (cam) => setCameraIndex(cam))
+  useEvent(app, 'select_camera', () => {
+    if (selected?.kind != 'camera') return
+    app.trigger('pick_camera', scene.children.findIndex(e => e == selected))
+  })
   useEvent(app, 'create_object', (kind) => {
     let spawn = createObject(kind, Offset(ox, oy, oz), selected, scene)
     let index = scene.children.indexOf(selected)
@@ -110,6 +117,22 @@ export function Editor() {
     let index = scene.children.findIndex(e => e == selected)
     if (decision && index >= 0) scene.children.splice(index, 1)
     app.trigger('scene_modified')
+  })
+  useEvent(app, 'link_camera', () => {
+    if (!selected) return
+    let link = createObject('link', null, selected, scene)
+    link.source = cameraIndex
+    link.target = scene.children.findIndex(e => e == selected)
+    let rect = viewportRect(scene.children[cameraIndex], selected, 0.3, 0.3)
+    if (rect) {
+      link.x = rect.x
+      link.y = rect.y
+      link.w = rect.w
+      link.h = rect.h
+    }
+    scene.children.splice(cameraIndex+1, 0, link)
+    app.trigger('scene_modified')
+    app.trigger('select_object', link)
   })
 
   const storageKey = `skanaar:raytracer:scene`
@@ -190,7 +213,7 @@ export function Editor() {
     let hit = null
     let best = 10
     for (let e of scene.children) {
-      if (e.renderOnly || e.hidden) continue
+      if (!e.transforms || e.renderOnly || e.hidden) continue
       let p = e.transforms.offset
       let d = Math.hypot(x(p) - c.x, y(p) - c.y)
       if (d <= best) { best = d; hit = e }
@@ -209,7 +232,7 @@ export function Editor() {
       }
       svg.canvas-3d path.mesh { stroke-linejoin: bevel; stroke-width: 0.125px }
       svg.canvas-3d :is(path, ellipse, rect).active { stroke-width: 2px }
-      svg.canvas-3d path.crosshair { stroke-dasharray: 2 2; stroke-width: 1px }`
+      svg.canvas-3d path.crosshair { stroke-dasharray: 2 2; stroke-width: 0.5px }`
     ),
     el(Toolbar, {}),
     el('svg',
@@ -225,7 +248,7 @@ export function Editor() {
           if (mode == 'pan' && startPos) {
             setOffset(o => diff(o, screenToSpace(e)))
           }
-          if (mode == 'move' && selected && startPos) {
+          if (mode == 'move' && selected && selected.transforms && startPos) {
             let t = selected.transforms
             if (e.altKey) {
               let r = viewRotation(e.movementX)
@@ -316,6 +339,7 @@ function createObject(kind, pos, selected, scene) {
   switch (kind) {
     case 'light': return Light(64, pos)
     case 'camera': return Camera(withSize(1))
+    case 'link': return Link(-1, -1, 0.3, 0.3, 0.3, 0.3)
     case 'box': return Box('box', withSize(1))
     case 'cylinder':
       return Lathe('cylinder', 16, [Vec(l,-l,0),Vec(l,l,0)], withSize(1))
@@ -330,6 +354,22 @@ function createObject(kind, pos, selected, scene) {
       return Instance('instance', ref, withSize(1))
     case 'point':
       return Point(`Point ${scene.children.length + 1}`, withSize(1).offset)
+  }
+}
+
+let round2 = (v) => Math.round(v * 100) / 100
+
+function viewportRect(camera, target, w, h) {
+  if (camera?.kind != 'camera' || !target?.transforms) return null
+  let center = mapply(toMatrix(target.transforms), Vec(0,0,0))
+  let p = mapply(toInverseMatrix(camera.transforms), center)
+  if (p.z > -EPSILON) return null
+  let aspect = renderSize.h / renderSize.w
+  return {
+    x: round2(p.x / -p.z + 0.5 - w/2),
+    y: round2(p.y / -p.z / aspect + 0.5 - h/2),
+    w,
+    h,
   }
 }
 

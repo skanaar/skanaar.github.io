@@ -60,7 +60,7 @@ export function treeMesh(opts, matrix) {
     let top = add(base, mult(length, dir))
     frustum(res, base, top, dir, rBase, rTop)
     if (depth <= 0) {
-      leaves(top, dir, length*0.7)
+      leaves(top, dir, length*0.3)
       return
     }
     let [u, v] = perpendicularAxes(dir)

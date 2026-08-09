@@ -34,6 +34,10 @@ export function Camera(transforms) {
   return { kind: 'camera', name: 'camera', transforms }
 }
 
+export function Link(from, to, x, y, w, h) {
+  return { kind: 'link', name: 'link', from, to, x, y, w, h }
+}
+
 export function Composite(name, children, transforms) {
   return { kind: 'composite', name, children, transforms }
 }

@@ -8,9 +8,9 @@ const style = `scene-objects {
   & li { display: flex; align-items: center; padding: 3px; cursor: default }
   & li.active { background: black; color: white; }
   & li.hidden > span { opacity: 0.4 }
-  & li .count { margin-left: auto; }
-  & li button {
-    margin-left: auto; padding: 0 2px; visibility: hidden; font-size: inherit;
+  & li .name { margin-right: auto }
+  & li button  {
+    margin-left: 2px; padding: 0 2px; visibility: hidden; font-size: inherit;
     border: 2px solid black; background: none; color:inherit; border-radius:2px;
   }
   & li:hover button, & li.hidden button { visibility: visible }
@@ -60,7 +60,13 @@ export function ObjectList() {
         className: [selected === e && 'active', e.hidden && 'hidden']
           .filter(Boolean).join(' ') || undefined,
       },
-        el('span', {}, e.name || e.kind),
+        el('span', { class: 'name' }, e.name || e.kind),
+        e.kind == 'camera' && el('button', {
+          onClick: (ev) => {
+            ev.stopPropagation()
+            app.trigger('link_camera')
+          },
+        }, el('span', {}, 'link')),
         el('button', {
           onClick: (ev) => {
             ev.stopPropagation()

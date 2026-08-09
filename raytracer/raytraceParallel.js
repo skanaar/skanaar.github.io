@@ -16,7 +16,7 @@ export function raytraceParallel({ canvas, w, h, maxDepth, scene, ditherer }) {
   ctx.fillStyle = '#000'
 
   function onComplete() {
-    resolve({ duration: performance.now() - start })
+    let duration = performance.now() - start
     let imgdata = ctx.createImageData(w, h)
     for (let { x, y } of ditherer.coordinates(w, h)) {
       let j = y % chunkSize
@@ -29,6 +29,7 @@ export function raytraceParallel({ canvas, w, h, maxDepth, scene, ditherer }) {
       imgdata.data[offset + 3] = 255
     }
     ctx.putImageData(imgdata, 0, 0)
+    resolve({ duration })
   }
 
   for (let i = 0; i < chunkCount; i++) {
