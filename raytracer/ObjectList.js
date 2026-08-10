@@ -13,6 +13,8 @@ const style = `scene-objects {
     margin-left: 2px; padding: 0 2px; visibility: hidden; font-size: inherit;
     border: 2px solid black; background: none; color:inherit; border-radius:2px;
   }
+  & li > svg { flex: none; margin-right: 4px }
+  & li.hidden > svg { opacity: 0.4 }
   & li:hover button, & li.hidden button { visibility: visible }
   & li:hover .count, & li.hidden .count { display: none }
   & li:hover button, & li.hidden button { display: inline-block }
@@ -23,6 +25,30 @@ const style = `scene-objects {
 }`
 function polyCount(entity, entities) {
   return compileObject(entity, entities).polys?.length
+}
+
+const icons = {
+  camera: 'M1,4h6v5h-6z M7,6.5l3.5,-2.5v5z',
+  light: 'M4,6a2,2 0 1,0 4,0a2,2 0 1,0 -4,0 M6,1v1.5 M6,9.5v1.5'
+    + ' M1,6h1.5 M9.5,6h1.5',
+  link: 'M1,3h5v6h-5z M7,6h4 M9,4l2,2l-2,2',
+  box: 'M1,4h6v6h-6z M1,4l3,-3h6v6l-3,3 M7,4l3,-3',
+  lathe: 'M2.5,3a3.5,1.5 0 1,0 7,0a3.5,1.5 0 1,0 -7,0'
+    + ' M2.5,3v6a3.5,1.5 0 0,0 7,0v-6',
+  sphere: 'M2,6a4,4 0 1,0 8,0a4,4 0 1,0 -8,0'
+    + ' M6,2a2.6,4 0 0,0 0,8a2.6,4 0 0,0 0,-8',
+  heightmap: 'M1,10l3,-5l2,3l2,-4l3,6z',
+}
+
+function KindIcon({ kind }) {
+  return el('svg', {
+    width: 16,
+    height: 16,
+    viewBox: '0 0 12 12',
+    fill: 'none',
+    stroke: 'currentColor',
+    strokeWidth: 1,
+  }, el('path', { d: icons[kind] ?? icons.box }))
 }
 
 export function ObjectList() {
@@ -60,6 +86,7 @@ export function ObjectList() {
         className: [selected === e && 'active', e.hidden && 'hidden']
           .filter(Boolean).join(' ') || undefined,
       },
+        el(KindIcon, { kind: e.kind }),
         el('span', { class: 'name' },
           e.name || e.kind,
           e.kind == 'link' && el('span', {}, ` ${e.source} - ${e.target}`)
