@@ -1,6 +1,8 @@
 let chunkSize = 16
 
-export function raytraceParallel({ canvas, w, h, maxDepth, scene, ditherer }) {
+export function raytraceParallel({
+  canvas, w, h, maxDepth, scene, camera, ditherer
+}) {
   let { promise, resolve } = Promise.withResolvers()
   let ctx = canvas.getContext("2d")
   let start = performance.now()
@@ -46,7 +48,7 @@ export function raytraceParallel({ canvas, w, h, maxDepth, scene, ditherer }) {
     })
     let totalArea = { width: w, height: h }
     let area = { width: w, height: chunkSize, x: 0, y: i*chunkSize }
-    worker.postMessage({ area, totalArea, maxDepth, scene })
+    worker.postMessage({ area, totalArea, maxDepth, scene, camera })
   }
 
   return promise

@@ -120,24 +120,24 @@ let { w, h } = renderSize
 function RayTracer() {
   const hostRef = React.useRef()
   const renderScene = () => {
-    // the worker renders through the first camera it finds, so hoist the
-    // active one to the front
+    const defaultCam = Camera(Transforms(Offset(-100,-100,240),Rotate(20,20,8)))
     let camera = currentScene.children
-      .find(e => e.kind == 'camera' && e.id == cameraId)
-    let entities = camera?.kind === 'camera'
-      ? [camera, ...currentScene.children.filter(e => e !== camera)]
-      : [
-        Camera(Transforms(Offset(-100,-100,240), Rotate(20,20,8))),
+      .find(e => e.kind == 'camera' && e.id == cameraId) ?? defaultCam
+    let entities = currentScene.children
+    if (entities.every(e => e.kind != 'light')){
+      entities = [
         Light(128, Offset(100,-100,100)),
         Light(64, Offset(-100,-100,100)),
-        ...currentScene.children
+        ...entities
       ]
+    }
     raytraceParallel({
       canvas: hostRef.current,
       w,
       h,
       maxDepth: app.menuState['toggle_reflections'] == true ? 2 : 0,
       scene: compileScene(entities),
+      camera,
       ditherer: app.menuState['toggle_dithering'] == true
         ? new FloydSteinbergDitherer()
         : new NoDitherer(),

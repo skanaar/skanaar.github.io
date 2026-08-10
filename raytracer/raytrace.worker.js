@@ -1,19 +1,6 @@
-import { Camera, Offset } from './objects.js'
 import { toMatrix } from './geometry.js'
-import {
-  Vec,
-  norm,
-  diff,
-  dot,
-  div,
-  add,
-  sqMag,
-  mult,
-  mag,
-  crossDiff,
-  EPSILON,
-  mapply
-} from './math.js'
+import { norm, diff, dot, div, add, sqMag, mult, mag } from './math.js'
+import { Vec, crossDiff, EPSILON, mapply } from './math.js'
 
 const FAR_AWAY = 32000
 
@@ -22,9 +9,8 @@ onmessage = (e) => {
   postMessage(imgdata)
 }
 
-function raytrace({ area, totalArea, maxDepth, scene }) {
+function raytrace({ area, totalArea, maxDepth, scene, camera }) {
   let { width, height, x, y } = area
-  let camera = scene.find(e => e.kind === 'camera') ?? Camera([Offset(0,0,256)])
   let lights = scene.filter(e => e.kind === 'light')
 
   let spheres = scene.filter(e => e.kind === 'sphere').map(PrecomputedSphere)
