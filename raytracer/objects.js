@@ -39,8 +39,12 @@ export function Link(source, target, x, y, w, h) {
   return { kind: 'link', name: 'link', source, target, x, y, w, h }
 }
 
+export function Material(name, shade1, shade2, solid, zoom, waves) {
+  return { kind: 'material', name, shade1, shade2, solid, zoom, waves }
+}
+
 export function Composite(name, children, transforms) {
-  return { kind: 'composite', name, children, transforms }
+  return { kind: 'composite', name, children, material: 'diffuse', transforms }
 }
 
 export function Instance(name, ref, transforms) {
@@ -65,7 +69,7 @@ export function Lathe(name, res, path, transforms) {
 }
 
 export function BezierLathe(name, resU, resV, path, transforms) {
-  let material = 'diffue'
+  let material = 'diffuse'
   return { kind: 'bezierlathe', name, material, path, resU, resV, transforms }
 }
 
@@ -78,7 +82,7 @@ export function HeightMap(name, opts, transforms) {
   return {
     kind: 'heightmap',
     name, res, rseed, zoom, isola, persistence, octaves, threshold,
-    transforms
+    transforms, material: 'diffuse'
   }
 }
 

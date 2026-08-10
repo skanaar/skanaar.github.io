@@ -31,7 +31,9 @@ export function Properties() {
       obj-props input::-webkit-outer-spin-button,
       obj-props input::-webkit-inner-spin-button { -webkit-appearance: none }`,
     ),
-    selected.material ? el(MaterialField, { object: selected }) : null,
+    selected.material
+      ? el(MaterialField, { instance: selected, objects })
+      : null,
     selected.kind == "light" ? el(LightField, { light: selected }) : null,
     selected.kind == "lathe" ? el(SegmentsField, { object: selected }) : null,
     selected.kind == "patches" ? el(SegmentsField, { object: selected }) : null,
@@ -41,6 +43,9 @@ export function Properties() {
     selected.kind == "tree" ? el(TreeFields, { object: selected }) : null,
     selected.kind == "instance"
       ? el(InstanceField, { instance: selected, objects })
+      : null,
+    selected.kind == "material"
+      ? el(MaterialFields, { instance: selected })
       : null,
     selected.kind == "link" ? el(LinkFields, { object: selected }) : null,
     selected.transforms && el(React.Fragment, {},
@@ -129,9 +134,26 @@ function InstanceField({ instance, objects }) {
   );
 }
 
-function MaterialField({ object }) {
+function MaterialFields({ instance }) {
+  return el(
+    React.Fragment,
+    {},
+    el("span", {}, "Shades"),
+    el(NumericInput, { field: "shade1", object: instance, range: [0, 1] }),
+    el(NumericInput, { field: "shade2", object: instance, range: [0, 1] }),
+    el('div', {}),
+    el("span", {}, "solid"),
+    el(NumericInput, { field: "solid", object: instance, range: [0, 100] }),
+    el("span", {}, "zoom"),
+    el(NumericInput, { field: "zoom", object: instance, range: [0, 100] }),
+    el("span", {}, "waves"),
+    el(NumericInput, { field: "waves", object: instance, range: [0, 100] }),
+  );
+}
+
+function MaterialField({ instance, objects }) {
   const update = (event) => {
-    object.material = event.target.value;
+    instance.material = event.target.value;
     app.trigger("scene_modified");
   };
 
@@ -141,10 +163,10 @@ function MaterialField({ object }) {
     el("span", {}, "Material"),
     el(
       "select",
-      { value: object.material, onChange: update, style: span3col },
-      el("option", {}, "diffuse"),
-      el("option", {}, "dark"),
-      el("option", {}, "mirror"),
+      { value: instance.material, onChange: update, style: span3col },
+      ...objects
+        .filter(e => e.kind == 'material')
+        .map(e => el("option", {}, e.name)),
     ),
   );
 }

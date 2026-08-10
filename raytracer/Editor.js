@@ -2,7 +2,7 @@ import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app, renderSize } from './Raytracer.js'
 import { compileObject, toMatrix, toInverseMatrix } from './geometry.js'
 import { latheMesh } from './geometry/lathe.js'
-import { Offset, Rotate, Scaling, Transforms, Mesh, Link } from './objects.js'
+import { Offset, Rotate, Scaling, Transforms, Mesh, Link, Material } from './objects.js'
 import { Camera, Box, Light, Sphere, Composite, Instance } from './objects.js'
 import { Lathe, Point, Tree } from './objects.js'
 import { add, cross, diff, EPSILON, mag, mapply, matrixStack } from './math.js'
@@ -375,6 +375,8 @@ function createObject(kind, pos, selected, scene) {
       return Instance('instance', ref, withSize(1))
     case 'point':
       return Point(`Point ${scene.children.length + 1}`, withSize(1).offset)
+    case 'material':
+      return Material(`Material ${scene.children.length+1}`, 0, 1, false, 10, 2)
   }
 }
 

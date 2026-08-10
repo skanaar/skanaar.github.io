@@ -1,6 +1,7 @@
 import { toMatrix } from './geometry.js'
 import { norm, diff, dot, div, add, sqMag, mult, mag } from './math.js'
 import { Vec, crossDiff, EPSILON, mapply } from './math.js'
+import { Noise } from './noise.js'
 
 const FAR_AWAY = 32000
 
@@ -15,6 +16,9 @@ function raytrace({ area, totalArea, maxDepth, scene, camera }) {
 
   let spheres = scene.filter(e => e.kind === 'sphere').map(PrecomputedSphere)
   let meshes = scene.filter(e => e.kind === 'mesh').map(PrecomputedMesh)
+  let materials = new Map(
+    scene.filter(e => e.kind === 'material').map(e => [e.name, e])
+  )
 
   let imgdata = new ImageData(width, height)
 
@@ -47,7 +51,7 @@ function raytrace({ area, totalArea, maxDepth, scene, camera }) {
             bright += lightBrightness(hit.point, hit.normal, light)
         }
       }
-      bright = hdr(bright * materialColor(hit))
+      bright = hdr(bright * materialColor(materials, hit))
       let value = Math.min(255, Math.floor(bright * 255))
       let offset = (i + j*width)*4
       imgdata.data[offset] = value
@@ -61,10 +65,17 @@ function raytrace({ area, totalArea, maxDepth, scene, camera }) {
   return imgdata
 }
 
-function materialColor(hit) {
-  if (hit.material == 'diffuse') return 1
-  if (hit.material == 'dark') return 0.5
-  return 1
+let noise = Noise({ zoom: 1, octaves: 3 })
+let waves = (n, x) => Math.sin((x-0.5)*Math.PI*2*n)/2 + 0.5
+
+function materialColor(materials, hit) {
+  let material = materials.get(hit.material)
+  if (!material) return 1
+  if (material.solid) return material.shade1
+  return waves(
+    material.waves,
+    noise(material.zoom * hit.point.x, material.zoom * hit.point.y)
+  )
 }
 
 // Precompute the ray-invariant terms once per scene so the per-ray hot loop

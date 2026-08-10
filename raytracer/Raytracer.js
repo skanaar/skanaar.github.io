@@ -41,6 +41,7 @@ app.addMenu(
   { title: 'Tree', event: 'create_object', arg: 'tree' },
   { title: 'Composite', event: 'create_object', arg: 'composite' },
   { title: 'Instance', event: 'create_object', arg: 'instance' },
+  { title: 'Material', event: 'create_object', arg: 'material' },
   { title: null },
   { title: 'Link camera', event: 'link_camera' },
   { title: 'Point', event: 'create_object', arg: 'point' },

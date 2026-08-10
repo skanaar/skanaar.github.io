@@ -93,6 +93,9 @@ export function compileObject(obj, objects) {
     case 'link': {
       return { ...obj, center: Vec(0,0,0), r: 1 }
     }
+    case 'material': {
+      return { ...obj, center: Vec(0,0,0), r: 1 }
+    }
     case 'point': {
       let point = mapply(toMatrix(obj.transforms), Vec(0,0,0))
       return { kind: 'point', center: point }

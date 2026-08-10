@@ -10,6 +10,7 @@ import {
   Scene,
   Tree,
   Box,
+  Material,
 } from './objects.js'
 import { Offset, Scaling, Rotate, Transforms } from './objects.js'
 import { Vec } from './math.js'
@@ -47,6 +48,10 @@ export function sceneTeapot() {
       ],
       Transforms(Offset(-100,20,-100), Rotate(0,0,0.5), Scaling(0.7,1.25,0.7))
     ),
+    Material('diffuse', 1, 1, true, 10, 1),
+    Material('dark', 0.5, 1, true, 10, 1),
+    Material('marble', 0.5, 1, false, 10, 3),
+    Material('granite', 0, 0.3, false, 10, 2),
   ])
 }
 
@@ -72,7 +77,11 @@ export function sceneIsland() {
         [Vec(0,-20,0),Vec(55,-10,0),Vec(55,0,0)],
         Transforms(Offset(0,-80,0))
       ),
-    ], Transforms(Offset(0,40,0), Rotate(1,1.5,1)))
+    ], Transforms(Offset(0,40,0), Rotate(1,1.5,1))),
+    Material('diffuse', 1, 1, true, 10, 1),
+    Material('dark', 0.5, 1, true, 10, 1),
+    Material('marble', 0.5, 1, false, 10, 3),
+    Material('granite', 0, 0.3, false, 10, 2),
   ])
 }
 
@@ -95,6 +104,7 @@ export function sceneMushroom() {
       32, 16,
       [Vec(50,50,0), Vec(50,80,0), Vec(15,90,0), Vec(1,90,0)],
       Transforms(Offset(0,72,-80), Rotate(0,0,1), Scaling(2,2,2))
-    )
+    ),
+    Material('diffuse', 1, 1, true, 10, 1),
   ])
 }

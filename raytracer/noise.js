@@ -9,7 +9,7 @@ export function Noise(conf) {
   var persistence = conf.persistence || 0.5
   var octaves = conf.octaves || 1
   var scale = conf.zoom * 2 || 2
-  var rand = seededRandom(conf.rseed)
+  var rand = seededRandom(conf.rseed ?? 0)
   var matrix = Array.from({ length: res }).map(() => rand() - 0.5)
 
   function getSingleOctave(x, y) {
