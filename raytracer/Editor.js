@@ -12,6 +12,7 @@ import { LatheEditable } from './geometry/LatheEditable.js'
 import { PatchesEditable } from './geometry/PatchesEditable.js'
 
 let creatables = ['box', 'cylinder', 'cone', 'tree', 'composite', 'instance']
+let clipboard = null
 
 export function Editor() {
   const [mode, setMode] = React.useState('pan')
@@ -48,21 +49,24 @@ export function Editor() {
   useEvent(app, 'zoom', (factor) => setZoom(zoom * factor))
   useEvent(app, 'update_scene', (scene) => {
     setScene(scene)
-    setCameraId(scene.children.find(e => e.kind == 'camera').id)
+    setCameraId(scene.children.find(e => e.kind == 'camera')?.id)
     if (scene.kind === 'lathe-editable') {
       let r = Math.max(1, ...scene.children.map(e => mag(e.transforms.offset)))
       setZoom(100 / r)
       setOffset(Vec(0,0,0))
     }
   })
-  useEvent(app, 'select_object', (item) => setSelected(item))
+  useEvent(app, 'select_object', (item) => {
+    setSelected(item)
+    app.enable('copy_object', null, isCopyable(item?.kind))
+  })
   useEvent(app, 'pick_camera', (cam) => setCameraId(cam))
   useEvent(app, 'select_camera', () => {
     if (selected?.kind != 'camera') return
-    app.trigger('pick_camera', scene.children.findIndex(e => e == selected))
+    app.trigger('pick_camera', selected?.id)
   })
-  useEvent(app, 'create_object', (kind) => {
-    let spawn = createObject(kind, Offset(ox, oy, oz), selected, scene)
+
+  function insertAfterSelection(spawn) {
     let index = scene.children.indexOf(selected)
     if (index > -1)
       scene.children.splice(index+1, 0, spawn)
@@ -70,6 +74,19 @@ export function Editor() {
       scene.children.push(spawn)
     app.trigger('scene_modified')
     app.trigger('select_object', spawn)
+  }
+
+  useEvent(app, 'create_object', (kind) => {
+    insertAfterSelection(createObject(kind, Offset(ox, oy, oz), selected, scene))
+  })
+  useEvent(app, 'copy_object', () => {
+    if (!isCopyable(selected?.kind)) return
+    clipboard = structuredClone(selected)
+    app.enable('paste_object', null, true)
+  })
+  useEvent(app, 'paste_object', () => {
+    if (!clipboard) return
+    insertAfterSelection(structuredClone(clipboard))
   })
   useEvent(app, 'scene_modified', () => {
     scene.update?.()
@@ -83,6 +100,7 @@ export function Editor() {
       app.enable('create_object', e, selected.kind == 'composite')
     app.enable('create_object', 'light', false)
     app.enable('create_object', 'sphere', false)
+    app.enable('paste_object', null, !!clipboard && selected.kind == 'composite')
     app.enable('edit_object', null, false)
     app.enable('edit_scene', null, true)
     app.breadcrumbs = [selected.name]
@@ -99,6 +117,7 @@ export function Editor() {
     app.enable('create_object', 'sphere', true)
     app.enable('create_object', 'light', true)
     for (let e of creatables) app.enable('create_object', e, true)
+    app.enable('paste_object', null, !!clipboard)
     app.enable('edit_object', null, true)
     app.enable('edit_scene', null, false)
     app.breadcrumbs = []
@@ -119,9 +138,9 @@ export function Editor() {
     app.trigger('scene_modified')
   })
   useEvent(app, 'link_camera', () => {
-    if (!selected) return
-    let link = createObject('link', null, selected, scene)
     const currentCamera = scene.children.find(o => o.id == cameraId)
+    if (!selected || !currentCamera) return
+    let link = createObject('link', null, selected, scene)
     link.source = currentCamera.id
     link.target = selected.id
     let rect = viewportRect(currentCamera, selected, 0.3, 0.3)
@@ -377,6 +396,10 @@ function viewportRect(camera, target, w, h) {
 
 function isMeshable(kind) {
   return ['light', 'camera'].includes(kind)
+}
+
+function isCopyable(kind) {
+  return ['box', 'lathe', 'composite'].includes(kind)
 }
 
 function compilePreviewObject(obj, entities, selected) {

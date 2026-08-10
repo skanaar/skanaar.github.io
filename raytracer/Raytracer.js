@@ -21,8 +21,12 @@ app.addMenu(
 )
 app.addMenu(
   'Edit',
+  { title: 'Copy', event: 'copy_object', cmd: 'c' },
+  { title: 'Paste', event: 'paste_object', cmd: 'v' },
+  { title: null },
   { title: 'Edit object', event: 'edit_object', cmd: 'e' },
   { title: 'Edit scene', event: 'edit_scene' },
+  { title: null },
   { title: 'Rename selected...', event: 'rename_object' },
   { title: 'Delete selected', event: 'delete_object' },
 )
@@ -84,6 +88,8 @@ app.enable('rename_object', null, false)
 app.enable('delete_object', null, false)
 app.enable('focus_selection', null, false)
 app.enable('select_camera', null, false)
+app.enable('copy_object', null, false)
+app.enable('paste_object', null, false)
 app.enable('create_object', 'point', false)
 app.addWindow('Objects', ObjectList, {
   visible: true,
@@ -192,7 +198,7 @@ function RayTracer() {
   })
   useEvent(app, 'update_scene', (scene) => {
     currentScene = scene
-    cameraId = scene.children.find(e => e.kind === 'camera').id
+    cameraId = scene.children.find(e => e.kind === 'camera')?.id
     app.enable('create_object', 'point', false)
     app.trigger('render')
   })

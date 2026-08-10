@@ -43,7 +43,7 @@ export function Properties() {
       ? el(InstanceField, { instance: selected, objects })
       : null,
     selected.kind == "link" ? el(LinkFields, { object: selected }) : null,
-    selected.trns && el(React.Fragment, {},
+    selected.transforms && el(React.Fragment, {},
       el(TransformInput, { name: "Offset", step: 1, transform: trns.offset }),
       el(TransformInput, { name: "Rotate", step: 1, transform: trns.rotate }),
       el(TransformInput, { name: "Scale", step: 0.1, transform: trns.scale }),
