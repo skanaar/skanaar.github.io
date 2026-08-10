@@ -25,7 +25,7 @@ export function Editor() {
   const [view, setView] = React.useState('front')
   const [zoom, setZoom] = React.useState(0.75)
   const [selected, setSelected] = React.useState(null)
-  const [cameraIndex, setCameraIndex] = React.useState(null)
+  const [cameraId, setCameraId] = React.useState(null)
 
   useEvent(app, 'scene_view', (view) => {
     app.check('scene_view', view)
@@ -48,7 +48,7 @@ export function Editor() {
   useEvent(app, 'zoom', (factor) => setZoom(zoom * factor))
   useEvent(app, 'update_scene', (scene) => {
     setScene(scene)
-    setCameraIndex(scene.children.findIndex(e => e.kind == 'camera'))
+    setCameraId(scene.children.find(e => e.kind == 'camera').id)
     if (scene.kind === 'lathe-editable') {
       let r = Math.max(1, ...scene.children.map(e => mag(e.transforms.offset)))
       setZoom(100 / r)
@@ -56,7 +56,7 @@ export function Editor() {
     }
   })
   useEvent(app, 'select_object', (item) => setSelected(item))
-  useEvent(app, 'pick_camera', (cam) => setCameraIndex(cam))
+  useEvent(app, 'pick_camera', (cam) => setCameraId(cam))
   useEvent(app, 'select_camera', () => {
     if (selected?.kind != 'camera') return
     app.trigger('pick_camera', scene.children.findIndex(e => e == selected))
@@ -121,16 +121,18 @@ export function Editor() {
   useEvent(app, 'link_camera', () => {
     if (!selected) return
     let link = createObject('link', null, selected, scene)
-    link.source = cameraIndex
-    link.target = scene.children.findIndex(e => e == selected)
-    let rect = viewportRect(scene.children[cameraIndex], selected, 0.3, 0.3)
+    const currentCamera = scene.children.find(o => o.id == cameraId)
+    link.source = currentCamera.id
+    link.target = selected.id
+    let rect = viewportRect(currentCamera, selected, 0.3, 0.3)
     if (rect) {
       link.x = rect.x
       link.y = rect.y
       link.w = rect.w
       link.h = rect.h
     }
-    scene.children.splice(cameraIndex+1, 0, link)
+    const camIndex = scene.children.findIndex(o => o.id == cameraId)
+    scene.children.splice(camIndex+1, 0, link)
     app.trigger('scene_modified')
     app.trigger('select_object', link)
   })

@@ -60,7 +60,10 @@ export function ObjectList() {
         className: [selected === e && 'active', e.hidden && 'hidden']
           .filter(Boolean).join(' ') || undefined,
       },
-        el('span', { class: 'name' }, e.name || e.kind),
+        el('span', { class: 'name' },
+          e.name || e.kind,
+          e.kind == 'link' && el('span', {}, ` ${e.source} - ${e.target}`)
+        ),
         e.kind == 'camera' && el('button', {
           onClick: (ev) => {
             ev.stopPropagation()

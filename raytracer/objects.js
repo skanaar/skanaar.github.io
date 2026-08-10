@@ -30,12 +30,13 @@ export function Point(name, pos) {
   return { kind: 'point', name, transforms: Transforms(pos) }
 }
 
+let camId = 0
 export function Camera(transforms) {
-  return { kind: 'camera', name: 'camera', transforms }
+  return { kind: 'camera', id: camId++, name: 'camera', transforms }
 }
 
-export function Link(from, to, x, y, w, h) {
-  return { kind: 'link', name: 'link', from, to, x, y, w, h }
+export function Link(source, target, x, y, w, h) {
+  return { kind: 'link', name: 'link', source, target, x, y, w, h }
 }
 
 export function Composite(name, children, transforms) {

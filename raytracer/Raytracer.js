@@ -107,7 +107,7 @@ app.addWindow('Editor', Editor, {
 app.scene = Scene([])
 app.breadcrumbs = []
 let currentScene = []
-let cameraIndex = -1
+let cameraId = -1
 export const renderSize = { w: 256, h: 192 }
 let { w, h } = renderSize
 
@@ -116,7 +116,8 @@ function RayTracer() {
   const renderScene = () => {
     // the worker renders through the first camera it finds, so hoist the
     // active one to the front
-    let camera = currentScene.children[cameraIndex]
+    let camera = currentScene.children
+      .find(e => e.kind == 'camera' && e.id == cameraId)
     let entities = camera?.kind === 'camera'
       ? [camera, ...currentScene.children.filter(e => e !== camera)]
       : [
@@ -136,7 +137,7 @@ function RayTracer() {
         : new NoDitherer(),
     }).then((result) => {
       if (app.menuState['toggle_hotspots'] == true)
-        drawLinks(hostRef.current, currentScene.children, cameraIndex)
+        drawLinks(hostRef.current, currentScene.children, cameraId)
       app.trigger('render_complete', result)
     })
   }
@@ -185,13 +186,13 @@ function RayTracer() {
     app.check('toggle_hotspots', !app.menuState['toggle_hotspots'])
     app.trigger('render')
   })
-  useEvent(app, 'pick_camera', (index) => {
-    cameraIndex = index
+  useEvent(app, 'pick_camera', (id) => {
+    cameraId = id
     app.trigger('render')
   })
   useEvent(app, 'update_scene', (scene) => {
     currentScene = scene
-    cameraIndex = scene.children.findIndex(e => e.kind === 'camera')
+    cameraId = scene.children.find(e => e.kind === 'camera').id
     app.enable('create_object', 'point', false)
     app.trigger('render')
   })
@@ -208,13 +209,13 @@ function RayTracer() {
   return el('canvas', { width: w, height: h, ref: hostRef })
 }
 
-function drawLinks(canvas, children, cameraIndex) {
-  if (cameraIndex < 0) return
+function drawLinks(canvas, children, cameraId) {
+  if (cameraId < 0) return
   let ctx = canvas.getContext('2d')
   ctx.save()
   ctx.lineWidth = 1
   for (let link of children) {
-    if (link.kind !== 'link' || link.source !== cameraIndex) continue
+    if (link.kind !== 'link' || link.source !== cameraId) continue
     if (link.hidden) continue
     ctx.strokeStyle = '#fff'
     ctx.strokeRect(
