@@ -376,7 +376,7 @@ function createObject(kind, pos, selected, scene) {
     case 'point':
       return Point(`Point ${scene.children.length + 1}`, withSize(1).offset)
     case 'material':
-      return Material(`Material ${scene.children.length+1}`, 0, 1, false, 10, 2)
+      return Material(`Material ${scene.children.length+1}`, 'solid', 0, 1, 5)
   }
 }
 

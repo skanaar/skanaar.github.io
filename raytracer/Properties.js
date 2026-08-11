@@ -135,19 +135,27 @@ function InstanceField({ instance, objects }) {
 }
 
 function MaterialFields({ instance }) {
+  const update = (event) => {
+    instance.materialKind = event.target.value;
+    app.trigger("scene_modified");
+  };
   return el(
     React.Fragment,
     {},
+    el("span", {}, "Kind"),
+    el("select", { value: instance.ref, onChange: update, style: span3col },
+      el("option", {}, "solid"),
+      el("option", {}, "wood"),
+      el("option", {}, "noise"),
+      el("option", {}, "dots"),
+      el("option", {}, "mirror"),
+    ),
     el("span", {}, "Shades"),
     el(NumericInput, { field: "shade1", object: instance, range: [0, 1] }),
     el(NumericInput, { field: "shade2", object: instance, range: [0, 1] }),
     el('div', {}),
-    el("span", {}, "solid"),
-    el(NumericInput, { field: "solid", object: instance, range: [0, 100] }),
-    el("span", {}, "zoom"),
+    el("span", {}, "Scale"),
     el(NumericInput, { field: "zoom", object: instance, range: [0, 100] }),
-    el("span", {}, "waves"),
-    el(NumericInput, { field: "waves", object: instance, range: [0, 100] }),
   );
 }
 

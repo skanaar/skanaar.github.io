@@ -39,8 +39,8 @@ export function Link(source, target, x, y, w, h) {
   return { kind: 'link', name: 'link', source, target, x, y, w, h }
 }
 
-export function Material(name, shade1, shade2, solid, zoom, waves) {
-  return { kind: 'material', name, shade1, shade2, solid, zoom, waves }
+export function Material(name, materialKind, shade1, shade2 = 1, zoom = 1) {
+  return { kind: 'material', name, materialKind, shade1, shade2, zoom }
 }
 
 export function Composite(name, children, transforms) {

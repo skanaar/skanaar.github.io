@@ -89,7 +89,7 @@ export const crossDiff = (a, b, v) => Vec(
 
 export const sq = (x) => x * x
 export const clamp = (x, low, high) => Math.max(low, Math.min(x, high))
-export const rnd = (t) => t * Math.random()
+export const lerp = (factor, a, b) => a + (b - a) * factor
 
 export function* generateRowByRowCoordinates(w, h) {
   for (let j = 0; j < h; j++)
