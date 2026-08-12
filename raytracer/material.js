@@ -1,32 +1,55 @@
-import { clamp, diff, lerp, sqMag, Vec } from './math.js'
+import { add, clamp, cross, diff, lerp, mult, sqMag, Vec } from './math.js'
 import { Noise } from './noise.js'
 
 let noise = Noise({ zoom: 100, octaves: 3, persistance: 0.7 })
 let softNoise = Noise({ zoom: 100, octaves: 2 })
 let waves = (n, x) => Math.sin((x-0.5)*Math.PI*2*n)/2 + 0.5
 
-export function computeColor(material, hit) {
-  if (!material) return 1
+function hitPatch(hit, normal, color, mirror) {
+  return { point: hit.point, depth: hit.depth, normal, color, mirror }
+}
+
+export function computeHitPatch(material, hit) {
+  if (!material) return hitPatch(hit, hit.normal, 1, false)
+  if (material.bump) {
+    let u = cross(Vec(0, 1, 0), hit.normal)
+    let v = cross(u, hit.normal)
+    let b0 = computeAt(material, hit.point, hit)
+    let bu = computeAt(material, add(hit.point, u), hit)
+    let bv = computeAt(material, add(hit.point, v), hit)
+    let bumpNormal = add(hit.normal,
+      add(mult(bu.color - b0.color, u), mult(bv.color - b0.color, v))
+    )
+    return hitPatch(hit, bumpNormal, 1, false)
+  }
+  return computeAt(material, hit.point, hit)
+}
+
+function computeAt(material, point, hit) {
   let { materialKind, shade1, shade2, zoom } = material
   switch (materialKind) {
-    case 'solid': return shade1
+    case 'mirror': return hitPatch(hit, hit.normal, 1, true)
+    case 'solid': return hitPatch(hit, hit.normal, shade1, false)
     case 'noise': {
-      let value = noise(zoom*hit.point.x, zoom*hit.point.y, zoom*hit.point.z)
-      return lerp(value, shade1, shade2)
+      let value = noise(zoom*point.x, zoom*point.y, zoom*point.z)
+      let color = lerp(value, shade1, shade2)
+      return hitPatch(hit, hit.normal, color, false)
     }
     case 'wood': {
-      let value = softNoise(zoom*hit.point.x, 4*zoom*hit.point.y, 4*zoom*hit.point.z)
-      return lerp(waves(3, value), shade1, shade2)
+      let value = softNoise(zoom*point.x, 4*zoom*point.y, 4*zoom*point.z)
+      let color = lerp(waves(3, value), shade1, shade2)
+      return hitPatch(hit, hit.normal, color, false)
     }
     case 'dots':
-      let x = zoom * 0.01 * hit.point.x
-      let y = zoom * 0.01 * hit.point.y
-      let z = zoom * 0.01 * hit.point.z
+      let x = zoom * 0.01 * point.x
+      let y = zoom * 0.01 * point.y
+      let z = zoom * 0.01 * point.z
       let d = sqMag(diff(
         Vec(x, y, z),
         Vec(Math.round(x), Math.round(y), Math.round(z))
       ))
-      return lerp(clamp(d*5, 0, 1), shade1, shade2)
+      let color = lerp(clamp(d*5, 0, 1), shade1, shade2)
+      return hitPatch(hit, hit.normal, color, false)
   }
-  if (material.solid) return material.shade1
+  return hitPatch(hit, hit.normal, 0, false)
 }

@@ -52,6 +52,7 @@ export function sceneTeapot() {
     Material('dark', 'solid', 0.5),
     Material('wood', 'wood', 0.5, 1,5),
     Material('granite', 'noise', 0, 0.3, 20),
+    Material('mirror', 'mirror', 0),
   ])
 }
 

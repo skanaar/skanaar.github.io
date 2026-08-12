@@ -1,5 +1,5 @@
 import { toMatrix } from './geometry.js'
-import { computeColor } from './material.js'
+import { computeHitPatch } from './material.js'
 import { norm, diff, dot, div, add, sqMag, mult, mag } from './math.js'
 import { Vec, crossDiff, EPSILON, mapply } from './math.js'
 
@@ -38,21 +38,23 @@ function raytrace({ area, totalArea, maxDepth, scene, camera }) {
       ))
       let ray = norm(diff(screenPoint, camPos))
       let hit = trace_ray(camPos, ray, maxDepth, spheres, meshes)
+      let hitPatch = computeHitPatch(materials.get(hit.material), hit)
 
       // hit patch illumination
       let bright = 0
-      if (hit.depth < FAR_AWAY) {
+      if (hitPatch.depth < FAR_AWAY) {
         for (let light of lights) {
-          let light_vector = diff(hit.point, light.point)
+          let light_vector = diff(hitPatch.point, light.point)
           let light_dist = mag(light_vector)
           let light_dir = div(light_vector, light_dist)
           let beam = trace_ray(light.point, light_dir, 0, spheres, meshes)
           if (beam.depth > light_dist - EPSILON)
-            bright += lightBrightness(hit.point, hit.normal, light)
+            bright += lightBrightness(hitPatch.point, hitPatch.normal, light)
         }
       }
-      bright = hdr(bright * computeColor(materials.get(hit.material), hit))
-      let value = Math.min(255, Math.floor(bright * 255))
+
+      let exposure = hdr(bright * hitPatch.color)
+      let value = Math.min(255, Math.floor(exposure * 255))
       let offset = (i + j*width)*4
       imgdata.data[offset] = value
       imgdata.data[offset + 1] = value
@@ -159,7 +161,12 @@ function trace_ray(camera, ray, depthBudget, spheres, meshes) {
   if (hit.material === 'mirror' && depthBudget > 0) {
     let reflection_ray = add(ray, mult(-2*dot(hit.normal, ray), hit.normal))
     let nextHit = trace_ray(hit.point, reflection_ray, depthBudget - 1, spheres, meshes)
-    hit = { depth: hit.depth, normal: nextHit.normal, point: nextHit.point }
+    hit = {
+      depth: hit.depth,
+      normal: nextHit.normal,
+      point: nextHit.point,
+      material: hit.material,
+    }
   }
 
   return hit
