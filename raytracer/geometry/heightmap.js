@@ -12,7 +12,7 @@ export function heightMapMesh(opts, matrix) {
       let island = isola * falloff + (1-isola) * 1
       return Vec(
         (i / res - 0.5),
-        noise(i/res, j/res) * island,
+        noise(i/res, j/res, 0) * island,
         (j / res - 0.5)
       )
     }

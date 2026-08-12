@@ -11,11 +11,11 @@ export function computeColor(material, hit) {
   switch (materialKind) {
     case 'solid': return shade1
     case 'noise': {
-      let value = noise(zoom * hit.point.x, zoom * hit.point.y)
+      let value = noise(zoom*hit.point.x, zoom*hit.point.y, zoom*hit.point.z)
       return lerp(value, shade1, shade2)
     }
     case 'wood': {
-      let value = softNoise(zoom * hit.point.x, 4 * zoom * hit.point.y)
+      let value = softNoise(zoom*hit.point.x, 4*zoom*hit.point.y, 4*zoom*hit.point.z)
       return lerp(waves(3, value), shade1, shade2)
     }
     case 'dots':

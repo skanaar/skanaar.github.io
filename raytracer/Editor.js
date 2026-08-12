@@ -2,9 +2,7 @@ import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app, renderSize } from './Raytracer.js'
 import { compileObject, toMatrix, toInverseMatrix } from './geometry.js'
 import { latheMesh } from './geometry/lathe.js'
-import { Offset, Rotate, Scaling, Transforms, Mesh, Link, Material } from './objects.js'
-import { Camera, Box, Light, Sphere, Composite, Instance } from './objects.js'
-import { Lathe, Point, Tree } from './objects.js'
+import { Offset, Rotate, Scaling, Mesh, createObject } from './objects.js'
 import { add, cross, diff, EPSILON, mag, mapply, matrixStack } from './math.js'
 import { RotateX, RotateY, Vec } from './math.js'
 import { Toolbar } from './Toolbar.js'
@@ -354,32 +352,6 @@ export function Editor() {
   )
 }
 
-function createObject(kind, pos, selected, scene) {
-  let withSize = (s) => Transforms(pos, Rotate(0, 0, 0), Scaling(s, s, s))
-  let l = 100
-  switch (kind) {
-    case 'light': return Light(64, pos)
-    case 'camera': return Camera(withSize(1))
-    case 'link': return Link(-1, -1, 0.3, 0.3, 0.3, 0.3)
-    case 'box': return Box('box', withSize(1))
-    case 'cylinder':
-      return Lathe('cylinder', 16, [Vec(l,-l,0),Vec(l,l,0)], withSize(1))
-    case 'cone':
-      return Lathe('cone',16,[Vec(0,-l,0),Vec(l,l,0),Vec(0,l,0)], withSize(1))
-    case 'sphere': return Sphere('sphere', 'diffuse', withSize(30))
-    case 'tree': return Tree('tree', {}, withSize(1))
-    case 'composite':
-      return Composite('composite', [createObject('box', pos)], withSize(1))
-    case 'instance':
-      let ref = isMeshable(selected?.kind) ? null : (selected?.name ?? null)
-      return Instance('instance', ref, withSize(1))
-    case 'point':
-      return Point(`Point ${scene.children.length + 1}`, withSize(1).offset)
-    case 'material':
-      return Material(`Material ${scene.children.length+1}`, 'solid', 0, 1, 5)
-  }
-}
-
 let round2 = (v) => Math.round(v * 100) / 100
 
 function viewportRect(camera, target, w, h) {
@@ -394,10 +366,6 @@ function viewportRect(camera, target, w, h) {
     w,
     h,
   }
-}
-
-function isMeshable(kind) {
-  return ['light', 'camera'].includes(kind)
 }
 
 function isCopyable(kind) {

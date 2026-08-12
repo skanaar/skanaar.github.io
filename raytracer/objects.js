@@ -1,4 +1,4 @@
-import { add, diff, mult, mag } from './math.js'
+import { add, diff, mult, mag, Vec } from './math.js'
 
 export function Offset(x, y, z) { return { x, y, z } }
 export function Rotate(x, y, z) { return { x, y, z } }
@@ -52,8 +52,7 @@ export function Instance(name, ref, transforms) {
 }
 
 export function Light(amount, offset) {
-  let transforms = Transforms(offset, Rotate(0,0,0), Scaling(1,1,1))
-  return { kind: 'light', amount, transforms }
+  return { kind: 'light', amount, transforms: Transforms(offset) }
 }
 
 export function Sphere(name, material, transforms) {
@@ -102,5 +101,34 @@ export function Tree(name, opts, transforms) {
     branches, trunkWidth, branchLength, leafCount,
     iterations, branchAngle, angleRandomness, randomSeed,
     transforms,
+  }
+}
+
+function isMeshable(kind) { return ['light', 'camera'].includes(kind) }
+
+export function createObject(kind, pos, selected, scene) {
+  let withSize = (s) => Transforms(pos, Rotate(0, 0, 0), Scaling(s, s, s))
+
+  let l = 100
+  switch (kind) {
+    case 'light': return Light(64, pos)
+    case 'camera': return Camera(withSize(1))
+    case 'link': return Link(-1, -1, 0.3, 0.3, 0.3, 0.3)
+    case 'box': return Box('box', withSize(1))
+    case 'cylinder':
+      return Lathe('cylinder', 16, [Vec(l,-l,0),Vec(l,l,0)], withSize(1))
+    case 'cone':
+      return Lathe('cone',16,[Vec(0,-l,0),Vec(l,l,0),Vec(0,l,0)], withSize(1))
+    case 'sphere': return Sphere('sphere', 'diffuse', withSize(30))
+    case 'tree': return Tree('tree', {}, withSize(1))
+    case 'composite':
+      return Composite('composite', [createObject('box', pos)], withSize(1))
+    case 'instance':
+      let ref = isMeshable(selected?.kind) ? null : (selected?.name ?? null)
+      return Instance('instance', ref, withSize(1))
+    case 'point':
+      return Point(`Point ${scene.children.length + 1}`, withSize(1).offset)
+    case 'material':
+      return Material(`Material ${scene.children.length+1}`, 'solid', 0, 1, 5)
   }
 }
