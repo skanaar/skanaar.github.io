@@ -199,7 +199,7 @@ export function Editor() {
 
   React.useEffect(() => {
     function onKeyDown(e) {
-      if (!selected) return
+      if (!selected || !selected.transforms) return
       if (/^(input|textarea|select)$/i.test(e.target.tagName)) return
       if (e.key == 'Delete' || e.key == 'Backspace') {
         e.preventDefault()
