@@ -2,14 +2,17 @@ import { useEvent, el, useForceUpdate } from '../assets/system.js'
 import { app, renderSize } from './Raytracer.js'
 import { compileObject, toMatrix, toInverseMatrix } from './geometry.js'
 import { latheMesh } from './geometry/lathe.js'
-import { Offset, Rotate, Scaling, Mesh, createObject } from './objects.js'
+import { Offset, Rotate, Scaling, Mesh, createObject, compositeCompatibles } from './objects.js'
 import { add, cross, diff, EPSILON, mag, mapply, matrixStack } from './math.js'
 import { RotateX, RotateY, Vec } from './math.js'
 import { Toolbar } from './Toolbar.js'
 import { LatheEditable } from './geometry/LatheEditable.js'
 import { PatchesEditable } from './geometry/PatchesEditable.js'
 
-let creatables = ['box', 'cylinder', 'cone', 'tree', 'composite', 'instance']
+let creatables = [
+  'camera', 'light', 'sphere', 'box', 'lathe',
+  'tree', 'composite', 'instance', 'material'
+]
 let clipboard = null
 
 export function Editor() {
@@ -95,7 +98,11 @@ export function Editor() {
   useEvent(app, 'edit_object', () => {
     if (!['composite', 'lathe', 'patches'].includes(selected?.kind)) return
     for (let e of creatables)
-      app.enable('create_object', e, selected.kind == 'composite')
+      app.enable('create_object', e,
+        selected.kind == 'composite'
+          ? compositeCompatibles.has(e)
+          : e == 'point'
+      )
     app.enable('create_object', 'light', false)
     app.enable('create_object', 'sphere', false)
     app.enable('paste_object', null, !!clipboard && selected.kind == 'composite')

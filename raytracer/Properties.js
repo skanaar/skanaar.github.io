@@ -1,13 +1,14 @@
 import { useForceUpdate, useEvent, el } from "../assets/system.js";
+import { instanceCompatibles } from "./objects.js";
 import { app } from "./Raytracer.js";
 
 export function Properties() {
-  const [selected, setSelected] = React.useState(null);
-  const [objects, setObjects] = React.useState([]);
-  const forceUpdate = useForceUpdate();
-  useEvent(app, "select_object", (obj) => setSelected(obj));
-  useEvent(app, "scene_modified", forceUpdate);
-  useEvent(app, "update_scene", (objs) => setObjects(objs.children));
+  const [selected, setSelected] = React.useState(null)
+  const [objects, setObjects] = React.useState([])
+  const forceUpdate = useForceUpdate()
+  useEvent(app, "select_object", (obj) => setSelected(obj))
+  useEvent(app, "scene_modified", forceUpdate)
+  useEvent(app, "update_scene", (objs) => setObjects(objs.children))
 
   if (!selected) return null;
 
@@ -53,13 +54,13 @@ export function Properties() {
       el(TransformInput, { name: "Rotate", step: 1, transform: trns.rotate }),
       el(TransformInput, { name: "Scale", step: 0.1, transform: trns.scale }),
     )
-  );
+  )
 }
 
 export function TransformInput({ transform: tr, name, step }) {
   const update = (field) => (event) => {
     tr[field] = +event.target.value;
-    app.trigger("scene_modified");
+    app.trigger("scene_modified")
   };
 
   return el(
@@ -69,13 +70,13 @@ export function TransformInput({ transform: tr, name, step }) {
     el("input", { type: "number", value: tr.x, step, onChange: update("x") }),
     el("input", { type: "number", value: tr.y, step, onChange: update("y") }),
     el("input", { type: "number", value: tr.z, step, onChange: update("z") }),
-  );
+  )
 }
 
 function NumericInput({ field, object, range, step }) {
   const update = (event) => {
     object[field] = +event.target.value;
-    app.trigger("scene_modified");
+    app.trigger("scene_modified")
   };
   return el("input", {
     type: "number",
@@ -84,7 +85,18 @@ function NumericInput({ field, object, range, step }) {
     min: range?.[0],
     max: range?.[1],
     step: step ?? (range ? (range[1] - range[0] < 10 ? 0.1 : 1) : undefined),
-  });
+  })
+}
+
+function Select({ field, object, children }) {
+  const update = (event) => {
+    object[field] = event.target.value;
+    app.trigger('scene_modified')
+  }
+  return el('select',
+    { value: object[field], onChange: update, style: span3col },
+    children.map((e) => el('option', {}, e)),
+  )
 }
 
 function LightField({ light }) {
@@ -95,7 +107,7 @@ function LightField({ light }) {
     el(NumericInput, { field: "amount", object: light, range: [0, 10000] }),
     el("div", {}),
     el("div", {}),
-  );
+  )
 }
 
 function SegmentsField({ object }) {
@@ -106,38 +118,29 @@ function SegmentsField({ object }) {
     el(NumericInput, { field: "res", object, range: [2, 64] }),
     el("div", {}),
     el("div", {}),
-  );
+  )
 }
 
 const span3col = { gridColumn: "2 / span 3", alignSelf: "start" };
 
 function InstanceField({ instance, objects }) {
-  const update = (event) => {
-    instance.ref = event.target.value;
-    app.trigger("scene_modified");
-  };
-
   return el(
     React.Fragment,
     {},
     el("span", {}, "Template"),
-    el(
-      "select",
-      { value: instance.ref, onChange: update, style: span3col },
-      el("option", {}, ""),
+    el(Select, { object: instance, field: 'ref' },
       objects
         .filter((e) => e != instance)
-        .filter((e) => e.kind !== "light")
-        .filter((e) => e.kind !== "camera")
-        .map((e) => el("option", {}, e.name ?? e.kind)),
+        .filter((e) => instanceCompatibles.has(e.kind))
+        .map((e) => e.name ?? e.kind),
     ),
-  );
+  )
 }
 
 function MaterialFields({ instance }) {
   const update = (event) => {
     instance.materialKind = event.target.value;
-    app.trigger("scene_modified");
+    app.trigger("scene_modified")
   };
   return el(
     React.Fragment,
@@ -156,27 +159,18 @@ function MaterialFields({ instance }) {
     el('div', {}),
     el("span", {}, "Scale"),
     el(NumericInput, { field: "zoom", object: instance, range: [0, 100] }),
-  );
+  )
 }
 
 function MaterialField({ instance, objects }) {
-  const update = (event) => {
-    instance.material = event.target.value;
-    app.trigger("scene_modified");
-  };
-
   return el(
     React.Fragment,
     {},
     el("span", {}, "Material"),
-    el(
-      "select",
-      { value: instance.material, onChange: update, style: span3col },
-      ...objects
-        .filter(e => e.kind == 'material')
-        .map(e => el("option", {}, e.name)),
+    el(Select, { object: instance, field: 'material' },
+      objects.filter(e => e.kind == 'material').map(e => e.name),
     ),
-  );
+  )
 }
 
 function LinkFields({ object }) {
@@ -194,7 +188,7 @@ function LinkFields({ object }) {
     el("span", {}, "Width, Height"),
     el(NumericInput, { field: "w", object: object, range: [0, 1] }),
     el(NumericInput, { field: "h", object: object, range: [0, 1] }),
-  );
+  )
 }
 
 function TreeFields({ object }) {
@@ -217,7 +211,9 @@ function TreeFields({ object }) {
     el(NumericInput, { field: "randomSeed", object, range: [0, 9999] }),
     el("span", {}, "Leaves"),
     el(NumericInput, { field: "leafCount", object, range: [0, 6], step: 1 }),
-  );
+    el('div', {}),
+    el('div', {}),
+  )
 }
 
 function TerrainFields({ object }) {
@@ -238,7 +234,5 @@ function TerrainFields({ object }) {
     el(NumericInput, { field: "octaves", object, range: [1, 12] }),
     el("span", {}, "Threshold"),
     el(NumericInput, { field: "threshold", object, range: [-1, 3] }),
-    el("div", {}),
-    el("div", {}),
-  );
+  )
 }

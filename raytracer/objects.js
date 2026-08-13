@@ -46,10 +46,15 @@ export function Material(name, materialKind, shade1, shade2 = 1, zoom = 1) {
 export function Composite(name, children, transforms) {
   return { kind: 'composite', name, children, material: 'diffuse', transforms }
 }
+export let compositeCompatibles =
+  new Set(['box', 'lathe', 'tree', 'heightmap', 'bezierlathe', 'patches']);
 
 export function Instance(name, ref, transforms) {
   return { kind: 'instance', name, ref, transforms }
 }
+export const instanceCompatibles = new Set([
+  'box', 'lathe', 'tree', 'heightmap', 'bezierlathe', 'patches', 'composite'
+]);
 
 export function Light(amount, offset) {
   return { kind: 'light', amount, transforms: Transforms(offset) }
@@ -76,12 +81,12 @@ export function BezierPatchSet(name, patches, res, transforms) {
   return { kind: 'patches', name, material:'diffuse', patches, res, transforms }
 }
 
-export function HeightMap(name, opts, transforms) {
+export function HeightMap(name, opts, transforms, material = 'diffuse') {
   let { res, rseed, zoom, isola, persistence, octaves, threshold = -1 } = opts
   return {
     kind: 'heightmap',
     name, res, rseed, zoom, isola, persistence, octaves, threshold,
-    transforms, material: 'diffuse'
+    transforms, material
   }
 }
 
@@ -115,10 +120,8 @@ export function createObject(kind, pos, selected, scene) {
     case 'camera': return Camera(withSize(1))
     case 'link': return Link(-1, -1, 0.3, 0.3, 0.3, 0.3)
     case 'box': return Box('box', withSize(1))
-    case 'cylinder':
+    case 'lathe':
       return Lathe('cylinder', 16, [Vec(l,-l,0),Vec(l,l,0)], withSize(1))
-    case 'cone':
-      return Lathe('cone',16,[Vec(0,-l,0),Vec(l,l,0),Vec(0,l,0)], withSize(1))
     case 'sphere': return Sphere('sphere', 'diffuse', withSize(30))
     case 'tree': return Tree('tree', {}, withSize(1))
     case 'composite':
