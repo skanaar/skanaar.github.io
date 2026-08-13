@@ -234,5 +234,7 @@ function TerrainFields({ object }) {
     el(NumericInput, { field: "octaves", object, range: [1, 12] }),
     el("span", {}, "Threshold"),
     el(NumericInput, { field: "threshold", object, range: [-1, 3] }),
+    el('div', {}),
+    el('div', {}),
   )
 }

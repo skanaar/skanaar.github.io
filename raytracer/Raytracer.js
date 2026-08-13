@@ -38,6 +38,7 @@ app.addMenu(
   { title: 'Box', event: 'create_object', arg: 'box' },
   { title: 'Lathe', event: 'create_object', arg: 'lathe' },
   { title: 'Tree', event: 'create_object', arg: 'tree' },
+  { title: 'Terrain', event: 'create_object', arg: 'heightmap' },
   { title: 'Composite', event: 'create_object', arg: 'composite' },
   { title: 'Instance', event: 'create_object', arg: 'instance' },
   { title: 'Material', event: 'create_object', arg: 'material' },

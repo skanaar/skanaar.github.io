@@ -58,6 +58,7 @@ function KindIcon({ kind }) {
 
 export function ObjectList() {
   const [query, setQuery] = React.useState('')
+  const [filter, setFilter] = React.useState('all')
   const [selected, setSelected] = React.useState(null)
   const [scene, setScene] = React.useState(app.scene)
   const forceUpdate = useForceUpdate()
@@ -67,6 +68,14 @@ export function ObjectList() {
 
   const items = scene.children
     .filter(e => !e.renderOnly)
+    .filter(e => {
+      switch (filter) {
+        case 'all': return true
+        case 'cameras': return 'camera link'.includes(e.kind)
+        case 'objects': return !'camera material link'.includes(e.kind)
+        case 'materials': return e.kind == 'material'
+      }
+    })
     .filter(e => !query || e.name?.includes(query) || e.kind.includes(query))
 
   return el(
@@ -74,8 +83,11 @@ export function ObjectList() {
     {},
     el('style', {}, style),
     el('bread-crumbs', {},
-      el('span', { style: { marginRight: 'auto' }},
-        app.breadcrumbs.length ? `scene > ${app.breadcrumbs[0]}` : 'scene'
+      el('select', { value: filter, onChange: (e) => setFilter(e.target.value) },
+        el('option', {}, 'all'),
+        el('option', {}, 'cameras'),
+        el('option', {}, 'objects'),
+        el('option', {}, 'materials'),
       ),
       el("input", {
         type: "search",

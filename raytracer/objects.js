@@ -10,10 +10,10 @@ export function Transforms(offset, rotate, scale = Scaling(1,1,1)) {
 }
 
 export function Mesh(material, polys, ops = {}) {
-  const vertices = polys
+  const verts = polys
     .flatMap(({ a, b, c }) => [a, b, c])
-  let center = mult(1/vertices.length, vertices.reduce((acc, e) => add(acc,e)))
-  let radius = vertices.reduce((max,p) => Math.max(mag(diff(center,p)), max), 0)
+  let center = mult(1/verts.length, verts.reduce((acc, e) => add(acc,e), 0))
+  let radius = verts.reduce((max,p) => Math.max(mag(diff(center,p)), max), 0)
   let renderOnly = ops.renderOnly
   return { kind: 'mesh', material, polys, center, radius, renderOnly }
 }
@@ -124,6 +124,10 @@ export function createObject(kind, pos, selected, scene) {
       return Lathe('cylinder', 16, [Vec(l,-l,0),Vec(l,l,0)], withSize(1))
     case 'sphere': return Sphere('sphere', 'diffuse', withSize(30))
     case 'tree': return Tree('tree', {}, withSize(1))
+    case 'heightmap':
+      return HeightMap('terrain', {
+        res: 16, isola: 0, seed: 0, zoom: 10, persistence: 0.5, octaves: 3
+      }, withSize(100))
     case 'composite':
       return Composite('composite', [createObject('box', pos)], withSize(1))
     case 'instance':
@@ -132,6 +136,7 @@ export function createObject(kind, pos, selected, scene) {
     case 'point':
       return Point(`Point ${scene.children.length + 1}`, withSize(1).offset)
     case 'material':
-      return Material(`Material ${scene.children.length+1}`, 'solid', 0, 1, 5)
+      return Material(`Material ${scene.children.length + 1}`, 'solid', 0, 1, 5)
+    default: throw new Error('unknown object kint: ' + kind)
   }
 }
