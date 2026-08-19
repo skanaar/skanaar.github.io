@@ -15,6 +15,26 @@ let creatables = [
 ]
 let clipboard = null
 
+function pickFile(accept) {
+  return new Promise((resolve) => {
+    let input = document.createElement('input')
+    input.type = 'file'
+    input.accept = accept
+    input.addEventListener('change', () => resolve(input.files[0] ?? null))
+    input.addEventListener('cancel', () => resolve(null))
+    input.click()
+  })
+}
+
+function downloadFile(name, text) {
+  let url = URL.createObjectURL(new Blob([text], { type: 'application/json' }))
+  let a = document.createElement('a')
+  a.href = url
+  a.download = name
+  a.click()
+  setTimeout(() => URL.revokeObjectURL(url), 1000)
+}
+
 export function Editor() {
   const [mode, setMode] = React.useState('pan')
   const [startPos, setStartPos] = React.useState(null)
@@ -161,18 +181,19 @@ export function Editor() {
     app.trigger('select_object', link)
   })
 
-  const storageKey = `skanaar:raytracer:scene`
   useEvent(app, 'save_scene', () => {
     scene.update?.()
-    try { localStorage.setItem(storageKey, JSON.stringify(app.scene)) }
-    catch (e) { alert(`Could not save scene: ${e.message}`) }
+    downloadFile('scene.json', JSON.stringify(app.scene, null, 2))
   })
-  useEvent(app, 'load_scene', () => {
+  useEvent(app, 'load_scene', async () => {
+    let file = await pickFile('.json,application/json')
+    if (!file) return
     try {
-      app.trigger('update_scene', JSON.parse(localStorage.getItem(storageKey)))
-      scene.update?.()
+      app.scene = JSON.parse(await file.text())
+      app.check('scene', null)
+      app.trigger('edit_scene')
     }
-    catch (e) { alert(`Could not load scene: ${e.message}`) }
+    catch (e) { alert(`Could not open scene: ${e.message}`) }
   })
 
   function screenToSpace({ movementX, movementY }) {
