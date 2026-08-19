@@ -388,6 +388,7 @@ function compilePreviewObject(obj, entities, selected) {
           ? [Vec(15*Math.SQRT2,-30,0), Vec(0,0,0), Vec(1,-500, 0)]
           : [Vec(15*Math.SQRT2,-30,0), Vec(0,0,0)],
         4,
+        360,
         matrixStack(toMatrix(obj.transforms), RotateX(Math.PI/2), RotateY(Math.PI/4))
       )
     )

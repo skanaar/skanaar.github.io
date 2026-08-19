@@ -68,8 +68,9 @@ export function Box(name, transforms, material = 'diffuse') {
   return { kind: 'box', name, material, transforms }
 }
 
-export function Lathe(name, res, path, transforms) {
-  return { kind: 'lathe', name, material: 'diffuse', path, res, transforms }
+export function Lathe(name, res, angle, path, transforms) {
+  let material = 'diffuse'
+  return { kind: 'lathe', name, material, angle, path, res, transforms }
 }
 
 export function BezierLathe(name, resU, resV, path, transforms) {
@@ -121,7 +122,7 @@ export function createObject(kind, pos, selected, scene) {
     case 'link': return Link(-1, -1, 0.3, 0.3, 0.3, 0.3)
     case 'box': return Box('box', withSize(1))
     case 'lathe':
-      return Lathe('cylinder', 16, [Vec(l,-l,0),Vec(l,l,0)], withSize(1))
+      return Lathe('cylinder', 16, 360, [Vec(l,-l,0),Vec(l,l,0)], withSize(1))
     case 'sphere': return Sphere('sphere', 'diffuse', withSize(30))
     case 'tree': return Tree('tree', {}, withSize(1))
     case 'heightmap':

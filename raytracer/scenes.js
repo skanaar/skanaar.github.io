@@ -21,7 +21,7 @@ export function sceneTeapot() {
     Camera(Transforms(Offset(0,0,420))),
     Light(16, Offset(-100, -100, -100)),
     Light(150, Offset(200-128, 50-128, 256)),
-    Lathe('room', 4,
+    Lathe('room', 4, 360,
       [Vec(0,-4,0), Vec(Math.sqrt(2),-4,0), Vec(Math.sqrt(2),1,0), Vec(0,1,0)],
       Transforms(Offset(0,0,0), Rotate(-90,0,45),Scaling(150,150,-150))
     ),
@@ -32,7 +32,7 @@ export function sceneTeapot() {
       3,
       Transforms(Offset(-8,150,0), Rotate(0, -15, 0), Scaling(0.8,0.8,0.8))
     ),
-    Lathe('column', 16,
+    Lathe('column', 16, 360,
       [
         Vec(20,-115,0),
         Vec(25,-110,0),
@@ -90,15 +90,15 @@ export function sceneIsland() {
       { randomSeed: 8 },
       Transforms(Offset(-101,62,6), Rotate(0,-2,0), Scaling(0.29,0.29,0.29))
     ),
-    ...hexes.map((offset, i) => Lathe(`hex ${i+1}`, 6, hex,
+    ...hexes.map((offset, i) => Lathe(`hex ${i+1}`, 6, 360, hex,
       Transforms(offset, Rotate(0,0,0), Scaling(0.51,0.51,0.51))
     )),
     Box('water', Transforms(Offset(0,70,0), Rotate(0, 0, 0), Scaling(1000, 0.1, 1000)), 'dark'),
     Composite('temple', [
       ...pillars.map((offset, i) =>
-        Lathe(`p${i+1}`, 12, pillar, Transforms(offset, Rotate(0,0,0)))
+        Lathe(`p${i+1}`, 12, 360, pillar, Transforms(offset, Rotate(0,0,0)))
       ),
-      Lathe('roof', 5,
+      Lathe('roof', 5, 360,
         [Vec(0,-20,0),Vec(55,-10,0),Vec(55,0,0)],
         Transforms(Offset(0,-80,0))
       ),
@@ -125,7 +125,7 @@ export function sceneMushroom() {
       Transforms(Offset(0,72,-80), Rotate(0,0,1), Scaling(2,2,2))
     ),
     Lathe('mushroom-gills',
-      32,
+      32, 360,
       [Vec(50,50,0), Vec(25,50,0)],
       Transforms(Offset(0,72,-80), Rotate(0,0,1), Scaling(2,2,2))
     ),

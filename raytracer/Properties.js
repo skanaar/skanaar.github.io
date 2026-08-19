@@ -36,7 +36,7 @@ export function Properties() {
       ? el(MaterialField, { instance: selected, objects })
       : null,
     selected.kind == "light" ? el(LightField, { light: selected }) : null,
-    selected.kind == "lathe" ? el(SegmentsField, { object: selected }) : null,
+    selected.kind == "lathe" ? el(LatheFields, { object: selected }) : null,
     selected.kind == "patches" ? el(SegmentsField, { object: selected }) : null,
     selected.kind == "heightmap"
       ? el(TerrainFields, { object: selected })
@@ -107,6 +107,17 @@ function LightField({ light }) {
     el(NumericInput, { field: "amount", object: light, range: [0, 10000] }),
     el("div", {}),
     el("div", {}),
+  )
+}
+
+function LatheFields({ object }) {
+  return el(
+    React.Fragment,
+    {},
+    el("span", {}, "Segments"),
+    el(NumericInput, { field: "res", object, range: [2, 64] }),
+    el("span", {}, "Angle"),
+    el(NumericInput, { field: "angle", object, range: [1, 360] }),
   )
 }
 

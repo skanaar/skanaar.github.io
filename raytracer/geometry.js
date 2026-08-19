@@ -33,7 +33,7 @@ export function compileObject(obj, objects) {
     case 'mesh': return obj
     case 'lathe': return Mesh(
       obj.material,
-      latheMesh(obj.path, obj.res, toMatrix(obj.transforms))
+      latheMesh(obj.path, obj.res, obj.angle, toMatrix(obj.transforms))
     )
     case 'bezierlathe': return Mesh(
       obj.material,

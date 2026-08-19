@@ -1,8 +1,8 @@
-import { mapply, RotateY } from '../math.js'
+import { mapply, RotateY, π } from '../math.js'
 import { Polygon, isValidPolygon, transformTriangle } from './polygon.js'
 
-export function latheMesh(path, res, matrix) {
-  var vertex = (i,j) => mapply(RotateY(-Math.PI * 2 * i/res), path[j])
+export function latheMesh(path, res, angle, matrix) {
+  var vertex = (i,j) => mapply(RotateY(-π * angle/180 * i/res), path[j])
   var mesh = []
   for (let i = 0; i < res; i++) {
     for (var j=1; j<path.length; j++) {
