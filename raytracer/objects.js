@@ -12,7 +12,8 @@ export function Transforms(offset, rotate, scale = Scaling(1,1,1)) {
 export function Mesh(material, polys, ops = {}) {
   const verts = polys
     .flatMap(({ a, b, c }) => [a, b, c])
-  let center = mult(1/verts.length, verts.reduce((acc, e) => add(acc,e), 0))
+  let sum = verts.reduce((acc, e) => add(acc,e), Vec(0,0,0))
+  let center = verts.length ? mult(1/verts.length, sum) : Vec(0,0,0)
   let radius = verts.reduce((max,p) => Math.max(mag(diff(center,p)), max), 0)
   let renderOnly = ops.renderOnly
   return { kind: 'mesh', material, polys, center, radius, renderOnly }
