@@ -157,7 +157,9 @@ function MaterialFields({ instance }) {
     React.Fragment,
     {},
     el("span", {}, "Kind"),
-    el("select", { value: instance.ref, onChange: update, style: span3col },
+    el("select", {
+      value: instance.materialKind, onChange: update, style: span3col
+    },
       el("option", {}, "solid"),
       el("option", {}, "wood"),
       el("option", {}, "noise"),
