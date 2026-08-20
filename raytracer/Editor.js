@@ -4,7 +4,7 @@ import { compileObject, toMatrix, toInverseMatrix } from './geometry.js'
 import { latheMesh } from './geometry/lathe.js'
 import { Offset, Rotate, Scaling, Mesh, createObject, compositeCompatibles } from './objects.js'
 import { add, cross, diff, EPSILON, mag, mapply, matrixStack } from './math.js'
-import { dot, mult, norm } from './math.js'
+import { clamp, dot, mult, norm } from './math.js'
 import { RotateX, RotateY, Vec } from './math.js'
 import { Toolbar } from './Toolbar.js'
 import { LatheEditable } from './geometry/LatheEditable.js'
@@ -17,7 +17,8 @@ let creatables = [
 let clipboard = null
 
 let round2 = (v) => Math.round(v * 100) / 100
-let roundVec = (v) => Vec(round2(v.x), round2(v.y), round2(v.z))
+let round6 = (v) => Math.round(v * 1e6) / 1e6
+let roundVec = (v) => Vec(round6(v.x), round6(v.y), round6(v.z))
 
 const ISO = Math.sqrt(3) / 2
 const ISO_DRAG = 1 / Math.sqrt(3)
@@ -32,6 +33,13 @@ const dragProjections = {
   side: { u: Vec(0, 0, 1), v: Vec(0, 1, 0) },
   top: { u: Vec(1, 0, 0), v: Vec(0, 0, 1) },
   iso: { u: Vec(ISO_DRAG, 0, -ISO_DRAG), v: Vec(1, 0, 1) },
+}
+
+function svgPoint(svg, evt) {
+  let pt = svg.createSVGPoint()
+  pt.x = evt.clientX
+  pt.y = evt.clientY
+  return pt.matrixTransform(svg.getScreenCTM().inverse())
 }
 
 function pickFile(accept) {
@@ -68,6 +76,7 @@ export function Editor() {
   const [zoom, setZoom] = React.useState(0.75)
   const [selected, setSelected] = React.useState(null)
   const [cameraId, setCameraId] = React.useState(null)
+  const svgRef = React.useRef()
 
   useEvent(app, 'scene_view', (view) => {
     app.check('scene_view', view)
@@ -217,8 +226,9 @@ export function Editor() {
     catch (e) { alert(`Could not open scene: ${e.message}`) }
   })
 
-  function screenToSpace({ movementX, movementY }) {
-    return viewDelta(Math.round(movementX/zoom), Math.round(movementY / zoom))
+  function screenToSpace(evt) {
+    let ctm = svgRef.current.getScreenCTM()
+    return viewDelta(evt.movementX / ctm.a / zoom, evt.movementY / ctm.d / zoom)
   }
 
   function viewDelta(dx, dy) {
@@ -270,13 +280,24 @@ export function Editor() {
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [selected, view])
 
+  React.useEffect(() => {
+    let svg = svgRef.current
+    function onWheel(e) {
+      e.preventDefault()
+      let unit = e.deltaMode == 1 ? 16 : e.deltaMode == 2 ? 100 : 1
+      let next = clamp(zoom * Math.exp(-e.deltaY * unit * 0.002), 0.01, 100)
+      if (next == zoom) return
+      let c = svgPoint(svg, e)
+      let k = 1/zoom - 1/next
+      setOffset(o => roundVec(add(o, viewDelta(c.x * k, c.y * k))))
+      setZoom(next)
+    }
+    svg.addEventListener('wheel', onWheel, { passive: false })
+    return () => svg.removeEventListener('wheel', onWheel)
+  }, [zoom, view])
+
   function pickAt(evt) {
-    let svg = evt.currentTarget
-    let ctm = svg.getScreenCTM()
-    let pt = svg.createSVGPoint()
-    pt.x = evt.clientX
-    pt.y = evt.clientY
-    let c = pt.matrixTransform(ctm.inverse())
+    let c = svgPoint(evt.currentTarget, evt)
     let hit = null
     let best = 10
     for (let e of scene.children) {
@@ -305,6 +326,7 @@ export function Editor() {
     el('svg',
       {
         className: 'canvas-3d',
+        ref: svgRef,
         viewBox: '-170 -128 340 256',
         onMouseDown: (e) => {
           let hit = pickAt(e)
