@@ -29,6 +29,7 @@ export function Toolbar() {
     el(ToolButton, { event: 'scene_view', arg: 'side', toggle: 1 }, 'X'),
     el(ToolButton, { event: 'scene_view', arg: 'top', toggle: 1 }, 'Y'),
     el(ToolButton, { event: 'scene_view', arg: 'front', toggle: 1 }, 'Z'),
+    el(ToolButton, { event: 'scene_view', arg: 'iso', toggle: 1 }, 'Iso'),
     el(ToolButton, { event: 'zoom', arg: 1 / 1.5 }, '-'),
     el(ToolButton, { event: 'zoom', arg: 1.5 }, '+'),
     el(ToolButton, { event: 'reset_view' }, '='),

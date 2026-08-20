@@ -4,6 +4,7 @@ import { compileObject, toMatrix, toInverseMatrix } from './geometry.js'
 import { latheMesh } from './geometry/lathe.js'
 import { Offset, Rotate, Scaling, Mesh, createObject, compositeCompatibles } from './objects.js'
 import { add, cross, diff, EPSILON, mag, mapply, matrixStack } from './math.js'
+import { dot, mult, norm } from './math.js'
 import { RotateX, RotateY, Vec } from './math.js'
 import { Toolbar } from './Toolbar.js'
 import { LatheEditable } from './geometry/LatheEditable.js'
@@ -14,6 +15,24 @@ let creatables = [
   'tree', 'composite', 'instance', 'material'
 ]
 let clipboard = null
+
+let round2 = (v) => Math.round(v * 100) / 100
+let roundVec = (v) => Vec(round2(v.x), round2(v.y), round2(v.z))
+
+const ISO = Math.sqrt(3) / 2
+const ISO_DRAG = 1 / Math.sqrt(3)
+const projections = {
+  front: { u: Vec(1, 0, 0), v: Vec(0, 1, 0), w: Vec(0, 0, 1) },
+  side: { u: Vec(0, 0, 1), v: Vec(0, 1, 0), w: Vec(1, 0, 0) },
+  top: { u: Vec(1, 0, 0), v: Vec(0, 0, 1), w: Vec(0, -1, 0) },
+  iso: { u: Vec(ISO, 0, -ISO), v: Vec(0.5, 1, 0.5), w: norm(Vec(1, -1, 1)) },
+}
+const dragProjections = {
+  front: { u: Vec(1, 0, 0), v: Vec(0, 1, 0) },
+  side: { u: Vec(0, 0, 1), v: Vec(0, 1, 0) },
+  top: { u: Vec(1, 0, 0), v: Vec(0, 0, 1) },
+  iso: { u: Vec(ISO_DRAG, 0, -ISO_DRAG), v: Vec(1, 0, 1) },
+}
 
 function pickFile(accept) {
   return new Promise((resolve) => {
@@ -39,9 +58,10 @@ export function Editor() {
   const [mode, setMode] = React.useState('pan')
   const [startPos, setStartPos] = React.useState(null)
   const [{ x: ox, y: oy, z: oz }, setOffset] = React.useState(Vec(0,0,0))
-  function x(p) { return zoom * (view == 'side' ? p.z-oz : p.x-ox) }
-  function y(p) { return zoom * (view == 'top' ? p.z-oz : p.y-oy) }
-  function z(p) { return view == 'front' ? p.z : view == 'side' ? p.x : -p.y }
+  function rel(p) { return diff(p, Vec(ox, oy, oz)) }
+  function x(p) { return zoom * dot(projections[view].u, rel(p)) }
+  function y(p) { return zoom * dot(projections[view].v, rel(p)) }
+  function z(p) { return dot(projections[view].w, p) }
   const [scene, setScene] = React.useState(app.scene)
   const forceUpdate = useForceUpdate()
   const [view, setView] = React.useState('front')
@@ -201,11 +221,8 @@ export function Editor() {
   }
 
   function viewDelta(dx, dy) {
-    switch (view) {
-      case 'front': return Vec(dx, dy, 0)
-      case 'side': return Vec(0, dy, dx)
-      case 'top': return Vec(dx, 0, dy)
-    }
+    let { u, v } = dragProjections[view]
+    return roundVec(add(mult(dx, u), mult(dy, v)))
   }
 
   function viewRotation(rot) {
@@ -214,6 +231,7 @@ export function Editor() {
       case 'front': return Rotate(0, 0, rot*k)
       case 'side': return Rotate(rot*k, 0, 0)
       case 'top': return Rotate(0, rot*k, 0)
+      case 'iso': return Rotate(0, rot*k, 0)
     }
   }
 
@@ -222,6 +240,7 @@ export function Editor() {
       case 'front': return Scaling(s, 1, 1)
       case 'side': return Scaling(1, 1, s)
       case 'top': return Scaling(1, s, 1)
+      case 'iso': return Scaling(s, 1, s)
     }
   }
 
@@ -243,7 +262,7 @@ export function Editor() {
       }[e.key]
       if (!delta) return
       e.preventDefault()
-      selected.transforms.offset = add(selected.transforms.offset, delta)
+      selected.transforms.offset = roundVec(add(selected.transforms.offset, delta))
       app.trigger('scene_modified')
     }
     window.addEventListener('keydown', onKeyDown)
@@ -293,7 +312,7 @@ export function Editor() {
         },
         onMouseMove: (e) => {
           if (mode == 'pan' && startPos) {
-            setOffset(o => diff(o, screenToSpace(e)))
+            setOffset(o => roundVec(diff(o, screenToSpace(e))))
           }
           if (mode == 'move' && selected && selected.transforms && startPos) {
             let t = selected.transforms
@@ -307,7 +326,7 @@ export function Editor() {
               let s = viewScaling(1 + (e.movementX) / 100)
               t.scale = Scaling(t.scale.x*s.x, t.scale.y*s.y, t.scale.z*s.z)
             } else {
-              t.offset = add(t.offset, screenToSpace(e))
+              t.offset = roundVec(add(t.offset, screenToSpace(e)))
             }
             app.trigger('scene_modified')
           }
@@ -379,8 +398,6 @@ export function Editor() {
     ),
   )
 }
-
-let round2 = (v) => Math.round(v * 100) / 100
 
 function viewportRect(camera, target, w, h) {
   if (camera?.kind != 'camera' || !target?.transforms) return null

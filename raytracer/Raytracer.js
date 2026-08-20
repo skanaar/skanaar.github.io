@@ -51,6 +51,7 @@ app.addMenu(
   { title: 'Front', event: 'scene_view', arg: 'front', cmd: '1' },
   { title: 'Side', event: 'scene_view', arg: 'side', cmd: '2' },
   { title: 'Top', event: 'scene_view', arg: 'top', cmd: '3' },
+  { title: 'Isometric', event: 'scene_view', arg: 'iso', cmd: '4' },
   { title: null },
   { title: 'Zoom out', event: 'zoom', arg: 1/1.5, cmd: ',', },
   { title: 'Zoom in', event: 'zoom', arg: 1.5, cmd: '.' },
