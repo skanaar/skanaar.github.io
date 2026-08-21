@@ -16,9 +16,8 @@ let creatables = [
 ]
 let clipboard = null
 
-let round2 = (v) => Math.round(v * 100) / 100
-let round6 = (v) => Math.round(v * 1e6) / 1e6
-let roundVec = (v) => Vec(round6(v.x), round6(v.y), round6(v.z))
+let round2 = (v) => Math.round(v * 1e2) / 1e2
+let roundVec = (v) => Vec(round2(v.x), round2(v.y), round2(v.z))
 
 const ISO = Math.sqrt(3) / 2
 const ISO_DRAG = 1 / Math.sqrt(3)
@@ -88,7 +87,7 @@ export function Editor() {
   })
   useEvent(app, 'focus_selection', () => {
     if (!selected) return
-    let compiled = compileObject(selected, scene.children)
+    let compiled = compileObject(selected, scene.parts)
     if (!compiled.center) return
     setZoom(100/Math.max(50, compiled.radius ?? compiled.r ?? 100))
     setOffset(compiled.center)
@@ -100,9 +99,9 @@ export function Editor() {
   useEvent(app, 'zoom', (factor) => setZoom(zoom * factor))
   useEvent(app, 'update_scene', (scene) => {
     setScene(scene)
-    setCameraId(scene.children.find(e => e.kind == 'camera')?.id)
+    setCameraId(scene.parts.find(e => e.kind == 'camera')?.id)
     if (scene.kind === 'lathe-editable') {
-      let r = Math.max(1, ...scene.children.map(e => mag(e.transforms.offset)))
+      let r = Math.max(1, ...scene.parts.map(e => mag(e.transforms.offset)))
       setZoom(100 / r)
       setOffset(Vec(0,0,0))
     }
@@ -118,11 +117,11 @@ export function Editor() {
   })
 
   function insertAfterSelection(spawn) {
-    let index = scene.children.indexOf(selected)
+    let index = scene.parts.indexOf(selected)
     if (index > -1)
-      scene.children.splice(index+1, 0, spawn)
+      scene.parts.splice(index+1, 0, spawn)
     else
-      scene.children.push(spawn)
+      scene.parts.push(spawn)
     app.trigger('scene_modified')
     app.trigger('select_object', spawn)
   }
@@ -188,25 +187,25 @@ export function Editor() {
   useEvent(app, 'delete_object', () => {
     if (!selected) return
     let decision = confirm(`Delete object "${selected.name}"`)
-    let index = scene.children.findIndex(e => e == selected)
-    if (decision && index >= 0) scene.children.splice(index, 1)
+    let index = scene.parts.findIndex(e => e == selected)
+    if (decision && index >= 0) scene.parts.splice(index, 1)
     app.trigger('scene_modified')
   })
   useEvent(app, 'link_camera', () => {
-    const currentCamera = scene.children.find(o => o.id == cameraId)
+    const currentCamera = scene.parts.find(o => o.id == cameraId)
     if (!selected || !currentCamera) return
     let link = createObject('link', null, selected, scene)
     link.source = currentCamera.id
     link.target = selected.id
-    let rect = viewportRect(currentCamera, selected, 0.3, 0.3)
+    let rect = viewportRect(currentCamera, selected, 30, 30)
     if (rect) {
       link.x = rect.x
       link.y = rect.y
       link.w = rect.w
       link.h = rect.h
     }
-    const camIndex = scene.children.findIndex(o => o.id == cameraId)
-    scene.children.splice(camIndex+1, 0, link)
+    const camIndex = scene.parts.findIndex(o => o.id == cameraId)
+    scene.parts.splice(camIndex+1, 0, link)
     app.trigger('scene_modified')
     app.trigger('select_object', link)
   })
@@ -300,7 +299,7 @@ export function Editor() {
     let c = svgPoint(evt.currentTarget, evt)
     let hit = null
     let best = 10
-    for (let e of scene.children) {
+    for (let e of scene.parts) {
       if (!e.transforms || e.renderOnly || e.hidden) continue
       let p = e.transforms.offset
       let d = Math.hypot(x(p) - c.x, y(p) - c.y)
@@ -364,12 +363,12 @@ export function Editor() {
         className: 'crosshair',
         d: `M${x(Vec(0,0,0))-1000},${y(Vec(0,0,0))}l 2000,0m-1000,-1000 l0,2000`
       }),
-      scene.children
+      scene.parts
         .filter(e => !e.hidden)
         .map(e => (
           {
             entity: e,
-            preview: compilePreviewObject(e, scene.children, selected == e)
+            preview: compilePreviewObject(e, scene.parts, selected == e)
           }
         ))
         .filter(({ preview }) => preview.kind == 'mesh')
@@ -383,17 +382,17 @@ export function Editor() {
             `M${x(a)},${y(a)} L${x(b)},${y(b)} L${x(c)},${y(c)} Z`)
             .join(''),
         })),
-      scene.children
+      scene.parts
         .filter(e => e.kind === 'light' && !e.hidden)
         .map((e, i) => {
-          let p = compilePreviewObject(e, scene.children).point
+          let p = compilePreviewObject(e, scene.parts).point
           return el('path', {
             key: `light${i}`,
             className: 'light' + (selected == e ? ' active' : ''),
             d: `M${x(p)-3},${y(p)-3}l6,0l0,6l-6,0Zm-3,3l6,-6l6,6l-6,6 Z`
           })
         }),
-      scene.children
+      scene.parts
         .filter(e => e.kind === 'sphere' && !e.hidden)
         .map((e) => {
           let { center, r } = compilePreviewObject(e)
@@ -406,7 +405,7 @@ export function Editor() {
             ry: zoom * r
           })
         }),
-      scene.children
+      scene.parts
         .filter(e => e.kind === 'point' && !e.hidden)
         .map((e) => {
           return el('ellipse', {
@@ -429,8 +428,8 @@ function viewportRect(camera, target, w, h) {
   if (p.z > -EPSILON) return null
   let aspect = renderSize.h / renderSize.w
   return {
-    x: round2(p.x / -p.z + 0.5 - w/2),
-    y: round2(p.y / -p.z / aspect + 0.5 - h/2),
+    x: Math.round((p.x / -p.z + 0.5) * 100 - w/2),
+    y: Math.round((p.y / -p.z / aspect + 0.5) * 100 - h/2),
     w,
     h,
   }

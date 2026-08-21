@@ -66,7 +66,7 @@ export function ObjectList() {
   useEvent(app, 'scene_modified', forceUpdate)
   useEvent(app, 'select_object', (obj) => setSelected(obj))
 
-  const items = scene.children
+  const items = scene.parts
     .filter(e => !e.renderOnly)
     .filter(e => {
       switch (filter) {
@@ -121,7 +121,7 @@ export function ObjectList() {
             app.trigger('scene_modified')
           },
         }, el('span', {}, e.hidden ? 'show' : 'hide')),
-        el('span', { class: 'count' }, polyCount(e, scene.children))
+        el('span', { class: 'count' }, polyCount(e, scene.parts))
       ))
     )
   )

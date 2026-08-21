@@ -8,7 +8,7 @@ export function Properties() {
   const forceUpdate = useForceUpdate()
   useEvent(app, "select_object", (obj) => setSelected(obj))
   useEvent(app, "scene_modified", forceUpdate)
-  useEvent(app, "update_scene", (objs) => setObjects(objs.children))
+  useEvent(app, "update_scene", (objs) => setObjects(objs.parts))
 
   if (!selected) return null;
 
@@ -195,12 +195,12 @@ function LinkFields({ object }) {
     el(NumericInput, { field: "target", object: object, range: [0, 1024] }),
     el('div', {}),
     el("span", {}, "Left, Top"),
-    el(NumericInput, { field: "x", object: object, range: [0, 1] }),
-    el(NumericInput, { field: "y", object: object, range: [0, 1] }),
+    el(NumericInput, { field: "x", object: object, range: [0, 100] }),
+    el(NumericInput, { field: "y", object: object, range: [0, 100] }),
     el('div', {}),
     el("span", {}, "Width, Height"),
-    el(NumericInput, { field: "w", object: object, range: [0, 1] }),
-    el(NumericInput, { field: "h", object: object, range: [0, 1] }),
+    el(NumericInput, { field: "w", object: object, range: [0, 100] }),
+    el(NumericInput, { field: "h", object: object, range: [0, 100] }),
   )
 }
 

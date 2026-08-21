@@ -123,9 +123,9 @@ function RayTracer() {
   const hostRef = React.useRef()
   const renderScene = () => {
     const defaultCam = Camera(Transforms(Offset(-100,-100,240),Rotate(20,20,8)))
-    let camera = currentScene.children
+    let camera = currentScene.parts
       .find(e => e.kind == 'camera' && e.id == cameraId) ?? defaultCam
-    let entities = currentScene.children
+    let entities = currentScene.parts
     if (entities.every(e => e.kind != 'light')){
       entities = [
         Light(128, Offset(100,-100,100)),
@@ -145,7 +145,7 @@ function RayTracer() {
         : new NoDitherer(),
     }).then((result) => {
       if (app.menuState['toggle_hotspots'] == true)
-        drawLinks(hostRef.current, currentScene.children, cameraId)
+        drawLinks(hostRef.current, currentScene.parts, cameraId)
       app.trigger('render_complete', result)
     })
   }
@@ -200,7 +200,7 @@ function RayTracer() {
   })
   useEvent(app, 'update_scene', (scene) => {
     currentScene = scene
-    cameraId = scene.children.find(e => e.kind === 'camera')?.id
+    cameraId = scene.parts.find(e => e.kind === 'camera')?.id
     app.enable('create_object', 'point', false)
     app.trigger('render')
   })
@@ -217,27 +217,27 @@ function RayTracer() {
   return el('canvas', { width: w, height: h, ref: hostRef })
 }
 
-function drawLinks(canvas, children, cameraId) {
+function drawLinks(canvas, parts, cameraId) {
   if (cameraId < 0) return
   let ctx = canvas.getContext('2d')
   ctx.save()
   ctx.lineWidth = 1
-  for (let link of children) {
+  for (let link of parts) {
     if (link.kind !== 'link' || link.source !== cameraId) continue
     if (link.hidden) continue
     ctx.strokeStyle = '#fff'
     ctx.strokeRect(
-      Math.round(link.x * w) + 0.5, // +0.5 to align with pixel grid
-      Math.round(link.y * h) + 0.5,
-      Math.round(link.w * w),
-      Math.round(link.h * h)
+      Math.round(link.x * w/100) + 0.5, // +0.5 to align with pixel grid
+      Math.round(link.y * h/100) + 0.5,
+      Math.round(link.w * w/100),
+      Math.round(link.h * h/100)
     )
     ctx.strokeStyle = '#000'
     ctx.strokeRect(
-      Math.round(link.x * w) + 0.5 - 1,
-      Math.round(link.y * h) + 0.5 - 1,
-      Math.round(link.w * w) + 2,
-      Math.round(link.h * h) + 2
+      Math.round(link.x * w/100) + 0.5 - 1,
+      Math.round(link.y * h/100) + 0.5 - 1,
+      Math.round(link.w * w/100) + 2,
+      Math.round(link.h * h/100) + 2
     )
   }
   ctx.restore()

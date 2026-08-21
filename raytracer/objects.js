@@ -23,8 +23,8 @@ export function NullObject() {
   return { kind: 'null' }
 }
 
-export function Scene(children) {
-  return { kind: 'scene', children }
+export function Scene(parts) {
+  return { kind: 'scene', parts }
 }
 
 export function Point(name, pos) {
@@ -44,8 +44,8 @@ export function Material(name, materialKind, shade1, shade2 = 1, zoom = 1) {
   return { kind: 'material', name, materialKind, shade1, shade2, zoom }
 }
 
-export function Composite(name, children, transforms) {
-  return { kind: 'composite', name, children, material: 'diffuse', transforms }
+export function Composite(name, parts, transforms) {
+  return { kind: 'composite', name, parts, material: 'diffuse', transforms }
 }
 export let compositeCompatibles =
   new Set(['box', 'lathe', 'tree', 'heightmap', 'bezierlathe', 'patches']);
@@ -120,7 +120,7 @@ export function createObject(kind, pos, selected, scene) {
   switch (kind) {
     case 'light': return Light(64, pos)
     case 'camera': return Camera(withSize(1))
-    case 'link': return Link(-1, -1, 0.3, 0.3, 0.3, 0.3)
+    case 'link': return Link(-1, -1, 30, 30, 30, 30)
     case 'box': return Box('box', withSize(1))
     case 'lathe':
       return Lathe('cylinder', 16, 360, [Vec(l,-l,0),Vec(l,l,0)], withSize(1))
@@ -136,9 +136,9 @@ export function createObject(kind, pos, selected, scene) {
       let ref = isMeshable(selected?.kind) ? null : (selected?.name ?? null)
       return Instance('instance', ref, withSize(1))
     case 'point':
-      return Point(`Point ${scene.children.length + 1}`, withSize(1).offset)
+      return Point(`Point ${scene.parts.length + 1}`, withSize(1).offset)
     case 'material':
-      return Material(`Material ${scene.children.length + 1}`, 'solid', 0, 1, 5)
+      return Material(`Material ${scene.parts.length + 1}`, 'solid', 0, 1, 5)
     default: throw new Error('unknown object kint: ' + kind)
   }
 }

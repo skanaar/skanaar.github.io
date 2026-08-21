@@ -13,22 +13,22 @@ export function PatchesEditable(obj) {
   let polys = bezierMesh(obj.patches, obj.res, Identity())
   let points = obj.patches
     .flatMap((patch, i) => patch.map((p, j) => Point(`Patch ${i} p${j}`, p)))
-  let children = [Mesh(obj.material, polys, { renderOnly: true }), ...points]
+  let parts = [Mesh(obj.material, polys, { renderOnly: true }), ...points]
   return {
     kind: 'mesh',
     patches: obj,
     get polys() { return this.mesh.polys },
     get radius() { return this.mesh.radius },
     get center() { return this.mesh.center },
-    children,
+    parts,
     res: obj.res,
     update() {
       obj.res = this.res
-      obj.patches = chunked(this.children
+      obj.patches = chunked(this.parts
         .filter(e => e.kind == 'point')
         .map(e => e.transforms.offset), 16)
       let polys = bezierMesh(obj.patches, obj.res, Identity())
-      this.children[0] = Mesh(obj.material, polys, { renderOnly: true })
+      this.parts[0] = Mesh(obj.material, polys, { renderOnly: true })
     }
   }
 }

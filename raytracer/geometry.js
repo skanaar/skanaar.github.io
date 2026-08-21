@@ -56,7 +56,7 @@ export function compileObject(obj, objects) {
       treeMesh(obj, toMatrix(obj.transforms))
     )
     case 'composite': {
-      let mesh = obj.children.flatMap(e => compileObject(e, obj.children).polys)
+      let mesh = obj.parts.flatMap(e => compileObject(e, obj.parts).polys)
       if (mesh.length == 0) return NullObject()
       return Mesh(
         obj.material,
@@ -68,7 +68,7 @@ export function compileObject(obj, objects) {
       if (!obj.ref || !template) return NullObject()
       template = { ...template, transforms: Transforms(Offset(0,0,0)) }
       // TODO: support for non-mesh objects here
-      let mesh = compileObject(template, template.children ?? []).polys
+      let mesh = compileObject(template, template.parts ?? []).polys
       return Mesh(
         template.material,
         mesh.map(p => transformTriangle(p, toMatrix(obj.transforms)))
