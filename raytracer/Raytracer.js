@@ -122,9 +122,9 @@ let { w, h } = renderSize
 function RayTracer() {
   const hostRef = React.useRef()
   const renderScene = () => {
-    const defaultCam = Camera(Transforms(Offset(-100,-100,240),Rotate(20,20,8)))
     let camera = currentScene.parts
-      .find(e => e.kind == 'camera' && e.id == cameraId) ?? defaultCam
+      .find(e => e.kind == 'camera' && e.id == cameraId) ??
+        Camera(Transforms(Offset(-100, -100, 240), Rotate(20, 20, 8)), -1)
     let entities = currentScene.parts
     if (entities.every(e => e.kind != 'light')){
       entities = [

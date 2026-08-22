@@ -32,8 +32,8 @@ export function Point(name, pos) {
 }
 
 let camId = 0
-export function Camera(transforms) {
-  return { kind: 'camera', id: camId++, name: 'camera', transforms }
+export function Camera(transforms, id) {
+  return { kind: 'camera', id: id ?? camId++, name: 'camera', transforms }
 }
 
 export function Link(source, target, x, y, w, h) {

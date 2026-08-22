@@ -106,7 +106,8 @@ export function ObjectList() {
         el(KindIcon, { kind: e.kind }),
         el('span', { class: 'name' },
           e.name || e.kind,
-          e.kind == 'link' && el('span', {}, ` ${e.source} - ${e.target}`)
+          e.kind == 'link' && el('span', {}, ` ${e.source} - ${e.target}`),
+          e.kind == 'camera' && el('span', {}, ` ${e.id}`),
         ),
         e.kind == 'camera' && el('button', {
           onClick: (ev) => {
