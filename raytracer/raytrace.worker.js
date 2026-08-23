@@ -1,9 +1,10 @@
 import { toMatrix } from './geometry.js'
 import { computeHitPatch } from './material.js'
-import { norm, diff, dot, div, add, sqMag, mult, mag } from './math.js'
+import { norm, diff, dot, div, add, mult, sqMag } from './math.js'
 import { Vec, crossDiff, EPSILON, mapply } from './math.js'
 
 const FAR_AWAY = 32000
+const LIGHT_CUTOFF = 1/32
 
 onmessage = (e) => {
   let imgdata = raytrace(e.data)
@@ -43,13 +44,18 @@ function raytrace({ area, totalArea, maxDepth, scene, camera }) {
       // hit patch illumination
       let bright = 0
       if (hitPatch.depth < FAR_AWAY) {
-        for (let light of lights) {
+        if (hitPatch.glow)
+          bright += hitPatch.color
+        else for (let light of lights) {
           let light_vector = diff(hitPatch.point, light.point)
-          let light_dist = mag(light_vector)
+          let sq_light_dist = sqMag(light_vector)
+          let intensity = lightIntensity(light, sq_light_dist)
+          if (intensity < LIGHT_CUTOFF) continue
+          let light_dist = Math.sqrt(sq_light_dist)
           let light_dir = div(light_vector, light_dist)
           let beam = trace_ray(light.point, light_dir, 0, spheres, meshes)
           if (beam.depth > light_dist - EPSILON)
-            bright += lightBrightness(hitPatch.point, hitPatch.normal, light)
+            bright += lightBrightness(hitPatch.point, hitPatch.normal, light, intensity)
         }
       }
 
@@ -176,8 +182,11 @@ function hdr(value) {
   return 1 - 1 / (1 + 2 * value)
 }
 
-function lightBrightness(p, surface_normal, light) {
+function lightIntensity(light, sq_dist) {
+  return light.amount * 300 / sq_dist
+}
+
+function lightBrightness(p, surface_normal, light, intensity) {
   let light_dir = norm(diff(light.point, p))
-  let intensity = light.amount * 300 / sqMag(diff(p, light.point))
-  return Math.max(0, intensity * dot(surface_normal, light_dir))
+  return Math.max(0, intensity * dot(surface_normal, light_dir) - LIGHT_CUTOFF)
 }

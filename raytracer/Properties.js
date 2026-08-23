@@ -165,6 +165,7 @@ function MaterialFields({ instance }) {
       el("option", {}, "noise"),
       el("option", {}, "dots"),
       el("option", {}, "mirror"),
+      el("option", {}, "glow"),
     ),
     el("span", {}, "Shades"),
     el(NumericInput, { field: "shade1", object: instance, range: [0, 1] }),
