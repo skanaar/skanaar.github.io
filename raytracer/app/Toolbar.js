@@ -1,4 +1,4 @@
-import { el, useEvent, useForceUpdate } from '../assets/system.js';
+import { el, useEvent, useForceUpdate } from '../../assets/system.js';
 import { app } from './Raytracer.js'
 
 const style = `tool-bar {

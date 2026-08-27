@@ -115,11 +115,15 @@ function isMeshable(kind) { return ['light', 'camera'].includes(kind) }
 
 export function createObject(kind, pos, selected, scene) {
   let withSize = (s) => Transforms(pos, Rotate(0, 0, 0), Scaling(s, s, s))
+  let nextCamId = () => scene.parts
+    .filter(e => e.kind == 'camera')
+    .map(e => e.id)
+    .reduce((a, b) => a > b ? a : b)
 
   let l = 100
   switch (kind) {
     case 'light': return Light(64, pos)
-    case 'camera': return Camera(withSize(1))
+    case 'camera': return Camera(withSize(1), nextCamId())
     case 'link': return Link(-1, -1, 30, 30, 30, 30)
     case 'box': return Box('box', withSize(1))
     case 'lathe':

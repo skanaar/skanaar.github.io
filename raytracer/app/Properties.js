@@ -1,5 +1,5 @@
-import { useForceUpdate, useEvent, el } from "../assets/system.js";
-import { instanceCompatibles } from "./objects.js";
+import { useForceUpdate, useEvent, el } from "../../assets/system.js";
+import { instanceCompatibles } from "../objects.js";
 import { app } from "./Raytracer.js";
 
 export function Properties() {

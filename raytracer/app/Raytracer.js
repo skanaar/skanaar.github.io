@@ -1,12 +1,12 @@
-import { el, App, useEvent } from '../assets/system.js'
-import { FloydSteinbergDitherer, NoDitherer } from './dither.js'
-import { compileScene } from './geometry.js'
-import { Camera, Light, Scene, Offset, Rotate, Transforms } from './objects.js'
-import { raytraceParallel } from './raytraceParallel.js'
+import { el, App, useEvent } from '../../assets/system.js'
+import { FloydSteinbergDitherer, NoDitherer } from '../dither.js'
+import { compileScene } from '../geometry.js'
+import { Camera, Light, Scene, Offset, Rotate, Transforms } from '../objects.js'
+import { raytraceParallel } from '../raytraceParallel.js'
 import { Editor } from './Editor.js'
 import { ObjectList } from './ObjectList.js'
 import { Properties } from './Properties.js'
-import { sceneIsland, sceneMushroom, sceneTeapot } from './scenes.js'
+import { sceneIsland, sceneMushroom, sceneTeapot } from '../scenes.js'
 
 export const app = new App('RayTracer', RayTracer, 'aperture.svg')
 app.position(30, 60)

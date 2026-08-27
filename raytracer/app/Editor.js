@@ -1,14 +1,15 @@
-import { useEvent, el, useForceUpdate } from '../assets/system.js'
+import { useEvent, el, useForceUpdate } from '../../assets/system.js'
 import { app, renderSize } from './Raytracer.js'
-import { compileObject, toMatrix, toInverseMatrix } from './geometry.js'
-import { latheMesh } from './geometry/lathe.js'
-import { Offset, Rotate, Scaling, Mesh, createObject, compositeCompatibles } from './objects.js'
-import { add, cross, diff, EPSILON, mag, mapply, matrixStack } from './math.js'
-import { clamp, dot, mult, norm } from './math.js'
-import { RotateX, RotateY, Vec } from './math.js'
+import { compileObject, toMatrix, toInverseMatrix } from '../geometry.js'
+import { latheMesh } from '../geometry/lathe.js'
+import { Offset, Rotate, Scaling, Mesh, createObject, compositeCompatibles } from '../objects.js'
+import { add, cross, diff, EPSILON, mag, mapply, matrixStack } from '../math.js'
+import { clamp, dot, mult, norm } from '../math.js'
+import { RotateX, RotateY, Vec } from '../math.js'
 import { Toolbar } from './Toolbar.js'
-import { LatheEditable } from './geometry/LatheEditable.js'
-import { PatchesEditable } from './geometry/PatchesEditable.js'
+import { LatheEditable } from '../geometry/LatheEditable.js'
+import { PatchesEditable } from '../geometry/PatchesEditable.js'
+import { jsonSerialize } from './json-serialize.js'
 
 let creatables = [
   'camera', 'light', 'sphere', 'box', 'lathe',
@@ -64,6 +65,7 @@ function downloadFile(name, text) {
 export function Editor() {
   const [mode, setMode] = React.useState('pan')
   const [startPos, setStartPos] = React.useState(null)
+  const isDragging = React.useRef(false)
   const [{ x: ox, y: oy, z: oz }, setOffset] = React.useState(Vec(0,0,0))
   function rel(p) { return diff(p, Vec(ox, oy, oz)) }
   function x(p) { return zoom * dot(projections[view].u, rel(p)) }
@@ -212,7 +214,7 @@ export function Editor() {
 
   useEvent(app, 'save_scene', () => {
     scene.update?.()
-    downloadFile('scene.json', JSON.stringify(app.scene, null, 2))
+    downloadFile('scene.json', jsonSerialize(app.scene))
   })
   useEvent(app, 'load_scene', async () => {
     let file = await pickFile('.json,application/json')
@@ -328,11 +330,10 @@ export function Editor() {
         ref: svgRef,
         viewBox: '-170 -128 340 256',
         onMouseDown: (e) => {
-          let hit = pickAt(e)
-          if (hit) app.trigger('select_object', hit)
           setStartPos(screenToSpace(e))
         },
         onMouseMove: (e) => {
+          if (startPos != null) isDragging.current = true
           if (mode == 'pan' && startPos) {
             setOffset(o => roundVec(diff(o, screenToSpace(e))))
           }
@@ -353,7 +354,12 @@ export function Editor() {
             app.trigger('scene_modified')
           }
         },
-        onMouseUp: () => { setStartPos(null) }
+        onMouseUp: (e) => {
+          setStartPos(null)
+          let hit = pickAt(e)
+          if (hit && !isDragging.current) app.trigger('select_object', hit)
+          isDragging.current = false
+        }
       },
       !app.menuState['toggle_crosshair'] ? null : el('path', {
         className: 'crosshair',
@@ -436,7 +442,7 @@ function viewportRect(camera, target, w, h) {
 }
 
 function isCopyable(kind) {
-  return ['box', 'lathe', 'composite'].includes(kind)
+  return 'box lathe composite tree terrain material'.includes(kind)
 }
 
 function compilePreviewObject(obj, entities, selected) {

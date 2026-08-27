@@ -1,6 +1,6 @@
-import { useEvent, el, useForceUpdate } from '../assets/system.js'
+import { useEvent, el, useForceUpdate } from '../../assets/system.js'
 import { app } from './Raytracer.js'
-import { compileObject } from './geometry.js'
+import { compileObject } from '../geometry.js'
 
 const style = `scene-objects {
   display: grid; grid-template-rows: auto minmax(0, 1fr); height: 300px;
